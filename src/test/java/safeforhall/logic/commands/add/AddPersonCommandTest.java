@@ -145,6 +145,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean hasExactPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }

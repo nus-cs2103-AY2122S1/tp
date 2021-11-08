@@ -30,7 +30,7 @@ import safeforhall.model.person.VaccStatus;
 public class FindPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String PARAMETERS = "[n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION STATUS] [f/FACULTY]";
+    public static final String PARAMETERS = "[n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] [f/FACULTY]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all residents whose parameters match any of "
             + "the provided keywords for different options (case-insensitive) and displays them as a "
             + "list with index numbers.\n"

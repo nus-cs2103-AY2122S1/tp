@@ -322,9 +322,11 @@ The following activity diagram illustrates how the `AddressBook#findPerson()` me
 The command extends the `Command` class and implements `IncludeCommand#execute()` to execute the command. 
 A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
 
-When `Event#addResidentsToEvent()` is called, it calls `ResidentList#addResidentList()` to create a new 
-String `newResidents` that consists of current `Person` in the `Event` and append all the `Person` in `toAdd` to 
-this String while making sure that there is no duplicate.
+When `IncludeCommand#createEditedEvent()` is called, two methods of events are invoked:
+* `Event#getCombinedDisplayString()` creates a display String with just the names of each `Person` in the combination 
+  of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate.
+* `Event#getCombinedStorageString()` creates a storage String with the full information of each `Person` in the 
+  combination of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate. 
 
 The following sequence diagram demonstrates what happens when the `IncludeCommand` is executed:
 

@@ -1,11 +1,11 @@
 package safeforhall.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -19,12 +19,13 @@ import safeforhall.model.person.VaccStatus;
 public class ResidentList {
     public static final String MESSAGE_CONSTRAINTS =
             "Information should be all rooms or all names and each piece of information is separated by a comma";
-    public static final String MESSAGE_CONSTRAINTS_ROOM_AND_NAME =
-            "Arguments given should be all rooms or all names";
+    public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
     public static final String DESC = "Residents: ";
     public static final String DEFAULT_LIST = "None";
     public static final String EMPTY_STRING = "";
     public static final int NUMBER_OF_RESIDENT_FIELD = 8;
+    private static final String RESIDENTS_SPLIT = "\\s*,\\s*";
+    private static final String RESIDENT_FIELDS_SPLIT = ";\\s*\\w*(\\w*\\s*)*:\\s*";
 
     private final String residentsDisplay;
     private final String residentsStorage;
@@ -39,10 +40,12 @@ public class ResidentList {
      */
     public ResidentList(String residents) {
         requireNonNull(residents);
+        checkArgument(isValidResidentList(residents), MESSAGE_CONSTRAINTS);
+
         this.isEmpty = residents.equals(DEFAULT_LIST);
         this.residentsDisplay = residents;
         this.residentsStorage = EMPTY_STRING;
-        stringResidentList = new ArrayList<>(Arrays.asList(this.residentsDisplay.split("\\s*,\\s*")));
+        stringResidentList = new ArrayList<>(Arrays.asList(this.residentsDisplay.split(RESIDENTS_SPLIT)));
     }
 
     /**
@@ -52,30 +55,23 @@ public class ResidentList {
      */
     public ResidentList(String residents, String residentList) {
         requireNonNull(residents);
+        checkArgument(isValidResidentList(residents), MESSAGE_CONSTRAINTS);
 
         this.isEmpty = residents.equals(DEFAULT_LIST);
         this.residentsDisplay = residents;
         this.residentsStorage = residentList;
 
         if (!residentList.equals(ResidentList.DEFAULT_LIST)) {
-            String[] residentInformationList = residentList.split("\\s*,\\s*");
-            for (String residentInformation : residentInformationList) {
-                String[] information = residentInformation.split(";\\s*\\w*(\\w*\\s*)*:\\s*");
-
-                Name name = new Name(information[0]);
-                Room room = new Room(information[1]);
-                Phone phone = new Phone(information[2]);
-                Email email = new Email(information[3]);
-                VaccStatus vaccStatus = new VaccStatus(information[4]);
-                Faculty faculty = new Faculty(information[5]);
-                LastDate lastFetDate = new LastDate(information[6]);
-                LastDate lastCollectionDate = new LastDate(information[7]);
-
-                Person p = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
-                this.residentList.add(p);
-            }
+            String[] residentInformationList = residentList.split(RESIDENTS_SPLIT);
+            Arrays.stream(residentInformationList).forEach(residentInformation -> {
+                String[] information = residentInformation.split(RESIDENT_FIELDS_SPLIT);
+                if (information.length != 8) {
+                    throw new IllegalArgumentException(MESSAGE_INCORRECT_FIELDS);
+                }
+                this.residentList.add(createResident(information));
+            });
         }
-        stringResidentList = new ArrayList<>(Arrays.asList(this.residentsDisplay.split("\\s*,\\s*")));
+        stringResidentList = new ArrayList<>(Arrays.asList(this.residentsDisplay.split(RESIDENTS_SPLIT)));
     }
 
     /**
@@ -83,27 +79,14 @@ public class ResidentList {
      *
      * @param residents A string of residents.
      */
-    public static boolean isValidResidentList(String residents) throws ParseException {
+    public static boolean isValidResidentList(String residents) {
         if (residents.equals(DEFAULT_LIST)) {
             return true;
         }
-        String[] informationList = residents.split("\\s*,\\s*");
-        boolean isRoom = false;
-        boolean isName = false;
-        for (String str : informationList) {
-            if (!(Name.isValidName(str) || Room.isValidRoom(str))) {
-                return false;
-            } else {
-                if (Room.isValidRoom(str) && !isName) {
-                    isRoom = true;
-                } else if (Name.isValidName(str) && !isRoom) {
-                    isName = true;
-                } else {
-                    throw new ParseException(MESSAGE_CONSTRAINTS_ROOM_AND_NAME);
-                }
-            }
-        }
-        return true;
+        String[] informationList = residents.split(RESIDENTS_SPLIT);
+        boolean isAllRoom = Arrays.stream(informationList).parallel().allMatch(Room::isValidRoom);
+        boolean isAllName = Arrays.stream(informationList).parallel().allMatch(Name::isValidName);
+        return isAllRoom || isAllName;
     }
 
     /**
@@ -222,7 +205,7 @@ public class ResidentList {
      * @return A String consisting of past and new residents for the event.
      */
     public String getRemovedStorageString(ArrayList<Person> toRemove) {
-        StringBuilder newResidentList = new StringBuilder("");
+        StringBuilder newResidentList = new StringBuilder();
 
         for (Person person : residentList) {
             if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
@@ -247,7 +230,7 @@ public class ResidentList {
      * @return A String consisting of the remaining residents for the event.
      */
     public String getRemovedDisplayString(ArrayList<Person> toRemove) {
-        StringBuilder newResidentList = new StringBuilder("");
+        StringBuilder newResidentList = new StringBuilder();
 
         for (Person person : residentList) {
             if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
@@ -304,5 +287,21 @@ public class ResidentList {
 
     public ArrayList<Person> getResidents() {
         return this.residentList;
+    }
+
+    /**
+     * Creates a new {@code resident} from the given information.
+     */
+    private Person createResident(String[] information) {
+        Name name = new Name(information[0]);
+        Room room = new Room(information[1]);
+        Phone phone = new Phone(information[2]);
+        Email email = new Email(information[3]);
+        VaccStatus vaccStatus = new VaccStatus(information[4]);
+        Faculty faculty = new Faculty(information[5]);
+        LastDate lastFetDate = new LastDate(information[6]);
+        LastDate lastCollectionDate = new LastDate(information[7]);
+
+        return new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
     }
 }

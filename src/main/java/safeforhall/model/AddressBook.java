@@ -85,6 +85,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same exact identity as {@code person} exists in the address book.
+     */
+    public boolean hasExactPerson(Person person) {
+        requireNonNull(person);
+        return persons.containsExact(person);
+    }
+
+    /**
      * Returns true if an event with the same details as {@code event} exists in the address book.
      */
     public boolean hasEvent(Event event) {
