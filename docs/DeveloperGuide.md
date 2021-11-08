@@ -412,7 +412,7 @@ The following steps describes the execution of the `joinG` command:
 
 **Target user profile**:
 
-* Year 2 Computer Science Student
+* Year 2 Computing Student
 * Taking the modules CS2103T, CS2101 and ES2660
 * Has a need to manage and organise a significant number of contacts of group mates
 * Has a need to manage different tasks related to different groups
@@ -425,7 +425,7 @@ The following steps describes the execution of the `joinG` command:
 
 **Value proposition**: 
 
-Thunder Cats is able to manage contacts faster than a typical mouse/GUI driven app.It centralises all information the user needs about a person and even allows users to group multiple contacts.
+ThunderCat is able to manage contacts faster than a typical mouse/GUI driven app. It centralises all information the user needs about a person and even allows users to group multiple contacts.
 
 ThunderCat provides a practical way for users to gain confidence using a CLI to navigate an application and manipulate JSON files.
 
@@ -439,10 +439,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user  | input the details of my group mates in a simple command |save time when I input the information|
 | `* * *`  | user  | delete a contact which will remove them from all groups within my address book in case there is a change of groupings | - |
 | `* * *`  | user  | directly change details in the address book from the JSON file | gain confidence in using JSON files |
-| `* * *`  | user  | only have a few basic commands to use my address book. | - |
+| `* * *`  | user  | only have a few basic commands to use my address book | - |
 | `* * *`  | user  | use a CLI to control the application | gain confidence in using commands to navigate an application |
-| `* * *`  | user  | delete contacts out of my address book | remove them when there is a change in group members |
-| `* * *`  | user  | create groups | locate the bulk of people in groups easily |
+| `* * *`  | user  | remove contacts from my project group | remove them when there is a change in group members |
+| `* * *`  | user  | create groups | locate group mates easily |
 | `* * *`  | user  | list all groups | have a overview of all the groups |
 | `* * *`  | user  | delete a group | remove them once they are not needed anymore |
 | `* * `  | user  | easily access the contacts of my group mates, for centralising all the contact details | I can access them when I need them on my laptop |
@@ -635,7 +635,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work if Java `11` or above is installed.
-2. Should be platform-independent, minimally working on any _mainstream OS_.
+2. Should be platform-independent, minimally working on any [_mainstream OS_](#mainstream-os-anchor).
 3. Should be able to hold up to 1000 records (persons, groups, etc.) without a noticeable sluggishness in performance
 for typical usage.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
@@ -655,6 +655,7 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
+<a name="mainstream-os-anchor"></a>
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 <a name="api"></a>
 * **API**: Application programming interfaces, or APIs, simplify software development and innovation by enabling applications to exchange data and functionality easily and securely.
@@ -704,7 +705,7 @@ testers are expected to do more *exploratory* testing.
     Expected: No person is added. Error details is shown in the result box. Error message of "Invalid command format!" is shown. Followed by an example of how the correct command input format should be. Displayed person list remains the same.
        
     5. Other incorrect delete commadns to try: `add p/55`, `add d/hello` (where the command format is not as specified in the user guide) <br>
-    Expected: Similar to previous test case result(Test case iv).4
+    Expected: Similar to previous test case result(Test case iv).
     
     
 
@@ -756,10 +757,10 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is added to the first group. Error details is shown in the result box. Error message of "Invalid command format!" is shown in the result box.
 
     4. Test case: `joinG p/1` <br>
-       Expected: Expected: Similar to previous test case result( Test case 1(iii) ).
+       Expected: Similar to previous test case result( Test case 1.3 ).
 
     5. Other incorrect delete commands to try: `joinG p/52 g/1`, `joinG p/1 g/55`, `joinG p/0 g/0` (where the command format is not as specified in the user guide. The indexes provided are out of bounds of the indexes displayed in the application.) <br>
-       Expected: Similar to previous test case result( Test case 1(iii) ).
+       Expected: Similar to previous test case result( Test case 1.3 ).
        
 2. Adding a person to a group while in the home page without any contacts present.
 
@@ -768,7 +769,7 @@ testers are expected to do more *exploratory* testing.
     * 1 group present.
     
     2. Test case: `joinG p/1 g/1`
-        Expected: Similar to previous test case result ( Test case 1(iii) ).
+        Expected: Similar to previous test case result ( Test case 1.3 ).
        
 3. Adding a person to a group while in the home page without any group present.
 
@@ -777,4 +778,10 @@ testers are expected to do more *exploratory* testing.
     * 0 group present.
     
     2. Test case: `joinG p/1 g/1`
-        Expected: Similar to previous test case result ( Test case 1(iii) ).
+        Expected: Similar to previous test case result ( Test case 1.3 ).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Effort
+
+AddressBook Level-3 (AB3) only uses Person entities, but now we deal with Group and Task entities in addition to Person objects, each with their own attributes. This was more difficult than AB3 because we had to also add commands to create, read, update, and delete all of them. We also had to maintain an application state for the Home and Group Information pages. This was more difficult than AB3 because AB3 only has one page. Furthermore, our pages each have two list panels, and they are displaying different types of data (Person, Group, Task), unlike AB3 which has only one list panel to display only Person cards for objects. We also had to ensure that in certain pages, certain commands don't run if they did not make sense to run. This was difficult more difficult than AB3 because in AB3, all commands can run, and they do not depend on the application state.
