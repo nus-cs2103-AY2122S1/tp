@@ -11,6 +11,7 @@ import java.util.Arrays;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private StringUtil() {}
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -64,5 +65,21 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * @@author zihaooo9-reused
+     * Reused from https://www.baeldung.com/java-check-string-number
+     * with minor modifications
+     *
+     * Returns true if {@code s} represents a Numeric value
+     * e.g. 1, -1, 1.1, 12345678901234567890, ..., {@code Integer.MAX_VALUE} <br>
+     * Will return false for any other non-null string input
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNumeric(String s) {
+        requireNonNull(s);
+        String regex = "-?\\d+(\\.\\d+)?";
+        return s.matches(regex);
     }
 }

@@ -7,8 +7,10 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -16,32 +18,50 @@ import seedu.address.model.person.Person;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_ALIAS = "d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the tutor/student identified by the index number used in the displayed tutor/student list.\n"
+            + "Parameters: <t INDEX (must be a positive integer)> or <s INDEX (must be a positive integer)>\n"
+            + "Example: " + COMMAND_WORD + " t 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_TUTOR_SUCCESS = "Deleted Tutor: \n%1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: \n%1$s";
 
     private final Index targetIndex;
+    private final PersonType personType;
 
-    public DeleteCommand(Index targetIndex) {
+    /**
+     * Creates a DeleteCommand to delete the specified tutor/student.
+     * @param targetIndex The specified index in either the tutor/student list, of the tutor/student to be deleted
+     * @param personType The parsed personType (only a valid input if "t" or "s")
+     */
+    public DeleteCommand(Index targetIndex, PersonType personType) {
         this.targetIndex = targetIndex;
+        this.personType = personType;
     }
 
+    /**
+     * Executes the delete command, which will remove a specified tutor/student from the list.
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        switch (personType) {
+        case TUTOR:
+            return executeDeleteTutor(model);
+            // No break necessary due to return statement
+        case STUDENT:
+            return executeDeleteStudent(model);
+            // No break necessary due to return statement
+        default:
+            // Any invalid input would be handled by the DeleteCommandParser and will not reach here
+            throw new CommandException(MESSAGE_USAGE);
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
     @Override
@@ -49,5 +69,39 @@ public class DeleteCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+    }
+
+    private void handleMatchList(Model model, Student student) {
+        Student studentMatched = model.getMatchedStudent();
+        if (studentMatched != null && studentMatched.isSamePerson(student)) {
+            model.clearMatchedTutor();
+        }
+    }
+
+    private CommandResult executeDeleteTutor(Model model) throws CommandException {
+        List<Tutor> lastShownTutorList = model.getFilteredTutorList();
+        if (lastShownTutorList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
+        }
+        if (targetIndex.getZeroBased() >= lastShownTutorList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTOR_DISPLAYED_INDEX);
+        }
+        Tutor tutorToDelete = lastShownTutorList.get(targetIndex.getZeroBased());
+        model.deleteTutor(tutorToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_TUTOR_SUCCESS, tutorToDelete));
+    }
+
+    private CommandResult executeDeleteStudent(Model model) throws CommandException {
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        if (lastShownStudentList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, personType));
+        }
+        if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+        Student studentToDelete = lastShownStudentList.get(targetIndex.getZeroBased());
+        handleMatchList(model, studentToDelete);
+        model.deleteStudent(studentToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
 }

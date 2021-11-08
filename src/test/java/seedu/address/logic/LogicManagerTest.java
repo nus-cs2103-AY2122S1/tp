@@ -1,14 +1,24 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.LETTER_DESC_STUDENT;
+import static seedu.address.logic.commands.CommandTestUtil.LETTER_DESC_TUTOR;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.QUALIFICATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PM_TP;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PM;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TP;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,20 +27,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.PersonType;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCliTutors;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
+import seedu.address.storage.JsonCliTutorsStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -38,15 +53,15 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonCliTutorsStorage cliTutorsStorage =
+                new JsonCliTutorsStorage(temporaryFolder.resolve("cliTutors.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(cliTutorsStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -58,39 +73,116 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "delete s 9";
+        assertCommandException(deleteCommand, String.format(Messages.MESSAGE_EMPTY_LIST, PersonType.STUDENT));
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand + LETTER_DESC_TUTOR, ListCommand.MESSAGE_EMPTY_LIST, model);
+        assertCommandSuccess(listCommand + LETTER_DESC_STUDENT, ListCommand.MESSAGE_EMPTY_LIST, model);
+        model.addTutor(ALICE);
+        model.addStudent(DANIEL);
+        assertCommandSuccess(listCommand + LETTER_DESC_TUTOR, ListCommand.MESSAGE_SUCCESS_TUTOR, model);
+        assertCommandSuccess(listCommand + LETTER_DESC_STUDENT, ListCommand.MESSAGE_SUCCESS_STUDENT,
+                model);
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+    public void execute_storageThrowsIoExceptionTutor_throwsCommandException() {
+        // Setup LogicManager with JsonCliTutorsIoExceptionThrowingStub
+        JsonCliTutorsStorage cliTutorsStorage =
+                new JsonCliTutorsIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionCliTutors.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(cliTutorsStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_TUTOR + NAME_DESC_BOB + PHONE_DESC_BOB
+                + GENDER_DESC_BOB + QUALIFICATION_DESC_BOB + TAG_DESC_PM_TP;
+        Tutor expectedTutor = new TutorBuilder().withTags(VALID_TAG_PM, VALID_TAG_TP).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addTutor(expectedTutor);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void execute_storageThrowsIoExceptionStudent_throwsCommandException() {
+        // Setup LogicManager with JsonCliTutorsIoExceptionThrowingStub
+        JsonCliTutorsStorage cliTutorsStorage =
+                new JsonCliTutorsIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionCliTutors.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(cliTutorsStorage, userPrefsStorage);
+        logic = new LogicManager(model, storage);
+
+        // Execute add command
+        String addCommand = AddCommand.COMMAND_WORD + LETTER_DESC_STUDENT + NAME_DESC_AMY + PHONE_DESC_AMY
+                + GENDER_DESC_AMY + TAG_DESC_PM;
+        Student expectedStudent = new StudentBuilder().build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addStudent(expectedStudent);
+        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getCliTutors_success() {
+        assertEquals(logic.getCliTutors(), new ModelManager().getCliTutors());
+    }
+
+    @Test
+    public void getFilteredTutorList_success() {
+        assertEquals(logic.getFilteredTutorList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
+    public void getFilteredStudentList_success() {
+        assertEquals(logic.getFilteredStudentList(), new ModelManager().getFilteredStudentList());
+    }
+
+    @Test
+    public void getMatchedTutorList_success() {
+        assertEquals(logic.getMatchedTutorList(), new ModelManager().getFilteredTutorList());
+    }
+
+    @Test
+    public void getFilteredTutorList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTutorList().remove(0));
+    }
+
+    @Test
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+                logic.getFilteredStudentList().remove(INDEX_FIRST_PERSON.getZeroBased()));
+    }
+
+    @Test
+    public void getMatchedTutorList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () ->
+                logic.getMatchedTutorList().remove(INDEX_FIRST_PERSON.getZeroBased()));
+    }
+
+    @Test
+    public void getCliTutorsFilePath_success() {
+        assertEquals(logic.getCliTutorsFilePath(), new ModelManager().getCliTutorsFilePath());
+    }
+
+    @Test
+    public void getGuiSettings_success() {
+        assertEquals(logic.getGuiSettings(), new ModelManager().getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings_success() {
+        GuiSettings guiSettings = new GuiSettings();
+        logic.setGuiSettings(guiSettings);
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.setGuiSettings(guiSettings);
+        assertEquals(logic.getGuiSettings(), expectedModel.getGuiSettings());
     }
 
     /**
@@ -129,7 +221,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCliTutors(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -149,13 +241,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonCliTutorsIoExceptionThrowingStub extends JsonCliTutorsStorage {
+        private JsonCliTutorsIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveCliTutors(ReadOnlyCliTutors cliTutors, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

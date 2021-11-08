@@ -2,6 +2,8 @@ package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MAX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTEGER_MIN;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
@@ -38,7 +40,10 @@ public class StringUtilTest {
         assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
 
         // EP: number larger than Integer.MAX_VALUE
-        assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
+        assertFalse(StringUtil.isNonZeroUnsignedInteger(INVALID_INTEGER_MAX));
+
+        // EP: number smaller than Integer.MIN_VALUE
+        assertFalse(StringUtil.isNonZeroUnsignedInteger(INVALID_INTEGER_MIN));
 
         // EP: valid numbers, should return true
         assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
@@ -140,4 +145,35 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for isNumeric --------------------------------------
+
+    @Test
+    public void isNumeric_throwNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isNumeric(null));
+    }
+
+    @Test
+    public void isNumericTest() {
+        // EP: empty strings
+        assertFalse(StringUtil.isNumeric("")); // Boundary value
+        assertFalse(StringUtil.isNumeric("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isNumeric("a"));
+        assertFalse(StringUtil.isNumeric("aaa"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isNumeric(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isNumeric("1 0")); // Spaces in the middle
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isNumeric("1")); // Boundary value
+        assertTrue(StringUtil.isNumeric("10"));
+        assertTrue(StringUtil.isNumeric("0"));
+        assertTrue(StringUtil.isNumeric("01")); // with 0 prefix
+        assertTrue(StringUtil.isNumeric("-1")); //negative numbers
+        assertTrue(StringUtil.isNumeric(INVALID_INTEGER_MAX)); // long
+        assertTrue(StringUtil.isNumeric(INVALID_INTEGER_MIN)); // long
+        assertTrue(StringUtil.isNumeric("1.1")); // double
+    }
 }

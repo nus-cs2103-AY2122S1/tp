@@ -10,11 +10,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.CliTutorsParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyCliTutors;
+import seedu.address.model.person.Student;
+import seedu.address.model.person.Tutor;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,7 +27,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final CliTutorsParser cliTutorsParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        cliTutorsParser = new CliTutorsParser();
     }
 
     @Override
@@ -42,11 +43,15 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = cliTutorsParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        if (model.getMatchedTutorList().isEmpty()) {
+            model.clearMatchedTutor();
+        }
+
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveCliTutors(model.getCliTutors());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,18 +60,28 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyCliTutors getCliTutors() {
+        return model.getCliTutors();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Tutor> getFilteredTutorList() {
+        return model.getFilteredTutorList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObservableList<Student> getFilteredStudentList() {
+        return model.getFilteredStudentList();
+    }
+
+    @Override
+    public ObservableList<Tutor> getMatchedTutorList() {
+        return model.getMatchedTutorList();
+    }
+
+    @Override
+    public Path getCliTutorsFilePath() {
+        return model.getCliTutorsFilePath();
     }
 
     @Override
