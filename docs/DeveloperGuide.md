@@ -390,6 +390,8 @@ Step 4. The user decides to view the usage of `add` to learn to add a contact, a
 
 Step 5. CONNECTIONS will display a detailed help message on the usage of the `add` command in `ResultDisplay`.
 
+![HelpSequenceDiagram](images/HelpCommandDiagram.png)
+
 
 ### Birthday Reminder feature
 
@@ -461,7 +463,7 @@ The operation is exposed in `CommandBox` and `CommandHistory`.
 
 The user keystroke will be read in `CommandBox#handleKeyStroke`, which will call the appropriate method in `CommandHistory` to retrieve the previous and next commands. The retrieved commands are passed into `CommandBox#commandTextField` to be displayed.
 
-Given below is an example usage scenario and how the Find mechanism behaves at each step.
+Given below is an example usage scenario and how the Command History mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. All contacts are displayed by default.
 
@@ -474,6 +476,8 @@ Step 4. `CommandBox#handleKeyStroke` reads the `UP` keystroke and calls `Command
 Step 5. `CommandHistory` retrieves the previous command and returns it.
 
 Step 6. `CommandBox` displays the previous command in the Command Box.
+
+![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
 
 #### Design considerations:
 
@@ -495,13 +499,13 @@ The operation is exposed in `SystemCommand`, specifically in `SystemCommand#exec
 
 The user keystroke will be read in `CommandBox#handleKeyStroke`. The user input will be evaluated by `SystemCommand#execute` to determine the appropriate help message to display.
 
-Given below is an example usage scenario and how the Find mechanism behaves at each step.
+Given below is an example usage scenario and how the Command Assistant mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. All contacts are displayed by default.
 
 Step 2. The user enters `find ` to search for a matching contact.
 
-Step 3. `CommandBox#handleKeyStroke` reads `find ` keystroke and calls `SystemCommand#execute`.
+Step 3. `CommandBox#handleKeyStroke` reads `find ` input string and calls `SystemCommand#execute`.
 
 Step 4. `SystemCommand` evaluates the user input and returns the appropriate help message.
 

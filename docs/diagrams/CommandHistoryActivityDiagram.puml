@@ -2,35 +2,34 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
+:UI receives keystroke;
+switch()
+case ([keystroke `UP`])
+  :Attempts to retrieves previous command;
+  if () then ([has command history])
+    if () then ([has previous command])
+      :Displays previous command;
+    else ([no previous command])
+      :Displays last command in history;
     endif
-
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
+  else ([no command history])
+    :Displays nothing;
+  endif
+case ([keystroke `DOWN`])
+  :Attempts to retrieves next command;
+  if () then ([has command history])
+    if () then ([has next command])
+      :Displays next command;
+    else ([no next command])
+      :Displays nothing;
     endif
-    :Page.onRender();
+  else ([no command history])
+    :Displays nothing;
   endif
-else (false)
-endif
+case ([other keystrokes])
+  :Retrieves Command Assistant;
+endswitch
 
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
-  endif
-endif
 
 stop
 

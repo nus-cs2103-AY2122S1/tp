@@ -8,80 +8,62 @@ end box
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":MailingListCommandParser" as MailingListCommandParser LOGIC_COLOR
-participant "d:MailingListCommnad" as MailingListCommand LOGIC_COLOR
-participant ":CsvUtil" as CsvUtil LOGIC_COLOR
+participant ":HelpCommandParser" as HelpCommandParser LOGIC_COLOR
+participant "h:HelpCommand" as HelpCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
-
-UI -> LogicManager : execute
+UI -> LogicManager : execute("help add")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand
+LogicManager -> AddressBookParser : parseCommand("help add")
 activate AddressBookParser
 
-create MailingListCommandParser
-AddressBookParser -> MailingListCommandParser
-activate MailingListCommandParser
+create HelpCommandParser
+AddressBookParser -> HelpCommandParser
+activate HelpCommandParser
 
-MailingListCommandParser --> AddressBookParser
-deactivate MailingListCommandParser
+HelpCommandParser --> AddressBookParser
+deactivate HelpCommandParser
 
-AddressBookParser -> MailingListCommandParser : parse
-activate MailingListCommandParser
+AddressBookParser -> HelpCommandParser : parse("add")
+activate HelpCommandParser
 
-create MailingListCommand
-MailingListCommandParser -> MailingListCommand
-activate MailingListCommand
+create HelpCommand
+HelpCommandParser -> HelpCommand
+activate HelpCommand
 
-MailingListCommand --> Model : SetPrefixes
-activate Model
-Model --> MailingListCommand
-deactivate Model
+HelpCommand --> HelpCommandParser : h
+deactivate HelpCommand
 
-MailingListCommand --> MailingListCommandParser : d
-deactivate MailingListCommand
-
-MailingListCommandParser --> AddressBookParser  : d
-deactivate MailingListCommandParser
+HelpCommandParser --> AddressBookParser  : h
+deactivate HelpCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-MailingListCommandParser -[hidden]-> AddressBookParser
-destroy MailingListCommandParser
+HelpCommandParser -[hidden]-> AddressBookParser
+destroy HelpCommandParser
 
-AddressBookParser --> LogicManager  : d
+AddressBookParser --> LogicManager  : h
 deactivate AddressBookParser
 
-LogicManager -> MailingListCommand : execute()
-activate MailingListCommand
+LogicManager -> HelpCommand : execute()
+activate HelpCommand
+
+create CommandResult
+HelpCommand -> CommandResult
+activate CommandResult
+CommandResult -> HelpCommand
+deactivate CommandResult
 
 
-MailingListCommand --> LogicManager : result
-deactivate MailingListCommand
+HelpCommand --> LogicManager : result
+deactivate HelpCommand
 
 UI <--LogicManager: result
 deactivate LogicManager
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-MailingListCommand -[hidden]-> LogicManager
-destroy MailingListCommand
+HelpCommand -[hidden]-> LogicManager
+destroy HelpCommand
 
-UI --> Model : getFilteredPersonList()
-activate Model
-Model --> UI : filteredPersonList
-deactivate Model
-UI --> Model : getPrefixes()
-activate Model
-Model --> UI : prefixes
-deactivate Model
 
-UI --> CsvUtil : modelToCsv(filteredPersonList, path, prefixes)
-activate CsvUtil
 
-CsvUtil --> CsvUtil : modelToCsv
-activate CsvUtil
-CsvUtil --> UI
-deactivate CsvUtil
-deactivate CsvUtil
 @enduml
