@@ -166,8 +166,7 @@ The `Model` component also,
              
 **Description** :                                                                                    
 
-The `Storage` component is responsible for persisting application data to be stored in JSON file format and reading 
-stored data
+The `Storage` component is responsible for persisting application data to be stored in JSON file format and reading stored data
 back into the application. 
 
 **Functionality** :
