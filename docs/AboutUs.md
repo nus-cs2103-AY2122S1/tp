@@ -38,7 +38,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/sherwinprofile.jpg" width="200px">
 
-[[github](https://github.com/sherrpass)][[portfolio](team/sherwinpoh.md)]
+[[github](https://github.com/sherrpass)][[portfolio](team/sherrpass.md)]
 
 * Role: Developer
 * Responsibilities: Storage IC

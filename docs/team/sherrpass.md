@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Sherwin Poh Kai Xun's Project Portfolio Page
+title: Sherwin's Project Portfolio Page
 ---
 
-### Project: SIASA (Student Insurance Agent Sales Assistant)
+## Project: SIASA
 
 SIASA (Student Insurance Agent Sales Assistant) is a desktop app for students who are also part-time insurance agents to
 manage their contacts (clients and potential clients) and their policies.
@@ -11,7 +11,7 @@ The user interacts with it mainly using a CLI, and it has a GUI created with Jav
 
 Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=sherrpass&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=sherrpass&tabRepo=AY2122S1-CS2103-F10-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
-* **Enhancements implemented**
+* **Enhancements implemented**:
     * **Create Policy Model** : Designed and constructed Policy, and it's details, e.g Commission, Expiry Date.
       Created an association between Policy and Contact and built UniquePolicyList. [PR #19](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/19)
         * What it does: Enables users to create and edit the details of a Policy and associate a Policy to a Contact it belongs to.
@@ -32,21 +32,21 @@ Given below are my contributions to the project.
     * **Add tags to policies** [PR #60](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/60)
       * What it does: Enables users to have multiple tags on policies.
       * Justification: Users can now classify, and distinguish visually different policies.
-* Contributions to the UG
+* **Contributions to the UG**:
     * Added the documentation for addpolicy, editpolicy commands. [PR #69](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/69)
     * Reorganised UG by grouping features according to their functionality. [PR #147](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/147)
-* Contributions to the DG
+* **Contributions to the DG**:
     * Updated model component, class diagram and description. [PR #34](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/34)
     * Added Implementations and design considerations for addpolicy and editcontact commands. [PR #199](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/199)
-* Contributions to team-based tasks
+* **Contributions to team-based tasks**:
     * Set up Github team org/repo and team project notes.
     * Helped to rename address book to SIASA throughout codebase.
     * Refactored the model component and helped to refactor the storage component of AB3 for SIASA.
     * Helped to maintain the issue tracker actively.
-* Contributions to community:
+* **Contributions to community:**
     * Helped to identify bugs for other project teams. [PR #242](https://github.com/AY2122S1-CS2103T-W13-3/tp/issues/242)
       [PR #243](https://github.com/AY2122S1-CS2103T-W13-3/tp/issues/243)
-* Review/mentoring contributions
+* **Review/mentoring contributions:**
     * Provided reviews of code quality and OOP for PRs: [PR #186](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/186)
       [PR #58](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/58)
       [PR #22](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/22)
