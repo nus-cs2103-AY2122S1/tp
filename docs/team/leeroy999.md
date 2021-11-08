@@ -12,26 +12,22 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 Given below are my contributions to the project.
 
 #### New Features
-* Added CRUD operations for events using appropriate commands, and finding of event by name
+* Added CRUD for events using appropriate commands, and find event by name
     * What it does: allows users to add, delete, edit and list events that are registered in Ailurus, and search for a specific event name.
     * Justification: This features allows users to group members in events with date included, to keep track of who are supposed to attend specific events and subsequently mark their attendance if necessary. This is useful for small and large scale events and possibly meetings and conferences as well in a work setting, and allow easier organisation.
-
 * Added marking and unmarking of attendance for members in an event.
   * What is does: allows users to mark a member as present or absent for an event that they are participating in. Also allows marking all members as present in an event.
   * Justification: Marking all as present is a quick way to mark the attendance of all participants, and only unmark the few that are not present. Allows accounting for members who attended, such as in a meeting or conference.
-
 * Added commands to add and delete individual members from an event.
   * Justification: On top of adding new events which can already have members, adding and deleting individual members from participation list reduce the need to create and delete event, and make it easy to amend participation list.
-
 * Overhauled events and logic of Ailurus of above features: ([#149](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/149))
-
 * Enhanced GUI for 1/3 spacings and centralised headers ([#233](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/233))
 
 #### Code contributed
 * [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=leeroy999)
 
 #### Project management
-  * Team lead: manage project contributions and merging of approved pull requests, maintaining Git repository and issue tracking.
+* Team lead: manage project contributions and merging of approved pull requests, maintaining Git repository and issue tracking.
 
 #### Enhancements to existing features
 * Enhanced listing of members to allow listing of all members in an event. ([#110](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/110))
