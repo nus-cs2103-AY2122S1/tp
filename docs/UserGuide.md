@@ -149,7 +149,7 @@ A Parameter can be further divided into 2 components:
 * Argument: Argument refers to the sequence of character that follow immediately after the `/` and before the start of the next prefix (if any). They are the information that you pass into a command and act as values for Prefixes.<br><br>
   In the example above, `Matthew Judge` is the value for the _student name_.
 
-Putting together both the prefix and the argument, `sn/Matthew Judge` tells TutorAid that the name of the third student should updated to _Matthew Judge_. Similarly, `sp/91263740` tells TutorAid that the phone number of the third student should be updated to _91263740_.
+Putting together both the prefix and the argument, `sn/Matthew Judge` tells TutorAid that the name of the third student should be updated to _Matthew Judge_. Similarly, `sp/91263740` tells TutorAid that the phone number of the third student should be updated to _91263740_.
 
 ### **2.3.1 Command Syntax in this Guide**
 
