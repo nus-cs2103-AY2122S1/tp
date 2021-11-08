@@ -16,8 +16,8 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
     - What it does: Allows the TA to upload a CSV file containing students' student ID, class ID, name and email
     - Justification: So that the TA can automate the process of adding students to their classes without having to
       manually type the add command
-    - Highlights: This feature involved trying out different third-party libraries and evaluating their suitability (
-      e.g. based on their size, ease-of-use, functionality offered). Challenges included handling the multiple
+    - Highlights: This feature involved using different third-party libraries and evaluating their suitability 
+      (based on their size, ease-of-use, functionality offered). Challenges included handling the multiple
       possibilities for invalid user input with intuitive error messages and good design.
     - Credits: [opencsv](http://opencsv.sourceforge.net/) (third-party library), Stackoverflow
 2. **Added the ability to download student data**
