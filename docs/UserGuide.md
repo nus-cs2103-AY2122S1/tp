@@ -421,6 +421,9 @@ If your changes to the data file makes its format invalid, EdRecord will discard
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EdRecord home folder.
 
+**Q**: Am I able to manually edit the application's preferences and data?<br>
+**A**: Unfortunately, at this version of EdRecord, we do not fully support the manual editing of the generated files. Highly advanced users should attempt at their own risk of their data being corrupted.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
