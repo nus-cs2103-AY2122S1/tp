@@ -25,9 +25,9 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 ## Installation Guide
 
-1. Ensure you have Java `11` or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
+1. Ensure you have Java `11` or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `tutormaster.jar`.
+2. Download the latest `tutormaster.jar` [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
