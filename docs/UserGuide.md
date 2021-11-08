@@ -11,6 +11,9 @@ By: `Team Fridgy`
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## 1. Introduction
 
 Fridgy is a **food and recipe management system**, for users to manage their ingredients and recipes easily.
@@ -49,7 +52,7 @@ This User Guide covers:
 
 <a name="startup"></a>
 <div style="text-align: center; padding-bottom: 2em">
-<img src="images/startup-ss.png" width="80%" id="logo" />
+<img src="images/startup-ss.png" width="80%" id="logo" class="ug-image" />
 <br>
 <i>When you first open Fridgy, it is filled with sample ingredients and recipes</i>
 </div>
@@ -131,6 +134,8 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### 4.2 Command Overview
 
 #### 4.2.1 Command Flags
@@ -146,6 +151,8 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 `-t` | `-t <tag>...` | Tag for the ingredient | No | Can contain alphanumeric characters or spaces. There can be at most 1 space between alphanumeric characters.
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2 Command Summary
 
@@ -169,6 +176,8 @@ Action | Format
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### 4.3 General Commands
 
 #### 4.3.1 Help
@@ -185,6 +194,8 @@ Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w
 Closes the window and exits the program. All your information will be saved.
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Ingredients
 This section covers commands related to Inventory management. Any command primarily interacting with ingredients will 
@@ -204,12 +215,12 @@ Add an ingredient to the Inventory.
 1. Minimal command flags used:<br />
    Command: `add ingredient -n tomato -q 5 -e 20-02-2077`
    <br />Expected Output:<br />
-   ![addCommand2.png](images/ingredientCommands/addCommand2.png) <br />
+   <img src="images/ingredientCommands/addCommand2.png" style="width:85%"> <br />
    <br />
 2. All command flags used:<br />
    Command: `add ingredient -n flour -d fresh -q 500g -e 27-09-2021`
    <br />Expected Output:<br />
-   ![addCommand1.png](images/ingredientCommands/addCommand1.png)
+   <img src="images/ingredientCommands/addCommand1.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
@@ -224,6 +235,8 @@ Add an ingredient to the Inventory.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.2 Delete Ingredient
 
 Delete ingredient(s) from the Inventory.
@@ -234,10 +247,10 @@ Delete ingredient(s) from the Inventory.
 **Example(s):**<br />
 1. Command: `delete ingredient 2`
 <br />Before:<br />
-![deleteCommand.png](images/ingredientCommands/deleteCommand1.png)
+<img src="images/ingredientCommands/deleteCommand1.png" style="width:85%">
    <br />
 <br />After:<br />
-![deleteCommand2.png](images/ingredientCommands/deleteCommand2.png)
+<img src="images/ingredientCommands/deleteCommand2.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -245,6 +258,8 @@ Delete ingredient(s) from the Inventory.
 - If multiple index numbers are specified, Fridgy will delete the ingredients at all specified index numbers.
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.3 Edit Ingredient
 
@@ -254,12 +269,12 @@ Edit an ingredient from the Inventory.
 `edit ingredient <index> [-n <name>] [-q <quantity> [<units>]] [-e <expiry date>] [-d <description>] [-t <tags>]...`
 
 **Example(s):**<br />
-1. Command: `edit ingredient 1 -d juicy -t jelly`
+1. Command: `edit ingredient 2 -d juicy -t jelly`
 <br />Before:<br />
-![editCommand1.png](images/ingredientCommands/editCommand1.png)
+<img src="images/ingredientCommands/editCommand1.png" style="width:85%" class="ug-image">
    <br />
 <br />After:<br />
-![editCommand2.png](images/ingredientCommands/editCommand2.png)
+<img src="images/ingredientCommands/editCommand2.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -275,6 +290,8 @@ Edit an ingredient from the Inventory.
     
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.4 Clear Ingredient
 
 Clear all the ingredients from the Inventory. Add `expired` keyword to only clear expired ingredients.
@@ -286,17 +303,20 @@ Clear all the ingredients from the Inventory. Add `expired` keyword to only clea
 1. Clear all ingredients:<br />
 Command: `clear ingredient`
 <br />Expected Output:<br />
-![clearCommand.png](images/ingredientCommands/clearCommand.png)
+<img src="images/ingredientCommands/clearCommand.png" style="width:85%">
    <br /> <br />
-2. Clear expired ingredients:<br /> 
+<div style="page-break-after: always;"></div>
+<p>2. Clear expired ingredients:<br /></p> 
 Command: `clear ingredient expired`
 <br />Before:<br />
-![clearCommand2.png](images/ingredientCommands/clearExpired1.png)
+<img src="images/ingredientCommands/clearExpired1.png" style="width:85%">
    <br />
 <br />After:<br />
-![clearCommand3.png](images/ingredientCommands/clearExpired2.png)   
+<img src="images/ingredientCommands/clearExpired2.png" style="width:85%">   
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.5 Find Ingredient
 
@@ -310,7 +330,7 @@ Command: `clear ingredient expired`
 **Example(s):**<br />
 1. Command: `find ingredient banana cream`
 <br />Expected Output:<br />
-![findIngredient1.png](images/ingredientCommands/findIngredient.png)
+<img src="images/ingredientCommands/findIngredient.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - Keyword(s) are separated by spaces.
@@ -335,9 +355,11 @@ Switch to Ingredient [tab](#31-tabs) and list all ingredients.
 **Example(s):**<br />
 1. Command: `list ingredient`
 <br />Expected Output:<br />
-![listIngredient1.png](images/ingredientCommands/listIngredient.png)
+<img src="images/ingredientCommands/listIngredient.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.7 View Ingredient
 
@@ -347,16 +369,18 @@ Open an ingredient in the [Main Window](#36-mainwindow).
 `view ingredient <index>`
 
 **Example(s):**<br />
-1. Command: `view ingredient 3`
+1. Command: `view ingredient 2`
 <br />Expected Output:<br />
-![viewCommand1.png](images/ingredientCommands/viewIngredient.png)
+<img src="images/ingredientCommands/viewIngredient.png" style="width:85%">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 
 [\[Back to Table of Contents\]](#table-of-contents)
-  
+
+<div style="page-break-after: always;"></div>
+
 ### 4.5 Recipes
 This sections covers commands related to Recipe Book management. Any command primarily interacting with recipes will
 be here.
@@ -372,15 +396,16 @@ Add a recipe to the Recipe Book.
 1. Minimal command flags used:<br /> 
 Command: `add recipe -n pasta -i tomato 2 -i linguine 50g`
 <br />Expected Output:<br />
-![addRecipe1.png](images/recipeCommands/addRecipe1.png)
+<img src="images/recipeCommands/addRecipe1.png" style="width:85%" class="ug-image">
 <br /> <br />
-2. All command flags used:<br />
+<div style="page-break-after: always;"></div>
+<p>2. All command flags used:<br /></p>
 Command:`add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season
 the lamb chops with salt and pepper. -s Grill the lamb chops over medium high heat until cooked with butter.
 -s Blend the mint with garlic to make a puree. -s Leave the lamb chops to rest for 5min. -s Serve with mint puree.
 -d Juicy lamb chops served medium rare with a refreshing mint puree.`
 <br />Expected Output:<br />
-![addRecipe2.png](images/recipeCommands/addRecipe2.png)
+<img src="images/recipeCommands/addRecipe2.png" style="width:85%" class="ug-image">
    
 <br />**Additional Information:**<br />
 - Refer to the [Command Flags](#421-command-flags) table for information on each command flag.
@@ -390,6 +415,8 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 - Recipe ingredients will be highlighted <span style="color:GhostWhite;background-color:Crimson">red</span> if they are missing or expired.  
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.2 Delete Recipe
 
@@ -401,10 +428,10 @@ Delete recipe(s) from the Recipe Book.
 **Example(s):**<br />
 1. Command: `delete recipe 4`
 <br />Before:<br />
-![deleteRecipe1.png](images/recipeCommands/deleteRecipe1.png)
+<img src="images/recipeCommands/deleteRecipe1.png" style="width:85%" class="ug-image">
    <br />
 <br />After:<br />
-![deleteRecipe2.png](images/recipeCommands/deleteRecipe2.png)
+<img src="images/recipeCommands/deleteRecipe2.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -412,7 +439,9 @@ Delete recipe(s) from the Recipe Book.
 - If multiple index numbers are specified, Fridgy will delete the recipes at all specified index numbers.
 
 [\[Back to Table of Contents\]](#table-of-contents)
- 
+
+<div style="page-break-after: always;"></div>
+
 #### 4.5.3 Edit Recipe
 
 Edit a recipe from the Recipe Book.
@@ -421,12 +450,12 @@ Edit a recipe from the Recipe Book.
 `edit recipe <index> [-n <name>] [-i <ingredient>]... [-d <description>] [-s <steps>]...`
 
 **Example(s):**<br />
-1. Command: `edit recipe 2 -i pork knuckle 5kg -i apple juice 1l`
+1. Command: `edit recipe 3 -i pork knuckle 5kg -i apple juice 1l`
 <br />Before:<br />
-![editRecipe1.png](images/recipeCommands/editRecipe1.png)
+<img src="images/recipeCommands/editRecipe1.png" style="width:85%" class="ug-image">
    <br/>
 <br />After:<br />
-![editRecipe2.png](images/recipeCommands/editRecipe2.png)
+<img src="images/recipeCommands/editRecipe2.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
@@ -441,6 +470,8 @@ Edit a recipe from the Recipe Book.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.4 Clear Recipe
 
 Clear all recipes from the Recipe Book.
@@ -451,9 +482,11 @@ Clear all recipes from the Recipe Book.
 **Example(s):**<br />
 1. Command: `clear recipe`
 <br />Expected Output: <br />
-![clearRecipe.png](images/recipeCommands/clearRecipe.png)
+<img src="images/recipeCommands/clearRecipe.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.5 Find Recipe
 
@@ -467,7 +500,7 @@ please use a [List Recipe](#456-list-recipe) command.
 **Example(s):**<br />
 1. Command: `find recipe chop sag`
    <br />Expected Output:<br />
-   ![findRecipe.png](images/recipeCommands/findRecipe.png)
+   <img src="images/recipeCommands/findRecipe.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - Keyword(s) are separated by spaces.
@@ -492,9 +525,11 @@ Switch to Recipe [tab](#31-tabs) and list all recipes.
 **Example(s):**<br />
 1. Command: `list recipe`
 <br /> Expected Output:<br />
-![listRecipe.png](images/recipeCommands/listRecipe.png)
+<img src="images/recipeCommands/listRecipe.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.7 View Recipe
 
@@ -506,13 +541,15 @@ Open a detailed view of a recipe in the [Main Window](#36-mainwindow).
 **Example(s):**<br />
 1. Command: `view recipe 6`
    <br />Expected Output:<br />
-   ![viewRecipe.png](images/recipeCommands/viewRecipe.png)
+   <img src="images/recipeCommands/viewRecipe.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
   [Side Bar](#32-side-bar).
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.8 Cook Recipe
 
@@ -524,13 +561,14 @@ Cook a recipe and deduct the ingredients required by the chosen recipe from the 
 **Example(s):**<br />
 1. `cook recipe 6`
 <br />Before:<br />
-![cookRecipe1.png](images/recipeCommands/cookRecipe1.png)
+<img src="images/recipeCommands/cookRecipe1.png" style="width:85%" class="ug-image">
    <br />
+<div style="page-break-after: always;"></div>
 <br />After:<br />
-![cookRecipe2.png](images/recipeCommands/cookRecipe2.png)
-   <br />
-<br />Changes in Ingredients:<br />
-![cookRecipe3.png](images/recipeCommands/cookRecipe3.png)
+<img src="images/recipeCommands/cookRecipe2.png" style="width:85%" class="ug-image">
+
+Changes in Ingredients:
+<img src="images/recipeCommands/cookRecipe3.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
 - An index number is required for the Command. Refer to the indexes displayed for each [Card](#33-cards) in the
