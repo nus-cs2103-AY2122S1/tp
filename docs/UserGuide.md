@@ -40,7 +40,7 @@ Action | Parameters| Description
 `list` | | Shows a list of all clients in InsurancePal
 `clear` | | Deletes all clients from InsurancePal
 `help` | | Provides a url link to the User Guide for InsurancePal
-`find KEYWORD [MORE_KEYWORDS]` | `KEYWORD`: Word to search for | Finds clients whose names contain any of the keywords
+`find KEYWORD [MORE_KEYWORDS]...` | `KEYWORD`, `MORE_KEYWORDS`: Word to search for | Finds clients whose names contain any of the keywords
 `exit`| | Exits and close InsurancePal
 {: .summaryTable}
 
@@ -188,7 +188,7 @@ Parameter | Constraints
 
 You can easily find clients with the `find` command. 
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
