@@ -1149,13 +1149,18 @@ Use case resumes from step 2.
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects empty or invalid keywords.
-    * 1b1. System displays error corresponding to the empty or invalid keywords and provides an example on the accepted format
+* 1b. System does not detect any keywords.
+    * 1b1. System displays error corresponding to the empty keywords and provides an example on the accepted format
       and arguments.
-    * 1b2. User enters command arguments again.
+    * 1b2. User enters command again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
+
+* 1c. System is unable to find a customer whose details contain the specified keywords
+   * 1c1. System tells user that no customers can be found
+   
+     Use case ends.
 
 **Use case (UC15): Find Employees in RHRH**
 
@@ -1176,13 +1181,18 @@ Use case resumes from step 2.
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects empty or invalid keywords.
-    * 1b1. System displays error corresponding to the empty or invalid keywords and provides an example on the accepted format
+* 1b. System does not detect any keywords.
+    * 1b1. System displays error corresponding to the empty keywords and provides an example on the accepted format
       and arguments.
     * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
+
+* 1c. System is unable to find an employee whose details contain the specified keywords
+   * 1c1. System tells user that no employees can be found
+   
+     Use case ends.
 
 **Use case (UC16): Find Suppliers in RHRH**
 
@@ -1201,14 +1211,18 @@ Use case resumes from step 2.
 Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
-* 1b. System detects empty or invalid keywords.
-    * 1b1. System displays error corresponding to the empty or invalid keywords and provides an example on the accepted format
+* 1b. System does not detect any keywords.
+    * 1b1. System displays error corresponding to the empty keywords and provides an example on the accepted format
       and arguments.
     * 1b2. User enters command arguments again.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
+* 1c. System is unable to find a supplier whose details contain the specified keywords
+   * 1c1. System tells user that no suppliers can be found
+   
+     Use case ends.
 
 **Use case (UC17): Check for reservations made for a date and time**
 
