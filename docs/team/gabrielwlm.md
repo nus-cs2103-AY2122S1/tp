@@ -20,7 +20,7 @@ Given below are my contributions to the project.
   * New feature: Added the ability to view students in a group:
     * PR [\#151](), [\#246]()
     * Allows the user to only see students who are in a specific tutorial group. The student list is filtered to show only students who are in the desired tutorial group, for easy access to perform other features of ClassMATE with students in the tutorial group.
-    * This implementation required an understanding of the `TutorialGroup` feature (contributed by Yirui and Yi Yang) and required the creation of more `Predicate` classes to filter students in the student list, including `GroupMemberPredicate` and `TutorialGroupContainsKeywordPredicate`.
+    * This implementation was a bit tough as it required an understanding of the `TutorialGroup` feature (contributed by Yirui and Yi Yang) and required the creation of more `Predicate` classes to filter students in the student list, including `GroupMemberPredicate` and `TutorialGroupContainsKeywordPredicate`. It also required an understanding of the syntax in commands in conjunction with the filtering of students.
     * I also added test cases to catch bugs in the command.
 
 * **Documentation**:
@@ -40,18 +40,18 @@ Given below are my contributions to the project.
         * Added use cases [\#81](), [\#246]()
         * Added non-functional requirements [\#81]()
         * Fixed spelling and grammatical errors [\#130](), [\#246]()
-
-* **Refactoring**:
-    * Refactored Person to Student
-      * PR [\#93]()
-      * I refactored all mentions and instances of `Person` to `Student` to make ClassMATE more specific to its target users and its purpose, which in short is to keep a record of students.
-        * Refactored AddressBook to Classmate
-          * PR [\#116]()
-          * I refactored all mentions and instances of `AddressBook` to `ClassMATE` to differentiate ClassMATE from AddressBook which we adapted, as it is now a different application.
+        * Added the class and group filtering feature section [\#246]()
 
 * **Team-Based tasks**:
     * Managed documentation for releases `v1.1` - `v1.4` (4 releases) on GitHub
     * Conducted manual testing of features based on descriptions provided in the User Guide.
+    * **Refactoring**:
+      * Refactored Person to Student
+        * PR [\#93]()
+        * I refactored all mentions and instances of `Person` to `Student` to make ClassMATE more specific to its target users and its purpose, which in short is to keep a record of students.
+      * Refactored AddressBook to Classmate
+        * PR [\#116]()
+        * I refactored all mentions and instances of `AddressBook` to `ClassMATE` to differentiate ClassMATE from AddressBook which we adapted, as it is now a different application.
     * **Bug Fixes**:
       * IsSameStudent bug [\#130]()
       * Findc bug [\#170]()
@@ -62,6 +62,7 @@ Given below are my contributions to the project.
 
 * **Review Contributions**
     * PRs Reviewed with comments: [\#77](), [\#131](), [\#135](), [\#138](), [\#142](), [\#207](), [\#240](), [\#243]()
+    * I helped fix grammatical errors and other bugs in the team documents as well as those of my fellow teammates
 
 * **Community Contributions**
     * Bugs reported in other teams work:
