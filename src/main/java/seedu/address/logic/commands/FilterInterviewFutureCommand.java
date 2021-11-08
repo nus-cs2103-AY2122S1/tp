@@ -5,9 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 
-/**
- * Filters the displayed list to show applicants with upcoming interviews in the future.
- */
 public class FilterInterviewFutureCommand extends FilterInterviewCommand {
 
     public static final String MESSAGE_SUCCESS =
