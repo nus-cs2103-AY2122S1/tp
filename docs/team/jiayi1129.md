@@ -19,11 +19,13 @@ Given below are my contributions to the project
 
 * **New Feature**: 
   * What it does: Allows the user to execute commands pertaining to appointments and receive feedback in the appointment list.
-  * Justification: This feature is crucial to the product as clinic receptionists as the `Model` and `Logic` class is essential for the logical flow of the application. 
+  * Justification: This feature is crucial to the product as the `Model` and `Logic` class is essential for the logical flow of the application. 
   * Highlights: This feature requires the creation of a new `UniqueAppointmentList` to be used in the `Model` class to manage an appointment list. 
     The `Appointment` class now implements the `Comparable` interface to have natural ordering, and the UI then displays a sorted appointment list that uses this natural comparator.
     
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=jiayi1129&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=jiayi1129&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+<div style="page-break-after: always;"></div>
 
 * **Project Management**:
   * Set up the GitHub team org/repo
