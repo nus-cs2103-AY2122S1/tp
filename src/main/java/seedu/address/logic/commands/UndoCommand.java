@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,7 +51,6 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetPersonIndex.getZeroBased() >= lastShownList.size()) {
@@ -60,6 +58,8 @@ public class UndoCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
+        List<Task> taskListToModify = getTaskListToModify(model, personToEdit);
+        assert taskListToModify != null : "view all task list functionality not implemented correctly!";
 
         //Make new copy for defensive programming.
         List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
@@ -67,32 +67,14 @@ public class UndoCommand extends Command {
 
         copyOfIndexList.sort(Collections.reverseOrder());
 
-        for (Index targetTaskIndex : targetTaskIndexes) {
-            if (targetTaskIndex.getZeroBased() >= tasks.size()) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
-            }
-        }
-
-        int notDone = 0;
-        for (Index targetTaskIndex : copyOfIndexList) {
-            Task taskDone = tasks.get(targetTaskIndex.getZeroBased());
-            if (taskDone.getDone()) {
-                taskDone.setNotDone();
-            } else {
-                notDone++;
-            }
-        }
-
-        Person editedPerson = new Person (
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
-        );
+        checkTargetIndexesValidity(personToEdit, taskListToModify);
+        List<Task> targetTasks = extractTargetTasks(taskListToModify, copyOfIndexList);
+        int notDone = markTargetTasksAsNotDone(tasks, targetTasks);
+        Person editedPerson = createEditedPersonWithUpdatedTasks(personToEdit, tasks);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, targetTaskIndexes.size(), notDone));
+        return generateWriteCommandResult(notDone, editedPerson);
     }
 
     public String getCommand() {
@@ -101,6 +83,57 @@ public class UndoCommand extends Command {
 
     public String getDescription() {
         return DESCRIPTION;
+    }
+
+    private CommandResult generateWriteCommandResult(int alreadyDone, Person editedPerson) {
+        CommandResult commandResult = new CommandResult(
+                generateSuccessMessage(editedPerson, targetTaskIndexes.size(), alreadyDone));
+        commandResult.setWriteCommand();
+        return commandResult;
+    }
+
+    private Person createEditedPersonWithUpdatedTasks(Person personToEdit, List<Task> tasks) {
+        return new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant());
+    }
+
+    private int markTargetTasksAsNotDone(List<Task> tasks, List<Task> targetTasks) {
+        int notDone = 0;
+        for (Task targetTask : targetTasks) {
+            for (int i = 0; i < tasks.size(); i++) {
+                if (!(tasks.get(i) == targetTask)) {
+                    continue;
+                }
+                if (!tasks.get(i).getDone()) {
+                    notDone++;
+                } else {
+                    Task editedTask = new Task(tasks.get(i).getTaskName(),
+                            tasks.get(i).getDate(), tasks.get(i).getTime(), tasks.get(i).getVenue());
+                    editedTask.updateDueDate();
+                    editedTask.setNotDone();
+                    tasks.set(i, editedTask);
+                }
+            }
+        }
+        return notDone;
+    }
+
+    private void checkTargetIndexesValidity(Person personToEdit, List<Task> tasks) throws CommandException {
+        for (Index targetTaskIndex : targetTaskIndexes) {
+            if (targetTaskIndex.getZeroBased() >= tasks.size()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
+            }
+        }
+    }
+
+    private List<Task> extractTargetTasks(List<Task> taskList, List<Index> targetTaskIndexes) {
+        List<Task> targetTasks = new ArrayList<>();
+        for (Index targetIndex : targetTaskIndexes) {
+            targetTasks.add(taskList.get(targetIndex.getZeroBased()));
+        }
+        return targetTasks;
     }
 
     /**

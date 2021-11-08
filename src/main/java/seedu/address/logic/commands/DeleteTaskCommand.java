@@ -59,20 +59,7 @@ public class DeleteTaskCommand extends Command {
         }
 
         Person personToEdit = model.getFilteredPersonList().get(targetPersonIndex.getZeroBased());
-        List<Task> taskListToModify = null;
-
-        if (model.getIsViewAllTasks()) {
-            for (Person person : model.getViewAllTaskListPersons()) {
-                if ((person.getName()).equals(personToEdit.getName())) {
-                    taskListToModify = person.getTasks();
-                    break;
-                }
-            }
-        } else {
-            checkPersonToEditTasksDisplayed(model, personToEdit);
-            taskListToModify = model.getDisplayTaskList();
-        }
-
+        List<Task> taskListToModify = getTaskListToModify(model, personToEdit);
         assert taskListToModify != null : "view all task list functionality not implemented correctly!";
 
         //Make new copy for defensive programming.
@@ -97,18 +84,6 @@ public class DeleteTaskCommand extends Command {
             if (targetTaskIndex.getZeroBased() >= taskListToModify.size()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
             }
-        }
-    }
-
-    /**
-     * Checks if the person whose task(s) is selected for modification has their task list displayed
-     * on the task list panel.
-     */
-    private void checkPersonToEditTasksDisplayed(Model model, Person personToEdit) throws CommandException {
-        boolean isPersonToEditTaskDisplayed = personToEdit.getName()
-                .equals(model.getTaskListManager().getNameOfChosenPerson());
-        if (!isPersonToEditTaskDisplayed && !model.getIsViewAllTasks()) {
-            throw new CommandException(Messages.MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED);
         }
     }
 

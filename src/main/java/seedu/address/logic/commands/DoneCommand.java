@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,7 +52,6 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetPersonIndex.getZeroBased() >= lastShownList.size()) {
@@ -61,6 +59,8 @@ public class DoneCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
+        List<Task> taskListToModify = getTaskListToModify(model, personToEdit);
+        assert taskListToModify != null : "view all task list functionality not implemented correctly!";
 
         //Make new copy for defensive programming.
         List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
@@ -68,31 +68,66 @@ public class DoneCommand extends Command {
 
         copyOfIndexList.sort(Collections.reverseOrder());
 
+        checkTargetIndexesValidity(personToEdit, taskListToModify);
+        List<Task> tasksToBeMarkedAsDone = extractTaskToBeMarkedAsDone(taskListToModify, copyOfIndexList);
+        int alreadyDone = markTargetTasksAsDone(tasks, tasksToBeMarkedAsDone);
+        Person editedPerson = createEditedPersonWithUpdatedTasks(personToEdit, tasks);
+
+        model.setPerson(personToEdit, editedPerson);
+        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return generateWriteCommandResult(alreadyDone, editedPerson);
+    }
+
+    private CommandResult generateWriteCommandResult(int alreadyDone, Person editedPerson) {
+        CommandResult commandResult = new CommandResult(
+                generateSuccessMessage(editedPerson, targetTaskIndexes.size(), alreadyDone));
+        commandResult.setWriteCommand();
+        return commandResult;
+    }
+
+    private Person createEditedPersonWithUpdatedTasks(Person personToEdit, List<Task> tasks) {
+        return new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant());
+    }
+
+    private int markTargetTasksAsDone(List<Task> tasks, List<Task> taskToBeMarkedAsDone) {
+        int alreadyDone = 0;
+        for (Task taskTobeMarkedAsDone : taskToBeMarkedAsDone) {
+            for (int i = 0; i < tasks.size(); i++) {
+                if (!(tasks.get(i) == taskTobeMarkedAsDone)) {
+                    continue;
+                }
+                if (tasks.get(i).getDone()) {
+                    alreadyDone++;
+                } else {
+                    Task editedTask = new Task(tasks.get(i).getTaskName(),
+                            tasks.get(i).getDate(), tasks.get(i).getTime(), tasks.get(i).getVenue());
+                    editedTask.updateDueDate();
+                    editedTask.setDone();
+                    tasks.set(i, editedTask);
+                }
+            }
+        }
+        return alreadyDone;
+    }
+
+    private void checkTargetIndexesValidity(Person personToEdit, List<Task> tasks) throws CommandException {
         for (Index targetTaskIndex : targetTaskIndexes) {
             if (targetTaskIndex.getZeroBased() >= tasks.size()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
             }
         }
+    }
 
-        int alreadyDone = 0;
-        for (Index targetTaskIndex : copyOfIndexList) {
-            Task taskDone = tasks.get(targetTaskIndex.getZeroBased());
-            if (taskDone.getDone()) {
-                alreadyDone++;
-            } else {
-                taskDone.setDone();
-            }
+    private List<Task> extractTaskToBeMarkedAsDone(List<Task> taskList, List<Index> targetTaskIndexes) {
+        List<Task> tasksToBeMarkedAsDone = new ArrayList<>();
+        for (Index targetIndex : targetTaskIndexes) {
+            tasksToBeMarkedAsDone.add(taskList.get(targetIndex.getZeroBased()));
         }
-
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant());
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        return new CommandResult(generateSuccessMessage(editedPerson, targetTaskIndexes.size(), alreadyDone));
+        return tasksToBeMarkedAsDone;
     }
 
     /**

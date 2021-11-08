@@ -101,18 +101,6 @@ public class EditTaskCommand extends Command {
         return generateWriteCommandResult(editedTask);
     }
 
-    /**
-     * Checks if the person whose task(s) is selected for modification has their task list displayed
-     * on the task list panel.
-     */
-    private void checkPersonToEditTasksDisplayed(Model model, Person personToEdit) throws CommandException {
-        boolean isPersonToEditTaskDisplayed = personToEdit.getName().equals(model.getTaskListManager()
-                .getNameOfChosenPerson());
-        if (!isPersonToEditTaskDisplayed && !model.getIsViewAllTasks()) {
-            throw new CommandException(Messages.MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED);
-        }
-    }
-
     private void replaceTaskWithEditedVersion(List<Task> tasks, Task taskToEdit, Task editedTask)
             throws CommandException {
         int taskToEditIndex = getTaskToEditIndex(tasks, taskToEdit);
