@@ -18,6 +18,18 @@ public class TaskTest {
 
 
     @Test
+    public void getTimeRepresentation() {
+        Task task20211011060 = new TaskBuilder().withName("Test1").withDate("2021-10-11")
+                        .withTime("01:00").build();
+        Task task20210101000 = new TaskBuilder().withName("Test2").withDate("2021-01-01")
+                        .withTime("00:00").build();
+
+        assertTrue(task20211011060.getTimeRepresentation() == 20211011060L);
+        assertFalse(task20210101000.getTimeRepresentation() == 20211011060L);
+
+    }
+
+    @Test
     public void isSameTask() {
         // same object -> returns true
         assertTrue(CS1234_QUIZ.isSameTask(CS1234_QUIZ));
@@ -66,7 +78,7 @@ public class TaskTest {
         Task editedQuiz = new TaskBuilder(CS1234_QUIZ).withName(VALID_NAME_QUIZ).build();
         assertFalse(CS1234_QUIZ.equals(editedQuiz));
 
-        // different phone -> returns false
+        // different time -> returns false
         editedQuiz = new TaskBuilder(CS1234_QUIZ).withTime(VALID_TIME_QUIZ).build();
         assertFalse(CS1234_QUIZ.equals(editedQuiz));
 

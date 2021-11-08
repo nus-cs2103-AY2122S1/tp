@@ -1,5 +1,6 @@
 package seedu.unify.model.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.testutil.Assert.assertThrows;
@@ -17,6 +18,14 @@ public class TimeTest {
     public void constructor_invalidTime_throwsIllegalArgumentException() {
         String invalidTime = "";
         assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime));
+    }
+
+    @Test
+    public void timeConversionToMinutes() {
+        Time time = new Time("16:40");
+        int actualValue = time.getTimeInMinutesFromStartOfDay();
+
+        assertEquals(actualValue, 1000);
     }
 
     @Test

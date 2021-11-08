@@ -262,11 +262,11 @@ Find tasks with matching keywords and show them in the task list.
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
 </div>
 
-![find_command](images/findCommand.jpeg)
+![find_command](images/findCommand.png)
 
 After running the find command, the tasks having the mentioned keyword are displayed as shown below:
 
-![find_command_after](images/findCommandAfter.jpeg)
+![find_command_after](images/findCommandAfter.png)
 
 
 ### 4.6 Listing all tasks : `list`
@@ -435,11 +435,11 @@ Clears all entries from the Uni-Fy app.
 
 </div>
 
-![clear_command_before](images/clearCommandBefore.jpeg)
+![clear_command_before](images/clearCommandBefore.png)
 
 When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
 
-![clear_command_after](images/clearCommandAfter.jpeg)
+![clear_command_after](images/clearCommandAfter.png)
 
 
 ### 4.12 Retrieving past commands
