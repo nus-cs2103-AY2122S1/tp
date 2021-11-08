@@ -161,13 +161,13 @@ Allows you to add a client to SalesNote.
 
 Note that the application maintains a list of unique individuals! In this case two individuals are **considered equal if
 they have the same name**. Two individuals having the exact same name is quite the rare occurrence, and so we felt
-this was more likely to be a user mistake we wanted to help prevent. If you do happen to have two clients with the
+this was more likely to be a mistake we wanted to help prevent. If you do happen to have two clients with the
 exact same name, our recommendation is to add a number, to make clear that this was intentional (e.g. adding Jane Lim
 and Jane Lim1).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you get the required format for a field wrong e.g. you key in an invalid EMAIL, SalesNote will give you a 
-warning, and a reminder of the requirements:
+If you get the required format for a field wrong e.g. you key in an invalid EMAIL, the command will fail and SalesNote will 
+give you a warning, and a reminder of the requirements:
 </div>
 
 ![add client tip](images/uiupdate/addclienttip.png)
@@ -268,7 +268,7 @@ with a label describing them, a client, an amount, and a date. The following are
   **regardless of capitalisation!** So if you have a client named `James`, your order can be addressed to `james`, `JAMES`, `James` and so on.
 * Editing a client, will also edit all the orders tied to the client. For instance, if a client's name is changed from
   "Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin". 
-* The date field should follow one of the following formats:
+* The date field should follow one of the following formats. Note that the field is case-insensitive (e.g. 08 NOV 2021 would also work):
 
   Format | Example
       --------|------------------
@@ -401,12 +401,30 @@ Allows you to sort all orders based on a chosen field and arrangement.
 **:information_source: Note:** <br>
 
 * Your orders are normally arranged in the sequence they were added.
-* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker.
-* Adding / Deleting an order reverts the list to the normal arrangement.
+
+* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker. 
+  
+* The [`addorder`](#adding-an-order--addorder) and [`listorders`](#listing-all-orders--listorders) commands revert the list to the normal arrangement.
 
 </div>
 
 Examples:
+
+Suppose you had the following order list with four orders:
+
+![sortorders1](images/sortorders1.png)
+
+<figcaption align = "center">In the figure above, SalesNote displays the Orders in the sequence they were added. So
+Order 1 was added first, and Order 4 was added last.</figcaption>
+
+Executing `sortorders f/amount o/asc` sorts the list in ascending order, by their amounts, giving:
+
+![sortorders2](images/sortorders2.png)
+
+<figcaption align = "center">Notice that Order 2 and Order 3 are tied with the same amount. Thus Order 2 is displayed
+first, since it was added earlier then Order 3.</figcaption>
+
+The possible combinations give the following outcomes:
 * `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
 * `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
 * `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
@@ -433,7 +451,7 @@ Press the ESCAPE key to close the total orders window
 
 ![TotalOrdersWindow](images/TotalOrdersWindow2.png)
 <figcaption align = "center">e.g. In the figure above, the application has three clients Ng Chin Gan, Alice Seah,
-and Jacob Tan, but Jacob Tan is not shown as there are no orders from him in SalesNote yet</figcaption>
+and Jacob Tan, but Jacob Tan is not shown in the TotalOrders window as there are no orders from him in SalesNote yet</figcaption>
 
 
 [return to top](#table-of-contents)
@@ -460,7 +478,7 @@ as completed, but also provides you with an ability to tag tasks to orders.
   relevant tasks `SO4` and later type `findtask SO4` to find all these related tasks. As a reminder, if the order
   should be deleted, SalesNote will automatically remove the tasks tagged to that order for you.
 * The number after the 'SO' prefix **must correspond to the id of an existing order**. 
-* The date that accompanies tasks should be keyed in one of the following formats:
+* The date field should follow one of the following formats. Note that the field is case-insensitive (e.g. 08 NOV 2021 would also work):
   
   Format | Example
     --------|------------------
