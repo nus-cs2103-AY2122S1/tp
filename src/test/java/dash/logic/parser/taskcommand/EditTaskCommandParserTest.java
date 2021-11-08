@@ -82,11 +82,12 @@ class EditTaskCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.TASK_DESC_ASSIGNMENT
-                + CommandTestUtil.TAG_DESC_UNGRADED;
+                + CommandTestUtil.TAG_DESC_UNGRADED + " p/1" + CommandTestUtil.TASK_DATE;
 
         EditTaskCommand.EditTaskDescriptor descriptor =
                 new EditTaskDescriptorBuilder().withTaskDescription(CommandTestUtil.VALID_TASK_DESCRIPTION_ASSIGNMENT)
-                        .withTags(CommandTestUtil.VALID_TAG_UNGRADED).build();
+                        .withTags(CommandTestUtil.VALID_TAG_UNGRADED).withPeople(TypicalPersons.ALICE)
+                        .withTaskDate("22/10/2021").build();
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
         assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);

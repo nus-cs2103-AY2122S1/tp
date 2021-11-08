@@ -6,6 +6,7 @@ import static dash.logic.parser.CliSyntax.PREFIX_NAME;
 import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
 import static dash.logic.parser.CliSyntax.PREFIX_PHONE;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -77,6 +78,8 @@ public class CommandTestUtil {
     public static final String TASK_DESC_LECTURE = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_LECTURE;
     public static final String TASK_DESC_PR_REVIEW = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_PR_REVIEW;
     public static final String TASK_DESC_QUIZ = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_QUIZ;
+
+    public static final String TASK_DATE = " " + PREFIX_TASK_DATE + "22/10/2021";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
