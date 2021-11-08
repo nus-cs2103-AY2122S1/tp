@@ -1130,6 +1130,8 @@ MSS
 2. CohortConnect shows a successfully added message.
 3. CohortConnect shows the updated list of contacts.
 
+    Use case ends.
+
 Extensions
 
 * 1a. The input command is invalid.
@@ -1139,11 +1141,25 @@ Extensions
   * 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-* 1b. User enters an existing name.
-  * 1b1. CohortConnect prompts that name is already taken.
+* 1b. User enters an existing Telegram handle.
+  * 1b1. CohortConnect prompts that person already exists.
   * 1b2. CohortConnect requests for correct format.
   * 1b3. User enters new data.
   * Steps 1b1-1b3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+  
+* 1c. User enters an existing GitHub username.
+  * 1c1. CohortConnect prompts that person already exists.
+  * 1c2. CohortConnect requests for correct format.
+  * 1c3. User enters new data.
+  * Steps 1c1-1c3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+  
+* 1d. The input command is missing compulsory fields.
+  * 1d1. CohortConnect shows an error message.
+  * 1d2. CohortConnect requests for compulsory fields.
+  * 1d3. User enters new data.
+  * 1d1-1d3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
 **Use Case 3: Edit user**
@@ -1164,6 +1180,13 @@ Extensions
   * 1a3. User enters new data.
   * Steps 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
+  
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 **Use Case 3: Delete user**
 
@@ -1183,6 +1206,13 @@ Extensions
   * 1a3. User enters new data.
   * Steps 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
+  
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
   
 **Use Case 4: Find a contact using name**
 
@@ -1234,6 +1264,13 @@ MSS
 
 Extensions
 
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
 * 2a. The list is empty.
   * Use case ends.
 
@@ -1254,6 +1291,13 @@ MSS
     Use case ends.
 
 Extensions
+
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 * 2a. The list is empty.
   * Use case ends.
@@ -1279,6 +1323,13 @@ MSS
     Use case ends.
 
 Extensions
+
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 * 2a. The list is empty.
   * Use case ends.
@@ -1306,6 +1357,13 @@ MSS
 
 Extensions
 
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
 * 2a. The list is empty.
   * Use case ends.
 
@@ -1317,6 +1375,70 @@ Extensions
   * 3b1. CohortConnect shows an error message.
   * 3b2. Displays list of users with telegram ids containing the keyword.
   * Use case resumes at step 3.
+
+**Use Case 16: Favorite an existing contact**
+
+MSS
+
+1. User enters command to favorite a contact.
+2. CohortConnect shows a successfully favorited message.
+3. CohortConnect shows the updated list of contacts.
+
+    Use case ends.
+    
+Extensions
+
+* 1a. The given index is not present.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+    
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
+* 1c. The contact at given index is already favorited.
+    * 1c1. CohortConnect shows an error message.
+    * 1c2. User enters new data.
+    * Steps 1c1-1c2 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+    
+**Use Case 17: Unfavorite an existing contact**
+
+MSS
+
+1. User enters command to unfavorite a contact.
+2. CohortConnect shows a successfully unfavorited message.
+3. CohortConnect shows the updated list of contacts.
+
+    Use case ends.
+    
+Extensions
+
+* 1a. The given index is not present.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+    
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
+* 1c. The contact at given index is already favorited.
+    * 1c1. CohortConnect shows an error message.
+    * 1c2. User enters new data.
+    * Steps 1c1-1c2 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 **Use Case 18: Import contacts from JSON or CSV file**
 
@@ -1360,6 +1482,13 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+  
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 **Use Case 20: Opening a contact's GitHub**
 
