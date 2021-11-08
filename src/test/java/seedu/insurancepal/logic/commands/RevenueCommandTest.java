@@ -87,9 +87,12 @@ public class RevenueCommandTest {
 
     @Test
     public void execute_resultingRevenueNegativeUnfilteredList_failure() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         Money negativeMoneyOfBob = new Money((-1) * Float.valueOf(REVENUE_STUB));
         RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(negativeMoneyOfBob));
+        String errorMessage = String.format(RevenueCommand.MESSAGE_ADD_REVENUE_FAIL_NEGATIVE, firstPerson.getName());
 
-        assertCommandFailure(revenueCommand, model, RevenueCommand.MESSAGE_ADD_REVENUE_FAIL);
+        assertCommandFailure(revenueCommand, model, errorMessage);
     }
 }

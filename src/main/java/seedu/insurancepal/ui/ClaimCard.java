@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.insurancepal.model.claim.Claim;
 import seedu.insurancepal.model.person.Name;
 
@@ -36,6 +37,8 @@ public class ClaimCard extends UiPart<Region> {
     private Label description;
     @FXML
     private Label status;
+    @FXML
+    private VBox cardBox;
 
 
     /**
