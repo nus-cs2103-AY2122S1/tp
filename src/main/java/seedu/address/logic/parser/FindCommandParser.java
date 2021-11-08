@@ -118,11 +118,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NATIONALITY).isPresent()
             && !argMultimap.getValue(PREFIX_NATIONALITY).get().trim().isEmpty()) {
             List<String> nationalityKeywords = argMultimap.getAllValues(PREFIX_NATIONALITY);
-            /*
-            for (String nationality : nationalityKeywords) {
-                ParserUtil.parseNationality(nationality);
-            }
-             */
+
             int numOfEmptyValue = (int) nationalityKeywords.stream()
                     .filter(String::isEmpty).count();
 
@@ -136,11 +132,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()
             && !argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get().trim().isEmpty()) {
             List<String> tutorialGroupKeywords = argMultimap.getAllValues(PREFIX_TUTORIAL_GROUP);
-            /*
-            for (String tutorialGroup : tutorialGroupKeywords) {
-                ParserUtil.parseTutorialGroup(tutorialGroup);
-            }
-             */
+
             int numOfEmptyValue = (int) tutorialGroupKeywords.stream()
                     .filter(String::isEmpty).count();
 
