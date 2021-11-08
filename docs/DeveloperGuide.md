@@ -143,7 +143,7 @@ For a list of version controlled command, refer [here](#appendix-c-version-contr
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -206,7 +206,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AcademyDirectoryParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `VersionedModel` when it is executed (e.g. to add a student).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -846,6 +846,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS1101S Avenger           | keep track of my students' tutorial performance                    | accurately reward class participation marks                            |
 | `* * *`  | CS1101S Avenger           | record my students' assessment results                             | monitor my students' progress and provide timely assistance to them    |
 | `* * *`  | First time user           | access the relevant commands with a "help" command                 | learn how to use the app more easily                                   |
+| `* *`    | CS1101S Avenger           | view the personal detail of my students                            | easily broadcast information to my students            |
 | `* *`    | CS1101S Avenger           | view the average scores of my students for specific assessments    | focus on the aspects to improve on during tutorial                     |
 | `* *`    | CS1101S Avenger           | visualize the class scores for specific assessments                | gauge how well my students are doing in assessments                    |
 | `* *`    | CS1101S Avenger           | add tags to certain students to take note of their weaker topics   | focus on topics that they are struggling with                          |
@@ -905,7 +906,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list students
 2.  Academy Directory shows a list of students
 3.  User requests to edit a specific student in the list
-4.  Academy Directory edit the student
+4.  Academy Directory edits the student
 
     Use case ends.
 
@@ -1050,27 +1051,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: Retrieve information**
+**Use case: Get personal detail**
 
 **MSS**
 
-1. User enters a command to retrieve information
-2. Academy Directory obtains the queried information from the students.
-3. Academy Directory displays the list of information queried.
+1. User enters a command to get personal detail
+2. Academy Directory obtains the queried personal detail from the students.
+3. Academy Directory displays the list of personal detail queried.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User specifies exact student name.
+* 1a. User provides keywords to be matched to students' names.
 
-    * 1a1. Academy Directory displays the queried information associated with the queried student.
+  * 1a1. Academy Directory displays the queried information associated with the students whose name
+  matches the queried keyword.
+
+    Use case ends.
   
-         Use case ends.
-  
-* 1a. User's queried information is not supported 
-    * 1a1. Academy Directory shows an error message.
-    * 1a2. Academy Directory requests for the user to try another information.
+* 1b. User's queried personal detail is not supported 
+    * 1b1. Academy Directory shows an error message.
+    * 1b2. Academy Directory requests for the user to try another information.
   
         Use case ends.
   
@@ -1084,14 +1086,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. Users request information of a student whose index exceeds the student list size
-    * 1a1. Academy Directory informs users that the index is invalid via an error message
-      
-      Use case resumes at step 1
+  * 1a1. Academy Directory informs users that the index is invalid via an error message
+
+    Use case resumes at step 1
+
+* 1b. The index number is invalid (not a positive integer)
+  * 1b1. Academy Directory informs users that the index is invalid and must be a positive integer for the command to be executed
+
+    Use case resumes at step 1
   
-* 1a. The index number is invalid (not a positive integer)
-    * 1a1. Academy Directory informs users that the index is invalid and must be a positive integer for the command to be executed
-     
-      Use case resumes at step 1
+**Use case: Undo changes to data**
+
+**MSS**
+
+1. User enters a command to undo a *data state change*
+2. Academy Directory regenerates the corresponding data file
+3. Academy Directory reloads information with the regenerated data file
+4. Academy Directory displays information to user.
+
+**Extensions**
+* 1a. There no changes to data state to be undone
+  * 1a1. Academy Directory informs users to check that there is a change to be undone via an error message
+
+    Use case ends
+
+* 2a. Unable to regenerate data file due to folder permission issues
+  * 2a1. Academy Directory informs users to check for read/write permission of the data folder via an error message
+
+    Use case ends
+
+* 3a. Unable to reload internal data due to corruption of regenerated data file
+  * 3a1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
+
+**Use case: Redo changes to data**
+
+**MSS**
+
+1. User enters a command to redo a *data state change*
+2. Academy Directory regenerates the corresponding data file
+3. Academy Directory reloads information with the regenerated data file
+4. Academy Directory displays information to user.
+
+**Extensions**
+* 1a. There no changes to data state to be redone
+  * 1a1. Academy Directory informs users to check that there is a change to be redone via an error message
+
+    Use case ends
+
+* 2a. Unable to regenerate data file due to folder permission issues
+  * 2a1. Academy Directory informs users to check for read/write permission of the data folder via an error message
+
+    Use case ends
+
+* 3a. Unable to reload internal data due to corruption of regenerated data file
+  * 3a1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
+
+**Use case: View Commit History**
+
+**MSS**
+
+1. User enters a command to view commit history
+2. Academy Directory displays commit history to user.
+
+**Extensions**
+* 1a. Unable to load file from disk due to folder permission issues
+  * 1a1. Academy Directory informs users to check for read/write permission of the version control folder via an error message
+
+    Use case ends
+
+* 1b. Unable to reload internal data due to corruption of regenerated data file
+  * 1b1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
+
+**Use case: Revert Commit**
+
+**MSS**
+
+1. User <u>views commit history</u>
+2. Academy Directory displays commit history to user.
+3. User picks a commit hash that is not the current commit to revert to
+4. Academy Directory regenerates the corresponding data file
+5. Academy Directory reloads information with the regenerated data file
+6. Academy Directory displays information to user.
+
+**Extensions**
+* 3a. User picks a commit hash that corresponds to the current commit
+  * 3a1. Academy Directory informs users to check commit hash via an error message
+
+    Use case ends
+* 3b. User picks an invalid commit hash
+  * 3b1. Academy Directory informs users to check commit hash via an error message
+
+    Use case ends
+
+* 4a. Unable to regenerate data file due to folder permission issues
+  * 4a1. Academy Directory informs users to check for read/write permission of the data folder via an error message
+
+    Use case ends
+
+* 5a. Unable to reload internal data due to corruption of regenerated data file
+  * 5a1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
 
 ### Non-Functional Requirements
 
@@ -1167,13 +1268,13 @@ cannot be reverted to and / or be undone or redone.
 
 ## **Appendix D: Effort**
 If the effort required to create **AB3** is 10, we would place the effort level required to implement the current version
-of **AcademyDirectory** at 15.
+of **Academy Directory** at 15.
 
-Our team has put in a significant amount of effort to get AcademyDirectory to the current version. Below, we list some notable changes overall and notable features implemented by us.
+Our team has put in a significant amount of effort to get Academy Directory to the current version. Below, we list some notable changes overall and notable features implemented by us.
 
 ### Notable Changes in General
 
-1. **Morphed existing AB3 to align with our design for AcademyDirectory**
+1. **Morphed existing AB3 to align with our design for Academy Directory**
 
    We have put in a significant amount of effort morphing the existing code base, AB3 to support the need of our application, which is designed for CS1101S avenger to be more effective and efficient.
 
@@ -1182,11 +1283,11 @@ Our team has put in a significant amount of effort to get AcademyDirectory to th
    Secondly, we had to remove all the irrelevant classes and update the existing test cases to fit our need.
 
    Lastly, we had to integrate all these new classes with the existing code to save applications data to a file
-   in AcademyDirectory. This required major refactoring of existing classes to support multiple new fields and commands.
+   in Academy Directory. This required major refactoring of existing classes to support multiple new fields and commands.
 
 
 2. **Redesigned GUI**
-   Compared to AB3, AcademyDirectory completely revamps the User Interface to bring out the best usage experiences to users. In that regard, we have updated Academy and make everything about it space-themed,
+   Compared to AB3, Academy Directory completely revamps the User Interface to bring out the best usage experiences to users. In that regard, we have updated Academy and make everything about it space-themed,
    allowing users the various options (primarily CLI, but GUI is also offered) to interact with our system, and reorganize the appearance to make Academy Directory look more neat and stylish, thus enhancing user's experience.
    One of the most notable change to UI was the differentiation of result display into two categories - status message and result visualized.
 
