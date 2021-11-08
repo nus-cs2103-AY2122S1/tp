@@ -360,7 +360,7 @@ Examples:
 
 #### Sorting residents : `sort`
 
-<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `sort` command cannot be undone!
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** To undo the `sort` command, simply run `view`.
 </div>
 
 Sorts the residents according to specified fields in ascending or descending order
@@ -643,7 +643,7 @@ Examples:
 
 #### Sorting events : `sort`
 
-<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `sort` command cannot be undone!
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** To undo the `sort` command, simply run `view`.
 </div>
 
 Sorts the events according to specified fields in ascending or descending order.
@@ -749,7 +749,7 @@ Command | Format | Examples
 |--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
-**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
+**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` or<br>`deadline k/LATE_KEYWORD d1/DATE1` | `deadline k/f d1/15-08-2021 d2/20-08-2021` or<br>`deadline k/lf d1/15-08-2021`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/john alex v/false f/fass` <br>
 **Edit** | `edit INDEX… [FLAG/UPDATED_PARTICULARS]…` | `edit 1 2 3 v/true fd/20-10-2021` <br>
 **Delete** | `delete INDEX…` | `delete 1 2 3`
@@ -762,7 +762,7 @@ Command | Format | Examples
 
 Command | Format | Examples
 |--------|-------|----------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**Add** |  `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]` | `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201`
 **View** | `view [INDEX]`| `view 30`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
 **Edit** | `edit INDEX [FLAG/UPDATED_PARTICULARS]…` | `edit 1 n/Football Training l/Field`
@@ -773,8 +773,8 @@ Command | Format | Examples
 
 ### Commons
 
-Command | Format | Examples
-|--------|-------|----------
+Command | Format
+|--------|-------
 **Help** | `help`
 **Switch** | `switch`
 **Clear** | `clear`
