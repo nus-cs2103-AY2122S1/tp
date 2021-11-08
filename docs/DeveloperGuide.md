@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="900" />
+<img src="images/ModelClassDiagram.png" width="1100" />
 
 
 The `Model` component,
