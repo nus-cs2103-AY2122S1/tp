@@ -33,10 +33,10 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
           and [JsonAdaptedTimeslot](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedTimeslot.java).
     * UI
         * Viewing Panel
-            * Created [ViewingPanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/ViewingPanel.java) and the logic behind it to view different things.
-            * Created [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java) to support viewing a single person.
-            * Created [LessonScheduleCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonScheduleCard.java)
-              and [LessonSchedulePanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonSchedulePanel.java) for viewing schedule.
+            * Created [ViewingPanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/ViewingPanel.java),
+              [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java),
+              [LessonScheduleCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonScheduleCard.java)
+              and [LessonSchedulePanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonSchedulePanel.java) for the viewing panel.
             * Modified other UI components, css and FXML files to enable the viewing panel.
 * ##### Documentation
     * User Guide
