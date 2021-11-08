@@ -32,7 +32,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex, ParseException exception) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (trimmedIndex.equals("")) {
-            throw new ParseException(MESSAGE_NON_EXISTENT_INDEX);
+            throw exception;
         }
         char firstElement = trimmedIndex.charAt(0);
 
