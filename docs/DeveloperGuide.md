@@ -1124,7 +1124,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `list`<br>
    Expected: All applicants listed without omission.
-   Command success message shown in the status message.
+   Command success message shown in the result display.
 
 
 ### Adding an applicant
@@ -1141,7 +1141,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob p/98765432 e/bob@gmail.com r/Lawyer et/Full time s/7000 l/Bachelors y/4`<br>
        Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same phone number as John Doe. 
     
-    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Jack Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`<br>
+    1. Test case: Ensure that you have completed the first test case under this section, then input the command `add Bob Smith p/97865321 e/JohnDoe@gmail.com r/Doctor et/Full time s/9000 l/Bachelors y/4`<br>
        Expected: No new applicant is added. Error details shown in the result display stating that Bob shares the same email as John Doe.
        
     1. Other incorrect add commands to try: `add`, `add John`, `add n/John p/98765432 e/JohnDoe@gmail.com r/Teacher`
@@ -1216,11 +1216,9 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `find i/oct` <br> 
        Expected: Applicants with interviews in October are listed. Command success message shown in result display.
-       (Using sample data, there should be 3 applicants listed.)
 
     1. Test case: `find s/4000` <br>
        Expected: Applicants with expected salary ranging from `3500` to `4500` are listed. Command success message shown in result display.
-       (Using sample data, Alex with salary `4500` and Roy with salary `3600` are listed.)
        
     1. Test case: `find y/-1` (invalid search terms) <br> 
        Expected: No change to applicant listed. Error details shown on result display.
@@ -1236,7 +1234,6 @@ testers are expected to do more *exploratory* testing.
   
     1. Test case: `find s/4000 i/oct` <br>
        Expected: Applicant with expected salary ranging from `3500` to `4500` **and** interview in October are listed. Command success message shown in result display.
-       (Using sample data, only Alex is listed.)
        
 1. Finding an applicant without prefixes
 
@@ -1403,14 +1400,14 @@ The effort required to evolve `AB3` to `RecruitIn` could be estimated to be appr
 Our team have contributed roughly 11000 lines of functional code, automated unit and integration testing, and documentation.
 Listed below are some features and enhancements, and an explanation of the difficulty or effort required to implement them:
 
-  1. ### **Addition of categories**
+  ### Addition of categories
       * `AB3` initially had the `Name`, `Phone Number`, `Email`, `Address`, and `Tag` categories.
       * `RecruitIn` removed the `Address` category, and introduced the `Applied Role`, `Employment Type`, `Expected Salary`,
         `Level of Education`, `Years of Experience`, `Interview`, and `Notes` categories, as well as a `Done` status.
       * The addition of the categories itself was relatively low effort as we were already reusing most of `AB3`'s existing categories.
       * Furthermore, we did not have to make any additional design decisions and could follow the existing architecture in order to add the new categories.
     
-  2. ### **Integration of categories**
+  ### Integration of categories
       * This includes integration of the new categories into the existing `add`, `edit` and `find` command.
       * The integration of the new categories into the `add` command was done without much relative difficulty.
       * The integration of the new categories into the `edit` command did involve a refactoring of the entire edit command parser, and thus required relatively more effort.
@@ -1419,7 +1416,7 @@ Listed below are some features and enhancements, and an explanation of the diffi
           2. The `find` command was improved to allow for searching of multiple categories at the same time.
           2. The `find` command was modified to validate parameters for each category.
   
-  3. ### **Implementation of new features**
+  ### Implementation of new features
       * This includes the implementation of the `show`, `mark`, `unmark`, `delete_marked`, and `filter_interview` commands.
           * The implementation of new features was generally high effort due to having to create each command from scratch.
           * Difficulties arose mostly from having to make our own design decisions, while at the same time having to following important software engineering principles and practices.
