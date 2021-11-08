@@ -15,10 +15,10 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 #### **Enhancements implemented**
 * Added the feature to filter applicants [PR: [\#83](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/83)]
   * **What it does**: Allows the user to filter applicants in the system based on various criteria.
-  * **Justification**: A filter feature is essential in helping the user in identifying suitable applicants that match certain criteria, especially when dealing with a high volume of applicants.
+  * **Justification**: A filter feature is essential in helping the user in identifying suitable candidates, especially when dealing with high volumes of applicants.
   * **Highlights**:
     * Making the feature scalable so that future developers can easily add more filter criteria with minimal additions to the code.
-    * Parsing a variable number of filtering criteria from the user into a single, unified condition.
+    * Parsing a variable number of filtering criteria from the user into a single condition.
 
 * Added the feature to visualize job positions with a pie chart [PR: [\#106](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/106)]
   * **What it does**: Allows the user to a position & its applicants' statuses as a pie chart.
@@ -29,7 +29,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * Added the feature to update applicant's application statuses [PR: [\#108](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/108)]
   * **What it does**: Allows the user to easily update applicants' statuses.
-  * **Justification**: As users are likely to frequently update applicant statuses, providing a dedicated command for this (separate from the 'edit' command) helps streamline user workflow.
+  * **Justification**: As users are likely to frequently update applicant statuses, providing a dedicated command for this helps streamline user workflow.
   * **Highlight**: Multiple levels of input validation (e.g. specified applicant exists, specified status is valid, specified status is different from current status)
 
 * Added `Application` class to model the applicant-position relationship [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92)]
@@ -42,8 +42,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 * Wrote tests for existing features to increase coverage [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92), [\#194](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/194)]
 
 #### **Contributions to the UG**
-* Added initial UG skeleton [PR: [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24)]
-* Updated quick start screenshot, added documentation for `filter-applicant`, `visualize` and `mark` commands to the 'Features' and 'Command Summary' sections [PRs: [\#108](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/108), [\#118](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/118)]
+* Added initial UG skeleton [PR: [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24)], updated quick start screenshot, added documentation for `filter-applicant`, `visualize` and `mark` commands to the 'Features' and 'Command Summary' sections [PRs: [\#108](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/108), [\#118](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/118)]
 
 #### **Contributions to the DG**
 * Added product scope, NFRs, glossary, contributed to user stories, use cases [PR: [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24)]
