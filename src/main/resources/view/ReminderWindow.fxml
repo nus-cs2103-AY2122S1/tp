@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+<fx:root alwaysOnTop="true" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@Fonts.css" />
+                <URL value="@ManageMe.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+
+            <VBox fx:id="reminderWindow" alignment="CENTER">
+                <Label fx:id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="header" textAlignment="JUSTIFY">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+                </Label>
+            <Label layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="header" text="Task:" textAlignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+
+                <VBox fx:id="reminderTaskList" minHeight="-Infinity" minWidth="-Infinity" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+                </VBox>
+            <Button fx:id="ackButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#acknowledgeDisplayList" text="Acknowledge">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin></Button>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

@@ -8,12 +8,12 @@ package UI <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
-Class MainWindow
+Class MmMainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
+Class XYZListPanel
+Class XYZCard
+Class ModuleWindow
 Class CommandBox
 }
 
@@ -29,32 +29,34 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+UiManager -down-> MmMainWindow
+MmMainWindow --> "1" HelpWindow
+MmMainWindow *-down-> "1" CommandBox
+MmMainWindow *-down-> "1" ResultDisplay
+MmMainWindow *-down-> "1" XYZListPanel
+MmMainWindow *-down-> "1" ModuleWindow
 
-PersonListPanel -down-> "*" PersonCard
+XYZListPanel -down-> "*" XYZCard
 
-MainWindow -left-|> UiPart
+MmMainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+XYZListPanel --|> UiPart
+XYZCard --|> UiPart
+ModuleWindow --|> UiPart
+HelpWindow -down-|> UiPart
 
-PersonCard ..> Model
+XYZCard ..> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MmMainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+XYZListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+ResultDisplay -[hidden]left- ModuleWindow
 
-MainWindow -[hidden]-|> UiPart
+note right of XYZListPanel: XYZListPanel = TaskListPanel, \nLinkListPanel, etc
+
+MmMainWindow -[hidden]-|> UiPart
 @enduml

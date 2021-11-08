@@ -1,0 +1,13 @@
+{
+  "links": [ {
+    "name": "Valid Link",
+    "address": "https://www.youtube.com",
+    "module": "CS2100"
+  }, {
+    "name": "Invalid Link",
+    "address": "www.youtube.com",
+    "module": ""
+  } ],
+  "tasks": [],
+  "modules": []
+}

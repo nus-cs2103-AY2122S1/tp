@@ -1,0 +1,15 @@
+@startuml
+start
+:User executes addTask command;
+if () then ([Command has missing/invalid parameters])
+    :Throws Parse Exception;
+else ([Command has valid parameters])
+    if () then ([Duplicate Task/Associated module does not exist])
+        :Throws Command Exception;
+    else ([Command can be executed])
+        :Creates specified task and adds it to task list;
+        :Prints Success Message to user;
+    endif
+endif
+stop
+@enduml

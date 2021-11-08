@@ -1,0 +1,93 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ManageMeParser" as ManageMeParser LOGIC_COLOR
+participant ":EditModCommandParser" as EditModCommandParser LOGIC_COLOR
+participant "d:EditModCommand" as EditModCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editMod 2 n/CS111")
+activate LogicManager
+
+LogicManager -> ManageMeParser : parseCommand("editMod 2 n/CS111")
+activate ManageMeParser
+
+create EditModCommandParser
+ManageMeParser -> EditModCommandParser
+activate EditModCommandParser
+
+EditModCommandParser --> ManageMeParser
+deactivate EditModCommandParser
+
+ManageMeParser -> EditModCommandParser : parse("2 n/CS111")
+activate EditModCommandParser
+
+create EditModCommand
+EditModCommandParser -> EditModCommand
+activate EditModCommand
+
+EditModCommand --> EditModCommandParser : d
+deactivate EditModCommand
+
+EditModCommandParser --> ManageMeParser : d
+deactivate EditModCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditModCommandParser -[hidden]-> ManageMeParser
+destroy EditModCommandParser
+
+ManageMeParser --> LogicManager : d
+deactivate ManageMeParser
+
+LogicManager -> EditModCommand : execute()
+activate EditModCommand
+
+EditModCommand -> Model : getFilteredModuleList()
+activate Model
+
+Model --> EditModCommand : lastShownModuleList
+deactivate Model
+
+EditModCommand -> Model  : editModuleInTasksWithModule(moduleToEdit, TagModule(CS111))
+activate Model
+
+Model --> EditModCommand
+deactivate Model
+
+EditModCommand -> Model : editModuleInLinksWithModule(Module(CS111), TagModule(CS111))
+activate Model
+
+Model --> EditModCommand
+deactivate Model
+
+EditModCommand -> Model : <Module>set(ModuleToEdit, CS111)
+activate Model
+
+Model --> EditModCommand
+deactivate Model
+
+EditModCommand -> Model : updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES)
+activate Model
+
+Model --> EditModCommand
+deactivate Model
+
+create CommandResult
+EditModCommand -> CommandResult
+activate CommandResult
+
+CommandResult -->  EditModCommand
+deactivate CommandResult
+
+EditModCommand --> LogicManager : result
+deactivate EditModCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

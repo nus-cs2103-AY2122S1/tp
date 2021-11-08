@@ -42,3 +42,28 @@
     font-family: "Open Sans SemiBold Italic";
     src: url("/fonts/open-sans/OpenSans-SemiBoldItalic.ttf");
 }
+
+@font-face {
+    font-family: Agfolan;
+    src: url("/fonts/Agfolan.ttf");
+}
+
+@font-face {
+    font-family: "Fresh-Milk";
+    src: url("/fonts/Fresh-Milk.ttf");
+}
+
+@font-face {
+    font-family: "Simple Something";
+    src: url("/fonts/Simple-Something.ttf");
+}
+
+@font-face {
+    font-family: "Fligen";
+    src: url("/fonts/Fligen-Regular.otf");
+}
+
+@font-face {
+    font-family: "Giliams";
+    src: url("/fonts/Giliams-Regular.otf");
+}

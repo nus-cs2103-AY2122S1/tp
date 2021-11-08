@@ -1,0 +1,203 @@
+* {
+    -menuBar-color: salmon;
+    -bg-color: lightpink;
+    -panel-color: mistyrose;
+    -calendar-color: floralwhite;
+    -cardPane-color: navajowhite;
+    -has-color: mediumspringgreen;
+    -readDay-color: cornsilk;
+}
+
+#menuBar {
+    -fx-background-color: -menuBar-color;
+}
+
+#menuBar .menu-item {
+    -fx-background-color: -menuBar-color;
+}
+
+#menuBar .label{
+    -fx-font-size: 16px;
+}
+
+.scroll-bar,
+#readLinkList,
+#readTaskList,
+#reminderTaskList,
+#moduleListPanelPlaceholder,
+#linkListPanelPlaceholder,
+#taskListPanelPlaceholder,
+#calendarPanelPlaceholder,
+#resultDisplay .content {
+    -fx-background-color: -panel-color;
+}
+
+.scroll-bar .thumb,
+#reminderWindow,
+#helpWindow,
+#readModulePane,
+#resultDisplayPlaceholder,
+#commandBoxPlaceholder,
+#calendar,
+#linkList,
+#taskList,
+#moduleList {
+    -fx-background-color: -bg-color;
+}
+
+#commandTextField {
+    -fx-background-color: -panel-color;
+    -fx-font-family: "Giliams";
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: #000000;
+}
+
+#resultDisplay {
+    -fx-font-size: 20px;
+}
+
+#moduleListView,
+#taskListView,
+#linkListView,
+#linkCardPane,
+#moduleCardPane,
+#taskCardPane,
+#linkListView .list-cell:empty,
+#taskListView .list-cell:empty,
+#moduleListView .list-cell:empty,
+#calendarPanelPlaceholder .cell .label,
+#dayCardPane {
+    -fx-background-color: transparent;
+}
+
+#calendarPlaceholder {
+    -fx-background-color: -calendar-color;
+}
+
+#readDayPanelPlaceholder .scroll-bar,
+#readDayPanelPlaceholder,
+#readDayTitlePlaceholder {
+    -fx-background-color: -readDay-color;
+}
+
+#readDayPanelPlaceholder .scroll-bar .thumb {
+    -fx-background-color: palegoldenrod;
+}
+
+#taskCardPane:inReminder,
+.list-view .list-cell {
+    -fx-background-color: -cardPane-color;
+    -fx-background-insets: 5px;
+}
+
+.button,
+.label {
+    -fx-font-family: "Giliams";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+#taskCardPane:isDone {
+    -fx-background-color: mediumaquamarine;
+}
+
+#taskCardPane:overdue {
+    -fx-background-color: lightsalmon;
+}
+
+#has {
+    -fx-fill: -calendar-color;
+    -fx-stroke: -calendar-color;
+    -fx-smooth: true;
+}
+
+#has:has {
+    -fx-fill: -has-color;
+    -fx-stroke: -has-color;
+}
+
+#dayCardPane:selected {
+    -fx-background-radius: 10px;
+    -fx-background-color: tomato;
+    -fx-text-fill: #ffffff;
+}
+
+#dayCardPane:selected #has {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+}
+
+#dayCardPane:selected #has:has {
+    -fx-fill: -has-color;
+    -fx-stroke: -has-color;
+}
+
+.scroll-bar .thumb {
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -background-color: transparent;
+    -fx-shape: "";
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 1 5 1 5;
+}
+
+.scroll-bar:horizontal .increment-arrow,
+.scroll-bar:horizontal .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 5 1 5 1;
+}
+
+#moduleId,
+#Name,
+#linkId,
+#Name,
+#taskId,
+#Name,
+#readDayTitle {
+    -fx-font-size: 18px;
+}
+
+#TagModule,
+#startTime,
+#endTime {
+    -fx-font-size: 13px;
+}
+
+.button {
+    -fx-padding: 2 2 2 2;
+    -fx-border-color: crimson;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: coral;
+    -fx-text-fill: #000000;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-border-color: gray;
+    -fx-background-color: khaki;
+}
+
+.header {
+    -fx-font-size: 24px;
+    -fx-background-color: -panel-color;
+}
+
+#resultDisplay {
+    -fx-font-family: "Giliams";
+    -fx-font-size: 20px;
+}

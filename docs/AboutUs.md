@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Markus Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/markuslim24.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/markuslim24)]
+[[portfolio](team/markuslim24.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Facilitate team meetings
 
-### Johnny Doe
+### Zhu Tianqi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tianqi-zhu.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Tianqi-Zhu)]
+[[portfolio](team/tianqi-zhu.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverable and deadlines, Scheduling and tracking, Github master
 
-### James Doe
+### Zhao Jinxin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jinxinzhao315.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/JinxinZhao315)]
+[[portfolio](team/jinxinzhao315.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation
+
+### Chow Rui Yan
+
+<img src="images/chowruiyan.png" width="200px">
+
+[[github](https://github.com/chowRuiYan)]
+[[portfolio](team/chowruiyan.md)]
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Zhang Cheng Chuan
+
+<img src="images/zhangchengchuan.png" width="200px">
+
+[[github](http://github.com/zhangchengchuan)]
+[[portfolio](team/zhangchengchuan.md)]
+
+* Role: Developer
+* Responsibilities: In charge of integration
