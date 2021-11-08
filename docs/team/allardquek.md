@@ -60,11 +60,12 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
       , [#106](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/106/files)
       , [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108/files)
       , [#130](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/130/files)
-    - Various bug fixes: e.g. [#74](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/74)
+    - Various bug fixes for other features: e.g. [#74](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/74)
       , [#200](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/200)
       , [#268](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/268)
       , [#359](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/359/files)
       , [#360](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/360/files)
+      , [#389](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/389)
 3. **Documentation:**
     - User Guide: Added documentation for table of contents, command syntax information, `upload`, `download`
       , `dashboard`
