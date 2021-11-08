@@ -887,12 +887,24 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
+      
+### Encrypt data file
+1. Encrypting the data file
+    1. Prerequisites: CsBook must contain data(At least 1 student and 1 group)
+    1. Test case: `encrypt`<br>
+  Expected: Open `data/csbook` with any text editor. The file contents should be encrypted.
+
+### Decrypt data file
+1. Decrypting the data file
+  1. Prerequisites: CsBook must contain data(At least 1 student and 1 group)
+  1. Test case: `decrypt`<br>
+     Expected: Open `data/csbook` with any text editor. The file contents should be decrypted.
 
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   1. Prerequisites: List all students and groups using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
@@ -902,3 +914,36 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Viewing detailed information about student
+1. Viewing detailed information of a student using a student's name
+   1. Prerequisites: There exists a student in CsBook with the name `David Li`and no student with the name `Bryan Cheong`.
+   1. Test case: `viewstudent David Li`<br>
+      Expected:  A pop-up is shown saying that the student has been successfully displayed. A detailed 
+      view of the student is displayed. The student's name, group, telegram handle and email is displayed on the top left corner of the display. 
+      Notes about the student is displayed on the bottom left corner of the display. A list of the student's assessments
+      is displayed on the right.
+   1. Test case: `viewstudent Bryan Cheong`<br>
+      Expected: A pop-up is shown saying that the student `Bryan Cheong` does not exist.
+
+### Adding an assessment to a student
+1. Adds an assessment for a student in the CSBook.
+   1. Prerequisites: List all students and groups using the `list` command. Multiple students in the list.
+   1. Test case: `addassessment 0 a/Finals s/13/30`<br>
+
+
+
+### Deleting a group
+
+1. Deleting a group
+
+  1. Prerequisites: List all students and groups using the `list` command. Multiple groups in the list.
+
+  1. Test case: `delete 1`<br>
+     Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+
+  1. Test case: `delete 0`<br>
+     Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+
+  1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
