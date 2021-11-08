@@ -3,7 +3,8 @@ layout: page
 title: Setting up and getting started
 ---
 
-* Table of Contents {:toc}
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 

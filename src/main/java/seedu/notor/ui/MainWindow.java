@@ -22,7 +22,6 @@ import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
 import seedu.notor.ui.listpanel.GroupListPanel;
-import seedu.notor.ui.listpanel.ListPanel;
 import seedu.notor.ui.listpanel.PersonListPanel;
 import seedu.notor.ui.listpanel.SubgroupListPanel;
 import seedu.notor.ui.note.GeneralNoteWindow;
@@ -132,7 +131,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        ListPanel<Person> listPanel = new PersonListPanel(logic.getFilteredPersonList());
+        PersonListPanel listPanel = new PersonListPanel(logic.getFilteredPersonList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

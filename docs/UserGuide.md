@@ -336,7 +336,7 @@ Archives every person displayed in the list panel.
 Format: `person /archive` <br>
 Advanced user Format: `p /ar`
 
-#### _Listing Archived Persons_ 
+#### _Listing Archived Persons_
 Shows the list of archived Persons.
 
 Format: `person /listarchive` <br>
@@ -380,14 +380,13 @@ Advanced user Format: `g (GROUP_NAME) /c`
 
 * Creates a new group with the name `GROUP_NAME`.
 * The new group must not have a same name with other existing groups.
-* The new group's name must not include any backslash (`/`) or underscore (`_`).
 
 Examples:
 
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
   ![groupCreate](images/groupCreate.png)
-  
+
 #### _Deleting a group_
 
 Deletes an existing group at the index `INDEX` specified.
@@ -410,10 +409,12 @@ This command only works when groups are listed in the list pane, and not when su
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
 Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
-
+å
 * Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
 * The new subgroup must not have the same name as other existing subgroups in the same group.
 * The new subgroup's name must not include any backslash (`/`) or underscore (`_`).
+
+>>>>>>> master
 
 Examples :
 
@@ -552,7 +553,6 @@ Format:  `group /find n:QUERY_NAME`<br>
 Advanced user Format: `g /f n:QUERY_NAME`
 
 * Finds all the groups that match the `KEYWORD`.
-* The keyword must not include any backslash (`/`) or underscore (`_`).
 * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
 
 Examples of finding group:

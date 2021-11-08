@@ -45,7 +45,7 @@ public class PersonRemoveGroupCommandParser extends PersonCommandParser {
         if (argMultimap.getValue(PREFIX_SUBGROUP).isPresent()) {
             subGroupName = argMultimap.getValue(PREFIX_SUBGROUP).get();
         }
-        // TODO: Check here for validty after Yukun allow special characters.
+
         if (!SuperGroup.isValidGroupName(groupName)) {
             throw new ParseException("Please input a valid group name.");
         }

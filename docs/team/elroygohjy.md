@@ -13,10 +13,10 @@ Given below are my contributions to the project.
 
 * **New Feature**:
   * [Advanced Note Command](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/76)
-    * What it does: Allows mentor to type notes for Persons and general Note in Notor via Note Window. 
-      Allows multiple instances of Note Window to be opened at once. 
-    * Justification: We wanted mentors to have more control over typing of notes, as it is an important aspect 
-      of mentoring. 
+    * What it does: Allows mentor to type notes for Persons and general Note in Notor via Note Window.
+      Allows multiple instances of Note Window to be opened at once.
+    * Justification: We wanted mentors to have more control over typing of notes, as it is an important aspect
+      of mentoring.
     * Credits: No code reused.
 
   * [Warning Window and Confirmation Window](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/76)
@@ -34,8 +34,8 @@ Given below are my contributions to the project.
 
   * [Command History](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/145)
       * What it does: Allows mentors to easily access previous typed commands via Up and Down arrow keys.
-      * Justification: We wanted mentors to be conveniently accessed previous commands so as they can use Notor at a 
-        fast pace. 
+      * Justification: We wanted mentors to be conveniently accessed previous commands so as they can use Notor at a
+        fast pace.
       * Credits: No code reused but inspired by Window Terminal.
 
   * [Note Window Shortcut keys](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/77)
@@ -46,10 +46,10 @@ Given below are my contributions to the project.
   * [Gui Testing Not implemented](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/229)
     * What it does: Tests Gui aspects of Notor.
     * Justification: New features such as Note Window, Confirmation Window, Warning Window and
-      General Note pane on Notor uses GUI, which is not possible to test via JUNIT 5. Not implemented due 
+      General Note pane on Notor uses GUI, which is not possible to test via JUNIT 5. Not implemented due
       to CI failure.
     * Credits: No code reused but followed closely to [TestFx](https://github.com/TestFX/TestFX) to setup.
-        
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&tabAuthor=elroygohjy&tabRepo=AY2122S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zA=elroygohjy&zR=AY2122S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&zACS=213.98121387283237&zS=2021-09-17&zFS=&zU=2021-11-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 **Review contributions:**: Reviewed [8 PRs](https://github.com/AY2122S1-CS2103T-W08-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
@@ -58,9 +58,9 @@ Given below are my contributions to the project.
         * What it does: Add dummy data is relevant to our target user mentor.
         * Justification: Allows mentor to visualise and understand how Notor works.
         * Credits: No code reused.
-    
+
 * **Documentation**:
-    * User Guide 
+    * User Guide
         * Person commands
         * Table for Keyboard shortcut for Note
         * Command History

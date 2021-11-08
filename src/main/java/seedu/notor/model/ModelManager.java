@@ -128,12 +128,6 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        for (String superGroup : target.getDisplaySuperGroups()) {
-            notor.findGroup(superGroup).removePerson(target);
-        }
-        for (String subGroup : target.getDisplaySubGroups()) {
-            notor.findGroup(subGroup).removePerson(target);
-        }
         notor.removePerson(target);
         updateGroups(target);
     }
