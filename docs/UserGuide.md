@@ -106,11 +106,13 @@ Next, let us add a task with description __Lab Report__ and deadline __12 Novemb
    which is 3 in this case. Type `task -e 3 n/Science Report` in the "Command Panel" and hit `Enter`.
     * This updates the description of the task at index __3__ to __Science Report__.
     * The description remains unchanged.
-
-3. You can also assign this task, __Science Report__ to __David__. Take note of the index of the task you would like to 
-   assign and the index of the student to whom the task should be assigned. In this case, the index of 
-   __Science Report__ is __3__ while the index of __David__ is __4__. Type the command `task -as 4 3` in the Command 
-   Panel and hit `Enter`.
+<br><br>
+   
+3. You can also assign this task, __Science Report__ to __David__.
+    * Take note of the index of the task you would like to
+      assign and the index of the student to whom the task should be assigned. In this case, the index of
+      __Science Report__ is __3__ while the index of __David__ is __4__.
+    * Type the command `task -as 4 3` in the Command Panel and hit `Enter`.
     * This assigns __Science Report__ to __David__.
 
 ### Managing Groups

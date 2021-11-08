@@ -561,7 +561,8 @@ testers are expected to do more *exploratory* testing.
 ### Adding a lesson to a student
 
 1. Adding a lesson while all students are being shown
-    1. Prerequisites: List all students using the list command. Multiple students in the list.
+    1. Prerequisites: List all students using the list command. Multiple students in the list. First student in the index
+       should not have any overlapping lessons with the first test case. Use default data to be sure.
     1. Test case: `student -al 1 s/Biology st/23:00 et/23:59 d/Fri` <br>
     Expected: Lesson is added to first student in the list. Student details are shown in the viewing panel on the right.
     Lesson can be seen under "Lessons" in the viewing panel.
