@@ -22,6 +22,11 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    /**s
+     * Retrieves the appropriate task list to modify depending on whether the user is viewing all
+     * person's task list or a specified person's task list.
+     * @throws CommandException If the user is not viewing any task list at all.
+     */
     protected List<Task> getTaskListToModify(Model model, Person personToEdit) throws CommandException {
         List<Task> taskListToModify = null;
         if (model.getIsViewAllTasks()) {

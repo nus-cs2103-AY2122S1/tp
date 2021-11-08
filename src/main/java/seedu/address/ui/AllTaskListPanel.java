@@ -23,7 +23,7 @@ import seedu.address.model.task.Task;
  */
 public class AllTaskListPanel extends UiPart<Region> {
     private static final String FXML = "AllTaskListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(AllTaskListPanel.class);
 
     @FXML
     private VBox vbox;
