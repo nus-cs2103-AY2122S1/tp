@@ -12,6 +12,15 @@ title: User Guide
 
 TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
+## How To Use This User Guide
+
+1. Install Tutor Master by following the instructions in the [Installation Guide](#installation-guide).
+2. Get familiar with the various components of the app by referring to the [User Interface Guide](#user-interface-ui-of-tutor-master).
+3. If you are a new user, you can follow our guide in [Quick Start](#quick-start) to familiarise yourself with the app.
+4. If you are familiar with the app, you can refer to the [Features](#features) section to see details of all commands or 
+    look at [Command Summary](#command-summary) to see all commands easily.
+5. Refer to our [FAQ](#faq) if you have any questions.
+
 ## Installation Guide
 
 1. Ensure you have Java `11` or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
@@ -20,14 +29,14 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 3. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
-4. Double-click the file to start the app. 
-    * If you are a Mac user, open Terminal and navigate to the directory with Tutor Master.
-   Type `java -jar tutormaster.jar` and run the command.
+4. To open the application,
+    * If you are a Mac user, open Terminal and navigate to the directory with Tutor Master. Type `java -jar tutormaster.jar` and run the command.
+    * If you are Windows user, double-click the jar file to start the app.
     * The GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
 
-## UI of Tutor Master
+## User Interface (UI) of Tutor Master
 
    ![Labelled UI](images/imagesInUG/labelledUI.png)
 
@@ -43,14 +52,15 @@ The UI consists of a:
 
 Now that you have installed Tutor Master, let us give it a try!
 
-Type any command in the "Command Panel" and hit `Enter` to execute it.
-
-Here are some starting commands to help you navigate around the application:
-
 Let us 
 * Create a student named "David" 
 * Add him to a group named "CS2103T" 
 * Add and assign a task named "CS2103T Project" to "David".
+
+We shall type commands in the Command Panel and hit `Enter` to execute it.
+
+Here are some starting commands to help you navigate around the application:
+
 
 ### Managing Students
 
@@ -63,41 +73,37 @@ Let's try adding a student with the following details:
 
 1. Type the command `student -a n/David p/90001111 e/david@gmail.com a/Singapore` and hit `Enter`.
    * This adds a student with the details specified.
-   * You will now be able to see __David__ at the entry in the person panel on the left,
+   * You will now be able to see __David__ at the entry in the Person Panel on the left,
    as shown in the image below.
    ![Add David](images/imagesInUG/student-addDavid.png)
-<br>
      
 2. Now lets try editing his address. Note the index number beside his name in the person panel, in this case it is 4.<br>
    Type the following command `student -e 4 a/Kent Ridge` and hit `Enter`.
    * This updates the address of David, who is at index __4__ to "Kent Ridge".
    * Note that the other details are unchanged, you can choose which fields you want to edit.
-<br>
 
 
 3. You can add a lesson to David. Let's assign a __Math__ lesson from __10:00__ to __12:00__ on __Friday__. <br>
    Type the following command `student -al 4 s/Math st/10:00 et/12:00 d/Fri` and hit `Enter`.
    * This adds a lesson to David with the given details.
    * You can view your schedule for the week by entering `schedule`, try it!
-<br>
-     
 
 4. If you wish to view more details of a student, you can use the student view command.<br>
    Type `student -v 4` in the Command Panel and hit `Enter`.
-    * Displays the student at `INDEX` 4 in the "Viewing Panel"
+    * This displays the student at `INDEX` 4 in the Viewing Panel.
 
 ### Managing Groups
 
 Let us now add "David" to a group named "CS2103T".
 
-1.  Type `group -a 4 n/CS2103T` in the "Command Panel" and hit `Enter`
-    * Takes "David" who is at `INDEX` 4 in the "Person Panel" and creates a group named "CS2103T"
-    * "CS2103T" is now added to the "Group Panel". It has an `INDEX` of 3 in the "Group Panel"
+1.  Type `group -a 4 n/CS2103T` in the Command Panel and hit `Enter`.
+    * This creates a group named "CS2103T" and includes "David" who is at `INDEX` 4 in the Person Panel.
+    * "CS2103T" is now added to the Group Panel. It has an `INDEX` of 3 in the Group Panel.
     * This group currently has "David" inside
       ![Add David To Group](images/imagesInUG/group-addDavidInGroup.png)
       
-2. Type `group -v 3` in the "Command Panel" and hit `Enter`
-    * Displays the group at `INDEX` 3 in the "Viewing Panel"
+2. Type `group -v 3` in the "Command Panel" and hit `Enter`.
+    * This displays the details of the group at `INDEX` 3 in the Viewing Panel.
 
 
 ### Managing Tasks
@@ -588,7 +594,7 @@ Examples:
 * `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
 </details>
 
-#### Marking a task as done by group: `task -dog`  (Coming in v2.0)
+#### Marking a task as done by group: `task -dog`  (Coming soon)
 <details markdown="1">
 <summary>
 Marks that a group has done a task.
@@ -618,7 +624,7 @@ Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
 </details>
 
-#### Marking a task as not done by group: `task -undog`  (Coming in v2.0)
+#### Marking a task as not done by group: `task -undog`  (Coming soon)
 <details markdown="1">
 <summary>
 Marks that a group has not done a task.
@@ -672,7 +678,7 @@ Tutor Master data are saved as a JSON file `[JAR file location]/data/tutormaster
 If your changes to the data file makes its format invalid, Tutor Master will discard all data and start with an empty data file at the next run.
 </div>
 
-#### Archiving data files `[coming in v2.0]`
+#### Archiving data files (Coming Soon)
 
 _Details coming soon ..._
 
@@ -680,7 +686,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another Computer?
+
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor Master home folder.
 
 
