@@ -937,10 +937,10 @@ When CohortConnect UI is initialized, the `CommandBox` class representing the Co
 
     ```
     private void setAccelerators() {
-        setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
-        setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
-        setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
-        setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+        setAccelerator(contacts, KeyCombination.valueOf("Shortcut+1"));
+        setAccelerator(favorites, KeyCombination.valueOf("Shortcut+2"));
+        setAccelerator(events, KeyCombination.valueOf("Shortcut+3"));
+        setAccelerator(findABuddy, KeyCombination.valueOf("Shortcut+4"));
         ...
     }
     ```
