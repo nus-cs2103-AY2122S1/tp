@@ -470,12 +470,12 @@ Avengers can also browse the third menu on the top left (with the clock symbol) 
 
 ![help message](images/ug/helpMessage.png)
 
-Provides in-depth assistance using AD with a `help` command, either generally or specifically.
+Provides in-depth assistance using Academy Directory with `help` command, either generally or specifically.
 
 ##### Viewing general help
 Format: `help`
 
-* The singular command `help` displays a menu of all commands available to use, as a list, and how
+* Type in `help` singularly displays a menu of all commands available to use as a list, how
   to navigate each command, alongside the syntax for each command.
 
 ##### Viewing specific help
@@ -488,7 +488,7 @@ Format: `help COMMAND_NAME`
     * What the syntax for the command is.
     * Example of usage and expected results.
 
-Note that `help help` will result in a general help window. We do not provide instruction for the command `help` itself
+Note that `help help` will result in a general help window. We do not provide instruction for the command `help` itself.
 
 Examples:
 * `help`
