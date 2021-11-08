@@ -2,7 +2,6 @@
 layout: page
 title: Timothy Wong's Project Portfolio Page
 ---
-
 ### Project: ComputingConnection
 
 *ComputingConnection* is a desktop application for entrepreneurial students in NUS Computing who want to keep track of other students’ details so that they can easily look for suitable people to work with on future projects by filtering contacts via information such faculty, major, programming languages, remarks, etc. *ComputingConnection* is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI) created with JavaFX. The programme is written in Java. 
@@ -23,15 +22,13 @@ Given below are my contributions to the project. My contributions to the project
   * What it does: Allows the user to remove an element from an optional data field of an existing contact, so that the user can remove specific **skill**, **programming language**, **framework**, **tag**, **remark** and **interaction** data fields of a contact.
   * Justification: This feature improves the product significantly by allowing precise adjustments to data fields. A user can remove specific elements at indexes in a data field in case a mistake was made to an entry. (The previous AB-3 implementation of `edit` would remove all elements).
   * Highlights: This feature required consideration over what data structure to use to overcome the project constraint of not using a database. The final implementation was done using the HashSet data structure for the storage of elements in each data field, and the removal was implemented using the ArrayList data structure in order to support Java generics.
-<br><br/>
 
 #### Other contributions
 As the team lead, I took a large initiative in ensuring tasks were done timely and properly.  
 
 1. **Project management**:
   * Set up and maintained the internal project notes and overall team direction.  
-  * Set up the GitHub team org/repo.
-  * Maintained the issue tracker.
+  * Set up the GitHub team org/repo, and maintained issue tracker.
   * Scheduled, initiated and led productive meetings and discussions.
   * Managed releases `v1.1` - `v1.3` (3 releases) on GitHub.
     <br><br/>
