@@ -596,6 +596,8 @@ Format: `task -undo STUDENTINDEX TASKINDEX`
 Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
 
+<div style="page-break-after: always;"></div>
+
 #### Marking a task as not done by group: `task -undog`  (Coming soon)
 
 Marks that a group has not done a task.
@@ -609,7 +611,6 @@ Examples:
 * `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Others
 
@@ -655,7 +656,6 @@ If your changes to the data file makes its format invalid, Tutor Master will dis
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
