@@ -12,11 +12,9 @@ class NoteCommand
 package Model {
 class Note
 class Index
-class String
 }
 
 NoteCommand --> "1" Index
 NoteCommand --> "1" Note
-Note --> "0..1" String
 
 @enduml
