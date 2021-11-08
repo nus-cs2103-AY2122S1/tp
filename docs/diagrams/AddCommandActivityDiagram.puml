@@ -1,9 +1,8 @@
 @startuml
 !include style.puml
 start
-if () then ([Client with name already in InsurancePal])
-    :Throw exception,
-    signalling duplicate person;
+if () then ([Client with name\nalready in InsurancePal])
+    :Reject the addition;
 else ([else])
     :Add client to InsurnacePal;
 endif
