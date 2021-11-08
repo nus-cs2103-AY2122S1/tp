@@ -58,16 +58,16 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
   * Handled most of the UI changes and the new UI design.
 
 ## **Documentation**:
-  * Developer Guide: NFRs and Glossary, and FXML handling
-  * User Guide: Feature list & Command Summary (with [Elton](eltongohjh.md))
-                  Revised the whole UG to adhere to the current commands,
-                  Fixes :
-                  - Filled out missing commands
-                  - Added some tips, caution, and information boxes to improve the UG readability
-                  - Fixed the structures of the contents (FAQ and Command Summary are flipped)
-                  - Fixed the links of the UG
-                  - Fixed typos
-                  - Completed some descriptions regarding groups and subgroups
+   * Developer Guide: NFRs and Glossary, and FXML handling
+   * User Guide: Created feature list & Command Summary (with [Elton](eltongohjh.md)), <br>
+                  Revised the whole UG to adhere to the current commands, <br>
+                  **Fixes**: <br>
+                  - Filled out missing commands <br>
+                  - Added some tips, caution, and information boxes to improve the UG readability <br>
+                  - Fixed the structures of the contents (FAQ and Command Summary are flipped) <br>
+                  - Fixed the links of the UG <br>
+                  - Fixed typos <br>
+                  - Completed some descriptions regarding groups and subgroups <br>
                   - Included some screenshots for visual cues, and updated UI to match up Notor
 
 ## **Tools**:
