@@ -261,6 +261,8 @@ When a module is deleted or edited, all `TagModule` references in all available 
 ![EditModSequenceDiagram](images/EditModSequenceDiagram.png) <br>
 *Sequence diagram for editMod command* <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Implementation for Read Module Feature
 Read module makes use of both the UI component which creates a pop-up window for display, and the Logic component
 which parses user commands and decide which module to read.
@@ -312,6 +314,8 @@ The following sequence diagram demonstrates how the Calendar is created.
 
 Since the `CalendarPanel` is constructed with an `ObservableList<Task>`, changes to `UniqueTaskList` made by user using `addTask`, `deleteTask` and `editTask` will be reflected in the calendar automatically. <br><br>
 Calendar has three functionality, `prevMonth`, `nextMonth` and `readDay`, all of which manipulate `referenceDate`, which is the key component for generating the whole calendar GUI. Both `prevMonth` and `nextMonth` subtracts or adds the current `referenceDate` by a month respectively. While `readDay` takes in a `LocalDate` as argument and replace the `referenceDate` with it.
+
+<div style="page-break-after: always;"></div>
 
 ##### Design Consideration
 The main consideration for the design of calendar is how many days should be displayed. The initial implementation was a "Week Calendar" which uses the current version of [NUSMODS](https://nusmods.com/timetable/sem-1) as reference. However, this design implies that there cannot be an overlap in the timing of different tasks. It would work for NUSMODS since it is a timetable and classes are not supposed to clash. However, it will not be as suitable for a calendar since multiple tasks can be happening or due at the same time. We decided to use the current implementation which is a "Month Calendar" with markings to represent the existence of tasks in the respective day-of-month and a task-list panel to display the tasks in greater details.<br><br>
@@ -377,6 +381,8 @@ Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -389,7 +395,6 @@ Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
 
 ## **Appendix A: Product scope**
 
@@ -455,7 +460,7 @@ Return to [Table of Contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
-## **Appendix C: Common Use cases**
+## **Appendix C: Common Use Cases**
 
 (For all use cases below, the **System** is `ManageMe` unless specified otherwise)
 
@@ -497,6 +502,8 @@ Return to [Table of Contents](#table-of-contents).
 * 1b. Parameters entered are of invalid format, including invalid characters in names, invalid date-time for tasks, and invalid address for links.
     * 1b1. System shows error in parsing data.
     * Use case resumes from step 1. <br><br>
+
+<div style="page-break-after: always;"></div>
 
 ### Use case 03: Generic Delete
 
