@@ -562,7 +562,7 @@ The following sequence diagram shows how the EditCommand function works for soci
 	* Cons: There will be many duplicated code as each social handles are similar.
 * **Alternative 2 (Current):** Store a person's social handles as a set.
     * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
-    * Cons: Will have many duplicated code as each social handles are similar.
+    * Cons: It may be more complicated to test.
 
 ### Export JSON file
 
