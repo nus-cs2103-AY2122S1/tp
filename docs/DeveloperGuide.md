@@ -169,6 +169,12 @@ The following sequence diagram shows how the edit operation works.
 
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
+#### Bulk Tag feature
+
+The bulk tag feature is facilitated by `BulkTagCommand`. It extends `Command` with a Tag as a parameter. The addition of the Tag relies on `ModelManager#setPerson()` to edit the Person in the `personList` in `ModelManager` by specifically adding the given Tag to the person.
+One important consideration for the command is that the bulk tag command does not affect the existing tags and thus functions differently as compared to the edit command.
+
+
 #### Import feature
 
 The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file from the file path stored.
@@ -361,10 +367,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                            | So that I can…​                                                                  |
 | -------- | ------------------------------------------ | ------------------------------                | ----------------------------------------------------------------------              |
 | `* * *`  | potential user                             | find a user guide for the app                 | have an idea of the features provided by the app                                    |
-| `* * *`  | Professor                                  | add a new person                              | keep track of all my students and TAs                                               |
+| `* * *`  | beginner user                              | add a new person                              | keep track of all my students and TAs                                               |
+| `* * *`  | beginner user                              | edit a person                                 | change any incorrect data and remove specific tags when needed                      |
 | `* * *`  | Professor                                  | tag contacts                                  | keep track of Lecture/Tutorial groups that different contacts belong to             |
 | `* * *`  | beginner user                              | see all the contacts I have at once           | easily tell who I have added and who I have not                                     |
-| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using ProfBook without manually inputting every piece of information              |
+| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using ProfBook without manually inputting every piece of information          |
 | `* * *`  | cautious user                              | export my existing contacts to a json file    | move my address book or keep a backup                                               |
 | `* * *`  | beginner user                              | save the data to a json document              | update it manually and have the option to close the program and open it again later |
 | `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
@@ -378,19 +385,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
 
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ProfBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ProfBook deletes the person
 
     Use case ends.
 
@@ -402,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -412,28 +418,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a person
-2. AddressBook checks if input is valid
-3. AddressBook adds the persons
+2. ProfBook checks if input is valid
+3. ProfBook adds the persons
 
     Use case ends.
 
 **Extensions**
 
 * 2a. Arguments that should be there is not there
-  * 2a1. Address Book rejects the command and shows an error message.
+  * 2a1. ProfBook rejects the command and shows an error message.
 
     Use case ends.
 
+* 2b. Arguments that are added results in a person that already exists in the ProfBook.
+    * 2b1. ProfBook rejects the command and shows an error message.
 
-
+      Use case ends.
+    
 **Use case: Edit a contact**
 
 **MSS**
 
-1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
-3.  User requests to edit a specific person in the list
-4.  AddressBook edits the person
+1. User requests to list/search persons
+2. ProfBook shows a list of persons
+3. User requests to edit a specific person in the list
+4. ProfBook checks if input is valid
+5. ProfBook edits the person
 
     Use case ends.
 
@@ -443,20 +453,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
-  * 3a1. AddressBook shows an error message.
+* 4a. The given index is invalid.
+  * 4a1. AddressBook shows an error message.
 
   Use case resumes at step 2.
 
-* 3b. The attribute to be edited does not exist.
-  * 3b1. AddressBook shows an error message.
+* 4b. The attribute to be edited does not exist.
+  * 4b1. ProfBook shows an error message.
   Use case ends
 
-* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
-  * 3c1. AddressBook shows an error message.
+* 4c. If the attribute edited is the name and results in a similar person i.e. same name as another person
+  * 4c1. ProfBook shows an error message.
 
       Use case ends
 
+* 4d. If the attribute edited is in the invalid format
+    * 4d1. ProfBook shows an error message.
+
+      Use case ends
 
 **Use case: Export contacts**
 
@@ -522,6 +536,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Bulk Tag a person**
+
+**MSS**
+
+1. User requests to bulk tag the filtered person list
+2. ProfBook checks if input is valid
+3. ProfBook adds the tag to all the persons in the filtered person list
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Tag to be added is invalid
+    * 2a1. ProfBook rejects the command and shows an error message.
+
+      Use case ends.
+
+* 2b. The filtered list is empty
+    * 2b1. ProfBook runs the command but it has no effect.
+
+      Use case ends.
+    
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -590,6 +626,34 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `sort \a`<br>
    Expected: No change to list. Error details shown in status message.
 
+### Add Test
+1. Test case: `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+<br> Expected: Adds the person to the ProfBook. 
+<br> Now progressively remove or edit each attribute in the add command and view the outputs
+2. Test case: Calling the same command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+<br> Expected: This person already exists in the address book.
+3. Test case: On changing name to lower case we can add the person `add n/john doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+<br> Expected: Adds the person to the ProfBook.
+4. Test case: `add n/John Doe a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+<br> Expected: Invalid command format!
+
+### Edit Test
+1. Test case: `edit 1 n/John Doe`
+<br>Expected: Edits the person at index 1 and changes name to John Doe.
+2. Test case: On changing index to 2 and running the command `edit 2 n/John Doe`
+<br> Expected: This person already exists in the address book.
+<br>Now progressively replace or add more attribute in the edit command and view the outputs
+3. Test case: `edit 1 N/e0000000`
+<br> Expected: Edits the person at index 1 and changes NUSNET_ID to E0000000 and Email to e0000000@u.nus.edu.
+
+### Bulk Tag Test
+1. Test case: `bulk_tag t/friends`
+   <br>Expected: Added the Tags [friends] to the Persons
+2. Test case: `bulk_tag t/friends`
+   <br> Expected: Added the Tags [friends] to the Persons. No change since all persons have the tag `friends`
+2. Test case: `bulk_tag t/friends t/passed`
+   <br> Expected: Added the Tags [passed] [friends] to the Persons. Now tag `passed` is added to all the person and `friends` already existed for all the persons
+   
 ### Import and Export
 
 1. Exporting then importing back original list of contacts
