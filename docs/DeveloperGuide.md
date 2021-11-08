@@ -10,7 +10,7 @@ title: Developer Guide
 3. [Glossary](#Glossary)
 4. [Design](#Design)
 5. [Architecture](#Architecture)
-6. Design](#Design)
+6. [Design](#Design)
    1. [Architecture](#Architecture)
    2. [UI Components](#UI component)
    3. [Logic Component](#Logic component)
@@ -819,10 +819,10 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of sample student records
-3. CS2100 TA requests to purge sample student records
-4. ProgrammerError deletes all sample student records
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of sample student records.
+3. CS2100 TA requests to purge sample student records.
+4. ProgrammerError deletes all sample student records.
 
    Use case ends.
 
@@ -830,10 +830,10 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA specifies the student's details
-4. ProgrammerError creates a student record
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA specifies the student's details.
+4. ProgrammerError creates a student record.
 
    Use case ends.
 
@@ -859,9 +859,9 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA requests to upload student records from a CSV file
-2. ProgrammerError requests for the TA to select a CSV file
-3. ProgrammerError uploads the student records from the CSV file
+1. CS2100 TA requests to upload student records from a CSV file.
+2. ProgrammerError requests for the TA to select a CSV file.
+3. ProgrammerError uploads the student records from the CSV file.
 
    Use case ends.
 
@@ -871,7 +871,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 Use case ends.
 
-3a. CSV file data is invalid
+3a. CSV file data is invalid.
 3s1. ProgrammerError informs the TA of the error.
 
 Use case ends.
@@ -880,10 +880,10 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to view a specific student record
-4. ProgrammerError shows the student record's details
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to view a specific student record.
+4. ProgrammerError shows the student record's details.
 
    Use case ends.
 
@@ -903,10 +903,10 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to delete a specific student record in the list
-4. ProgrammerError deletes the student record
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to delete a specific student record in the list.
+4. ProgrammerError deletes the student record.
 
    Use case ends.
 
@@ -926,10 +926,10 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to update a specific student record
-4. ProgrammerError updates the student record
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to update a specific student record.
+4. ProgrammerError updates the student record.
 
    Use case ends.
 
@@ -945,7 +945,7 @@ Use case ends.
 
     Use case resumes at step 2.
 
-* 3b. The given email or student id is not unique
+* 3b. The given email or student id is not unique.
 
     * 3b.1. ProgrammerError shows an error message.
 
@@ -956,7 +956,7 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to download student data to a CSV file
+1. CS2100 TA requests to download student data to a CSV file.
 2. ProgrammerError requests for the TA to select a directory to download the CSV file to.
 3. ProgrammerError downloads the student data to a CSV file in the chosen directory.
 
@@ -977,18 +977,18 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to create a new lab record
-2. ProgrammerError requests for lab details
-3. CS2100 TA specifies the lab name and total score
-4. ProgrammerError creates a lab record for every student
+1. CS2100 TA requests to create a new lab record.
+2. ProgrammerError requests for lab details.
+3. CS2100 TA specifies the lab name and total score.
+4. ProgrammerError creates a lab record for every student.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given lab name is not unique or lab score < 0
+* 3a. The given lab name is not unique or lab score < 0.
   * 3a.1 ProgrammerError shows an error message.
-  Use case resumes at 2
+  Use case resumes at 2.
 
   Use case ends.
 
@@ -996,18 +996,18 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to  <ins>view a particular student's record using a show command (UC3) <ins/>
-2. ProgrammerError show the student's record
-3. CS2100 TA specifies lab number and actual score or total score
-4. ProgrammerError updates the student's record
+1. CS2100 TA requests to  <ins>view a particular student's record using a show command (UC3) <ins/>.
+2. ProgrammerError show the student's record.
+3. CS2100 TA specifies lab number and actual score or total score.
+4. ProgrammerError updates the student's record.
 
   Use case ends.
 
 **Extensions**
 
-* 3a. The given lab score < 0 or actual score > total score
+* 3a. The given lab score < 0 or actual score > total score.
     * 3a.1 ProgrammerError shows an error message.
-* Use case resumes at 2
+* Use case resumes at 2.
 
   Use case ends.
 
@@ -1015,10 +1015,10 @@ Use case ends.
 
 **MSS**
 
-1. CS2100 TA requests to view the dashboard of student data
-2. ProgrammerError displays the dashboard showing the number of students, classes, labs 
+1. CS2100 TA requests to view the dashboard of student data.
+2. ProgrammerError displays the dashboard showing the number of students, classes, labs.
 as well as the number of labs unmarked for each class.
-3. ProgrammerError automatically updates the dashboard when changes are made to the student data
+3. ProgrammerError automatically updates the dashboard when changes are made to the student data.
 
    Use case ends.
 
