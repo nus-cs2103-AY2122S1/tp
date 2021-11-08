@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters command: unpin 3;
+switch()
+case ([Contact at index 3 exists])
+  :CONNECTIONS checks if contact is already pinned;
+  if () then ([Contact is pinned])
+    : CONNECTIONS unpin contact;
+    : CONNECTIONS places contact behind pinned contacts and in front of other unpinned contacts;
+    -CONNECTIONS displays contact details
+  else ([Contact is not pinned])
+    : CONNECTIONS displays message: "Contact is not pinned!";
+  endif
+case ([No contact at index 3])
+  :CONNECTIONS displays error message: "The contact index provided is out of range.";
+endswitch
+
+
+stop
+
+@enduml
