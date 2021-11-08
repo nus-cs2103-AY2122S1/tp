@@ -44,7 +44,8 @@ public class TaskTime {
 
     @Override
     public String toString() {
-        return taskTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return taskTime.format(formatter);
     }
 
     @Override
