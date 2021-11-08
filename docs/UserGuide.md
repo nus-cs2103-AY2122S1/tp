@@ -68,8 +68,8 @@ classes. If you are familiar with Unix commands, this is definitely for you!
     - Command will only be stored after `Enter` has been pressed.
 - Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify
   a student's student ID.
-- Parameters can be in any order. <br> e.g. if the command specifies `-n NAME -sid STUDENT_ID`
-  , `-sid STUDENT_ID -n NAME`is also acceptable.
+- Parameters can be in any order. <br> e.g. if the command specifies `-n <NAME> -sid <STUDENT_ID>`
+  , `-sid <STUDENT_ID> -n <NAME>`is also acceptable.
 - If a parameter is expected only once in the command, but you specified it multiple times, only the **last** occurrence
   of the parameter will be taken. <br> e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be
@@ -188,7 +188,7 @@ Edits the details or grade of an existing student in the PE.
 * At least one of the optional argument must be provided.
 * Take note that the parameters `-ln` and `-s` needs to be specified together.
 
-Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
+Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUM> -s <ACTUAL_SCORE>]`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input flag arguments.
@@ -335,7 +335,7 @@ Command | Format & Examples
 **Delete** | `delete <INDEX_IN_LIST>`
 **Delete Lab** | `dellab -ln <LAB_NUM>`
 **Download** | `download`
-**Edit** | `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
+**Edit** | `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUM> -s <ACTUAL_SCORE>]`
 **Edit Lab** | `editlab -ln <LAB_NUM> [-nln <NEW_LAB_NUM>] [-ts <NEW_LAB_SCORE>]`
 **Exit** | `exit`
 **Fill** | `fill`

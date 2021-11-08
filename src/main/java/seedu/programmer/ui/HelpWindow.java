@@ -114,7 +114,7 @@ public class HelpWindow extends PopupWindow {
                 "Creates a record of a new student");
         FeatureTableItem edit = new FeatureTableItem("Edit",
                 "edit  <INDEX_IN_LIST>  [-n <NAME>]  [-sid <STUDENT_ID>]  [-cid <CLASS_ID>]\n\t "
-                        + "[-email <EMAIL>]  [-ln <LAB_NUMBER>]  [-s <ACTUAL_SCORE>]",
+                        + "[-email <EMAIL>]  [-ln <LAB_NUM>]  [-s <ACTUAL_SCORE>]",
                 "Edits a student's specified field to the new value. Multiple fields can be edited at the same time");
         FeatureTableItem delete = new FeatureTableItem("Delete",
                 "delete  <INDEX_IN_LIST>",
@@ -134,13 +134,13 @@ public class HelpWindow extends PopupWindow {
 
     private void initializeLabFeatures() {
         FeatureTableItem addLab = new FeatureTableItem("AddLab",
-                "addlab  -ln <LAB_NUMBER>  -ts <TOTAL_SCORE>",
+                "addlab  -ln <LAB_NUM>  -ts <TOTAL_SCORE>",
                 "Creates a lab record for all students in the database");
         FeatureTableItem delLab = new FeatureTableItem("DeleteLab",
-                "dellab  -ln <LAB_NUMBER>",
+                "dellab  -ln <LAB_NUM>",
                 "Removes the lab with the corresponding lab number");
         FeatureTableItem editLab = new FeatureTableItem("EditLab",
-                "editlab  -ln <LAB_NUMBER>  [-nln <NEW_LAB_NUMBER>]  [-ts <NEW_LAB_SCORE>]",
+                "editlab  -ln <LAB_NUM>  [-nln <NEW_LAB_NUM>]  [-ts <NEW_LAB_SCORE>]",
                 "Edits an existing lab's lab number and/or total score");
 
         featureTableItems.addAll(addLab, editLab, delLab);
