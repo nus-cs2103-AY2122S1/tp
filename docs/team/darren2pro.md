@@ -36,7 +36,6 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added/improved documentation for the features `add-applicant`, `delete-applicant`, `list-applicant` and `find-applicant` [\#14](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/14), [\#116](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/116/files)
-    * 
   * Developer Guide:
     * Added implementation details of the `add-applicant` feature. [\#97](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/97)
     * Updated all the UML diagrams for the various components to suit MTR [\#202](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/202)
