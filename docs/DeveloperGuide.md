@@ -364,6 +364,7 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindAnyCommand`.
     * Cons: More code.
 
+<div style="page-break-before: always;"></div>
 
 ### Help feature
 
@@ -397,6 +398,8 @@ The list of birthdays is generated in the `ModelManager`, which implements the f
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
 Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are coloured green while birthdays that are within one week are coloured blue. Additionally, a customised message with each contact's phone number and age will be displayed in the birthday reminder list.
+
+<div style="page-break-before: always;"></div>
 
 Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
@@ -443,6 +446,8 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
+
+<div style="page-break-before: always;"></div>
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
