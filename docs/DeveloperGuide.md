@@ -7,26 +7,26 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+## **1. Acknowledgements**
+*ComputingConnection* makes use of the following third-party libraries:
+Libraries used: [JavaFX](https://openjfx.io/), [JSON in Java](https://mvnrepository.com/artifact/org.json/json)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **3. Design**
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W10-3/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W10-3/tp/tree/master/docs/diagrams/) folder.
 </div>
 
-### Architecture
+### 3.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -67,7 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2 UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W10-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +84,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### 3.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W10-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -113,10 +113,10 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 3.4 Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W10-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" />
 
 
 The `Model` component,
@@ -126,14 +126,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Skill` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Skill` object per unique skill, instead of each `Person` needing their own `Skill` objects. This can also be applied to the `Faculty` class (as shown in the diagram), `Major`, `Language`, `Framework` and `Tag` classes.
+<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
 
-### Storage component
+### 3.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W10-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -144,19 +145,91 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### 3.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **4. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### 4.1 Optional and Multiple Data Fields Feature
 
-#### Proposed Implementation
+#### 4.1.1 Implementation
+The **optional and multiple data fields** feature allows the user to add labels to a particular contact under these specific categories: **skill, programming language, programming framework, tag,** and **remark**.
+
+This implementation uses the following classes in the `Model` component:
+* `Skill` in the skill package
+* `Language` in the skill package
+* `Framework` in the skill package
+* `Tag` in the tag package
+* `Remark` in the remark package
+
+Furthermore, this implementation introduces the following classes in the `Logic` component: 
+* `AppendCommand` that extends Command
+* `AppendPersonDescriptor` that is nested in AppendCommand
+* `AppendCommandParser` that implements Parser<AppendCommand>
+* `RemoveCommand` that extends Command
+* `RemovePersonDescriptor` that is nested in RemoveCommand
+* `RemoveCommandParser` that implements Parser<RemoveCommand>
+
+In addition, the following classes are utilised in the `Ui` component
+* `PersonCard` that extends UiPart<Region>
+* `PersonListCard.fxml` to display the labels
+
+Given below is an example usage scenario and how the `append` and `remove` mechanism behaves at each step.
+
+Step 1. The user launches the application with existing contacts from previous uses. 
+
+Step 2. The user executes `append 3 l/python` to append "python" to the list of programming languages of the contact at index 3. The command passes through `LogicManager`, `AddressBookParser`, and `AppendCommandParser` which creates an `AppendPersonDescriptor` object and subsequently an `AppendCommand` object to be executed.
+
+Step 3. After the `AppendCommand` is executed and the interaction with the `Model` component is complete and fed back to the `Ui` component, the item `python` is now seen under the 3rd contact's list of programming languages, with no change to the previous existing programming languages. Languages are then sorted alphanumerically in the display. 
+
+Step 4. If the user realises that a mistake in assigning the wrong language, i.e. should have been "java" instead of "python", the user executes the `rm 3 l/INDEX`, where index is the index of the "python" language in the display of the 3rd contact. Similar to the `AppendCommand`, the `RemoveCommand` deletes only the targeted language specified by the index, with no change to the other existing data fields.   
+
+The following sequence diagrams show how the `append` command works:
+
+1. In this sequence diagram, the focus is on the `Logic` component and how an `AppendCommand` object is created once the user inputs `append 3 l/python`.
+![AppendSequenceDiagram](images/AppendSequenceDiagram.png)
+
+2. In this next sequence diagram, the focus is on the interactions between the `Logic` and `Model` components when the `AppendCommand` is executed. 
+![AppendSequenceDiagram2](images/AppendSequenceDiagram2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppendCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes `append` command:
+![AppendActivityDiagram](images/AppendActivityDiagram.png)
+
+
+#### 4.1.2 Design  considerations
+The previous implementation of **AB3's** `edit` command deleted all `Tags` when editing. There was no way to add new data fields to existing ones without re-entering all data fields manually. Similarly, there was no way to remove a specific `Tag`. Therefore, for optional and multiple data fields such as **skills**, **programming languages**, etc, appending and specific removal were significant design improvements. 
+
+One of the main considerations was to deal with the project constraints of not using a separate database. Therefore, the design implementation would have to be done over data structures stored in a JSON format. 
+
+Another consideration regarding the display design was to display the data fields alphanumerically instead of when they were chornologically added. This facilitates the user's visual categorisation across multiple contacts. (i.e. "backend" would always appear before "frontend" for all contacts that are applicable).
+
+Finally, defensive coding techniques were used by making a copy of the `AppendPersonDescriptor` class. 
+
+#### 4.1.3 Alternatives
+**Aspect: How the new data fields are implemented:**
+* **Alternative 1 (current choice):** Each `Person` object references their own data field objects. I.e. multiple `Language` objects named "python" may exist, with each object related to a specific `Person`.
+* **Alternative 2 (future implementation):** An alternative implementation (arguably, more object oriented) would be to have a unique data field list for each **optional and mulitple data field**, i.e. skill, programming language, framework, tag, and remark, that `Person` references. This allows us to only require one data field object per unique element, instead of each `Person` needing their own data field objects. See [Model component alternative](#model-component) for more information. 
+
+**Aspect: How the append command executes:**
+* **Alternative 1 (current choice):** HashSets are currently used for the appending of unique data field objects. The first HashSet is used to store the new data fields to append (provided by input). The second HashSet stores the existing data fields of the specified contact. The third HashSet is used to combine the first and second, and is then set to the target contact's data field HashSet. 
+* **Alternative 2 (future implementation):** An alternative implementation, which uses one data field object per unique element (e.g.  [Model component alternative](#model-component)), would be to append new pointers to a list of existing pointers a `Person` has to various data field elements.
+
+**Aspect: How the remove command executes:**
+* **Alternative 1 (current choice):** Similar to the `append` command, the `rm` command also uses HashSets to store indexes and existing data fields. Additionally, the ArrayList data structure was used to implement Java generics for better code quality.
+* **Alternative 2 (future implementation):** Similar to the `append` command, an alternative implementation would be to remove pointers in a list of existing pointers a `Person` has.
+
+### 4.2 \[Proposed\] Undo/redo feature
+
+#### 4.2.1 Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -219,7 +292,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### 4.2.2 Design considerations:
 
 **Aspect: How undo & redo executes:**
 
@@ -234,14 +307,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### 4.3 Interactions feature
 
-_{Explain here how the data archiving feature will be implemented}_
-
-
-###  Interactions feature
-
-#### Implementation
+#### 4.3.1 Implementation
 The interaction mechanism utilizes the same concept as other commands like `add` and `edit` with some tweaks.
 
 Given below is an example usage scenario and how the interaction mechanism behaves at each step.
@@ -262,6 +330,16 @@ The following sequence diagram visually describes the steps above:
 
 ![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
 
+  #### 4.3.2 Design considerations
+  **Aspect: How interactions is stored:**
+  
+  * **Alternative 1 (current choice):** As a list of interactions in the Person object.
+  * Pros: Easy to implement, intuitive design and navigatability
+  * Cons: Heavy coupling with the person class
+  
+  * **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
+  * Pros: More isolated from the Person class, so less changes to overall code
+  * Cons: Navigatability is reduced significantly
 
 ###  View feature
 
@@ -287,15 +365,11 @@ generate a `ViewCommand`.
 Step 5. `ViewCommand` helps to call the updateViewedPerson method,
 so that the GUI shows the correct Person.
 
-
 The following sequence diagram visually describes the steps above:
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
-
-
 #### Design considerations:
-
 **Aspect: How viewedPerson is stored:**
 
 * **Alternative 1 (current choice):** As a FilteredList in the ModelManager.
@@ -310,9 +384,69 @@ The following sequence diagram visually describes the steps above:
   * Cons: More rigid and harder to improve upon for future versions.
 
 
+###  Filter feature
+
+#### Implementation
+The filter mechanism utilizes the same concept as other commands like `find` with some tweaks.
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user inputs the command `filter f/computing`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a filter command and creates an `FilterCommandParser` object.
+
+Step 4. `FilterCommandParser` helps to extract out the tokens and generate a `FilterCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![InteractionSequenceDiagram](images/FilterCommandSequenceDiagram.png)
+
+###  Organisations feature
+
+#### Implementation
+The Organisation commands utilize the same concept as other commands like `add` and `delete` with some tweaks.
+
+Given below is an example usage scenario and how the organisation commands behave at each step.
+
+Step 1. The user inputs the command `addorg n/Facebook e/hello@facebook.com`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's an AddOrg command and creates a `AddOrgCommandParser` object.
+
+Step 4. `AddOrgCommandParser` helps to extract out the tokens and generate a `AddOrgCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![OrganisationSequenceDiagram](images/OrganisationSequenceDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How persons in organisations are stored:**
+
+* **Alternative 1 (current choice):** As a list of persons in each organisation in the Address Book.
+    * Pros: Easy to implement, intuitive design
+    * Cons: Any updates to a person in Address Book have to be checked and updated in each organisation
+
+* **Alternative 2:** List of persons in each organisation stores the references to the persons
+    * Pros: Any updates to a person in Address Book is synchronised with the organisations the person is in
+    * Cons: Harder to implement
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -322,9 +456,9 @@ The following sequence diagram visually describes the steps above:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **6. Appendix: Requirements**
 
-### Product scope
+### 6.1 Product scope
 
 **Target user profile**:
 
@@ -337,7 +471,7 @@ The following sequence diagram visually describes the steps above:
 
 **Value proposition**: Through an address book, this product aims to store information such as faculty, major, programming languages, interests, past projects, remarks of peers that the user has encountered throughout university. ComputingConnection will help the student remember and document his/her network of students encountered in NUS for easy reference in the future.
 
-### User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -356,8 +490,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user                              | remove specific data fields | precisely remove incorrect data fields of a contact                       |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
 | `* * *`  | slightly familiar user                 | remove appended data fields          | remove outdated or incorrect data fields                                   |
-| `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
+| `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
+| `* * *`  | slightly familiar user                 | delete an organisation                | remove any organisations that are irrelevant or errors                                   |
+| `* * *`  | slightly familiar user                 | add a person to an organisation                | record a person's link to an organsiation                                   |
+| `* * *`  | slightly familiar user                 | delete a person from an organisation                | remove a person's link to an organisation or errors                                   |
 | `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
 | `* * *`  | slightly familiar user                 | view a Person in detail                | view the miscellaneous data fields such as remarks and interactions                            |
 | `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
@@ -374,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is the `ComputingConnection` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -401,7 +538,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to update a contact
 2.  ComputingConnection shows the current details of the contact with editable fields
 3.  User edits the fields
-4.  ComputingConnecction updates the contact accordingly
+4.  ComputingConnection updates the contact accordingly
 
     Use case ends.
 
@@ -467,6 +604,60 @@ Use case ends.
 
   Use case ends.
 
+**Use case: Delete an organisation**
+
+**MSS**
+
+1.  User requests to delete an organisation
+2.  ComputingConnection deletes the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The index provided is invalid.
+    * 1a1. ComputingConnection shows an error message.
+
+  Use case ends.
+
+**Use case: Add a person to an organisation**
+
+**MSS**
+
+1.  User requests to add a person to an organisation
+2.  ComputingConnection adds the person to the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The person index provided is invalid.
+    * 1a1. ComputingConnection shows an error message.
+* 2a. The organisation name provided is invalid.
+    * 2a1. ComputingConnection shows an error message.
+* 3a. The person already exists in the organisation.
+    * 3a1. ComputingConnection shows an error message.
+    
+  Use case ends.
+
+**Use case: Removing a person to an organisation**
+
+**MSS**
+
+1.  User requests to remove a person from an organisation
+2.  ComputingConnection removes the person from the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The person index provided is invalid.
+    * 1a1. ComputingConnection shows an error message.
+* 2a. The organisation name provided is invalid.
+    * 2a1. ComputingConnection shows an error message.
+
+  Use case ends.
+
 **Use case: Delete a specific contact**
 
 **MSS**
@@ -521,7 +712,7 @@ Use case ends.
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
@@ -529,14 +720,14 @@ Use case ends.
 
 *{More to be added}*
 
-### Glossary
+### 6.5 Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **7. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -545,7 +736,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### 7.1 Launch and shutdown
 
 1. Initial launch
 
@@ -562,7 +753,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### 7.2 Deleting a person
 
 1. Deleting a person while all persons are being shown
 
@@ -579,7 +770,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### 7.3 Saving data
 
 1. Dealing with missing/corrupted data files
 

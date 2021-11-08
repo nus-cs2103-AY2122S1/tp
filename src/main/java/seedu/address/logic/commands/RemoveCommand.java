@@ -178,6 +178,7 @@ public class RemoveCommand extends Command {
 
         // Arrange previous skills in an array
         ArrayList<T> elementArray = new ArrayList<>();
+        elementArray.addAll(previousSet);
         elementArray.sort(Comparator.comparing(Object::toString)); //Does this work?
 
         // Convert the set of Indexes to an array of integers
