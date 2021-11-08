@@ -1188,13 +1188,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
@@ -1204,19 +1204,19 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 rv/Great place! t/view t/tourist ra/4` <br>
        Expected: "Singapore Flyers" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
 
-    1. Test case:  `add c/fnb n/Genki Sushi WestGate p/12345678 e/123@example.com a/3 Gateway Dr, #03-05, Singapore 608532` <br>
-       Expected: "Genki Sushi WestGate" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
+    2. Test case:  `add c/fnb n/Genki Sushi WestGate p/12345678 e/123@example.com a/3 Gateway Dr, #03-05, Singapore 608532` <br>
+        Expected: "Genki Sushi WestGate" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
 
-    1. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/4 c/acc e/123@example.com ` <br>
+    3. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/4 c/acc e/123@example.com ` <br>
        Expected: "HardRock Hotel" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
 
-    1. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/10 c/acc e/123@example.com ` <br>
+    4. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/10 c/acc e/123@example.com ` <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
 
-    1. Test case: `add c/att n/Botanic Gardens p/23456789 e/123@example.com` <br>
+    5. Test case: `add c/att n/Botanic Gardens p/23456789 e/123@example.com` <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
 
-    1. Other incorrect add commands to try: `add`, `add 0`, `add n/`, `123 add ALL_NECESSARY_PARAMETERS` (All necessary parameters include category, name, phone number, email and address)<br>
+    6. Other incorrect add commands to try: `add`, `add 0`, `add n/`, `123 add ALL_NECESSARY_PARAMETERS` (All necessary parameters include category, name, phone number, email and address)<br>
        Expected: Similar to previous.
 
 ### Editing a contact
@@ -1228,7 +1228,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
 
     2. Test case: `edit 0`<br>
-       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+           Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
     3. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
@@ -1460,8 +1460,8 @@ testers are expected to do more *exploratory* testing.
 1. Undoing changes consecutively
 
 * Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order:<br>
-       1. `delete n/Marina Bay Sands`<br>
-       2. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
+       a. `delete n/Marina Bay Sands`<br>
+       b. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
 
     1. Test case: `undo`<br>
        Expected: Previously added contact, `Singapore Flyers` is removed from address book. Undo success message shown in the status message.
@@ -1476,10 +1476,10 @@ testers are expected to do more *exploratory* testing.
 1. Redoing changes consecutively
 
 * Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order:<br>
-        1. `delete n/Marina Bay Sands`<br>
-        2. `edit 1 e/123@example.com`<br>
-        3. `undo`<br>
-        4. `undo`<br><br>
+        a. `delete n/Marina Bay Sands`<br>
+        b. `edit 1 e/123@example.com`<br>
+        c. `undo`<br>
+        d. `undo`<br><br>
 
   1. Test case: `redo`<br>
     Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
