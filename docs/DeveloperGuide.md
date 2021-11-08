@@ -698,10 +698,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Appendix E: Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **GUI**: A GUI (graphical user interface) is a system of interactive visual components for the user to interact with.
-* **Index**: The position of a task in the list. Indexes start from 1.
-* **Parameter**: Specific information to be provided for commands.
+|Term |Explanation |
+|-----|------------|
+|**Mainstream OS** | Windows, Linux, Unix, OS-X|
+|**GUI** | A GUI (graphical user interface) is a system of interactive visual components for the user to interact with. |
+|**Index**| The position of a task in the list. Indexes start from 1. |
+|**Parameter**| Specific information to be provided for commands. |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -777,6 +779,20 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Finding a task
+
+1. Finding a task from the task list
+    1. Test case: `find task`<br>
+       Expected: Task list is filtered to show only the tasks that matches the keyword task.
+       
+    2. Test case: `find weekly task d/2021-11-11 tg/CS2103T`<br>
+       Expected: Task list is filtered to show only the tasks that matches the keywords "weekly" and "task" with a due date of 2021-11-11 and a tag of CS2103T.
+
+    3. Test case: `find d/2021-11-11`<br>
+       Expected: Task list is not filtered. Error details for invalid command shown in the status message.
+
+    4. Other incorrect delete commands to try: `find`, `find tg/CS2103T`, `...`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 

@@ -9,8 +9,6 @@ Uni-Fy is a desktop app for managing your university workload and it is designed
 
 Given below are my contributions to the project.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=KelvinSoo&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&tabOpen=true&tabType=authorship&tabAuthor=KelvinSoo&tabRepo=AY2122S1-CS2103T-W17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&checkedFileTypes=docs~functional-code~test-code~other)
-
 * **New Feature**: Added a weekly `progress bar` to keep track of all tasks
   * What it does: allows the user to visualise weekly progress
   * Justification: This feature improves the product significantly because a user is able to keep track of their weekly task completion progress.
@@ -34,18 +32,20 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user is able to easily visualise their weekly tasks.
   * Highlights: It required an in-depth understanding of `model`, `logic` and `JavaFX` components. The implementation too was challenging as it required updating of the UI using `Observables` and ensuring that other commands that updates tasks would also update the UI.
   * Contribution: Created the initial framework for the feature. Linking the `logic` and `model` of show with the `UI`: [\#128](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/128), [\#168](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/168)
-    
-* **Project management**:
-  * Managed releases `v1.2` - `v1.3b` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
   * Improve find feature to allow more predicates and find base on date, tag. [\#169](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/169)
   * Improve the GUI design (Pull requests [\#71](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/71), [\#73](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/73), [\#89](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/89), [\#91](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/91), [\#168](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/168), [\#191](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/191), [\#202](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/202))
-  
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=KelvinSoo&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&tabOpen=true&tabType=authorship&tabAuthor=KelvinSoo&tabRepo=AY2122S1-CS2103T-W17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&checkedFileTypes=docs~functional-code~test-code~other)
+
+* **Project management**:
+  * Managed releases `v1.2` - `v1.3b` (3 releases) on GitHub
+
 * **Documentation**:
   * User Guide:
     * Added section for navigation, icons and glossary: [\#174](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/174)
-    * Added documentation for the features `find` and `list`: [\#18](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/18), [\#183](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/183), [\#286](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/286)
+    * Added documentation for the features `find`, `list` and `done`: [\#18](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/18), [\#183](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/183), [\#286](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/286)
     * Did cosmetic tweaks to existing documentation of features `help`: [\#284](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/284)
     * Improve introduction and command table : [\#184](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/184)
   * Developer Guide:
@@ -57,5 +57,4 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Integrated a third party library (Apache commons) to the project ([\#278](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/278))
-
-* _{you can add/remove categories in the list above}_
+  
