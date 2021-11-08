@@ -20,6 +20,8 @@ title: Developer Guide
     * [Help feature](#help-feature)
     * [Birthday Reminder feature](#birthday-reminder-feature)
     * [Mailing List feature](#mailing-list-feature)
+    * [Command History feature](#command-history-feature)
+    * [Command Assistant feature](#command-assistant-feature)
 
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
@@ -450,6 +452,72 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 <div style="page-break-before: always;"></div>
+
+### Command History feature
+
+#### Implementation
+
+The operation is exposed in `CommandBox` and `CommandHistory`.
+
+The user keystroke will be read in `CommandBox#handleKeyStroke`, which will call the appropriate method in `CommandHistory` to retrieve the previous and next commands. The retrieved commands are passed into `CommandBox#commandTextField` to be displayed.
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. All contacts are displayed by default.
+
+Step 2. The user executes `find n/David t/friend t/football` to search for a matching contact.
+
+Step 3. User wants to retrieve previous command and presses the `UP` key.
+
+Step 4. `CommandBox#handleKeyStroke` reads the `UP` keystroke and calls `CommandHistory#getPreviousCommand`.
+
+Step 5. `CommandHistory` retrieves the previous command and returns it.
+
+Step 6. `CommandBox` displays the previous command in the Command Box.
+
+#### Design considerations:
+
+**Aspect: Implementation of Command History:**
+
+* **Option 1 (current choice):** Generate `CommandHistory` as a Singleton class.
+    * Pros: Ensures that there is only one set of history that is tracked.
+    * Cons: Complicates testing as different versions of history cannot be created.
+
+* **Option 2:** Generate `CommandHistory` as a normal class.
+    * Pros: Makes testing easier as multiple `CommandHistory` objects can be created with different history to test different conditions.
+    * Cons: Possible conflicting history if `CommandHistory` is not updated properly.
+
+### Command Assistant feature
+
+#### Implementation
+
+The operation is exposed in `SystemCommand`, specifically in `SystemCommand#execute`.
+
+The user keystroke will be read in `CommandBox#handleKeyStroke`. The user input will be evaluated by `SystemCommand#execute` to determine the appropriate help message to display.
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. All contacts are displayed by default.
+
+Step 2. The user enters `find ` to search for a matching contact.
+
+Step 3. `CommandBox#handleKeyStroke` reads `find ` keystroke and calls `SystemCommand#execute`.
+
+Step 4. `SystemCommand` evaluates the user input and returns the appropriate help message.
+
+Step 5. CONNECTIONS will display a help message in `ResultDisplay`.
+
+#### Design considerations:
+
+**Aspect: Implementation of Command Assistant:**
+
+* **Option 1:** Create a `AssistantCommand` class which extends from `Command` to handle the features of `Command Assistant`.
+    * Pros: Simplifies implementation as only an additional subclass needs to be created.
+    * Cons: Creates an additional command that users may be able to utilise, which they are not supposed to.
+
+* **Option 2 (current choice):** Create a new type of command called `SystemCommand` that does not extend from `Command`.
+    * Pros: Prevents potential issues such as users using an additional command which they are not supposed to use.
+    * Cons: Requires additional code to interface with `Logic`, 'MainWindow` and `CommandBox`.
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
