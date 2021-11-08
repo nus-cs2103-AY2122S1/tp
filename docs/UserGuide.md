@@ -463,7 +463,7 @@ Action | Format, Examples
 **Edit Task** | `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]` <br> e.g., `edit 1 -ti2 -tnInternship Interview -tt15:45`
 **Mark Task Done** | `donetask INDEX -tiTASK_INDEX…​` <br> e.g., `donetask 3 -ti2 -ti5`
 **Undo Mark Task Done** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti2 -ti5`
-**View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
+**View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat INDEX -f KEYWORDS`<br>e.g.,`cat 4 -f work`<br><br> `cat -A` <br><br> `cat -A -f KEYWORDS`<br>e.g.,`cat -A -f work`
 **View Reminder Days** | `reminder`
 **Set Reminder Days** | `reminder -s DAYS`<br>e.g., `reminder -s 21`
 
