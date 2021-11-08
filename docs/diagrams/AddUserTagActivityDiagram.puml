@@ -12,10 +12,11 @@ DiamondBorderColor #gold
 
 start
 :User executes add command;
-:Create the client;
+:Create and add new Client to UniqueClientList;
 :Create or retrieve existing tags;
 :Add tags to the client;
 :Add the client to the tags;
+:AddressBook Listener adds new tags to UniqueTagList;
 :UniqueTagList fires an update event;
 :UI Listener updates TagPanel UI;
 stop

@@ -533,8 +533,8 @@ We will use this section to document implementation details regarding GUI-relate
 #### 4.7.1 Filter tag panel
 Filter tag panel involves the use of a listener to watch for any changes in the `UniqueTagList`. Once a change 
 is detected, it will update the UI accordingly. The tricky part is to get `UniqueTagList` to work with the `TagPanel`
-listener. We also have to constantly monitor the reference states of `UniqueTagList` so that tags panel automatically removes 
-tags that are no longer referenced by any clients. For this, some sort of Garbage collection mechanism must exist.
+listener. We also have to constantly monitor the "reference states" of `Tag` items in the `UniqueTagList` so that tags panel automatically removes 
+tags that are no longer referenced by any clients. For this, some form of garbage collection mechanism must exist.
 
 Below, we will see how creating and modifying the client have an effect on the `UniqueTagList`. Client modification can be 
 seen as the entry point that triggers the chain of tag modification operations and thus the UI update of the `TagPanel`.
@@ -546,6 +546,9 @@ The following activity diagram summarizes what happens when a user executes an a
 <img src="images/AddUserTagActivityDiagram.png" width="250" />
 </p>
 
+###### Doubly link client and tags
+Doubly linking client and tags allows us to monitor the "reference states" of the tags without iterating through the `UniqueClientList`. "Reference state" here refers to the state of being referenced as well as how many clients are currently "referencing" the tags. 
+
 ##### 4.7.1.2 Edit a client
 The following activity diagram summarizes what happens when a user executes an edit command:
 
@@ -553,12 +556,24 @@ The following activity diagram summarizes what happens when a user executes an e
 <img src="images/EditUserTagActivityDiagram.png" width="300" />
 </p>
 
+###### How unreferenced tags are "garbage collected"?
+The garbage collection of unreferenced tags takes place whenever the `AddressBook` listener detects an update event in the `UniqueClientList`. 
+The garbage collector will iterate through the `UniqueTagList` and remove all `Tag` objects that are not referenced by any clients. The design choice of doubly linking the tag and client further help facilitate this process since the reference state of the `Tag` has become easily available as a result.
+
 ##### 4.7.1.3 Delete a client
 The following activity diagram summarizes what happens when a user executes a delete command:
 
 <p align="center">
 <img src="images/DeleteUserTagActivityDiagram.png" width="300" />
 </p>
+
+###### Remove vs "Delete"
+You might notice that there is an interchanging of the words Remove and Delete which seem to suggest the same thing. However, they do have some slight difference in connotation.<br>
+* Remove: removal of `Client` from `UniqueClientList`.
+* Delete: removal of all lingering references that this `Client` has.
+
+The "Delete" operation should be invoked everytime you remove a `Client` from the `UniqueClientList` to ensure the correctness of the "reference state" of `Tag`. 
+This is because removal of a `Client` from the `UniqueClientList` connotes a complete deletion of the `Client`, hence it is important to ensure that any lingering references including association with previously associated `Tag` objects are cut since the client are no longer "present".
 
 --------------------------------------------------------------------------------------------------------------------
 
