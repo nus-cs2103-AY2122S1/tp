@@ -78,7 +78,6 @@ A Staff'd Command is an **instruction** that signals Staff’d to perform an ope
 * Parameters must be **inputted with a space** before them.
   e.g. `add n/NAME p/PHONE_NUMBER` is accepted, but `addn/NAME p/PHONE_NUMBER` and `add n/NAMEp/PHONE_NUMBER` will not be accepted.
 
-
 * If a parameter is expected only once in the command but you specified it multiple times, only the **last occurrence** of the parameter will be used.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be used.
 
@@ -237,7 +236,7 @@ Opens a **help window** which contains a link to Staff'd information page.
 
 **Format:** `help`
 
-![HelpMessage](images/HelpMessage.png)
+![HelpMessage](images/helpMessage.png)
 
 **Go to:**  
 [Table of Contents](#table-of-contents)

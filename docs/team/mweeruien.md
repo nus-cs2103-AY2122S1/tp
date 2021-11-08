@@ -28,7 +28,7 @@ Below are my contributions to the project.
 
 * **Project management**:
   * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
-  * Managed milestone tracking
+  * Managed issue tracking
   
 * **Documentation**:
   * User Guide:
