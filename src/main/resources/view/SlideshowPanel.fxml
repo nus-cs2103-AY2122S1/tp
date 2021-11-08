@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="slideshow" styleClass="stack-pane" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1">
+  <StackPane VBox.vgrow="NEVER" alignment="TOP_LEFT" minHeight="30" prefHeight="30" maxHeight="30">
+    <padding>
+      <Insets top="5" left="10" />
+    </padding>
+    <Label styleClass="label-bright" fx:id="currentFlashcardNumber" text="Flashcard number: 1" />
+  </StackPane>
+  <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
+    <padding>
+      <Insets top="10" right="50" bottom="10" left="50" />
+    </padding>
+    <Label styleClass="label-bright" text="What does this mean?" />
+    <Label styleClass="label-header" fx:id="currentForeignPhrase"
+           text="Foreign Phrase" wrapText="true" textAlignment="CENTER">
+      <padding>
+        <Insets bottom="10" />
+      </padding>
+    </Label>
+    <Label styleClass="label-bright" fx:id="answerHeader" text="Answer:" />
+    <Label styleClass="label-header" fx:id="answer"
+           text="" wrapText="true" textAlignment="CENTER" />
+  </VBox>
+  <StackPane VBox.vgrow="NEVER" alignment="BOTTOM_RIGHT" minHeight="30" prefHeight="30" maxHeight="30">
+    <padding>
+      <Insets bottom="5" right="10" />
+    </padding>
+    <Label styleClass="label-bright" fx:id="progress" text="Flashcards answered: " />
+  </StackPane>
+</VBox>

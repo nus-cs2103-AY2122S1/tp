@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1">
+  <StackPane fx:id="flashcardListPanel">
+    <VBox>
+      <StackPane fx:id="flashcardHeaderBarPlaceholder" VBox.vgrow="ALWAYS" styleClass="pane-with-border" />
+      <VBox>
+        <ListView fx:id="flashcardListView" VBox.vgrow="ALWAYS" prefHeight="600"/>
+      </VBox>
+    </VBox>
+  </StackPane>
+</VBox>

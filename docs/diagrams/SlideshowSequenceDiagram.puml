@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FlashCardAppParser" as FlashCardAppParser LOGIC_COLOR
+participant "slideshowCommand:SlideshowCommand" as SlideshowCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("slideshow")
+activate LogicManager
+
+LogicManager -> FlashCardAppParser : parseCommand("slideshow")
+activate FlashCardAppParser
+
+create SlideshowCommand
+FlashCardAppParser -> SlideshowCommand
+activate SlideshowCommand
+
+FlashCardAppParser <-- SlideshowCommand:slideshowCommand
+deactivate SlideshowCommand
+
+LogicManager <-- FlashCardAppParser:slideshowCommand
+deactivate FlashCardAppParser
+
+LogicManager -> SlideshowCommand : execute()
+activate SlideshowCommand
+
+SlideshowCommand -> ModelManager : startSlideshow()
+activate ModelManager
+
+ref over ModelManager
+    start slideshowApp
+end
+
+SlideshowCommand <-- ModelManager
+deactivate ModelManager
+
+create CommandResult
+SlideshowCommand -> CommandResult
+activate CommandResult
+
+SlideshowCommand <-- CommandResult:result
+deactivate CommandResult
+
+LogicManager <-- SlideshowCommand:result
+deactivate SlideshowCommand
+
+[<-- LogicManager:result
+deactivate LogicManager
+@enduml

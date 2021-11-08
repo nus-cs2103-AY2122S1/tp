@@ -3,10 +3,10 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FlashcardAppParser" as FlashcardAppParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "deleteCommand:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -16,39 +16,36 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> FlashcardAppParser : parseCommand("delete 1")
+activate FlashcardAppParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+FlashcardAppParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> FlashcardAppParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+FlashcardAppParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
 DeleteCommandParser -> DeleteCommand
 activate DeleteCommand
 
-DeleteCommand --> DeleteCommandParser : d
+DeleteCommand --> DeleteCommandParser : deleteCommand
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> FlashcardAppParser : deleteCommand
 deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+FlashcardAppParser --> LogicManager : deleteCommand
+deactivate FlashcardAppParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteFlashcard(1)
 activate Model
 
 Model --> DeleteCommand
@@ -58,12 +55,12 @@ create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteCommand : result
 deactivate CommandResult
 
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 
-[<--LogicManager
+[<--LogicManager:result
 deactivate LogicManager
 @enduml
