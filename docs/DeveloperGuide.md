@@ -174,11 +174,11 @@ It then returns a `AddCommand` back to `UniFyParser`, initialized with the `Task
 
 ##### Usage Scenario
 
-The following demonstrates a usage scenario where the user wants to add a task with name CS2103, date 2021-10-10, time 23:59, priority level LOW and tag Important
+The following demonstrates a usage scenario where the user wants to add a task with name CS2103, date 2021-10-10, time 23:59 (default time), priority level LOW(default priority level)) and tag Important
 
-1. The method `execute("add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
-2. `parseCommand` in `UniFyParser` takes in the String `"add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW"` as its parameter and initializes a `AddCommandParser` object.
-3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW"`.
+1. The method `execute("add n/CS2103 d/2021-10-10 tg/Important")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String `"add n/CS2103 d/2021-10-10 tg/Important"` as its parameter and initializes a `AddCommandParser` object.
+3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/CS2103 d/2021-10-10 tg/Important"`.
 4. An `AddCommand` object will be initialized, taking in the `Task` with a `Name`, `Date`, `Time`, `Priority` and `Set<Tag>`, in this case containing `Name`: `CS2103`, `Date`: `2021-10-10`, `Time`: `23:59`, `Priority`: `LOW` and one tag in `Set<Tag>`: `Important`.
 5. The method call then returns to `LogicManager`, which calls the `execute` method of `AddCommand`.
 6. By using the `hasTask` method of the `Model` , the `AddCommand` checks for a duplicate task in its `execute` method.

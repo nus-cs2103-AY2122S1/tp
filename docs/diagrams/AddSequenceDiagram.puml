@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW")
+[-> LogicManager : execute("add n/CS2103 d/2021-10-10 tg/Important")
 activate LogicManager
 
-LogicManager -> UniFyParser : parseCommand("add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW")
+LogicManager -> UniFyParser : parseCommand("add n/CS2103 d/2021-10-10 tg/Important")
 activate UniFyParser
 
 create AddCommandParser
@@ -26,7 +26,7 @@ activate AddCommandParser
 AddCommandParser --> UniFyParser
 deactivate AddCommandParser
 
-UniFyParser -> AddCommandParser : parse("n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW")
+UniFyParser -> AddCommandParser : parse("n/CS2103 d/2021-10-10 tg/Important")
 activate AddCommandParser
 
 create AddCommand
