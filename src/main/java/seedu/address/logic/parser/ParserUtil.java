@@ -23,7 +23,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "The index '%1$s' is invalid. It should be a positive integer";
     public static final String MESSAGE_OVERFLOW_INTEGER = "UNIon is unable to handle such a large integer";
-    public static final String MESSAGE_NON_EXISTENT_INDEX = "Index cannot be empty";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
