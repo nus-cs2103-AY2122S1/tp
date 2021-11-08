@@ -413,7 +413,7 @@ It implements the `parse()` method, which parses the find parameter (eg: name, t
 
 The `FindCommand` class extends `Command`. Its instance is created by providing a predicate (condition to be fulfilled by the elements of 
 the `FilteredPersonList` that contains the contact(s) matching the find parameters). Its implementation of
-`Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+`Command#execute()` updates the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find Bob Joe")` API call.
