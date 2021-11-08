@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "d:DeleteMedicalEntryCommand" as DeleteMedicalEntryCommand LOGIC_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("...")
+activate LogicManager
+ref over LogicManager: Parse User Input
+LogicManager -> DeleteMedicalEntryCommand : execute(model)
+activate DeleteMedicalEntryCommand
+
+DeleteMedicalEntryCommand -> ModelManager : setPatient
+activate ModelManager
+ModelManager --> DeleteMedicalEntryCommand
+deactivate ModelManager
+
+DeleteMedicalEntryCommand -> ModelManager : updateAppointmentBook
+activate ModelManager
+ModelManager --> DeleteMedicalEntryCommand
+deactivate ModelManager
+
+DeleteMedicalEntryCommand -> ModelManager : updateFilteredPatientList
+activate ModelManager
+ModelManager --> DeleteMedicalEntryCommand
+deactivate ModelManager
+
+DeleteMedicalEntryCommand -> ModelManager : updateFilteredAppointmentList
+activate ModelManager
+ModelManager --> DeleteMedicalEntryCommand
+deactivate ModelManager
+
+create CommandResult
+DeleteMedicalEntryCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteMedicalEntryCommand : r
+deactivate CommandResult
+
+DeleteMedicalEntryCommand --> LogicManager : r
+deactivate DeleteMedicalEntryCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml

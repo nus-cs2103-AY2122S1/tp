@@ -3,40 +3,125 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+![Doc'it icon](images/DocitHeader.png)
 
-* Table of Contents
-{:toc}
+`Doc'it` provides a centralised platform for authorised staff from small family clinics to view, update, and onboard
+patient records, solving the inefficient paper records and files used today. With `Doc'it`, small family clinics can
+reduce man-hours in managing paper files, translating this saved time into better front-line care services.
+
+#### Table of Contents
+
+1. [Quick Start](#quick-start)
+2. [Overview of Features](#overview-of-features)
+    1. [Basic Commands](#general-commands)
+        - [Clear all records](#clear-all-records-doc-clear)
+        - [Help](#help-doc-help)
+        - [Exit the program](#exit-the-program-doc-exit)
+    2. [Patient-related Commands](#patient-commands)
+        - [Add a patient](#add-a-patient-pt-add)
+        - [List all patients](#list-all-patients-pt-list)
+        - [Edit a patient](#edit-a-patient-pt-edit)
+        - [Delete a patient](#delete-a-patient-pt-delete)
+        - [Add to medical history](#add-a-medical-history-pt-ma)
+        - [Delete to medical history](#delete-a-medical-history-pt-md)
+        - [Find patient\(s\)](#find-a-patient-with-keywords-pt-find-keywords)
+    3. [Appointment-related Commands](#appointment-commands)
+        - [Add an appointment](#add-an-appointment-apmt-add)
+        - [List all appointments](#list-all-appointments-apmt-list)
+        - [List all archived appointments](#list-all-archived-appointments-apmt-alist)
+        - [Edit an appointment](#edit-an-appointment-apmt-edit)
+        - [Delete an appointment](#delete-an-appointment-apmt-delete)
+        - [Archive an appointment](#archive-an-appointment-apmt-archive)
+        - [Sort all appointments](#sort-all-appointments-apmt-sort)
+        - [Add prescription](#add-prescription-apmt-pa)
+        - [Delete prescription](#delete-prescription-apmt-pd)
+4. [FAQ](#faq)
+5. [Command Summary](#command-summary)
+6. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `docit.jar` from [here](https://github.com/AY2122S1-CS2103-W14-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your `Doc'it`.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   <br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`doc help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`pt list`** : Lists all patients.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`doc exit`** : Exits the app.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the **Features** section below for details of each command.
+this on
+7. Doc'it is built specifically for small clinic staff based in Singapore. Hence, the date and time run in Singapore time.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Overview of Features
+
+<div markdown="block" class="alert alert-info">
+
+This section provides a brief overview of `Doc'it`. The intention is for users to gain a better
+understanding of basic functionalities of `Doc'it`, before diving into specific commands.
+
+</div>
+
+1. **Basic functionality**
+    1. Clear all records
+    2. Get Help
+    3. Exit app
+2. **Managing Patient Records**
+    1. Create a new Patient Record
+    2. View details of Patient Record
+    3. Delete Patient Record
+    4. Edit Patient Record
+    5. Add Medical History from a Patient Record
+    6. Delete Medical History of a Patient Record
+    7. Find filtered patient records based on keywords
+3. **Managing Patient Appointments**
+    1. Create a new appointment
+    2. View appointment
+    3. Delete appointment
+    4. Archive appointment
+    5. List appointments
+    6. Sort appointments (in order of urgency)
+    7. Managing appointment prescriptions
+        1. Add prescription
+        2. Remove prescription
+    
+##Navigating Doc'it
+This section details the various components of Doc'it interface and how you could go about navigating Doc'it.
+
+   ![Navigability](images/Navigability.png)
+
+### Patient View
+![Navigability](images/PatientView.png)
+In this view, you can view all Patients. Each Patient has a name, phone number, address, email and a Medical History. 
+
+All patient-related commands will have change parts of the Patient View.
+
+### Appointment View
+![Navigability](images/AppointmentView.png)
+In this view, you can view all Appointments. Each Appointment has the patient, date and time.
+
+The AppointmentView comprises of two types of Appointments: Upcoming and Archive. Upcoming appointments are scheduled appointments, while Archived appointments are previous appointments that have been archived. You can switch between the two with the `apmt list` and `apmt alist` command. Alternatively, you could also click on the corresponding tab.
+
+### Command Result Status Display
+![Navigability](images/CommandResultStatusDisplay.png)
+In this component, you can view the messages and feedback from Doc'it after every command.
+
+### Command Box
+![Navigability](images/CommandBox.png)
+This is the component where you will input your commands. After inputting your commands, you may click the `Enter` key on your keyboard. Alternatively, you can click the `Send` button displayed here.
+
 
 ## Features
 
@@ -48,145 +133,442 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/cancer` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`  after them can be used multiple times including zero times.<br>
+  e.g. `[m/MEDICAL_HISTORY]… ` can be used as ` ` (i.e. 0 times), `m/Diabetes`, `m/Scoliosis m/High Blood Pressure` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* `INDEX` must a positive integer of the given item in the panel.
+
+* `DATETIME` must be in the format `yyyy-mm-dd HHmm` for all commands, with time using 24-Hour notation.<br>
+  e.g. `2021-10-28 1530` indicates 28 Oct 2021 at 3.30pm
+
 </div>
 
-### Viewing help : `help`
+--------------------------------------------------------------------------------------------------------------------
 
-Shows a message explaning how to access the help page.
+## Basic Commands
+This section covers basic application-related commands. All of these commands have `doc` in front of them.
 
-![help message](images/helpMessage.png)
+### Clear all records: `doc clear`
 
-Format: `help`
+Clears all patient records and appointment records (upcoming and archived). This is an irreversible operation.
 
+Format: `doc clear`
 
-### Adding a person: `add`
+---
 
-Adds a person to the address book.
+### Help: `doc help`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Shows the user manual for `Doc'it` explaining how to access the help page.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `doc help`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+![DocHelp](images/DocHelp.png)
 
-### Listing all persons : `list`
+---
 
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
+### Exit the program: `doc exit`
 
 Exits the program.
 
-Format: `exit`
+Format: `doc exit`
 
-### Saving the data
+---
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+## Patient Commands
+Patient is the primary entity in `Doc'it`. This section documents how to perform create, update, read and delete operations on patient
+records.
 
-### Editing the data file
+>:information_source: All patient-related commands have the keyword `pt` in front of them.
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+### Add a patient: `pt add`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
+Creates a new patient record.
 
-### Archiving data files `[coming in v2.0]`
+**Format:** `pt add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MEDICAL_HISTORY]...`
 
-_Details coming soon ..._
+- `MEDICAL_HISTORY` is optional; if `MEDICAL_HISTORY` is not given, an empty string of text will be used.
+- `MEDICAL_HISTORY` can be added multiple times within a single `pt add` command, as indicated by the ```...``` used.
+
+**Examples:**
+- `pt add n/Joshen Lim p/99998888 e/joshen@gmail.com a/123 Clementi Road SG293821`
+
+**Expected Outcome:**
+```
+New patient added:
+Joshen Lim; Phone: 99988888; Email: joshen@gmail.com; Address: 123 Clementi Road SG293821
+```
+
+**GUI Display:**
+![PtAdd](images/PtAdd.png)
+
+
+---
+
+### List all patients: `pt list`
+
+Shows a list of all patients in the record system.
+
+Format: `pt list`
+
+**Expected Outcome:**
+```
+Listed all patients
+```
+
+**GUI Display:**
+![Patient Card](images/PatientCard.png)
+---
+
+### Edit a patient: `pt edit`
+
+Edits the details of a specified patient.
+
+**Format:** `pt edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEDICAL_HISTORY]`
+- All fields are optional but if stated, must not be null or empty
+- `INDEX` is compulsory when making an edit to patient details
+
+**Examples:**
+- `pt edit 1 n/Joshen Tan m/Heartache`
+
+**Expected outcome:** <br>
+```
+Edited Patient:
+Joshen Tan; Phone: 12345678; Email: google@gmail.com; Address: 311 clementi SG540192; Medical History: Heartache, recorded 31 Oct 2021
+```
+
+---
+
+### Delete a patient: `pt delete`
+
+Deletes a patient record, including all information about the patient.
+
+**Format:** `pt delete INDEX`
+
+- Deletes the patient at the specified `INDEX` (one-indexed).
+
+**Examples:**
+```
+pt list
+pt delete 1
+```
+
+**Expected Outcome:**
+```
+Deleted patient:
+Joshen Tan; Phone: 12345678; Email: google@gmail.com; Address: 311 clementi SG540192; Medical History: Heartache, recorded 31 Oct 2021
+```
+
+---
+
+### Add a Medical Entry: `pt ma`
+
+Adds a medical entry to the Medical History of a Patient Record, saving the medical history and ```today``` as the date of entry.
+
+**Format:** `pt ma INDEX m/MEDICAL_HISTORY...`
+
+- Adds a medical history to the patient at the specified `INDEX` (one-indexed).
+- Multiple entries of medical history can be added in one command: e.g. `m/Diabetes`, `m/Scoliosis m/High Blood Pressure` etc.
+- `m/MEDICAL_HISTORY` is a required field in this command
+
+**Examples:**
+```
+pt list
+pt ma 1 m/diabetes
+```
+
+**Expected Outcome:**
+```
+Updated: 
+Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Address: Blk 11 Ang Mo Kio Street 74, #11-04; Medical History: diabetes, recorded 8 Nov 2021
+```
+
+**GUI Display:**
+![Add Medical History](images/AddMedicalHistory.png)
+
+**Restrictions:**
+- Can only add up to 8 medical entries per patient
+- Each medical entry can only have up to 50 characters
+
+---
+
+### Delete a Medical History: `pt md`
+
+Deletes a medical history to the Patient Record.
+
+**Format:** `pt md INDEX i/MEDICAL_HISTORY_INDEX`
+
+- Deletes a medical history from the patient at the specified `INDEX` (one-indexed). The entry deleted is specified by the `MEDICAL_HISTORY_INDEX`
+
+**Examples:**
+- `pt md 1 i/1`
+
+**Expected Outcome:**
+```
+Updated: 
+Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Address: Blk 11 Ang Mo Kio Street 74, #11-04
+```
+
+---
+
+### Find a Patient with keywords: `pt find [keywords...]`
+
+Finds all patients that match any one of the keywords listed. These keywords can come from
+either the Patient's Name or Medical History.
+
+**Format:** `pt find [keywords...]`
+
+- Finds all patients that match any one of the keywords listed.
+
+**Examples:**
+- `pt find Alex David diabetes high blood pressure`
+
+**Expected Outcome:**
+```
+4 patients listed!
+```
+
+---
+
+## Appointment Commands
+A patient in `Doc'it` may have appointments to visit the clinic.
+
+In the Appointments panel, upcoming appointments are shown in the Upcoming tab, and past appointments are archived in the Archived tab.
+
+One appointment stores these details:
+* Index of patient: The index of an existing patient in the Patients panel
+* Date and time: The date and time of the appointment
+
+>:information_source: All appointment-related commands have the keyword `apmt` in front of them.
+These commands modify the Appointments panel of `Doc'it`.
+
+### Add an appointment: `apmt add`
+Adds an appointment for the patient at the specified index in the Patients panel.
+
+**Format:** `apmt add i/PATIENT_INDEX d/DATETIME`
+
+- `PATIENT_INDEX`: Index of patient who should have this appointment
+- `DATETIME`: Date and time of appointment in format `yyyy-mm-dd HHmm`
+  - Year must be between 2000 to 2999 inclusive.
+
+**Examples:**
+* `apmt add i/1 d/2021-10-05 1500` adds appointment on 5 Oct 2021 at 3pm to patient at index 1.
+* `apmt add i/2 d/2022-12-31 0700` adds appointment on 31 Dec 2022 at 7am to patient at index 2.
+
+**Example Usage:**
+- `apmt add i/1 d/2021-12-28 1500`
+
+**Expected Outcome:**
+```
+New appointment added:
+Patient: Alex Yeoh; Datetime: 28 Dec 2021 1500; Prescription: []
+```
+
+### List all appointments: `apmt list`
+Shows the list of all appointments.
+
+**Format:** `apmt list`
+
+**Examples:**
+* `apmt list`  Lists all appointments.
+
+**GUI Display:**
+![Appointment Card](images/AppointmentCard.png)
+
+### List all archived appointments: `apmt alist`
+Shows the list of all archived appointments.
+
+**Format:** `apmt alist`
+
+**Examples:**
+* `apmt alist`  Lists all archived appointments.
+
+**GUI Display:**
+![Show Archived](images/ShowArchiveAppointments.png)
+
+### Edit an appointment: `apmt edit`
+
+Edits the details of an appointment at the specified index in the Appointments panel.
+
+**Format:** `apmt edit APMT_INDEX [i/PATIENT_INDEX] [d/DATETIME]`
+
+- `APMT_INDEX`: Index of appointment in the Appointments panel
+- `PATIENT_INDEX`: Index of patient who should have this appointment
+- `DATETIME`: Date and time of appointment in format `yyyy-mm-dd HHmm`
+  - Year must be between 2000 to 2999 inclusive.
+- At least one of the optional fields should be present
+
+> :bulb: Use `i/PATIENT_INDEX` to change whose appointment it belongs to. <br>
+> e.g. `apmt edit 1 i/2` modifies the first appointment to belong to the patient at index 2
+
+**Examples:**
+- `apmt edit 1 i/2`
+- `apmt edit 1 d/2021-10-28 1500`
+- `apmt edit 1 i/1 d/2021-10-28 1500`
+
+**Example Usage:**
+- `apmt edit 1 i/1 d/2021-12-25 1500`
+
+**Expected Outcome:**
+```
+Edited Appointment:
+Patient: Alex Yeoh; Datetime: 25 Dec 2021 1500; Prescription: []
+```
+
+
+### Delete an appointment: `apmt delete`
+Deletes the appointment at the specified index in the Appointments panel.
+
+**Format:** `apmt delete INDEX`
+* Deletes the appointment at the specified INDEX.
+* The index refers to the index number shown in the displayed appointment list.
+* The index must be a positive integer 1, 2, 3, ...
+
+**Examples:**
+* `apmt list`  Display Upcoming appointments tab.
+* `apmt delete 1`  Deletes appointment at index 1.
+
+**Example Usage:**
+- `apmt delete 1`
+
+**Expected Outcome:**
+```
+Deleted Appointment:
+Patient: Alex Yeoh; Datetime: 28 Oct 2021 1500; Prescription: []
+
+```
+
+
+### Archive an appointment: `apmt archive`
+Archives an old appointment that is already past its date.
+
+**Format:** `apmt archive INDEX`
+* Archives the appointment at the specified INDEX.
+* The index refers to the index number shown in the displayed appointment list.
+* The index must be a positive integer 1, 2, 3, ...
+
+**Examples:**
+* `apmt archive 1`  Archives appointment at index 1.
+
+**Expected Outcome:**
+```
+Archived Appointment:
+Patient: Alex Yeoh; Datetime: 31 Dec 2012 1200; Prescription: []
+```
+
+### Sort all appointments: `apmt sort`
+Shows a sorted list of all appointments based on urgency (appointments today > ascending date > ascending name).
+
+**Format:** `apmt sort`
+
+**Examples:**
+* `apmt sort`  Lists all sorted appointments.
+
+**GUI Display:**
+![Sorted Appointments](images/SortAppointments.png)
+
+## Add prescription: `apmt pa`
+Adds a prescription to the designated appointment.
+
+
+**Format:** `apmt pa APMT_INDEX n/MEDICINE_NAME v/MEDICINE_VOLUME d/MEDICINE_DURATION`
+* The names of medicine added to the prescription list must be unique.
+
+**Examples:**
+* `apmt pa 1 n/Penicillin v/400 ml d/2 times a week`
+
+**Expected Outcome:**
+```
+New prescription added:
+Medicine: Penicillin
+Volume: 400 ml
+Duration: 2 times a week
+```
+
+**GUI Display:**
+![Add Prescription](images/AddPrescription.png)
+
+## Delete prescription: `apmt pd`
+Deletes a prescription from the designated appointment.
+
+**Format:** `apmt pd APMT_INDEX n/MEDICINE_NAME`
+
+**Examples:**
+* `apmt pd 1 n/panadol`
+
+**Expected Outcome:**
+```
+Deleted prescription:
+Medicine: panadol
+
+from John Doe's appointment.
+```
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous `Doc'it` home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+### Basic Commands
+
+| Command     | Format        |
+|-------------|---------------|
+| User Manual | `doc help`    |
+| Clear       | `doc clear`   |
+| Exit        | `doc exit`    |
+
+### Patient-related Commands
+
+| Command | Format                                                                                                      | Example                                                                                   |
+|---------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Add                     | `pt add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MEDICAL_HISTORY]...`                     | `pt add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/cancer` |
+| Delete                  | `pt delete INDEX`                                                                           | `pt delete 3`                                                                             |
+| Edit                    | `pt edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEDICAL_HISTORY]`         | `pt edit 2 n/James Lee e/jameslee@example.com`                                            |
+| Find                    | `pt find n/NAME`                                                                            | `pt find n/James Jake`                                                                    |
+| List                    | `pt list`                                                                                   | -                                                                                         |
+| Add Medical History     | `pt ma INDEX m/MEDICAL_HISTORY`                                                             | `pt ma 1 m/diabetes`                                                                      |
+| Delete Medical History  | `pt md INDEX i/MEDICAL_HISTORY_INDEX`                                                       | `pt md 1 i/1`                                                                             |
+
+### Appointment and Prescription-related Commands
+
+| Command              | Format                                                            | Example                                                |
+|----------------------|-------------------------------------------------------------------|--------------------------------------------------------|
+| Add                  | `apmt add INDEX d/DATETIME`                                       | `apmt add 1 d/2021-10-05 1600`                         |
+| Edit                 | `apmt edit APMT_INDEX [i/PATIENT_INDEX] [d/DATETIME]`             | `apmt edit 1 d/2021-10-05 1600`                        |
+| Delete               | `apmt delete INDEX`                                               | `apmt delete 1`                                        |
+| Archive              | `apmt archive INDEX`                                              | `apmt archive 1`                                       |
+| List                 | `apmt list`                                                       | -                                                      |
+| List Archived        | `apmt alist`                                                      | -                                                      |
+| Sort                 | `apmt sort`                                                       | -                                                      |
+| Add Prescription     | `apmt pa APPOINTMENT_INDEX n/MEDICINE v/VOLUME d/DURATION `     | `apmt pa 1 n/Penicillin v/400 ml d/2 times a week `  |
+| Delete Prescription  | `apmt pd APPOINTMENT_INDEX n/MEDICINE`                          | `apmt pd 1 n/Penicillin `                            |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+| Term                | Definition                                                                                                                                |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| Appointment         | A scheduled consult between a patient and the clinic's doctor at an exact date and time. The doctor may or may not prescribe medication.  |
+| Archive             | Storage for data that is non-urgent, e.g. appointment records that are past their date.                                                   |
+| Patient Record      | A record of a patient's name, phone number, address, email and medical history.                                                 |
+| Prescription        | The issued medication/treatment for a patient along with a duration and volume.                                                           |
+| Expired Appointment | An appointment that is 24-hours past its scheduled time.                                                                                  |
+| Medical History     | A list of past medical conditions faced by a patient. Each medical condition is stored as a Medical Entry.                                |
+| Medical Entry       | Description of the past medical condition of a patient, with a date of record when the entry was recorded.                                 |

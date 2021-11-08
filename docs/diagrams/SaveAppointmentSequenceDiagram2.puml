@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+
+Participant ":Storage" as storage STORAGE_COLOR
+
+box Model MODEL_COLOR_T1
+participant ":JsonAdaptedAppointment" as jaa MODEL_COLOR
+participant ":Appointment" as appointment MODEL_COLOR
+participant ":AddressBook" as addressbook MODEL_COLOR
+end box
+
+create jaa
+storage -> jaa : JsonAdaptedAppointment()
+jaa -> appointment : getPatient()
+jaa -> addressbook : getIndexOfPatient(patient)
+
+@enduml
