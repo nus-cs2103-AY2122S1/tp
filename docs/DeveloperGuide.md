@@ -217,7 +217,7 @@ Step4: After the construction of the timetable, each `TuitionClass` is inserted 
 The following *Sequence Diagram* illustrates how `Timetable` interacts with `TimetableInfoPage` as explained by `step 3` and `step 4`:
 
 <p align="center">
-  <img src="images/TimetableCommandSequenceDiagram.png" height="540"/>
+  <img src="images/TimetableCommandSequenceDiagram.png" height="450"/>
 </p>
 
 Step5: The complete timetable is displayed to user through the `UI` component.
