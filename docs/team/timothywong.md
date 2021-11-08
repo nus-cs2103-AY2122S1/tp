@@ -42,7 +42,7 @@ As the team lead, I took a large initiative in ensuring tasks were done timely a
     <br><br/>
 
 3. **Enhancements to existing features**:
-  * Updated the Person class to make it relevant to the value proposition of ComputingConnection: [\#39](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/39), [\#57](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/57) 
+  * Updated the Model component of AB3 to make it relevant to the value proposition of ComputingConnection: [\#39](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/39), [\#57](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/57) 
   * Updated the `add` and `edit` commands to support new data fields and integration: [\#39](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/39), [\#57](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/57)
   * Updated the GUI tags and structure: [\#69](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/69), [\#75](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/75), [\#98](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/98) 
   * Ensure test cases are compatible and integrated with new features.
@@ -54,10 +54,9 @@ As the team lead, I took a large initiative in ensuring tasks were done timely a
  section: [\#81](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/81)
     * User Guide: Added documentation for the features `append` and `remove`: [\#67](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/67), [\#71](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/71)
     * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#21](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/21), [\#24](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/24)
-    * Developer guide:
-    * Added implementation details of the `delete` feature.
+    * Developer guide: Added implementation details of the `Optional and Multiple Data Fields` feature.
+    * Developer guide: Updated front matters, formatting, use cases: UC01, UC03, UC04, NFRs, and appendix for manual testing: [\#192](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/192), [\#194](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/194)
       <br><br/>
-
 5. **Review and Mentoring Contributions**:
   * PRs reviewed (with non-trivial review comments): [\#66](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/66), [\#181](https://github.com/AY2122S1-CS2103T-W10-3/tp/pull/181)
   * Contributed to forum discussions: [\#197](https://github.com/nus-cs2103-AY2122S1/forum/issues/197)
