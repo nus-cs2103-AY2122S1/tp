@@ -71,23 +71,23 @@ public class PersonCard extends UiPart<Region> {
             name.setGraphic(genderIcon);
             name.setContentDisplay(ContentDisplay.RIGHT);
         }
-        phone.setText(person.getPhone().value);
+        phone.setText("Phone: " + person.getPhone().value);
         if (person.getPhone().value.isEmpty()) {
             phone.setManaged(false);
         }
-        nationality.setText(person.getNationality().value);
+        nationality.setText("Nationality: " + person.getNationality().value);
         if (person.getNationality().value.isEmpty()) {
             nationality.setManaged(false);
         }
-        email.setText(person.getEmail().value);
+        email.setText("Email: " + person.getEmail().value);
         if (person.getEmail().value.isEmpty()) {
             email.setManaged(false);
         }
-        tutorialGroup.setText(person.getTutorialGroup().value);
+        tutorialGroup.setText("Tutorial Group: " + person.getTutorialGroup().value);
         if (person.getTutorialGroup().value.isEmpty()) {
             tutorialGroup.setManaged(false);
         }
-        remark.setText(person.getRemark().value);
+        remark.setText("Remarks: " + person.getRemark().value);
         if (person.getRemark().value.isEmpty()) {
             remark.setManaged(false);
         }
