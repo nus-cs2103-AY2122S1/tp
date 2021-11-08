@@ -116,7 +116,7 @@ public class AddToClassCommand extends Command {
      * @return an array of arraylists containing students being divided to not found, already enrolled, added,
      * and not added due to class size limit.
      */
-    private ArrayList[] categorizeStudents(StudentList studentList, Model model, TuitionClass tuitionClass) {
+    public static ArrayList[] categorizeStudents(StudentList studentList, Model model, TuitionClass tuitionClass) {
         ArrayList<String> invalidStudentNames = new ArrayList<>();
         ArrayList<Student> newStudents = new ArrayList<>();
         ArrayList<String> notAdded = new ArrayList<>();
@@ -147,13 +147,13 @@ public class AddToClassCommand extends Command {
         return returnValue;
     }
 
-    private void addInvalidStudentName(String studentName, ArrayList<String> invalidStudentNames) {
+    private static void addInvalidStudentName(String studentName, ArrayList<String> invalidStudentNames) {
         if (!invalidStudentNames.contains(studentName)) {
             invalidStudentNames.add(studentName);
         }
     }
 
-    private void addExistingStudentName(String studentName, ArrayList<String> existingStudents,
+    private static void addExistingStudentName(String studentName, ArrayList<String> existingStudents,
                                 ArrayList<Student> newStudents, Model model, Student student) {
         if (!existingStudents.contains(studentName)
                 && !newStudents.contains(model.getSameNameStudent(student))) {
@@ -161,13 +161,13 @@ public class AddToClassCommand extends Command {
         }
     }
 
-    private void addToNotAdded(ArrayList<String> notAdded, String studentName) {
+    private static void addToNotAdded(ArrayList<String> notAdded, String studentName) {
         if (!notAdded.contains(studentName)) {
             notAdded.add(studentName);
         }
     }
 
-    private void addNewStudent(String studentName, ArrayList<Student> newStudents, Model model,
+    private static void addNewStudent(String studentName, ArrayList<Student> newStudents, Model model,
                                ArrayList<String> validStudentNames, Student student) {
         newStudents.add(model.getSameNameStudent(student));
         validStudentNames.add(studentName);

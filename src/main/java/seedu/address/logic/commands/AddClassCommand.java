@@ -12,9 +12,9 @@ import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -57,18 +57,21 @@ public class AddClassCommand extends Command {
         if (classList != null && timeslot.checkTimetableConflicts(classList)) {
             throw new CommandException(MESSAGE_TIMESLOT_CONFLICT);
         }
-        int limit = toAdd.getLimit().getLimit();
-        ArrayList[] students = getStudents(model, toAdd.getStudentList().getStudents(), limit);
+
+        //Set students in tuition class
+        ArrayList[] students = getStudents(model, toAdd.getStudentList().getStudents());
         toAdd.changeStudents(students[0]);
+
+        //Update model with new tuition class
         model.addTuition(toAdd);
         model.updateFilteredTuitionList(Model.PREDICATE_SHOW_ALL_TUITIONS);
-        addClassToStudent(toAdd, students[2], model);
+        addClassToStudents(toAdd, students[2], model);
         String message = this.getMessage(students[1], students[3]);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + "\n" + message);
     }
 
 
-    private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Student> validStudentsAsPerson, Model model) {
+    private void addClassToStudents(TuitionClass tuitionClass, ArrayList<Student> validStudentsAsPerson, Model model) {
         for (Student person: validStudentsAsPerson) {
             Student studentToChange = person;
             person.addClass(tuitionClass);
@@ -79,32 +82,10 @@ public class AddClassCommand extends Command {
     }
 
 
-    private ArrayList[] getStudents(Model model, ArrayList<String> nowStudents, int limit) {
-        ArrayList<String> newStudents = new ArrayList<>();
-        ArrayList<String> invalidStudents = new ArrayList<>();
-        ArrayList<Student> validStudentsAsPerson = new ArrayList<>();
-        ArrayList<String> notAddedStudent = new ArrayList<>();
-        for (String s: nowStudents) {
-            Student person = new Student(new Name(s));
-            if (!model.hasStudent(person)) {
-                if (!invalidStudents.contains(s)) {
-                    invalidStudents.add(s);
-                }
-                continue;
-            }
-            if (newStudents.size() >= limit) {
-                //valid students not added due to limit exceeded.
-                if (!notAddedStudent.contains(s) && !newStudents.contains(s)) {
-                    notAddedStudent.add(s);
-                }
-                continue;
-            }
-            if (!newStudents.contains(s)) {
-                newStudents.add(s);
-                validStudentsAsPerson.add(model.getSameNameStudent(person));
-            }
-        }
-        ArrayList[] returnValue = new ArrayList[]{newStudents, invalidStudents, validStudentsAsPerson, notAddedStudent};
+    private ArrayList[] getStudents(Model model, ArrayList<String> nowStudents) {
+        toAdd.changeStudents(new ArrayList<>());
+        ArrayList[] students = AddToClassCommand.categorizeStudents(new StudentList(nowStudents), model, toAdd);
+        ArrayList[] returnValue = new ArrayList[]{students[2], students[1], students[0], students[3]};
         return returnValue;
     }
     private String getMessage(ArrayList<String> invalidStudents, ArrayList<String> notAdded) {
