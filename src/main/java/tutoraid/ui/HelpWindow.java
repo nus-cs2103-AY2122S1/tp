@@ -62,7 +62,7 @@ import static tutoraid.commons.core.HelpGuide.EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.EXIT_COMMAND;
 import static tutoraid.commons.core.HelpGuide.EXIT_DESC;
 import static tutoraid.commons.core.HelpGuide.EXIT_TITLE;
-import static tutoraid.commons.core.HelpGuide.FAQ;
+import static tutoraid.commons.core.HelpGuide.FAQ1;
 import static tutoraid.commons.core.HelpGuide.FAQ_TITLE;
 import static tutoraid.commons.core.HelpGuide.FEATURES_NOTES;
 import static tutoraid.commons.core.HelpGuide.FEATURES_TITLE;
@@ -828,11 +828,11 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates the FAQ section.
+     * Creates the FAQ1 section.
      */
     public void faq() {
         faqTitle.setText(FAQ_TITLE);
-        faq.setText(FAQ);
+        faq.setText(FAQ1);
         faq.setLineSpacing(2.0);
     }
 }

@@ -42,7 +42,7 @@ public class HelpGuide {
 
     public static final String ADD_L_TITLE = "Adding a lesson";
     public static final String ADD_L_DESC = "Adds a new lesson to TutorAid.";
-    public static final String ADD_L_COMMAND = "add -l s/LESSON_NAME [c/LESSON_PHONE] [p/LESSON_PRICE] "
+    public static final String ADD_L_COMMAND = "add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] "
             + "[t/LESSON_TIMING]";
     public static final String ADD_L_EXAMPLE = "add -l s/Maths 1 c/50 p/100 t/Mon 1000-1200";
 
@@ -72,7 +72,7 @@ public class HelpGuide {
     public static final String EDIT_S_TITLE = "Editing a student";
     public static final String EDIT_S_DESC = "Edits the details of the specified student with the given student "
             + "index in TutorAid.";
-    public static final String EDIT_S_COMMAND = "edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] "
+    public static final String EDIT_S_COMMAND = "edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] "
             + "[pn/PARENT_NAME] [pp/PARENT_PHONE]";
     public static final String EDIT_S_EXAMPLE = "edit -s 2 pp/91112222";
     public static final String EDIT_S_EXAMPLE_DESC = " changes the 2nd student’s parent contact number in "
@@ -80,7 +80,7 @@ public class HelpGuide {
 
     public static final String EDIT_L_TITLE = "Editing a lesson";
     public static final String EDIT_L_DESC = "Edits the specified lesson with the given lesson index in TutorAid.";
-    public static final String EDIT_L_COMMAND = "edit LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] "
+    public static final String EDIT_L_COMMAND = "edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] "
             + "[p/LESSON_TIMING] [t/LESSON_TIMING]";
     public static final String EDIT_L_EXAMPLE = "edit -l 2 c/17";
     public static final String EDIT_L_EXAMPLE_DESC = " changes the 2nd lesson's capacity in "
@@ -101,15 +101,13 @@ public class HelpGuide {
     public static final String VIEW_L_EXAMPLE_DESC = " shows the details associated with the 4th lesson.";
 
     public static final String ADD_P_TITLE = "Adding progress for a student";
-    public static final String ADD_P_DESC = "Adds a given string representing progress to a student with a given "
-            + "student index.";
+    public static final String ADD_P_DESC = "Adds a progress entry to the student at the specified student index.";
     public static final String ADD_P_COMMAND = "add -p STUDENT_INDEX PROGRESS";
     public static final String ADD_P_EXAMPLE = "add -p 2 completed homework";
     public static final String ADD_P_EXAMPLE_DESC = " adds 'completed homework' to the 2nd student in TutorAid.";
 
     public static final String DEL_P_TITLE = "Deleting progress from a student";
-    public static final String DEL_P_DESC = "Removes the string representing progress from the student with a given "
-            + "student index.";
+    public static final String DEL_P_DESC = "Removes the latest progress entry from the student at the specified student index.";
     public static final String DEL_P_COMMAND = "del -p STUDENT_INDEX";
     public static final String DEL_P_EXAMPLE = "del -p 2";
     public static final String DEL_P_EXAMPLE_DESC = " deletes the progress of the 2nd student in TutorAid.";
@@ -126,16 +124,14 @@ public class HelpGuide {
     public static final String FIND_L_EXAMPLE_DESC = " returns lessons that have the word 'maths' in their names.";
 
     public static final String ADD_SL_TITLE = "Adding student(s) to lesson(s)";
-    public static final String ADD_SL_DESC = "Tells TutorAid that the specified student(s) attend "
-            + "the specified lesson(s).";
+    public static final String ADD_SL_DESC = "Adds student(s) into the lesson(s) they are enrolled in.";
     public static final String ADD_SL_COMMAND = "add -sl s/STUDENT_INDEX... l/LESSON_INDEX...";
     public static final String ADD_SL_EXAMPLE = "add -sl s/1 2 3 l/1 2";
     public static final String ADD_SL_EXAMPLE_DESC = " adds students with indexes 1, 2, 3 into lessons "
             + "with indexes 1, 2.";
 
     public static final String DEL_SL_TITLE = "Deleting student(s) from lesson(s)";
-    public static final String DEL_SL_DESC = "Tells TutorAid that the specified student(s) no longer attend "
-            + "the specified lesson(s).";
+    public static final String DEL_SL_DESC = "Removes student(s) from the lesson(s) they are no longer enrolled in.";
     public static final String DEL_SL_COMMAND = "del -sl s/STUDENT_INDEX... l/LESSON_INDEX...";
     public static final String DEL_SL_EXAMPLE = "del -sl s/1 2 3 l/1 2";
     public static final String DEL_SL_EXAMPLE_DESC = " deletes students with indexes 1, 2, 3 from lessons "
@@ -156,7 +152,7 @@ public class HelpGuide {
     public static final String EDIT_DATA_TITLE = "Editing the data file";
     public static final String EDIT_DATA_DESC1 = "TutorAid student data are saved as a JSON file ";
     public static final String EDIT_STUDENTS_FILEPATH = "[JAR file location]/data/tutorAidStudents.json";
-    public static final String EDIT_DATA_DESC2 = ", while TutorAid lesson data are saved as a JSON file ";
+    public static final String EDIT_DATA_DESC2 = " while TutorAid lesson data are saved as a JSON file ";
     public static final String EDIT_LESSONS_FILEPATH = "[JAR file location]/data/tutorAidLessons.json";
     public static final String EDIT_DATA_DESC3 = "Advanced users are welcome to update data directly by editing "
             + "any of the two data files.";
@@ -164,8 +160,8 @@ public class HelpGuide {
             + "format or data invalid, TutorAid will discard the invalid data file and replace it with "
             + "an empty data file at the next run.";
 
-    public static final String FAQ_TITLE = "FAQ";
-    public static final String FAQ = "Q: How do I transfer my data to another Computer?\n"
+    public static final String FAQ_TITLE = "FAQ1";
+    public static final String FAQ1 = "Q: How do I transfer my data to another Computer?\n"
             + "A: Install the app in the other computer and overwrite the empty data file "
             + "it creates with the file that contains the data of your previous TutorAid home folder.";
 }
