@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FavoriteCommandParser" as FavoriteCommandParser LOGIC_COLOR
+participant ":FavoriteCommand" as FavoriteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("fav 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("fav 1")
+activate AddressBookParser
+
+create FavoriteCommandParser
+AddressBookParser -> FavoriteCommandParser
+activate FavoriteCommandParser
+
+FavoriteCommandParser --> AddressBookParser
+deactivate FavoriteCommandParser
+
+AddressBookParser -> FavoriteCommandParser : parse("1")
+activate FavoriteCommandParser
+
+create FavoriteCommand
+FavoriteCommandParser -> FavoriteCommand
+activate FavoriteCommand
+
+FavoriteCommand --> FavoriteCommandParser :
+deactivate FavoriteCommand
+
+FavoriteCommandParser --> AddressBookParser
+deactivate FavoriteCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> FavoriteCommand : execute()
+activate FavoriteCommand
+
+FavoriteCommand -> FavoriteCommand : execute(model)
+activate FavoriteCommand
+FavoriteCommand --> FavoriteCommand :
+deactivate FavoriteCommand
+
+FavoriteCommand -> Model : model.favouritePerson()
+activate Model
+Model --> FavoriteCommand :
+deactivate Model
+
+create CommandResult
+FavoriteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FavoriteCommand : result
+deactivate CommandResult
+
+FavoriteCommand --> LogicManager : result
+deactivate FavoriteCommand
+
+[<--LogicManager
+
+@enduml
