@@ -51,7 +51,7 @@ Given below are my contributions to the project.
   3. Wrote unit/integration tests(with Model) for Edit Friend functionality.
   4. Wrote unit/integration tests for Add Friend Skill functionality.
   5. Wrote unit/integration tests for Recommend functionality - ensuring it works with e.g. list command in succession.
-  6. Manual testing and highlighting of bugs and reporting of issues observed in application, UG and DG.
+  6. Manual testing and highlighting of bugs and reporting of issues observed in application, UG and DG. ([Issues raised and resolved](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues?q=is%3Aissue+author%3Akevin9foong+is%3Aclosed))
   7. Discovery of testing bugs with Schedule tests which use shared mutable references to the same Friend instance 
      (fixed in [PR #153](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/153/files))  
 
@@ -104,7 +104,7 @@ Given below are my contributions to the project.
 #### Contributions beyond project team:
 * Evidence of helping others: 
   1. Forum responses:
-  [When to use assertions](https://github.com/nus-cs2103-AY2122S1/forum/issues/190#issuecomment-913379752)
-  [Git on removing tags from commits](https://github.com/nus-cs2103-AY2122S1/forum/issues/24#issuecomment-899956054)
+     * [When to use assertions](https://github.com/nus-cs2103-AY2122S1/forum/issues/190#issuecomment-913379752)
+     * [Git on removing tags from commits](https://github.com/nus-cs2103-AY2122S1/forum/issues/24#issuecomment-899956054)
   2. Helping of other team with bug testing
   [Bugs reported](https://docs.google.com/document/d/1nXaZGo2nbEuU-jgpz8IDph73P4WFkGlo9_yW_paeNDE/edit)
