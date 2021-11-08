@@ -172,6 +172,8 @@ The [Parameter Constraints](#parameter-constraints) section shows the constraint
 
 * Only the `NAME` parameter of a person is _compulsory_, other parameters are _optional_.
 * The parameters can be in any order.
+* A person is considered a duplicate person when there is another person in the contact list with exactly the same details.
+* If duplicate people are entered, these people will not be added.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and social handles (including 0)
@@ -182,7 +184,7 @@ Examples:
 * **`add`** `n/Amy Tan` adds a person named Amy Tan to the list.
 * **`add`** `n/Benedict p/98765432 e/ben@yahoo.com g/M` adds a person named Benedict, a Male with phone number 98765432 and email ben@yahoo.com to your contact list.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds a person named Ernest, with Telegram handle 'earnest2334' and Instagram handle 'ernessst' to your contact list.
-![Add Command Example](images/AddEnerst.png)
+![Add Command Example](images/AddErnest.png)
 *After execution of Add Command: **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst`*
 
 ### Adding tags to people: `addt`
@@ -200,6 +202,7 @@ Format: **`addt`** `INDEX t/TAG [t/TAG]…​`
 * `TAG` is case-sensitive.
 * Input tag will be appended to the existing tag.
 * If duplicate tags are entered, these tags will not be added.
+* If there are duplicate people after adding tags, these tags will not be added.
 
 For example:
 
@@ -230,12 +233,11 @@ Format: **`remark`** `INDEX r/REMARK`
 * Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing remark will be updated to the input remark.
 * If a duplicate remark is entered, only the latest remark will be taken.
-* You can remove a person’s remark by typing `remark` (i.e. empty parameter) or `remark r/` without specifying any remark.
+* If there are duplicate people after adding remark, the remark will not be added.
 
 Examples:
 
 * **`remark`** `1 r/She likes coding` adds the remark 'She likes coding' to first person in the displayed contact list.
-* **`remark`** `2` clears the remark of the second person in the displayed contact list.
 ![result for 'remark 2'](images/RemoveRemark.png)
 *After execution of Remark Command: **`remark`** `2`*
 
@@ -271,6 +273,7 @@ The [Parameter Constraints](#parameter-constraints) section shows the constraint
   * This does not apply to `s/SOCIAL_HANDLE` and `t/TAG` as they accept multiple values.
 * Existing tags will be updated to the input tag.
 * You can remove all tags from a person by typing `t/` without specifying any tags (i.e. `edit INDEX t/`).
+* If there are duplicate people after editing a person, the person will not be edited.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can change the default colour of the tag with `t/TAG:#HEX_COLOUR`<br>
@@ -338,6 +341,7 @@ Format: **`deletet`** `INDEX [t/TAG]…​`
 * Existing tag will be removed if one of the input tags matches the existing tag.
 * If no `TAG` is provided, all tags of the person will be deleted.
 * `TAG` is case-sensitive
+* If there are duplicate people after deleting tags, these tags will not be deleted.
 
 For example:
 
@@ -351,6 +355,7 @@ Alternate Format: **`deletet`** `all [t/TAG]…​`
 * Existing tag will be removed if one of the input tags matches the existing tag.
 * If no `TAG` is provided, all tags in the displayed contact list will be deleted.
 * `TAG` is case-sensitive
+* If there are duplicate people after deleting tags, these tags will not be deleted.
 
 For example:
 
@@ -390,6 +395,10 @@ Format: **`find`** `PREFIX/VALUE [PREFIX/VALUE]…​`
 * The `VALUE` is case-insensitive. (e.g `hans` will match `Hans`)
 * People matching all values will be returned (i.e. `AND` search).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person is only considered a duplicate person when there is another person in the contact list with exactly the same details.
+</div>
+
 Examples:
 
 * **`find`** `n/Alex` returns alex and Alexandra.
@@ -413,9 +422,7 @@ Format: **`sort`** `PREFIX/`
   * `e/` 
   * `nat/`
   * `tg/`
-  * `s/`
-  * `r/` 
-  * `t/`
+  * `r/`
 * If the parameter contains words, everyone is sorted in ascending alphabetical order.
 * If the parameter contains numbers, everyone is sorted in ascending numeric order.
 
