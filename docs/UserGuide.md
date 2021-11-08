@@ -281,6 +281,9 @@ with a label describing them, a client, an amount, and a date. The following are
   **dd-mm-yyyy** | `08-11-2021`
   **yyyy/mm/dd** | `2021/11/08`
   **dd/mm/yyyy** | `08/11/2021`
+  
+* Note that there is **no enforcement on preventing dates in the past**. The field is simply to allow you to provide a reminder
+  for yourself.
 </div>
 
 [return to top](#table-of-contents)
@@ -495,6 +498,9 @@ as completed, but also provides you with an ability to tag tasks to orders.
   **dd-mm-yyyy** | `08-11-2021`
   **yyyy/mm/dd** | `2021/11/08`
   **dd/mm/yyyy** | `08/11/2021`
+
+* Note that there is **no enforcement on preventing dates in the past**. The field is simply to allow you to provide a reminder
+  for yourself.
 </div>
 
 [return to top](#table-of-contents)
