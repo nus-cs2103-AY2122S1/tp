@@ -23,7 +23,6 @@ Given below are my contributions to the project.
     * What it does: The add task command now accepts three types of tasks: Todos, Deadlines & Events.
     * Justification: There are primarily three types of tasks for one to consider, tasks that happen on a date, Events,
       tasks that needs to be completed by a date, Deadlines, and tasks that are not associated with a date.
-    * Highlights: 
 
 * **New Feature**: Implemented the Done Task Command. (Pull requests [\#85](https://github.com/AY2122S1-CS2103-W14-4/tp/pull/85))
     * What it does: Marks a specified task as completed.
