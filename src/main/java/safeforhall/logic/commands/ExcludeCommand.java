@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import safeforhall.commons.core.LogsCenter;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
@@ -29,6 +31,8 @@ public class ExcludeCommand extends Command {
             + CliSyntax.PREFIX_RESIDENTS + "A101, A102, A103";
 
     public static final String MESSAGE_SUCCESS = "%s removed from event %s";
+
+    private final Logger logger = LogsCenter.getLogger(ExcludeCommand.class);
     private final Index index;
     private final ResidentList residentList;
 
@@ -74,6 +78,7 @@ public class ExcludeCommand extends Command {
         try {
             event = lastShownList.get(index.getZeroBased());
         } catch (IndexOutOfBoundsException e) {
+            logger.warning("Index given is invalid");
             throw new CommandException("Index given is invalid");
         }
 
