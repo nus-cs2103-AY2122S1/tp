@@ -21,7 +21,7 @@ end box
 UI -> LogicManager : execute( "mailingList")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand
+LogicManager -> AddressBookParser : parseCommand("mailingList")
 activate AddressBookParser
 
 create MailingListCommandParser
@@ -31,11 +31,11 @@ activate MailingListCommandParser
 MailingListCommandParser --> AddressBookParser
 deactivate MailingListCommandParser
 
-AddressBookParser -> MailingListCommandParser : parse
+AddressBookParser -> MailingListCommandParser : parse("mailingList")
 activate MailingListCommandParser
 
 create MailingListCommand
-MailingListCommandParser -> MailingListCommand
+MailingListCommandParser -> MailingListCommand : MailingListCommand(DEFAULT_PREFIXES)
 activate MailingListCommand
 
 MailingListCommand --> Model : SetPrefixes

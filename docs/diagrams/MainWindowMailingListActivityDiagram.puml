@@ -5,7 +5,7 @@ if "isChooseFile()"
     --> [True] "User chooses download name and location"
 endif
 
-if "user string ends with csv"
+if "user string ends with .csv"
     --> [True] "download path found"
 else
     --> [False] "append .csv to filename"
