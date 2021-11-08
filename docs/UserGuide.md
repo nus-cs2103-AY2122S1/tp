@@ -160,7 +160,8 @@ Examples:
 * `find T/01` returns `Alex Yeoh`
 * `find t/frien` returns `Alex Yeoh`, `Bernice Yu`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+![result for 'find alex david'](images/FindExample.png)
 
 ### Deleting a person : `delete`
 
@@ -326,3 +327,4 @@ Action | Format, Examples
 **[Statistics](#view-statistics-of-last-searched-list--stat)** | `stat`
 **[Help](#viewing-help--help)** | `help`
 **[Exit](#exiting-the-program--exit)** | `exit`
+

@@ -386,11 +386,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list/search persons
-2. ProfBook shows a list of persons
-3. User requests to edit a specific person in the list
-4. ProfBook checks if input is valid
-5. ProfBook edits the person
+1.  User requests to list/search persons
+2.  ProfBook shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  ProfBook edits the person
 
     Use case ends.
 
@@ -400,22 +399,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The given index is invalid.
-  * 4a1. AddressBook shows an error message.
+
+* 3a. The given index is invalid.
+  * 3a1. ProfBook shows an error message.
 
   Use case resumes at step 2.
 
-* 4b. The attribute to be edited does not exist.
-  * 4b1. ProfBook shows an error message.
+* 3b. The attribute to be edited does not exist.
+  * 3b1. ProfBook shows an error message.
   Use case ends
 
-* 4c. If the attribute edited is the name and results in a similar person i.e. same name as another person
-  * 4c1. ProfBook shows an error message.
+* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
+  * 3c1. ProfBook shows an error message.
 
       Use case ends
 
-* 4d. If the attribute edited is in the invalid format
-    * 4d1. ProfBook shows an error message.
+* 3d. If the attribute edited is in the invalid format
+    * 3d1. ProfBook shows an error message.
 
       Use case ends
 
@@ -424,9 +424,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to export the list
-4.  AddressBook exports list to JSON file
+4.  ProfBook exports list to JSON file
 
     Use case ends.
 
@@ -434,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file directory is invalid
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -444,9 +444,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list/search persons
-2.  AddressBook shows a list of persons
+2.  ProfBook shows a list of persons
 3.  User requests to export the emails of the list
-4.  AddressBook exports list of emails to JSON file
+4.  ProfBook exports list of emails to JSON file
 
     Use case ends.
 
@@ -454,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file directory is invalid
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -463,11 +463,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to import existing contacts from JSON file.
-2. AddressBook checks if file is valid format
-3. AddressBook shows a list of persons
-4. User decides to import (or not)
-5. AddressBook imports if user selects yes
+1. User requests to import contacts from JSON file.
+2. ProfBook checks if file is valid format
+3. ProfBook merges the existing contacts with contacts from JSON file
 
     Use case ends.
 
@@ -479,7 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file is in invalid format/does not exist
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProfBook shows an error message.
 
       Use case ends.
 
