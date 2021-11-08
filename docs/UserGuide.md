@@ -125,7 +125,11 @@ Format: `export`
 
 <a name = "person-command"></a>
 ### Working with people
-The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
+The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+This command only works when persons are listed in Notor.
+</div> <br>.
 
 #### _Creating a person_
 
@@ -209,10 +213,6 @@ Examples:
 * `p 2 /e n:John Doe p:93339333`
 
 #### _Removing a person from group_
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-This command only works when persons are listed in Notor.
-</div> <br>
 
 Removes an existing person from a group.
 
