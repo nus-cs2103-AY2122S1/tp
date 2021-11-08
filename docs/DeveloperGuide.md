@@ -15,9 +15,7 @@ This developer guide provides an overview and details of Uni-Fy's system archite
 
 - Adapted from  AddressBook Level-3 project created as part of the SE-EDU initiative
 
---------------------------------------------------------------------------------------------------------------------
-
-### 1.2 Setting up, getting started
+### 1.3 Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -143,7 +141,7 @@ The `Storage` component,
 
 ### 2.6 Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.unify.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -285,7 +283,7 @@ These operations are exposed in the `Model` interface as `Model#commitUniFy()`, 
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedUniFy` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single Uni-Fy state.
+Step 1. The user launches the application for the first time. The `VersionedUniFy` will be initialized with the initial Uni-Fy state, and the `currentStatePointer` pointing to that single Uni-Fy state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
@@ -382,15 +380,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                   | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                   | So that I can…​                                               |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add tasks                      |                                                                        |
+| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the app                 |
+| `* * *`  | user                                       | add tasks                      | see them in the product                                                |
+| `* * *`  | user                                       | mark tasks as done             | track which tasks are done/undone                                      |
 | `* * *`  | user                                       | delete tasks                   | remove tasks that I no longer need to track                            |
 | `* * *`  | user                                       | find tasks                     | locate details of a task without having to go through the entire list  |
-| `* *`    | user                                       | show tasks                     | show the tasks that I have for the week or according to the date       |
-| `* *`    | user                                       | tag tasks                      | set a tasks priority                                                   |
-| `*`      | user with many tasks in the address book   | search for tasks               | locate a task easily                                                 |
+| `* *`    | user                                       | edit tasks                     | more easily change specifics of a task without deleting and re-adding  |
+| `* *`    | user                                       | show tasks                     | show the tasks that I have for the week                                |
+| `* *`    | user                                       | tag tasks                      | add a category for the task                                            |
+| `* *`    | user with many tasks in the address book   | search for tasks               | locate a task easily                                                   |
+| `* *`    | user with many tasks in the address book   | sort tasks                     | organise my tasks in a better way                                      |
+| `*`      | unmotivated student                        | track my weekly progress       | get a sense of achievement on completion of tasks                      |
+
 
 
 ## Appendix C: Use cases
@@ -418,22 +421,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 1.
 
 
-**Use case: UC02 - Tag a task**
+**Use case: UC02 - List all tasks**
 
 **MSS**
 
-1.  User requests to tag tasks that contains some keywords
-2.  Uni-Fy sets priority for that particular task(s) with the matching keywords
+1.  User requests to list every task in Uni-Fy.
+2.  Uni-Fy displays all of user's tasks.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User requests to tag tasks that contains some keywords with a due date.
-    * 1a1. Uni-Fy sets priority for the particular task(s) with matching keywords with that due date.
-      Use case ends.
+* 1a. The list is empty.
+  
+  Use case ends.
 
-**Use case: UC03 - Mark a task as done**
+
+**Use case: UC03 - Tag a task**
+
+**MSS**
+
+1.  User requests to tag a task using a keyword.
+2.  Uni-Fy sets tag for that particular task with the matching keyword.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to tag task using multiple keywords.
+    * 1a1. Uni-Fy sets multiple tags for the particular task with corresponding keywords.
+      
+  Use case ends.
+
+
+**Use case: UC04 - Mark a task as done**
 
 **MSS**
 
@@ -447,13 +468,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
     * 1a1. Uni-Fy shows an error message.
-      Use case reverts to step 3.
+      
+  Use case reverts to step 3.
 
-**Use case: UC04 - Mark a task as undone**
+**Use case: UC05 - Mark a task as undone**
 
 **MSS**
 
-1.  User requests to mark a task as undone base on its index
+1.  User requests to mark a task as undone based on its index.
 2.  Uni-Fy sets the state for that particular task(s) to TODO.
 3.  Uni-Fy shows the updated weekly progress.
 
@@ -463,27 +485,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
     * 1a1. Uni-Fy shows an error message.
-      Use case reverts to step 3.
+      
+  Use case reverts to step 3.
 
 
-**Use case: UC05 - Show tasks**
+**Use case: UC06 - Show tasks**
 
 **MSS**
 
-1.  User requests to show tasks based on a given date or week number
-2.  Uni-Fy displays the list of tasks occurring in that week or on the given date.
+1.  User requests to show tasks based on week number.
+2.  Uni-Fy displays the list of tasks occurring in that week.
 
 **Extensions**
 
 * 1a. The list is empty.
+  
   Use case ends.
 
 * 2a. The given index is invalid.
-    * 3a1. Uni-Fy shows an error message.
-      Use case reverts to step 1.
+    * 2a1. Uni-Fy shows an error message.
+      
+  Use case reverts to step 1.
 
       
-**Use case: UC06 - Find a task**
+**Use case: UC07 - Find a task**
 
 **MSS**
 
@@ -495,22 +520,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The list is empty.
+  
   Use case ends.
 
 * 1b. The keyword is invalid.
     * 1b1. Uni-Fy shows an error message.
+    
   Use case ends.
   
 
-
-**Use case: UC07 - Delete a task**
+**Use case: UC08 - Delete a task**
 
 **MSS**
 
-1.  User requests for all their tasks to be listed
-2.  Uni-Fy displays user's list of tasks
-3.  User requests to delete a specific task based on its index
-4.  Uni-Fy deletes the specified task
+1.  User <ins>requests for all their tasks to be listed (UC02)</ins>.
+2.  Uni-Fy displays user's list of tasks.
+3.  User requests to delete a specific task based on its index.
+4.  Uni-Fy deletes the specified task.
 
     Use case ends.
 
@@ -524,10 +550,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. Uni-Fy shows an error message.
 
-      Use case resumes at step 2.
-
-  Use case ends.
-
+  Use case resumes at step 2.
+    
 
 ## Appendix D: Non-Functional Requirements
 
@@ -542,6 +566,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## Appendix E: Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **GUI**: A GUI (graphical user interface) is a system of interactive visual components for the user to interact with.
+* **Index**: The position of a task in the list. Indexes start from 1.
+* **Parameter**: Specific information to be provided for commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
