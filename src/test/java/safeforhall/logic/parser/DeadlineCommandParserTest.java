@@ -3,6 +3,8 @@ package safeforhall.logic.parser;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.commands.CommandTestUtil.KEYWORD_DESC_C;
 import static safeforhall.logic.commands.CommandTestUtil.KEYWORD_DESC_F;
+import static safeforhall.logic.commands.CommandTestUtil.KEYWORD_DESC_LC;
+import static safeforhall.logic.commands.CommandTestUtil.KEYWORD_DESC_LF;
 import static safeforhall.logic.commands.CommandTestUtil.LAST_DATE1_DESC_OCT;
 import static safeforhall.logic.commands.CommandTestUtil.LAST_DATE2_DESC_OCT;
 import static safeforhall.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -15,7 +17,7 @@ import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.model.person.LastDate;
 
 public class DeadlineCommandParserTest {
-    private DeadlineCommandParser parser = new DeadlineCommandParser();
+    private final DeadlineCommandParser parser = new DeadlineCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -26,49 +28,59 @@ public class DeadlineCommandParserTest {
     @Test
     public void parse_validArgs_returnsListCommand() {
         // no leading and trailing whitespaces
-        DeadlineCommand expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"));
-        assertParseSuccess(parser, KEYWORD_DESC_F + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
+        DeadlineCommand expectedDeadlineCommand = new DeadlineCommand("f",
+                new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        assertParseSuccess(parser, KEYWORD_DESC_F + LAST_DATE1_DESC_OCT + LAST_DATE2_DESC_OCT,
+                expectedDeadlineCommand);
 
-        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"));
-        assertParseSuccess(parser, KEYWORD_DESC_C + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
+        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
+        assertParseSuccess(parser, KEYWORD_DESC_C + LAST_DATE1_DESC_OCT + LAST_DATE2_DESC_OCT,
+                expectedDeadlineCommand);
 
-        expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
         assertParseSuccess(parser, KEYWORD_DESC_F + LAST_DATE1_DESC_OCT
                 + LAST_DATE2_DESC_OCT, expectedDeadlineCommand);
 
-        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
         assertParseSuccess(parser, KEYWORD_DESC_C + LAST_DATE1_DESC_OCT
                 + LAST_DATE2_DESC_OCT, expectedDeadlineCommand);
 
         expectedDeadlineCommand = new DeadlineCommand("lf", new LastDate("10-10-2021"));
-        assertParseSuccess(parser, KEYWORD_DESC_F + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
+        assertParseSuccess(parser, KEYWORD_DESC_LF + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
 
         expectedDeadlineCommand = new DeadlineCommand("lc", new LastDate("10-10-2021"));
-        assertParseSuccess(parser, KEYWORD_DESC_C + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
+        assertParseSuccess(parser, KEYWORD_DESC_LC + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
 
         // multiple whitespaces between keywords
-        expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"));
+        expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_F
-                + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
+                + LAST_DATE1_DESC_OCT + LAST_DATE2_DESC_OCT, expectedDeadlineCommand);
 
-        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"));
+        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_C
-                + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
+                + LAST_DATE1_DESC_OCT + LAST_DATE2_DESC_OCT, expectedDeadlineCommand);
 
-        expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        expectedDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_F + LAST_DATE1_DESC_OCT
                 + LAST_DATE2_DESC_OCT, expectedDeadlineCommand);
 
-        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        expectedDeadlineCommand = new DeadlineCommand("c", new LastDate("10-10-2021"),
+                new LastDate("15-10-2021"));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_C + LAST_DATE1_DESC_OCT
                 + LAST_DATE2_DESC_OCT, expectedDeadlineCommand);
 
         expectedDeadlineCommand = new DeadlineCommand("lf", new LastDate("10-10-2021"));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_F
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_LF
                 + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
 
         expectedDeadlineCommand = new DeadlineCommand("lc", new LastDate("10-10-2021"));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_C
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_LC
                 + LAST_DATE1_DESC_OCT, expectedDeadlineCommand);
     }
 }

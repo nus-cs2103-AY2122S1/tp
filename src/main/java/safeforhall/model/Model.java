@@ -65,6 +65,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the exact same identity as {@code person} exists in the address book.
+     */
+    boolean hasExactPerson(Person person);
+
+    /**
      * Searches and converts the names in the {@code residentList} to a list of person and return the list of person
      * if it exists in the address book.
      */

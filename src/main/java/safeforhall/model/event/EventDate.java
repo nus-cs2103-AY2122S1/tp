@@ -54,10 +54,6 @@ public class EventDate implements Comparable<EventDate> {
         return toLocalDate().isBefore(LocalDate.now());
     }
 
-    public String getEventDate() {
-        return eventDate;
-    }
-
     /**
      * Converts the given {@code EventDate} to a {@code LocalDate}.
      */

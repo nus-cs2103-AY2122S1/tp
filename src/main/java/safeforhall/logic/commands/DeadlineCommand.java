@@ -81,7 +81,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates an ListCommand to add the specified {@code String, LastDate}
+     * Creates an DeadlineCommand to add the specified {@code String, LastDate}
      */
     public DeadlineCommand(String keyword, LastDate date1, LastDate date2) {
         requireNonNull(keyword);

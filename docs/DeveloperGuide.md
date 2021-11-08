@@ -117,13 +117,13 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="850" />
+<img src="images/ModelClassDiagram.png" width="900" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Event` objects (which are contained in a `UniqueEventList` object).
+* stores the currently 'selected' `Person` or `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` or `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -233,9 +233,11 @@ How it works:
 3. When the `ViewCommand` is executed without index parameters, the main panel will show all residents or events, and the sidebar will be cleared.
 4. If the command is run in the `ResidentTab`, the details of the resident with the corresponding index being displayed in the sidebar. Vice versa for `EventTab`.
 
-The following sequence diagram demonstrates what happens when the `ViewCommand` is executed:
+The following sequence diagram demonstrates what happens when the `ViewPersonCommand` is executed:
 
-![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
+![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewPersonCommandSequenceDiagram.png)
+
+`ViewEventCommand` follows a similar sequence of interactions.
 
 #### Design considerations:
 
@@ -297,7 +299,9 @@ public boolean test(Person person) {
 }
 ```
 
-Most variables are checked against using it's respective `equals` method except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support 1. Multiple keywords matching for name and 2. Room matching by block, level and block-level.
+Most variables are checked against using their respective `equals` methods except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support:
+1. Multiple keywords matching for name and 
+2. Room matching by block, level and block-level.
 
 #### Design considerations:
 
@@ -323,9 +327,11 @@ The following activity diagram illustrates how the `AddressBook#findPerson()` me
 The command extends the `Command` class and implements `IncludeCommand#execute()` to execute the command. 
 A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
 
-When `Event#addResidentsToEvent()` is called, it calls `ResidentList#addResidentList()` to create a new 
-String `newResidents` that consists of current `Person` in the `Event` and append all the `Person` in `toAdd` to 
-this String while making sure that there is no duplicate.
+When `IncludeCommand#createEditedEvent()` is called, two methods of `Event` are invoked:
+* `Event#getCombinedDisplayString()` creates a display String with just the names of each `Person` in the combination 
+  of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate.
+* `Event#getCombinedStorageString()` creates a storage String with the full information of each `Person` in the 
+  combination of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate. 
 
 The following sequence diagram demonstrates what happens when the `IncludeCommand` is executed:
 
@@ -454,9 +460,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 3a. The given index is invalid.
-
     * 3a1. System shows an error message.
-
+  
       Use case resumes at step 2.
 
 
@@ -473,9 +478,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The given index is invalid.
-
     * 2a1. System shows an error message.
-
+  
       Use case resumes at step 2.
 
 
@@ -503,7 +507,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a2 are repeated until the residents entered are valid.
-
       Use case resumes from step 4.
 
 **Use case: UC04 - Exclude a resident from an event**
@@ -525,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a3 are repeated until the residents entered are valid.
-
+  
       Use case resumes from step 4.
 
 **Use case: UC05 - List residents who missed their FET**
@@ -546,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a3. Hall admin enters a new date.
 
       Steps 2a1-2a2 are repeated until the date entered are valid.
-
+  
       Use case resumes from step 3.
 
 **Use case: UC06 - List residents whose FET or Test Kit collection dates are due soon**
@@ -629,7 +632,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. System detects duplicate file.
     * 2a1. System displays an error message.
-
       Use case resumes at step 2.
 
 **Use case: UC09 - Remind residents to take FET**
@@ -780,26 +782,25 @@ testers are expected to do more *exploratory* testing.
 1. Adding a resident and their information into the app
 
    1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. 
-    Success message is shown.
+      Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. Success message is shown.
 
 2. Adding a duplicate resident with the same name or same room
 
    1. Prerequisites: A resident with the same name `Tommy` or room `A123` is already in the app.
 
-   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br> 
-   Expected: Error message shown, `This resident or room already exists in the address book`
+   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: Error message shown, `This resident or room already exists in the address book`
    
    3. Test case: `add n/Tom r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: Error message shown, `This resident or room already exists in the address book`
+      Expected: Error message shown, `This resident or room already exists in the address book`
    
 3. Adding a resident with invalid parameters
 
    1. Test case: `add n/Tom! r/A201 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
+      Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
 
    2. Test case: `add n/Tom r/A201 p/87654321 e/tom@gmail.com v/true f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
+      Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
 
 ### Viewing a resident
 
@@ -848,7 +849,7 @@ testers are expected to do more *exploratory* testing.
 1. Edit multiple residents' details while all residents are being shown
    
     1. Prerequisites: View all residents using the `view` command. Multiple residents in the list. 
-       Edited resident does not already exist in the address book. Edited details are not the same as the original details.
+       Edited resident does not already exist in the address book.
 
     1. Test case: `edit 1 2 v/T`<br>
        Expected: First and second residents' vaccination statuses are updated to vaccinated. First and second residents' names shown in the status message.
@@ -879,32 +880,32 @@ testers are expected to do more *exploratory* testing.
 1. Sorting the list of residents by valid fields and order
 
    1. Test case: `sort by/n o/a`<br>
-   Expected: List of residents are sorted by their names in the alphabetical order.
+      Expected: List of residents are sorted by their names in the alphabetical order.
 
 
 2. Sorting the list of residents by invalid fields or order
 
    1. Test case: `sort by/z o/a`<br>
-    Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
+      Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
 
    2. Test case: `sort by/n o/z`<br>
-   Expected: Error message shown, `ORDER should be one of the following: a, d`
+      Expected: Error message shown, `ORDER should be one of the following: a, d`
    
 ### Exporting residents' emails
 
 1. Export email addresses of list of residents
 
    1. Test case: `export testEmailExport`<br>
-   Expected: Csv file filled with column of email addresses of the residents displayed in the app.
+      Expected: Csv file filled with column of email addresses of the residents displayed in the app.
    
 
 2. Duplicate filename provided
 
    1. Prerequisites: csv file `testDuplicateExport.csv` is already in existing `/data/exports` directory
    2. Test case: `export testDuplicateExport`<br>
-   Expected: Error message shown, `This filename already exists`
+      Expected: Error message shown, `This filename already exists`
 
-
+<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 For all Event commands, ensure that you are on the Events tab before continuing.
 </div>
@@ -915,14 +916,14 @@ For all Event commands, ensure that you are on the Events tab before continuing.
 1. View a list of all the events in the app, or the information of a specific event
 
     1. Test case: `view`<br>
-    Expected: A list of all the events is displayed in the app's GUI
+       Expected: A list of all the events is displayed in the app's GUI
 
     2. Test case: `view 3`<br>
     Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
        
 2. Invalid indexes provided
    1. Test case: `view x` (where x is larger than the list size)<br>
-   Expected: Error message shown, `The event index provided is invalid`
+      Expected: Error message shown, `The event index provided is invalid`
 
 ### Finding an event
 
@@ -944,7 +945,7 @@ For all Event commands, ensure that you are on the Events tab before continuing.
 1. Edit an event's details while all events are being shown
 
     1. Prerequisites: View all events using the `view` command. Multiple events in the list.
-       Edited event does not already exist in the address book. Edited details are not the same as the original details.
+       Edited event does not already exist in the address book.
 
     1. Test case: `edit 1 c/5`<br>
        Expected: First event capacity is updated to 5. Updated event details shown in the status message.
@@ -991,7 +992,6 @@ For all Event commands, ensure that you are on the Events tab before continuing.
     1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1. 
     2. Test case: `include 1 r/Alex Yeoh`<br>
        Expected: The given resident will be added to the event. Sidebar will reflect that the resident is in the event.
-
 
 2. Add a single valid resident by room to a valid Event
     1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1.
