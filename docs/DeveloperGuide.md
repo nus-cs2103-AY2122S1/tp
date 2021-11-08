@@ -479,12 +479,12 @@ Given below is an example usage scenario and how viewing reminder is executed:
 Figure I.2.2 shows a sequence diagram of how viewing reminder's logic works.<br>
 <img src="images/ViewRemindSequenceDiagramLogic.png" width="800" />
 
-*Figure I.2.3: View reminder logic sequence diagram*
+*Figure I.2.2: View reminder logic sequence diagram*
 
-Figure I.2.4 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
+Figure I.2.3 shows a sequence diagram of how the reminder window is displayed with the UI components.<br>
 <img src="images/ReminderSequenceDiagram.png" width="800" /> <br>
 
-*Figure I.2.5: View reminder sequence diagram.*
+*Figure I.2.3: View reminder sequence diagram.*
 
 #### Design considerations
 **Aspect: Date and time range of lessons to be considered as upcoming**
@@ -524,7 +524,7 @@ Given below is an example usage scenario and how viewing tag is executed:
 Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
 <img src="images/ViewTagSequenceDiagramUi.png" width="800" />
 
-*Figure I.3.2: View tags UI sequence diagram*
+*Figure I.3.1: View tags UI sequence diagram*
 
 #### Design considerations
 **Aspect: Data structure for storing tags**
