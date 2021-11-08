@@ -141,7 +141,6 @@ public class Student implements DisplayableObject {
 
     /**
      * Updates a lab result for a student
-     * @return true if lab info is successfully edited
      * */
     public void editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
         int index = this.labList.indexOf(lab);

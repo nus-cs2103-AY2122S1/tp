@@ -83,7 +83,7 @@ public class EditLabCommand extends Command {
             throw new CommandException(MESSAGE_NO_STUDENT);
         }
 
-        if (newLabNum != null ) {
+        if (newLabNum != null) {
             Lab newLab = new Lab(newLabNum);
 
             if (studentList.get(0).getLabList().contains(newLab)) {
