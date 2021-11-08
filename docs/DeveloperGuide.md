@@ -1327,7 +1327,6 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 1. Export Filtered contact list
-
     1. Prerequisites: Filter contacts using the `find` command.
 
     1. Test case: variations on `mailingList` as above<br>
