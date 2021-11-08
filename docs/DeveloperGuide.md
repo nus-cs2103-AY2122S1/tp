@@ -308,7 +308,7 @@ The changes in person objects are updated in their order and task objects.
 
 ### Other related commands
 Note that similar considerations are addressed in the following commands:
-* `DeleteOrderCommand` where `Task` objects related to the deleted `Order` are also deleted.
+* `DeleteOrderCommand` where `Task` objects related to the deleted `Order` is also deleted.
   
 * `AddTaskCommand` `EditTaskCommand` where if the user attempts to tag a `Task` to a `Order`, SalesNote first checks if the
 `Order` already exists. 
