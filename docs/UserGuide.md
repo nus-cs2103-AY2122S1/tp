@@ -46,7 +46,7 @@ Note how the app contains some sample data. <br>
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
-Some example commands you can try in order to get familiarise with Notor:
+Some example commands you can try sequentially to get familiarise with Notor:
 
 * **`person /list`** : Lists all contacts.
 * **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
@@ -356,9 +356,9 @@ Examples:
 * `g Orbital /c`
   ![groupCreate](images/groupCreate.png)
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Creating a group command will only work when persons are listed in Notor.
-The rest of group commands below will work only when groups or subgroups are listed.**
+The rest of group commands below will work only when groups or subgroups are listed.
 </div>
 
 #### _Deleting a group_
