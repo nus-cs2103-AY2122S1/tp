@@ -4,6 +4,8 @@ import static tutoraid.ui.DetailLevel.HIGH;
 import static tutoraid.ui.DetailLevel.LOW;
 import static tutoraid.ui.DetailLevel.MED;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -36,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
 
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Queue<String> messageQueue = new LinkedList<>();
 
     private Stage primaryStage;
     private Logic logic;
@@ -159,12 +162,23 @@ public class MainWindow extends UiPart<Stage> {
         fillLessonCard(MED);
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.setFeedbackToUser(getMessageFromQueue());
+
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudentBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private String getMessageFromQueue() {
+        StringBuilder output = new StringBuilder();
+        while (!messageQueue.isEmpty()) {
+            output.append(messageQueue.poll());
+            output.append("\n");
+        }
+        return output.toString();
     }
 
     /**
@@ -213,6 +227,20 @@ public class MainWindow extends UiPart<Stage> {
 
     public LessonListPanel getLessonListPanel() {
         return lessonListPanel;
+    }
+
+    /**
+     * Prints a message to the Console if the UI part has been initialised, otherwise it adds to a queue which will
+     * be polled when Console gets initialised.
+     *
+     * @param message The message to be displayed
+     */
+    public void printMessage(String message) {
+        if (resultDisplay != null) {
+            resultDisplay.setFeedbackToUser(message);
+        } else {
+            messageQueue.add(message);
+        }
     }
 
     /**
