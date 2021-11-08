@@ -40,6 +40,7 @@ Given below are my contributions to the project.
       * Wrote the implementation details of `Ordering` and drew the required UMLs [\#161](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/161/files)
       * Helped a team member with the implementation details of `Mutating Inventory` and drew the required UMLs [\#185](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/185/files)
       * Wrote part of use cases [\#73](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/73)
+   * Proofread the final version of UG and DG. Links to PR: [\#215](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/215), [\#216](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/216), [\#217](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/217), [\#218](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/218)
 
 * **Community**:
    * Team-based Tasks:
