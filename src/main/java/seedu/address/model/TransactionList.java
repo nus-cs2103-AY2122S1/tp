@@ -19,7 +19,7 @@ public class TransactionList implements ReadOnlyTransactionList {
     }
 
     public TransactionList() {
-        this(new ArrayList());
+        this(new ArrayList<TransactionRecord>());
     }
 
     @Override
