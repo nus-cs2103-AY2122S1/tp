@@ -29,7 +29,8 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
                     new Faculty("computing"), new Major("computer science"),
                     new Compatibility(80),
-                    getSkillSet("frontend", "backend"), getLanguageSet("java", "html", "css", "javascript"),
+                    getSkillSet("frontend", "backend"),
+                    getLanguageSet("java", "html", "css", "javascript"),
                     getFrameworkSet("javafx", "reactJS"), getTagSet("friends"),
                     getRemarkSet("here is a sample remark", "good fit")),
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
@@ -67,8 +68,8 @@ public class SampleDataUtil {
 
     public static Organisation[] getSampleOrganisations() {
         return new Organisation[] {
-                new Organisation(new Name("NUS"), new Email("NUS@nus.edu.sg")),
-                new Organisation(new Name("Grab"), new Email("Grab@grab.edu.sg"))
+            new Organisation(new Name("NUS"), new Email("NUS@nus.edu.sg")),
+            new Organisation(new Name("Grab"), new Email("Grab@grab.edu.sg"))
         };
     }
 
