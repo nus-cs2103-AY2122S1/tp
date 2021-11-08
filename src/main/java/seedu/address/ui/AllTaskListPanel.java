@@ -48,7 +48,7 @@ public class AllTaskListPanel extends UiPart<Region> {
         updateRootNode(personList);
 
         allTaskListView.showRootProperty().set(false);
-        allTaskListView.setCellFactory(listView -> new AllTaskListPanel.AllTaskListViewCell());
+        allTaskListView.setCellFactory(t -> new AllTaskListPanel.AllTaskListViewCell());
     }
 
     /**
@@ -184,6 +184,12 @@ public class AllTaskListPanel extends UiPart<Region> {
                     tc.initialise(vbox, 150);
                     setGraphic(tc.getRoot());
                 }
+                tuple.getTask().getIsOverdueBooleanProperty().addListener(t -> {
+                    this.updateItem(tuple, empty);
+                });
+                tuple.getTask().getIsDueSoonBooleanProperty().addListener(t -> {
+                    this.updateItem(tuple, empty);
+                });
             }
         }
     }

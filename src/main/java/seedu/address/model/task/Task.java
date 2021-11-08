@@ -24,9 +24,9 @@ public class Task {
     private final TaskDate date;
     private final TaskTime time;
     private final Venue venue;
-    private BooleanProperty isDone;
-    private BooleanProperty isOverdue;
-    private BooleanProperty isDueSoon;
+    private final BooleanProperty isDone;
+    private final BooleanProperty isOverdue;
+    private final BooleanProperty isDueSoon;
 
     /**
      * Constructor for task. Creates a new task with the given a String name.
@@ -113,6 +113,14 @@ public class Task {
         return isDueSoon.getValue();
     }
 
+    public BooleanProperty getIsOverdueBooleanProperty() {
+        return this.isOverdue;
+    };
+
+    public BooleanProperty getIsDueSoonBooleanProperty() {
+        return this.isDueSoon;
+    }
+
     /**
      * Updates if the task is overdue or due soon.
      */
@@ -158,7 +166,7 @@ public class Task {
                 ? venue == null
                 : otherTask.getVenue().equals(venue);
         return otherTask.getTaskName().equals(taskName)
-                && otherTask.isDone.getValue() == isDone.getValue()
+                && ((otherTask.getDone()) == (getDone()))
                 && sameDate
                 && sameTime
                 && sameVenue;

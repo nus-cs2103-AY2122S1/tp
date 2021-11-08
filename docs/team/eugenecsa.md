@@ -19,19 +19,16 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**
   * Added indicators of overdue and soon to be due tasks to PersonCard.
 
-* **New Features** 
+* **New Features**
   * Added date, time, and address attributes to `Task`.
   * Added functionality of identifying overdue and soon to be due tasks.
   * Added commands to mark tasks as done or not done.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the feature `viewtask` [\#44](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/44)
-        * Added documentation for the marking task as done and not done [\#86](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/86) [\#107](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/107)
+        * Added documentation for the feature `viewtask`. [\#44](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/44)
+        * Added documentation for the marking task as done and not done. [\#86](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/86) [\#107](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/107)
+        * Added table of flags with input constraints. [\214](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/214)
     * Developer Guide:
         * Added use case [\#36](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/36)
         * Added implementation details of `donetask` and `undotask` [/#203](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/203)
-
-* **Community**:
-
-* **Tools**:

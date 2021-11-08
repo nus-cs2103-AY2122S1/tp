@@ -121,7 +121,6 @@ public class ViewTaskListCommand extends Command {
         return cr;
     }
 
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
