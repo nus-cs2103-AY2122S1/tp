@@ -79,9 +79,9 @@ all types of objects to be unique for instance, I changed our TaskList and Order
 
 ## Contributions to the DG
 
-###`task` and `order` package
+### Task and Order package
 
-####Implementation
+#### Implementation
 The implementation of both of these packages is largely similar to the `person` package. In the original AB3, there is a
 `person` class, stored in a `UniquePersonList` that handles list operations, further stored in a `AddressBook` that handled
 other utility functions like data management.
@@ -138,7 +138,7 @@ This was an alternative method we considered, that would come with a cost in com
 `Task` and `Order` objects. We felt that the method we chose that made use of the `UniqueXList` properties and kept the
 classes more distinct better adhered to the Separation of concerns and Law of Demeter principle.
 
-#### Addressing related feature flaws present in the original AB3 codebase
+#### Updating related fields in Person
 In implementing the fields for the `Task` and `Order` object and considering possible feature flaws, we decided to update
 the fields for the `Person` class as well. The original AB3 treated two people as equal only if their names were spelt exactly
 the same, with this being case-sensitive. We decided that multiple clients having the exact same name was rare
