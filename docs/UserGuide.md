@@ -47,9 +47,10 @@ Used to highlight tips.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Used to highlight dangers.
 </div>
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+
 
 <a name = "quick-start"></a>
 ## Quick Start
@@ -61,6 +62,8 @@ Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds.
 Note how the app contains some sample data. <br>
 ![Ui](images/Ui.png)
+
+<div style="page-break-after: always;"></div>
 
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
@@ -79,6 +82,7 @@ Some example commands you can try sequentially to get familiarise with Notor:
 * **`exit`** : Exits the application. <br>
 
 Refer to the [Features](#features) below for details of each command.
+
 
 <div style="page-break-after: always;"></div>
 
@@ -145,7 +149,7 @@ Format: `exit`
 <a name = "exporting-data"></a>
 #### _Exporting data_
 
-Exports all the data of Notor into a CSV file. The exported CSV will be located in the same directory as Notor.
+Exports all the data of Notor into a CSV file to Notor's Directory.
 
 Format: `export`
 
@@ -179,6 +183,8 @@ Examples:
 * `p Michael Joe /c p:92229222 e:notor@notor.com t:Loves Singing g:2`
   ![personCreate](images/personCreate.png)
 
+<div style="page-break-after: always;"></div>
+
 #### _Adding a person to a group_
 
 Adds a person at the given index `INDEX` to a specified group.
@@ -191,8 +197,6 @@ Examples:
 * `person 1 /add g:Orbital`
 * `p 2 /a g:Orbital`
 
-<div style="page-break-after: always;"></div>
-
 #### _Adding a person to a subgroup_
 
 Adds a person at the given index `INDEX` to a specified subgroup.
@@ -204,7 +208,6 @@ Examples:
 * `person 1 /add g:Orbital sg:Artemis`
 * `p 2 /a g:Orbital sg:Artemis`
 
-<div style="page-break-after: always;"></div>
 
 #### _Deleting a person_
 
@@ -219,6 +222,8 @@ Examples:
 
 * `person 1 /delete `
 * `p 2 /d`
+
+<div style="page-break-after: always;"></div>
 
 #### _Editing a person_
 
@@ -354,6 +359,8 @@ Archives every person displayed in the list panel.
 Format: `person /archive` <br>
 Advanced user Format: `p /ar`
 
+<div style="page-break-after: always;"></div>
+
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
@@ -369,8 +376,6 @@ Advanced user Format:`p (INDEX) /uar`
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 You must be on the list of archived persons in order to use this command, as it needs the index of the person to unarchive.
 </div>
-
-<div style="page-break-after: always;"></div>
 
 <a name = "group-command"></a>
 
@@ -389,6 +394,8 @@ A few ideas on how you can use groups are:<br>
     you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.</li>
 </ul>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### _Creating a group_
 
@@ -570,7 +577,6 @@ Examples:
 
 * `person /find n:Alex t:graduated, engineering`
 * `p /f n:Mary`
-* `p /find n:Jo t:Final Year Project`
 
 ![personFind](images/personFind.png)
 
@@ -602,17 +608,20 @@ Notor data are saved in the hard disk automatically after any command that chang
 
 ### Editing the data file
 
-Notor data are saved as a JSON file at Notor's Directory. Advanced users are welcome to update data
+Notor data are saved as a JSON file in Notor's Directory. Advanced users are welcome to update data
 directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 If your changes to the data file makes its format invalid, Notor will discard all data and start with an empty data file at the next run.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
+--------------------------------------------------------------------------------------------------------------------
+
 <a name = "tips-on-using-notor"></a>
+
 ## Tips on Using Notor
 
 ### Keeping Track of Successfully Executed Command History
@@ -677,20 +686,16 @@ Action                    | Format                                              
 **Unarchive**             | `person (INDEX) /unarchive`                                                   | `p (INDEX) /uar`
 
 <div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b>
-<ul>
-  <li>For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
+For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
     the card.
-  </li>
-</ul>
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-  <ul>
-    <li> For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, please use the <b>List</b> command to make sure the <code>Group</code> you want to
-      use the command on is displayed before using them via <code>GROUP_INDEX</code>.</li>
-    <li> For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> command to list out all the subgroups in a Group you want to view,
-      then list out the persons inside that subgroup by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out. </li>
-  </ul>
+<div markdown="block" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+
+For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, please use the <b>List</b> command to make sure the <code>Group</code> you want to
+      use the command on is displayed before using them via <code>GROUP_INDEX</code>.<br>
+For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> command to list out all the subgroups in a Group you want to view,
+    then list out the persons inside that subgroup by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
 </div>
 
 <div style="page-break-after: always;"></div>
