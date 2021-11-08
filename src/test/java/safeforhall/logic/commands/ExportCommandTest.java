@@ -19,7 +19,7 @@ import safeforhall.testutil.AddressBookBuilder;
  * Contains integration tests (interaction with the Model) for {@code ExportCommand}.
  */
 public class ExportCommandTest {
-    private static final String TEST_DATA_FOLDER = "src/test/data/ExportTest";
+    private static final String TEST_DATA_FOLDER = "src/test/data/ExportTest/";
 
     private AddressBook emptyAddressBook = new AddressBookBuilder().build();
     private Model emptyModel = new ModelManager(emptyAddressBook, new UserPrefs());
