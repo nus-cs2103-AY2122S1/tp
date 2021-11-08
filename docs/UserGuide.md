@@ -53,9 +53,9 @@ Section | Explanation
 **List of Residents** | Displays the list of residents in the app. You can view details about a specific resident by clicking on it, or by using the `view` command
 **Individual resident information** | In the example shown, the resident has a late FET test which is 21 days overdue.
 
-### Formats
+## Legend
 
-Below are some formats used used to convey different kinds of information:
+Below are some formats used to convey different kinds of information:
 
 **Information boxes**
 
