@@ -9,7 +9,7 @@ SalesNote is a desktop application that helps tailors to manage sales and keep t
 
 Given below are my contributions to the project.
 
-* **Enhancements implemented**:
+* **New Features**:
     * Added gender, measurement and remark fields to the Person class and updated the existing commands to make sure of these fields [#30](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/30) [#31](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/31) [#32](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/32)
         * Allows the user to record the gender and body measurements of a client while storing general notes about the client.
         * Justification: This feature extends the product's functionality because it allows the user to keep track of important crafting details of their clients, which will then help them shorten the workflow.
