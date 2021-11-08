@@ -117,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="900" />
+<img src="images/ModelClassDiagram.png" width="1100" />
 
 
 The `Model` component,
@@ -1025,7 +1025,7 @@ For all Event commands, ensure that you are on the Events tab before continuing.
        Expected: A list of all the events is displayed in the app's GUI
 
     2. Test case: `view 3`<br>
-    Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
+       Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
        
 2. Invalid indexes provided
    1. Test case: `view x` (where x is larger than the list size)<br>

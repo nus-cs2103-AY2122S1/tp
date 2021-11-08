@@ -365,7 +365,7 @@ public class ParserUtil {
      */
     public static String parseOrder(String order) throws ParseException {
         requireNonNull(order);
-        String trimmedOrder = order.trim();
+        String trimmedOrder = order.trim().toLowerCase();
 
         if (!trimmedOrder.equals(ASCENDING) && !trimmedOrder.equals(DESCENDING)) {
             throw new ParseException(ALLOWED_ORDER);
