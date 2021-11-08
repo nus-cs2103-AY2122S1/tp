@@ -107,11 +107,11 @@ Format: `help`
 
 You can add a client to InsurancePal using the `add` command
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE_BRAND INSURANCE_TYPE]…`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [no/NOTE] [t/TAG]… [i/INSURANCE_TYPE INSURANCE_BRAND]…`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal i/life`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal i/life Prudential`
 
 <details markdown="1">
 
