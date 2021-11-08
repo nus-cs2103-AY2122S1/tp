@@ -579,97 +579,6 @@ The following sequence diagram shows how the DeleteTagCommand mechanism works:
 * **Alternative 2:** The `deletet all` command should pass only if everyone has the specified tag to delete.
     * Pros: Minimise unintentional deletion of tags.
     * Cons: Less user-friendly, since the user have to make sure all users that are considered must carry that tag to delete.
-
-### Clearing all contacts `clear`
-
-#### Implementation
-
-The clearing all contacts mechanism will delete all contacts from Socius.
-
-#### Usage
-
-The following activity diagram briefly summarizes what happens when a user executes the `ClearCommand` to clear all contacts:
-
-![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
-
-Given below is an example usage scenario and how the clear all contacts mechanism behaves at each step.
-
-Step 1. The user launches the application.
-
-Step 2. The user executes the `clear` command to clear all contacts.
-
-Step 3. `ClearCommand#execute` will replace the model with a blank contact list.
-
-The following sequence diagram shows how the clearing all contacts mechanism works:
-
-![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
-
-### Listing all contacts `list`
-
-#### Implementation
-
-The listing all contacts mechanism will list all contacts in Socius.
-
-#### Usage
-
-The following activity diagram briefly summarizes what happens when a user executes the `ListCommand` to list all contacts:
-
-![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
-
-Given below is an example usage scenario and how the listing all contacts mechanism behaves at each step.
-
-Step 1. The user launches the application.
-
-Step 2. The user executes the `list` command to list all contacts.
-
-Step 3. `ListCommand#execute` will update the model to show everyone in the contact list.
-
-The following sequence diagram shows how the listing all contacts mechanism works:
-
-![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
-
-### Finding people `find`
-
-#### Implementation
-
-The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
-
-#### Usage
-
-Given below is an example usage scenario of how the findCommand mechanism behaves at each step.
-
-1. The user first launches Socius. The user can see the details of his/her contacts once Socius starts.
-
-2. The user finds a new contact by one or more contact details, for example, Name and Tag.
-
-3. The user executes the command "find n/[NAME] t/[TAG]" to find people with that Name and has that Tag.
-
-4. The `parse` function of FindCommandParse will parse the input and instantiate a new `Predicate` object for each
-   argument present. At the end, all `Predicate` objects are combined using the `MultiplePredicate` object.
-
-5. The command communicates with the `Model` to filter out the found person from the existing AddressBook.
-
-6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-The following sequence diagram shows how the FindCommand function works:
-
-![UpdatedAddCommandSeqDiagram](images/FindCommandDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![UpdatedAddCommand](images/UpdatedFindCommand.png)
-
-#### Design Considerations
-
-**Aspect: How contacts are saved with multiple arguments:**
-
-* **Alternative 1 (current choice):** Only include people who contain all the specified contact details
-    * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
-    * Cons: Requires you to be familiar of the people in your contact list.
-
-* **Alternative 2:** Include people who contain at least one of the specified contact details.
-    * Pros: Good for users who want to broadly search for eligible friends.
-    * Cons: Not very intuitive.
     
 ### Sorting people `sort`
 
@@ -865,30 +774,7 @@ The following sequence diagram shows how the alias command mechanism works:
 * **Alternative 2:** Non-Singleton
     * Pros: More commonly used in general and thus easier to understand.
     * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
-
-### Exiting Socius `exit`
-
-#### Implementation
-
-The exiting Socius mechanism will exit Socius.
-
-#### Usage
-
-The following activity diagram briefly summarizes what happens when a user executes the `ExitCommand` to exit Socius:
-
-![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
-
-Given below is an example usage scenario and how the exiting Socius mechanism behaves at each step.
-
-Step 1. The user launches the application.
-
-Step 2. The user executes the `exit` command to exit from Socius.
-
-Step 3. `ExitCommand#execute` returns a CommandResult with the `exit` boolean set to True.
-
-The following sequence diagram shows how the exiting from Socius mechanism works:
-
-![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+    
 
 ### Saving data
 
