@@ -7,7 +7,8 @@ participant "copy:EditTaskDescriptor" as copy
 participant "e:EditTaskCommand" as e
 end box
 
-[-> ETCP ** : parse(arguments)
+
+[-> ETCP : parse(arguments)
 
 
 
@@ -15,14 +16,14 @@ note over ed
 Only edited values are set in desc
 end note
 
-activate ETCP
+
 ETCP -> ed ** :
 activate ed
 return desc
-ETCP -> ed ++: setDescription\n("Example description")
+ETCP -> ed ++: setDescription("Example description")
 return
 
-ETCP -> e ** : new EditTask\nCommand\n(index, desc)
+ETCP -> e ** : new EditTaskCommand(index, desc)
 activate e
 
 note over copy
