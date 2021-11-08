@@ -21,6 +21,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -78,8 +79,34 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getTag_nullTagName_throwsNullPoinnterException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getTag(null));
+    }
+
+    @Test
+    public void getTag_validTag_returnsCorrectTag() {
+        Tag tagA = new Tag("hi");
+        AddressBook addressBook = new AddressBook();
+        addressBook.addTag(tagA);
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        assertEquals(modelManager.getTag("hi"), tagA);
+    }
+    
+    @Test
+    public void getThemeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getThemeList().remove(0));
+    }
+
+    @Test
     public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
     }
 
     @Test
