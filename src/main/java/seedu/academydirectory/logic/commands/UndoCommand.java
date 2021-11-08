@@ -16,7 +16,10 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully undone changes to Academy"
             + " Directory as requested!";
 
-    public static final String UNDO_REQUEST_REJECTED = "Unable to undo Academy Directory as requested ...";
+    public static final String UNDO_REQUEST_REJECTED = "Unable to undo Academy Directory data change. Is there " +
+            "anything to undo? Read/write permission granted to folder?";
+
+    public static final String CORRUPTED_FILES = "Unable to undo Academy Directory data change. Corrupted files?";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo changes to Academy Directory "
             + "Example: " + COMMAND_WORD;
@@ -32,7 +35,9 @@ public class UndoCommand extends Command {
     public CommandResult execute(VersionedModel model) throws CommandException {
         Commit prevCommit = model.getHeadCommit().getParentSupplier().get();
         if (prevCommit.isEmpty()) {
-            throw new CommandException(UNDO_REQUEST_REJECTED + " Is there anything to undo?");
+            throw new CommandException(UNDO_REQUEST_REJECTED);
+        } else if (prevCommit.getTreeSupplier().get().isEmpty()) {
+            throw new CommandException(CORRUPTED_FILES);
         }
 
         new RevertCommand(prevCommit.getHash()).execute(model);

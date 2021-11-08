@@ -110,6 +110,9 @@ public class VersionControlController implements Version {
 
         // Regenerate files
         Tree relevantTree = relevantCommit.getTreeSupplier().get();
+        if (relevantTree.isEmpty()) {
+            return Commit.emptyCommit();
+        }
         relevantTree.regenerateBlobs();
 
         this.headCommit = relevantCommit;
