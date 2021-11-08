@@ -81,5 +81,5 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
 
 ## **Tools**:
 
-  I used IntelliJ and Git Bash for my main source code window and my terminal window, 
-  and to create the UI, I used Scenebuilder.
+  I used IntelliJ and Git Bash for my main source code window and my terminal window, and to create the UI, I used Scenebuilder.
+  
