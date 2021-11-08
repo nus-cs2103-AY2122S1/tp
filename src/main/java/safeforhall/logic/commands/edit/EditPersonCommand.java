@@ -84,7 +84,11 @@ public class EditPersonCommand extends Command {
             }
             Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+
+            boolean isSameName = personToEdit.isSameNamePerson(editedPerson);
+            boolean isSameRoom = personToEdit.isSameRoomPerson(editedPerson);
+            boolean isNotSamePerson = !isSameName || !isSameRoom;
+            if (isNotSamePerson && model.hasExactPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
             updatePersonEventResidentLists(model, personToEdit, editedPerson);

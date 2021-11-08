@@ -166,6 +166,12 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    @Override
+    public boolean hasExactPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasExactPerson(person);
+    }
+
     /**
      * Returns a String of information if {@code Person} does not exist in the address book, return
      * an empty String otherwise.
