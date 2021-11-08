@@ -14,7 +14,7 @@ InsurancePal is a client management software specially designed to help manage t
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `InsurancePal.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-4/tp/releases).
+1. Download the latest `insurancePal.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your InsurancePal.
 
