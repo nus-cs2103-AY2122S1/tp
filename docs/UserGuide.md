@@ -70,7 +70,7 @@ Commands in these highlighted boxes are typically used to show exactly what you 
 ## **2.2 TutorAid Visual Components**
 
 This section details the various components in TutorAid and how they will be referred to throughout the guide.
-![Labelled Ui](images/labelled-ui.jpg)
+![Labelled Ui](images/labelled-ui.png)
 
 #### Menu Bar
 {:.no_toc}
