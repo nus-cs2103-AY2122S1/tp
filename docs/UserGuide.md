@@ -723,7 +723,7 @@ Action | Format, Examples
 **Edit Group Name** | `groupeditname gn/OLD_GROUP_NAME gn/NEW_GROUP_NAME` <br> e.g., `groupeditname gn/Bali gn/Hanoi`
 **Remove Tags from Group** | `groupremovetag gn/GROUP_NAME t/TAG1 [t/MORE_TAGS]...` <br> e.g., `groupremovetag gn/Bali n/friends`
 **Remove Contact from Group** | `groupremovecontact gn/GROUP_NAME n/NAME1 [n/MORE_NAMES]...` <br> e.g., `groupremovecontact gn/Bali n/Jacob Tan`
-**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups James Jake`
+**Find Groups** | `findgroups KEYWORD [MORE_KEYWORDS]`<br> e.g., `findgroups London Taiwan`
 
 <p align="center">
     <a href="#tableofcontents">Click here to return to table of contents</a>
