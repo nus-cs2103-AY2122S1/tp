@@ -34,6 +34,7 @@ Given below are my contributions to the project.
 * **Contributions to DG**:
   * Added on to the target user profile, value proposition, user stories, use cases, non-functional requirements and glossary.
   * Added the documentation for the 'Add a student' feature, which includes a summary of the feature's implementation, sequence diagrams and design considerations.
+  * Added the documentation for `Logic` component. 
   * Added an _Introduction_ section.
 
 * **Contributions to team-based tasks**:
