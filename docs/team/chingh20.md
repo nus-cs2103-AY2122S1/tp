@@ -22,7 +22,7 @@ Given below are my contributions to the project.
       * Removed the help window from AB3 and created CommandNoteListPanel.
         * CommandNoteListPanel takes in CommandNoteCard objects as inputs, which are generated from dummy command class objects, 
         and generates a command summary for the user. It is prompted when user enters `help` or when the user presses the help icon,
-        and it takes the place of the game entry list when it is prompted.  
+        and it takes the place of the game entry list when it is prompted.
       * Adjusted help command and parser classes to allow user to ask for help for specific command. Ex. `help add`
       * Take away:
         * In depth understanding of how the command, parser, Ui classes work together.
@@ -34,12 +34,12 @@ Given below are my contributions to the project.
         * Modified the clear command so that it could be used to prompt the confirmation window or to actually clear data when executed.
       * Take away:
         * In depth understanding of how the logic component works with the UI.
-        * Integration testing is important. Needed to update the graph and statistics after a clear command is executed.
       * Improvement in the future:
         * To improve code quality and preventing user from intentionally breaking the clear command I should probably create two separate
         classes in the future instead of using one clear command class and allowing two execution behaviors.
     * Major PRs: [Parser](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/36) [Help](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/99)
     [Clear](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/105) 
+
 
 * **Enhancements to existing features**:
     * Wrote the initial code for adding `/p PROFIT` as an argument for add command. 
@@ -51,11 +51,13 @@ Given below are my contributions to the project.
       we should add profit as an attribute in GameEntry, or how we should handle it with the existing attributes INITIAL_CASH and FINAL_CASH early on. 
       Perhaps by doing so, we would have time to create new classes or think of better ways to handle profit.
     * Major PR: [Profit](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/106)
-  
+ 
+ 
 * **Testing**
   * Wrote test cases for Parser classes 
   * Created testing utils for logic component
   
+
 * **Documentation**:
     * User Guide:
       - Added clear, help, and find features
@@ -66,10 +68,12 @@ Given below are my contributions to the project.
       - Added implementation details, manual testing, and use cases for delete feature
       - Created delete sequence and activity diagrams
       - Wrote use cases for help
-      
+   
+   
 * **Project management**:
   * Allocated issues from PE-D
   
+
 * **Community**:
     * Participated in reviewing PRs.
     * Reported 13 bugs and suggestions for another team during PE-D.

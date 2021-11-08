@@ -37,8 +37,8 @@ You can reach us at the email `e0543894[at]u.nus.edu`
 
 [[github](http://github.com/chingh20)] [[portfolio](team/chingh20.md)]
 
-* Role: PlaceHolder
-* Responsibilities: PlaceHolder
+* Role: Developer
+* Responsibilities: Parser Component, Clear and Help features
 
 ### Shalini Seshadri 
 
