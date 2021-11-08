@@ -80,24 +80,6 @@ Wrote test cases for the following classes
 [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
 [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
 [\#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/125))
-* EditPersonDescriptorBuilder (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#227](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/227),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* PersonBuilder (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* PersonUtil (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88))
-* TypicalPersons(Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
 * GithubTest (Pull requests
 [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88))
 * EditCommandParserTest (Pull requests
