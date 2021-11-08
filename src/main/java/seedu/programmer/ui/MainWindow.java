@@ -46,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
     private static final String UPLOAD_FAIL_NO_STUDENTS_MESSAGE = String.format(UPLOAD_FAIL_MESSAGE,
                                                                                 "No students found in your file!");
-    private static final String DEFAULT_STORAGE_LOCATION = "data/programmerError.json" ;
+    private static final String DEFAULT_STORAGE_LOCATION = "data/programmerError.json";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
