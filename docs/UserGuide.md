@@ -50,10 +50,10 @@ classes. If you are familiar with Unix commands, this is definitely for you!
    Here are some example commands you can try:
     * `add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`: Adds a student named `Sherwin` to PE with his
       Student ID, Class ID and Email.
-    * `edit 1 -n Sherwin`: Updates the name of the student at index 1 of the displayed list (1-indexed) to Sherwin
-    * `delete 1`: Deletes the student at index 1 of the displayed list (1-indexed)
-    * `filter -sid A1234567X`: Filters the list of students to display the student(s) whose student ID contains `
-      A1234567X' (case-insensitive)
+    * `edit 1 -n Sherwin`: Updates the name of the student at index 1 of the displayed list (1-indexed) to Sherwin.
+    * `delete 1`: Deletes the student at index 1 of the displayed list (1-indexed).
+    * `filter -sid A1234567X`: Filters the list of students to display the student(s) whose student ID contains
+   `A1234567X` (case-insensitive).
 6. Refer to the [Features](#features) below for details on all available commands. Take note that command parameters
    wrapped with `[` `]` listed in this guide signifies that the parameter is optional.
 
@@ -78,7 +78,7 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 </div>
 
-## <a name="parameter-summary"></a>Parameter Summary
+## <a name="parameter-summary"></a>1. Parameter Summary
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Note:**
@@ -98,13 +98,13 @@ Parameter | What it means | Constraints
 **-ts** | Lab Total Score | A positive integer between 1 and 100 (inclusive)
 **-s** | Lab Score of Student | A non-negative integer, not greater than the corresponding lab total score
 
-## <a name="general-features"></a>1. General Features
+## <a name="general-features"></a>2. General Features
 
-### <a name="view-help"></a>1.1 View Help: `help` or F2 on keyboard
+### <a name="view-help"></a>2.1 View Help: `help` or F2 on keyboard
 
 Shows a message explaining how to access the help page.
 
-### <a name="view-dashboard"></a>1.2 View Dashboard: `dashboard`
+### <a name="view-dashboard"></a>2.2 View Dashboard: `dashboard`
 
 ![dashboard](images/commands/DashboardCommand/dashboard.png)
 
@@ -115,13 +115,13 @@ Displays a dashboard window showing the following data:
 3. Number of labs
 4. Number of labs unmarked for each class
 
-### <a name="exit"></a>1.3 Exit: `exit` or F1 on keyboard
+### <a name="exit"></a>2.3 Exit: `exit` or F1 on keyboard
 
 Exits ProgrammerError and closes the GUI.
 
-## <a name="data-features"></a>2. Data Features
+## <a name="data-features"></a>3. Data Features
 
-### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
+### <a name="fill-sample-data"></a>3.1 Fill Sample Data: `fill`
 
 Fills the program with sample data if no data is already present. Otherwise, throws an error message.
 
@@ -129,12 +129,12 @@ Fills the program with sample data if no data is already present. Otherwise, thr
 As this is a mass operation, it might take a couple of seconds to complete.
 </div>
 
-### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
+### <a name="purge-all-data"></a>3.2 Purge all Data: `purge`
 
 Clears all data in PE. This can be used to delete pre-existing sample data or existing student data.
 Otherwise, throws an error if no pre-existing data.
 
-### <a name="upload-data"></a>2.3 Upload Data: `upload` or F4 on keyboard
+### <a name="upload-data"></a>3.3 Upload Data: `upload` or F4 on keyboard
 
 Uploads student data via a CSV file with the following header: `studentId,classId,name,email`. Note that the data
 should contain **only** the student ID, class ID, name and email field respectively and spaces directly before or after
@@ -157,14 +157,14 @@ In summary:
 2. Note that this command is **not** meant for uploading lab results. Rather, it is only for automating the adding of
    students to PE.
 
-### <a name="download-data"></a>2.4 Download Data: `download` or F3 on keyboard
+### <a name="download-data"></a>3.4 Download Data: `download` or F3 on keyboard
 
 Downloads the student data to a CSV file in the chosen directory. The file will be automatically named `programmerError.csv`.
 
 
-## <a name="student-features"></a>3. Student Features
+## <a name="student-features"></a>4. Student Features
 
-### <a name="add-student"></a>3.1 Add Student: `add`
+### <a name="add-student"></a>4.1 Add Student: `add`
 
 Adds a student to ProgrammerError with their student ID, class ID and email. Both the student ID and email must be unique.
 
@@ -174,24 +174,23 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 **Example:**
 
-- `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
-  A1234567X, class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
+- `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu` Adds the student called Sherwin with student ID
+  A1234567X, class ID B01 and email e0542421@u.nus.edu PE.
 
 </div>
 
-### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
+### <a name="edit-student"></a>4.2 Edit Student's Details or Grade : `edit`
 
-Edits the details or grade of an existing student in the PE.
+Edits the details or grade of an existing student in PE as specified by the `INDEX_IN_LIST` argument.
+The corresponding fields of the student will be updated according to the input arguments.
+
 * Both the student ID and email must be unique.
 * 1-indexing is used here as according to the displayed list.
 * Any combination of the optional arguments can be provided.
 * At least one of the optional argument must be provided.
 * Take note that the parameters `-ln` and `-s` needs to be specified together.
 
-Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUM> -s <ACTUAL_SCORE>]`
-
-- Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
-- Existing values will be updated to the input flag arguments.
+Format: `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUM> -s <ACTUAL_SCORE>]`
 
 <div markdown="block" class="alert alert-success">
 
@@ -202,13 +201,11 @@ Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [
 
 </div>
 
-### <a name="delete-student"></a>3.3 Delete Student: `delete`
+### <a name="delete-student"></a>4.3 Delete Student: `delete`
 
-Deletes the specified student from the PE.
+Deletes the specified student from the PE. Take note that `INDEX_IN_LIST` is 1-indexed.
 
 Format: `delete <INDEX_IN_LIST>`
-
-- Deletes the student at `<INDEX_IN_LIST>`. (1-indexed)
 
 <div markdown="block" class="alert alert-success">
 
@@ -218,7 +215,7 @@ Format: `delete <INDEX_IN_LIST>`
 
 </div>
 
-### <a name="filter-student"></a>3.4 Filter Students: `filter`
+### <a name="filter-student"></a>4.4 Filter Students: `filter`
 
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 * Any combination of the optional arguments can be provided.
@@ -248,7 +245,7 @@ Below shows an example when `filter -cid B01` is executed with 4 students from c
 
 </div>
 
-### <a name="show-student"></a>3.5 Show Student Details: `show`
+### <a name="show-student"></a>4.5 Show Student Details: `show`
 
 Shows a particular student's details including their scores for each lab.
 
@@ -262,21 +259,21 @@ Format: `show <INDEX_IN_LIST>`
 
 **Example:**
 
-- `show 1`: Shows the student particular and lab results of the student at index 1 as displayed in the list.
+- `show 1` Shows the particulars and lab results of student at index 1 as displayed in the list.
 
 </div>
 
-### <a name="list-students"></a>3.6 List All Students: `list`
+### <a name="list-students"></a>4.6 List All Students: `list`
 
 Displays a list of all students in the left panel. This list is ordered first by class ID followed by student name.
 
-## <a name="lab-features"></a>4. Lab Features
+## <a name="lab-features"></a>5. Lab Features
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
 As the following commands are mass operations, they might take slightly longer than usual.
 </div>
 
-### <a name="add-lab"></a>4.1 Add Lab: `addlab`
+### <a name="add-lab"></a>5.1 Add Lab: `addlab`
 
 Adds a lab to every student with the lab number and total score.
 
@@ -287,12 +284,12 @@ Format: `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 
 **Examples:**
 
-- `addlab -ln 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
-- `addlab -ln 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
+- `addlab -ln 1 -ts 20` Adds a lab with number 1 and total score 20 for all students.
+- `addlab -ln 2 -ts 30` Adds a lab with number 2 and total score 30 for all students.
 
 </div>
 
-### <a name="edit-lab"></a>4.2 Edit Lab: `editlab`
+### <a name="edit-lab"></a>5.2 Edit Lab: `editlab`
 
 Edits the details of an existing lab for every student.
 * Any combination of the optional arguments can be provided.
@@ -300,18 +297,17 @@ Edits the details of an existing lab for every student.
 
 Format: `editlab -ln <LAB_NUM> [-nln <NEW_LAB_NUM>] [-ts <NEW_LAB_SCORE>]`
 
-
 <div markdown="block" class="alert alert-success">
 
 **Examples:**
 
-- `editlab -ln 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
-- `editlab -ln 1 -nln 2`: Changes the number of an existing lab from 1 to 2 for all students.
-- `editlab -ln 1 -nln 2 -ts 30`: Changes the number of an existing lab from 1 to 2 and the total score of the same lab to 30 for all students.
+- `editlab -ln 1 -ts 30` Changes the total score of lab 1 to 30 for all students.
+- `editlab -ln 1 -nln 2` Changes the number of an existing lab from 1 to 2 for all students.
+- `editlab -ln 1 -nln 2 -ts 30` Changes the number of an existing lab from 1 to 2 and the total score of the same lab to 30 for all students.
 
 </div>
 
-### <a name="delete-lab"></a>4.3 Delete Lab: `dellab`
+### <a name="delete-lab"></a>5.3 Delete Lab: `dellab`
 
 Deletes an existing lab from every student in ProgrammerError.
 
