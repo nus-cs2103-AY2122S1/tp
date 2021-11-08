@@ -333,6 +333,8 @@ the initial `Period` without the input `Period`. This command is facilitated by 
    * Pros: Makes shift related features easier to implement.
    * Cons: Parser becomes more complicated.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Add shift to staff's schedule
 
 #### Implementation
@@ -410,6 +412,7 @@ Notes:
 
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Find Staff
 
 #### Implementation
@@ -775,10 +778,10 @@ Project scope:
 * **storage**: The part of the programme which handles the writing to disk of the data in the programme.
 * **index**: The current person on the list of staff that can be viewed.
 * **Use cases**: A use case describes an interaction between the user and the system for a specific functionality of the
-  system. [uml-user-guide][uml-user-guide]
+  system. Source: [seedu](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/chapters/specifyingRequirements.html#use-cases)
 * **User stories**: User story: User stories are short, simple descriptions of a feature told from the perspective of
   the person who desires the new capability, usually a user or customer of the
-  system. [Mike Cohn](https://www.mountaingoatsoftware.com/agile/user-stories)
+  system. Source: [Mike Cohn](https://www.mountaingoatsoftware.com/agile/user-stories)
 * **Home folder**: The folder where _staffd.jar_ is stored at.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -847,6 +850,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Adding a shift to a person's schedule
+
 1. Adding a shift to an existing person's schedule, given the target person's index in the list.
     
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
