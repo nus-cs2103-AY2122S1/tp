@@ -849,10 +849,10 @@ testers are expected to do more *exploratory* testing.
         * The target task index must not be within the task list shown.
         * Arguments are valid and compulsory parameters are provided.
 
-    1. Test case: `rm 1 -ti100`
+    1. Test case: `rm 1 -ti100`<br>
        Expected: No task will be deleted. Error details shown in the status message.
- 
-    1. Test case: `rm 2 -ti0`
+
+    1. Test case: `rm 2 -ti0`<br>
        Expected: No task will be deleted. Error details shown in the status message.
 
 ### Saving data
@@ -865,4 +865,4 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with corrupted data files
 
     1. Modify the data file located at `[JAR file location]/data/contactsh.json` with incorrect modifications such as replacing phone numbers with a string of alphabets.
-    2. Run the program. <br> Expected: The data file is replaced with an empty file, program starts with no contacts. 
+    2. Run the program. <br> Expected: The data file is replaced with an empty file, program starts with no contacts.
