@@ -39,7 +39,6 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 ## <a name="Glossary"></a>Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Student ID**: NUS student matriculation number (AXXXXXXXY)
 - **Email**: NUS student email (eXXXXXXX@u.nus.edu)
 - **TA**: CS2100 lab teaching assistant
