@@ -53,7 +53,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
-* **Supergroup**: SuperGroup is a group that can have many subgroups. We often use it interchangeably with `Group` as 
+* **Supergroup**: SuperGroup is a group that can have many subgroups. We often use it interchangeably with `Group` as
     `Supergroup` is more of an implementation detail.
 * **Subgroup**: A child of a `Supergroup` used to store multiple persons based on a more specific category than `Supergroup`. A **
   Subgroup** can be created by specifying the parent group of the **Subgroup**. A person can be in the **Subgroup** only if 

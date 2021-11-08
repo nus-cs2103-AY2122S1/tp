@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 
 * **New Feature**:
   * [Advanced Note Command](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/76)
-    * What it does: Allows mentor to type notes for Persons and general Note in Notor via Note Window. 
+    * What it does: Allows mentor to type notes for Persons and general Note in Notor via Note Window.
       Allows multiple instances of Note Window to be opened at once. 
     * Justification: We wanted mentors to have more control over typing of notes, as it is an important aspect 
       of mentoring. 

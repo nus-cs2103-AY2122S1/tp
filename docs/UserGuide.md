@@ -324,13 +324,13 @@ Archives every person displayed in the list panel.
 Format: `person /archive` <br>
 Advanced user Format: `p /ar`
 
-#### _Listing Archived Persons_ 
+#### _Listing Archived Persons_
 Shows the list of archived Persons.
 
 Format: `person /listarchive` <br>
 Advanced user Format: `p /lar`
 
-#### _Unarchiving_ 
+#### _Unarchiving_
 Restores the archived person back to your person list in Notor.
 
 Format: `person (INDEX) /unarchive` <br>
