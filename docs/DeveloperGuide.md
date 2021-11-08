@@ -1786,7 +1786,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Navigate to and open `/data/addressbook.json` in a text editor.
 
-   2. Delete one line of code from a Person object, such as `"tagged" : [ "friends" ]`
+   2. Delete one line of code from a Person object, such as `"name" : "Alex Yeoh"`.
 
    3. Restart CohortConnect.
 
