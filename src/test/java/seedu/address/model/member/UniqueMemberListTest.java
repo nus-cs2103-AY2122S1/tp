@@ -114,19 +114,19 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void getSamePerson_personWithSameNameInSportsPa_returnsPersonWithSameName() {
+    public void getSameMember_memberWithSameNameInSportsPa_returnsMemberWithSameName() {
         uniqueMemberList.add(ALICE);
         assertEquals(uniqueMemberList.getSameMember(ALICE_DIFFERENT_PHONE), ALICE);
     }
 
     @Test
-    public void getSamePerson_personWithSamePhoneInSportsPa_returnsPersonWithSameName() {
+    public void getSameMember_memberWithSamePhoneInSportsPa_returnsMemberWithSameName() {
         uniqueMemberList.add(ALICE);
         assertEquals(uniqueMemberList.getSameMember(ALICE_DIFFERENT_NAME), ALICE);
     }
 
     @Test
-    public void getSamePerson_personWithSameNameNotInSportsPa_returnsNull() {
+    public void getSameMember_memberWithSameNameNotInSportsPa_returnsNull() {
         assertNull(uniqueMemberList.getSameMember(BOB));
     }
 
