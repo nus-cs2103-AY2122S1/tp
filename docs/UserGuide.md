@@ -324,13 +324,13 @@ Archives every person displayed in the list panel.
 Format: `person /archive` <br>
 Advanced user Format: `p /ar`
 
-#### _Listing Archived Persons_ 
+#### _Listing Archived Persons_
 Shows the list of archived Persons.
 
 Format: `person /listarchive` <br>
 Advanced user Format: `p /lar`
 
-#### _Unarchiving_ 
+#### _Unarchiving_
 Restores the archived person back to your person list in Notor.
 
 Format: `person (INDEX) /unarchive` <br>
@@ -350,7 +350,7 @@ of a group to organize people based on a more specific category.
 Creates a group.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Creating a group command will only work when persons are listed in Notor.
+Creating a group command will work when any type of list is shown.
 The rest of group commands below will work only when groups or subgroups are listed.
 </div> <br>
 
@@ -359,14 +359,13 @@ Advanced user Format: `g (GROUP_NAME) /c`
 
 * Creates a new group with the name `GROUP_NAME`.
 * The new group must not have a same name with other existing groups.
-* The new group's name must not include any backslash (`/`) or underscore (`_`).
 
 Examples:
 
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
   ![groupCreate](images/groupCreate.png)
-  
+
 #### _Deleting a group_
 
 Deletes an existing group.
@@ -394,7 +393,6 @@ Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
 
 * Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
 * The new subgroup must not have a same name with other existing subgroups in the same group.
-* The new subgroup's name must not include any backslash (`/`) or underscore (`_`).
 
 Examples :
 
@@ -533,7 +531,6 @@ Format:  `group /find n:QUERY_NAME`<br>
 Advanced user Format: `g /f n:QUERY_NAME`
 
 * Finds all the groups that match the `KEYWORD`.
-* The keyword must not include any backslash (`/`) or underscore (`_`).
 * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
 
 Examples of finding group:
@@ -672,3 +669,13 @@ Action     | Format   | Short Format
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous Notor home folder.
+
+## Coming Soon!
+
+### What's next?
+
+In the future, we would like to implement these features to enhance the experiences of mentors in using Notor:
+  * View command for the viewing pane to support viewing other types of notes and command summary through the help command.
+  * Different UI settings for the users to choose the color scheme they prefer.
+  * Expand help window to improve user's experience in looking for help.
+  * Import command to support importing data from CSV into Notor.
