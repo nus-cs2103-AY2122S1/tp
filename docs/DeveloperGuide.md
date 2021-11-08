@@ -371,7 +371,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX, which filters its contents based on a specified `Predicate`.  
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
+<div markdown="span" class="alert alert-info">:information_source:   **Note:** This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
 </div>  
 
 Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
