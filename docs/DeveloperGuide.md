@@ -131,6 +131,8 @@ the command `deletem 1`.
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified
