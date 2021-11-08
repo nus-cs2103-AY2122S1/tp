@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditTaskCommandParser" as EditTaskParser LOGIC_COLOR
+participant "d:EditTaskDescriptor" as EditTaskDescriptor LOGIC_COLOR
+participant "c:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("editTask 1 n/play")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("editTask 1 n/play")
+activate AddressBookParser
+
+create EditTaskParser
+AddressBookParser -> EditTaskParser
+activate EditTaskParser
+
+EditTaskParser --> AddressBookParser
+deactivate EditTaskParser
+
+AddressBookParser -> EditTaskParser : parse("1 n/play")
+activate EditTaskParser
+
+create EditTaskDescriptor
+EditTaskParser -> EditTaskDescriptor
+activate EditTaskDescriptor
+
+EditTaskDescriptor --> EditTaskParser : d
+deactivate EditTaskDescriptor
+
+create EditTaskCommand
+EditTaskParser -> EditTaskCommand
+activate EditTaskCommand
+
+EditTaskCommand --> EditTaskParser : c
+deactivate EditTaskCommand
+
+EditTaskParser --> AddressBookParser : c
+destroy EditTaskParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> EditTaskCommand : execute()
+activate EditTaskCommand
+
+ref over EditTaskCommand, Model
+Edit task
+end ref
+
+create CommandResult
+EditTaskCommand -> CommandResult
+activate CommandResult
+CommandResult --> EditTaskCommand : r
+deactivate CommandResult
+
+EditTaskCommand --> LogicManager : r
+deactivate EditTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
