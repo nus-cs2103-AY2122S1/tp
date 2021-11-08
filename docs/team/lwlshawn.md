@@ -13,7 +13,6 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
 
 ### Summary of Contributions
 
-
 #### Code Contributed
 * [Reposense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2103T-W08-3%2Ftp&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=lwlshawn&tabRepo=AY2122S1-CS2103T-W08-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
@@ -166,6 +165,8 @@ Focusing on after `AddOrderCommand:execute` is called,
 
 Here is an activity diagram to more clearly illustrate the logic of the application:
 ![AddOrderActivityDiagram](../images/AddOrderActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Result
 An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
