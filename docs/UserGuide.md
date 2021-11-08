@@ -44,7 +44,7 @@ Managera is OS-independent, meaning it will work on any operating system (Window
 - [**Saving the data**](#saving-the-data)
 - [**Editing the data file**](#editing-the-data-file)
 - [**Features in the next update v1.5**](#features-in-the-next-update-v15)
-    * [Undone event](#undo-event-undone)
+    * [Undone event completion](#undo-event-completion-undone)
 - [**Modifications in the next update v1.5**](#modifications-in-the-next-update-v15)
     * [Event time period](#event-time-period)
     * [Detect schedule clashes](#detect-clashes-in-schedule)
@@ -297,7 +297,6 @@ Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 * Adds an NOK to the participant at the specified `INDEX`.
 * The index refers to the index number of the participant as shown in the displayed participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* An NOK with the same name cannot be assigned to the same participant.
 * The name must contain only alphanumeric characters and is case-insensitive e.g., `Willy` will match `wiLLy`.
   
 
@@ -396,10 +395,9 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 * The event time must be given in 24-hr format, i.e. 0000 to 2359.
 
 
-* If an event is edited in a way such that its name **and** date
-  would exactly match those of another existing event, Managera would refuse to execute the command as it forbids
-  duplicate events.
-* An event is considered duplicate if its name **and** date match those of another event.
+* An event is considered a duplicate if its name **and** date match those of another existing event. If an event is
+  edited in a way such that it becomes a duplicate of an existing event, Managera would refuse to execute the command as
+  it forbids duplicate events.
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st event in the displayed event list to be 
@@ -607,7 +605,7 @@ file at the next run.
 
 ## Features in the next update v1.5: 
 
-### Undo event: `undone`
+### Undo event completion: `undone`
 
 Marks the specified event in Managera as undone.
 
