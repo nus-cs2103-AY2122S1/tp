@@ -8,15 +8,4 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <ListView fx:id="mcListView" VBox.vgrow="ALWAYS" />
-<!--    <Label fx:id="ge" text="4/16"/>-->
-
-<!--    <Label fx:id="foundation" text="32/36"/>-->
-
-<!--    <Label fx:id="breadthDepth" text="4/40"/>-->
-
-<!--    <Label fx:id="professionalism" text="8/12"/>-->
-
-<!--    <Label fx:id="mathScience" text="16/16"/>-->
-
-<!--    <Label fx:id="ue" text="6/40"/>-->
 </VBox>

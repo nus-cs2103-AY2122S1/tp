@@ -180,7 +180,7 @@ When the `EditCommand#execute()` method is called,
 Below is an example sequence diagram and an explanation on how `EditCommand` is executed.
 ![EditCommand](images/EditCommandSequenceDiagram.png)
 
-**Step 1.** The user enters the command "edit 1 c/2101".
+**Step 1.** The user enters the command "edit 1 c/CS2101".
 
 **Step 2.** ModuleTrackerParser takes in the user's input, and calls `EditCommandParser#parse` to create an `EditCommand` object containing the data parsed from the user input.
 
@@ -358,7 +358,7 @@ The `ClearCommandParser#arePrefixesPresent()` method is responsible to check if 
 
 The `ClearCommand` class extends the `Command` class and implements the `ClearCommand#execute()` method which handles the main logic of the class.
 When the `ClearCommand#execute()` method is called,
-- All `Module` objects which has the corresponding `AcademicCalendar` is filtered out from the `Model` and store in a list
+- All `Module` objects which has the corresponding `AcademicCalendar` is filtered out from the `Model` and stored in a list
 - For each `Module` in the list, the `Module` is replaced by a copy of it without the `AcademicCalander` field.
 - A `CommandResult` is returned with the updated `Model`.
 
@@ -512,7 +512,7 @@ The method will return a `ViewCommand` object with `ModuleInSpecificSemesterPred
 
 The `ViewCommand` class extends the `Command` class and implements the `ViewCommand#execute()` method.
 When the `ViewCommand#execute()` method is called,
-- All `Module` objects in the specified semester is filtered out based on the `ModuleInSpecificSemesterPredicate` and are store in a filtered list.
+- All `Module` objects in the specified semester is filtered out based on the `ModuleInSpecificSemesterPredicate` and are stored in a filtered list.
 - A `CommandResult` is returned with the updated `Model`.
 
 #### Implementation
@@ -1004,10 +1004,10 @@ If the effort required to create AB3 is 100, we would place the effort required 
 
     In order to allow the user to easily track their course progress, our team had to add a component that allows the user to view the number of MCs completed in total, as well as for each course requirement.
 
-    This involved creating a brand-new UI component from scratch that would display this information to the user.
+    This involved creating a brand-new `UI` component from scratch that would display this information to the user.
 
-    Firstly, we altered the application's UI to accommodate the new Mc progress panel.
+    Firstly, we altered the application's `UI` components to accommodate the new Mc progress panel.
 
     As many commands can cause the user's MC progress to change (i.e. setting MC goal, setting the current semester, taking new modules), we had to create a new model for a `McProgress`, as well as a `McProgressList`. These components are then updated accordingly after execution of a command.
 
-    We then link the `McProgressList` to the UI component so that any changes to the `McProgress` will be detected by the UI, and will allow the UI to update accordingly.
+    We then link the `McProgressList` to the `UI` component so that any changes to the `McProgress` will be detected by the `UI`, and will allow it to be updated accordingly.

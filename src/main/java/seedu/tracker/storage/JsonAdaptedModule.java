@@ -116,24 +116,30 @@ class JsonAdaptedModule {
 
         final Set<Tag> modelTags = new HashSet<>(moduleTags);
 
+        return checkAndCreateModule(modelCode, modelTitle, modelDescription, modelMc, modelTags);
+    }
+
+    private Module checkAndCreateModule(Code code, Title title, Description description, Mc mc, Set<Tag> tags)
+            throws IllegalValueException {
         if (academicYear == 0 || semester == 0) {
-            return new Module(modelCode, modelTitle, modelDescription, modelMc, modelTags);
-        } else {
-
-            if (!AcademicYear.isValidAcademicYear(academicYear)) {
-                throw new IllegalValueException(AcademicYear.MESSAGE_CONSTRAINTS);
-            }
-            final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
-
-            if (!Semester.isValidSemester(semester)) {
-                throw new IllegalValueException(Semester.MESSAGE_CONSTRAINTS);
-            }
-            final Semester modelSemester = new Semester(semester);
-
-            final AcademicCalendar modelAcademicCalendar = new AcademicCalendar(modelAcademicYear, modelSemester);
-
-            return new Module(modelCode, modelTitle, modelDescription, modelMc, modelTags, modelAcademicCalendar);
+            return new Module(code, title, description, mc, tags);
         }
+
+        if (!AcademicYear.isValidAcademicYear(academicYear)) {
+            throw new IllegalValueException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
+
+        final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
+
+        if (!Semester.isValidSemester(semester)) {
+            throw new IllegalValueException(Semester.MESSAGE_CONSTRAINTS);
+        }
+
+        final Semester modelSemester = new Semester(semester);
+
+        final AcademicCalendar modelAcademicCalendar = new AcademicCalendar(modelAcademicYear, modelSemester);
+
+        return new Module(code, title, description, mc, tags, modelAcademicCalendar);
     }
 
 }

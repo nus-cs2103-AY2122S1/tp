@@ -129,7 +129,9 @@ public class McProgressList {
     }
 
     private Mc getTotalCompletedMcs(ObservableList<Module> completedModules) {
-        int totalNum = completedModules.stream().mapToInt(module -> module.getMc().value).sum();
+        int totalNum = completedModules.stream()
+                .mapToInt(module -> module.getMc().value)
+                .sum();
         if (totalNum == 0) {
             return new Mc();
         } else {

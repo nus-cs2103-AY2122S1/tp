@@ -82,7 +82,7 @@ public class ParserUtil {
     /**
      * Parses {@code mc} into an {@code Mc} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified mc is invalid for a module MC (not non-zero unsigned integer from 1-20).
+     * @throws ParseException if the specified mc is invalid for a module MC (not unsigned integer from 0-20).
      */
     public static Mc parseMc(String mc) throws ParseException {
         String trimmedMc = mc.trim();
