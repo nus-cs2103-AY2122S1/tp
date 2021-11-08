@@ -287,7 +287,7 @@ The following activity diagram summarizes what happens when a user executes an A
 
 ![UpdatedAddCommand](images/UpdatedAddCommand.png)
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How contacts are saved with optional arguments:**
 
@@ -330,7 +330,7 @@ The following sequence diagram shows how the AddTagCommand mechanism works:
 
 ![UpdatedAddTagCommandSeqDiagram](images/AddCommandDiagram.png)
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How to support adding tags for one person and for everyone within AddTagCommand:**
 
@@ -430,7 +430,8 @@ Step 9: This will update the relevant person with the new data
 The following sequence diagram shows how the EditCommand function works for social handles:
 ![EditCommandSeqDiagramForSocialHandle](images/dg/EditCommandDiagramForSocialHandle.png)
 
-#### Design considerations:
+#### Design Considerations
+
 **Aspect: How to store social handle**
 * **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
     * Pros: The logic will be easier to test.
@@ -593,7 +594,7 @@ The following sequence diagram shows how the DeleteTagCommand mechanism works:
 
 ![UpdatedAddTagCommandSeqDiagram](images/AddCommandDiagram.png)
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How to support adding tags for one person and for everyone within AddTagCommand:**
 
@@ -801,7 +802,7 @@ Step 6. It will then call `Model#importAddressBook` which will take in the impor
 
 Step 7. Finally, it will return a `CommandResult` if the operation is successful.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: File directory:**
 
@@ -840,7 +841,7 @@ Step 6. It will then call `JsonUtil#saveJsonFile` which will take in the `output
 
 Step 7. Finally, it will return a `CommandResult` if the operation is successful.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: File directory:**
 
@@ -881,7 +882,7 @@ The following sequence diagram shows how the alias command mechanism works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
 </div>
 
-#### Design considerations:
+#### Design Considerations
 
 * **Alternative 1 (current choice):** Singleton pattern
     * Pros: Cannot be instantiated multiple times.
@@ -922,7 +923,7 @@ The following sequence diagram shows how the exiting from Socius mechanism works
 After each command, the latest data is saved in a JSON file. This helps users who
 wish to seamlessly continue using Socius after exiting from Socius previously.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How to safely save data from contact list to a JSON file:**
 
@@ -1015,7 +1016,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -1066,7 +1067,7 @@ the same edit distance as `minDistance`, if `minDistance` is smaller than `dista
 Step 7. Finally, it will throw a `ParseException` which contains the suggested words computed previously and
 display the suggestions to the user.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: Algorithm and Time Complexity:**
 
