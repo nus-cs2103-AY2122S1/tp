@@ -47,10 +47,10 @@ public class TypicalStudents {
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier")
-            .withStudentId("A0782425H").withClassId("B01")
+            .withStudentId("A0123456H").withClassId("B01")
             .withEmail("e0418399@u.nus.edu").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller")
-            .withStudentId("A0852425H").withClassId("B01")
+            .withStudentId("A1234567H").withClassId("B01")
             .withEmail("e0422388@u.nus.edu").build();
 
     // Manually added - student's details found in {@code CommandTestUtil}

@@ -3,9 +3,52 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-  {:toc}
+## **Table of Contents**
 
+1. [Acknowledgements](#Acknowledgements)
+2. [Setting up, getting started](#Setting up)
+3. [Design](#Design)
+4. [Architecture](#Architecture)
+5. [UI Components](#UI component)
+6. [Logic Component](#Logic component)
+7. [Model Component](#Model component)
+8. [Storage component](#Storage component)
+9. [Common Classes](#Common Classes)
+10. [Implementations](#Implementations)
+    1. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
+    2. [`Add` Student Feature](#add student)
+    3. [`Filter` Student List Feature](#filter student)
+    4. [`Show` lab results Feature](#show lab)
+    5. [`Edit` Lab Feature](#edit lab)
+    6. [`Download` Data Feature](#download data)
+    7. [`Purge` Feature](#purge data)
+11. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+12. [Appendix: Requirements](#Appendix Requirements)
+    1. [Product Scope](#Product Scope)
+13. [User Stories](#User Stories)
+14. [Use Cases](#Use Cases)
+    1. [Use Case: UC1 Purge/Delete all sample student records](#Use Case1)
+    2. [Use Case: UC2 Create a student record](#Use Case2)
+    3. [Use Case: UC3 View a student record](#Use Case3)
+    4. [Use Case: UC4 Delete a student record](#Use Case4)
+    5. [Use Case: UC5 Update a student record](#Use Case5)
+    6. [Use Case: UC6 Download student records](#Use Case6)
+    7. [Use Case: UC7 Create a lab record](#Use Case7)
+    8. [Use Case: UC8 Edit a lab record](#Use Case8)
+15. [Non-Functional Requirements](#Non-Functional Requirements)
+16. [Glossary](#Glossary)
+17. [Appendix: Instructions for Manual Testing](#Appendix Testing)
+    1. [Launch and Shutdown](#Launch and Shutdown)
+    2. [Deleting a Student](#Del student)
+    3. [Show a Student's Lab Result](#show lab student)
+    4. [Download Data](download-data)
+    5. [Dashboard](dashboard)
+18. [Appendix: Effort](#Appendix Effort)
+    1. Challenges Faced and Achievements Made 
+       1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
+       2. [Designing New UI Components](Designing New UI components)
+       3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
+       4. [Implementing Dynamic Features](#Implementing Dynamic Features)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -218,7 +261,8 @@ Classes used by multiple components are in the `seedu.programmer.commons` packag
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+## <a name="undoredo"></a> **\[Proposed\] Undo/redo feature**
+
 
 #### Proposed Implementation
 
@@ -315,7 +359,8 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-### Add Student 
+## <a name="add student"></a> **`Add` Student Feature**
+
 #### Implementation 
 
 The add student feature allows the CS2100 to add a new student into the student list. Its implementation 
@@ -370,7 +415,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
     ensure that it works with `EditCommand` as well.
 
-### Filter Student List
+## <a name="filter student"></a> **`Filter` Student List Feature**
 
 #### Implementation
 
@@ -450,7 +495,8 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
     * Pros: Allows for users to type less for the same expected behaviour.
     * Cons: New users may be confused with such shortcut commands.
 
-### Show Lab Results Feature
+## <a name="show lab"></a> **`Show` Lab Results Feature**
+
 
 #### Implementation
 
@@ -514,7 +560,8 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
       (ie `Student` instance at index 1 of student list has its lab results at index 1 of lab results list), given that
       other operations such as add and delete can change the indexes easily.
 
-### Edit Lab Details Feature
+
+## <a name="edit lab"></a> **`Edit` Lab Feature**
 
 #### Implementation
 
@@ -570,7 +617,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     * Cons: Hard to implement, as we have to ensure that students refer to latest ObservableList of lab templates 
       for their own scores and will still need to create a copy of the template for their own reference.
       
-### Download Data Feature
+## <a name="download data"></a> **`Download` Data Feature**
 
 The download data feature allows the CS2100 TA to download student data as a CSV file in a directory location of their
 choice.
@@ -621,8 +668,7 @@ success.
    downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
    functionality of allowing the CS2100 TA to select a folder destination.
 
-
-### Purge Feature
+## <a name="purge data"></a> **`Purge` Feature**
 
 #### Implementation
 
@@ -683,7 +729,8 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 
 ## <a name="Appendix Requirements"></a> **12. Appendix: Requirements**
 
-### Product scope
+### <a name="Product Scope"></a> **Product Scope**
+
 
 **Target user profile**:
 
@@ -740,7 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
 
-**Use case: UC1 Purge/Delete all sample student records**
+### <a name="Use Case1"></a> **Use case: UC1 Purge/Delete all sample student records**
 
 Precondition: CS2100 TA opens ProgrammerError for the first time
 
@@ -753,7 +800,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
    Use case ends.
 
-**Use case: UC2 Create a student record**
+### <a name="Use Case2"></a> **Use case: UC2 Create a student record**
 
 **MSS**
 
@@ -782,7 +829,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 3.
 
-**Use case: UC3 View a student record**
+### <a name="Use Case3"></a> **Use case: UC3 View a student record**
 
 **MSS**
 
@@ -805,7 +852,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-**Use case: UC4 Delete a student record**
+### <a name="Use Case4"></a> **Use case: UC4 Delete a student record**
 
 **MSS**
 
@@ -828,7 +875,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-**Use case: UC5 Update a student record**
+### <a name="Use Case5"></a> **Use case: UC5 Update a student record**
 
 **MSS**
 
@@ -858,7 +905,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-**Use case: UC6 Download student records**
+### <a name="Use Case6"></a> **Use case: UC6 Download student records**
 
 **MSS**
 
@@ -870,7 +917,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
    Use case ends.
 
-**Use case: UC7 Create a lab record**
+### <a name="Use Case7"></a> **Use case: UC7 Create a lab record**
 
 **MSS**
 
@@ -889,7 +936,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
   Use case ends.
 
-**Use case: UC8 Edit a lab record**
+### <a name="Use Case8"></a> **Use case: UC8 Edit a lab record**
 
 **MSS**
 
@@ -945,47 +992,43 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+##3 <a name="Launch and Shutdown"></a>Launch and Shutdown
 
-1. Initial launch
+1. Initial launch 
+   1. Download the jar file and copy into an empty folder 
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+          optimum.
 
-    1. Download the jar file and copy into an empty folder
+2. Saving window preferences 
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window. 
+   2. Re-launch the app by double-clicking the jar file.<br>
+          Expected: The most recent window size and location is retained.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+3. _{ more test cases …​ }_
 
-1. Saving window preferences
+### <a name="Del student"></a>Deleting a Student
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+- Deleting a student while all students are being shown
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-1. _{ more test cases …​ }_
+2. Test case: `delete 1`<br>
+   Expected: First student is deleted from the list. Details of the deleted student shown in the result display box.
 
-### Deleting a student
+3. Test case: `delete 0`<br>
+   Expected: No student is deleted. Error details shown in the result display box.
 
-1. Deleting a student while all students are being shown
+4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-    1. Test case: `delete 1`<br>
-       Expected: First student is deleted from the list. Details of the deleted student shown in the result display box.
-
-    1. Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the result display box.
-
-    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-       
-### Show a student's lab results
-1. Showing a student's lab results while all students are being shown
-    1.  Prerequisites: List all students using the `list` command. Multiple students in the list.
-    1.  Test case: `show 1` shows the information and list of lab results of the student with index 1 on the right panel.
-    1.  Test case: `show 0`<br>
-        Expected:  Error details shown in the result display box. The last shown student's lab results remains on the right panel.
+### <a name="show lab student"></a>Show a Student's Lab Results
+- Showing a student's lab results while all students are being shown
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+2. Test case: `show 1` shows the information and list of lab results of the student with index 1 on the right panel.
+3. Test case: `show 0`<br>
+    Expected:  Error details shown in the result display box. The last shown student's lab results remains on the right panel.
         
-2. Updating shown content for student-related features
+4. Updating shown content for student-related features
     1. Prerequisites: There is at least 1 student in ProgrammerError's storage.
     1. Test case (AddCommand): 
        * Add a student by keying in `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`
@@ -997,7 +1040,7 @@ testers are expected to do more *exploratory* testing.
        * Edit a student by keying in `edit 1 -n John Doe`
        * The information shown on the right panel is updated to show the student whose name is edited to `John Doe`.
 
-2. Updating shown content for lab-related features
+5. Updating shown content for lab-related features
     1. Prerequisites: There are at least 1 student in ProgrammerError's storage.
     1. Test case (AddLabCommand):
        * Add a lab for all students by keying in `addlab -ln 1 -ts 20`, assuming that Lab 1 does not exist.
@@ -1012,37 +1055,36 @@ testers are expected to do more *exploratory* testing.
         * If the right panel is currently empty, it remains to be empty.
         * If the right panel is showing a student's lab results,  the `Lab1` tag is updated to `Lab2` and the Lab card with title `Lab1` is edited to have title `Lab2`.
 
-### Download data
+### <a name="download-data"></a>Download Data
 
 1. Select folder from directory chooser window to save data to:
+   1. To cancel, click 'cancel' to return to the main window. 
+   2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
-    1. To cancel, click 'cancel' to return to the main window.
-    2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
-    
 
-### Dashboard
+### <a name="dashboard"></a>### Dashboard
 
-1. Enter dashboard as a command or press F5 to view the dashboard.
-
-    1. CS2100 TA will be able to view the number of students, number of classes, number of labs.
-    2. CS2100 TA will also be able to see the number of labs left to mark.
+1. Enter dashboard as a command or press F5 to view the dashboard. 
+   1. CS2100 TA will be able to view the number of students, number of classes, number of labs. 
+   2. CS2100 TA will also be able to see the number of labs left to mark.
   
   
 ## <a name="Effort"></a> **18. Appendix: Effort**
   
 ### Challenges Faced and Achievements Made
 The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
-  1. **Rewriting the Command Syntax** 
+
+### <a name="Rewriting the Command Syntax"></a> **1. Rewriting the Command Syntax** 
   - This was challenging as it required a nuanced understanding of how CLI syntax is constructed and following standard conventions. 
   - Not all of us were familiar with Unix syntax, which made it more difficult to design a solution that would be suitable for users who prefer typing.
-  2. **Designing New UI components**
+### <a name="Designing New UI components"></a> **2. Designing New UI components**
   - AB3 uses simple components with an (arguably) poor user interface (UI) and user experience (UX). On the other hand, our team revamped the look and feel of the application, customizing the dark theme specially (using GitHub's color scheme) to suit TAs. This involved much experimentation with color schemes and building new components, such as popup windows to enhance the user experience. 
   - Other examples include: color-coding the labs which are marked or unmarked (displayed as green or red respectively), as well as customizing the Help window and Dashboard Window to incorporate our new Dark Theme.
-  3. **Working with Third-Party Libraries**
+### <a name="Working with Third-Party Libraries"></a> **3. Working with Third-Party Libraries**
   - Compared to AB3 which uses minimal third-party libraries for its features, our team integrated two additional external libraries to develop our `upload` and `download` features. 
   - This was more challenging than it initially seemed as it required trying out multiple potential candidate libraries to find those which are most suitable for our use case and would be compatible across multiple operating systems. 
   - Through this process, we also encountered dependency issues with the new libraries and spent significant time and effort debugging these issues.
-  4. **Implementing Dynamic Features**
+### <a name="Implementing Dynamic Features"></a> **4. Implementing Dynamic Features**
   - AB3's features typically work by having the user type in text commands to be executed. We felt this was core, but we wanted to go a step further and implement our features to minimise the TA having to type unecessary commands.
   - For instance, the list of students always remains sorted whenever updates are made to the student data. This required many checks and careful organization of the student data so that the sorting can be done efficiently at minimal cost to the user TA.
   - Additionally, the `show` panel and `dashboard` window were also designed to update dynamically whenever changes are made to the student data. This saves the TA much time in keeping track of the labs they have yet to mark, thereby enhancing their user experience and satisfaction.
