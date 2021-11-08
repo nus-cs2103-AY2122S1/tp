@@ -35,6 +35,7 @@ Given below are my contributions to the project.
         * Did cosmetic tweaks to existing documentation of `help` feature and glossary: (Pull request [\#189](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/189))
     * Developer Guide:
         * Added implementation details of the `addgroup` feature.
+        * Updated project-level documentation and UML diagrams (Pull requests [\#273](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/273), [\#284](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/284))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): (Pull requests [\#168](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/168), [\#177](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/177), [\#127](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/127))
