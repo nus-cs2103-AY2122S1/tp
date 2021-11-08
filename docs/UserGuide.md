@@ -446,11 +446,11 @@ Format: `clearTasks`
 
 ---
 
-## Clearing all entries from tApp: `clear`
+## Clearing all entries from tApp: `clearAll`
 
 Clears all entries from tApp.
 
-Format: `clear`
+Format: `clearAll`
 
 ## Viewing help : `help`
 
