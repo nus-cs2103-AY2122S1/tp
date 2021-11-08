@@ -319,6 +319,8 @@ Below is the sequence diagram that depicts the parsing of the `add -p 2 Did Home
 
 ![ParseAddProgress](images/ParseAddProgressCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`and `AddLessonCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
@@ -517,6 +519,8 @@ Below is the sequence diagram that depicts the parsing of the `add -sl` command:
 
 ![ParseAddStudentToLesson](images/ParseAddStudentToLessonCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`and `AddStudentToLessonCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 

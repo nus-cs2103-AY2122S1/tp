@@ -44,4 +44,9 @@ deactivate TutorAidParser
 ref over LogicManager, AddStudentToLessonCommand : get commandResult
 <-- LogicManager : commandResult
 deactivate LogicManager
+
+destroy AddStudentToLessonCommandParser
+
+destroy AddCommandParser
+
 @enduml
