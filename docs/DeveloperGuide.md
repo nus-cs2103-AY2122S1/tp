@@ -282,13 +282,7 @@ of client. `edit` command sets the `revenue` of client.
   * Pros: Fewer commands for the user to remember
   * Cons: It will be difficult to give proper error messages since we are not sure
   of the user's intentions
-
-### Add command
-
-A user can use the add command to add a clients. A sequence diagram of this action is as shown:
-
-![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
-
+  
 ###  Note feature
 
 #### Current Implementation
