@@ -2,7 +2,6 @@
 layout: page
 title: Ananya Ravi's Project Portfolio Page
 ---
-
 ### Project: WedFast
 
 WedFast is a program that aims to help users plan their wedding efficiently by organising
@@ -12,7 +11,6 @@ The program is a desktop based application created using JavaFx GUI, and users w
 input/manage their contact details.
 
 Given below are my contributions to the project.
-
 * **New Feature**: Add Price component to every Person.
   * What it does: Allows the user to include the pricing that a person's service amounts to when adding/editing
     amounts to, and displays this price in the program.
@@ -36,8 +34,7 @@ Given below are my contributions to the project.
     whether they are attending/involved in the wedding. Visibly displays Green, Yellow or Red on the text to indicate 
     confirmed, pending or declined status.
   * Justification: Allows the user to know at all times who is and is not attending and keep their priorities in check.
-  * Highlights: same as for Price and Info Component
-  * Credit: same as for Price and Info Component
+  * Highlights and Credit: same as for Price and Info Component
 
 * **New Feature**: Add undo command
   * What it does: This command helps to undo the most previous command .Summary of commands that can be undone: 
@@ -49,7 +46,6 @@ Given below are my contributions to the project.
   * Credit: The general structure UndoCommand class was adopted from various other Command subclasses.
     
 * **Code contributed**: [RepoSense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=w10-4&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Banana3021&tabRepo=AY2122S1-CS2103T-W10-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
-
 * **Project management**:
     * Managed releases `v1.2.1` - `v1.3` (2 releases) on GitHub
 
