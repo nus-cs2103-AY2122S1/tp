@@ -9,9 +9,7 @@ title: Yeh Yu Cheng's Project Portfolio Page
 
 Users can interact with Tutor Master using a CLI (command-line interface), while also benefit from the GUI we provided.
 
-### Contributed code
-
-[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=eltonyeh&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+Contributed code: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=eltonyeh&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 ### Enhancements
 
@@ -58,4 +56,4 @@ Users can interact with Tutor Master using a CLI (command-line interface), while
     - Some notable PRs: [#62](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/62), [#81](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/81), [#129](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/129), [#213](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/213), [#237](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/237)
   - Reviewed 17 pull requests created by my teammates. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+reviewed-by%3A%40me)
     - Some notable reviews: [#71](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/71), [#74](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/74)
-  - Report 12 bugs/suggestions for Group W08-2 to help them enhance their product. Example: [#1](https://github.com/eltonyeh/ped/issues/1), [#2](https://github.com/eltonyeh/ped/issues/2), [#3](https://github.com/eltonyeh/ped/issues/3), [#4](https://github.com/eltonyeh/ped/issues/4), [#5](https://github.com/eltonyeh/ped/issues/5), [#6](https://github.com/eltonyeh/ped/issues/6), [#7](https://github.com/eltonyeh/ped/issues/7), [#8](https://github.com/eltonyeh/ped/issues/8), [#9](https://github.com/eltonyeh/ped/issues/9), [#10](https://github.com/eltonyeh/ped/issues/10), [#11](https://github.com/eltonyeh/ped/issues/11), [#12](https://github.com/eltonyeh/ped/issues/12)
+  - Report 12 bugs/suggestions for Group W08-2 to help them enhance their product. [Full list](https://github.com/eltonyeh/ped/issues)
