@@ -15,9 +15,7 @@ This developer guide provides an overview and details of Uni-Fy's system archite
 
 - Adapted from  AddressBook Level-3 project created as part of the SE-EDU initiative
 
---------------------------------------------------------------------------------------------------------------------
-
-### 1.2 Setting up, getting started
+### 1.3 Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -382,15 +380,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                   | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                   | So that I can…​                                               |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add tasks                      |                                                                        |
+| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the app                 |
+| `* * *`  | user                                       | add tasks                      | see them in the product                                                |
+| `* * *`  | user                                       | mark tasks as done             | track which tasks are done/undone                                      |
 | `* * *`  | user                                       | delete tasks                   | remove tasks that I no longer need to track                            |
 | `* * *`  | user                                       | find tasks                     | locate details of a task without having to go through the entire list  |
-| `* *`    | user                                       | show tasks                     | show the tasks that I have for the week or according to the date       |
-| `* *`    | user                                       | tag tasks                      | set a tasks priority                                                   |
-| `*`      | user with many tasks in the address book   | search for tasks               | locate a task easily                                                 |
+| `* *`    | user                                       | edit tasks                     | more easily change specifics of a task without deleting and re-adding  |
+| `* *`    | user                                       | show tasks                     | show the tasks that I have for the week                                |
+| `* *`    | user                                       | tag tasks                      | add a category for the task                                            |
+| `* *`    | user with many tasks in the address book   | search for tasks               | locate a task easily                                                   |
+| `* *`    | user with many tasks in the address book   | sort tasks                     | organise my tasks in a better way                                      |
+| `*`      | unmotivated student                        | track my weekly progress       | get a sense of achievement on completion of tasks                      |
+
 
 
 ## Appendix C: Use cases
