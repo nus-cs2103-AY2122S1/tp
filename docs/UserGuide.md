@@ -280,7 +280,7 @@ or
 vc 3
 ```
 <p align="center">
-    <img src="images/class_view.png" alt="view class" width="650" height="180">
+    <img src="images/class_view.png" alt="view class" width="650" height="240"><br>
     <i>Figure 3: Displaying details of a class in the information page</i>
 </p>
 
@@ -511,10 +511,12 @@ fc physics chemistry
 ```
 TutAssistor will display a list of all classes with `physics` or `chemistry` in their name.
 
+The filtered list should look similar to the example shown below:
 
-The filtered list should look similar to the example shown below: <br>
-![FindCommand example](images/find_screenshot.png)
-<p align="center"><i>Figure 6: Example of executing `find alice tan` command</i></p>
+<p align="center">
+    <img src="images/find_screenshot.png" alt="Find student" width="540" height="500"><br>
+    <i>Figure 6: Example of executing `find alice tan` command</i>
+</p>
 
 ### 3.8 List all students/tuition classes
 Shows the full list of students or classes.
@@ -573,16 +575,20 @@ timetable
   For example, in Figure 7 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
 </div>
 
-![Timetable](images/time_table.png)
-<p align="center"><i>Figure 7: A timetable view of all tuition classes in a week</i></p>
+<p align="center">
+    <img src="images/time_table.png" alt="Timetable" width="620" height="540"><br>
+    <i>Figure 7: A timetable view of all tuition classes in a week</i>
+</p>
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today. <br>
 Also, a reminder of classes happening today will be displayed
 when the TutAssistor is reopened.
 
-![Today view](images/today_view.png)
-<p align="center"><i>Figure 8: List view of all the classes scheduled today</i></p>
+<p align="center">
+    <img src="images/today_view.png" alt="Today view" width="450" height="450"><br>
+    <i>Figure 8: List view of all the classes scheduled today</i>
+</p>
 
 ### 3.12 View help: `help` | `h`
 
@@ -590,8 +596,10 @@ Shows a command summary, as well as a link to the user guide. <br>
 
 Format: `help`
 
-![Help window](images/helpWindow.png)
-<p align="center"><i>Figure 9: The help window</i></p>
+<p align="center">
+    <img src="images/helpWindow.png" alt="Help window" width="280" height="520"><br>
+    <i>Figure 9: The help window</i>
+</p>
 
 ### 3.13 Navigate input history
 
