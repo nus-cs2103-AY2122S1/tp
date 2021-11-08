@@ -36,10 +36,7 @@ public class ExpectedSalary {
     }
 
     /**
-     * Returns true if a given string represents a valid expected salary, false otherwise.
-     *
-     * @param test {@code String} representing an {@code ExpectedSalary} input to validate.
-     * @return true if the given {@code String} represents a valid expected salary, false otherwise.
+     * Returns true if a given string represents a valid name.
      */
     public static boolean isValidExpectedSalary(String test) {
         try {
