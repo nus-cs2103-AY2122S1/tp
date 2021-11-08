@@ -15,7 +15,7 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 
 <hr/>
 
-#### Contributions
+#### Features
 
 1. **New Feature**: Added the ability to filter the list of students based on different query parameters.
     * What it does:
@@ -37,8 +37,10 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
    "onKeyPressed" event listener. Deep thoughts were also required in the consideration of the edge cases to ensure that this feature is free of bug.
 
 <div style="page-break-after: always;"></div>
-    
-3. **Project management**:
+
+#### Other Contributions
+
+1. **Project management**:
     * Created and set up the GitHub team organisation, repo, pages and actions.
     * Managed and ensured the prompt delivery of
       releases [v1.3.trial](https://github.com/AY2122S1-CS2103-F09-3/tp/releases/tag/v1.3.trial)
@@ -47,7 +49,7 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * Solved bug that prevented User Guide and Developer Guide from being linked as one of the header pages in
       the team's `index.md` page (PR [\#276](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/276)).
 
-4. **Enhancements to existing features**:
+2. **Enhancements to existing features**:
     * Enhanced the `edit` feature to accommodate the changing requirements of PE (PRs [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121),
       [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387),
       [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403),
@@ -67,7 +69,7 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       [\#362](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/362),
       [\#375](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/375)).
 
-5. **Documentation**:
+3. **Documentation**:
     * User Guide:
         * Added documentation for the command history navigation feature and for features `filter`
           and `edit` (PRs [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35),
@@ -82,7 +84,7 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
           (PRs [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162), [\#549](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/549), [\#576](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509)).
         * Added use case scenario for `filter` feature (PR [\#598](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/598)).
 
-6. **Community**:
+4. **Community**:
     * PRs with non-trivial comments: [\#113](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/113),
    [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121),
    [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160),
