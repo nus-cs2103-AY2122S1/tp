@@ -265,6 +265,7 @@ The modification command includes: `add-position` `add-applicant` `edit-position
 
 Format: `undo`
 
+* Note: The modifications cannot be undone after you exit the program. 
 
 ### Viewing help : `help`
 

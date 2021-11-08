@@ -359,10 +359,15 @@ public class ModelManager implements Model {
     @Override
     public String recoverHistory() {
         Memento memento = history.recoverHistory();
+        String message = this.resetData(memento);
+        return message;
+    }
+
+    @Override
+    public String resetData(Memento memento) {
         Model previousModel = memento.getModel();
         this.setPositionBook(previousModel.getPositionBook());
         this.setApplicantBook(previousModel.getApplicantBook());
-
         return memento.getMessage();
     }
 
