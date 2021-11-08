@@ -25,7 +25,6 @@ Given below are my contributions to the project.
   * Justification: Repeating commands is something which people do all the time. Allowing them to access commands they input earlier allows for a convenience. Moreover, since this product
     is aimed for Linux user, a familiar feature such as this one is very beneficial and would feel like second nature.
   * Highlights: This feature was quite difficult to implement. The first issue was to understand how the GUI handles key input. Moreover, it also needs to handle executing the command while not allowing user to access the `cache` manually. After a lot of consideration, I finally ended up creating an internal command and changing the commandResult to allow for passing the text straight into the CommandBox.
- 
 
 * **New Feature**: Added the `task`, `addtask`, and `deletetask`.
   * What it does: Allow user to attach task to people and add or delete them.
