@@ -333,6 +333,8 @@ the initial `Period` without the input `Period`. This command is facilitated by 
    * Pros: Makes shift related features easier to implement.
    * Cons: Parser becomes more complicated.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Add shift to staff's schedule
 
 #### Implementation
@@ -410,6 +412,7 @@ Notes:
 
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Find Staff
 
 #### Implementation
@@ -847,6 +850,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Adding a shift to a person's schedule
+
 1. Adding a shift to an existing person's schedule, given the target person's index in the list.
     
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
