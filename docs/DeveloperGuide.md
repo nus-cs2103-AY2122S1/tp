@@ -1457,12 +1457,9 @@ Compared to AB3, which only has to manage a single entity type (`Person`), our a
 
 Moving forward, as we added new features, we also had to carefully consider & account for how these features interact with both `Position` and `Applicant`. For instance, in the `visualize` command, which displays a pie chart of a specified `Position`, we implemented guard clauses to account for the user attempting to run the command on a `Position` with no `Applicants`. To check for this case, we need to interact with both the `Position` and `Applicant` objects in our application's model, bringing about additional complexity.
 
-### Effort required: 110 - 120%
+### Effort required: ~120%
 
-Many commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`) so not much work was needed to adapt it to what we wanted. However, besides our weekly 
-inputs of coding, we had to brainstorm and constantly adapt our code to better fit our user's needs. The challenges faced as mentioned also delayed many features into later weeks, 
-requiring more effort to be put into the project. But overall, our product is not strikingly outstanding with fancy UI, "clever" logical code or AI-integrated but rather maintaining
-a realistic, simplistic code base for future developers to further improve on.
+Some commands are adaptations of the original AB3 code (e.g. add-applicant, delete-applicant), but much effort was required to handle the interaction between Position and Applicant as stated above. Also, we brainstormed and constantly adapted our code to better fit our user's needs. Features were implemented to enable the calculation and visualization of statistics, and allow users to undo previous modifications. Considering the above points, we think the effort required for our project is approximately 120%.
 
 ### Achievements
 * Planning and delivery of software engineering projects:
