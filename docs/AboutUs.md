@@ -3,57 +3,50 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
-
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are the team behind FriendBook.
 
 ## Project team
 
-### John Doe
+### Pawandeep Singh Sekhon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pss-coder.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+Pawandeep's [github](http://github.com/pss-coder)
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+Pawandeep's project [portfolio](team/pss-coder.md)
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: In charge of Deliverables and Deadlines, and UI
 
-### Johnny Doe
+### Chin Ze-Xi, Sean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xnajasho.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+Sean's [github](http://github.com/xnajasho)
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+Sean's project [portfolio](team/xnajasho.md)
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: In charge of Scheduling and tracking, and Model
 
-### James Doe
+### Ronald Tan Sing Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/RonaldTanSingWei.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+Ronald's [github](http://github.com/ronaldtansingwei)
+
+Ronald's project [portfolio](team/ronaldtansingwei.md)
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of Documentation, Testing, and Strategy
+
+### Sajal Vaishnav
+
+<img src="images/sajalvaishnav.png" width="200px">
+
+Sajal's [github](http://github.com/sajalvaishnav)
+
+Sajal's project [portfolio](team/sajalvaishnav.md)
+
+* Role: Developer
+* Responsibilities: In charge of Integration, Code Quality, and Storage

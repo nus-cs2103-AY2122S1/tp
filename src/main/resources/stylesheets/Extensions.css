@@ -1,0 +1,13 @@
+
+.error {
+    /*-fx-background-color: red;*/
+    -fx-background-color: #e27881 !important;
+    -fx-font-weight: bold;
+    -fx-text-fill: black !important; /* The error class should always override the default text-fill style */
+}
+
+#saveLocationStatus {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: #524d50;
+}

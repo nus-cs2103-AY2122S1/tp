@@ -1,0 +1,85 @@
+.background {
+    -fx-background-color: #95baec;
+    background-color: whitesmoke; /* Used in the default.html file */
+}
+
+.main-container {
+    -fx-background-color: #95baec;
+}
+
+.label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: #524d50;
+    -fx-opacity: 1;
+}
+
+.help-title {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Open Sans Extra Bold";
+    -fx-text-fill: whitesmoke;
+    -fx-opacity: 1;
+}
+
+.titled-pane .title {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: #524d50;
+    -fx-opacity: 1;
+}
+
+.titled-pane .title:hover {
+    -fx-background-color: #d9dce8;
+    -fx-cursor: "hand";
+}
+
+.accordion .titled-pane > *.content {
+    -fx-background-color: #f9edcd;
+}
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-background-color: #f9edcd;
+    -fx-text-fill: black;
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 14pt;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-text-fill: #524d50;
+    -fx-font-family: "Open Sans Regular";
+    -fx-cursor: hand;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-text-fill: whitesmoke;
+}
+
+/* Scrollbar Style*/
+.scroll-bar {
+    -fx-background-color: #f9edcd;
+
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #d9dce8;
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
