@@ -27,9 +27,9 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports contacts from a specified JSON file.\n"
+            + ": Imports contacts from a specified JSON or CSV file.\n"
             + "Parameters: FILENAME.json or FILENAME.csv\n"
-            + "Example: " + COMMAND_WORD + " friends";
+            + "Example: " + COMMAND_WORD + " friends.json";
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported from file: %s";
 
