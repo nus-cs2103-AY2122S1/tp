@@ -199,11 +199,14 @@ This section describes noteworthy details on how certain features are implemente
 
 #### Implementation
 
-The telegram handle field is facilitated by the `Telegram` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+The telegram handle field is facilitated by the `Telegram` class.
+It is stored internally as a `String` in the data file `addressbook.json`
+and is then initialized as a `Telegram` object. 
 
 The `Telegram` class implements the following operation:
 
-* `Telegram#isValidTelegram(String test)` — Returns true if a given string is a valid telegram handle.
+* `Telegram#isValidTelegram(String test)` — Returns true if a given
+string is a valid telegram handle with the help of a validation regex.
 
 Regex used in verifying the validity of telegram handle:
 
@@ -211,7 +214,11 @@ Regex used in verifying the validity of telegram handle:
 * `\w` — **Word**. Any word character (alphanumeric & underscore)
 * `{5,32}` — **Quantifier**. Match between 5 and 32 of the preceding token.
 
-The `Telegram` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where every field, including the `Telegram` field, is compulsory except the `Tag` field.
+#### Design considerations
+
+The `Telegram` class is first integrated into the `Person` class and added as
+a new field to the `Person` class. This is illustrated by the class diagram below,
+where every field, including the `Telegram` field, is compulsory except the `Tag` field.
 
 ![PersonWithTelegramClassDiagram](images/PersonWithTelegramClassDiagram.png)
 
@@ -219,11 +226,16 @@ The `Telegram` class is first integrated into the `Person` class and added as a 
 
 #### Implementation
 
-The `Phone`, `Email` and `Address` fields were modified such that these fields are no longer compulsory. The class diagram below illustrates the `Person` class after the addition of the `Telegram` field. The `Name` and `Telegram` fields are compulsory while the rest are optional.
+The `Phone`, `Email` and `Address` fields are modified such that these fields are
+no longer compulsory. The class diagram below illustrates the `Person` class after
+the addition of the `Telegram` field. The `Name` and `Telegram` fields are compulsory
+while the rest are optional.
 
 ![PersonOptionalFieldClassDiagram](images/PersonOptionalFieldClassDiagram.png)
 
-In order to accommodate to the above-mentioned new optional fields, the respective constructors were modified such that the following examples are considered valid inputs.
+In order to accomodate to the above mentioned new optional fields,
+the respective constructors were modified such that the following examples
+are considered valid inputs.
 
 Example 1: Adding new contact without email and address.
 
@@ -245,7 +257,9 @@ Example 3: Adding new contact without email and address but with empty phone inp
 add n/John Doe te/@johndoe123 p/
 ```
 
-In such a case, the constructors are modified such that the above input is also deemed as valid. The rationale behind this is that there is nothing for the `VALIDATION_REGEX` to verify, unlike in the following example.
+In such a case, the constructors are modified such that the above input is also deemed
+as valid. The rationale behind this is that there is nothing for the `VALIDATION_REGEX`
+to verify, unlike in the following example.
 
 Example 4: Adding new contact without email and address but with invalid phone input.
 
@@ -255,41 +269,212 @@ add n/John Doe te/@johndoe123 p/invalidPhoneNumber
 
 For the case above, the respective constructors will carry out validation on the given input.
 
-In order to allow for optional fields, the `AddCommandParser` also has to be modified. In particular, the following methods are modified
-* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)`
-* `AddCommandParser#parse(args)`
+#### Design considerations
 
-For the `arePrefixesPresent` method, the prefixes provided were changed to only include the following mandatory fields:
+In order to allow for optional fields, the `AddCommandParser` also has to be modified.
+In particular, the following methods are modified
+* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` — 
+Returns true if none of the prefixes contains empty `Optional` values in the
+given `ArgumentMultimap`.
+* `AddCommandParser#parse(args)` — Parses the given `String` of arguments
+in the context of the `AddCommand` and returns an `AddCommand` object for execution.
+Throws `ParseException` if the user input does not conform the expected format.
+
+For the `arePrefixesPresent` method, the prefixes provided were changed to only
+include the following mandatory fields:
 * `PREFIX_NAME`
 * `PREFIX_TELEGRAM`
+* `PREFIX_GITHUB`
 
-`AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static parsing methods in `ParserUtil` to parse the different fields in `Person`. The individual fields are first initialised with an empty string, which is now a valid input. The method then calls the `arePrefixesPresent` method to check if the provided prefix is present. If present, the method will then call the respective static parsing methods in `ParserUtil`.
+`AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static
+parsing methods in `ParserUtil` to parse the different fields in `Person`.
+The individual fields are first initialised with an empty string, which is now
+a valid input. The method then calls the `arePrefixesPresent` method to check if
+the provided prefix is present. If present, the method will then call the respective
+static parsing methods in `ParserUtil`.
 
 ### GitHub
 
 #### Implementation
 
-The GitHub field is facilitated by the `Github` class. It is stored internally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+The GitHub field is facilitated by the `Github` class. It is stored internally
+as a `String` in the data file `addressbook.json` and is then initialized as a
+`Github` object. 
 
 The `Github` class implements the following operation:
 
-* `Github#isValidGithub(String test)` — Returns true if a given string is a valid GitHub username.
+* `Github#isValidGithub(String test)` — Returns true if a given string is
+a valid GitHub username with the help of a validation regex.
 
 Regex used in verifying the validity of GitHub username:
 
 `public static final String VALIDATION_REGEX = "[a-zA-Z\d](?:[a-zA-Z\d]|-(?=[a-zA-Z\d])){0,38}";`
 * `[a-zA-Z\d]` — **Character set**. Match any character in the set.
-* `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case-sensitive.
-* `A-Z` — **Range**. Matches a character in the range "A" to "Z" (char code 65 to 90). Case-sensitive.
+* `a-z` — **Range**. Matches a character in the range "a" to "z"
+(char code 97 to 122). Case sensitive.
+* `A-Z` — **Range**. Matches a character in the range "A" to "Z"
+(char code 65 to 90). Case sensitive.
 * `\d` — **Digit**. Matches any digit character (0-9).
-* `(?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
-* `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the sign.
+* `(?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))` — **Non-capturing group**.
+Groups multiple tokens together without creating a capture group.
+* `|` — **Alternation**. Acts like a boolean OR.
+Matches the expression before or after the sign.
 * `-` — **Character**. Matches a "-" character (char code 45).
 * `{0,38}` — **Quantifier**. Match between 0 and 38 of the preceding token.
 
-The `Github` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where only the `Name`, `Telegram` and `Github` fields are compulsory.
+#### Design considerations
+
+The `Github` class is first integrated into the `Person` class and added as
+a new field to the `Person` class. This is illustrated by the class diagram below,
+where only the `Name`, `Telegram` and `Github` fields are compulsory.
 
 ![PersonWithGithubClassDiagram](images/PersonWithGithubClassDiagram.png)
+
+### Favorite command
+
+#### Implementation
+
+The Favorite command favorites a non-favorited contact from the current list of contacts.
+
+In order to distinguish whether a contact has been favorited or unfavorited,
+a boolean flag, an `isFavorite` field is added into the `Person` class and
+is initialised as `false` when adding new contacts to the address book.
+
+The following methods are added to `Person` to help identify and toggle the `isFavorite`
+field within a `Person` object:
+* `Person#isFavorite()` — Returns a boolean flag to tell whether the `Person`
+object is Favorited or not.
+* `Person#SetIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`true`, which basically favorites the contact of this `Person` object.
+* `Person#SetNotIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`false`, which basically unfavorites the contact of this `Person` object.
+
+Favoriting contacts is facilitated by the `IsFavoritePredicate`.
+* `IsFavoritePredicate` stores a boolean flag for comparison with a `Person` object.
+* It also has a `IsFavoritePredicate#test(Person person)` to determine if the `Person`
+input into the test is currently favorited or unfavorited.
+
+Given below is an example usage scenario and how the `FavoriteCommand` is executed:
+* **Step 1:** The user enters favorite command keyword followed by the index
+of the contact to be favorited `fav 1`.
+* **Step 2:** The `LogicManager` executes the input command text calling the method
+`LogicManager#execute(String commandText)`.
+* **Step 3:** The `LogicManager#execute(String commandText)` method calls the following
+method from `AddressBookParser`, `AddressBookParser#parseCommand(String userInput)`.
+* **Step 4:** Since the command input is a command with description, the command
+word `fav` and argument `1` is passed into
+`AddressBookParser#parseCommandWithDescription(String commandWord, String arguments)`
+which creates a new `FavoriteCommandParser`.
+* **Step 5:** `FavoriteCommandParser#parse(String args)` is then called.
+Since the argument provided here, `1`, is a valid argument for the favorite command,
+a `FavoriteCommand(1)` is returned.
+* **Step 6:** The `FavoriteCommand#execute(Model model)` method is then finally called,
+favoriting the contact at index `1` through the `model` provided as input argument by
+calling `ModelManager#favoritePerson(Person target)`.
+
+The Sequence Diagrams below illustrates how the components interact with each other
+for the scenario where the user issues the command `fav 1`.
+
+![FavoriteSequenceDiagram](images/FavoriteSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How to keep track of isFavorite**
+
+* **Alternative 1 (Current Implementation):** Create a boolean flag within `Person` class
+which signifies that a `Person` is favorite if `true` and vice versa.
+    * Pros: Can be easily toggled since the execute method takes in model as arguments.
+    `Model#getFilteredPersonList()` retrieves the list of `Person`.
+    The status of the boolean flag can be easily identified by `Person#isFavorite()`
+    and easily toggled by `Person#SetIsFavorite()` or `Person#SetNotIsFavorite()`.
+    * Cons: Increased coupling. The toggling of `isFavorite` should ideally be handled
+    by another class, similar to the other fields in `Person` such as `Github` and `Telegram`.
+    
+* **Alternative 2:** Create a `Favorite` class which stores a boolean flag which signifies
+that a `Person` is favorite if `true` and vice versa.
+    * Pros: Reduced coupling. The toggling of `isFavorite` will no longer have to be handled
+    by the `Person` class. This is similar to that of other fields such as `Github` and
+    `Telegram` where the contents of the respective fields are handled by their
+    respective classes.
+    * Cons: Does not make sense to create a new class to store a single boolean value.
+    Unlike other fields which will require validation with the help of a validation regex,
+    `isFavorite` can only hold either a `true` or `false` value. There is absolutely
+    no need to validate the validity of the boolean values, much less create a validation
+    regex.
+
+### Unfavorite command
+
+#### Implementation
+
+The Unfavorite command unfavorites a favorited contact from the current list of contacts.
+
+Similar to Favorite command, in order to distinguish whether a contact has
+been favorited or unfavorited, a boolean flag, an `isFavorite` field is added
+into the `Person` class and is initialised as `false` when adding new contacts
+to the address book.
+
+The following methods are added to `Person` to help identify and toggle the `isFavorite`
+field within a `Person` object:
+* `Person#isFavorite()` — Returns a boolean flag to tell whether the `Person`
+object is Favorited or not.
+* `Person#SetIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`true`, which basically favorites the contact of this `Person` object.
+* `Person#SetNotIsFavorite()` — Sets the `Person` objects' `isFavorite` field to
+`false`, which basically unfavorites the contact of this `Person` object.
+
+Similar to Favoriting contacts, Unfavoriting contacts is also facilitated by the
+`IsFavoritePredicate`.
+* `IsFavoritePredicate` stores a boolean flag for comparison with a `Person` object.
+* It also has a `IsFavoritePredicate#test(Person person)` to determine if the `Person`
+input into the test is currently favorited or unfavorited.
+
+Given below is an example usage scenario and how the `UnfavoriteCommand` is executed:
+* **Step 1:** The user enters unfavorite command keyword followed by the index
+of the contact to be unfavorited `unfav 1`.
+* **Step 2:** The `LogicManager` executes the input command text calling the method
+`LogicManager#execute(String commandText)`.
+* **Step 3:** The `LogicManager#execute(String commandText)` method calls the following
+method from `AddressBookParser`, `AddressBookParser#parseCommand(String userInput)`.
+* **Step 4:** Since the command input is a command with description, the command
+word `unfav` and argument `1` is passed into
+`AddressBookParser#parseCommandWithDescription(String commandWord, String arguments)`
+which creates a new `UnfavoriteCommandParser`.
+* **Step 5:** `UnfavoriteCommandParser#parse(String args)` is then called.
+Since the argument provided here, `1`, is a valid argument for the unfavorite command,
+a `UnfavoriteCommand(1)` is returned.
+* **Step 6:** The `UnfavoriteCommand#execute(Model model)` method is then finally called,
+unfavoriting the contact at index `1` through the `model` provided as input argument by
+calling `ModelManager#unfavoritePerson(Person target)`.
+
+The Sequence Diagrams below illustrates how the components interact with each other
+for the scenario where the user issues the command `unfav 1`.
+
+![UnfavoriteSequenceDiagram](images/UnfavoriteSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How to keep track of isFavorite**
+
+* **Alternative 1 (Current Implementation):** Create a boolean flag within `Person` class
+which signifies that a `Person` is favorite if `true` and vice versa.
+    * Pros: Can be easily toggled since the execute method takes in model as arguments.
+    `Model#getFilteredPersonList()` retrieves the list of `Person`.
+    The status of the boolean flag can be easily identified by `Person#isFavorite()`
+    and easily toggled by `Person#SetIsFavorite()` or `Person#SetNotIsFavorite()`.
+    * Cons: Increased coupling. The toggling of `isFavorite` should ideally be handled
+    by another class, similar to the other fields in `Person` such as `Github` and `Telegram`.
+    
+* **Alternative 2:** Create a `Favorite` class which stores a boolean flag which signifies
+that a `Person` is favorite if `true` and vice versa.
+    * Pros: Reduced coupling. The toggling of `isFavorite` will no longer have to be handled
+    by the `Person` class. This is similar to that of other fields such as `Github` and
+    `Telegram` where the contents of the respective fields are handled by their
+    respective classes.
+    * Cons: Does not make sense to create a new class to store a single boolean value.
+    Unlike other fields which will require validation with the help of a validation regex,
+    `isFavorite` can only hold either a `true` or `false` value. There is absolutely
+    no need to validate the validity of the boolean values, much less create a validation
+    regex.
 
 ### Export command
 
@@ -947,6 +1132,8 @@ MSS
 2. CohortConnect shows a successfully added message.
 3. CohortConnect shows the updated list of contacts.
 
+    Use case ends.
+
 Extensions
 
 * 1a. The input command is invalid.
@@ -956,11 +1143,25 @@ Extensions
   * 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-* 1b. User enters an existing name.
-  * 1b1. CohortConnect prompts that name is already taken.
+* 1b. User enters an existing Telegram handle.
+  * 1b1. CohortConnect prompts that person already exists.
   * 1b2. CohortConnect requests for correct format.
   * 1b3. User enters new data.
   * Steps 1b1-1b3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+  
+* 1c. User enters an existing GitHub username.
+  * 1c1. CohortConnect prompts that person already exists.
+  * 1c2. CohortConnect requests for correct format.
+  * 1c3. User enters new data.
+  * Steps 1c1-1c3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+  
+* 1d. The input command is missing compulsory fields.
+  * 1d1. CohortConnect shows an error message.
+  * 1d2. CohortConnect requests for compulsory fields.
+  * 1d3. User enters new data.
+  * 1d1-1d3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
 **Use Case 3: Edit user**
@@ -981,6 +1182,13 @@ Extensions
   * 1a3. User enters new data.
   * Steps 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
+  
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 **Use Case 4: Edit profile**
 
@@ -1071,6 +1279,14 @@ Extensions
   * 1a3. User enters new data.
   * Steps 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
+  
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+  
   
 **Use Case 8: Find a contact by name**
 
@@ -1186,6 +1402,13 @@ MSS
 
 Extensions
 
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
 * 2a. The list is empty.
   * Use case ends.
 
@@ -1206,6 +1429,13 @@ MSS
     Use case ends.
 
 Extensions
+
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 * 2a. The list is empty.
   * Use case ends.
@@ -1231,6 +1461,13 @@ MSS
     Use case ends.
 
 Extensions
+
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 * 2a. The list is empty.
   * Use case ends.
@@ -1258,6 +1495,13 @@ MSS
 
 Extensions
 
+* 1a. The given arguments are incorrectly formatted.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
 * 2a. The list is empty.
   * Use case ends.
 
@@ -1269,6 +1513,70 @@ Extensions
   * 3b1. CohortConnect shows an error message.
   * 3b2. Displays list of users with telegram ids containing the keyword.
   * Use case resumes at step 3.
+
+**Use Case 16: Favorite an existing contact**
+
+MSS
+
+1. User enters command to favorite a contact.
+2. CohortConnect shows a successfully favorited message.
+3. CohortConnect shows the updated list of contacts.
+
+    Use case ends.
+    
+Extensions
+
+* 1a. The given index is not present.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+    
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
+* 1c. The contact at given index is already favorited.
+    * 1c1. CohortConnect shows an error message.
+    * 1c2. User enters new data.
+    * Steps 1c1-1c2 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+    
+**Use Case 17: Unfavorite an existing contact**
+
+MSS
+
+1. User enters command to unfavorite a contact.
+2. CohortConnect shows a successfully unfavorited message.
+3. CohortConnect shows the updated list of contacts.
+
+    Use case ends.
+    
+Extensions
+
+* 1a. The given index is not present.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+    
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
+* 1c. The contact at given index is already favorited.
+    * 1c1. CohortConnect shows an error message.
+    * 1c2. User enters new data.
+    * Steps 1c1-1c2 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 **Use Case 18: Import contacts from JSON or CSV file**
 
@@ -1312,6 +1620,13 @@ Extensions
   * 1a2. CohortConnect prompts for new filename.
   * 1a3. User enters new filename.
   * Steps 1a1-1a3 are repeated until the filename received is valid.
+  
+* 1b. The given arguments are incorrectly formatted.
+    * 1b1. CohortConnect shows an error message.
+    * 1b2. CohortConnect requests for correct format.
+    * 1b3. User enters new data.
+    * Steps 1b1-1b3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
 
 **Use Case 20: Opening a contact's GitHub**
 
@@ -1391,6 +1706,13 @@ MSS
 
 Extensions
 
+* 1a. User types in command with wrong format.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
 * *a. At any time, the User chooses to close the app.
    * *a1. CohortConnect closes.
 
@@ -1411,6 +1733,7 @@ Extensions
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 * **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays. 
+* **Regex**: Regular Expression
 
 --------------------------------------------------------------------------------------------------------------------
 
