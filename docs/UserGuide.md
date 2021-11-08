@@ -95,6 +95,8 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
    [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html).
 
 3. Download the latest release `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
+   <br>
+   ![latestRelease](images/latestRelease.PNG)
 
 4. Copy `managera.jar` to a new folder which will act as the [_home folder_](#glossary) for Managera.
 
