@@ -17,7 +17,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kevin9foong.md)]
 
 * Role: Team Lead, Deadlines & Delivery
-* Responsibilities: In charge of the `add` feature.
+* Responsibilities: In charge of the `add`, `add skill` and `recommend` features and the Storage component.
 
 ### Marcus Tang Xin Kye
 
