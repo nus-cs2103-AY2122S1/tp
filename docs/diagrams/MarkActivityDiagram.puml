@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+
+start
+:User enters mark command;
+:Parse command word;
+
+if () then ([command word is an alias])
+    :Replace shortcut with
+    actual command word;
+else ([else])
+endif
+:Parse command arguments;
+:Convert string of numbers to list of Index;
+
+if () then ([indices are valid])
+    :Mark attendance of members at indices;
+else ([else])
+    : Throw CommandException;
+endif
+
+
+stop
+
+@enduml

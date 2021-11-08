@@ -447,21 +447,18 @@ newly edited`Member`s with the updated attendance are now referenced by `ModelMa
 
 The following sequence diagram shows how the mark attendance operation works.
 
-![MarkSequenceDiagram](images/MarkSequenceDiagram.png)
+<img src="images/MarkSequenceDiagram.png" width="300" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-The following activity diagram summarizes what happens when a user executes the `import` command:
-
-<img src="images/SplitActivityDiagram.png" width="250" />
-
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
 to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
 
-
+The following activity diagram shows what happens when a user executes the `mark` command.
+![MarkActivityDiagram](images/MarkActivityDiagram.png)
 
 #### Design considerations:
 
@@ -513,11 +510,11 @@ Step 11. Lastly, a new `CommandResult` is returned to the `LogicManager`.
 
 The following sequence diagram shows how the find member operation works:
 
-![FindMemberSequenceDiagram](images/FindMemberSequenceDiagram.png)
+<img src="images/FindMemberSequenceDiagram.png" width="1000"/>
 
 The following activity diagram summarizes what happens when a user enters and executes a find member command:
 
-<img src="images/FindMemberActivityDiagram.png" width="250" />
+<img src="images/FindMemberActivityDiagram.png" width="300" />
 
 #### Design considerations
 **Aspect: Implementation of the find member command**
@@ -1206,7 +1203,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * **Graphical User Interface (GUI)**: A user interface that includes graphical representation like buttons and icons for
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
-* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format
+* **JSON** : JSON, or JavaScript Object Notation, is a minimal, readable format for structuring data.
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
 * **Fast typists**: Types faster than 40wpm (words per minute)
 * **Alias**: A shortcut name for any command in SportsPA
