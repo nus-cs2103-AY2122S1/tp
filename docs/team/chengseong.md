@@ -10,7 +10,7 @@ ProfBook is an AddressBook Application targeted at CS2103 instructors to manage 
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to import contacts from an existing JSON File
-    * What it does: allows the user to merge contacts from another JSON File into the existing AddressBook
+    * What it does: allows the user to merge contacts from another JSON File into the existing ProfBook
     * Justification: This feature can be used in conjunction with the export feature to archive and reinstate contacts and also help instructors facilitate the passing around of contacts
 
 * **New Feature**: Added the ability to sort the ProfBook
