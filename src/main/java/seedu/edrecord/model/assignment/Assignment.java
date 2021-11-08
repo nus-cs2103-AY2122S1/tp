@@ -59,7 +59,7 @@ public class Assignment {
             return true;
         }
         return otherAssignment != null
-                && otherAssignment.getName().equals(getName());
+                && otherAssignment.name.equalsIgnoreCase(name);
     }
 
     /**
