@@ -52,20 +52,16 @@ Staff'd supports **salary calculation of staff**. By inputting the salaries and 
 1. Opening the application creates a [**data folder**](#glossary):mag: inside the home folder. This will contained a **staffd.json** file which is the save file of Staff'd.
 
 ![Ui](images/Ui.png)
-[TODO Update Ui.png based on the latest updates]
 
 <br>
 
 ## Staff'd Commands
 A Staff'd Command is an **instruction** that signals Staff’d to perform an operation. It consists of a [Command Word](#glossary):mag: and [Parameters](#glossary):mag:.
-[TODO: ADD PICTURE WITH A SAMPLE COMMAND THAT ANNOTATES THE DIFFERENT SECTIONS]
+![CommandTextExample](images/CommandTextExample.png)![CommandTextExample2](images/CommandTextExample2.png)
 
 <div markdown="block" class="alert alert-info">
 
 **:exclamation: Notes about the command format:**<br>
-
-* Paameters must be inputted with a space before them.
-  e.g. `add n/NAME p/PHONE_NUMBER` is accepted, but `addn/NAME p/PHONE_NUMBER` and `add n/NAMEp/PHONE_NUMBER` will not be accepted.
 
 * Words in `UPPER_CASE` are the **parameters to be supplied**.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be replaced with a name, such as `add n/John Doe`.
@@ -78,6 +74,9 @@ A Staff'd Command is an **instruction** that signals Staff’d to perform an ope
 
 * Parameters can be inputted in **any order**.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Parameters must be **inputted with a space** before them.
+  e.g. `add n/NAME p/PHONE_NUMBER` is accepted, but `addn/NAME p/PHONE_NUMBER` and `add n/NAMEp/PHONE_NUMBER` will not be accepted.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the **last occurrence** of the parameter will be used.
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be used.
@@ -100,11 +99,11 @@ The following is an example of usage of Staff'd by a manager who wishes to **add
 :information_source: Example Usage of **Adding a Staff** to the Restaurant
 <br>
 1. Joe wants to join your restaurant. Joe has the following information:
-  - Name: Joe
-  - Phone Number: 98765432
-  - Email: Joe@example.com
-  - Status: Full-time worker
-  - Role: Kitchen staff
+- Name: Joe
+- Phone Number: 98765432
+- Email: Joe@example.com
+- Status: Full-time worker
+- Role: Kitchen staff
 1. Add Joe and his information using the [`add`](#adding-a-staff--add) command.<br>`add n/Joe s/fulltime r/kitchen p/98765432 $/1234789 e/Joe@example.com`
 1. Type the command in the command box and press Enter to execute it.
 
@@ -115,7 +114,7 @@ The following is an example of usage of Staff'd by a manager who wishes to **add
 1. Joe is going to work the first shift this Monday.
 1. Use the [`addShift`](#adding-a-shift-to-a-staffs-schedule--addshift) command to add the staff to the morning shift. <br> `addShift -n Joe d/monday-0`
 1. Type the command in the command box and press Enter to execute it.
-1. Enter `tab` into the command box and press Enter to change tabs to the Schedule Tab.
+1. Enter [`tab`](#changing-tabs--tab) into the command box and press Enter to change tabs to the Schedule Tab.
 
 </div>
 
@@ -131,8 +130,8 @@ Formatting Item|Description
 ---------------|-----------
 **Bold** | Emphasizes key points
 _Italics_ | Examples to complement descrptions
-[Blue Words]() | Links to relevant information
-`Code Block` | [Commands](#staffd-commands), Command [Parameters](#glossary):mag:, or Command Examples
+[Blue Words](#user-guide-formatting) | Links to relevant information
+`Code Block` | [Commands](#staffd-commands), Command Parameters, or Command Examples
 :information_source: | Extra Information or Usage Examples
 :exclamation: | Important information
 :triangular_flag_on_post: | Links to [Flag Legend](#flag-legend):triangular_flag_on_post:
@@ -146,7 +145,7 @@ Item to Clarify | Section in User Guide
 --------------- | ---------------------
 Navigation | [Table of Contents](#table-of-contents)
 Staff'd Command Format | [Staff'd Commands](#staffd-commands)
-GUI | [GUI Breakdown](#gui-breakdown)
+[GUI](#glossary):mag: | [GUI Breakdown](#gui-breakdown)
 Staff'd Command Flags | [Flag Legend](#flag-legend):triangular_flag_on_post:
 Technical Terms | [Glossary](#glossary):mag:
 
@@ -172,8 +171,6 @@ The following is an example of how a user can refer to the User Guide to **learn
 
 </div>
 
-[TODO Add the picture showing the format of a command and its breakdown]
-
 [Return to Table of Contents](#table-of-contents)
 
 <br>
@@ -181,8 +178,13 @@ The following is an example of how a user can refer to the User Guide to **learn
 
 ## GUI Breakdown
 ### GUI Overview
-[TODO: ADD PICTURE HERE OF STAFF DETAILS GUI]
-[TODO: ADD PICTURE HERE OF STAFF SCHEDULE GUI]
+![StaffList](images/StaffList.png)
+_Staff’d User Interface - Staff Display_
+
+<br>
+
+![StaffSchedule](images/StaffSchedule.png)
+_Staff’d User Interface - Schedule Display_
 
 GUI Component | Description
 ------------- | -----------
@@ -192,10 +194,10 @@ Output Box | **Displays output messages** from Staff'd. These can be **success m
 Command Box | Box where users **type in their inputs**. To submit an input, click the **Enter** button.
 Staff Display | **Displays** the **staff information** or **schedule information** depending on which tab you are in.
 
-<br>
 
 ### Staff Display
-[TODO: ADD PICTURE THE ANNOTATIONS ON STAFF FIELDS + A TABLE FOR EACH OF THE COMPONENTS]
+![Staff Fields](images/StaffFields.png)
+_Staff Display Breakdown_
 
 Staff Field | Description
 ----------- | -----------
@@ -214,8 +216,12 @@ For commands relevant to staff details management, refer to [these features](#ba
 <br>
 
 ### Schedule Display
-[TODO: ADD PICTURE FOR THE ANNOTATIONS OF SCHEDULE FIELDS]
+![Schedule Fields](images/ScheduleFields.png)
+_Schedule Display Breakdown_
+
 For commands relevant to staff schedule management, refer to [these features](#basic-management-of-staff-schedules).
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 
@@ -230,7 +236,7 @@ Opens a **help window** which contains a link to Staff'd information page.
 
 **Format:** `help`
 
-![help message](images/helpMessage.png)
+![HelpMessage](images/helpMessage.png)
 
 **Go to:**  
 [Table of Contents](#table-of-contents)
@@ -238,7 +244,7 @@ Opens a **help window** which contains a link to Staff'd information page.
 <br>
 
 ### Changing tabs : `tab`
-Switches between the tabs: **staff view** and **schedule**.
+Switches between the tabs: **Staff View** and **Schedule View**. Reference images for these tabs can be seen [here](#gui-breakdown).
 
 **Format:** `tab`
 
@@ -254,8 +260,11 @@ This **resets the displayed staff list** in both the staff view and schedule vie
 **Format:** `list`
 
 **Output**:
-![staff view](images/staff_view.png)
-*Staff List After `List Command`*
+![SetRoleReq](images/ListCommand.png)
+_Full Staff List is displayed._
+
+**See Also:**[`setRoleReq` Command](#setting-role-requirements--setrolereq)
+
 
 **Go to:**  
 [Table of Contents](#table-of-contents)
@@ -278,9 +287,10 @@ This **resets the displayed staff list** in both the staff view and schedule vie
 ### Setting Role Requirements : `setRoleReq`
 
 **Sets the role requirements**, which is the minimum number of staff required for each [role](#glossary):mag: in all shifts.
+* The role "norole" cannot be set.
 * The default role requirements are 0 for all three roles.
 * The [Clear Command](#clearing-all-entries--clear) also resets the role requirements to the default.
-* Refer to the [flag legend](#flag-legend):triangular_flag_on_post: for more information on how to format the input for role requirements.
+* Refer to the [Flag Legend](#flag-legend):triangular_flag_on_post: for more information on how to format the input for role requirements.
 * The number inputted must be between 0 and 2147483647 (inclusive).
 * Multiple roles can be set in the same command, but if the same role is set multiple times in a command, the last instance would be the one set.
 * Staff with multiple roles are considered to be fulfilling all of their roles for a shift. For example, if there is one staff working on a shift with the roles _bartender_ and _floor_, and the requirements are 1 for both of those roles, the program considers both roles as fulfilled.
@@ -293,6 +303,10 @@ This **resets the displayed staff list** in both the staff view and schedule vie
 
 `setRoleReq rr/floor-3`\
 `setRoleReq rr/kitchen-4 rr/bartender-2`
+
+**Output**:
+![SetRoleReq](images/SetRoleReq.png)
+_After changing role requirements: `viewShift` Command notifies if there is a staff shortage for the viewed shift._
 
 **See Also:** [Clear Command](#clearing-all-entries--clear)
 
@@ -347,10 +361,10 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 * Upon the addition of a staff, the system provides an `index` for them in the [Staff List](#glossary):mag:, which can be use in other commands, to refer to them.
 
-**Format:**
+**Format:** \
 `add n/NAME p/PHONE_NUMBER e/EMAIL $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 
-**Examples:**
+**Examples:** \
 `add n/Joe s/fulltime r/kitchen p/98765432 $/1234789 e/Joe@example.com`  
 `add n/Candice s/parttime p/91234567 $/2 e/candice@example.com`
 
@@ -406,8 +420,6 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 `delete -r floor`  
 `delete -s fulltime`
 
-![delete result](images/DeleteResult.png)
-
 **See Also:** [`add` Command](#adding-a-staff--add)
 
 **Go to:**  
@@ -462,12 +474,14 @@ Searches can be conducted by `Name`, `Index`, or other fields. The search also f
 `find -t fren -n john`  
 `find -n John -t friend` or `find -t friend -n John`
 
-**Output:**  
-List before using Find command:
-![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
+**Output:**
 
-List after using Find command:
-![List after find command is called](images/findCommand/AfterFindCommand.jpg)
+![FindCommand](images/FindCommand.png)
+_Only staff matching the fields inputted are displayed in the Staff Display_
+
+
+![FindCommandSchedule](images/FindCommandSchedule.png)
+_Only staff matching the fields inputted are displayed in the Schedule Display_
 
 **Go to:**  
 [Table of Contents](#table-of-contents)  
@@ -505,6 +519,14 @@ Marking a single date:
 
 **See Also:** [`unmark` Command](#removing-the-absent-mark--unmark)
 
+**Output:**
+
+![MarkCommandList](images/MarkCommandList.png)
+_Staff’s absent periods updated in Staff View_
+
+![MarkCommandSchedule](images/MarkCommandSchedule.png)
+_Staff marked as absent in Schedule View_
+
 **Go to:**  
 [Table of Contents](#table-of-contents)  
 [Flag Legend](#flag-legend):triangular_flag_on_post:
@@ -529,6 +551,14 @@ The format of the input date is in: `YYYY-MM-DD`.
 `unmark -t friends da/2020-01-03`
 
 **See Also:** [`mark` Command](#marking-a-staff-as-absent--mark)
+
+**Output:**
+
+![UnmarkCommandList](images/UnmarkCommandList.png)
+_Staff’s absent periods updated in Staff View_
+
+![UnmarkCommandSchedule](images/UnmarkCommandSchedule.png)
+_Staff marked as present in Schedule View_
 
 **Go to:**  
 [Table of Contents](#table-of-contents)  
@@ -639,14 +669,17 @@ Note that day refers to the day of the week, and it is case-insensitive. However
 `viewShift -ti wednesday-12:00`\
 `viewShift -ti THURSDAY-16:30`
 
-**Output after ViewShift Command:**
+**Output:**
 
-![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
+![ViewShiftCommandList](images/ViewShiftCommandList.png)
+_Staff working at the specified shift are displayed in Staff View_
 
+![ViewShiftCommandSchedule](images/ViewShiftCommandSchedule.png)
+_Staff working at the specified shift are displayed in Schedule View_
 
 **Go to:**  
 [Table of Contents](#table-of-contents)  
-[Flag Legend](#flag-legend):triangular_flag_on_post:  
+[Flag Legend](#flag-legend):triangular_flag_on_post:
 
 <br>
 
@@ -663,6 +696,14 @@ The change command changes the default period for shift-related commands, when n
 
 **Examples:**  
 `change da/2021-12-28`
+
+**Output:**
+
+![ChangeCommand](images/ChangeCommand.png)
+_Schedule View shows the new specified period._
+
+![ChangeCommandAddShift](images/ChangeCommandAddShift.png)
+_Shift-related commands such as `addShift` will be now be added to the new period._
 
 **Go to:**  
 [Table of Contents](#table-of-contents)  
@@ -689,7 +730,7 @@ Updates the start time and end time of a specific shift of a specific staff.
 
 **Go to:**  
 [Table of Contents](#table-of-contents)  
-[Flag Legend](#flag-legend):triangular_flag_on_post:  
+[Flag Legend](#flag-legend):triangular_flag_on_post:
 
 <br>
 
@@ -705,6 +746,11 @@ Displays the staff statistics for an individual staff or a group of staff for th
 `istaff -p 999`
 `istaff -n Joe`
 
+**Output:**
+
+![IStaffCommand](images/IstaffCommand.png)
+_Statistics of the specified staff for the current month of November._
+
 **Go to:**  
 [Table of Contents](#table-of-contents)  
 [Flag Legend](#flag-legend):triangular_flag_on_post:
@@ -718,9 +764,14 @@ Displays the staff statistics for all the staff: the total working hours and tot
 **Format:**
 `stats`
 
+**Output:**
+
+![StatsCommand](images/StatsCommand.png)
+_Statistics all the staff for the current month of November._
+
 **Go to:**  
 [Table of Contents](#table-of-contents)  
-[Flag Legend](#flag-legend):triangular_flag_on_post:  
+[Flag Legend](#flag-legend):triangular_flag_on_post:
 
 <br>
 
@@ -738,7 +789,7 @@ Action | Format, Examples
 [**Exit**](#exiting-the-program--exit) | `exit`
 [**Add**](#adding-a-staff--add) | `add n/NAME p/PHONE_NUMBER e/EMAIL $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 [**Edit**](#editing-a-staff--edit) | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
-[**Delete**](#deleting-a-shift-from-a-staff--deleteshift) | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
+[**Delete**](#deleting-a-staff--delete) | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 [**Find**](#finding-staff--find) | `find -i INDEX [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE...] [-t TAG...]`<br>`find [-n NAME_KEYWORDS...] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE...] [-t TAG...]`
 [**Mark absent**](#marking-a-staff-as-absent--mark) | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 [**Remove mark**](#removing-the-absent-mark--unmark) | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
