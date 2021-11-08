@@ -1334,7 +1334,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Same result as exporting full contact list, but with only the contacts displayed in the filtered list
 
 1. Export Empty contact list
-        1. Prerequisites: Filter contacts using the `find` command.
+    1. Prerequisites: Filter contacts using the `find` command.
 
     1. Test case: `mailingList`<br>
         Expected: Exporting a mailing list of 0 contacts is not allowed. Error details are shown in the status message.
