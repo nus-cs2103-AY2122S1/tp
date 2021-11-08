@@ -989,21 +989,21 @@ testers are expected to do more *exploratory* testing.
 1. Add a participant without birthdate
    
    1. Test case: `add n/Hartin Menz p/91234567 e/hartin@gmail.com a/NUS` <br>
-      Expected: Participant is added to the participant list. Details of the participant shown in the status message.
+      Expected: The participant is added to the participant list. Details of the participant are shown in the status message.
 
 2. Add a participant with birthdate
 
    1. Test case: `add n/Hartin Menz p/99991234 e/menz@gmail.com a/NTU d/1970-11-11` <br>
-      Expected: Participant is added to the participant list. Details of the participant shown in the status message.
+      Expected: The participant is added to the participant list. Details of the participant are shown in the status message.
 
 ### Deleting a participant
 
-1. Delete a participant while all participants are being shown
+1. Delete a participant while all participants are shown
 
-   1. Prerequisites: All participants listed using the `list` command. At least one participant in the participant list.
+   1. Prerequisites: All participants listed using the `list` command. At least one participant is in the participant list.
 
    1. Test case: `delete 1`<br>
-      Expected: First participant is deleted from the participant list. Details of the deleted participant shown in the status 
+      Expected: The first participant in the participant list is deleted. Details of the deleted participant are shown in the status 
       message.
 
    1. Test case: `delete 0`<br>
@@ -1016,30 +1016,30 @@ testers are expected to do more *exploratory* testing.
 
 1. Edit a participant's name (new name is unique and does not match any other participant's)
 
-   1. Prerequisite: At least 1 participant in the participant list.
+   1. Prerequisite: At least one participant is in the participant list.
 
    2. Test case: `edit 1 n/Alexis Peoh`<br>
-      Expected: Participant at index 1 is renamed to "Alexis Peoh" with all other details unchanged.
+      Expected: The participant at index 1 is renamed to "Alexis Peoh" with all other details unchanged.
 
 
 ### Locating participants by name
 
 1. Find a participant with name "David"
 
-   1. Prerequisite: All participants listed using the `list` command. At least one participant in the participant list.
+   1. Prerequisite: All participants listed using the `list` command. At least one participant is in the participant list.
 
    2. Test case: `find David`<br>
-      Expected: Participant list is filtered to show only participants with "David" in their names. The list may be empty if
+      Expected: The participant list is filtered to show only participants with "David" in their names. The list may be empty if
       no participant has "David" in their name.
 
 ### Viewing a participant’s details
 
 1. View details of a participant
 
-   1. Prerequisite: All participants listed using the `list` command. At least one participant in the participant list.
+   1. Prerequisite: All participants listed using the `list` command. At least one participant is in the participant list.
 
    2. Test case: `view 1`<br>
-      Expected: Details of the first participant in the participant list shown in the status message.
+      Expected: Details of the first participant in the participant list are shown in the status message.
 
 ### Adding a Next-of-Kin to a participant
 
@@ -1048,7 +1048,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: At least one participant in the participant list.
    
    2. Test case: `addNok 1 n/Patrick Yeoh p/91234444 tag/Cousin`<br>
-      Expected: NOK is added to the first participant in the list. Details of action shown in the status message.
+      Expected: The NOK is added to the first participant in the list. Details of the action are shown in the status message.
 
 ### Deleting a Next-of-Kin of a participant
 
@@ -1057,14 +1057,14 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: At least 1 participant in the participant list, and the first participant has at least 1 NOK.
 
    2. Test case: `deleteNok 1 1`<br>
-      Expected: First NOK of first participant removed. Details of action shown in the status message.
+      Expected: The first NOK of the first participant is removed. Details of the action are shown in the status message.
 
 ### Adding an event
 
 1. Add an event without time
 
    1. Test case: `addEvent n/CS2103T finals d/2021-11-23`<br>
-      Expected: Event is added to the event list. Details of the event shown in the status message.
+      Expected: The event is added to the event list. Details of the event are shown in the status message.
    
 2. Add an event with time
 
