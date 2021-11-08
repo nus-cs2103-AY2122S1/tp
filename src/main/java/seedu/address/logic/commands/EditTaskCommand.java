@@ -44,7 +44,7 @@ public class EditTaskCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp.";
     public static final String MESSAGE_TODO_TIME = "A Todo task cannot contain any time information";
     public static final String MESSAGE_DEADLINE_ON = "on/ prefix cannot be used for a Deadline task";
     public static final String MESSAGE_EVENT_BY = "by/ prefix cannot be used for an Event task";

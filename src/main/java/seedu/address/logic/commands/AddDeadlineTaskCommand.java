@@ -14,7 +14,7 @@ import seedu.address.model.task.Task;
 public class AddDeadlineTaskCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline task to the tApp task list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DEADLINE + "DEADLINE "
@@ -27,7 +27,7 @@ public class AddDeadlineTaskCommand extends Command {
             + PREFIX_TAG + "W1404";
 
     public static final String MESSAGE_SUCCESS = "New deadline task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp task list.";
 
     public final Task toAdd;
 

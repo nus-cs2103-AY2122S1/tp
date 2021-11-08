@@ -13,7 +13,7 @@ public class AddTodoTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "todo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo task to the tApp task list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
@@ -25,7 +25,7 @@ public class AddTodoTaskCommand extends Command {
 
     //TODO todo task description
     public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp task list.";
 
     public final TodoTask toAdd;
 

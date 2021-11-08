@@ -14,7 +14,7 @@ import seedu.address.model.task.Task;
 public class AddEventTaskCommand extends Command {
     public static final String COMMAND_WORD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to the tApp task list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EVENT + "EVENT "
@@ -27,7 +27,7 @@ public class AddEventTaskCommand extends Command {
             + PREFIX_TAG + "W1404";
 
     public static final String MESSAGE_SUCCESS = "New event task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp task list.";
 
     public final Task toAdd;
 
