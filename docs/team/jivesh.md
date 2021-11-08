@@ -34,4 +34,4 @@ My contributions to the project are listed below:
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
 
 * **Tools**:
-  * Made a project on Github to track issues
+  * Made a [project](https://github.com/orgs/AY2122S1-CS2103-T14-2/projects/1) on Github to track issues
