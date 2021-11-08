@@ -367,7 +367,7 @@ GUI is updated to display the propagated changes in the appointment list.
 
 #### Design considerations
 Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
-to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
+to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete `Appointment` when they have references to the deleted `Patient` or `Doctor`.
 
 <div style="page-break-after: always;"></div>
 
