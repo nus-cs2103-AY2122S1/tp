@@ -20,6 +20,7 @@ Class JsonEdRecordStorage
 Class JsonSerializableEdRecord
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedIdGradePair
 }
 
 package "ModuleSystem Storage" #F4F6F6{
@@ -28,6 +29,7 @@ Class JsonModuleSystemStorage
 Class JsonSerializableModuleSystem
 Class JsonAdaptedModule
 Class JsonAdaptedGroup
+Class JsonAdaptedAssignment
 }
 
 }
@@ -49,10 +51,12 @@ JsonEdRecordStorage .up.|> EdRecordStorage
 JsonEdRecordStorage ..> JsonSerializableEdRecord
 JsonSerializableEdRecord --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "*" JsonAdaptedIdGradePair
 
 JsonModuleSystemStorage .up.|> ModuleSystemStorage
 JsonModuleSystemStorage ..> JsonSerializableModuleSystem
 JsonSerializableModuleSystem --> "*" JsonAdaptedModule
 JsonAdaptedModule --> "*" JsonAdaptedGroup
+JsonAdaptedModule --> "      *" JsonAdaptedAssignment
 
 @enduml
