@@ -59,7 +59,7 @@ Given below are my contributions to the project
 
 * **Contributions to team-based tasks**:
   * Updated the README file to match current project [#10](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/10)
-  * Updated Site Wide Settings in `Documentation.md`, `_config.yml`, `_base.scss` and `index.md` files to match current project [#11](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/11)
+  * Updated Site Wide Settings to match the current project [#11](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/11)
   * Refactored and renamed the codebase from AddressBook to PlannerMd [#34](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/34)
   * Added "skeleton" code to have less merge conflicts [#53](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/53) [#60](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/60)
   * Added test builders before features are implemented so that features can be implemented concurrent with their tests [#54](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/54)
