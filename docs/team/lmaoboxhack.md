@@ -61,7 +61,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 * Setup of GitHub team org & repo
 * Repo maintenance (Proper tagging of issues, milestone management, linking issues to PRs, etc.)
 * Renaming of packages [PR: [\#59](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/59)] (Scrapped due to potential complications)
-* Setup of tools: GitHub Pages (for product website), Github Actions (for CI), Gradle
+* Setup of tools: GitHub Pages (for product website), GitHub Actions (for CI), Gradle
 
 #### **Review contributions**
 * Significant PR reviews: [Review of \#50](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/50#pullrequestreview-785391113), [Review of \#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81#pullrequestreview-783478563), [Review of \#111](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/111#pullrequestreview-790827571)
@@ -72,8 +72,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ### **Contributions to the Developer Guide (Extracts)**:
   
 <img src="../images/ApplicantPositionClassDiagram.png" width="750" />
-<img src="../images/filterapplicantsequencediagram0.png" width="950" />
-<img src="../images/filterapplicantsequencediagram1.png" width="1100" />
+<img src="../images/FilterApplicantSequenceDiagram0.png" width="950" />
+<img src="../images/FilterApplicantSequenceDiagram1.png" width="1100" />
 <img src="../images/MarkApplicantActivityDiagram.png" width="750" />
 <img src="../images/VisualizeActivityDiagram.png" width="600" />
 <img src="../images/VisualizeSequenceDiagram.png" width="500" />
@@ -99,7 +99,7 @@ Filter the list of applicants by specific criteria.
 
 Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
 
-* The position filter is case-sensitive. e.g `software engineer` will not match `Software Engineer`
+* The position filter is case-sensitive. e.g. `software engineer` will not match `Software Engineer`
 * The status filter is case-insensitive. e.g. `accepted` or `ACCEPTED` will both match the `"Accepted"` application status.
 * A variable number of filters can be specified, but at least one must be present.
 * The filtering uses a logical `AND`. e.g. `filter-applicant pos/software engineer status/accepted` will match all applicants applying to the `software engineer` position AND with application status `"Accepted"`.
