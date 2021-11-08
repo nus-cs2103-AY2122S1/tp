@@ -538,15 +538,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | insurance agent                                     | add total costs from each of my clients         | determine how much to spend on gifts for clients.|
 | `* * *`  | user                                                | save my total costs for future use         | save time on having to type them everytime.|
 | `* * *`  | insurance agent                                     | keep notes about the client      | remember the health condition and ailments of all my clients.|
-
 | `* * *`  | insurance agent                                     | add the time and place of my appointments for my respective clients in the contact page        | be punctual|
 | `* * *`  | user                                     | save my contacts upon closing my address book        | save time on having to type them everytime |
 | `* * *`  | organised user                                    | sort the clients in my address book by their first name         | locate a client easily|
-
 | `* * *`  | organised and shrewd insurance agent                                     | sort my clients based on how much money I am making from them         | know which clients to prioritise|
 | `* * *`  | insurance agent                                     | calculate the commissions I get from my client        | know the revenue obtained from the policy my client buys. |
 | `* * *`  | organised insurance agent                                    | remember what insurance my client already has        |  sell the client insurance he/she does not have yet |
-
 | `* * *`  | user with many contacts in the address book                                     | search for contacts in my contacts list whose name matches my input         |  navigate to the person I am looking for quickly |
 | `* * *`  | user                                     | delete clients from my contact list         | remove a client from my contact list I no longer need to keep in contact with|
 | `* * *`  | user                                    | use programs on Windows and Mac         | use it on all my laptops |
@@ -566,8 +563,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | edit the information of entries in my address book   | ensure the information is accurate and up to date.|
 | `* *`    | insurance agent with a lot of clients                                       | create labels for my clients   |  classify and keep track of each of their characteristics|
 | `*`      | user | see how much space the program is using          | easily manage my computer memory |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -878,9 +873,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
