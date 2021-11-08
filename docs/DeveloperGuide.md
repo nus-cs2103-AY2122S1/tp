@@ -212,6 +212,7 @@ helper classes to parse the text into editable attributes `XYZ` of `Person`, whi
 * `Tags`
 * `Insurances`
 * `Notes`
+
 All fields are optional, but at least one must be provided
 
 ![EditCommandSequenceDiagram](images/EditCommandSequenceDiagram.png)
