@@ -1,0 +1,22 @@
+@startuml
+start
+if () then ([else])
+    if () then ([else])
+        if () then ([else])
+            :Create new position instance
+                 with the edited information;
+            :Update the applicants' positions ;
+            :Delete old position and
+            add new position to positionBook;
+        else ([Title edited but corresponding
+        position not exist])
+               :CommandException;
+        endif
+    else ([Has applicant duplicate])
+        :CommandException;
+    endif
+else ([Index is invalid])
+    :CommandException;
+endif
+stop
+@enduml

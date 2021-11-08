@@ -5,15 +5,19 @@ package seedu.address.commons.exceptions;
  */
 public class IllegalValueException extends Exception {
     /**
-     * @param message should contain relevant information on the failed constraint(s)
+     * Constructor for a IllegalValueException for a given message.
+     *
+     * @param message Message should contain relevant information on the failed constraint(s).
      */
     public IllegalValueException(String message) {
         super(message);
     }
 
     /**
-     * @param message should contain relevant information on the failed constraint(s)
-     * @param cause of the main exception
+     * Constructor for a IllegalValueException for a given message and cause.
+     *
+     * @param message Message should contain relevant information on the failed constraint(s).
+     * @param cause Cause of the main exception.
      */
     public IllegalValueException(String message, Throwable cause) {
         super(message, cause);

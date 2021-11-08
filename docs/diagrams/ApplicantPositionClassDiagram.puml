@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam ClassAttributeFontColor #FFFFFF
+show <<enumeration>> fields
+
+together {
+Class HiddenOutside #FFFFFF
+Class HiddenOutside1 #FFFFFF
+}
+
+together {
+Class Applicant
+Class Position
+}
+
+HiddenOutside ..> Applicant
+HiddenOutside1 ..> Position
+
+together {
+Class Name
+Class Phone
+Class Email
+Class Address
+Class ProfileUrl
+}
+
+Package Application <<Rectangle>> {
+
+Class Application
+enum ApplicationStatus as "ApplicationStatus" <<enumeration>> {
+PENDING
+ACCEPTED
+REJECTED
+}
+
+}
+
+together {
+Class Title
+Class Description
+}
+
+Applicant *--> Name
+Applicant *--> Phone
+Applicant *--> Email
+Applicant *--> Address
+Applicant *--> ProfileUrl
+Applicant *--> Application
+
+Application --> "1" Position
+Application *--> ApplicationStatus
+
+Position *--> Title
+Position *--> Description
+
+@enduml

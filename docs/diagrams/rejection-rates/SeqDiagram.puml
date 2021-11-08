@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":Model" as Model LOGIC_COLOR
+participant ":Calculator" as Calculator LOGIC_COLOR
+participant ":ApplicantBook" as ApplicantBook LOGIC_COLOR
+end box
+
+[-> Model: execute(rate ...)
+activate Model
+
+Model -> Calculator: calculateRejectionRate()
+activate Calculator
+
+Calculator -> Calculator: calculateRejectionRate()
+
+Calculator -> ApplicantBook: calculation occurs
+activate ApplicantBook
+
+ApplicantBook -> Calculator: rejectionRate
+deactivate ApplicantBook
+deactivate Calculator
+
+Calculator --> Model: Request complete
+deactivate Calculator
+
+[<-- Model
+deactivate Model
+
+@enduml

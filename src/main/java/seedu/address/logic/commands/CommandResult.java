@@ -11,10 +11,10 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /** Help information for the user. */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /** The application if user requests exit. */
     private final boolean exit;
 
     /**
@@ -67,5 +67,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
-
 }
