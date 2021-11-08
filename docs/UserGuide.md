@@ -73,70 +73,6 @@ ________________________________________________________________________________
    <img src="images/mac_error.png" height="200" align="center"/>
     </p>
 
-
-
-
-
-[Back to Table of Contents](#table-of-contents)
-
-_____________________________________________________________________________________________________________
-
-## Command Syntax
-Before we start, let's take a look at what a typical command in SportsPA comprises of.
-
-Component | Description
------------------ | ------------------
-Command Word   | The keyword that represents a command in SportsPA
-Preamble        | The keyword that represents an `INDEX` / `DAY`
-Prefix    | The keyword preceding the parameter(s)
-Parameter | The argument proceeding the prefix
-
-To illustrate the above, we will use the edit member command:<br>
-`editm 1 n/John Doe p/92315540 d/2 3 t/exco`<br>
- `editm` is the command word and `1` is the preamble representing the index of the member to edit.`n/` `p/` `d/` `t/` are the prefixes and 
-`John Doe`, `92315540`, `2 3`, `exco` are the parameters.<br>
-The add member command also follows a similar format, but without the preamble:<br>
-`addm n/John Doe p/92315540 t/exco`
-
-For your easy reference, we have prepared a summary of prefixes and their required parameters below:
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** There are 2 main 'objects' in SportsPA, Member and Facility.
-</div>
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** Parameters should **not** be blank, unless otherwise stated e.g., see [Editing a member](#editing-a-member-editm).
-</div>
-
-Member-specific prefixes:
-
-Prefix        | Parameter                    | Requirements
------------------ | ------------------|------------------
-`p/ `             | `PHONE`             | Maximum of 15 digits
-`d/`              | `DAY(S)`              | Integer, 1-7 only, 1 represents Monday, 2 represents Tuesday etc.
-`t/`              | `TAG`            | Maximum of 20 alphanumeric characters and spaces
-`tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
-`tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
-`by/` | `SORT_ORDER` | `name` or `tag` only 
-
-Facility-specific prefixes:
-
-Prefix | Parameter | Requirements
--------- | --------- | ----------------
-`l/` | `LOCATION` | Maximum of 50 alphanumeric characters and spaces
-`c/` | `CAPACITY`| Integer, 1-50 only
-`t/`  | `TIME` | 24-hour format e.g., 1400
-
-General prefixes:
-
-Prefix | Parameter | Requirements
--------- | --------- | ----------------
-`n/` | `NAME` | Maximum of 50 alphanumeric characters and spaces
-`s/` | `SHORTCUT` | Not an existing command word in SportsPA, 1 word only
-`cw/` | `COMMAND_WORD` | Existing command words in SportsPA
-
 [Back to Table of Contents](#table-of-contents)
 
 _____________________________________________________________________________________________________________
@@ -169,6 +105,56 @@ Here are some example commands you can try:
 * **`deletem 3`** : Deletes 3rd member in the members list.
 
 * **`exit`** : Exits the app.
+
+[Back to Table of Contents](#table-of-contents)
+
+_____________________________________________________________________________________________________________
+
+## Command Syntax
+Before we start, let's take a look at what a typical command in SportsPA comprises of.
+
+Component | Description
+----------------- | ------------------
+Command Word   | The keyword that represents a command in SportsPA
+Preamble        | The keyword that represents an `INDEX` / `DAY`
+Prefix    | The keyword preceding the parameter(s)
+Parameter | The argument proceeding the prefix
+
+To illustrate the above, we will use the edit member command:<br>
+`editm 1 n/John Doe p/92315540 d/2 3 t/exco`<br>
+`editm` is the command word and `1` is the preamble representing the index of the member to edit.`n/` `p/` `d/` `t/` are the prefixes and
+`John Doe`, `92315540`, `2 3`, `exco` are the parameters.<br>
+The add member command also follows a similar format, but without the preamble:<br>
+`addm n/John Doe p/92315540 t/exco`
+
+For your easy reference, we have prepared a summary of prefixes and their required parameters below.
+
+Member-specific prefixes:
+
+Prefix        | Parameter                    | Requirements
+----------------- | ------------------|------------------
+`p/ `             | `PHONE`             | Maximum of 15 digits
+`d/`              | `DAY(S)`              | Integer, 1-7 only, 1 represents Monday, 2 represents Tuesday etc.
+`t/`              | `TAG`            | Maximum of 20 alphanumeric characters and spaces
+`tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
+`tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
+`by/` | `SORT_ORDER` | `name` or `tag` only
+
+Facility-specific prefixes:
+
+Prefix | Parameter | Requirements
+-------- | --------- | ----------------
+`l/` | `LOCATION` | Maximum of 50 alphanumeric characters and spaces
+`c/` | `CAPACITY`| Integer, 1-50 only
+`t/`  | `TIME` | 24-hour format e.g., 1400
+
+General prefixes:
+
+Prefix | Parameter | Requirements
+-------- | --------- | ----------------
+`n/` | `NAME` | Maximum of 50 alphanumeric characters and spaces
+`s/` | `SHORTCUT` | Not an existing command word in SportsPA, 1 word only
+`cw/` | `COMMAND_WORD` | Existing command words in SportsPA
 
 [Back to Table of Contents](#table-of-contents)
 
