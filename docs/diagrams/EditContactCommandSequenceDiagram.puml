@@ -8,6 +8,9 @@ participant "c:EditContactCommand" as EditContactCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+
+
+
 participant ":Model" as Model MODEL_COLOR
 
 participant "toEdit:Contact" as ToEdit MODEL_COLOR
@@ -24,47 +27,40 @@ activate Model
 
 Model -> ToEdit
 activate ToEdit
-ToEdit -> Model: contactToEdit
+ToEdit --> Model: contact to edit
 deactivate ToEdit
 
-Model --> EditContactCommand : contactToEdit
+Model --> EditContactCommand : contact to edit
 deactivate Model
 
-EditContactCommand -> EditContactCommand : createEditedContact(contactToEdit)
+EditContactCommand -> EditContactCommand : createEditedContact(contact to edit)
 activate EditContactCommand
 
 create Edited
 EditContactCommand -> Edited
 activate Edited
-Edited --> EditContactCommand : editedContact
+Edited --> EditContactCommand : edited contact
 deactivate Edited
 deactivate EditContactCommand
 
 EditContactCommand -> Model : getPoliciesBelongingTo(contactToEdit)
 
 activate Model
-Model -> EditContactCommand : policiesToEdit
+Model -> EditContactCommand : policies to edit
 deactivate Model
 
 EditContactCommand -> EditContactCommand: create new policies belonging to editedContact
 
-EditContactCommand -> Model : replace policiesToEdit with new policies
-
-activate Model
-Model --> EditContactCommand
-deactivate Model
+EditContactCommand -> Model : replace policies to edit with new policies
 
 
-EditContactCommand -> Model : setContact(editedContact)
+EditContactCommand -> Model : setContact(edited contact)
 
-activate Model
-Model --> EditContactCommand
-deactivate Model
 
 EditContactCommand -[hidden]-> ToEdit
 destroy ToEdit
 
-[<-- EditContactCommand
+[<-- EditContactCommand : commandResult
 deactivate EditContactCommand
 Model -[hidden]-> EditContactCommand
 

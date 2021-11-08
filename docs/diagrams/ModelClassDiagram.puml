@@ -15,22 +15,30 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
+Package Contact <<Rectangle>> {
+    Class UniqueContactList
+    Class Contact
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
+}
+
 Class Tag
 
 
+Package Policy <<Rectangle>> {
 Class UniquePolicyList
 Class Policy
 Class PaymentStructure
 Class Commission
 Class Title
 Class CoverageExpiryDate
+
+Class HiddenInside #FFFFFF
+}
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -45,23 +53,23 @@ ModelManager -left-> "1" Siasa
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-Siasa *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Siasa *--> "1" UniqueContactList
+UniqueContactList --> "~* all" Contact
+Contact *--> Name
+Contact *--> Phone
+Contact *--> Email
+Contact *--> Address
+Contact *--> "*" Tag
 
 Siasa *--> "1" UniquePolicyList
 UniquePolicyList --> "~* all" Policy
-UniquePolicyList ..> Person
+Policy : equals()
 Policy *--> PaymentStructure
 Policy *--> Commission
 Policy *--> Title
 Policy *--> "*" Tag
 Policy *--> CoverageExpiryDate
-Policy -right->"owner" Person
+Policy -right->"owner" Contact
 
 Name -[hidden]down-> Phone
 Name -[hidden]down-> Address
@@ -75,7 +83,10 @@ PaymentStructure -[hidden]down-> Commission
 
 
 
-ModelManager -->"~* filtered" Person
+
+
+
+ModelManager -->"~* filtered" Contact
 ModelManager -->"~* filtered" Policy
 
 @enduml
