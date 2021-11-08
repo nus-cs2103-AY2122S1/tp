@@ -27,7 +27,7 @@ Given below are my contributions to the project.
   * Justification: Refactoring Academy Directory is necessary to restructure how data are shown to users, how command results are displayed either as a log message or as a result shown. In addition, it separates Academy Directory from Address Book 3 completely.
   * Highlights: The major points of GUI refactoring includes:
     * Changing the background color and logo of Academy Directory. Restructure front-end and style for better usage
-    * Changing how list and student cards look like, how View Command will be shown, and how Help Window should look.
+    * Changing how the student list will look like, how View Command will be shown, and how Help Window should look.
     * Implemented a new layout called Creator that visualizes data separately from the result display logger, using information from VersionedModel.
     * Changing how message usage, error message, and help message appear on the status message display, and what the content should be.
   * Credits: I have used Source Academy's image, Slides Carnival image, PNGTree icons, and IconX8 icons in the process of designing the new front-end for Academy Directory. All images and files used have been released for commercial reuse and distribution with license, and have been properly acknowledged on our User Guide and Developer Guide.

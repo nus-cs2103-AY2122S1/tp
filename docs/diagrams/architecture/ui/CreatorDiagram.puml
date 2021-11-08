@@ -21,8 +21,9 @@ Creator ..> VersionedModel
 XYZCreator --down|> Creator
 
 Creator --down|> UiPart
+VisualizerDisplay --down|> UiPart
 
 VisualizerDisplay .> XYZCreator : creates >
 
-VisualizerDisplay ..> VersionedModel
+VisualizerDisplay .> VersionedModel
 @enduml

@@ -83,6 +83,7 @@ certain technical terms commonly used in this developer guide [here](#glossary).
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
   - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
   - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
+  - [JFreeChart](https://www.jfree.org/jfreechart/) for powerful graphing and visualization APIs
 - Background and icons used:
   - Source Academy classroom front page, taken from the [Asset page in Source Academy front-end](https://github.com/source-academy/frontend/tree/master/src/assets)
     License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
@@ -171,11 +172,12 @@ The `UI` component,
 * executes user commands using the `Logic` component, through the MainWindow object.
 * listens for changes in `VersionedModel` data so that the UI can be updated with the modified data.
 * keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* keeps a reference of some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
+* depends some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
   the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
 
 Some classes of the UI, notably `CommandBox`, `StudentCard` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
-executes a Command from the Logic `component`. The `CommandExecutor` functional interface serves as a link between the UI and the Logic component, reducing dependency of UI on the Logic part
+executes a Command from the Logic `component`. The Command Executor is first created in `MainWindow` and pass down to those components to execute commands.
+The `CommandExecutor` functional interface thus serves as a link between the UI and the Logic component, reducing dependency of UI on the Logic part
 
 ![Structure of the UI Component](images/dg/architecture/ui/ExecutorClassDiagram.png)
 
@@ -184,6 +186,8 @@ to show users the result of a command execution. After information is sent from 
 Info Object to the Creator classes, which will be used to convert it for user view in the Visualizer Display itself.
   
 ![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
+
+Note that some details are omitted or repeated in the class diagram for better explanation of how the various components of UI work.
 
 **Design Considerations**
 
@@ -471,7 +475,7 @@ This command edits a `Student`'s personal details such as their `NAME`, `PHONE`,
 
 #### Implementation
 `EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `EditCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `EditCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
 unless the `NAME` is the same  as the `Student` being edited.
@@ -493,7 +497,7 @@ This command serves to update the `Grade` of various `Assessment` that the stude
 #### Implementation
 
 `GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `GradeCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `GradeCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`.
 The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
@@ -509,7 +513,7 @@ This command serves to update the attendance status of students. A student's `At
 #### Implementation
 
 `AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `AttendanceCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `AttendanceCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
 
@@ -528,7 +532,7 @@ This command serves to update the `Participation` score of students. Following t
 #### Implementation
 
 `ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `ParticipationCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `ParticipationCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done.
 
@@ -619,7 +623,7 @@ This command sorts the `AcademyDirectory` student list based on their `Participa
 #### Implementation
 
 `SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `SortCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `SortCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
 
@@ -662,7 +666,7 @@ This command clears all `Student` entries from `AcademyDirectory`.
 and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
 Note that this is a singular command - meaning that no argument should follow after `clear`.
 
-The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 ![ClearCommandSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
 
@@ -746,7 +750,7 @@ Because `RevertCommand` has to restore academy directory data which is the respo
 and set the current `VersionedModel` internal data to the newly reloaded data. This is indicated in the sequence diagram
 as the sudden use of `Storage` component directly from `RevertCommand`. This is (highly) not 
 ideal, but the implementer has no idea how to do this properly i.e. without sudden creation of a new `StorageManager`
-... Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
+. Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
 access from elsewhere, and to put this limitation in this documentation to be solved one day. 
 
 ### UndoCommand
@@ -1225,6 +1229,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Logs and previous commits should be transferable and functional after transfer onto other computers.
 12. Users should be able to undo up to at least _100_ commands.
 13. Software default file size should not exceed _50_ Megabytes.
+14. Most commands should take preferrably 1 second to be executed, and at most 3-4 seconds.
 
 ### Glossary
 
@@ -1254,7 +1259,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 Manual testing was conducted internally by the team as of the time of writing.
-
 
 The details of the testing procedure can be found here: [Manual Testing](ManualTesting.md)
 
@@ -1316,10 +1320,10 @@ students' studio attendance, studio participation, and grades. These tools are t
 they complement the Avengers in tracking their students' progress.
 
 To improve user experience, we implemented several new features that will aid Avengers in their weekly tutoring work,
-such as Show, Sort, Visualize, and a set of version control tools (Undo, Redo, History, Revert).
+such as Show, Sort, Visualize, a set of version control tools (Undo, Redo, History, Revert), and a more comprehensive help command.
 The data visualization tools allow Avengers to perform better analysis, and customize their teaching to maximize their students'
 learning experience. With the version control tools, Academy Directory is much more forgiving and this allows
-Avengers to feel more confident and at ease while using our product.
-
+Avengers to feel more confident and at ease while using our product. The new Help command makes new users more comfortable to learn Academy Directory.
+ 
 The implementation details and design considerations for these features could be found in [Implementation](#implementation) section
 and the [Design](#design) section respectively.
