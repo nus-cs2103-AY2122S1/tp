@@ -2,17 +2,16 @@
 layout: page
 title: Developer Guide
 ---
+
 Welcome to the CSBook Developer Guide. CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via a Command Line Interface** (CLI) while still having the
 benefits of a Graphical User Interface (GUI). This guide is designed for developers that are interested to work
 on this app. It contains detailed information that will allow developers to maintain the app or
 alter and extend the app for their own use.
 
-
-* Table of Contents
-{:toc}
+- Table of Contents
+  {:toc}
 
 ---
-
 
 ## **Setting up, getting started**
 
@@ -75,15 +74,15 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of Ui Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts: `CommandBox`, `ResultPopup`, `StudentListPanel`, `GroupListPanel`, `DetailedStudentCard`, `AssessmentListPanel` and `StatusBarFooter`. 
+The UI consists of a `MainWindow` that is made up of parts: `CommandBox`, `ResultPopup`, `StudentListPanel`, `GroupListPanel`, `DetailedStudentCard`, `AssessmentListPanel` and `StatusBarFooter`.
 
-The `StudentListPanel` consists of a list of `StudentCard` objects, which displays the student's name and group they belong to. 
+The `StudentListPanel` consists of a list of `StudentCard` objects, which displays the student's name and group they belong to.
 
 The `GroupListPanel` consists of a list of `GroupCard` objects, which displays the group's name and description.
 
-The `AssessmentListPanel` consists of a list of `AssessmentCard` objects, which displays the assessment's name, score and percentage. 
+The `AssessmentListPanel` consists of a list of `AssessmentCard` objects, which displays the assessment's name, score and percentage.
 
-The `DetailedStudentCard` displays the student's name, group, telegram handle, email and notes. 
+The `DetailedStudentCard` displays the student's name, group, telegram handle, email and notes.
 
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -231,17 +230,16 @@ The following sequence diagram shows how the overall loading data operation work
 
 - **Alternative 1 (current choice):** Load groups without their student list, load students, then update each group's student list using the loaded students.
 
-    - Pros: Allows us to validate the student's group name field and saves space as we do not need to store the student list for each group in our data file.
-    - Cons: May take more time to load as we need to do more computation.
+  - Pros: Allows us to validate the student's group name field and saves space as we do not need to store the student list for each group in our data file.
+  - Cons: May take more time to load as we need to do more computation.
 
 - **Alternative 2:** Have each group store their student's information in the data file, load students and load groups separately.
 
-    - Pros: Less computation as we can immediately convert the data file to retrieve the students and groups.
-    - Cons: Wastes space as each student's details is recorded twice in the data file, once in the list of students and
+  - Pros: Less computation as we can immediately convert the data file to retrieve the students and groups.
+  - Cons: Wastes space as each student's details is recorded twice in the data file, once in the list of students and
     once in the list of groups.
 
 ### JSON encryption feature
-
 
 The JSON encryption mechanism is facilitated by `JsonCsBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
 Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the
@@ -345,17 +343,16 @@ The following sequence diagram shows how the overall decryption operation works:
 
 - **Alternative 1 (current choice):** Encrypts the entire CSBook data.
 
-    - Pros: More secure.
-    - Cons: May take up more storage due to excessive encryption.
+  - Pros: More secure.
+  - Cons: May take up more storage due to excessive encryption.
 
 - **Alternative 2:** Encrypts individual fields.
 
-    - Pros: Uses less storage by encrypting data and not fields.
-      (e.g. `name: Jun Wei` is encrypted to become `name: [ENCRYPTED]`)
-    - Cons: Less secure compared to encrypting the entire JSON file.
+  - Pros: Uses less storage by encrypting data and not fields.
+    (e.g. `name: Jun Wei` is encrypted to become `name: [ENCRYPTED]`)
+  - Cons: Less secure compared to encrypting the entire JSON file.
 
 ### Student Group Management Feature
-
 
 The management of `Group` objects and `Student` objects is done by the `ModelManager`.
 While the choosing of operations to perform is determined by the user through the use of commands
@@ -363,12 +360,14 @@ While the choosing of operations to perform is determined by the user through th
 through discussing the implementation of the `ModelManager` class and `Student`, `Group` object fields.
 
 The relevant operations for managing groups, with regard to `Student` operations are as follows:
+
 - `ModelManager#deleteStudent(Student)` - Deletes a `Student` from the model, and remove the `Student` reference from
   the respective `Group` that the student belongs to
 - `ModelManager#addStudent(Student)` - Adds a `Student` to the model, and add a reference to the `Student` in the
   respective `Group` the student is assigned to
 
 The relevant operations for managing groups, with regard to `Group` operations are as follows:
+
 - `ModelManager#deleteGroup(Group)` - Deletes a `Group` from the model, as well as delete all `Student` objects
   associated with the group
 - `ModelManager#addGroup(Group)` - Adds a `Group` to the model
@@ -388,7 +387,7 @@ objects to. The user executes a command that will create a new `Group` and add i
 **Step 2**. After the `Group` is added to the model, the user then executes a command to create a new `Student` that will
 be a part of an existing group. This command will then call `ModelManager#addStudent(Student)` with the created
 `Student` which finds the `Group` that the `Student` is to be added to, include a reference to the `Student` in the `Group`,
- then finally add the `Student` into the `CsBook` model.
+then finally add the `Student` into the `CsBook` model.
 
 ![GroupManagementSequence1](images/GroupManagementSequence1.png)
 \
@@ -426,34 +425,35 @@ After all `Student` objects associated with the `Group` has been removed, the `G
 **Aspect: How a Student references a Group and vice versa:**
 
 - **Alternative 1 (current choice):** Each `Group` only stores unique student `Name`s and `Student` stores unique `GroupName`s
-    - Pros: Reduces coupling between `Group` and `Student` significantly
-    - Cons: We must ensure that both `Name` and `GroupName`s are all unique throughout the `csbook`
+
+  - Pros: Reduces coupling between `Group` and `Student` significantly
+  - Cons: We must ensure that both `Name` and `GroupName`s are all unique throughout the `csbook`
 
 - **Alternative 2 (old implementation):** Each `Group` stores a reference of `Student` and vice versa
 
-    - Pros: More straightforward to implement.
-    - Cons: Increases coupling between `Group` and `Student` significantly
+  - Pros: More straightforward to implement.
+  - Cons: Increases coupling between `Group` and `Student` significantly
 
 **Aspect: What happens when `ModelManager#deleteGroup(Group)` command is executed:**
 
 - **Alternative 1 (current choice):** Deletes all `Student` objects associated with the `Group`
 
-    - Pros: Easy to implement.
-    - Cons: Restricts us to just one `Group` per `Student` when implemented as-is
+  - Pros: Easy to implement.
+  - Cons: Restricts us to just one `Group` per `Student` when implemented as-is
 
 - **Alternative 2:** Only delete the `Group` itself and only remove the `Group` reference within `Student` objects
 
-    - Pros: Allows for a `Student` to belong to multiple `Group`s
-    - Cons: When implemented as-is, allows `Student`s to not belong to any `Group`, violating our assumption that all
-      `Student`s have a `Group`
+  - Pros: Allows for a `Student` to belong to multiple `Group`s
+  - Cons: When implemented as-is, allows `Student`s to not belong to any `Group`, violating our assumption that all
+    `Student`s have a `Group`
 
 ---
+
 ## **Proposed Implementation**
 
 This section describes implementation details of new features that can be included in future versions of this application.
 
 ### Undo/redo feature
-
 
 The proposed undo/redo mechanism is facilitated by `VersionedCsBook`. It extends `CsBook` with an undo/redo history, stored internally as an `csBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -563,7 +563,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   - Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
-
 ---
 
 ## **Maintaining the application**
@@ -584,12 +583,12 @@ This section contains links to additional guides that will help you maintain the
 
 **Target user profile**:
 
-* has a need to manage a large number of students
-* teaches more than one module
-* prefers desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- has a need to manage a large number of students
+- teaches more than one module
+- prefers desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
 
 **Value proposition**: manage student details faster than a typical mouse/GUI driven app
 
@@ -597,33 +596,31 @@ This section contains links to additional guides that will help you maintain the
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------| ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | add a new student entry         |                  |
-| `* * *`  | new user                                   | edit a student entry         | can make changes to my students' information without removing and adding them separately                 |
-| `* * *`  | new user                                   | delete a student entry         | remove students that I no longer teach                 |
-| `* * *`  | new user                                   | group my weaker students together         | easily identify these students and focus more on them                 |
-| `* * *`  | new user                                   | view the students in a particular group        | check on their performance as a group                 |
-| `* * *`  | new user                                   | remove students from a group        | ensure that each group contains the correct students as their performance changes                 |
-| `* * *`  | new user                                   | search for my groups with a parameter        | find a specific group given a detail I know about that group              |
-| `* * *`  | new user                                   | delete a group       | remove certain groups which are no longer needed              |
-| `* * *`  | new user                                   | export my students' information containing their grades        | share/document all the data               |
-| `* *`  | new user                                   | record my student's assessment grade         | keep track of their individual performance                 |
-| `* *`  | new user                                   | take down notes on my students               | keep track of their strengths and weaknesses to be able to help them better |
-| `* *`  | new user                                   | search for my students with a parameter        | find specific students given a detail I know about them               |
-| `* *`  | new user                                   | sort my students by their grades        | find the top and bottom performers of my class               |
-| `* *`  | lazy user                                  | be able to autocomplete my student's name       | easily find my student's name in the event that I forget their full name              |
-| `* *`  | lazy user                                  | access commands that I frequently use easily      | save time on typing out my most-used commands              |
-| `* *`  | lazy user                                  | import my students' details from luminus      | avoid having to manually key in my students' information             |
-| `* *`  | user that cares about security             | safeguard my CSBook    | ensure only authorized users can view my students' data            |
-| `* *`  | user that cares about security             | encrypt my students' information    | protect my students' sensitive data from potential malware            |
-| `* *`  | user that cares about security             | backup my students' information   | in the event that my student's information gets corrupted            |
-| `*`  | new user                                   | visualise my student's assessment data        | visualize graphically how my students are performing in class                 |
-| `*`  | lazy user                                  | chat with my student via Telegram directly from the app      | avoid having to open the Telegram app separately             |
-| `*`  | experienced user                           | set-up custom shortcuts     | easily access my most frequently used commands            |
-| `*`  | experienced user                           | be able to undo my commands     | backtrack when a mistake is made            |
-
-_{More to be added}_
+| Priority | As a …​                        | I want to …​                                            | So that I can…​                                                                          |
+| -------- | ------------------------------ | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `* * *`  | new user                       | add a new student entry                                 |                                                                                          |
+| `* * *`  | new user                       | edit a student entry                                    | can make changes to my students' information without removing and adding them separately |
+| `* * *`  | new user                       | delete a student entry                                  | remove students that I no longer teach                                                   |
+| `* * *`  | new user                       | group my weaker students together                       | easily identify these students and focus more on them                                    |
+| `* * *`  | new user                       | view the students in a particular group                 | check on their performance as a group                                                    |
+| `* * *`  | new user                       | remove students from a group                            | ensure that each group contains the correct students as their performance changes        |
+| `* * *`  | new user                       | search for my groups with a parameter                   | find a specific group given a detail I know about that group                             |
+| `* * *`  | new user                       | delete a group                                          | remove certain groups which are no longer needed                                         |
+| `* * *`  | new user                       | export my students' information containing their grades | share/document all the data                                                              |
+| `* *`    | new user                       | record my student's assessment grade                    | keep track of their individual performance                                               |
+| `* *`    | new user                       | take down notes on my students                          | keep track of their strengths and weaknesses to be able to help them better              |
+| `* *`    | new user                       | search for my students with a parameter                 | find specific students given a detail I know about them                                  |
+| `* *`    | new user                       | sort my students by their grades                        | find the top and bottom performers of my class                                           |
+| `* *`    | lazy user                      | be able to autocomplete my student's name               | easily find my student's name in the event that I forget their full name                 |
+| `* *`    | lazy user                      | access commands that I frequently use easily            | save time on typing out my most-used commands                                            |
+| `* *`    | lazy user                      | import my students' details from luminus                | avoid having to manually key in my students' information                                 |
+| `* *`    | user that cares about security | safeguard my CSBook                                     | ensure only authorized users can view my students' data                                  |
+| `* *`    | user that cares about security | encrypt my students' information                        | protect my students' sensitive data from potential malware                               |
+| `* *`    | user that cares about security | backup my students' information                         | in the event that my student's information gets corrupted                                |
+| `*`      | new user                       | visualise my student's assessment data                  | visualize graphically how my students are performing in class                            |
+| `*`      | lazy user                      | chat with my student via Telegram directly from the app | avoid having to open the Telegram app separately                                         |
+| `*`      | experienced user               | set-up custom shortcuts                                 | easily access my most frequently used commands                                           |
+| `*`      | experienced user               | be able to undo my commands                             | backtrack when a mistake is made                                                         |
 
 ### Use cases
 
@@ -634,16 +631,15 @@ _{More to be added}_
 1. User creates a new group.
 2. CSBook shows the newly created group.
 
-   Use Case ends. 
+   Use Case ends.
 
 **Extensions**
 
 - 1a. CSBook detects that a group with the same name exists.
 
-    - 1a1. CSBook shows an error message.
+  - 1a1. CSBook shows an error message.
 
   Use case resumes at step 1.
-
 
 **Use case: UC02 - Add a Student**
 
@@ -653,31 +649,31 @@ _{More to be added}_
    Use Case ends.
 
 **Extensions**
-- 1a. CSBook detects that the student already exists. 
+
+- 1a. CSBook detects that the student already exists.
 
   - 1a1. CSBook shows an error message.
   - 1a2. User enters new student entry.
- 
-     Steps 1a1-1a2 are repeated until the student entered does not already exist.
-  
-  Use case resumes from Step 2. 
+
+    Steps 1a1-1a2 are repeated until the student entered does not already exist.
+
+  Use case resumes from Step 2.
 
 - 1b. CSBook detects that the student details entered are invalid.
 
-  - 1b1. CSBook shows an error message. 
-  - 1b2. User enters new student data. 
-  
-    Steps 1b1-1b2 are repeated until the student details entered are valid. 
-  
-  Use Case resumes from Step 2. 
-  
+  - 1b1. CSBook shows an error message.
+  - 1b2. User enters new student data.
+
+    Steps 1b1-1b2 are repeated until the student details entered are valid.
+
+  Use Case resumes from Step 2.
 
 **Use case: UC03 - Record a student's grade for an assessment**
 
 **MSS**
 
-1. User adds an assessment to an existing student. 
-2. CSBook shows the newly created assessment. 
+1. User adds an assessment to an existing student.
+2. CSBook shows the newly created assessment.
 
    Use case ends.
 
@@ -687,24 +683,23 @@ _{More to be added}_
 
   - 1a1. CSBook shows an error message.
   - 1a2. User adds assessment to existing student.
-    
+
     Steps 1a1-1a2 are repeated until given student is an existing one.
-    
+
   Use case resumes from Step 2.
 
-- 1b. CSBook detects that the assessment already exists. 
-  
-  Use Case ends. 
+- 1b. CSBook detects that the assessment already exists.
+
+  Use Case ends.
 
 - 1c. CSBook detects that the assessment details are of an invalid format.
-  
-  - 1c1. CSBook shows an error message. 
-  - 1c2. User enters new details for assessment. 
-  
+
+  - 1c1. CSBook shows an error message.
+  - 1c2. User enters new details for assessment.
+
     Steps 1c1-1c2 are repeated until the assessment details are valid.
-  
-  Use Case resumes from Step 2. 
-  
+
+  Use Case resumes from Step 2.
 
 **Use case: UC04 - Group students together**
 
@@ -723,60 +718,60 @@ _{More to be added}_
 - 1a. CSBook detects that a group with the same name exists.
 
   - 1a1. CSBook shows an error message.
-  
+
   Use case resumes at step 3.
 
 - 3a. CSBook detects that the student exists.
 
   - 3a1. CSBook shows an error message.
-  - 3a2. User changes group of the student. 
-  
-  Use case resumes at step 4. 
+  - 3a2. User changes group of the student.
+
+  Use case resumes at step 4.
 
 **Use case: UC05 - View a particular student**
 
-**MSS** 
+**MSS**
 
-1. User requests to view a particular student. 
-2. CSBook retrieves and displays the student's information. 
+1. User requests to view a particular student.
+2. CSBook retrieves and displays the student's information.
 
-Use case ends. 
+Use case ends.
 
-**Extensions** 
+**Extensions**
 
-- 1a. CSBook detects that the student does not exist. 
-  
-  - 1a1. CSBook shows an error message. 
-  - 1a2. User enters the name of an existing student. 
+- 1a. CSBook detects that the student does not exist.
+
+  - 1a1. CSBook shows an error message.
+  - 1a2. User enters the name of an existing student.
 
   Steps 1a1-1a2 are repeated until the name entered belongs to an existing student.
 
-  Use Case resumes at step 2.  
+  Use Case resumes at step 2.
 
 **Use case: UC06 - View students in a specific group**
 
 **MSS**
 
 1. User requests to show a specific group.
-2. CSBook retrieves and displays students in the specific group. 
+2. CSBook retrieves and displays students in the specific group.
 
    Use case ends.
 
 **Extensions**
 
 - 1a. CSBook detects that a group does not exist.
-  
-  - 1a1. CSBook shows an error message. 
-  - 1a2. User enters an existing group name. 
-  
+
+  - 1a1. CSBook shows an error message.
+  - 1a2. User enters an existing group name.
+
     Steps 1a1-1a2 are repeated until the group name entered belongs to an existing group.
 
-  Use case resumes at 2. 
+  Use case resumes at 2.
 
-- 1b. CSBook detects that the input provided to view group is of invalid format. 
-  
-  - 1b1. CSBook shows an error message. 
-  - 1b2. User enters correct format to view group. 
+- 1b. CSBook detects that the input provided to view group is of invalid format.
+
+  - 1b1. CSBook shows an error message.
+  - 1b2. User enters correct format to view group.
 
     Steps 1b1-1b2 are repeated until the group exists.
 
@@ -788,60 +783,56 @@ Use case ends.
 
 1. User creates a new group.
 2. CSBook shows the newly created group.
-3. User request to change the group of a student to the group. 
+3. User request to change the group of a student to the group.
 4. CSBook updates and shows the student with the group's name.
 
-Use Case ends. 
+Use Case ends.
 
 **Extensions**
 
 - 1a. CSBook detects that a group with the same name exists.
 
-    - 1a1. CSBook shows an error message.
+  - 1a1. CSBook shows an error message.
 
   Use case resumes at step 3.
 
 - 3a. CSBook detects that the student does not exist.
-  
-  - 3a1. CSBook shows an error message. 
+
+  - 3a1. CSBook shows an error message.
   - 3a2. User enters a student's name.
 
-    Steps 3a1-3a2 repeats until the student's name entered belongs to an existing student. 
-  
-  Use case resumes at step 4. 
+    Steps 3a1-3a2 repeats until the student's name entered belongs to an existing student.
 
+  Use case resumes at step 4.
 
-**Use case: UC08 - Add note to a particular student** 
+**Use case: UC08 - Add note to a particular student**
 
-**MSS** 
+**MSS**
 
 1. User adds note to a student.
-2. CSBook updates and shows the student's information with the new note. 
+2. CSBook updates and shows the student's information with the new note.
 
-Use case ends. 
+Use case ends.
 
 **Extensions**
 
 - 1a. CSBook detects that the student does not exist.
 
-    - 1a1. CSBook shows an error message.
-    - 1a2. User enters a student's name.
+  - 1a1. CSBook shows an error message.
+  - 1a2. User enters a student's name.
 
-      Steps 1a1-1a2 repeats until the student's name entered belongs to an existing student.
+    Steps 1a1-1a2 repeats until the student's name entered belongs to an existing student.
 
   Use case resumes at step 2.
 
-- 1b. CSBook detects that invalid format used to add note. 
+- 1b. CSBook detects that invalid format used to add note.
 
-  - 1b1. CSBook shows an error message. 
-  - 1b2. User adds note with valid format. 
+  - 1b1. CSBook shows an error message.
+  - 1b2. User adds note with valid format.
 
     Steps 1b1-1b2 repeats until the user adds note with valid format.
 
   Use case resumes at step 2.
-
-
-_{More to be added}_
 
 ### Non-Functional Requirements
 
@@ -850,8 +841,6 @@ _{More to be added}_
 3.  (Usability) A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  (Recoverability) Should the stored student data of the application be corrupted, it can still recover and function on a clean slate by itself.
 5.  (Security) The stored student data of the application should be encrpyted/stored securely to reduce the chances of an unintended leak of information from the application.
-
-_{More to be added}_
 
 ### Glossary
 
@@ -875,30 +864,169 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+- Initial launch
 
-   1. Download the jar file and copy into an empty folder
+  1.  Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample students and groups. The window size may not be optimum.
+  2.  Double-click the jar file Expected: Shows the GUI with a set of sample students and groups. The window size may not be optimum.
 
-1. Saving window preferences
+- Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+  1.  Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+  2.  Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
+
+### Encrypt data file
+
+- Encrypting the data file
+
+  1.  Prerequisites: CsBook must contain data (at least 1 student and 1 group)
+  2.  Test case: `encrypt`\&nbsp;
+      Expected: Open `data/csbook` with any text editor. The file contents should be encrypted.
+
+### Decrypt data file
+
+- Decrypting the data file
+
+  1. Prerequisites: CsBook must contain data (at least 1 student and 1 group)
+
+  2. Test case: `decrypt`\&nbsp;
+     Expected: Open `data/csbook` with any text editor. The file contents should be decrypted.
+
+### Adding a student
+
+- Adding a student
+
+  1. Prerequisites: a student with the name `Brian` does not exist, and there is a group named `CS2101`.
+
+  2. Test case: `add n/Brian t/@brian99 e/briancheong99@u.nus.edu g/CS2101`\&nbsp;
+     Expected: `Brian` is added to the list of students and is in the group `CS2101`.
+
+  3. Test case: `add n/Brian t/@brian99 e/briancheong99@u.nus.edu`\&nbsp;
+     Expected: No student is added. Error details shown in the pop-up message.
+
+### Editing a student
+
+- Editing a student
+
+  1. Prerequisites: List all students and groups using the `list` command. Multiple students in the list. No student named `Brian` exists.
+
+  2. Test case: `edit 1 n/Brian`\&nbsp;
+     Expected: The name of the first student is changed to `Brian`.
+
+  3. Test case: `edit 0 n/Brian`\&nbsp;
+     Expected: No student is edited. Error details shown in the pop-up message.
+
+### Viewing detailed information about student
+
+- Viewing detailed information of a student using a student's name
+
+  1.  Prerequisites: There exists a student in CsBook with the name `David Li`and no student with the name `Bryan Cheong`.
+
+  2.  Test case: `viewstudent David Li`\&nbsp;
+      Expected: A pop-up is shown saying that the student has been successfully displayed. A detailed view of the student is displayed. The student's name, group, telegram handle and email is displayed on the top left corner of the display.
+      Notes about the student is displayed on the bottom left corner of the display. A list of the student's assessments
+      is displayed on the right.
+
+  3.  Test case: `viewstudent Bryan Cheong`\&nbsp;
+      Expected: A pop-up is shown saying that the student `Bryan Cheong` does not exist.
+
+### Adding an assessment to a student
+
+- Adding an assessment for a student.
+
+  1.  Prerequisites: List all students and groups using the `list` command. Multiple students in the list. The first student should not have an assessment named `Finals`.
+
+  2.  Test case: `addassessment 1 a/Finals s/13/30`\&nbsp;
+      Expected: A new assessment named `Finals` with score `13/20` has been added to the first student.
+
+  3.  Test case: `addassessment 1 a/Finals s/13/12`\&nbsp;
+      Expected: No new assessment is added to the first student. Error details shown in the pop-up message.
+
+### Deleting an assessment from a student
+
+- Deleting an assessment from a student.
+
+  1.  Prerequisites: List all students and groups using the `list` command. Multiple students in the list. The assessment `Finals` must exist in the first student's assessment list. The assessment `Midterms` does not exist in the first student's assessment list.
+
+  2.  Test case: `deleteassessment 1 a/Finals`\&nbsp;
+      Expected: The assessment named `Finals` has been removed from the first student.
+
+  3.  Test case: `deleteassessment 1 a/Midterms`\&nbsp;
+      Expected: No assessments has been deleted from the first student. Error details shown in the pop-up message.
+
+### Adding a note to a student
+
+- Adding a note to a student.
+
+  1.  Prerequisites: a student with the name `Brian` exists. A student with the name `Jun Wei` does not exist.
+
+  2.  Test case: `note n/Brian no/Not good at UML Diagrams`\&nbsp;
+      Expected: A new note `Not good at UML Diagrams` has been added to the student named `Brian`.
+
+  3.  Test case: `note n/Jun Wei no/Not good at UML Diagrams`\&nbsp;
+      Expected: No new note is added to any student. Error details shown in the pop-up message.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+- Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+  1.  Prerequisites: List all students and groups using the `list` command. There should be at least one student.
 
-   1. Test case: `delete 1`<br>
-      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+  2.  Test case: `delete 1`\&nbsp;
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
-   1. Test case: `delete 0`<br>
+  3.  Test case: `delete 0`\&nbsp;
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+  4.  Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)\&nbsp;
       Expected: Similar to previous.
+
+### Adding a group
+
+- Adding a group
+
+  1. Prerequisites: a group with the name `CS1101S` does not exist. A group with the name `CS2103T` exists.
+
+  2. Test case: `addgroup g/CS1101S d/Tutorial Group 2`\&nbsp;
+     Expected: a new group has been added with the name `CS1101S` and description `Tutorial Group 2`.
+
+  3. Test case: `addgroup g/CS2103T d/Software Engineering`\&nbsp;
+     Expected: no new group has been added. Error details shown in the pop-up message.
+
+### Viewing a group
+
+- Viewing a group
+
+  1. Prerequisites: A group with the name `CS2103T` exists. A group with the name `CS1101S` does not exist. There is at least one student who is in the `CS2103T` group.
+
+  2. Test case: `viewgroup g/CS2103T`\&nbsp;
+     Expected: the students in the group `CS2103T` are shown in the list of students.
+
+  3. Test case: `viewgroup g/CS1101S`\&nbsp;
+     Expected: no group has been viewed. Error details shown in the pop-up message.
+
+### Changing a student's group
+
+- Changing a student's group
+
+  1. Prerequisites: A student with the name `Brian` exists and is in a group `CS2101`. A group with the name `CS2103T` exists. A group with the name `CS1101S` does not exist.
+
+  2. Test case: `changegroup n/Brian g/CS2103T`\&nbsp;
+     Expected: the student named `Brian` is now in the group `CS2103T`.
+
+  3. Test case: `changegroup n/Brian g/CS1101S`\&nbsp;
+     Expected: no student has had their group changed. Error details shown in the pop-up message.
+
+### Deleting a group
+
+- Deleting a group
+
+  1. Prerequisites: List all students and groups using the `list` command. A group with the name `CS2103T` exists, and there are students in the group. A group with the name `CS1101S` does not exist.
+
+  2. Test case: `deletegroup g/CS2103T`\&nbsp;
+     Expected: the group named `CS2103T` is deleted. All students who are in the group are deleted as well.
+
+  3. Test case: `deletegroup g/CS1101S`\&nbsp;
+     Expected: No group is deleted. Error details shown in the pop-up message.
