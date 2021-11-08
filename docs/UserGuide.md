@@ -58,6 +58,9 @@ Used to highlight dangers.
 Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
 ### 2. Installing the project
 Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor.
+
+<div style="page-break-after: always;"></div>
+
 ### 3. Running the application
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds.
 Note how the app contains some sample data. <br>
@@ -501,6 +504,8 @@ Lists all persons in the list panel.
 Format: `person /list`<br>
 Advanced user Format:`p /l`
 ![personList](images/personList.png)
+
+<div style="page-break-after: always;"></div>
 
 #### _Listing all groups_
 
