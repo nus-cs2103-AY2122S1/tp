@@ -38,7 +38,7 @@ Used to highlight dangers.
 ### 1. Setup
 Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
 ### 2. Installing the project
-Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your **Notor**.
+Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor.
 ### 3. Running the application
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds.
 Note how the app contains some sample data. <br>
@@ -47,7 +47,7 @@ Note how the app contains some sample data. <br>
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
-Some example commands you can try:
+Some example commands you can try in order to get familiarise with Notor:
 
 * **`person /list`** : Lists all contacts.
 * **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
@@ -104,7 +104,7 @@ Format: `help`
 #### _Clearing all entries_ :
 
 Clears all entries from Notor. Be warned; data will be deleted and **will not be saved**. The intended use of this
- command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
+command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 
 Format: `clear`
 * Take care not to confuse this command with the more specific`/clearnote` command.
@@ -164,7 +164,7 @@ Adds a person at the given index to a specified subgroup of group.
 Format: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
 Advanced user Format: `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
 
-* Adds a person with the `INDEX` to `SUBGROUP_NAME` of `SUBGROUP_NAME`.
+* Adds a person with the `INDEX` to `SUBGROUP_NAME` of `GROUP_NAME`.
 
 Examples:
 * `person 1 /add g:Orbital sg:Artemis`
@@ -202,7 +202,7 @@ Advanced user Format:`p (INDEX) /e [n:NAME] [p:PHONE] [e:EMAIL]`
 
 Examples:
 * `person 1 /edit n:John Cena e:notor@notor.com`
-* `p 2 /e n:Little Lamb p:93339333`
+* `p 2 /e n:John Doe p:93339333`
 
 #### _Removing a person from group_ :
 
@@ -320,7 +320,7 @@ Format: `person /listarchive`
 Advanced user Format: `p /lar`
 
 #### _Unarchiving_ :
-Returns the archived person to your regular person list in Notor.
+Restores the archived person back to your person list in Notor.
 
 Format: `person (INDEX) /unarchive`
 Advanced user Format:`p (INDEX) /uar`
@@ -346,11 +346,9 @@ Examples:
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
 
-<div markdown="block" class="alert alert-info">
-:warning:
-**Only the group create command can be used at other views.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Creating a group command will only work when persons are listed in Notor.
 The rest of group commands below will work only when groups or subgroups are listed.**
-:warning:
 </div>
 
 #### _Deleting a group_ :
@@ -368,6 +366,7 @@ Examples :
 * `g 1 /d`
 
 #### _Creating a subgroup_ :
+
 Creates a new subgroup. **This command only works when group are listed and not when subgroups are listed.**
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
@@ -385,7 +384,8 @@ Examples :
 
 #### _Adding notes to a group or subgroup_ :
 
-Adds notes on a group or subgroup and saves the time when the note is added.
+* Adds notes on a group or subgroup and saves the time when the note is added.
+* Pops up a note window to add note to group or subgroup.
 
 Format: `group (INDEX) /note`<br>
 Advanced user Format: `group (INDEX) /n`
@@ -438,11 +438,12 @@ Advanced user Format: `g /l`
 #### _Listing all persons in a group or subgroup_ :
 
 Lists all persons in that group or subgroup.<br>
-Use after you have listed out all groups or subgroups (so you can select the index).<br>
+
 
 Format: `person (INDEX) /list`<br>
 Advanced user Format:`p (INDEX) /l`
 
+* Only works after you have listed out all groups or subgroups in Notor.
 * Lists all persons of a group or subgroup that is at the given `INDEX` .
 * Do not confuse this with the list all subgroups command, whose first command word is `group`
 
@@ -453,8 +454,9 @@ Examples:
 
 #### _Listing all subgroups in a group_ :
 
-Lists all the subgroups within a group. Use after you have listed out all groups (so you can select the index)
+Lists all the subgroups within a group.
 
+* Only works after you have listed out all groups or subgroups in Notor.
 * Do not confuse this with the list all persons command, whose first command word is `person`
 
 Format: `group (INDEX) /list`<br>
@@ -491,7 +493,7 @@ Examples:
 #### _Finding groups or subgroups_ :
 
 Finds all the groups with the keyword specified. This will search for the keyword within the group's name.
-Only works when group/s are shown in the list panel.
+Use after you have listed out all groups or subgroups.
 
 Format:  `group /find n:QUERY_NAME`<br>
 Advanced user Format: `g /f n:QUERY_NAME`
@@ -514,7 +516,7 @@ Notor data are saved in the hard disk automatically after any command that chang
 
 ### Editing the data file
 
-Notor data are saved as a JSON file `[JAR file location]/data/Notor.json`. Advanced users are welcome to update data
+Notor data are saved as a JSON file `[JAR file location]/data/notor.json`. Advanced users are welcome to update data
 directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -531,7 +533,8 @@ Users can also use the Down arrow key to navigate back to the more recent comman
 ### Keyboard Shortcuts
 Notor has keyboard shortcuts to give you added convenience and allow you to control Notor using your keyboard alone. Here are the shortcuts we have available.
 
-**In Pop-Up Windows**
+**In Note Pop-Up Windows**
+
 Navigate the buttons using the arrow keys. On Windows and Linux, select the button by pressing enter; on MacOS, press space.
 
 **Note**:
@@ -583,7 +586,7 @@ Action                    | Format                                              
 **Untag**                 | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /ut [t:TAG1,TAG2,...]`
 **Clear Tags**            | `person (INDEX) /cleartags`                                                   | `p (INDEX) / ct`
 **List Persons**          | `person /list`                                                                | `p /l`
-**List Persons in Group or SubGroup** | `person [INDEX] /list`                                            | `p [INDEX] /l`
+**List Persons in Group or SubGroup** | `person (INDEX) /list`                                            | `p [INDEX] /l`
 **Find**                  | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
 **Archive**               | `person (INDEX) /archive`                                                     | `p (INDEX) /ar`
 **Archive All**           | `person /archive`                                                             | `p /ar`
