@@ -81,7 +81,7 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -89,7 +89,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### UI component
 
@@ -108,7 +108,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Logic component
 
@@ -124,12 +124,16 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-before: always;"></div>
+
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-before: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -139,7 +143,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -155,7 +159,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Storage component
 
@@ -174,7 +178,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ## **Implementation**
 
@@ -204,7 +208,7 @@ Step 6. The user decides to remove the tag `student` from a contact at index 3, 
 
 Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Design considerations:
 
@@ -233,7 +237,7 @@ Step 1. The user launches the application. Current `UniquePersonList` will conta
 
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 Step 2. The user executes `add n/person3 …​` to add a new contact. This contact is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
 
@@ -263,7 +267,7 @@ The following sequence diagram shows how the pin operation works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Design considerations:
 
@@ -287,7 +291,7 @@ The following sequence diagram shows how the pin operation works:
     * Pros: Harder to implement.
     * Cons: Less code duplication.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Find feature
 
@@ -324,7 +328,7 @@ Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated fi
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### FindAny feature
 
@@ -468,7 +472,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -503,7 +507,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 * keep track of upcoming birthdays
 * easy to use
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### User stories
 
@@ -530,7 +534,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 | User                          | Can modify contact details            | Update my contacts' details
 | Experienced user      | Retrieve previously run commands          | Avoid typing the commands I use frequently again and again
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Use cases
 
@@ -579,7 +583,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
     Use case ends.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 **Extensions**
 
@@ -625,7 +629,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
     Use case ends.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 **Use case: Find a contact**
 
@@ -675,7 +679,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case ends.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 * 2b. No existing contacts match the tag provided.
 
@@ -774,7 +778,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
     
       Use case resumes at step 2.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 **Use case: Untag a contact**
 
@@ -913,7 +917,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case ends.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -930,7 +934,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -958,7 +962,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Adding a contact
 
@@ -988,7 +992,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is added. Error details are shown in the status message.
 
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Finding a contact (all search terms must be fulfilled)
 1. Finding a contact by name
@@ -1089,7 +1093,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect untag commands to try: `findAny`, `findAny t/<valid tag> n/<valid name> c/`, `...`.<br>
        Expected: No changes made. Error details are shown in the status message.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Deleting a contact
 
@@ -1118,7 +1122,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
       Expected: No contact is deleted. Error details are shown in the status message.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Deleting multiple contacts
 
@@ -1146,7 +1150,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within the list size currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Pinning a contact
 
@@ -1177,7 +1181,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect unpin commands to try: `unpin`, `unpin -1`, `unpin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Tagging a contact
 
@@ -1211,7 +1215,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
        Expected: No changes made. Error details are shown in the status message.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Export Mailing List Command
 
