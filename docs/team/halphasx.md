@@ -59,7 +59,7 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
 
 ## **Documentation**:
     * Developer Guide: NFRs and Glossary, and FXML handling
-    * User Guide: Feature list & Command Summary(with [Elton](eltongohjh.md))
+    * User Guide: Feature list & Command Summary (with [Elton](eltongohjh.md))
                   Revised the whole UG to adhere to the current commands,
                   Fixes :
                   - Filled out missing commands
@@ -78,5 +78,5 @@ I used IntelliJ and Git Bash for my main source code window and my terminal wind
   As I have less experience with Java and I am still adapting to the workflow, I usually give teammates my suggestion and tried
   to help as much as I can on suggestions on certain features. As I was in charge of UI, I also coordinated with my fellow teammates
   regarding the commands as well as the supported features.
-  I asked for help on handling CI testing in the forums(e.g. https://github.com/nus-cs2103-AY2122S1/forum/issues/323 ,  https://github.com/nus-cs2103-AY2122S1/forum/issues/363)
+  I asked for help on handling CI testing in the forums (e.g. https://github.com/nus-cs2103-AY2122S1/forum/issues/323 ,https://github.com/nus-cs2103-AY2122S1/forum/issues/363)
 
