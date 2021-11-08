@@ -34,6 +34,8 @@ title: Developer Guide
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 - [Appendix: Effort](#appendix-effort)
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 ## **Setting up, getting started**
@@ -46,7 +48,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103-T14-1/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
@@ -170,6 +172,8 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -477,7 +481,6 @@ Given below is an example usage scenario:
 
   We choose to combine these two similar and relevant features into one command for simplicity. Different and self-explanatory flags are used here to distinguish them.
 
-
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -487,6 +490,8 @@ Given below is an example usage scenario:
 - [Logging guide](Logging.md)
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
+
+<div style="page-break-after: always;"></div>
 
 ---
 
@@ -771,6 +776,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Should be usable by a novice who has never used the system.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 ## **Appendix: Instructions for manual testing**
@@ -936,6 +943,10 @@ testers are expected to do more *exploratory* testing.
       Expected: No visit is marked as done. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect done commands to try: `done`, `done x` (where x is larger than the list size)<br>
       Expected: Same as previous.
+
+<div style="page-break-after: always;"></div>
+
+---
 
 ## **Appendix: Effort**
 
