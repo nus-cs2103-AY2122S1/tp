@@ -1144,6 +1144,13 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `mailingList k/`<br>
        Expected: No changes made. Error details are shown in the status message.
 
+1. Export Filtered contact list
+
+    1. Prerequisites: Filter contacts using the `find` command.
+
+    1. Test case: `mailingList` as above<br>
+        Expected: Same result as exporting full contact list, but with only the contacts in the filtered list
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
