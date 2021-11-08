@@ -15,7 +15,8 @@ https://github.com/AY2021S1-CS2103T-W16-3/tp/pull/179/commits/aec461182c194c9ca2
 <!--@@author
 -->
 
-# **1. Introduction**
+# 1. Introduction
+
 
 Welcome to the TutorAid User Guide, the one-stop manual where you will find everything that you need to know about how to use the app!
 
@@ -37,7 +38,8 @@ Just downloaded TutorAid? Check out the [About](#2-about) and [Quick Start](#3-q
 
 ***
 
-# **2. About**
+# 2. About
+
 
 This section contains information and terms that may help you to understand the user guide.
 
@@ -170,7 +172,7 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 ***
 
-# **3. Quick Start**
+# 3. Quick Start
 
 1. Ensure that you have Java `11` or above installed in your computer.
 
@@ -204,14 +206,14 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 ***
 
-# **4. Beginner's Tutorial**
+# 4. Beginner's Tutorial
 
 Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use a few of our commands to manage the details of your students and lessons on a day-to-day basis :smile:
 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you.
 
 
-### **Tips before you get started:**
+### Tips before you get started
 {:.no_toc}
 
 * As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
@@ -354,7 +356,7 @@ For more information about how to interpret any of the commands, you check out t
 
 > :bulb: This section provides a detailed documentation of all the commands in TutorAid. Thus, it is best for users to visit this after gaining familiarity with the command format, command syntax and a few of the frequently used commands in TutorAid.
 
-## 5.1 Student Commands
+## **5.1 Student Commands**
 
 ### Adding a student: `add -s`
 {:.no_toc}
@@ -452,20 +454,20 @@ Examples:
 
 ### Deleting progress from a student: `del -p`
 {:.no_toc}
-Removes a progress entry from the student at the specified student index.
+Removes the latest progress entry from the student at the specified student index.
 
 Format: `del -p STUDENT_INDEX`
 
-* Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
+* Deletes the most recently added `PROGRESS` from the student at the specified `STUDENT_INDEX`.
 * The index refers to the index number shown in the Student Panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `del -p 2` deletes the progress of the 2nd student displayed in the Student Panel.
+* `list` followed by `del -p 2` deletes the latest progress of the 2nd student displayed in the Student Panel.
 
 > :bulb: Using this command will update the Student Panel to only display the edited student.
 
-## 5.2 Lesson Commands
+## **5.2 Lesson Commands**
 
 ### Adding a lesson: `add -l`
 {:.no_toc}
@@ -545,7 +547,7 @@ Format: `find -l KEYWORD...`
 Examples:
 * `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
 
-## 5.3 Student and Lesson Commands
+## **5.3 Student and Lesson Commands**
 
 ### Listing all students and lessons: `list`
 {:.no_toc}
@@ -588,7 +590,7 @@ Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 Examples:
 * `del -sl s/1 2 3 l/1` deletes the students with indexes 1, 2 and 3 from the lesson with index 1.
 
-## 5.4 Other Commands
+## **5.4 Other Commands**
 
 ### Viewing help: `help`
 {:.no_toc}
@@ -610,7 +612,7 @@ Exits the program.
 
 Format: `exit`
 
-## 5.5 Saving and Editing Data
+## **5.5 Saving and Editing Data**
 
 ### Saving the data
 {:.no_toc}
@@ -635,13 +637,19 @@ TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAi
 # 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous TutorAid home folder.
+**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous TutorAid home folder.<br><br>
+
+**Q**: I am currently only able to view my students' latest progress entry, how can I view all the entries?<br>
+**A**: To view all the progress entries of a student, you can key `view -s STUDENT_INDEX` into the Command Box and hit ENTER. You should be able to see you 10 most recently added progress entries. Please note that you will not be able to view all the progress entries of multiple students at any one time.<br><br> 
+
+**Q**: I have added more than 10 progress entries for a student, but why am I only able to see up to the 10 most recent entries?
+**A**: TutorAid only support storing up to 10 progress entries so that it is easier for tutor to manage and view all of their entries for each student
 
 ***
 
 # 8. Command Summary
 
-### 8.1 Student Commands
+### **8.1 Student Commands**
 
 |---
 Action | Format and Examples
@@ -654,7 +662,7 @@ Action | Format and Examples
 **[Add Progress](#adding-progress-for-a-student-add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student-del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
-### 8.2 Lesson Commands
+### **8.2 Lesson Commands**
 
 |---
 Action | Format and Examples
@@ -665,7 +673,7 @@ Action | Format and Examples
 **[View lesson](#viewing-a-lesson-view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **[Find lesson](#finding-lessons-by-name-find--l)** | `find -l KEYWORD...`<br>e.g., `find -l maths`
 
-### 8.3 Student and Lesson Commands
+### **8.3 Student and Lesson Commands**
 
 |---
 Action | Format and Examples
@@ -674,7 +682,7 @@ Action | Format and Examples
 **[Add student(s) to lesson(s)](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
 **[Delete student(s) from lesson(s)](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 
-### 8.4 Other Commands
+### **8.4 Other Commands**
 
 |---
 Action | Format and Examples
