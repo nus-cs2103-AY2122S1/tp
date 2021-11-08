@@ -41,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()
                 && argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.FIND_COMMAND_ONLY_NAME_OR_INDEX));
         }
 
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
