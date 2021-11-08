@@ -401,8 +401,6 @@ The above applies to the scenario when the user inputs a command which calls a m
 
 The panels default to `StudentCard` and `LessonCard` for the application launch, thus showing most details to the user but not the complete list of `Progress` entries.
 
-***
-
 ### Add lesson feature
 
 #### Implementation
