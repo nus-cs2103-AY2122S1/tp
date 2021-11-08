@@ -79,7 +79,7 @@ all types of objects to be unique for instance, I changed our TaskList and Order
 
 ## Contributions to the DG
 
-### Task and Order package
+### Task and Order Package
 
 #### Implementation
 The implementation of both of these packages is largely similar to the `person` package. In the original AB3, there is a
@@ -138,7 +138,7 @@ This was an alternative method we considered, that would come with a cost in com
 `Task` and `Order` objects. We felt that the method we chose that made use of the `UniqueXList` properties and kept the
 classes more distinct better adhered to the Separation of concerns and Law of Demeter principle.
 
-#### Updating related fields in Person
+#### Updating related fields in Person class
 In implementing the fields for the `Task` and `Order` object and considering possible feature flaws, we decided to update
 the fields for the `Person` class as well. The original AB3 treated two people as equal only if their names were spelt exactly
 the same, with this being case-sensitive. We decided that multiple clients having the exact same name was rare
@@ -148,4 +148,23 @@ should be recognised as the same a `Person` with `Name` `JOHN DOE`.
 We updated the equality check to account for this, and also updated the input validation for `Name` to allow at most one
 space between blocks of characters (previously `John   Doe` would be different from `John Doe`. We felt this likely to be
 a mistake and should be avoided).
+
+### Add Order feature
+As mentioned above, to add an `Order`, the `Person` the `Order` is addressed to should already be in `SalesNote`. The
+following is a sequence diagram showing the execution of the command:
+
+![AddOrderSequenceDiagram](../images/AddOrderSequenceDiagram.png)
+Focusing on after `AddOrderCommand:execute` is called,
+
+1. First the application calls `model:hasOrder(toAdd)` to check if `toAdd` is already in the model.
+2. Next, the application calls `model:hasPersonWithName(toAdd.getCustomer.getName())` to check if the `Person` the `Order`
+   is addressed to is already in the application
+4. If both checks pass, the application finally calls `model:addOrder(toAdd)` to add the `Order`.
+
+Here is an activity diagram to more clearly illustrate the logic of the application:
+![AddOrderActivityDiagram](../images/AddOrderActivityDiagram.png)
+
+#### Result
+An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
+is unique and does not duplicate an existing `Order` object in SalesNote.
 

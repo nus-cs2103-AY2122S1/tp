@@ -270,11 +270,19 @@ Focusing on after `AddOrderCommand:execute` is called,
 1. First the application calls `model:hasOrder(toAdd)` to check if `toAdd` is already in the model.
 2. Next, the application calls `model:hasPersonWithName(toAdd.getCustomer.getName())` to check if the `Person` the `Order`
    is addressed to is already in the application
-3. Tasks linked to the orders and the orders themselves are deleted.
+4. If both checks pass, the application finally calls `model:addOrder(toAdd)` to add the `Order`.
+
+Here is an activity diagram to more clearly illustrate the logic of the application:
+![AddOrderActivityDiagram](images/AddOrderActivityDiagram.png)
+
+#### Result
+An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
+is unique and does not duplicate an existing `Order` object in SalesNote.
 
 ### Update Person Changes in Order List and Task List
 
-SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated to the Order list.
+Other commands where the relationships between the `Order`, `Person` and `Task` classes comes up is in
+editing and deletion of clients. We wanted to achieve the following:
 
 * When a client is deleted, their orders and the tasks linked to the orders will be deleted as well.
 * When a client name is modified, this change will be updated in their existing orders.
@@ -297,6 +305,15 @@ The sequence diagram below shows the interaction within the Logic component for 
 
 #### Result
 The changes in person objects are updated in their order and task objects.
+
+### Other related commands
+Note that similar considerations are addressed in the following commands:
+* `DeleteOrderCommand` where `Task` objects related to the deleted `Order` are also deleted.
+  
+* `AddTaskCommand` `EditTaskCommand` where if the user attempts to tag a `Task` to a `Order`, SalesNote first checks if the
+`Order` already exists. 
+  
+We have omitted these as their implementation concerns are largely similar to the two above that we have already presented.
 
 ### Sort Order Feature
 
