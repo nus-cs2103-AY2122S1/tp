@@ -92,6 +92,7 @@ Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO N
     - have each `domain label` consist of alphanumeric characters, separated only by hyphens, if any
 * If only either `GITHUB USERNAME` or `REPO NAME` are specified, the data will still be saved but not shown.
 * If the same student is edited and the remaining empty data field is entered, a proper GitHub link will be shown.
+* `TAG` has a character limit of 20 and must be alphanumeric with no spaces.
 
 Examples:
 * `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list
@@ -110,8 +111,7 @@ Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO_NAME] [
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 * This command flags out indexes less than 1 first, before missing fields, ensuring the validity of the fields, and finally the validity of index that is greater than 0. (If an invalid index greater than 0 is entered with no or wrong fields, the command would not check the validity of the index)
 
 Examples:
@@ -222,6 +222,7 @@ Format: `addGroup g/GROUP_NAME [r/REPO_NAME] [y/YEAR] [t/TAG]...`
 * `GROUP_NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit.
   The case of the character does not matter.
 * `YEAR` represents the year field used in CS2103 GitHub links and not an actual calendar year. Input is therefore flexible to allow for changes in year formatting 
+* `TAG` has a character limit of 20 and must be alphanumeric with no spaces. 
 
 Examples:
 * `addGroup g/W15-4 y/AY2122S1 r/tp t/tApp` adds group W15-4 to the list and displays a confirmation output with GitHub link and no
@@ -241,8 +242,7 @@ Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
-* You can remove all the group’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the group’s tags by typing `t/` without specifying any tags after it.
 * Similar to `editStudent` this command flags out index values less than 1 first, before missing fields, ensuring the validity of the fields, and finally the index that is greater than 0.
 
 Examples:
@@ -343,6 +343,7 @@ Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 * A combination of different priority levels are not accepted.
 * Tasks that are not specified a priority level will be by default Low Priority.
 * `DESCRIPTION` should only contain ASCII characters.
+* `TAG` has a character limit of 20 and must be alphanumeric with no spaces.
 
 Examples:
 * `todo n/play` creates the todo task "play" with the default LOW Priority.

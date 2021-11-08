@@ -3,7 +3,7 @@ layout: page
 title: tApp
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103-W14-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103-W14-4/tp/branch/master/graph/badge.svg?token=4CJCMBYU5I)](https://codecov.io/gh/AY2122S1-CS2103-W14-4/tp)
 
 ![Ui](images/Ui.png)

@@ -9,20 +9,16 @@ if () then ([valid format])
     :Parses the ""marka"" command, separate
     student index(es) and week prefix args;
 
-    while () is ([else])
+    repeat :Checks student's attendance status for given week;
+      if () then ([present for given week])
+          :Marks student as absent for the given week;
 
-    :Checks student's attendance
-    status for given week;
+      else ([else])
+      :Marks student as present for the given week;
 
-    if () then ([present for given week])
-    :Marks student as absent for the given week;
-
-    else ([else])
-    :Marks student as present for the given week;
-
-    endif
-
-    endwhile ([reached the end of the list])
+      endif
+    repeat while () is ([more unmarked students in list])
+    -> [else];
 
     :Displays all matching students to user;
     :Show success status message;
