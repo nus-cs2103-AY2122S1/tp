@@ -232,8 +232,8 @@ illustrates the description for deleting **games**:
 #### 4.1.2 Design considerations
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
-friend has to a game has to be removed, by calling `Model#removeLinkAllFriends()`, before deleting the game by 
-calling `Model#deleteGame()`. The game is deleted from the list of friends. This process is illustrated in the 
+friend has to the game has to be removed, by calling `Model#removeLinkAllFriends(Game)`, before deleting the game by 
+calling `Model#deleteGame(Game)`. The game is then deleted from the list of games. This process is illustrated in the 
 sequence diagram below:
 
 <img src="images/DeleteGameSequenceDiagram2.png" width="1000" />
