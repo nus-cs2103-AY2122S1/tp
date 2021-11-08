@@ -125,7 +125,7 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for the `execute("mdel /m 1")` 
 API call.
 
-![Interactions Inside the Logic and Model Components for the `mdel /m 1` Command](images/MdelSequenceDiagram.png)
+![Interactions Inside the Logic and Model Components for the `mdel /m 1` Command](images/member/MdelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -229,11 +229,11 @@ This feature allows Ailurus users to list all members who have attended a partic
 
 This feature can be accessed using `mlist` command with parameters `/e EVENT_INDEX` and `/att`. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("mlist /e 1 /att")` API call.
 
-![MlistSequenceDiagram](images/MlistSequenceDiagram.png)
+![MlistSequenceDiagram](images/member/MlistSequenceDiagram.png)
 
 After the `LogicManager` receives the new `MlistCommand` object, `MlistCommand` would call the appropriate commands from `Model` and `Event` to get the correct index of the event from the filtered event list, get the list of members who attended the specific event, and set the current event while updating the filtered member list, as shown below.
 
-<img src="images/MlistExecutionSequenceDiagram.png" width = "600" />
+<img src="images/member/MlistExecutionSequenceDiagram.png" width = "600" />
 
 ### Add member to an event
 
@@ -241,11 +241,11 @@ This feature allows Ailurus users to add a list of members, identified by the me
 
 This feature can be accessed using `emadd` command with parameters `/e EVENT_INDEX` and multiple `/m MEMBER_INDEX` to add multiple members to an event. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("emadd /e 1 /m 1 /m 2")` API call.
 
-![EmaddSequenceDiagram](images/EmaddSequenceDiagram.png)
+![EmaddSequenceDiagram](images/event/EmaddSequenceDiagram.png)
 
 After the `LogicManager` receives the new `EmaddCommand` object, `EmaddCommand` would call the appropriate commands from `Model` and `Event` to get the indices from the current filtered event and member list, and add the members to be added in the event as shown below.
 
-<img src="images/EmaddExecutionSequenceDiagram.png" width = "600" />
+<img src="images/event/EmaddExecutionSequenceDiagram.png" width = "600" />
 
 ### Add event to Event List
 This feature allows the user to add an event with a name, date and the participating members if any. Members to be
