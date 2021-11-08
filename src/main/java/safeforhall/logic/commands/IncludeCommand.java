@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import safeforhall.commons.core.LogsCenter;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
@@ -31,6 +33,8 @@ public class IncludeCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%s added to event %s";
     public static final String MESSAGE_EXCEED_CAPACITY = "Number of residents to add exceed event capacity";
+
+    private final Logger logger = LogsCenter.getLogger(IncludeCommand.class);
     private final Index index;
     private final ResidentList residentList;
 
@@ -76,6 +80,7 @@ public class IncludeCommand extends Command {
         try {
             event = lastShownList.get(index.getZeroBased());
         } catch (IndexOutOfBoundsException e) {
+            logger.warning("Index given is invalid");
             throw new CommandException("Index given is invalid");
         }
 
