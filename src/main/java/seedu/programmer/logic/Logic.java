@@ -39,6 +39,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns tan unmodifiable view of all students  */
+    ObservableList<Student> getAllStudents();
+
     /** Returns the selected labs. */
     ObservableList<DisplayableObject> getSelectedInformation();
 

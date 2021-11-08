@@ -22,7 +22,7 @@ public class DashboardWindow extends PopupWindow {
 
     private static final String FXML = "DashboardWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private Logic logic;
+    private final Logic logic;
 
     @FXML
     private Label overallStatsLabel;
@@ -55,7 +55,7 @@ public class DashboardWindow extends PopupWindow {
      */
     public void update() {
         logger.info("Updating dashboard window...");
-        ObservableList<Student> stuList = logic.getFilteredStudentList();
+        ObservableList<Student> stuList = logic.getAllStudents();
         HashSet<ClassId> classes = getClasses(stuList);
         fillOverallStats(classes, stuList);
         fillLabsMarked(classes, stuList);
