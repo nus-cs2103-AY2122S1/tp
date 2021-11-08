@@ -10,6 +10,7 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 ## Table of Contents
 
+- [Glossary](#Glossary)
 - [Quick Start](#quick-start)
 - [Features](#features)
   1. [Parameter Summary](#parameter-summary)
@@ -35,7 +36,15 @@ classes. If you are familiar with Unix commands, this is definitely for you!
       2. [Edit Lab: `editlab`](#edit-lab)
       3. [Delete Lab: `dellab`](#delete-lab)
 - [Command Summary](#command-summary)
-- [Glossary](#glossary)
+
+## <a name="Glossary"></a>Glossary
+
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Student ID**: NUS student matriculation number (AXXXXXXXY)
+- **Email**: NUS student email (eXXXXXXX@u.nus.edu)
+- **TA**: CS2100 lab teaching assistant
+- **PE**: ProgrammerError
+- **CSV**: Comma-Separated Values
 
 ## <a name="quick-start"></a>Quick Start
 
@@ -383,9 +392,4 @@ Command | Format & Examples
 **Show** | `show <INDEX_IN_LIST>`
 **Upload** | `upload`
 
-## <a name="glossary"></a>Glossary
-- **Student ID**: NUS student matriculation number (AXXXXXXXY)
-- **Email**: NUS student email (eXXXXXXX@u.nus.edu)
-- **TA**: CS2100 lab teaching assistant
-- **PE**: ProgrammerError
-- **CSV**: Comma-Separated Values
+
