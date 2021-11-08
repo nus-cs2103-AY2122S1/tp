@@ -5,7 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
+
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 public class TypicalClasses {
     public static final TuitionClass MATH = new TuitionClassBuilder().withName("Math")
@@ -22,10 +32,18 @@ public class TypicalClasses {
             .withId(4).build();
     public static final TuitionClass CHEMISTRY = new TuitionClassBuilder().withName("Chemistry")
             .withClassLimit(1).withTimeslot("Sat 11:00-14:00").withRemark("Acid")
-            .withId(1).build();
+            .withId(5).build();
 
 
     private TypicalClasses() {} // prevents instantiation
+
+    //manually added classes
+    public static final TuitionClass SCI = new TuitionClassBuilder().withName("SCI")
+            .withClassLimit(3).withTimeslot("Sun 11:00-14:00").withRemark("Bases")
+            .withId(1).build();
+    public static final TuitionClass EMATH = new TuitionClassBuilder().withName("EMATH")
+            .withClassLimit(5).withTimeslot("Sun 14:00-15:00").withRemark("Vectors")
+            .withId(2).build();
 
     /**
      * Returns an {@code AddressBook} with all the typical tuition classes.

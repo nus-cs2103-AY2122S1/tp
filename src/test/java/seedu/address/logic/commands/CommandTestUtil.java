@@ -47,6 +47,7 @@ public class CommandTestUtil {
     public static final String VALID_LIMIT_FIVE = "5";
     public static final String VALID_LIMIT_ONE = "1";
     public static final String VALID_CLASS_MON = "Mon 10:00-12:00";
+    public static final String VALID_CLASS_SUN = "Sun 10:00-11:00";
     public static final String VALID_CLASS_TUE = "Tue 23:00-23:30";
     public static final String VALID_CLASS_PHY = "Physics";
     public static final String VALID_CLASS_CHEM = "Chemistry";

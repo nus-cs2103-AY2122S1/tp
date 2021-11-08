@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.student.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
@@ -70,6 +71,14 @@ public class TuitionClassBuilder {
         this.timeslot = Timeslot.parseString(timeslot);
         return this;
     }
+    /**
+     * Sets the {@code Timeslot} of the {@code TuitionClass} that we are building.
+     */
+    public TuitionClassBuilder withTimeslot(Timeslot timeslot) {
+        this.timeslot = timeslot;
+        return this;
+    }
+
     /**
      * Sets the {@code StudentList} of the {@code TuitionClass} that we are building.
      */

@@ -59,7 +59,6 @@ public class RemoveStudentCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-
         //random string before prefix
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_STUDENT_INDICES + VALID_CLASS_INDEX,
                 MESSAGE_INVALID_FORMAT);
