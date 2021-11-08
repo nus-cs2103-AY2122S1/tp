@@ -9,7 +9,7 @@ import seedu.notor.ui.note.NoteWindow;
 
 public class PersonDeleteExecutor extends PersonExecutor {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_PERSON_CANCEL = "Deleting of Person: %1$s has been cancelled.";
+    public static final String MESSAGE_DELETE_PERSON_CANCEL = "Cancelled Deleting of Person: %1$s";
     public static final String MESSAGE_DELETE_PERSON_FAILURE =
             "Unable to delete Person: %1$s as note window for the person is currently opened.";
     public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with deleting Person: %1$s?";

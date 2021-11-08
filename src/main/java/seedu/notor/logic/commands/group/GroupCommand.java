@@ -4,10 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.notor.commons.core.index.Index;
+import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.TargetedCommand;
 
 public abstract class GroupCommand extends TargetedCommand {
-    public static final String MESSAGE_USAGE = "Please use the help command to find out how to use the bot.";
+    public static final String MESSAGE_USAGE = "Group commands target a group by INDEX - group (INDEX) /COMMANDWORD "
+            + "[parameters]\n"
+            + "except the create command, with this format - group (NAME) /create [g:supergroupIndex]\n"
+            + "or the find/list command - group /COMMANDWORD (params).\n"
+            + HelpCommand.MESSAGE_USAGE;
     public static final String COMMAND_WORD = "group";
     public static final List<String> COMMAND_WORDS = Arrays.asList("group", "g");
     protected final Index index;
