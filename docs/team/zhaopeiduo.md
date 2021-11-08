@@ -10,8 +10,7 @@ manage their students’ lab results in a simple and efficient manner, allowing 
 processes and more time teaching students.
 
 Given below are my contributions to the project. My contribution to the project code base is also shown in the
-[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
-.
+[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17).
 
 ### New Features
 
@@ -42,14 +41,16 @@ Given below are my contributions to the project. My contribution to the project 
 * Add a button bar with buttons for exit, help, download, upload and dashboard features. Enabled keyboard shortcut to be
   more keyboard-friendly.
 * Add/Modify test cases for various commands: [\#69](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/69),
-  [\#530](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/530)
-  [\#572](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/572)
+  [\#530](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/530),
+  [\#572](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/572).
 * Bug fixes: [\#238](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/238),
   [\#280](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/280),
   [\#351](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/351),
   [\#357](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/357),
   [\#374](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/374),
-  [\#381](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/381).
+  [\#381](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/381),
+  [\#429](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/429),
+  [\#430](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/430).
 
 #### **Project management**:
 
@@ -58,19 +59,19 @@ Given below are my contributions to the project. My contribution to the project 
 #### **Documentation**:
 
 * User Guide:
-    * Added documentation for the features `delete`
-      and `show`: [\#34](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/34)
-      , [\#279](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/279).
+    * Added documentation for the features `delete` and `show`: [\#34](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/34), 
+      [\#279](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/279).
+    * Added section on editing the data file directly: [\#589](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/589).
 * Developer Guide:
     * Added use cases for ProgrammerError: [\#46](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/46/files).
     * Added implementation details of the `show` feature: [\#159](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/159).
     * Updated the UML diagrams for ProgrammerError: [\#158](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/159)
       , [\#393](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/393).
-    * Added instruction for manual testing for `show`[\#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541)
+    * Added instruction for manual testing for `show`: [\#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541)
 
 #### **Community**:
 
 * PRs reviewed (with non-trivial review comments): [\#194](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/194).
 * Contributed to forum discussions: [\#290](https://github.com/nus-cs2103-AY2122S1/forum/issues/290).
 * Reported bugs and suggestions for other teams in the class: [\#3](https://github.com/ZhaoPeiduo/ped/issues/3)
-  , [\#5](https://github.com/ZhaoPeiduo/ped/issues/5) from PE-D
+  , [\#5](https://github.com/ZhaoPeiduo/ped/issues/5) from PE-D.
