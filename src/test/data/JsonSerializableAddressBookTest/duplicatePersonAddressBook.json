@@ -2,13 +2,21 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "language": "English",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "lastVisit": "",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions": [ "diabetes" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "language": "English",
+    "address": "4th street",
+    "lastVisit": "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "visit" : ""
   } ]
 }

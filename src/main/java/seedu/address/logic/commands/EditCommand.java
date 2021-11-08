@@ -2,10 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -19,12 +20,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Visit;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -33,22 +38,23 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the elderly identified "
+            + "by the index number used in the displayed elderly list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_LAST_VISIT + "LAST_VISIT] "
+            + "[" + PREFIX_HEALTH_CONDITION + "HEALTH_CONDITION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_LANGUAGE + "English";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Elderly: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This elderly already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -83,7 +89,23 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        // check for warnings
+        boolean isInvalidVisit = editedPerson.hasVisit() && editedPerson.getVisit().get().isOverdue();
+        boolean isInvalidLastVisit = editedPerson.hasLastVisit() && editedPerson.getLastVisit().get().isFuture();
+
+        if (isInvalidVisit && isInvalidLastVisit) {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.BOTH_VISIT_FIELDS_WARNING);
+        } else if (isInvalidLastVisit) {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.FUTURE_LAST_VISIT_WARNING);
+        } else if (isInvalidVisit) {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.PAST_NEXT_VISIT_WARNING);
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        }
     }
 
     /**
@@ -95,11 +117,21 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Language updatedLanguage = editPersonDescriptor.getLanguage().orElse(personToEdit.getLanguage());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        LastVisit lastVisit = editPersonDescriptor.getLastVisit().orElse(personToEdit.getLastVisit().get());
+        Optional<LastVisit> updatedLastVisit = Optional.ofNullable(lastVisit);
+        // edit command does not allow editing visits
+        Optional<Visit> updatedVisit = personToEdit.getVisit();
+        // edit command does not allow editing frequency
+        Optional<Frequency> updatedFrequency = personToEdit.getFrequency();
+        // edit command does not allow editing occurrence
+        Optional<Occurrence> updatedOccurrence = personToEdit.getOccurrence();
+        Set<HealthCondition> updatedHealthConditions = editPersonDescriptor.getHealthConditions()
+                .orElse(personToEdit.getHealthConditions());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedLanguage, updatedAddress,
+                updatedLastVisit, updatedVisit, updatedFrequency, updatedOccurrence, updatedHealthConditions);
     }
 
     @Override
@@ -127,29 +159,31 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
-        private Email email;
+        private Language language;
         private Address address;
-        private Set<Tag> tags;
+        private Set<HealthCondition> healthConditions;
+        private LastVisit lastVisit;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code healthConditions} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email);
+            setLanguage(toCopy.language);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setHealthConditions(toCopy.healthConditions);
+            setLastVisit(toCopy.lastVisit);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, language, address, healthConditions, lastVisit);
         }
 
         public void setName(Name name) {
@@ -168,12 +202,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setLanguage(Language language) {
+            this.language = language;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Language> getLanguage() {
+            return Optional.ofNullable(language);
         }
 
         public void setAddress(Address address) {
@@ -184,21 +218,30 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setLastVisit(LastVisit lastVisit) {
+            this.lastVisit = lastVisit;
+        }
+
+        public Optional<LastVisit> getLastVisit() {
+            return Optional.ofNullable(lastVisit);
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Sets {@code healthConditions} to this object's {@code healthConditions}.
+         * A defensive copy of {@code healthConditions} is used internally.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public void setHealthConditions(Set<HealthCondition> healthConditions) {
+            this.healthConditions = (healthConditions != null) ? new HashSet<>(healthConditions) : null;
+        }
+
+        /**
+         * Returns an unmodifiable healthCondition set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code healthConditions} is null.
+         */
+        public Optional<Set<HealthCondition>> getHealthConditions() {
+            return (healthConditions != null)
+                    ? Optional.of(Collections.unmodifiableSet(healthConditions)) : Optional.empty();
         }
 
         @Override
@@ -218,9 +261,10 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
+                    && getLanguage().equals(e.getLanguage())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getHealthConditions().equals(e.getHealthConditions())
+                    && getLastVisit().equals(e.getLastVisit());
         }
     }
 }

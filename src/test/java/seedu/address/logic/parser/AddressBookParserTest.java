@@ -4,27 +4,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DoneCommand;
+import seedu.address.logic.commands.DownloadCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.VisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonAttributesContainsKeywordsPredicate;
+import seedu.address.model.person.Visit;
+import seedu.address.testutil.DateTimeUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -32,6 +38,25 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_done() throws Exception {
+        DoneCommand command = (DoneCommand) parser.parseCommand(DoneCommand.COMMAND_WORD + " "
+            + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DoneCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_visit() throws Exception {
+        String date = DateTimeUtil.getInputStringSevenDaysFromNow();
+        final Visit visit = new Visit(date);
+        VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + visit.value);
+        Optional<Visit> expectedVisit = Optional.ofNullable(visit);
+        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, expectedVisit, frequency, occurrence), command);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -70,10 +95,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        String keywords = "foo bar baz";
+        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " "
+                + keywords);
+        assertEquals(new FindCommand(new PersonAttributesContainsKeywordsPredicate(
+                ArgumentTokenizer.tokenize(keywords))), command);
     }
 
     @Test
@@ -83,9 +109,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_download() throws Exception {
+        assertTrue(parser.parseCommand(DownloadCommand.COMMAND_WORD) instanceof DownloadCommand);
+        assertTrue(parser.parseCommand(DownloadCommand.COMMAND_WORD + " 1") instanceof DownloadCommand);
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " all/") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " m/") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " w/") instanceof ListCommand);
     }
 
     @Test

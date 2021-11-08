@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,12 +11,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Visit;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -26,23 +31,33 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    private final String email;
+    private final String language;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String lastVisit;
+    private final String visit;
+    private final String frequency;
+    private final String occurrence;
+    private final List<JsonAdaptedHealthCondition> healthConditions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("language") String language, @JsonProperty("address") String address,
+            @JsonProperty("lastVisit") String lastVisit, @JsonProperty("visit") String visit,
+            @JsonProperty("frequency") String frequency, @JsonProperty("occurrence") String occurrence,
+            @JsonProperty("healthConditions") List<JsonAdaptedHealthCondition> healthConditions) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.language = language;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.lastVisit = lastVisit;
+        this.visit = visit;
+        this.frequency = frequency;
+        this.occurrence = occurrence;
+        if (healthConditions != null) {
+            this.healthConditions.addAll(healthConditions);
         }
     }
 
@@ -52,10 +67,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
+        language = source.getLanguage().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        lastVisit = source.getLastVisit().orElse(new LastVisit("")).value;
+        visit = source.getVisit().orElse(new Visit("")).value;
+        frequency = source.getFrequency().orElse(Frequency.EMPTY).value;
+        occurrence = String.valueOf(source.getOccurrence().orElse(new Occurrence(1)).value);
+        healthConditions.addAll(source.getHealthConditions().stream()
+                .map(JsonAdaptedHealthCondition::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +84,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<HealthCondition> personHealthConditions = new ArrayList<>();
+        for (JsonAdaptedHealthCondition healthCondition : healthConditions) {
+            personHealthConditions.add(healthCondition.toModelType());
         }
 
         if (name == null) {
@@ -86,13 +105,14 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (language == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Language.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Language.isValidLanguage(language)) {
+            throw new IllegalValueException(Language.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Language modelLanguage = new Language(language);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -102,8 +122,39 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (lastVisit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));
+        }
+        final Optional<LastVisit> modelLastVisit = Optional.ofNullable(new LastVisit(lastVisit));
+
+        if (visit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));
+        }
+        final Optional<Visit> modelVisit = Optional.ofNullable(new Visit(visit));
+
+        if (frequency == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Frequency.class.getSimpleName()));
+        }
+        if (!Frequency.isValidFrequency(frequency)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        final Optional<Frequency> modelFrequency = Optional.ofNullable(Frequency.find(frequency));
+
+        if (occurrence == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Occurrence.class.getSimpleName()));
+        }
+        if (!Occurrence.isValidOccurrence(occurrence)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        // TODO: abstract all convert occurrence from string to int into a method
+        int convertedOccurrence = Integer.parseInt(occurrence);
+        final Optional<Occurrence> modelOccurrence = Optional.ofNullable(new Occurrence(convertedOccurrence));
+
+        final Set<HealthCondition> modelHealthConditions = new HashSet<>(personHealthConditions);
+        return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelLastVisit, modelVisit,
+                modelFrequency, modelOccurrence, modelHealthConditions);
     }
 
 }

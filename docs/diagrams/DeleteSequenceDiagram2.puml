@@ -1,0 +1,102 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 15
+skinparam maxMessageSize 210
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete v/1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete v/1")
+activate AddressBookParser
+
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
+
+AddressBookParser -> DeleteCommandParser : parse(" v/1")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> AddressBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+alt no visit flag "v/" is present
+    LogicManager -> DeleteCommand : execute()
+    activate DeleteCommand
+
+
+    DeleteCommand -> Model : deletePerson(1)
+    activate Model
+
+    Model --> DeleteCommand
+    deactivate Model
+
+    create CommandResult
+    DeleteCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> DeleteCommand
+    deactivate CommandResult
+
+    DeleteCommand --> LogicManager : result
+    deactivate DeleteCommand
+
+else visit flag "v/" is present
+    LogicManager -> DeleteCommand : execute()
+    activate DeleteCommand
+
+    create Person
+    DeleteCommand -> Person
+    activate Person
+
+    Person --> DeleteCommand: editedPerson
+    deactivate Person
+
+    DeleteCommand -> Model: setPerson(1, editedPerson)
+    activate Model
+
+    Model --> DeleteCommand
+    deactivate Model
+
+    create CommandResult
+    DeleteCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> DeleteCommand
+    deactivate CommandResult
+
+    DeleteCommand --> LogicManager : result
+    deactivate DeleteCommand
+
+end
+[<--LogicManager
+deactivate LogicManager
+@enduml

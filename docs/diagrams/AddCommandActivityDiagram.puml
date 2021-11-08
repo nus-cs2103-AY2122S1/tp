@@ -1,0 +1,23 @@
+@startuml
+skinparam wrapWidth 140
+skinparam defaultTextAlignment center
+
+start
+:User inputs add command;
+:Logic executes add command;
+:AddCommandParser parses the command;
+
+if() then ([Input arguments are valid])
+    if() then([The elderly's name
+    does not exist
+    in the address book])
+        :addPerson;
+    else ([else])
+        :Throw CommandException;
+    endif;
+else ([else])
+    :Throw ParseException;
+endif;
+stop
+
+@enduml

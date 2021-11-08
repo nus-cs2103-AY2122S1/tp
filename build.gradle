@@ -20,6 +20,10 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
@@ -63,10 +67,13 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    compile group: 'org.json', name: 'org.json', version: 'chargebee-1.0'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'seniorlove.jar'
 }
 
 defaultTasks 'clean', 'test'

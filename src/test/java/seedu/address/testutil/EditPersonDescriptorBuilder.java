@@ -5,12 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,9 +35,10 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
+        descriptor.setLanguage(person.getLanguage());
         descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setHealthConditions(person.getHealthConditions());
+        descriptor.setLastVisit(person.getLastVisit().get());
     }
 
     /**
@@ -56,10 +58,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Language} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+    public EditPersonDescriptorBuilder withLanguage(String language) {
+        descriptor.setLanguage(new Language(language));
         return this;
     }
 
@@ -72,12 +74,21 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Sets the {@code LastVisit} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withLastVisit(String lastVisit) {
+        descriptor.setLastVisit(new LastVisit(lastVisit));
+        return this;
+    }
+
+    /**
+     * Parses the {@code healthConditions} into a {@code Set<HealthCondition>}
+     * and set it to the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withHealthConditions(String... healthConditions) {
+        Set<HealthCondition> healthConditionSet = Stream.of(healthConditions).map(HealthCondition::new)
+                .collect(Collectors.toSet());
+        descriptor.setHealthConditions(healthConditionSet);
         return this;
     }
 

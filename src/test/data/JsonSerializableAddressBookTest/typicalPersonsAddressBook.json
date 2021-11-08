@@ -3,44 +3,72 @@
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
-    "email" : "alice@example.com",
+    "language" : "English",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "lastVisit": "2021-07-07 12:00",
+    "visit" : "2022-10-10 12:00",
+    "frequency": "",
+    "occurrence": "1",
+    "healthConditions" : [ "diabetes" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
+    "language" : "French",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "lastVisit": "2021-08-08 12:00",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions" : [ "dementia", "diabetes" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
+    "language" : "English",
     "address" : "wall street",
-    "tagged" : [ ]
+    "lastVisit": "2021-01-01 12:00",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
+    "language" : "Chinese",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "lastVisit": "2021-01-01 12:00",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions" : [ "high blood pressure" ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
+    "phone" : "94822240",
+    "language" : "English",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "lastVisit": "2021-01-01 12:00",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
+    "phone" : "94824427",
+    "language" : "Hokkien",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "lastVisit": "2021-01-01 12:00",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
+    "phone" : "94820442",
+    "language" : "Cantonese",
     "address" : "4th street",
-    "tagged" : [ ]
+    "lastVisit": "2021-01-01 12:00",
+    "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
+    "healthConditions" : [ ]
   } ]
 }

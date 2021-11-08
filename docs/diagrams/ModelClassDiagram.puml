@@ -8,21 +8,27 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
+Interface ReadOnlySummary <<Interface>>
 Class AddressBook
 Class ReadOnlyAddressBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class Summary
 
 
 Class UniquePersonList
 Class Person
 Class Address
-Class Email
+Class Language
 Class Name
 Class Phone
-Class Tag
+Class HealthCondition
+Class LastVisit
+Class Visit
+Class Frequency
+Class Occurrence
 
 }
 
@@ -35,20 +41,26 @@ ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" Summary
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+Summary .up.|> ReadOnlySummary
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Email
+Person *--> Language
 Person *--> Address
-Person *--> "*" Tag
+Person *--> "*" HealthCondition
+Person *--> LastVisit
+Person *--> Visit
+Visit *--> "0..1" Frequency
+Visit *--> "0..1" Occurrence
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Address -[hidden]right-> Language
 
 ModelManager -->"~* filtered" Person
 @enduml

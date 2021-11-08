@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SortUtil;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,7 +23,9 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Summary summary;
     private final UserPrefs userPrefs;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
 
     /**
@@ -34,7 +39,11 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.sortedPersons = new SortedList<>(this.addressBook.getPersonList());
+        sortedPersons.setComparator(SortUtil.SORT_BY_NAME);
+        this.filteredPersons = new FilteredList<>(sortedPersons);
+        this.summary = new Summary(addressBook);
+
     }
 
     public ModelManager() {
@@ -108,7 +117,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -126,7 +134,31 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        logger.info("Display person list by the order of name.");
+        sortedPersons.setComparator(SortUtil.SORT_BY_NAME);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=================================== Summary =============================================================
+
+    @Override
+    public ReadOnlySummary getSummary() {
+        return summary;
+    }
+
+    @Override
+    public void updateStatistics() {
+        summary.setStatistics(addressBook);
+    }
+
+    @Override
+    public void sortFilteredPersonList(Comparator<Person> personComparator, boolean isAscending) {
+        logger.info("Sort the person list.");
+        if (isAscending) {
+            sortedPersons.setComparator(personComparator);
+        } else {
+            sortedPersons.setComparator(personComparator.reversed());
+        }
     }
 
     @Override

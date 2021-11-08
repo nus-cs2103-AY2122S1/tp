@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 15
+skinparam maxMessageSize 210
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":VisitCommandParser" as VisitCommandParser LOGIC_COLOR
+participant "v:VisitCommand" as VisitCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("visit 1 at/2020-11-12 12:00 f/Weekly o/2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("visit 1 at/2020-11-12 12:00 f/Weekly o/2")
+activate AddressBookParser
+
+create VisitCommandParser
+AddressBookParser -> VisitCommandParser
+activate VisitCommandParser
+
+VisitCommandParser --> AddressBookParser
+deactivate VisitCommandParser
+
+AddressBookParser -> VisitCommandParser : parse("1 at/2020-11-12 12:00 f/Weekly o/2")
+activate VisitCommandParser
+
+create VisitCommand
+VisitCommandParser -> VisitCommand
+activate VisitCommand
+
+VisitCommand --> VisitCommandParser : v
+deactivate VisitCommand
+
+VisitCommandParser --> AddressBookParser : v
+deactivate VisitCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+VisitCommandParser -[hidden]-> AddressBookParser
+destroy VisitCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> VisitCommand : execute()
+activate VisitCommand
+
+create Person
+VisitCommand -> Person
+activate Person
+
+Person --> VisitCommand: editedPerson
+deactivate Person
+
+VisitCommand -> Model: setPerson(1, editedPerson)
+activate Model
+
+Model --> VisitCommand
+deactivate Model
+
+create CommandResult
+VisitCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> VisitCommand
+deactivate CommandResult
+
+VisitCommand --> LogicManager : result
+deactivate VisitCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

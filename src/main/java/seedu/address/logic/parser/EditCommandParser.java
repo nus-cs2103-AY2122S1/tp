@@ -3,10 +3,11 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.healthcondition.HealthCondition;
+import seedu.address.model.person.LastVisit;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,7 +34,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_LANGUAGE, PREFIX_ADDRESS, PREFIX_HEALTH_CONDITION, PREFIX_LAST_VISIT);
 
         Index index;
 
@@ -49,13 +52,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (argMultimap.getValue(PREFIX_LANGUAGE).isPresent()) {
+            editPersonDescriptor.setLanguage(ParserUtil.parseLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
+            LastVisit lastVisit = ParserUtil.parseLastVisit(argMultimap.getValue(PREFIX_LAST_VISIT).get()).get();
+            editPersonDescriptor.setLastVisit(lastVisit);
+        }
+
+        parseHealthConditionsForEdit(argMultimap.getAllValues(PREFIX_HEALTH_CONDITION))
+                .ifPresent(editPersonDescriptor::setHealthConditions);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -65,18 +74,20 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> healthConditions} into a {@code Set<HealthCondition>} if
+     * {@code healthConditions} is non-empty. If {@code healthConditions} contain only one element which is an
+     * empty string, it will be parsed into a {@code Set<HealthCondition>} containing zero healthConditions.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<HealthCondition>> parseHealthConditionsForEdit(Collection<String> healthConditions)
+            throws ParseException {
+        assert healthConditions != null;
 
-        if (tags.isEmpty()) {
+        if (healthConditions.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> healthConditionSet = healthConditions.size() == 1 && healthConditions.contains("")
+                ? Collections.emptySet() : healthConditions;
+        return Optional.of(ParserUtil.parseHealthConditions(healthConditionSet));
     }
 
 }

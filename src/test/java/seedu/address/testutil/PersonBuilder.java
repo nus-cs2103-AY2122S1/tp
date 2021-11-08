@@ -1,14 +1,19 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Visit;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -18,14 +23,20 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_LANGUAGE = "English";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_LAST_VISIT = "2021-01-01 12:00";
+    public static final String DEFAULT_VISIT = "";
 
     private Name name;
     private Phone phone;
-    private Email email;
+    private Language language;
     private Address address;
-    private Set<Tag> tags;
+    private Optional<LastVisit> lastVisit;
+    private Optional<Visit> visit;
+    private Optional<Frequency> frequency;
+    private Optional<Occurrence> occurrence;
+    private Set<HealthCondition> healthConditions;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -33,9 +44,13 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        language = new Language(DEFAULT_LANGUAGE);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        lastVisit = Optional.ofNullable(new LastVisit(DEFAULT_LAST_VISIT));
+        visit = Optional.ofNullable(new Visit(DEFAULT_VISIT));
+        frequency = Optional.ofNullable(Frequency.EMPTY);
+        occurrence = Optional.ofNullable(new Occurrence(1));
+        healthConditions = new HashSet<>();
     }
 
     /**
@@ -44,9 +59,13 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
+        language = personToCopy.getLanguage();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        lastVisit = personToCopy.getLastVisit();
+        visit = personToCopy.getVisit();
+        frequency = personToCopy.getFrequency();
+        occurrence = personToCopy.getOccurrence();
+        healthConditions = new HashSet<>(personToCopy.getHealthConditions());
     }
 
     /**
@@ -58,10 +77,11 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code healthConditions} into a {@code Set<HealthCondition>}
+     * and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withHealthConditions(String ... healthConditions) {
+        this.healthConditions = SampleDataUtil.getHealthConditionSet(healthConditions);
         return this;
     }
 
@@ -74,6 +94,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code LastVisit} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastVisit(String lastVisit) {
+        this.lastVisit = Optional.ofNullable(new LastVisit(lastVisit));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Visit} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withVisit(String visit) {
+        this.visit = Optional.ofNullable(new Visit(visit));
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -82,15 +118,31 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Language} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public PersonBuilder withLanguage(String language) {
+        this.language = new Language(language);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Frequency} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFrequency(String frequency) {
+        this.frequency = Optional.ofNullable(Frequency.find(frequency));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Occurrence} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOccurrence(int occurrence) {
+        this.occurrence = Optional.ofNullable(new Occurrence(occurrence));
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, language, address, lastVisit, visit, frequency, occurrence, healthConditions);
     }
 
 }

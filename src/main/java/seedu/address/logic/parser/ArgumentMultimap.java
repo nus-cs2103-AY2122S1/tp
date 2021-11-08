@@ -57,4 +57,44 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns true if all {@code prefix} is / are present.
+     * @param prefix Prefix key with which the specified argument value is to be associated
+     * @return True if all {@code prefix} is / are present, false otherwise
+     */
+    public boolean isAllPresent(Prefix ...prefix) {
+        for (Prefix p : prefix) {
+            if (!argMultimap.containsKey(p)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if at least two of all {@code prefix} are present.
+     * Returns false if {@code prefix} contains less than two items.
+     * Uses the {@code isAllPresent()} method.
+     * @param prefix Prefix key with which the specified argument value is to be associated
+     * @return True if multiple {@code prefix} is / are present, false otherwise
+     */
+    public boolean isMultiplePresent(Prefix ...prefix) {
+        for (int i = 0; i < prefix.length - 1; i++) {
+            for (int j = i + 1; j < prefix.length; j++) {
+                if (isAllPresent(prefix[i], prefix[j])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof ArgumentMultimap
+                && argMultimap.equals(((ArgumentMultimap) other).argMultimap));
+    }
 }
