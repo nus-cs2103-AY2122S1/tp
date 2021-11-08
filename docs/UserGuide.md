@@ -119,7 +119,7 @@ In this section, we will be using this as an example to study and understand the
 
 #### Command Word
 {:.no_toc}
-The Command Word is how you can tell TutorAid what kind of operation you want to do. These command words can also be found here [here](#8-command-summary). All commands must contain a Command Word.
+The Command Word is how you can tell TutorAid what kind of operation you want to do. These command words can also be found [here](#8-command-summary). All commands must contain a Command Word.
 
 In the example above, `edit` tells TutorAid to perform an _edit_ operation.
 
