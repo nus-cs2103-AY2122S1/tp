@@ -6,7 +6,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant ":FindCommand" as FindCommand LOGIC_COLOR
-participant ":FindCompositePredicate" as FindCompositePredicate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,18 +32,6 @@ deactivate FindCommandParser
 
 AddressBookParser -> FindCommandParser : parse("v/t")
 activate FindCommandParser
-
-create FindCompositePredicate
-FindCommandParser -> FindCompositePredicate
-activate FindCompositePredicate
-
-FindCompositePredicate --> FindCommandParser : c
-deactivate FindCompositePredicate
-
-FindCommandParser -> FindCompositePredicate : setVaccStatus("t")
-activate FindCompositePredicate
-FindCompositePredicate --> FindCommandParser
-deactivate FindCompositePredicate
 
 create FindCommand
 FindCommandParser -> FindCommand
