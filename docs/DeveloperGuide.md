@@ -186,7 +186,7 @@ The `addstudent` feature adds a student with the provided name and NUSNET ID int
 4. If the student to add has a unique NUSNET ID, the groups, if provided, will be parsed individually.
     * If the provided group exists, the student will be added into that group.
     * If the provided group does not exist, a new group will be added, and the student will be added into that group subsequently.
-5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags and added into the database.
+5. A new `Student` object is created with the given name, NUSNET ID, groups, and tags, which is then added into the database.
 
 
 The following activity diagram summarizes what happens when a user executes the `addstudent` command to add a new student. In the case where the student is not added, an error message will be displayed with the reason.
