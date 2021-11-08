@@ -37,13 +37,13 @@ Given below are my contributions to the project.
       * Justification: We wanted mentors to be conveniently accessed previous commands so as they can use Notor at a
         fast pace.
       * Credits: No code reused but inspired by CLI Terminal.
+    
+<div style="page-break-after: always;"></div>
 
   * [Note Window Shortcut keys](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/90)
       * What it does: Allows mentors to save and quit Note Window using shortcut keys.
       * Justification: We wanted mentors fully immersive, hand-free experience.
       * Credits: No code reused.
-    
-    <div style="page-break-after: always;"></div>
 
   * [Gui Testing (Not implemented)](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/229)
     * What it does: Tests Gui aspects of Notor.
