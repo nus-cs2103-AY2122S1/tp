@@ -80,7 +80,8 @@ CONNECTIONS is a **desktop app for managing contacts and keeping tracks of birth
 
 </div>
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
+
 ### Upcoming Birthdays
 The vertical tab provides upcoming birthdays at a glance. Having this means that you will never miss a birthday.
 It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, with the **nearest** upcoming birthday at the **top**.
@@ -90,7 +91,8 @@ It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
 * The rest of the entries will not be color-coded.  
   ![BirthdayColors](images/BirthdayColors.png)  
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
+
 ### Command Assistant
 
 Shows command format and example as the command is entered for a smoother learning curve.
@@ -123,7 +125,8 @@ Notes:
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
+
 ## Commands
 
 ### Viewing help : `help`
@@ -150,7 +153,8 @@ Notes:
   * Opens a link to the documentation.
   ![help link](images/helpLink.png)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
+
 ### Adding a contact: `add`
 
 Adds a contact to CONNECTIONS.
@@ -188,7 +192,8 @@ Shows a list of all contacts in CONNECTIONS.
 #### Format:
 * `list`
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
+
 ### Editing a contact : `edit`
 
 Edits an existing contact in CONNECTIONS.
@@ -210,7 +215,8 @@ Notes:
 * `edit 2 n/Betsy Crower t/`
   * Edits the name of the 2nd contact in the displayed contact list to be `Betsy Crower` and clears all existing tags.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
+
 ### Adding Tags : `tag`
 
 Adds one or more tags to an existing contact in CONNECTIONS. This facilitates the organization of contacts into groups.
@@ -244,7 +250,7 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd contact.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Locating contacts by name(s) and tag(s): `find`
 
@@ -306,7 +312,7 @@ Notes:
 * `findAny c/ n/Shin t/FRIENDS t/chef`
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Pinning a contact : `pin`
 
@@ -328,7 +334,7 @@ Notes:
 * `find n/Betsy` followed by `pin 1`
   * pins the 1st contact in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Unpinning a contact : `unpin`
 
@@ -348,7 +354,7 @@ Notes:
 * `find n/Betsy` followed by `unpin 1`
   * unpins the 1st contact in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Deleting a contact : `delete`
 
@@ -420,7 +426,7 @@ Clears all entries from CONNECTIONS.
 #### Format:
 * `clear`
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -451,7 +457,7 @@ If your changes to the data file makes its format invalid, CONNECTIONS will disc
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 ## Command Summary
 
 Action | Summary | Format, Examples
