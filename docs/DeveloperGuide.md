@@ -196,7 +196,7 @@ The features mentioned are:
 1. Getting help
 2. [Modifying Contacts]((#adding-a-person-add))
    1. [Adding a person](#adding-a-person-add) [done]
-   2. [Adding tags to people](#adding-tags-to-people-addt)
+   2. [Adding tags to people](#adding-tags-to-people-addt) [diag]
    3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark) [done]
    4. Editing a person
    5. Deleting a person
@@ -228,22 +228,22 @@ without the need to include other contact details.
 
 Given below is an example usage scenario of how the AddCommand mechanism behaves at each step.
 
-1. The user first launches Socius and adds a new contact by name, without any other contact details.
+Step 1. The user first launches Socius and adds a new contact by name, without any other contact details.
 
-2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
+Step 2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
 
-3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
+Step 3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
    instantiating a new `Person` object.
 
-4. The command communicates with the `Model` to add the person to the existing AddressBook.
+Step 4. The command communicates with the `Model` to add the person to the existing AddressBook.
 
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+Step 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The following sequence diagram shows how the AddCommand function works:
 
 ![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes an AddCommand:
 
 ![UpdatedAddCommand](images/UpdatedAddCommand.png)
 
@@ -259,6 +259,49 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Save all optional attributes of a contact as Optional type.
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
+
+### Adding tags to people `addt`
+
+#### Implementation
+
+The add tag mechanism is facilitated by AddTagCommand and AddTagCommandParser. It allows users to add tags to a person 
+in their contact list by specifying the person's index number and the tags to add.
+
+#### Usage
+
+Given below is an example usage scenario and how the remark mechanism behaves at each step.
+
+Step 1. The user executes `addt 1 t/friend` command to add the 'friend' tag to the first person in the displayed contact list.
+
+Step 1.1. Alternatively, the user may execute `addt all t/friend` command to add the 'friend' tag to everybody in the displayed
+contact list.
+
+Step 2. `AddTagCommandParser#parse` will then parse the arguments provided. A new `AddTagCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the AddTagCommandParser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The `AddTagCommand` will then create a new `Person` using information from input tag. All other information will be taken from the original `Person`.
+
+Step 4. `AddTagCommand#execute` will then replace the original `Person` in the `model` with the new `Person`.
+
+The following sequence diagram shows how the AddTagCommand mechanism works:
+
+![UpdatedAddTagCommandSeqDiagram](images/AddCommandDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to support adding tags for one person and for everyone within AddTagCommand:**
+
+* **Alternative 1 (current choice):** When the user enters 'addt all...', the parser will take Index as null.
+    * Pros: Easy to implement.
+    * Cons: May result in unexpected bugs.
+
+* **Alternative 2:** Create two different classes for each function.
+    * Pros: Will result in fewer unexpected bugs since the logic is more straightforward to the developer.
+    * Cons: Less user-friendly as multiple commands have very similar functionalities.
+
 
 ### Adding a remark to people `remark`
 
@@ -289,7 +332,7 @@ The following sequence diagram briefly shows how the RemarkCommandParser operati
 
 Step 3. The `RemarkCommand` will then create a new `Person` using information from input remark. All other information will be taken from the original `Person`.
 
-Step 4. `RemarkCommand#execute` will then replace the old `Person` in the `model` with the new `Person`.
+Step 4. `RemarkCommand#execute` will then replace the original `Person` in the `model` with the new `Person`.
 
 The following sequence diagram shows how the RemarkCommand mechanism works:
 
@@ -313,7 +356,6 @@ The following sequence diagram shows how the RemarkCommand mechanism works:
 #### Implementation
 
 The find mechanism is facilitated by FindCommand and FindCommandParser. It allows users to find contacts using any of their contact details.
-
 
 #### Usage
 
