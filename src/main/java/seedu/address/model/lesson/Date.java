@@ -160,7 +160,7 @@ public class Date implements Comparable<Date> {
      * Checks if this date is on the same day of the week as the specified date.
      *
      * @param other The date to compare to.
-     * @return True if this date is is on the same day of the week as the specified date, false otherwise.
+     * @return True if this date is on the same day of the week as the specified date, false otherwise.
      */
     public boolean isSameDayOfWeek(Date other) {
         return localDate.getDayOfWeek().equals(other.getDayOfWeek());

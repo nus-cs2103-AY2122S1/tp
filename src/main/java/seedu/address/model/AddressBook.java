@@ -88,6 +88,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if {@code lesson} clashes with an existing lesson in the address book.
+     *
+     * @param lesson The lesson we want to check.
+     * @return True if any existing lesson clashes with the given lesson.
      */
     public boolean hasClashingLesson(Lesson lesson) {
         requireNonNull(lesson);
@@ -95,7 +98,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     * Returns true if {@code lesson} clashes with an existing lesson in the address book
+     * excluding the {@code lessonToIgnore}
+     *
+     * @param lesson The lesson we want to check.
+     * @param lessonToIgnore The lesson we do not want to check against.
+     * @return True if any existing lesson, excluding the {@code lessonToIgnore},clashes with the given lesson.
      */
     public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
         requireNonNull(lesson);
@@ -104,6 +112,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns true if any of the specified lessons clashes with existing lesson in the address book.
+     *
+     * @param lessons The lessons we want to check.
+     * @return True if any of the given lessons clash with any existing lessons.
      */
     public boolean hasClashingLesson(Iterable<Lesson> lessons) {
         requireAllNonNull(lessons);
