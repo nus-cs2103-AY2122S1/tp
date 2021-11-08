@@ -21,6 +21,7 @@ import static tutoraid.commons.core.HelpGuide.ADD_S_TITLE;
 import static tutoraid.commons.core.HelpGuide.CLEAR_COMMAND;
 import static tutoraid.commons.core.HelpGuide.CLEAR_DESC;
 import static tutoraid.commons.core.HelpGuide.CLEAR_TITLE;
+import static tutoraid.commons.core.HelpGuide.CLI;
 import static tutoraid.commons.core.HelpGuide.DEL_L_COMMAND;
 import static tutoraid.commons.core.HelpGuide.DEL_L_DESC;
 import static tutoraid.commons.core.HelpGuide.DEL_L_EXAMPLE;
@@ -63,20 +64,32 @@ import static tutoraid.commons.core.HelpGuide.EXIT_COMMAND;
 import static tutoraid.commons.core.HelpGuide.EXIT_DESC;
 import static tutoraid.commons.core.HelpGuide.EXIT_TITLE;
 import static tutoraid.commons.core.HelpGuide.FAQ1;
+import static tutoraid.commons.core.HelpGuide.FAQ2_ANS_PART1;
+import static tutoraid.commons.core.HelpGuide.FAQ2_ANS_PART2;
+import static tutoraid.commons.core.HelpGuide.FAQ2_ANS_PART3;
+import static tutoraid.commons.core.HelpGuide.FAQ2_Q;
+import static tutoraid.commons.core.HelpGuide.FAQ3_ANS_PART1;
+import static tutoraid.commons.core.HelpGuide.FAQ3_ANS_PART2;
+import static tutoraid.commons.core.HelpGuide.FAQ3_Q;
+import static tutoraid.commons.core.HelpGuide.FAQ4;
 import static tutoraid.commons.core.HelpGuide.FAQ_TITLE;
 import static tutoraid.commons.core.HelpGuide.FEATURES_NOTES;
 import static tutoraid.commons.core.HelpGuide.FEATURES_TITLE;
-import static tutoraid.commons.core.HelpGuide.FIND_COMMAND;
-import static tutoraid.commons.core.HelpGuide.FIND_DESC1;
-import static tutoraid.commons.core.HelpGuide.FIND_DESC2;
-import static tutoraid.commons.core.HelpGuide.FIND_DESC3;
+import static tutoraid.commons.core.HelpGuide.FIND_L_COMMAND;
+import static tutoraid.commons.core.HelpGuide.FIND_L_DESC;
 import static tutoraid.commons.core.HelpGuide.FIND_L_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.FIND_L_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.FIND_L_TITLE;
+import static tutoraid.commons.core.HelpGuide.FIND_S_COMMAND;
+import static tutoraid.commons.core.HelpGuide.FIND_S_DESC;
 import static tutoraid.commons.core.HelpGuide.FIND_S_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.FIND_S_EXAMPLE_DESC;
-import static tutoraid.commons.core.HelpGuide.FIND_TITLE;
+import static tutoraid.commons.core.HelpGuide.FIND_S_TITLE;
 import static tutoraid.commons.core.HelpGuide.FORMAT;
 import static tutoraid.commons.core.HelpGuide.FULL_USER_GUIDE;
+import static tutoraid.commons.core.HelpGuide.GLOSSARY_TITLE;
+import static tutoraid.commons.core.HelpGuide.GUI1;
+import static tutoraid.commons.core.HelpGuide.GUI2;
 import static tutoraid.commons.core.HelpGuide.HELP_COMMAND;
 import static tutoraid.commons.core.HelpGuide.HELP_DESC;
 import static tutoraid.commons.core.HelpGuide.HELP_TITLE;
@@ -87,13 +100,13 @@ import static tutoraid.commons.core.HelpGuide.LIST_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.LIST_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.LIST_GENERAL_COMMAND;
 import static tutoraid.commons.core.HelpGuide.LIST_TITLE;
-import static tutoraid.commons.core.HelpGuide.L_FLAG;
 import static tutoraid.commons.core.HelpGuide.OVERVIEW;
+import static tutoraid.commons.core.HelpGuide.PROGRESS1;
+import static tutoraid.commons.core.HelpGuide.PROGRESS2;
 import static tutoraid.commons.core.HelpGuide.QUICK_START;
 import static tutoraid.commons.core.HelpGuide.QUICK_START_TITLE;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_DESC;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_TITLE;
-import static tutoraid.commons.core.HelpGuide.S_FLAG;
 import static tutoraid.commons.core.HelpGuide.USER_GUIDE_TITLE;
 import static tutoraid.commons.core.HelpGuide.VIEW_L_COMMAND;
 import static tutoraid.commons.core.HelpGuide.VIEW_L_DESC;
@@ -183,6 +196,8 @@ public class HelpWindow extends UiPart<Stage> {
     private Label format17;
     @FXML
     private Label format18;
+    @FXML
+    private Label format19;
 
     @FXML
     private Label example;
@@ -216,12 +231,8 @@ public class HelpWindow extends UiPart<Stage> {
     private Label example14;
     @FXML
     private Label example15;
-
-
     @FXML
-    private Label sFlag;
-    @FXML
-    private Label lFlag;
+    private Label example16;
 
     @FXML
     private Label helpTitle;
@@ -253,7 +264,6 @@ public class HelpWindow extends UiPart<Stage> {
     private Label listAExample;
     @FXML
     private Label listAExampleDesc;
-
 
     @FXML
     private Label delSTitle;
@@ -311,23 +321,27 @@ public class HelpWindow extends UiPart<Stage> {
     private Label delPExampleDesc;
 
     @FXML
-    private Label findTitle;
+    private Label findSTitle;
     @FXML
-    private Label findCommand;
+    private Label findSDesc;
     @FXML
-    private Label findDesc1;
-    @FXML
-    private Label findDesc2;
-    @FXML
-    private Label findDesc3;
+    private Label findSCommand;
     @FXML
     private Label findSExample;
     @FXML
     private Label findSExampleDesc;
+
+    @FXML
+    private Label findLTitle;
+    @FXML
+    private Label findLDesc;
+    @FXML
+    private Label findLCommand;
     @FXML
     private Label findLExample;
     @FXML
     private Label findLExampleDesc;
+
 
     @FXML
     private Label addLTitle;
@@ -428,9 +442,42 @@ public class HelpWindow extends UiPart<Stage> {
     private Label editCaution;
 
     @FXML
+    private Label glossaryTitle;
+    @FXML
+    private Label cli;
+    @FXML
+    private Label gui1;
+    @FXML
+    private Label gui2;
+    @FXML
+    private Label progress1;
+    @FXML
+    private Label progress2;
+
+    @FXML
     private Label faqTitle;
     @FXML
-    private Label faq;
+    private Label faq1;
+    @FXML
+    private Label faq2Q;
+    @FXML
+    private Label faq2AnsPart1;
+    @FXML
+    private Label faqViewCommand;
+    @FXML
+    private Label faq2AnsPart2;
+    @FXML
+    private Label faq2AnsPart3;
+    @FXML
+    private Label faq3Q;
+    @FXML
+    private Label faq3AnsPart1;
+    @FXML
+    private Label faqListCommand;
+    @FXML
+    private Label faq3AnsPart2;
+    @FXML
+    private Label faq4;
 
     @FXML
     private VBox helpWindow;
@@ -467,11 +514,13 @@ public class HelpWindow extends UiPart<Stage> {
         deleteStudentsFromLessonsFeature();
         clearFeature();
         exitFeature();
-        findFeature();
+        findStudentFeature();
+        findLessonFeature();
 
         //Setting up the end of the user guide
         savingData();
         editData();
+        glossary();
         faq();
     }
 
@@ -682,21 +731,29 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates the 'find feature' section.
+     * Creates the 'find student feature' section.
      */
-    public void findFeature() {
+    public void findStudentFeature() {
         format12.setText(FORMAT);
         example9.setText(EXAMPLE);
-        sFlag.setText(S_FLAG);
-        lFlag.setText(L_FLAG);
 
-        findTitle.setText(FIND_TITLE);
-        findDesc1.setText(FIND_DESC1);
-        findDesc2.setText(FIND_DESC2);
-        findDesc3.setText(FIND_DESC3);
-        findCommand.setText(FIND_COMMAND);
+        findSTitle.setText(FIND_S_TITLE);
+        findSDesc.setText(FIND_S_DESC);
+        findSCommand.setText(FIND_S_COMMAND);
         findSExample.setText(FIND_S_EXAMPLE);
         findSExampleDesc.setText(FIND_S_EXAMPLE_DESC);
+    }
+
+    /**
+     * Creates the 'find student feature' section.
+     */
+    public void findLessonFeature() {
+        format19.setText(FORMAT);
+        example16.setText(EXAMPLE);
+
+        findLTitle.setText(FIND_L_TITLE);
+        findLDesc.setText(FIND_L_DESC);
+        findLCommand.setText(FIND_L_COMMAND);
         findLExample.setText(FIND_L_EXAMPLE);
         findLExampleDesc.setText(FIND_L_EXAMPLE_DESC);
     }
@@ -828,11 +885,41 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates the FAQ1 section.
+     * Creates the Glossary section.
+     */
+    public void glossary() {
+        glossaryTitle.setText(GLOSSARY_TITLE);
+        cli.setText(CLI);
+        gui1.setText(GUI1);
+        gui2.setText(GUI2);
+        progress1.setText(PROGRESS1);
+        progress2.setText(PROGRESS2);
+    }
+
+    /**
+     * Creates the FAQ section.
      */
     public void faq() {
         faqTitle.setText(FAQ_TITLE);
-        faq.setText(FAQ1);
-        faq.setLineSpacing(2.0);
+        faq1.setText(FAQ1);
+        faq1.setLineSpacing(2.0);
+        faq2Q.setText(FAQ2_Q);
+        faq2Q.setLineSpacing(2.0);
+        faq2AnsPart1.setText(FAQ2_ANS_PART1);
+        faq2AnsPart1.setLineSpacing(2.0);
+        faq2AnsPart2.setText(FAQ2_ANS_PART2);
+        faq2AnsPart2.setLineSpacing(2.0);
+        faqViewCommand.setText(VIEW_S_COMMAND);
+        faq2AnsPart3.setText(FAQ2_ANS_PART3);
+        faq2AnsPart3.setLineSpacing(2.0);
+        faq3Q.setText(FAQ3_Q);
+        faq3Q.setLineSpacing(2.0);
+        faq3AnsPart1.setText(FAQ3_ANS_PART1);
+        faq3AnsPart1.setLineSpacing(2.0);
+        faqListCommand.setText(LIST_A_EXAMPLE);
+        faq3AnsPart2.setText(FAQ3_ANS_PART2);
+        faq3AnsPart2.setLineSpacing(2.0);
+        faq4.setText(FAQ4);
+        faq4.setLineSpacing(2.0);
     }
 }

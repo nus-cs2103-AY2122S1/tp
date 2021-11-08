@@ -107,6 +107,18 @@
                         <Label fx:id="viewSExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
 
+                    <Label fx:id="findSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="findSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format12" text="Format: " wrapText="true"/>
+                        <Label fx:id="findSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example9" text="Label" wrapText="true"/>
+                        <Label fx:id="findSExample" text="Label" wrapText="true"/>
+                        <Label fx:id="findSExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
                     <Label fx:id="addPTitle" text="Label" wrapText="true"/>
                     <Label fx:id="addPDesc" text="Label" wrapText="true"/>
                     <TextFlow>
@@ -177,22 +189,15 @@
                         <Label fx:id="viewLExample" text="Label" wrapText="true"/>
                         <Label fx:id="viewLExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
+
+                    <Label fx:id="findLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="findLDesc" text="Label" wrapText="true"/>
                     <TextFlow>
-                        <Label fx:id="findTitle" text="Label" wrapText="true"/>
-                        <Label fx:id="findDesc1" text="Label" wrapText="true"/>
-                        <Label fx:id="sFlag" text="Label" wrapText="true"/>
-                        <Label fx:id="findDesc2" text="Label" wrapText="true"/>
-                        <Label fx:id="lFlag" text="Label" wrapText="true"/>
-                        <Label fx:id="findDesc3" text="Label" wrapText="true"/>
+                        <Label fx:id="format19" text="Format: " wrapText="true"/>
+                        <Label fx:id="findLCommand" text="Label" wrapText="true"/>
                     </TextFlow>
                     <TextFlow>
-                        <Label fx:id="format12" text="Format: " wrapText="true"/>
-                        <Label fx:id="findCommand" text="Label" wrapText="true"/>
-                    </TextFlow>
-                    <TextFlow>
-                        <Label fx:id="example9" text="Label" wrapText="true"/>
-                        <Label fx:id="findSExample" text="Label" wrapText="true"/>
-                        <Label fx:id="findSExampleDesc" text="Label" wrapText="true"/>
+                        <Label fx:id="example16" text="Label" wrapText="true"/>
                         <Label fx:id="findLExample" text="Label" wrapText="true"/>
                         <Label fx:id="findLExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
@@ -248,8 +253,36 @@
                     <Label fx:id="editDataDesc3" text="Label" wrapText="true"/>
                     <Label fx:id="editCaution" text="Label" wrapText="true"/>
 
+                    <Label fx:id="glossaryTitle" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="cli" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="gui1" text="Label" wrapText="true"/>
+                        <Label fx:id="gui2" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="progress1" text="Label" wrapText="true"/>
+                        <Label fx:id="progress2" text="Label" wrapText="true"/>
+                    </TextFlow>
+
                     <Label fx:id="faqTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="faq" text="Label" wrapText="true"/>
+                    <Label fx:id="faq1" text="Label" wrapText="true"/>
+                    <Label fx:id="faq2Q" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="faq2AnsPart1" text="Label" wrapText="true"/>
+                        <Label fx:id="faqViewCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <Label fx:id="faq2AnsPart2" text="Label" wrapText="true"/>
+                    <Label fx:id="faq2AnsPart3" text="Label" wrapText="true"/>
+                    <Label fx:id="faq3Q" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="faq3AnsPart1" text="Label" wrapText="true"/>
+                        <Label fx:id="faqListCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <Label fx:id="faq3AnsPart2" text="Label" wrapText="true"/>
+                    <Label fx:id="faq4" text="Label" wrapText="true"/>
+
                 </children>
                 <opaqueInsets>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
