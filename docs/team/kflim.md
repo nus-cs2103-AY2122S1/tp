@@ -20,8 +20,6 @@ Given below are my contributions to the project.
 * **Code contributed**:
 [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kflim&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
-* **Project management**:
-
 * **Enhancements to existing features**:
     * Added `man` feature
     * Improved `find` feature to allow users to find people based on different attributes of a person, such as name and address
