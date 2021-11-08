@@ -649,10 +649,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Appendix E: Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **GUI**: A GUI (graphical user interface) is a system of interactive visual components for the user to interact with.
-* **Index**: The position of a task in the list. Indexes start from 1.
-* **Parameter**: Specific information to be provided for commands.
+|Term |Explanation |
+|-----|------------|
+|**Mainstream OS** | Windows, Linux, Unix, OS-X|
+|**GUI** | A GUI (graphical user interface) is a system of interactive visual components for the user to interact with. |
+|**Index**| The position of a task in the list. Indexes start from 1. |
+|**Parameter**| Specific information to be provided for commands. |
 
 --------------------------------------------------------------------------------------------------------------------
 
