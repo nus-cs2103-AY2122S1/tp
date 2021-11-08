@@ -11,11 +11,11 @@ package UI <<Rectangle>> UI_COLOR_T1 {
     Class "{abstract}\nUiPart<Region>" as UiPartRegion UI_COLOR_T4
     Class UiManager
     Class MainWindow
-    Class "{abstract}\nPopupWindow" as PopupWindow
-    Class HelpWindow
-    Class DashboardWindow
-    Class PopupManager UI_COLOR_T3
-    Class FileManager UI_COLOR_T3
+    Class "{abstract}\nPopupWindow" as PopupWindow UI_COLOR_WINDOW
+    Class HelpWindow UI_COLOR_WINDOW
+    Class DashboardWindow UI_COLOR_WINDOW
+    Class PopupManager UI_COLOR_MANAGER
+    Class FileManager UI_COLOR_MANAGER
     package MainComponents YELLOW_COLOR {}
 }
 
