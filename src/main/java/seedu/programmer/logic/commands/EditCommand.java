@@ -51,12 +51,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_NO_NEW_FIELDS = "There is no fields to be edited. Student's information are "
             + "already the same as what you have asked to be edited to.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
     public static final String MESSAGE_DUPLICATE_STUDENT_ID = "This student with the same Student ID "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
-    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s score has been updated!\n";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s score has been updated!";
     public static final String MESSAGE_NO_LAB_EDITED = "No lab has been updated.";
 
     private static LabNum labNum2;
@@ -64,10 +63,10 @@ public class EditCommand extends Command {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * Constructor for EditCommand.
+     * Class constructor for EditCommand.
      *
-     * @param index of the student in the filtered student list to edit
-     * @param editStudentDescriptor details to edit the student with
+     * @param index of the student in the filtered student list to edit.
+     * @param editStudentDescriptor details to edit the student with.
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
@@ -124,6 +123,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
+     *
+     * @param studentToEdit Student object to be edited.
+     * @param editStudentDescriptor Contains the corresponding fields of the student to be edited.
+     * @return The {@code Student} with the edited attributes.
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
             throws CommandException {
@@ -191,6 +194,9 @@ public class EditCommand extends Command {
         private Lab lab;
         private ObservableList<Lab> labList;
 
+        /**
+         * Class constructor.
+         */
         public EditStudentDescriptor() {}
 
         /**
@@ -281,6 +287,5 @@ public class EditCommand extends Command {
                     && getClassId().equals(e.getClassId())
                     && getEmail().equals(e.getEmail());
         }
-
     }
 }

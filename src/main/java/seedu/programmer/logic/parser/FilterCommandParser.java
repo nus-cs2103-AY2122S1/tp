@@ -24,7 +24,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
      *
-     * @param args The command arguments.
+     * @param args The String arguments as given by the user.
      * @throws ParseException If the user input does not conform the expected format.
      */
     public FilterCommand parse(String args) throws ParseException {

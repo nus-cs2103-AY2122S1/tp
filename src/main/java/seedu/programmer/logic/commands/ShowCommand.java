@@ -11,7 +11,7 @@ import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Student;
 
 /**
- * Shows the student's particular and lab results at the given index
+ * Shows the student's particular and lab results at the given index.
  */
 public class ShowCommand extends Command {
 
@@ -27,9 +27,9 @@ public class ShowCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates a ShowCommand to show the {@code Student} as indicated by the targetIndex
+     * Class constructor specifying the student at which index to show.
      *
-     * @param targetIndex the index of the target student shown on ProgrammerError
+     * @param targetIndex The index as displayed on the list (1-indexed) corresponding the student to be shown.
      */
     public ShowCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
