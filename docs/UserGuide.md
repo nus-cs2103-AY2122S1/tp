@@ -681,13 +681,10 @@ You can first quickly input `findtask Aug` to get a list of tasks with deadline 
 
 ![commandcombination2](images/commandcombination2.png)
 
-Now you can easily use `marktask 2` to mark the second task, that was previously not on the viewable list as complete. To
-go back to viewing all tasks and "remove" the filtered view, simply type `listtasks` to get the original list of tasks:
+Now you can easily use `marktask 2` to mark the second task, that was previously not on the viewable list as complete. Finally,
+to go back to viewing all tasks and "remove" the filtered view, simply type `listtasks` to get the original list of tasks:
 
 ![commandcombination3](images/commandcombination3.png)
-
-This general method of using the `findClient`/`findOrder`/`findTask` to narrow the list down, before using other commands
-that act on the list of items is something we expect will be useful for you.
 
 [return to top](#table-of-contents)
 
