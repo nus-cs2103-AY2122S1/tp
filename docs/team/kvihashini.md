@@ -11,9 +11,8 @@ Given below are my contributions to the project.
 
 **Code contributed**: [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=kvihashini&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
-**All Pull Requests**: [PRs](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+author%3Akvihashini)
-
-**Issues Solved**: [Issues](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues?q=is%3Aissue+author%3Akvihashini+is%3Aclosed)
+**Pull Requests and Issues**: [PRs](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+author%3Akvihashini)
+, [Issues](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues?q=is%3Aissue+author%3Akvihashini+is%3Aclosed)
 
 **Enhancements implemented**:
 * Added skeleton model for Groups. [\#48](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/48)
