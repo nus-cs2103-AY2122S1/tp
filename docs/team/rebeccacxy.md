@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * Highlights: This feature required amendments to the existing command syntax to allow the respective commands to be associated with ingredient type. It required an in-depth analysis of design alternatives.
 
 * **New Feature**: Added the `quantity` and optional `description` attributes to ingredients.
-  * What it does: The quantity attribute is essential to the core functionality of both the ingredient and recipe manager. The description attribute is a nice-to-have additional field for tracking of ingredients.
+  * What it does: The `quantity` attribute is essential to the core functionality of both the ingredient and recipe manager. The `description` attribute is a nice-to-have additional field for tracking of ingredients.
   * Highlights: These attributes integrate into other commands that need to specify a quantity and description. They were also integrated throughout the storage-related code so that the quantity and description can be exported to a file.
 
 * **New Feature**: Added automatic sorting of ingredients and their tags
@@ -44,6 +44,6 @@ Given below are my contributions to the project.
 
 * **Statistics**:
   * PRs reviewed: [40](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Arebeccacxy)
-  * PRs raised: [22](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
+  * PRs raised: [24](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
   * Issues raised: [25](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Arebeccacxy+is%3Aclosed)
 
