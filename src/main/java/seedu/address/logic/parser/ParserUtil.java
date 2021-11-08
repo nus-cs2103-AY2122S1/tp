@@ -30,6 +30,9 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex, ParseException exception) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.equals("")) {
+            throw exception;
+        }
         char firstElement = trimmedIndex.charAt(0);
 
         if (firstElement == 45 && trimmedIndex.length() == 1) {
