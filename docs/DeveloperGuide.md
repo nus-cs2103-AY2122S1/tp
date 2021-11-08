@@ -1064,7 +1064,6 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect pin commands to try: `pin`, `pin -1`, `pin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
-<div style="page-break-after: always;"></div>
 ### Unpinning a contact
 1. Unpinning a contact
 
