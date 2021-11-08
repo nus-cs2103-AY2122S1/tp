@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.stage.*?>
+
+<fx:root resizable="false" title="Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11"
+         xmlns:fx="http://javafx.com/fxml/1">
+  <icons>
+    <Image url="@/images/statsIcon.png"/>
+  </icons>
+  <scene>
+    <Scene>
+      <stylesheets>
+        <URL value="@Fonts.css"/>
+        <URL value="@DarkTheme.css"/>
+      </stylesheets>
+      <VBox>
+        <children>
+          <HBox alignment="CENTER" styleClass="hbox">
+            <children>
+              <PieChart fx:id="priorityPieChart" title="Priority Count"/>
+              <Label fx:id="priorityPieChartDesc" maxWidth="150.0" minWidth="150.0" prefWidth="150.0"
+                     styleClass="label-bright" text="Label" wrapText="true"/>
+            </children>
+          </HBox>
+          <HBox alignment="CENTER" styleClass="hbox">
+            <children>
+              <PieChart fx:id="investmentPlanPieChart" title="Investment plans count"/>
+              <Label fx:id="investmentPlanPieChartDesc" maxWidth="150.0" minWidth="150.0" prefWidth="150.0"
+                     styleClass="label-bright" text="Label" wrapText="true"/>
+            </children>
+          </HBox>
+        </children>
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>

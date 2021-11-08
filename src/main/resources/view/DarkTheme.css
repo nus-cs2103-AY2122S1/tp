@@ -13,9 +13,10 @@
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: #fafafa;
     -fx-opacity: 1;
 }
+
 
 .label-header {
     -fx-font-size: 32pt;
@@ -23,6 +24,26 @@
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
+
+.chart {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.chart-title {
+  -fx-text-fill: #fafafa;
+  -fx-font-size: 1.7em;
+  -fx-underline: true;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-family: "Open Sans Light";
+    -fx-font-size: 11pt;
+}
+
+.default-color0.chart-pie { -fx-pie-color: red; }
+.default-color1.chart-pie { -fx-pie-color: orange; }
+.default-color2.chart-pie { -fx-pie-color: green; }
 
 .text-field {
     -fx-font-size: 12pt;
@@ -132,7 +153,12 @@
     -fx-text-fill: #010504;
 }
 
+
 .stack-pane {
+     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.border-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
 
@@ -228,6 +254,18 @@
     -fx-background-color: #3a3a3a;
 }
 
+.button-copy-url {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #3e7b91;
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
 .button:pressed, .button:default:hover:pressed {
   -fx-background-color: white;
   -fx-text-fill: #1d1d1d;
@@ -256,6 +294,49 @@
     -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
+/*
+ * Combo box styling
+ * Author: Anshul Parashar, Roy Shmuli
+ * Adapted from: https://stackoverflow.com/questions/19343531/javafx-combobox-styling
+ */
+
+.combo-box .list-cell
+{
+    -fx-background: white;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-padding: 0 0 0 7;
+    -fx-cell-size: 1.66667em;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: white, white;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-padding: 0 0 0 5;
+
+    /* No alternate highlighting */
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
 .dialog-pane {
     -fx-background-color: #1d1d1d;
 }
@@ -279,6 +360,10 @@
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
+}
+
+.hbox {
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .scroll-bar {
@@ -344,7 +429,6 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

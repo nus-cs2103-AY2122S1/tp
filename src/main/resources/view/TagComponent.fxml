@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.FlowPane?>
+<fx:root spacing="1" alignment="TOP_LEFT" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="displayPicture" styleClass="cell_small_label" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+        <FlowPane fx:id="tags" styleClass="cell_small_label" hgap="5"/>
+    </children>
+</fx:root>

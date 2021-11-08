@@ -3,57 +3,64 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg). <br>
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You may reach us through the following email addresses:
+* Khor Ethan: e0526005@u.nus.edu
+* Lau Teng Hon: e0543465@u.nus.edu
+* Toh Wang Bin: e0544223@u.nus.edu
+* Lim Peiyuan: e0543756@u.nus.edu
+* Calvin Tan: calvin.twx@u.nus.edu
+
 
 ## Project team
 
-### John Doe
+### Khor Ethan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/squeakysquak.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/squeakysquak)]
+[[portfolio](team/squeakysquak.md)]
 
-* Role: Project Advisor
+* Role: Developer, in charge of Scheduling & Tracking
+* Responsibilities: Model 
 
-### Jane Doe
+### Lau Teng Hon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/th-429b.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Th-429B)]
+[[portfolio](team/th-429b.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Team Lead, in charge of Deliverables & Deadlines
+* Responsibilities: Storage
 
-### Johnny Doe
+### Toh Wang Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/trash-bin99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/trash-bin99)]
+[[portfolio](team/trash-bin99.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer, in charge of Testing
+* Responsibilities: Parser
 
-### Jean Doe
+### Lim Peiyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/py0000.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Py0000)]
+[[portfolio](team/py0000.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Developer, in charge of Code Quality
+* Responsibilities: Logic
 
-### James Doe
+### Calvin Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cyn7hius.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Cyn7hius)]
+[[portfolio](team/cyn7hius.md)]
 
-* Role: Developer
+* Role: Developer, in charge of Documentation
 * Responsibilities: UI
