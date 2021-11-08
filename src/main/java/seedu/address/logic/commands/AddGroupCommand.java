@@ -17,7 +17,7 @@ public class AddGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "addGroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to tApp. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to tApp group list. "
             + "Parameters: "
             + PREFIX_GROUP + "NAME "
             + "[" + PREFIX_REPO + "REPO_NAME] "
@@ -30,7 +30,7 @@ public class AddGroupCommand extends Command {
             + PREFIX_TAG + "tApp";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the tApp";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the tApp group list.";
 
     public final Group toAdd;
 

@@ -43,7 +43,7 @@ public interface Logic {
     ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' application file path.
      */
     Path getAddressBookFilePath();
 
@@ -57,5 +57,8 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    /**
+     * Returns the display type of the application.
+     */
     DisplayType getDisplayType();
 }

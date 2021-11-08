@@ -533,6 +533,6 @@ Commands | Format | Examples
 
 Action | Format, Examples
 --------|-----------------------------
-[**Clear Address Book**](#clearing-all-entries-from-tapp-clear) | `clearAll`
+[**Clear Address Book**](#clearing-all-entries-from-tapp-clearall) | `clearAll`
 [**Help**](#viewing-help--help) | `help`
 [**Exit**](#exiting-the-program--exit) | `exit`

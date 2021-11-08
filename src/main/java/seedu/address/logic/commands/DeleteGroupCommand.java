@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a student identified using it's displayed index from the tApp.
  */
 public class DeleteGroupCommand extends Command {
 
