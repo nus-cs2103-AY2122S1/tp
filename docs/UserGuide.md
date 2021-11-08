@@ -133,7 +133,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
    * Items with <code>t/</code> before them represent the time of the task
    * Items with <code>p/</code> before them represent the priority level of the task
      * The priority level can be `LOW`, `MEDIUM` or `HIGH` (**Note**: needs to be uppercase)
-   * Date is represented in YYYY-MM-DD format, and year should be 2021 or 2022
+   * Date is represented in YYYY-MM-DD format, and year should be 2021
    * Time is represented in HH:MM format
    * Tag must be alphanumeric and contain at most 15 characters
 </div>
@@ -156,7 +156,7 @@ Adds a task to the task list. The parameters for the command can be input in any
   * The format should be as follows <code><i>t/hh:mm</i></code>
 * Adds task with the date <code><i>d/date</i></code>
   * The format should be as follows <code><i>d/yyyy-mm-dd</i></code>
-  * The date should `2021` or `2022`
+  * The date should `2021`
 * Add task with the tag <code><i>tg/tag</i></code>
 * Add task with the priority level <code><i>p/level</i></code>
 * The task is added for that date only at the given time
