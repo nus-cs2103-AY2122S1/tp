@@ -32,8 +32,8 @@ public class EditApplicantCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_POSITION + "POSITION] " + "\n"
-            + "[" + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE]"
+            + "[" + PREFIX_POSITION + "POSITION] "
+            + "[" + PREFIX_GITHUB_PROFILE + "GITHUB_PROFILE]" + "\n"
             + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com ";
