@@ -548,7 +548,7 @@ Example: `tg/T09`
 ### `s/SOCIAL_HANDLE`
 `SOCIAL_HANDLE` should be of the format `PLATFORM:USERID` and adhere to the following constraints:
 * Only the following platforms are supported: `Instagram`, `Telegram`, `Facebook`, `Twitter`, `Github`, `Linkedin`, `Snapchat`, `Discord`
-* The following 2 letter shorthand is used to replace the `PLATFORM` for their corresponding social platform:
+* The following 2 letter shorthand can be used to replace the full name of their corresponding social platform:
      * `ig` for Instagram
      * `tg` for Telegram
      * `fb` for Facebook
