@@ -790,13 +790,13 @@ Action | Format, Examples
 [**Exit**](#exiting-the-program--exit) | `exit`
 [**Add**](#adding-a-staff--add) | `add n/NAME p/PHONE_NUMBER e/EMAIL $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 [**Edit**](#editing-a-staff--edit) | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
-[**Delete**](#deleting-a-shift-from-a-staff--deleteshift) | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
+[**Delete**](#deleting-a-staff--delete) | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 [**Find**](#finding-staff--find) | `find -i INDEX [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE...] [-t TAG...]`<br>`find [-n NAME_KEYWORDS...] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE...] [-t TAG...]`
 [**Mark absent**](#marking-a-staff-as-absent--mark) | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 [**Remove mark**](#removing-the-absent-mark--unmark) | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 [**Add shift to staff**](#adding-a-shift-to-a-staffs-schedule--addshift) | `addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 [**Swap shifts**](#swapping-shifts--swapshift) | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
-[**Delete staff shift**](#deleting-a-staff--delete) | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
+[**Delete staff shift**](#deleting-a-shift-from-a-staff--deleteshift) | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 [**View shift**](#viewing-all-the-staff-working-a-shift--viewshift) | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
 [**Change schedule**](#viewing-schedule-for-the-week-change) | `change da/START_DATE`
 [**Set shift time**](#updating-the-start-time-and-end-time-for-a-shift--setshifttime) | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
