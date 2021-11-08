@@ -238,7 +238,10 @@ find <NAME> [MORE_NAMES]
 
 * Searches for matching names
 
-  **:information_source: Name must contain only alphabetical characters.**<br>
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: Name must contain only alphabetical characters.
+</div>
+
 * Matches contact names with the **exact** keyword or those that contain the keyword as substring. e.g. `find al` will return <b><u>Al</u></b>ex Yeoh as well as Roy B<b><u>al</u></b>akrishnan
 * The search **is case-insensitive**.  e.g. alex will match Alex
 * Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
@@ -326,7 +329,7 @@ of the contact, GitHub username, telegram id or the index. It shows the student 
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: Note:
+:information_source: Note:
 The show keywords are case-insensitive, john Doe will match with John Doe, JOHN DOE and JoHN DoE
 
 </div>
@@ -344,10 +347,8 @@ show John Doe
 ```
 
 <div markdown="span" class="alert alert-primary">
-
-:bulb: Note:
+:information_source: Note:
 If the exact name is not given, the show function will act similar to find and then you can pick out one contact from the given list.
-
 </div>
 
 Format 2:

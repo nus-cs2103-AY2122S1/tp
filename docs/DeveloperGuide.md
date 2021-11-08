@@ -508,7 +508,7 @@ Next, The `ExportCommand` is then executed in `LogicManager`. The `ExportCommand
    temporaryStorage.saveAddressBook(currentAddressBook, filePath, true);
    ```
    <div markdown="span" class="alert alert-primary">
-    :bulb: **Note:** The third argument `true` indicates that `saveAddressBook(ReadOnlyAddressBook)` is triggered by an export command. This distinction is necessary as default saving of contact data to the address book is performed with the same method, but requires overwriting of the storage file, whereas the export command does not overwrite files.
+    :information_source: **Note:** The third argument `true` indicates that `saveAddressBook(ReadOnlyAddressBook)` is triggered by an export command. This distinction is necessary as default saving of contact data to the address book is performed with the same method, but requires overwriting of the storage file, whereas the export command does not overwrite files.
     </div>
 
    In the Storage component, utility classes are used to check, create and write to the JSON file.
@@ -908,7 +908,7 @@ When CohortConnect UI is initialized, the `CommandBox` class representing the Co
 1. If `KeyCode.UP` is detected in the `TextField`, `CommandHistory#getPrevious()` is called, and the returned String is set to the text field.
 
     <div markdown="span" class="alert alert-primary">
-    :bulb: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
+    :information_source: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
     </div>
 
     The activity diagram below illustrates what happens when a user presses the UP arrow key.
@@ -918,7 +918,7 @@ When CohortConnect UI is initialized, the `CommandBox` class representing the Co
 2. If `KeyCode.DOWN` is detected in the `TextField`, `CommandHistory#getNext()` is called, and the returned String is set to the text field.
 
     <div markdown="span" class="alert alert-primary">
-    :bulb: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
+    :information_source: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
     </div>
 
     The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
@@ -946,7 +946,7 @@ When CohortConnect UI is initialized, the `CommandBox` class representing the Co
     ```
 
     <div markdown="span" class="alert alert-primary">
-    :bulb: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
+    :information_source: **Note:** When detecting KeyCombination, Javafx automatically switches its interpretation of "Shortcut" as "Ctrl" for Windows and "Cmd" for macOS. The symbols in the MenuItem (shown above) change as well.
     </div>
 
 2. When their respective key combinations are detected, the MenuItem's onAction methods are called. For example, the following method is called when Cmd/Ctrl + 4 is detected.
