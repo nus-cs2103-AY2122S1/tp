@@ -9,6 +9,8 @@ Interface ReadOnlyModuleSystem <<Interface>>
 Class ModuleSystem
 Class UniqueModuleList
 Class Module
+Class UniqueAssignmentList
+Class Assignment
 
 Interface ReadOnlyGroupSystem <<Interface>>
 Class GroupSystem
@@ -34,4 +36,6 @@ GroupSystem .up.|> ReadOnlyGroupSystem
 GroupSystem *--> "1" UniqueGroupList
 UniqueGroupList --> "*" Group
 
+Module *--> "1" UniqueAssignmentList
+UniqueAssignmentList --> "*" Assignment
 @enduml
