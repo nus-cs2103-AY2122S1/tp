@@ -183,22 +183,6 @@ public class EditCommand extends Command {
         }
     }
 
-    private List<Task> getTaskListToModify(Model model, Person personToEdit) throws CommandException {
-        List<Task> taskListToModify = null;
-        if (model.getIsViewAllTasks()) {
-            for (Person person : model.getViewAllTaskListPersons()) {
-                if ((person.getName()).equals(personToEdit.getName())) {
-                    taskListToModify = person.getTasks();
-                    break;
-                }
-            }
-        } else {
-            checkPersonToEditTasksDisplayed(model, personToEdit);
-            taskListToModify = model.getDisplayTaskList();
-        }
-        return taskListToModify;
-    }
-
     private CommandResult generateWriteCommandResult(Model model, Person editedPerson, String editedTaskMessage) {
         if (targetTaskIndex == null) {
             CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
@@ -241,18 +225,6 @@ public class EditCommand extends Command {
         Venue updatedVenue = editTaskDescriptor.getTaskVenue().orElse(taskToEdit.getVenue());
 
         return new Task(updatedName, updatedDate, updatedTime, updatedVenue);
-    }
-
-    /**
-     * Checks if the person whose task(s) is selected for modification has their task list displayed
-     * on the task list panel.
-     */
-    private void checkPersonToEditTasksDisplayed(Model model, Person personToEdit) throws CommandException {
-        boolean isPersonToEditTaskDisplayed = personToEdit.getName().equals(model.getTaskListManager()
-                .getNameOfChosenPerson());
-        if (!isPersonToEditTaskDisplayed && !model.getIsViewAllTasks()) {
-            throw new CommandException(Messages.MESSAGE_PERSON_TO_EDIT_TASK_NOT_DISPLAYED);
-        }
     }
 
     /**

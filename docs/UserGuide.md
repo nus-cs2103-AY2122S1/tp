@@ -31,7 +31,7 @@ to quickly navigate to the command of your choice.
 * [Deleting a person : `rm`](#deleting-a-person-rm)
 * [Listing all persons : `ls`](#listing-all-persons-ls)
 * [Sorting persons by name: `sort`](#sorting-persons-by-name-sort)
-* [Locating persons by name : `find`](#locating-persons-by-name-find)
+* [Locating persons by name : `find`](#locating-persons-find)
 * [Adding a task : `add`](#adding-a-task-add)
 * [Editing a task : `edit`](#editing-a-task-edit)
 * [Deleting a task : `rm`](#deleting-a-task-rm)
