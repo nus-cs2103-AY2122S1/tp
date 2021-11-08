@@ -526,7 +526,7 @@ Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the us
 *Figure I.3.2: View tags UI sequence diagram*
 
 #### Design considerations
-**Aspect: Data Structures to support lesson operations**
+**Aspect: Data structure for storing tags**
 
 * **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a private field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
   - Pros:
