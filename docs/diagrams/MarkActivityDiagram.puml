@@ -9,6 +9,7 @@ if () then ([All staff(s) queried for \n not marked for period])
     :mark staff(s) for period;
     :Save to staffd.json;
 else ([else])
+    :Inform user of staff already marked for period;
 endif
 stop
 @enduml

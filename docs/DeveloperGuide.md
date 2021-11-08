@@ -237,7 +237,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The mark/unmark feature is facillated by `Person`. It uses the following
-operations of `Person`.
+operations of `Person`. The marked periods are stored as `Set<Period>` objects.
 
  * `Person#mark()` — Adds the input time period to the person to be marked as absent. 
  * `Person#unmark()` — Removes the input time period from the person.
@@ -250,7 +250,7 @@ Given below is an example usage scenario and how the mark/unmark command
 changes the information stored.
 
 Step 1. The user launches the application for the first time. The staff all
-the staff information is read from the save file `addressbook.json`.
+the staff information is read from the save file `staffd.json`.
 The initial information of the staff that we are looking at 
 will look something like this. The `Period` object that we are using can be taken to
 represent 1/1/2001 to 2/1/2001
@@ -279,13 +279,30 @@ The following sequence diagram shows how the mark command works.
 
 ![seq](images/MarkSequenceDiagram.png)
 
-The `unmark` command does the opposite — it calls `Person#mark()`, which replaces the
-`Period` that are contained in the `Person` with the `Period` objects representing
-the initial `Period` without the input `Period`.
+
 
 The following is an activity diagram showing the general activity of the mark command.
 
 ![activity](images/MarkActivityDiagram.png)
+
+The merging of the periods in `mark` command is facilitated by `Period#union()`, which takes
+in a collection of Period and performs a mathematical union on the collection, treating the 
+collection as a set of dates.
+The code is found [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/tree/master/src/main/java/seedu/address/model/person/Period.java).
+
+The following is an activity diagram showcasing a simplified view of the activity of the union method.
+
+![activity](images/PeriodUnionActivityDiagram.png)
+
+The `unmark` command does the opposite — it calls `Person#unmark()`, which replaces the
+`Period` that are contained in the `Person` with the `Period` objects representing
+the initial `Period` without the input `Period`. This command is facilitated by the
+`Period#complement()` method which is called on all the stored `Period`.
+
+
+
+
+
 
 #### Design considerations
 
