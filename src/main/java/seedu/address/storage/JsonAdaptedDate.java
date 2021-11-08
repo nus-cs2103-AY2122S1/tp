@@ -39,10 +39,11 @@ class JsonAdaptedDate {
      * @throws IllegalValueException if there were any data constraints violated in the adapted date.
      */
     public Date toModelType() throws IllegalValueException {
-        if (!Date.isValidDate(value)) {
+        String strippedDate = value.strip();
+        if (!Date.isValidDate(strippedDate)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(value);
+        return new Date(strippedDate);
     }
 
 }
