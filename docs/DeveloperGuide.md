@@ -767,7 +767,7 @@ Step 2. The user executes `delete-applicant 3` command to delete the 3rd applica
 Step 3. The user executes `add-applicant n/David …​` to add a new applicant. The `add-applicant` command also updates its `Memento` and calls `Model#addToHistory()`, causing the state of the `Model` before the modification to be saved in `History`.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a modification command fails its execution, it will not call `Model#addToHistory()`, so the model state will not be saved into the `history`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a modification command fails its execution, it will not call `Model#addToHistory()`, so the model state will not be saved into the `History`.
 
 </div>
 
