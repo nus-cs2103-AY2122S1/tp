@@ -34,7 +34,7 @@ Below are my contributions to the project.
   
 * **Documentation**:
   * User Guide:
-    * Organized User Guide and added new sections such as GUI Breakdown, User Guide Usage, and Glossary. Improved sections such as Flag Legend and Introduction. [\$330](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/330)
+    * Organized User Guide and added new sections such as GUI Breakdown, User Guide Usage, and Glossary. Improved sections such as Flag Legend and Introduction. [\#330](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/330)
     * Added documentation for the features: `find` [\#72](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/72), `viewShift`[\#102](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/102), `setRoleReq` [\#149](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/149/)
   * Developer Guide:
     * Added implementation details for the `find` and `viewShift` features
