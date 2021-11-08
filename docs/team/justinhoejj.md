@@ -42,10 +42,12 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Specify Birthday field is optional [\#116](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/116).
-    * Developer Guide:
-        * Describe implementation details of birthday reminder list [\#93](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/93).
+  * Developer Guide:
+    * Describe implementation details of birthday reminder list [\#93](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/93).
+    * Add instructions for manual testing of all commands [\#204](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/204).
+    * Fix UML sequence diagrams [\#206](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/206).
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#74](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/74), [\#86](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/86), [\#87](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/87)
-    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/91), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/221), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/328))
-    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/Justinhoejj/ped/issues/21), [2](https://github.com/Justinhoejj/ped/issues/23), [3](https://github.com/AY2122S1-CS2103T-W17-3/tp/issues/263))
+    * PRs reviewed (with non-trivial review comments): [\#74](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/74), [\#86](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/86), [\#87](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/87).
+    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/91), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/221), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/328)).
+    * Reported [bugs and suggestions](https://github.com/Justinhoejj/ped/issues) for other teams in the class.
