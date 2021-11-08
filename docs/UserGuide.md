@@ -80,9 +80,10 @@ Format: `help`
 
 Attribute | Prefix | Format
 ------|---|---------------------------------------------------------
+
 **NAME** | `n/` | Names should only contain alphanumeric characters and spaces with max length 60 characters, and it should not be blank
 **PHONE** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long
-**EMAIL** | `e/` | Emails should be of the format `"NUS Network ID"@u.nus.edu`
+**EMAIL** | `e/` | Emails should be of the format `"NUSNET_ID"@u.nus.edu`
 **ADDRESS** | `a/` | Addresses can take any values with max length of 80 characters, and it should not be blank
 **TAG** | `t/` | Tags names should be alphanumeric
 **GITHUB_ID** | `g/` | GitHub ID must be valid ie alphanumeric separated by single dash and it should not start or end with a dash, and it should not be blank
