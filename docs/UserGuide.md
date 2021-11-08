@@ -22,6 +22,7 @@ classes. If you are familiar with Unix commands, this is definitely for you!
       2. [Purge All Data: `purge`](#purge-all-data)
       3. [Upload Data: `upload`](#upload-data)
       4. [Download Data: `download`](#download-data)
+      5. [Edit The Data File Directly (For advanced users)](#edit-data-file)
   4. [Student Features](#student-features)
       1. [Add Student: `add`](#add-student)
       2. [Edit Student Details: `edit`](#edit-student)
@@ -161,6 +162,28 @@ In summary:
 
 Downloads the student data to a CSV file in the chosen directory. The file will be automatically named `programmerError.csv`.
 
+### <a name="edit-data-file"></a>2.4 Edit The Data File Directly (For advanced users)
+
+Instead of using commands to edit students' details and lab results, you may change the json file directly.
+
+Note that ProgrammerError will only accept data files fulfilling the restrictions specified in the [parameter summary](#parameter-summary).
+The absence of an attribute and/or invalid value for an attribute will result in an error message shown in the logger, and ProgrammerError 
+will start with an empty json data file instead. 
+
+Here are some examples of corrupted data that is not accepted by ProgrammerError.
+
+     "labResultList" : [ {
+      //Absent attribute example: LabNumValue attribute is missing
+      "actualScoreValue" : 10,
+      "totalScoreValue" : 20
+      }
+
+     "labResultList" : [ {
+      //Invalid attribute example: LabNumValue is not between 1 to 13
+      "labNumValue" : 20,
+      "actualScoreValue" : 15,
+      "totalScoreValue" : 20
+      }
 
 ## <a name="student-features"></a>4. Student Features
 
