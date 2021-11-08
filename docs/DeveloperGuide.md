@@ -303,7 +303,7 @@ The figure below shows the sequence diagram for editing a lesson.
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
 object to create the `editedLesson` object. The detailed sequence diagram for LessonEditCommand is the similar to LessonAddCommand's
-with an additional step for retrieving the lesson to edit from the student of interest. Refer to Figure I.0.3.2 above. 
+with an additional step for retrieving the lesson to edit from the student of interest. Refer to Figure I.0.3.3 above. 
 
 The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
