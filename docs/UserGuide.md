@@ -244,6 +244,16 @@ Edits the details of existing residents in the address book.
 
 Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] [f/FACULTY] [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
+Parameter | Constraints
+|--------|-------
+**NAME** | Unique, only containing alphabetical characters and spaces
+**PHONE** | At least 6 digits long
+**ROOM** | Made up of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
+**EMAIL** |  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br> The domain name must: <br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+**VACCINATION_STATUS** | `T` or `F` (case insensitive)
+**FACULTY** | Single alphabetical word
+**LAST_FET_DATE** <br> **LAST_COLLECTION_DATE** | Should be of `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+
 * Edit the residents at the specified `INDEXES`.
 * Each index refers to the index number shown in the displayed resident list.
 * The indexes **must be positive integers** 1, 2, 3, …​
@@ -476,7 +486,15 @@ Examples:
 
 Edits an existing event in the address book.
 
-Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CAPACITY]`
+Format: `edit INDEX [n/EVENT_NAME] [v/VENUE] [c/CAPACITY] [d/EVENT_DATE] [t/EVENT_TIME]`
+
+Prefix | Field | Details
+-------- | ------ | ------
+`n` | Name | Should only contain alphanumeric characters and spaces, and it should not be blank
+`v` | Venue | Should only contain alphanumeric characters and spaces, and it should not be blank
+`c` | Capacity | Represents the maximum number of residents allowed in this event and is an integer, 1 <= capacity <= 2147483647
+`d` | Date | Should be of `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+`t` | Time | Should be of `HHmm` format
 
 * Edits the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
