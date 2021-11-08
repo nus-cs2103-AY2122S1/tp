@@ -7,9 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.opencsv.CSVWriter;
 
+import safeforhall.commons.core.LogsCenter;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
 import safeforhall.model.person.Person;
@@ -31,6 +33,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
 
     private final String filename;
+    private final Logger logger = LogsCenter.getLogger(ExportCommand.class);
 
     /**
      * Constructs an ExportCommand.
@@ -89,6 +92,7 @@ public class ExportCommand extends Command {
         try {
             File f = new File(filename);
             if (f.exists() && !f.isDirectory()) {
+                logger.warning("File already exists");
                 throw new CommandException(MESSAGE_DUPLICATE_FILE_ERROR);
             } else {
                 CSVWriter writer = new CSVWriter(new FileWriter(filename));
@@ -96,6 +100,7 @@ public class ExportCommand extends Command {
                 writer.close();
             }
         } catch (IOException e) {
+            logger.warning("Issue with file creation");
             throw new CommandException(e.getMessage());
         }
     }
