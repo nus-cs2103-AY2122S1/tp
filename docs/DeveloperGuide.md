@@ -316,7 +316,9 @@ Given below is an example of what happens when the user attempts to add a progre
 
 `add -p 2 Did Homework​`
 
-Below is the sequence diagram that depicts the parsing of the `add -p` command:
+
+Below is the sequence diagram that depicts the parsing of the `add -p 2 Did Homework​` command:
+
 ![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
@@ -325,18 +327,20 @@ Below is the sequence diagram that depicts the parsing of the `add -p` command:
 
 3. `AddCommandParser#parse()` extracts the command flag `-p` at the start of its argument, which denotes the addition of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse()`.
 
-4. The remaining (`2 Did Homework​`) is then parsed into targetIndex `2` and progress with the description `Did Homework`, which are then used to construct an `AddProgressCommand` object that will be returned to `LogicManager`.
+4. The remainder (`2 Did Homework​`) is then parsed into targetIndex `2` and progress with the description `Did Homework`, which are then used to construct an `AddProgressCommand` object that will be returned to `LogicManager`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail its execution and `ParseException` will be thrown.</div>
 
+
 Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit and then add the progress to the student:
+
 ![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
 
 5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
 
 6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
 
-7. `AddProgressCommand` then calls the `Model#viewStudent()` to signal `Model` to view this student's details.
+7. `AddProgressCommand` then calls the `Model#viewStudent()` to signal to `Model` to view this student's details.
 
 8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
 
@@ -481,7 +485,9 @@ Given below is an example of what happens when the user attempts to add some stu
 
 `add -sl s/1 2 3 l/3 2 1​`
 
+
 Below is the sequence diagram that depicts the parsing of the `add -sl` command:
+
 ![ParseAddStudentToLesson](images/ParseAddStudentToLessonSequenceDiagram.png)
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
@@ -494,7 +500,9 @@ Below is the sequence diagram that depicts the parsing of the `add -sl` command:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**At this point, if `AddStudentToLessonCommandParser#parse()` detects that invalid input has been supplied, the command will fail its execution and `ParseException` will be thrown.</div>
 
+
 Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets the students and the lessons and then add these students into the lessons:
+
 ![AddStudentToLesson](images/AddStudentToLessonSequenceDiagram.png)
 
 5. `LogicManager#execute()` then calls upon `AddStudentToLessonCommand#execute()`. It then loops through each studentIndex-lessonIndex pair and call another method of its own `AddStudentToLessonCommand#executeSingle()` to communicates with the `Model` to get the index-specified `Student` instance and `Lesson` instance.
