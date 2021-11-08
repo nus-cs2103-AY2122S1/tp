@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User executes ""marka"" command;
+
+if () then ([valid format])
+    :Parses the ""marka"" command, separate
+    student index(es) and week prefix args;
+
+    repeat :Checks student's attendance status for given week;
+      if () then ([present for given week])
+          :Marks student as absent for the given week;
+
+      else ([else])
+      :Marks student as present for the given week;
+
+      endif
+    repeat while () is ([more unmarked students in list])
+    -> [else];
+
+    :Displays all matching students to user;
+    :Show success status message;
+
+else ([else])
+
+    :Shows error message to user;
+
+endif
+
+stop
+
+@enduml

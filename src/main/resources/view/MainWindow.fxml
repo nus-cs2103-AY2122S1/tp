@@ -11,10 +11,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="tApp" minWidth="600" minHeight="650" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/tApp_logo.png" />
   </icons>
   <scene>
     <Scene>
@@ -34,27 +37,40 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.8f" orientation="VERTICAL">
+          <VBox fx:id="studentList" styleClass="pane-with-border" VBox.vgrow="ALWAYS" prefWidth="600" prefHeight="400">
+            <padding>
+              <Insets top="15" right="10" bottom="5" left="10" />
+            </padding>
+            <Label fx:id="listName" VBox.vgrow="NEVER">
+              <padding>
+                <Insets bottom="5" left="10" />
+              </padding>
+              <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+              </minWidth>
+            </Label>
+            <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: #303030" spacing="10" prefHeight="100">
+            <padding>
+              <Insets top="5" right="5" bottom="5" left="5" />
+            </padding>
+            <ScrollPane fx:id="terminalScrollPane" fitToWidth="true" vvalue="1.0" VBox.vgrow="ALWAYS"
+                        style="-fx-background: #383838;">
+              <VBox fx:id="terminalContainer" VBox.vgrow="ALWAYS" style="-fx-background-color: #383838;" />
+            </ScrollPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" minHeight="50" prefHeight="50" maxHeight="80">
+              <padding>
+                <Insets top="5" right="5" bottom="5" left="5" />
+              </padding>
+            </StackPane>
+          </VBox>
+        </SplitPane>
+        <StackPane fx:id="statusBarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>

@@ -1,0 +1,76 @@
+{
+  "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "email" : "alice@u.nus.edu",
+    "studentNumber" : "A0000001B",
+    "username" : "paulice",
+    "repo" : "ip",
+    "tagged" : [ "friends" ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : null
+  }, {
+    "name" : "Benson Meier",
+    "email" : "johnd@u.nus.edu",
+    "studentNumber" : "A0000002B",
+    "username" : "benben",
+    "repo" : "ip",
+    "tagged" : [ "owesMoney", "friends" ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "groupName" : "W14-4"
+  }, {
+    "name" : "Carl Kurz",
+    "email" : "heinz@u.nus.edu",
+    "studentNumber" : "A0000003B",
+    "username" : "cark",
+    "repo" : "ip",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W14-4"
+  }, {
+    "name" : "Daniel Meier",
+    "email" : "cornelia@u.nus.edu",
+    "studentNumber" : "A0000004B",
+    "username" : "danmei",
+    "repo" : "ip",
+    "tagged" : [ "friends" ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W14-4"
+  }, {
+    "name" : "Elle Meyer",
+    "email" : "werner@u.nus.edu",
+    "studentNumber" : "A0000005B",
+    "username" : "em",
+    "repo" : "ip",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "F01-3"
+  }, {
+    "name" : "Fiona Kunz",
+    "email" : "lydia@u.nus.edu",
+    "studentNumber" : "A0000006B",
+    "username" : "fku",
+    "repo" : "ip",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "F01-3"
+  }, {
+    "name" : "George Best",
+    "email" : "anna@u.nus.edu",
+    "studentNumber" : "A0000007B",
+    "username" : "user",
+    "repo" : "ipppp",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : null
+  } ],
+  "tasks" : [ ],
+  "groups" : [ ]
+}

@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddMemberCommandParser" as AddSGParser LOGIC_COLOR
+participant "a:AddMemberCommand" as AddSGCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("addSG 1 g/w14-4")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addMember 1 g/w14-4")
+activate AddressBookParser
+
+create AddSGParser
+AddressBookParser -> AddSGParser
+activate AddSGParser
+
+AddSGParser --> AddressBookParser
+deactivate AddSGParser
+
+AddressBookParser --> AddSGParser : parse("1 g/w14-4"))
+activate AddSGParser
+
+create AddSGCommand
+AddSGParser -> AddSGCommand
+activate AddSGCommand
+
+AddSGCommand -> AddSGParser : a
+deactivate AddSGCommand
+
+AddSGParser -> AddressBookParser : a
+destroy AddSGParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddSGCommand : execute()
+activate AddSGCommand
+
+ref over AddSGCommand, Model
+Add member to group
+end ref
+
+create CommandResult
+AddSGCommand --> CommandResult
+activate CommandResult
+CommandResult --> AddSGCommand : r
+deactivate CommandResult
+
+AddSGCommand --> LogicManager : r
+deactivate AddSGCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

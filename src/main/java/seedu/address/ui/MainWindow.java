@@ -1,14 +1,19 @@
 package seedu.address.ui;
 
+import static seedu.address.model.Model.DisplayType.STUDENTS;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +21,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,16 +30,21 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String STUDENTS_LIST_NAME = "Students";
+    private static final String TASKS_LIST_NAME = "Tasks";
+    private static final String GROUPS_LIST_NAME = "Groups";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final StudentListPanel studentListPanel;
+    private final TaskListPanel taskListPanel;
+    private final GroupListPanel groupListPanel;
+    private Model.DisplayType currentDisplay;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +53,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private ScrollPane terminalScrollPane;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private VBox terminalContainer;
+
+    @FXML
+    private StackPane statusBarPlaceholder;
+
+    @FXML
+    private Label listName;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +83,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+        listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
     }
 
     public Stage getPrimaryStage() {
@@ -110,17 +133,44 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        currentDisplay = STUDENTS;
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        listName.setText(STUDENTS_LIST_NAME);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Update the data lists.
+     */
+    void updateInnerParts() {
+        Model.DisplayType type = logic.getDisplayType();
+        if (currentDisplay != type) {
+            switch (type) {
+            case STUDENTS:
+                listPanelPlaceholder.getChildren().remove(studentListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(studentListPanel.getRegion());
+                listName.setText(STUDENTS_LIST_NAME);
+                break;
+            case GROUPS:
+                listPanelPlaceholder.getChildren().remove(groupListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(groupListPanel.getRegion());
+                listName.setText(GROUPS_LIST_NAME);
+                break;
+            case TASKS:
+                listPanelPlaceholder.getChildren().remove(taskListPanel.getRegion());
+                listPanelPlaceholder.getChildren().add(taskListPanel.getRegion());
+                listName.setText(TASKS_LIST_NAME);
+                break;
+            default:
+                break;
+            }
+            currentDisplay = type;
+        }
     }
 
     /**
@@ -133,6 +183,11 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    @FXML
+    public void initialize() {
+        terminalScrollPane.vvalueProperty().bind(terminalContainer.heightProperty());
     }
 
     /**
@@ -163,10 +218,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -176,20 +227,22 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult.isExit()) {
                 handleExit();
+            } else {
+                updateInnerParts();
             }
 
+            terminalContainer.getChildren().add(
+                    new TerminalBox(commandText, commandResult.getFeedbackToUser()));
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            terminalContainer.getChildren().add(
+                    new TerminalBox(commandText, e));
             throw e;
         }
     }

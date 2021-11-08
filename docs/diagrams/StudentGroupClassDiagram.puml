@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Student <<Rectangle>>{
+Class Student
+Class Attendance
+Class Participation
+Class Name
+Class Email
+Class UserName
+Class StudentNumber
+}
+
+Package Group <<Rectangle>>{
+Class Group
+Class GroupName
+Class LinkYear
+Class Members
+}
+
+
+Student *-down-> "1" Name
+Student *-down-> "1" Attendance
+Student *-down-> "1" Participation
+Student *-down-> "1" Email
+Student *-down-> "1" StudentNumber
+Student *-down-> "0..1" UserName
+Student *-up---> "0..1" RepoName
+Student -up--> "*" Tag
+Student -right--> "0..1" GroupName
+
+Group *-down-> "1" GroupName
+Group *-left-> "1" Members
+Group *-down-> "0..1" LinkYear
+Group *-up--> "0..1" RepoName
+Group -up--> "*" Tag
+
+Members -left--> "*" Student
+@enduml

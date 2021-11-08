@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditGroupCommandParser" as EditGroupParser LOGIC_COLOR
+participant "d:EditGroupDescriptor" as EditGroupDescriptor LOGIC_COLOR
+participant "c:EditGroupCommand" as EditGroupCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("editGroup 1 g/w14-4")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("editGroup 1 g/w14-4")
+activate AddressBookParser
+
+create EditGroupParser
+AddressBookParser -> EditGroupParser
+activate EditGroupParser
+
+EditGroupParser --> AddressBookParser
+deactivate EditGroupParser
+
+AddressBookParser -> EditGroupParser : parse("1 g/w14-4"))
+activate EditGroupParser
+
+create EditGroupDescriptor
+EditGroupParser -> EditGroupDescriptor
+activate EditGroupDescriptor
+
+EditGroupDescriptor --> EditGroupParser : d
+deactivate EditGroupDescriptor
+
+create EditGroupCommand
+EditGroupParser -> EditGroupCommand
+activate EditGroupCommand
+
+EditGroupCommand --> EditGroupParser : c
+deactivate EditGroupCommand
+
+EditGroupParser --> AddressBookParser : c
+destroy EditGroupParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> EditGroupCommand : execute()
+activate EditGroupCommand
+
+ref over EditGroupCommand, Model
+Edit group
+end ref
+
+create CommandResult
+EditGroupCommand -> CommandResult
+activate CommandResult
+CommandResult --> EditGroupCommand : r
+deactivate CommandResult
+
+EditGroupCommand --> LogicManager : r
+deactivate EditGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

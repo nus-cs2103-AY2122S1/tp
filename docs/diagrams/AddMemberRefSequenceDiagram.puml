@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  Add member to group
+box Logic LOGIC_COLOR_T1
+participant "d:DeleteStudentCommand" as DeleteStudentCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Student" as Student MODEL_COLOR
+participant ":Group" as Group MODEL_COLOR
+participant ":Members" as Members MODEL_COLOR
+participant ":AddressBook" as Ab MODEL_COLOR
+end box
+
+activate DeleteStudentCommand
+
+
+DeleteStudentCommand --> Model : addMembers(student, group)
+activate Model
+
+create Student
+Model --> Student : new Student(student, groupName)
+activate Student
+Student --> Model : updatedStudent
+deactivate Student
+
+Model --> Group : addMember(updatedStudent)
+activate Group
+Group --> Members : addMember((updatedStudent)
+activate Members
+deactivate Members
+deactivate Group
+
+
+Model --> Ab : setStudent(student, updatedStudent)
+activate Ab
+deactivate Ab
+
+Model --> Ab : setGroup(group, newGroup)
+activate Ab
+deactivate Ab
+@enduml

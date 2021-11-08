@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <HBox>
+      <VBox alignment="CENTER_LEFT" minHeight="105.0" prefWidth="800.0" GridPane.columnIndex="0">
+        <padding>
+          <Insets top="15" right="20" bottom="15" left="20" />
+        </padding>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+          <Label fx:id="id" styleClass="cell_big_label"/>
+          <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        </HBox>
+        <FlowPane fx:id="tags" />
+        <Label fx:id="link" styleClass="cell_small_label" text="\$link" />
+        <StackPane fx:id="memberListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+      </VBox>
+    </HBox>
+  </GridPane>
+</HBox>

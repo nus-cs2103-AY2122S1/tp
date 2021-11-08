@@ -1,0 +1,23 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "email": "alice@u.nus.edu",
+    "studentNumber" : "A0123456B",
+    "username" : "user",
+    "repo" : "ip",
+    "tagged": [ "friends" ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 ]
+  }, {
+    "name": "A Pauline",
+    "email": "alice@u.nus.edu",
+    "studentNumber" : "A0123456B",
+    "username" : "user",
+    "repo" : "ip",
+    "tagged": [ "friends" ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 ]
+  } ],
+  "tasks" : [ ],
+  "groups" : [ ]
+}

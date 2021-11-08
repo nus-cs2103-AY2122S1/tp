@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<fx:root alignment="BOTTOM_LEFT" maxHeight="Infinity" maxWidth="Infinity" type="javafx.scene.layout.VBox"
+         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="valueHeader" text="Attendance" wrapText="true"/>
+    <GridPane fx:id="valueArrayGrid" hgap="5">
+        <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+        </minWidth>
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="20" maxWidth="20" prefWidth="20" />
+        </columnConstraints>
+
+        <Label text="3" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label text="4" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label text="5" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <Label text="6" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+        <Label text="7" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+        <Label text="8" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+        <Label text="9" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+        <Label text="10" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
+        <Label text="11" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="8" GridPane.rowIndex="0"/>
+        <Label text="12" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="9" GridPane.rowIndex="0"/>
+    </GridPane>
+</fx:root>

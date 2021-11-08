@@ -1,0 +1,21 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "email": "hans@u.nus.edu",
+    "studentNumber" : "A0123456B",
+    "username" : "user",
+    "repo" : "ip",
+    "tagged" : [ ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name": "Student With Invalid Email Field",
+    "email": "hansexample.com",
+    "studentNumber": "A0000000B",
+    "tagged" : [ ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  } ],
+  "tasks" : [ ],
+  "groups" : [ ]
+}
