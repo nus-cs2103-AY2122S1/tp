@@ -162,7 +162,7 @@ ClassMATE allows the user to manage information relevant to the TutorialClass. A
 1. Add a new tutorial class
 2. Delete an existing tutorial class
 3. List all existing tutorial class
-4. Find all tutorial classes containing a keyword in their classcodes
+4. Find all tutorial classes containing a keyword in their classcodes (more [here](#class-and-group-filters-features))
 5. View Class Details
 
 #### Current Implementation
