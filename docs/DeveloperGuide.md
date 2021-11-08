@@ -23,16 +23,16 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
     - [Setting up, getting started](#setting-up)
     - [Design](#design)
         - [Architecture](#architecture)
-        - [UI Component](#ui)
-        - [Logic Component](#logic)
-        - [Model Component](#model)
-        - [Storage Component](#storage) 
+        - [UI component](#ui)
+        - [Logic component](#logic)
+        - [Model component](#model)
+        - [Storage component](#storage) 
         - [Common classes](#common-classes)
     - [Implementation](#implementation)
         - [Stateful PlannerMD](#stateful-plannermd)
-        - [Toggle Command](#toggle-command)
+        - [Toggle command](#toggle-command)
         - [Remark](#remark)
-        - [Propagating Person Changes to Appointment List](#propagating-person-changes-to-appointment-list)
+        - [Propagating Person changes to Appointment list](#propagating-person-changes-to-appointment-list)
         - [Adding an appointment](#adding-an-appointment)
         - [Deleting an appointment](#deleting-an-appointment)
         - [Editing an appointment](#editing-an-appointment)
@@ -43,7 +43,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Product scope](#product-scope)
         - [User stories](#user-stories)
         - [Use cases](#use-cases)
-        - [Non-functional Requirements](#nfr)
+        - [Non-functional requirements](#nfr)
         - [Glossary](#glossary)
     - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
         - [Launch and shutdown](#launch-and-shutdown)
@@ -256,10 +256,10 @@ Therefore, we decided to introduce a state, allowing us to display the list the 
 
 <div style="page-break-after: always;"></div>
 
-### Toggle Command <a name="toggle-command"/>
+### Toggle command <a name="toggle-command"/>
 Command used to toggle displayed tab and the current state of PlannerMD.
 
-The Activity Diagram below illustrates the execution flow when the user executes a `remark` command.<br>
+The Activity Diagram below illustrates the execution flow when the user executes a `toggle` command.<br>
 
 ![ToggleActivityDiagram](images/ToggleActivityDiagram.png)
 
@@ -335,7 +335,7 @@ The GUI updates the patient record in the displayed list and displays a success 
 
 <div style="page-break-after: always;"></div>
 
-### Propagating Person Changes to Appointment List  <a name="propagating-person-changes-to-appointment-list"/>
+### Propagating Person changes to Appointment list  <a name="propagating-person-changes-to-appointment-list"/>
 Since specific patients and doctors within the records are directly referenced in appointments,
 changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
 * When patients or doctor deleted, appointments they are a part of will be deleted as well.
@@ -945,7 +945,7 @@ Same as UC08P but with the following changes:
 
 <div style="page-break-after: always;"></div>
 
-### Non-Functional Requirements  <a name="nfr"/>
+### Non-functional requirements  <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should work independent of network connection.
