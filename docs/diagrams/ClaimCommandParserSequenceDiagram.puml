@@ -1,11 +1,11 @@
 @startuml
 !include style.puml
 
-Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T2
+Participant ":InsurancePalParser" as addressBookParser LOGIC_COLOR_T2
 Participant ":ClaimCommandParser" as claimCommandParser LOGIC_COLOR
 Participant "<<class>>\nParserUtil" as util MODEL_COLOR
-Participant ":EditClaimDescriptor" as descriptor STORAGE_COLOR
-Participant ":ClaimCommand" as command #purple
+Participant "ecd:EditClaimDescriptor" as descriptor STORAGE_COLOR
+Participant "claimCommand:ClaimCommand" as command #purple
 
 addressBookParser -[LOGIC_COLOR_T2]> claimCommandParser :"1 n/Car Accident \nd/At NTU s/pending"
 activate addressBookParser LOGIC_COLOR_T2
@@ -21,17 +21,17 @@ create descriptor
 claimCommandParser -[LOGIC_COLOR]> descriptor :EditClaimDescriptor(Title, Description, Status)
 activate descriptor STORAGE_COLOR
 
-descriptor -[STORAGE_COLOR]-> claimCommandParser :EditClaimDescriptor
+descriptor -[STORAGE_COLOR]-> claimCommandParser :ecd
 deactivate descriptor
 
 create command
-claimCommandParser -[LOGIC_COLOR]> command :ClaimCommand(Index, EditClaimDescriptor)
+claimCommandParser -[LOGIC_COLOR]> command :ClaimCommand(Index, ecd)
 activate command #purple
 
-command -[#purple]-> claimCommandParser :ClaimCommand
+command -[#purple]-> claimCommandParser :claimCommand
 deactivate command
 
-claimCommandParser -[LOGIC_COLOR]-> addressBookParser :ClaimCommand
+claimCommandParser -[LOGIC_COLOR]-> addressBookParser :claimCommand
 deactivate claimCommandParser
 
 deactivate addressBookParser

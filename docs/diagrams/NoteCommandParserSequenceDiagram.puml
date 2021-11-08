@@ -1,20 +1,20 @@
 @startuml
 !include style.puml
 
-Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T2
+Participant ":InsurancePalParser" as insurancePalParser LOGIC_COLOR_T2
 Participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
-Participant "<<class>>\nParserUtil" as util LOGIC_COLOR_T3
+Participant "<<class>>\nParserUtil" as util MODEL_COLOR
 Participant ":Note" as note MODEL_COLOR
 Participant ":NoteCommand" as command LOGIC_COLOR_T4
 
-addressBookParser -[LOGIC_COLOR_T2]> NoteCommandParser :"1 Has asthma"
-activate addressBookParser LOGIC_COLOR_T2
+insurancePalParser -[LOGIC_COLOR_T2]> NoteCommandParser :"1 Has asthma"
+activate insurancePalParser LOGIC_COLOR_T2
 activate NoteCommandParser LOGIC_COLOR
 
 NoteCommandParser -[LOGIC_COLOR]> util :parseIndex;
-activate util LOGIC_COLOR_T3
+activate util MODEL_COLOR
 
-util -[LOGIC_COLOR_T3]-> NoteCommandParser :index
+util -[MODEL_COLOR]-> NoteCommandParser :index
 deactivate util
 
 NoteCommandParser -[LOGIC_COLOR]> util :parseNote;
@@ -37,9 +37,9 @@ activate command LOGIC_COLOR_T4
 command -[LOGIC_COLOR_T4]-> NoteCommandParser :NoteCommand
 deactivate command
 
-NoteCommandParser -[LOGIC_COLOR]-> addressBookParser :NoteCommand
+NoteCommandParser -[LOGIC_COLOR]-> insurancePalParser :NoteCommand
 deactivate NoteCommandParser
 
-deactivate addressBookParser
+deactivate insurancePalParser
 
 @enduml

@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java) //TODO update link
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,9 +114,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java) //TODO update link
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java) //TODO update link
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -259,7 +259,7 @@ helper classes to parse the text into the data classes `Index` and `Revenue`.
 
 **Step 2**: Executing the RevenueCommand
 
-<img src="images/RevenueCommandExecuteActivityDiagram.png" width="300" />
+<img src="images/RevenueCommandExecuteActivityDiagram.png" width="500" />
 
 There are 2 possible outcomes from the execution of a RevenueCommand.
 
@@ -318,13 +318,12 @@ The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. 
 
 **Step 2:** Executing the NoteCommand
 
-<img src="images/NoteCommandExecuteActivityDiagram.png" width="300" />
+<img src="images/NoteCommandExecuteActivityDiagram.png" width="500" />
 
-There are 3 possible outcomes from the execution of a `NoteCommand`.
+There are 2 possible outcomes from the execution of a `NoteCommand`.
 
 1. Add a new Note to the client
-2. Edit an existing Note of the client
-3. Delete an existing Note of the client
+2. Delete an existing Note of the client
 
 #### Design considerations
 {:.no_toc}
@@ -374,7 +373,7 @@ missing fields imply that the user wants to edit or delete an existing claim. Th
 
 <img src="images/ClaimCommandExecuteActivityDiagram.png" width="500" />
 
-There are 3 possible outcomes from the execution of a ClaimCommand.
+There are 3 possible outcomes from the execution of a ClaimCommand (shown in blue above).
 1. Add a new claim to the client
 2. Edit an existing claim of the client
 3. Delete an existing claim of the client
@@ -426,19 +425,30 @@ parse the text into the data classes `Index` and `Appointment`.
 
 <img src="images/ScheduleCommandParserSequenceDiagram.png" width="800" />
 
+During this process, the Appointment object is being created using the user input.
+Depending on the input, there are 2 possible outcomes:
+1. A valid appointment containing a meeting time is created.
+2. An empty appointment is created. This happens when the user input for `m/` is an empty string.
+
+This process is illustrated by this diagram:
+
+<img src="images/AppointmentConstructorActivityDiagram.png" width="600" />
+
 `ScheduleCommandParser` then creates a `ScheduleCommand` using the `Index` and `Appointment` objects created.
 
 **Step 2:** Executing the ScheduleCommand
 
-<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="400" />
+<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="600" />
 
-There are 3 possible outcomes from the execution of a ScheduleCommand.
+There are 4 possible outcomes from the execution of a ScheduleCommand.
 1. Schedule a new appointment with the client
 2. Reschedule an appointment with the client
 3. Delete an existing appointment with the client
+4. Do nothing.
 
 #### Design considerations
 {:.no_toc}
+* Appointments with expired dates are not automatically deleted and scheduling appointments that are expired are permitted. This is because the user might want to check how long it has since they met a specific client.
 
 *Aspect*: User interface of adding, editing and deleting appointments
 
@@ -789,13 +799,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. New users should be able to easily see where to find information on how to use the application.
+4. New users should be able to see where to find information on how to use the application within 2 actions upon launching the application.
 5. Should inform user of the necessary amendments to make to their input when receiving a bad input.
 6. Data should be transferable between different devices that are both running InsurancePal.
 7. Each command should be successfully executed within 1 second.
-8. Should not exit unexpectedly as a result of software implementation regardless of user input.
+8. Should not exit or crash without explicit permission or instruction by the user.
 9. Should not modify information stored without explicit permission or instruction by the user.
-10. Should not allow duplicate entries.
+10. Should not allow duplicate entries of clients.
 
 ### Glossary
 
@@ -831,8 +841,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -848,12 +856,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
