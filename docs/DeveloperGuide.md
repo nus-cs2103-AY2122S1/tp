@@ -1361,7 +1361,7 @@ testers are expected to do more *exploratory* testing.
    3. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the deadline task <br>
        Expected: No task is edited. Error message of invalid prefix is shown.
 
-   4. Test Case: `editTask 1 by/2021-20-12`, where the index is the index of the deadline task, and the date provided is invalid. <br>
+   4. Test Case: `editTask 1 by/2021-20-12`, where the date provided is invalid. <br>
       Expected: No task is edited. Error message of invalid date shown.
 
 4. Editing an event task
@@ -1374,7 +1374,7 @@ testers are expected to do more *exploratory* testing.
     3. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the event task <br>
        Expected: No task is edited. Error message of invalid prefix is shown.
 
-    4. Test Case: `editTask 1 on/2021-20-12`, where the index is the index of the event task, and the date provided is invalid. <br>
+    4. Test Case: `editTask 1 on/2021-20-12`, where the date provided is invalid. <br>
         Expected: No task is edited. Error message of invalid date shown.
 
 5. Editing a todo task
@@ -1409,26 +1409,26 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all tasks using the `tasks` command. Multiple tasks in the list.
 
-    1. Test case: `taskDone 1`<br>
+    1. Test case: `doneTask 1`<br>
        Expected: First task is marked as completed. Status message shows details of the task.
 
-    1. Test case: `taskDone 0`<br>
+    1. Test case: `doneTask 0`<br>
        Expected: No student is marked. Error details shown in the status message.
 
-    1. Other incorrect mark participation commands to try: `taskDone`, `taskDone x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect mark participation commands to try: `doneTask`, `doneTask x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Marking a task as done while on another directory
 
     1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
 
-    1. Test case: `taskDone`<br>
+    1. Test case: `doneTask`<br>
        Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks.
        Updated task list is shown.
 
 1. Marking multiple tasks
 
-    1. Test case: `taskDone 1 2 3`<br>
+    1. Test case: `doneTask 1 2 3`<br>
        Expected: Tasks 1, 2 and 3 are marked as completed in the list. Status message shows details of tasks.
 
 ### Clearing task list
@@ -1481,4 +1481,6 @@ Our team has put in a significant amount of effort into making our application c
 Implementing this required a deep understanding of how AB3 was structured and implemented, in order to expand on its functionality.
 Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to the implementation.
 
-In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. This required significant time and effort, as well as a good understanding of the `Logic` component of AB3.
+In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. 
+This required significant time and effort, as well as a good understanding of the `Logic` component of AB3. We also made significant changes to the UI, making it more appropriate
+for this app, such as the introduction of the different colours for the different tags. 
