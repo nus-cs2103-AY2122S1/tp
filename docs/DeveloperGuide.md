@@ -137,6 +137,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+The Activity Diagram below accompanies the `DeleteCommand`.
+
+![Activity Diagram of Delete Command](images/DeleteActivityDiagram.png)
+
 <div style="page-break-before: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -265,11 +269,20 @@ Step 8. Contact's `Pin` attribute will change to indicate that the contact is no
 
 Step 9. CONNECTIONS UI will update to show the contact behind other pinned contacts using a `PersonCard`. 
 
-The following sequence diagram shows how the pin operation works:
+The following sequence diagram shows how the `pin` operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+
+The following activity diagram shows possible user interactions with a `pin` command.
+![PinActivityDiagram](images/PinActivityDiagram.png)
+
+
+The following activity diagram shows possible user interactions with a `unpin` command.
+![UnpinActivityDiagram](images/UnpinActivityDiagram.png)
+
 
 <div style="page-break-before: always;"></div>
 
@@ -320,6 +333,12 @@ Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonLis
 Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated filtered list in `PersonListPanel`. Only contacts whose name contains `David` **while also having** `friend` **and**
 `football` tagged to them will be displayed.
 
+The following sequence diagram shows how the Find operation works:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser`, `FindPredicate` and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 #### Design considerations:
 
 **Aspect: How Find executes:**
@@ -356,6 +375,12 @@ Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPerson
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
+The following sequence diagram shows how the FindAny operation works:
+
+![FindAnySequenceDiagram](images/FindAnySequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindAnyCommandParser`, `FindAnyPredicate` and `FindAnyCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 #### Design considerations:
 
 **Aspect: How FindAny executes:**
@@ -390,8 +415,12 @@ Step 4. The user decides to view the usage of `add` to learn to add a contact, a
 
 Step 5. CONNECTIONS will display a detailed help message on the usage of the `add` command in `ResultDisplay`.
 
+The following sequence diagram shows how the Help operation works:
+
 ![HelpSequenceDiagram](images/HelpCommandDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `HelpCommandParser` and `HelpCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Birthday Reminder feature
 
@@ -411,7 +440,11 @@ Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday r
 
 Step 3. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
 
-Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will include the new contact and place it in the right slot, ensuring the birthday reminder list remains sorted. 
+Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will be updated to include the new contact, ensuring the birthday reminder list remains sorted as shown below. 
+
+![BirthdayReminderSequenceDiagram](images/BirthdayReminderSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 5. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person> birthdayReminders` and update `BirthdayReminderPanelList`, displaying the new contact. 
 
@@ -435,25 +468,43 @@ Users can use arguments to specify which fields to include in their download.
 Given below is an example usage scenario and how the Mailing List mechanism behaves at each step.
 
 Step 1. The user filters the contacts using other commands, eg. `find`.  
+
 Step 2. The `FilteredList` in `Model` is updated.  
+
 Step 3. The UI is updated to reflect this new state.  
+
 Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
-Step 5. These `Prefix` arguments are stored in `Model`.  
-Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
-Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
+
+Step 5. These `Prefix` arguments are stored in `Model`.
 ![MailingListSequenceDiagram](images/MailingListSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MailingListCommandParser` and `MailingListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+Step 6. The user is prompted to pick a name and the download location for their generated CSV file.   
+
+Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.  
+
+![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
+
 Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
+
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
+
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-#### Design considerations:
+#### Front end design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
-<div style="page-break-before: always;"></div>
+#### Back end design considerations:
+* **Option 1 (current choice):** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
+    * Pros: Straightforward.
+    * Cons: Requires large changes to the attributes and purpose of CommandResult. 
+
+* **Option 2 (current choice):** Store data in model and access using logic
+    * Pros: Minimal changes to CommandResult structure are necessary.
+    * Cons: Additional calls to logic and model are needed to get the required information.
+
 
 ### Command History feature
 
@@ -476,6 +527,8 @@ Step 4. `CommandBox#handleKeyStroke` reads the `UP` keystroke and calls `Command
 Step 5. `CommandHistory` retrieves the previous command and returns it.
 
 Step 6. `CommandBox` displays the previous command in the Command Box.
+
+The following activity diagram shows possible user interactions with the command history feature.
 
 ![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
 
@@ -542,12 +595,6 @@ Step 3. Upon start up, `JsonAddressBookStorage` attempts to load the data file. 
 Step 4. Since the value of `Email` (compulsory field) for the second contact is invalid, `JsonAdaptedPerson` returns `null` which is not added to `JsonAddressBookStorage`.
 
 Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will not display the second contact. The other fields and contacts will be displayed as per normal.  
-
-
-#### Design considerations:
-* Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1276,10 +1323,10 @@ testers are expected to do more *exploratory* testing.
        Expected: Tags added to contact at index 1. Details of the tags added to contact are shown in the status message.
 
     1. Test case: `tag 2 t/friends`<br>
-       Expected: No changes to the contact. Warning details are shown in the status message.
+       Expected: No changes to the contact. Warning details about existing tag(s) are shown in the status message.
        
     1. Test case: `tag 2 t/party t/friends`<br>
-        Expected: New tag is added to the contact. Warning details are shown in the status message.
+        Expected: New tag is added to the contact. Warning details about existing tag(s) are shown in the status message.
 
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag 1 t/<tag name longer than 60 characters>`, `...`.<br>
        Expected: No changes to contacts. Error details are shown in the status message.
@@ -1315,11 +1362,16 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 1. Export Filtered contact list
-
     1. Prerequisites: Filter contacts using the `find` command.
 
-    1. Test case: `mailingList` as above<br>
-        Expected: Same result as exporting full contact list, but with only the contacts in the filtered list
+    1. Test case: variations on `mailingList` as above<br>
+        Expected: Same result as exporting full contact list, but with only the contacts displayed in the filtered list
+
+1. Export Empty contact list
+    1. Prerequisites: Filter contacts using the `find` command.
+
+    1. Test case: `mailingList`<br>
+        Expected: Exporting a mailing list of 0 contacts is not allowed. Error details are shown in the status message.
 
 ### Saving data
 

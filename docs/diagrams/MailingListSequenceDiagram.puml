@@ -2,6 +2,7 @@
 !include style.puml
 
 box UI UI_COLOR
+skinparam minClassWidth 120
 participant "UI" as UI UI_COLOR
 end box
 
@@ -10,17 +11,16 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":MailingListCommandParser" as MailingListCommandParser LOGIC_COLOR
 participant "d:MailingListCommnad" as MailingListCommand LOGIC_COLOR
-participant ":CsvUtil" as CsvUtil LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-UI -> LogicManager : execute
+UI -> LogicManager : execute( "mailingList")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand
+LogicManager -> AddressBookParser : parseCommand("mailingList")
 activate AddressBookParser
 
 create MailingListCommandParser
@@ -30,11 +30,11 @@ activate MailingListCommandParser
 MailingListCommandParser --> AddressBookParser
 deactivate MailingListCommandParser
 
-AddressBookParser -> MailingListCommandParser : parse
+AddressBookParser -> MailingListCommandParser : parse("mailingList")
 activate MailingListCommandParser
 
 create MailingListCommand
-MailingListCommandParser -> MailingListCommand
+MailingListCommandParser -> MailingListCommand : MailingListCommand(DEFAULT_PREFIXES)
 activate MailingListCommand
 
 MailingListCommand --> Model : SetPrefixes
@@ -58,30 +58,13 @@ LogicManager -> MailingListCommand : execute()
 activate MailingListCommand
 
 
-MailingListCommand --> LogicManager : result
+MailingListCommand --> LogicManager : CommandResult
 deactivate MailingListCommand
 
-UI <--LogicManager: result
+UI <--LogicManager: CommandResult
 deactivate LogicManager
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 MailingListCommand -[hidden]-> LogicManager
 destroy MailingListCommand
 
-UI --> Model : getFilteredPersonList()
-activate Model
-Model --> UI : filteredPersonList
-deactivate Model
-UI --> Model : getPrefixes()
-activate Model
-Model --> UI : prefixes
-deactivate Model
-
-UI --> CsvUtil : modelToCsv(filteredPersonList, path, prefixes)
-activate CsvUtil
-
-CsvUtil --> CsvUtil : modelToCsv
-activate CsvUtil
-CsvUtil --> UI
-deactivate CsvUtil
-deactivate CsvUtil
 @enduml

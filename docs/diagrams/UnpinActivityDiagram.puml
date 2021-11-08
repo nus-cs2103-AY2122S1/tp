@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters command: unpin <index>;
+switch()
+case ([Contact at specified index exists])
+  :CONNECTIONS retrieves contact at specified index;
+  :CONNECTIONS checks if contact is already pinned;
+  if () then ([Contact is pinned])
+    : CONNECTIONS unpin contact;
+    : CONNECTIONS places contact behind pinned contacts;
+    -CONNECTIONS displays contact details
+  else ([Contact is not pinned])
+    : CONNECTIONS displays error message;
+  endif
+case ([No contact at specified index])
+  :CONNECTIONS displays error message;
+endswitch
+
+
+stop
+
+@enduml

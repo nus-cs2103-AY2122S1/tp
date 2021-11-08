@@ -43,10 +43,14 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Specify Birthday field is optional [\#116](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/116).
-  * Developer Guide:
-    * Describe implementation details of birthday reminder list [\#93](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/93).
-    * Add instructions for manual testing of all commands [\#204](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/204).
-    * Fix UML sequence diagrams [\#206](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/206).
+        * Re-organise commands and features [\#206](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/206).
+        * Elaborate on command use case [\#218](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/218).
+    * Developer Guide:
+        * Describe implementation details of birthday reminder list [\#93](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/93).
+        * Add instructions for manual testing of all commands [\#204](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/204).
+        * Fix UML sequence diagrams [\#206](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/206).
+        * Add activity diagram for pin command [\#225](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/225).
+        * Add sequence diagram for describing how birthday reminder list updates [\#225](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/225).
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#74](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/74), [\#86](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/86), [\#87](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/87).

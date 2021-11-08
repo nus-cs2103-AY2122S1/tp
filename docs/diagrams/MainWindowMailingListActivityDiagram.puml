@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+(*) --> "UI receives commandResult"
+if "isChooseFile()"
+    --> [True] "User chooses download name and location"
+endif
+
+if "user string ends with .csv"
+    --> [True] "download path found"
+else
+    --> [False] "append .csv to filename"
+endif
+"append .csv to filename" -> "download path found"
+
+"download path found" --> "get list of Person Objects to export"
+"get list of Person Objects to export" --> "get Prefixes of fields to export"
+"get Prefixes of fields to export" --> "Write CSV using CsvUtil"
+"Write CSV using CsvUtil" --> (*)
+
+@enduml

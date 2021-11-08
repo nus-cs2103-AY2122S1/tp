@@ -28,9 +28,12 @@ Given below are my contributions to the project.
   * Wrote test cases for handling `mailingList` command
   * Wrote test cases for handling `Tag` command
 
+<div style="page-break-after: always;"></div>
+
 * **Documentation**:
   * User Guide:
     * Did cosmetic and grammatical tweaks to existing documentation of features: [\#192](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/192)
+
   * Developer Guide:
     * Added user stories for versions 1.1 and 1.2 (Pull requests [\#13](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/13), [\#35](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/35))
     * Product scope for version 1.2 (Pull request [#39](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/39))
@@ -39,7 +42,6 @@ Given below are my contributions to the project.
   * Typesetting:
     * Typesetted User guide, developer guide and profile pages for PDF conversion [\#213](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/213)
 
-<div style="page-break-after: always;"></div>
 * **Tools**:
   * Integrated a third party library (OpenCSV) to the project ([\#91](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/91), 
   * Improved `TestUtils` by adding the ability to create different AddressBook states for testing ([\#52](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/52))
