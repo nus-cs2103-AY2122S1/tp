@@ -6,8 +6,7 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-
-import java.util.stream.Stream;
+import static seedu.programmer.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
@@ -19,15 +18,16 @@ import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
 
 /**
- * Parses input arguments and creates a new AddCommand object.
+ * Parses input arguments and creates a new {@code AddCommand} object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * and returns an {@code AddCommand} object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The String arguments as given by the user.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap;
@@ -55,13 +55,4 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(null));
         return new Student(name, studentId, classId, email);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values
-     * in the given {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

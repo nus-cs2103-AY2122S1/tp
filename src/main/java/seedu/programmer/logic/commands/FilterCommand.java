@@ -11,8 +11,8 @@ import seedu.programmer.model.Model;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
- * Finds and lists all students in ProgrammerError whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all students in ProgrammerError whose details contain any of the argument.
+ * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
@@ -29,7 +29,7 @@ public class FilterCommand extends Command {
     private final StudentDetailContainsQueryPredicate predicate;
 
     /**
-     * Initializes a a {@code FilterCommand} object with the {@code predicate} to test which students to be filtered.
+     * Class constructor of {@code FilterCommand} with the {@code predicate} to test which students to be filtered.
      *
      * @param predicate that filters the list of students to be displayed.
      */

@@ -38,7 +38,7 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Constructor for all fields including list of all the labs.
+     * Class constructor with all fields including list of all the labs.
      */
     public Student(Name name, StudentId studentId, ClassId classId, Email email, ObservableList<Lab> list) {
         requireAllNonNull(name, studentId, classId, email);
@@ -87,7 +87,7 @@ public class Student implements DisplayableObject {
 
     /**
      * Returns a labList with all labs unmarked.
-     * */
+     */
     public List<Lab> getFreshLabList() {
         List<Lab> freshCopy = new ArrayList<>();
         for (Lab lab : labList) {
@@ -102,9 +102,11 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Adds a lab to all the student records
-     * @return true if lab is successfully added
-     * */
+     * Adds a lab to all the student records.
+     *
+     * @param lab The lab to be added.
+     * @return true if lab is successfully added.
+     */
     public boolean addLab(Lab lab) {
         int index = this.labList.indexOf(lab);
         if (index == -1) {
@@ -118,30 +120,39 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Deletes a lab from all the student records
-     * @returns ture if lab is successfully deleted
-     * */
+     * Deletes a lab from all the student records.
+     *
+     * @param lab The lab to be deleted.
+     * @returns true If lab is successfully deleted.
+     */
     public boolean deleteLab(Lab lab) {
         return this.labList.remove(lab);
     }
 
     /**
-     * Updates a lab's score  for a student
-     * */
-    public void editLabScore(Lab lab , LabResult score) throws CommandException {
+     * Updates a lab's score  for a student.
+     *
+     * @param lab The lab to be edited.
+     * @param total The total score to be given to that lab.
+     */
+    public void editLabScore(Lab lab , LabResult total) throws CommandException {
         Integer labTotalScore = lab.getLabTotal().getLabTotalScore();
-        if (score.getLabResult() > labTotalScore) {
-            throw new CommandException(warnExceedTotalScore(score.getLabResult(), labTotalScore));
+        if (total.getLabResult() > labTotalScore) {
+            throw new CommandException(warnExceedTotalScore(total.getLabResult(), labTotalScore));
         }
         int index = this.labList.indexOf(lab);
         Lab current = this.labList.get(index);
 
-        current.updateActualScore(score);
+        current.updateActualScore(total);
     }
 
     /**
-     * Updates a lab result for a student
-     * */
+     * Updates a lab result for a student.
+     *
+     * @param lab The lab to be edited.
+     * @param newLabNum The new lab number to be edited into.
+     * @param total The total score to be given to that lab.
+     */
     public void editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
         int index = this.labList.indexOf(lab);
         Lab current = this.labList.get(index);
@@ -181,6 +192,9 @@ public class Student implements DisplayableObject {
     /**
      * Returns true if both students have the same studentId or email.
      * This defines a weaker notion of equality between two students.
+     *
+     * @param otherStudent The other student to be checked against.
+     * @return true if the Student ID or Email matches.
      */
     public boolean isSameStudent(Student otherStudent) {
         return isSameStudentId(otherStudent) || isSameStudentEmail(otherStudent);
@@ -189,6 +203,9 @@ public class Student implements DisplayableObject {
     /**
      * Returns true if both students have the same studentId.
      * This defines a weaker notion of equality between two students.
+     *
+     * @param otherStudent The other student to be checked against.
+     * @return true if the Email matches.
      */
     public boolean isSameStudentEmail(Student otherStudent) {
         return otherStudent != null
@@ -199,6 +216,9 @@ public class Student implements DisplayableObject {
     /**
      * Returns true if both students have the same email.
      * This defines a weaker notion of equality between two students.
+     *
+     * @param otherStudent The other student to be checked against.
+     * @return true if the Student ID matches.
      */
     public boolean isSameStudentId(Student otherStudent) {
         return otherStudent != null
@@ -233,7 +253,10 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Check if two students have identical personal information and lab results.
+     * Checks if two students have identical personal information and lab results.
+     *
+     * @param otherStudent The other student to be checked against.
+     * @return true if all the details of the students matches.
      */
     public boolean isIdenticalStudent(Student otherStudent) {
         boolean isIdentityFieldSame = otherStudent.getName().equals(getName())
@@ -272,10 +295,10 @@ public class Student implements DisplayableObject {
     }
 
     /**
-     * Create a new Student Object with the same fields.
+     * Creates a new Student Object with the same fields.
      *
      * @return A copy of the Student.
-     * */
+     */
     public Student copy() {
         Student studentCopy = new Student(name, studentId, classId, email);
         studentCopy.setLabResultRecord(labList);

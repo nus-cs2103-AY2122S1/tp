@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a lab's total score in the ProgrammerError.
+ * Represents a lab total score in the ProgrammerError.
  */
 public class LabTotal {
     private final Integer labTotalScore;
 
     /**
-     * Constructs a {@code LabTotal}.
+     * Class constructor for {@code LabTotal}.
      *
      * @param labTotalScore The total score of a lab.
      */
@@ -25,7 +25,10 @@ public class LabTotal {
     }
 
     /**
-     * Returns true if a given string is a valid labTotal.
+     * Returns true if a given string is a valid lab total score.
+     *
+     * @param test The Integer to be tested against.
+     * @return true if the lab total score is valid.
      */
     public static boolean isValidLabTotalScore (Integer test) {
         return test.compareTo(0) > 0 && test.compareTo(101) < 0;

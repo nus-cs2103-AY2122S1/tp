@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 
 import javafx.collections.ObservableList;
@@ -9,10 +9,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.ui.UiPart;
 
 
 /**
- * An UI component that displays information of a {@code student}.
+ * A UI component that displays information of a {@code student}.
  */
 public class StudentCard extends UiPart<Region> {
 
@@ -81,8 +82,8 @@ public class StudentCard extends UiPart<Region> {
     }
 
     /**
-     * Update the student particulars to be displayed.
-     * */
+     * Updates the student particulars to be displayed.
+     */
     public void updateStudentInformation(Student student) {
         name.setText(student.getNameValue());
         studentId.setText("Student ID: " + student.getStudentIdValue());

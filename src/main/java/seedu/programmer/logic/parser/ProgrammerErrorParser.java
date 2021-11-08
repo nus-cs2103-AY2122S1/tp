@@ -38,8 +38,8 @@ public class ProgrammerErrorParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput Full user input string
-     * @return The command based on the user input
+     * @param userInput Full user input string.
+     * @return The command based on the user input.
      * @throws ParseException If the user input does not conform the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
@@ -91,6 +91,7 @@ public class ProgrammerErrorParser {
 
     /**
      * Returns a formatted string by adding a whitespace behind {@code str}.
+     *
      * @param str is the String to be formatted.
      * @return the formatted string.
      */

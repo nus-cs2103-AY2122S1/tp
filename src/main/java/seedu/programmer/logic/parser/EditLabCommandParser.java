@@ -9,8 +9,7 @@ import static seedu.programmer.logic.commands.EditLabCommand.MESSAGE_MISSING_LAB
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
-
-import java.util.stream.Stream;
+import static seedu.programmer.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.programmer.logic.commands.EditLabCommand;
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
@@ -26,10 +25,11 @@ import seedu.programmer.model.student.LabTotal;
 public class EditLabCommandParser implements Parser<EditLabCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditLabCommand
+     * and returns an EditLabCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The String arguments as given by the user.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public EditLabCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -90,13 +90,4 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             return new EditLabCommand(labResult, total);
         }
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values
-     * in the given {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

@@ -13,6 +13,8 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified feedback to the user.
+     *
+     * @param feedbackToUser The message to be shown to the user.
      */
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = requireNonNull(feedbackToUser);

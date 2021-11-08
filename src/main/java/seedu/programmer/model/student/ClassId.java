@@ -5,7 +5,7 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a student's classId in the ProgrammerError.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassId(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidClassId(String)}.
  */
 public class ClassId {
     public static final String MESSAGE_CONSTRAINTS =
@@ -18,7 +18,7 @@ public class ClassId {
     private final String classId;
 
     /**
-     * Constructs a {@code classID}.
+     * Class constructor for {@code classID}.
      *
      * @param classId A valid classID.
      */
@@ -29,7 +29,10 @@ public class ClassId {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid class ID.
+     *
+     * @param classId The String to be checked against.
+     * @return true if it is a valid class ID.
      */
     public static boolean isValidClassId(String classId) {
 
@@ -44,7 +47,7 @@ public class ClassId {
     /**
      * Gets the class number from the ClassId.
      *
-     * @return the class number
+     * @return the class number.
      */
     public int getClassNum() {
         int startIdx = 1;

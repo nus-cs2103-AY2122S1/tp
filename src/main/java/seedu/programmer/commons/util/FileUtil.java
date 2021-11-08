@@ -77,7 +77,7 @@ public class FileUtil {
     }
 
     /**
-     * Creates parent directories of file if it has a parent directory
+     * Creates parent directories of file if it has a parent directory.
      *
      * @param file File to create parent directories of.
      */

@@ -6,7 +6,7 @@ package seedu.programmer.logic.commands;
 public class UploadCommandResult extends CommandResult {
 
     /**
-     * Creates an UploadCommandResult.
+     * Class constructor for {@code UploadCommandResult}.
      *
      * @param feedbackToUser Message to show user.
      */
