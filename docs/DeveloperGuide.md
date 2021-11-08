@@ -1461,8 +1461,6 @@ Effort required: ~120%
 
 Some commands are adaptations of the original AB3 code (e.g. add-applicant, delete-applicant), but much effort was required to handle the interaction between Position and Applicant as stated above. Also, we brainstormed and constantly adapted our code to better fit our user's needs. Features were implemented to enable the calculation and visualization of statistics, and allow users to undo previous modifications. Considering the above points, we think the effort required for our project is approximately 120%.
 
-Achievements: Better understood JavaFX, interweaving code bases, planning and delivering, software engineering on a whole We feel that many of the initial outcomes of the project were achieved, such as integrating software engineering related principles into our project while at the same keeping to our deadlines and planning ahead for future iterations of the project. We better understood how to link various classes together despite their differences and segregate them to better fit how we wanted the classes and methods to be accessed. A side benefit would be learning JavaFX because this is a completely new interface and tool used in helping design UI and seeing how our code works with the UI greatly benefited us as well.
-
 ### Achievements
 * Planning and delivery of software engineering projects:
   * Our biggest takeaway from this project were the various processes and workflow used when working as a team in software engineering.
