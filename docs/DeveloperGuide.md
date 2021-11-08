@@ -506,23 +506,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                | store my data in a file                              | easily export data from the application                                |
 | `* * *`  | user                | add GitHub links for each student            | easily access their Github to check their progress                     |
 | `* * *`  | user                | add GitHub links for each student group              | easily access their Github to check their progress                     |
+| `* * *`  | user                | record attendance during tutorials                   | accurately award attendance marks to students                       |
 | `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
 | `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
 | `* *`    | user                | set my current directory to either students or tasks or groups | add students/tasks/groups more easily                                         |
 | `* *`    | user                | access the ‘help’ page with all available commands   | refer to instructions when I forget how to use tApp                    |
-| `* *`    | user                | allocate students to different groups                | track their progress based on their groups                             |
+| `* *`    | user                | add students as members to different groups          | Keep track of different group members and their progress               |
+| `* *`    | user                | delete student members from groups                   | remove members if they quit their course or change their groups        |
+| `* *`    | user                | edit groups                                          | correct any errors I made without deleting and creating a new group    |
 | `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
+| `* *`    | user                | edit students                                        | correct any errors I made without deleting and creating a new student  |
 | `* *`    | user                | search for a student                                 | quickly access all information related to the student                  |
 | `* *`    | user                | search for a group                                   | quickly access all information related to the group                    |
 | `* *`    | user                | purge all current students                           | start a new semester with new students                                 |
 | `* *`    | user                | purge all current groups                             | start a new semester with new groups                                   |
 | `* *`    | user                | purge all current tasks                              | get rid of all my tasks                                                |
 | `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
-| `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
 | `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
 | `* *`    | user                | assign priority levels for tasks                     | know what tasks require my earliest attention                          |
 | `* *`    | user                | create events as a type of task                      | keep track of tasks that occur at a specified time                     |
 | `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
+| `*`      | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
 | `*`      | user                | tag students to specific tasks                       | keep track of students related to a task                               |
 | `*`      | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
 | `*`      | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
