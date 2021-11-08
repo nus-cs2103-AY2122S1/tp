@@ -1,0 +1,63 @@
+@startuml
+!include ../style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant "ReportWindow" as ReportWindow UI_COLOR
+participant "nodePrinter:NodePrinter" as NodePrinter UI_COLOR
+participant "**<<class>>**\nPrintJob" as PrintJob UI_COLOR
+participant ":Printable" as Printable UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PrintReportCommand" as PrintReportCommand LOGIC_COLOR
+end box
+
+[-> MainWindow : executeCommand("exportReport")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("exportReport")
+activate LogicManager
+
+ref over LogicManager, PrintReportCommand : parse export report
+
+
+LogicManager --> MainWindow
+deactivate LogicManager
+
+MainWindow -> ReportWindow : fillInnerParts()
+activate ReportWindow
+
+
+
+ReportWindow --> MainWindow : report
+deactivate ReportWindow
+
+MainWindow -> ReportWindow : handlePrint(report)
+activate ReportWindow
+
+ReportWindow -> PrintJob : createPrinterJob()
+activate PrintJob
+
+PrintJob --> ReportWindow : job
+deactivate PrintJob
+
+ReportWindow -> NodePrinter : print(job, report)
+activate NodePrinter
+
+NodePrinter -> Printable : init(report))
+activate Printable
+
+Printable --> NodePrinter : printable
+deactivate Printable
+
+NodePrinter --> ReportWindow
+deactivate NodePrinter
+
+ReportWindow --> MainWindow
+deactivate ReportWindow
+
+[<-- MainWindow
+deactivate MainWindow
+@enduml
