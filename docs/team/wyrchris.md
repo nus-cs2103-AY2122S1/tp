@@ -10,25 +10,24 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability for the search command to search based on client's attribute. (Pull requests: [\#41](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/41), [\#65](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/65))
+* **New Feature**: Added Search command. (Pull requests: [\#41](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/41), [\#65](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/65))
   * What it does: allows the search command to be able to search for clients whose attributes match the given attribute keywords as well as generic keywords.
-  * Justification: This feature improves the user experience for the FAs when managing a large addressbook because this will provide them with the ability to search for specific for clients with greater flexibility.
+  * Justification: This feature improves the user experience for the FAs when managing a large addressbook by providing them with the ability to search for specific for clients with greater flexibility.
   * Highlights: The implementation was challenging as the searching logic is complicated which is dependent on both the given generic keywords and attribute keywords.
   This requires a predicate to check all the client's attributes against all the generic keyword and each client's attribute with their respective attribute keyword, which is also used by the filter command.
 
-* **New Feature**: Added a filter command to filter the list of clients based on client's attribute. (Pull requests: [\#58](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/58), [\#65](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/65))
+* **New Feature**: Added Filter command. (Pull requests: [\#58](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/58), [\#65](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/65))
   * What it does: allows the user to filter the current displayed client's list based on given keywords similar to the search command.
-  * Justification: This feature similarly improves the user experience for the FAs when managing a large addressbook but compared to the search command, the filter command will allow the users to find clients incrementally.
-  * Highlights: This implementation uses the same predicate from the search command to check if the client should be filtered.
+  * Justification: This allows the users to find clients incrementally based on keywords.
 
-* **New Feature**: Added the ability to manage multiple addressbook. (Pull requests: [\#110](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/110), [\#129](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/129))
+* **New Feature**: Added Multiple AddressBook functionality. (Pull requests: [\#110](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/110), [\#129](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/129))
   * What it does: allows the user to create/delete/switch between different addressbook.
   * Justification: This feature will allow the FAs to manage different group of clients under separate addressbook that can also be easily ported over to other devices.
-  * Highlights: This feature was particularly difficult to implement as it requires changes to both the model and storage as well the GUI.
+  * Highlights: This feature was challenging as it requires direct manipulation of the data files as well as changing multiple different components. 
 
-* **New Feature**: Improve edit/delete command to handle batch edit/delete respectively (Pull requests: [\#102](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/102), [\#196](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/196))
+* **New Feature**: Added Batch Edit/Delete functionality (Pull requests: [\#102](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/102), [\#196](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/196))
   * What it does: allows the user to edit and delete multiple clients at the same time.
-  * Justification: This feature will allow the FAs to edit any common fields for multiple client with a single command or to delete multiple clients without typing the command multiple times.
+  * Justification: Reduce the number of command needed to be executed for performing multiple edit and delete.
   * Highlights: For the batch edit command, the edit command will now have to check whether after applying the edits to the clients will there be duplicate before applying any of the edit.
 
 
@@ -52,6 +51,8 @@ Given below are my contributions to the project.
     * Update documentation for existing command `clear` [\#123](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/123)
   * Developer Guide:
     * Added implementation details of the `search` and `filter` feature [\#116](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/116)
+    * Added implementation details of the addressbook command `ab create`,`ab delete`, `ab list` [\#205](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/205)
+    * Added implementation details for IgnoreNullComparable interface and PrefixMapper class [\#230](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/230)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments) (Pull requests: [\#46](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/46),
