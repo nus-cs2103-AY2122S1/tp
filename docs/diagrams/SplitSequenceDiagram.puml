@@ -1,0 +1,100 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SportsPaParser" as SportsPaParser LOGIC_COLOR
+participant ":SplitCommandParser" as SplitCommandParser LOGIC_COLOR
+participant "s:SplitCommand" as SplitCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:MemberAvailableOnDayPredicate" as Predicate MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+participant ":SportsPa" as SportsPa MODEL_COLOR
+participant ":UniqueFacilityList" as Facilities MODEL_COLOR
+end box
+
+box ObservableList UI_COLOR_T2
+participant "f:FilteredMemberList" as FilteredList UI_COLOR_T3
+endbox
+
+[-> LogicManager : execute("split 1")
+activate LogicManager
+
+LogicManager -> SportsPaParser : parseCommand("split 1")
+activate SportsPaParser
+
+create SplitCommandParser
+SportsPaParser -> SplitCommandParser
+activate SplitCommandParser
+
+SplitCommandParser --> SportsPaParser
+deactivate SplitCommandParser
+
+SportsPaParser -> SplitCommandParser : parse("1")
+activate SplitCommandParser
+
+create SplitCommand
+SplitCommandParser -> SplitCommand : SplitCommand(1)
+
+activate SplitCommand
+SplitCommand --> SplitCommandParser : s
+deactivate SplitCommand
+
+SplitCommandParser --> SportsPaParser : s
+deactivate SplitCommandParser
+SplitCommandParser -[hidden]-> SportsPaParser : f
+destroy SplitCommandParser
+
+SportsPaParser --> LogicManager : s
+deactivate SportsPaParser
+
+LogicManager -> SplitCommand : execute(model)
+activate SplitCommand
+
+create Predicate
+SplitCommand -> Predicate : MemberAvailableOnDayPredicate(1)
+activate Predicate
+Predicate --> SplitCommand : p
+deactivate Predicate
+SplitCommandParser -[hidden]-> SportsPaParser : f
+destroy Predicate
+
+SplitCommand -> Model : split(p, 1)
+
+activate Model
+Model -> FilteredList : setPredicate(p)
+activate FilteredList
+FilteredList --> Model
+deactivate FilteredList
+Model -> SportsPa : split(f, 1)
+
+activate SportsPa
+SportsPa -> Facilities : allocateMembersToFacilities(f, 1)
+
+activate Facilities
+Facilities --> SportsPa
+deactivate Facilities
+
+SportsPa --> Model
+deactivate SportsPa
+
+Model --> SplitCommand
+deactivate Model
+
+create CommandResult
+SplitCommand -> CommandResult
+activate CommandResult
+CommandResult --> SplitCommand
+deactivate CommandResult
+
+SplitCommand --> LogicManager : r
+deactivate SplitCommand
+SplitCommandParser -[hidden]-> SportsPaParser : f
+destroy SplitCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

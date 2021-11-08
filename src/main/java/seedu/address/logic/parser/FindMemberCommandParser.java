@@ -100,16 +100,17 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
         builder.withPredicate(new PhoneContainsKeywordsPredicate(phoneList));
     }
 
-    private void generateTagPredicate(List<Tag> tags, Builder builder) {
-        builder.withTags(tags);
-        builder.withPredicate(new TagsContainKeywordsPredicate(tags));
-    }
-
     private void generateAvailabilityPredicate(Availability availability, Builder builder) {
         List<Availability> availabilityList = new ArrayList<>(Arrays.asList(availability));
         builder.withAvailability(availability);
         builder.withPredicate(new AvailabilityContainsKeywordsPredicate(availabilityList));
     }
+
+    private void generateTagPredicate(List<Tag> tags, Builder builder) {
+        builder.withTags(tags);
+        builder.withPredicate(new TagsContainKeywordsPredicate(tags));
+    }
+
 
     private void generateTodayAttendancePredicate(TodayAttendance todayAttendance, Builder builder) {
         List<TodayAttendance> todayAttendanceList = new ArrayList<>(Arrays.asList(todayAttendance));

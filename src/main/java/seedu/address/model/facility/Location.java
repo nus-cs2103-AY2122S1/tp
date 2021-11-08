@@ -38,7 +38,7 @@ public class Location {
     public boolean equals(Object obj) {
         return (obj == this)
                 || (obj instanceof Location
-                && location.equals(((Location) obj).location));
+                && location.equalsIgnoreCase(((Location) obj).location));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -113,5 +115,24 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(testFilePath);
         assertThrows(CommandException.class,
                 String.format(ImportCommand.MESSAGE_FILE_NOT_FOUND, testFilePath), () -> importCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        String standardFilePath = "test.csv";
+        ImportCommand standardCommand = new ImportCommand(standardFilePath);
+
+        //same object -> return true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        //same value, different object -> return true
+        assertTrue(standardCommand.equals(new ImportCommand("test.csv")));
+
+        //different command -> return false
+        assertFalse(standardCommand.equals(new ExportCommand()));
+
+        //different value -> return false
+        String differentFilePath = "abc.csv";
+        assertFalse(standardCommand.equals(new ImportCommand(differentFilePath)));
     }
 }

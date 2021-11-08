@@ -2,11 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.DayOfWeek;
-import java.time.format.TextStyle;
-import java.util.Locale;
-
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.DayUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.member.MemberAvailableOnDayPredicate;
@@ -50,18 +47,17 @@ public class SplitCommand extends Command {
         MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(dayNumber);
 
         int result = model.split(predicate, dayNumber);
+
         if (result == -1) {
             // No members available
-            throw new CommandException(String.format(MESSAGE_NO_MEMBERS_AVAILABLE,
-                    DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault())));
+            throw new CommandException(String.format(MESSAGE_NO_MEMBERS_AVAILABLE, DayUtil.displayDay(dayNumber)));
         } else if (result != 0) {
             // Insufficient facilities
             throw new CommandException(String.format(MESSAGE_INSUFFICIENT_FACILITIES,
-                    DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault()), result));
+                    DayUtil.displayDay(dayNumber), result));
         } else {
             // Split successful
-            return new CommandResult(String.format(MESSAGE_SUCCESS,
-                    DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault())),
+            return new CommandResult(String.format(MESSAGE_SUCCESS, DayUtil.displayDay(dayNumber)),
                     false, true, false);
         }
     }

@@ -17,7 +17,7 @@ public class AddMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the member list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to SportsPA.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

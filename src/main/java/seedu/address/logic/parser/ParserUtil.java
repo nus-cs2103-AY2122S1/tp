@@ -21,7 +21,6 @@ import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.member.Address;
 import seedu.address.model.member.Availability;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
@@ -35,13 +34,15 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer,"
-            + "and it should not be blank.";
-    private static final String MESSAGE_INVALID_TODAY_ATTENDANCE = "Today Attendance should be 'true' or false',"
-            + "and it should not be blank.";
-    private static final String MESSAGE_INVALID_TOTAL_ATTENDANCE = "Total Attendance should be a "
+    public static final String MESSAGE_INVALID_INDEX = "Index should be a positive unsigned integer,"
+            + " and it should not be blank.";
+    public static final String MESSAGE_INVALID_TODAY_ATTENDANCE = "Today Attendance should be 'true' or 'false',"
+            + " and it should not be blank.";
+    public static final String MESSAGE_INVALID_TOTAL_ATTENDANCE = "Total Attendance should be a "
             + "non-negative unsigned integer, and it should not be blank.";
 
+    public static final String MESSAGE_INVALID_DAY = "Day should be an integer from 1 to 7\n"
+            + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -181,21 +182,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -282,7 +268,7 @@ public class ParserUtil {
         requireNonNull(dayString);
         String validationRegex = "[1-7]";
         if (!dayString.matches(validationRegex)) {
-            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_DAY);
         }
         int dayNumber = Integer.parseInt(dayString);
         return DayOfWeek.of(dayNumber);

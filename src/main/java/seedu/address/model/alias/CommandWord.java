@@ -35,7 +35,7 @@ import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.commands.UnmarkAttendanceCommand;
 
 /**
- * Represents a CommandWord for an alias in user pref.
+ * Represents a CommandWord for an alias.
  * Guarantees: is valid as declared in {@link #isValidCommandWord(String)}
  */
 public class CommandWord implements Serializable {

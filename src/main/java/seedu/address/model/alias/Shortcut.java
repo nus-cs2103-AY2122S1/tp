@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.Serializable;
 
 /**
- * Represents a Shortcut for an alias in user pref.
+ * Represents a Shortcut for an alias.
  * Guarantees: is valid as declared in {@link #isValidShortcut(String)}
  */
 public class Shortcut implements Serializable {

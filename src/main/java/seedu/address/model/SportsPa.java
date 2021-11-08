@@ -114,6 +114,22 @@ public class SportsPa implements ReadOnlySportsPa {
     }
 
     /**
+     * Returns true if a member with the same name as {@code member} exists in SportsPA.
+     */
+    public boolean hasMemberWithSameName(Member member) {
+        requireNonNull(member);
+        return members.containsMemberWithSameName(member);
+    }
+
+    /**
+     * Returns true if a member with the same phone number as {@code member} exists in SportsPA.
+     */
+    public boolean hasMemberWithSamePhoneNumber(Member member) {
+        requireNonNull(member);
+        return members.containsMemberWithSamePhoneNumber(member);
+    }
+
+    /**
      * Returns true if a facility with the same details as {@code facility} exists in SportsPA.
      */
     public boolean hasFacility(Facility facility) {

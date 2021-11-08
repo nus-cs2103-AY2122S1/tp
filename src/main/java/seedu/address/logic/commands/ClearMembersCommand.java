@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Clears the members list of SportsPA.
+ * Clears the member list of SportsPA.
  */
 public class ClearMembersCommand extends Command {
 

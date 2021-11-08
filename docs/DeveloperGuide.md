@@ -1,13 +1,55 @@
 ---
 layout: page
 title: Developer Guide
+nav-text: Developer Guide
 ---
 
+![](images/sportsPA_logo.png)
+
+<span style = "font-size: 32px; color: #e46c0a">
+Welcome to the SportsPA Developer Guide!
+</span>
+
+<div style="page-break-after: always;"></div>
+
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
 
+SportsPA is a desktop application for NUS sports CCA Leaders to manage membership and
+training sessions, optimized for use via a *Command Line Interface* (CLI), while still preserving the benefits of a *Graphical User Interface* (GUI).
+
+SportsPA is highly optimized for *fast typists* and can be fully operated through keyboard commands.
+
+This developer guide is intended to be a one-stop source for anyone interested in extending and modifying `SportsPA`.
+For certain terms that are unique to `SportsPA`, a [glossary](#glossary) has been provided for readers.
+
+--------------------------------------------------------------------------------------------------------------------
+## Using this Developer Guide
+
+You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to your desired location in
+this Developer Guide. A link to return to the [Table of Contents](#table-of-contents) is also provided at the end of every section.
+<br>
+The table below summarizes the meaning of the icons and text styles used throughout this Developer Guide.
+<br>
+
+Syntax | Description
+----------------- | ------------------
+**bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
+*italics* | Terms to be defined in the [glossary](#glossary)  
+`Codeblock`          | Represents distinct classes, and their methods
+[link](#table-of-contents) | Represents links that can be clicked on to navigate to a relevant section of the User Guide or a different website
+**:information_source: Notes:** | Represents important information to note
+**:bulb: Tip:**| Represents useful tips that we would like to share
+
+[Back to Table of Contents](#table-of-contents)
+
+
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 * Based on AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
@@ -17,6 +59,11 @@ title: Developer Guide
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** Readers are advised to [download](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases) SportsPA's latest release to test the application.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,13 +104,6 @@ The rest of the App consists of four components.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `deletem 1`.
-
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -76,6 +116,13 @@ through its interface rather than the concrete class (reason: to prevent outside
 implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+the command `deletem 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 The sections below give more details of each component.
 
@@ -110,6 +157,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -201,7 +250,7 @@ is represented as `Alias`. The class diagram for `AliasMap` is shown below.
 
 ![AliasClassDiagram](images/AliasClassDiagram.png)
 
-AliasMap` implements the following operations:
+`AliasMap` implements the following operations:
 
 * `AliasMap#add(Alias)` — Adds an alias to the mapping.
 * `AliasMap#remove(Shortcut)` — Removes an alias from the mapping.
@@ -276,38 +325,52 @@ likely to be repeated, we decided that it was sufficient to allow users to creat
 The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
 filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
-`Address Book`stores a list of all facilities as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
+`SportsPa` stores a list of all facilities in `UniqueFacilityList` as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
 with 7 key-value pairs, of which the keys are all the enums of the
 `java.time.DayOfWeek` (`{MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}`) and the values are all initialized
-as an empty `ArrayList`. This is based on the assumption that facilities are available on every day of the week.
+as an empty `ArrayList` to hold the members allocated. This is based on the assumption that facilities are available on every day of the week.
 <br>
-When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `List<Member>` of all facilities for that `DAY` is cleared.
-The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a Greedy algorithm. <br>
-i.e. The filtered members list and facility list are iterated and each Member is allocated to the first facility which is not at max capacity. After
-a facility is at max capacity, any remaining members are allocated to the next available facility and so on.
+When the `split` command is executed with a given `DAY` parameter, all members available on that `DAY` are filtered and the `ArrayList<Member>` of all facilities for that `DAY` is cleared.
+The available members are then added to the `List<Member>` of the corresponding `DayOfWeek` in the `EnumMap` of the facilities using a greedy algorithm. 
+<br>
+i.e. The filtered members list and facility list are iterated and each `Member` is allocated to the first `Facility` which is not at max capacity. After
+a `Facility` is at max capacity, any remaining `Member`s are allocated to the next available `Facility` and so on.
 
-`ModelManager` implements the following operations:
-* `split(Predicate<Member> predicate, int dayNumber)` —  Filters the list of all members according to the given `predicate`.
-When the `split` command is executed, `MemberAvailableOnDayPredicate` is passed to `predicate`, allowing a filtered list of members available
-on the given `dayNumber` to be created and passed to the `split` method of `SportsPa`.
+`ModelManager` implements the following operation:
+* `ModelManager#split(Predicate<Member>, int)` —  Filters the list of all members according to the given `predicate`.
 
-`SportsPa` implements the following operations:
-* `split(FilteredList<Member> membersFilteredList, int dayNumber)` — Splits the members in the given filtered member list into facilities on the given day.
-Returns -1 if no members are available, the number of members that exceed the total capacity if the number of members is
-more than the total capacity on the given day and 0 if members can be split successfully.
+`SportsPa` implements the following operation:
+* `SportsPa#split(FilteredList<Member>, int)` — Splits the members in the given filtered member list into facilities on the given day.
 
-Additionally, `UniqueFacilityList` implements the following operations:
-* `allocateMembersToFacilitiesOnDay(FilteredList<Member> members, int dayNumber)` — Clears the `AllocationMap` of each `Facility`
+Additionally, <br>
+`UniqueFacilityList` implements the following operation:
+* `UniqueFacilityList#allocateMembersToFacilitiesOnDay(FilteredList<Member>, int)` — Clears the `AllocationMap` of each `Facility`
 and allocates the members in the given filtered member list to facilities greedily.
+* 
+`Facility` implements the following operation:
+* `Facility#addMemberToFacilityOnDay(Member, DayOfWeek)` — Adds the given member to `AllocationMap` on the given day.
 
 Given below is an example usage scenario and how the split feature behaves at each step.
 
-Step 1.
+Step 1. The user launches the application for the first time. The user then adds 5 members into an empty SportsPA
+by executing the `addm` command 5 times with the parameter `d/1` (all required parameters are provided as well but not specified here).
+Each `Member` in the `filteredMembers` list will have an availability of Monday.
+The user then adds 1 facility into SportsPA by executing the `addf` command with the parameter `c/5`
+(all required parameters are provided as well but not specified here). The `Facility` in the `facilities` list will 
+have a capacity of 5 and an `AllocationMap` with all the values initialized as an empty `ArrayList`.
+
+Step2. The user executes `split 1` command to split the 5 members in the filtered list to facilities on Monday. The `split` command
+creates a `MemberAvailableOnDayPredicate` with the given day and passes it and the given day to `ModelManager#split(Predicate<Member>, int)`.
+`ModelManager` then creates a filtered list of members who are available on Monday. It then calls `SportsPa#split(FilteredList<Member>, int)`, passing to it
+the filtered list and the given day. `SportsPA` then iterates through the 5 members in the filtered member list and the 1 facility in its `UniqueFacilityList`, calling
+`Facility#addMemberToFacilityOnDay(Member, DayOfWeek)`. This adds the 5 members to the `ArrayList` of the `AllocationMap` of the `Facility` for Monday.
 
 The following sequence diagram shows how the split mechanism works.
 
+![SplitSequenceDiagram](images/SplitSequenceDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifeline for `SplitCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
@@ -340,7 +403,7 @@ The lifeline for `SplitCommand` should end at the destroy marker (X) but due to 
 
 #### Implementation
 
-The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
+The mark/unmark attendance mechanism is facilitated by `ModelManager`. The `ModelManager` stores a list of filtered members
 as `filteredMembers`. Each `Member` in the list internally stores `totalAttendance` and `todayAttendance`
 which will be updated accordingly when the attendance of that `Member` is marked or unmarked.
 
@@ -447,9 +510,80 @@ The following activity diagram summarizes what happens when a user enters and ex
 * **Alternative 1 (current choice):** The find member command can search for members with multiple attributes.
     * Pros: Allows users to find members in a more precise manner e.g. Users can find members who are available on Monday and are EXCO members.
     * Cons: More complex implementation due to parsing multiple prefixes and chaining predicates, thus this alternative is more prone to bugs.
-* ** Alternative 2: The find member command can search for members with only one attribute.
+* **Alternative 2**: The find member command can search for members with only one attribute.
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
+
+### Import members feature
+
+#### Implementation
+
+The import member mechanism is facilitated by `ModelManager` and `SportsPa`. `ModelManager` has access to SportsPA's
+data from the `SportsPa` object, from which member data will be read from when the `import` command is requested by the user.
+
+**Before going further, here are some terms used that you should take note of:**
+* "invalid import" in this context refers to an imported member having the same name as an 
+existing member AND the same phone number as another existing member.
+* "valid import" in this context refers to an imported member not having the same name as an
+  existing member AND the same phone number as another existing member.
+
+`ModelManager` implements the following relevant operations:
+* `ModelManager#isValidImport(Member)` — Checks if the member being imported is a valid import.
+* `ModelManager#hasMember(Member)` — Returns true if a member with the same name or phone as the given member exists in SportsPA.
+* `ModelManager#setMember(Member target, Member editedMember)` — Replaces the target member in the list with an edited member.
+
+Given below is an example usage scenario and how the import mechanism behaves.
+
+Step 1. The user launches the application for the first time. The user then executes the command `addm n/Bob p/12345678`,
+which adds a member called Bob with a phone number 12345678 into the member list.
+
+![ImportStep1ObjectDiagram](images/ImportStep1ObjectDiagram.png)
+
+Step 2. The user then realises he has many more members to add and wants to use the `import` command. He prepares a CSV file
+called `myFile.csv` to import the members from. 
+
+![CSVFileScreenShot](images/ImportImplementationCsv.png)
+
+Step 3. The user executes the command `import myFile.csv` to import the members from the CSV file. The `import` command first 
+parses the CSV file using a private method `ImportCommand#parseCsv()`, which returns a list of `Member` objects to be imported.
+
+After which, the command iterates through the list of `Member` objects. Each iteration goes as such:
+
+I. A check is done to see if each `Member` is a valid import by calling `ModelManager#isValidImport(Member)`. If it is a
+valid import, go to the next step. Else, the current iteration is skipped and a list of skipped members is kept and will be
+shown to the user via the GUI.<br>
+
+In this case, both `Member` objects are valid imports and can be imported.
+
+II. Then, `ModelManager#hasMember(Member)` is called to check if there are any members in SportsPA with the same name 
+or phone as the member being imported. If there is such a member in SportsPA, Then the existing member details in SportsPA
+will be updated by the imported member details by calling `ModelManager#setMember(Member target, Member editedMember)`. 
+Else, the imported member is simply added into SportsPA.<br>
+    
+In this case, there is 1 member being imported named Bob while there already exists a member called Bob in SportsPA.
+So, the existing member, Bob's details will be updated to the details from the CSV file.
+As for Amy, the details would be added into SportsPA.
+
+![ImportStep3ObjectDiagram](images/ImportStep3ObjectDiagram.png)
+
+The following sequence diagram shows how the import command works.
+
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes the `import` command:
+
+<img src="images/ImportActivityDiagram.png" width="250" />
+
+#### Design Considerations:
+
+**Aspect: how to deal with invalid imports:**
+* **Alternative 1 (current choice):** Skip the invalid imports and notify the user of the invalid imports.
+  * Pros: Easy to implement and users will be able to know which imports they need to rectify.
+  * Cons: Might not be the desired interaction users want.
+
+* **Alternative 2:** Treat the command as an invalid command.
+  * Pros: Easy to implement
+  * Cons: User might want to import the valid imports and the invalid imports might just be an error on their part.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -591,7 +725,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
+   or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to delete a specific member in the list
 3. SportsPA deletes the member
 
@@ -615,8 +749,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
    or <span style="text-decoration: underline">search for members (UC04)</span>
-2. User requests to edit the details of specific member in the list.
-3. SportsPA edits the details of the member.
+2. User requests to edit the details of specific member in the list
+3. SportsPA edits the details of the member
 
    Use case ends.
 
@@ -642,8 +776,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to sort all the members by a field.
-2. SportsPA sorts the members accordingly.
+1. User requests to sort all the members by a field
+2. SportsPA sorts the members accordingly
     
     Use case ends.
 
@@ -660,9 +794,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
-2. User requests to set availability of specific member(s) in the list.
-3. SportsPA updates the availability of the given member(s).
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to set availability of specific member(s) in the list
+3. SportsPA updates the availability of the given member(s)
 
    Use case ends.
 
@@ -672,7 +806,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index/indices is/are invalid
+* 2a. One or more of the given member index is invalid
 
     * 2a1. SportsPA shows an error message
 
@@ -689,9 +823,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to <span style="text-decoration: underline">list members (UC03)</span>
-   or <span style="text-decoration: underline">search for members (UC04)</span>.
-2. User requests to mark the attendance of specific member(s) in the list.
-3. SportsPA marks the attendance of the specified member(s).
+   or <span style="text-decoration: underline">search for members (UC04)</span>
+2. User requests to mark the attendance of specific member(s) in the list
+3. SportsPA marks the attendance of the specified member(s)
 
     Use case ends.
 
@@ -701,7 +835,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The index/indices given is/are invalid.
+* 2a. The index/indices given is/are invalid
 
     * 2a1. SportsPA shows an error message
   
@@ -730,6 +864,12 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * 1b. The content of CSV file is not in the valid format
 
     * 1b1. SportsPA shows an error message
+
+      Use case ends.
+
+* 1c. There are some imported members that have the same name or same phone
+
+    * 1c1. SportsPA updates the details of those members using data from the CSV file
 
       Use case ends.
     
@@ -814,8 +954,8 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 1. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-2. User requests to edit the details of specific facility in the list.
-3. SportsPA edits the details of the facility.
+2. User requests to edit the details of specific facility in the list
+3. SportsPA edits the details of the facility
         
     Use case ends.
 
@@ -841,7 +981,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **MSS**
 
-1. User requests to split available members into the facilities
+1. User requests to split available members into the facilities on a specified day
 2. SportsPA shows the allocation results
 
    Use case ends.
@@ -854,9 +994,9 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
       Use case ends.
 
-* 1a. SportsPA detects no available members
+* 1b. SportsPA detects no available members
 
-    * 1a1. SportsPA shows an error message
+    * 1b1. SportsPA shows an error message
 
       Use case ends.
 
@@ -868,20 +1008,26 @@ This use case is similar to that of <span style="text-decoration: underline">mar
    or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-3. User requests to deallocate a specified member from a specified facility.
-4. SportsPA deallocates the specified member from the specified facility.
+3. User requests to deallocate a specified member from a specified facility on a specified day.
+4. SportsPA deallocates the specified member from the specified facility on a specified day.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index/indices is/are invalid
+* 3a. Any of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
       
       Use case resumes from step 3.
-  
-* 3b. The specified member is not allocated to the specified facility.
+
+* 3b. The given day is invalid
+
+    * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3c. The specified member is not allocated to the specified facility
 
     * 3b1. SportsPA shows an error message
 
@@ -894,30 +1040,36 @@ This use case is similar to that of <span style="text-decoration: underline">mar
    or <span style="text-decoration: underline">search for members (UC04)</span>
 2. User requests to <span style="text-decoration: underline">list facilities (UC14)</span>
    or <span style="text-decoration: underline">search for facilities (UC15)</span>
-3. User requests to allocate a specified member to a specified facility.
-4. SportsPA allocates the specified member to the specified facility.
+3. User requests to allocate a specified member to a specified facility on a specified day
+4. SportsPA allocates the specified member to the specified facility on a specified day
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index/indices is/are invalid
+* 3a. Any of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
 
       Use case resumes from step 3.
 
-* 3b. The specified member is already allocated to the specified facility.
+* 3b. The given day is invalid
 
     * 3b1. SportsPA shows an error message
+
+      Use case resumes from step 3.
+
+* 3c. The specified member is already allocated to the specified facility.
+
+    * 3c1. SportsPA shows an error message
 
       Use case resumes from step 3.
     
 **Use case: UC21 - Export facility details and member allocations**
 
 **MSS**
-1. User requests to export facility details and member allocations.
-2. SportsPA exports the facility details and member allocations to a CSV file.
+1. User requests to export facility details and member allocations
+2. SportsPA exports the facility details and member allocations to a CSV file
 
    Use case ends.
 
@@ -955,7 +1107,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
-* **Above average typing speed**: faster than 40wpm (words per minute)
+* **Fast typists**: Types faster than 40wpm (words per minute)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1046,7 +1198,7 @@ testers are expected to do more *exploratory* testing.
 ### Setting member availability
 1. Set the availability of one or more members 
     
-    1. Prerequisites: List all members using the `listf` command. One or more members ar ein the list.
+    1. Prerequisites: List all members using the `listf` command. One or more members are in the list.
    
     2. Test case: `setm 1 2 3 d/1 2`<br>
         Expected: The availability of the first 3 members are changed to Monday and Tuesday. The names of members
@@ -1104,11 +1256,11 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 ### Splitting members into facilities
 
-1. Allocating all the members into the allocation lists of the facilities.
+1. Allocating all the members into the allocation maps of the facilities on a given day.
 
     1. Test case: `split 1`<br>
-       Expected: All members that have Monday as one of their available days will be allocated to facility. Their names
-       will be shown in the facility list under Monday.
+       Expected: All members that have Monday as one of their available days will be allocated to a facility if 
+       there is sufficient capacity. Their names will be shown in the facilities' allocation maps under Monday.
    
     2. Test case: `split`<br>
        Expected: No members are allocated to any facility. Error details are shown in the status message.

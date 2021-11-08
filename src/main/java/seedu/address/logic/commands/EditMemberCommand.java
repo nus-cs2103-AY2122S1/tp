@@ -34,7 +34,7 @@ public class EditMemberCommand extends Command {
     public static final String COMMAND_WORD = "editm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
-            + "by the index number used in the displayed member list.\n"
+            + "by the index number used in the currently displayed member list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -77,7 +77,8 @@ public class EditMemberCommand extends Command {
         Member memberToEdit = lastShownList.get(index.getZeroBased());
         Member editedMember = createEditedMember(memberToEdit, editMemberDescriptor);
 
-        if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
+        if ((!(memberToEdit.hasSamePhoneNumber(editedMember)) && model.hasMemberWithSamePhoneNumber(editedMember))
+                || (!(memberToEdit.hasSameName(editedMember)) && model.hasMemberWithSameName(editedMember))) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 

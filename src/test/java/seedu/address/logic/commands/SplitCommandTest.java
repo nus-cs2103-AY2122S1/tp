@@ -8,13 +8,10 @@ import static seedu.address.testutil.TypicalMembers.AMY;
 import static seedu.address.testutil.TypicalMembers.BOB;
 import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 
-import java.time.DayOfWeek;
-import java.time.format.TextStyle;
-import java.util.Locale;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.DayUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.SportsPa;
@@ -36,7 +33,7 @@ public class SplitCommandTest {
         MemberAvailableOnDayPredicate predicate = new MemberAvailableOnDayPredicate(1);
         expectedModel.split(predicate, 1);
         assertCommandSuccess(command, model, String.format(SplitCommand.MESSAGE_SUCCESS,
-                DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault())), expectedModel);
+                DayUtil.displayDay(1)), expectedModel);
     }
 
     @Test
@@ -45,7 +42,7 @@ public class SplitCommandTest {
         SplitCommand command = new SplitCommand(1);
         assertCommandFailure(command, model, String.format(
                 SplitCommand.MESSAGE_NO_MEMBERS_AVAILABLE,
-                DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault())));
+                DayUtil.displayDay(1)));
     }
 
     @Test
@@ -64,7 +61,7 @@ public class SplitCommandTest {
         model.addMember(AMY);
         model.addMember(BOB);
         String expectedMessage = String.format(SplitCommand.MESSAGE_INSUFFICIENT_FACILITIES,
-                DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault()), 1);
+                DayUtil.displayDay(1), 1);
         assertCommandFailure(command, model, expectedMessage);
     }
 
