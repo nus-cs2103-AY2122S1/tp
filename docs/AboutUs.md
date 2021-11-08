@@ -27,7 +27,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/marcustxk.md)]
 
 * Role: Integration, Code Quality
-* Responsibilities: In charge of `list` feature
+* Responsibilities: In charge of `list` feature and schedule feature.
 
 ### Taufiq Bin Abdul Rahman
 

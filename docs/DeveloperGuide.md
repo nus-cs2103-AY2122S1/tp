@@ -103,14 +103,18 @@ etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` c
 
 ### 3.3 Logic component
 
+### Description :
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+**Description** :
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+The `Logic` component is responsible for handling the execution of the input entered by the user. Here, the user input 
+is parsed to determine what command it is, before the command is executed.
+
+**Functionality** :
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `MainParser` class to parse the user command.  
+1. When `Logic` is called upon to execute a command, it uses the `MainParser` class to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `HelpCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a friend).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -125,14 +129,21 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 </div>
 
+**Component Structure**
+
+Here's a (partial) class diagram of the `Logic` component:
+
+<img src="images/LogicClassDiagram.png" width="550"/>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `MainParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `HelpCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `HelpCommand`) which the `AddressBookParser` returns back as a `Command` object.
-    * Note: For user commands with `friend` or `game` as the first arguments will go through an additional `FriendCommandParser` or `GameCommandParser` respectively for parsing, which will then create the respective `XYZFriendCommandParser` or `XYZGameCommandParser`
+  * Note: For user commands with `friend` or `game` as the first arguments will go through an additional `FriendCommandParser` or `GameCommandParser` respectively for parsing, which will then create the respective `XYZFriendCommandParser` or `XYZGameCommandParser`
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
 
 ### 3.4 Model component
 

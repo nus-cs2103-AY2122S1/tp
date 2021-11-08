@@ -75,14 +75,14 @@ This table describes the main symbols used in the user guide and their respectiv
 <br><center><ins>Image: gitGud upon startup.</ins></center>
 
 5. Choose and type in a command into the command input box and press `Enter` to execute it. 
-e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
+e.g. typing `help` and pressing `Enter` will open the help window.<br>
    Here are some example commands you can try:
 
-   * **`friend --add Draco -n Marcus`** : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
+   * `friend --add Draco -n Marcus` : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
 
-   * **`friend --delete Draco`** : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
+   * `friend --delete Draco` : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
 
-   * **`exit`** : Exits the app.
+   * `exit` : Exits the app.
    
 Congratulations! You have successfully set up gitGud.
 For more in-depth details of each command, refer to the [features](#5-features) section below.
@@ -103,7 +103,7 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 | 2 | Command input box | This is where you can input commands to perform actions in gitGud. |
 | 3 | Command feedback box | This box displays information related to the status of the commands you have executed. |
 | 4 | Friends list | This section displays the friends list and may be filtered to display specific friends based on the previously executed commands. |
-| 5 | Main card | This box displays in-depth information for friends or games during `get` commands. | 
+| 5 | Main card | This box displays in-depth information for friends or games after running `get` commands. | 
 | 6 | Games list | This section displays the games list and may be filtered to display specific games based on the previously executed commands. | 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ Adds a new friend to gitGud friend’s list with an associated **unique** friend
 
 The friend identifier (`FRIEND_ID`) is an ID you assign to a friend to refer to each unique friend for use within the 
 gitGud application, 
-it must also be unique and not previously exist in the friends list.
+it must also be unique and not exist in the friends list.
 gitGud has imposed the command constraints listed below on the friend identifier to ensure it is easy for you to remember and type.
 </div>
 
@@ -152,7 +152,7 @@ Command constraints:
   * must be non-empty and cannot contain only whitespaces.
   * can have at most 20 characters.
   * supports all characters except for `-`.
-* The `FRIEND_ID` must be unique and must not already exist in the friends list.
+* The `FRIEND_ID` must be unique (case-insensitive) and should not already exist in the friends list.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -161,10 +161,10 @@ you are sure about.**
 </div>
 
 Examples:
-* `friend --add Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and
+* `friend --add Draco` Adds a brand-new friend into the friends list with the identifier `Draco` and
   which does not currently have an associated real-life name.
-* `friend --add tau_bar -n Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
-  has the real-life name 'Taufiq'.
+* `friend --add tau -n Taufiq` Adds a brand-new friend into the friends list with the identifier `tau` and
+  has the real-life name `Taufiq`.
 
 ![Friend add Screenshot](images/ui-screenshots/friend-add.png)
 <br><center><ins>Image: Command feedback box after adding a friend `Draco`</ins></center>
@@ -179,7 +179,7 @@ Command constraints:
 * The `FRIEND_ID` used must currently exist in the friends list.
 
 Examples: 
-* `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` 'Draco' to 'Kevin'.
+* `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` `Draco` to `Kevin`.
 
 ![Friend edit Screenshot](images/ui-screenshots/friend-edit.png)
 <br><center><ins>Image: Command feedback box after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
@@ -194,7 +194,7 @@ Command constraints:
 * The `FRIEND_ID` must currently exist in the friends list.
 
 Examples:
-* `friend --delete Draco` Deletes friend with gitGud `FRIEND_ID` of Draco and all their data from the friends list.
+* `friend --delete Draco` Deletes friend with gitGud `FRIEND_ID` of `Draco` and all their data from the friends list.
 
 ![Friend delete Screenshot](images/ui-screenshots/friend-delete.png)
 <br><center><ins>Image: Command feedback box after deleting a friend `Draco`</ins></center>
@@ -227,8 +227,8 @@ Command constraints:
 
 Examples:
 * `friend --link Draco -g DOTA -u Draco995`
-  Links a single game, “DOTA” with the in-game username ‘Draco995’,
-  to the friend with the gitGud `FRIEND_ID` ‘Draco’.
+  Links a single game, `DOTA` with the in-game username `Draco995`,
+  to the friend with the gitGud `FRIEND_ID` `Draco`.
 
 ![Friend link Screenshot](images/ui-screenshots/link-feedback.png)
 <br><center><ins>Image: Command feedback box after linking a friend `marcustxk` to a game `RocketLeague`</ins></center>
@@ -249,7 +249,7 @@ Command constraints:
 * The friend has to be previously linked to the game with the provided `GAME_ID`.
 
 Examples:
-* `friend --unlink Draco -g DOTA` Removes the link between the friend with `FRIEND_ID` 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
+* `friend --unlink Draco -g DOTA` Removes the link between the friend with `FRIEND_ID` `Draco` and the game with `GAME_ID` `DOTA`. `Draco` is now no longer associated with `DOTA`.
 
 ![Friend unlink Screenshot](images/ui-screenshots/unlink-feedback.png)
 <br><center><ins>Image: Command feedback box after unlinking a friend `marcustxk` from a game 
@@ -274,8 +274,8 @@ Command constraints:
   whereas -1, 11, 1.2, and 'one' are invalid skill values.
  
 Examples: 
-* `friend --skill Draco -g Valorant -v 7` Sets the skill value for friend 'Draco' for the linked game
-'Valorant' to 7.
+* `friend --skill Draco -g Valorant -v 7` Sets the skill value for friend `Draco` for the linked game
+`Valorant` to 7.
 
 ![Ui after assigning skill value](images/ui-screenshots/friend-skill-success.png)
 <br><center><ins>Image: Command feedback box after assigning skill value `7` to a game `Valorant` linked to a
@@ -314,8 +314,8 @@ Command constraints:
 * `IS_FREE` is used to mark the period as a free or busy period, and can only be the values `1` meaning free or `0` meaning busy.
 
 Examples:
-* `friend --schedule Draco -p 18 22 2 -f 1` Schedules 'Draco' as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
-* `friend --schedule Draco -p 12 24 7 -f 0` Schedules 'Draco' as busy from 12th to 24th hour, 1200 - 2400 (midnight) on Sunday.
+* `friend --schedule Draco -p 18 22 2 -f 1` Schedules `Draco` as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
+* `friend --schedule Draco -p 12 24 7 -f 0` Schedules `Draco` as busy from 12th to 24th hour, 1200 - 2400 (midnight) on Sunday.
 
 ![Ui after adding schedule](images/ui-screenshots/schedule-feedback.png)
 <br><center><ins>Image: Command feedback box after scheduling a friend's `Draco` availability</ins></center>
@@ -360,7 +360,7 @@ Command constraints:
 * The `FRIEND_ID` must currently exist in the friends list.
 
 Examples:
-* `friend --get Draco` Gets the complete data for friend 'Draco'.
+* `friend --get Draco` Gets the complete data for friend `Draco`.
 
 ![Friend get screenshot](images/ui-screenshots/friend-get.png)
 <br><center><ins>Image: gitGud displaying friend `Draco` after the `get` command</ins></center>
@@ -400,7 +400,7 @@ Command constraints:
   * must be a single word (no spaces) e.g. `ApexLegends` and not `Apex Legends`.
   * must only contain alphanumeric characters e.g. `CSGO` and not `CS:GO`.
   * can have at most 20 characters.
-* The `GAME_ID` provided should not already exist in the games list. 
+* The `GAME_ID` provided must be unique (case-insensitive) should not already exist in the games list. 
 
 <div markdown="block" class="alert alert-info">
 
@@ -415,7 +415,7 @@ e.g. `Apex Legends` may be stored as `ApexLegends`.
 </div>
 
 Examples:
-* `game --add RocketLeague` Adds a brand-new game into the game list with the **unique** `GAME_ID` 'RocketLeague'.
+* `game --add RocketLeague` Adds a brand-new game into the game list with the **unique** `GAME_ID` `RocketLeague`.
 
 ![Ui](images/ui-screenshots/game-add.png)
 <br><center><ins>Image: Command feedback box showing that the game `RocketLeague` has been added</ins></center>
@@ -437,7 +437,7 @@ Command constraints:
 * The `GAME_ID` must exist in the games list to be deleted.
 
 Examples:
-* `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
+* `game --delete Valorant` Deletes the game record `Valorant` from the game list if it exists.
 
 ![Ui](images/ui-screenshots/game-delete.png)
 <br><center><ins>Image: Command feedback box showing that the game `Valorant` has been deleted</ins></center>
@@ -456,7 +456,7 @@ Command constraints:
 * The `GAME_ID` must currently exist in the database.
 
 Examples:
-* `game --get CSGO` Gets all the relevant information for the game 'CSGO''.
+* `game --get CSGO` Gets all the relevant information for the game `CSGO`.
 
 ![Game get screenshot](images/ui-screenshots/game-get.png)
 <br><center><ins>Image: gitGud after getting the game `CSGO`</ins></center>
@@ -554,8 +554,8 @@ Terminology used | What it means
 --------|------------------
 Tilted | A term widely used in the gaming community to express frustration. 
 Pro | A term widely used in the gaming community to refer to a someone who is considered highly skilled. 
-Friend Identifier | An identifier you assign to a friend to refer to that specific friend within the gitGud application.
-Game Identifier | An identifier you assign to a game to refer to that specific game within the gitGud application.
+Friend Identifier | A unique identifier you assign to a friend to refer to that specific friend within the gitGud application.
+Game Identifier | A unique identifier you assign to a game to refer to that specific game within the gitGud application.
 
 --------------------------------------------------------------------------------------------------------------------
 
