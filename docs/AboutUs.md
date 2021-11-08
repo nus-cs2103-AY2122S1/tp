@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Rachel Cheah
@@ -15,6 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/RachelCheah)]
 
+[[PPP](https://ay2122s1-cs2103-t16-2.github.io/tp/team/rachelcheah.html)]
 
 * Role: Team Lead
 * Responsibilities: Scheduling and tracking project progress
@@ -25,6 +24,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/chengseong)]
 
+[[PPP](https://ay2122s1-cs2103-t16-2.github.io/tp/team/chengseong.html)]
+
 * Role: Developer
 * Responsiblities : Integration and Code Quality
 
@@ -33,6 +34,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/meixuanjin.png" width="200px">
 
 [[github](http://github.com/meixuanjin)]
+
+[[PPP](https://ay2122s1-cs2103-t16-2.github.io/tp/team/meixuanjin.html)]
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines
@@ -43,6 +46,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/siddharth-sid)]
 
+[[PPP](https://ay2122s1-cs2103-t16-2.github.io/tp/team/siddharth-sid.html)]
+
 * Role: Developer
 * Responsibilities: Testing
 
@@ -52,6 +57,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/nujiak.png" width="200px">
 
 [[github](http://github.com/nujiak)]
+
+[[PPP](https://ay2122s1-cs2103-t16-2.github.io/tp/team/nujiak.html)]
 
 * Role: Developer
 * Responsibilities: Documentation

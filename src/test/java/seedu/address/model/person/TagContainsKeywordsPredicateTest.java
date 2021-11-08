@@ -14,6 +14,7 @@ import seedu.address.testutil.PersonBuilder;
 public class TagContainsKeywordsPredicateTest {
 
     public static final String TAG_TYPE = "t/";
+    public static final String FULL_TAG_TYPE = "t/full";
 
     @Test
     public void equals() {
@@ -50,7 +51,7 @@ public class TagContainsKeywordsPredicateTest {
                 new TagContainsKeywordsPredicate(Arrays.asList("t/", "friends"), TAG_TYPE);
         assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
 
-        //partial tag
+        // Partial tag
         predicate =
                 new TagContainsKeywordsPredicate(Arrays.asList("t/", "frie"), TAG_TYPE);
         assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
@@ -67,5 +68,26 @@ public class TagContainsKeywordsPredicateTest {
         TagContainsKeywordsPredicate predicate =
                 new TagContainsKeywordsPredicate(Arrays.asList("t/", "colleagues"), TAG_TYPE);
         assertFalse(predicate.test(new PersonBuilder().withTags("friends").build()));
+    }
+
+    @Test
+    public void test_tagContainsFullKeywords_returnsTrue() {
+        // Full Tag
+        TagContainsKeywordsPredicate predicate =
+                new TagContainsKeywordsPredicate(Arrays.asList("t/full", "friends"), FULL_TAG_TYPE);
+        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
+
+        // Full Tag with mixed-case
+        predicate =
+                new TagContainsKeywordsPredicate(Arrays.asList("t/full", "frIends"), FULL_TAG_TYPE);
+        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
+    }
+
+    @Test
+    public void test_tagDoesNotContainFullKeywords_returnsTrue() {
+        // Non-Matching Tag
+        TagContainsKeywordsPredicate predicate =
+                new TagContainsKeywordsPredicate(Arrays.asList("t/full", "colleagues"), FULL_TAG_TYPE);
+        assertFalse(predicate.test(new PersonBuilder().withTags("family").build()));
     }
 }

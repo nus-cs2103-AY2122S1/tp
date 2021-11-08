@@ -40,7 +40,7 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException, DataConversionException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        logger.info("----------------[USER COMMAND]\n[" + commandText + "]");
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
