@@ -36,8 +36,8 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
   - Updated user guide to include instructions for `grade` and `dlgrade` commands.
   - Provided additional detail for assignment commands (`mkasg`, `edasg` and `dlasg` commands).
 - **Developer Guide**
-  - Documented implementation documentation for grade feature.
-  - Updated UML diagrams to accurately reflect EdRecord.
+  - Documented implementation for grading feature.
+  - Updated UML diagrams to accurately reflect classes used to implement grades.
 
 ### Community
 
