@@ -41,11 +41,11 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 ProgrammerError *--> "1" UniqueStudentList
 UniqueStudentList --> "~* all" Student
-Student *--> Name
-Student *--> StudentId
-Student *--> ClassId
-Student *--> Email
-Student *--> Lab
+Student *--> "1" Name
+Student *--> "1" StudentId
+Student *--> "1" ClassId
+Student *--> "1" Email
+Student *--> "*" Lab
 
 Name -[hidden]right-> StudentId
 StudentId -[hidden]right-> ClassId
