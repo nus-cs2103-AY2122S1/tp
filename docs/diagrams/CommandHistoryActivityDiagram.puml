@@ -2,9 +2,8 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:UI receives keystroke;
-switch()
-case ([keystroke `UP`])
+:UI receives `UP` or `DOWN` keystroke;
+if () then ([keystroke `UP`])
   :Attempts to retrieves previous command;
   if () then ([has command history])
     if () then ([has previous command])
@@ -15,7 +14,7 @@ case ([keystroke `UP`])
   else ([no command history])
     :Displays nothing;
   endif
-case ([keystroke `DOWN`])
+else ([keystroke `DOWN`])
   :Attempts to retrieves next command;
   if () then ([has command history])
     if () then ([has next command])
@@ -26,10 +25,7 @@ case ([keystroke `DOWN`])
   else ([no command history])
     :Displays nothing;
   endif
-case ([other keystrokes])
-  :Retrieves Command Assistant;
-endswitch
-
+endif
 
 stop
 
