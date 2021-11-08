@@ -45,7 +45,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 <img src="images/kevinmingtarja.png" width="200px">
 
 [[github](https://github.com/kevinmingtarja)]
-[[portfolio](team/kevinnathanaelmingtarja.md)]
+[[portfolio](team/kevinmingtarja.md)]
 
 * Role: Developer
 * Responsibilities:
