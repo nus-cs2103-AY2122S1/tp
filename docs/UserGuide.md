@@ -153,8 +153,8 @@ After launching the app, the GUI similar to the one shown below should appear in
 Component | What it does
 -------|--------
 Menu Bar | Exits TutAssistor or views help.
-Command Box | Keys in command.
-Result Display Pane | Displays feedback of command to user.
+Command Box | Key in commands
+Result Display Pane | Displays feedback of commands.
 TuitionList Panel | Displays all tuition classes.
 StudentList Panel | Displays all students.
 Main Display Pane | Displays today's lessons, tuition class's or student's details, or a timetable.
@@ -262,8 +262,11 @@ or
 ```
 vs 2
 ```
-![view student](images/student_view.png)
-<p align="center"><i>Figure 2: Displaying a student's details in the information page</i></p>
+
+<p align="center">
+    <img src="images/student_view.png" alt="view student" width="650" height="180"><br>
+    <i>Figure 2: Displaying a student's details in the information page</i>
+</p>
 
 #### 3.2.2 Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
@@ -276,8 +279,10 @@ or
 ```
 vc 3
 ```
-![view class](images/class_view.png)
-<p align="center"><i>Figure 3: Displaying details of a class in the information page</i></p>
+<p align="center">
+    <img src="images/class_view.png" alt="view class" width="650" height="240"><br>
+    <i>Figure 3: Displaying details of a class in the information page</i>
+</p>
 
 ### 3.3 Edit student/tuition class
 Edits an existing student or tuition class.
@@ -343,9 +348,12 @@ or
 ```
 del 1 2
 ```
-An example output is shown below: <br>
-![DeleteCommand example](images/DeleteStudentUG.png)
-<p align="center"><i>Figure 4: Example of executing `delete 1 2` command</i></p>
+An example output is shown below:
+
+<p align="center">
+    <img src="images/DeleteStudentUG.png" alt="Delete student" width="650" height="420"><br>
+    <i>Figure 4: Example of executing `delete 1 2` command</i>
+</p>
 
 #### Deleting tuition classes: `deleteclass` | `delc`
 
@@ -422,8 +430,10 @@ Upon entering the command, a pop-up window with a text box is displayed for you 
 Users can add, remove, or edit remarks through the editor window.
 </div>
 
-![Remark editor](images/remark_editor_student.png)
-<p align="center"><i>Figure 5: Editing remarks with editor window</i></p>
+<p align="center">
+    <img src="images/remark_editor_student.png" width="520" height="250" alt="Remark editor"><br>
+    <i>Figure 5: Editing remarks with editor window</i>
+</p>
 
 <div markdown="span" class="alert alert-primary">
 :warning: For MacOS users, the remarks editor may open as a new tab instead of a window, which can cause a UI bug where the buttons are not displayed correctly. To open as a new window instead, go to System preferences > General > Prefer tabs and choose never. 
@@ -501,10 +511,12 @@ fc physics chemistry
 ```
 TutAssistor will display a list of all classes with `physics` or `chemistry` in their name.
 
+The filtered list should look similar to the example shown below:
 
-The filtered list should look similar to the example shown below: <br>
-![FindCommand example](images/find_screenshot.png)
-<p align="center"><i>Figure 6: Example of executing `find alice tan` command</i></p>
+<p align="center">
+    <img src="images/find_screenshot.png" alt="Find student" width="540" height="500"><br>
+    <i>Figure 6: Example of executing `find alice tan` command</i>
+</p>
 
 ### 3.8 List all students/tuition classes
 Shows the full list of students or classes.
@@ -563,16 +575,20 @@ timetable
   For example, in Figure 7 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
 </div>
 
-![Timetable](images/time_table.png)
-<p align="center"><i>Figure 7: A timetable view of all tuition classes in a week</i></p>
+<p align="center">
+    <img src="images/time_table.png" alt="Timetable" width="620" height="540"><br>
+    <i>Figure 7: A timetable view of all tuition classes in a week</i>
+</p>
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today. <br>
 Also, a reminder of classes happening today will be displayed
 when the TutAssistor is reopened.
 
-![Today view](images/today_view.png)
-<p align="center"><i>Figure 8: List view of all the classes scheduled today</i></p>
+<p align="center">
+    <img src="images/today_view.png" alt="Today view" width="450" height="450"><br>
+    <i>Figure 8: The view of all classes scheduled today in the Main Display Pane</i>
+</p>
 
 ### 3.12 View help: `help` | `h`
 
@@ -580,8 +596,10 @@ Shows a command summary, as well as a link to the user guide. <br>
 
 Format: `help`
 
-![Help window](images/helpWindow.png)
-<p align="center"><i>Figure 9: The help window</i></p>
+<p align="center">
+    <img src="images/helpWindow.png" alt="Help window" width="280" height="520"><br>
+    <i>Figure 9: The help window</i>
+</p>
 
 ### 3.13 Navigate input history
 

@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 
 [[github](https://github.com/timiditi)]
-
+[[portfolio](team/timiditi.md)]
 
 * Role: Team Lead
 * Responsibilities: Documentation
@@ -45,7 +45,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/adam-ky.png" width="200px">
 
 [[github](http://github.com/adam-ky)]
-
+[[portfolio](team/adam-ky.md)]
 * Role: Time Keeper
 * Responsibilities: In charge of defining, assigning, and tracking project tasks. Ensure project deliverables are done on time.
 

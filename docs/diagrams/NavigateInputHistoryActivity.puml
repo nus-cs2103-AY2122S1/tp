@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+title Navigate Input History
+
+start
+:User presses `↑`"up" key;
+
+if () then ([else])
+  if() then ([Already at start of input history])
+  :Command Box text set as first input in history;
+  else ([else])
+  :Command Box text set as previous input;
+  endif
+else ([Input history is empty])
+  :Command box text set as empty String;
+
+endif
+
+stop
+
+start
+:User presses `↓`"down" key;
+if () then ([Already at the end of input history])
+  :Command box text set as empty String;
+else([else])
+  :Command Box text set as next input;
+endif
+
+stop
+
+@enduml
