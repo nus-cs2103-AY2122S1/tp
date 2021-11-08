@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam UiBackgroundColor UI_COLOR
 skinparam genericDisplay old
+skinparam defaultFontSize 20
 
 Package Model {
 Class ObservableList<Game> <<Interface>> MODEL_COLOR

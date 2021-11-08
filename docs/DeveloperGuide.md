@@ -170,7 +170,7 @@ The `Model` component consists of the following
 
 * `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 
-The `Model` component manages the data in the following way 
+The `Model` component manages the data in the following way:
 
 <img src="images/ModelClassDiagram2.png" width="600" />
 
@@ -182,6 +182,7 @@ Friends:
 
 <img src="images/ModelClassDiagram3.png" width="600" />
 
+Games:
 * The Model manages a `GamesList`, which is made up of a `UniqueGamesList`, which contains an `ObservableList<Game>`.
 * This `ObservableList<Game>` is wrapped inside a `FilteredList<Games>`. This is to enable easy filtering of the games list for commands like `--list`.
 * The `ObservableList<Game>` is exposed to the `UI` component and is displayed under the 'Games' section of the user interface.
@@ -460,12 +461,15 @@ such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
 
 ### 4.6 Get Feature
 
-#### 4.6.1 Implementation
+#### 4.6.1 Description
+
+The `--get` command is used to get/obtain the complete information about a Friend or Game.
+
+#### 4.6.2 Implementation
 
 When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
 
 <img src="images/GetCommandWorkflowActivityDiagram.png" width="1000">
-<br><center><ins>Image: Activity diagram showing the workflow of a '--get' command.</ins></center>
 
 The `--get` command is parsed using the following classes:
 * For friends:
@@ -493,11 +497,8 @@ After the `LogicManager#execute` receives a `GetFriendCommand` or `GetGameComman
 An example execution of a `GetFriendCommand` is shown in the sequence diagram below.
 
 <img src="images/GetSequenceDiagram.png" width="1000">
-<br><center><ins>Image: Sequence diagram showing the interaction between various entities<br>of 'Logic' and 'Model' component during the execution of a 'friend --get FRIEND_ID' command.</ins></center>
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
-
-#### 4.6.2 Design Considerations
 
 Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
 * `CommandResult` with a `Friend` object
