@@ -39,7 +39,7 @@ class JsonAdaptedPerson {
     private final String info;
     private final String mods;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final List<JsonAdaptedGrade> grades = new ArrayList<>();
+    private final List<JsonAdaptedIdGradePair> grades = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String info,
                              @JsonProperty("modules") String mods,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("grades") List<JsonAdaptedGrade> grades) {
+                             @JsonProperty("grades") List<JsonAdaptedIdGradePair> grades) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -79,7 +79,7 @@ class JsonAdaptedPerson {
         grades.getGrades().keySet().forEach(asg -> {
             int id = asg.getId();
             Grade grade = grades.findGrade(asg);
-            this.grades.add(new JsonAdaptedGrade(id, grade));
+            this.grades.add(new JsonAdaptedIdGradePair(id, grade));
         });
     }
 
@@ -174,7 +174,7 @@ class JsonAdaptedPerson {
 
         if (!grades.isEmpty()) {
             Module mod = moduleSet.getModules().stream().findFirst().get();
-            for (JsonAdaptedGrade grade : grades) {
+            for (JsonAdaptedIdGradePair grade : grades) {
                 Map.Entry<Integer, Grade> pair = grade.toModelType();
                 int id = pair.getKey();
                 Grade modelGrade = pair.getValue();
