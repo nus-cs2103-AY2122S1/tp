@@ -309,7 +309,7 @@ Archiving people allows you to keep your Notor clean, without losing your inform
 #### _Archiving a person_
 Archives a single person by the index.
 
-Format: `person (INDEX) /archive`
+Format: `person (INDEX) /archive` <br>
 Advanced user Format: `p (INDEX) /ar`
 
 ![personArchive](images/personArchive.png)
@@ -317,7 +317,7 @@ Advanced user Format: `p (INDEX) /ar`
 #### _Archiving All_
 Archives every person displayed in the list panel.
 
-Format: `person /archive`
+Format: `person /archive` <br>
 Advanced user Format: `p /ar`
 
 #### _Listing Archived Persons_ 
@@ -329,10 +329,12 @@ Advanced user Format: `p /lar`
 #### _Unarchiving_ 
 Restores the archived person back to your person list in Notor.
 
+* You must be on the list of archived persons in order to use this command, as it takes the index as a compulsory parameter
+
 Format: `person (INDEX) /unarchive`
 Advanced user Format:`p (INDEX) /uar`
 
-* You must be on the list of archived persons in order to use this command, as it takes the index as a compulsory parameter
+
 
 <a name = "group-command"></a>
 ### Working with groups/subgroups
@@ -346,7 +348,7 @@ Creates a group.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Creating a group command will only work when persons are listed in Notor.
 The rest of group commands below will work only when groups or subgroups are listed.
-</div>
+</div> <br>
 
 Format: `group (GROUP_NAME) /create`<br>
 Advanced user Format: `g (GROUP_NAME) /c`
