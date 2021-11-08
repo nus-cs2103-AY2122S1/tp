@@ -128,7 +128,7 @@ At a high level, the `MainWindow` component interacts with 3 other main componen
 Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
 
 <p align="center">
-    <img src="images/ui/UiClassDiagramOverview.png" width="700" />
+    <img src="../images/ui/UiClassDiagramOverview.png" width="700" />
 </p>
 <div style="text-align: center">
     <em>Figure 4.2.1: Overview of Ui components</em>
@@ -149,7 +149,7 @@ Now taking a closer look at the `MainWindow` component, it consists of a number 
 the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
 
 <p align="center">
-    <img src="images/ui/UiClassDiagramMainComponents.png" width="600" />
+    <img src="../images/ui/UiClassDiagramMainComponents.png" width="600" />
 </p>
 <div style="text-align: center">
     <em>Figure 4.2.2: MainWindow Ui components</em>
@@ -192,7 +192,7 @@ not require its own parser.
 This sequence diagram in Figure 5.5.1 shows how the `download` command works at a lower level:
 
 <p align="center">
-    <img src="images/commands/DownloadCommand/DownloadSequenceDiagram.png" width="600"/>
+    <img src="../images/commands/DownloadCommand/DownloadSequenceDiagram.png" width="600"/>
 </p>
 <div style="text-align: center">
     <em>Figure 5.5.1: Sequence diagram illustrating the execution of download command</em>
@@ -202,7 +202,7 @@ This sequence diagram in Figure 5.5.1 shows how the `download` command works at 
 The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the download command:
 
 <p align="center">
-    <img src="images/commands/DownloadCommand/DownloadActivityDiagram.png" width="600"/>
+    <img src="../images/commands/DownloadCommand/DownloadActivityDiagram.png" width="600"/>
 </p>
 <div style="text-align: center">
     <em>Figure 5.5.2: Activity diagram for executing download command</em>
