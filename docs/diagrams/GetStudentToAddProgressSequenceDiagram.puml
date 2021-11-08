@@ -5,7 +5,7 @@ mainframe **sd**  get commandResult
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant "a:AddProgressCommand" as AddProgressCommand LOGIC_COLOR
+participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
 participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -36,6 +36,10 @@ AddProgressCommand -> Student : addProgress(progress)
 activate Student
 
 Student -> Student : addProgress(progress)
+activate Student
+Student --> Student
+deactivate Student
+
 Student --> AddProgressCommand
 deactivate Student
 

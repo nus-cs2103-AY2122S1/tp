@@ -499,7 +499,7 @@ Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets 
 
 5. `LogicManager#execute()` then calls upon `AddStudentToLessonCommand#execute()`. It then loops through each studentIndex-lessonIndex pair and call another method of its own `AddStudentToLessonCommand#executeSingle()` to communicates with the `Model` to get the index-specified `Student` instance and `Lesson` instance.
 
-6. For each student-lesson pair, `AddStudentToLessonCommand#executeSingle()` calls the `Lesson#addStudent()` to add the student to the lesson and `Student#addLesson()` to add the lesson to the student.
+6. For each student-lesson pair, `AddStudentToLessonCommand#executeSingle()` calls the `Lesson#addStudent()` to add the student to the lesson and `Student#addLesson()` to add the lesson to the student if the student is not attending the lesson.
 
 7. After going through all the student-lesson pairs, the result of the `AddStudentToLessonCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
 
@@ -508,7 +508,7 @@ Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets 
 **Aspect: How to add students into lessons:**
 
 * **Alternative 1 (current choice):** Adds many students to many lessons at once.
-    * Pros: More convenient for the user.
+    * Pros: More convenient for typing.
     * Cons: More complicated to implement.
 
 * **Alternative 2:** Add a single student to a single lesson each time.

@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
 participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
 participant ":AddStudentToLessonCommandParser" as AddStudentToLessonCommandParser LOGIC_COLOR
-participant "a:AddStudentToLessonCommand" as AddStudentToLessonCommand LOGIC_COLOR
+participant ":AddStudentToLessonCommand" as AddStudentToLessonCommand LOGIC_COLOR
 end box
 
 [-> LogicManager : execute("add -sl s/1 2 3 l/3 2 1")
@@ -24,16 +24,16 @@ activate AddStudentToLessonCommandParser
 create AddStudentToLessonCommand
 AddStudentToLessonCommandParser -> AddStudentToLessonCommand : AddStudentToLessonCommand(studentIndexes, lessonIndexes)
 activate AddStudentToLessonCommand
-AddStudentToLessonCommandParser <-- AddStudentToLessonCommand : a
+AddStudentToLessonCommandParser <-- AddStudentToLessonCommand
 deactivate AddStudentToLessonCommand
 
-AddCommandParser <-- AddStudentToLessonCommandParser : a
+AddCommandParser <-- AddStudentToLessonCommandParser
 deactivate AddStudentToLessonCommandParser
 
-TutorAidParser <-- AddCommandParser : a
+TutorAidParser <-- AddCommandParser
 deactivate AddCommandParser
 
-LogicManager <-- TutorAidParser : a
+LogicManager <-- TutorAidParser
 deactivate TutorAidParser
 
 ref over LogicManager, AddStudentToLessonCommand : get commandResult
