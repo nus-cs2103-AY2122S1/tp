@@ -544,8 +544,8 @@ for an appointment.
 
 ![Appointment](images/addappointment.png)
 
-<div markdown="span" class="alert alert-primary">:warning:
-The `DATE` of the appointment must at least be specified.
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
+The `DATE` of the appointment must be specified.
 </div>
 
 
@@ -575,7 +575,7 @@ This command is useful when your appointment has been rescheduled or has a chang
 Existing details will be updated with the input data.
 </div>
 
-<div markdown="span" class="alert alert-warning"> :exclamation: 
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
 At least **one** of the optional fields must be present.
 </div>
 
