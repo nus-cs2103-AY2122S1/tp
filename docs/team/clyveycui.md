@@ -5,9 +5,9 @@ title: Cui Langyuan's Project Portfolio Page
 
 ### Project: AniList
 
-AniList is a desktop Command Line Interface app for managing animes that the user have watched. AniList is written in Java and the GUI is created with JavaFX.
+AniList is a desktop Command Line Interface app for managing animes that the user is watching, has watched, and finished watching. AniList is written in Java and the GUI is created with JavaFX.
 
-AniList was created based of AddressBook - Level 3, an address book application used for teaching Software Engineering Principles.
+AniList was created based off AddressBook - Level 3, an address book application used for teaching Software Engineering Principles.
 
 Given below are my contributions to the project.
 

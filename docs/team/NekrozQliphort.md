@@ -5,7 +5,7 @@ title: Ryan Chung's Project Portfolio Page
 
 ### Project: AniList
 
-AniList is a desktop app for managing anime that the user have watched. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+AniList is a desktop app for managing animes that the user is watching, has watched, and finished watching. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 This project is morphed from AddressBook Level 3, designed for teaching Software Engineering principles.
 
 Given below are my contributions to the project.
