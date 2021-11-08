@@ -197,7 +197,7 @@ Format: `sort`
 <div style="page-break-after: always;"></div>
 
 ##### Filtering contacts : `filter`
-Filters the contacts by data fields of the person including faculty, major, skill, framework, language and tag.
+Filters the contacts by data fields of the contact including faculty, major, skill, framework, language and tag.
 
 Format: `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 
@@ -238,9 +238,9 @@ Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATIBILITY] [s/SKILL]�
 Examples: 
 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science` 
-  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
+  > Adds a contact named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science compat/80 s/frontend l/javascript r/interest in web development`
-  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with a compatibility of 80/100, with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
+  > Adds a contact named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with a compatibility of 80/100, with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
 ![result for 'add'](images/AddCommand.png)
 
 <div markdown="block" class="alert alert-info">
@@ -319,10 +319,10 @@ Format: `interaction INDEX int/DESCRIPTION on/DATE`
 
 Examples: 
 * `interaction 1 int/We talked. on/1990-01-20` <br/>
-> Adds an interaction with description 'We talked.' and date '1990-01-20' to the Person at index 1 of the displayed list.
+> Adds an interaction with description 'We talked.' and date '1990-01-20' to the contact at index 1 of the displayed list.
   
 * `interaction 2 int/We chat. on/1990-01-20` <br/>
-> Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the displayed list.
+> Adds an interaction with description 'We chat.' and date '1990-01-20' to the contact at index 2 of the displayed list.
 ![result for 'interaction 2 int/We chat. on/1990-01-20'](images/interactionscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -421,10 +421,10 @@ Examples:
 ![result for 'addorg'](images/addorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:bulb: Persons and organisations
+:bulb: Contacts and organisations
 * Use organisations to help you link contact together!
-* An organisation can have any number of persons within it (including 0). However, an organisation must have a name and email.
-* Remember to add the member persons separately before adding them.
+* An organisation can have any number of contacts within it (including 0). However, an organisation must have a name and email.
+* Remember to add the member contacts separately before adding them.
 * Organisation names must be unique, emails can be repeated.
 </div>
 
@@ -447,36 +447,36 @@ Examples:
 > 
 <div style="page-break-after: always;"></div>
 
-##### Adding person to an organisation: `addtoorg`
-Adds the person at the specified index in the displayed list to an organisation with the specified name.
+##### Adding contacts to an organisation: `addtoorg`
+Adds the contact at the specified index in the displayed list to an organisation with the specified name.
 
 Format: `addtoorg INDEX n/NAME`
 
 Examples:
 * `addtoorg 1 n/NUS`
-> Adds the 1st person in the displayed list to the NUS organisation.
+> Adds the 1st contact in the displayed list to the NUS organisation.
 ![result for 'addtoorg'](images/addtoorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:information_source: Add a person to an organisation one at a time! 
-* A person can belong to more than one Organisation.
+:information_source: Add a contact to an organisation one at a time! 
+* A contact can belong to more than one Organisation.
 * Multiple addition will be implemented in future versions.
 </div>
 
 <div style="page-break-after: always;"></div>
 
-##### Removing person from an organisation: `deletefromorg`
-Deletes the person at the specified index in the person list of an organisation with the specified name.
+##### Removing contact from an organisation: `deletefromorg`
+Deletes the contact at the specified index in the contact list of an organisation with the specified name.
 
 Format: `deletefromorg INDEX NAME`
 
 Examples:
 * `deletefromorg 1 n/NUS`
-> Deletes the 1st person in the person list of the NUS organisation.
+> Deletes the 1st contact in the contact list of the NUS organisation.
 ![result for 'deletefromorg'](images/deletefromorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:information_source: The person and organisation will not be deleted, just the relation.
+:information_source: The contact and organisation will not be deleted, just the relation.
 </div>
 
 <div style="page-break-after: always;"></div>
