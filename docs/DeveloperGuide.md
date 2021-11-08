@@ -400,8 +400,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tutor                                      | monitor number of tasks assigned to a student| assign tasks to students while ensuring they can manage the workload   |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is `TutorMaster` and the **Actor** is the `user`, unless specified otherwise)
