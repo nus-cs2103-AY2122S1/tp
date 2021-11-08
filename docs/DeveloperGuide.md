@@ -82,8 +82,6 @@ The sections below give more details of each component.
 
 ### UI component
 
-[comment]: <> (TODO: LEEROY)
-
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -109,7 +107,6 @@ corresponding `Event`, `Member` and `Task` objects as discussed under [Model Com
 
 ### Logic component
 
-[comment]: <> (TODO: LEEROY)
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
@@ -170,21 +167,10 @@ In our implementation, the unique identifier is `Name` and `TaskDeadline`, which
 * At the same time, JSON format member need to store the completion status of each referencing task.
 * In all, implementing the storage of this member-task relation by using JSON file is likely to incur redundancy and error-prone, so we decided to use an easier implementation, which is the current one.
 
-A better implementation of the alternative design may involve using database management system like PostgreSQL, a proposed entity relationship model diagram for the member-task relation is given here: [ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
-
-
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably,) 
-
-[comment]: <> (a more OOP&#41; model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>)
-
-
-[comment]: <> (<img src="images/BetterModelClassDiagram.png" width="450" />)
-
-[comment]: <> (</div>)
+A better implementation of the alternative design may involve using Database Management System (DBMS) like PostgreSQL, a proposed entity relationship model diagram for the member-task relation is given here: [ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
 
 ### Storage component
 
-[comment]: <> (TODO: SAMUEL)
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
@@ -214,7 +200,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Workflow**
 
-[comment]: <> (TODO: CHI XU)
 Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
 
 ![Activity Diagram for User Commands](images/CommandActivityDiagram.png)
@@ -260,7 +245,7 @@ Given below is the sequence diagram when a user provides a valid `eadd` command:
 to add a new event with its name, date and the first and second member displayed in the currently shown member list as 
 the members for this event.
 
-<img src="images/event/EventAddSequenceDiagram.png" width="600" />
+![EventAddSequenceDiagram](images/event/EventAddSequenceDiagram.png)
 
 As seen in the diagram above, once the user entered the `eadd` command,
 the `Logic` component will parse the parameters, creating an `EaddCommandParser`. This parser will proceed to 
@@ -278,6 +263,7 @@ As seen in the diagram above,
 5. If not,`EaddCommand` will call `Model#addEvent(event)` to add that event to the model.
 6. `EaddCommand` will then create a `CommandResult` object and return it to `LogicManager`.
 
+* <u>Design Decision</u>: Instead of only allowing adding of events and not adding participants, eadd command allows creation of complete events with multiple participants to minimise commands required to add them individually. The format is similar to `mdel` and `mlist` commands for familiarity with similar commands for other modules.
 
 ### Mark event members as attended
 This feature allows the user to mark members of the event as attended. Include which members to mark based on
@@ -293,7 +279,7 @@ Given below is the sequence diagram when a user provides a valid `emark` command
 to mark the two members provided as having attended the event. It is shown in the GUI with their member labels in the
 designated event card shown as green.
 
-<img src="images/event/EventMarkSequenceDiagram.png" width="600" />
+![EventMarkSequenceDiagram](images/event/EventMarkSequenceDiagram.png)
 
 As seen in the diagram above, once the user entered the `emark` command,
 the `Logic` component will parse the parameters, creating an `EmarkCommandParser`. This parser will proceed to
@@ -322,7 +308,7 @@ This feature can be accessed by using `tadd` command with parameters of
 Given below is the sequence diagram when a user provides a valid `tadd` command: `tadd /n meeting /d 11/11/2021 20:00 /m 1 /m 2`
 to add a new task with its name and deadline to the first and second member displayed in the currently shown member list.
 
-<img src="images/task/TaskAddSequenceDiagram.png" width="600" />
+![TaskAddSequenceDiagram](images/task/TaskAddSequenceDiagram.png)
 
 As seen in the diagram above, once the user entered the `tadd` command,
 the `Logic` component will parse the parameters and create a `Task` object based on the parameters and a `TaddCommand` object.
@@ -431,8 +417,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `mdel`, just save the member being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -485,7 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | create tasks for my members or myself | |
 | `* *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
-| `*`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
+| `* *`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
 | `* *`  | user                                       | add a deadline to task | keep track of who has overdue tasks |
 | `* * *`  | user                                       | delete already obscure and unnecessary tasks | have a cleaner task list |
 
@@ -494,7 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | load members from other files | access and manage different sets of data |
+| `* * `  | user                                       | load members from other files | access and manage different sets of data |
 | `*`  | user                                       | write my data to a file as save data | access them and resume at a later date |
 
 
@@ -502,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add all members of a particular event to one group | send notifications to only those involved |
+| `*`  | user                                       | add all members of a particular event to one group | send notifications to only those involved |
 
 
 #### Other miscellaneous Functions
@@ -514,8 +499,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many members in the address book | sort members by name           | locate a member easily                                                 |
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -677,8 +660,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Ailurus shows an error message about missing or invalid input.
 
       Use case ends.
-
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
@@ -695,15 +677,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. The software should work on the Windows, Linux, and OS-X platforms.
 12. The GUI should work well with standard screen resolutions 1920x1080 and higher, and
     for screen scales 100% and 125%. It should be usable for resolutions 1280x720 and higher, and
-    for screen scales 150%.    
-    *{More to be added}*
+    for screen scales 150%.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface) that the user sees and interacts directly with on the application window. Also called UI (User Interface)
+* **DBMS**: [Database Management System](https://en.wikipedia.org/wiki/Database) such as MySQL, PostgreSQL and MongoDB.
+* **JAR**: [Java ARchive](https://en.wikipedia.org/wiki/JAR_(file_format)) file that packages many Java class files and associated metadata and resources.
+* **Prefix**: A flag or tag that precedes a parameter to be passed in, starting with a backslash (`/`)
+* **Parameter**: What is being passed into the command as data to be used. Similar to arguments.
+* **Parse**: Analysing the text and extracting important data from the text given for use in storage and manipulation of data.
 
-*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -772,6 +757,26 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `mlist /e 0`
    Expected: Error message that `MEMBER_INDEX` should be a non-zero unsigned integer.
+
+2. Listing all members attended an event in `EVENT LIST`
+
+    1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
+
+    2. Test case: `mlist /e 1 /att`
+       Expected: List all members who attended the event in `MEMBER LIST` column
+
+    3. Test case: `mlist /e 1 /att /abs`
+       Expected: Error message that the format is wrong, only `/att` or `/abs` prefix can be present in the command.
+
+3. Listing all members absent in an event in `EVENT LIST`
+
+    1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
+
+    2. Test case: `mlist /e 1 /abs`
+       Expected: List all members who did not attend the event in `MEMBER LIST` column
+
+    3. Test case: `mlist /e 1 /abs /att`
+       Expected: Error message that the format is wrong, only `/att` or `/abs` prefix can be present in the command.
 
 #### Finding all members with a task
 
@@ -1041,13 +1046,11 @@ search for name.
 
 1. Dealing with missing/corrupted data files
 
-   1. Test case: Add invalid characters such as `@` to the file, such as after any `{`.
+   1. Test case: Add invalid characters such as `@` to the file, such as after any `{` character.
    Expected: Ailurus launches with no data.
    Solution: remove data file and restart ailurus application.
 
 ## **Appendix: Effort**
-
-[comment]: <> (https://docs.google.com/document/d/10rPMnwmrThbKavWpjAlYiz8w-_u1WaiaiBqwbc30VcA/edit)
 
 Overall, the team felt that this project was moderately difficult, due to the lack of experience in [JavaFX](https://openjfx.io/) library and managing a codebase that was larger than expected. Most of the features added were `CRUD` (Create, Read, Update, Delete) related, with exceptions to find and filtering features in `tlist` and `mlist` commands, as well as marking commands.
 
