@@ -13,6 +13,9 @@ import seedu.unify.model.task.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
+    private static final String MESSAGE_INVALID_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
@@ -29,6 +32,12 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingParts_failure() {
+        // no field specified
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
 }
