@@ -18,7 +18,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 
    1.2 [What can TutAssistor do for you?](#12-what-can-tutassistor-do-for-you)
    
-   1.3 [How to use this guide?](13-how-to-use-this-guide)
+   1.3 [How to use this guide?](#13-how-to-use-this-guide)
 
 2. [Get started](#2-get-started)
 
