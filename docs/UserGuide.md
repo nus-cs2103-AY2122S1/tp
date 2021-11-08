@@ -49,6 +49,7 @@ user guide below.
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
+- [Using Commands in combinations](#using-commands-in-combinations)
 - [Command Summary](#command-summary)
             
             
@@ -73,6 +74,8 @@ Some example commands you can try:
    * **`clear`**: Deletes all existing data.
    * **`exit`**: Exits the app.
 6. Refer to the [Features](#features) below to learn more about the commands.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -662,6 +665,32 @@ If your changes to the data file make its format invalid, SalesNote will discard
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SalesNote home folder.
 
 [return to top](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Using Commands in combinations
+
+One of the most common use patterns we expect you to go through, is using our `findClient`/`findOrder`/`findTask`
+to first filter the list to items of interest, before then using other commands. We provide an example here. Suppose you 
+started with this list of tasks:
+
+![commandcombination1](images/commandcombination1.png)
+
+Now, perhaps you've just finished a task in August not on the current display, and want to locate it and mark it as complete. 
+You can first quickly input `findtask Aug` to get a list of tasks with deadline in August:
+
+![commandcombination2](images/commandcombination2.png)
+
+Now you can easily use `marktask 2` to mark the second task, that was previously not on the viewable list as complete. To
+go back to viewing all tasks and "remove" the filtered view, simply type `listtasks` to get the original list of tasks:
+
+![commandcombination3](images/commandcombination3.png)
+
+This general method of using the `findClient`/`findOrder`/`findTask` to narrow the list down, before using other commands
+that act on the list of items is something we expect will be useful for you.
+
+[return to top](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
