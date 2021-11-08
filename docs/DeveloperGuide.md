@@ -18,9 +18,9 @@ title: Developer Guide
     
 
 * [Implementation](#implementation)
-    * [Adding a game entry](#adding-a-gameentry)
-    * [Editing a game entry](#editing-a-gameentry)
-    * [Deleting a game entry](#deleting-a-gameentry)
+    * [Adding a game entry](#adding-a-game-entry)
+    * [Editing a game entry](#editing-a-game-entry)
+    * [Deleting a game entry](#deleting-a-game-entry)
     * [Finding game entries](#finding-game-entries)  
     * [Graphical analysis of game entries](#graphical-analysis-of-game-entries)
     * [Additional game statistics](#additional-game-statistics)
