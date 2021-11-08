@@ -169,13 +169,13 @@ Each step will be described in the sections below.
 
 Parsing of the user input is primarily handled by the `AddCommandParser` which calls other
 helper classes to parse the text into various attributes `XYZ` of `Person`, which are: 
-* `Name`
-* `Phone`
-* `Email`
-* `Address`
-* `Tags` (optional)
-* `Insurances` (optional)
-* `Notes` (optional)
+* `name`
+* `phone`
+* `email`
+* `address`
+* `tags` (optional)
+* `insurances` (optional)
+* `note` (optional)
 
 ![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
@@ -205,13 +205,13 @@ Each step will be described in the sections below.
 
 Parsing of the user input is primarily handled by the `EditCommandParser` which calls other
 helper classes to parse the text into editable attributes `XYZ` of `Person`, which are: 
-* `Name`
-* `Phone`
-* `Email`
-* `Address`
-* `Tags`
-* `Insurances`
-* `Notes`
+* `name`
+* `phone`
+* `email`
+* `address`
+* `tags`
+* `insurances`
+* `note`
 
 All fields are optional, but at least one must be provided
 
