@@ -27,7 +27,7 @@ Updating tests was also more complicated as many of the commands already relied 
 
 * **Team Tasks**:
     * Designed initial mockup for SportsPA v1.1
-    * Managed release `v1.2` - `v1.2.1` (2 releases) on GitHub
+    * Managed release `v1.2` - `v1.2.1` and `v1.4` (3 releases) on GitHub
     * Morphed existing product Address Book to include basic functionality supporting list of facilities (i.e `findf`, `clearf`, `deletef`, `editf`) (Pull requests [\#85](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/85), [\#89](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/89), [\#97](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/97), [\#111](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/111))
     * Fixed bugs discovered from PED (Pull Requests [\#213](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/213), [\#263](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/263))
 
