@@ -153,8 +153,8 @@ After launching the app, the GUI similar to the one shown below should appear in
 Component | What it does
 -------|--------
 Help Window | Exits TutAssistor or views help.
-Command Box | Keys in command.
-Result Display Pane | Displays feedback of command to user.
+Command Box | Key in commands
+Result Display Pane | Displays feedback of commands.
 TuitionList Panel | Displays all tuition classes.
 StudentList Panel | Displays all students.
 Main Display Pane | Displays today's lessons, tuition class's or student's details, or a timetable.
@@ -587,7 +587,7 @@ when the TutAssistor is reopened.
 
 <p align="center">
     <img src="images/today_view.png" alt="Today view" width="450" height="450"><br>
-    <i>Figure 8: List view of all the classes scheduled today</i>
+    <i>Figure 8: The view of all classes scheduled today in the Main Display Pane</i>
 </p>
 
 ### 3.12 View help: `help` | `h`
