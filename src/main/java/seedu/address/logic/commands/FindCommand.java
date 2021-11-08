@@ -37,10 +37,11 @@ public class FindCommand extends Command {
             + PREFIX_NATIONALITY + "NATIONALITY\n"
             + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP\n"
             + PREFIX_REMARK + "REMARK\n"
-            + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE_USERID\n"
+            + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE\n"
             + PREFIX_TAG + "TAG\n\n"
             + "Note: \n"
             + " - Keywords are case-insensitive."
+            + " - For SOCIAL_HANDLE, stating platform is required (e.g. tg:alex)."
             + "Example: " + COMMAND_WORD + " n/alice g/f p/91234567 tg/19";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "A empty %s was entered. \n%1$s");
