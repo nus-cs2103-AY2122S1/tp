@@ -30,14 +30,14 @@ public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String args) throws ParseException {
         if (args.equals("")) {
-            //sort by time
+            //Sort by time
             return new SortCommand(Order.TIME);
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SORT_ORDER);
         Optional s = argMultimap.getValue(PREFIX_SORT_ORDER);
         if (s.isEmpty()) {
-            //wrong format, not using prefix 'o/'
+            //Wrong format, not using prefix 'o/'
             throw new ParseException(SortCommand.MESSAGE_USAGE);
         }
         try {

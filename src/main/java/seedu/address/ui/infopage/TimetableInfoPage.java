@@ -71,6 +71,7 @@ public class TimetableInfoPage extends InfoPage {
      * @param start starting time of timetable.
      */
     public void setTableTime(int start, int totalRows) {
+        assert totalRows >= 0 : "Timetable cannot have negative number of rows.";
         for (int i = 0; i < totalRows; i++) {
             RowConstraints rowConst = new RowConstraints();
             rowConst.setPercentHeight(100.0 / totalRows);
