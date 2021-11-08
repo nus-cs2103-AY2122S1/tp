@@ -100,7 +100,7 @@ public class HelpWindow extends PopupWindow {
                 "Deletes all data");
         FeatureTableItem download = new FeatureTableItem("Download",
                 "download / Click Download Button / Press F3",
-                "Downloads the database as a csv file");
+                "Downloads the database as a CSV file");
         FeatureTableItem upload = new FeatureTableItem("Upload",
                 "upload / Press Upload button / Press F4",
                 "Uploads a CSV file containing students' details to ProgrammerError's database");
