@@ -132,4 +132,4 @@ Examples:
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | **Filter Applicants**       | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted` |
 | **Update Applicant status** | `mark NAME status/STATUS` <br> e.g.,  `mark john doe status/accepted`                                                 |
-| **Visualize Positions**     | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`                                              |
+| **Visualize Positions**     | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`|
