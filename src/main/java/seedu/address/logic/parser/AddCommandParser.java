@@ -19,17 +19,21 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new {@code AddCommand} object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args user input.
+     * @return {@code AddCommand} that adds contact to contact list.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -47,7 +51,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Birthday possibleBirthday = ParserUtil.parseBirthday((argMultimap.getValue(PREFIX_BIRTHDAY).orElse(null)));
-        Person person = new Person(name, phone, email, address, tagList, possibleBirthday);
+        Pin defaultPin = new Pin(false);
+
+        Person person = new Person(name, phone, email, address, tagList, possibleBirthday, defaultPin);
 
         return new AddCommand(person);
     }

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}.
  */
 public class Email {
 
@@ -45,7 +45,10 @@ public class Email {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Checks if given string is in valid email.
+     *
+     * @param test input that is to be checked if it is a valid email.
+     * @return if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -56,6 +59,12 @@ public class Email {
         return value;
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

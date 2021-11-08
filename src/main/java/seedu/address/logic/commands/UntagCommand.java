@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,78 +22,112 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
-public class UntagCommand extends EditCommand {
+/**
+ * Removes an existing {@code Tag} from an existing {@code Person} in the address book.
+ */
+public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a tag from the "
-            + "details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String COMMAND_DESCRIPTION = "Removes a tag from the details of the contact "
+            + "identified by the index number used in the displayed contact list.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag(s) from %1$s: %2$s";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
+
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) from %1$s: %2$s";
     public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
 
+    private static final Logger logger = LogsCenter.getLogger(UntagCommand.class);
+
+    private final Index index;
+    private final EditPersonDescriptor editPersonDescriptor;
+
     /**
+     * Creates an {@code UntagCommand} which untags the contact at the index.
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public UntagCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        super(index, editPersonDescriptor);
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        this.index = index;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Executes the {@code UntagCommand} which untags the contact at the index.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code UntagCommand}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (getIndex().getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(getIndex().getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, getEditPersonDescriptor());
+        Person personToUntag = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToUntag, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToUntag.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToUntag, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, editedPerson.getName(),
-                getRemovedTags(getEditPersonDescriptor())));
+        return new CommandResult(String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson.getName(),
+                getRemovedTags(editPersonDescriptor)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Person} with the details of {@code personToUntag}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+    private static Person createEditedPerson(Person personToUntag, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        assert personToEdit != null;
+        assert personToUntag != null;
+        assert editPersonDescriptor.getTags().isPresent();
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday().orElse(null));
+        assert editPersonDescriptor.getName().isEmpty();
+        assert editPersonDescriptor.getPhone().isEmpty();
+        assert editPersonDescriptor.getEmail().isEmpty();
+        assert editPersonDescriptor.getAddress().isEmpty();
+        assert editPersonDescriptor.getBirthday().isEmpty();
 
-        Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        Name originalName = personToUntag.getName();
+        Phone originalPhone = personToUntag.getPhone();
+        Email originalEmail = personToUntag.getEmail();
+        Address originalAddress = personToUntag.getAddress();
+        Birthday originalBirthday = personToUntag.getBirthday().orElse(null);
+        Pin originalPin = personToUntag.getPin();
+
+        Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<>());
+        Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
         if (!updatedTags.containsAll(removedTags)) {
-            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, updatedName,
+            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, originalName,
                     getNotFoundTags(updatedTags, removedTags)));
         }
         updatedTags.removeAll(removedTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
+        logger.info(String.format("%s contains the following tags: %s ; removed the following tags: %s",
+                originalName, updatedTags.stream().map(tag -> tag.tagName).collect(Collectors.joining(", ")),
+                getRemovedTags(editPersonDescriptor)));
+
+        return new Person(originalName, originalPhone, originalEmail,
+                originalAddress, updatedTags, originalBirthday, originalPin);
     }
 
     /**
@@ -112,10 +149,16 @@ public class UntagCommand extends EditCommand {
      * @return String containing tags that are removed
      */
     public static String getRemovedTags(EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getTags().orElse(new HashSet<Tag>()).stream()
+        return editPersonDescriptor.getTags().orElse(new HashSet<>()).stream()
                 .map(tag -> tag.tagName).collect(Collectors.joining(", "));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -130,7 +173,7 @@ public class UntagCommand extends EditCommand {
 
         // state check
         UntagCommand e = (UntagCommand) other;
-        return getIndex().equals(e.getIndex())
-                && getEditPersonDescriptor().equals(e.getEditPersonDescriptor());
+        return index.equals(e.index)
+                && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 }

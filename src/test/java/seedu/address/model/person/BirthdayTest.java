@@ -32,7 +32,7 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidFormat("31-12-2011")); // invalid format
         assertFalse(Birthday.isValidFormat("2021-11-12")); // invalid format
         assertFalse(Birthday.isValidDate("12122012 ")); // white space at end
-        assertFalse(Birthday.isValidDate("12122012 ")); // white space at the start
+        assertFalse(Birthday.isValidDate(" 12122012")); // white space at the start
 
         // invalid dates
         assertFalse(Birthday.isValidDate("32022011")); // invalid date
@@ -42,6 +42,6 @@ public class BirthdayTest {
         // valid birthday
         assertTrue(Birthday.isValidFormat("19011999")); // valid date
         assertTrue(Birthday.isValidFormat("31121999")); // 31st December 1999
-        assertTrue(Birthday.isValidFormat("29022012")); // 29th Febuary leap year
+        assertTrue(Birthday.isValidFormat("29022012")); // 29th February leap year
     }
 }

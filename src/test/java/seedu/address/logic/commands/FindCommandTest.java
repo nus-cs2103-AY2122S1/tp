@@ -5,20 +5,29 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.HANNAH;
+import static seedu.address.testutil.TypicalPersons.HANNAH_NO_BIRTHDAY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.FindPredicate;
+import seedu.address.model.person.Name;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,55 +38,210 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        List<Name> firstNameList = List.of(new Name(CARL.getFullName()));
+        List<Tag> firstTagList = List.of(new Tag("football"), new Tag("friends"));
+        List<Name> secondNameList = List.of(new Name(ELLE.getFullName()));
+        List<Tag> secondTagList = List.of(new Tag("colleagues"));
+        FindPredicate firstPredicateCaseInsensitive =
+                new FindPredicate(firstNameList, firstTagList, false);
+        FindPredicate secondPredicateCaseInsensitive =
+                new FindPredicate(secondNameList, secondTagList, false);
+        FindPredicate firstPredicateCaseSensitive =
+                new FindPredicate(firstNameList, firstTagList, false);
+        FindPredicate secondPredicateCaseSensitive =
+                new FindPredicate(secondNameList, secondTagList, false);
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommandCaseInsensitive = new FindCommand(firstPredicateCaseInsensitive);
+        FindCommand findSecondCommandCaseInsensitive = new FindCommand(secondPredicateCaseInsensitive);
+        FindCommand findFirstCommandCaseSensitive = new FindCommand(firstPredicateCaseInsensitive);
+        FindCommand findSecondCommandCaseSensitive = new FindCommand(secondPredicateCaseInsensitive);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(findFirstCommandCaseInsensitive.equals(findFirstCommandCaseSensitive));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        FindCommand findFirstCommandCaseInsensitiveCopy = new FindCommand(firstPredicateCaseInsensitive);
+        assertTrue(findFirstCommandCaseInsensitive.equals(findFirstCommandCaseInsensitiveCopy));
+
+        FindCommand findFirstCommandCaseSensitiveCopy = new FindCommand(firstPredicateCaseSensitive);
+        assertTrue(findFirstCommandCaseSensitive.equals(findFirstCommandCaseSensitiveCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(findFirstCommandCaseInsensitive.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(findFirstCommandCaseInsensitive.equals(null));
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(findFirstCommandCaseInsensitive.equals(findSecondCommandCaseInsensitive));
+        assertFalse(findFirstCommandCaseSensitive.equals(findSecondCommandCaseSensitive));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_nonExistentName_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        List<Name> firstNameList = List.of(new Name("zeke"));
+        List<Tag> firstTagList = List.of();
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_oneExistentName_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        List<Name> firstNameList = List.of(new Name("benson"));
+        List<Tag> firstTagList = List.of();
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExistentName_twoPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        List<Name> firstNameList = List.of(new Name("hannah"));
+        List<Tag> firstTagList = List.of();
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(HANNAH, HANNAH_NO_BIRTHDAY), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_twoExistentName_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        List<Name> firstNameList = List.of(new Name("alice"), new Name("benson"));
+        List<Tag> firstTagList = List.of();
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nonExistentTagCaseInsensitive_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("Chef"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nonExistentTagCaseSensitive_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("Chef"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, true);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExistentTagCaseInsensitive_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("FOOtball"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExistentTagCaseSensitive_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("Football"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, true);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExistentTagCaseInsensitive_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("friends"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExistentTagCaseSensitive_noPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("FRIENDS"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, true);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleExistentTagCaseInsensitive_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("friends"), new Tag("owesmoney"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleExistentTagCaseSensitive_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        List<Name> firstNameList = List.of();
+        List<Tag> firstTagList = List.of(new Tag("friends"), new Tag("owesMoney"));
+        FindPredicate findPredicate = new FindPredicate(firstNameList, firstTagList, true);
+        FindCommand command = new FindCommand(findPredicate);
+        expectedModel.updateFilteredPersonList(findPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nameAndTagCaseSensitive_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        List<Name> firstNameList = List.of(new Name("benson"));
+        List<Tag> firstTagList = List.of(new Tag("FRIENDS"));
+        FindPredicate predicate = new FindPredicate(firstNameList, firstTagList, true);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
     }
 
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    @Test
+    public void execute_nameAndTagCaseInsensitive_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        List<Name> firstNameList = List.of(new Name("bEnSon"));
+        List<Tag> firstTagList = List.of(new Tag("fRiENds"));
+        FindPredicate predicate = new FindPredicate(firstNameList, firstTagList, false);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
 }

@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_NOT_REMOVED;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -17,12 +17,18 @@ import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new {@code UntagCommand} object.
+ */
 public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the UntagCommand
-     * and returns an UntagCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the {@code UntagCommand}
+     * and returns an {@code UntagCommand} object for execution.
+     *
+     * @param args user input.
+     * @return {@code UntagCommand} which untags a contact at the specific index.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -49,7 +55,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * @throws ParseException if tags contain empty string
+     * @throws ParseException if tags contain empty string.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;

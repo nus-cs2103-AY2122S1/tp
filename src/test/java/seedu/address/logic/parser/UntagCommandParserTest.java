@@ -1,9 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_WIFE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,6 +39,27 @@ public class UntagCommandParserTest {
     public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser, TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
+
+        // no prefix specified
+        assertParseFailure(parser, "1" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+
+        // name prefix specified instead of tag
+        assertParseFailure(parser, "1" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // phone prefix specified instead of tag
+        assertParseFailure(parser, "1" + PHONE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // email prefix specified instead of tag
+        assertParseFailure(parser, "1" + EMAIL_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // address prefix specified instead of tag
+        assertParseFailure(parser, "1" + ADDRESS_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // birthday prefix specified instead of tag
+        assertParseFailure(parser, "1" + BIRTHDAY_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // invalid prefix followed by tag prefix
+        assertParseFailure(parser, "1" + BIRTHDAY_DESC_AMY + TAG_DESC_WIFE, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", UntagCommand.MESSAGE_NOT_REMOVED);
@@ -65,6 +93,9 @@ public class UntagCommandParserTest {
         // valid tag followed by invalid tag
         assertParseFailure(parser, "1" + TAG_DESC_HUSBAND + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
+        // valid tag followed by invalid prefix
+        assertParseFailure(parser, "1" + TAG_DESC_HUSBAND + NAME_DESC_AMY, Tag.MESSAGE_CONSTRAINTS);
+
         // empty tag
         assertParseFailure(parser, "1" + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
 
@@ -79,7 +110,7 @@ public class UntagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND;
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_HUSBAND).build();
         UntagCommand expectedCommand = new UntagCommand(targetIndex, descriptor);
 
@@ -91,7 +122,7 @@ public class UntagCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         UntagCommand expectedCommand = new UntagCommand(targetIndex, descriptor);
 

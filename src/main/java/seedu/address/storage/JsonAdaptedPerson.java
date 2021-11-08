@@ -16,14 +16,14 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing.";
 
     private final String name;
     private final String phone;
@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String birthday;
+    private final String pin;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +39,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("birthday") String birthday) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("birthday") String birthday, @JsonProperty("pin") String pin) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +49,7 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.birthday = birthday;
+        this.pin = pin;
     }
 
     /**
@@ -61,6 +64,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         birthday = source.getBirthday().map(Birthday::toString).orElse(null);
+        pin = source.getPin().toString();
     }
 
     /**
@@ -71,8 +75,11 @@ class JsonAdaptedPerson {
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            Tag currentTag = tag.toModelType();
+            personTags.add(currentTag);
         }
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -106,22 +113,37 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (pin == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
+        }
+
+        if (!Pin.isValidPinStatus(pin)) {
+            throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
+        }
+
+        final Pin modelPin = new Pin(pin);
+
 
         if (birthday == null) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null, modelPin);
         }
 
-        // Set birthday if non-null
         if (!Birthday.isValidFormat(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
         }
         if (!Birthday.isValidDate(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
         }
+        if (Birthday.isFutureDate(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        }
+        if (Birthday.isYear0000(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        }
+
         final Birthday modelBirthday = new Birthday(birthday);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelPin);
     }
 
 }

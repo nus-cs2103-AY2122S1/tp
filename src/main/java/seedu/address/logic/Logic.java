@@ -1,11 +1,13 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -23,6 +25,8 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+    CommandResult systemExecute(String commandText);
+
     /**
      * Returns the AddressBook.
      *
@@ -30,7 +34,7 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of people */
     ObservableList<Person> getFilteredPersonList();
 
     /**
@@ -47,4 +51,16 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the set of {@code Prefix} stored by the model.
+     *
+     * @return Set of Prefixes
+     */
+    Set<Prefix> getPrefixStore();
+
+    /**
+     * Returns an unmodifiable list of upcoming birthdays
+     */
+    ObservableList<Person> getBirthdayReminderList();
 }

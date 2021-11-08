@@ -1,10 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +87,24 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sets the {@code Prefix} store value.
+     *
+     * @param prefixes Collection of {@code Prefix} to keep track of
+     */
+    void setPrefixes(Collection<Prefix> prefixes);
+
+    /**
+     * Returns the stored Collection of prefixes as a Set.
+     *
+     * @return Set of Prefixes
+     */
+    Set<Prefix> getPrefixes();
+
+    /** Returns an unmodifiable view of person sorted by with upcoming birthday at the top list */
+    ObservableList<Person> getBirthdayReminderList();
+
+    /** Removes all entries from Birthday Reminder List*/
+    void clearBirthdayReminderList();
 }

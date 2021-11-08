@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -15,18 +15,20 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new TagCommand object
+ * Parses input arguments and creates a new {@code TagCommand} object.
  */
 public class TagCommandParser implements Parser<TagCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the TagCommand
-     * and returns an TagCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the {@code TagCommand}
+     * and returns a {@code TagCommand} object for execution.
+     *
+     * @param args user input.
+     * @return {@code TagCommand} which tags a contact at the specific index.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         Index index;
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
