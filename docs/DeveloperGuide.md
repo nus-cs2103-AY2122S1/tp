@@ -311,8 +311,6 @@ The proposed theme mechanism is simply done by completely altering the base css 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.
 
-#### Design Consideration
-
 #### Design Considerations
 
 **Aspect: Customizability of CSS file**
@@ -502,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Anilist` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AniList` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - View Help**
 
@@ -943,7 +941,7 @@ The app is initially populated with some sample data, based on real life animes.
 
     3. Remove the first opening brace `{`
 
-    4. Open Anilist again
+    4. Open AniList again
 
     5. Now that the data file is corrupted, the app should start out without any anime in the list
 
