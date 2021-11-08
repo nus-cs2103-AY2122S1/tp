@@ -19,4 +19,15 @@ public class ClearDoneTaskCommand extends Command {
         model.deleteDoneTasks();
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        return (other instanceof ClearDoneTaskCommand);
+    }
 }

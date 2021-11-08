@@ -25,7 +25,11 @@ public class CompleteTaskCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a CompleteTaskCommand to mark the specified Task at {@code Index} as complete
+     */
     public CompleteTaskCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
