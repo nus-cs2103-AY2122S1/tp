@@ -1483,6 +1483,14 @@ testers are expected to do more *exploratory* testing.
    2. Repeat the same test cases as 1.2 and 1.3.<br>
       Expected: No reservation is added. Error message shown, telling users to set tables before use.
 
+### Listing customers/employees/suppliers/reservations
+
+1. Switching the view to display the customer/employee/supplier/reservation list. 
+   1. Test case: `listC` / `listE` / `listS` / `listR` <br>
+         Expected: List of all customers/employees/suppliers/reservations will be displayed. Success message `Switched to X View` will be displayed(X corresponding to the specific `list` command used).
+   2. Test case: `lisC` / `leestE` / ... <br>
+      Expected: Any form of misspelling will result in no changes to the current view. Error message `Unknown command` will be displayed.
+
 ### Deleting a customer/employee/supplier/reservation
 
 1. Deleting a customer/employee/supplier/reservation while all customers/employees/suppliers/reservation are being shown.
@@ -1790,3 +1798,11 @@ testers are expected to do more *exploratory* testing.
        `Supplier list is currently empty!`
     3. Repeat the same test cases as 1.2 to 1.7. The filtered supplier list will sort as per expected in test cases
        1.2 to 1.7
+
+### Resetting the customer/employee/supplier
+
+1. Switching the view to display the customer/employee/supplier list to its default sorting order(by `name`).
+    1. Test case: `resetC` / `resetE` / `resetS` <br>
+       Expected: List of all customers/employees/suppliers in default ordering will be displayed. Success message `X list sorting has been reset to default (name).` will be displayed(X corresponding to the specific `reset` command used).
+    2. Test case: `reesetC` / `resagE` / ... <br>
+       Expected: Any form of misspelling will result in no changes to the current view. Error message `Unknown command` will be displayed.
