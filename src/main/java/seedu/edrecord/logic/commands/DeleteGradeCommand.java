@@ -75,9 +75,7 @@ public class DeleteGradeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment assignment = assignmentList.stream()
-                .filter(asg -> asg.getId() == id.getOneBased())
-                .findFirst()
+        Assignment assignment = model.getAssignment(id.getOneBased())
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

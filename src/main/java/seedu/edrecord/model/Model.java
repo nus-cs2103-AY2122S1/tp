@@ -2,6 +2,7 @@ package seedu.edrecord.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.beans.value.ObservableValue;
@@ -180,6 +181,11 @@ public interface Model {
      * Returns an unmodifiable view of the assignment list under the currently selected module.
      */
     List<Assignment> getAssignmentList();
+
+    /**
+     * Returns the assignment with the given ID.
+     */
+    Optional<Assignment> getAssignment(int id);
 
     /**
      * Adds the given assignment to the currently selected module.

@@ -277,6 +277,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Optional<Assignment> getAssignment(int id) {
+        return selectedModule.get().getAssignment(id);
+    }
+
+    @Override
     public void addAssignment(Assignment assignment) {
         selectedModule.get().addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);

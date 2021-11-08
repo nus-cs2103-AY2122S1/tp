@@ -54,7 +54,7 @@ public class Assignment {
      *
      * @param otherAssignment The other assignment to compare to.
      */
-    public boolean isSameName(Assignment otherAssignment) {
+    public boolean isSameAssignment(Assignment otherAssignment) {
         if (otherAssignment == this) {
             return true;
         }

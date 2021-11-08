@@ -26,7 +26,7 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_validAssignmentDetails_returnsAssignment() throws Exception {
         JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(MIDTERM);
-        assertEquals(MIDTERM.isSameName(assignment.toModelType()), true);
+        assertEquals(MIDTERM.isSameAssignment(assignment.toModelType()), true);
     }
 
     @Test

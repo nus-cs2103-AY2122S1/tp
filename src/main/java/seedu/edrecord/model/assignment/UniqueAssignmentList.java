@@ -21,7 +21,7 @@ import seedu.edrecord.model.assignment.exceptions.DuplicateAssignmentException;
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Assignment#isSameName(Assignment)
+ * @see Assignment#isSameAssignment(Assignment)
  */
 public class UniqueAssignmentList implements Iterable<Assignment> {
     private static final Weightage maximumTotalWeightage = new Weightage("100");
@@ -29,6 +29,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
     private int assignmentCounter = 1;
 
     /**
@@ -36,8 +37,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      */
     public boolean contains(Assignment toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameName)
-                || internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameAssignment);
     }
 
     /**
@@ -117,7 +117,16 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      */
     public boolean hasSameName(Assignment assignment) {
         requireNonNull(assignment);
-        return internalList.stream().anyMatch(asg -> !(asg.equals(assignment)) && asg.isSameName(assignment));
+        return internalList.stream().anyMatch(asg -> !(asg.equals(assignment)) && asg.isSameAssignment(assignment));
+    }
+
+    /**
+     * Returns true if there is another assignment with the same ID in the list.
+     */
+    public boolean hasSameId(Assignment assignment) {
+        requireNonNull(assignment);
+        return internalList.stream().anyMatch(asg -> !(asg.equals(assignment))
+                && asg.getId().equals(assignment.getId()));
     }
 
     /**
@@ -164,7 +173,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     private boolean assignmentsAreUnique(List<Assignment> assignments) {
         for (int i = 0; i < assignments.size() - 1; i++) {
             for (int j = i + 1; j < assignments.size(); j++) {
-                if (assignments.get(i).isSameName(assignments.get(j))) {
+                if (assignments.get(i).isSameAssignment(assignments.get(j))) {
                     return false;
                 }
             }

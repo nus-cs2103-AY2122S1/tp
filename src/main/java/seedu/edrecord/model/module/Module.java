@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.Assignment;
@@ -177,6 +178,20 @@ public class Module {
      */
     public boolean hasSameNameAssignment(Assignment a) {
         return assignmentList.hasSameName(a);
+    }
+
+    /**
+     * Returns true if the module contains an assignment that has the same ID as the given assignment.
+     */
+    public boolean hasSameIdAssignment(Assignment a) {
+        return assignmentList.hasSameId(a);
+    }
+
+    /**
+     * Gets the assignment with the given ID, if it exists.
+     */
+    public Optional<Assignment> getAssignment(int id) {
+        return getAssignmentList().stream().filter(asg -> asg.getId() == id).findFirst();
     }
 
     /**

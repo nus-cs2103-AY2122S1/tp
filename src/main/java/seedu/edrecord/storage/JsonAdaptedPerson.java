@@ -31,6 +31,7 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     public static final String INVALID_ASSIGNMENT = "Assignment does not exist.";
+    public static final String GRADE_SCORE_MORE_THAN_ASSIGNMENT = "Grade score is more than assignment max score.";
 
     private final String name;
     private final String phone;
@@ -176,10 +177,13 @@ class JsonAdaptedPerson {
             for (JsonAdaptedGrade grade : grades) {
                 Map.Entry<Integer, Grade> pair = grade.toModelType();
                 int id = pair.getKey();
-                Assignment assignment = mod.getAssignmentList().stream()
-                        .filter(asg -> asg.getId() == id)
-                        .findFirst()
+                Grade modelGrade = pair.getValue();
+                Assignment assignment = mod.getAssignment(id)
                         .orElseThrow(() -> new IllegalValueException(INVALID_ASSIGNMENT));
+                if (modelGrade.getScore().isPresent()
+                        && modelGrade.getScore().get().compareTo(assignment.getMaxScore()) > 0) {
+                    throw new IllegalValueException(GRADE_SCORE_MORE_THAN_ASSIGNMENT);
+                }
                 modelGrades.add(assignment, pair.getValue());
             }
         }

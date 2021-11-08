@@ -88,7 +88,7 @@ class JsonAdaptedModule {
 
         Module module = new Module(code, groupSystem);
 
-        if (assignmentCounter == null) {
+        if (assignmentCounter == null || assignmentCounter <= 0) {
             throw new IllegalValueException(INVALID_COUNTER);
         } else {
             module.setAssignmentCounter(assignmentCounter);
@@ -96,7 +96,7 @@ class JsonAdaptedModule {
 
         for (JsonAdaptedAssignment jsonAdaptedAssignment : assignments) {
             Assignment asg = jsonAdaptedAssignment.toModelType();
-            if (module.hasSameNameAssignment(asg)) {
+            if (module.hasSameNameAssignment(asg) || module.hasSameIdAssignment(asg)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ASSIGNMENT);
             } else if (asg.getId() < 1 || asg.getId() > assignmentCounter) {
                 throw new IllegalValueException(INVALID_ID);

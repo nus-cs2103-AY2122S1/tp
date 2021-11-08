@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -269,6 +270,11 @@ public class MakeAssignmentCommandTest {
         }
 
         @Override
+        public Optional<Assignment> getAssignment(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment) {
             throw new AssertionError("This method should not be called.");
         }
@@ -327,7 +333,7 @@ public class MakeAssignmentCommandTest {
         @Override
         public boolean hasSameNameInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
-            return this.assignment.isSameName(assignment);
+            return this.assignment.isSameAssignment(assignment);
         }
     }
 
@@ -345,7 +351,7 @@ public class MakeAssignmentCommandTest {
         @Override
         public boolean hasSameNameInCurrentModule(Assignment assignment) {
             requireNonNull(assignment);
-            return assignmentsAdded.stream().anyMatch(assignment::isSameName);
+            return assignmentsAdded.stream().anyMatch(assignment::isSameAssignment);
         }
 
         @Override

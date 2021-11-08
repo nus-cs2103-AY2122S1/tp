@@ -92,9 +92,7 @@ public class GradeCommand extends Command {
         if (id.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
-        Assignment assignment = assignmentList.stream()
-                .filter(asg -> asg.getId() == id.getOneBased())
-                .findFirst()
+        Assignment assignment = model.getAssignment(id.getOneBased())
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
         // Check if ungraded assignment has score or score is more than the assignment's maximum score.
