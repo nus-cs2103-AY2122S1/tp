@@ -62,7 +62,7 @@ at [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?tabOpen=
 
 ## **Documentation**:
 
-* Developer Guide: NFRs and Glossary, and FXML handling
+* Developer Guide: NFRs and Glossary, and The proposed View Pane.
 * User Guide: Created feature list & Command Summary (with [Elton](eltongohjh.md) and [Elroy](elroygohjy.md), <br>
   Revised the whole UG to adhere to the current commands,
 
