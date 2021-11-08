@@ -18,6 +18,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### Table of Contents
+- [**About this guide**](#about-this-guide)
 - [**Acknowledgements**](#acknowledgements)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
@@ -57,11 +58,28 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Editing an applicant](#editing-an-applicant)
   * [Deleting an applicant](#deleting-an-applicant)
   * [Finding an applicant](#finding-an-applicant)
+  * [Showing an applicant](#showing-search-terms)
   * [Marking an applicant](#marking-an-applicant)
   * [Unmarking an applicant](#unmarking-an-applicant)
   * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **About this guide**
+[Table of contents](#table-of-contents)
+
+This guide aims to help developers get familiar with how RecruitIn functions.
+* To understand the design of RecruitIn on a higher level, you may visit [Design](#design) for implementation
+details of each component of RecruitIn.
+* If you wish to go further to understand how certain features are implemented on a lower level, you may visit
+[Implementation](#implementation) for noteworthy implementation details of important features.
+* If you wish to conduct some manual testing of RecruitIn, you may visit [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+to find various test cases and expected results for some features of RecruitIn.
+* If you wish to make further developments to RecruitIn, 
+you may follow the guide at [Setting up, getting started](#setting-up-getting-started) 
+for a quick set up of your development environment.
 
 --------------------------------------------------------------------------------------------------------------------
 
