@@ -187,11 +187,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in `ProgrammerError`, which `Student` references. This allows `ProgrammerError` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
-
-![Better Model Class Diagram](images/BetterModelClassDiagram.png)
-
-</div>
 
 ## <a name="Storage component"></a> **8. Storage component**
 
@@ -382,7 +377,8 @@ the `QueryStudentDescriptor`.
 
 * `StudentDetailContainsQueryPredicate#test(Student)` — Evaluates the predicate on the given `Student` argument.
 * `QueryStudentDescriptor#doesStudentMatchDescriptor(Student)` — Evaluates if the `QueryStudentDescriptor` fields
-  matches with the corresponding fields of the `Student` argument.
+  matches with the corresponding fields of the `Student` argument. It is a match as long as the corresponding fields of
+  the `Student` argument **contains the character sequence** as specified in the `QueryStudentDescriptor`.
 
 These operations are exposed in the `Model` interface as `Model#updateFilteredStudentList(Predicate<Student>)`.
 
@@ -416,7 +412,7 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
 **Aspect: How filter command executes**
 
 * **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`, `-sid` and `-email`)
-    * Pros: Allow for flexibility in the way the CS2100 TA wants to filter the list.
+    * Pros: Allow for flexibility in the way the CS2100 Lab TA wants to filter the list.
     * Cons: More difficult to implement and proper handling of the combinations of query parameters is needed.
 
 * **Alternative 2:** A different type of filter command to filter by each of the student's attribute.
