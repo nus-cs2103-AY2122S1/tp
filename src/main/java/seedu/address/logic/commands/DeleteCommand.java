@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Delete persons identified using their displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates an DeleteCommand to delete the specified {@code Person}.
      *
-     * @param targetIndexes The indexes of {@code Person} to delete.
+     * @param targetIndexes Indexes of the specified {@code Person}s to delete
      */
     public DeleteCommand(Index[] targetIndexes) {
         this.targetIndexes = targetIndexes;
