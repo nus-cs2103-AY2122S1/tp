@@ -22,6 +22,7 @@ Given below are my contributions to the project.
 2. Implemented task editing commands
   * What it does: `tedit` command can edit the name and deadline of the task, `tdone` command can mark a task as done, `tundone` command can mark a task as uncompleted.
   * Justification: This feature improves the product by allowing users to edit the detailed information of an existing task.
+  * Highlights: `tedit` will only change the fields specified in the command parameters. `tdone` and `tundone` can edit multiple tasks' status.
   * Notable PRs: [PR#146](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/146), [PR#150](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/150), [PR#157](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/157)
 
 3. Implemented `mtfind` command
@@ -43,8 +44,8 @@ Given below are my contributions to the project.
 
 #### Documentation
 * Developer guide
-    1. Add implementation of `tadd` command and `tdone` command. [PR#270](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/270)
-    2. Modify `Model` component in DG and add an alternative design. [PR#276](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/276)
+    1. Add implementation of `tadd` command and `tdone` command and the sequence diagrams. [PR#270](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/270)
+    2. Modify `Model` component in DG, add an alternative design of `Model`, and modify command activity diagram. [PR#276](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/276)
     3. Add manual testing guide for task. [PR#278](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/278)
 
 * User guide
