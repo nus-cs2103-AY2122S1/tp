@@ -512,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a friend and specifies a `FRIEND_ID`.
+1. User requests to add a friend and specifies a `FRIEND_ID` and optionally specifies a `NAME`.
 2. gitGud adds a friend into the friends list and informs user of successful addition of friend.
 
     Use case ends.
@@ -520,125 +520,175 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions** 
 
 * 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique.
-    * 1a1. gitGud informs user that it has failed to add a friend.<br>
-      1a2. User makes another request to add a friend with a different `FRIEND_ID`.<br>
+    * 1a1. gitGud informs user that it has failed to add a friend.
+    * 1a2. User makes another request to add a friend with a different `FRIEND_ID`.
+    * Use case continues from step 2.
+
+**Use case: UC02 - Edit a friend**
+
+**MSS**
+
+1. User requests to edit a friend and specifies a `FRIEND_ID` and new `NAME` to update.  
+2. gitGud updates friend and informs user of successful edit of friend.  
+
+   Use case ends.  
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.  
+    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+      1a2. User makes another request to edit a friend with a different `FRIEND_ID`.  
+      Use case continues from step 2.  
+
+**Use case: UC03 - Delete a friend**
+
+**MSS**
+
+1. User requests to delete a friend using a friend's `FRIEND_ID`.  
+2. gitGud deletes the friend from friend list and informs user of successful deletion of friend.  
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.  
+    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+      1a2. User makes another request to delete a friend with a different `FRIEND_ID`.  
+      Use case continues from step 2.  
+
+**Use case: UC04 - Link a game to a friend**
+
+**MSS**
+
+1. User requests to link a friend using a friend's `FRIEND_ID`, a game's `GAME_ID` and an `IN_GAME_USERNAME`.
+2. gitGud links the friend to the game, stores their game username and informs user of successful linking of friend.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+      1a2. User makes another request to link a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
+      Use case continues from step 2.     
+
+**Use case: UC05 - Unlink a game from a friend**
+
+**MSS**
+
+1. User requests to unlink a friend using a friend's `FRIEND_ID`, a game's `GAME_ID`.
+2. gitGud unlinks the friend from the game and informs user of successful unlinking of friend.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+      1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
       Use case continues from step 2.
 
-**Use case: UC02 - Delete a friend**
+* 1b. gitGud detects that the `FRIEND_ID` and`GAME_ID` link does not exist.
+    * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
+      1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
+      Use case continues from step 2.
+
+**Use case: UC06 - Assigning a skill value for a linked game to a friend**
 
 **MSS**
 
-1. User requests to delete a friend using the friend's `FRIEND_ID`
-2. gitGud deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given `FRIEND_ID` is invalid.
-
-    * 2a1. gitGud shows an error message.
-
-      Use case resumes at step 1.
-
-
-**Use case: UC03 - List friends whose `FRIEND_ID` contains a keyword**
-
-**MSS**
-
-1. User requests to list friends in gitGud using a keyword filter.
-2. gitGud shows a filtered list of friends whose `FRIEND_ID` contains the keyword.
+1. User requests to assign a `SKILL_VALUE` to a friend from a linked game using a friend's `FRIEND_ID`, a game's `GAME_ID`.
+2. gitGud assigns the friend a skill value for the linked game and informs user of successful assigning of skill value.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The user does not provide a keyword.
+* 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+      1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID`.  
+      Use case continues from step 2.
 
-    * 2a1. All friends are listed.
+* 1b. gitGud detects that the `FRIEND_ID` and`GAME_ID` link does not exist.
+    * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
+      1b2. User makes another request to assign a skill value a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
+      Use case continues from step 2.
 
+**Use case: UC07 - Scheduling a friend**
+
+**MSS**
+
+1. User requests to update a friend's schedule using a friend's `FRIEND_ID`, the time period (`START_HOUR` to `END_HOUR`) of the `DAY` they wish to set, as well as whether the friend `IS_FREE` then.
+2. gitGud updates the friend's schedule and informs user of successful scheduling of friend.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+      1a2. User makes another request to schedule a friend with a different `FRIEND_ID`.  
+      Use case continues from step 2.
+
+**Use case: UC08 - Recommending friends available to play with**
+
+**MSS**
+
+1. User requests to recommend friends who play a game of `GAME_ID`, who are free during `HOUR` in `DAY`.
+2. gitGud displays a list of friends free to play during the time specified, sorted by the friends' skill at game of `GAME_ID` and  informs user of successful recommendation of friends.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `GAME_ID` does not exist.
+    * 1a1. gitGud informs user that no game was found with specified `GAME_ID`.  
+      1a2. User makes another request to recommend friends for a game with a different `GAME_ID`.  
+      Use case continues from step 2.
+
+**Use case: UC09 - Get a friend's complete information**
+
+**MSS**
+
+1. User requests for complete information about friend of `FRIEND_ID`.
+2. gitGud displays the complete information related to  `FRIEND_ID` and informs user of successful retrieval of friend information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+      1a2. User makes another request to retrieve data a friend with a different `FRIEND_ID`.  
+      Use case continues from step 2.
+
+**Use case: UC10 - List/filter friends whose `FRIEND_ID` contains a keyword**
+
+**MSS**
+
+1. User requests to list friends in gitGud using a `KEYWORD` filter.
+2. gitGud displays a filtered list of friends whose `FRIEND_ID` contains the `KEYWORD` and informs user of successful listing of friends.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user does not provide a `KEYWORD`.  
+    * 1a1. All friends are listed.  
       Use case ends.
 
+**Use case: UC11 - Add a game**
+* **MSS** and **Extensions** similar to <u> Add a Friend (UC1) </u>, except it is for a game with `GAME_ID`.
 
-**Use case: UC04 - List games whose `GAME_NAME` contains a keyword**
+**Use case: UC12 - Add a game**
+* **MSS** and **Extensions** similar to <u> Delete a Friend (UC3) </u>, except it is for a game with `GAME_ID`.
 
-**MSS**
+**Use case: UC13 - Get a game's complete information**
+* **MSS** and **Extensions** similar to <u> Get a friend's complete information (UC09) </u>, except it is for a game with `GAME_ID`.
 
-1. User requests to list games in gitGud using a keyword filter.
-2. gitGud shows a filtered list of games whose `GAME_NAME` contains the keyword.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The user does not provide a keyword.
-
-    * 2a1. All games are listed.
-
-      Use case ends.
-
-
-**Use case: UC05 - Link a friend to a particular game**
-
-**MSS**
-
-1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`) and the username for that game 
-   (using `USERNAME`).
-2. gitGud associates the friend with the game provided.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given `FRIEND_ID` is invalid.
-
-    * 2a1. gitGud shows an error message.
-    * 2a2. User can list friends currently in gitGud or add new friends.
-
-      Use case resumes at step 1.
-
-
-* 2b. The given `GAME_NAME` is invalid.
-
-    * 2b1. gitGud shows an error message.
-    * 2b2. User can list games currently in gitGud or add new games.
-
-      Use case resumes at step 1.
-
-
-**Use case: UC06 - Get a friend's complete information**
-
-**MSS**
-
-1. User <u>list friends (UC03)</u> and chooses a `FRIEND_ID`.
-2. User requests for complete information about `FRIEND_ID`.
-3. gitGud displays the complete information related to  `FRIEND_ID`.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given `FRIEND_ID` is invalid.
-    * 2a1. gitGud shows an error message.
-
-      Use case resumes at step 1.
-
-**Use case: UC07 - Get a game's complete information**
-
-**MSS**
-
-1. User <u>list games (UC04)</u> and chooses a `GAME_ID`.
-2. User requests for complete information about `GAME_ID`.
-3. gitGud displays the complete information related to  `GAME_ID`.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The given `GAME_ID` is invalid.
-    * 2a1. gitGud shows an error message.
-
-      Use case resumes at step 1.
+**Use case: UC14 - List/filter games whose `GAME_ID` contains a keyword**
+* **MSS** and **Extensions** similar to <u> List/filter friends whose `FRIEND_ID` contains a keyword (UC10) </u>, except it lists games whose `GAME_ID` contains the `KEYWORD`.
+    
 
 ### 6.4 Non-Functional Requirements
 
@@ -660,7 +710,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">
+
+**:information_source: Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
