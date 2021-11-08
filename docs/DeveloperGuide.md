@@ -617,7 +617,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC06 Delete a specific contact
+#### Use case: UC06 Filter contact list based on a tag.
+
+**MSS**
+
+1. Student requests for filtering the contact list by the mentioned tag.
+2. ComputingConnection shows a filtered contact list based on the mentioned tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Filter tag is invalid.
+    * 2a1. ComputingConnection shows an error message.
+
+      Use case ends.
+
+#### Use case: UC07 Delete a specific contact
 
 **MSS**
 
@@ -636,7 +652,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC07 Add interactions to a specific contact
+#### Use case: UC08 Add interactions to a specific contact
 
 **MSS**
 
@@ -652,7 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC08 View a specific contact
+#### Use case: UC09 View a specific contact
 
 **MSS**
 
@@ -669,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC09 Add an organisation
+#### Use case: UC10 Add an organisation
 
 **MSS**
 
@@ -685,7 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC10 Delete an organisation
+#### Use case: UC11 Delete an organisation
 
 **MSS**
 
@@ -701,7 +717,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC11 Add a person to an organisation
+#### Use case: UC12 Add a person to an organisation
 
 **MSS**
 
@@ -721,7 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
   Use case ends.
 
-#### Use case: UC12 Removing a person from an organisation
+#### Use case: UC13 Removing a person from an organisation
 
 **MSS**
 
