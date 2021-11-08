@@ -3,7 +3,7 @@ layout: page
 title: Yeh Yu Cheng's Project Portfolio Page
 ---
 
-## Project: Tutor Master
+### Project: Tutor Master
 
 **Tutor Master** is a desktop application for experienced freelance tutors to keep track of their students. More specifically, it helps tutors to record student details and the tasks, lessons and exams assigned to them. Besides, tutors can view their teaching schedule in Tutor Master. The app is mainly written in Java and has about 12k LoC.
 
@@ -11,7 +11,7 @@ Users can interact with Tutor Master using a CLI (command-line interface), while
 
 Contributed code: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=eltonyeh&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-### Enhancements
+#### Enhancements
 
 - **Internal Design**: Create the `UniqueId` class
   - What it does: this allows we to uniquely identify entities including students, groups, tasks, lessons and exams by generating unique id for each object.
@@ -30,7 +30,7 @@ Contributed code: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dash
 - **New Feature**: Ability to unassign tasks from `TaskAssignable` (Students and Groups)
   - This allows users to unassign tasks from students/groups. It is the reverse action compared to the feature above.
 
-### Contributions to the user guide
+#### Contributions to the user guide
 
 - Wrote the guide of the commands about:
   - clearing all entries
@@ -41,16 +41,16 @@ Contributed code: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dash
 - Fix some command mismatches
 - Draft the command summary
 
-### Contributions to the developer guide
+#### Contributions to the developer guide
 
 - Add implementation detail of the `UniqueId` interface, including the related UML diagram.
 
-### Contributions to team-based tasks
+#### Contributions to team-based tasks
 
 - Update site-wide settings, i.e., change some `Addressbook` to `TutorMaster` in `README.md`, `_config.yml`, etc.
 - Wrote the acknowledgement note
 
-### Community
+#### Community
   - Solved 16 issues assigned to myself. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues?q=is%3Aissue+author%3Aeltonyeh)
   - Created 23 pull requests for our team. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+author%3Aeltonyeh)
     - Some notable PRs: [#62](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/62), [#81](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/81), [#129](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/129), [#213](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/213), [#237](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/237)
