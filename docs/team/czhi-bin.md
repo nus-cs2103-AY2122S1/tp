@@ -52,8 +52,7 @@ Given below are my contributions to the project.
 
 **Team-Based Tasks**:
   * Setting up the GitHub team org/repo
-    * [#8](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/8)
-    * [#39](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/39)
+    * [#8](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/8), [#39](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/39)
   * Manged releases `v1.2` on GitHub
   * Updating UG that are not specific to a feature
     * [#154](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/154), [#200](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/200), [#201](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/201)
