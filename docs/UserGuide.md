@@ -54,8 +54,8 @@ Now that you have installed Tutor Master, let us give it a try!
 
 Let us 
 * Create a student named "David" 
-* Add him to a group named "CS2103T" 
-* Add and assign a task named "CS2103T Project" to "David".
+* Add and assign a task named "Science Report" to "David".
+* Add him to a group named "CS2103T"
 
 We shall type commands in the Command Panel and hit `Enter` to execute it.
 
@@ -77,9 +77,9 @@ Let's try adding a student with the following details:
    as shown in the image below.
    ![Add David](images/imagesInUG/student-addDavid.png)
      
-2. Now lets try editing his address. Note the index number beside his name in the person panel, in this case it is 4.<br>
+2. Now lets try editing his address. Note the index number beside his name in the Person Panel, in this case it is 4.<br>
    Type the following command `student -e 4 a/Kent Ridge` and hit `Enter`.
-   * This updates the address of David, who is at index __4__ to "Kent Ridge".
+   * This updates the address of David, who is at index __4__ to __Kent Ridge__.
    * Note that the other details are unchanged, you can choose which fields you want to edit.
 
 
@@ -92,23 +92,38 @@ Let's try adding a student with the following details:
    Type `student -v 4` in the Command Panel and hit `Enter`.
     * This displays the student at `INDEX` 4 in the Viewing Panel.
 
+### Managing Tasks
+
+Next, let us add a task with description __Lab Report__ and deadline __12 November 2021__. 
+
+1. Type the command `task -a n/Lab Report d/2021-11-12` in the Command Panel and hit `Enter`.
+    * This adds a task with the details specified above. 
+    * You should now see __Lab Report__ in the Task Panel in the middle column as shown in the image below.
+      ![Add David](images/imagesInUG/task-add.png)
+
+2. Now, let us try editing the description of the task to Science Report. Note the index of the task in the Task Panel, 
+   which is 3 in this case. Type `task -e 3 n/Science Report` in the "Command Panel" and hit `Enter`.
+    * This updates the description of the task at index __3__ to __Science Report__.
+    * The description remains unchanged.
+
+3. You can also assign this task, __Science Report__ to __David__. Take note of the index of the task you would like to 
+   assign and the index of the student to whom the task should be assigned. In this case, the index of 
+   __Science Report__ is __3__ while the index of __David__ is __4__. Type the command `task -as 4 3` in the Command 
+   Panel and hit `Enter`.
+    * This assigns __Science Report__ to __David__.
+
 ### Managing Groups
 
 Let us now add "David" to a group named "CS2103T".
 
 1.  Type `group -a 4 n/CS2103T` in the Command Panel and hit `Enter`.
-    * This creates a group named "CS2103T" and includes "David" who is at `INDEX` 4 in the Person Panel.
-    * "CS2103T" is now added to the Group Panel. It has an `INDEX` of 3 in the Group Panel.
-    * This group currently has "David" inside
+    * This creates a group named __CS2103T__ and includes __David__ who is at `INDEX` 4 in the Person Panel.
+    * __CS2103T__ is now added to the Group Panel. It has an `INDEX` of 3 in the Group Panel.
+    * This group currently has __David__ inside
       ![Add David To Group](images/imagesInUG/group-addDavidInGroup.png)
       
 2. Type `group -v 3` in the "Command Panel" and hit `Enter`.
     * This displays the details of the group at `INDEX` 3 in the Viewing Panel.
-
-
-### Managing Tasks
-
-// to be added
 
 You can refer to the [Features](#features) below for details of each command.
 
