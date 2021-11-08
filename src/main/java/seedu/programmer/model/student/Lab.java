@@ -35,7 +35,7 @@ public class Lab implements DisplayableObject {
 
     /**
      * Constructs an unmarked Lab Object.
-     * .
+     *
      * @param labNum The labNum of the lab.
      * @param totalScore The total score.
      */
