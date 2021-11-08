@@ -11,7 +11,7 @@ import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Student;
 
 /**
- * Shows the student's particular and lab results at the given index
+ * Shows the student's particular and lab results at the given index.
  */
 public class ShowCommand extends Command {
 

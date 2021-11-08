@@ -9,7 +9,6 @@ public class UploadCommandResult extends CommandResult {
      * Creates an UploadCommandResult.
      *
      * @param feedbackToUser Message to show user.
-     * @param model Current model.
      */
     public UploadCommandResult(String feedbackToUser) {
         super(feedbackToUser);

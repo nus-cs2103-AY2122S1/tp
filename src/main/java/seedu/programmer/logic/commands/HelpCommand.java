@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import seedu.programmer.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Formats the full help instructions for available commands to be displayed.
  */
 public class HelpCommand extends Command {
 

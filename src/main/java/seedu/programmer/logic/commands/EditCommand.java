@@ -64,8 +64,10 @@ public class EditCommand extends Command {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param index of the student in the filtered student list to edit
-     * @param editStudentDescriptor details to edit the student with
+     * Constructor for EditCommand.
+     *
+     * @param index of the student in the filtered student list to edit.
+     * @param editStudentDescriptor details to edit the student with.
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
@@ -122,6 +124,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
+     *
+     * @param studentToEdit Student object to be edited.
+     * @param editStudentDescriptor Contains the corresponding fields of the student to be edited.
+     * @return The student with the edited attributes.
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
             throws CommandException {
@@ -189,6 +195,9 @@ public class EditCommand extends Command {
         private Lab lab;
         private ObservableList<Lab> labList;
 
+        /**
+         * Class constructor.
+         */
         public EditStudentDescriptor() {}
 
         /**

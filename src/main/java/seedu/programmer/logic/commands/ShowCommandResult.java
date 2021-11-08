@@ -11,7 +11,7 @@ public class ShowCommandResult extends CommandResult {
     private final Student target;
 
     /**
-     * Constructs a {@code CommandResult} when there is a result to show.
+     * Class constructor for a {@code CommandResult} when there is a result to show.
      */
     public ShowCommandResult(String feedbackToUser, Student target) {
         super(feedbackToUser);

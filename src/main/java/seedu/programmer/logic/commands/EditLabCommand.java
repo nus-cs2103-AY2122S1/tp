@@ -44,6 +44,8 @@ public class EditLabCommand extends Command {
     private final Lab original;
 
     /**
+     * Class constructor with new lab number and new total score.
+     *
      * @param original the lab to be edited.
      * @param newLabNum the new lab number.
      * @param total the total score to be added.
@@ -55,6 +57,8 @@ public class EditLabCommand extends Command {
         this.total = total;
     }
     /**
+     * Class constructor with new total score.
+     *
      * @param original the lab to be edited.
      * @param total the total score to be added.
      * */
@@ -66,6 +70,8 @@ public class EditLabCommand extends Command {
     }
 
     /**
+     * Class constructor with new lab number.
+     *
      * @param original the lab to be edited.
      * @param newLabNum the new lab number
      * */

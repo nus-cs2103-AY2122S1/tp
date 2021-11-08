@@ -11,6 +11,8 @@ import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 
+import java.util.stream.Stream;
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -159,5 +161,16 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values
+     * in the given {@code argumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap object to be checked against.
+     * @param prefixes The prefixes to be checked if they exist in {@code argumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

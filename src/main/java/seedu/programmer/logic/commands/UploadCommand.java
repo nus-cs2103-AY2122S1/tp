@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import seedu.programmer.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Allows users to upload a CSV file into the application.
  */
 public class UploadCommand extends Command {
 
