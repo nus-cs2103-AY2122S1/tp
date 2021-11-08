@@ -9,7 +9,7 @@ Uni-Fy is a desktop app for managing your university workload and it is designed
 
 Given below are my contributions to the project.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=KelvinSoo&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&tabOpen=true&tabType=authorship&tabAuthor=KelvinSoo&tabRepo=AY2122S1-CS2103T-W17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&checkedFileTypes=docs~functional-code~test-code~other)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=Dr-Octavius&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&tabAuthor=srj31&tabRepo=AY2122S1-CS2103T-W17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zA=srj31&zR=AY2122S1-CS2103T-W17-4%2Ftp%5Bmaster%5D&zACS=128.8181818181818&zS=2021-09-17&zFS=srj31&zU=2021-11-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=falser)
 
 * **New Feature**: Tasks appear green if the daily panel reflects the current date
   * What it does: Tasks Lights up Green if the current date is in the Weekly Panel View.
