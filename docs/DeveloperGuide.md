@@ -408,6 +408,8 @@ To support the differentiated search functionality for different flags (e.g. nam
 multiple classes extending from `Predicate<Student>` can be created,
 each with different implementation of the `test(Student student)` function.
 
+<div style="page-break-after: always;"></div>
+
 * `NameContainsKeywordsPredicate`: checks if any word in the full name of student matches exactly any word in the
   given keywords. e.g. `Alex Yu` will match `Alex Yeoh` and `Bernice Yu`. Partial search is not supported
   e.g. `Han` will not match `Hans`.
@@ -478,13 +480,15 @@ The `show` feature allows users to show the performance analysis of a student, a
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-<div style="page-break-after: always;"></div>
 
 The following activity diagrams summarize what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
 <center>
     <img src="images/ShowActivityDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
+
 <center>
     <img src="images/ShowStudentActivityDiagram.png" />
 </center>
@@ -921,7 +925,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai -i E0123456`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` has been specified more than once.
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
 
 5. Adding a group with non-existent students.
 
