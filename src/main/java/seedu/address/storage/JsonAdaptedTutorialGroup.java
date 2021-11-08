@@ -44,16 +44,19 @@ public class JsonAdaptedTutorialGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
     public TutorialGroup toModelType() throws IllegalValueException {
+        final ClassCode modelClassCode = addClassCode();
+        final GroupNumber modelGroupNumber = addGroupNumber();
+        final GroupType modelGroupType = addGroupType();
+        return new TutorialGroup(modelGroupNumber, modelClassCode, modelGroupType);
+    }
 
-        if (classCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ClassCode.class.getSimpleName()));
-        }
-        if (!ClassCode.isValidClassCode(classCode)) {
-            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
-        }
-        final ClassCode modelClassCode = new ClassCode(classCode);
-
+    /**
+     * Abstracted method to get GroupNumber.
+     *
+     * @return Valid GroupNumber.
+     * @throws IllegalValueException
+     */
+    private GroupNumber addGroupNumber() throws IllegalValueException {
         if (groupNumber == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupNumber.class.getSimpleName())
@@ -62,9 +65,33 @@ public class JsonAdaptedTutorialGroup {
         if (!GroupNumber.isValidGroupNumber(groupNumber)) {
             throw new IllegalValueException(GroupNumber.MESSAGE_CONSTRAINTS);
         }
+        return new GroupNumber(groupNumber);
+    }
 
-        final GroupNumber modelGroupNumber = new GroupNumber(groupNumber);
+    /**
+     * Abstracted method to get ClassCode.
+     *
+     * @return Valid ClassCode.
+     * @throws IllegalValueException
+     */
+    private ClassCode addClassCode() throws IllegalValueException {
+        if (classCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ClassCode.class.getSimpleName()));
+        }
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassCode(classCode);
+    }
 
+    /**
+     * Abstracted method to add GroupType.
+     *
+     * @return valid GroupType.
+     * @throws IllegalValueException
+     */
+    private GroupType addGroupType() throws IllegalValueException {
         if (groupType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     GroupType.class.getSimpleName()));
@@ -72,10 +99,7 @@ public class JsonAdaptedTutorialGroup {
         if (!GroupType.isValidGroupType(groupType)) {
             throw new IllegalValueException(GroupType.MESSAGE_CONSTRAINTS);
         }
-
-        final GroupType modelGroupType = new GroupType(groupType);
-
-        return new TutorialGroup(modelGroupNumber, modelClassCode, modelGroupType);
+        return new GroupType(groupType);
     }
 
 }

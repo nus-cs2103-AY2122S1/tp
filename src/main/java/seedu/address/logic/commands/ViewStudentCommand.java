@@ -40,7 +40,8 @@ public class ViewStudentCommand extends Command {
         }
 
         Student studentToView = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, studentToView), false, true,
+        return new CommandResult(
+                String.format(MESSAGE_VIEW_STUDENT_SUCCESS, studentToView), false, true,
                 false, studentToView);
     }
 

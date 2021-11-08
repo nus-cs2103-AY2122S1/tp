@@ -20,7 +20,6 @@ public class TutorialGroupContainsKeywordsPredicate implements Predicate<Tutoria
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         tutorialGroup.getClassCode().toString(), keyword));
-        //TODO Add GroupType as a keyword
     }
 
     @Override

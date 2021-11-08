@@ -88,61 +88,14 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> studentTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            studentTags.add(tag.toModelType());
-        }
-
-        final List<StudentMark> studentMarks = new ArrayList<>();
-        for (JsonAdaptedMark mark : marks) {
-            studentMarks.add(mark.toModelType());
-        }
-
-        final List<TutorialGroup> studentTutorialGroups = new ArrayList<>();
-        for (JsonAdaptedTutorialGroup tutorialGroup : tutorialGroups) {
-            studentTutorialGroups.add(tutorialGroup.toModelType());
-        }
-
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
-        if (classCode == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassCode.class.getSimpleName()));
-        }
-        if (!ClassCode.isValidClassCode(classCode)) {
-            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
-        }
-        final ClassCode modelClassCode = new ClassCode(classCode);
+        final List<Tag> studentTags = addTags();
+        final List<StudentMark> studentMarks = addMarks();
+        final List<TutorialGroup> studentTutorialGroups = addTutorialGroups();
+        final Name modelName = addName();
+        final Phone modelPhone = addPhone();
+        final Email modelEmail = addEmail();
+        final Address modelAddress = addAddress();
+        final ClassCode modelClassCode = addClassCode();
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         final List<StudentMark> modelMarks = new ArrayList<>(studentMarks);
@@ -150,6 +103,129 @@ class JsonAdaptedStudent {
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress,
                 modelClassCode, modelTags, modelMarks, modelTutorialGroups);
+    }
+
+    /**
+     * Abstracted method to create List of tags.
+     *
+     * @return List of tags.
+     * @throws IllegalValueException
+     */
+    private List<Tag> addTags() throws IllegalValueException {
+        List<Tag> studentTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tagged) {
+            studentTags.add(tag.toModelType());
+        }
+        return studentTags;
+    }
+
+    /**
+     * Abstracted method to create List of Student Marks.
+     *
+     * @return List of student marks.
+     * @throws IllegalValueException
+     */
+    private List<StudentMark> addMarks() throws IllegalValueException {
+        List<StudentMark> studentMarks = new ArrayList<>();
+        for (JsonAdaptedMark mark : marks) {
+            studentMarks.add(mark.toModelType());
+        }
+        return studentMarks;
+    }
+
+    /**
+     * Abstracted method to get list of tutorial groups.
+     *
+     * @return Valid Tutorial Groups.
+     * @throws IllegalValueException
+     */
+    private List<TutorialGroup> addTutorialGroups() throws IllegalValueException {
+        List<TutorialGroup> studentTutorialGroups = new ArrayList<>();
+        for (JsonAdaptedTutorialGroup tutorialGroup : tutorialGroups) {
+            studentTutorialGroups.add(tutorialGroup.toModelType());
+        }
+        return studentTutorialGroups;
+    }
+
+    /**
+     * Abstracted method to add Name.
+     *
+     * @return valid Name.
+     * @throws IllegalValueException
+     */
+    private Name addName() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(name);
+    }
+
+    /**
+     * Abstracted method to add Phone.
+     *
+     * @return valid Phone.
+     * @throws IllegalValueException
+     */
+    private Phone addPhone() throws IllegalValueException {
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(phone);
+    }
+
+    /**
+     * Abstracted method to add Address.
+     *
+     * @return valid Address.
+     * @throws IllegalValueException
+     */
+    private Address addAddress() throws IllegalValueException {
+        if (address == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new Address(address);
+    }
+
+    /**
+     * Abstracted method to add Email.
+     *
+     * @return valid Email.
+     * @throws IllegalValueException
+     */
+    private Email addEmail() throws IllegalValueException {
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(email);
+    }
+
+    /**
+     * Abstracted method to get ClassCode.
+     *
+     * @return Valid ClassCode.
+     * @throws IllegalValueException
+     */
+    private ClassCode addClassCode() throws IllegalValueException {
+        if (classCode == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassCode.class.getSimpleName()));
+        }
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassCode(classCode);
     }
 
 }

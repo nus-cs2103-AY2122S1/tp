@@ -30,7 +30,7 @@ public class DeleteLastMarkCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the student in the filtered student list to edit
+     * @param index of the student in the filtered student list to delete last mark of.
      */
     public DeleteLastMarkCommand(Index index) {
         requireNonNull(index);
