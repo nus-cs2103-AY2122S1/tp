@@ -15,8 +15,7 @@ The EdRecord codebase was initially adapted from [AddressBook Level 3](https://s
 * [Features implemented](#features-implemented)
 * [Documentation](#documentation)
 * [Team-based tasks](#team-based-tasks)
-* [Reviewing/Mentoring](#reviewingmentoring)
-* [Beyond the project](#beyond-the-project)
+* [Community](#community)
 
 ### Code
 * [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=chaiwanlin&tabRepo=AY2122S1-CS2103-W14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
@@ -80,7 +79,7 @@ The EdRecord codebase was initially adapted from [AddressBook Level 3](https://s
     * Edited documentation to integrate with team project  [\#62](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/62)
     * Updated documentation for the features: `mkmod`, `mkclass`, `dlmod`, `dlclass`, `mv`, `rm`
 * Developer Guide:
-    * Added implementation details of the `Module` and `Group` features.
+    * Added implementation details of the `Module` and `Group` features [/#335](https://github.com/nus-cs2103-AY2122S1/tp/pull/335).
     * Diagrams contributed [/#215](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/215):
       <img src="images/ModelClassDiagram.png" width="450" />
       <img src="images/ModuleSystemModelClassDiagram.png" width="450" />
@@ -98,7 +97,7 @@ The EdRecord codebase was initially adapted from [AddressBook Level 3](https://s
 
 ### Community
 * [PRs reviewed (with non-trivial review comments)](https://github.com/AY2122S1-CS2103-W14-3/tp/pulls?q=is%3Apr+reviewed-by%3Achaiwanlin)
-* Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+* [Reported bugs and suggestions for other teams in the class](https://github.com/AY2122S1-CS2103T-F11-4/tp/issues?q=is%3Aissue+is%3Aclosed+chaiwanlin)
 
 
 

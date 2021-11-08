@@ -24,7 +24,7 @@ public class RemoveCommand extends Command {
     public static final String COMMAND_WORD = "rm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the person identified by the index number used"
-            + "in the displayed person list from the specified module and class.\n"
+            + " in the displayed person list from the specified module and class.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_MODULE + "MODULE "
             + PREFIX_GROUP + "GROUP\n"
