@@ -24,7 +24,7 @@ are:
     - Add tags to mentees and sort by tags to easily identify meta-data
     - Archive contacts you're no longer speaking to
 2. A clean note-taking system
-    - designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
+    - Designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
 
 ### Acknowledgements
 
@@ -131,7 +131,7 @@ Gui buttons in `PersonNoteWindow`.
 
 ### UI Changes
 
-*(placeholder API for now, will update to our own link later when implemented.)*
+**API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -142,9 +142,7 @@ Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or Subg
 
 ### Model Changes
 
-*(placeholder API for now, will update to our own link later when implemented.)*
-
-**API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
@@ -169,9 +167,7 @@ Here is the better class structure to be implemented:
 
 ### Storage component
 
-*(placeholder API for now, will update to our own link later when implemented.)*
-
-**API**: [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API**: [`Storage.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/storage/Storage.java)
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
@@ -182,8 +178,7 @@ The `Storage` component,
 
 ### Common classes
 
-**
-API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/address/commons/core/trie/Trie.java)
+**API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/commons/core/trie/Trie.java)
 
 * Allows grouping and autocompletion of `Tag` and `Command` objects.
 * Supports addition and deletion of items.
