@@ -19,13 +19,13 @@ Given below are my contributions to the project.
     * What it does: Allows the user to rename commonly used commands to shorter ones. The aliases persist even after leaving the application.
     * Justification: We have many long command names such as `addassessment` and `addstudent`. Given that speed and ease of usage via the CLI interface is a priority, we allow the user to define their own shorter, more convenient aliases for commands that they use often.
     * Highlights: There were many non-trivial design decisions considered when implementing this feature. Some of these include preventing cyclic alias dependencies, and a way to remove the alias. You can read more about these in the [developer guide](../DeveloperGuide.md).
-    
-* **New Feature**: Added the ability to scroll through past commands.
-    * What it does: Pressing the `up` and `down` keys will scroll through your previous commands, similar to any conventional CLI interface.
-    * Justification: The case where the user would want to add scores for the same assessment to multiple students is one of many cases where a similar command has to be run multiple times. This feature allows one to input consecutive similar commands easily.
 
 <div style="page-break-after: always;"></div>
 
+* **New Feature**: Added the ability to scroll through past commands.
+    * What it does: Pressing the `up` and `down` keys will scroll through your previous commands, similar to any conventional CLI interface.
+    * Justification: The case where the user would want to add scores for the same assessment to multiple students is one of many cases where a similar command has to be run multiple times. This feature allows one to input consecutive similar commands easily.
+  
 * **New Feature**: Added the ability to export data.
     * What it does: Allows the user to export the data to a CSV file. 
     * Justification: Exporting the data serves as both a way to share the data with the user's colleagues for them to import to their copy of the application, and a way to back up the data.
