@@ -2,6 +2,7 @@ package seedu.academydirectory.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.UserPrefs;
 import seedu.academydirectory.model.VersionedModel;
@@ -35,9 +37,7 @@ public class HistoryCommandTest {
                 .forEach((academyDirectory) -> {
                     VersionedModel model = new VersionedModelManager(academyDirectory, userPrefs);
                     Command historyCommand = new HistoryCommand();
-                    CommandResult commandResult = assertDoesNotThrow(() -> historyCommand.execute(model));
-                    assertEquals(HistoryCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
-                    assertEquals("", model.getAdditionalViewModel().getAdditionalInfo().get());
+                    assertThrows(CommandException.class, () -> historyCommand.execute(model));
                 });
     }
 
@@ -48,9 +48,7 @@ public class HistoryCommandTest {
                 .forEach((academyDirectory) -> {
                     VersionedModel model = new VersionedModelManager(academyDirectory, userPrefs);
                     Command historyCommand = new HistoryCommand();
-                    CommandResult commandResult = assertDoesNotThrow(() -> historyCommand.execute(model));
-                    assertEquals(HistoryCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
-                    assertEquals("", model.getAdditionalViewModel().getAdditionalInfo().get());
+                    assertThrows(CommandException.class, () -> historyCommand.execute(model));
                 });
     }
 
