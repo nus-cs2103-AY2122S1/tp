@@ -11,7 +11,7 @@ Users can manage contacts, organise them into project groups and manage their ta
 
 
 This guide contains detailed information on the architecture, implementation and design decisions for ThunderCat. This guide has been designed 
-for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat, or those who seek alter and extend the app for their own use.
+for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat, or those who seek to alter and extend the app for their own use.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -298,10 +298,7 @@ An example of an `UndoableCommand` is `AddCommand`, which adds a person to the r
     * Execution is different for each command so specific execution can be fine-tuned for each individual command.
   * Cons:
     * We must ensure that the implementation of each individual command are correct.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+    
 
 ### Add Panel to the UI
 
