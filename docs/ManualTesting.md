@@ -38,12 +38,12 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
   * [Visual Design](#visual-design)
   * [User Interface Functionality](#user-interface-functionality)
 * [Performance Testing](#performance-testing)
-  * [Visualization with large AcademyDirectory](#visualization-with-large-academydirectory-_coming-soon_)
-  * [Limit test AcademyDirectory capacity](#limit-test-academydirectory-capacity-_coming-soon_)
+  * [Visualization with large Academy Directory](#visualization-with-large-academy-directory-)
+  * [Limit test Academy Directory capacity](#limit-test-academy-directory-capacity-)
 * [Compatibility Testing](#compatibility-testing)
-  * [Cross-OS Compatibility](#cross-os-compatibility-_coming-soon_)
+  * [Cross-OS Compatibility](#cross-os-compatibility-)
 * [Portability Testing](#portability-testing)
-  * [Transfer of AcademyDirectory](#transfer-of-academydirectory-_coming-soon_)
+  * [Transfer of Academy Directory](#transfer-of-academy-directory-)
 
 
 
@@ -931,14 +931,14 @@ These tests are primarily focused on testing both the appearance and the functio
 
 ## Performance testing
 
-### Visualization with large AcademyDirectory _[Coming soon]_
+### Visualization with large Academy Directory _[Coming soon]_
 
-* Testing of large number of the `Visualize` function with a large number of students in `AcademyDirectory`
-  * Potentially affects runtime and if so, `AcademyDirectory` might require optimization.
+* Testing of large number of the `Visualize` function with a large number of students in Academy Directory
+  * Potentially affects runtime and if so, Academy Directory might require optimization.
 
-### Limit test AcademyDirectory capacity _[Coming soon]_
+### Limit test Academy Directory capacity _[Coming soon]_
 
-* Testing the `Student` capacity that `AcademyDirectory` can handle
+* Testing the `Student` capacity that Academy Directory can handle
   * Things to look out for: 
     * Potential general loss in performance e.g less responsive buttons, longer startup time, longer time taken to process commands
 
@@ -948,21 +948,21 @@ These tests are primarily focused on testing both the appearance and the functio
 
 ### Cross-OS Compatibility _[Coming soon]_
 
-* Testing of `AcademyDirectory` on all mainstream OS such as `Windows`, `MacOS` and `Linux`.
+* Testing of Academy Directory on all mainstream OS such as `Windows`, `MacOS` and `Linux`.
 
 
-* Testing of `AcademyDirectory` on more obscure OS such as different `Linux` distributions e.g `Kali Linux`.
+* Testing of Academy Directory on more obscure OS such as different `Linux` distributions e.g `Kali Linux`.
 
 
 ***
 
 ## Portability testing
 
-### Transfer of `AcademyDirectory` _[Coming soon]_
+### Transfer of Academy Directory _[Coming soon]_
 
-* Testing transfer of `AcademyDirectory` between identical mainstream OS e.g from `MacOS` to `MacOS`.
+* Testing transfer of Academy Directory between identical mainstream OS e.g from `MacOS` to `MacOS`.
 
-* Testing transfer of `AcademyDirectory` between different mainstream OS e.g from `MacOS` to `Windows`.
+* Testing transfer of Academy Directory between different mainstream OS e.g from `MacOS` to `Windows`.
   * Things to look out for: 
     * Hypothetically, a potential increase in time taken to execute `Visualize` after transfer e.g `Macbook A` to `Macbook B` and back to `Macbook A` without changing any files.
 
