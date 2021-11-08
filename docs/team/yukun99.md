@@ -7,7 +7,7 @@ title: Yukun's Project Portfolio Page
 
 Notor aims to help mentors who wish to informally keep tabs on their mentees, by providing a quick way to take notes and
 mantain records on their mentees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is
-written in Java, and has about 10 kLoC.
+written in Java, and has about 13 kLoC.
 
 ## My Contributions
 
@@ -196,7 +196,7 @@ API** : [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/
 The `Storage` component,
 
 * now includes a new `Archive` Storage component
-* `Archive` allows users to temporarily remove `Person`s from their Address Book
+* `Archive` allows users to temporarily remove `Person`s from Notor
 
 ### Common classes
 
