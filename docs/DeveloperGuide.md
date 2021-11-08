@@ -76,6 +76,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -92,6 +93,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Applicant` and `Position` objects residing in the `Model`.
+
 
 ### Logic component
 
@@ -114,7 +116,6 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 **Interactions Inside the Logic Component for the `delete-position 1` Command**
 <img src="images/DeleteSequenceDiagram.png" width="1080" height="500"/>
 
-
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -125,6 +126,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `MrTechRecruiterParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPositionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `MrTechRecruiterParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPositionCommandParser`, `DeleteApplicantCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -141,6 +143,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** To avoid cluttering up the Model class diagram, classes like `ReadOnlyPositionBook`, `PositionBook` etc. are not added. However, they have similar relationships and structure as that of `ReadOnlyApplicantBook`, `ApplicantBook` etc.
 </div>
+
 
 ### Applicant and Position
 
