@@ -44,5 +44,5 @@ Given below are my contributions to the project.
 * **Community and Contributions to team-based tasks**:
   * Maintenance of the repo: proper issue handling, milestone tagging, linking PRs to the relevant issues
   * Reported bugs and suggestions for other teams in the class in the mock PE.
-  * 
+  * Discussion about certain implementations (non-trivial): [\#111](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/111)
   
