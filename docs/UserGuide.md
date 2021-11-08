@@ -213,9 +213,9 @@ Examples:
 ![result for `find -n Alex`](images/FindAlexResult.png)
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
-start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do 
-in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with 
-the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name 
+start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do
+in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with
+the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name
 "Alex Yeoh".
 </div>
 
@@ -306,7 +306,7 @@ Format: `cat INDEX [-f KEYWORDS]`
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
 start of any word in a task name or if the keywords do not appear in the same order in the task name as they do in the
-given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name 
+given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name
 "Work at 5pm". However, `cat 1 -f ork` and `cat 1 -f 5pm work" will not match the same task with the name "Work at 5pm".
 </div>
 
