@@ -21,7 +21,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **3. Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -544,7 +544,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique.
     * 1a1. gitGud informs user that it has failed to add a friend.
-    * 1a2. User makes another request to add a friend with a different `FRIEND_ID`.
+    * 1a2. User makes another request to add a friend with a different valid and unique `FRIEND_ID`.
+    * Use case continues from step 2.
+
+* 1b. gitGud detects that the `FRIEND_ID`/`NAME` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. 1b1. gitGud informs user that `FRIEND_ID`/`NAME` provided is invalid.
+    * 1b2. User makes another request to add a friend with a different valid `FRIEND_ID`/`NAME` and unique `FRIEND_ID`.
     * Use case continues from step 2.
 
 **Use case: UC02 - Edit a friend**
@@ -560,8 +565,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.  
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-    * 1a2. User makes another request to edit a friend with a different `FRIEND_ID`.  
+    * 1a2. User makes another request to edit a friend with a different `FRIEND_ID` for an existing friend.  
     * Use case continues from step 2.  
+
+* 1b. gitGud detects that the `NAME` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `NAME` provided is invalid.
+    * 1b2. User makes another request to edit friend with `FRIEND_ID` with a different valid `NAME`.
+    * Use case continues from step 2.
 
 **Use case: UC03 - Delete a friend**
 
@@ -576,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.  
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-    * 1a2. User makes another request to delete a friend with a different `FRIEND_ID`
+    * 1a2. User makes another request to delete a friend with a different `FRIEND_ID` for an existing friend.
     * Use case continues from step 2.  
 
 **Use case: UC04 - Link a game to a friend**
@@ -584,7 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to link a friend using a friend's `FRIEND_ID`, a game's `GAME_ID` and an `IN_GAME_USERNAME`.
-2. gitGud links the friend to the game, stores their game username and informs user of successful linking of friend.
+2. gitGud links the friend to the game, stores their in-game username and informs user of successful linking of friend.
 
    Use case ends.
 
@@ -592,8 +602,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-    * 1a2. User makes another request to link a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
+    * 1a2. User makes another request to link a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game.  
     * Use case continues from step 2.     
+
+* 1b. gitGud detects that the `IN_GAME_USERNAME` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `IN_GAME_USERNAME` provided is invalid.
+    * 1b2. User makes another request to link a friend with a game, with existing `FRIEND_ID` and `GAME_ID` and valid `IN_GAME_USERNAME`.
+    * Use case continues from step 2.
 
 **Use case: UC05 - Unlink a game from a friend**
 
@@ -608,10 +623,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-    * 1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
+    * 1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game.  
     * Use case continues from step 2.
 
-* 1b. gitGud detects that the `FRIEND_ID` and`GAME_ID` link does not exist.
+* 1b. gitGud detects that the `FRIEND_ID` and `GAME_ID` link does not exist.
     * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
     * 1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
     * Use case continues from step 2.
@@ -629,12 +644,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-    * 1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID`.  
+    * 1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game with existing link.  
     * Use case continues from step 2.
 
-* 1b. gitGud detects that the `FRIEND_ID` and`GAME_ID` link does not exist.
+* 1b. gitGud detects that the `FRIEND_ID` and `GAME_ID` link does not exist.
     * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
-    * 1b2. User makes another request to assign a skill value a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
+    * 1b2. User makes another request to assign a skill value to a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`  for an existing friend and/or game.  
+    * Use case continues from step 2.
+
+* 1c. gitGud detects that the `SKILL_VALUE ` provided is invalid and does not meet specifications provided in User Guide.
+    * 1c1. gitGud informs user that `SKILL_VALUE ` provided is invalid.
+    * 1c2. User makes another request to assign a skill value to a friend with a game, with existing `FRIEND_ID` and `GAME_ID` with existing game link and valid `SKILL_VALUE`.
     * Use case continues from step 2.
 
 **Use case: UC07 - Schedule a friend**
@@ -650,7 +670,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-    * 1a2. User makes another request to schedule a friend with a different `FRIEND_ID`.  
+    * 1a2. User makes another request to schedule a friend with a different `FRIEND_ID` for an existing friend.  
+    * Use case continues from step 2.
+
+* 1b. gitGud detects that the `START_HOUR`/`END_HOUR`/`DAY`/`IS_FREE` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `START_HOUR`/`END_HOUR`/`DAY`/`IS_FREE` provided is invalid.
+    * 1b2. User makes another request to schedule friend with `FRIEND_ID` with a different valid `START_HOUR`/`END_HOUR`/`DAY`/`IS_FREE`.
     * Use case continues from step 2.
 
 **Use case: UC08 - Recommend friends available to play with**
@@ -666,7 +691,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `GAME_ID` does not exist.
     * 1a1. gitGud informs user that no game was found with specified `GAME_ID`.  
-    * 1a2. User makes another request to recommend friends for a game with a different `GAME_ID`.  
+    * 1a2. User makes another request to recommend friends for a game with a different `GAME_ID` for an existing game.  
+    * Use case continues from step 2.
+
+* 1b. gitGud detects that the `HOUR`/`DAY` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `HOUR`/`DAY` provided is invalid.
+    * 1b2. User makes another request to recommend friends for a game with `GAME_ID` with a different valid `HOUR`/`DAY`.
     * Use case continues from step 2.
 
 **Use case: UC09 - Get a friend's complete information**
@@ -682,7 +712,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-    * 1a2. User makes another request to retrieve data a friend with a different `FRIEND_ID`.  
+    * 1a2. User makes another request to retrieve data a friend with a different `FRIEND_ID` for an existing friend.
     * Use case continues from step 2.
 
 **Use case: UC10 - List/filter friends whose `FRIEND_ID` contains a keyword**
@@ -703,7 +733,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC11 - Add a game**
 * **MSS** and **Extensions** similar to <u> Add a Friend (UC1) </u>, except it is for a game with `GAME_ID`.
 
-**Use case: UC12 - Add a game**
+**Use case: UC12 - Delete a game**
 * **MSS** and **Extensions** similar to <u> Delete a Friend (UC3) </u>, except it is for a game with `GAME_ID`.
 
 **Use case: UC13 - Get a game's complete information**
@@ -734,7 +764,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Given below are instructions to test the app manually.
 
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.

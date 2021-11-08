@@ -46,12 +46,12 @@ Given below are my contributions to the project.
     * Added user story `list` feature.
     * Updated the logic component section of the Developer Guide to follow gitGud.
     * Added implementation section of `friend --schedule` feature.
-    * Added/Updated use cases for all existing implemented features.
+    * Added missing/Updated existing use cases for all implemented features to be consistent.
 
 * **Contributions to team-based tasks**:
   * Refactored the parser to support new syntax of commands for games and friends each having their own CRUD commands using the flag system.
   * Updated application name and logo to gitGud's.
-  * Updated `Ui.png` and README.md for inital project setup (`v1.1`).
+  * Updated `Ui.png` and README.md for initial project setup (`v1.1`).
   * Created and managed milestones `v1.3b` and `v1.4`.   
   * Added branch protection for `master` branch to support transition to feature branch workflow and prevent accidental pushes to `master` branch.
   * Added Pull Request checks, for at least 1 Approval and for all checks to pass before allowing the PR to be merged, to ensure `master` branch code is always working.
