@@ -181,14 +181,15 @@ will start with an empty json data file instead.
 
 Here are some examples of corrupted data that is not accepted by ProgrammerError.
 
-     "labResultList" : [ {
-      //Absent attribute example: LabNumValue attribute is missing
+
+      //Absent attribute example: labNumValue attribute is missing
+      labResultList" : [ {
       "actualScoreValue" : 10,
       "totalScoreValue" : 20
       }
 
-     "labResultList" : [ {
-      //Invalid attribute example: LabNumValue is not between 1 to 13
+      //Invalid attribute example: labNumValue is not between 1 to 13
+      "labResultList" : [ {
       "labNumValue" : 20,
       "actualScoreValue" : 15,
       "totalScoreValue" : 20
