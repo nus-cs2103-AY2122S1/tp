@@ -17,7 +17,8 @@ Given below are my contributions to the project.
   * What it does: Allows the user to mark people as important.
   * Justification: Some people are more important than others. Hence, allowing user to mark people in their contacts as important to make it easier for them to highlight people.
   * Highlights: This enhancement was moderately easy as there was not too many codes to change.
-<br>
+
+
 * **New Feature**: Added the cache.
   * What it does: Stores the user input as wel as allow user to access it using up and down arrow key.
   * Justification: Repeating commands is something which people do all the time. Allowing them to access commands they input earlier allows for a convenience. Moreover, since this product
@@ -25,7 +26,7 @@ Given below are my contributions to the project.
   * Highlights: This feature was quite difficult to implement. The first issue was to understand how the GUI handles key input. Moreover, it also needs to handle executing the command
   while not allowing user to access the cache manually. After a lot of consideration, I finally ended up creating an internal command and changing the commandResult
   to allow for passing the text straight into the CommandBox.
-<br>
+  
 * **New Feature**: Added the `task`, `addtask`, and `deletetask`.
   * What it does: Allow user to attach task to people and add or delete them.
   * Justification: When working with a lot of people, there is a need to keep track of what's going on with everyone. This
@@ -33,7 +34,7 @@ Given below are my contributions to the project.
   * Highlights: This feature was medium level in terms of implementing. Adding task itself was not too much. However, allowing for
   adding multiple task and deleting task was quite challenging. It required me to fully understand how the model and storage work and
   putting into consideration possible issues such as deleting one task affecting the index of other tasks.
-<br>
+  
 * **New Feature**: Added the `description`.
   * What it does: Add little notes and descriptor to people.
   * Justification: Sometimes merely contact details are not enough. Perhaps more important text are needed. Hence, the description
@@ -41,7 +42,7 @@ Given below are my contributions to the project.
   * Highlights: This feature, though just like `remarks`, presented the challenge in adding the GUI. Since we wanted to add
   a separate section for the description, it was quite confusing to implement in terms of JavaFX. I ended up using a feature
   of JavaFX I was not used to which means I had to go through the implementation of said feature first. 
-<br>
+
 * **Documentation**:
   
   * User Guide:
