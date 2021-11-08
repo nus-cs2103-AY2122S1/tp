@@ -193,8 +193,8 @@ Step 2. The user executes an `addc c/G01 s/Tuesday 12:00pm to 2:00pm, Friday 12:
 state of ClassMATE. The updated `UniqueTutorialClassList` will be displayed in the `ClassListPanel`
 to the user.
 
-Step 3. The user executes a  `viewc 1` command. The `viewc` command updates the `FilteredList` of `TutorialCLass`es to only display the class at the
-given index, and updates the `FilteredList` of `Students` to contain only the students who are in the selected class. The updated filtered list of
+Step 3. The user executes a  `viewc 1` command. The `viewc` command updates the `filteredTutorialClasses` to only display the class at the
+given index, and updates the `filteredStudents` to contain only the students who are in the selected class. The updated filtered list of
 students and tutorial classes will be displayed to the user.
 
 Step 4. The user executes a `deletec 2` command. The `deletec` command calls `Model#deleteTutorialCLass()`, modifying and saving the
@@ -224,7 +224,7 @@ Execution of the `AddClassCommand`
     increasing the overall time
 * Alternative 2: Nesting of students within Tutorial Class
     * Pros: Faster in class specific student commands and students are better organised.
-    * Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
+    * Cons: Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
 
 ### Student Management Features
 
@@ -505,7 +505,7 @@ The *Sequence Diagram* below shows how `UniqueTutorialClassList` retrieves the
 #### Current Implementation (Adding/Removing Student from Tutorial Group)
 
 Each Student contains a `Set` of `TutorialGroup` they belong to. Tutorial Groups are stored internally as a `HashSet`. The `HashSet` of
-`TutorialGroup` is implemented such that there are no duplicate `TutorialGroup`, and each Student belongs to at most 1 `Tutorial Group` of 
+`TutorialGroup` is implemented such that there are no duplicate `TutorialGroup`, and each Student belongs to at most 1 `TutorialGroup` of 
 each Group Type. 
 
 ClassMATE will then support the following command classes:
@@ -521,7 +521,7 @@ ClassMATE state, and would be displayed with the details the Student.
 Step 2. The user enters `liststu` to list all the existing Students in ClassMATE
 
 Step 3. The user executes `addsg 1 gn/1 c/G06 type/OP1`. After the Command has been parsed, the `addsg` command calls `AddStudentToGroup#addTutorialGroup()`. 
-Subsequently, `Model#setStudent` and `Classmate#setStudent` are called consecutively to update the `tutorialGroups` of the Student.
+Subsequently, `Model#setStudent` and `Classmate#setStudent` are called consecutively to update the `TutorialGroup` of the Student.
 During the execution of `AddStudentToGroupCommand`, a new `Student` instance with the edited set of `TutorialGroup` is created.
 
 #### Design Considerations

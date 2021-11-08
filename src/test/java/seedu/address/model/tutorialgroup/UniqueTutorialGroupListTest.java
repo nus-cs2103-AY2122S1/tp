@@ -75,4 +75,17 @@ public class UniqueTutorialGroupListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueTutorialGroupList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void equals() {
+        assertTrue(uniqueTutorialGroupList.equals(uniqueTutorialGroupList));
+
+        assertFalse(uniqueTutorialGroupList.equals(null));
+        assertFalse(uniqueTutorialGroupList.equals(1));
+
+        UniqueTutorialGroupList copy = new UniqueTutorialGroupList();
+        copy.add(TUT_01);
+        assertFalse(uniqueTutorialGroupList.equals(copy));
+
+    }
 }
