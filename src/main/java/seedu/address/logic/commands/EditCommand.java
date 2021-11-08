@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,7 +44,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
-    public static final String MESSAGE_NO_STUDENT_CHANGES = "Student details fisanyare already up to date.";
+    public static final String MESSAGE_NO_STUDENT_CHANGES = "Student details are already up to date.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     private final Index index;
@@ -68,8 +69,10 @@ public class EditCommand extends Command {
         requireNonNull(model);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         Student studentToEdit = model.getStudent(index);
+        if (studentToEdit == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
-
         //stronger check for all fields - name address phone email
         if (studentToEdit.equals(editedStudent)) {
             throw new CommandException(MESSAGE_NO_STUDENT_CHANGES);
@@ -86,6 +89,7 @@ public class EditCommand extends Command {
                     .getClasses().getClasses().stream().map(model::getClassById).collect(Collectors.toList());
             for (TuitionClass tuitionClass: enrolledClasses) {
                 tuitionClass.updateStudent(studentToEdit, editedStudent);
+                logger.info(String.format("student name in class %s to %s", studentToEdit, editedStudent));
             }
         }
         logger.info(String.format("Edited student: Details changed from %s to %s", studentToEdit, editedStudent));
