@@ -324,7 +324,7 @@ ec 1 n/Math ts/Wed 10:00-12:00
 <div markdown="span" class="alert alert-primary">
 :information_source: Note: The edited timeslot cannot conflict with an en existing timeslot of another class.
 </div>
-
+<br>
 An example output of using the `editclass` command is shown below:
 
 <p align="center">
