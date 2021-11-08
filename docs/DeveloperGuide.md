@@ -37,7 +37,7 @@ List of sources of all reused/adapted ideas, code, documentation, and third-part
 * The [`SchedulePanel#createTimeThread()`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L114) method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
 * Initialising the `CalendarView` in the [`SchedulePanel`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32) was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
 * The [CenterPanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/CenterPanel.java#L138) JavaFX solution was inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
-* UG and DG Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
+* Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
 * Detection of overlapping dates: [Ole V.V.](https://stackoverflow.com/questions/60785426/).
 * Money parsing regex was inspired by [this StackOverflow answer](https://stackoverflow.com/a/17867041).
 
