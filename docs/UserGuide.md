@@ -193,7 +193,7 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
   * Lastly, key in the following command to launch `tutoraid.jar`: `java -jar tutoraid.jar`. An application window similar to the one below should appear in a few seconds. Note how the app contains some sample data. <br><br>
     
-    ![](images/blank.png)
+    ![](images/Ui.png)
 
 > :bulb: If you are using the second approach, it is recommended to store `tutoraid.jar` in a folder in your _Desktop_ so that it is easier to navigate to it the next time you need to launch TutorAid!
    
