@@ -99,17 +99,6 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
-    /**
-     * Removes the task specified by the index from the list.
-     * The task must exist in the list.
-     */
-    public void remove(int index) {
-        if (index < 0 || index >= internalList.size()) {
-            throw new TaskNotFoundException();
-        }
-        internalList.remove(index);
-    }
-
     public void setTasks(TaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

@@ -94,10 +94,6 @@ public class Task extends Module {
         return Objects.hash(super.getName(), isDone);
     }
 
-    private String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
     @Override
     public String toString() {
         return super.getName().toString() + " by " + getTaskDeadline().toString() + " ";
