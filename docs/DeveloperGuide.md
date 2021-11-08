@@ -892,7 +892,7 @@ The app is initially populated with some sample data, based on real life animes.
     3. Test case 2: `delete 0`<br>
        Expected: No anime is deleted. Error details shown in the status message
 
-    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete n/attack on titan`<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the displayed list size), `delete n/attack on titan`<br>
        Expected: Similar to previous
  
 2. Deleting an anime while not all animes are being shown
@@ -930,6 +930,20 @@ The app is initially populated with some sample data, based on real life animes.
    4. After the previous command, use command `genre 1 c/delete g/action g/fantasy`
       Expected: The `fantasy` genre will be deleted to the test anime, while a message tells the user that the `action` genre is not present
 
+### Status
+
+1. Updating Status
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Test case 1: `status 1 s/finished`<br>
+       Expected: First anime status will be set to `FINISHED`
+
+    3. Test case 2: `status 1 s/t`<br>
+       Expected: First anime status will be set to `TOWATCH`
+
+    4. Other incorrect delete commands to try: `status`, `status x` (where x is larger than the displayed list size), `status n/attack on titan`<br>
+       Expected: No anime is updated. Error details shown in the status message
       
 ### Saving data
 
@@ -973,7 +987,7 @@ The app is initially populated with some sample data, based on real life animes.
    Expected: The current tab will switch to `all tab` and all animes will be listed
 
    2. Test case: `LisT`<br/>
-   Expected: Error stating unknown command. AniList commands are case sensitive
+   Expected: Error stating unknown command. AniList commands are case-sensitive
 
 2. List animes based on their watch status
 
@@ -1029,11 +1043,11 @@ This includes, but is not limited to:
 * Splitting the edit command into various different commands
 * Redesigning the tagging system
 * Redesigning the find feature
-* Adding an user statistics feature
+* Adding a user statistics feature
 * Revamping the GUI
 * Adding theme switching feature
 * Adding various tabs to represent different lists
-* Various other minor changes to functionalites
+* Various other minor changes to functionalities
 
 Amongst these changes, we had the hardest time designing the find feature, as we wished to integrate it with our other features such as genres and tabs.
 Due to our iterative approach, we had to redesign other features to fit the needs of a redesigned find command, which took quite a few iterations before we got it to a point where we felt comfortable with it.
