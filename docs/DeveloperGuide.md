@@ -543,7 +543,7 @@ seen as the entry point that triggers the chain of tag modification operations a
 The following activity diagram summarizes what happens when a user executes an add command:
 
 <p align="center">
-<img src="images/AddUserTagActivityDiagram.png" width="250" />
+<img src="images/AddUserTagActivityDiagram.png" width="320" />
 </p>
 
 ###### Doubly link client and tags
@@ -553,7 +553,7 @@ Doubly linking client and tags allows us to monitor the "reference states" of th
 The following activity diagram summarizes what happens when a user executes an edit command:
 
 <p align="center">
-<img src="images/EditUserTagActivityDiagram.png" width="300" />
+<img src="images/EditUserTagActivityDiagram.png" width="320" />
 </p>
 
 ###### How unreferenced tags are "garbage collected"?
@@ -564,7 +564,7 @@ The garbage collector will iterate through the `UniqueTagList` and remove all `T
 The following activity diagram summarizes what happens when a user executes a delete command:
 
 <p align="center">
-<img src="images/DeleteUserTagActivityDiagram.png" width="300" />
+<img src="images/DeleteUserTagActivityDiagram.png" width="320" />
 </p>
 
 ###### Remove vs "Delete"
