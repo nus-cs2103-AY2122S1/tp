@@ -550,19 +550,20 @@ for future multiplayer competitive gaming sessions.
 
 ### 6.2 User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (useful to have) - `* *`, Low (nice to have) - `*`
 
 | Priority | As a (describes user) | I want to be able to (functionality)                               | So that I can (rationale)                                 |
 |----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
-| ***      | user                  | easily add my friends personal info/data (name, id)     | store a list of friends who I can possibly play with      |
+| ***      | user                  | add my friends personal info/data (name, id)     | store a list of friends who I can possibly play with      |
 | ***      | user                  | link my friends to the games they play                  | associate my friends with a particular game and store their usernames for each game               |
 | ***      | user                  | view a list of my friends information                   | see who my friends are                                    |
 | ***      | user                  | delete a friend from the contact list                   | remove friends that were mistakenly added                 |
 | ***      | user                  | see full information of a friend from the contact list  | get any information I want about the friend               |
-| ***      | user                  | easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
+| ***      | user                  | add games that I want to play with my friends    | store the games that I plan to play with my friends       |
 | ***      | user                  | view a list of my game information                      | see which of my friends play certain games                |
 | ***      | user                  | delete a game from the games list                       | remove games that were mistakenly added or due to typos   |
 | ***      | user                  | see full information of a game from the games list      | see information about which friends play the game and their in-game usernames    |
+| **       | user                  | edit my friends name                                    | update my friends' name without having to recreate a friend                    |
 | **       | user                  | unlink a game from a friend                             | remove the association between a friend and a certain game                       |
 | **       | user                  | add my friends' availabilities to my friends' schedules | store what time they are free during the week             |
 | **       | user                  | view my friends' availabilities in their schedules      | see what time they are free during the week to play with me                      |
@@ -570,8 +571,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **       | user                  | add my friends' skill levels for each game              | store their relative skill levels for each game that they play                   |
 | **       | user                  | update my friends' skill levels for each game           | update their skill levels over time                                              |
 | **       | user                  | view a recommended list of friends for a game and at a certain time             | find friends to play a game with me at a certain timing  |
-| *       | user                   | store friends' skill levels for a category of game             | store friends' skill levels for categories of games  |
-| *       | user                   | view friends' skill levels for a category of game             | see which friends are good at certain categories of games  |
+| *       | user                   | track the match history of my friends                  | monitor my friends' progress  |
+| *       | user                   | store my friends' skill levels of different genres of games                  | know which genre of games to play with my friend  |
+
 
 ### 6.3 Use cases
 
