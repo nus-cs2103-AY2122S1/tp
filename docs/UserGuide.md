@@ -67,6 +67,28 @@ The result of executing the input command will be displayed the lower-most box.
 
 ![Ui](images/commandBox.png)
 
+### Formats
+
+Below are some formats used used to convey different kinds of information:
+
+**Information boxes**
+
+<div markdown="span" class="alert alert-info"> :information_source: **Info:** These contain additional information about SafeFor(H)All.
+</div>
+
+**Tips**
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** These contain our tips that can help improve your experience using SafeFor(H)All.
+</div>
+
+**Warnings**
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** These contain warnings that can result in unintended consequences of a feature.
+</div>
+
+**Highlights**
+
+`These are used to highlight parameters, field values, commands, file names or any user inputs.`
 
 ## Features
 
@@ -179,7 +201,7 @@ Lists residents whose ART collection or FET tests are either:
 | Usage Example | A resident's fet or collection is due one week after their `last fet date` or `last collection date`. <br> For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021` | The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive.<br> For example, if a resident's last fet date is `15-10-2021`, then the fet deadline will be `22-10-2021`, if the current date is `25-10-2021`, then the number of days the resident is late for fet is `3 days`.
 | Note | The given `DATE2` must be a date later than the given `DATE1`<br>`DATE1` is the start date and `DATE2` is the last date inclusive | Anyone whose fet and collection is due before but not on `DATE1` is outputted
 
-Here's a step by step guide for `Normal Keyword`:<br>
+Here's a step-by-step guide for `Normal Keyword`:<br>
 1. Type the `deadline` command with the `normal keyword`, `f` for fet or `c` for collection, `d1`, the start date and
    `d2`, the end date.
    ![Step1](images/logic/commands/deadlinecommand/step1a.png)
@@ -189,7 +211,7 @@ Here's a step by step guide for `Normal Keyword`:<br>
    ![Step2](images/logic/commands/deadlinecommand/step2a.png)
 
 
-Here's a step by step guide for `Late Keyword`:<br>
+Here's a step-by-step guide for `Late Keyword`:<br>
 1. Type the `deadline` command with the `late keyword`, `lf` for late fet or `lc` for late collection, `d1`, the 
    end date
    ![Step1](images/logic/commands/deadlinecommand/step1b.png)
@@ -246,11 +268,40 @@ Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STAT
 * Existing values will be updated to the input values.
 * Edit multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Let’s say that residents Alex Yeoh and Bernice Yu just updated you that they are now fully vaccinated, and have submitted their overdue FET on 5th Nov 2021.
+
+You can easily update these details in a single `edit` command.<br>
+
+1. Navigate to the Resident Tab by either clicking on it, or if you were previously on the Events Tab, by entering the `switch` command.
+   ![Step1](images/logic/commands/editcommand/person/step1.png)
+
+2. To view Alex Yeoh's current vaccination status and last FET date, you can either click on him, or use the `view INDEX` command. In this case, Alex's index is reflected as 1 in the current list of residents.
+   ![Step2](images/logic/commands/editcommand/person/step2.png)
+
+3. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. 
+   To update Alex and Bernice's details, simply enter `edit 1 2 v/T fd/05-11-2021`.
+   ![Step3](images/logic/commands/editcommand/person/step3.png)
+
+4. The result box will notify you of the edited residents.
+   ![Step4](images/logic/commands/editcommand/person/step4.png)
+
+5. To check whether Alex Yeoh's vaccination status and last FET date have been correctly updated, again, you can either click on him, or use the `view INDEX` command to view his additional details. 
+   Note that in this case, Alex Yeoh and Bernice Yu no longer have outstanding FETs to submit, so the red flag around their name will be removed.
+   There will also be a syringe symbol beside their names that reflects their vaccination statuses without having to view their additional information.
+   ![Step5](images/logic/commands/editcommand/person/step5.png)
+
+6. Repeat Step 5 if you wish to do the check Bernice Yu's updated details as well.
+   ![Step6](images/logic/commands/editcommand/person/step6.png)
+   
+More Examples:
 *  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
 *  `edit 1 2 3 v/t fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
 #### Deleting a resident : `delete`
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `delete` command cannot be undone! Do make sure that you have entered the command correctly before running it.
+</div>
 
 Deletes specified residents from the address book.
 
@@ -261,7 +312,21 @@ Format: `delete INDEX…`
 * The indexes **must be positive integers** 1, 2, 3, …​
 * Delete multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Suppose Alex Yeoh and Bernice Yu have recently moved out of hall. To keep the addressbook updated, you want to remove them from the list of residents.
+
+You can easily do this a single `delete` command.<br>
+
+1. Navigate to the Resident Tab by either clicking on it, or if you were previously on the Events Tab, by entering the `switch` command.
+   ![Step1](images/logic/commands/deletecommand/person/step1.png)
+
+2. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. To remove them from the list of residents, enter `delete 1 2`.
+   ![Step2](images/logic/commands/deletecommand/person/step2.png)
+
+3. The result box will notify you of the deleted residents, and Alex Yeoh and Bernice Yu will then be removed from the resident list.
+   ![Step3](images/logic/commands/deletecommand/person/step3.png)
+
+More Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
 * `find n/Anne` followed by `delete 1` deletes the 1st resident named Anne in the results of the `find` command.
 
@@ -281,6 +346,9 @@ Examples:
 * `trace r/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
 
 #### Sorting residents : `sort`
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `sort` command cannot be undone!
+</div>
 
 Sorts the residents according to specified fields in ascending or descending order
 
@@ -432,7 +500,27 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CA
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
+Example:<br>
+Let’s say that Powerlifting changed the date and time of their event from `25 Oct 2021 8:00AM` to `26 Oct 2021 9:00AM`.
+
+You can easily update these details in a single `edit` command.<br>
+
+1. Navigate to the Event Tab by either clicking on it, or if you were previously on the Resident Tab, by entering the `switch` command.
+   ![Step1](images/logic/commands/editcommand/event/step1.png)
+
+2. To view Powerlifting's additional event details, you can either click on the event, or use the `view INDEX` command. In this case, Powerlifting's index is reflected as 1 in the current list of events.
+   ![Step2](images/logic/commands/editcommand/event/step2.png)
+
+3. To update the date and time of the event, simply enter `edit 1 d/26-10-2021 t/0900`.
+   ![Step3](images/logic/commands/editcommand/event/step3.png)
+
+4. The result box will display the updated details of the event.
+   ![Step4](images/logic/commands/editcommand/event/step4.png)
+
+5. To check whether the details have been correctly updated, again, you can either click on Powerlifting, or use the `view INDEX` command to view the additional event details.
+   ![Step5](images/logic/commands/editcommand/event/step5.png)
+
+More Examples:
 *  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
 #### Searching by event information: `find`
@@ -458,6 +546,9 @@ Examples:
 * `find d/03-01-2021` returns all the events which occur on the date `03-01-2021` <br>
 
 #### Deleting an event : `delete`
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `delete` command cannot be undone! Do make sure that you have entered the command correctly before running it.
+</div>
 
 Deletes specified events from the address book.
 
@@ -489,7 +580,7 @@ Format: `include INDEX r/RESIDENTS`
 
 </div>
 
-Here's a step by step guide:<br>
+Here's a step-by-step guide:<br>
 1. Type the `include` command with the `index` of the event, and the `names/rooms` of the residents to include to
    the event. When adding multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
    ![Step1](images/logic/commands/includecommand/step1.png)
@@ -523,7 +614,7 @@ Format: `exclude INDEX r/RESIDENTS`
 
 </div>
 
-Here's a step by step guide:<br>
+Here's a step-by-step guide:<br>
 1. Type the `exclude` command with the `index` of the event, and the `names/rooms` of the residents to exclude from
    the event. When removing multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
    ![Step1](images/logic/commands/excludecommand/step1.png)
@@ -539,6 +630,9 @@ Examples:
 * `exclude 4 r/John Doe, Jane Doe` removes John Doe and Jane Doe from the fourth event in the address book
 
 #### Sorting events : `sort`
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `sort` command cannot be undone!
+</div>
 
 Sorts the events according to specified fields in ascending or descending order.
 
