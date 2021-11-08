@@ -73,12 +73,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setSportsPaFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setSportsPaFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setSportsPaFilePath_validPath_setsSportsPaFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setSportsPaFilePath(path);
         assertEquals(path, modelManager.getSportsPaFilePath());
@@ -90,24 +90,24 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInSportsPa_returnsFalse() {
         assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInSportsPa_returnsTrue() {
         modelManager.addMember(ALICE);
         assertTrue(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void getSamePerson_personWithSameNameInAddressBook_returnsPersonWithSameName() {
+    public void getSamePerson_personWithSameNameInSportsPa_returnsPersonWithSameName() {
         modelManager.addMember(ALICE);
         assertEquals(modelManager.getSameMember(ALICE_DIFFERENT_PHONE), ALICE);
     }
 
     @Test
-    public void getSamePerson_personWithSameNameNotInAddressBook_returnsNull() {
+    public void getSamePerson_personWithSameNameNotInSportsPa_returnsNull() {
         assertNull(modelManager.getSameMember(BOB));
     }
 
