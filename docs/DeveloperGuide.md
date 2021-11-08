@@ -1675,7 +1675,7 @@ testers are expected to do more *exploratory* testing.
        produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
        `Unknown command` and the last one resulting in error message `The supplier index provided is invalid`
 
-3. Editing a supplier while supplier list is filtered.
+2. Editing a supplier while supplier list is filtered.
 
     1. Prerequisites: Filter display list by using the `findS KEYWORD` command,
        where `KEYWORD` must exist in at least 1 of the suppliers.
@@ -1700,7 +1700,7 @@ testers are expected to do more *exploratory* testing.
        produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
        `Unknown command` and the last one resulting in error message `The employee index provided is invalid`
 
-3. Editing an employee while employee list is filtered.
+2. Editing an employee while employee list is filtered.
 
     1. Prerequisites: Filter display list by using the `findE KEYWORD` command,
        where `KEYWORD` must exist in at least 1 of the employees.
@@ -1758,7 +1758,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect commands to try: `getC`, `getC -1`, `getC x` (where x is larger than the customer list size), `...` <br>
        Expected: Similar to previous.
 
-1. Getting the corresponding customer of a reservation while reservation list is filtered.
+2. Getting the corresponding customer of a reservation while reservation list is filtered.
 
     1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 reservation
        on `DATE`.
@@ -1777,7 +1777,7 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect commands to try: `getC`, `getC -1`, `getC x` (where x is larger than the customer list size), `...` <br>
       Expected: Similar to previous.
       
-1. Getting the corresponding customer of a reservation while reservation list is filtered.
+2. Getting the corresponding customer of a reservation while reservation list is filtered.
 
     1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 reservation 
        on `DATE`.
