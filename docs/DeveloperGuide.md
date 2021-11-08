@@ -1094,6 +1094,40 @@ Use case resumes from step 2.
 Steps 1c1 - 1c2 are repeated until the supplier to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
+**Use case (UC13): Delete a Reservation**
+
+**MSS**
+
+1. User enters the command to delete a reservation.
+2. The specified reservation is deleted from RHRH.
+3. System confirms that the reservation has been deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid reservation index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters reservation index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that reservation to delete does not exist in RHRH.
+    * 1c1. System displays an error that no such reservation index exist in RHRH.
+    * 1c2. User enters reservation index again
+
+Steps 1c1 - 1c2 are repeated until the reservation to delete exists in RHRH. <br>
+Use case resumes from step 2.
+
 **Use case (UC13): Find Customers in RHRH**
 
 **MSS**
@@ -1172,6 +1206,76 @@ Use case resumes from step 2.
 
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
+
+
+**Use case (UC20): Check for reservations made for a date and time**
+
+**MSS**
+
+1. User enters the command to check the reservations made for a date and time.
+2. System shows the reservations that are on that date and time.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. System detects invalid command format of date/time.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again. 
+      
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. 
+Use case resumes from step 2.
+
+* 1b. System detects that there are no reservations made for that date and time
+    * 1b1. No reservations are displayed
+
+      Use case ends
+
+**Use case (UC21): Check for reservations made for a date**
+
+**MSS**
+
+1. User enters the command to check the reservations made for a date.
+2. System shows the reservations that are on that date.
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. System detects invalid command format of date/time.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+  
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. 
+Use case resumes from step 2.
+
+* 1b. System detects that there are no reservations made for that date
+    * 1b1. No reservations are displayed
+
+      Use case ends
+
+**Use case (UC22): Check for reservations made for a time on the current date**
+
+**MSS**
+
+1. User enters the command to check the reservations made for a time on the current date.
+2. System shows the reservations that are on that time on the current date
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. System detects invalid command format of date/time.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+  
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+Use case resumes from step 2.
+
+* 1b. System detects that there are no reservations made for that time on the current date
+    * 1b1. No reservations are displayed
+
+      Use case ends
 
 **Use case (UC16): Set the tables of the restaurant inside the app**
 
@@ -1256,6 +1360,41 @@ Use case resumes from step 2.
 
   Use case ends.
 
+**Use case (UC19): Get customer who made a reservation in RHRH**
+
+**MSS**
+
+1. User enters the command to get the customer who made a specified reservation.
+2. The corresponding customer information is shown.
+3. System confirms that the corresponding customer is listed.
+
+   Use case ends.
+
+**Extension**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid reservation index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters reservation index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that reservation to get customer information does not exist in RHRH.
+    * 1c1. System displays an error that no such reservation index exist in RHRH.
+    * 1c2. User enters reservation index again
+
+Steps 1c1 - 1c2 are repeated until the reservation to get customer information exists in RHRH. <br>
+Use case resumes from step 2.
+
+
 **Use case (UC19): Sort Suppliers in RHRH**
 
 **MSS**
@@ -1288,78 +1427,6 @@ Use case resumes from step 2.
 
   Use case ends.
 
-
-**Use case (UC20): Check for reservations made for a date and time**
-
-**MSS**
-
-1. User enters the command to check the reservations made for a date and time.
-2. System shows the reservations that are on that date and time.
-
-   Use case ends.
-
-**Extensions:**
-
-* 1a. System detects invalid command format of date/time.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-  Use case resumes from step 2.
-
-* 1b. System detects that there are no reservations made for that date and time
-    * 1b1. No reservations are displayed
-
-      Use case ends
-
-**Use case (UC21): Check for reservations made for a date**
-
-**MSS**
-
-1. User enters the command to check the reservations made for a date.
-2. System shows the reservations that are on that date.
-
-   Use case ends
-
-**Extensions:**
-
-* 1a. System detects invalid command format of date/time.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-  Use case resumes from step 2.
-
-* 1b. System detects that there are no reservations made for that date
-    * 1b1. No reservations are displayed
-
-      Use case ends
-
-**Use case (UC22): Check for reservations made for a time on the current date**
-
-**MSS**
-
-1. User enters the command to check the reservations made for a time on the current date.
-2. System shows the reservations that are on that time on the current date
-
-   Use case ends
-
-**Extensions:**
-
-* 1a. System detects invalid command format of date/time.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-  Use case resumes from step 2.
-
-* 1b. System detects that there are no reservations made for that time on the current date
-    * 1b1. No reservations are displayed
-
-      Use case ends
     
 **Use case (UC23): List all customers/employees/suppliers in default sorting order(by `name`)**
 
