@@ -371,20 +371,19 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX, which filters its contents based on a specified `Predicate`.  
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
 
-<div markdown="block" class="alert alert-info"> 
-* This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
 </div>  
 
 Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
 The process is described by the following sequence diagram:
 
-<img src="images/filterapplicantsequencediagram0.png" width="950" />
+<img src="images/FilterApplicantSequenceDiagram0.png" width="950" />
 
 The role of the `FilterApplicantDescriptor` class is to store the details of the parsed filters for the `Model` component's use, when the `FilterApplicantCommand` is subsequently executed.
 
 The execution of the `FilterApplicantCommand` is shown below in a sequence diagram (as a continuation of the diagram above):
 
-<img src="images/filterapplicantsequencediagram1.png" width="1100" />
+<img src="images/FilterApplicantSequenceDiagram1.png" width="1100" />
 
 The `FilterApplicantDescriptorVerifier` class verifies the 
 original `FilterApplicantDescriptor` against the `Model`,
