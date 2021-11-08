@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EdRecordParser" as EdRecordParser LOGIC_COLOR
+participant ":MakeAssignmentCommandParser" as MakeAssignmentCommandParser LOGIC_COLOR
+participant "m:MakeAssignmentCommand" as MakeAssignmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Assignment" as Assignment MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mkasg \n n/PE w/5 s/10")
+activate LogicManager
+
+LogicManager -> EdRecordParser : parseCommand(\n"n/PE w/5 s/10")
+activate EdRecordParser
+
+create MakeAssignmentCommandParser
+EdRecordParser -> MakeAssignmentCommandParser
+activate MakeAssignmentCommandParser
+
+MakeAssignmentCommandParser --> EdRecordParser
+deactivate MakeAssignmentCommandParser
+
+EdRecordParser -> MakeAssignmentCommandParser : parse("n/PE w/5 s/10")
+activate MakeAssignmentCommandParser
+
+create MakeAssignmentCommand
+MakeAssignmentCommandParser -> MakeAssignmentCommand
+activate MakeAssignmentCommand
+
+create Assignment
+MakeAssignmentCommand -> Assignment
+activate Assignment
+
+Assignment --> MakeAssignmentCommand
+deactivate Assignment
+
+MakeAssignmentCommand --> MakeAssignmentCommandParser : m
+deactivate MakeAssignmentCommand
+
+MakeAssignmentCommandParser --> EdRecordParser : m
+deactivate MakeAssignmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MakeAssignmentCommandParser -[hidden]-> EdRecordParser
+destroy MakeAssignmentCommandParser
+
+EdRecordParser --> LogicManager : m
+deactivate EdRecordParser
+
+LogicManager -> MakeAssignmentCommand : execute()
+activate MakeAssignmentCommand
+
+MakeAssignmentCommand -> Model : addAssignment()
+activate Model
+
+ref over Model
+add Asg
+end ref
+
+Model --> MakeAssignmentCommand
+deactivate Model
+
+create CommandResult
+MakeAssignmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MakeAssignmentCommand
+deactivate CommandResult
+
+MakeAssignmentCommand --> LogicManager : result
+deactivate MakeAssignmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
