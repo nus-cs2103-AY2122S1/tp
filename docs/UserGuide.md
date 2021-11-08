@@ -512,7 +512,7 @@ Removes the participant with the first specified index from the event with the s
 
 Format: `expel PARTICIPANT_INDEX EVENT_INDEX`
 
-* Removes the participant at specified `PARTICIPANT_INDEX` from the event at specified index `EVENT_INDEX`.
+* Removes the participant at specified `PARTICIPANT_INDEX` from the event at specified `EVENT_INDEX`.
 * `PARTICIPANT_INDEX` refers to the index number of the participant as shown in the displayed participant list.
 * `EVENT_INDEX` refers to the index number of the event as shown in the displayed event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
