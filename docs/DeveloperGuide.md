@@ -668,22 +668,22 @@ Here's what you should do:
 1. cd to `tp/src/main/resources/view`.
 2. Open `BookTheme.css`.
 3. On the top of the css file, you will see that all the [css variables](https://www.w3schools.com/css/css3_variables.asp) are nicely organised and defined for you.
-Here's the css snippet (The comment briefly describes what each of the variables does):
-````
-* {
-    -fx-base1: #cb997e; // base color 1 (preferably the darkest tone) (the main background color of LeadsForce)
-    -fx-base2: #eddcd2; // base color 2
-    -fx-base3: #fff1e6; // base color 3
-    -fx-base4: #f0efeb; // base color 4
-    -fx-base5: #ddbea9; // base color 5 (preferably the lightest tone)
-    -fx-font-color: derive(-fx-base1, -30%); // the color of a generic font in LeadsForce
-    -fx-font-color-bright: #ffffff; // the color of `bright` font in LeadsForce (for fonts that overlay component of base color 1)
-    -fx-menu-color: #263238; // color of the menu
-    -fx-menu-color-highlighted: #455a64; // color of the menu when highlighted
-    -fx-menu-font-color: #ffffff; // color of the menu font
-    -fx-menu-font-color-highlighted: #ffffff; // color of the menu font when highlighted
-}
-````
+The following table describes what each of the css variables does:
+
+CSS Variable | Description | Default (in BookTheme)
+--------|---------|---------
+-fx-base1 | Base color 1 <br>• Preferably the darkest tone.<br>• Used as the main background color of LeadsForce. | #cb997e
+-fx-base2 | Base color 2 | #eddcd2
+-fx-base3 | Base color 3 | #fff1e6
+-fx-base4 | Base color 4 | #f0efeb
+-fx-base5 | Base color 5 <br>• Preferably the lightest tone. | #ddbea9
+-fx-font-color | The color of a generic font in LeadsForce | derive(-fx-base1, -30%)
+-fx-font-color-bright | The color of a "bright" font in LeadsForce <br>• "Bright" fonts overlay components of base color 1. | #ffffff
+-fx-menu-color | Color of the menu | #263238
+-fx-menu-color-highlighted | Color of the menu when highlighted | #455a64
+-fx-menu-font-color | Color of the menu font | #ffffff
+-fx-menu-font-color-highlighted | Color of the menu font when highlighted | #ffffff
+
 4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
 5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
 <p align="center">
@@ -699,7 +699,7 @@ If you want to add more themes on top of our existing themes, here's what you sh
 5. Save the file and cd to `tp/src/main/java/seedu/address/storage/ThemeList.java`.
 6. Add `RainbowTheme.css` to the static variable `THEMES` like so:<br>
 ````
-private static final List<String> THEMES = List.of("BookTheme", "TwilightTheme", "DarkTheme", "SpaceTheme", "RainbowTheme");
+List.of("BookTheme", "TwilightTheme", "DarkTheme", "SpaceTheme", "RainbowTheme");
 ````
 7. Now boot up LeadsForce and you should see that your newly added theme is available in the menu bar. Hooray!
 <p align="center">
