@@ -366,6 +366,9 @@ Examples:
 * `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` adds a student with name `John Does`, student phone number `81234567`, parent's name `Mrs Doe` and parent's phone number `91234567`.
 
 * The student's phone number, parent's name and parent's phone number are optional details for you to include.
+* Names can only contain alphanumerical characters and spaces.
+* Phone numbers can only contain digits 0-9 and should not contain any spaces.
+* Phone numbers must be minimally 3 digits long.
 
 > :bulb: TutorAid does not allow you to add duplicate students. A student is considered as a duplicate if he/she has the exact same name (case-insensitive) as an existing student in the app.
 > For example, TutorAid will consider 'John Doe' and 'john doe' as the same student, but not 'John Doe' and 'John'.
