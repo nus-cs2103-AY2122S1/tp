@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":QuizInputParser" as QuizInputParser LOGIC_COLOR
+participant "d:NextQuestionCommand" as NextQuestionCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "quizManager:QuizManager" as QuizManager LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("next", quizManager)
+activate LogicManager
+
+LogicManager -> QuizInputParser : parseCommand("next", quizManager)
+activate QuizInputParser
+
+
+create NextQuestionCommand
+QuizInputParser -> NextQuestionCommand
+activate NextQuestionCommand
+
+NextQuestionCommand --> QuizInputParser : d
+deactivate NextQuestionCommand
+
+QuizInputParser --> LogicManager : d
+deactivate QuizInputParser
+
+LogicManager -> NextQuestionCommand : execute()
+activate NextQuestionCommand
+
+NextQuestionCommand -> QuizManager : nextQuestion()
+activate QuizManager
+
+QuizManager --> NextQuestionCommand
+deactivate QuizManager
+
+create CommandResult
+NextQuestionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NextQuestionCommand
+deactivate CommandResult
+
+NextQuestionCommand --> LogicManager : result
+deactivate NextQuestionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

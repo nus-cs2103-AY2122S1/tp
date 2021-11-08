@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant "<<class>>\nUiUtils" as UiUtils UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":UserPrefs" as UserPrefs MODEL_COLOR
+end box
+
+MainWindow -> LogicManager : getTheme()
+activate LogicManager LOGIC_COLOR
+
+LogicManager -> Model : getTheme()
+activate Model MODEL_COLOR
+
+Model -> UserPrefs : getTheme()
+activate UserPrefs MODEL_COLOR
+
+UserPrefs --> Model : theme
+deactivate UserPrefs
+
+Model --> LogicManager : theme
+deactivate Model
+
+LogicManager --> MainWindow : theme
+deactivate LogicManager
+
+MainWindow -> UiUtils : setTheme(theme)
+activate UiUtils UI_COLOR
+
+UiUtils --> MainWindow
+deactivate UiUtils
+
+deactivate MainWindow
+
+
+
+
+@enduml

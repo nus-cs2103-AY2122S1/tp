@@ -1,0 +1,13 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor STATISTIC_COLOR
+
+package Statistic <<Rectangle>>{
+Class Statistic
+Class TagStatistic
+}
+
+TagStatistic -up-|> Statistic
+@enduml

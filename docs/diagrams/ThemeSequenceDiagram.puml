@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "t:ThemeCommand" as ThemeCommand LOGIC_COLOR
+participant "c:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":UserPrefs" as UserPrefs MODEL_COLOR
+end box
+
+[-> ThemeCommand : t.execute()
+activate ThemeCommand LOGIC_COLOR
+
+ThemeCommand -> Model : setTheme(theme)
+activate Model MODEL_COLOR
+
+Model -> UserPrefs : setTheme(theme)
+activate UserPrefs MODEL_COLOR
+UserPrefs --> Model
+deactivate UserPrefs
+
+Model --> ThemeCommand
+deactivate Model
+
+create CommandResult
+ThemeCommand -> CommandResult
+activate CommandResult LOGIC_COLOR
+
+CommandResult --> ThemeCommand : c
+deactivate CommandResult
+
+[<-- ThemeCommand : c
+deactivate ThemeCommand
+
+@enduml

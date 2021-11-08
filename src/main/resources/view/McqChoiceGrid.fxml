@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane id="mcqGrid" fx:id="mcqGrid" alignment="CENTER" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0"/>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" minHeight="10.0" percentHeight="50.0"/>
+        <RowConstraints vgrow="ALWAYS" minHeight="10.0" percentHeight="50.0"/>
+    </rowConstraints>
+    <children>
+        <Button fx:id="optionA" mnemonicParsing="false" styleClass="quiz-choice" text="\$optionA" />
+        <Button fx:id="optionB" mnemonicParsing="false" styleClass="quiz-choice" text="\$optionB" GridPane.columnIndex="1" />
+        <Button fx:id="optionC" mnemonicParsing="false" styleClass="quiz-choice" text="\$optionC" GridPane.rowIndex="1" />
+        <Button fx:id="optionD" mnemonicParsing="false" styleClass="quiz-choice" text="\$optionD" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    </children>
+</GridPane>

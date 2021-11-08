@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package "Logic" #F4F6F6{
+
+package "Parsers" {
+Class SmartNusParser LOGIC_COLOR
+Class FindCommandParser LOGIC_COLOR
+}
+
+package "Commands" {
+Class FindCommand LOGIC_COLOR
+}
+
+}
+
+package "Model" #F4F6F6{
+Interface Predicate<Question> <<Interface>> MODEL_COLOR
+Class NameContainsKeywordPredicate MODEL_COLOR
+Class TagsContainKeywordsPredicate MODEL_COLOR
+Class HasImportancePredicate MODEL_COLOR
+}
+
+
+NameContainsKeywordPredicate .up[MODEL_COLOR].|> Predicate
+NameContainsKeywordPredicate -down[hidden]-> TagsContainKeywordsPredicate
+TagsContainKeywordsPredicate .up[MODEL_COLOR].|> Predicate
+HasImportancePredicate .up[MODEL_COLOR].|> Predicate
+
+SmartNusParser ..[LOGIC_COLOR]> "creates" FindCommandParser
+FindCommandParser .[LOGIC_COLOR].> "creates"  FindCommand
+FindCommandParser .[LOGIC_COLOR].> "creates"  Predicate
+FindCommand -r[LOGIC_COLOR]-> "1..*" Predicate
+
+@enduml

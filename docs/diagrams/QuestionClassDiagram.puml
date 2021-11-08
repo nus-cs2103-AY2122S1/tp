@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class "{abstract}\nQuestion" as Question
+Class Name
+Class Importance
+Class Tag
+
+Question *-left-> Name
+Question *-l-> Importance
+Question *-l-> "1..*" Choice
+Question *-l-> "*" Tag
+Question *-l-> "1" Statistic
+MultipleChoiceQuestion -up-|> Question
+TrueFalseQuestion -up-|> Question
+ShortAnswerQuestion -up-|> Question
+
+@enduml

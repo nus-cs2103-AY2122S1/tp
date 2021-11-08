@@ -1,0 +1,79 @@
+{
+  "_comment": "SmartNus save file which contains the same Question values as in TypicalQuestions#getTypicalSmartNus()",
+  "questions" : [ {
+    "name" : "Alice Pauline",
+    "importance" : "1",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "importance" : "2",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "importance" : "3",
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "importance" : "1",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "importance" : "2",
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "importance" : "3",
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "importance" : "1",
+    "tagged" : [ ]
+  }, {
+    "name" : "What is 1+1?",
+    "importance" : "1",
+    "tagged" : [ ],
+    "choices" : [ {
+      "title" : "2",
+      "isCorrect" : true
+    }, {
+      "title" : "1",
+      "isCorrect" : false
+    }, {
+      "title" : "4",
+      "isCorrect" : false
+    }, {
+      "title" : "2",
+      "isCorrect" : false
+    } ],
+    "questionType" : 0,
+    "attemptCount" : 0,
+    "correctCount" : 0
+  }, {
+    "name" : "Is 1+1 = 2?",
+    "importance" : "2",
+    "tagged" : [],
+    "choices" : [ {
+      "title" : "True",
+      "isCorrect" : true
+    }, {
+      "title" : "False",
+      "isCorrect" : false
+    } ],
+    "questionType" : 1,
+    "attemptCount" : 0,
+    "correctCount" : 0
+  }, {
+    "name" : "Harry, you're a wizard. Where is this quote from?",
+    "importance" : "2",
+    "tagged" : [ ],
+    "choices" : [ {
+      "title" : "Harry Potter and the Philosopher's Stone",
+      "isCorrect" : true,
+      "keywords" : [ "harry", "potter" ]
+    } ],
+    "questionType" : 0,
+    "attemptCount" : 0,
+    "correctCount" : 0
+  }
+  ]
+}

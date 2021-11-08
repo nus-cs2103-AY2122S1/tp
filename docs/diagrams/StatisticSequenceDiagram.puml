@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+
+Participant ":Question" as question MODEL_COLOR
+Participant ":Statistic" as statistic STATISTIC_COLOR
+
+[-[USER_COLOR]> question : attemptAndCheckAnswer(Choice)
+activate question MODEL_COLOR
+
+question-[MODEL_COLOR]> statistic : addAttempt()
+activate statistic STATISTIC_COLOR
+statistic --[STATISTIC_COLOR]> question
+
+question -[MODEL_COLOR]> statistic : addCorrect()
+statistic --[STATISTIC_COLOR]> question
+deactivate statistic
+
+[<-[MODEL_COLOR]- question : True
+deactivate question
+
+@enduml

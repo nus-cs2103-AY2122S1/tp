@@ -3,57 +3,57 @@ layout: page
 title: About Us
 ---
 
+**SmartNUS** is a project built for CS2103T Software Engineering.
+
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+## Project Team
 
-## Project team
+### Abhishek Gupta
 
-### John Doe
+<img src="images/agentum07.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/agentum07)]
+[[portfolio](team/agentum07.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Implementation of note features, refactoring storage
 
-### Jean Doe
+### Arya Nagatama Giat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aryagiat.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/aryagiat)]
+[[portfolio](team/aryagiat.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Implementation of UI features and user statistics
+
+### Neo Jing Xuan
+
+<img src="images/neojxuan.png" width="200px">
+
+[[github](http://github.com/neojxuan)] [[portfolio](team/neojxuan.md)]
+
+* Role: Developer
+* Responsibilities: Morphed AB3 into a question bank app, implementation of find and short answer question features
+
+### Ong Jun Heng, Cedric
+
+<img src="images/cedricongjh.png" width="200px">
+
+[[github](http://github.com/cedricongjh)]
+[[portfolio](team/cedricongjh.md)]
+
+* Role: Developer
+* Responsibilities: Adding MCQs and TFQs, enhancing quiz features, enhancing statistics 
+
+### Peh Kai Min, Ryan
+
+<img src="images/ryanpeh.png" width="200px">
+
+[[github](http://github.com/ryanpeh)]
+[[portfolio](team/ryanpeh.md)]
+
+* Role: Developer
+* Responsibilities: Implementation of quiz features

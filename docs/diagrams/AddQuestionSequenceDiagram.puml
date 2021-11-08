@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SmartNusParser" as SmartNusParser LOGIC_COLOR
+participant ":AddTfqCommandParser" as AddTfqCommandParser LOGIC_COLOR
+participant "a:AddTfqCommand" as AddTfqCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute
+activate LogicManager
+
+LogicManager -> SmartNusParser : parseCommand
+activate SmartNusParser
+
+create AddTfqCommandParser
+SmartNusParser -> AddTfqCommandParser
+activate AddTfqCommandParser
+
+AddTfqCommandParser --> SmartNusParser
+deactivate AddTfqCommandParser
+
+SmartNusParser -> AddTfqCommandParser : parse
+activate AddTfqCommandParser
+
+create AddTfqCommand
+AddTfqCommandParser -> AddTfqCommand
+activate AddTfqCommand
+
+AddTfqCommand --> AddTfqCommandParser : a
+deactivate AddTfqCommand
+
+AddTfqCommandParser --> SmartNusParser : a
+deactivate AddTfqCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTfqCommandParser -[hidden]-> SmartNusParser
+destroy AddTfqCommandParser
+
+SmartNusParser --> LogicManager : a
+deactivate SmartNusParser
+
+LogicManager -> AddTfqCommand : execute
+activate AddTfqCommand
+
+AddTfqCommand -> Model : addQuestion
+activate Model
+
+Model --> AddTfqCommand
+deactivate Model
+
+create CommandResult
+AddTfqCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTfqCommand
+deactivate CommandResult
+
+AddTfqCommand --> LogicManager : result
+deactivate AddTfqCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

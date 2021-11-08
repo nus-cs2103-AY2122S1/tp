@@ -6,11 +6,13 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
 
-Class AddressBookParser
+Class SmartNusParser
+Class QuizInputParser
 Class XYZCommand
+Class ABCCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
-
+Class QuizInputParser
 
 Interface Logic <<Interface>>
 Class LogicManager
@@ -27,18 +29,24 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager -->"1" QuizInputParser
+LogicManager -->"1" SmartNusParser
+SmartNusParser ..> XYZCommand : creates >
+QuizInputParser ..> ABCCommand : creates >
+QuizInputParser .right[hidden].> SmartNusParser
+SmartNusParser .left[hidden].> SmartNusParser
 
 XYZCommand -up-|> Command
+ABCCommand -up-|> Command
 LogicManager .left.> Command : executes >
 
 LogicManager --> Model
 LogicManager --> Storage
 Storage --[hidden] Model
-Command .[hidden]up.> Storage
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+
+note bottom of XYZCommand: XYZCommand = AddQuestionCommand, \nFindCommand, etc
+note bottom of ABCCommand: ABCCommand = AnswerMcqCommand, \nNextQuestionCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult

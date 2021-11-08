@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":QuizInputParser" as QuizInputParser LOGIC_COLOR
+participant ":AnswerMcqCommandParser" as AnswerMcqCommandParser LOGIC_COLOR
+participant "d:AnswerMcqCommand" as AnswerMcqCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "quizManager:QuizManager" as QuizManager LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("A", quizManager)
+activate LogicManager
+
+LogicManager -> QuizInputParser : parseCommand("A", quizManager)
+activate QuizInputParser
+
+create AnswerMcqCommandParser
+QuizInputParser -> AnswerMcqCommandParser
+activate AnswerMcqCommandParser
+
+AnswerMcqCommandParser --> QuizInputParser
+deactivate AnswerMcqCommandParser
+
+QuizInputParser -> AnswerMcqCommandParser : parse("A", quizManager)
+activate AnswerMcqCommandParser
+
+create AnswerMcqCommand
+AnswerMcqCommandParser -> AnswerMcqCommand
+activate AnswerMcqCommand
+
+AnswerMcqCommand --> AnswerMcqCommandParser : d
+deactivate AnswerMcqCommand
+
+AnswerMcqCommandParser --> QuizInputParser : d
+deactivate AnswerMcqCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AnswerMcqCommandParser -[hidden]-> QuizInputParser
+destroy AnswerMcqCommandParser
+
+QuizInputParser --> LogicManager : d
+deactivate QuizInputParser
+
+LogicManager -> AnswerMcqCommand : execute()
+activate AnswerMcqCommand
+
+AnswerMcqCommand -> QuizManager : attemptAndCheckAnswer(Choice)
+activate QuizManager
+
+QuizManager --> AnswerMcqCommand
+deactivate QuizManager
+
+create CommandResult
+AnswerMcqCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AnswerMcqCommand
+deactivate CommandResult
+
+AnswerMcqCommand --> LogicManager : result
+deactivate AnswerMcqCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

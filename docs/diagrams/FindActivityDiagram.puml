@@ -1,0 +1,25 @@
+@startuml
+start
+:User executes find command;
+:Create FindCommandParser;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user specifies "question"])
+    :Create FindQuestionCommandParser;
+    :Create FindQuestionCommand;
+    :Update FilteredQuestionList;
+    :Display updated FilteredQuestionList;
+else ([else])
+    if() then ([user specifies "note"])
+        :Create FindNoteCommandParser;
+        :Create FindNoteCommand;
+        :Update FilteredNoteList;
+        :Display updated FilteredNoteList;
+    else([user does not specify object to search for])
+        :Throw ParseException;
+    endif
+endif
+stop
+@enduml

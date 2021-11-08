@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor COMMON_COLOR
+
+package Commons <<Rectangle>>{
+Class Theme
+Class LightTheme
+Class DarkTheme
+}
+
+LightTheme -up-|> Theme
+DarkTheme -up-|> Theme
+@enduml

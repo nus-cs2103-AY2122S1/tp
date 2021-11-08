@@ -1,0 +1,25 @@
+{
+  "questions": [
+    {
+      "name": "SAQ with answer that has no keywords",
+      "importance": "3",
+      "tagged": [
+        "Java",
+        "CS2103T",
+        "style"
+      ],
+      "choices": [
+        {
+          "title": "answer with no keywords",
+          "isCorrect": false,
+          "keywords": []
+        }
+      ],
+      "questionType": 2,
+      "attemptCount": 0,
+      "correctCount": 0
+    }
+  ],
+
+  "notes": []
+}

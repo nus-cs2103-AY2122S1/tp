@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package AddQuestionLogic {
+Class "{abstract}\nCommand" as Command
+Class SmartNusParser
+Class AddQuestionCommand
+Class AddSaqCommand
+Class AddTfqCommand
+Class AddMcqCommand
+}
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> SmartNusParser
+HiddenOutside ..> Command
+
+SmartNusParser ..> AddSaqCommand : creates >
+SmartNusParser ..> AddMcqCommand : creates >
+SmartNusParser ..> AddTfqCommand : creates >
+AddQuestionCommand -up-|> Command
+AddSaqCommand -up--|> AddQuestionCommand
+AddTfqCommand -up--|> AddQuestionCommand
+AddMcqCommand -up--|> AddQuestionCommand
+SmartNusParser .right[hidden].> Command
+
+
+
+@enduml

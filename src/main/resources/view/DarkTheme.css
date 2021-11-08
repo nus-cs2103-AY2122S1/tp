@@ -212,9 +212,9 @@
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
-.button {
+.button, .chosen-button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #1d1d1d;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
@@ -225,7 +225,9 @@
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-border-color: #484747;
+    -fx-background-color: #484747;
+    -fx-text-fill: #d8d8d8;
 }
 
 .button:pressed, .button:default:hover:pressed {
@@ -254,6 +256,11 @@
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color, 30%);
+}
+
+.unchosen-button {
+    -fx-border-color: #6c6c6c;
+    -fx-background-color: #6c6c6c;
 }
 
 .dialog-pane {
@@ -328,11 +335,16 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #questionListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+}
+
+#questionDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
@@ -349,4 +361,41 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#choices {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#choices .label {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 14;
+}
+
+.correct-choice-bg {
+    -fx-background-color: #035546;
+}
+
+.wrong-choice-bg {
+    -fx-background-color: #802b40;
+}
+
+.quiz-choice:disabled {
+    -fx-max-height: Infinity;
+    -fx-max-width: Infinity;
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+    -fx-wrap-text: true;
+}
+
+.quiz-choice-correct:disabled {
+    -fx-background-color: darkgreen;
+}
+
+.quiz-choice-incorrect:disabled {
+    -fx-background-color: darkred;
 }

@@ -1,0 +1,12 @@
+@startuml
+
+(*) --> "User answers the question"
+--> "increment attempt count"
+
+if "is correct answer" then
+    --> [true] "increment correct count"
+    --> (*)
+else
+    -> [false] (*)
+
+@enduml

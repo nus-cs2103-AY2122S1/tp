@@ -1,0 +1,30 @@
+{
+  "questions": [
+    {
+      "name": "TFQ with choice title not True or False",
+      "importance": "3",
+      "tagged": [
+        "Java",
+        "CS2103T",
+        "style"
+      ],
+      "choices": [
+        {
+          "title": "True",
+          "isCorrect": false,
+          "keywords": []
+        },
+        {
+          "title": "Not True/False",
+          "isCorrect": true,
+          "keywords": []
+        }
+      ],
+      "questionType": 1,
+      "attemptCount": 0,
+      "correctCount": 0
+    }
+  ],
+
+  "notes": []
+}

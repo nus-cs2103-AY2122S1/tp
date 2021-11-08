@@ -261,3 +261,10 @@
     width: calc(50% - (#{$spacing-unit} / 2));
   }
 }
+
+/**
+  * Remove bullet points
+  */
+.no-bullet-points ul {
+  list-style-type: none;
+}

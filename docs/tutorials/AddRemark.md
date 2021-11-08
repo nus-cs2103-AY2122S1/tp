@@ -5,9 +5,9 @@ title: "Tutorial: Adding a command"
 
 Let's walk you through the implementation of a new command — `remark`.
 
-This command allows users of the AddressBook application to add optional remarks to people in their address book and edit it if required. The command should have the following format:
+This command allows users of the SmartNUS application to add optional remarks to a question in their question list and edit it if required. The command should have the following format:
 
-`remark INDEX r/REMARK` (e.g., `remark 2 r/Likes baseball`)
+`remark INDEX r/REMARK` (e.g., `remark 2 r/need to review`)
 
 We’ll assume that you have already set up the development environment as outlined in the Developer’s Guide.
 
@@ -16,19 +16,19 @@ We’ll assume that you have already set up the development environment as outli
 
 Looking in the `logic.command` package, you will notice that each existing command have their own class. All the commands inherit from the abstract class `Command` which means that they must override `execute()`. Each `Command` returns an instance of `CommandResult` upon success and `CommandResult#feedbackToUser` is printed to the `ResultDisplay`.
 
-Let’s start by creating a new `RemarkCommand` class in the `src/main/java/seedu/address/logic/command` directory.
+Let’s start by creating a new `RemarkCommand` class in the `src/main/java/seedu/smartnus/logic/command` directory.
 
 For now, let’s keep `RemarkCommand` as simple as possible and print some output. We accomplish that by returning a `CommandResult` with an accompanying message.
 
 **`RemarkCommand.java`:**
 
 ``` java
-package seedu.address.logic.commands;
+package seedu.smartnus.logic.commands;
 
-import seedu.address.model.Model;
+import seedu.smartnus.model.Model;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing question in the question list.
  */
 public class RemarkCommand extends Command {
 
@@ -43,9 +43,7 @@ public class RemarkCommand extends Command {
 
 ### Hook `RemarkCommand` into the application
 
-Now that we have our `RemarkCommand` ready to be executed, we need to update `AddressBookParser#parseCommand()` to recognize the `remark` keyword. Add the new command to the `switch` block by creating a new `case` that returns a new instance of `RemarkCommand`.
-
-You can refer to the changes in this [diff](https://github.com/se-edu/addressbook-level3/commit/35eb7286f18a029d39cb7a29df8f172a001e4fd8#diff-34ace715a8a8d2e5a66e71289f017b47).
+Now that we have our `RemarkCommand` ready to be executed, we need to update `SmartNusParser#parseCommand()` to recognize the `remark` keyword. Add the new command to the `switch` block by creating a new `case` that returns a new instance of `RemarkCommand`.
 
 ### Run the application
 
@@ -65,8 +63,8 @@ Following the convention in other commands, we add relevant messages as constant
 
 ``` java
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the remark of the person identified "
-            + "by the index number used in the last person listing. "
+            + ": Edits the remark of the question identified "
+            + "by the index number used in the last question listing. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "r/ [REMARK]\n"
@@ -91,7 +89,7 @@ Let’s change `RemarkCommand` to parse input from the user.
 We start by modifying the constructor of `RemarkCommand` to accept an `Index` and a `String`. While we are at it, let’s change the error message to echo the values. While this is not a replacement for tests, it is an obvious way to tell if our code is functioning as intended.
 
 ``` java
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.smartnus.commons.util.CollectionUtil.requireAllNonNull;
 //...
 public class RemarkCommand extends Command {
     //...
@@ -101,8 +99,8 @@ public class RemarkCommand extends Command {
     private final String remark;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
-     * @param remark of the person to be updated to
+     * @param index of the question in the filtered question list to edit the remark
+     * @param remark of the question to be updated to
      */
     public RemarkCommand(Index index, String remark) {
         requireAllNonNull(index, remark);
@@ -136,13 +134,12 @@ public class RemarkCommand extends Command {
 }
 ```
 
-Your code should look something like [this](https://github.com/se-edu/addressbook-level3/commit/35eb7286f18a029d39cb7a29df8f172a001e4fd8#diff-34ace715a8a8d2e5a66e71289f017b47) after you are done.
 
 ### Parse user input
 
 Now let’s move on to writing a parser that will extract the index and remark from the input provided by the user.
 
-Create a `RemarkCommandParser` class in the `seedu.address.logic.parser` package. The class must extend the `Parser` interface.
+Create a `RemarkCommandParser` class in the `seedu.smartnus.logic.parser` package. The class must extend the `Parser` interface.
 
 ![The relationship between Parser and RemarkCommandParser](../images/add-remark/ParserInterface.png)
 
@@ -216,22 +213,20 @@ public RemarkCommand parse(String args) throws ParseException {
 
 <div markdown="span" class="alert alert-primary">
 
-:information_source: Don’t forget to update `AddressBookParser` to use our new `RemarkCommandParser`!
+:information_source: Don’t forget to update `SmartNusParser` to use our new `RemarkCommandParser`!
 
 </div>
 
-If you are stuck, check out the sample
-[here](https://github.com/se-edu/addressbook-level3/commit/dc6d5139d08f6403da0ec624ea32bd79a2ae0cbf#diff-fc19ecee89c3732a62fbc8c840250508).
 
 ## Add `Remark` to the model
 
-Now that we have all the information that we need, let’s lay the groundwork for propagating the remarks added into the in-memory storage of person data. We achieve that by working with the `Person` model. Each field in a Person is implemented as a separate class (e.g. a `Name` object represents the person’s name). That means we should add a `Remark` class so that we can use a `Remark` object to represent a remark given to a person.
+Now that we have all the information that we need, let’s lay the groundwork for propagating the remarks added into the in-memory storage of question data. We achieve that by working with the `Question` model. Each field in a Question is implemented as a separate class (e.g. a `Name` object represents the question’s name). That means we should add a `Remark` class so that we can use a `Remark` object to represent a remark given to a question.
 
 ### Add a new `Remark` class
 
-Create a new `Remark` in `seedu.address.model.person`. Since a `Remark` is a field that is similar to `Address`, we can reuse a significant bit of code.
+Create a new `Remark` in `seedu.smartnus.model.Question`. Since a `Remark` is a field that is similar to `Tag`, we can reuse a significant bit of code.
 
-A copy-paste and search-replace later, you should have something like [this](https://github.com/se-edu/addressbook-level3/commit/4516e099699baa9e2d51801bd26f016d812dedcc#diff-af2f075d24dfcd333876f0fbce321f25). Note how `Remark` has no constrains and thus does not require input
+A copy-paste and search-replace later. Note how `Remark` has no constrains and thus does not require input
 validation.
 
 ### Make use of `Remark`
@@ -240,11 +235,11 @@ Let’s change `RemarkCommand` and `RemarkCommandParser` to use the new `Remark`
 
 ## Add a placeholder element for remark to the UI
 
-Without getting too deep into `fxml`, let’s go on a 5 minute adventure to get some placeholder text to show up for each person.
+Without getting too deep into `fxml`, let’s go on a 5 minute adventure to get some placeholder text to show up for each question.
 
-Simply add the following to [`seedu.address.ui.PersonCard`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-0c6b6abcfac8c205e075294f25e851fe).
+Simply add the following to `seedu.smartnus.ui.card.QuestionCard`.
 
-**`PersonCard.java`:**
+**`QuestionCard.java`:**
 
 ``` java
 @FXML
@@ -254,70 +249,61 @@ private Label remark;
 
 `@FXML` is an annotation that marks a private or protected field and makes it accessible to FXML. It might sound like Greek to you right now, don’t worry — we will get back to it later.
 
-Then insert the following into [`main/resources/view/PersonListCard.fxml`](https://github.com/se-edu/addressbook-level3/commit/850b78879582f38accb05dd20c245963c65ea599#diff-12580431f55d7880578aa4c16f249e71).
+Then insert the following into `main/resources/view/QuestionListCard.fxml`.
 
-**`PersonListCard.fxml`:**
+**`QuestionListCard.fxml`:**
 
 ``` xml
 <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
 ```
 
-That’s it! Fire up the application again and you should see something like this:
+That’s it! Fire up the application again!
 
-![$remark shows up in each entry](../images/add-remark/$Remark.png)
+## Modify `Question` to support a `Remark` field
 
-## Modify `Person` to support a `Remark` field
+Since `QuestionCard` displays data from a `Question`, we need to update `Question` to get our `Remark` displayed!
 
-Since `PersonCard` displays data from a `Person`, we need to update `Person` to get our `Remark` displayed!
+### Modify `Question`
 
-### Modify `Person`
+We change the constructor of `Question` to take a `Remark`. We will also need to define new fields and accessors accordingly to store our new addition.
 
-We change the constructor of `Person` to take a `Remark`. We will also need to define new fields and accessors accordingly to store our new addition.
+### Update other usages of `Question`
 
-### Update other usages of `Person`
-
-Unfortunately, a change to `Person` will cause other commands to break, you will have to modify these commands to use the updated `Person`!
+Unfortunately, a change to `Question` will cause other commands to break, you will have to modify these commands to use the updated `Question`!
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: Use the `Find Usages` feature in IntelliJ IDEA on the `Person` class to find these commands.
+:bulb: Use the `Find Usages` feature in IntelliJ IDEA on the `Question` class to find these commands.
 
 </div>
-
-Refer to [this commit](https://github.com/se-edu/addressbook-level3/commit/ce998c37e65b92d35c91d28c7822cd139c2c0a5c) and check that you have got everything in order!
 
 
 ## Updating Storage
 
-AddressBook stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedPerson` to work with our new `Person`!
+SmartNus stores data by serializing `JsonAdaptedQuestion` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedQuestion` to work with our new `Question`!
 
 While the changes to code may be minimal, the test data will have to be updated as well.
 
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: You must delete AddressBook’s storage file located at `/data/addressbook.json` before running it! Not doing so will cause AddressBook to default to an empty address book!
+:exclamation: You must delete SmartNus' storage file located at `/data/smartnus.json` before running it! Not doing so will cause SmartNus to default to an empty question list!
 
 </div>
 
-Check out [this commit](https://github.com/se-edu/addressbook-level3/commit/556cbd0e03ff224d7a68afba171ad2eb0ce56bbf)
-to see what the changes entail.
-
 ## Finalizing the UI
 
-Now that we have finalized the `Person` class and its dependencies, we can now bind the `Remark` field to the UI.
+Now that we have finalized the `Question` class and its dependencies, we can now bind the `Remark` field to the UI.
 
-Just add [this one line of code!](https://github.com/se-edu/addressbook-level3/commit/5b98fee11b6b3f5749b6b943c4f3bd3aa049b692)
+Just add this one line of code!
 
-**`PersonCard.java`:**
+**`QuestionCard.java`:**
 
 ``` java
-public PersonCard(Person person, int displayedIndex) {
+public QuestionCard(Question question, int displayedIndex) {
     //...
-    remark.setText(person.getRemark().value);
+    remark.setText(question.getRemark().value);
 }
 ```
-
-![The remark label is bound properly!](../images/add-remark/RemarkBound.png)
 
 ## Putting everything together
 
@@ -325,47 +311,47 @@ After the previous step, we notice a peculiar regression — we went from di
 
 ### Update `RemarkCommand` and `RemarkCommandParser`
 
-In this last step, we modify `RemarkCommand#execute()` to change the `Remark` of a `Person`. Since all fields in a `Person` are immutable, we create a new instance of a `Person` with the values that we want and
-save it with `Model#setPerson()`.
+In this last step, we modify `RemarkCommand#execute()` to change the `Remark` of a `Question`. Since all fields in a `Question` are immutable, we create a new instance of a `Question` with the values that we want and
+save it with `Model#setQuestion()`.
 
 **`RemarkCommand.java`:**
 
 ``` java
 //...
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Question: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Question: %1$s";
 //...
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Question> lastShownList = model.getFilteredQuestionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_QUESTION_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+        Question questionToEdit = lastShownList.get(index.getZeroBased());
+        Question editedQuestion = new Question(
+                questionToEdit.getName(), questionToEdit.getImportance(), remark, questionToEdit.getTags());
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setQuestion(questionToEdit, editedQuestion);
+        model.updateFilteredQuestionList(PREDICATE_SHOW_ALL_QUESTIONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedQuestion));
     }
 
     /**
      * Generates a command execution success message based on whether
      * the remark is added to or removed from
-     * {@code personToEdit}.
+     * {@code questionToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    private String generateSuccessMessage(Question questionToEdit) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, questionToEdit);
     }
 ```
 
-![Congratulations!](../images/add-remark/RemarkComplete.png)
+Congratulations! This is what the app should look like:
+![Remark Done](../images/add-remark/RemarkComplete.png)
 
 ## Writing tests
 
@@ -373,7 +359,7 @@ Tests are crucial to ensuring that bugs don’t slip into the codebase unnoticed
 
 Let’s verify the correctness of our code by writing some tests!
 
-Of course you can simply add the test cases manually, like you've been doing all along this tutorial. The result would be like the test cases in [here](https://github.com/se-edu/addressbook-level3/commit/fac8f3fd855d55831ca0cc73313b5943d49d4d6e#diff-d749de38392f7ea504da7824641ba8d9). Alternatively, you can get the help of IntelliJ to generate the skeletons of the test cases, as explained in the next section.
+Of course you can simply add the test cases manually, like you've been doing all along this tutorial.
 
 ### Automatically generating tests
 
@@ -394,8 +380,6 @@ Following convention, let’s change the name of the generated method to `execut
 
 Let’s use the utility functions provided in `CommandTestUtil`. The functions ensure that commands produce the expected `CommandResult` and output the correct message. In this case, `CommandTestUtil#assertCommandSuccess` is the best fit as we are testing that a `RemarkCommand` will successfully add a `Remark`.
 
-You should end up with a test that looks something like [this](https://github.com/se-edu/addressbook-level3/commit/fac8f3fd855d55831ca0cc73313b5943d49d4d6e#diff-d749de38392f7ea504da7824641ba8d9).
-
 ## Conclusion
 
-This concludes the tutorial for adding a new `Command` to AddressBook.
+This concludes the tutorial for adding a new `Command` to SmartNus.

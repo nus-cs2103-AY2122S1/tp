@@ -16,14 +16,16 @@ title: Setting up and getting started
 Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 </div>
 
-First, **fork** this repo, and **clone** the fork into your computer.
+First, **fork** [this](https://github.com/AY2122S1-CS2103T-F12-1/tp) repo, and **clone** the fork into your computer.
+
+Here is a [guide](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/adding-and-cloning-repositories/cloning-and-forking-repositories-from-github-desktop) on how to **fork** and **clone** the repository.
 
 If you plan to use Intellij IDEA (highly recommended):
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to to ensure Intellij is configured to use **JDK 11**.
 1. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.<br>
   :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
 1. **Verify the setup**:
-   1. Run the `seedu.address.Main` and try a few commands.
+   1. Run the `seedu.smartnus.Main` and try a few commands.
    1. [Run the tests](Testing.md) to ensure they all pass.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -45,11 +47,10 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Learn the design**
 
-   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture).
+   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [SmartNUS’s architecture](DeveloperGuide.md#architecture).
 
 1. **Do the tutorials**
    These tutorials will help you get acquainted with the codebase.
 
    * [Tracing code](tutorials/TracingCode.md)
    * [Adding a new command](tutorials/AddRemark.md)
-   * [Removing fields](tutorials/RemovingFields.md)

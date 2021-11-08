@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "name": "MCQ with 2 correct choices",
+      "importance": "3",
+      "tagged": [
+        "Java",
+        "CS2103T",
+        "style"
+      ],
+      "choices": [
+        {
+          "title": "1",
+          "isCorrect": false,
+          "keywords": []
+        },
+        {
+          "title": "correct answer 1",
+          "isCorrect": true,
+          "keywords": []
+        },
+        {
+          "title": "3",
+          "isCorrect": false,
+          "keywords": []
+        },
+        {
+          "title": "correct answer 2",
+          "isCorrect": true,
+          "keywords": []
+        }
+      ],
+      "questionType": 0,
+      "attemptCount": 0,
+      "correctCount": 0
+    }
+  ],
+
+  "notes": []
+}
