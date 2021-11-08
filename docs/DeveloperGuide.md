@@ -1228,7 +1228,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
 
     2. Test case: `edit 0`<br>
-           Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
+       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
     3. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
