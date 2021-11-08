@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
 participant ":ScheduleFriendCommandParser" as ScheduleFriendCommandParser LOGIC_COLOR
-participant "c:ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
+participant "scheduleFriendCommand:ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
 end box
 
 [-> LogicManager : execute("friend --schedule draco -p 2 4 1 -f 1")

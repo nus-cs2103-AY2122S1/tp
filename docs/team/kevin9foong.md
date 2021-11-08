@@ -14,32 +14,37 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 Given below are my contributions to the project.
 
 #### New Features
-  1. Add Friend functionality <br>
+  1. Add Friend functionality (mostly implmented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69)) <br>
      **What it does**: Allows users to add friends to the gitGud friends list.<br>
      **Justification**: Core functionality for users to store list of friends.  
      
-  2. Edit Friend functionality <br>
+
+  2. Edit Friend functionality (mostly implemented in [PR #93](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/93)) <br>
      **What it does**: Allows users to edit friend's name.<br>
      **Justification**: A friend can store a lot of information linked to it - e.g. linked games, skill values, schedule etc. 
      Hence, it is important to be able to update information tied to a friend without having to delete and add again which 
      requires user to have to re-provide the previous information of the deleted friend when adding again.
      
-  3. Add Game functionality <br>
+
+  3. Add Game functionality (mostly implmented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69)) <br>
      **What it does**: Allows users to add games to the gitGud games list.<br>
      **Justification**: Core functionality for users to store list of games. 
      
-  4. Implemented Storage support for Friends and Games <br>
+
+  4. Implemented Storage support for Friends and Games (mostly implmented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69)) <br>
      **What it does**: Allows friends and games data to be persisted across multiple application runs by storing in json files. This 
      allows our application to fulfill its main objective of being able to record friends' gaming information.<br>
      **Justification**: Without support for persistent storage, users would have to re-enter the same information with each run of 
      our application to use other functionality, making the use of our application cumbersome and unproductive.
      
-  5. Add friend skill functionality <br>
+
+  5. Add friend skill functionality (mostly implemented in [PR #102](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/102)) <br>
      **What it does**: Allows user to store and update friends' skill at different games.<br>
      **Justification**: A core feature which allows our application of fulfilling its main objective of being able to record friends' 
      skill values at specific games, so they can keep track of and find the most-highly skilled friends to play with.
      
-  6. Friend recommendation functionality <br>
+
+  6. Friend recommendation functionality (mostly implemented in [PR #153](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/153)) <br>
      **What it does**: Recommends friends for user to play with for a given game and given time based on highest skill value of friend.<br>
      **Justification**: This functionality solves our user's problem of finding optimal friends to play with that both fits into their busy schedules and 
      provides the highest potential win rate for competitive gaming by providing preferred(highest skilled) friends available during a specified time 
@@ -56,7 +61,7 @@ Given below are my contributions to the project.
      (fixed in [PR #153](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/153/files))  
 
 #### Contribution to team based tasks
-1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. <br>
+1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs (mostly implemented in [PR #45](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/45)). <br>
     * **What it involves**:
       * Refactoring of Persons and Tags to Friends and Games classes for team usage.
       * Updating of relevant test cases
@@ -74,7 +79,7 @@ Given below are my contributions to the project.
   [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevin9foong&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
 #### Documentation
-  * User Guide:
+  * User Guide: (Completed mostly in [PR #209](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/209), [PR #133](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/133) and [PR #45](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/133))
     1. Added the initial documentation for the features `add friend`, `add game`, `delete game` and 
        `link game and friend`.
     2. Maintenance of `add friend` and `add game` features in the UG.  
@@ -84,24 +89,28 @@ Given below are my contributions to the project.
     6. Added symbols, constraints and warnings to each user command for user's reference. 
     7. Added the user guide structure (including icons), application UI overview and FAQ sections. 
     8. Added glossary section including terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
+
+
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
-    3. Highlighting of bugs related to Use Case Extension numbering. [Issue #243](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues/243)  
-    4. Highlighting of UML diagram bugs in delete and schedule sequence diagrams (eg. found notation bugs for Reference frame etc.) [Issue #251](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues/251)
+    3. Highlighting of bugs related to Use Case Extension numbering. ([Issue #243](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues/243))
+    4. Highlighting of UML diagram bugs in delete and schedule sequence diagrams (eg. found notation bugs for Reference frame etc.) ([Issue #251](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues/251))
     5. Added documentation for Storage component (including UML class diagram for Storage). 
     6. Added implementation documentation for `recommend` command (including UML activity diagram and sequence diagrams for Recommend). 
+
+
   * README:
     1. Updated Github Actions build status badge to reflect status of gitGud team repository.
     2. Updated description and organised layout of README.
 
-#### Review/mentoring contributions (with non-trivial comments): 
+#### Review/mentoring contributions (with non-trivial comments)
 1. [Ui Recommendations and bugs from Review](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/107)
 2. [Discovery of 'hidden bug' which led to defensive programming fix in Schedule PR](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/113)
       The hidden bug is for corrupted data files not containing schedule fields in the json format data, the schedule commands fail.
 3. [Highlighting of important DG bugs in UML diagrams and guide on how to fix](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
 
-#### Contributions beyond project team:
+#### Contributions beyond project team
 * Evidence of helping others: 
   1. Forum responses:
      * [When to use assertions](https://github.com/nus-cs2103-AY2122S1/forum/issues/190#issuecomment-913379752)

@@ -365,7 +365,7 @@ gitGud undergoes to display the recommendations friends list to the user:
 
 <ins>Step 1: Parsing and triggering recommend command execution</ins><br>
 
-Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
+Similar to [delete](#41-delete-feature) and [link](#42-link-feature) features above, the parse and execute actions shown in the activity 
 diagram are implemented via invoking`RecommendCommandParser#parse(String)`, which extracts a specified game and timing from the 
 user input and constructs a `RecommendCommand` instance with the extracted data. 
 
@@ -391,27 +391,46 @@ produces the list of friend recommendations.
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
-In Java, the implementation of JavaFX's `FilteredList` and `SortedList` in Java are just `ObservableList` wrapped 
-with a wrapper that filters and sorts the content respectively. Therefore, JavaFX's `FilteredList` and 
-`SortedList` listens for and tracks changes just like an `ObservableList` whenever the`FilteredList#setPredicate(Predicate)` or 
-`SortedList#setComparator(Comparator)` methods are invoked. The user 
-interface is notified and updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
+The user interface is then notified of the changes to the `FilteredList` and `SortedList` managed by the `ModelManager` made in Step 2 
+and is automatically updated to reflect the changes to the user (as explained in the [Model](#34-model-component) component).
 
-Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
-recommend feature.  
+Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the recommend feature.  
 
 #### 4.5.3 Design Considerations
 
-* The recommend command allows users to filter by hour and day instead of filtering by minute and day.
-  * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
-  the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
-  target users (students) usually have weekly schedules based on hourly blocks.
+<ins>Aspect: How should the user be allowed to filter friends timing by?</ins>
 
-* Usage of predicates and comparators for filtering and ordering the filtered and sorted friends list.
-  * We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
-  between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
-  such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
-  on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
+The user is able to retrieve an ordered list by skill for friends filtered by a specified game and timing. However, our first 
+design consideration is the format the user should use for specifying the timing to filter by.
+
+Below are the options we could allow the user to filter by: <br> 
+* Option #1: Filter by 24-hour clock and day (i.e. `1000` and `1` to represent `1000` on Monday)
+* Option #2: Filter by minute, hour and day (i.e `0`, `10` and `1` to represent `1000` on Monday)
+* Option #3: Filter by hour and day (i.e. `10` and `1` to represent `1000` on Monday)
+
+<ins>Decision</ins>
+
+We decided to limit the filtering to by **hour and day** for 3 main reasons: 
+1. to be consistent with the [schedule](#44-schedule-feature) feature which stores schedules based on hours 
+2. we found that accuracy to the exact minute is not necessary as our target users (students) usually have weekly schedules based on hourly blocks. 
+3. we avoided the use of the 24-hour clock as a time filter as it can also represent minutes and could potentially mislead users, since `1059` 
+seems to be a valid input but is not supported by our application which only supports schedules in hour blocks(rationale in point #2). 
+
+Hence, we specifically limited the timing filter to hour and day only. 
+
+<ins>Aspect: Implementation of sorting and filtering functionality</ins> 
+
+To implement sorting and filtering of the friends list to be displayed, we had 2 main options: 
+* Option #1: Implement specific sorting and filter methods at the ModelManager class, then invoke them with the specified game and timing as arguments.
+* Option #2: Implement a general `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` method and pass in 
+`FriendRecommendFilterPredicate` and `Comparator` instances as arguments. 
+
+<ins>Decision</ins>
+
+We decided to implement predicates and comparators for the implementation of Recommend command (option #2) for two key reasons: 
+1. Option #2 reduces the coupling between the `RecommendCommand` and the `Model` component. Since the implemented general methods 
+such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` are not dependent on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
+2. Option #1 mixes Recommendation and Model concerns together, leading to reduced cohesion and increased coupling, which leads to poor software design. 
 
 ### 4.6 Get Feature
 

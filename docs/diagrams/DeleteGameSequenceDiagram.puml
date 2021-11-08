@@ -2,12 +2,12 @@
 !include style.puml
 skinparam defaultFontSize 30
 
-box Logic GAME_DELETE_BOX_COLOR
+box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":MainParser" as MainParser MAIN_PARSER_COLOR
-participant ":GameCommandParser" as GameCommandParser GAME_PARSER_COLOR
-participant ":DeleteGameCommandParser" as DeleteGameCommandParser DELETE_GAME_PARSER_COLOR
-participant ":DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
+participant ":MainParser" as MainParser LOGIC_COLOR
+participant ":GameCommandParser" as GameCommandParser LOGIC_COLOR
+participant ":DeleteGameCommandParser" as DeleteGameCommandParser LOGIC_COLOR
+participant "deleteGameCommand:DeleteGameCommand" as DeleteGameCommand LOGIC_COLOR
 end box
 
 
