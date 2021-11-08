@@ -1,40 +1,61 @@
 @startuml
 !include style.puml
 
+mainframe **sd**  get commandResult
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
+participant "lastShownList:List<Student>" as List MODEL_COLOR
 participant "studentToEdit:Student" as Student MODEL_COLOR
 end box
 
 activate LogicManager
+
 LogicManager -> AddProgressCommand : execute(model)
-
 activate AddProgressCommand
-AddProgressCommand -> Student : addProgress(progress)
 
+AddProgressCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> AddProgressCommand : lastShownList
+deactivate Model
+
+AddProgressCommand -> List : get(targetIndex)
+activate List
+
+List --> AddProgressCommand : studentToEdit
+deactivate List
+
+AddProgressCommand -> Student : addProgress(progress)
 activate Student
+
+Student -> Student : addProgress(progress)
+activate Student
+Student --> Student
+deactivate Student
+
 Student --> AddProgressCommand
 deactivate Student
 
-AddProgressCommand -> Model : updateFilteredStudentList(true)
+AddProgressCommand -> Model : viewStudent(studentToEdit)
 activate Model
 
-Model -> AddProgressCommand
+Model --> AddProgressCommand
 deactivate Model
 
 create CommandResult
 AddProgressCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddProgressCommand
+CommandResult --> AddProgressCommand : commandResult
 deactivate CommandResult
 
-LogicManager <-- AddProgressCommand
+LogicManager <-- AddProgressCommand : commandResult
 deactivate AddProgressCommand
 @enduml
