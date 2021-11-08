@@ -706,7 +706,7 @@ testers are expected to do more *exploratory* testing.
     Expected: No person is added. Error details is shown in the result box. Error message of "Invalid command format!" is shown. Followed by an example of how the correct command input format should be. Displayed person list remains the same.
        
     5. Other incorrect delete commadns to try: `add p/55`, `add d/hello` (where the command format is not as specified in the user guide) <br>
-    Expected: Similar to previous test case result(Test case iv).4
+    Expected: Similar to previous test case result(Test case iv).
     
     
 
@@ -758,10 +758,10 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is added to the first group. Error details is shown in the result box. Error message of "Invalid command format!" is shown in the result box.
 
     4. Test case: `joinG p/1` <br>
-       Expected: Expected: Similar to previous test case result( Test case 1(iii) ).
+       Expected: Similar to previous test case result( Test case 1.3 ).
 
     5. Other incorrect delete commands to try: `joinG p/52 g/1`, `joinG p/1 g/55`, `joinG p/0 g/0` (where the command format is not as specified in the user guide. The indexes provided are out of bounds of the indexes displayed in the application.) <br>
-       Expected: Similar to previous test case result( Test case 1(iii) ).
+       Expected: Similar to previous test case result( Test case 1.3 ).
        
 2. Adding a person to a group while in the home page without any contacts present.
 
@@ -770,7 +770,7 @@ testers are expected to do more *exploratory* testing.
     * 1 group present.
     
     2. Test case: `joinG p/1 g/1`
-        Expected: Similar to previous test case result ( Test case 1(iii) ).
+        Expected: Similar to previous test case result ( Test case 1.3 ).
        
 3. Adding a person to a group while in the home page without any group present.
 
@@ -779,6 +779,10 @@ testers are expected to do more *exploratory* testing.
     * 0 group present.
     
     2. Test case: `joinG p/1 g/1`
-        Expected: Similar to previous test case result ( Test case 1(iii) ).
-      
-       
+        Expected: Similar to previous test case result ( Test case 1.3 ).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Effort
+
+AddressBook Level-3 (AB3) only uses Person entities, but now we deal with Group and Task entities in addition to Person objects, each with their own attributes. This was more difficult than AB3 because we had to also add commands to create, read, update, and delete all of them. We also had to maintain an application state for the Home and Group Information pages. This was more difficult than AB3 because AB3 only has one page. Furthermore, our pages each have two list panels, and they are displaying different types of data (Person, Group, Task), unlike AB3 which has only one list panel to display only Person cards for objects. We also had to ensure that in certain pages, certain commands don't run if they did not make sense to run. This was difficult more difficult than AB3 because in AB3, all commands can run, and they do not depend on the application state.
