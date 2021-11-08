@@ -32,6 +32,7 @@ public class DeleteGradeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade from the student "
             + "identified by the index number used in the displayed student list. \n"
+            + "Reference the assignment using the assignment ID displayed in the assignments view.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ID + "ASSIGNMENT ID \n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ID + "4";
@@ -39,19 +40,19 @@ public class DeleteGradeCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Deleted grade %s \nfor assignment: %s \nfor student: %s";
     public static final String MESSAGE_NO_SUCH_GRADE = "There is no grade for this assignment.";
 
-    private final Index index;
-    private final Index id;
+    private final Index studentIndex;
+    private final Index assignmentId;
 
     /**
-     * @param index Index of the student to grade.
-     * @param id    ID of the assignment to grade.
+     * @param studentIndex Index of the student to grade.
+     * @param assignmentId    ID of the assignment to grade.
      */
-    public DeleteGradeCommand(Index index, Index id) {
-        requireNonNull(index);
-        requireNonNull(id);
+    public DeleteGradeCommand(Index studentIndex, Index assignmentId) {
+        requireNonNull(studentIndex);
+        requireNonNull(assignmentId);
 
-        this.index = index;
-        this.id = id;
+        this.studentIndex = studentIndex;
+        this.assignmentId = assignmentId;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class DeleteGradeCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         // Check for valid index
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (studentIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -71,14 +72,14 @@ public class DeleteGradeCommand extends Command {
 
         List<Assignment> assignmentList = model.getAssignmentList();
 
-        if (id.getOneBased() >= model.getAssignmentCounter()) {
+        if (assignmentId.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment assignment = model.getAssignment(id.getOneBased())
+        Assignment assignment = model.getAssignment(assignmentId.getOneBased())
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(studentIndex.getZeroBased());
         AssignmentGradeMap grades = personToEdit.getGrades();
         Grade toRemove = grades.findGrade(assignment);
         if (toRemove == null) {
@@ -126,6 +127,6 @@ public class DeleteGradeCommand extends Command {
 
         // state check
         DeleteGradeCommand e = (DeleteGradeCommand) other;
-        return index.equals(e.index) && id.equals(id);
+        return studentIndex.equals(e.studentIndex) && assignmentId.equals(assignmentId);
     }
 }

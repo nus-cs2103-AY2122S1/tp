@@ -36,6 +36,7 @@ public class GradeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a grade to the student "
             + "identified by the index number used in the displayed student list. \n"
+            + "Reference the assignment using the assignment ID displayed in the assignments view.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ID + "ASSIGNMENT ID "
             + PREFIX_STATUS + "STATUS "
