@@ -81,7 +81,7 @@ Ready to jump right into recording your inventory? Use <code>clear</code> to cle
     </li>
     <li>
       <p>Items in <code>[]</code> with <code>|</code>(vertical slash) are exclusively optional (user must specify at least one of the options).<br>
-      e.g <code>delete [{name} | id/{id_number}]</code> should be supplied with either <code>name</code> or <code>id number</code>.</p>
+      e.g. <code>delete [{name} | id/{id_number}]</code> should be supplied with either <code>name</code> or <code>id number</code>.</p>
     </li>
     <li>
       <p>Items with <code>…​</code> after them can be specified zero or more times.<br>
@@ -136,14 +136,14 @@ Prefix  |  Argument     | Description                   | Remarks               
 `t/`    | tag(s)        | Tags of the item to add.      | Only alphanumeric characters are allowed.                |
 
 <div class="code-example bg-grey-lt-000">
-:information_source: When adding an item for the first time, the name, id, cost price, and sales prices must all be specified.
+:information_source: When adding an item for the first time, the name, id, cost price, and sales price must all be specified.
 </div>
 
 Examples:
 
-- `add apple` adds an apple into the inventory
-- `add id/111111 c/2` adds 2 of item with id #111111 into the inventory
-- `add banana id/192023 cp/1.0 sp/2.2` adds a banana (#192023) with cost price $1.0 and sales price $2.2 into the
+- `add apple` adds an apple into the inventory.
+- `add id/111111 c/2` adds 2 of item with id 111111 into the inventory.
+- `add banana id/192023 cp/1.0 sp/2.2` adds a banana (id 192023) with cost price $1.0 and sales price $2.2 into the
   inventory.
 
 <div class="code-example bg-grey-lt-000">
@@ -168,8 +168,8 @@ Prefix  |  Argument      | Description                  | Remarks
 - An item can be specified by name, id number , or both.
 
 
-- `delete Apple` deletes by name
-- `delete id/181817` deletes by id number
+- `delete Apple` deletes by name.
+- `delete id/181817` deletes by id number.
 
 ![delete](images/screenshots/delete_item.png)
 
@@ -190,7 +190,7 @@ Flag    |  Argument      | Description                      | Remarks           
 Examples:
 
 - `remove Apple` removes **one** apple from inventory
-- `remove id/181817 c/5` removes 5 items with id 181817
+- `remove id/181817 c/5` removes 5 of item with id 181817
 
 ![remove](images/screenshots/remove_item.png)
 
@@ -207,7 +207,7 @@ Flag    |  Argument     | Description                     | Remarks
 `n/`    | name          | new name for the item.          | Only alphanumeric characters (and spaces) are allowed.
 `id/`   | id number     | new id number for the item.     | Must be an integer with no more than 6 digits.
 `cp/`   | cost price    | new cost price for the item.    | Must be non-negative.
-`sp/`   | sell price    | new sell price for the item.    | Must be non-negative.
+`sp/`   | sell price    | new sales price for the item.   | Must be non-negative.
 `t/`    | tag           | new tag(s) for the item.        | Only alphanumeric characters are allowed.
 
 - Feel free to edit multiple fields at once!
@@ -220,8 +220,8 @@ Flag    |  Argument     | Description                     | Remarks
 
 Examples:
 
-- `edit 1 id/192028` edits first item's id to #192028
-- `edit 2 n/Panadol cp/2`  edits second item's name to "Panadol" and cost price to $2.0
+- `edit 1 id/192028` edits first item's id to 192028.
+- `edit 2 n/Panadol cp/2`  edits second item's name to "Panadol" and cost price to $2.0.
 
 ![edit](images/screenshots/edit_item.png)
 
@@ -260,12 +260,12 @@ Find items in the inventory. Note that display must be in inventory mode (see [`
 
 Format: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
 
-BogoBogo searches and lists items in the inventory that has matches any of the specified name, id, or tag.
+BogoBogo searches and lists items in the inventory that matches any of the specified name, id, or tag.
 
 Examples:
 
-- `find n/Cookie n/Apple` finds and lists items with the words "Cookie" or "Apple" in their names
-- `find id/123456` finds item with id 123456
+- `find n/Cookie n/Apple` finds and lists items with the words "Cookie" or "Apple" in their names.
+- `find id/123456` finds item with id 123456.
 
 ![find](images/screenshots/find_item.png)
 
@@ -327,8 +327,8 @@ Flag    |  Argument      | Description                            | Remarks     
 
 Examples:
 
-- `iorder milk c/5`  Adds 5x milk into the current order
-- `iorder id/12345`  Adds 1x item with id 12345 into the current order
+- `iorder milk c/5`  Adds 5x milk into the current order.
+- `iorder id/12345`  Adds 1x item with id 12345 into the current order.
 
 ![iorder](images/screenshots/iorder.png)
 
@@ -347,8 +347,8 @@ Flag    |  Argument      | Description                                 | Remarks
 
 Examples:
 
-- `corder milk c/5` Removes 5x milk from the order
-- `corder id/12345` Removes 1x item with id 12345 from the order
+- `corder milk c/5` Removes 5x milk from the order.
+- `corder id/12345` Removes 1x item with id 12345 from the order.
 
 ![corder](images/screenshots/corder.png)
 
