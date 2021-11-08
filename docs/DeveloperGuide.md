@@ -420,7 +420,7 @@ Additionally, it implements the following operation:
 
 This operation is exposed in the `Model` interface as `Model#deletePerson()`.
 
-Given below is an example usage scenario of how the delete by tag mechanism behaves at each step.
+Given below is an example usage scenario and how the delete by tag mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the list of
 `persons` consisting of all contacts (image adapted from Delete-by-name section).
@@ -464,11 +464,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How delete by tag executes:**
 
-* **Alternative 1 (current choice):** Deletes all contacts with tag.
+* **Alternative 1 (current choice):** Deletes all contacts under a specific tag.
     * Pros: Easy to implement.
     * Cons: May be inconvenient for users who wish to delete selected range of contacts (e.g. delete pending contacts under friends).
 
-* **Alternative 2:** Deletes selected contacts within tag.
+* **Alternative 2:** Deletes selected contacts under a specific tag.
     * Pros: Increases ease of deleting multiple contacts with different statuses for user
     * Cons: Difficult to implement, and could potentially add confusion with an increase in syntax required to 
       differentiate various functions for delete.
@@ -482,16 +482,18 @@ _{more aspects and alternatives to be added}_
 :information_source: **Note:**<br>
 The following details on implementation only cover the information on how the status count across different tags
 is computed within the report. Implementation details regarding expenditure calculations and overall contact status count are left out.
+
 </div>
 
-The report mechanism is facilitated by `Model`. Additionally, it implements the following operation:
+The report mechanism is used to generate a report with the summarized statuses(and prices) across different tags.
+It is facilitated by `Model`. Additionally, it implements the following operation:
 
 * `Model#getFilteredPersonList()` — Provides list of `persons` in address book based on the predicate provided
 
 Given below is an example usage scenario and how the report behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the
-`person` list consisting of all contacts (image adapted from Delete-by-name section).
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the list of
+`persons` consisting of all contacts (image adapted from Delete-by-name section).
 
 ![Report0](images/DeleteByNamePersonList0.png)
 
