@@ -39,6 +39,13 @@ This section provides instructions to begin using Siasa.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Technical Terms:
+
+| Term      | Description                                                                            |
+|-----------|----------------------------------------------------------------------------------------|
+| Parameter | A parameter is a piece of information that the user needs to provide in a command.     |
+| CSV       | Abbreviation of Comma Separated Values. Format in which the statistics file is stored. |
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -120,43 +127,51 @@ Examples:
 
 ### Policy Management
 
-#### Common - Policy Details
-* **Name** - `n/POLICY_NAME`
-  * Should be unique
-* **Payment structure of the policy** -`p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMT]`:
-
-| Payment Type                                       | Sample Command| Represents                                     |
-|----------------------------------------------------|-----------------------|---------------------------------------------|
-| Single lump sum                                    | /p 10000               | Single payment of $100                      |
-| X payments per year, indefinite number of payments | /p 10000 12            | Monthly payments of $100, indefinitely       |
-| X payments per year, definite number of payments   | /p 10000 12 120        | Monthly payments of $100, 120 total payments |
-
-
-* **Commission structure of the policy** - `c/COMMISSION_% NUM_OF_COMM`:
-  * Receives a percentage commission (`COMMISSION_%`) from the payment amount (`PMT_AMOUNT_CENTS`) for the first number of payments (`NUM_OF_COMM`) in the payment structure.
-  * `COMMISSION_%`: percentage of each payment that goes to commission
-  * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
-  *  E.g. `c/ 6 5` Receives 6% commission for the first 5 payments.
-    
-* **Contact that the policy belongs to** - `cl/CONTACT_INDEX`
-  * Current index of that contact in the contact list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-* **Coverage expiry** - `e/COVERAGE_EXPIRY_DATE`
-  * Date that the coverage expires in YYYY-MM-DD format, optional.
-* **Tags** - `t/TAG...`
-  * can have more than one tag
-
 #### Creating A Policy : `addpolicy`
 
 Adds a policy to the policy list.
 
-Format: `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM
+Format: `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMM_% NUM_OF_COMM
 cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
 **:grey_exclamation:**
-A policy should not have less payments than the number of commissions, since every commission is tied to one payment!
+A policy should not have less number of payments than the number of commissions, since every commission is tied to one payment!
 </div>
+
+**Name** `n/POLICY_NAME`: Should be unique
+
+**Payment structure** `p/`:
+* `PMT_AMOUNT_CENTS`: Payment amount in cents for each payment
+* `PMTS_PER_YR`: Payment frequency in a year
+* `NUM_OF_PMT`: Total number of payments in payment structure
+
+
+| Payment Type                                       | PMT AMOUNT CENTS | PMTS PER YR | NUM OF PMT | Context                                     |
+|----------------------------------------------------|------------------|-------------|------------|---------------------------------------------|
+| Single lump sum                                    |       1000       |      -      |      -     | Single payment of $10                      |
+| X payments per year, indefinite number of payments |       1000       |      12     |      -     | Annual payments of $10, indefinitely       |
+| X payments per year, definite number of payments   |       1000       |      12     |     120    | Annual payments of $10, 120 total payments |
+
+**Commission structure of the policy** `c/`:
+* `COMM_%`: Percentage of each payment that goes to commission
+* `NUM_OF_COMM`: The number of payments that the agent will receive commission for.
+* Receives a percentage commission `COMM_%` from the payment amount `PMT_AMOUNT_CENTS` for the first number of payments `NUM_OF_COMM` in the payment structure.
+
+Calculating Commission with Payment Structure:
+
+| Payment Structure                            | COMM % | NUM OF COMM | Commission per payment | Context                                                 |
+|----------------------------------------------|--------------|-------------|------------------------|---------------------------------------------------------|
+| Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from each of the first 100 payments |
+| Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from each of the first 5 payments        |
+
+**Associated Contact** `cl/`:
+* `CONTACT_INDEX`: Index of that contact in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Coverage expiry**: `e/ COVERAGE_EXPIRY_DATE` Date that the coverage expires in YYYY-MM-DD format, optional.
+
+**Tags**: `t/ TAG` can have more than one tag
 
 Examples:
 * `addpolicy n/Aviva full life plan B p/10050 c/10 1 cl/1 e/2021-12-12 t/Life Insurance` Adds a policy named Aviva full life plan B,
@@ -170,7 +185,7 @@ belonging to the contact with index 2.
 
 Edits an existing policy in the application.
 
-Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM]
+Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMM_% NUM_OF_COMM]
 [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
@@ -178,10 +193,11 @@ Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM
 Careful changing the number of commissions or payments. A policy should not have less payments than the number of commissions.
 </div>
 
+* Same parameters as addpolicy
 * Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
+* Existing values will be updated by the provided input values.
+* When editing tags, the existing tags of the policy will be replaced by the input tags i.e adding of tags is not cumulative.
 * You can remove all the policy’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -264,7 +280,7 @@ These are the current sorters implemented:
 
 ### Statistics
 
-#### Download useful statistics as TXT : `download`
+#### Download useful statistics as CSV : `download`
 
 Download CSV files containing useful statistics for the user. This includes
 - Most valuable contacts + total commission from each of contact
@@ -316,9 +332,9 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
 **List Contacts** | `allcontact`
 **Find Contacts** | `findcontact KEYWORD`
-**Add Policy** | `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
+**Add Policy** | `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMM_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **Delete Policy** | `deletepolicy INDEX`
-**Edit Policy** | `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
+**Edit Policy** | `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMM_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **List Policies** | `allpolicy`
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
