@@ -493,6 +493,7 @@ Format: `help COMMAND_NAME`
     * Why the command is needed.
     * What the syntax for the command is.
     * Example of usage and expected results.
+Note that `help help` will result in a general help window. We do not provide instruction for the command `help` itself
 
 Examples:
 * `help`
