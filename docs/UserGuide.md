@@ -773,7 +773,7 @@ Format: `listR`
 
 :information_source: **Notes:**<br>
 
-* Reservation list will be sorted in ascending date time order, i.e. the reservation with the largest date time will be on top.
+* Reservation list will be sorted in descending date time order, i.e. the reservation with the largest date time will be on top.
 * RHRH will switch to the reservation list and list all reservations no matter which list you are current viewing.
 * You can also switch to the reservation list manually by clicking the `View` tab in the menu bar and selecting
   `Reservations`.

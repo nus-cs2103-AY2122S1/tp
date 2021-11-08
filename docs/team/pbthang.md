@@ -22,9 +22,9 @@ Given below are my contributions to the project.
   * What it does: From the display `Reservation` list, users can get the information of the customer who made a particular reservation
   * Justifications: Displaying customer information with reservation may result in cluttered user interface, data repetition and coupling in the codebase. Hence,this command helps user to easily navigate between a reservation and the corresponding customer information.
   
-* **New Feature**: Implemented sorting order by date-time ascending for `Reservation` list.
-  * What it does: Reservations are sorted by ascending date-time.
-  * Justifications: Reservations should be in chronological order for easy referencing, and date-time ascending order is chosen so that the latest reservations are always on top of the list.
+* **New Feature**: Implemented sorting order by date-time descending for `Reservation` list.
+  * What it does: Reservations are sorted by descending date-time.
+  * Justifications: Reservations should be in chronological order for easy referencing, and date-time descending order is chosen so that the latest reservations are always on top of the list.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=pbthang&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=pbthang&tabRepo=AY2122S1-CS2103T-T17-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
