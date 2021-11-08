@@ -13,6 +13,7 @@ Given below are my contributions to the project.
   * What it does: It provides an at-a-glance view of the tags associated to all the clients. 
   * Justification: It complements the filter feature since it gives the user an idea of what tags and how many tags are currently assigned, thus allowing them to filter their desired clients more quickly. 
   * Future improvements: Each tag in the tag panel can have a client count displayed to give the user an idea of how many clients are currently associated to this tag.
+  * Highlights: The implementation of tag panel was rather challenging since it involves setting up a custom listener as opposed to `ListView`, which by default, already has listener set up. A garbage collection mechanism will also need to be set up to ensure that any lingering unreferenced tags are purged. For this, I have to create another listener to watch for any changes in the `UniqueClientList` and trigger the removal of unreferenced tags from there.
 
 * **New Feature**: Implemented clickable filter tag buttons. (Pull requests [\#138](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/138))
   * What it does: Every tag is now a clickable button. Clicking on each tag allows the user to filter the client list based on the tag name.
@@ -44,10 +45,7 @@ Given below are my contributions to the project.
         * Update model architecture section due to `Tag` class reimplementation. [\#109](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/109)
         * Add design details of `Field` interface. [\#109](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/109)
         * Add `GUI Feature` section and implementation details for `Filter tag panel`. [\#233](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/233)
-        * Add `Extensions and customisations` and recommend a workflow for developers to follow to tweak or add new themes. [\#233](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/233)
+        * Add `Extensions and customisations` section and recommend a workflow for developers to follow to tweak or add new themes. [\#233](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/233)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#51](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/51), [\#67](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/67), [\#64](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/64)
-  
-* **Tools**:
-    * Integrated a third party library (fontawesomefx) to the project (Pull requests [\#133](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/133))
