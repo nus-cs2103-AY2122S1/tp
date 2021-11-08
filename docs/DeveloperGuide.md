@@ -588,6 +588,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1b. A client with the same name already exists in InsurancePal
+
+    * 1b1. InsurancePal shows an error message
+
+      Use case ends.
+
 **Use case: List all clients**
 
 **MSS**
@@ -625,7 +631,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
+* 3b. The given details are of an invalid format
 
+    * 3b1. InsurancePal shows an error message
+
+      Use case resumes at step 2.
+
+* 3c. A client with the same name already exists in InsurancePal
+
+    * 3c1. InsurancePal shows an error message
+
+      Use case resumes at step 2.
 **Use case: Finding a client**
 
 **MSS**
