@@ -116,10 +116,9 @@ Let's break down what happens when you call a command, like the find command. Th
 * `LogicManager` uses the Command API to call execute() on the command, which calls the execute method on the executor.
 * The executor updates the model and returns the command result, which is passed back to the `LogicManager`.
 
-
 #### In-depth example of Command Workflow, using the Person Note Command.
 
-Notor allows you to add note to itself, a person or group.
+Notor allows you to add notes to itself, a person or group.
 
 The following sequence diagram shows the detail when `PersonNoteCommand` is executed to add note for a person.
 
@@ -162,11 +161,17 @@ Now it contains `ListPanel` which can be a `PersonListPanel`, `GroupListPanel` o
 Here is the better class structure to be implemented:
 ![ModelClassDiagram2](images/BetterModelClassDiagram.png)
 
-* `Trie` allows tags to be autocompleted as commands are entered.
-* Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per object.
-* Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
-* This feature is planned for a future update, as the `Trie` data structure has already been implemented.
-* This feature could also not be implemented due to short form commands already being very user friendly.
+**API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/commons/core/trie/Trie.java)
+
+* Allows grouping and autocompletion of `Tag` and `Command` objects.
+  * Supports addition and deletion of items.
+  * Supports finding of first item.
+  * Supports finding of first item that starts with specified keyword.
+* Design considerations
+  * Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per object.
+  * Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
+* This feature is planned to be incorporated in a future update, as the `Trie` data structure has already been implemented.
+  * It was delayed as short form commands were judged sufficiently user friendly.
 
 ### Storage component
 
@@ -178,15 +183,6 @@ The `Storage` component,
 
 * now includes a new `Archive` Storage component
 * `Archive` allows users to temporarily remove `Person`s from Notor
-
-### Common classes
-
-**API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/commons/core/trie/Trie.java)
-
-* Allows grouping and autocompletion of `Tag` and `Command` objects.
-* Supports addition and deletion of items.
-* Supports finding of first item.
-* Supports finding of first item that starts with specified keyword.
 
 --------------------------------------------------------------------------------------------------------------------
 

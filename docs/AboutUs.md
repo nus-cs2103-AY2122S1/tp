@@ -17,7 +17,7 @@ You can reach us at the email `e0588244.nus.edu.sg`
 [[portfolio](team/kaixin-hc.md)]
 
 * Role: Team Lead, Developer
-* Responsibilities: Project Management
+* Responsibilities: Project Management, Deliverables
 
 ### Xu Yukun
 
@@ -37,7 +37,7 @@ You can reach us at the email `e0588244.nus.edu.sg`
 [[portfolio](team/eltongohjh.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Integration
+* Responsibilities: Integration
 
 ### Elroy Goh
 
@@ -57,7 +57,7 @@ You can reach us at the email `e0588244.nus.edu.sg`
 [[portfolio](team/halphasx.md)]
 
 * Role: Developer
-* Responsibilities: Deliverables, Integration
+* Responsibilities: Documentation, UI expert
 
 ## Instructor
 
