@@ -4,19 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.notor.logic.commands.group.GroupCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.parser.ArgumentMultimap;
 import seedu.notor.logic.parser.ArgumentTokenizer;
-import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.group.SuperGroup;
-import seedu.notor.model.tag.Tag;
 
 /**
  * Parses input arguments to create a group command.
@@ -47,17 +42,12 @@ public class SuperGroupCreateCommandParser extends GroupCommandParser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TAG);
 
         if (!Name.isValidName(uncheckedName)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonCreateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Name.MESSAGE_CONSTRAINTS, PersonCreateCommand.MESSAGE_USAGE));
         }
 
         Name name = new Name(uncheckedName);
-
-        Set<Tag> tagList = new HashSet<>();
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
-        }
-
-        SuperGroup superGroup = new SuperGroup(name, tagList);
+        SuperGroup superGroup = new SuperGroup(name);
 
         return new SuperGroupCreateCommand(index, superGroup);
     }

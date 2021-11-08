@@ -58,6 +58,7 @@ public abstract class Group implements Notable {
         return note.getSavedDate();
     }
 
+    // tags: not implemented yet
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

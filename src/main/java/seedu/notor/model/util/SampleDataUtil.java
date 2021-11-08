@@ -39,7 +39,8 @@ public class SampleDataUtil {
             new Person(new Name("Charlotte Oliveiro"), new Phone("92218221"), new Email("olicharlotte@example.com"),
                     EMPTY_NOTE, getTagSet("AI")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    Note.of("Consultation tommorrow.", DATE_TIME_NOW), getTagSet("Database")),
+                    Note.of("Mon, Nov 08 2021 07:10\nConsultation tomorrow. Bring 'The Mythic Man Month'.",
+                            DATE_TIME_NOW), getTagSet("Database")),
             new Person(new Name("Irfan Ibrahim"), new Phone("91003210"), new Email("irfan@example.com"),
                     EMPTY_NOTE, getTagSet("Y4", "SWE")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
@@ -49,9 +50,9 @@ public class SampleDataUtil {
 
     public static ReadOnlyNotor getSampleNotor() {
         try {
-            Notor sampleAb = new Notor();
+            Notor sampleNotor = new Notor();
             for (Person samplePerson : getSamplePersons()) {
-                sampleAb.addPerson(samplePerson);
+                sampleNotor.addPerson(samplePerson);
             }
             SuperGroup orbital = new SuperGroup(new Name("Orbital"), new HashSet<>());
             SuperGroup finalYearProject = new SuperGroup(new Name("FYP"), new HashSet<>());
@@ -59,13 +60,13 @@ public class SampleDataUtil {
             SubGroup apollo = new SubGroup(new Name("Apollo"), new HashSet<>(), "Orbital");
             orbital.addSubGroup(artemis);
             orbital.addSubGroup(apollo);
-            sampleAb.addSuperGroup(orbital);
-            sampleAb.addSuperGroup(finalYearProject);
-            sampleAb.addPersonToSuperGroup(orbital, "Alex Yeoh", "Bernice Yu", "Charlotte Oliveiro");
-            sampleAb.addPersonToSuperGroup(finalYearProject, "Irfan Ibrahim", "Roy Balakrishnan");
-            sampleAb.addPersonToSubGroup(apollo, "Alex Yeoh", "Bernice Yu");
-            sampleAb.addPersonToSubGroup(artemis, "Charlotte Oliveiro");
-            return sampleAb;
+            sampleNotor.addSuperGroup(orbital);
+            sampleNotor.addSuperGroup(finalYearProject);
+            sampleNotor.addPersonToSuperGroup(orbital, "Alex Yeoh", "Bernice Yu", "Charlotte Oliveiro");
+            sampleNotor.addPersonToSuperGroup(finalYearProject, "Irfan Ibrahim", "Roy Balakrishnan");
+            sampleNotor.addPersonToSubGroup(apollo, "Alex Yeoh", "Bernice Yu");
+            sampleNotor.addPersonToSubGroup(artemis, "Charlotte Oliveiro");
+            return sampleNotor;
         } catch (ExecuteException e) {
             e.printStackTrace();
             logger.info("An unexpected error occurred when creating sample data."

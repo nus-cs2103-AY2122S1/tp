@@ -14,13 +14,12 @@ import seedu.notor.model.group.SubGroup;
 public class SubGroupCreateCommand extends GroupCommand {
     public static final String COMMAND_WORD = "create";
     public static final List<String> COMMAND_WORDS = Arrays.asList("create", "c");
+    private static final String COMMAND_DESCRIPTION = ": Creates a subgroup within a group.\n";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group. "
-            + "Parameters: "
-            + COMMAND_WORD
-            + " GROUP_NAME \n"
-            + "Example: " + COMMAND_WORD
-            + "Team 1";
+    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
+            + COMMAND_DESCRIPTION
+            + "Parameters: n:SUBGROUPNAME\n"
+            + "Example: " + GroupCommand.COMMAND_WORD + " 1 " + COMMAND_WORD + " n:Artemis";
 
     private final GroupExecutor executor;
 

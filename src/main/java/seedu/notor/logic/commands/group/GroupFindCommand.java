@@ -17,9 +17,8 @@ public class GroupFindCommand extends GroupCommand {
     public static final String COMMAND_WORD = "find";
     public static final List<String> COMMAND_WORDS = Arrays.asList("find", "f");
 
-    private static final String COMMAND_DESCRIPTION =
-            ": Finds a group via searching their name for a given query, and returns the group list filtered by "
-                    + "those who match the query\n";
+    private static final String COMMAND_DESCRIPTION = ": Finds a group via searching their names for a given query. \n"
+            + "Returns the group list filtered by those who match the query\n";
 
     public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION

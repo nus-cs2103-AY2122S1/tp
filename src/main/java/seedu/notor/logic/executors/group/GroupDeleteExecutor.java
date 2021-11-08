@@ -12,7 +12,7 @@ import seedu.notor.ui.note.NoteWindow;
 
 public class GroupDeleteExecutor extends GroupExecutor {
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
-    public static final String MESSAGE_DELETE_GROUP_CANCEL = "Deleting of Group: %1$s has been cancelled.";
+    public static final String MESSAGE_DELETE_GROUP_CANCEL = "Cancelled deleting of Group: %1$s";
     public static final String MESSAGE_DELETE_GROUP_FAILURE =
             "Unable to delete Group: %1$s as note window for the Group is currently opened.";
     public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with deleting of Group: %1$s?";

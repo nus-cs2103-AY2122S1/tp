@@ -209,7 +209,27 @@ for `CommandHistory` when using up arrow key  is as follows.
 
 ![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
 
+### \[Proposed\] Last Contact Feature
 
+Most CLI systems boast specific tools to help manage the frequency of meeting with the contacts. This feature was deferred, but here are some thoughts on implementation.
+
+![LastContactClassDiagram](images/LastContactClassDiagram.png)
+
+Each Person would have one LastContactDate and NextContactDate. These two can have specialised functions inside to determine if the NextContactDate is soon enough, and ability to sort the Person List by these two dates can also be implemented.
+
+#### Potential Commands
+
+* Commands to set the Last Contact Day
+  * Might have a default of the current date, or takes a parameter to set the last contact date to the last edited date of the note. 
+  * Alternatively takes a date for manual inputs.
+* Commands to set the Next Contact Day
+
+#### Design considerations
+
+* For ease of use, utility classes to parse different kinds of date strings might be useful. For example, parsing 7d as 7 days from today, then 1m means 1 month from the day, 1y meaning 1 year... etc.
+* User commands to update the last contact date to the next contact date before you change the next contact date might serve users well
+* It may be useful to set a new LastContactDate or NextContactDate for whole groups at once
+* With regards to UI, these dates might be observed by person card using the Observation design pattern. This would allow the UI to update these dates with colours depending on how soon the NextContactDate is or how far away the LastContactDay is.
 
 ### \[Proposed\] Data archiving
 
@@ -764,7 +784,16 @@ Must have at least one subgroup in the list.
    
 ### Tagging a person
 
-{Todo...}
+Prerequisites: Have persons in the list panel.
+
+1. Test case: `person 1 /tag t:tag1, tag2`<br>
+   Expected: Tags with those names are added to person 1, unless person 1 already has both tags, in which case an error message is displayed. If Person1 already has a tag, it is not added twice.
+
+2. Test case: `person 1 /untag t:tag1, tag2`<br>
+   Expected: Tags with those names are removed from person 1, unless person 1 has neither tag, in which case an error message is displayed
+3. Test case: `person 1 /ct t:tag1, tag2`<br>
+    Expected: Similar to **Clearing note of a person**, a warning window will be displayed. The extra parameters do nothing.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files

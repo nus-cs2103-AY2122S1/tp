@@ -1,12 +1,13 @@
 package seedu.notor.logic.parser;
 
-import static seedu.notor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 
@@ -29,6 +30,7 @@ public class PersonDeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         String deleteFirstPerson = "person a /delete";
-        assertParseFailure(notorParser, deleteFirstPerson, MESSAGE_UNKNOWN_COMMAND);
+        assertParseFailure(notorParser, deleteFirstPerson,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 }
