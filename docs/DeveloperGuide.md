@@ -176,7 +176,8 @@ The `UI` component,
   the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
 
 Some classes of the UI, notably `CommandBox`, `StudentCard` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
-executes a Command from the Logic `component`. The `CommandExecutor` functional interface serves as a link between the UI and the Logic component, reducing dependency of UI on the Logic part
+executes a Command from the Logic `component`. The Command Executor is first created in `MainWindow` and pass down to those components to execute commands.
+The `CommandExecutor` functional interface thus serves as a link between the UI and the Logic component, reducing dependency of UI on the Logic part
 
 ![Structure of the UI Component](images/dg/architecture/ui/ExecutorClassDiagram.png)
 
@@ -185,6 +186,8 @@ to show users the result of a command execution. After information is sent from 
 Info Object to the Creator classes, which will be used to convert it for user view in the Visualizer Display itself.
   
 ![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
+
+Note that some details are omitted or repeated in the class diagram for better explanation of how the various components of UI work.
 
 **Design Considerations**
 

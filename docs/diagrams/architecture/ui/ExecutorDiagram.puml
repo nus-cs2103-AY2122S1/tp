@@ -15,7 +15,7 @@ Class CommandBox
 
 StudentListPanel -down--> "*" StudentCard
 
-MainWindow ..> CommandExecutor
+MainWindow ...> CommandExecutor : create >
 StudentCard -> "1" CommandExecutor
 StudentListPanel --> "1" CommandExecutor
 CommandBox --> "1" CommandExecutor
@@ -25,6 +25,12 @@ MainWindow *-- "1" CommandBox
 MainWindow *-- "1" StudentListPanel
 MainWindow *-- "1" AppMenu
 
-
+AppMenu -[hidden]left- CommandBox
 CommandBox -[hidden]left- StudentListPanel
+
+package Logic <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+CommandExecutor --left> Logic
 @enduml
