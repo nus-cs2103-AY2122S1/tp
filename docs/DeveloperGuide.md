@@ -780,16 +780,25 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the program
+
+    1. Use `exit` or close the window to end the program.
+
+### Adding a person
+
+1. Adding a person with description more than 500 characters long.
+
+    1. Enter the following command: `add -nJohn Doe -p98765432 -ejohnd@example.com -aJohn street, block 123 -dThis is a description that is more than 500 characters long. The rest of this message is randomly padded to make up 500 characters.0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789`<br>
+       Expected: Error message stating that description is too long.
 
 ### Deleting a person
 
@@ -806,12 +815,14 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete the data file located at `[JAR file location]/data/contactsh.json`.
+    2. Run the program. <br> Expected: A new data file with some example contacts will be created.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+    1. Modify the data file located at `[JAR file location]/data/contactsh.json` with incorrect modifications such as replacing phone numbers with a string of alphabets.
+    2. Run the program. <br> Expected: The data file is replaced with an empty file, program starts with no contacts. 
