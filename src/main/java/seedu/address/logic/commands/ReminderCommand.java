@@ -15,7 +15,7 @@ public class ReminderCommand extends Command {
     public static final String COMMAND_WORD = "reminder";
     public static final String SET_FLAG = " -s";
     public static final String NO_FLAG_DESCRIPTION = "Shows the number of days prior to a task's"
-            + " date for the task to be reminded as due soon.";
+            + " date for the task to be reminded as due soon";
     public static final String HAS_FLAG_DESCRIPTION = "Sets the number of days prior to a task's"
             + " date for the task to be reminded as due soon.\n"
             + "Parameters: DAYS (must be a positive integer)\n"

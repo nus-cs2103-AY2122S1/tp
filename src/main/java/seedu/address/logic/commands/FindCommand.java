@@ -23,19 +23,19 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String DESCRIPTION =
-            "Finds all persons whose specified detail contain any of the specified keywords (case-insensitive)";
+            "Finds all persons whose specified detail contain any of the specified keywords (case-insensitive).";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose specified detail contain any of the specified keywords (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]"
+            + "[" + PREFIX_NAME + " NAME] "
+            + "[" + PREFIX_PHONE + " PHONE] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + "[" + PREFIX_ADDRESS + " ADDRESS] "
+            + "[" + PREFIX_TAG + " TAG]"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] "
             + "Example: " + COMMAND_WORD + " -n alex yeoh";
 
     private final AttributeContainsKeywordsPredicate predicate;

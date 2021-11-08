@@ -341,7 +341,7 @@ public class HelpWindow extends AnchorPane {
 
     private void handleFind() {
         additionalInfo.setText("Format: "
-                + "find [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-l TAG]… [-d DESCRIPTION] "
+                + "find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-l TAG]… [-d DESCRIPTION] "
                 + "[-tn TASK_NAME] KEYWORD [MORE_KEYWORDS]"
                 + "\nPersons matching all the keywords will be returned"
                 + "\nAt least one of the optional fields must be provided"
