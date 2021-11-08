@@ -33,7 +33,7 @@ public class LastMetTest {
         assertFalse(LastMet.isValidLastMet("20-30")); // missing local part
 
         // invalid parts
-        assertFalse(LastMet.isValidLastMet("20-50-5050")); // invalid domain name
+        assertFalse(LastMet.isValidLastMet("20-50-5050")); // invalid domain LastMet
         assertFalse(LastMet.isValidLastMet("60-08-2010"));
         assertFalse(LastMet.isValidLastMet("5654-08-12"));
 
@@ -41,6 +41,9 @@ public class LastMetTest {
         assertTrue(LastMet.isValidLastMet("20-12-1999"));
         assertTrue(LastMet.isValidLastMet("20-09-2021"));
         assertTrue(LastMet.isValidLastMet(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))); // today
+
+        LastMet lastMet = new LastMet(null); // null last met converts to empty string
+        assertTrue(LastMet.isValidLastMet(lastMet.toString()));
     }
 
     @Test
@@ -88,5 +91,55 @@ public class LastMetTest {
         assertTrue(emptyLastMet.isEmpty());
 
         assertFalse(tempLastMet.isEmpty());
+    }
+
+    @Test
+    public void equals() {
+        LastMet john = new LastMet("20-12-2020");
+        LastMet otherJohn = new LastMet("20-12-2020");
+        LastMet jane = new LastMet("25-12-2020");
+
+        // same object
+        assertTrue(john.equals(john));
+
+        // different object same LastMet
+        assertTrue(john.equals(otherJohn));
+        assertEquals(john.hashCode(), otherJohn.hashCode());
+
+        // different object different LastMet
+        assertFalse(john.equals(jane));
+
+        // different type
+        assertFalse(john.equals("20-12-2020"));
+
+    }
+
+    @Test
+    public void toString_nullValue_returnsEmptyString() {
+        LastMet lastMet = new LastMet(null); // null last met converts to empty string
+        assertEquals(lastMet.toString(), "");
+        assertEquals(lastMet.hashCode(), 0);
+    }
+
+    @Test
+    public void compareWithDirection() {
+        LastMet nullValueLastMet = new LastMet(null); // null last met converts to empty string
+        LastMet lastMet = new LastMet("20-12-2020");
+        LastMet laterLastMet = new LastMet("21-12-2020");
+
+        // both null
+        assertEquals(0, nullValueLastMet.compareWithDirection(nullValueLastMet, null));
+
+        // other null
+        assertEquals(-1, lastMet.compareWithDirection(nullValueLastMet, null));
+
+        // this null
+        assertEquals(1, nullValueLastMet.compareWithDirection(lastMet, null));
+
+        // ascending
+        assertEquals(-1, lastMet.compareWithDirection(laterLastMet, SortDirection.SORT_ASCENDING));
+
+        // descending
+        assertEquals(1, lastMet.compareWithDirection(laterLastMet, SortDirection.SORT_DESCENDING));
     }
 }
