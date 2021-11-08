@@ -11,6 +11,7 @@ title: User Guide
 <p align="center">
 Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions to the features in LeadsForce, scroll down the table of contents below to get started ☺️
 </p>
+<div style="page-break-after: always;"></div>
 
 ## Table of Contents
 
@@ -23,6 +24,10 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [3.3 Last Met Attribute](#33-last-met-attribute)
     * [3.4 Tag Attribute](#34-tag-attribute)
 * [**4. Navigating LeadsForce**](#4-navigating-leadsforce)
+    * [4.1 Command View](#41-command-view)
+    * [4.2 Client List View](#42-client-list-view)
+    * [4.3 Client Info View](#43-client-info-view)
+    * [4.4 Meeting Schedule View](#44-meeting-schedule-view)
 * [**5. Features**](#5-features)
     * [5.1 Create new contact: add](#51-create-new-contact--add)
     * [5.2 Retrieve particular contact: view](#52-retrieve-particular-contact--view)
@@ -53,6 +58,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
    * [11.1 Glossary](#111-glossary)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction
 
@@ -79,6 +85,7 @@ When reading our User Guide, here are some important information to take note of
 <img src="images/tip_icon.png" width="50"/> | Tips: suggestions that can help LeadsForce run faster.
 <img src="images/warn_icon.png" width="50"/> | Warnings: important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
 
+<div style="page-break-after: always;"></div>
 
 ## 2. Quick start
 
@@ -108,6 +115,7 @@ When reading our User Guide, here are some important information to take note of
 6. Refer to the [Features](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Client Information
 
@@ -174,6 +182,7 @@ The `Tag` attribute refers to the tags associated with the client. A client can 
 | <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. e.g. to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. e.g. if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. |
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Navigating LeadsForce
 
@@ -211,6 +220,12 @@ The command view is where you will be able to input commands into LeadsForce. Th
    pressing `enter`, LeadsForce can filter out clients based on the tag that is chosen. Further details of
    the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
+<img src="images/info_icon.png" width="30"/>Not liking the current colour scheme? LeadsForce offers 3 other darker themes for you to use, toggle the `theme` bar to change the colour scheme of the application.
+
+| Space theme | Twilight theme | Dark theme |
+| :--: | :--: | :--: |
+| <img src="images/SpaceThemeInterface.png" width="400"/> | <img src="images/TwilightThemeInterface.png" width="400"/> | <img src="images/DarkThemeInterface.png" width="400"/> |
+
 ### 4.2 Client List View
 
 <p align="center">
@@ -241,6 +256,7 @@ view.
 The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to
 the latest meeting that the client has. When first booting up the application, all meetings will be shown. Using
 the [`Schedule`](#57-find-meeting-schedule--schedule) command can change the list of meetings shown to the user.
+<div style="page-break-after: always;"></div>
 
 ## 5. Features
 
@@ -315,7 +331,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 | :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
-| <img src="images/tip_icon.png" width="50"/> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
+| <img src="images/tip_icon.png" width="50"/> | • Multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
 
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
@@ -351,9 +367,9 @@ All clients in an address book would be shown in the client view list.
 ### 5.6 Sort Contacts : `sort`
 
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
-based on the given `SORT DIRECTION`.
+based on the given `SORT_DIRECTION`.
 
-| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
+| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT_DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :---: | :--- |
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
@@ -363,7 +379,7 @@ based on the given `SORT DIRECTION`.
 For instance, if you were to sort clients by risk appetite.
 
 | `sort r/asc`| `sort r/dsc` |
-| :---: | :--- |
+| :---: | :---: |
 | <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
 
 
@@ -380,7 +396,7 @@ Finds the meeting schedule on a specified date.
 For instance, using `schedule 30-11-2021` will produce the following result. <br>
 
 | Before | After |
-| --- | --- |
+| :---: | :---: |
 | <img src="images/ExpectedScheduleCommand.png" width="400"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="400"/> |
 
 ### 5.8 Locating clients by keywords : `search`
@@ -396,7 +412,7 @@ Finds clients whose contacts match with the given keywords.
 For instance, using `search Alex` will produce the following result. <br>
 
 | Before | After |
-| --- | --- |
+| :---: | :---: |
 | <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
 
 ### 5.9 Filter current list by keywords : `filter`
@@ -413,7 +429,7 @@ Filters the current list by the given keywords.
 For instance, using `filter t/colleagues` will produce the following result.
 
 | Before | After |
-| --- | --- |
+| :---: | :---: |
 | <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
 
 ### 5.10 Clearing all entries : `clear`
@@ -461,6 +477,8 @@ update data directly by editing that data file.
 <div markdown="block" class="alert alert-warning">
  <p><img src="images/warn_icon.png" width="30"/> <b>If your changes to the data file makes its format invalid, LeadsForce will discard all data and start with an empty data file at the next run.</b></p>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## 6. Multiple Address Books Feature
 
@@ -528,6 +546,8 @@ If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 7. FAQ
 
 **Q**: Is LeadsForce free to use? <br>
@@ -558,6 +578,7 @@ directory where you have stored the `LeadsForce.jar` file, and type `java -jar L
 the data of your previous LeadsForce home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 8. Troubleshooting
 
@@ -597,6 +618,7 @@ However, if you do happen to encounter any bugs while using LeadsForce, please g
 LeadsForce's [issue page](https://github.com/AY2122S1-CS2103T-T17-3/tp/issues) to issue the bug with the steps to
 recreate the bug.
 
+<div style="page-break-after: always;"></div>
 
 ## 10. Command summary
 
@@ -627,6 +649,8 @@ Action | Format | Examples
 **Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
 **Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
 **List Address Book** | `ab list` | -
+
+<div style="page-break-after: always;"></div>
 
 ## 11. Appendix
 
