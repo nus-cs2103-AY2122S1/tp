@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.interaction.Interaction;
+import seedu.address.model.organisation.Organisation;
 import seedu.address.model.person.Compatibility;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
@@ -28,39 +29,46 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
                     new Faculty("computing"), new Major("computer science"),
                     new Compatibility(80),
-                    getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("friends"),
-                    getRemarkSet("remarks1")),
+                    getSkillSet("frontend", "backend"), getLanguageSet("java", "html", "css", "javascript"),
+                    getFrameworkSet("javafx", "reactJS"), getTagSet("friends"),
+                    getRemarkSet("here is a sample remark", "good fit")),
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
                     new Faculty("fass"), new Major("economics"),
-                    new Compatibility(80),
-                    getSkillSet("frontend"), getLanguageSet("java"),
+                    new Compatibility(50),
+                    getSkillSet("frontend"), getLanguageSet("java", "python"),
                     getFrameworkSet("javafx"), getTagSet("colleagues", "friends"),
-                    getRemarkSet("remarks1")),
+                    getRemarkSet("sample remark")),
             new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
                     new Faculty("fass"), new Major("social work"),
                     new Compatibility(80),
-                    getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("neighbours"),
-                    getRemarkSet("remarks1")),
+                    getSkillSet("frontend"), getLanguageSet("html", "css", "javascript"),
+                    getFrameworkSet("reactJS"), getTagSet("neighbours"),
+                    getRemarkSet("met on the way to school")),
             new Person(new Name("David Li"), new Email("lidavid@example.com"),
                     new Faculty("science"), new Major("physics"),
-                    new Compatibility(80),
-                    getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("family"),
-                    getRemarkSet("remarks1")),
+                    new Compatibility(60),
+                    getSkillSet("backend"), getLanguageSet("sql"),
+                    getFrameworkSet("psql"), getTagSet("classmate"),
+                    getRemarkSet("met in cs2040s class")),
             new Person(new Name("Irfan Ibrahim"), new Email("irfan@example.com"),
                     new Faculty("computing"), new Major("business analytics"),
-                    new Compatibility(80),
-                    getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("classmates"),
-                    getRemarkSet("remarks1")),
+                    new Compatibility(70),
+                    getSkillSet("backend"), getLanguageSet("sql"),
+                    getFrameworkSet("psql", "mongoDB"), getTagSet("classmate"),
+                    getRemarkSet("met in cs2040 class")),
             new Person(new Name("Roy Balakrishnan"), new Email("royb@example.com"),
                     new Faculty("computing"), new Major("computer science"),
                     new Compatibility(80),
                     getSkillSet("frontend"), getLanguageSet("java"),
                     getFrameworkSet("javafx"), getTagSet("colleagues"),
-                    getRemarkSet("remarks1"))
+                    getRemarkSet("sample remark"))
+        };
+    }
+
+    public static Organisation[] getSampleOrganisations() {
+        return new Organisation[] {
+                new Organisation(new Name("NUS"), new Email("NUS@nus.edu.sg")),
+                new Organisation(new Name("Grab"), new Email("Grab@grab.edu.sg"))
         };
     }
 
@@ -69,6 +77,11 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
+        for (Organisation sampleOrganisation : getSampleOrganisations()) {
+            sampleAb.addOrganisation(sampleOrganisation);
+        }
+
         return sampleAb;
     }
 
