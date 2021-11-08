@@ -111,7 +111,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 ### Date Time Formatting
 
 * All fields that require **both** `Date` and `Time` in RHRH are accepted if they follow the format below, where the 
-  order of date and time are interchangeable.
+  order of date and time are interchangeable. (Except for `check` command)
 However, time strictly follows the `24 hours` format.
 
 | Acceptable Formats | Examples |
