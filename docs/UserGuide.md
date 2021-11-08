@@ -519,7 +519,7 @@ Examples:
 * Adding single (general) tag : `tag 1 a/friends`
 * Adding single (event) tag : `tag 2 a/event-hackathon`
 * Adding multiple tags : `tag 3 a/friends a/teammate`
-* Removing multiple (general) tags : `tag 2 r/family owesmoney`
+* Removing multiple (general) tags : `tag 2 r/family r/owesmoney`
 * Removing multiple (module) tags : `tag 2 r/module-CS1101S module-MA1521`
 * Adding and removing a tag : `tag 4 a/friends r/colleagues`
 
