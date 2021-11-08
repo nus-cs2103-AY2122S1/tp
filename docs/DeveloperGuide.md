@@ -48,11 +48,10 @@ title: Developer Guide
    5. [Download Data](#download-data)
    6. [Dashboard](#dashboard)
 9. [**Appendix: Effort**](#Appendix Effort)
-   1. [Challenges Faced and Achievements Made](#Challenges Faced)
-      1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
-      2. [Designing New UI Components](#Designing New UI components)
-      3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
-      4. [Implementing Dynamic Features](#Implementing Dynamic Features)
+   1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
+   2. [Designing New UI Components](#Designing New UI components)
+   3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
+   4. [Implementing Dynamic Features](#Implementing Dynamic Features)
 
 --------------------------------------------------------------------------------------------------------------------
 
