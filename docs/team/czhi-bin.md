@@ -59,9 +59,7 @@ Given below are my contributions to the project.
     * [#39](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/39)
   * Manged releases `v1.2` on GitHub
   * Updating UG that are not specific to a feature
-    * [#154](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/154)
-    * [#200](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/200)
-    * [#201](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/201)
+    * [#154](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/154), [#200](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/200), [#201](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/201)
   * Refactor `ModuleLesson` to remove the use of a `Set` to save the `ModuleCode`
     * [#132](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/132/files)
   * Create skeleton files for all `XYZModuleLessonCommand` and `XYZModuleLessonCommandParser`, and refactor all `XYZCommand` and `XYZCommandParser` to `XYZPersonCommand` and `XYZPersonCommandPerson`
