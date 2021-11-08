@@ -155,14 +155,14 @@ Calculating Commission with Payment Structure:
 | Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from the first 100 payments |
 | Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from first 5 payments        |
 
-**Contact that the policy belongs to**
+**Associated Contact**:
 * `CONTACT_INDEX`: Index of that contact in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-**Coverage expiry**
+**Coverage expiry**:
 * `COVERAGE_EXPIRY_DATE`: Date that the coverage expires in YYYY-MM-DD format, optional.
 
-**Tags**
+**Tags**:
 * `TAG`: can have more than one tag
 
 #### Creating A Policy : `addpolicy`
