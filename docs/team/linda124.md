@@ -26,7 +26,6 @@ Given below are my contributions to the project.
   * Managed releases `v1.2.1` - `v1.3` (2 releases) on GitHub
 
 * **Enhancements to existing features**:
-
   * Implemented basic GUI changes at the beginning (Pull requests [\#54](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/54))
   * Wrote additional tests for existing delete command which helped increase total coverage by 1.31% (Pull requests [\#195](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/195))
   * Added a confirmation popup window for clear command to alert the user that addressbook has been cleared (Pull requests [\#95](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/95), [\#104](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/104), [\#184](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/184))
@@ -44,6 +43,10 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation and testing related information for the `delete by tag` and `report` features. Relevant diagrams were also included.
       (Pull request [\#214](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/214))
+    * Added a part of the documentation for use cases during the earlier stages of implementation
+      (Pull requests [\#24](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/24))
+    * Made modifications to user stories 
+      (Pull requests [\#231](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/231))
 
 * **Contributions to team-based tasks**:
   * Maintaining the issue tracker
