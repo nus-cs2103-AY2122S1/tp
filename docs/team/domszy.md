@@ -28,7 +28,7 @@ Mentioned below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Updated the `edit` and `add` command to accomodate the new attributes in LeadsForce (Pull Request: [#67](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/67))
-  * Wrote additional tests for existing features to increase coverage
+  * Wrote additional tests for existing features to increase coverage 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=t17&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Domszy&tabRepo=AY2122S1-CS2103T-T17-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
@@ -43,7 +43,7 @@ Mentioned below are my contributions to the project.
 
 
   * Developer Guide (Pull Request: [#205](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/205)):
-    * Added implementation details of the `edit` command ([#24](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/24))
+    * Added implementation details of the `edit` command 
     * Wrote the introduction, expanded on use cases, manual testing portion, product scope and the different components.
     * Color coded the different components of the application.
     * standardising the diagrams to make it easier to read, and changing the colours of the diagrams to increase readability. 
