@@ -70,7 +70,8 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
                   - Completed some descriptions regarding groups and subgroups
                   - Included some screenshots for visual cues, and updated UI to match up Notor
 
-
+## **Tools**:
+I used IntelliJ and Git Bash for my main source code window and my terminal window, and to create the UI, I used Scenebuilder.
 
 ## **Community**:
 
@@ -79,6 +80,3 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
   regarding the commands as well as the supported features.
   I asked for help on handling CI testing in the forums(e.g. https://github.com/nus-cs2103-AY2122S1/forum/issues/323 ,  https://github.com/nus-cs2103-AY2122S1/forum/issues/363)
 
-## **Tools**:
-  I used IntelliJ and Git Bash for my main source code window and my terminal window, and to create the UI, I used Scenebuilder.
-  
