@@ -531,7 +531,7 @@ Examples:
 
 Source Control data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
 
-If you are adding groups or assessments to a student, make sure you also add the groups to the groupList, and the assessments to the assessmentList. Otherwise, the changes you made could be lost!
+If you are adding groups or assessments to a student, make sure you also add the groups to the group list, and the assessments to the assessment list. Otherwise, the changes you made could be lost!
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Source Control will discard all data and start with an empty data file at the next run.

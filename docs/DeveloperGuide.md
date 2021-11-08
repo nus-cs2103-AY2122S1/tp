@@ -921,7 +921,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai -i E0123456`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` has been specified more than once.
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
 
 5. Adding a group with non-existent students.
 
