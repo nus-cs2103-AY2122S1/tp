@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 /**
  * Represents a Person's remark in the address book.
@@ -8,8 +9,10 @@ import static java.util.Objects.requireNonNull;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values.\n"
-            + "Leaving it blank will remove the Remark field.";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values.\n\n"
+            + "Note:\n"
+            + "In edit command, remarks can be removed from a person by leaving "
+            + "the remarks value blank (i.e. " + PREFIX_REMARK + " ).";
 
     /*
      * The first character of the remark must not be a whitespace,

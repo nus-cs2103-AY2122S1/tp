@@ -24,8 +24,9 @@ public class AliasCommand extends Command {
             + PREFIX_ALIAS + "ALIAS "
             + PREFIX_COMMAND + "COMMAND\n\n"
             + "Example: "
-            + COMMAND_WORD
-            + " a/findPartner c/find g/m nat/South Korean";
+            + COMMAND_WORD + " "
+            + PREFIX_ALIAS + "findPartner "
+            + PREFIX_COMMAND + "find g/m nat/South Korean";
 
     public static final String MESSAGE_SUCCESS = "Alias successfully added. Mapped `%s` to the command `%s`.";
     public static final String MESSAGE_INVALID_ALIAS = "Invalid alias. Command words cannot be used as an alias.";

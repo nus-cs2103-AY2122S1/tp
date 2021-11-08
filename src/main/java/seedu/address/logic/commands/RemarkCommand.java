@@ -23,12 +23,12 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
             + ": Edits the remark of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing remark will be overwritten by the input values.\n\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_REMARK + "REMARK]\n\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "r/Likes to swim";
+            + "by the index number used in the displayed person list.\n\n"
+            + "Parameters: INDEX [" + PREFIX_REMARK + "REMARK]\n\n"
+            + "Note:\n"
+            + " - INDEX must be a positive integer.\n"
+            + " - Existing remark will be overwritten by the input values.\n\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_REMARK + "Likes to swim";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
