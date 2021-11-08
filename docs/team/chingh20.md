@@ -1,6 +1,6 @@
 ---
 layout: page
-title: #Huang Ching's Project Portfolio Page
+title: Huang Ching's Project Portfolio Page
 ---
 
 ### Project: GameBook
