@@ -1,7 +1,14 @@
 package seedu.programmer.testutil;
 
 import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.LabNum;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.
