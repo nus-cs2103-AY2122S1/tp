@@ -45,7 +45,7 @@ This includes neatly storing employees, suppliers, loyal customers information a
 
 #### Review and Mentoring contributions
 
-* Reviewed 16 pull requests on GitHub
+* Reviewed 17 pull requests on GitHub
 
 * Helped to ensure issues and internal milestones are on schedule
 
@@ -62,6 +62,6 @@ This includes neatly storing employees, suppliers, loyal customers information a
 
 #### Contributions to the Developer Guide (DG):
 
-* Added all user stories and glossary (Pull request [#22](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/22) and Pull request [#250](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/250))
+* Added all user stories, use cases and test cases for table related and check related commands and glossary (Pull request [#22](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/22) and Pull request [#250](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/250))
 
 * Added section for SetTablesCommand together with UML diagrams (Pull request [#213](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/213) and Pull request [#222](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/222))
