@@ -9,6 +9,7 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant "appointment:Appointment" as appointment MODEL_COLOR
+participant ":Prescription" as Prescription MODEL_COLOR
 participant "appointmentBook\n:AppointmentBook" as appointmentBook MODEL_COLOR
 end box
 
@@ -20,9 +21,12 @@ Model --> DeletePrescriptionCommand : AppointmentBook
 
 
 DeletePrescriptionCommand -> Model : deletePrescription()
-Model -> appointment : deletePrescription()
+Model -> appointment : deletePrescription(medicineName)
+appointment -> Prescription : remove()
+Prescription --> appointment
+destroy Prescription
 appointment --> Model
-Model -> appointmentBook : setAppointment()
+Model -> appointmentBook : setAppointment(newAppointment)
 appointmentBook --> Model
 
 Model ---> DeletePrescriptionCommand
