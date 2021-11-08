@@ -29,16 +29,16 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/zhuoyang125.png" width="200px">
 
-[[github](http://github.com/zhuoyang125)]
-![img.png](img.png)
+[[github](http://github.com/zhuoyang125)]] [[portfolio](team/zhuoyang125.md)]
+
 * Role: Developer
 * Responsibilities: UI IC
 
 ### Sherwin Poh Kai Xun
 
-<img src="images/sherrpass.png" width="200px">
+<img src="images/sherwinprofile.jpg" width="200px">
 
-[[github](https://github.com/sherrpass)]
+[[github](https://github.com/sherrpass) [portfolio](team/sherwinpoh.md)]
 
 * Role: Developer
 * Responsibilities: Storage IC

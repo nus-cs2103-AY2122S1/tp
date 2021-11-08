@@ -3,21 +3,21 @@ layout: page
 title: Developer Guide
 ---
 
--   Table of Contents
-    {:toc}
+* Table of Contents 
+{:toc}
 
 ---
 ## **Developer Guide Information**
 
-### **Purpose**
+### Purpose
 
 This developer guide aims to provide information regarding the design and implementation of Siasa, including the design considerations when implementing each feature.
 
-### **Target Audience**
+### Target Audience
 
 This developer guide is made for Java developers who are or were formerly **student financial advisors**, the target audience of Siasa. Thus, it is assumed that readers have basic background knowledge on Java and is familiar with common terms used in insurance policies.
 
-### **Acknowledgements**
+### Acknowledgements
 
 -   This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -55,7 +55,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `deletecontact 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -86,7 +86,7 @@ The `UI` component,
 -   listens for changes to `Model` data so that the UI can be updated with the modified data.
 -   depends on some classes in the `Model` component, as it displays `Contact` and `Policy` object residing in the `Model`.
 -   keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
--   is referenced by the `Logic` component, because the `Warning` class in `Logic` relies on `MainWindow` for the user input in the dialog box. 
+-   is referenced by the `Logic` component, because the `Warning` class in `Logic` relies on `MainWindow` for the user input in the dialog box.
 
 ### Logic component
 
@@ -94,43 +94,44 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="800" />
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `SiasaParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPolicyCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<img src="images/ParserClasses.png" width="600"/>
-
 How the parsing works:
 
--   When called upon to parse a user command, the `SiasaParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `SiasaParser` returns back as a `Command` object.
--   All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+- When called upon to parse a user command, the `SiasaParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPolicyCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPolicyCommand`) which the `SiasaParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddPolicyCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletepolicy 1")` API call.
+
+![Interactions Inside the Logic Component for the `deletepolicy 1` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeletePolicyCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-4/tp/blob/2d1b8809aa8b78086507f8e2a5d48bc05a385e01/src/main/java/seedu/siasa/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Component Class Diagram](images/ModelClassDiagram.png)
 
 The `Model` component,
 
--   stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
--   stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
--   stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
--   does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- stores the SIASA data i.e., all `Contact` and `Policy` objects (which are contained in a `UniqueContactList` and
+  `UniquePolicyList `object respectively).
+- stores the currently 'selected' `Contact` and `Policy` objects (e.g., results of a search query) in a separate filtered_list each
+  which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed'
+  e.g. the UI can be bound to this list so that the UI automatically updates when the data in the lists change.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- does not depend on any of the other three components
+  (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -140,7 +141,7 @@ The `Model` component,
 
 The `Storage` component,
 
--   can save both SIASA data and user preference data in json format, and read them back into corresponding objects.
+-   can save both SIASA data (contacts and policies) and user preference data in json format, and read them back into corresponding objects.
 -   inherits from both `SiasaStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 -   depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -154,6 +155,91 @@ Classes used by multiple components are in the `seedu.siasa.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Creating Policies
+
+This section explains the process of adding a `Policy` to the `Policy` list that belongs to an owner which is a `Contact`.
+This is similar to how a `Contact` is created as well with some highlighted differences.
+
+The `AddPolicyCommand` will create a new `Policy` with the specified details and add it to the application. This command requires
+the `Policy`'s details and the `Contact`'s `Index` to specify which `Contact` the policy belongs to.
+
+The `AddPolicyCommand` implements the `AddPolicyCommand#execute` method, which obtains the `Contact` object, the owner,
+from the `Model` using the `Index`, creates the policy with the details and the owner, checks for similar policies and
+if none, updates the `Model`'s `Policy` list.
+
+The sequence diagram below illustrates how the `AddPolicyCommand` is executed.
+![](images/AddPolicyParserSequenceDiagram.png)
+
+**Step 1.** The user enters the command `addpolicy n/critical illness p/30000 4 120 c/10 30 cl/2`
+
+**Step 2.** User input is passed to `SiasaParser` which creates and calls `AddPolicyCommandParser#parse` with the arguments.
+This creates a new AddPolicyCommand by passing in the `Policy`'s details and owner `Contact`'s `Index`.
+
+![](images/AddPolicyCommandExecuteSequenceDiagram.png)
+
+**Step 3.** The `AddPolicyCommand` is executed by `LogicManager` by calling the `execute` method.
+
+**Step 4.** As the model is passed into the `execute` method, the list of `Contact`s save in the model can be obtained
+by calling `Model#getFilteredContactList`. The owner `Contact` is obtained from the list using the `Index`.
+
+**Step 5.** The policy to be added is created by passing in the details and the owner `Contact`.
+
+**Step 6.** The policy is added to the model by calling `Model#addPolicy`.
+
+#### Notable differences with creating contact
+1. The Contact to be added is created within `AddContactCommandParser#parse` and not in `AddContactCommand#execute`.
+2. No Contact details are passed into `AddContactCommand`
+
+
+#### Design considerations:
+#### How to create the `Policy` to be added.
+* **Alternative 1 (chosen)**: `Policy` details and Contact Index are passed into `AddPolicyCommand`, when executed, owner
+  `Contact` is obtained from the `Model` and `Policy` to be added is created.
+    * Advantage over alt. 2:
+        * Less coupling since the parser does not need a reference to `Model`.
+        * Cleaner implementation of `SiasaParser#parse` since all `CommandParser`s do not need a reference to `Model`.
+* **Alternative 2**: `Model` reference is passed into `AddPolicyCommandParser#parse`, `Contact` is obtained from the `Model`
+  and `Policy` to be added is created within parse and the created `Policy` is passed into AddPolicyCommand.
+    * Advantage over alt. 1:
+        * Greater abstraction since `Policy` components are not revealed and stored within the `AddPolicyCommand`
+        * Consistent with the implementation of `AddContactCommand`.
+
+### Editing Contact
+`EditContactCommand` requires an `EditContactDescriptor` which encapsulates the intended changes to the `Contact` and
+the `Index` of the `Contact` to be edited.
+
+Due to the immutable nature of both `Contact` and `Policy`, editing a `Contact`'s details would require creating a new `Contact`
+object. In addition, as `Policy` has an owner field, all `Policies` that belong to the edited `Contact` need to be edited and a
+new `Policy` object would need to be created for each of them with the edited new `Contact` object as the owner.
+
+The sequence diagram below illustrates how the `EditContactCommand` is executed.
+![](images/EditContactCommandExecuteSequenceDiagram.png)
+
+**Step 1**: `EditContactCommand#execute` is called which gets the `contactToEdit` from the `Model` using the `Index` provided,
+similar to the process in `AddPolicyCommand`.
+
+**Step 2**: Using the `EditContactDescriptor` object and the `contactToEdit`, a new `editedContact` is created by calling
+`EditContactCommand#createEditedContact`.
+
+**Step 3**: Policies belonging to the `contactToEdit` is obtained from the `Model`.
+
+**Step 4**: For each of the policies, a new `Policy` object is created with identical fields but with `editedContact` as the owner and
+the `Model` is updated with these new policies.
+
+**Step 5** The `contactToEdit` is replaced by the `editedContact` by calling `Model#setContact`.
+#### Design considerations:
+#### Immutability of Contact and Policy
+* **Alternative 1 (chosen)**: Both `Contact` and `Policy` are immutable. Therefore, any edit to `Policy` or `Contact` requires new objects
+  to be created.
+    * Advantage over 2:
+        * With the invariant that an object will not be changed once created, it is easier to design,
+          implement and use the application as code complexity increases.
+        * Thread safety
+* **Alternative 2**: Both `Contact` and `Policy` are mutable. Any changes to `Policy` or `Contact` can be done simply by modifying the fields.
+    * Advantage over 1:
+        * Less objects need to be created, arguably better performance as number of entries increase.
+* **Reason for choice**: Despite performance concerns, application meets performance requirements and expectations from testing.
+
 ### Sorting and Filtering
 
 This section explains the implementation of the Sorting and Filtering feature. They are both implemented with a similar concept.
@@ -162,7 +248,7 @@ The set of sorting commands are `sortcontact` and `sortpolicy`, while the set of
 
 #### Design Considerations
 
-1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/fliters with significant code duplication.
+1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/filters without significant code duplication.
 2. The sorting functionality has to work alongside the preexisting filtering functionality.
 3. The sorting and filtering functionality has to be *stackable*; Lists should allow filtering then sorting and vice-versa.
 
@@ -179,6 +265,8 @@ Due to the implementation of both `SortedList` and `FilteredList`, if the underl
 The respective parsers would construct the commands with the correct `Predicate`s or `Comparator`s depending on the arguments provided by the user. Then, the commands, when executed, will apply them to the respective lists in the model.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
+
+![Sequence diagram when the user executes `sortpolcy dsc`](images/SortPolicyDscSequenceDiagram.png)
 
 **Step 1.** The user executes the command `sortpolicy titledsc`.
 
@@ -248,7 +336,7 @@ operations.
 - Pros:
     - Maintains the UI structure of ```MainWindow``` controlling all the smaller UI parts.
 - Cons:
-    - A more complex implementation to control ```WanringWindow```
+    - A more complex implementation to control ```WarningWindow```
 **Alternative 2:** Have the ```Command``` call a method in ```WarningWindow``` directly.
 - Pros:
     - A more straightforward implementation.
@@ -288,13 +376,13 @@ Our target audience is a student who,
 -   prefers typing to mouse interactions
 -   is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 Currently, there are no good contact applications on desktop that allow student financial advisors, that do not have time to use complex contact book applications, to easily keep track of their contacts and policies.
 
 Siasa enables student financial advisors to quickly and easily keep track of their contacts (both potential clients and existing clients) and financial plans sold to aid their operations. The different payment structures also provide better customisation for student financial advisors, allowing them to better record any policies they may have sold.
 
-Siasa also provides valuable data and statistics in a `.txt` file for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
+Siasa also provides valuable data and statistics in `.csv` files for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
 
 ### User stories
 
@@ -337,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
-#### **UC1: Displaying Help**
+#### UC1: Displaying Help
 
 **MSS**
 
@@ -346,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-#### **UC2: Add a Contact/Policy**
+#### UC2: Add a Contact/Policy
 
 **MSS**
 
@@ -365,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC3: Edit a Contact/Policy**
+#### UC3: Edit a Contact/Policy
 
 **MSS**
 
@@ -390,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC4: Delete a Contact/Policy**
+#### UC4: Delete a Contact/Policy
 
 **MSS**
 
@@ -415,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC5: List a Contact's Policies**
+#### UC5: List a Contact's Policies
 
 **MSS**
 
@@ -440,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC6: Clear a Contact's Policies**
+#### UC6: Clear a Contact's Policies
 
 **MSS**
 
@@ -465,7 +553,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC7: Sort Contact/Policy List**
+#### UC7: Sort Contact/Policy List
 
 **MSS**
 
@@ -490,7 +578,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC8: Download Statistics**
+#### UC8: Download Statistics
 
 **MSS**
 
@@ -509,11 +597,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     1.  Should work on any OS with `32-bit` or `64-bit` architectures.
     1.  User data should be in human editable file and stored locally.
     1.  Should not require internet for any of its features.
-    
+
 *   Performance requirements:
     1.  Should be able to hold up to 1000 entries(contacts/policies) without a noticeable sluggishness in performance for typical usage.
     1.  The response to any commands should be less than 1 second.
-    
+
 *   Quality requirements:
     1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
     1.  The application should be easily picked up by a new user with no prior experience with a similar application.
@@ -542,7 +630,8 @@ testers are expected to do more *exploratory* testing.
 1.  Initial launch
 
     1.  Download the jar file and copy into an empty folder
-    1.  Double-click the jar file Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
+    1.  Double-click the jar file<br>
+        Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
 
 1.  Saving window preferences
 
@@ -559,9 +648,9 @@ testers are expected to do more *exploratory* testing.
         Expected: A contact with the details provided will be added into the contact list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
     1.  Test case: `addcontact n/!nvalidN@me p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` <br>
         Expected: No contact is added. Error details shown in the status message. Status bar remains the same.
-       
+
 1. Adding a contact while not all contacts are being shown
-   
+
     1.  Prerequisites: Filter the contact list using `findcontact KEYWORD` so that not all the contacts are shown.
     1.  Test case: `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`<br>
         Expected: A contact with the details provided will be added into the contact list. The complete contact list will be shown. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
@@ -595,7 +684,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a policy
 
 1.  Adding a policy while all policies are being shown
-    
+
     1.  Prerequisites: List all contacts using the `allpolicy` command. Multiple policies and contacts in the list.
     1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/2100-06-13 t/AIA`<br>
         Expected: A policy with the details provided will be added into the policy list. Details of the added policy shown in the status message. Timestamp in the status bar is updated.
@@ -605,7 +694,7 @@ testers are expected to do more *exploratory* testing.
         Expected: A warning will pop-up. Pressing `confirm` will create a policy. A policy with the details provided will be added into the policy list. Details of the added policy shown in the status message. Timestamp in the status bar is updated. Pressing `cancel` or closing will not create a policy. Error details shown in the status message. Status bar remains the same.
 
 1. Adding a policy while not all policies are being shown
-   
+
     1.  Prerequisites: Filter the policy list using `contactpolicy CONTACT_INDEX` so that not all the policies are shown. All contacts are still shown.
     1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/2100-06-13 t/AIA`<br>
         Expected: A policy with the details provided will be added into the policy list. The complete policy list will be shown. Details of the added policy shown in the status message. Timestamp in the status bar is updated.
@@ -631,7 +720,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a policy
 
 1.  Deleting a policy while all policies are being shown
-    
+
     1.  Prerequisites: List all contacts using the `allpolicy` command. Multiple policies in the list.
     1.  Test case: `deletepolicy 1`<br>
         Expected: First policy is deleted from the list. Details of the deleted policy shown in the status message. Timestamp in the status bar is updated.
