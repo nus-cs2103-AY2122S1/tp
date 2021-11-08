@@ -9,15 +9,13 @@ title: Developer Guide
 2. [Setting up, getting started](#Setting up)
 3. [Glossary](#Glossary)
 4. [Design](#Design)
-5. [Architecture](#Architecture)
-6. [Design](#Design)
    1. [Architecture](#Architecture)
    2. [UI Components](#UI component)
    3. [Logic Component](#Logic component)
    4. [Model Component](#Model component)
    5. [Storage component](#Storage component)
-   6. [Common Classes](#Common Classes)
-7. [Implementations](#Implementations)
+   6. [Common Classes](#common-classes)
+5. [Implementations](#Implementations)
    1. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
    2. [`Add` Student Feature](#add student)
    3. [`Filter` Student List Feature](#filter student)
@@ -26,8 +24,8 @@ title: Developer Guide
    6. [`Download` Data Feature](#download data)
    7. [`Purge` Feature](#purge data)
    8. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
-8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-9. [Appendix: Requirements](#Appendix Requirements)
+6. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+7. [Appendix: Requirements](#Appendix Requirements)
    1. [Product Scope](#Product Scope)
    2. [User Stories](#User Stories)
    3. [Use Cases](#Use Cases)
@@ -42,19 +40,19 @@ title: Developer Guide
       9. [Use Case: UC9 Edit a lab record](#Use Case9)
       10. [Use case: UC10 View dashboard of student records](#Use Case10)
    4. [Non-Functional Requirements](#Non-Functional Requirements)
-10. [Appendix: Instructions for Manual Testing](#Appendix Testing)
-    1. [Launch and Shutdown](#Launch and Shutdown)
-    2. [Deleting a Student](#Del student)
-    3. [Show a Student's Lab Result](#show lab student)
-    4. [Upload Data](upload-data)
-    5. [Download Data](download-data)
-    6. [Dashboard](dashboard)
-11. [Appendix: Effort](#Appendix Effort)
-    1. [Challenges Faced and Achievements Made](#Challenges Faced)
-       1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
-       2. [Designing New UI Components](Designing New UI components)
-       3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
-       4. [Implementing Dynamic Features](#Implementing Dynamic Features)
+8. [Appendix: Instructions for Manual Testing](#manual-testing)
+   1. [Launch and Shutdown](#Launch and Shutdown)
+   2. [Deleting a Student](#Del student)
+   3. [Show a Student's Lab Result](#show lab student)
+   4. [Upload Data](#upload-data)
+   5. [Download Data](#download-data)
+   6. [Dashboard](#dashboard)
+9. [Appendix: Effort](#Appendix Effort)
+   1. [Challenges Faced and Achievements Made](#Challenges Faced)
+      1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
+      2. [Designing New UI Components](#Designing New UI components)
+      3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
+      4. [Implementing Dynamic Features](#Implementing Dynamic Features)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,7 +66,7 @@ ProgrammerError makes use of the following third-party libraries:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Setting-up"></a> **2. Setting up, getting started**
+## <a name="Setting up"></a> **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -1013,7 +1011,7 @@ Use case ends.
 
   Use case ends.
 
-### <a name="Use Cas10"></a> **Use case: UC10 View dashboard of student records**
+### <a name="Use Case10"></a> **Use case: UC10 View dashboard of student records**
 
 **MSS**
 
@@ -1052,7 +1050,7 @@ as well as the number of labs unmarked for each class.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Appendix"></a> **17. Appendix: Instructions for manual testing**
+## <a name="manual-testing"></a> **17. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1144,7 +1142,7 @@ testers are expected to do more *exploratory* testing.
    2. CS2100 TA will also be able to see the number of labs left to mark for each class.
   
   
-## <a name="Effort"></a> **18. Appendix: Effort**
+## <a name="Appendix Effort"></a> **18. Appendix: Effort**
 
 ### <a name="Challenges Faced"></a> Challenges Faced and Achievements Made
 The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
