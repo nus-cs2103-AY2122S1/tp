@@ -92,6 +92,7 @@ Given below are my contributions to the project.
     * [Discovery of 'hidden bug' which led to defensive programming fix in Schedule PR](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/113)
       The hidden bug is for corrupted data files not containing schedule fields in the json format data, the 
       schedule commands fail.
+    * [Highlighting of important DG bugs in UML diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
   
 * **Tools**:
   1. Integrated the Github plugin (codecov) to the team repo.

@@ -95,7 +95,7 @@ Before we jump into the commands, let us take a moment to familiarise ourselves 
 gitGud provides a gamer-themed user interface as shown in the image below with 6 main sections.
 
 ![Ui-labelled](images/ui-screenshots/ui-overview.png)
-<br><center><ins>Image: User interface layout of gitGud.</ins></center>
+<br><center><ins>Image: User interface layout of gitGud</ins></center>
 
 | Number | Section Name | Description |
 | -------| -------------- | ----------- | 
@@ -166,8 +166,6 @@ Examples:
 * `friend --add tau_bar -n Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
   has the real-life name 'Taufiq'.
 
-Screenshot:
-
 ![Friend add Screenshot](images/ui-screenshots/friend-add.png)
 <br><center><ins>Image: Command feedback box after adding a friend `Draco`</ins></center>
 
@@ -183,8 +181,6 @@ Command constraints:
 Examples: 
 * `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` 'Draco' to 'Kevin'.
 
-Screenshot: 
-
 ![Friend edit Screenshot](images/ui-screenshots/friend-edit.png)
 <br><center><ins>Image: Command feedback box after editing an existing friend `kevcool`'s name to `Kevin Foong`</ins></center>
 
@@ -199,8 +195,6 @@ Command constraints:
 
 Examples:
 * `friend --delete Draco` Deletes friend with gitGud `FRIEND_ID` of Draco and all their data from the friends list.
-
-Screenshot:
 
 ![Friend delete Screenshot](images/ui-screenshots/friend-delete.png)
 <br><center><ins>Image: Command feedback box after deleting a friend `Draco`</ins></center>
@@ -236,13 +230,11 @@ Examples:
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
   to the friend with the gitGud `FRIEND_ID` ‘Draco’.
 
-Screenshot:
-
 ![Friend link Screenshot](images/ui-screenshots/link-feedback.png)
 <br><center><ins>Image: Command feedback box after linking a friend `marcustxk` to a game `RocketLeague`</ins></center>
 
 ![Friend link Screenshot](images/ui-screenshots/friend-link.png)
-<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after linking a friend `marcustxk` 
+<br><center><ins>Image: gitGud after running `friend --get marcustxk` after linking a friend `marcustxk` 
 to a game `RocketLeague`</ins></center>
 
 #### 5.1.5 Unlinking a game from a friend: `friend --unlink`
@@ -259,14 +251,12 @@ Command constraints:
 Examples:
 * `friend --unlink Draco -g DOTA` Removes the link between the friend with `FRIEND_ID` 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
-Screenshot:
-
 ![Friend unlink Screenshot](images/ui-screenshots/unlink-feedback.png)
 <br><center><ins>Image: Command feedback box after unlinking a friend `marcustxk` from a game 
 `RocketLeague`</ins></center>
 
 ![Friend unlink screenshot](images/ui-screenshots/friend-unlink.png)
-<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after unlinking a game `RocketLeague` from a 
+<br><center><ins>Image: gitGud after running `friend --get marcustxk` after unlinking the game `RocketLeague` from a 
 friend 
 `marcustxk`</ins></center>
 
@@ -286,16 +276,14 @@ Command constraints:
 Examples: 
 * `friend --skill Draco -g Valorant -v 7` Sets the skill value for friend 'Draco' for the linked game
 'Valorant' to 7.
-  
-Screenshot:
 
 ![Ui after assigning skill value](images/ui-screenshots/friend-skill-success.png)
 <br><center><ins>Image: Command feedback box after assigning skill value `7` to a game `Valorant` linked to a
 friend `Draco`</ins></center>
 
 ![Friend skill screenshot](images/ui-screenshots/friend-skill-then-get.png)
-<br><center><ins>Image: gitGud after running `friend --get Draco`, after adding a skill value `7` for a 
-friend `Draco` for a game `Valorant`</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get Draco` after adding a skill value `7` for a 
+friend `Draco` for the game `Valorant`</ins></center>
 
 #### 5.1.7 Scheduling a friend: `friend --schedule`
 
@@ -329,13 +317,11 @@ Examples:
 * `friend --schedule Draco -p 18 22 2 -f 1` Schedules 'Draco' as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
 * `friend --schedule Draco -p 12 24 7 -f 0` Schedules 'Draco' as busy from 12th to 24th hour, 1200 - 2400 (midnight) on Sunday.
 
-Screenshot:
-
 ![Ui after adding schedule](images/ui-screenshots/schedule-feedback.png)
 <br><center><ins>Image: Command feedback box after scheduling a friend's `Draco` availability</ins></center>
 
 ![Ui](images/ui-screenshots/friend-schedule.png)
-<br><center><ins>Image: gitGud after running `friend --get Draco`, after scheduling a friend's `Draco` 
+<br><center><ins>Image: gitGud after running `friend --get Draco` after scheduling a friend's `Draco` 
 availability</ins></center>
 
 #### 5.1.8 Recommending friends available to play with - `recommend`
@@ -356,9 +342,8 @@ Examples:
 * `recommend -g Valorant -t 10 6` Recommends friends who play the game with the `GAME_ID` `Valorant` and
   are available weekly at `1000` every Saturday based on the stored schedule.
 
-Screenshot:
 ![Friend recommend screenshot](images/ui-screenshots/recommend.png)
-<br><center><ins>Image: Friends available on Saturday 1000 recommended in friends list</ins></center>
+<br><center><ins>Image: gitGud displaying friends available on Saturday 1000 recommended in friends list</ins></center>
 
 #### 5.1.9 Getting a single friend's complete data: `friend --get`
 
@@ -377,8 +362,6 @@ Command constraints:
 Examples:
 * `friend --get Draco` Gets the complete data for friend 'Draco'.
 
-Screenshot:
-
 ![Friend get screenshot](images/ui-screenshots/friend-get.png)
 <br><center><ins>Image: gitGud displaying friend `Draco` after the `get` command</ins></center>
 
@@ -396,8 +379,6 @@ Format: `friend --list [KEYWORD]`
 Examples:
 * `friend --list` Lists all friends stored in gitGud.
 * `friend --list t` Lists all friends stored in gitGud that have `t` in their `FRIEND_ID`.
-
-Screenshot:
 
 ![Ui](images/ui-screenshots/friend-list.png)
 <br><center><ins>Image: gitGud after listing all friends that have `t` in their `FRIEND_ID`</ins></center>
@@ -436,10 +417,8 @@ e.g. `Apex Legends` may be stored as `ApexLegends`.
 Examples:
 * `game --add RocketLeague` Adds a brand-new game into the game list with the **unique** `GAME_ID` 'RocketLeague'.
 
-Screenshot:
-
 ![Ui](images/ui-screenshots/game-add.png)
-<br><center><ins>Image: Command feedback box after adding a game `RocketLeague`</ins></center>
+<br><center><ins>Image: Command feedback box showing that the game `RocketLeague` has been added</ins></center>
 
 #### 5.2.2 Deleting a game: `game --delete`
 
@@ -460,10 +439,8 @@ Command constraints:
 Examples:
 * `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
 
-Screenshot:
-
 ![Ui](images/ui-screenshots/game-delete.png)
-<br><center><ins>Image: gitGud after deleting the game `Valorant`</ins></center>
+<br><center><ins>Image: Command feedback box showing that the game `Valorant` has been deleted</ins></center>
 
 #### 5.2.3 Getting a single game's complete data: `game --get`
 
@@ -480,8 +457,6 @@ Command constraints:
 
 Examples:
 * `game --get CSGO` Gets all the relevant information for the game 'CSGO''.
-
-Screenshot:
 
 ![Game get screenshot](images/ui-screenshots/game-get.png)
 <br><center><ins>Image: gitGud after getting the game `CSGO`</ins></center>
@@ -501,8 +476,6 @@ Examples:
 * `game --list` Lists all games stored in gitGud.
 * `game --list Valo` Lists all games stored in gitGud that have `Valo` in their `GAME_ID`.
 
-Screenshot:
-
 ![Ui](images/ui-screenshots/game-list.png)
 <br><center><ins>Image: gitGud after listing games with the keyword `Valo`.</ins></center>
 
@@ -516,10 +489,8 @@ Shows a message providing a link to the User Guide page.
 
 Format: `help`
 
-Screenshot:
-
 ![Ui](images/ui-screenshots/help.png)
-<br><center><ins>Image: gitGud after running help command</ins></center>
+<br><center><ins>Image: gitGud's help popup window displaying link to gitGud's User Guide after `help` command is executed.</ins></center>
 
 #### 5.3.2 Clearing the friends and games lists : `clear`
 
