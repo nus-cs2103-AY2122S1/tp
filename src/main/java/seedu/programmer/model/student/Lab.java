@@ -56,32 +56,70 @@ public class Lab implements DisplayableObject {
         this.labNum = labNum;
     }
 
+    /**
+     * Empty constructor for Lab.
+     */
     public Lab() {}
 
+    /**
+     * Returns the labNum of the lab.
+     *
+     * @return The labNum of the lab.
+     */
     public LabNum getLabNum() {
         return labNum;
     }
 
+    /**
+     * Returns the student's actual score of the lab.
+     *
+     * @return The LabResult object.
+     */
     public LabResult getLabResult() {
         return actualScore;
     }
 
+    /**
+     * Gets the total score of the lab.
+     *
+     * @return The total score of the lab.
+     */
     public LabTotal getLabTotal() {
         return totalScore;
     }
 
+    /**
+     * Get the lab number.
+     *
+     * @return The lab number.
+     */
     public int getLabNumValue() {
         return labNum.getLabNum();
     }
 
+    /**
+     * Get the lab result integer value.
+     *
+     * @return The lab result integer value.
+     */
     public int getLabResultValue() {
         return actualScore.getLabResult();
     }
 
+    /**
+     * Get the total score of the lab.
+     *
+     * @return The total score of the lab.
+     */
     public int getLabTotalValue() {
         return totalScore.getLabTotalScore();
     }
 
+    /**
+     * Updates the actual score of the student for the lab.
+     *
+     * @param value The new actual score.
+     */
     public void updateActualScore(LabResult value) {
         this.actualScore = value;
     }
