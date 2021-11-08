@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 public class Lab implements DisplayableObject {
 
     public static final String MESSAGE_LAB_SCORE_AND_LAB_NUMBER_REQUIREMENT =
-            "Both Lab Number and Score to be should be provided together.";
+            "Both Lab Number and Score should be provided together.";
     public static final String MESSAGE_LAB_NUMBER_CONSTRAINT =
             "Lab number should be between 1 and 13 (inclusive).";
     public static final String MESSAGE_LAB_SCORE_CONSTRAINT = "Lab score should be a non-negative integer.";
