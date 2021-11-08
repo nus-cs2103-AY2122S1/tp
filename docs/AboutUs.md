@@ -29,7 +29,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/zhuoyang125.png" width="200px">
 
-[[github](http://github.com/zhuoyang125)]] [[portfolio](team/zhuoyang125.md)]
+[[github](http://github.com/zhuoyang125)][[portfolio](team/zhuoyang125.md)]
 
 * Role: Developer
 * Responsibilities: UI IC
