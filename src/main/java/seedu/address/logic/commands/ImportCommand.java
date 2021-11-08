@@ -69,12 +69,11 @@ public class ImportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> personList;
-
         // Verify file extension. Should have been checked in ImportCommandParser.
         assert StringUtil.isCsv(fileName) || StringUtil.isJson(fileName);
 
         // Retrieve list of Persons.
+        List<Person> personList;
         if (StringUtil.isJson(fileName)) {
             personList = getImportedPersonsFromJson();
         } else if (StringUtil.isCsv(fileName)) {
@@ -83,19 +82,9 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
         }
 
-        // Add Persons to Model
-        for (Person p: personList) {
-            try {
-                model.addPerson(p);
-            } catch (DuplicatePersonException dpe) {
-                // do nothing; skip the current person if it already exists
-            }
-        }
+        addPersonsToModel(model, personList);
+        switchToContactsTab(model);
 
-        if (model.getPersonListControl() != null) {
-            model.setTabIndex(0);
-        }
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         logger.info("Import success");
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, fileName));
     }
@@ -146,6 +135,24 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_NOT_FOUND, fileName));
         }
         return fileData.getPersonList();
+    }
+
+    private void addPersonsToModel(Model model, List<Person> personList) {
+        // Add Persons to Model
+        for (Person p: personList) {
+            try {
+                model.addPerson(p);
+            } catch (DuplicatePersonException dpe) {
+                // do nothing; skip the current person if it already exists
+            }
+        }
+    }
+
+    private void switchToContactsTab(Model model) {
+        if (model.getPersonListControl() != null) {
+            model.setTabIndex(0);
+        }
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
