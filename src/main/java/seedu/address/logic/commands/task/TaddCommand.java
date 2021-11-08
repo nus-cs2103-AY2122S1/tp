@@ -55,10 +55,15 @@ public class TaddCommand extends Command {
 
         ObservableList<Member> members = model.getFilteredMemberList();
 
+        // check if each index is valid
         for (Index targetMemberId: targetMemberIdList) {
             if (targetMemberId.getZeroBased() >= members.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
             }
+        }
+
+        // check if each target member has the task to add
+        for (Index targetMemberId: targetMemberIdList) {
             Member targetMember = members.get(targetMemberId.getZeroBased());
             if (model.hasTask(targetMember, toAdd)) {
                 throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK,

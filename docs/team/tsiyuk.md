@@ -53,4 +53,4 @@ Given below are my contributions to the project.
 
 #### Community
 1. Reviewed PRs of fellow teammates. (Some with non-trivial review comments, E.g. [PR#149](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/149))
-2. Reported bugs and suggestions for other teams during [PE-D].(https://github.com/tsiyuk/ped/issues)
+2. Reported bugs and suggestions for other teams during [PE-D](https://github.com/tsiyuk/ped/issues).
