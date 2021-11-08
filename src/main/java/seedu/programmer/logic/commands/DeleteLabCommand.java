@@ -10,7 +10,7 @@ import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
- * Deletes a lab with the specified lab number for all the students in the list.
+ * Deletes a lab all the students in the list.
  */
 public class DeleteLabCommand extends Command {
 
@@ -28,9 +28,9 @@ public class DeleteLabCommand extends Command {
     private final Lab lab;
 
     /**
-     * Constructor for DeleteLabCommand.
+     * Class constructor for {@code DeleteLabCommand}.
      *
-     * @param lab to be added.
+     * @param lab The lab to be deleted.
      */
     public DeleteLabCommand(Lab lab) {
         this.lab = lab;

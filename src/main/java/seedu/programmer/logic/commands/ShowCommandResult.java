@@ -9,11 +9,13 @@ import seedu.programmer.model.student.Student;
  */
 public class ShowCommandResult extends CommandResult {
 
-    /** The application should show student's result. */
+    /**
+     * The application should show student's result.
+     */
     private final Student target;
 
     /**
-     * Constructs a {@code ShowCommandResult} when there is a student to show.
+     * Class constructor for a {@code ShowCommandResult} when there is a student to show.
      */
     public ShowCommandResult(String feedbackToUser, Student target) {
         super(feedbackToUser);

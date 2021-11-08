@@ -16,7 +16,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * Controller for a help window
+ * Controller for a help window.
  */
 public class HelpWindow extends PopupWindow {
 

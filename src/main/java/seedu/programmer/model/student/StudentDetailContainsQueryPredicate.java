@@ -9,6 +9,11 @@ import java.util.function.Predicate;
 public class StudentDetailContainsQueryPredicate implements Predicate<Student> {
     private final QueryStudentDescriptor queryFields;
 
+    /**
+     * Class constructor with {@code queryFields}.
+     *
+     * @param queryFields The object containing all the relevant fields of a student to be queried.
+     */
     public StudentDetailContainsQueryPredicate(QueryStudentDescriptor queryFields) {
         this.queryFields = queryFields;
     }
