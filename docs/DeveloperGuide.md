@@ -923,7 +923,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-1. _{ more test cases …​ }_
 
 ### Deleting a task
 
@@ -939,7 +938,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `task delete`, `task delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-1. _{ more test cases …​ }_
 
 
 ### Saving data
