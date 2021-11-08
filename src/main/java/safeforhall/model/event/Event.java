@@ -75,8 +75,7 @@ public class Event {
                 && otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getEventDate().equals(getEventDate())
                 && otherEvent.getEventTime().equals(getEventTime())
-                && otherEvent.getVenue().equals(getVenue())
-                && otherEvent.getCapacity().equals(getCapacity());
+                && otherEvent.getVenue().equals(getVenue());
     }
 
     public String getCombinedStorageString(ArrayList<Person> toAdd) {

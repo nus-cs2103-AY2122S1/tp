@@ -37,6 +37,17 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         FindPersonCommand.FindCompositePredicate findCompositePredicate =
                 new FindPersonCommand.FindCompositePredicate();
 
+        setPredicateFields(argMultimap, findCompositePredicate);
+
+        if (!findCompositePredicate.isAnyFieldFiltered()) {
+            throw new ParseException(FindPersonCommand.MESSAGE_NOT_FILTERED);
+        }
+
+        return new FindPersonCommand(findCompositePredicate);
+    }
+
+    private void setPredicateFields(ArgumentMultimap argMultimap,
+                            FindPersonCommand.FindCompositePredicate findCompositePredicate) throws ParseException {
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             findCompositePredicate.setName(ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
                     .get()));
@@ -61,12 +72,6 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             findCompositePredicate.setFaculty(ParserUtil.parseFaculty(argMultimap.getValue(CliSyntax.PREFIX_FACULTY)
                     .get()));
         }
-
-        if (!findCompositePredicate.isAnyFieldFiltered()) {
-            throw new ParseException(FindPersonCommand.MESSAGE_NOT_FILTERED);
-        }
-
-        return new FindPersonCommand(findCompositePredicate);
     }
 
 }
