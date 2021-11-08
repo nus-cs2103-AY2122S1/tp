@@ -606,8 +606,25 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-   
+    
+### Undo and Redo
+
+1. Test case: `undo` after program start up
+    1. Expected: Error detail shown for having no commands to undo
+2. Test case: `delete -a` followed by `undo`
+    1. Expected: `delete -a` deletes all contacts. `undo` brings back all deleted contacts.
+3. Test case: `redo`
+    1. Prerequisites: An `undo` command was successfully run immediately before
+    2. Expected: The effect of the `undo` command is reversed
+4. Test case: `redo`
+    1. Prerequisites: A command that is not `undo` was run immediately before
+    2. Expected: Error detail shown for having no commands to redo
 
 ## Effort
-The difficulty level for our project is at a relatively moderate level. 
-We did not make large changes to the AB3 but instead chose to enhance the existing features. Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. For example, when implementing the sort feature, there were so many different lists in AB3 and some of them were immutable. So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
+The difficulty level for our project is at a relatively moderate level. Instead of making large changes to AB3, we opted to enhance existing features and introduce new features which complement the existing functionalities.
+ 
+The challenges we faced were largely from figuring out the original implementation of AB3 so that we can introduce features by extending the structure of AB3 instead of overhauling.
+
+For example, when implementing the `sort` feature, there were many different list representations of the contacts used throughout the application, some of which were immutable. It required time and effort to walk through the code, and sufficiently test modifications to ensure that the `sort` feature modifies the correct mutable list, and that there were no unintended side effects from directly manipulating the list.
+
+Another feature which required much effort was the `undo` and `redo` commands. In order to implement them with minimal changes to existing code, we had to investigate how all data changes are propagated following the execution of their calling command. Then, we had to write an implementation which allowed us to decouple any new classes required from those that already existed. In the end, we settled on using functional interfaces and Java lambdas to offer an intuitive syntax and to follow software engineering principles. The only required changes to old code were to wrap existing methods in `ModelManager` in a lambda function which is passed to a new `OperationManager` class as `Runnable`, from which `OperationManager` handles all states changes, transparent to other developers. 
