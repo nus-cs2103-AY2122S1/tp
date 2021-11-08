@@ -19,8 +19,6 @@ Given below are my contributions to the project.
     * Highlights: This feature needed a reimplementation of the existing Person class was immutable and did not support modifications to a client's attributes. The workaround this was to
       implement a PersonAdapter wrapper class that supports for editing and adding of certain attributes by wrapping a single Person object and replacing it with an edited copy. 
       This helped us implement real time updating and now all changes are reflected immediately in all parts of our application.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
 
 * **New Feature**: Created the Tabs in the Client Window to display the various client information in the user interface. [#126](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/126/files)
   * What it does: This allows for all the categorised information of a single client to be displayed in an organized yet intuitive user interface across 5 tabs.
@@ -28,7 +26,6 @@ Given below are my contributions to the project.
     rather than having a scrollable interface.
   * Highlights: This feature required the reimplementation of our existing ClientView tab through using JavaFX. Our tabs do not use the existing Tab feature present in JavaFX, but we rather had
     a VBox that got updated with the appropriate content when a tab button was pressed or a tab command was entered.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=mrmrinal&tabRepo=AY2122S1-CS2103T-W16-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
