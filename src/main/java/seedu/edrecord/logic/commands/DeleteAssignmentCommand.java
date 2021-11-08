@@ -2,8 +2,6 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.edrecord.commons.core.Messages;
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.logic.commands.exceptions.CommandException;

@@ -6,7 +6,6 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
 
-import java.util.List;
 import java.util.Optional;
 
 import seedu.edrecord.commons.core.Messages;
