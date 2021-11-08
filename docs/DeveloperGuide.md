@@ -217,7 +217,7 @@ Step4: After the construction of the timetable, each `TuitionClass` is inserted 
 The following *Sequence Diagram* illustrates how `Timetable` interacts with `TimetableInfoPage` as explained by `step 3` and `step 4`:
 
 <p align="center">
-  <img src="images/TimetableCommandSequenceDiagram.png" />
+  <img src="images/TimetableCommandSequenceDiagram.png" height="450"/>
 </p>
 
 Step5: The complete timetable is displayed to user through the `UI` component.
@@ -514,7 +514,7 @@ Given below is an example usage scenario and how an `addtoclass` command is exec
 The interactions between the components during the usage scenario is shown in the *Sequence Diagram* below.<br>
 
 <p align="center" >
-  <img src="images/AddToClassSequenceDiagram.png" />
+  <img src="images/AddToClassSequenceDiagram.png" height="550"/>
 </p>
 
 Step 1: The user enters `atc si/2 4 tc/1` command to add the second and fourth students to the first tuition class.
@@ -534,7 +534,7 @@ Step 4: Newly enrolled students are added to the tuition class. `AddToClassComma
 The following *Activity Diagram* summarizes what happens when a user executes an `addtoclass` command:
 
 <p align="center" >
-  <img src="images/AddToClassActivityDiagram.png" />
+  <img src="images/AddToClassActivityDiagram.png" height="550" />
 </p>
 
 #### Design considerations
