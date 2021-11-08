@@ -92,9 +92,9 @@ the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diag
 
 ### <a name="Architecture"></a> **4.1 Architecture**
 
-<p align="center">
-  <img src="images/ArchitectureDiagram.png" width="280"/>
-</p>
+<div style="align-content: center">
+    <img src="images/ArchitectureDiagram.png" width="280"/>
+</div>
 <div style="text-align: center">
     <em>Figure 4.1.1: Architecture diagram of PE</em>
 </div>
