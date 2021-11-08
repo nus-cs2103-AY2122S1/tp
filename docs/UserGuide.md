@@ -264,7 +264,7 @@ This **resets the displayed staff list** in both the staff view and schedule vie
 ![SetRoleReq](images/ListCommand.png)
 _Full Staff List is displayed._
 
-**See Also:**[`setRoleReq` Command](#setting-role-requirements--setrolereq-)
+**See Also:**[`setRoleReq` Command](#setting-role-requirements--setrolereq)
 
 
 **Go to:**  
@@ -796,7 +796,7 @@ Action | Format, Examples
 [**Remove mark**](#removing-the-absent-mark--unmark) | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
 [**Add shift to staff**](#adding-a-shift-to-a-staffs-schedule--addshift) | `addShift -n NAME d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAYOFWEEK-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 [**Swap shifts**](#swapping-shifts--swapshift) | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
-[**Delete staff shift**](#deleting-a-shift-from-a-staff--deleteshift) | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
+[**Delete staff shift**](#deleting-a-staff--delete) | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 [**View shift**](#viewing-all-the-staff-working-a-shift--viewshift) | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
 [**Change schedule**](#viewing-schedule-for-the-week-change) | `change da/START_DATE`
 [**Set shift time**](#updating-the-start-time-and-end-time-for-a-shift--setshifttime) | `setShiftTime -n NAME d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/DAYOFWEEK-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
