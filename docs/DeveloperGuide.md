@@ -1211,7 +1211,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No member is added. Error message of invalid group name shown in the status message. 
 
     1. Test case: `addMember 0 g/w14-4`<br>
-       Expected: No group is deleted. Error message of invalid command format shown in the status message.
+       Expected: No group is added. Error message of invalid command format shown in the status message.
 
     1. Other incorrect delete commands to try: `addMember`, `addMember x g/w14-4`, `...` (where x is smaller than 0)<br>
        Expected: Similar to previous.
