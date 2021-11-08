@@ -9,7 +9,6 @@ package Logic {
 Class AddressBookParser
 Class AddressBookInternalParser
 Class XYZCommand
-Class XYZInternalCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 
@@ -32,10 +31,9 @@ LogicManager .up..|> Logic
 LogicManager ->"1" AddressBookParser
 LogicManager ->"1" AddressBookInternalParser
 AddressBookParser ..> XYZCommand : creates >
-AddressBookInternalParser ..> XYZInternalCommand : creates >
+AddressBookInternalParser ..> XYZCommand : creates >
 
 XYZCommand -up-|> Command
-XYZInternalCommand -up-|> Command
 LogicManager .left.> Command : executes >
 
 LogicManager --> Model
