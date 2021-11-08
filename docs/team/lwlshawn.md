@@ -28,6 +28,8 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
     orders can only be added if the appropriate client is already in SalesNote, that related orders are edited when a client
       is edited, and that related orders and tasks are deleted when a client is deleted.
 
+<div style="page-break-after: always;"></div>
+
 #### Contributions to the UG
 * I was responsible for overall re-writing of the document, to meet the requirements of CS2101. In this process, I took care
 of adapting the language to more appropriately meet the requirements of cs2101 by making it more user-centric. The language
@@ -75,7 +77,8 @@ all types of objects to be unique for instance, I changed our TaskList and Order
   [\#32](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/32), 
   [\#26](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/26), 
   [\#22](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/22)
-  
+
+<div style="page-break-after: always;"></div>
 
 ## Contributions to the DG
 
