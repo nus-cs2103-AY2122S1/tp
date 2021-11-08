@@ -39,7 +39,9 @@ Action | Parameters| Description
 `delete INDEX` | `INDEX`: Index of the client | Deletes a client from InsurancePal
 `list` | | Shows a list of all clients in InsurancePal
 `clear` | | Deletes all clients from InsurancePal
+`help` | | Provides a url link to the User Guide for InsurancePal
 `find KEYWORD [MORE_KEYWORDS]...` | `KEYWORD`, `MORE_KEYWORDS`: Word to search for | Finds clients whose names contain any of the keywords
+`exit`| | Exits and close InsurancePal
 {: .summaryTable}
 
 ## Application Overview
@@ -172,7 +174,7 @@ Parameter | Constraints
 `NAME` | {::nomarkdown}<ul><li>Can only contain alphanumeric characters and spaces</li><li>Names must be unique</li><li>Cannot be blank</li></ul>{:/}
 `PHONE` | {::nomarkdown}<ul><li>Can only contain numbers</li><li>At least 3 digits long</li></ul>{:/}
 `EMAIL` | {::nomarkdown}<ul><li>Emails should be of the format <em>local-part@domain</em></li><li><em>local-part</em> must meet the following constraints<ul><li markdown="1">Only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)</li><li>Cannot start or end with any special characters</li></ul></li><li><em>domain</em> must meet the following constraints<ul><li>The domain name is made up of domain labels separated by periods.<li>The domain name must end with a domain label at least 2 characters long</li><li>Domain labels must consist of alphanumeric characters, separated only by hyphens, if any</li><li>Domain labels must start and end with alphanumeric characters</li></li><li>Cannot be blank</li></ul></li></ul>{:/}
-`REVENUE` | {::nomarkdown}<ul><li>Must be a valid float of up to 2 decimal places</li><li>Cannot be negative</li><li>Cannot be more that 20,000,000</li><li>Cannot be blank</li></ul>{:/}
+`REVENUE` | {::nomarkdown}<ul><li>Must be a valid float of up to 2 decimal places</li><li>Trailing zeros are allowed for float values</li><li>Cannot be negative</li><li>Cannot be more that 20,000,000</li><li>Cannot be blank</li></ul>{:/}
 `ADDRESS` | {::nomarkdown}<ul><li>Can contain any values</li><li>Cannot be blank</li></ul>{:/}
 `NOTE` | {::nomarkdown}<ul><li>Can contain any value, including alphanumeric characters, spaces and punctuations.</li><li>Can be blank</li></ul>{:/}
 `TAG` | {::nomarkdown}<ul><li>Can only contain alphanumeric characters</li><li>Must be at most 20 characters long</li><li>Cannot be blank</li></ul>{:/}
@@ -402,7 +404,7 @@ revenue of Betsy Crowe to be `249.89`.
 Parameter | Constraints
 ---- | ----
 `INDEX` | {::nomarkdown}<ul><li>Must be a <em>positive number</em> associated with a client in the displayed client list</li></ul>{:/}
-`REVENUE` | {::nomarkdown}<ul><li>Can be any float value up to 2 decimal places. E.g 100, 250.11, 500</li><li>Can be negative. E.g -90.10</li><li>Cannot be blank</li></ul>{:/}
+`REVENUE` | {::nomarkdown}<ul><li>Can be any float value up to 2 decimal places. E.g 100, 250.11, 500</li><li>Trailing zeros are allowed for float values. E.g 100.000, 2.20000, -500.410000</li><li>Can be negative. E.g -90.10</li><li>Cannot be blank</li></ul>{:/}
 
 </details>
 

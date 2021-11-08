@@ -165,7 +165,7 @@ public class ParserUtil {
         try {
             return Insurance.of(insuranceType, insuranceName);
         } catch (IllegalValueException exception) {
-            throw new ParseException(Insurance.MESSAGE_CONSTRAINTS);
+            throw new ParseException(exception.getMessage());
         }
     }
 
