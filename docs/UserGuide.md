@@ -11,7 +11,7 @@ If you are a CS2103T student who is using Socius, or just someone who wants to f
 
 In this user guide, you will find step-by-step instructions on how you can install Socius and guide on how to use all of its features.
 
-Are you a developer? Make sure to check out our [Developer Guide]((https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/docs/DeveloperGuide.md)) too!
+Are you a developer? Make sure to check out our [Developer Guide]((https://ay2122s1-cs2103t-w08-4.github.io/tp/DeveloperGuide.html)) too!
 
 We hope that you will have a great time using Socius! :)
 
