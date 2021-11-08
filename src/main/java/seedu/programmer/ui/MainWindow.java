@@ -251,6 +251,7 @@ public class MainWindow extends UiPart<Stage> {
 
         popupManager.displayPopup(String.format(UPLOAD_SUCCESS_MESSAGE, stuList.size()));
         labResultListPanelPlaceholder.getChildren().clear();
+        dashboardWindow.update(); // Remember to refresh dashboard with new students
         logger.info("Uploaded CSV data successfully!");
     }
 
