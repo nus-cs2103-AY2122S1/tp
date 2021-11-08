@@ -137,7 +137,7 @@ Examples:
 
 Examples:
 
-| Payment Type                                       | PMT_</br>AMOUNT_</br>CENTS | PMTS_</br>PER_</br>YR | NUM_</br>OF_</br>PMT | Context                                     |
+| Payment Type                                       | PMT AMOUNT CENTS | PMTS PER YR | NUM OF PMT | Context                                     |
 |----------------------------------------------------|------------------|-------------|------------|---------------------------------------------|
 | Single lump sum                                    |       1000       |      -      |      -     | Single payment of $10                      |
 | X payments per year, indefinite number of payments |       1000       |      12     |      -     | Annual payments of $10, indefinitely       |
@@ -150,7 +150,7 @@ Examples:
 
 Calculating Commission with Payment Structure:
 
-| Payment Structure                            | COMM_% | NUM_</br>OF_</br>COMM | Commission per payment | Context                                                 |
+| Payment Structure                            | COMM % | NUM OF COMM | Commission per payment | Context                                                 |
 |----------------------------------------------|--------------|-------------|------------------------|---------------------------------------------------------|
 | Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from each of the first 100 payments |
 | Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from each of the first 5 payments        |
