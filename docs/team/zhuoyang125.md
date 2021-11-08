@@ -47,4 +47,3 @@ Given below are my contributions to the project.
 * **Community**:
     * PRs reviewed (with non-trivial review comments): PR [\#60](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/60
     * Reported bugs and suggestions for other teams in the class, which can be found [here](https://github.com/zhuoyang125/ped/issues)
-    
