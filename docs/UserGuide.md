@@ -310,7 +310,6 @@ Notes:
 Pins a contact to the top of the contact list.  
 
 Pinned contacts will appear at the top of the unfiltered list  
-![single pinned contact`](images/pinUiSingle.jpg)  
 ![two pinned contacts](images/pinUiDouble.jpg)  
 #### Format: 
 * `pin INDEX`
@@ -325,6 +324,8 @@ Notes:
   * pins the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `pin 1`
   * pins the 1st contact in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Unpinning a contact : `unpin`
 
@@ -343,6 +344,8 @@ Notes:
   * unpins the 2nd contact in CONNECTIONS.
 * `find n/Betsy` followed by `unpin 1`
   * unpins the 1st contact in the results of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact : `delete`
 
