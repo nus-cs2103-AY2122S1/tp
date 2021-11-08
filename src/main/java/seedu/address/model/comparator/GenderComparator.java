@@ -9,16 +9,16 @@ public class GenderComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        if (p1.getGender() == null) {
-            if (p2.getGender() == null) {
+        if (p1.getGender().toString().isEmpty()) {
+            if (p2.getGender().toString().isEmpty()) {
                 return 0;
             }
             return 1;
         }
-        if (p2.getGender() == null) {
+        if (p2.getGender().toString().isEmpty()) {
             return -1;
         }
-        return p1.getGender().toString().compareTo(p2.getGender().toString());
+        return p1.getGender().toString().toLowerCase().compareTo(p2.getGender().toString().toLowerCase());
     }
 
     @Override

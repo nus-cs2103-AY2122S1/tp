@@ -8,16 +8,16 @@ public class PhoneComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        if (p1.getPhone() == null) {
-            if (p2.getPhone() == null) {
+        if (p1.getPhone().toString().isEmpty()) {
+            if (p2.getPhone().toString().isEmpty()) {
                 return 0;
             }
             return 1;
         }
-        if (p2.getPhone() == null) {
+        if (p2.getPhone().toString().isEmpty()) {
             return -1;
         }
-        return p1.getPhone().toString().compareTo(p2.getPhone().toString());
+        return p1.getPhone().toString().toLowerCase().compareTo(p2.getPhone().toString().toLowerCase());
     }
 
     @Override

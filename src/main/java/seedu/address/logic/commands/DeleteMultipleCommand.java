@@ -28,9 +28,10 @@ public class DeleteMultipleCommand extends Command {
 
     public static final String COMMAND_WORD = "deletem";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes all persons whose details contain any of "
-            + "the specified keywords (case-insensitive) from the list.\n"
-            + "Parameters:"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Deletes all persons whose details match with all "
+            + "the specified keywords (case-insensitive) from the list.\n\n"
+            + "Parameters: "
             + "[" + PREFIX_NAME + "NAME]... "
             + "[" + PREFIX_GENDER + "GENDER]... "
             + "[" + PREFIX_PHONE + "PHONE]... "
@@ -39,7 +40,7 @@ public class DeleteMultipleCommand extends Command {
             + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP]... "
             + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE]... "
             + "[" + PREFIX_REMARK + "REMARK]... "
-            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_TAG + "TAG]... \n\n"
             + "Example: " + COMMAND_WORD + " n/alice p/91234567 tg/19";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "An empty %s was entered. \n%1$s");

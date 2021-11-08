@@ -18,15 +18,18 @@ public class GenderTest {
         // null gender
         assertThrows(NullPointerException.class, () -> Gender.isValidGender(null));
 
-        // invalid socialHandle
+        // invalid Gender
         assertFalse(Gender.isValidGender(" ")); // spaces only
         assertFalse(Gender.isValidGender("B")); // invalid character
         assertFalse(Gender.isValidGender("MF")); // more than one character
 
-        // valid socialHandle
+        // valid Gender
         assertTrue(Gender.isValidGender("M"));
         assertTrue(Gender.isValidGender("F"));
         assertTrue(Gender.isValidGender("O"));
+        assertTrue(Gender.isValidGender("m"));
+        assertTrue(Gender.isValidGender("f"));
+        assertTrue(Gender.isValidGender("o"));
     }
 
 }
