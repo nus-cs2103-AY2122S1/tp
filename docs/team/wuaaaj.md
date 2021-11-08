@@ -14,11 +14,11 @@ Given below are my contributions to the project.
 * **New Feature**: Added the `clear` command(Pull request [#83](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/83))
     * What it does: Allows the user to remove all modules in a specific semester from the academic plan.
     * Justification: This feature improves the product significantly because it allows a user to remove a set of modules from academic plan using one command. Without this feature, when users want to replan a specific semester, they need to find the modules in that semester first and run `untake` command for each module, which is very troublesome. 
-    * Highlights: The 
+    * Highlights: This enhancement affects existing commands and commands to be added in the future. The implementation is challenge because need to know both model and logic part very well.
 * **New Feature**: Added set MC goal command feature(Pull request [#76](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/76))
     * What it does: Allows the user to set their own target Mc goal.
     * Justification: This feature improves the product significantly because it allows a user to change the default Mc goal and set a new one based on their own condition. It improves the flexibility of the product.
-    * Highlights:  
+    * Highlights: This enhancement affects existing commands and commands to be added in the future.
 
 * **Enhancements to existing features**:
   * Fixed bugs related to GUI and message output. (Pull request [#103](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/103))
