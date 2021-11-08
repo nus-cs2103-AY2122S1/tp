@@ -523,20 +523,15 @@ More Examples:
 
 #### Searching by event information: `find`
 
-Shows a list of events that match the provided keywords for different available parameters.
+Shows a list of events that match the provided keywords for different available parameters. Allowed flags include; `n/`, `d/`, `v/`, `c/`
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `d/`, `v/`, `c/`
-* Searching by name:
-    - It is case-insensitive. e.g `dance` will match `Dance`
-    - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training`
-    - Events matching at least one keyword for the event name will be returned (i.e. `OR` search).
-      e.g `Football Basketball` will return `Football Training`, `Basketball Training`
-* Searching by venue:
-    - It is case-insensitive. e.g `nus field` will match `NUS Field`
-    - Only full event names will be matched. e.g `Field` will not match `NUS Field`
-* The date and capacity fields are subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
+Prefix | Field | Restrictions
+-------- | ------ | ------
+`n` | Name | - It is case-insensitive. e.g `dance` will match `Dance` <br> <br> - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training` <br> <br> - Events matching at least one keyword for the event name will be returned (i.e. `OR` search). e.g `Football Basketball` will return `Football Training`, `Basketball Training`
+`v` | Venue | - It is case-insensitive. e.g `nus field` will match `NUS Field` <br> <br> - Only full event names will be matched. e.g `Field` will not match `NUS Field`
+`d, c` | Date, Capacity | - Subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
 
 Examples:
 * `find n/Football` returns `Football Match` and `Football Training`
