@@ -1,18 +1,23 @@
 @startuml
 !include style.puml
 
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
 mainframe **sd**  get commandResult
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
-participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
-participant "lastShownList:List<Student>" as List MODEL_COLOR
-participant "studentToEdit:Student" as Student MODEL_COLOR
+participant ":List<Student>" as List MODEL_COLOR
+participant ":Student" as Student MODEL_COLOR
 end box
 
 activate LogicManager
@@ -53,9 +58,9 @@ create CommandResult
 AddProgressCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddProgressCommand : commandResult
+CommandResult --> AddProgressCommand
 deactivate CommandResult
 
-LogicManager <-- AddProgressCommand : commandResult
+LogicManager <-- AddProgressCommand
 deactivate AddProgressCommand
 @enduml

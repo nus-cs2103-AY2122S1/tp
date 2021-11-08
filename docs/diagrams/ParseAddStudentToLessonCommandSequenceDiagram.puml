@@ -1,6 +1,11 @@
 @startuml
 !include style.puml
 
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
@@ -9,20 +14,20 @@ participant ":AddStudentToLessonCommandParser" as AddStudentToLessonCommandParse
 participant ":AddStudentToLessonCommand" as AddStudentToLessonCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("add -sl s/1 2 3 l/3 2 1")
+[-> LogicManager : execute()
 activate LogicManager
 
-LogicManager -> TutorAidParser : parseCommand("add -sl s/1 2 3 l/3 2 1")
+LogicManager -> TutorAidParser : parseCommand()
 activate TutorAidParser
 
-TutorAidParser -> AddCommandParser : parse("-sl s/1 2 3 l/3 2 1")
+TutorAidParser -> AddCommandParser : parse()
 activate AddCommandParser
 
-AddCommandParser -> AddStudentToLessonCommandParser : parse("s/1 2 3 l/3 2 1")
+AddCommandParser -> AddStudentToLessonCommandParser : parse()
 activate AddStudentToLessonCommandParser
 
 create AddStudentToLessonCommand
-AddStudentToLessonCommandParser -> AddStudentToLessonCommand : AddStudentToLessonCommand(studentIndexes, lessonIndexes)
+AddStudentToLessonCommandParser -> AddStudentToLessonCommand : AddStudentToLessonCommand()
 activate AddStudentToLessonCommand
 AddStudentToLessonCommandParser <-- AddStudentToLessonCommand
 deactivate AddStudentToLessonCommand
@@ -39,4 +44,9 @@ deactivate TutorAidParser
 ref over LogicManager, AddStudentToLessonCommand : get commandResult
 <-- LogicManager : commandResult
 deactivate LogicManager
+
+destroy AddStudentToLessonCommandParser
+
+destroy AddCommandParser
+
 @enduml
