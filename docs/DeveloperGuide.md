@@ -280,6 +280,8 @@ The `addgroup` feature allows users to create new groups, as well as specify stu
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagrams summarises what happens when a user executes the `addgroup` command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
 
 <center>
@@ -288,6 +290,8 @@ The following activity diagrams summarises what happens when a user executes the
 <center>
     <img src="images/AddStudentsToGroupActivityDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram summarises what happens when the user inputs an `addgroup` command together with a student to be added.
 
@@ -626,6 +630,8 @@ Targets professors of CS1101S who:
 doing so faster than a typical mouse/GUI driven app.
 It can analyse results of individual students, tutorial groups, or the whole cohort in each assessment,
 in order to identify students who may require additional help.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -972,6 +978,8 @@ testers are expected to do more *exploratory* testing.
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
