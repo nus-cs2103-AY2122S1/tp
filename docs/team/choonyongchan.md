@@ -58,9 +58,7 @@ of test cases and test data were written to rigorously test the different aspect
 * Updated the 'Non-functional Requirements' section in the Developer Guide. [#26](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/26/files)
 
 **5 Contributions to team-based tasks**
-* Set up the team's Github Repository.
-* Set up the team's Google Drive folder.
-* Set up the team's initial project manager on Notion.
+* Set up the team's Github Repository, Google Drive folder and initial project management using Notion.
 * In charge of reviewing and approving the team's Github pull requests.
 * Managed the milestones `v1.2` - `v1.3b` on Github.
 
