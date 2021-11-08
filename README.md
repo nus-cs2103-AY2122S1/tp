@@ -9,4 +9,4 @@
 * It inherits from the Addressbook-Level-3 application, created by the [SE-EDU initiative](https://se-education.org).
 * It is named `ClassMATE` because it is meant for a classroom setting.
 * For the detailed documentation of this project, see the **[classMATE Product Website](https://ay2122s1-cs2103t-w15-1.github.io/tp/)**.
-* This project is an effort of team W15 of the CS2103T module.
+* This project is an effort of team W15-1 of the CS2103T module of AY21/22 Semester 1.
