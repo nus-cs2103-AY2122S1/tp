@@ -31,20 +31,29 @@ Given below are my contributions to the project.
   * Highlights: Implemented using a dynamic programming algorithm called `Wagner-Fischer algorithm`, which computes the `Levenshtein distance` of any two words.
   The dynamic programming algorithm used is significantly faster (quadratic time) than the more straightforward but slower recursive algorithm which takes exponential time.
 
+* **Enhancements to existing features:**
+  * Added `TutorialGroup` attribute to the `Person` model. (Pull request [#54](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/54))
+  * Wrote additional tests for new and existing features. (Pull request [#54](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/54), [\#311](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/311))
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=kevinmingtarja)
 
 * **Project management**:
   * Set up the GitHub team organization
+  * Made 27 [pull requests](https://github.com/AY2122S1-CS2103T-W08-4/tp/pulls?q=is%3Apr+author%3Akevinmingtarja+is%3Aclosed) on GitHub
+  * Finished and closed more than 50 [issues](https://github.com/AY2122S1-CS2103T-W08-4/tp/issues?q=is%3Aissue+assignee%3Akevinmingtarja+is%3Aclosed)
 
 * **Review contributions**:
   * In charge of reviewing and approving pull requests with one other teammate.
-  * Reviewed 50 [pull requests](https://github.com/AY2122S1-CS2103T-W08-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Akevinmingtarja).
+  * Reviewed more than 50 [pull requests](https://github.com/AY2122S1-CS2103T-W08-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Akevinmingtarja).
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `alias`, `import`, `export`, and `import`
+    * Added documentation for the features `alias`, `import`, `export`, and `import`. (Pull request [#92](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/92), [#94](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/94))
+    * Refactored UG based on mock PE. (Pull request [#258](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/258), [#281](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/281))
   * Developer Guide:
-    * Added implementation details of the `alias`, `import`, `export`, `import`, and `input suggestion` feature.
+    * Added implementation details and UML diagrams for the `alias`, `import`, `export`, `import`, and `input suggestion` features. 
+  (Pull requests [#126](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/126), [#259](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/259), [#282](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/282), [#314](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/314))
+    * Added use cases for `tag` and `remarks`. (Pull request [#45](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/45))
 
 * **Tools**:
   * Integrated Codecov into the team repo
