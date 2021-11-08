@@ -673,26 +673,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                   | So that I can…​                                                     |
 | -------- | --------------------------------------------- | ----------------------------------------------------------------  | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                      | read usage instructions                                           | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                          | add a new person                                                  |                                                                        |
-| `* * *`  | user with changing plans                      | delete a person                                                   | remove entries that I no longer need                                   |
+| `* * *`  | new user                                      | access usage instructions                                         | obtain help when I forget how to use the App                           |
+| `* * *`  | user                                          | add a new person                                                  | include entries of people I wish to contact                            |                                           
+| `* * *`  | efficient user                                | delete a person by name                                           | remove an entry that I no longer need without excessive searching      |
+| `* * *`  | user with changing plans                      | delete contacts based on their category                           | remove multiple entries efficiently                                    |
 | `* * *`  | user who wants convenience                    | find a person by name                                             | save time by not searching through the entire contact list             |
-| `* * *`  | private user                                  | hide private contact details                                      | minimize chance of someone else seeing them by accident                |
-| `* * *`  | user with several contacts                    | filter contacts                                                   | keep track of them                                                     |
-| `* * *`  | careless user                                 | undo the last incorrect change made to tasks                      | revert my mistake                                                      |
-| `* * *`  | expert user                                   | use shortcuts to access different features                        | utilise the app efficiently                                            |
+| `* * *`  | user with several contacts                    | find contacts using their category                                | view the contacts I have for each role easily                          | 
+| `* * *`  | cost-conscious user                           | find contacts based on their price range                          | shortlist affordable services I can contact for hiring                 |                            
+| `* * *`  | careless user                                 | undo the last incorrect change made to tasks                      | revert a mistake                                                       |
+| `* * *`  | expert user                                   | create shortcuts to access different features                     | utilise the app efficiently                                            |
 | `* * *`  | frugal user                                   | add price tags to contacts                                        | avoid exceeding my budget                                              |
-| `* * *`  | forgetful user                                | notified for a specific time to remind myself to complete a task  | avoid forgetting to complete any important tasks                       |
-| `* * *`  | user with poor time management skills         | keep track of payment and deadlines                               | avoid missing any payments and getting fined                          |
-| `* * *`  | very organized user                           | group contacts under the same category                            | manipulate the contacts easily                                         |
-| `* * *`  | user who wants to customise the program       | create shortcuts for longer commands                              | use the commands more efficiently                                      |
-| `* * *`  | infrequent user                               | get reminded via email of when to handle contacts                 | avoid not being aware of my plans                                      |
-| `* *  `  | user who relies on faces for for recognition  | view the profile picture of contacts whose faces I have forgotten | recognise these people should I have to meet them in the future        |
-| `* *  `  | user with limited time to find contacts       | access recommended contacts                                       | prioritise adding more important contacts from scratch                 |
-| `* *  `  | user who needs to prioritise certain contacts | rank the contacts                                                 | see who needs to be called more often                                  |
-| `* *  `  | busy user                                     | schedule different timings for different contacts                 | plan the wedding around my schedule                                    |
-| `* *  `  | user who invites a lot of people              | check the attending status of guests                              | my plan is consistent                                                  |
-
+| `* * *`  | forgetful user                                | take note of important information for each contact               | avoid missing key details                                              |
+| `* * *`  | very organized user                           | group multiple contacts under the same category                   | manipulate the contacts easily                                         |
+| `* *  `  | user who manages several contacts             | view the status of the people involved                            | check that my plan is consistent                                       |
+| `* *  `  | forgetful user                                | check the number of days left till my wedding                     | schedule tasks left to do well within time                             |
+| `* * *`  | disorganized user                             | see a summary of the expenses and status of my wedding            | better understand the current progress of my wedding                   |
 
 *{More to be added}*
 
