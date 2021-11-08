@@ -13,7 +13,7 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 
 Given below are my contributions to the project.
 
-* **New Features**
+#### New Features
   1. Add Friend functionality <br>
      What it does: Allows users to add friends to the gitGud friends list. 
      <br>
@@ -47,33 +47,37 @@ Given below are my contributions to the project.
      provides the highest potential win rate for competitive gaming by providing preferred(highest skilled) friends available during a specified time 
      with a single command.
 
-* **Testing**
+#### Testing 
   1. Wrote unit/integration tests for Storage component.
   2. Wrote unit/integration tests for Add Friend and Add Game commands.
   3. Wrote unit/integration tests(with Model) for Edit Friend functionality.
-  4. Wrote unit tests for Add Friend skill functionality.
+  4. Wrote unit/integration tests for Add Friend Skill functionality.
   5. Wrote unit/integration tests for Recommend functionality - ensuring it works with e.g. list command in succession.
-  6. Manual testing and highlighting of bugs observed in application, UG and DG. 
+  6. Manual testing and highlighting of bugs and reporting of issues observed in application, UG and DG.
+  7. Discovery of testing bugs with Schedule tests which use shared mutable references to the same Friend instance 
+     (fixed in [PR #153](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/153/files))  
 
-* **Contribution to team based tasks**
-    1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. <br>
+#### Contribution to team based tasks
+1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. <br>
        What it involves:
         * Refactoring of Persons and Tags to Friends and Games classes for team usage.
         * Updating of relevant test cases
           <br>
           Justification: Refactoring the codebase for gitGud's structure provides a base for our team to extend
           and develop gitGud specific features on top of.
-    
-    2. Setting up of tools 
-       * Integrated the Github plugin (codecov) to the team repo.
-    
-    3. Set up initial project website.
-    4. Initial set up for team repo & organization.
 
-* **Code contributed**: 
+2. Setting up of tools 
+   1. Integrated the Github plugin (codecov) to the team repo.
+
+3. Miscellaneous tasks: 
+   1. Set up initial project website.
+   2. Initial set up for team repo & organization.
+   3. Facilitation of weekly team meeting. 
+
+#### Code contributed 
   [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevin9foong&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
-* **Documentation**:
+#### Documentation
   * User Guide:
     1. Added the initial documentation for the features `add friend`, `add game`, `delete game` and 
        `link game and friend`.
@@ -82,23 +86,29 @@ Given below are my contributions to the project.
     4. Added the documentation for the features `assign skill`, `edit friend` and `recommend friend to play with`.
     5. Made changes to formatting and optimization of words used to make user guide more conversational and directed to target user. 
     6. Added symbols, constraints and warnings to each user command for user's reference. 
-    7. Added the application UI overview and FAQ sections. 
+    7. Added the user guide structure (including icons), application UI overview and FAQ sections. 
     8. Added glossary section including terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
-    3. Discovery of bugs related to Use Case Extension numbering.  
-    4. Added documentation for Storage component (e.g. UML diagram, description etc). 
-    5. Added implementation details for Recommend command. 
+    3. Highlighting of bugs related to Use Case Extension numbering.  
+    4. Highlighting of UML diagram bugs in delete and schedule sequence diagrams (eg. found notation bugs for Reference frame etc.)
+    5. Added documentation for Storage component (including UML class diagram for Storage). 
+    6. Added implementation documentation for Recommend command (including UML activity diagram and sequence diagrams for Recommend). 
   * README:
     1. Updated Github Actions build status badge to reflect status of gitGud team repository.
     2. Updated description and organised layout of README.
 
-* **Community**:
-  1. PRs reviewed (With non-trivial review comments):
-    * [Ui Recommendations and bugs from Review](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/107)
-    * [Discovery of 'hidden bug' which led to defensive programming fix in Schedule PR](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/113)
-      The hidden bug is for corrupted data files not containing schedule fields in the json format data, the 
-      schedule commands fail.
-    * [Highlighting of important DG bugs in UML diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
+#### Review/mentoring contributions (with non-trivial comments): 
+1. [Ui Recommendations and bugs from Review](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/107)
+2. [Discovery of 'hidden bug' which led to defensive programming fix in Schedule PR](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/113)
+      The hidden bug is for corrupted data files not containing schedule fields in the json format data, the schedule commands fail.
+3. [Highlighting of important DG bugs in UML diagrams and guide on how to fix](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
 
+#### Contributions beyond project team:
+* Evidence of helping others: 
+  1. Forum responses:
+  [When to use assertions](https://github.com/nus-cs2103-AY2122S1/forum/issues/190#issuecomment-913379752)
+  [Git on removing tags from commits](https://github.com/nus-cs2103-AY2122S1/forum/issues/24#issuecomment-899956054)
+  2. Helping of other team with bug testing
+  [Bugs reported](https://docs.google.com/document/d/1nXaZGo2nbEuU-jgpz8IDph73P4WFkGlo9_yW_paeNDE/edit)
