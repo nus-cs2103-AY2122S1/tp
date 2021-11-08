@@ -14,40 +14,40 @@ title: User Guide
 
 <img alt="DonnaFinLogo" src="./images/DonnaFin.png" width="800"/>
 
-DonnaFin.io is a desktop application used by financial advisors to keep track of their
-client information and related tasks. The '.io' in our name is a reflection of our belief
+DonnaFin.io is a desktop application financial advisors use to keep track of their
+client information and related tasks. The '.io' in our name reflects our belief
 that you deserve a faster workflow for input and output. If you can type fast,
 you can use our [CLI-like](#7-glossary) commands to manage your client information
-and view your notes much faster than your typical customer relationship manager apps.
+and view your notes much faster than your typical customer relationship management apps.
 
-Note: From here on we shall refer to DonnaFin.io as DonnaFin for your readability.
+Note: From here on, we shall refer to DonnaFin.io as DonnaFin for your readability.
 
 ### 1.1 Is this guide for you?
 
 Are you a new user who is looking to get started with using DonnaFin? Perhaps you are a more
 advanced user trying to refresh your understanding of the available commands? Look no further!
-This is the guide that will kickstart your journey as a DonnaFin whizz and even be your go-to
-reference if you need to refresh your understanding on some features.
+This guide will kickstart your journey as a DonnaFin whizz and even be your go-to
+reference if you need to refresh your understanding of some features.
 Head over to [Quick Start](#2-quick-start) or [Features](#4-features) for more information.
 
 ### 1.2 How to use the user guide
 
-As most applications on the market are not CLI-based, this may come across
-as new to some users. We strongly recommend that first-time users read through the user guide to gain a basic understanding
+As most applications on the market are not CLI-based, this may be
+new to some users. We strongly recommend that first-time users read through the user guide to gain a basic understanding
 of how to use our app. We have also included links to navigate around the user guide to allow easier access
-of related information. Some tips and tricks, as well as cautions are included throughout the guide to
+to related information. This guide includes some tips and tricks, and cautions to
 help you get more out of our application. Additionally, links back to the top of the page
 like below are present at the end of every section. For easier navigation around this User Guide, we suggest using our table of contents together with these
-links to quickly find and access the information you need.
+links to find and access the information you need quickly.
 
 This marks the end of the Introduction. Click
-<a href="#top">here</a> to return to the top
+<a href="#top">here</a> to return to the top.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 2. Quick start
+## 2. Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your computer.
 
 1. Download the latest `donnafin.jar` from [here](https://github.com/AY2122S1-CS2103T-W16-1/tp/releases).
 
@@ -66,13 +66,13 @@ This marks the end of the Introduction. Click
 
    * **`view`**`3` : Opens the client window, where you can access the details of the 3rd client shown in the current list.
 
-   * **`tab`**`a` : Access the assets tab of client that is currently viewed.
+   * **`tab`**`a` : Access the assets tab of the client that is currently viewed.
 
    * **`append`**`n/Good Class Bungalow ty/Property v/$10000000 r/newly bought with bank loan` :
    As we are in the Asset tab now, this will add an asset to the currently viewed client.
    * **`remove`**`1` : Removes the 1st asset in the Asset tab.
 
-   * **`home`** : Return to home window.
+   * **`home`** : Return to the home window.
 
    * **`delete`**`3` : Deletes the 3rd client shown in the current list.
 
@@ -81,18 +81,18 @@ This marks the end of the Introduction. Click
 1. Refer to the [Features](#4-features) below for details of each command.
 
 This marks the end of the Quick Start section. Click
-<a href="#top">here</a> to return to the top
+<a href="#top">here</a> to return to the top.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 3. About
 
-This section aims to help familiarize you with how our application works as well as the terminology that we use
+This section aims to help familiarize you with how our application works and the terminology that we use
 throughout our application and user guide.
 
 ### 3.1 Special Icons
 
-Here are the special icons used throughout our User Guide to help you utilise this guide more effectively.
+Here are the special icons used throughout our User Guide to help you utilize this guide more effectively.
 
 #### Tips
 
@@ -112,9 +112,9 @@ Notes are here to provide you with extra information that you may find useful wh
 
 #### Caution
 
-Cautions are around to warn you of potential pitfalls that unfamiliar users may encounter. For example, if you fail
-to heed warnings around commands like `clear` or tamper with application files without adequate knowledge, you may
-inadvertently lose data permanently.
+Cautions are around to warn you of potential pitfalls that unfamiliar users may encounter. For example, suppose you fail
+to heed warnings around commands like `clear` or tamper with application files without adequate knowledge. In that case,
+you may inadvertently lose data permanently.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: Here lies a cautionary tale!
@@ -122,25 +122,25 @@ inadvertently lose data permanently.
 
 ### 3.2 Application Home Window Breakdown
 
-Here is an overview of the different elements that makes up the Home Window of DonnaFin
+Here is an overview of the different elements that make up the Home Window of DonnaFin
 
 ![Main Window.png](./images/MainWindowScreenshot.png)
 
 #### 3.2.1 Quick Access Buttons
-* This area gives you access to the 'File' button that allows you to quickly exit the app, and the help
-  button that redirects you to the User Guide for further guidance.
+* This area gives you access to the 'File' button that allows you to quickly exit the app. The help
+  button redirects you to the User Guide for further guidance.
 
 #### 3.2.2 Command Box
 * The command box is where you can enter a command where you can hit enter to execute it.
 
 #### 3.2.3 Result Display
 * The result display is where the response to the command entered is displayed.
-* In the event you enter an invalid or wrongly formatted command, the error message will be displayed here as well.
+* If you enter an invalid or wrongly formatted command, the error message will be displayed here as well.
 
 #### 3.2.4 Client List Panel
-In this section, you will be able to view a list of all the clients that have their records stored on DonnaFin. The index
+In this section, you will view a list of all the clients that have their records stored on DonnaFin. The index
 of a client corresponds to the index needed to be entered in the `view` command. For example: if the client list is as
-per the image above, entering the input `view 2` would take you to the client window of Bernice Yu, as she has the index
+per the image above, entering the input `view 2` will take you to the client window of Bernice Yu, as she has the index
 of 2.
 
 The following client details are also viewable from the Client List Window:
@@ -152,7 +152,7 @@ The following client details are also viewable from the Client List Window:
 ### 3.3 Application Client Window Breakdown
 
 Using the `view` command brings you to the client window. Though the client window differs in content and layout
-from the main window, the 'Quick Access Button', 'Command Box' and 'Result Display' are all the same as explained
+from the main window, the 'Quick Access Button', 'Command Box', and 'Result Display' are all the same, as explained
 earlier in section 3.2.
 
 Here is a picture showing all the common elements spread across all tabs in the Client View.
@@ -160,7 +160,7 @@ Here is a picture showing all the common elements spread across all tabs in the 
 ![Client View](images/ClientView.png)
 
 #### 3.3.1 Client Tab Buttons
-* These buttons are specific to the Client Window, and you can use these buttons to toggle through the different tabs
+* These buttons are specific to the Client Window. You can use these buttons to toggle through the different tabs
   to access and edit client information. The tabs are as follows:
   1. Contact
   2. Policies
@@ -168,12 +168,12 @@ Here is a picture showing all the common elements spread across all tabs in the 
   4. Liabilities
   5. Notes
 
-The tabs can also be toggled through using the `tab` command as shown [here](https://ay2122s1-cs2103t-w16-1.github.io/tp/UserGuide.html#431-switching-tabs-in-client-window-tab).
+You can toggle through the tabs using the `tab` command as shown [here](https://ay2122s1-cs2103t-w16-1.github.io/tp/UserGuide.html#431-switching-tabs-in-client-window-tab).
 
 #### 3.3.2 Contact Tab
 The Contact Tab is the Client Window tab you first see when transitioning from the Home View to the Client View.
-Alternatively, this tab can also be accessed by pressing on the `Contact` button when in any of the Client View tabs,
-or through typing the command `tab c`, `tab contact` or `tab contacts`. You can access the following contact details of
+Alternatively, this tab can also be accessed by pressing on the `Contact` button when in any of the Client View tabs
+or typing the command `tab c`, `tab contact` or `tab contacts`. You can access the following contact details of
 your client:
 1. Name
 2. Phone
@@ -184,17 +184,17 @@ The picture below shows how these are displayed:
 
 ![ClientContactTab](images/ClientContactTab.png)
 
-The Contact tab also supports the `edit` that allows you to change any of your client's contact details as
+The Contact tab also supports the `edit` that allows you to change your client's contact details, as
 shown [here.](https://ay2122s1-cs2103t-w16-1.github.io/tp/UserGuide.html#432-edit-clients-contact-information-edit)
 
 #### 3.3.3 Policies Tab
 The Policies Tab is the Client View tab that stores all of your client's policies. This tab could be accessed by pressing on
-the **Policies** button when in any of the Client View tabs, or by typing the command `tab p`, `tab policy` or `tab policies`.
+the **Policies** button when in any of the Client View tabs or typing the command `tab p`, `tab policy` or `tab policies`.
 
 You will know that you are in the Policy tab if you see the **Policies** header below the Result Display. You can access the total
-commission that you have earned through looking at the number to the right of the **Total Policy Commissions**.
+commission you earned through looking at the number to the right of the **Total Policy Commissions**.
 
-The table displays each policy in its own row, with each field of the policy (e.g. insurer, commission) displayed in columns.
+The table displays each policy in its row, with each policy field (e.g. insurer, commission) displayed in columns.
 
 ![PolicyTab](images/PolicyTab.png)
 
@@ -205,13 +205,13 @@ Here are the following fields that each policy records:
 4. Yearly Premium
 5. Commission
 
-Each policy has an index which is sorted by ascending order, and if you would like to remove an existing policy, you can
+Each policy has an index that is sorted by ascending order. If you would like to remove an existing policy, you can
 use its index as a parameter for `delete`. To save you the effort of counting rows, we have indexed the rows with a counter
 on the leftmost column.
 
 
 The Policies tab also supports the `append` and `remove` command that allows you to add a new policy or
-remove an existing policy as shown
+remove an existing policy, as shown
 [here](https://ay2122s1-cs2103t-w16-1.github.io/tp/UserGuide.html#435-policy-features).
 
 #### 3.3.4 Asset/Liabilities Tab
@@ -219,7 +219,7 @@ remove an existing policy as shown
 ###### This section covers both the asset and liability tab due to their similarities.
 
 The Asset/Liabilities tab is the Client View tab that stores all of your client's assets/liabilities. This tab can be
-accessed by pressing on the `Assets/Liabilities` button when in any of the Client View tabs, or through typing the
+accessed by pressing on the `Assets/Liabilities` button when in any of the Client View tabs or typing the
 command `tab a`, `tab asset`, or `tab assets` for the Assets tab and typing the command `tab l`, `tab liability`, or
 `tab liabilities` for the Liabilities tab.
 
@@ -227,7 +227,7 @@ You will know that you are in the Assets tab if you see the **Assets** header be
 Liabilities tab if you see the **Liabilities** header below the Result Display. You can see the total value of these
 assets/liabilities by looking at the number beside the **Total Asset/Liability Value**.
 
-The table displays each asset / liability in a row with each field of the asset / liability displayed in columns.
+The table displays each asset/liability in a row with each field of the asset/liability displayed in columns.
 
 ![Asset/Liabilities Tab of DonnaFin](images/Asset_Liability.png)
 
@@ -238,7 +238,7 @@ Here are the following fields that each asset/liability records:
 4. Asset/Liability Value
 5. Remarks
 
-Each asset/liability has an index which is sorted by ascending order, and if you would like to remove an existing
+Each asset/liability has an index that is sorted by ascending order. If you would like to remove an existing
 asset/liability, you can use its index as a parameter for `delete`. To save you the effort of counting rows, we have
 indexed the rows with a counter on the leftmost column.
 
@@ -247,12 +247,19 @@ remove an existing asset/liability as shown [here](#4331-add-an-asset-to-a-clien
 
 #### 3.3.5 Notes Tab
 
-The Notes tab stores additional information about your client. This tab can be accessed by pressing on the `Notes`
-button when in any of the Client View tabs, or through typing the command `tab n`, `tab note` or `tab notes`.
+The Notes tab stores additional information about your client. You can access this tab by pressing on the `Notes`
+button when in any of the Client View tabs or typing the command `tab n`, `tab note` or `tab notes`.
 
 You will know that you are in the Notes tab if you see a big white text box below the Result Display. You may simply
-type into it, and all the edits you make will be saved. Unlike the command box, this supports multi-line input and
+type into it, and you will save all the edits you make. Unlike the command box, this supports multi-line input and
 allows you to indent lines with spaces.
+
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note:**
+A discerning user may notice that Notes stands out from all the other tabs. Unlike other fields, Notes support
+multi-line input. As you may write at length in these multi-line fields, we deemed that force-fitting your note-taking
+workflow through a single-line command input would be counter-productive and unintuitive.
+</div>
 
 ![Notes Tab of DonnaFin](images/Notes.png)
 
@@ -262,7 +269,7 @@ In DonnaFin, we provide the user with a Command-Line-Input (or CLI). The command
 `COMMAND_WORD` followed optionally by a number of parameters (`COMMAND_WORD PARAMETER1 PARAMETER2 PARAMETER3`).
 
 The `COMMAND_WORD` directly describes the intent (e.g. `add`, `delete`, `view`).
-The optional parameters are additional information that may be required by the command. For example, `delete` requires
+The optional parameters are additional information that the command may require. For example, `delete` requires
 one parameter — the index of the client being listed, so the full command would be `delete 1`
 
 Command syntax takes these three possible forms:
@@ -306,7 +313,7 @@ This marks the end of the About section. Click <a href="#top">here</a> to return
 
 ## 4. Features
 
-This section gives you a detailed explanation on how each of our features work.
+This section gives you a detailed explanation of how each of our features works.
 
 For your easy reference and navigation, we have split our features into _four different categories_:
 1. [Global Features](#41-global)
@@ -317,7 +324,7 @@ For your easy reference and navigation, we have split our features into _four di
 The following categories will explain the intended purpose of our features.
 
 ### 4.1 Global
-Global commands consists of features that can be accessed from any (Home or Client) window of DonnaFin.
+Global commands consist of features that you can access from any (Home or Client) window of DonnaFin.
 Such features include getting help and exiting DonnaFin.
 
 #### 4.1.1 Viewing help : `help`
@@ -336,8 +343,8 @@ Format: `exit`
 
 ### 4.2 Home Window
 
-Home Window commands consists of features that enables you to manage your client base.
-These features are exclusive to [Home Window](#32-application-home-window-breakdown), the default window that pops up when DonnaFin is opened.
+Home Window commands consist of features that enable you to manage your client base.
+These features are exclusive to [Home Window](#32-application-home-window-breakdown), the default window that pops up when DonnaFin opens.
 
 **The Home Window:**
 ![home window](images/Ui.png)
@@ -360,22 +367,22 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
-Do take note that there is a near duplicate check for names. This means that when
+Do take note that there is a near-duplicate check for names. This means that when
 adding a person whose name is similar to another client already found in DonnaFin,
 the result display will prompt the user as shown below but the client will still be added to
-the client list. However, if the names are exact duplicates they will be rejected.
+the client list. However, if the names are exact duplicates, they will be rejected.
 
-Near duplicate:
+Near-duplicate:
 ![DuplicateRejectionMessage](images/NearDuplicateRejectionMessage.png)
 
 Duplicate:
 ![FullDuplicateRejectionMessage](./images/FullDuplicateRejectionMessage.png)
 
-Names are said to be near duplicates if the names differ only in case
+Names are said to be near-duplicates  if the names differ only in case
 (upper case letters where there are lower case letters) or
 with spaces (user types in two or more spaces in place of one)
 
-| First Name     | Second Name                        | Is near duplicate
+| First Name     | Second Name                        | Is near-duplicate
 | -------------- | ---------------------------------------| -------------------------------------------------------------------------------------------------- |
 | david Li     | David LI                        | yes
 | daviD Li     | David LI                        | yes
@@ -386,7 +393,7 @@ with spaces (user types in two or more spaces in place of one)
 | DavidLi     | David Li                        | no
 
 Note that this duplicate detection does not try to combine separated words.
-E.g. 'John Son' and 'Johnson' would not be seen as near duplicates.
+E.g. 'John Son' and 'Johnson' would not be seen as near-duplicates.
 
 #### 4.2.2 Deleting a Client : `delete`
 
@@ -474,14 +481,14 @@ Format: `clear`
 
 ### 4.3 Client Window
 
-Client Window commands consists of features that enables you to manage data on each specific client.
+Client Window commands consists of features that enable you to manage data on each specific client.
 These features are exclusive to [Client Window](#33-application-client-window-breakdown). They give access and writing privileges for any client information
 fields. You can access these commands once you have entered the Client Window using our [view command](#425-view-client-information--view).
 
 **The Client Window:**
 ![ClientContactTab](images/ClientContactTab.png)
 
-Such features include switching tabs, editing contact information, managing financial details, as well as notes for each client.
+Such features include switching tabs, editing contact information, managing financial details, and notes for each client.
 
 #### 4.3.1 Switching Tabs In Client Window: `tab`
 
@@ -614,7 +621,7 @@ Example: `edit e/allison@gmail.com`
 
 #### 4.3.3 Asset Features
 
-Asset Features consists of features that enables you to add and remove assets
+Asset Features consists of features that enable you to add and remove assets
 for your clients.
 
 <div markdown="span" class="alert alert-primary">
@@ -657,7 +664,7 @@ Example:
 
 #### 4.3.4 Liability Features
 
-Liability Features consists of features that enables you to add and remove liabilities
+Liability Features consists of features that enable you to add and remove liabilities
 for your clients.
 
 <div markdown="span" class="alert alert-primary">
@@ -700,7 +707,7 @@ Example:
 
 #### 4.3.5 Policy Features
 
-Policy Features consists of features that enables you to add and remove policies
+Policy Features consists of features that enable you to add and remove policies
 for your clients.
 
 <div markdown="span" class="alert alert-primary">
@@ -743,7 +750,7 @@ Example:
 
 #### 4.3.6 Edit Notes
 
-You can simply add your changes inside the notes field inside `Notes` tab and DonnaFin will automatically save your data.
+You can simply add your changes inside the notes field inside the `Notes` tab, and DonnaFin will automatically save your data.
 
 #### 4.3.7 Returning to Home Window: `home`
 
@@ -762,7 +769,7 @@ DonnaFin data are saved in the hard disk automatically after any command that ch
 #### 4.4.2 Editing the data file
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If your changes to the data file is erroneous and causes DonnaFin to "lose its data".
+If your changes to the data file are erroneous and cause DonnaFin to "lose its data".
 Don't worry, as long as you do not run commands, your data is still stored. Simply undo your changes to restore.
 </div>
 
@@ -793,51 +800,51 @@ an empty data file on the next run (no clients are shown).
 ```
 
 The above figure shows the original JSON data for `totalValueInsured`
-regarding the client Alex Yeoh. If you tamper with the
+regarding the client Alex Yeoh. Suppose you tamper with the
 JSON file directly and change one of client details to an invalid format (in this case the
-total value of assets is supposed to be start with a '$' to indicate that it is a monetary value), DonnaFin will
+total value of assets is supposed to be start with a '$' to indicate that it is a monetary value). DonnaFin will
 start with an empty data file.
 
-When this happens however, to prevent total loss of your data, **we do not delete it right away**.
-Only when **any** valid command is run, DonnaFin will assume that the intended action is to clear your data.
+However, when this happens, to prevent total loss of your data, **we do not delete it right away**.
+DonnaFin will assume that the intended action is to clear your data and restart only when **any** valid command is run.
 DonnaFin will then proceed to cleanly wipe donnafin.json and execute your command.
 
 </div>
 
 This marks the end of the Features section. Click
-<a href="#top">here</a> to return to the top
+<a href="#top">here</a> to return to the top.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
        the data of your previous DonnaFin home folder.
 
 **Q**: I have multiple clients with the same name, but your application won't let me add them! What do I do?<br>
-**A**: We realise some names are common, but we decided to prioritise your ability to instantly recognise a client 
+**A**: We realize some names are common, but we decided to prioritize your ability to instantly recognize a client 
        over letting you keep the accuracy of the name. For that reason, we suggest adding other identifying nicknames
        or words in the name e.g. "John Walker (Bartender)" and "John Walker (Johnny)".
 
 **Q**: My clients have assets and policies valued in USD / RMB / AUD / other currency. How can I show this in the table?<br>
-**A**: We plan to have multi-currency support in future developments. However, currently we only accept dollar ('$') 
-       currencies and formats that are compatible with the Singapore Dollar. For now, please use only a single currency
+**A**: We plan to have multi-currency support in future developments. However, currently, we only accept dollar ('$') 
+       currencies and formats compatible with the Singapore Dollar. For now, please use only a single currency
        and convert as appropriate.
 
-**Q**: I want to write with non-latin alphabets. Do you have support for internationalization (e.g. Chinese, Hindi, Malay)<br>
-**A**: While it may not break our system, we have developed this application with latin script in mind, and cannot guarantee a
+**Q**: I want to write with non-Latin alphabets. Do you have support for internationalization (e.g. Chinese, Hindi, Malay)<br>
+**A**: While it may not break our system, we have developed this application with Latin script in mind, and cannot guarantee a
        bug-free experience.
 
 This marks the end of the FAQ section. Click
-<a href="#top">here</a> to return to the top
+<a href="#top">here</a> to return to the top.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Command summary
 
 This section gives a quick summary of how you may use DonnaFin. You may click on the links for each command to jump
-to the detailed description on how to use a specific command.
+to the detailed description of using a specific command.
 
 | Global Commands     | Format                                                                | Examples
 | ---------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
@@ -872,20 +879,20 @@ to the detailed description on how to use a specific command.
 
 
 This marks the end of the Command Summary section. Click
-<a href="#top">here</a> to return to the top
+<a href="#top">here</a> to return to the top.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Glossary
 
-* **CLI**: Abbreviation for command line interface, where the application process commands as text. This is in contrast
-  to graphical user interfaces (mouse-based applications) that have the user click buttons or similar control surfaces.
+* **CLI**: Abbreviation for command-line interface, where the application process commands as text. This contrasts
+  with graphical user interfaces (mouse-based applications) that have the user click buttons or similar control surfaces.
 * **Asset**: Items that generate profit or return on investment.
 * **Liability**: Obligations that require payments from the client.
 * **Policy**: A contract between an insurer and policyholder (the client in this case) where the policyholder receives
 financial protection or reimbursement against losses.
 
 This marks the end of the Glossary. Click
-<a href="#top">here</a> to return to the top
+<a href="#top">here</a> to return to the top.
 
 --------------------------------------------------------------------------------------------------------------------
