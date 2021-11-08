@@ -117,11 +117,17 @@ Let's break down what happens when you call a command, like the find command. Th
 
 #### In-depth example of Command Workflow, using the Person Note Command.
 
-Notor allows you to add note to a itself, a person or group in a list.
+Notor allows you to add note to itself, a person or group.
 
 The following sequence diagram shows the detail when `PersonNoteCommand` is executed to add note for a person.
 
 ![PersonNoteSequenceDiagram](images/PersonNoteSequenceDiagram.png)
+
+* `PersonNoteCommand` has `Mentor` which is the actor involved in the sequence diagram.
+* `Mentor` can save and quit note on the `PersonNoteWindow` object via shortcut keys mentioned in User Guide or
+Gui buttons in `PersonNoteWindow`.
+* By saving, `PersonNoteWindow` call `executesaveNote()` in `Logic Manager` which will result in updating of `Model`.
+* By quiting, the instance of `PersonNoteWindow` is destroyed.
 
 ### UI Changes
 
@@ -138,8 +144,7 @@ Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or Subg
 
 *(placeholder API for now, will update to our own link later when implemented.)*
 
-**
-API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
@@ -166,8 +171,7 @@ Here is the better class structure to be implemented:
 
 *(placeholder API for now, will update to our own link later when implemented.)*
 
-**
-API** : [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API**: [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
@@ -191,6 +195,24 @@ API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/s
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
+### Command History 
+
+`CommandHistory` allows user to access past successfully executed commands by using Up and Down Arrow keys. Since, our 
+implementation of `CommandHistory` only tracks past successfully executed commands pertaining to a single instance of 
+Notor, `CommandHistory` does not have dependency to `Model` and `Storage`.
+
+The class diagram of `CommandHistory` is as follows.
+
+![CommandHistoryClassDiagram](images/CommandHistoryClassDiagram.png)
+
+To illustrate how does `CommandHistory` works, activity diagram 
+for `CommandHistory` when using up arrow key  is as follows.
+
+![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
+
+
 
 ### \[Proposed\] Data archiving
 
@@ -230,7 +252,7 @@ Priorities:<p>
 * High - must have<p>
 * Medium - nice to have<p>
 * Low - unlikely to have<p>
-* Default - already implemented)
+* Default - already implemented<p>
 
 |As a …                                                                                      |I want to …                                                                                                   |So that I can …                                            |Priority    |Status     |When?         |
 |--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|------------|-----------|--------------|
@@ -379,6 +401,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 * 3a. User cancels their request.
   * 3a1. Notor displays a confirmation of the cancelling of the request
+    
     Use case ends.
 
 #### Basic Group Commands
@@ -403,6 +426,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 2. Notor creates the group and displays a success message.
 
     Use case ends.
+
 **Extensions**
 
 * 1a. Group already exists.
@@ -418,12 +442,38 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 2. Notor creates the group and displays a success message.
 
     Use case ends.
+
 **Extensions**
 
 * 1a. Group already exists.
   * 1a1. Resume use case from step 1.
 * 1b. Group name is invalid.
   * 1b1. Resume use case from step 1.
+
+
+#### Use case: User exits from Notor
+
+**MSS**
+
+1. User requests to exit.
+2. Notor exits.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. User has unsaved Note Window opened.
+    * 1a1. Notor displays a confirmation window.
+    * 1a2. User confirms exit without saving Note.
+    
+    Use case resumes from step 2.
+
+
+* 1a1.1 User cancels exit via confirmation window.
+  
+  Use case ends.
+  
+
 
 #### Proposed Extended Use Cases ( Not Implemented )
 
@@ -438,6 +488,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 5. Notor <u>runs command (UC1)</u>.
 
    Use case ends.
+
 
 
 ### Non-Functional Requirements
@@ -496,9 +547,14 @@ testers are expected to do more *exploratory* testing.
   Expected: Same as above -- following string is ignored.
 3. Test case: `group /list`<br>
   Expected: List all groups in your Notor
-4. Incorrect test cases to try: `grop /list` (or other typos)
-  Prerequisite: On the person list, using the command `person (INDEX) /list`. Expected: Display error message.
-5. Test case: `person /lar` <br>
+4. Incorrect test cases to try: `grop /list` (or other typos) <br>
+   Expected: Display error message.
+
+5. Prerequisite: On the person list.
+   1. `person (INDEX) /list` <br>
+   Expected: Display error message.
+
+6. Test case: `person /lar` <br>
   Prerequisite: List the archived persons
 
 Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Must have at least one group in the list.
@@ -517,155 +573,147 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Prerequisites: Be in person list. Must have at least one person in the list.
 
-    1. Prerequisites: Be in person list. Must have at least one person in the list.
+1. Test case: `person 1 /delete`<br>
+   Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
 
-    1. Test case: `person 1 /delete`<br>
-       Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
+1. Test case: `person 0 /delete `<br>
+   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Test case: `person 0 /delete `<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect delete commands to try: `p /delete`, `p x /delete`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Other incorrect delete commands to try: `p /delete`, `p x /delete`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Adding a group
 
-1. Adding a group
-    1. Test case: `group Test /create`<br>
-       Expected: Group is created. If you switch to group list, you will be able to see the new group created.
+1. Test case: `group Test /create`<br>
+   Expected: Group is created. If you switch to group list, you will be able to see the new group created.
 
-    1. Test case: `group 123 /create`<br>
-       Expected: No group is created. Error details shown in the status message.
+1. Test case: `group 123 /create`<br>
+   Expected: No group is created. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `group /create`, `group group_1 /create`, `...`
-       (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Other incorrect delete commands to try: `group /create`, `group group_1 /create`, `...`
+   (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Deleting a group
+   
+Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
 
-1. Deleting a group while all groups are being shown
+1. Test case: `group 1 /delete`<br>
+   Expected: A confirmation window popped. Upon confirmation, first group is deleted from the list.
 
-    1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+1. Test case: `group 0 /delete`<br>
+   Expected: No group is deleted. Error details shown in the status message.
 
-    1. Test case: `group 1 /delete`<br>
-       Expected: A confirmation window popped. Upon confirmation, first group is deleted from the list.
-
-    1. Test case: `group 0 /delete`<br>
-       Expected: No group is deleted. Error details shown in the status message.
-
-    1. Other incorrect delete commands to try: `group /delete`, `group x /delete`, `...`
-       (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Other incorrect delete commands to try: `group /delete`, `group x /delete`, `...`
+   (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 
 ### Adding person to a group
 
-1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
+Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
 
-    1. Test case: `person 1 /add g:Orbital`<br>
-       Expected: Person is added to the group. Person is updated with a new group in the UI.
+1. Test case: `person 1 /add g:Orbital`<br>
+   Expected: Person is added to the group. Person is updated with a new group in the UI.
 
-    1. Test case: `person 0 /add g:Orbital`<br>
-       Expected: Nothing happened. Error details shown in the status message.
+1. Test case: `person 0 /add g:Orbital`<br>
+   Expected: Nothing happened. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
-       (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
+   (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Removing a person from a group
 
-1. Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. First person is added to group Orbital.
-    1. Test case: `person 1 /remove g:Orbital`<br>
-           Expected: Person is removed to the group. Person is updated with group removed in the UI.
+Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. First person is added to group Orbital.
 
-    1. Test case: `person 0 /remove g:Orbital`<br>
-       Expected: No person is removed. Error details shown in the status message.
+1. Test case: `person 1 /remove g:Orbital`<br>
+       Expected: Person is removed to the group. Person is updated with group removed in the UI.
 
-    1. Other incorrect delete commands to try: `person /remove`, `person 1 /remove g:NonExistent`, `...`
-       (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Test case: `person 0 /remove g:Orbital`<br>
+   Expected: No person is removed. Error details shown in the status message.
+
+1. Other incorrect delete commands to try: `person /remove`, `person 1 /remove g:NonExistent`, `...`
+   (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Adding subgroup to a group
 
-1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
 
-    1. Test case: `group 1 /create n:Artemis`<br>
-       Expected: Artemis is added to the first group. Group is updated with a new subgroup in the UI.
+1. Test case: `group 1 /create n:Artemis`<br>
+   Expected: Artemis is added to the first group. Group is updated with a new subgroup in the UI.
 
-    1. Test case: `group 0 /create n:Artemis`<br>
-       Expected: No group is created. Error details shown in the status message.
+1. Test case: `group 0 /create n:Artemis`<br>
+   Expected: No group is created. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `group /create`, `...`
-       (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Other incorrect delete commands to try: `group /create`, `...`
+   (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Removing a subgroup from a group
 
-1. Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
-    1. Test case: `group 1 /delete n:Artemis`<br>
-       Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group.
-       Group is updated with a subgroup removed in the UI.
+Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
 
-    1. Test case: `group 0 /delete n:Artemis`<br>
-       Expected: No subgroup is removed. Error details shown in the status message.
+1. Test case: `group 1 /delete n:Artemis`<br>
+   Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group.
+   Group is updated with a subgroup removed in the UI.
 
-    1. Other incorrect delete commands to try: `group /delete`, `group 1 /delete n:NonExistent`, `...`
-       (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Test case: `group 0 /delete n:Artemis`<br>
+   Expected: No subgroup is removed. Error details shown in the status message.
 
-
-
+1. Other incorrect delete commands to try: `group /delete`, `group 1 /delete n:NonExistent`, `...`
+   (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+       
 ### Adding general note.
-1. Adding general note.
 
-    1. Test case: `note` <br>
-       Expected: Note window opened with title of note window named as `General Note` to add note to.
-       Within the note window, user can make use of keyboard shortcuts in **User Guide** for saving and quiting of note.
-       Upon saving of note, general note is added and displayed in left pane of Notor.
+1. Test case: `note` <br>
+   Expected: Note window opened with title of note window named as `General Note` to add note to.
+   Within the note window, user can make use of keyboard shortcuts in **User Guide** for saving and quiting of note.
+   Upon saving of note, general note is added and displayed in left pane of Notor.
 
 ### Clearing general note.
 
-1. Clearing of general note.
-    1. Test case: `clearnote` <br>
-       Expected: Warning Window opened to prompt whether to proceed with clearing of general note.
-       General note is cleared in Notor upon confirmation to continue with clearing of note.
-       General note is not cleared upon confirmation to cancel clear note.
+1. Test case: `clearnote` <br>
+   Expected: Warning Window opened to prompt whether to proceed with clearing of general note.
+   General note is cleared in Notor upon confirmation to continue with clearing of note.
+   General note is not cleared upon confirmation to cancel clear note.
 
 ### Adding note to a person
 
-1. Adding note to a person in person list. <br>
-    Prerequisites: List all persons using the `person /list` command or already in person list.
-    Must have at least one person in the list.
+Prerequisites: List all persons using the `person /list` command or already in person list.
+Must have at least one person in the list.
 
-    1. Test case: `person 1 /note` <br>
-        Expected: Note window opened with title of note window named as the person to add note to.
-        Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving
-        and quiting of note.
-        Upon saving of note, first three lines of note excluding empty line is shown for the first person in the list.
+1. Test case: `person 1 /note` <br>
+    Expected: Note window opened with title of note window named as the person to add note to.
+    Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving
+    and quiting of note.
+    Upon saving of note, first three lines of note excluding empty line is shown for the first person in the list.
 
-    1. Test case: `person 0 /note `<br>
-      Expected: No note window is opened. Error details shown in the status message.
+1. Test case: `person 0 /note `<br>
+  Expected: No note window is opened. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `p /note`, `p x /note`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Other incorrect delete commands to try: `p /note`, `p x /note`, `...` (where x is larger than the list size)<br>
+  Expected: Similar to previous.
 
 ### Clearing note of a person
-1. Clearing note of a person in person list. <br>
-   Prerequisites: List all persons using the `person /list` command or already in person list.
-        Must have at least one person in the list.
 
-    1. Test case: `person 1 /clearnote` <br>
-       Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person.
-       Note of first person is cleared in the list upon confirmation to clear note.
-       Note of first person in the list remains upon confirmation to cancel clear note.
+Prerequisites: List all persons using the `person /list` command or already in person list.
+    Must have at least one person in the list.
 
-   1. Test case: `person 0 /clearnote `<br>
-      Expected: No warning window is opened. Error details shown in the status message.
+1. Test case: `person 1 /clearnote` <br>
+   Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person.
+   Note of first person is cleared in the list upon confirmation to clear note.
+   Note of first person in the list remains upon confirmation to cancel clear note.
 
-    1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Test case: `person 0 /clearnote `<br>
+  Expected: No warning window is opened. Error details shown in the status message.
+
+1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Tagging a person
 
