@@ -9,9 +9,9 @@ import seedu.address.ui.ThemeType;
 
 public class ThemeListTest {
 
-    ThemeType bookTheme = ThemeType.of("BookTheme").get();
-    ThemeType spaceTheme = ThemeType.of("SpaceTheme").get();
-    ThemeList themeList = new ThemeList(bookTheme);
+    private final ThemeType bookTheme = ThemeType.of("BookTheme").get();
+    private final ThemeType spaceTheme = ThemeType.of("SpaceTheme").get();
+    private final ThemeList themeList = new ThemeList(bookTheme);
 
     @Test
     public void equals() {
