@@ -663,7 +663,12 @@ The following sequence diagram in Figure 5.5.1 shows how the `download` command 
 </div>
 <br>
 
-The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the `download` command:
+The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the `download` command.
+The main two possible scenarios are:
+
+1. There is student data present to download. If so, the user proceeds to select a destination folder and the data will
+    be stored in a file named `programmerError.csv` in the selected directory.
+2. There is no student data present to download. In this case, the user is simply notified that there is no data to download.
 
 <p align="center">
     <img src="images/commands/DownloadCommand/DownloadActivityDiagram.png" width="600"/>
