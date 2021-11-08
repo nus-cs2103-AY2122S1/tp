@@ -438,10 +438,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor requests to list residents
-2.  System shows a list of residents
-3.  Actor requests to delete a specific resident in the list
-4.  System deletes the resident
+1. Actor requests to list residents.
+2. System shows a list of residents.
+3. Actor requests to delete a specific resident in the list.
+4. System deletes the resident.
 
     Use case ends.
 
@@ -450,6 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+
 
 * 3a. The given index is invalid.
 
@@ -457,57 +458,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC02 - Remind residents to take FET**
+
+**Use case: UC02 - View details of an event**
 
 **MSS**
 
-1. Actor filters residents, specifying desired FET due date.
-2. System shows the list of residents filtered.
-3. Actor requests for a list of the email addresses of the residents shown.
-4. System outputs the list email addresses.
-5. Actor sends an email to these residents to remind them to take their FET soon.
+1. Actor navigates to the `Event` tab of the application.
+2. Actor requests to view an event from the list of events.
+3. System shows the relevant information of the event and list of residents involved in the event.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+
+* 3a. The list is empty.
 
     Use case ends.
 
-**Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC03 - View residents involved in an event**
-
-**MSS**
-
-1. Actor navigates to the `events` tab of the application.
-2. Actor requests to view an event.
-3. System shows the list of residents involved in the event and their relevant personal information.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC04 - View any unvaccinated residents involved in an event**
-
-**MSS**
-
-1. Actor <u>views residents involved in an event (UC03)</u>
-2. Actor filters for unvaccinated residents.
-3. System shows the list of unvaccinated residents.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC05 - Include a resident to an event**
+**Use case: UC03 - Include a resident to an event**
 
 **MSS**
 
@@ -529,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
 
-**Use case: UC06 - Exclude a resident from an event**
+**Use case: UC04 - Exclude a resident from an event**
 
 **MSS**
 
@@ -551,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
 
-**Use case: UC07 - List residents who missed their FET**
+**Use case: UC05 - List residents who missed their FET**
 
 **MSS**
 
@@ -572,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-**Use case: UC08 - List residents whose FET or Test Kit collection dates are due soon**
+**Use case: UC06 - List residents whose FET or Test Kit collection dates are due soon**
 
 **MSS**
 
@@ -593,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-**Use case: UC09 - Update a resident's last FET date**
+**Use case: UC07 - Update a resident's last FET date**
 
 **MSS**
 
@@ -608,6 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 * 3a. SafeFor(H)all detects invalid index entered.
     * 3a1. SafeFor(H)all displays an error message.
     * 3a2. SafeFor(H)all requests for a valid index.
@@ -617,6 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
     
+
 * 3b. SafeFor(H)all detects invalid date entered.
     * 3b1. SafeFor(H)all displays an error message.
     * 3b2. SafeFor(H)all requests for a valid date.
@@ -626,6 +604,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
     
+
 * 5a. SafeFor(H)all detects invalid index entered.
     * 5a1. SafeFor(H)all displays an error message.
     * 5a2. SafeFor(H)all requests for a valid index.
@@ -634,6 +613,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 5a1-5a2 are repeated until the index entered is valid.
 
       Use case resumes from step 6.
+
+**Use case: UC08 - Export current list of residents' email as csv**
+
+**MSS**
+
+1. Actor requests for a list of the email addresses of the residents shown.
+2. Actor enters filename of file to be created.
+3. System outputs the list of email addresses in the form of a csv file.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. System detects duplicate file.
+    * 2a1. System displays an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Remind residents to take FET**
+
+**MSS**
+
+1. Actor <u>lists residents who missed their FET (UC05)</u>
+2. Actor <u>exports current list of residents' email as csv (UC08)</u>
+3. Actor sends an email to these residents to remind them to take their FET soon.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+**Use case: UC10 - Remind residents to collect FET kits**
+
+**MSS**
+
+1. Actor <u>lists residents whose FET or Test Kit collection dates are due soon (UC06)</u>
+2. Actor <u>exports current list of residents' email as csv (UC08)</u>
+3. Actor sends an email to these residents to remind them to collect their FET kits soon.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
 
 
 ### Non-Functional Requirements
