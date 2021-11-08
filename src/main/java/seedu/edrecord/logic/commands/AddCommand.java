@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_INFO + "INFO "
+            + "[" + PREFIX_INFO + "INFO" + "] "
             + PREFIX_MODULE + "MODULE "
             + PREFIX_GROUP + "GROUP "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_INFO + "A student "
             + PREFIX_MODULE + "CS2103 "
-            + PREFIX_GROUP + "T01 "
+            + PREFIX_GROUP + "T03 "
             + PREFIX_TAG + "weak";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
