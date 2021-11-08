@@ -48,4 +48,4 @@ Given below are my contributions to the project.
 * **Contributions beyond the project team**:
   * Reporting bugs in other team's products. Some examples include: [1](https://github.com/AY2122S1-CS2103T-T15-4/tp/issues/222), [2](https://github.com/AY2122S1-CS2103T-T15-4/tp/issues/221)
   * Reviewing the User Guides and Developer Guides of two peer teams
-  
+
