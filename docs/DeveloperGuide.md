@@ -596,6 +596,70 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Add Test
+1. Adding a person to the ProfBook
+
+   1. Test case: `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+      <br> Expected: Adds the person to the ProfBook.
+      <br> Now progressively remove or edit each attribute in the add command and view the outputs
+
+      1. Test case: Calling the same command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+         <br> Expected: This person already exists in the address book.
+
+      2. Test case: On changing name to lower case we can add the person `add n/john doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+         <br> Expected: Adds the person to the ProfBook.
+
+      3. Test case: `add n/John Doe a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
+         <br> Expected: Invalid command format!
+
+### Get Statistics of last searched list of contacts
+
+1. Showing statistics of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of all the contacts are shown in the display
+
+1. Showing statistics of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
+    
+### Edit Test
+1. Editing a person in the ProfBook
+   1. Test case: `edit 1 n/John Doe`
+      <br>Expected: Edits the person at index 1 and changes name to John Doe.
+
+   2. Test case: On changing index to 2 and running the command `edit 2 n/John Doe`
+      <br> Expected: This person already exists in the address book.
+      <br>Now progressively replace or add more attribute in the edit command and view the outputs
+
+   3. Test case: `edit 1 N/e0000000`
+      <br> Expected: Edits the person at index 1 and changes NUSNET_ID to E0000000 and Email to e0000000@u.nus.edu.
+
+### Find test
+
+1. Finding a person
+
+    1. Prerequisites: Multiple persons in the list.
+
+    2. Test case: `find n/alex`<br>
+       Expected: List shows contacts with name matching or partially matching 'alex'.
+
+    3. Test case: `find n/ alex`<br>
+       Expected: Invalid command format!
+
+    4. Test case: `find n/`<br>
+       Expected: Invalid command format!
+
+    5. Test case: `find l/`<br>
+       Expected: Invalid command format!
+
+    6. Other incorrect find commands to try: `find`, `find a`, `...` (where attribute type does not exist)<br>
+       Expected: Similar to previous.
 
 ### Delete test
 
@@ -612,75 +676,32 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Find test
+### Bulk Tag Test
+1. Tagging the last searched list of contacts
 
-1. Finding a person
+   1. Test case: `bulk_tag t/friends`
+      <br>Expected: Added the Tags [friends] to the Persons
 
-    1. Prerequisites: Multiple persons in the list.
+   2. Test case: `bulk_tag t/friends`
+      <br> Expected: Added the Tags [friends] to the Persons. No change since all persons have the tag `friends`
 
-    2. Test case: `find n/alex`<br>
-       Expected: List shows contacts with name matching or partially matching 'alex'.
-
-    3. Test case: `find n/ alex`<br>
-       Expected: Invalid command format!
-   
-    4. Test case: `find n/`<br>
-       Expected: Invalid command format!
-   
-    5. Test case: `find l/`<br>
-       Expected: Invalid command format!
-
-    6. Other incorrect find commands to try: `find`, `find a`, `...` (where attribute type does not exist)<br>
-       Expected: Similar to previous.
+   3. Test case: `bulk_tag t/friends t/passed`
+      <br> Expected: Added the Tags [passed] [friends] to the Persons. Now tag `passed` is added to all the person and `friends` already existed for all the persons
 
 ### Sort Test
-1. Test case: `sort`<br>
-   Expected: List is sorted by name.
+1. Sorting contacts in ProfBook
+   1. Test case: `sort`<br>
+      Expected: List is sorted by name.
    
-2. Test case: `sort -r`<br>
-   Expected: List is sorted by name in reverse.
+   2. Test case: `sort -r`<br>
+      Expected: List is sorted by name in reverse.
    
-3. Test case: `sort T/`<br>
-   Expected: List is sorted by TutorialID
+   3. Test case: `sort T/`<br>
+      Expected: List is sorted by TutorialID
    
-4. Test case: `sort a/`<br>
-   Expected: No change to list. Error details shown in status message.
+   4. Test case: `sort a/`<br>
+      Expected: No change to list. Error details shown in status message.
 
-### Add Test
-1. Test case: `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
-<br> Expected: Adds the person to the ProfBook. 
-<br> Now progressively remove or edit each attribute in the add command and view the outputs
-
-2. Test case: Calling the same command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
-<br> Expected: This person already exists in the address book.
-
-3. Test case: On changing name to lower case we can add the person `add n/john doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
-<br> Expected: Adds the person to the ProfBook.
-
-4. Test case: `add n/John Doe a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
-<br> Expected: Invalid command format!
-
-### Edit Test
-1. Test case: `edit 1 n/John Doe`
-<br>Expected: Edits the person at index 1 and changes name to John Doe.
-
-2. Test case: On changing index to 2 and running the command `edit 2 n/John Doe`
-<br> Expected: This person already exists in the address book.
-<br>Now progressively replace or add more attribute in the edit command and view the outputs
-
-3. Test case: `edit 1 N/e0000000`
-<br> Expected: Edits the person at index 1 and changes NUSNET_ID to E0000000 and Email to e0000000@u.nus.edu.
-
-### Bulk Tag Test
-1. Test case: `bulk_tag t/friends`
-   <br>Expected: Added the Tags [friends] to the Persons
-   
-2. Test case: `bulk_tag t/friends`
-   <br> Expected: Added the Tags [friends] to the Persons. No change since all persons have the tag `friends`
-   
-2. Test case: `bulk_tag t/friends t/passed`
-   <br> Expected: Added the Tags [passed] [friends] to the Persons. Now tag `passed` is added to all the person and `friends` already existed for all the persons
-   
 ### Import and Export
 
 1. Exporting then importing back original list of contacts
@@ -699,7 +720,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect delete commands to try: `import`, `export` <br>
        Expected: Error details shown in the status message.
 
-2. Export last searched list of contacts
+2. Exporting the last searched list of contacts
 
    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
 
@@ -708,8 +729,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Export emails of last searched list of contacts
 
-
-1. Export emails of all persons are being shown
+1. Exporting the emails of all persons shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -719,30 +739,12 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `exportemail` <br>
        Expected: Error details shown in the status message.
 
-1. Export emails of last searched list of contacts
+1. Exporting emails of last searched list of contacts
 
     1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
 
     1. Test case: `exportemail friends.txt`<br>
        Expected: Emails of last searched contacts are exported to emails.txt
-
-
-
-### Get Statistics of last searched list of contacts
-
-1. Show statistics of all persons are being shown
-
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    1. Test case: `stat`<br>
-       Expected: Tag, Type and Tutorial count of all the contacts are shown in the display
-
-1. Show statistics of last searched list of contacts
-
-    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
-
-    1. Test case: `stat`<br>
-       Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
     
 ### Loading/Saving data
 
