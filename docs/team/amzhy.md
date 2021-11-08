@@ -25,7 +25,7 @@ Access my [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
   * What it does: Allows user to delete a student or tuition classes in **TutAssistor**.
   * Justification:  This enables the user to remove entire records pertaining to multiple students or tuition classes.
   * Highlights:
-    * Duplicate indexes in user inputs have to be removed to ensure that only one student/class is deleted at a particular index.
+    * Duplicate indices in user inputs have to be removed to ensure that only one student/class is deleted at a particular index.
     * The order of deletion has to be considered carefully by sorting the indices before deletion, as the 
 list of students/classes adapts while students/classes are being deleted respectively.
   
@@ -42,7 +42,7 @@ using the existing Java API.
   * Highlights:
     * This is a major refactor as the `Timeslot` is crucial for the logic of `Timetable` and general management of all the tuition classes. 
 
-* **Refactor some commands to use multiple indexes**: Refactor `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` to use multiple student or class indexes as arguments. (Pull request [\#65](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/65))
+* **Refactor some commands to use multiple indices**: Refactor `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` to use multiple student or class indices as arguments. (Pull request [\#65](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/65))
   * What it does: Allows user to delete multiple students or tuition classes, as well as remove multiple students from a class.
   * Justification: Improve efficiency so that the user is able to delete multiple students or classes at once instead of 
 repeating similar commands multiple times.
