@@ -593,7 +593,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to link a friend using a friend's `FRIEND_ID`, a game's `GAME_ID` and an `IN_GAME_USERNAME`.
+1. User requests to link a game with `GAME_ID` to a friend using with `FRIEND_ID`,  and an `IN_GAME_USERNAME`.
 2. gitGud links the friend to the game, stores their in-game username and informs user of successful linking of friend.
 
    Use case ends.
@@ -614,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to unlink a friend using a friend's `FRIEND_ID`, a game's `GAME_ID`.
+1. User requests to unlink a game with `GAME_ID` from a friend with `FRIEND_ID`.
 2. gitGud unlinks the friend from the game and informs user of successful unlinking of friend.
 
    Use case ends.
@@ -622,20 +622,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
-    * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+    * 1a1. gitGud informs user that no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
     * 1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game.  
     * Use case continues from step 2.
 
 * 1b. gitGud detects that the `FRIEND_ID` and `GAME_ID` link does not exist.
     * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
-    * 1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
+    * 1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game with an existing link.
     * Use case continues from step 2.
 
 **Use case: UC06 - Assign a skill value for a linked game to a friend**
 
 **MSS**
 
-1. User requests to assign a `SKILL_VALUE` to a friend from a linked game using a friend's `FRIEND_ID`, a game's `GAME_ID`.
+1. User requests to assign a `SKILL_VALUE` for a linked game with `GAME_ID` to a friend with `FRIEND_ID`.
 2. gitGud assigns the friend a skill value for the linked game and informs user of successful assigning of skill value.
 
    Use case ends.
@@ -644,7 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-    * 1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game with existing link.  
+    * 1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game with an existing link.  
     * Use case continues from step 2.
 
 * 1b. gitGud detects that the `FRIEND_ID` and `GAME_ID` link does not exist.
@@ -652,24 +652,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b2. User makes another request to assign a skill value to a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`  for an existing friend and/or game.  
     * Use case continues from step 2.
 
-* 1c. gitGud detects that the `SKILL_VALUE ` provided is invalid and does not meet specifications provided in User Guide.
-    * 1c1. gitGud informs user that `SKILL_VALUE ` provided is invalid.
+* 1c. gitGud detects that the `SKILL_VALUE` provided is invalid and does not meet specifications provided in User Guide.
+    * 1c1. gitGud informs user that `SKILL_VALUE` provided is invalid.
     * 1c2. User makes another request to assign a skill value to a friend with a game, with existing `FRIEND_ID` and `GAME_ID` with existing game link and valid `SKILL_VALUE`.
     * Use case continues from step 2.
 
-**Use case: UC07 - Schedule a friend**
+**Use case: UC07 - Schedule a friend's availability**
 
 **MSS**
 
 1. User requests to update a friend's schedule using a friend's `FRIEND_ID`, the time period (`START_HOUR` to `END_HOUR`) of the `DAY` they wish to set, as well as whether the friend `IS_FREE` then.
-2. gitGud updates the friend's schedule and informs user of successful scheduling of friend.
+2. gitGud updates the friend's schedule and informs user of successful scheduling of friend's availability.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.
-    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+    * 1a1. gitGud informs user that no friend was found with specified `FRIEND_ID`.  
     * 1a2. User makes another request to schedule a friend with a different `FRIEND_ID` for an existing friend.  
     * Use case continues from step 2.
 
@@ -683,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to recommend friends who play a game of `GAME_ID`, who are free during `HOUR` in `DAY`.
-2. gitGud displays a list of friends free to play during the time specified, sorted by the friends' skill at game of `GAME_ID` and  informs user of successful recommendation of friends.
+2. gitGud displays a list of friends free to play with during the time specified, sorted by the friends' skill for the game with `GAME_ID` and  informs user of successful recommendation of friends.
 
    Use case ends.
 
@@ -703,16 +703,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests for complete information about friend of `FRIEND_ID`.
-2. gitGud displays the complete information related to  `FRIEND_ID` and informs user of successful retrieval of friend information.
+1. User requests for complete information about a friend of `FRIEND_ID`.
+2. gitGud displays the complete information related to `FRIEND_ID` and informs user of successful retrieval of friend information.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.
-    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-    * 1a2. User makes another request to retrieve data a friend with a different `FRIEND_ID` for an existing friend.
+    * 1a1. gitGud informs user that no friend was found with specified `FRIEND_ID`.  
+    * 1a2. User makes another request to retrieve data of an existing friend with a different `FRIEND_ID`.
     * Use case continues from step 2.
 
 **Use case: UC10 - List/filter friends whose `FRIEND_ID` contains a keyword**

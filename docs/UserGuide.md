@@ -285,7 +285,7 @@ friend `Draco`</ins></center>
 <br><center><ins>Image: gitGud after running `friend --get Draco` after adding a skill value `7` for a 
 friend `Draco` for the game `Valorant`</ins></center>
 
-#### 5.1.7 Scheduling a friend: `friend --schedule`
+#### 5.1.7 Scheduling a friend's availability: `friend --schedule`
 
 Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
 * gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
@@ -324,7 +324,7 @@ Examples:
 <br><center><ins>Image: gitGud after running `friend --get Draco` after scheduling a friend's `Draco` 
 availability</ins></center>
 
-#### 5.1.8 Recommending friends available to play with - `recommend`
+#### 5.1.8 Recommending friends available to play with: `recommend`
 
 Lists all friends who both play the given game with `GAME_ID` and are available to play
 with at the specified time each week based on their stored schedules.
