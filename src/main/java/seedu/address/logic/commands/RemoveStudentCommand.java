@@ -32,6 +32,7 @@ public class RemoveStudentCommand extends Command {
 
     public static final String MESSAGE_REMOVE_STUDENT_SUCCESS = "Removed students: %1$s from class: %2$s";
     public static final String MESSAGE_REMOVE_STUDENT_FAILURE = "Students: %1$s are not found in class: %2$s";
+    public static final String MESSAGE_EMPTY_CLASS = "This class is empty. No students are removed.";
     private static final Logger logger = LogsCenter.getLogger(RemoveStudentCommand.class);
     private final List<Index> studentIndexes;
     private final Index classIndex;
@@ -63,12 +64,12 @@ public class RemoveStudentCommand extends Command {
         requireNonNull(model);
         TuitionClass tuitionClass = model.getTuitionClass(classIndex);
         if (tuitionClass == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_CLASS_NOT_FOUND));
+            throw new CommandException(Messages.MESSAGE_CLASS_NOT_FOUND);
         }
         for (Index currIndex : studentIndexes) {
             Student studentToRemove = model.getStudent(currIndex);
             if (studentToRemove == null) {
-                throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND));
+                throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
             }
             if (tuitionClass.containsStudent(studentToRemove)) {
                 TuitionClass updatedClass = tuitionClass.removeStudent(studentToRemove);
