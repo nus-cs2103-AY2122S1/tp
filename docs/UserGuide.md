@@ -30,7 +30,6 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 ## Quick start
 
@@ -49,7 +48,6 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 ## Features
 
