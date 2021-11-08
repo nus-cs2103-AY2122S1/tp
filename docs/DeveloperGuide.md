@@ -1002,7 +1002,7 @@ For all Event commands, ensure that you are on the Events tab before continuing.
     2. Test case: `add n/Swim v/Pool d/10-10-2021 t/1900 c/10` <br>
        Expected: Error message shown specifying that such an event already exists.
 
-3. Adding an event with invalid paramters
+3. Adding an event with invalid parameters
 
     1. Test case: `add n/Swim v/Pool d/10-10-2021 t/1900 c/0` <br>
        Expected: Error message shown specifying that capacity needs to be a positive integer.
