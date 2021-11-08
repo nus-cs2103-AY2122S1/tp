@@ -85,7 +85,5 @@ public class GradeCommandParserTest {
         // invalid status
         assertParseFailure(parser, "1 " + PREFIX_ID + "3 " + PREFIX_STATUS + "not_submitted " + PREFIX_SCORE + "30",
                 Grade.MESSAGE_CONSTRAINTS);
-
-        //TODO add test for status-score mismatch
     }
 }

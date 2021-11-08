@@ -1,5 +1,6 @@
 package seedu.edrecord.model.assignment;
 
+import static seedu.edrecord.commons.util.AppUtil.checkArgument;
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Grade {
     public enum GradeStatus { NOT_SUBMITTED, SUBMITTED, GRADED }
 
     public static final String MESSAGE_CONSTRAINTS = "Status should be \"not submitted\", \"submitted\" or \"graded\".";
+    public static final String MESSAGE_STATUS_SCORE_MISMATCH = "Score should only be present if status is \"graded\"";
 
     private final Optional<Score> score;
     private final GradeStatus status;
@@ -26,6 +28,7 @@ public class Grade {
      */
     public Grade(Optional<Score> score, GradeStatus status) {
         requireAllNonNull(score);
+        checkArgument(isValidGrade(status, score), MESSAGE_STATUS_SCORE_MISMATCH);
         this.score = score;
         this.status = status;
     }
@@ -47,6 +50,13 @@ public class Grade {
             score.ifPresent(builder::append);
         }
         return builder.toString();
+    }
+
+    /**
+     * Checks if the given grade is valid.
+     */
+    public static boolean isValidGrade(GradeStatus status, Optional<Score> score) {
+        return score.isEmpty() || status.equals(GradeStatus.GRADED);
     }
 
     @Override
