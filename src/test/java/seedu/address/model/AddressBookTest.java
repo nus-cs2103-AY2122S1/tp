@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -25,6 +27,30 @@ import seedu.address.testutil.PersonBuilder;
 public class AddressBookTest {
 
     private final AddressBook addressBook = new AddressBook();
+
+    private Person alex = new PersonBuilder()
+            .withName("Alex Marcus")
+            .withPhone("91234567")
+            .withEmail("e0000007@u.nus.edu")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withTags("friends")
+            .withGitHubId("alex-marcus")
+            .withNusNetworkId("e0000007")
+            .withType("student")
+            .withStudentId("A0000010X")
+            .withTutorialId("00")
+            .build();
+    private Person carol = new PersonBuilder()
+            .withName("Carol Heinz")
+            .withPhone("97897897")
+            .withEmail("e0000009@u.nus.edu")
+            .withAddress("wall street")
+            .withGitHubId("carol-heinz")
+            .withNusNetworkId("e0000009")
+            .withType("student")
+            .withStudentId("A0001000X")
+            .withTutorialId("02")
+            .build();
 
     @Test
     public void constructor() {
@@ -65,6 +91,30 @@ public class AddressBookTest {
     }
 
     @Test
+    public void mergeFile_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.mergeFile(null));
+    }
+
+    @Test
+    public void mergeFile_noDuplicates_success() throws DataConversionException {
+        AddressBook addAddressBook = getTypicalAddressBook();
+        AddressBook mergeAddressBook = getTypicalAddressBook();
+        addAddressBook.addPerson(alex);
+        addAddressBook.addPerson(carol);
+        mergeAddressBook.mergeFile(Paths.get("src/test/data/ImportTest/noDuplicates.json"));
+        assertEquals(addAddressBook, mergeAddressBook);
+    }
+
+    @Test
+    public void mergeFile_withDuplicates_success() throws DataConversionException {
+        AddressBook addAddressBook = getTypicalAddressBook();
+        AddressBook mergeAddressBook = getTypicalAddressBook();
+        addAddressBook.addPerson(alex);
+        mergeAddressBook.mergeFile(Paths.get("src/test/data/ImportTest/withDuplicates.json"));
+        assertEquals(addAddressBook, mergeAddressBook);
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
@@ -83,6 +133,12 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    @Test
+    public void hashCodeTest() throws DataConversionException {
+        AddressBook addressBook1 = getTypicalAddressBook();
+        AddressBook addressBook2 = getTypicalAddressBook();
+        assertTrue(addressBook1.hashCode() == addressBook1.hashCode());
+    }
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -98,5 +154,4 @@ public class AddressBookTest {
             return persons;
         }
     }
-
 }

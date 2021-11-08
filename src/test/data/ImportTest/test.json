@@ -1,0 +1,36 @@
+{
+  "persons" : [ {
+    "name" : "Alex Marcus",
+    "phone" : "91234567",
+    "email" : "e0000007@u.nus.edu",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "gitHubId" : "alex-marcus",
+    "nusNetworkId" : "e0000007",
+    "type" : "student",
+    "studentId" : "A0000010X",
+    "tutorialId" : "00"
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "e0000001@u.nus.edu",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ],
+    "gitHubId" : "benson-meier",
+    "nusNetworkId" : "e0000001",
+    "type" : "student",
+    "studentId" : "A0000001X",
+    "tutorialId" : "01"
+  }, {
+    "name" : "Carol Heinz",
+    "phone" : "97897897",
+    "email" : "e0000009@u.nus.edu",
+    "address" : "wall street",
+    "tagged" : [ ],
+    "gitHubId" : "carol-heinz",
+    "nusNetworkId" : "e0000009",
+    "type" : "student",
+    "studentId" : "A0001000X",
+    "tutorialId" : "02"
+  }]
+}

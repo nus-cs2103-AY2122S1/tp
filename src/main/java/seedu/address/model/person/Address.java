@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values with max length of 80 "
+            + "characters, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -34,7 +35,14 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && (test.length() < 81);
+    }
+
+    /**
+     * Compares this value with another Address's value using Java's compareTo function
+     */
+    public int compareTo(Address a) {
+        return value.compareTo(a.value);
     }
 
     @Override
@@ -44,9 +52,17 @@ public class Address {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && value.equals(((Address) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Address)) {
+            return false;
+        }
+
+        Address otherAddress = (Address) other;
+
+        return value.equals(otherAddress.value); // state check
     }
 
     @Override

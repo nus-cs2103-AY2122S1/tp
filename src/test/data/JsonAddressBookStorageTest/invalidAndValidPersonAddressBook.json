@@ -1,13 +1,25 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "persons": [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "e0000000@u.nus.edu",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "gitHubId" : "alice-pauline",
+    "nusNetworkId" : "e0000000",
+    "type" : "student",
+    "studentId" : "A0000000X",
+    "tutorialId" : "00"
   }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name" : "Alice Pauline",
+    "phone" : "948asdf2424",
+    "email" : "e0000000@u.nus.edu",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "gitHubId" : "alice-pauline",
+    "nusNetworkId" : "e0000000",
+    "type" : "student",
+    "studentId" : "A0000000X",
+    "tutorialId" : "00"
   } ]
 }

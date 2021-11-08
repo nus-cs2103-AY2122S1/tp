@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces"
+            + " with max length 60 characters, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,7 +35,15 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && (test.length() < 61);
+    }
+
+
+    /**
+     * Compares this with another Name using Java's compareTo function
+     */
+    public int compareTo(Name n) {
+        return fullName.compareTo(n.fullName);
     }
 
 
@@ -46,9 +54,17 @@ public class Name {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Name)) {
+            return false;
+        }
+
+        Name otherName = (Name) other;
+
+        return fullName.equals(otherName.fullName); // state check
     }
 
     @Override

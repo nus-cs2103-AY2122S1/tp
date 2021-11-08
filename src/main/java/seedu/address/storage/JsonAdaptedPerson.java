@@ -12,9 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GitHubId;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NusNetworkId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TutorialId;
+import seedu.address.model.person.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +34,11 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String gitHubId;
+    private final String nusNetworkId;
+    private final String type;
+    private final String studentId;
+    private final String tutorialId;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,14 +46,23 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("gitHubId") String gitHubId,
+            @JsonProperty("nusNetworkId") String nusNetworkId, @JsonProperty("type") String type,
+            @JsonProperty("studentId") String studentId, @JsonProperty("tutorialId") String tutorialId) {
+
         this.name = name;
-        this.phone = phone;
         this.email = email;
+        this.gitHubId = gitHubId;
+        this.nusNetworkId = nusNetworkId;
+        this.type = type;
+        this.studentId = studentId;
+        this.tutorialId = tutorialId;
+        this.phone = phone;
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+
     }
 
     /**
@@ -57,6 +76,11 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        gitHubId = source.getGitHubId().value;
+        nusNetworkId = source.getNusNetworkId().value;
+        type = source.getType().value;
+        studentId = source.getStudentId().value;
+        tutorialId = source.getTutorialId().value;
     }
 
     /**
@@ -78,14 +102,6 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -94,8 +110,62 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (gitHubId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GitHubId.class.getSimpleName()));
+        }
+        if (!GitHubId.isValidGitHubId(gitHubId)) {
+            throw new IllegalValueException(GitHubId.MESSAGE_CONSTRAINTS);
+        }
+        final GitHubId modelGitHubId = new GitHubId(gitHubId);
+
+        if (nusNetworkId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    NusNetworkId.class.getSimpleName()));
+        }
+        if (!NusNetworkId.isValidNusNetworkId(nusNetworkId)) {
+            throw new IllegalValueException(NusNetworkId.MESSAGE_CONSTRAINTS);
+        }
+        final NusNetworkId modelNusNetworkId = new NusNetworkId(nusNetworkId);
+
+        if (type == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Type.class.getSimpleName()));
+        }
+        if (!Type.isValidType(type)) {
+            throw new IllegalValueException(Type.MESSAGE_CONSTRAINTS);
+        }
+        final Type modelType = new Type(type);
+
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
+        }
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        final StudentId modelStudentId = new StudentId(studentId);
+
+        if (tutorialId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TutorialId.class.getSimpleName()));
+        }
+        if (!TutorialId.isValidTutorialId(tutorialId)) {
+            throw new IllegalValueException(TutorialId.MESSAGE_CONSTRAINTS);
+        }
+        final TutorialId modelTutorialId = new TutorialId(tutorialId);
+
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelPhone = new Phone(phone);
+
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -103,7 +173,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGitHubId, modelNusNetworkId,
+                modelType, modelStudentId, modelTutorialId);
     }
 
 }

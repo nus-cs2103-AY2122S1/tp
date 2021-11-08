@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -95,6 +96,14 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Sorts the contents of this list using {@code prefix}
+     */
+    public void sort(Prefix prefix, boolean reverse) {
+        requireNonNull(prefix);
+        internalList.sort(new PersonComparator(prefix, reverse));
     }
 
     /**

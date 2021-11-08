@@ -33,6 +33,13 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another Phone's value using Java's compareTo function
+     */
+    public int compareTo(Phone e) {
+        return value.compareTo(e.value);
+    }
+
     @Override
     public String toString() {
         return value;
@@ -40,9 +47,17 @@ public class Phone {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Phone)) {
+            return false;
+        }
+
+        Phone otherPhone = (Phone) other;
+
+        return value.equals(otherPhone.value); // state check
     }
 
     @Override

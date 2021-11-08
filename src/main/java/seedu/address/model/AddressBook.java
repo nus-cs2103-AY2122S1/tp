@@ -2,11 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.storage.JsonAddressBookStorage;
 
 /**
  * Wraps all data at the address-book level
@@ -56,6 +60,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    /// bulk list updating operations
+
+    /**
+     * Adds the contacts from the json file at {@code filePath} with this AddressBook
+     * @throws DataConversionException if the file is not in the correct format.
+     */
+
+    public void mergeFile(Path filePath) throws DataConversionException {
+        requireNonNull(filePath);
+        JsonAddressBookStorage toMergeStorage = new JsonAddressBookStorage(filePath);
+        ReadOnlyAddressBook toMerge = toMergeStorage.readAddressBook().get();
+        ObservableList<Person> toMergeList = toMerge.getPersonList();
+        for (Person person: toMergeList) {
+            if (!hasPerson(person)) {
+                addPerson(person);
+            }
+        }
+    }
+
     //// person-level operations
 
     /**
@@ -83,6 +106,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Sorts {@code UniquePersonList} by the given prefix
+     */
+    public void sortList(Prefix prefix, boolean reverse) {
+        persons.sort(prefix, reverse);
     }
 
     /**

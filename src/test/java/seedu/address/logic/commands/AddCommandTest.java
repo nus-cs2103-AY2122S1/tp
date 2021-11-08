@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManagerState;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
@@ -79,6 +82,16 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void restoreState(ModelManagerState state) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ModelManagerState getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -124,6 +137,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void importFile(Path filePath) {
+            throw new AssertionError("this method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -134,7 +152,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void deletePersons(List<Person> targets) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson, boolean removeFilter) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +168,20 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void sortAddressBook(Prefix prefix, boolean reverse) {
             throw new AssertionError("This method should not be called.");
         }
     }

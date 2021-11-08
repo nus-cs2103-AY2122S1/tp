@@ -26,6 +26,22 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_all_returnsDeleteCommandAll() {
+        assertParseSuccess(parser, "-a", DeleteCommand.all());
+    }
+
+    @Test
+    public void parse_found_returnsDeleteCommandAllShown() {
+        assertParseSuccess(parser, "-f", DeleteCommand.allShown());
+    }
+
+    @Test
+    public void parse_allAndFound_returnsDeleteCommandAllShown() {
+        assertParseSuccess(parser, "-a -f", DeleteCommand.allShown());
+        assertParseSuccess(parser, "-f -a", DeleteCommand.allShown());
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
