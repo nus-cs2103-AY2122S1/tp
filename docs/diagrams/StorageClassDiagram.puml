@@ -22,6 +22,14 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+package "ModuleSystem Storage" #F4F6F6{
+Interface ModuleSystemStorage <<Interface>>
+Class JsonModuleSystemStorage
+Class JsonSerializableModuleSystem
+Class JsonAdaptedModule
+Class JsonAdaptedGroup
+}
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -30,8 +38,10 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" EdRecordStorage
+StorageManager -up-> "1" ModuleSystemStorage
 
 Storage -left-|> UserPrefsStorage
+Storage -left-|> ModuleSystemStorage
 Storage -right-|> EdRecordStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
@@ -39,5 +49,10 @@ JsonEdRecordStorage .up.|> EdRecordStorage
 JsonEdRecordStorage ..> JsonSerializableEdRecord
 JsonSerializableEdRecord --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonModuleSystemStorage .up.|> ModuleSystemStorage
+JsonModuleSystemStorage ..> JsonSerializableModuleSystem
+JsonSerializableModuleSystem --> "*" JsonAdaptedModule
+JsonAdaptedModule --> "*" JsonAdaptedGroup
 
 @enduml
