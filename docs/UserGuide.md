@@ -408,7 +408,7 @@ Shows a list of all lessons in contHACKS.
 
 Format: `listc`
 
-Command alias: `lc`
+Command alias: `lsc`
 
 ***
 
