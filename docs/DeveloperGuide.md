@@ -103,9 +103,12 @@ The UI consists of a `MainWindow` that is made up of parts such as:
 * `CommandBox`
 * `ResultDisplay`
 * `PersonListPanel`
+* `PersonComponent`
+* `TagComponent`
 * `StatusBarFooter`
 * `HelpWindow`
 * `StatsWindow`
+
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component,
@@ -879,6 +882,7 @@ The sequence diagram below shows the process for the usage scenario as described
 
 **Value proposition**: Financial Advisors are busy. We will help them save time by optimising our system for them. FAST keeps track of client details and information for them.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -1457,10 +1461,10 @@ testers are expected to do more *exploratory* testing.
     2. **Test case**: `find pr/high`<br>
        **Expected**: All clients with a "HighPriority" tag are displayed. Success message with details of search is shown.
        
-    3. **Test case**: `find pr/friend`
+    3. **Test case**: `find pr/friend`<br>
        **Expected**: No search results are displayed. Error message is shown.
        
-    4. **Other incorrect find commands to try**: `find pr/`, `find pr/    `
+    4. **Other incorrect find commands to try**: `find pr/`, `find pr/`<br>
        **Expected**: Similar to previous (in Point 3).
        
 #### Finding by tag
@@ -1470,10 +1474,10 @@ testers are expected to do more *exploratory* testing.
     2. **Test case**: `find t/friend`<br>
        **Expected**: All clients with a "friend" tag are displayed. Success message with details of search is shown.
        
-    3. **Test case**: `find t/`
+    3. **Test case**: `find t/`<br>
        **Expected**: No search results are displayed. Error message is shown.
        
-    4. **Other incorrect find commands to try**: `find t/    `
+    4. **Other incorrect find commands to try**: `find t/    <br>`
        **Expected**: Similar to previous (in Point 3).
        
 #### Finding by remark
@@ -1483,10 +1487,10 @@ testers are expected to do more *exploratory* testing.
     2. **Test case**: `find r/likes to eat`<br>
        **Expected**: All clients with remarks containing "likes to eat" are displayed. Success message with details of search is shown.
        
-    3. **Test case**: `find r/`
+    3. **Test case**: `find r/`<br>
        **Expected**: No search results are displayed. Error message is shown.
        
-    4. **Other incorrect find commands to try**: `find r/    `
+    4. **Other incorrect find commands to try**: `find r/    `<br>
        **Expected**: Similar to previous (in Point 3).
 
 ### Deleting a Client
@@ -1542,10 +1546,8 @@ testers are expected to do more *exploratory* testing.
 
     3. **Test case**: `rmk 1 r/`<br>
        **Expected**: Removes the remark of the first client in the displayed list. Success message with details of the client, and an empty remark is shown.
-    4. **Test case**: `rmk 1`<br>
-       **Expected**: No remark added. Error message is shown.
    
-    5. **Other incorrect remark commands to try**: `rmk r/ `, `rmk 1 r/remark...`(where remark... represents a remark longer than 45 characters) <br>
+    4. **Other incorrect remark commands to try**: `rmk r/ `, `rmk 1 r/remark...`(where remark... represents a remark longer than 45 characters) <br>
        **Expected**: Similar to previous (in Point 4).
 
 ### Appointment Feature
