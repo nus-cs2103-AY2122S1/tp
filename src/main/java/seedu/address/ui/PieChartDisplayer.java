@@ -8,7 +8,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/*
+/**
  * Displays its given pie chart in a new window.
  */
 public class PieChartDisplayer {
@@ -45,5 +45,4 @@ public class PieChartDisplayer {
             }
         });
     }
-
 }
