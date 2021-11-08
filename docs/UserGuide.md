@@ -492,9 +492,9 @@ tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]
 
 :bulb: TIP:
 <br/>
-* Index cannot be left blank, must be a positive integer and be specified after the `tag` keyword.<br>
-* To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
-* Users can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
+• Index cannot be left blank, must be a positive integer and be specified after the `tag` keyword.<br>
+• To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
+• Users can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
 
 </div>
 
