@@ -105,7 +105,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 <div style="page-break-after: always;"></div>
@@ -261,7 +261,7 @@ The Sequence Diagram below illustrates the interactions within the Logic compone
 
 #### Design considerations
 
-When deciding on the design for `find -folders`, we considered the existing `find` command to search for persons by name. This `find` command uses `StringUtil.containsWordIgnoreCase` which only matches full words.
+When deciding on the design for `find -folders`, we considered the existing `find` command to search for contacts by name. This `find` command uses `StringUtil.containsWordIgnoreCase` which only matches full words.
 
 However, one use case we wanted to cater to was students who group their contacts by shared modules. For example, students take CS2103T and CS2101 concurrently, and may wish to search for these two folders (and other CS modules) by using the keyword `CS`. If we only matched full words, `find -folders CS` would not contain *either* of the modules `CS2103T` or `CS2101`, which is undesirable.
 
@@ -269,7 +269,7 @@ However, one use case we wanted to cater to was students who group their contact
     * Pros: More intuitive behaviour for the above use case
     * Cons: Requires a new method to be implemented
 * **Alternative 2**: Match full words only
-    * Pros: Easy to implement as this uses the same logic as finding persons by name
+    * Pros: Easy to implement as this uses the same logic as finding contacts by name
     * Cons: May lead to unexpected behaviour for the above use case
 
 Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
@@ -294,7 +294,7 @@ The following diagram shows how `mv` works:
 
 ![EditFolderNameSequenceDiagram](images/EditFolderNameSequenceDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 * **Alternative 1 (current choice)**: Old folder and new folder name are separated by the pipe operator `|`.
     * Pros: Easy to distinguish between the folder to be replaced and the new incoming folder name considering how folder name can have blank spaces in between
@@ -339,21 +339,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                 | I want to …​                                       | So that I can…​                                         |
 | -------- | ------------------------------------------ | ----------------------------------------------------- | ---------------------------------------------------------- |
-| `* * *`  | user                                       | create a folder                                       | folder related contacts together                           |
-| `* * *`  | user                                       | view all the folders that I created                   |                                                            |
-| `* * *`  | user                                       | delete a folder                                       | remove folders when they become irrelevant                 |
-| `* * *`  | user                                       | add a user to a folder                                | folder related contacts together and find them efficiently |
+| `* * *`  | student                                    | create a folder                                       | classify related contacts together                           |
+| `* * *`  | student                                    | view all the folders that I created                   |                                                            |
+| `* * *`  | student                                    | delete a folder                                       | remove folders when they become irrelevant                 |
+| `* * *`  | student                                    | add a user to a folder                                | classify related contacts together and find them efficiently |
 | `* * *`  | experienced computing student              | use my knowledge of Unix commands to navigate the app | use the app without learning a new set of commands         |
-| `* * *`  | student                                    | write to a JSON file                                  | achieve data persistence between the application and local storage |
-| `* *`    | user                                       | remove a contact from a folder                        | update contacts in folders easily                          |
-| `* *`    | user                                       | clear all folders                                     | reset my folders easily                                    |
+| `* * *`  | student                                    | save to a JSON file automatically                     | achieve data persistence between the application and local storage |
+| `* *`    | student                                    | remove a contact from a folder                        | update contacts in folders easily                          |
+| `* *`    | student                                    | clear all folders                                     | reset my folders easily                                    |
 | `* *`    | student                                    | add several contacts into a folder at one go          | reduce time wastage adding them 1 by 1                     |
-| `* *`    | user                                       | update my folder name                                 | efficiently manage outdated groups                         |
-| `* *`    | user                                       | find a specific folder                                | minimize time spent on looking for my folder               |
+| `* *`    | student                                    | update my folder name                                 | efficiently manage outdated folders                        |
+| `* *`    | student                                    | find a specific folder                                | minimize time spent on looking for my folder               |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `UNIon` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UNIon` and the **Actor** is the `student`, unless specified otherwise)
 
 **Use case: UC01 - Add a new folder**
 
@@ -513,7 +513,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 5.  Should handle invalid user input gracefully and not crash.
@@ -521,12 +521,12 @@ Use case ends.
 
 Project scope
 - The app is not required to handle communication with people, only keeping track of metadata associated with contacts
-- The app is not required to handle integration with message apps like Telegram and WhatsApp
+- The app is not required to handle integration with messaging apps like Telegram and WhatsApp
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Experienced Computing Student**: A student that has already completed introductory module in their respective universities.
+* **Experienced Computing Student**: A student that has already completed introductory modules in their respective universities.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -552,9 +552,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
       
-### Managing people
+### Managing contacts
 
-#### Adding a person: `touch`
+#### Adding a contact: `touch`
 
 1. Creating a contact
     1. Test case: `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`<br>
@@ -566,7 +566,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `touch -n Betsy Doe -p 98765432 -e johnd@example.com`<br>
     Expected: Betsy Doe is not added as the command is invalid (due to missing compulsory address parameter). Error message is shown.
 
-#### Listing all persons: `ls -contacts`
+#### Listing all contacts: `ls -contacts`
 
 1. Listing all contacts
     1. Prerequisite: List is populated with contacts (see above)
@@ -577,18 +577,18 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `ls -contacts`<br>
     Expected: Full list of contacts is shown
 
-#### Editing a person: `vim`
+#### Editing a contact: `vim`
 
-1. Editing a person while all contacts are being shown
-    1. Prerequisite: There is an existing person in the contact list
+1. Editing a contact while all contacts are being shown
+    1. Prerequisite: There is an existing contact in the contact list
     1. Test case: `vim 1 -n Jane Doe`<br>
     Expected: Contact at first position is renamed to Jane Doe
     1. Incorrect edit commands to try: `vim`, `vim 0 -n Jane Doe`, `vim x -n Jane Doe` (where x is larger than the list size)
-2. Editing a person while a filter is in place
-    1. Prerequisite: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+2. Editing a contact while a filter is in place
+    1. Prerequisite: Run a search using the `find -contacts` command. Multiple contacts in the filtered list.
     1. Similar to previous, but index number is with reference to the filtered list.
 
-#### Locating persons by name: `find -contacts`
+#### Locating contacts by name: `find -contacts`
 
 1. Finding contacts
     1. Prerequisite: There are multiple existing contacts, including someone named Janet Doe
@@ -597,26 +597,26 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `find -contacts Jane` <br>
     Expected: No contacts found as only full words are matched.
 
-#### Deleting a person: `rm`
+#### Deleting a contact: `rm`
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
    
-    1. Prerequisites: List all persons using the `ls -contacts` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts using the `ls -contacts` command. Multiple contacts in the list.
     1. Test case: `rm 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
     1. Test case: `rm 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
     1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Deleting a person while a filter is in place
-    1. Prerequisite: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+2. Deleting a contact while a filter is in place
+    1. Prerequisite: Run a search using the `find -contacts` command. Multiple contacts in the filtered list.
     1. Similar to previous, but index number is with reference to the filtered list.
 
-#### Clearing all people: `rm -contacts`
+#### Clearing all contacts: `rm -contacts`
 
 1. Clearing all contacts
-    1. Prerequisites: Multiple persons in the list.
+    1. Prerequisites: Multiple contacts in the list.
     1. Test case: `rm -contacts`<br>
        Expected: all contacts are removed.
 
@@ -635,14 +635,14 @@ testers are expected to do more *exploratory* testing.
 #### Adding contacts to a folder: `echo`
 
 1. Adding contacts to a folder while all contacts and all folders are being shown
-    1. Prerequisites: There are existing persons and existing folders
+    1. Prerequisites: There are existing contacts and existing folders
     1. Test case: `echo 1 >> CS2103`<br>
-       Expected: Adds the first person in the list to the folder `CS2103`
+       Expected: Adds the first contact in the list to the folder `CS2103`
     1. Test case: `echo 1 2 >> CS2103`<br>
-       Expected: Adds the first two people in the list to the folder `CS2103`
+       Expected: Adds the first two contacts in the list to the folder `CS2103`
 
 1. Adding contacts to a folder while there is a filter in place for contacts
-    1. Prerequisites: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+    1. Prerequisites: Run a search using the `find -contacts` command. Multiple contacts in the filtered list.
     1. Similar to point 1 but index is with reference to the filtered list.
 
 1. Adding contacts to a folder while there is a filter in place for folders
@@ -654,12 +654,12 @@ testers are expected to do more *exploratory* testing.
 #### Deleting a contact from folder: `rm`
 
 1. Removing contacts from a folder while all contacts and all folders are being shown
-    1. Prerequisites: There are existing persons and existing folders
+    1. Prerequisites: There are existing contacts and existing folders
     1. Test case: `rm 1 >> CS2103`<br>
-       Expected: Removes the first person in the list from the folder `CS2103`
+       Expected: Removes the first contact in the list from the folder `CS2103`
 
 1. Removing contacts from a folder while there is a filter in place for contacts
-    1. Prerequisites: Run a search using the `find -contacts` command. Multiple persons in the filtered list.
+    1. Prerequisites: Run a search using the `find -contacts` command. Multiple contacts in the filtered list.
     1. Similar to point 1 but index is with reference to the filtered list.
 
 1. Removing contacts from a folder while there is a filter in place for folders
@@ -732,16 +732,16 @@ and had secondary responsibilities as well.
 
 UNIon does reuse some code from AB3 when implementing folders. However, it was not 
 just a simple copy and paste. Because of the differing behaviours of folders and 
-persons, the code had to be adapted to quite a large extent to suit our purposes.
+contacts, the code had to be adapted to quite a large extent to suit our purposes.
 For folders, only about 5% of the effort was saved by reusing the code from AB3.
 This mostly came in the form of saving time and effort from typing out the code and
 understanding how the different components interact with models like `Person`. Since
 `Folder` is a model as well, the `Person` served as an example to help us understand 
 how the models interacted with other components. However, the code from `Person` merely 
-served as the base. The difference in behaviour of folders and persons meant that we had 
-to come up with the rest of the code involving the behaviou of folders ourselves.
+served as the base. The difference in behaviour of folders and contacts meant that we had 
+to come up with the rest of the code involving the behaviour of folders ourselves.
 
-UNIon deals with more entities than AB3, with both persons and folders. Not only does
+UNIon deals with more entities than AB3, with both contacts and folders. Not only does
 this make coding more difficult, testing is more difficult as well. The GUI of UNIon
 includes the display of folders as well. It was more difficult to ensure that UNIon
 runs smoothly with more entities present, creating more chances for bugs to sneak in.
