@@ -5,7 +5,7 @@ title: Developer Guide
 
 ## **Introduction**
 
-Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take
+Thank you for your interest in the development of Notor! This is an open-source project aimed at helping mentors take
 quick, efficient notes to facilitate effective and efficient mentoring of many mentees. The design principles
 scaffolding Notor are as follows.
 
@@ -53,9 +53,11 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
-* **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **
-  Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is
-  automatically in the parent `Group` as well
+* **Supergroup**: SuperGroup is a group that can have many subgroups. We often use it interchangeably with `Group` as 
+    `Supergroup` is more of an implementation detail.
+* **Subgroup**: A child of a `Supergroup` used to store multiple persons based on a more specific category than `Supergroup`. A **
+  Subgroup** can be created by specifying the parent group of the **Subgroup**. A person can be in the **Subgroup** only if 
+  the person is already in the parent `Supergroup`.
 * **Tag**: A string descriptor attached to `Group` objects or `Person` objects
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
@@ -171,7 +173,7 @@ API** : [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/
 The `Storage` component,
 
 * now includes a new `Archive` Storage component
-* `Archive` allows users to temporarily remove `Person`s from their Address Book
+* `Archive` allows users to temporarily remove `Person`s from Notor
 
 ### Common classes
 
@@ -678,11 +680,31 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ## **Appendix: Effort**
 
+### Tagging
+AB3 supports tagging, but the tags are too restrictive as you cannot add tags cumulative.
+We thought that users should be able to add tags without removing the existing tags.
+So we had to change most of the implementation of tags, and add in new commands to support adding of tags of
+cumulatively.
+
+### Note taking for Person, Group and Subgroup
+Notor is designed to allow mentors to be able to take note easily.
+AB3 does not have this feature, so we had to implement this feature from scratch.
+It was challenging to design a note window that is responsive to change.
+Moreover, having a separate note window makes it more GUI based.
+To optimize for mentors who type fast, we implemented keyboard shortcuts to ensure that mentors will be able to take note quickly.
+
+### List Views
+We decided to have groups and subgroups so that users can organize people in the list.
+AB3 only has support listing of people. Our team needed to create new UI elements to support that.
+Even when the new UI elements, it was still tough to create commands to support the operation of switching between views and
+updating the list view when a change has been made.
+
+
 ### GUI Test (Implemented but scrapped due to CI failure)
 
-We have initially decided to implement **Gui Testing** because many of our functionalities
+We have initially decided to implement **GUI Testing** because many of our functionalities
 such as clearing notes, tags and Notor, and adding notes uses a pop up window.
 
 The difficulty level of GUI Testing is moderate because there is very limited
-guides available on **TestFx** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally,
+guides available on **TestFX** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally,
 all efforts are of no avail.
