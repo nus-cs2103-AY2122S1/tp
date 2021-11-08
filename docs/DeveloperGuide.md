@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AB3](https://github.com/se-edu/addressbook-level3) source code for the initial starting code
+* [opencsv](http://opencsv.sourceforge.net/) was used to read and write csv files
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -665,6 +666,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC11 - Find close contacts of a resident**
+
+**MSS**
+
+1. Actor views the list of residents and locates the resident to trace.
+2. Actor filters the resident list by that resident's name or room and specifies a number of days to trace back to.
+3. System shows a filtered resident list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. System cannot find the resident in question.
+    * 2a1. System displays an error message.
+    * 2a2. System requests for a valid name or room.
+    * 2a3. Actor retries with different information.
+
+      Use case resumes from step 2.
+
+* 2b. System detects an invalid duration that is negative or more than a month.
+    * 2b1. System displays an error message.
+    * 2b2. System requests for a valid duration.
+    * 2b3. Actor retries with different input.
+
+      Use case resumes from step 2.
+
+**Use case: UC12 - Inform close contacts of a resident**
+
+**MSS**
+
+1. Actor <u>filters for residents who are close contacts of a given resident (UC11)</u>
+2. Actor <u>exports current list of residents' email as csv (UC08)</u>
+3. Actor sends an email to these residents to remind them to self-isolate.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC13 - Find all residents on the same floor as a positive case**
+
+**MSS**
+
+1. Actor views all residents.
+2. Actor locates the positive resident and finds their room number.
+3. Actor filters the resident list based on the block and floor extracted from the room number.
+4. System shows a filtered resident list.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. System detects and invalid block character or out of range floor number.
+    * 3a1. System displays an error message.
+    * 3a2. System requests for a valid block floor combination.
+    * 3a3. Actor retries with different information.
+
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
