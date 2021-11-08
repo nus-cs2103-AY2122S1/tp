@@ -24,7 +24,9 @@ Given below are my contributions to the project.
     * Justification: I wanted to abstract away the management of progress entries from `Student` to preserve the single responsibility principle.
   * Implemented the functionality of `add -sl` and `del -sl` commands that add and remove students from lessons for v1.3.
     * Relevant PR(s): [#125](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/125)
-    * Worked closely with the `Logic` component to implement the commands and the parser for adding students to and removing students from lessons, as well as the `Model` component to add a new `LessonNames` field to `Student`.
+    * Worked closely with the `Logic` component to implement the commands and the parser for adding students to and removing students from lessons, as well as the `Model` component to add a new `Lessons` field to `Student`.
+
+<div style="page-break-after: always;"></div>
 
 * **Contributions to the UG**:
   * Added documentation for the following features in the `Features` and `Command summary` sections:
