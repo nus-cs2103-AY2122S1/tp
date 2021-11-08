@@ -186,6 +186,7 @@ Format:
 ```
 edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
+<div markdown="span" class="alert alert-primary">
 
 :bulb: TIP:
 <br/>
@@ -210,12 +211,14 @@ edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
    • Can have a maximum of 39 characters.
    <br/>
 
+</div>
+
 * Edits name, Telegram and GitHub fields of user's profile.
 * If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
 E.g. `edit profile te/` and `edit profile n/Bob te/` would result in an error because the updated Telegram handle 
 has not been specified. 
 * If multiple prefixes are missing parameters, then the user is notified of the first missing parameter.
-E.g. `edit profile n/ te/ ` would result in an error saying that the name to be edited is missing.
+E.g. `edit profile n/ te/` would result in an error saying that the name to be edited is missing.
 
 Examples:
 * `edit profile te/bob_osum`
@@ -484,10 +487,16 @@ Format:
 ```
 tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]
 ```
->* Index is compulsory and must be a positive integer.<br>
->* To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: TIP:
+<br/>
+* Index cannot be left blank, must be a positive integer and be specified after the `tag` keyword.<br>
+* To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
 * Users can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
 
+</div>
 
 * Adding tags : 
   * If `a/` is entered, it must be followed by the name(s) of tag(s) to be added. E.g. `tag 1 a/ r/friends` 
