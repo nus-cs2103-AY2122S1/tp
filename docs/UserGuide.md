@@ -57,7 +57,7 @@ ________________________________________________________________________________
 
 1. Ensure you have Java `11` or above installed on your Computer. If you are unsure of how to do so, refer to the [FAQ](#faq).
 
-2. Download the latest `SportsPA.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases/tag/v1.3.1).
+2. Download the latest `SportsPA.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases/tag/v1.4).
 
 3. Copy the file to the folder you want to use as the _home folder_ for SportsPA.
 
