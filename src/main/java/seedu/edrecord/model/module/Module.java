@@ -3,8 +3,6 @@ package seedu.edrecord.model.module;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
-import java.util.Objects;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.Assignment;
@@ -65,10 +63,6 @@ public class Module {
 
     public String getCode() {
         return code;
-    }
-
-    public GroupSystem getGroupSystem() {
-        return groupSystem;
     }
 
     public boolean hasAnyGroup() {
