@@ -477,8 +477,8 @@ command, except it removes that tutorial group from ClassMATE after checking if 
 in that tutorial group.
 
 Using the example of the `AddGroupCommand`,
-when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [![img_1.png](img_1.png)“Logic component”](#logic-component).
-During the parsing, a new TutorialGroup instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
+when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [“Logic component”](#logic-component).
+During the parsing, a new `TutorialGroup` instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
 
 The *Sequence Diagram* below summarizes how tutorial groups are added to a tutorial class.
 
