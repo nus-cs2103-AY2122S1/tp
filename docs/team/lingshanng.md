@@ -3,7 +3,7 @@ layout: page
 title: Ng Lingshan's Project Portfolio Page
 ---
 
-### Project: TuitionAddressBook (TAB)
+### Project: Tuition Address Book
 
 Tuition Address Book (TAB) is an all-in-one desktop application for 1-to-1 private home tutors that helps to keep track of students and their respective lesson information. TAB utilises a Command Line Interface (CLI) to allow tutors to perform tasks efficiently, while providing a clean Graphical User Interface (GUI) for tutors to easily view student and lesson data.
 
