@@ -26,7 +26,6 @@ Interested to jump right in? Take a look at [**3. Getting started**](#3-getting-
 The following is the GUI of our application:
 
 ![UI Preview](images/userguide/1.2.1%20UI%20Preview.png)
-- Note that Daily Panel is in red only for visibility purposes
 
 GUI Components:
 1. **Task List Panel**: Displays all your tasks
@@ -389,16 +388,10 @@ Removes a specific task that has been added to your app.
 
 **:green_book: Examples:**
 
-* `delete 3` removes the third item in the task list
-* `delete 1 2` removes the first and second items in the task list
+* `delete 2` removes the second item in the task list
+* `delete 1 3` removes the first and third items in the task list
 
 </div>
-
-**Demonstration:**
-
-
-<div style="page-break-after: always;"></div>
-
 
 ![delete_command](images/userguide/deleteCommandBefore.png)
 
