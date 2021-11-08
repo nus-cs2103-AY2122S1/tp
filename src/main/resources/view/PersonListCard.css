@@ -1,0 +1,23 @@
+#name {
+    -fx-wrap-text: true;
+}
+
+#address {
+    -fx-wrap-text: true;
+    -fx-padding: 2 2 2 2;
+}
+
+#phone {
+    -fx-wrap-text: true;
+    -fx-padding: 2 2 2 2;
+}
+
+#email {
+    -fx-wrap-text: true;
+    -fx-padding: 2 2 2 2;
+}
+
+#description {
+    -fx-wrap-text: true;
+    -fx-padding: 2 2 2 2;
+}

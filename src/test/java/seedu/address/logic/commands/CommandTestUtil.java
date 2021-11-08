@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,12 +16,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -36,6 +42,22 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TASK_NAME_TASK1 = "task 1";
+    public static final String VALID_TASK_NAME_TASK2 = "task 2";
+    public static final String VALID_TASK_DATE_1 = "2021-12-20";
+    public static final String VALID_TASK_DATE_2 = "2022-08-08";
+    public static final String VALID_TASK_TIME_1 = "23:59";
+    public static final String VALID_TASK_TIME_2 = "10:30";
+    public static final String VALID_TASK_VENUE_1 = "Zoom";
+    public static final String VALID_TASK_VENUE_2 = "Bugis";
+    public static final List<Task> VALID_TASK_LIST_1 = new ArrayList<Task>(
+            Arrays.asList(new Task(new TaskName(VALID_TASK_NAME_TASK1), null, null, null))
+    );
+    public static final List<Task> VALID_TASK_LIST_2 = new ArrayList<Task>(
+            Arrays.asList(new Task(new TaskName(VALID_TASK_NAME_TASK2), null, null, null))
+    );
+    public static final String VALID_DESCRIPTION_AMY = "Owner of platinum membership";
+    public static final String VALID_DESCRIPTION_BOB = "Potential Chinese Supplier";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +69,23 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
+    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
+    public static final String IMPORTANCE_DESC_AMY = " " + PREFIX_IMPORTANCE + "true";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TASK = "   ";
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION
+            + "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+            + "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+            + "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+            + "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+            + "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"
+            + "1"; // More than 500 characters is not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -60,13 +93,31 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditCommand.EditTaskDescriptor DESC_TASK_ONE;
+    public static final EditCommand.EditTaskDescriptor DESC_TASK_TWO;
+
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withDescription(VALID_DESCRIPTION_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withDescription(VALID_DESCRIPTION_BOB).build();
+        DESC_TASK_ONE = new EditCommand.EditTaskDescriptor();
+        DESC_TASK_ONE.setTaskName(new TaskName("Work"));
+        DESC_TASK_TWO = new EditCommand.EditTaskDescriptor();
+        DESC_TASK_TWO.setTaskName(new TaskName("Sleep"));
+    }
+    public static final EditTaskDescriptor DESC_MEETING;
+    public static final EditTaskDescriptor DESC_RUN;
+
+
+    static {
+        DESC_MEETING = new EditTaskDescriptorBuilder().withTaskName("Meeting").withTaskDate("2021-11-30")
+                .withTaskTime("13:00").withVenue("SR15").build();
+        DESC_RUN = new EditTaskDescriptorBuilder().withTaskName("Run").withTaskDate("2021-12-30")
+                .withTaskTime("18:00").withVenue("Clementi Stadium").build();
     }
 
     /**
@@ -78,6 +129,8 @@ public class CommandTestUtil {
             Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
+            System.out.println(expectedCommandResult.getFeedbackToUser());
+            System.out.println(result.getFeedbackToUser());
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

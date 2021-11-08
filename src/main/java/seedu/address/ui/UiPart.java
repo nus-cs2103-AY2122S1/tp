@@ -43,6 +43,8 @@ public abstract class UiPart<T> {
         loadFxmlFile(fxmlFileUrl, root);
     }
 
+    public UiPart() {}
+
     /**
      * Constructs a UiPart with the specified FXML file within {@link #FXML_FILE_FOLDER} and root object.
      * @see #UiPart(URL, T)

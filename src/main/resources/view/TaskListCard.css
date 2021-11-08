@@ -1,0 +1,12 @@
+#id {
+    -fx-wrap-text: true;
+    -fx-min-width: 80.0;
+}
+
+#taskList {
+    -fx-wrap-text: true;
+}
+
+#taskName {
+    -fx-text-fill: white;
+}

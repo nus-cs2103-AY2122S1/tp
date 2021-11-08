@@ -4,10 +4,12 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,7 +41,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane importance;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private Label description;
+    @FXML
+    private Label tasksDue;
+    @FXML
+    private ColumnConstraints col0;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -54,7 +64,13 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(addTags(tag)));
+        description.setText(person.getDescription().toString());
+        tasksDue.setText("Overdue Tasks: " + person.getOverdueTasks()
+                + "\nSoon to be due Tasks: " + person.getSoonDueTasks());
+        if (person.isImportant()) {
+            importance.getChildren().add(new Label("Important!"));
+        }
     }
 
     @Override
@@ -73,5 +89,11 @@ public class PersonCard extends UiPart<Region> {
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
+    }
+
+    private Label addTags (Tag tag) {
+        Label label = new Label(tag.tagName);
+        label.setMaxWidth(col0.getMinWidth());
+        return label;
     }
 }

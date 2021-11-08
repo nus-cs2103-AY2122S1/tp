@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "ContactSh.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -79,8 +79,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("Gui Settings : ")
+                .append(guiSettings)
+                .append("\nLocal data file location : ")
+                .append(addressBookFilePath);
         return sb.toString();
     }
 

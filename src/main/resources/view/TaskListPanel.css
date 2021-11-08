@@ -1,0 +1,6 @@
+#taskListPanelHeader {
+    -fx-background-color: black;
+    -fx-text-fill: lime green;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}

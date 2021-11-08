@@ -11,6 +11,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
+import seedu.address.model.util.TaskStatusChecker;
 
 /**
  * The manager of the UI component.
@@ -20,9 +21,10 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/ContactSh_logo.png";
 
     private Logic logic;
+    private final TaskStatusChecker taskStatusChecker;
     private MainWindow mainWindow;
 
     /**
@@ -31,6 +33,7 @@ public class UiManager implements Ui {
     public UiManager(Logic logic) {
         super();
         this.logic = logic;
+        this.taskStatusChecker = new TaskStatusChecker(logic.getTaskListManager());
     }
 
     @Override
@@ -41,7 +44,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, taskStatusChecker);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

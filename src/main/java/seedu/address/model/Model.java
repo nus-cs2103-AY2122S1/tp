@@ -4,14 +4,19 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -49,7 +54,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -76,12 +83,73 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Refreshes the current filtered person list.
+     */
+    void updateFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the task list to be displayed on the GUI.
+     */
+    ObservableList<Task> getDisplayTaskList();
+
+    /**
+     * Displays {@code person}'s task list on the GUI.
+     */
+    void displayPersonTaskList(Person person);
+
+    void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate);
+
+    void updateSortedPersonList(boolean isReverseOrder);
+
+    void displayFilteredTaskList(Predicate<Task> predicate);
+
+    /** Gets important statistics information relating to tasks. */
+    ObservableList<PieChart.Data> getStatistics();
+
+    TaskListManager getTaskListManager();
+
+    /**
+     * Get the next input command in the cache.
+     */
+    String getAfter();
+
+    /**
+     * Get the previous input command in the cache.
+     */
+    String getBefore();
+
+    /**
+     * Add a command to cache
+     */
+    void addCommand(String command);
+
+    ObservableList<Person> getViewAllTaskListPersons();
+
+    /**
+     * Updates the {@code observablePersonList} using the newly updated
+     * {@code filteredTasks}.
+     */
+    void updateViewAllTaskListPersons();
+
+    /**
+     * Sets the predicate used to filter {@code observablePersonList}.
+     */
+    void setViewAllTasksFindPred(Predicate<Task> predicate);
+
+    boolean getIsViewAllTasks();
+
+    void setIsViewAllTasks(boolean isViewAllTasks);
 }

@@ -1,3 +1,41 @@
+.root {
+    -fx-background-color: #1d1d1d;
+}
+
 #copyButton, #helpMessage {
     -fx-font-family: "Open Sans";
+}
+
+.label {
+    -fx-font-size: 8pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.text-field {
+    -fx-font-size: 8pt;
+    -fx-font-family: "Open Sans Semibold";
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-row-cell {
+    -fx-border-color: white;
+    -fx-table-cell-border-color: white;
+    -fx-alignment: center;
+}
+
+.table-column {
+    -fx-alignment: center;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 8pt;
+    -fx-text-fill: white;
+    -fx-opacity: 1;
 }

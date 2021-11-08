@@ -2,18 +2,22 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
     // Identity fields
     private final Name name;
@@ -23,17 +27,26 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Description description;
+    private final Importance importance;
+
+    // TaskList
+    private final List<Task> tasks = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Task> tasks,
+                  Description description, Importance importance) {
+        requireAllNonNull(name, phone, email, address, tags, tasks, description, importance);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.tasks.addAll(tasks);
+        this.description = description;
+        this.importance = importance;
     }
 
     public Name getName() {
@@ -52,6 +65,14 @@ public class Person {
         return address;
     }
 
+    public boolean isImportant() {
+        return importance.isImportant();
+    }
+
+    public Importance getImportance() {
+        return importance;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -61,7 +82,54 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns an immutable task list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(tasks);
+    }
+
+    /**
+     * Returns the mutable task lists of this {@code Person}.
+     */
+    public List<Task> getModifiableTasks() {
+        return tasks;
+    }
+
+    /**
+     * Returns the number of tasks that are overdue.
+     */
+    public int getOverdueTasks() {
+        int count = 0;
+        for (Task task : tasks) {
+            task.updateDueDate();
+            if (task.getIsOverdue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Returns the number of tasks that are due soon.
+     */
+    public int getSoonDueTasks() {
+        int count = 0;
+        for (Task task : tasks) {
+            task.updateDueDate();
+            if (task.getIsDueSoon()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns true if both persons have the same name and phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,6 +139,20 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns a {@code List<Task>} containing tasks that returned true
+     * upon application of {@code predicates}'s test method.
+     */
+    public List<Task> filterTasks(Predicate<Task> predicate) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (predicate.test(task)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 
     /**
@@ -92,13 +174,15 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getDescription().equals(getDescription())
+                && otherPerson.isImportant() == isImportant();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, tasks, description, importance);
     }
 
     @Override
@@ -111,7 +195,6 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
@@ -120,4 +203,15 @@ public class Person {
         return builder.toString();
     }
 
+    @Override
+    public int compareTo(Person other) {
+        return this.name.toString().compareTo(other.name.toString());
+    }
+
+    /**
+     * Creates a new {@code Person} object with the same attributes.
+     */
+    public Person makeClone() {
+        return new Person(name, phone, email, address, tags, tasks, description, importance);
+    }
 }

@@ -10,6 +10,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.cache.UserCommandCache;
+
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,6 +21,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private UserCommandCache userCommandCache;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -27,6 +30,7 @@ public class StorageManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.userCommandCache = UserCommandCache.getInstance();
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,5 +79,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
-
 }

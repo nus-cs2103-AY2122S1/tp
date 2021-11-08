@@ -5,42 +5,162 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "eat",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "sleep",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "study",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "Owner of Lunta Inc",
+    "isImportant" : "true"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "a",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "bc",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "c",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "HR in Sarimba",
+    "isImportant" : "true"
   }, {
+    "name" : "Benjamin Wesley",
+    "phone" : "88956321",
+    "email" : "benwe@example.com",
+    "address" : "23, Coleman Street, #05-30",
+    "tagged" : [ "cousin" ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "eat",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "sleep",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "study",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "",
+    "isImportant" : "false"
+  },{
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "tasks" : [ ],
+    "description" : "",
+    "isImportant" : "false"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "c",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "d",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "e",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "Potential Client?",
+    "isImportant" : "true"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "consult prof Damith about project iteration v1.",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "CS2103/T Teammate",
+    "isImportant" : "true"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "a",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "b",
+    "isImportant" : "false"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "tasks" : [ {
+      "daysPriorToTaskDate": 3,
+      "taskName" : "asdasd",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
+    "description" : "fffffffffffffff",
+    "isImportant" : "false"
   } ]
 }

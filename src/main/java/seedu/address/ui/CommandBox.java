@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,6 +36,30 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Handles the Up and Down arrow pressed event;
+     * @param key The key pressed.
+     */
+    @FXML
+    private void keyPressed(KeyEvent key) {
+        try {
+            if (key.getCode().equals(KeyCode.UP)) {
+                commandExecutor.execute("accesscache -qqUP", true);
+            } else if (key.getCode().equals(KeyCode.DOWN)) {
+                commandExecutor.execute("accesscache -qqDOWN", true);
+            } else {
+                //Do Nothing
+            }
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+    /** Method to set text in text field */
+    public void setText(String text) {
+        requireNonNull(text);
+        commandTextField.setText(text);
+    }
+
+    /**
      * Handles the Enter button pressed event.
      */
     @FXML
@@ -42,7 +70,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            commandExecutor.execute(commandText);
+            commandExecutor.execute(commandText, false);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
@@ -77,9 +105,8 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String)
+         * @see seedu.address.logic.Logic#execute(String, boolean)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(String commandText, boolean isInternal) throws CommandException, ParseException;
     }
-
 }

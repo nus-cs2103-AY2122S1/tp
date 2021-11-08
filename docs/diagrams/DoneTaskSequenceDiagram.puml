@@ -1,0 +1,78 @@
+@startuml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DoneCommandParser" as DoneCommandParser LOGIC_COLOR
+participant "done:DoneCommand" as DoneCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Task" as Task MODEL_COLOR
+end box
+
+[-> LogicManager : execute("donetask 2 -ti3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("donetask 2 -ti3")
+activate AddressBookParser
+
+create DoneCommandParser
+AddressBookParser -> DoneCommandParser
+activate DoneCommandParser
+
+DoneCommandParser --> AddressBookParser
+deactivate DoneCommandParser
+
+AddressBookParser -> DoneCommandParser : parse("2 -ti3")
+activate DoneCommandParser
+
+create DoneCommand
+DoneCommandParser -> DoneCommand : DoneCommand(2, [3])
+activate DoneCommand
+
+DoneCommand --> DoneCommandParser : done
+deactivate DoneCommand
+
+DoneCommandParser --> AddressBookParser : done
+deactivate DoneCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DoneCommandParser -[hidden]-> AddressBookParser
+destroy DoneCommandParser
+
+AddressBookParser --> LogicManager : done
+deactivate AddressBookParser
+
+LogicManager -> DoneCommand : execute()
+activate DoneCommand
+
+DoneCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> DoneCommand : lastShownList
+deactivate Model
+
+DoneCommand -> Task : setDone()
+activate Task
+
+Task --> DoneCommand
+deactivate Task
+
+create CommandResult
+DoneCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DoneCommand
+deactivate CommandResult
+
+DoneCommand --> LogicManager : result
+deactivate DoneCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

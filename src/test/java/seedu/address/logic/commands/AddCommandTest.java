@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -14,13 +13,17 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -37,7 +40,12 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS,
+                validPerson,
+                validPerson.getTasks().size(),
+                StringUtil.singularOrPlural("task", validPerson.getTasks().size())
+            ), commandResult.getFeedbackToUser()
+        );
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -58,24 +66,24 @@ public class AddCommandTest {
         AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand, addBobCommand);
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -145,6 +153,86 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void displayPersonTaskList(Person person) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void displayFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Task> getDisplayTaskList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateSortedPersonList(boolean isReverseOrder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<PieChart.Data> getStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommand(String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TaskListManager getTaskListManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getBefore() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getAfter() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getViewAllTaskListPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateViewAllTaskListPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setViewAllTasksFindPred(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIsViewAllTasks(boolean isViewAllTasks) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsViewAllTasks() {
             throw new AssertionError("This method should not be called.");
         }
     }

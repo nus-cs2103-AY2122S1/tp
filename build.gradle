@@ -16,6 +16,11 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+//noinspection GroovyAssignabilityCheck
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '8.29'
 }
@@ -66,7 +71,15 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ContactSh.jar'
+
+    manifest {
+        attributes 'Main-Class': 'seedu.address.Main'
+    }
+}
+
+run {
+    enableAssertions = true;
 }
 
 defaultTasks 'clean', 'test'
