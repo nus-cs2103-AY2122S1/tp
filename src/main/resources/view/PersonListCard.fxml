@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane gridLinesVisible="true" hgap="1.0" vgap="1.0" HBox.hgrow="SOMETIMES">
+  <GridPane hgap="2.0" vgap="1.0" HBox.hgrow="SOMETIMES">
     <columnConstraints>
-      <ColumnConstraints fx:id="col0" hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
+      <ColumnConstraints fx:id="col0" fillWidth="false" hgrow="SOMETIMES" minWidth="100.0" prefWidth="150.0" />
          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
          <ColumnConstraints hgrow="NEVER" minWidth="0.0" />
     </columnConstraints>
@@ -20,14 +20,17 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-         <FlowPane fx:id="importance" alignment="CENTER_LEFT" columnHalignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: #000000;" />
+         <FlowPane fx:id="importance" alignment="CENTER_LEFT" columnHalignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" />
          <HBox>
             <children>
            <Label fx:id="id" styleClass="cell_big_label" text="\$id " wrapText="true" />
            <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
             </children>
+            <padding>
+               <Insets bottom="2.0" />
+            </padding>
          </HBox>
-      <FlowPane fx:id="tags" hgap="1.0" minWidth="100.0" style="-fx-border-color: #000000;" vgap="1.0" />
+      <FlowPane fx:id="tags" hgap="1.0" minWidth="100.0" vgap="1.0" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
             <VBox.margin>
                <Insets bottom="2.0" right="2.0" top="2.0" />
@@ -42,7 +45,13 @@
             </VBox.margin></Label>
     </VBox>
       <Label fx:id="tasksDue" styleClass="cell_small_label" text="\$tasksDue" GridPane.columnIndex="2" />
-      <Label fx:id="description" styleClass="cell_small_label" text="\$description" GridPane.columnIndex="1" />
+      <Label fx:id="description" styleClass="cell_small_label" text="\$description" GridPane.columnIndex="1">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin></Label>
       <rowConstraints>
          <RowConstraints />
       </rowConstraints>

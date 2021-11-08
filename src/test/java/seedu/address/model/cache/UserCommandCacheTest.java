@@ -87,7 +87,7 @@ public class UserCommandCacheTest {
             assertEquals(userCommandCache.getBefore(), String.valueOf(j));
         }
 
-        for (int k = 25; k < 51; k++) {
+        for (int k = 26; k < 51; k++) {
             assertEquals(userCommandCache.getAfter(), String.valueOf(k));
         }
     }
