@@ -359,7 +359,6 @@ Advanced user Format: `g (GROUP_NAME) /c`
 
 * Creates a new group with the name `GROUP_NAME`.
 * The new group must not have a same name with other existing groups.
-* The new group's name must not include any backslash (`/`) or underscore (`_`).
 
 Examples:
 
@@ -394,7 +393,6 @@ Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
 
 * Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
 * The new subgroup must not have a same name with other existing subgroups in the same group.
-* The new subgroup's name must not include any backslash (`/`) or underscore (`_`).
 
 Examples :
 
@@ -533,7 +531,6 @@ Format:  `group /find n:QUERY_NAME`<br>
 Advanced user Format: `g /f n:QUERY_NAME`
 
 * Finds all the groups that match the `KEYWORD`.
-* The keyword must not include any backslash (`/`) or underscore (`_`).
 * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
 
 Examples of finding group:

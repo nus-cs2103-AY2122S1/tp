@@ -115,6 +115,9 @@ class JsonSerializableNotor {
                 if (temp == null) {
                     throw new IllegalValueException("Group not found!");
                 }
+                if (temp.findSubGroup(split[1]) == null) {
+                    throw new IllegalValueException("Group not found!");
+                }
                 temp.addPersonToSubGroup(split[1], person);
             }
 
