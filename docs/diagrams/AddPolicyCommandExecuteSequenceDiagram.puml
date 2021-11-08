@@ -12,6 +12,7 @@ participant ":Model" as Model MODEL_COLOR
 participant "l:List<Contact>" as List MODEL_COLOR
 participant "owner:Contact" as Contact MODEL_COLOR
 participant "toAdd:Policy" as Policy MODEL_COLOR
+participant "res:CommandResult" as CommandResult MODEL_COLOR
 
 end box
 
@@ -59,7 +60,14 @@ activate Model
 Model --> AddPolicyCommand
 deactivate Model
 
-[<-- AddPolicyCommand
+create CommandResult
+AddPolicyCommand -> CommandResult
+activate CommandResult
+CommandResult --> AddPolicyCommand : res
+deactivate CommandResult
+
+
+[<-- AddPolicyCommand : res
 deactivate AddPolicyCommand
 [<-[hidden]- AddPolicyCommand
 destroy AddPolicyCommand

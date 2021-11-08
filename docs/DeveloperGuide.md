@@ -158,22 +158,21 @@ This section describes some noteworthy details on how certain features are imple
 ### Creating Policies
 
 This section explains the process of adding a `Policy` to the `Policy` list that belongs to an owner which is a `Contact`.
-This is similar to how a `Contact` is created as well with some highlighted differences.
+This is similar to how a `Contact` is created as well with some highlighted differences elaborated below.
 
 The `AddPolicyCommand` will create a new `Policy` with the specified details and add it to the application. This command requires
 the `Policy`'s details and the `Contact`'s `Index` to specify which `Contact` the policy belongs to.
 
-The `AddPolicyCommand` implements the `AddPolicyCommand#execute` method, which obtains the `Contact` object, the owner,
-from the `Model` using the `Index`, creates the policy with the details and the owner, checks for similar policies and
-if none, updates the `Model`'s `Policy` list.
+The `AddPolicyCommand#execute` method obtains the `Contact` object, the owner,
+from the `Model` using the `Index` and creates the policy with the details and the owner. Then it updates the `Model`'s `UniquePolicyList`.
 
 The sequence diagram below illustrates how the `AddPolicyCommand` is executed.
 ![](images/AddPolicyParserSequenceDiagram.png)
 
 **Step 1.** The user enters the command `addpolicy n/critical illness p/30000 4 120 c/10 30 cl/2`
 
-**Step 2.** User input is passed to `SiasaParser` which creates and calls `AddPolicyCommandParser#parse` with the arguments.
-This creates a new AddPolicyCommand by passing in the `Policy`'s details and owner `Contact`'s `Index`.
+**Step 2.** User input is passed to `SiasaParser` which creates a `AddPolicyCommandParser` object and calls `AddPolicyCommandParser#parse` with the arguments.
+This creates a new `AddPolicyCommand` by passing in the `Policy`'s details and owner `Contact`'s `Index`.
 
 ![](images/AddPolicyCommandExecuteSequenceDiagram.png)
 
@@ -198,8 +197,8 @@ by calling `Model#getFilteredContactList`. The owner `Contact` is obtained from 
     * Advantage over alt. 2:
         * Less coupling since the parser does not need a reference to `Model`.
         * Cleaner implementation of `SiasaParser#parse` since all `CommandParser`s do not need a reference to `Model`.
-* **Alternative 2**: `Model` reference is passed into `AddPolicyCommandParser#parse`, `Contact` is obtained from the `Model`
-  and `Policy` to be added is created within parse and the created `Policy` is passed into AddPolicyCommand.
+* **Alternative 2**: `Model` reference is passed into `AddPolicyCommandParser#parse`. `Contact` is obtained from the `Model`
+  and the `Policy` to be added is created within parse. The created `Policy` is then passed into the `AddPolicyCommand` constructor.
     * Advantage over alt. 1:
         * Greater abstraction since `Policy` components are not revealed and stored within the `AddPolicyCommand`
         * Consistent with the implementation of `AddContactCommand`.
@@ -213,7 +212,7 @@ object. In addition, as `Policy` has an owner field, all `Policies` that belong 
 new `Policy` object would need to be created for each of them with the edited new `Contact` object as the owner.
 
 The sequence diagram below illustrates how the `EditContactCommand` is executed.
-![](images/EditContactCommandExecuteSequenceDiagram.png)
+![](images/EditContactCommandSequenceDiagram.png)
 
 **Step 1**: `EditContactCommand#execute` is called which gets the `contactToEdit` from the `Model` using the `Index` provided,
 similar to the process in `AddPolicyCommand`.
@@ -238,7 +237,7 @@ the `Model` is updated with these new policies.
 * **Alternative 2**: Both `Contact` and `Policy` are mutable. Any changes to `Policy` or `Contact` can be done simply by modifying the fields.
     * Advantage over 1:
         * Less objects need to be created, arguably better performance as number of entries increase.
-* **Reason for choice**: Despite performance concerns, application meets performance requirements and expectations from testing.
+* **Reason for choice**: Despite performance concerns, application meets performance requirements from testing.
 
 ### Sorting and Filtering
 

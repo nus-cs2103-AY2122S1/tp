@@ -222,13 +222,13 @@ Format: `clearpolicy CONTACT_INDEX`
 
 #### Finding contacts: `findcontact`
 
-Finds and lists all contacts in address book whose name contains any of the argument keywords.
+Finds and lists all contacts in SIASA whose name contains any of the argument keywords.
 
 Format: `findcontact KEYWORD`
 * Keyword matching is case-insensitive.
 
 Example:
-* `findcontact john` returns a list with all the contacts containing the name john.
+* `findcontact john bob` returns a list with all the contacts containing the word "john" or "bob".
 
 #### Show Expired/Expiring Policies: `expiringpolicy`
 
