@@ -3,7 +3,10 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
-skinparam classFontSize 20
+skinparam classFontSize 18
+skinparam class {
+    stereotypeFontSize 18
+}
 
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
