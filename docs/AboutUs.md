@@ -11,8 +11,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/banana3021.png" width="200px">
 
-[[github](https://github.com/Banana3021.md)]
-[[portfolio](team/Banana3021.md)]
+[[github](https://github.com/Banana3021)]
+[[portfolio](team/banana3021.md)]
 
 * Role: Developer
 * Responsibilities: Feature Development + Data
