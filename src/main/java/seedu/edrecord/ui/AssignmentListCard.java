@@ -64,7 +64,7 @@ public class AssignmentListCard extends UiPart<Region> {
     private TableView<Map.Entry<Assignment, Grade>> assignmentsTable;
 
     /**
-     * Creates a {@code AssignmentListCard} with the given {@code Person} and index to display.
+     * Creates an {@code AssignmentListCard} with the given {@code Person}, index and {@code module} to display.
      */
     public AssignmentListCard(Person person, int displayedIndex, ObservableValue<Module> module) {
         super(FXML);
