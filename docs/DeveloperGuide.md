@@ -8,8 +8,8 @@ benefits of a Graphical User Interface (GUI). This guide is designed for develop
 on this app. It contains detailed information that will allow developers to maintain the app or
 alter and extend the app for their own use.
 
-- Table of Contents
-  {:toc}
+- Table of Contents 
+{:toc}
 
 ---
 
