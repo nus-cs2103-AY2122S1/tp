@@ -78,7 +78,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * @param index              of the game in the filtered game list to edit
+     * @param index of the game in the filtered game list to edit
      * @param editGameDescriptor details to edit the game with
      */
     public EditCommand(Index index, EditGameEntryDescriptor editGameDescriptor) {

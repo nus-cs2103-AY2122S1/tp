@@ -47,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ GameBook methods ==============================
 
     @Override
     public Path getGameBookFilePath() {
