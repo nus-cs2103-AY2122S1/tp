@@ -226,7 +226,6 @@ block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The 
 The following sequence diagram shows the method invocation in this step.
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
 
-
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
 `Model#addApplicantWithParticulars` method.
 
@@ -250,6 +249,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
     * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
     * Cons: May have lead to greater coupling among classes.
+  
 
 * **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
   calls.
@@ -305,8 +305,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 ![EditApplicantActivityDiagram](images/EditApplicantActivityDiagram.png)
 
 
-
-
 ### Mark/update applicant's status feature :heavy_check_mark:
 
 #### Implementation
@@ -333,14 +331,13 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 <img src="images/MarkApplicantActivityDiagram.png" width="750" />
 
 #### Design considerations:
-
-
 **Aspect: Integration or separation with the 'Edit Applicant' feature**
 
 * **Alternative 1 (current choice):** Separate updating of applicant statuses into its own command
     * Pros: More streamlined command for ease of use
       * Our target user (Tech recruiters) are likely to update applicant statuses a with must higher frequency than information like e-mails, addresses etc. Hence, having a dedicated, shorter command streamlines the user workflow.
     * Cons: Additional command increases complexity, harder to maintain.
+
 
 * **Alternative 2:** Integrate updating of applicant statuses into 'Edit Applicant' command
     * Pros: Fewer commands for user to remember, also easier for developer to maintain.
@@ -353,7 +350,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX, which filters its contents based on a specified `Predicate`.  
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
-
 
 
 #### Design considerations:
@@ -386,7 +382,6 @@ Note: The `FilterApplicantDescriptor` is not marked for deletion when the comman
 
 The `Descriptor` pattern (used similarly in features such as 'Edit Applicant') comes in handy whenever a command accepts a variable number of arguments & unspecified arguments are assumed to be ignored. For instance, the 'Edit Applicant' feature accepts a variable number of fields to be edited, and leaves all unspecified fields unedited.
 
-
 The filter feature fits such a description, as the user should be able to specify a variable number of filtering criteria, and unspecified criteria should be left out of the filter. Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`. It is also used in `FilterApplicantDescriptorVerifier`, to verify a variable number of filters.
 
 #### Design considerations:
@@ -406,6 +401,7 @@ The filter feature fits such a description, as the user should be able to specif
 * **Alternative 1 (current choice): Reusing 'Descriptor' pattern**
     * Pros: Well-documented, pre-existing class that can be adapted to suit current usecase; time saved
     * Cons: Less customized solution (e.g a user might wish to specify multiple criteria for a particular filter, or switch to a logical `OR` filter instead, in which case the `Descriptor` pattern is insufficient to fulfill such functionality).
+
 
 * **Alternative 2: Delegate the responsibility of constructing Predicates to a new class**
     * Pros: Greater customizability in specifying different types of filters
@@ -444,6 +440,7 @@ Step 3. Results of this new filtered list is then passed to the model and is ref
     * Pros: Because of the way we implemented, it is much easier to search via name rather than positions or statuses. Also reduces coupling on the `FilterApplicantCommand` class and easier to test.
     * Cons: Might result in slight confusion for users due to 2 similarly-named commands.
 
+
 * **Alternative 2:** Use the existing `FindCommand` or created `FilterApplicantCommand` and improve the command from there to achieve this functionality.
     * Pros: A singular class to handle all finding/filtering-related commands, making it easier for users.
     * Cons: Very difficult to code since it requires integrating of multiple existing classes, resulting in potentially many bugs and complicated logic.
@@ -480,13 +477,12 @@ Step 3. UI-wise, the applicant should now appear with the updated application st
     * Pros: Simplifies code base since it is accessible via the `Application` class directly.
     * Cons: Higher coupling for `Application` class.
 
+
 * **Alternative 2:** Have application status in a separate class with enumerations inside it.
     * Pros: Separates code logic from Application, easier to digest and manipulate.
     * Cons: Increases complexity of code. Separate class has little usage.
 
-
-
-
+  
 ### List applicants feature
 
 #### Implementation
@@ -513,6 +509,7 @@ Step 3. The UI is updated to show the current list of applicants.
 * **Alternative 1 (current choice):** Create a separate command from the original AB3, but follow a similar style.
     * Pros: Better understanding of underlying code and how everything comes together.
     * Cons: More time-consuming.
+
 
 * **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
     * Pros: Many functions already in place and little modification is required.
@@ -549,6 +546,7 @@ Step 3. The UI for `positionBook` will now contain the new position added.
 * **Alternative 1 (current choice):** Have a singular `Position` class to handle all position related methods.
     * Pros: Simplifies coding and testing since everything is parked under 1 class.
     * Cons: Higher coupling for the `Position` class.
+
 
 * **Alternative 2:** Have a separate class which contains details of various positions like applicants.
     * Pros: Separates details from the actual class.
@@ -606,8 +604,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 
 
-    
-
 ### List positions feature
 
 #### Implementation
@@ -634,6 +630,7 @@ Step 3. The UI is updated to show the current list of positions.
 * **Alternative 1 (current choice):** Create a separate command from the original AB3, but follow a similar style.
     * Pros: Better understanding of underlying code and how everything comes together.
     * Cons: More time-consuming.
+
 
 * **Alternative 2:** Use existing `list` command in AB3 and adapt for MTR.
     * Pros: Many functions already in place and little modification is required.
@@ -676,6 +673,8 @@ Step 5. Any command the user executes next simply refreshes the current state to
 * **Alternative 1** (current choice): Calculate the rejection rate only when needed. No storing required.
     * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
     * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run.
+  
+
 * **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
     * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
       Also, accessing a rejection rate will be much quicker.
@@ -684,6 +683,7 @@ Step 5. Any command the user executes next simply refreshes the current state to
 
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
+
 
 ### Visualize Positions feature
 
@@ -716,6 +716,7 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
     * Pros: Quick and easy to use, reusable.
     * Cons: Lack of flexibility, limited choice in UI design.
 
+
 * **Alternative 2:** Full, `UiPart` class with FXML 
     * Pros: Greater customizability, styling options.
     * Cons: More complex, harder to maintain.
@@ -727,7 +728,6 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
 The [Memento Pattern](https://en.wikipedia.org/wiki/Memento_pattern) is used to implement undo feature. The undo functionality is facilitated by `Memento` and `History`. 
 Every command keeps a `memento` which stores the state of `model` before any modification is done by a command. 
 The `model` keeps track of the `history` which stores a stack of previous modification commands. 
-
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
@@ -760,7 +760,6 @@ The following sequence diagram shows how the undo operation works:
 </div>
 
 
-
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
@@ -772,6 +771,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire model.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
+
 
 * **Alternative 2:** Individual command knows how to undo by
   itself.
