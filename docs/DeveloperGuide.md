@@ -347,6 +347,10 @@ The following demonstrates a usage scenario where the user wants to delete the f
 6. By using a functional interface called ‘BiFunction’, the `SotCommand` sorts the task list by calling a method ‘sortTasks’ under ‘Model’.
 7. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
 
+The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `sort x/time o/asc` command as in Step 3.
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
 The following activity diagram summarizes what happens when the user inputs a sort command.
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
