@@ -4,7 +4,9 @@ title: Developer Guide
 nav-text: Developer Guide
 ---
 
-![](images/sportsPA_logo.png)
+<p align="center">
+<img src = "images/sportsPA_logo.png" width="600"/> <br>
+</p>
 
 <span style = "font-size: 32px; color: #e46c0a">
 Welcome to the SportsPA Developer Guide!
@@ -463,7 +465,7 @@ to be unmarked via the `Member#setNotPresent()` and `ModelManager` references th
 
 The following activity diagram shows what happens when a user executes the `mark` command.
 
-<img src="images/MarkActivityDiagram.png" width="250"/>
+<img src="images/MarkActivityDiagram.png" width="300"/>
 
 #### Design considerations:
 
