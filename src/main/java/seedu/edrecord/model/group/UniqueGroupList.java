@@ -134,6 +134,9 @@ public class UniqueGroupList implements Iterable<Group> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        if (internalList.isEmpty()) {
+            return "";
+        }
         sb.append("[");
         for (Group group : internalList) {
             sb.append(group).append(",");

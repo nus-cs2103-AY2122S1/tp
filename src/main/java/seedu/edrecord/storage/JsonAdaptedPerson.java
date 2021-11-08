@@ -116,42 +116,42 @@ class JsonAdaptedPerson {
         }
 
         ModuleSet moduleSet = new ModuleSet();
-        String[] modGroupPairs = mods.split(" ");
-        for (String modGroupPair : modGroupPairs) {
-            String[] modGroupArray = modGroupPair.split(":");
-            if (modGroupArray.length != 2) {
-                throw new IllegalValueException(ModuleSet.MESSAGE_CONSTRAINTS);
-            }
-            String mod = modGroupArray[0];
-            if (!Module.isValidModuleCode(mod)) {
-                throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
-            }
-            if (!Module.MODULE_SYSTEM.hasModule(mod)) {
-                throw new IllegalValueException(String.format(Module.MESSAGE_DOES_NOT_EXIST, mod));
-            }
-            final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
+        if (!mods.equals("")) {
+            String[] modGroupPairs = mods.split(" ");
+            for (String modGroupPair : modGroupPairs) {
+                String[] modGroupArray = modGroupPair.split(":");
+                if (modGroupArray.length != 2) {
+                    throw new IllegalValueException(ModuleSet.MESSAGE_CONSTRAINTS);
+                }
+                String mod = modGroupArray[0];
+                if (!Module.isValidModuleCode(mod)) {
+                    throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
+                }
+                if (!Module.MODULE_SYSTEM.hasModule(mod)) {
+                    throw new IllegalValueException(String.format(Module.MESSAGE_DOES_NOT_EXIST, mod));
+                }
 
-            String groups = modGroupArray[1];
-            if (groups.length() <= 1 || groups.charAt(0) != '[' || groups.charAt(groups.length() - 1) != ']') {
-                throw new IllegalValueException(ModuleSet.MESSAGE_GROUP_CONSTRAINTS);
-            }
-            groups = ModuleSet.parseGroups(groups);
-            String[] groupArray = groups.split(",");
+                String groups = modGroupArray[1];
+                if (groups.length() <= 1 || groups.charAt(0) != '[' || groups.charAt(groups.length() - 1) != ']') {
+                    throw new IllegalValueException(ModuleSet.MESSAGE_GROUP_CONSTRAINTS);
+                }
+                groups = ModuleSet.parseGroups(groups);
+                String[] groupArray = groups.split(",");
 
-            for (String group : groupArray) {
-                if (!Group.isValidGroup(group)) {
-                    throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+                final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
+                Module module = new Module(modelModule.getCode());
+                for (String group : groupArray) {
+                    if (!Group.isValidGroup(group)) {
+                        throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+                    }
+                    if (!modelModule.getGroupSystem().hasGroup(group)) {
+                        throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
+                    }
+                    moduleSet.add(module, new Group(group));
                 }
-                if (!modelModule.getGroupSystem().hasGroup(group)) {
-                    throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
-                }
-                final Group modelGroup = modelModule.getGroup(group);
-                if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
-                    modelModule.getGroupSystem().addGroup(modelGroup);
-                }
-                moduleSet.addToSet(modelModule);
             }
         }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // TODO change `new AssignmentGradeMap()` to save grades
