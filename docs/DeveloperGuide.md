@@ -528,6 +528,8 @@ Step 5. `CommandHistory` retrieves the previous command and returns it.
 
 Step 6. `CommandBox` displays the previous command in the Command Box.
 
+The following activity diagram shows possible user interactions with the command history feature.
+
 ![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
 
 #### Design considerations:
