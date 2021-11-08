@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-  
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 MrTechRecruiter (MTR) is a standalone desktop app aimed in helping technology-related company recruiters overlook and administer job positions and applicants applying for various jobs in their companies.
@@ -122,7 +122,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `MrTechRecruiterParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPositionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `MrTechRecruiterParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPositionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `MrTechRecruiterParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPositionCommandParser`, `DeleteApplicantCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -138,6 +138,33 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+
+### Applicant and Position
+
+The `Applicant` and `Position` classes are the two main entities in MrTechRecruiter.  
+`Applicant`s each apply to one `Position`; this relationship is described by the `Application` class.
+The following class diagram illustrates this:
+
+<img src="images/ApplicantPositionClassDiagram.png" width="750" />
+
+`Applicant`s are:
+
+- Uniquely identified by their `Name`, i.e. `UniqueApplicantList` maintains the uniqueness of its members by performing `Name` comparisons.
+  - Additionally, `Name` comparisons are performed on a case-insensitive basis.  
+    **Rationale**: `John Doe` is likely to be the same person as `john doe` or `JOHN DOE`; thus, case-insensitive `Name` comparison is more user-friendly (as users cannot be expected to be case-correct all the time).
+- Indirectly associated to `Position` via `Application`.
+
+`Position`s are:
+
+- Uniquely identified by their `Title`, in a similar fashion to `Applicant`.
+  - `Title` comparisons are also case-insensitive, for the same reasons as above.
+- Indirectly associated to `Applicant` via `Application`.
+
+The `Application` class:
+
+- Encapsulates the 'job application' relationship between `Applicant` and `Position`.
+- The `Position` field **must** exist; i.e. is non-null.
+  - If a `Position` is deleted, all `Application`s referencing it, as well as their corresponding `Applicant`s, are deleted as well.
 
 
 ### Storage component
@@ -295,70 +322,106 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 2:** Create a separate ModelManager to handle applicant-related commands.
     * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
     * Cons: May result in a lot more code and work in order to achieve the same level of logic.
-    
+
+
+### Mark/update applicant's status feature :heavy_check_mark:
+
+#### Implementation
+This feature is achieved using the `MarkApplicantStatusCommand` class.
+It is a simple command similar in functionality to the 'Edit applicant' feature, but streamlined for updating application statuses.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There are currently only 3 states for applicants: `Accepted`, `Rejected` and `Pending`. These are described in the `Applicant.ApplicationStatus` enum.
+</div>
+  
+The `MarkApplicantStatusCommand#execute` first confirms the existence of the target applicant to be marked using guard clauses.
+If the applicant exists, the applicant is updated with the new application status and the model replaces this applicant.
+
+Given below is an example usage scenario of the mark applicant feature. <br>
+Preconditions: Applicant exists in MTR and valid mark status given.
+
+Step 1. User inputs `mark john doe status/rejected`. The app parser stores the target applicant name and new `ApplicationStatus` internally in the `MarkApplicantStatusCommand` as private fields.
+
+Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoking the `Applicant#markAs` method and `Model#setApplicant` method, which creates a new applicant and replaces the existing applicant with the created one.
+
+Step 3. UI-wise, the applicant should now appear with the updated application status.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
+
+<img src="images/MarkApplicantActivityDiagram.png" width="750" />
+
+#### Design considerations:
+
+**Aspect: Integration or separation with the 'Edit Applicant' feature**
+
+* **Alternative 1 (current choice):** Separate updating of applicant statuses into its own command
+    * Pros: More streamlined command for ease of use
+      * Our target user (Tech recruiters) are likely to update applicant statuses a with must higher frequency than information like e-mails, addresses etc. Hence, having a dedicated, shorter command streamlines the user workflow.
+    * Cons: Additional command increases complexity, harder to maintain.
+
+* **Alternative 2:** Integrate updating of applicant statuses into 'Edit Applicant' command
+    * Pros: Fewer commands for user to remember, also easier for developer to maintain.
+    * Cons: More troublesome to quickly update applicant statuses.
+
 
 ### Filter applicants feature
 
 #### Implementation
 
-The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
-which filters its contents based on a specified `Predicate`.  
-This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called. 
-
-The `FilterApplicantCommand#execute()` method has guard clauses to check that the contents of the input are valid through the
-`FilterApplicantDescriptor#hasAnyFilter()` method. If contents are valid, it uses mapping via the `FilterApplicantCommand#applicantMatchesFilter`
-method to filter out all applicants matching the given criteria. A new filtered list is now displayed on the MTR UI. <br>
+The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX, which filters its contents based on a specified `Predicate`.  
+This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
 
 <div markdown="block" class="alert alert-info"> 
-* This command is used for filtering applicants by `Position` and `applicationStatus` only, not to be confused with `FindApplicantCommand`.
+* This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
+</div>  
 
-</div>
+Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
+The process is described by the following sequence diagram:
 
-Given below is an example usage scenario of the applicant filter feature. <br>
-Preconditions: Applicant exists in MTR and valid filters provided. 
+<img src="images/filterapplicantsequencediagram0.png" width="950" />
 
-Step 1. User inputs command `filter-applicant status/rejected`. The app parser stores all information in a new `FilterApplicantDescriptor` instance.
+The role of the `FilterApplicantDescriptor` class is to store the details of the parsed filters for the `Model` component's use, when the `FilterApplicantCommand` is subsequently executed.
 
-Step 2. Model executes `FilterApplicantCommand#applicantMatchesFilter` method my mapping all applicants to check if they meet the criteria/information given.
+The execution of the `FilterApplicantCommand` is shown below in a sequence diagram (as a continuation of the diagram above):
 
-Step 3. Results of this new filtered list is then passed to the model and is reflected onto the UI.
+<img src="images/filterapplicantsequencediagram1.png" width="1100" />
 
-The following activity diagram summarizes the actions taken when LogicManager executes the FilterApplicantCommand:
-[to be added]
+The `FilterApplicantDescriptorVerifier` class verifies the 
+original `FilterApplicantDescriptor` against the `Model`,
+to ensure the validity of the filters specified by the user.
 
+The (verified) `FilterApplicantDescriptor` is then passed to a call to `ApplicantMatchesFiltersPredicate#new`, which takes the filters and constructs a `Predicate` that evaluates to true only for an `Applicant` that passes all the filters, i.e. the filtering is performed with a logical `AND`.
+
+The `ApplicantMatchesFilterPredicate` is then passed to a call to `Model#updateApplicantFilteredList()`, where JavaFX's internal `FilteredList` functionality takes over and handles the filtering of the applicant list.
+
+Note: The `FilterApplicantDescriptor` is not marked for deletion when the command finishes execution, as it is used by the command result to display a success message to the user.
 
 #### Rationale for implementation
 
-The `Descriptor` pattern (used similarly in features such as the editing of applicants) comes in handy whenever its corresponding command accepts a variable number of arguments & unspecified arguments are assumed to be ignored.
-For instance, the edit applicant feature accepts a variable number of fields to be edited, and leaves all unspecified fields untouched.
+The `Descriptor` pattern (used similarly in features such as 'Edit Applicant') comes in handy whenever a command accepts a variable number of arguments & unspecified arguments are assumed to be ignored. For instance, the 'Edit Applicant' feature accepts a variable number of fields to be edited, and leaves all unspecified fields unedited.
 
-The filter feature fits in this category, as the user should be able to specify a variable number of filtering criteria,
-and unspecified criteria should be left out of the filter.
-Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`.
-It is also used to in the validation of the filtering criteria.
-
+The filter feature fits such a description, as the user should be able to specify a variable number of filtering criteria, and unspecified criteria should be left out of the filter. Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`. It is also used in `FilterApplicantDescriptorVerifier`, to verify a variable number of filters.
 
 #### Design considerations:
 
-**Aspect: Accessing a list**
+**Aspect: Filtering the applicant list**
 
-* **Alternative 1 (current choice):** Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`.
-    * Pros: [to be added]
-    * Cons: Does not make good use of the in-built functionality of `FilteredList`.
+* **Alternative 1 (current choice): Filtering the Applicant list via the FilteredList API** :
+    * Pros: Well-defined behaviour when working through the API
+    * Cons: More complex filtering operations are harder to achieve, as we are restricted by the operations defined by the API.
 
-* **Alternative 2:** [to be added]
+* **Alternative 2: Manually manipulating the ApplicantList (e.g. using the Java Stream API)** 
+    * Pros: Greater flexibility; do not have to rely on constructing predicates and passing them to FilteredList.
+    * Cons: Directly manipulating the internal list breaks the abstraction provided by the FilteredList API, which can cause bugs.
 
-**Aspect: Filtering the inputs**
+**Aspect: Reusing 'Descriptor' pattern from AB3's 'EditPersonDescriptor'**
 
-* **Alternative 1(current choice):** Separate class to handle parsing of filtering inputs.
-    * Pros: Allows class with methods catered better to our needs (e.g. use of Optional so that fields not filtered by are untouched)
-    * Cons: More time-consuming to create from scratch and creation of more test cases.
+* **Alternative 1 (current choice): Reusing 'Descriptor' pattern**
+    * Pros: Well-documented, pre-existing class that can be adapted to suit current usecase; time saved
+    * Cons: Less customized solution (e.g a user might wish to specify multiple criteria for a particular filter, or switch to a logical `OR` filter instead, in which case the `Descriptor` pattern is insufficient to fulfill such functionality).
 
-* **Alternative 2:** Modifying/improving original AB3 `FindCommand` and `FindCommandParser`.
-    * Pros: Base code already exists and modifying it would take less time. Test cases also require little modification.
-    * Cons: Requires understanding base of the code and high coupling exists.
-
-
+* **Alternative 2: Delegate the responsibility of constructing Predicates to a new class**
+    * Pros: Greater customizability in specifying different types of filters
+    * Cons: The class needs to be written from the ground up - this will cause greater complexity & take more time. Tests will need to be written from the ground up as well to accomodate the  behaviour of the new class.
 
 ### Find applicants feature
 
@@ -399,43 +462,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 2:** Use the existing `FindCommand` or created `FilterApplicantCommand` and improve the command from there to achieve this functionality.
     * Pros: A singular class to handle all finding/filtering-related commands, making it easier for users.
     * Cons: Very difficult to code since it requires integrating of multiple existing classes, resulting in potentially many bugs and complicated logic.
-
-
-### Mark/update applicant's status feature :heavy_check_mark:
-
-#### Implementation
-The mark feature is achieved using the `MarkApplicantStatusCommand` class. It is a simple command which only modifies the 
-application status of the applicant for a particular position. It does so by taking in the applicant to be modified and the updated `ApplicationStatus`.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** There are currently only 3 states for applicants: `Accepted`, `Rejected` and `Pending`.
-</div>
-
-The `MarkApplicantStatusCommand#execute` first confirms the existence of the target applicant to be marked using guard clauses.
-If the applicant exists, the applicant is updated with the new application status and the model replaces this applicant.
-
-Given below is an example usage scenario of the mark applicant feature. <br>
-Preconditions: Applicant exists in MTR and valid mark status given.
-
-Step 1. User inputs `mark john doe status/rejected`. The app parser stores the target applicant name and new `ApplicationStatus` internally in the `MarkApplicantStatusCommand` as private fields.
-
-Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoking the `Applicant#markAs` method and `Model#setApplicant` method, which creates a new applicant and replaces the existing applicant with the created one.
-
-Step 3. UI-wise, the applicant should now appear with the updated application status.
-
-The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
-[to be added]
-
-#### Design considerations:
-
-**Aspect: Accessing the applicant's application status**
-
-* **Alternative 1 (current choice):** Have application status as an enumeration under the `Application` class which serves as an association class between `Applicant` and `Position`.
-    * Pros: Simplifies code base since it is accessible via the `Application` class directly.
-    * Cons: Higher coupling for `Application` class.
-
-* **Alternative 2:** Have application status in a separate class with enumerations inside it.
-    * Pros: Separates code logic from Application, easier to digest and manipulate.
-    * Cons: Increases complexity of code. Separate class has little usage.
 
 
 ### List applicants feature
@@ -664,6 +690,40 @@ Step 5. Any command the user executes next simply refreshes the current state to
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
 
+### Visualize Positions feature
+
+#### Implementation
+
+This feature makes use of JavaFX's built-in `PieChart` component, as well as the `Tooltip` component to display the percentages of each pie chart slice.  
+  
+The following activity diagram describes the execution flow of the command:
+
+<img src="images/VisualizeActivityDiagram.png" width="600" />
+
+Additionally, the following classes are responsible for generating and displaying the pie chart to the user:
+- `PositionPieChart`: A JavaFX `PieChart` summarizing a `Position`, and the application statuses of its `Applicants`.
+  - Contains logic to process a specified `Position` and a list of `Applicants` into a `PositionPieChart`.
+  - Does some additional post-processing like styling, and installing `Tooltips` to display pie chart percentages.
+- `PieChartDisplayer`: Takes in a JavaFX `PieChart` and displays it to the user in a new window.
+  - The opened window is set to close when it loses focus, via the `setCloseOnLoseFocus()` method.
+
+The following sequence diagram demonstrates this process:
+
+<img src="images/VisualizeSequenceDiagram.png" width="500" />
+
+Note: The `PositionPieChart` is not marked for deletion when the command finishes execution, as it persists for as long as the user keeps the pie chart open.
+
+#### Design Considerations
+
+**Aspect: Displaying of pie chart to user** 
+
+* **Alternative 1 (current choice):** `PieChartDisplayer` class.
+    * Pros: Quick and easy to use, reusable.
+    * Cons: Lack of flexibility, limited choice in UI design.
+
+* **Alternative 2:** Full, `UiPart` class with FXML 
+    * Pros: Greater customizability, styling options.
+    * Cons: More complex, harder to maintain.
 
 ### Undo feature
 
@@ -786,24 +846,24 @@ An efficient applicant management system for HR departments of technology compan
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | general user                               | add new job positions | Add applicants to these positions. |
-| `* * *`  | general user                               | delete existing job positions | Remove irrelevant, out-of-date jobs. |
-| `* * *`  | general user                               | edit existing job positions | update the position name and description according to my company's changes.|
-| `* * *`  | general user                               | see the current list of positions | have a quick overview of current positions in the company. |
-| `* * *`  | general user                               | add a new applicant under a position      | Store his/her information within the system.    |
-| `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position.          |
-| `* * *`  | general user                               | edit existing applicants | update the applicant's name and relevant information accordingly.|
-| `* * *`  | general user                               | find applicants based on their name, position or application status | compare applicants' relevant information. |
-| `* * *`  | general user                               | update applicants' application statuses directly | quickly update and see positions' competitiveness. |
-| `* * *`  | general user                               | see the current list of applicants | have a quick overview of applicants that have applied to the various positions. |
-| `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a position might be.          |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App.              |
-| `* *  `  | user                                       | hide private applicant details   | ensure confidentiality of applicants' information. |
-| `* *  `  | user                                       | undo my last command/action | retract mistakes or changes made in the command. |
-| `*    `  | user with many applicants in the address book | sort applicants by name           | locate an applicant easily.  |
-| `*    `  | user                                       | see a graphical representation of statuses in a position | have a quick visualisation on how competitive a position might be. |
+| Priority | As a …​                                       | I want to …​                                                        | So that I can…​                                                                 |
+| -------- | --------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `* * *`  | general user                                  | add new job positions                                               | Add applicants to these positions.                                              |
+| `* * *`  | general user                                  | delete existing job positions                                       | Remove irrelevant, out-of-date jobs.                                            |
+| `* * *`  | general user                                  | edit existing job positions                                         | update the position name and description according to my company's changes.     |
+| `* * *`  | general user                                  | see the current list of positions                                   | have a quick overview of current positions in the company.                      |
+| `* * *`  | general user                                  | add a new applicant under a position                                | Store his/her information within the system.                                    |
+| `* * *`  | general user                                  | delete an applicant from under a position                           | Remove applicants that are no longer related to this position.                  |
+| `* * *`  | general user                                  | edit existing applicants                                            | update the applicant's name and relevant information accordingly.               |
+| `* * *`  | general user                                  | find applicants based on their name, position or application status | compare applicants' relevant information.                                       |
+| `* * *`  | general user                                  | update applicants' application statuses directly                    | quickly update and see positions' competitiveness.                              |
+| `* * *`  | general user                                  | see the current list of applicants                                  | have a quick overview of applicants that have applied to the various positions. |
+| `* * *`  | general user                                  | view the average rejection rates of all job positions               | gauge how competitive a position might be.                                      |
+| `* * *`  | new user                                      | see usage instructions                                              | refer to instructions when I forget how to use the App.                         |
+| `* *  `  | user                                          | hide private applicant details                                      | ensure confidentiality of applicants' information.                              |
+| `* *  `  | user                                          | undo my last command/action                                         | retract mistakes or changes made in the command.                                |
+| `*    `  | user with many applicants in the address book | sort applicants by name                                             | locate an applicant easily.                                                     |
+| `*    `  | user                                          | see a graphical representation of statuses in a position            | have a quick visualisation on how competitive a position might be.              |
 
 
 ### Use cases
@@ -1295,34 +1355,87 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect command to try: `edit-applicant 5`
       Expected: An error message will show, indicating that the index is invalid. 
 
+### Marking an applicant's status
+
+1. Updating an applicant's status successfully
+
+   1. Prerequisites: There is at least one applicant in MTR. List all applicants and positions using the `list-applicant` and `list-position` commands respectively. Assume there is a position `software engineer` and an applicant `John Doe` to that position, with status `Pending`.
+
+   2. Test case: `mark john doe status/accepted`
+      Expected: Applicant `John Doe`'s position is updated as 'Accepted'.
+      A success message is shown.
+
+   3. Test case: `mark john doe status/rejected`
+      Expected: Applicant `John Doe`'s position is updated as 'Rejected'.
+      A success message is shown.
+
+2. Attempting to update a non-existent applicant's status
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. There is no applicant with the name 'John Cena'.
+
+   2. Test case: `mark john cena status/rejected`
+      Expected: An error message is shown, indicating that there is no such applicant.
 
 ### Deleting an applicant
 
 1. Deleting an applicant from MrTechRecruiter
 
-  1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
+   1. Prerequisites: There are 2 applicants within MTR. At index `1` we have `John Doe`, and at index `2` we have Mary Jane.
 
-  1. Test case: `delete-applicant 1`<br>
-     Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+   2. Test case: `delete-applicant 1`<br>
+      Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message.
 
-  1. Test case: `delete-applicant 3`<br>
-     Expected: No applicant is deleted. Error details depicting index out of bounds is shown.
-  
+   3. Test case: `delete-applicant 3`<br>
+      Expected: No applicant is deleted. Error details depicting index out of bounds is shown.
 
+### Filtering applicants
 
+1. Specifying valid filtering criteria.
 
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. Assume there is a position `software engineer`, and at least two applicants to that position. Assume also that there is a position `database administrator`, and there is one applicant to that position.
 
-### Viewing average rate of a job
+   2. Test case: `filter-applicant pos/software engineer`
+      Expected: A success message is shown. Only the two applicants under the `software engineer` position now show.
 
-1. Viewing average rate of a job in MrTechRecruiter
+   3. Test case: `filter-applicant pos/database administrator`
+      Expected: A success message is shown. Only the one applicant under the `database administrator` position now shows.
+
+2. Attempting to filter by invalid criteria.
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. There is no position with the title 'pilot'.
+
+   2. Test case: `filter-applicant pos/pilot`
+      Expected: An error message is shown, indicating that the 'pilot' filter is invalid.
+
+### Viewing rejection rate of a job
+
+1. Viewing rejection rate of a job in MrTechRecruiter
 
     1. Prerequisites: <br>
        a. Job must exist in address book. <br>
-       b. Average rate already tabulated for the job.
+       b. Rejection rate already tabulated for the job.
 
-    1. Test case: `rate pos/software engineer`<br>
+    2. Test case: `rate pos/software engineer`<br>
        Expected: Text indicating the rejection rate will be displayed in the status bar. E.g. `Rejection rate for software engineer = 10.00%`
 
+### Visualizing a position
+
+1. Visualizing an existing position.
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. Assume there is a position `software engineer`, and at least two applicants to that position. Assume also that there is a position `database administrator`, and there are no applicants to that position.
+  
+   2. Test case: `visualize software engineer`
+      Expected: A success message is shown. A new window opens, showing a visual representation of the position, its applicants and the breakdown of their various statuses.
+
+   3. Test case: `visualize database administrator`
+      Expected: An error message is shown, indicating that there are no applicants to the position.
+
+2. Attempting to visualize a non-existent position.
+
+   1. Prerequisites: List all applicants and positions using the `list-applicant` and `list-position` commands respectively. There is no position with the title 'super spy'.
+
+   2. Test case: `visualize super spy`
+      Expected: An error message is shown, indicating that there is no such position.
 
 ### Undoing 
 
@@ -1343,3 +1456,35 @@ testers are expected to do more *exploratory* testing.
        box. A sample json file will be created. Then repeat the steps as above.
 
     1. The steps for data/positionbook.json is similar.
+
+## **Appendix: Effort**
+**<u>Difficulty: Medium to Hard</u>**
+
+We felt that our project overall is not extremely difficult to implement but requires a fair amount of understanding of the code base. Many commands created and classes implemented
+were predominantly based off of AB3 and enhanced to a great extent; others were freshly added in to be in tune with our product. Hence despite having different features from AB3,
+the overall project is still doable.
+
+
+**<u>Challenges faced:</u>** Implementing multiple entity types, improving existing CRUD features.
+
+Our project was harder than AB3 because we needed to have both `Position` and `Applicant` be part our product. Since `Applicant` and `Position` are dissimilar, we had to create separate logic
+for these classes on top of adapting the existing `Person` class to fit our `Applicant` class better. While `Position` does not have as many fields as an `Applicant`, the difficulty came in linking it back
+to the `ModelManager` as we had to add an additional `PositionBook` which further complicated the code base logic.
+
+Also since Applicant and Position are associated, when implementing the CRUD commands for both classes, we had to carefully consider the relationship between the two entities & 
+implement additional logic wherever it made sense for our target user (e.g. when we delete a Position, all Applicants to that Position are deleted as well to avoid 
+Applicants to a non-existing Position).
+
+**<u>Effort required:</u>** 110 - 120%
+
+Many commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`) so not much work was needed to adapt it to what we wanted. However, besides our weekly 
+inputs of coding, we had to brainstorm and constantly adapt our code to better fit our user's needs. The challenges faced as mentioned also delayed many features into later weeks, 
+requiring more effort to be put into the project. But overall, our product is not strikingly outstanding with fancy UI, "clever" logical code or AI-integrated but rather maintaining
+a realistic, simplistic code base for future developers to further improve on. 
+
+
+**<u>Achievements:</u>** Better understood JavaFX, interweaving code bases, planning and delivering, software engineering on a whole
+We feel that many of the initial outcomes of the project were achieved, such as integrating software engineering related principles into our project while at the same
+keeping to our deadlines and planning ahead for future iterations of the project. We better understood how to link various classes together despite their differences and segregate them
+to better fit how we wanted the classes and methods to be accessed. A side benefit would be learning JavaFX because this is a completely new interface and tool used in helping design
+UI and seeing how our code works with the UI greatly benefitted us as well.
