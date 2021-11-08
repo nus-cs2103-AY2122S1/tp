@@ -547,7 +547,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 The ```mark``` command is facilitated by creating a ```MarkCommand```, which is a subclass of ```MarkingCommand```.
 This command then updates the ```model``` accordingly, depending on the given input.
 
-The following activity diagram summarizes what happens when a user executes a ```mark``` command:
+The following activity diagram summarizes what happens when a user executes a ```mark``` command:<br>
 ![images](images/dg-diagrams/MarkCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
@@ -580,10 +580,10 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 ### Unmark feature
 [Table of contents](#table-of-contents)
 
-The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which is a subclass of 
+The ```unmark``` command is facilitated by creating an ```UnmarkCommand```, which is a subclass of 
 ```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
 
-The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
+The following activity diagram summarizes what happens when a user executes an ```unmark``` command:
 ![images](images/dg-diagrams/UnmarkCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
