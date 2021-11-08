@@ -38,7 +38,21 @@ public class VisualizeCommandTest {
     }
 
     @Test
-    public void assessmentCorrectOrder_validStudentList_sameOrderAsAssessmentClass() {
+    public void getOrderedAssessmentResults_emptyStudentList_nonEmptyHashmapWithEmptyValueList() {
+        List<Student> emptyStudentList = new ArrayList<>();
+
+        VisualizeCommand visualizeCommand = new VisualizeCommand();
+
+        LinkedHashMap<String, List<Integer>> actual =
+                visualizeCommand.getOrderedAssessmentResults(emptyStudentList);
+
+        LinkedHashMap<String, List<Integer>> expected = emptyAssessmentResults();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void getOrderedAssessmentResults_validStudentList_sameOrderAsAssessmentClass() {
         List<Student> studentList = buildStudentListWithAssessment();
         VisualizeCommand visualizeCommand = new VisualizeCommand();
         LinkedHashMap<String, List<Integer>> assessmentMap = visualizeCommand.getOrderedAssessmentResults(studentList);
@@ -75,5 +89,13 @@ public class VisualizeCommandTest {
         }
 
         return assessment.getCopy().getAssessmentHashMap();
+    }
+
+    private static LinkedHashMap<String, List<Integer>> emptyAssessmentResults() {
+        LinkedHashMap<String, List<Integer>> emptyMap = new LinkedHashMap<>();
+        for (String assessment: Assessment.ASSESSMENT_LIST) {
+            emptyMap.put(assessment, new ArrayList<>());
+        }
+        return emptyMap;
     }
 }
