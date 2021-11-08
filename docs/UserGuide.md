@@ -289,24 +289,24 @@ Now that you have set up the lesson _History 1_, let us add one of your existing
 
    ![](images/addToLesson.png)
 
-### 4.4: Adding a progress note for a student
+### 4.4: Adding a progress entry for a student
 {:.no_toc}
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
-note of it so that you can provide him with extra practice. To do so, you can easily add a progress note for Alex on TutorAid by following the steps below: 
+note of it so that you can provide him with extra practice. To do so, you can easily add a progress entry for Alex on TutorAid by following the steps below: 
 
 1. Key in `add -p 1 Requires extra practice for Vectors` into the Command Box and press ENTER. 
 
     > :bulb: The `1` in the command above refers to the index number of Alex Yeoh in the Student Panel. For more information, you can refer to the detailed documentation for the [Add a Progress to a Student](#adding-progress-for-a-student-add--p) command.
    
-1. Notice that Alex's details reflected in the Student Panel have updated to display the progress note you just added, as seen here:
+1. Notice that Alex's details reflected in the Student Panel have updated to display the progress entry you just added, as seen here:
 
     ![](images/addProgress.png)
    
    You can then key in the `list -a` into the Command Box and hit ENTER to if you wish to revert back to your original view.
 
-Now, the next time you open TutorAid, you will be able to see Alex's latest progress note at a glance!
+Now, the next time you open TutorAid, you will be able to see Alex's latest progress entry at a glance!
 
-> :bulb: You will be able to add up to **10** such progress notes for each student. When you attempt to add an 11th note, your very first note will be automatically deleted, and your new note will be added in. <br>
+> :bulb: You will be able to add up to **10** such progress entries for each student. When you attempt to add an 11th entry, your very first entry will be automatically deleted, and your new entry will be added in. <br>
 
 ### 4.5: Deleting a student
 {:.no_toc}
@@ -331,7 +331,7 @@ You can also learn and experiment with a few other TutorAid commands that we hav
 You may find the following commands particularly handy:
 * [Changing the viewing modes](#listing-all-students-and-lessons-list)
 * [Deleting a student from a lesson](#deleting-students-from-lessons-del--sl)
-* [Deleting a progress note from a student](#deleting-progress-from-a-student-del--p)
+* [Deleting a progress entry from a student](#deleting-progress-from-a-student-del--p)
 * [Finding a student](#finding-students-by-name-find--s)
 * [Finding a lesson](#finding-lessons-by-name-find--l)
 
@@ -425,16 +425,16 @@ Examples:
 
 ### Adding progress for a student: `add -p`
 {:.no_toc}
-Adds a progress note to the student at the specified student index.
+Adds a progress entry to the student at the specified student index.
 
 Format: `add -p STUDENT_INDEX PROGRESS`
 
 * Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
 * The index refers to the index number shown in the Student Panel.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Up to 10 progress notes can be added for each student. If a 11th progress note is added, the oldest note will be deleted before adding the new note to the student.
+* Up to 10 progress entries can be added for each student. If a 11th progress entry is added, the oldest entry will be deleted before adding the new entry to the student.
 
-> :bulb: We support up to just 10 notes to ensure that the progress notes for each student are easy to view and manage.
+> :bulb: We support up to just 10 entries to ensure that the progress entries for each student are easy to view and manage.
 
 Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student displayed in the Student Panel.
@@ -444,7 +444,7 @@ Examples:
 
 ### Deleting progress from a student: `del -p`
 {:.no_toc}
-Removes a progress note from the student at the specified student index.
+Removes a progress entry from the student at the specified student index.
 
 Format: `del -p STUDENT_INDEX`
 
