@@ -60,7 +60,7 @@ to quickly navigate to the command of your choice.
 1. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`man`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -113,7 +113,7 @@ Format: `man [COMMAND_NAME]`
 
 Examples:
 * `man sort` Shows the full details of `sort` command as below.
-![result for `man sort`](images/mansortResult.png)
+![result for `man sort`](images/ManSortResult.png)
 
 ### Adding a person: `add`
 
@@ -209,7 +209,7 @@ Examples:
 
 * `find -n Alex` Finds all people whose name matches the keyword "Alex".
 
-![result for `find -n Alex`](images/findAlexResult.png)
+![result for `find -n Alex`](images/FindAlexResult.png)
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
 start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do 
@@ -286,7 +286,7 @@ Format: `cat INDEX [-f KEYWORDS]`
    Examples:
 
    * `cat 1` Displays the list of tasks attached to the 1st person.
-   ![result for `cat 1`](images/catAlexResult.png)
+   ![result for `cat 1`](images/ViewTaskAlexResult.png)
 
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
@@ -300,7 +300,7 @@ Format: `cat INDEX [-f KEYWORDS]`
 
    * Alex is the first person in the person list and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
    * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
-   ![result for `cat 1 -f work`](images/cat-fResult.png)
+   ![result for `cat 1 -f work`](images/ViewTaskAlexFilteredResult.png)
 
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
@@ -312,7 +312,7 @@ given input, it will not match that particular task. For instance, `cat 1 -f wor
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
-   ![result for `cat -A`](images/catAllResult.png)
+   ![result for `cat -A`](images/ViewAllTaskResult.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!
