@@ -24,7 +24,7 @@ public class TimetableInfoPage extends InfoPage {
     private static final Logger logger = LogsCenter.getLogger(TimetableInfoPage.class);
     private static final String[] days = convertDays();
 
-    private final int numCols = 8;
+    private final int cols = 8;
     private Timetable timetable;
 
     @FXML
@@ -59,9 +59,9 @@ public class TimetableInfoPage extends InfoPage {
     }
 
     private void setTableDay() {
-        for (int j = 0; j < numCols; j++) {
+        for (int j = 0; j < cols; j++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / numCols);
+            colConst.setPercentWidth(100.0 / cols);
             timetableShown.getColumnConstraints().add(colConst);
         }
     }
@@ -69,9 +69,9 @@ public class TimetableInfoPage extends InfoPage {
     /**
      * Sets vertical size of the table.
      * @param start starting time of timetable.
-     * @param end end time of timetable.
      */
-    public void setTableTime(int start, int end, int totalRows) {
+    public void setTableTime(int start, int totalRows) {
+        assert totalRows >= 0 : "Timetable cannot have negative number of rows.";
         for (int i = 0; i < totalRows; i++) {
             RowConstraints rowConst = new RowConstraints();
             rowConst.setPercentHeight(100.0 / totalRows);

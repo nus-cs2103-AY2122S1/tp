@@ -11,7 +11,6 @@ public class TimetableCommand extends Command {
     public static final String COMMAND_WORD = "timetable";
     public static final String SHORTCUT = "tt";
     public static final String NO_CLASS = "No class found.";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": show timetable\n"
             + "Parameters: nil\n"
             + "Example: " + COMMAND_WORD;

@@ -45,20 +45,20 @@ public class AddToClassCommand extends Command {
             + "found in the address book: ";
     private static final String MESSAGE_NO_STUDENT_ADDED = "No student has been added.";
     private static final Logger logger = LogsCenter.getLogger(AddToClassCommand.class);
-    private List<Index> studentIndex;
+    private List<Index> studentIndices;
     private Index classIndex;
     private StudentList studentList;
     private boolean isUsingIndex;
-    private List<String> unfoundIndex = new ArrayList<>();
+    private List<String> unfoundIndices = new ArrayList<>();
 
     /**
      * Constructor for AddToClass command using student index.
-     * @param studentIndex index of student to be added.
+     * @param studentIndices index of student to be added.
      * @param classIndex index of class to be added to.
      */
-    public AddToClassCommand(List<Index> studentIndex, Index classIndex) {
+    public AddToClassCommand(List<Index> studentIndices, Index classIndex) {
         this.classIndex = classIndex;
-        this.studentIndex = studentIndex;
+        this.studentIndices = studentIndices;
         this.isUsingIndex = true;
     }
 
@@ -82,7 +82,8 @@ public class AddToClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //checks that the tuition class exists and is not full
+
+        //Check that the tuition class exists and is not full
         TuitionClass tuitionClass = model.getTuitionClass(classIndex);
         if (tuitionClass == null) {
             throw new CommandException(Messages.MESSAGE_CLASS_NOT_FOUND);
@@ -91,10 +92,13 @@ public class AddToClassCommand extends Command {
         if (isClassFull) {
             throw new CommandException(MESSAGE_LIMIT_EXCEEDED);
         }
-        //checks whether the command is using index or names
+
+        //Check whether the command is using index or names
         if (!isUsingIndex) {
+            logger.info("Names are used to add students.");
             return this.executeStudentName(model, tuitionClass);
         }
+        logger.info("Indices are used to add students.");
         return this.executeStudentIndex(model, tuitionClass);
     }
 
@@ -117,38 +121,56 @@ public class AddToClassCommand extends Command {
         ArrayList<Student> newStudents = new ArrayList<>();
         ArrayList<String> notAdded = new ArrayList<>();
         ArrayList<String> validStudentNames = new ArrayList<>();
-        ArrayList<String> existingStudent = new ArrayList<>();
+        ArrayList<String> existingStudents = new ArrayList<>();
         validStudentNames.addAll(tuitionClass.getStudentList().getStudents());
         int limit = tuitionClass.getLimit().getLimit();
         for (String studentName: studentList.getStudents()) {
             Student student = new Student(new Name(studentName));
             if (!model.hasStudent(student)) {
-                if (!invalidStudentNames.contains(studentName)) {
-                    invalidStudentNames.add(studentName);
-                }
+                addInvalidStudentName(studentName, invalidStudentNames);
                 continue;
             }
             if (validStudentNames.contains(studentName)) {
-                if (!existingStudent.contains(studentName)
-                        && !newStudents.contains(model.getSameNameStudent(student))) {
-                    existingStudent.add(studentName);
-                }
+                addExistingStudentName(studentName, existingStudents, newStudents, model, student);
                 continue;
             }
             if (limit <= validStudentNames.size()) {
-                if (!notAdded.contains(studentName)) {
-                    notAdded.add(studentName);
-                }
+                addToNotAdded(notAdded, studentName);
                 continue;
             }
             if (!newStudents.contains(model.getSameNameStudent(student))) {
-                newStudents.add(model.getSameNameStudent(student));
-                validStudentNames.add(studentName);
+                addNewStudent(studentName, newStudents, model, validStudentNames, student);
             }
         }
         ArrayList[] returnValue = new ArrayList[]{newStudents, invalidStudentNames,
-            validStudentNames, notAdded, existingStudent};
+            validStudentNames, notAdded, existingStudents};
         return returnValue;
+    }
+
+    private void addInvalidStudentName(String studentName, ArrayList<String> invalidStudentNames) {
+        if (!invalidStudentNames.contains(studentName)) {
+            invalidStudentNames.add(studentName);
+        }
+    }
+
+    private void addExistingStudentName(String studentName, ArrayList<String> existingStudents,
+                                ArrayList<Student> newStudents, Model model, Student student) {
+        if (!existingStudents.contains(studentName)
+                && !newStudents.contains(model.getSameNameStudent(student))) {
+            existingStudents.add(studentName);
+        }
+    }
+
+    private void addToNotAdded(ArrayList<String> notAdded, String studentName) {
+        if (!notAdded.contains(studentName)) {
+            notAdded.add(studentName);
+        }
+    }
+
+    private void addNewStudent(String studentName, ArrayList<Student> newStudents, Model model,
+                               ArrayList<String> validStudentNames, Student student) {
+        newStudents.add(model.getSameNameStudent(student));
+        validStudentNames.add(studentName);
     }
 
     /**
@@ -188,6 +210,7 @@ public class AddToClassCommand extends Command {
     private String updateStudent(ArrayList<Student> newStudents, TuitionClass tuitionClass,
                                 TuitionClass modifiedClass, Model model) {
         String logStudentName = "";
+        assert newStudents != null : "Students to be added should not be null.";
         for (Student student : newStudents) {
             Student studentToAdd = student;
             Student studentToChange = student;
@@ -211,10 +234,10 @@ public class AddToClassCommand extends Command {
      */
     private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) {
         ArrayList<String> studentNames = new ArrayList<>();
-        for (Index index: studentIndex) {
+        for (Index index: studentIndices) {
             Student student = model.getStudent(index);
             if (student == null) {
-                this.unfoundIndex.add("Index " + index.getOneBased() + " ");
+                this.unfoundIndices.add("Index " + index.getOneBased() + " ");
             } else {
                 studentNames.add(student.getName().toString());
             }
@@ -238,14 +261,11 @@ public class AddToClassCommand extends Command {
         boolean noStudentAdded = newStudents.size() == 0;
         boolean studentExists = students[4].size() > 0;
         String message = "";
-        ArrayList<String> studentAdded = new ArrayList<>();
-        for (Student student : newStudents) {
-            studentAdded.add(student.getName().toString());
-        }
+        ArrayList<String> studentsAdded = getNewlyAddedStudentNames(newStudents);
         if (noStudentAdded) {
             message += MESSAGE_NO_STUDENT_ADDED + "\n";
         } else {
-            message += String.format(MESSAGE_SUCCESS, studentAdded) + "\n";
+            message += String.format(MESSAGE_SUCCESS, studentsAdded) + "\n";
         }
         if (studentExists) {
             message += String.format(MESSAGE_STUDENT_EXISTS, students[4]) + "\n";
@@ -256,10 +276,18 @@ public class AddToClassCommand extends Command {
         if (hasInvalidNames) {
             message += MESSAGE_STUDENT_NOT_FOUND + invalidStudentNames;
         }
-        if (unfoundIndex.size() > 0) {
-            message += MESSAGE_STUDENT_NOT_FOUND + unfoundIndex;
+        if (unfoundIndices.size() > 0) {
+            message += MESSAGE_STUDENT_NOT_FOUND + unfoundIndices;
         }
         return message;
+    }
+
+    private ArrayList<String> getNewlyAddedStudentNames(ArrayList<Student> newStudents) {
+        ArrayList<String> studentsAdded = new ArrayList<>();
+        for (Student student : newStudents) {
+            studentsAdded.add(student.getName().toString());
+        }
+        return studentsAdded;
     }
 
     @Override
@@ -276,7 +304,7 @@ public class AddToClassCommand extends Command {
             return false;
         }
         if (isUsingIndex) {
-            if (!studentIndex.equals(that.studentIndex)) {
+            if (!studentIndices.equals(that.studentIndices)) {
                 return false;
             }
         } else {

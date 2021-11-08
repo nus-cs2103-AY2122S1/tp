@@ -95,7 +95,7 @@ class TimetableTest {
         }
 
         @Override
-        public Label productLabel(String message) {
+        public Label produceLabel(String message) {
             return null;
         }
     }

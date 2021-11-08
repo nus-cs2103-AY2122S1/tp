@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.Model;
@@ -21,8 +24,15 @@ public class SortCommand extends Command {
             + "Example1: " + COMMAND_WORD + " " + PREFIX_SORT_ORDER + "asc\n"
             + "Example2: " + COMMAND_WORD;
     public static final String MESSAGE_SORTED = "The tuition class list is now sorted by %1$s order";
+    private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
     private SortCommandParser.Order order;
+
+    /**
+     * Constructs a SortCommand with a sort order.
+     * @param order the order to sort.
+     */
     public SortCommand(SortCommandParser.Order order) {
+        logger.info("Start sorting by " + getSuccessMessage(order.toString()) + " order");
         this.order = order;
     }
 
@@ -36,6 +46,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         SortCommandParser.Order resultOrder;
+        assert this.order != null : "Order to sort should not be null";
         switch (this.order) {
         case ASCENDING:
             resultOrder = SortCommandParser.Order.ASCENDING;
@@ -69,6 +80,7 @@ public class SortCommand extends Command {
         case "desc":
             return "descending";
         default:
+            //This line should not be reached
             return order;
         }
     }
