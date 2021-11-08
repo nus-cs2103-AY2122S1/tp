@@ -16,7 +16,7 @@ import seedu.programmer.model.student.Student;
 
 
 /**
- * Adds a lab with total score and default score for all the students in the list.
+ * Edits a lab with new lab number and total score for all students.
  */
 public class EditLabCommand extends Command {
 
@@ -45,6 +45,8 @@ public class EditLabCommand extends Command {
 
     /**
      * @param original the lab to be edited.
+     * @param newLabNum the new lab number.
+     * @param total the total score to be added.
      * */
     public EditLabCommand(Lab original, LabNum newLabNum, LabTotal total) {
         requireNonNull(original);
@@ -54,6 +56,7 @@ public class EditLabCommand extends Command {
     }
     /**
      * @param original the lab to be edited.
+     * @param total the total score to be added.
      * */
     public EditLabCommand(Lab original, LabTotal total) {
         requireNonNull(original);
