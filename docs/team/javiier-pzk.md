@@ -59,7 +59,7 @@ restaurants.
 * Released JAR files on GitHub team repo for [v1.3 (trial)](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases/tag/v1.3(trial)) and [v1.3 (final)](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases/tag/v1.3(final))
 
 #### Review and Mentoring contributions
-* Reviewed [59](https://github.com/AY2122S1-CS2103T-T17-1/tp/pulls?q=is%3Apr+reviewed-by%3A%40me+is%3Aclosed) PRs in total
+* Reviewed [60](https://github.com/AY2122S1-CS2103T-T17-1/tp/pulls?q=is%3Apr+reviewed-by%3A%40me+is%3Aclosed) PRs in total
 * PRs reviewed with non-trivial comments: PRs [\#33](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/33), 
       [\#127](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/127), [\#189](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/189)
 
