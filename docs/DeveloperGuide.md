@@ -325,7 +325,7 @@ Step 4. `FilterCommandParser` helps to extract out the tokens and generate a `Fi
 
 The following sequence diagram visually describes the steps above:
 
-![InteractionSequenceDiagram](images/FilterCommandSequenceDiagram.png)
+![FilterCommandSequenceDiagram](images/FilterCommandSequenceDiagram.png)
 
 ### 4.5 Organisations feature
 
