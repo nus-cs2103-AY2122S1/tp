@@ -10,34 +10,35 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
 Given below are my contributions to the project.
 
 * **New Feature**: Implemented functionality and test cases for remark field ([#41](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/41)).
-  * What it does: Adds an optional remark field to patient that can contain any text with restriction.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them. 
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+  * What it is: An optional remark field for patients and doctors which contains text without any restriction.
+  * Justification: Remark provides a field for important miscellaneous information about patients or doctors such as allergies and chronic conditions.
+  * Highlights: This enhancement introduced a new field to the existing `Person` object with a new prefix to consider. Since most of the architecture and test classes have dependencies with `Person`, many classes had to be meticulously updated. (**Note**: `Patient` and `Doctor` are subclasses of `Person`)
 
-* **New Feature**: * Implemented functionality and test cases for remark patient command ([#41](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/41)).
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* **New Feature**: Implemented functionality and test cases for remark patient command ([#41](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/41)).
+  * What it does: Allows user to add remarks to a specific patient.
+  * Justification: This feature improves the product because it allows the user to easily edit remarks through an independent command instead of coupling the functionality with add and edit patient commands and needlessly clutter the possible fields these commands can take. 
+  Also, since the remark would likely be updated frequently to reflect patients' current considerations, having a separate command without the relatively more sophisticated logic used in the execution path (including parsing) of edit command allows the execution of remark command to be quicker.
+  * Highlights: Since this is an entirely new command added which edits `Patient` details, the execution path required not only consideration for parsing the user input but also interactions with the current list of patients.
 
 * **New Feature**: Implemented functionality and test cases for toggle command ([#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58)).
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+  * What it does: Allows the user to toggle between patient state and doctor state.
+  * Justification: This feature improves the product because it allows the user to toggle between the two states to execute commands according to the state.
+  * Highlights: Since toggling of states also involves toggling the list displayed to the user in the UI, careful considerations were required during implementation to minimize the coupling amongst `UI`, `Model` and `Logic` components. 
 
 * **New Feature**: Implemented functionality and test cases for list doctor command ([#75](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/75)).
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+  * What it does: Allows the user to list all doctors
+  * Justification: This feature improves the product because it allows the user to list all doctors within PlannerMD. The user can thus view all the doctors' details and execute commands on the listed doctors.
+  * Highlights: Since this command should only be executed when PlannerMD is in the `Doctor` state, parsing of the command needs to be sensitive to the state.
 
 * **New Feature**: Implemented functionality and test cases for find doctor command ([#74](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/74), [#78](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/78)).
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+  * What it does: Allows the user to find a list of doctors according to keyword(s).
+  * Justification: This feature improves the product because it allows the user to quickly search for doctors according to keyword(s). The user can thus view all the filtered doctors' details and execute commands on the listed doctors.
+  * Highlights: Since this command should only be executed when PlannerMD is in the `Doctor` state, parsing of the command needs to be sensitive to the state.
 
-* **New Feature**: Updated Model component to be stateful and added integration tests for relevant classes ([#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58), [#70](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/70)).
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* **New Feature**: Updated PlannerMD architecture to be stateful and added integration tests for relevant classes ([#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58), [#70](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/70)).
+  * What it does: Implement state within the architecture of PlannerMD
+  * Justification: To keep our commands as simple as possible, without explicitly referencing patient or doctor.
+  * Highlights: This enhancement affects existing commands and commands to be added as commands executed now depends on the state as well. Existing parser thus needed to be updated to be sensitive to the state as well. 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=hpkoh&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hpkoh&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
@@ -47,8 +48,6 @@ Given below are my contributions to the project.
   * Update remark doctor/patient command to propagate changes to appointments and updated test cases to test for propagation([#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122))
   * Update tag doctor/patient command to propagate changes to appointments and updated test cases to test for propagation([#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122))
   * Update delete doctor/patient command to propagate deletion to appointments and updated test cases to test for propagation([#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122))
-
-<div style="page-break-after: always;"></div>
 
 * **Documentation**:
   * Contributions to the UG:
@@ -66,14 +65,14 @@ Given below are my contributions to the project.
     * Added manual testing instructions for remark command ([#232](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/232), [#268](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/268))
     * Added manual testing instructions for tag command ([#232](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/232), [#268](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/268))
     * Standardize use cases ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
-    * Added doctor use cases ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
+    * Added use cases for doctor commands ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
     * Standardize manual testing format ([#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250), [#265](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/265))
 
 
 * **Contributions to team-based tasks**:
   * Check code coverage and testability of implementations
-  * Update plannerMD to support doctor features([#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58))
-  * Update parser to parse appointment commands([#105](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/105))
+  * Updated PlannerMD to support doctor features([#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58))
+  * Updated parser to parse appointment commands([#105](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/105))
   * Fixed bugs found in the PED and manual testing([#235](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/235), [#119](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/119), [#235](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/235))
 
 * **Community**:
