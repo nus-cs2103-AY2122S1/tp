@@ -168,7 +168,7 @@ Adds a person at the given index to a specified subgroup of group.
 Format: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
 Advanced user Format: `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
 
-* Adds a person with the `INDEX` to `SUBGROUP_NAME` of `SUBGROUP_NAME`.
+* Adds a person with the `INDEX` to `SUBGROUP_NAME` of `GROUP_NAME`.
 
 Examples:
 * `person 1 /add g:Orbital sg:Artemis`
@@ -593,7 +593,7 @@ Action                    | Format                                              
 **Untag**                 | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /ut [t:TAG1,TAG2,...]`
 **Clear Tags**            | `person (INDEX) /cleartags`                                                   | `p (INDEX) / ct`
 **List Persons**          | `person /list`                                                                | `p /l`
-**List Persons in Group or SubGroup** | `person [INDEX] /list`                                            | `p [INDEX] /l`
+**List Persons in Group or SubGroup** | `person (INDEX) /list`                                            | `p [INDEX] /l`
 **Find**                  | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
 **Archive**               | `person (INDEX) /archive`                                                     | `p (INDEX) /ar`
 **Archive All**           | `person /archive`                                                             | `p /ar`
@@ -653,3 +653,13 @@ Action     | Format   | Short Format
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous Notor home folder.
+
+## Coming Soon!
+
+### What's next?
+
+In the future, we would like to implement these features to enhance the experiences of mentors in using Notor:
+  * View command for the viewing pane to support viewing other types of notes and command summary through the help command.
+  * Different UI settings for the users to choose the color scheme they prefer.
+  * Expand help window to improve user's experience in looking for help.
+  * Import command to support importing data from CSV into Notor.
