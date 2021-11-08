@@ -71,7 +71,7 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
           [\#385](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/385)
         * Created and maintained the command summary at the bottom of the User Guide
           [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35), 
-          [\517](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/517)
+          [\#517](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/517)
     * Developer Guide:
         * Added implementation details of the `filter`
           feature. [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162), [\#549](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/549), [\#576](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509)
@@ -87,7 +87,6 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
    [\#500](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/500)
     * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/348),
    [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/324))
-    * Reported bugs and suggestions for other teams in the class (
-      examples: [1](https://github.com/shermannws/ped/issues/7),
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/shermannws/ped/issues/7),
    [2](https://github.com/shermannws/ped/issues/17),
    [3](https://github.com/shermannws/ped/issues/5))
