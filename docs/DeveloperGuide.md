@@ -450,7 +450,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
   * 1b1. Resume use case from step 1.
 
 
-#### Use ase: User exits from Notor
+##### Use case: User exits from Notor
 
 **MSS**
 
