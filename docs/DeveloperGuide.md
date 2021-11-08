@@ -254,6 +254,47 @@ To create a class, the user has to provide a valid class code (unique from curre
 - **Alternative 2 (current choice)**: A `GroupSystem` under a module.
 
     - Pros: Simple to save and load. More OOP-oriented and instinctive to understand.
+    
+### Assign students grades for assignments
+
+A command for grading assignments was added: `grade INDEX id/ASSIGNMENT ID st/STATUS [s/SCORE]`. This command allows the user to assign a Grade object to a student. The user can delete grades using the command `dlgrade INDEX id/ASSIGNMENT ID`.
+
+The `grade` command parses the user's input into a valid `Grade` object, then retrieves the assignment from the current module using the assignment's unique `id`. Since assignments are linked to a specific module, the user must `cd` into a module before using the `grade` command.
+
+Within each `Person` object, there is an `AssignmentGradeMap` that keeps track of the student's assignments and their respective grade. 
+Internally, `AssignmentGradeMap` is implemented using a `HashMap` of `Assignments` mapped to `Grades`.
+
+
+#### `Grade` object
+
+The `Grade` object contains the completion status of the assignment (Not submitted, Submitted, Graded) and optionally the score that the student has achieved.
+
+The user must choose from the three available completion status only. Additionally, if the completion status is "Graded", the user can choose to also assign the student a score. If the completion status is "Not submitted" or "Submitted", a score cannot be assigned to the student.
+
+#### Design considerations:
+
+- **Alternative 1 (current choice):** Store grades under students.
+  - Pros: More intuitive to implement. From an OOP point of view, it makes more sense for students' grades to be stored under the Person object.
+  - Cons: More difficult to implement deletion of assignments, as the delete command needs to iterate through every person in the module to remove grades.
+
+- **Alternative 2:** Store grades under assignments.
+  - Pros: Easier to implement deletion, as grades can be stored under individual assignments and the entire assignment can be deleted.
+  - Cons: Difficult to implement creation and storage of grades, as it is difficult to maintain an association between `Person` objects and `Assignment` objects, especially when students' details are edited.
+
+### \[Proposed\] Separate view for assignments 
+
+#### Proposed Implementation
+
+A new command will be added: `view [asg/info]`. This command toggles the view between assignments and the default contact list.
+
+#### Assignment View
+
+This view will be optimized for verifying and grading assignments. 
+
+### Contact List View
+
+This is the current view of the app. This is optimized to display contact details.
+
 
 ---
 
