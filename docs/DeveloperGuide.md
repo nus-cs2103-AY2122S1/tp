@@ -596,12 +596,6 @@ Step 4. Since the value of `Email` (compulsory field) for the second contact is 
 
 Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will not display the second contact. The other fields and contacts will be displayed as per normal.  
 
-
-#### Design considerations:
-* Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-before: always;"></div>
@@ -1329,10 +1323,10 @@ testers are expected to do more *exploratory* testing.
        Expected: Tags added to contact at index 1. Details of the tags added to contact are shown in the status message.
 
     1. Test case: `tag 2 t/friends`<br>
-       Expected: No changes to the contact. Warning details are shown in the status message.
+       Expected: No changes to the contact. Warning details about existing tag(s) are shown in the status message.
        
     1. Test case: `tag 2 t/party t/friends`<br>
-        Expected: New tag is added to the contact. Warning details are shown in the status message.
+        Expected: New tag is added to the contact. Warning details about existing tag(s) are shown in the status message.
 
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag 1 t/<tag name longer than 60 characters>`, `...`.<br>
        Expected: No changes to contacts. Error details are shown in the status message.
@@ -1368,11 +1362,16 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 1. Export Filtered contact list
-
     1. Prerequisites: Filter contacts using the `find` command.
 
-    1. Test case: `mailingList` as above<br>
-        Expected: Same result as exporting full contact list, but with only the contacts in the filtered list
+    1. Test case: variations on `mailingList` as above<br>
+        Expected: Same result as exporting full contact list, but with only the contacts displayed in the filtered list
+
+1. Export Empty contact list
+    1. Prerequisites: Filter contacts using the `find` command.
+
+    1. Test case: `mailingList`<br>
+        Expected: Exporting a mailing list of 0 contacts is not allowed. Error details are shown in the status message.
 
 ### Saving data
 
