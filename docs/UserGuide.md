@@ -123,6 +123,8 @@ Refer to the [Features](#features) section for more details of each command.
 
 <br>
 
+## User Guide Usage
+
 ### User Guide Formatting
 
 Formatting Item|Description
@@ -138,7 +140,6 @@ _Italics_ | Examples to complement descrptions
 
 <br>
 
-## User Guide Usage
 ### User Guide Navigation
 
 Item to Clarify | Section in User Guide
@@ -755,19 +756,19 @@ These flags are used for identifying fields and parameters in a command. The tab
 
 Flags for Specific Fields|Flags for Lookup|Name|Description/Conditions
 -----|-----|-----|----------
-i/|-i|Index|<ul><li>Represents the corresponding **staff index in the displayed staff list**.
-n/|-n|Name|<ul><li>Represents the **name** of the staff.<li>**Compulsory** field. <li>Names are case sensitive, so _john_ and _John_ are regarded as two different people.<li>Duplicate names are not accepted.
-p/|-p|Phone Number|<ul><li>Represents the **phone number** of the staff.<li>**Compulsory** field. <li>Phone number must be longer than 3 digits, containing only numeric characters.
-e/|-e|Email|<ul><li>Represents the **email** of a staff. <li>**Compulsory** field. <li>Must be of format `local-part@domain`. <li>The `local-part` must only contain alphanumeric characters, excluding and the special characters "`+ _ . -`"", but cannot start or end with any special character. <li>The `domain` is made up of `domain labels`  separated by periods. It must end with a `domain label` which is at least 2 characters long. <li>The `domain labels` must consist of alphanumeric characters, separated only by hyphens, if any, and they must start and end with alphanumeric characters.
-r/|-r|Role|<ul><li>Represents the **responsibilities** that a staff member has in the store.<li>The accepted roles are: `floor`, `kitchen`, or `bartender`. <li>The absence of a role would be denoted as "norole".
-t/|-t|Tags|<ul><li>Tags are used to **store additional information** about staff, and can be used to **reference staff**.<li>Tags are sorted in alphabetical order.
-s/|-s|Status|<ul><li>Represents the **employment status** of a staff.<li>The accepted statuses are: `fulltime`, or `partime`.
-$/|-$|Salary (per hour)|<ul><li>Represents the **salary** of a staff.<li>**Compulsory** field. <li>Must be a non-negative number representing the **staff's pay in dollars**. <li>Cents can be added, by adding a period, followed by the cents, which then also has to be a positive number of either 1 or 2 digits. <li>The maximum salary that can be set is $9999.99.
-d/|-d|Shift (for shift related commands)|<ul><li>Represents a **shift** of a staff.<li>Represented as a `DAYOFWEEK-SLOT_NUMBER`. <li>`DAYOFWEEK` refers to the **day of the week**, such as _monday_ or _saturday_. The `DAYOFWEEK` is case insensitive.<li>`SLOT_NUMBER` refers to either the first or second shift. The first shift (morning) is represented with `0`, and the second shift (afternoon) is represented with `1`.<li>Example: `TUESDAY-0` and `wednesday-1` are valid shifts.
-rr/|NA|Role Requirements|<ul><li>Represents the **requirements of each role**. <li>When  used as an input, it is represented as `ROLE-REQUIRED_NUMBER`. <li> The required number refers to the number of staff of that role required per shift.
-da/|NA|Date|<ul><li>Dates must be of format `YYYY-MM-DD` when provided.</li><li>**When no dates are provided:** the resultant period for the command is the next 7 days, inclusive of the current one.</li><li>**When one date is provided:** the resultant period for the command is the next following the one provided, inclusive.</li><li>**When two dates are provided:** the resultant period for the command is between the first and the second date provided, inclusive. The first date provided has to be before or equal to the second date.</li><li>To specify a single date, provide two dates representing same date.</li>
-st/|NA| Shift Time | <ul><li>Shift time must have start and end time.</li><li>Time is in the format of HH:mm. (e.g. 10:30 represents 10.30 am) </li><li>Start and end time must have a dash to delimit the two. (e.g. 10:30-11:30 represents 10.30 am to 11.30 a.m)</li>
-NA |-ti|Shift (by Time)|<ul><li>Represents in the format `DAYOFWEEK-TIME` <li>The time must be of format `HH:mm`, and follows the 24hr format.
+i/|-i|Index| * Represents the corresponding **staff index in the displayed staff list**.
+n/|-n|Name| * Represents the **name** of the staff. * **Compulsory** field. * Names are case sensitive, so _john_ and _John_ are regarded as two different people. * Duplicate names are not accepted.
+p/|-p|Phone Number| * Represents the **phone number** of the staff. * **Compulsory** field.  * Phone number must be longer than 3 digits, containing only numeric characters.
+e/|-e|Email| * Represents the **email** of a staff.  * **Compulsory** field.  * Must be of format `local-part@domain`.  * The `local-part` must only contain alphanumeric characters, excluding and the special characters "`+ _ . -`"", but cannot start or end with any special character.  * The `domain` is made up of `domain labels`  separated by periods. It must end with a `domain label` which is at least 2 characters long.  * The `domain labels` must consist of alphanumeric characters, separated only by hyphens, if any, and they must start and end with alphanumeric characters.
+r/|-r|Role|<ul> * Represents the **responsibilities** that a staff member has in the store. * The accepted roles are: `floor`, `kitchen`, or `bartender`. * The absence of a role would be denoted as "norole".
+t/|-t|Tags|<ul> * Tags are used to **store additional information** about staff, and can be used to **reference staff**. * Tags are sorted in alphabetical order.
+s/|-s|Status|<ul> * Represents the **employment status** of a staff. * The accepted statuses are: `fulltime`, or `partime`.
+$/|-$|Salary (per hour)|<ul> * Represents the **salary** of a staff. * **Compulsory** field.  * Must be a non-negative number representing the **staff's pay in dollars**.  * Cents can be added, by adding a period, followed by the cents, which then also has to be a positive number of either 1 or 2 digits.  * The maximum salary that can be set is $9999.99.
+d/|-d|Shift (for shift related commands)|<ul> * Represents a **shift** of a staff. * Represented as a `DAYOFWEEK-SLOT_NUMBER`.  * `DAYOFWEEK` refers to the **day of the week**, such as _monday_ or _saturday_. The `DAYOFWEEK` is case insensitive. * `SLOT_NUMBER` refers to either the first or second shift. The first shift (morning) is represented with `0`, and the second shift (afternoon) is represented with `1`. * Example: `TUESDAY-0` and `wednesday-1` are valid shifts.
+rr/|NA|Role Requirements|<ul> * Represents the **requirements of each role**.  * When  used as an input, it is represented as `ROLE-REQUIRED_NUMBER`.  *  The required number refers to the number of staff of that role required per shift.
+da/|NA|Date|<ul> * Dates must be of format `YYYY-MM-DD` when provided.</li> * **When no dates are provided:** the resultant period for the command is the next 7 days, inclusive of the current one.</li> * **When one date is provided:** the resultant period for the command is the next following the one provided, inclusive.</li> * **When two dates are provided:** the resultant period for the command is between the first and the second date provided, inclusive. The first date provided has to be before or equal to the second date.</li> * To specify a single date, provide two dates representing same date.</li>
+st/|NA| Shift Time | <ul> * Shift time must have start and end time.</li> * Time is in the format of HH:mm. (e.g. 10:30 represents 10.30 am) </li> * Start and end time must have a dash to delimit the two. (e.g. 10:30-11:30 represents 10.30 am to 11.30 a.m)</li>
+NA |-ti|Shift (by Time)|<ul> * Represents in the format `DAYOFWEEK-TIME`  * The time must be of format `HH:mm`, and follows the 24hr format.
 
 :exclamation: Note: "NA" means that the tag does not exist.
 
