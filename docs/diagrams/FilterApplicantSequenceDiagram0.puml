@@ -20,13 +20,18 @@ MrTechRecruiterParser -> FilterApplicantCommandParser **
 MrTechRecruiterParser -> FilterApplicantCommandParser ++ : parse()
 
 FilterApplicantCommandParser -> FilterApplicantDescriptor **
+activate FilterApplicantDescriptor
+FilterApplicantDescriptor --> FilterApplicantCommandParser -- : d
+|||
 
 FilterApplicantCommandParser -> FilterApplicantCommand ** : new FilterApplicantCommand(d)
+activate FilterApplicantCommand
+FilterApplicantCommand --> FilterApplicantCommandParser -- : f
 
-FilterApplicantCommandParser -> MrTechRecruiterParser -- : f
+FilterApplicantCommandParser --> MrTechRecruiterParser -- : f
 destroy FilterApplicantCommandParser
 
-MrTechRecruiterParser -> LogicManager -- : f
+MrTechRecruiterParser --> LogicManager -- : f
 deactivate MrTechRecruiterParser
 |||
 ref over LogicManager : execution continues

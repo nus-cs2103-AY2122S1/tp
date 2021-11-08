@@ -12,16 +12,23 @@ participant "p:PositionPieChart" as PositionPieChart UI_COLOR
 participant ":PieChartDisplayer" as PieChartDisplayer UI_COLOR
 end box
 
-activate VisualizePositionCommand
+[-> VisualizePositionCommand ++ : execute()
 
 VisualizePositionCommand -> PositionPieChart **
 activate PositionPieChart
 return p
+|||
 
 VisualizePositionCommand -> PieChartDisplayer ** : new PieChartDisplayer(p)
-' activate PieChartDisplayer
-' return d
+activate PieChartDisplayer
+return
+|||
 
-VisualizePositionCommand --> PieChartDisplayer : displayPieChart()
+VisualizePositionCommand -> PieChartDisplayer ++ : displayPieChart()
+return
+destroy PieChartDisplayer
+
+[<-- VisualizePositionCommand -- : result
+destroy VisualizePositionCommand
 
 @enduml

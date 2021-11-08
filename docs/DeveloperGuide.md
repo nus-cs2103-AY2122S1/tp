@@ -348,7 +348,7 @@ Step 3. UI-wise, the applicant should now appear with the updated application st
 
 The following activity diagram summarizes the actions taken when LogicManager executes the MarkApplicantStatusCommand:
 
-![MarkApplicantActivityDiagram](images/MarkApplicantActivityDiagram.png)
+<img src="images/MarkApplicantActivityDiagram.png" width="750" />
 
 #### Design considerations:
 
@@ -393,6 +393,8 @@ to ensure the validity of the filters specified by the user.
 The (verified) `FilterApplicantDescriptor` is then passed to a call to `ApplicantMatchesFiltersPredicate#new`, which takes the filters and constructs a `Predicate` that evaluates to true only for an `Applicant` that passes all the filters, i.e. the filtering is performed with a logical `AND`.
 
 The `ApplicantMatchesFilterPredicate` is then passed to a call to `Model#updateApplicantFilteredList()`, where JavaFX's internal `FilteredList` functionality takes over and handles the filtering of the applicant list.
+
+Note: The `FilterApplicantDescriptor` is not marked for deletion when the command finishes execution, as it is used by the command result to display a success message to the user.
 
 #### Rationale for implementation
 
@@ -697,7 +699,7 @@ This feature makes use of JavaFX's built-in `PieChart` component, as well as the
   
 The following activity diagram describes the execution flow of the command:
 
-![VisualizeActivityDiagram](images/VisualizeActivityDiagram.png)
+<img src="images/VisualizeActivityDiagram.png" width="600" />
 
 Additionally, the following classes are responsible for generating and displaying the pie chart to the user:
 - `PositionPieChart`: A JavaFX `PieChart` summarizing a `Position`, and the application statuses of its `Applicants`.
@@ -708,7 +710,9 @@ Additionally, the following classes are responsible for generating and displayin
 
 The following sequence diagram demonstrates this process:
 
-![VisualizeSequenceDiagram](images/VisualizeSequenceDiagram.png)
+<img src="images/VisualizeSequenceDiagram.png" width="500" />
+
+Note: The `PositionPieChart` is not marked for deletion when the command finishes execution, as it persists for as long as the user keeps the pie chart open.
 
 #### Design Considerations
 

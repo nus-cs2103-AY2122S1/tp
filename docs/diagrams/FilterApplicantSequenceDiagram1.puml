@@ -20,10 +20,23 @@ activate LogicManager
 LogicManager -> FilterApplicantCommand ++ : execute(m)
 
 FilterApplicantCommand -> FilterApplicantDescriptorVerifier ** : new FilterApplicantDescriptorVerifier(m, d)
+activate FilterApplicantDescriptorVerifier
+return
+|||
 
 FilterApplicantCommand -> ApplicantMatchesFiltersPredicate ** : new ApplicantMatchesFiltersPredicate(d)
+activate ApplicantMatchesFiltersPredicate
+ApplicantMatchesFiltersPredicate --> FilterApplicantCommand -- : p
+|||
 
 FilterApplicantCommand -> Model : updateApplicantFilteredList(p)
-deactivate FilterApplicantCommand
+activate Model
+return
+
+return result
+destroy FilterApplicantCommand
+destroy FilterApplicantDescriptorVerifier
+
+[<-- LogicManager --
 
 @enduml
