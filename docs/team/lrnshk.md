@@ -1,6 +1,6 @@
 --- 
 layout: page
-title: Lauren Shak's Project Portfolio Page
+title: Lauren Shak Luo Jun's Project Portfolio Page
 ---
 
 ### Project: Track2Gather

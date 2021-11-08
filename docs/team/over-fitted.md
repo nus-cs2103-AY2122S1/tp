@@ -1,6 +1,6 @@
 --- 
 layout: page
-title: Andrew Sutjipto's Project Portfolio Page
+title: Andrew Wirawan Sutjipto's Project Portfolio Page
 ---
 
 ### Project: Track2Gather
