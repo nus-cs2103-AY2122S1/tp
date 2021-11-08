@@ -5,7 +5,7 @@ title: Justin Hoe's Project Portfolio Page
 
 ### Project: CONNECTIONS
 
-CONNECTIONS is a desktop app adapted from AB3 for managing contacts and keeping track of birthdays.
+CONNECTIONS is a desktop app adapted from [AddressBook - Level 3](https://se-education.org/addressbook-level3/) for managing contacts and keeping track of birthdays.
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI) that is created with JavaFX.
 It is written in Java and has about 10 KLOC. 
 

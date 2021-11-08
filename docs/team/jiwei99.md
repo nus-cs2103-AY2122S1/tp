@@ -5,7 +5,9 @@ title: Lim Ji Wei's Project Portfolio Page
 
 ### Project: CONNECTIONS
 
-CONNECTIONS is a desktop address book application. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CONNECTIONS is a desktop app adapted from [AddressBook - Level 3](https://se-education.org/addressbook-level3/) for managing contacts and keeping track of birthdays.
+It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI) that is created with JavaFX.
+It is written in Java and has about 10 KLOC.
 
 Given below are my contributions to the project.
 
