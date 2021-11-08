@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1 2 3")
+[-> LogicManager : execute("show 48")
 activate LogicManager
 
-LogicManager -> UniFyParser : parseCommand("delete 1 2 3")
+LogicManager -> UniFyParser : parseCommand("show 48")
 activate UniFyParser
 
 create ShowCommandParser
@@ -26,7 +26,7 @@ activate ShowCommandParser
 ShowCommandParser --> UniFyParser
 deactivate ShowCommandParser
 
-UniFyParser -> ShowCommandParser : parse("1 2 3")
+UniFyParser -> ShowCommandParser : parse("48")
 activate ShowCommandParser
 
 create ShowCommand
