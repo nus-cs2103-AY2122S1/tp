@@ -32,7 +32,7 @@ public class EditModuleLessonCommand extends Command {
     public static final String MESSAGE_USAGE = "editc: Edits the details of the lesson identified "
             + "by the index number used in the displayed lesson list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer and exists in contHACKS) "
             + "[" + PREFIX_MODULE_CODE + "MODULE_CODE LESSON_CODE] "
             + "[" + PREFIX_LESSON_DAY + "DAY] "
             + "[" + PREFIX_LESSON_TIME + "START_TIME END_TIME] "
@@ -72,7 +72,7 @@ public class EditModuleLessonCommand extends Command {
         List<ModuleLesson> lastShownList = model.getFilteredModuleLessonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         ModuleLesson lessonToEdit = lastShownList.get(index.getZeroBased());

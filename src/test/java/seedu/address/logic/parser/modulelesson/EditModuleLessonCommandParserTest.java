@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.modulelesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_DAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
@@ -48,30 +47,30 @@ public class EditModuleLessonCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(p, VALID_MODULE_CODE_CS2040S_B05, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(p, VALID_MODULE_CODE_CS2040S_B05, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(p, "1", MESSAGE_NO_FIELD_PROVIDED);
 
         // no index and no field specified
-        assertParseFailure(p, "", MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(p, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(p, "-1" + MODULE_CODE_DESC_CS2030S_T12, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(p, "-1" + MODULE_CODE_DESC_CS2030S_T12, MESSAGE_INVALID_FORMAT);
 
         // zero
-        assertParseFailure(p, "0" + MODULE_CODE_DESC_CS2030S_T12, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+        assertParseFailure(p, "0" + MODULE_CODE_DESC_CS2030S_T12, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(p, "0 DEBUGGING SUCKS" + MODULE_CODE_DESC_CS2030S_T12,
-                MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+                MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
         assertParseFailure(p, "0 i/DEBUGGING SUCKS" + MODULE_CODE_DESC_CS2030S_T12,
-                MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
