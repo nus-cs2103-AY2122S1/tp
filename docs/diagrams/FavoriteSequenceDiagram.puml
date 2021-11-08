@@ -11,6 +11,9 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
 end box
 
 [-> LogicManager : execute("fav 1")
@@ -47,11 +50,43 @@ activate FavoriteCommand
 
 FavoriteCommand -> FavoriteCommand : execute(model)
 activate FavoriteCommand
-FavoriteCommand --> FavoriteCommand :
+
+FavoriteCommand -> Model : getFilteredPersonList();
+activate Model
+
+Model -> FavoriteCommand : List<Person>
+deactivate Model
+
+FavoriteCommand -> FavoriteCommand : lastShownList.get(0)
+activate FavoriteCommand
+
+FavoriteCommand --> FavoriteCommand : target
 deactivate FavoriteCommand
 
-FavoriteCommand -> Model : model.favouritePerson()
+FavoriteCommand --> FavoriteCommand : CommandResult
+deactivate FavoriteCommand
+
+FavoriteCommand -> Model : model.favouritePerson(target)
 activate Model
+
+Model -> AddressBook
+activate AddressBook
+
+AddressBook -> UniquePersonList : favoritePerson(target)
+activate UniquePersonList
+
+UniquePersonList -> Person : setIsFavorite()
+activate Person
+
+Person -> UniquePersonList :
+deactivate Person
+
+UniquePersonList -> AddressBook :
+deactivate UniquePersonList
+
+AddressBook -> Model :
+deactivate AddressBook
+
 Model --> FavoriteCommand :
 deactivate Model
 
