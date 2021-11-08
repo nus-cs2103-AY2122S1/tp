@@ -10,6 +10,31 @@ import org.junit.jupiter.api.Test;
 public class PriorityTest {
 
     @Test
+    public void constructor_invalidPriority_throwsIllegalArgumentException() {
+        String invalidPriority = "";
+        assertThrows(IllegalArgumentException.class, () -> new Priority(invalidPriority));
+    }
+
+    @Test
+    public void validObjectPriorityCreation_success() {
+        Priority.ObjectPriority priorityHigh = Priority.ObjectPriority.HIGH;
+        Priority.ObjectPriority priorityLow = Priority.ObjectPriority.LOW;
+
+        assertTrue(priorityHigh.getValue() == 3);
+        assertTrue(priorityLow.getValue() == 1);
+    }
+
+    @Test
+    public void constructor_validObjectPriority_success() {
+        Priority.ObjectPriority priorityLow = Priority.ObjectPriority.LOW;
+
+        Priority priority = new Priority(priorityLow);
+
+        assertEquals(priority.getObjectPriority(), priorityLow);
+
+    }
+
+    @Test
     public void isValidPriority() {
         // null priority level
         assertThrows(NullPointerException.class, () -> Priority.isValidPriority(null));

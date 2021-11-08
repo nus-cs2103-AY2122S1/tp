@@ -106,7 +106,7 @@ Here is a table of commonly used terms in this document along with their meaning
    get the app to start in your device, please refer to the FAQ section. 
    The GUI shown in the image below should appear in a few seconds.
    Note how the app contains some sample data.<br>
-   ![Ui](images/UI.png)
+   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it.
 
