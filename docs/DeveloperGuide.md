@@ -444,8 +444,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user  | directly change details in the address book from the JSON file | gain confidence in using JSON files |
 | `* * *`  | user  | only have a few basic commands to use my address book | - |
 | `* * *`  | user  | use a CLI to control the application | gain confidence in using commands to navigate an application |
-| `* * *`  | user  | delete contacts out of my address book | remove them when there is a change in group members |
-| `* * *`  | user  | create groups | locate the bulk of people in groups easily |
+| `* * *`  | user  | remove contacts from my project group | remove them when there is a change in group members |
+| `* * *`  | user  | create groups | locate group mates easily |
 | `* * *`  | user  | list all groups | have a overview of all the groups |
 | `* * *`  | user  | delete a group | remove them once they are not needed anymore |
 | `* * `  | user  | easily access the contacts of my group mates, for centralising all the contact details | I can access them when I need them on my laptop |
