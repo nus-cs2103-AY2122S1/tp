@@ -1,26 +1,23 @@
 ---
 layout: page
-title: User Guide
+title: ClassMATE User Guide
 ---
 
 
 Are you having trouble with administrative work as a CS2101 tutor? Does current tools like Excel sheets or the pen and paper cause a lot of pain when trying to organize and search for students or recording class participation? Could there be a way to streamline this process while providing you a better way to visualise the information? Well, ClassMATE has it all covered!
 
-ClassMATE is a **desktop app designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' class participation without much hassle. Having both a Command Line Interface** (CLI) and a Graphical User Interface (GUI), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
+ClassMATE is a **desktop app designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' class participation without much hassle. Having both a Command Line Interface** [(CLI)](#Glossary) and a Graphical User Interface [(GUI)](#Glossary), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
 
-This user guide for ClassMATE, will teach you how to:
+This user guide for ClassMATE will teach you how to:
 * Create students, classes and groups
 * Organize groups in their respective classes
 * Add students to a class and their respective oral presentation groups within the class
 * Filter and search students by groups and classes
 * Add class participation marks for students
 
-The first part is a guide on how to set up ClassMATE and an overview of the symbols and syntax we use in the user guide.
-The remaining sections explain the important features of ClassMATE, such as the Tutorial Classes, Students,
-Marks, and Tutorial Group Commands.
+Check out the first few sections on how to set up ClassMATE and an overview of the symbols and syntax we use in the user guide. You can go through the remaining sections to learn how to use the various efficient features of ClassMATE, comprising the Tutorial Class, Student, Student Marks, and Tutorial Group Commands.
 
-Use the Table of Contents below to
-navigate to relevant sections to learn the commands for ClassMATE. Click on a section title to head there now!
+Use the Table of Contents below to navigate to relevant sections to learn how to use the various features of ClassMATE. Click on a section title to head there now!
 
 * Table of Contents
 {:toc}
@@ -28,12 +25,12 @@ navigate to relevant sections to learn the commands for ClassMATE. Click on a se
 
 ## How to use this User Guide
 
-This User Guide has been created to help users, old and new alike, familiarize themselves with ClassMATE, its features, commands and uses!
+This User Guide helps you familiarize yourself with ClassMATE, its features, commands and uses!
 
-* Use the Quick Start [below](#Quick-Start) :arrow_down_small: to setup ClassMATE on your Computer.
+* Use the Quick Start [below](#Quick-Start) :arrow_down_small: to set up ClassMATE on your Computer.
 * You may view the entire list of ClassMATE's Features by clicking [here](#features).
 * Alternatively, you can refer to the Command Summary Table at the bottom, or by clicking [here](#Command-Summary).
-* A list of frequently-asked questions (FAQs) is maintained [here](#FAQ)
+* You can check out a list of frequently-asked questions (FAQs) [here](#FAQ) and the glossary [here](#glossary)
 
 Throughout the User Guide,
 
@@ -43,25 +40,24 @@ Throughout the User Guide,
 
 **:warning:Warning** will be used to provide warnings about features
 
-We hope you find this User Guide helpful in using ClassMATE!
+We hope you find this User Guide helpful when using ClassMATE!
 
 ------
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer. (Go to [this website](https://codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) and follow the instructions to download and install Oracle JDK 11, which is _basically_ Java 11.)
+1. Ensure you have Java `11` or above installed in your Computer. (Go to [this website](https://codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) and follow the instructions to download and install Oracle JDK 11, which is _basically_ [Java 11](#Glossary).)
 1. Download the latest `classmate.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-1/tp/releases).
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-annotated.png)
-1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
-   Check out some examples in the [Tutorial](#CLI Tutorial)
-1. Refer to the [Features](#Features) below for details of each command.
+1. To execute a command, you must type the command in the **Command-Line Input** and press Enter, e.g. typing **`help`** and pressing Enter will open the help window. Check out some examples in the [Tutorial](#CLI Tutorial)
+1. Please refer to the [Features](#Features) below for details of each command.
 
 ## CLI Tutorial
 
 In this section, you will familiarize yourself with the use of CLI to facilitate your experience when using ClassMATE.
-All commands would be typed in the **Command-Line Input** located at the top of the user interface as shown in the image below.
+All commands have to be typed in the **Command-Line Input** located at the top of the user interface as shown in the image below.
 
 ![Command Line Input](images/CommandLineInput.png)
 
@@ -90,12 +86,11 @@ Once you have attempted these commands, you're ready to go!
 **:information_source: Notes about the command format:**<br>
 These are general rules applying to all explanations and command formats listed below!
 
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addstu n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -117,29 +112,25 @@ These are general rules applying to all explanations and command formats listed 
 
 ## Features
 
-Here, you can find instructions on how to use ClassMATE's various features. The features are divided into three main subsections,
-each covering different subsections, namely the Tutorial Class Features, Student features and Tutorial Group Features. Each
-subsection will provide you with an overview of the section, followed by the individual commands' formats, instructions on how to use them,
-examples of use and the expected outcome of executing these commands.
+Here, you can find instructions on how to use ClassMATE's various features. The features are divided into five main subsections, each covering different groups of commands:
+1. [Tutorial Class Commands](#tutorial-class-commands)
+2. [Student Commands](#student-commands)
+3. [Student Marks Commands](#student-marks-commands)
+4. [Tutorial Group Commands](#tutorial-group-commands)
+5. [Other Commands](#other-commands)
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page, which directs you to this user guide.
-
-![help message](images/helpMessage.png)
-
-Entering format: `help`
+Each subsection will provide you with an overview, followed by the individual command formats, instructions on how to use them, examples of their usage and the expected outcome of executing these commands. 
 
 ## Tutorial Class Commands
 
 This section covers all the commands you can use to manage information pertaining to tutorial classes!
 
-Features include the ability to:
-1. Add a tutorial class
-1. List all tutorial classes
-1. View all students in a tutorial class
-1. Find a tutorial class by its class code
-1. Delete a tutorial class
+You can:
+1. [Add a tutorial class](#adding-a-tutorial-class--addc)
+1. [List all tutorial classes](#listing-all-classes--listc)
+1. [View all students in a tutorial class](#viewing-a-class-viewc)
+1. [Find a tutorial class by its class code](#finding-classes-by-class-codes-findc)
+1. [Delete a tutorial class](#deleting-a-class-deletec)
 
 ### Adding a tutorial class : `addc`
 
@@ -198,20 +189,20 @@ Examples:
 
 ### Finding classes by class codes: `findc`
 
-Find classes by class codes.
+Finds a class by its class code.
 
-Entering format: `findc KEYWORD [MORE_KEYWORDS]`
+Entering format: `findc CLASS_CODE [MORE_CLASS_CODES]`
 
 **:information_source: Note:**<br>
-* The search is absolute. e.g `G0` will not match `G06`
+* The search is absolute. e.g. `G0` will not match `G06`
 
 Examples:
 
-* `findc G02` returns `G02` if it exists<br>
+* `findc G02` returns `G02` if it exists.<br>
 
 ### Deleting a class: `deletec`
 
-Deletes a class from ClassMATE
+Deletes a class from ClassMATE.
 
 Entering format: `deletec INDEX`
 
@@ -237,16 +228,13 @@ Examples:
 
 This part of the guide covers all the commands you can use to manage student information!
 
-These features include the ability to:
-1. Add new students
-1. Edit an existing student
-1. View a student's details
-1. Delete a student
-1. List all students
-1. Find students by name
-1. Add class participation marks
-1. Remove class participation marks
-
+You can:
+1. [Add a new student](#adding-a-student-addstu)
+1. [Edit an existing student](#editing-a-student--editstu)
+1. [View a student's details](#viewing-a-student--viewstu)
+1. [List all students](#listing-all-students--liststu)
+1. [Find students by name](#finding-students-by-name-findstu)
+1. [Delete a student](#deleting-a-student--deletestu)
 
 ### Adding a student: `addstu`
 
@@ -274,18 +262,22 @@ Entering format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] 
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
-* At least one of the optional fields must be provided.
+* At least one of the optional parameters must be provided.
 
   <div markdown="span" class="alert alert-primary"> :information-source: **Note:**
-      An error message will be displayed to provide at least one field if no fields are provided, regardless of whether the INDEX is valid or not. The INDEX will be checked after at least one optional field is provided.
+      An error message will be displayed to provide at least one parameter if no parameters are provided, regardless of whether the INDEX is valid or not. The INDEX will be checked after at least one optional parameter is provided.
   </div>
 
 **:information_source: Note:**<br>
 * The index must be a positive integer 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
+
+<div markdown="span" class="alert alert-primary">:warning: **Warning:**
+When editing a student, the previous information in the parameter being updated will be irreversibly deleted so be careful! :warning:
+</div>
 
 Examples:
 *  `editstu 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -295,7 +287,7 @@ Examples:
 
 ![view student](images/viewstu.png)
 
-View a student's details in ClassMATE, as shown in the picture above
+Views a student's details in ClassMATE, as shown in the picture above.
 
 Format: `viewstu INDEX`
 
@@ -324,7 +316,7 @@ Finds students whose names contain any of the given keywords.
 
 Entering format: `findstu KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 
@@ -354,20 +346,27 @@ Examples:
 
 ## Student Marks Commands
 
-There are 6 types of Marks that can be assigned to a student, for each session that the student attends. It is meant to be a class participation score, but its use can be flexible. The marks that can be assigned are:
+This section of the guide covers all the commands you can use to manage student marks!
+
+You can:
+1. [Add the latest mark](#adding-the-latest-mark-addlm)
+1. [Delete the latest mark](#deleting-latest-mark-deletelm)
+1. [Delete all marks for a student](#deleting-all-marks-deleteam)
+
+There are 6 types of Marks that can be assigned to a student for each session that the student attends. These marks are meant to be a class participation score, but you can use it flexibly. The marks that can be assigned are:
 
 * Poor
 * Low
-* Avg
+* Avg (short for Average)
 * Good
 * High
 * Excellent
 
-### Adding Latest Mark: `addlm`
+### Adding the Latest Mark: `addlm`
 
-Adds the mark for latest session.
+Adds a mark to a student for their latest session.
 
-Entering format: `addlm INDEX m/Mark`
+Entering format: `addlm INDEX m/MARK`
 
 * Mark is not case-sensitive.
 * The index refers to the index number shown in the displayed student list.
@@ -382,7 +381,7 @@ Examples:
 
 ### Deleting Latest Mark: `deletelm`
 
-Deletes the mark for latest session.
+Deletes the mark of a student for their latest session.
 
 Entering format: `deletelm INDEX`
 
@@ -396,7 +395,7 @@ Entering format: `deletelm INDEX`
 Examples:
 
 * `liststu` followed by `addlm 2 m/Low`  and `deletelm 2` deletes the LOW mark assigned to the 2nd student in the student list.
-* `findstu Betsy` followed by `deletelm 1` deletes latest sessions' mark for 1st student in the results of `findstu`.
+* `findstu Betsy` followed by `deletelm 1` deletes the latest sessions' mark for 1st student in the results of `findstu`.
 
 ### Deleting All Marks: `deleteam`
 
@@ -421,9 +420,16 @@ These are the commands that involve tutorial groups!
 
 The first part covers interactions between groups and classes, while the second part covers interactions between students and groups.
 
-### Adding a group: `addcg`
+You can:
+1. [Add a new tutorial group](#adding-a-tutorial-group-addcg)
+1. [Views all students in a tutorial group](#viewing-a-tutorial-group-viewg)
+1. [Delete a tutorial group](#deleting-a-tutorial-group-deletecg)
+1. [Add a student to a tutorial group](#adding-students-to-a-tutorial-group-addsg)
+1. [Delete a student from a tutorial group](#deleting-student-from-a-group-deletesg)
 
-Adds a group to a particular tutorial class in ClassMATE
+### Adding a Tutorial Group: `addcg`
+
+Adds a tutorial group to a particular tutorial class in ClassMATE.
 
 Entering format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
@@ -432,34 +438,28 @@ Entering format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 
 * GROUP_TYPE refers to the assignment that the group will work for. It should only be OP1 or OP2.
 
-* The class must have already been added to ClassMATE first. If you are unsure, you can refer to
-  [Adding a Tutorial Class](#adding-a-tutorial-class)
+* The class must have already been added to ClassMATE first. If you are unsure, you can refer to [Adding a Tutorial Class](#adding-a-tutorial-class--addc)
 
-* Tutorial groups are identified by GROUP_NUMBER, GROUP_TYPE and CLASS_CODE. This means that
-  any two tutorial groups are identical if all three fields are identical, which is not allowed.
+* Tutorial groups are identified by GROUP_NUMBER, GROUP_TYPE and CLASS_CODE. This means that any two tutorial groups are identical if all three parameters are identical, which is not allowed.
 
 Examples:
 * `addcg gn/1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
+### Viewing a Tutorial Group: `viewg`
 
-### Viewing a Group: `viewg`
-
-Lists students in a particular tutorial group in ClassMATE
+Displays all students in a particular tutorial group in ClassMATE.
 
 Entering format: `viewg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
 **:information_source: Note:**<br>
 * Only `OP1` and `OP2` are accepted as Group Types.
 
-
 Examples:
 * `viewg c/G06 type/OP2 gn/1` lists the students in `OP2` Group `1` of class `G06`
 
+### Deleting a Tutorial Group: `deletecg`
 
-### Deleting a Group: `deletecg`
-
-Deletes a group from ClassMATE
-
+Deletes a tutorial group from ClassMATE.
 
 Entering Format: `deletecg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
@@ -477,11 +477,11 @@ This command deletes a group and is irreversible. :warning:
 Examples:
 * `deletecg c/G06 type/OP2 gn/1` deletes the `OP2` Group `1` of class `G06`
 
-### Adding Student to a group: `addsg`
+### Adding Students to a Tutorial group: `addsg`
 
-Adds a student to a group.
+Adds a student to a tutorial group.
 
-Entering format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
+Entering format: `addsg INDEX gn/GROUP_NUMBER c/CLASS_CODE type/TYPE`
 
 * Adds the student to a group in the class
 
@@ -495,7 +495,7 @@ Example:
 
 Deletes a student from a group.
 
-Entering format: `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE`
+Entering format: `deletesg INDEX g/GROUP_NUMBER c/CLASS_CODE type/TYPE`
 
 * Deletes the student from a group in the class
 * Type refers to the assignment that the group will work together for
@@ -507,6 +507,18 @@ Entering format: `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE`
 Example:
 * `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
   `deletesg 1 gn/1 c/G06 type/OP1` then removes Betsy from OP1 Group 1 in class G06
+
+## Other Features
+
+These are other commands and features you can use in ClassMATE!
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page, which directs you to this user guide. So, don't worry about forgetting commands, just refer to this guide!
+
+![help message](images/helpMessage.png)
+
+Entering format: `help`
 
 ### Clearing all data : `clear` :warning:
 
@@ -532,7 +544,7 @@ ClassMATE data is saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-ClassMATE data are saved as a JSON file `[JAR file location]/data/classmate.json`. Advanced users are welcome to update data directly by editing that data file.
+ClassMATE data are saved as a [JSON](#Glossary) file `[JAR file location]/data/classmate.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ClassMATE will discard all data and start with an empty data file at the next run.
@@ -543,57 +555,61 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClassMATE home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the [JSON](#Glossary) file that contains the data of your previous ClassMATE home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
-### Tutorial Class Commands
+### Tutorial Classes
 
 Action | Format, Examples
 --------|------------------
-**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00pm to 4:00pm`
-**List all classes** | `listc`
-**View students in class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
-**Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc G02`
-**Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
+**[Add class](#adding-a-tutorial-class--addc)** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2:00pm to 4:00pm, Friday 2:00pm to 4:00pm`
+**[List all classes](#listing-all-classes--listc)** | `listc`
+**[View students in class](#viewing-a-class-viewc)** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
+**[Find class](#finding-classes-by-class-codes-findc)** | `findc CLASS_CODE [MORE_CLASS_CODES]`<br> e.g., `findc G02`
+**[Delete class](#deleting-a-class-deletec)** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
 
-### Student Commands
+### Students
 
 Action | Format, Examples
 --------|------------------
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
-**List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
-**View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
-**Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
-**Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
+**[Add student](#adding-a-student-addstu)** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
+**[Edit student](#editing-a-student--editstu)** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
+**[List students](#listing-all-students--liststu)** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
+**[View student](#viewing-a-student--viewstu)** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
+**[Find student](#finding-students-by-name-findstu)** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
+**[Delete student](#deleting-a-student--deletestu)** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
 
-### Tutorial Group Commands
+### Student Marks
 Action | Format, Examples
 --------|------------------
-**Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
-**List Tutorial Group** | `listg`
-**Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg 1 gn/1 c/G01 type/OP1`
-**Delete Student from Group** | `deletesg INDEX gn/GROUP_NAME c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
-**View Students from Group** | `viewg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `viewg gn/1 c/G01 type/OP1`
-**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
+**[Add latest mark](#adding-the-latest-mark-addlm)** | `addlm INDEX m/MARK`<br> e.g., `liststu` followed by `addlm 1 m/excellent`
+**[Delete latest mark](#deleting-latest-mark-deletelm)** | `deletelm INDEX`<br> e.g., `liststu` followed by `deletelm 2`
+**[Delete all marks](#deleting-all-marks-deleteam)** | `deleteam INDEX`<br> e.g., `liststu` followed by `deleteam 3`
+
+### Tutorial Groups
+Action | Format, Examples
+--------|------------------
+**[Add tutorial group](#adding-a-tutorial-group-addcg)** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
+**[View students from group](#viewing-a-tutorial-group-viewg)** | `viewg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `viewg gn/1 c/G01 type/OP1`
+**[Delete tutorial group](#deleting-a-tutorial-group-deletecg)** | `deletecg INDEX` <br> e.g., `deletecg 2`
+**[Add student to group](#adding-students-to-a-tutorial-group-addsg)** | `addsg INDEX g/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g., `addsg 1 gn/1 c/G01 type/OP1`
+**[Delete student from group](#deleting-student-from-a-group-deletesg)** | `deletesg INDEX gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
 
 ### Other Commands
 Action | Format, Examples
 --------|------------------
-**Help** | `help`
-**Clears ClassMATE data** | `clear`
-**Exit ClassMATE** | `exit`
-
-
+**[Help](#viewing-help--help)** | `help`
+**[Clears ClassMATE Data](#clearing-all-data--clear-warning)** | `clear`
+**[Exit ClassMATE](#exiting-the-program--exit)** | `exit`
 
 ## Glossary
 
 Term | Definition
 --------|------------------
-**Java 11** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
-**JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
-**CLI** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following visual prompts from the program.
-**GUI** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with a program through graphical icons.
+**[Java 11](#How to use this User Guide)** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
+**[JSON](#Editing the data file)** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
+**[CLI](#How to use this User Guide)** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following visual prompts from the program.
+**[GUI](#How to use this User Guide)** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with a program through graphical icons.

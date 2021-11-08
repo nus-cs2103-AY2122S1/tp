@@ -13,24 +13,33 @@ Given below are my contributions to the project.
 
 * Enhancements implemented:
   * New feature: Added the ability to find classes:
-    * PR [\#130]()
+    * PR [\#130](), 
     * Allows the user to find a specific tutorial class among all the tutorial classes, so they can use other features of ClassMATE with the desired tutorial class.
     * This implementation was a bit tough as it was my first feature implementation, which involved configuring several edits to the existing code, including the creation of `FindClassCommand` and `FindClassCommandParser`, which define the find class command. I also modified several files to integrate the `FindClassCommand` into ClassMATE, including `ClassmateParser`.
+    * I also added test cases to catch bugs in the command.
   * New feature: Added the ability to view students in a group:
-    * PR [\#151]()
+    * PR [\#151](), 
     * Allows the user to only see students who are in a specific tutorial group. The student list is filtered to show only students who are in the desired tutorial group, for easy access to perform other features of ClassMATE with students in the tutorial group.
-    * This implementation required an understanding of the `TutorialGroup` feature (contributed by Yirui and Yiyang) and required the creation of more `Predicate` classes to filter students in the student list, including `GroupMemberPredicate` and `TutorialGroupContainsKeywordPredicate`.
+    * This implementation required an understanding of the `TutorialGroup` feature (contributed by Yirui and Yi Yang) and required the creation of more `Predicate` classes to filter students in the student list, including `GroupMemberPredicate` and `TutorialGroupContainsKeywordPredicate`.
+    * I also added test cases to catch bugs in the command.
 
 * **Documentation**:
     * Edited various documents to repurpose AddressBook into ClassMATE [\#78]()
     * User Guide:
         * Added documentation for the features `addc`, `deletec` and `viewc` [\#76]()
         * Rearranged order of the features to improve readability [\#76](), [\#238]()
-        * Updated command summary [\#76](), [\#238]()
+        * Updated command summary and improve readability [\#76](), [\#238]()
+        * Added Java 11 download instructions [\#140]()
+        * Made the user guide more personable [\#140]()
+        * Added warnings to commands that involved deletion of data [\#238](),
+        * Fixed spelling and grammatical errors
+        * Added hyperlinks to increase navigability
+        * Added student mark commands in command summary
     * Developer Guide:
         * Added glossary terms [\#81]()
-        * Added use cases [\#81]()
+        * Added use cases [\#81](), 
         * Added non-functional requirements [\#81]()
+        * Fixed spelling and grammatical errors [\#130](), 
 
 * **Refactoring**:
     * Refactored Person to Student
@@ -49,9 +58,10 @@ Given below are my contributions to the project.
       * Viewg bug [\#179]()
       * Non-existent class/group bug [\#241]()
       * Documentation bugs [\#170](), [\#220]()
+      * Fixed grammatical errors in PPPs
 
 * **Review Contributions**
-    * PRs Reviewed with comments: [\#77](), [\#131](), [\#135](), [\#138](), [\#142](), [\#207]()
+    * PRs Reviewed with comments: [\#77](), [\#131](), [\#135](), [\#138](), [\#142](), [\#207](), [\#240](), [\#243]()
 
 * **Community Contributions**
     * Bugs reported in other teams work:
