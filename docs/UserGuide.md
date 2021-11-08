@@ -117,7 +117,7 @@ Scroll down to the bottom and click on `recruitIn.jar`.
    ![Ui](images/ug-features/description.png)
    
    Applicant data are displayed as a list in the **Applicant Panel**.
-   ![Applicant Diagram](images/dg-diagrams/ApplicantDiagram.png)
+   ![Applicant Diagram](images/ApplicantDiagram.png)
 
 5. Now that your app is set up and running, lets run through a quick sample workflow on managing an applicant:<br><br>
 
