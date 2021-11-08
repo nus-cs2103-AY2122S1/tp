@@ -35,6 +35,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed releases `v1.3` on GitHub. [release](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases/tag/v1.3)
+  * Managed PDF conversion for User Guide and Developer Guide.
   
 
 * **Documentation**:
