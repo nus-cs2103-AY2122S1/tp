@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -162,7 +162,7 @@ ClassMATE allows the user to manage information relevant to the TutorialClass. A
 1. Add a new tutorial class
 2. Delete an existing tutorial class
 3. List all existing tutorial class
-4. Find all tutorial classes containing a keyword in their classcodes
+4. Find tutorial classes by their class codes (more [here](#Class and Group Filters Features))
 5. View Class Details
 
 #### Current Implementation
@@ -193,21 +193,16 @@ Step 2. The user executes an `addc c/G01 s/Tuesday 12:00pm to 2:00pm, Friday 12:
 state of ClassMATE. The updated `UniqueTutorialClassList` will be displayed in the `ClassListPanel`
 to the user.
 
-Step 3. The user executes a `findc G01` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
-of tutorial classes. The updated filtered list consisting of te results of the search query will be displayed to the user.
-
-Step 4. The user executes a  `viewc 1` command. The `viewc` command updates the `FilteredList` of `TutorialCLass`es to only display the class at the
+Step 3. The user executes a  `viewc 1` command. The `viewc` command updates the `FilteredList` of `TutorialCLass`es to only display the class at the
 given index, and updates the `FilteredList` of `Students` to contain only the students who are in the selected class. The updated filtered list of
 students and tutorial classes will be displayed to the user.
 
-Step 5. The user executes a `deletec 2` command. The `deletec` command calls `Model#deleteTutorialCLass()`, modifying and saving the
+Step 4. The user executes a `deletec 2` command. The `deletec` command calls `Model#deleteTutorialCLass()`, modifying and saving the
 state of ClassMATE by deleting the class stored at the given index in the `FilteredList`. The students from the deleted class are no longer part of the deleted
 class and left with a displayed class code of `No Class`. The tutorial groups that were part of the class will be deleted. This updated list will be displayed to the user.
 
-Step 6. The user executes a `listc` command. The `listc` command calls `Model#updateFilteredTutorialClassList()` modifying and saving the state of the `FilteredList`
+Step 5. The user executes a `listc` command. The `listc` command calls `Model#updateFilteredTutorialClassList()` modifying and saving the state of the `FilteredList`
 to contain all tutorial classes in ClassMATE. This updated list will be displayed to the user.
-
-
 
 Using the example of the `AddClassCommand`,
 when the user enters the `addc` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Logic component](#logic-component).
@@ -220,17 +215,6 @@ The *Sequence Diagram* below summarises the aforementioned steps in the executio
 Execution of the `AddClassCommand`
 
 #### Design Considerations
-
-#### Aspect: Finding Tutorial Classes
-
-* Alternative 1 (current choice): Find tutorial class by exact class code
-    * Pros: Higher Accuracy in search, and due to the class code being three letters, does not cause users to take significantly
-      more time.
-    * Cons: Search keyword can only match specific class instead of finding multiple classes.
-* Alternative 2 : Find Tutorial Classes by selecting all classes with classcodes containing the search keyword
-    * Pros: Shorter keyword to type, therefore increasing user typing speed slightly, and user is able to find multiple classes
-    * Cons: Lower Accuracy in searching for a specific class, all class codes being with G and multiple class codes beginning with 'G0' for example.
-
 
 #### Aspect: Student and Tutorial Class lists
 * Alternative 1 (current choice): Use two separate lists to store students and tutorial classes
@@ -258,8 +242,8 @@ ClassMATE allows the user to manage information about Students. The user is able
 #### Current Implementation
 
 `Classmate` facilitates all operations related to students. It maintains a `UniqueStudentList` consisting of all students as well as a
-seperate `FilteredList` of students in `ModelManager` that reflect the current state of the student list to be displayed to the user. `Classmate` contains the logic related to
-managing students, and summarises the various student realted commands.
+separate `FilteredList` of students in `ModelManager` that reflect the current state of the student list to be displayed to the user. `Classmate` contains the logic related to
+managing students, and summarises the various student related commands.
 
 The following operations are supported by ClassMATE:
 
@@ -292,7 +276,7 @@ Step 5. The user executes a `viewstu 1` command. The `viewstu` command causes a 
 groups the student is in and the class participation marks for previous lessons. Any movements to the main screen would result in this window closing.
 
 Step 6. The user executes a `deletestu 2` command. The `deletestu` command calls the `Model#deleteStudent()` function. This executes a `DeleteStudentCommand`,
-which deletes a student curretnly in the second index of the `FitleredList`. This modifies and saves the state of ClassMATE, displaying the updated list of students
+which deletes a student currently in the second index of the `FitleredList`. This modifies and saves the state of ClassMATE, displaying the updated list of students
 to the user.
 
 Step 7. the user executes a `liststu` command. The command calls the `Model#updateFilteredStudentList()` function by setting the predicate of the
@@ -313,7 +297,7 @@ Execution of the `FindStudentCommand`
 
 #### Aspect: Adding Students to ClassMATE
 
-* Alternative 1 (current choice): Add a student with a compulsory classcode parameter
+* Alternative 1 (current choice): Add a student with a compulsory `CLASS_CODE` parameter
     * Pros: This was the most intuitive option, as users only need add students assigned to their classes. Therefore, requiring users
       to create a class before adding a student prevents the case where students are added without a class
     * Cons: This increases the command length for the user, increasing the time taken for the user to type the command.
@@ -327,12 +311,12 @@ Execution of the `FindStudentCommand`
 * Alternative 1 (current choice): Display a summary of user information in the List and more details upon viewing the student.
     * Pros: This reduces cluttering in the student display panel and presents the necessary information to the user in the list. User has the option to
     focus on a particular student and view additional details if they need to.
-    * Cons: This necessiates the creation of an additional `viewc` command for users to be able to view this data.
+    * Cons: This necessitates the creation of an additional `viewc` command for users to be able to view this data.
 
 * Alternative 2: Present all student information in the student list itself.
     * Pros: All student information can be seen in one place without having to use additional commands to access information.
     * Cons: This is not visually appealing and provides information in a cluttered manner to the user, reducing the overall
-    quality of the user's experience using the applicaiton.
+    quality of the user's experience using the application.
 
 ### Student Participation Mark Features
 
@@ -383,7 +367,7 @@ Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls t
 Step 4. The user executes a `deleteam 1` command. The `deleteam` command calls `DeleteAllMarkCommand#deleteAllStudentMark()`, then subsequently `Model#setStudent()`and `Model#updateFilteredStudentList()`, modifying and saving the state of ClassMATE by deleting all marks for the 1st student at the given index in the `UniqueStudentList`. This updated list will be displayed to the user.
 
 Using the example of the `AddMarkCommand`,
-when the user enters the `addm` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
+when the user enters the `addm` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#logic-component).
 During the parsing, a new `Student` instance is created. This `Student` instance will be received by the `AddMarkCommand` when it is created.
 
 The *Sequence Diagram* below summarizes the aforementioned steps.
@@ -408,11 +392,11 @@ Execution of the `AddMarkCommand`
 * Alternative 1: Display as a list under student credentials in each student card
   * Pros: Simple to implement, easily viewed
   * Cons: Unable to fit all marks, lack of earlier mark visibility
-* Alternative 2 (current choice): Display in 'viewstu' command as separate feature
+* Alternative 2 (current choice): Display in `viewstu` command as separate feature
   * Pros: Can view all marks at once, clear to understand
   * Cons: Marks can only be viewed for one student at a time
 
-### ClassCode Implementation Feature
+### ClassCode Features
 (Contributed by Zhou Yirui)
 
 ClassMATE allows user to assign a Student or a Tutorial Group to a Tutorial Class using a ClassCode. A user is able to:
@@ -434,7 +418,7 @@ The `addstu` command calls `Model#hasTutorialClass()`, and the model component c
 class code exists. If it exists, the student is added successfully with the classCode parameter `G08`, else, an error message is given.
 
 Step 2: The user deletes TutorialClass G08 using the `deletec c/G08` command. The `deletec` command changes the ClassCode of all students
-of TutorialClass `G08` to `G00`. On ClassMATE, the UI reflects the Student to have no Tutorial Class. 
+of TutorialClass `G08` to `G00`. On ClassMATE, the UI reflects the Student to have no Tutorial Class, i.e. `No class`.
 
 ### Tutorial Group Management Features
 This feature is split into two parts.
@@ -493,7 +477,7 @@ command, except it removes that tutorial group from ClassMATE after checking if 
 in that tutorial group.
 
 Using the example of the `AddGroupCommand`,
-when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
+when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#logic-component).
 During the parsing, a new TutorialGroup instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
 
 The *Sequence Diagram* below summarizes how tutorial groups are added to a tutorial class.
@@ -517,7 +501,6 @@ The *Sequence Diagram* below shows how `UniqueTutorialClassList` retrieves the
     * Pros: Simpler to implement, easier to add or remove tutorial groups.
       Storing tutorial groups as arrays in JSON is less complicated.
     * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
-
 
 #### Current Implementation (Adding/Removing Student from Tutorial Group)
 
@@ -550,7 +533,44 @@ During the execution of `AddStudentToGroupCommand`, a new `Student` instance wit
 * Alternative 2: Identifying the Student using a Student ID. 
     * Pros: Faster to perform the action of adding/deleting a Student from Tutorial Group. 
     * Cons: Utility of Student ID is low as it is not used by other Commands. Also more difficult to implement.
-    
+
+### Class and Tutorial Group Filters Features
+
+(Contributed by Gabriel Waikin Loh Matienzo)
+
+ClassMATE allows the user to filter students based on tutorial groups and find. A user is able to:
+
+1. View all students in a class
+2. View all students in a group
+
+#### Proposed Implementation
+
+Using the Predicate class `ClassCodeContainsKeywordsPredicate`(implemented by Vishnu), which finds a specific class given a class code as well as implementing a `GroupMember Predicate` that filters for students in a particular tutorial group, `Model#updateFilteredStudentList` is used to display a new list of students from a particular class or tutorial group.
+
+ClassMATE will then support the following command classes:
+
+* `FindClassCommand(ClassCode classCode)`
+* `ViewGroupCommand(ClassCode classCode, GroupNumber groupNumber, GroupType groupType)`
+
+These commands inherit from the `Command` class, and are named accordingly.
+
+Given below is an example of how the class and group filter features can be used:
+
+Step 1. The user has at least one class and at least one group in that class. The user executes a `findc G01` command. During parsing the `findc` command creates a `ClassCodeContainsKeywordsPredicate` that is used to call `Model#updateFilteredClassList()` to filter for `TutorialClass`(s) with the same class code(s) as the one(s) specified. Before this, the `findc` command also checks if there is no such `TutorialClass` and returns an error if there is none. If there are no errors, the state of the filtered list of tutorial classes is updated, and the updated filtered list will display the results of the search query to the user.
+
+Step 2. The user executes a `viewg c/G01 type/OP1 gn/1` command. After parsing the command, the `viewg` command first checks if there exists a `TutorialClass` with the specified class code. the `viewg` command checks if there exists a `TutorialGroup` with the specified class code, group type and group number. After all the checks pass, the `viewg` command calls `Model#updateFilteredStudentList()` to filter for students who belong to the `TutorialGroup` with the specified parameters. This updates the state of the filtered list of students, and the updated filtered list will display the results of the search query to the user.
+
+#### Design Considerations
+
+#### Aspect: Finding Tutorial Classes
+
+* Alternative 1 : Find tutorial classes by filtering for all tutorial classes with class codes containing the given keyword.
+  * Pros: Shorter keywords may increase user typing speed slightly, and user is able to find multiple classes at once.
+  * Cons: The increase in user typing speed may be marginal and negligible, as users may only save time not typing 1 character as the class codes are 3 characters long and all class codes begin with G. Additionally, the search will have lower accuracy as you may see up to 10 classes for a two character search e.g. `G0`.
+* Alternative 2 (current choice): Find tutorial classes by their exact class code
+  * Pros: Higher Accuracy in search, and since class codes are only three characters long, it does not cause users to take significantly more time.
+  * Cons: Keywords used in searches can only match specific classes instead of finding multiple classes at once.
+ 
 ### Recommended workflow for setting up ClassMATE
 
 The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
@@ -592,24 +612,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see help      | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | find help      | refer to instructions when I forget how to use the App                 |
 | `* *`  | new user                                       | view sample data              | see what the app looks like when in use                               |
 | `* * *`  | user                                       | add a new student              |                                                                        |
 | `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
 | `* * *`  | user                                       | add a new class                |                                                                        |
 | `* * `   | user                                       | add a class schedule           | plan my week in advance                                                |
 | `* * *`  | user                                       | view a class' details          | easily check the details of a particular class                         |
-| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need
+| `* * *`  | user                                       | delete a student               | remove students as required                                 |
+| `* * *`  | user                                       | delete a class                 | remove classes I no longer need
 | `* * *`  | user                                       | find a student by name          | locate details of students without having to go through the entire list |
 | `* * *`  | user                                       | find a class by code           | locate details of a class without having to go through the entire list |
 | `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
 | `* * *`  | user                                       | view all students in a class   | see the students enrolled in a particular class                                         |
-| `* *`    | experienced user                           | add class participation details to a student | track the paricipation of each student                   |
-| `* *` | experienced user | add groups within tutorial classes | to organise my class groups |
-| `* *` | experienced user | add students to specific sub-groups | to organise students in groups based on examination (e.g. OP1) |
-| `* *` | experienced user | delete students from specific sub-groups | remove students from the group as required |
+| `* *`    | experienced user                           | add class participation details to a student | track the participation of each student |
 | `*` | user | add different types of marks to students | to mark students for various assessments |
+| `* *` | experienced user | add tutorial groups within tutorial classes | organise my class groups |
+| `* *` | experienced user | add students to specific tutorial groups | to organise students in groups based on examination (e.g. OP1) |
+| `* *` | experienced user | delete students from specific tutorial groups | remove students from tutorial groups as required |
+| `* *` | experienced user | view students from specific tutorial groups | easily see the students in a tutorial group |
+| `* *` | experienced user | delete tutorial groups from tutorial classes | remove tutorial groups I no longer need |
 
 ### Use cases
 
@@ -745,7 +767,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 1b. The tutorial class that the tutorial group is being added to does not exists.
+* 1b. The tutorial class that the tutorial group is being added to does not exist.
     *  1b1. ClassMATE shows a message informing the user.
 
   Use case ends.
@@ -794,7 +816,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
-**Use case: Delete Latest Mark from Student**
+**Use case: View Students in a Tutorial Group**
+
+**MSS**
+
+1. User requests to view Students in a Tutorial Group from a Tutorial Class using some parameters that identify the Tutorial Group.
+
+2. ClassMATE shows the filtered list of students that belong to the specified Tutorial Group to the user.
+
+**Extensions**
+
+* 1a. Tutorial Class does not exist.
+  * 1a1. ClassMATE shows an error message.
+
+  Use case ends.
+
+* 1b. Tutorial Group does not exist.
+  * 2b1. ClassMATE shows an error message.
+
+  Use case ends.
+
+**Use case: Delete the Latest Mark from Student**
 
 **MSS**
 
@@ -849,7 +891,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tutorial group**: A tutorial group is a subsection of the class and contains a few students for the purpose of small activities or group project.
 * **Group number**: The number of a group in the CS2101 class, which is specified by a number.
 * **Class code**: The name of a typical class in for the CS2101 module. E.g. G06.
-* **Group type**: The type of a group in the CS2101 class, which is either OP1 or OP2.
+* **Group type**: The type of tutorial group in the CS2101 class, which is either OP1 or OP2.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -62,7 +62,7 @@ Student Marks State Diagram before/after operation `deletelm`:
 
 *After* :
 
-![StudentMarksState2](diagrams\StudentMarksState2.png)
+![StudentMarksState2](diagrams/StudentMarksState2.png)
 
 
 

@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **Enhancements implemented**:
   * Viewing student functionality
     * Command for viewing a student
-    * Creating a pop up window to display student information
+    * Creating a pop-up window to display student information
   * Tutorial Group implementation
     * Creating TutorialGroup and its fields, GroupNumber and GroupType
     * Saving tutorial groups in JSON file under each tutorial class
