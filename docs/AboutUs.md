@@ -56,4 +56,4 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[portfolio](team/kvihashini.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI,  Model and logic for Groups and related features.
