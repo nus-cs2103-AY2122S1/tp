@@ -14,19 +14,13 @@ Given below are my contributions to the project.
 
 ### New Features
 
-* **Telegram Class**:
-    * Pull requests [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54)
-    * What it does: Allows user to store the Telegram handles of people in their contacts.
+* **Telegram and Github Class**:
+    * Pull requests 
+    [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54) and
+    [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88)
+    * What it does: Allows user to store the Telegram handle and Github username of people.
     * Justification: Provides convenience when looking to connect with any of the
-     existing contacts.
-    * Highlights: The implementation was rather challenging as it required simultaneous
-    changes to occur in the Model and Logic component.
-    
-* **Github Class**:
-    * Pull requests [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88)
-    * What it does: Allows user to store the Github usernames of people in their contacts.
-    * Justification: Provides convenience before looking to connect with any of the
-     existing contacts.
+     existing contacts without having to source for ways to communicate and understand.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
     
@@ -41,15 +35,15 @@ Given below are my contributions to the project.
 * **Favorite Command**:
     * Pull requests [\#127](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/127)
     * What it does: Allows user to favorite an existing contact.
-    * Justification: This feature allows for users to sort out contacts that might be
-    of importance to them, such as their family and friends.
+    * Justification: Allow users to sort out contacts that are important to them,
+     such as their family and friends.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
     
 * **Unfavorite Command**:
     * Pull requests [\#131](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/131)
     * What it does: Allows user to unfavorite an existing contact.
-    * Justification: This feature allows for users to sort out contacts that might no
+    * Justification: Allow users to sort out contacts that might no
      longer be of importance to them.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
@@ -126,9 +120,7 @@ UserPrefsTest (Pull requests
 * ConfigTest,
 GuiSettingsTest,
 LogsCenterTest,
-MessagesTest,
-JsonUserPrefsStorageTest,
-JsonUserProfileStorageTest (Pull requests
+MessagesTest (Pull requests
 [\#273](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/273))
 * StorageManagerTest (Pull requests
 [\#273](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/273),
