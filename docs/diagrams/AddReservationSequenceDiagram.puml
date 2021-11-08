@@ -1,0 +1,158 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+participant ":AddCommandPrefixParser" as AddCommandPrefixParser LOGIC_COLOR
+participant ":AddReservationCommandParser" as AddReservationCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":AddReservationCommand" as AddReservationCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "EzFoodie" as EzFoodie MODEL_COLOR
+participant "UniqueMemberList" as UniqueMemberList MODEL_COLOR
+participant "Member" as Member MODEL_COLOR
+participant "FilteredList" as FilteredList MODEL_COLOR
+end box
+
+[-> LogicManager : execute(add -rs/...)
+activate LogicManager
+
+LogicManager -> EzFoodieParser : parseCommand(add -rs/...)
+activate EzFoodieParser
+
+create AddCommandPrefixParser
+EzFoodieParser -> AddCommandPrefixParser : AddCommandPrefixParser()
+activate AddCommandPrefixParser
+
+AddCommandPrefixParser --> EzFoodieParser
+deactivate AddCommandPrefixParser
+
+EzFoodieParser -> AddCommandPrefixParser : parse(arguments)
+activate AddCommandPrefixParser
+
+create AddReservationCommandParser
+AddCommandPrefixParser -> AddReservationCommandParser : AddReservationCommandParser()
+activate AddReservationCommandParser
+
+AddReservationCommandParser --> AddCommandPrefixParser
+deactivate AddReservationCommandParser
+
+AddCommandPrefixParser --> EzFoodieParser
+deactivate AddCommandPrefixParser
+
+EzFoodieParser -> AddReservationCommandParser : parse(arguments)
+activate AddReservationCommandParser
+
+AddReservationCommandParser -> ParserUtil : parseDateTime(datetime)
+activate ParserUtil
+
+ParserUtil --> AddReservationCommandParser
+
+AddReservationCommandParser -> ParserUtil : parseRemark(remark)
+
+ParserUtil --> AddReservationCommandParser
+
+AddReservationCommandParser -> ParserUtil : parseReservationId(id)
+
+ParserUtil --> AddReservationCommandParser
+deactivate ParserUtil
+
+create AddReservationCommand
+AddReservationCommandParser -> AddReservationCommand : AddReservationCommand(id, datetime, remark)
+activate AddReservationCommand
+
+AddReservationCommand --> AddReservationCommandParser
+deactivate AddReservationCommand
+
+AddReservationCommandParser --> EzFoodieParser
+deactivate AddReservationCommandParser
+
+EzFoodieParser --> LogicManager
+deactivate EzFoodieParser
+
+LogicManager -> AddReservationCommand : execute(model)
+activate AddReservationCommand
+
+AddReservationCommand -> Model : getUpdatedMemberList()
+activate Model
+
+AddReservationCommand -> Member : getReservations()
+activate Member
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getName()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getPhone()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getEmail()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getAddress()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getTimeStamp()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getCredit()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getPoints()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getTransactions()
+
+Member --> AddReservationCommand
+
+AddReservationCommand -> Member : getReservations()
+
+Member --> AddReservationCommand
+deactivate Member
+
+AddReservationCommand -> AddReservationCommand : createEditedMember(memberToEdit, reservationToAdd)
+
+AddReservationCommand -> Model : getReservationsList()
+
+Model --> AddReservationCommand
+
+AddReservationCommand -> Model : setMember(memberToEdit, editedMember)
+
+Model -> EzFoodie : setMember(target, editedMember)
+activate EzFoodie
+
+EzFoodie -> UniqueMemberList : setMember(target, editedMember)
+activate UniqueMemberList
+
+deactivate UniqueMemberList
+deactivate EzFoodie
+
+AddReservationCommand -> Model : updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS)
+
+
+Model -> FilteredList : setPredicate(predicate)
+activate FilteredList
+
+FilteredList --> Model
+deactivate FilteredList
+
+deactivate Model
+
+AddReservationCommand --> LogicManager
+deactivate AddReservationCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

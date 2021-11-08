@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes command start with "sort";
+
+:Check command;
+
+if () then ([user command is valid])
+    :Parse arguments from command;
+    :Extract sort order from arguments;
+    :Create comparator with sort order;
+    :Sort members based on comparator;
+    :List sorted members;
+    :Show success message to user;
+else ([user command is invalid])
+    :Show error message to user;
+endif
+
+stop
+@enduml

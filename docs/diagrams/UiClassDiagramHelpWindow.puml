@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class HelpWindow
+Class HelpBox
+}
+
+HelpWindow *-down-> "1" HelpBox
+
+HelpWindow --|> UiPart
+HelpBox --|> UiPart
+
+HelpWindow -[hidden]-|> UiPart
+@enduml

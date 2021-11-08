@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class SummaryWindow
+Class SummaryBox
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+SummaryWindow *-down-> "1" SummaryBox
+
+SummaryWindow --|> UiPart
+SummaryBox --|> UiPart
+
+SummaryBox ..> Model
+
+SummaryWindow -[hidden]-|> UiPart
+@enduml

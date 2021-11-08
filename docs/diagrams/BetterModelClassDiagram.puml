@@ -4,18 +4,27 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+EzFoodie *-right-> "1" UniqueMemberList
+EzFoodie *-right-> "1" UniqueReservationList
+UniqueReservationList -[hidden]down- UniqueMemberList
+UniqueReservationList -[hidden]down- UniqueMemberList
 
-UniqueTagList *-right-> "*" Tag
-UniquePersonList -right-> Person
+UniqueReservationList *-right-> "*" Reservation
+UniqueMemberList -right-> Member
 
-Person -up-> "*" Tag
+Member -up-> "*" Reservation
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Member *--> "1" MemberId
+Member *--> "1" Name
+Member *--> "1" Phone
+Member *--> "1" Email
+Member *--> "1" Credit
+Member *--> "1" Point
+Member *--> "1" Tier
+Member *--> "1" RegistrationTimestamp
+Member *--> "1" Address
+Member *--> "*" Transaction
+
+Reservation *-up-> "1" Remark
+Reservation *-up-> "1" ReservationDateTime
 @enduml

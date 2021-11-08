@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+participant ":SummaryCommand" as SummaryCommand LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute('summary')
+activate LogicManager
+
+LogicManager -> EzFoodieParser : parseCommand('summary')
+activate EzFoodieParser
+
+create SummaryCommand
+EzFoodieParser -> SummaryCommand : SummaryCommand()
+activate SummaryCommand
+
+SummaryCommand -> EzFoodieParser
+
+EzFoodieParser --> LogicManager
+deactivate EzFoodieParser
+
+LogicManager -> SummaryCommand : execute(model)
+
+SummaryCommand --> LogicManager
+deactivate SummaryCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

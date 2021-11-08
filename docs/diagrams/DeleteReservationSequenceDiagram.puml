@@ -1,0 +1,148 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+participant ":DeleteCommandPrefixParser" as DeleteCommandPrefixParser LOGIC_COLOR
+participant ":DeleteReservationCommandParser" as DeleteReservationCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":DeleteReservationCommand" as DeleteReservationCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "EzFoodie" as EzFoodie MODEL_COLOR
+participant "UniqueMemberList" as UniqueMemberList MODEL_COLOR
+participant "Member" as Member MODEL_COLOR
+participant "FilteredList" as FilteredList MODEL_COLOR
+end box
+
+[-> LogicManager : execute(add -rs/...)
+activate LogicManager
+
+LogicManager -> EzFoodieParser : parseCommand(add -rs/...)
+activate EzFoodieParser
+
+create DeleteCommandPrefixParser
+EzFoodieParser -> DeleteCommandPrefixParser : DeleteCommandPrefixParser()
+activate DeleteCommandPrefixParser
+
+DeleteCommandPrefixParser --> EzFoodieParser
+deactivate DeleteCommandPrefixParser
+
+EzFoodieParser -> DeleteCommandPrefixParser : parse(arguments)
+activate DeleteCommandPrefixParser
+
+create DeleteReservationCommandParser
+DeleteCommandPrefixParser -> DeleteReservationCommandParser : DeleteReservationCommandParser()
+activate DeleteReservationCommandParser
+
+DeleteReservationCommandParser --> DeleteCommandPrefixParser
+deactivate DeleteReservationCommandParser
+
+DeleteCommandPrefixParser --> EzFoodieParser
+deactivate DeleteCommandPrefixParser
+
+EzFoodieParser -> DeleteReservationCommandParser : parse(arguments)
+activate DeleteReservationCommandParser
+
+DeleteReservationCommandParser -> ParserUtil : parseMemberId(memberId)
+activate ParserUtil
+
+ParserUtil --> DeleteReservationCommandParser
+
+DeleteReservationCommandParser -> ParserUtil : parseReservationId(reservationId)
+
+ParserUtil --> DeleteReservationCommandParser
+deactivate ParserUtil
+
+create DeleteReservationCommand
+DeleteReservationCommandParser -> DeleteReservationCommand : DeleteReservationCommand(memberId, (reservationId))
+activate DeleteReservationCommand
+
+DeleteReservationCommand --> DeleteReservationCommandParser
+deactivate DeleteReservationCommand
+
+DeleteReservationCommandParser --> EzFoodieParser
+deactivate DeleteReservationCommandParser
+
+EzFoodieParser --> LogicManager
+deactivate EzFoodieParser
+
+LogicManager -> DeleteReservationCommand : execute(model)
+activate DeleteReservationCommand
+
+DeleteReservationCommand -> Model : getUpdatedMemberList()
+activate Model
+
+DeleteReservationCommand -> Member : getReservations()
+activate Member
+
+Model --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getName()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getPhone()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getEmail()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getAddress()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getTimeStamp()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getCredit()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getPoints()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getTransactions()
+
+Member --> DeleteReservationCommand
+
+DeleteReservationCommand -> Member : getReservations()
+
+Member --> DeleteReservationCommand
+deactivate Member
+
+DeleteReservationCommand -> Model : setMember(memberToEdit, editedMember)
+
+Model -> EzFoodie : setMember(target, editedMember)
+activate EzFoodie
+
+EzFoodie -> UniqueMemberList : setMember(target, editedMember)
+activate UniqueMemberList
+
+deactivate UniqueMemberList
+deactivate EzFoodie
+
+DeleteReservationCommand -> Model : updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS)
+
+
+Model -> FilteredList : setPredicate(predicate)
+activate FilteredList
+
+FilteredList --> Model
+deactivate FilteredList
+
+deactivate Model
+
+DeleteReservationCommand --> LogicManager
+deactivate DeleteReservationCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

@@ -6,20 +6,32 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests functionalities of Versions.
+ */
 public class VersionTest {
 
+    /**
+     * Checks whether the version string is parses correctly.
+     */
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
-        verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
-        verifyVersionParsedCorrectly("V3.10.2", 3, 10, 2, false);
-        verifyVersionParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
+        verifyVersionIsParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
+        verifyVersionIsParsedCorrectly("V3.10.2", 3, 10, 2, false);
+        verifyVersionIsParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
     }
 
+    /**
+     * Checks whether the wrong version string will throw an exception.
+     */
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
     }
 
+    /**
+     * Checks whether a version contains expected information.
+     */
     @Test
     public void versionConstructor_correctParameter_valueAsExpected() {
         Version version = new Version(19, 10, 20, true);
@@ -30,6 +42,9 @@ public class VersionTest {
         assertEquals(true, version.isEarlyAccess());
     }
 
+    /**
+     * Checks whether the string representation of a version is correct.
+     */
     @Test
     public void versionToString_validVersion_correctStringRepresentation() {
         // boundary at 0
@@ -45,6 +60,9 @@ public class VersionTest {
         assertEquals("V100.100.100ea", version.toString());
     }
 
+    /**
+     * Checks whether compareTo is correct for versions.
+     */
     @Test
     public void versionComparable_validVersion_compareToIsCorrect() {
         Version one;
@@ -105,6 +123,9 @@ public class VersionTest {
         assertTrue(one.compareTo(another) < 0);
     }
 
+    /**
+     * Checks whether hashCode is correct for valid versions.
+     */
     @Test
     public void versionComparable_validVersion_hashCodeIsCorrect() {
         Version version = new Version(100, 100, 100, true);
@@ -114,6 +135,9 @@ public class VersionTest {
         assertEquals(1010010010, version.hashCode());
     }
 
+    /**
+     * Checks whether equals method is correct for valid versions.
+     */
     @Test
     public void versionComparable_validVersion_equalIsCorrect() {
         Version one;
@@ -128,8 +152,19 @@ public class VersionTest {
         assertTrue(one.equals(another));
     }
 
-    private void verifyVersionParsedCorrectly(String versionString,
-            int major, int minor, int patch, boolean isEarlyAccess) {
+    /**
+     * Checks whether verified version is parsed correctly.
+     *
+     * @param versionString String representation of version.
+     * @param major version major.
+     * @param minor version minor.
+     * @param patch version patch.
+     * @param isEarlyAccess whether it is early access.
+     */
+    @Test
+    private void verifyVersionIsParsedCorrectly(String versionString,
+                                                int major, int minor, int patch,
+                                                boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
     }
 }

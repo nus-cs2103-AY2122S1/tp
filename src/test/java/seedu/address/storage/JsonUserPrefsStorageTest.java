@@ -16,6 +16,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserPrefs;
 
+/**
+ * Tests the functionalities of
+ * {@code JsonUserPrefsStorage}.
+ */
 public class JsonUserPrefsStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
@@ -73,7 +77,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setEzFoodieFilePath(Paths.get("ezfoodie.json"));
         return userPrefs;
     }
 

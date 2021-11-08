@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox fx:id="summaryBox"
+        alignment="CENTER_LEFT"
+        minHeight="105"
+        GridPane.columnIndex="0">
+    <padding>
+      <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total number of Members: " />
+      <Label fx:id="totalNumberOfMembers"
+             styleClass="cell_small_label"
+             text="\$totalNumberOfMembers" />
+      <padding>
+        <Insets bottom="10" />
+      </padding>
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total number of transactions: " />
+      <Label fx:id="totalNumberOfTransactions"
+             styleClass="cell_small_label"
+             text="\$totalNumberOfTransactions" />
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total amount of transactions: " />
+      <Label fx:id="totalAmountOfTransactions"
+             styleClass="cell_small_label"
+             text="\$totalAmountOfTransactions" />
+      <padding>
+        <Insets bottom="10" />
+      </padding>
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total number of transactions in past month (including current month): " />
+      <Label fx:id="totalNumberOfTransactionsInPastMonth"
+             styleClass="cell_small_label"
+             text="\$totalNumberOfTransactionsInPastMonth" />
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total amount of transactions in past month (including current month): " />
+      <Label fx:id="totalAmountOfTransactionsInPastMonth"
+             styleClass="cell_small_label"
+             text="\$totalAmountOfTransactionsInPastMonth" />
+      <padding>
+        <Insets bottom="10" />
+      </padding>
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total number of transactions in past 3 months (including current month): " />
+      <Label fx:id="totalNumberOfTransactionsInPast3Months"
+             styleClass="cell_small_label"
+             text="\$totalNumberOfTransactionsInPast3Months" />
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total amount of transactions in past 3 months (including current month): " />
+      <Label fx:id="totalAmountOfTransactionsInPast3Months"
+             styleClass="cell_small_label"
+             text="\$totalAmountOfTransactionsInPast3Months" />
+      <padding>
+        <Insets bottom="10" />
+      </padding>
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total number of transactions in past 6 months (including current month): " />
+      <Label fx:id="totalNumberOfTransactionsInPast6Months"
+             styleClass="cell_small_label"
+             text="\$totalNumberOfTransactionsInPast6Months" />
+    </HBox>
+    <HBox alignment="CENTER_LEFT">
+      <Label styleClass="cell_small_label, cell_label_width_600"
+             text="Total amount of transactions in past 6 months (including current month): " />
+      <Label fx:id="totalAmountOfTransactionsInPast6Months"
+             styleClass="cell_small_label"
+             text="\$totalAmountOfTransactionsInPast6Months" />
+      <padding>
+        <Insets bottom="10" />
+      </padding>
+    </HBox>
+  </VBox>
+</StackPane>

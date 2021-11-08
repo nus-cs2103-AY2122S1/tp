@@ -11,12 +11,20 @@ import seedu.address.testutil.SerializableTestClass;
 import seedu.address.testutil.TestUtil;
 
 /**
- * Tests JSON Read and Write
+ * Tests the functionalities of JsonUtil, i.e. read and write JSON.
  */
 public class JsonUtilTest {
 
+    /**
+     * Stands for the path of serialization file.
+     */
     private static final Path SERIALIZATION_FILE = TestUtil.getFilePathInSandboxFolder("serialize.json");
 
+    /**
+     * Checks if serializing object to json file will throw exception.
+     *
+     * @throws IOException
+     */
     @Test
     public void serializeObjectToJsonFile_noExceptionThrown() throws IOException {
         SerializableTestClass serializableTestClass = new SerializableTestClass();
@@ -27,6 +35,11 @@ public class JsonUtilTest {
         assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE), SerializableTestClass.JSON_STRING_REPRESENTATION);
     }
 
+    /**
+     * Checks if deserializing object from json file will throw exception.
+     *
+     * @throws IOException
+     */
     @Test
     public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
         FileUtil.writeToFile(SERIALIZATION_FILE, SerializableTestClass.JSON_STRING_REPRESENTATION);

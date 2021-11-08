@@ -35,18 +35,36 @@ public class GuiSettings implements Serializable {
         windowCoordinates = new Point(xPosition, yPosition);
     }
 
+    /**
+     * Gets GUI window width.
+     *
+     * @return double the width of window.
+     */
     public double getWindowWidth() {
         return windowWidth;
     }
 
+    /**
+     * Gets GUI window height.
+     *
+     * @return double the height of window.
+     */
     public double getWindowHeight() {
         return windowHeight;
     }
 
+    /**
+     * Gets GUI window coordinates.
+     *
+     * @return Point object of window coordinate.
+     */
     public Point getWindowCoordinates() {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
     }
 
+    /**
+     * Overrides the equals method for GuiSettings.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -63,11 +81,21 @@ public class GuiSettings implements Serializable {
                 && Objects.equals(windowCoordinates, o.windowCoordinates);
     }
 
+    /**
+     * Overrides the hashCode method.
+     *
+     * @return int objects after hashed with windowWidth, windowHeight and windowCoordinates.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(windowWidth, windowHeight, windowCoordinates);
     }
 
+    /**
+     * Overrides the toString Method for GuiSettings.
+     *
+     * @return String including all width, height and Position.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

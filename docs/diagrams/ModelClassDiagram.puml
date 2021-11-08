@@ -5,50 +5,83 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyEzFoodie <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class EzFoodie
+Class ReadOnlyEzFoodie
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
-Class UniquePersonList
-Class Person
+Class UniqueMemberList
+Class Member
+Class MemberId
 Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Credit
+Class Point
+Class RegistrationTimestamp
+Class Tier
+Class Transaction
+Class Reservation
+
+Class TransactionId
+Class Billing
+Class TransactionTimestamp
+
+Class ReservationId
+Class Remark
+Class ReservationDateTime
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+EzFoodie .up.|> ReadOnlyEzFoodie
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyEzFoodie
+ModelManager -left-> "1" EzFoodie
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+EzFoodie *--> "1" UniqueMemberList
+UniqueMemberList --> "~* all" Member
+Member *--> "1" MemberId
+Member *--> "1" Name
+Member *--> "1" Phone
+Member *--> "1" Email
+Member *--> "1" Credit
+Member *--> "1" Point
+Member *--> "1" Tier
+Member *--> "1" RegistrationTimestamp
+Member *--> "1" Address
+Member *--> "*" Transaction
+Member *--> "*" Reservation
 
+Transaction *--> "1" TransactionId
+Transaction *--> "1" Billing
+Transaction *--> "1" TransactionTimestamp
+
+Reservation *--> "1" ReservationId
+Reservation *--> "1" Remark
+Reservation *--> "1" ReservationDateTime
+
+MemberId -[hidden]right-> Name
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Credit
+Credit -[hidden]right-> Point
+Point -[hidden]right-> Tier
+Tier -[hidden]right-> RegistrationTimestamp
+Address -[hidden]right-> Transaction
+Transaction -[hidden]right-> Reservation
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Member
 @enduml

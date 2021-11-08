@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class MemberListPanel
+Class MemberCard
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+MemberListPanel *-down-> "*" MemberCard
+
+MemberListPanel --|> UiPart
+MemberCard --|> UiPart
+
+MemberCard ..> Model
+
+MemberListPanel -[hidden]-|> UiPart
+@enduml

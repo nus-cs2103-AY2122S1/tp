@@ -3,9 +3,11 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+
+participant ":DeleteCommandPrefixParser" as DeleteCommandPrefixParser LOGIC_COLOR
+participant ":DeleteMemberCommandParser" as DeleteMemberCommandParser LOGIC_COLOR
+participant "command:DeleteMemberCommand" as DeleteMemberCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +15,84 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("del -mem/ -i/1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> EzFoodieParser : parseCommand("del -mem/ -i/1")
+activate EzFoodieParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteCommandPrefixParser
+EzFoodieParser -> DeleteCommandPrefixParser : DeleteCommandPrefixParser()
+activate DeleteCommandPrefixParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DeleteCommandPrefixParser --> EzFoodieParser
+deactivate DeleteCommandPrefixParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+EzFoodieParser -> DeleteCommandPrefixParser : parse(" -mem/ -i/1")
+activate DeleteCommandPrefixParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteMemberCommandParser
+DeleteCommandPrefixParser -> DeleteMemberCommandParser : DeleteMemberCommandParser()
+activate DeleteMemberCommandParser
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteMemberCommandParser --> DeleteCommandPrefixParser
+deactivate DeleteMemberCommandParser
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DeleteCommandPrefixParser --> EzFoodieParser
+deactivate DeleteCommandPrefixParser
+
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeleteCommandPrefixParser -[hidden]-> EzFoodieParser
+destroy DeleteCommandPrefixParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+EzFoodieParser -> DeleteMemberCommandParser : parse(" -mem/ -i/1")
+activate DeleteMemberCommandParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+create DeleteMemberCommand
+DeleteMemberCommandParser -> DeleteMemberCommand : DeleteMemberCommand(1)
+activate DeleteMemberCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteMemberCommand --> DeleteMemberCommandParser : command
+deactivate DeleteMemberCommand
+
+DeleteMemberCommandParser --> EzFoodieParser : command
+deactivate DeleteMemberCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteMemberCommandParser -[hidden]-> EzFoodieParser
+destroy DeleteMemberCommandParser
+
+EzFoodieParser --> LogicManager : command
+deactivate EzFoodieParser
+
+LogicManager -> DeleteMemberCommand : execute(model)
+activate DeleteMemberCommand
+
+DeleteMemberCommand -> Model : getFilteredPatientList()
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteMemberCommand : lastShownList
+deactivate Model
+
+DeleteMemberCommand -> Model : deleteMember(memberToDelete)
+activate Model
+
+Model --> DeleteMemberCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteMemberCommand -> CommandResult : CommandResult(message)
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteMemberCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteMemberCommand --> LogicManager : result
+deactivate DeleteMemberCommand
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteMemberCommand -[hidden]-> LogicManager
+destroy DeleteMemberCommand
 
 [<--LogicManager
 deactivate LogicManager

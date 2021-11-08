@@ -1,0 +1,120 @@
+{
+  "_comment": "EzFoodie save file which contains the same Member values as in TypicalMembers#getTypicalEzFoodie()",
+  "members" : [ {
+    "id" : "00001",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "timestamp": "1609459200000",
+    "credit" : "610",
+    "point" : "610",
+    "transactions" : [ {
+      "id": "000001",
+      "timestamp": "1611100800000",
+      "billing": "567.54"
+    }, {
+      "id": "000002",
+      "timestamp": "1611187200000",
+      "billing": "43.34"
+    } ],
+    "reservations" : [ {
+      "id": "000001",
+      "dateTime": "2021-01-20 00:00",
+      "remark": "3 people"
+    }, {
+      "id": "000002",
+      "dateTime": "2021-01-21 00:00",
+      "remark": "1 people"
+    } ],
+    "tagged" : [ "friends" ]
+  }, {
+    "id" : "00002",
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "timestamp": "1609462800000",
+    "credit" : "645",
+    "point" : "645",
+    "transactions" : [ {
+      "id": "000001",
+      "timestamp": "1611104400000",
+      "billing": "645.39"
+    } ],
+    "reservations" : [ {
+      "id": "000001",
+      "dateTime": "2021-01-20 01:00",
+      "remark": "4 people"
+    } ],
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "id" : "00003",
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "timestamp": "1609466400000",
+    "credit" : "272",
+    "point" : "272",
+    "transactions" : [ {
+      "id": "000001",
+      "timestamp": "1611108000000",
+      "billing": "272.57"
+    } ],
+    "reservations" : [ {
+      "id": "000001",
+      "dateTime": "2021-01-20 02:00",
+      "remark": "2 people"
+    } ],
+    "tagged" : [ ]
+  }, {
+    "id" : "00004",
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "timestamp": "1609470000000",
+    "credit" : "0",
+    "point" : "0",
+    "transactions" : [ ],
+    "reservations" : [ ],
+    "tagged" : [ "friends" ]
+  }, {
+    "id" : "00005",
+    "name" : "Elle Meyer",
+    "phone" : "94821224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "timestamp": "1609473600000",
+    "credit" : "0",
+    "point" : "0",
+    "transactions" : [ ],
+    "reservations" : [ ],
+    "tagged" : [ ]
+  }, {
+    "id" : "00006",
+    "name" : "Fiona Kunz",
+    "phone" : "94824427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "timestamp": "1609477200000",
+    "credit" : "0",
+    "point" : "0",
+    "transactions" : [ ],
+    "reservations" : [ ],
+    "tagged" : [ ]
+  }, {
+    "id" : "00007",
+    "name" : "George Best",
+    "phone" : "94821442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "timestamp": "1609480800000",
+    "credit" : "0",
+    "point" : "0",
+    "transactions" : [ ],
+    "reservations" : [ ],
+    "tagged" : [ ]
+  } ]
+}

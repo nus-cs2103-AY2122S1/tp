@@ -11,19 +11,38 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * Member view information should be shown to the user.
+     */
+    private final boolean showMemberView;
+
+    /**
+     * Summary information should be shown to the user.
+     */
+    private final boolean showSummary;
+
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with the specified fields from {@code feedbackToUser},
+     * {@code showHelp}, {@code exit}, {@code showMemberView} and
+     * {@codeshowSummary}.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showMemberView,
+                         boolean showSummary) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.showMemberView = showMemberView;
         this.exit = exit;
+        this.showSummary = showSummary;
     }
 
     /**
@@ -31,21 +50,57 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
+    /**
+     * Gets feedback to user.
+     *
+     * @return string for feedback to user.
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
+    /**
+     * Determines whether the app should show help window.
+     *
+     * @return boolean if true is showHelp command.
+     */
     public boolean isShowHelp() {
         return showHelp;
     }
 
+    /**
+     * Determines whether the app should show member window.
+     *
+     * @return boolean if true is shown member view command.
+     */
+    public boolean isShowMemberView() {
+        return showMemberView;
+    }
+
+    /**
+     * Determines whether the app should show summary window.
+     *
+     * @return boolean if true is shown summary command.
+     */
+    public boolean isShowSummary() {
+        return showSummary;
+    }
+
+    /**
+     * Determines whether the app should exit.
+     *
+     * @return boolean if ture is exit command.
+     */
     public boolean isExit() {
         return exit;
     }
 
+    /**
+     * Overrides the equals method.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,12 +115,17 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && showMemberView == otherCommandResult.showMemberView
+                && exit == otherCommandResult.exit
+                && showSummary == otherCommandResult.showSummary;
     }
 
+    /**
+     * Overrides the hashCode method.
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, showMemberView, exit, showSummary);
     }
 
 }

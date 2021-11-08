@@ -1,0 +1,12 @@
+{
+  "members": [ {
+    "id": "00001",
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street",
+    "timestamp": "1609459200000",
+    "credit": "0",
+    "point": "0"
+  } ]
+}

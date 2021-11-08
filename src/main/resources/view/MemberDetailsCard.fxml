@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <HBox id="cardPane" fx:id="cardPane">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="name" text="\$name" styleClass="cell_big_label" />
+        <Label fx:id="tier" text="\$tier" styleClass="cell_big_label" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="ID: " />
+        <Label fx:id="id" styleClass="cell_small_label" text="\$id" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="Phone: " />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="Email: " />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="Address: " />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="Registration: " />
+        <Label fx:id="registrationTime" styleClass="cell_small_label" text="\$registrationTime" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="Credit: " />
+        <Label fx:id="credit" styleClass="cell_small_label" text="\$credit" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <Label styleClass="cell_small_label, cell_label_width_100" text="Point: " />
+        <Label fx:id="point" styleClass="cell_small_label" text="\$point" />
+      </HBox>
+    </VBox>
+    <padding>
+      <Insets bottom="10" />
+    </padding>
+  </HBox>
+  <HBox alignment="CENTER">
+    <VBox fx:id="reservationList" styleClass="pane-with-border" minWidth="700" prefWidth="700"
+          VBox.vgrow="ALWAYS">
+      <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+      </padding>
+      <Label alignment="CENTER" styleClass="cell_big_label, cell_label_width_700" text="Reservations" >
+        <padding>
+          <Insets top="5" bottom="5" />
+        </padding>
+      </Label>
+      <StackPane fx:id="reservationListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+    </VBox>
+    <VBox fx:id="transactionList" styleClass="pane-with-border" minWidth="500" prefWidth="500"
+          VBox.vgrow="ALWAYS">
+      <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+      </padding>
+      <Label alignment="CENTER" styleClass="cell_big_label, cell_label_width_500" text="Transactions" >
+        <padding>
+          <Insets top="5" bottom="5" />
+        </padding>
+      </Label>
+      <StackPane fx:id="transactionListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+    </VBox>
+  </HBox>
+</VBox>

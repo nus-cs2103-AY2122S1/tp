@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="40" GridPane.columnIndex="0">
+      <padding>
+        <Insets top="5" right="10" bottom="5" left="10" />
+      </padding>
+      <HBox alignment="CENTER_LEFT">
+        <Label alignment="CENTER" fx:id="id" styleClass="cell_small_label, cell_label_width_90"
+               text="\$id" />
+        <Label alignment="CENTER" fx:id="dateTime"
+               styleClass="cell_small_label, cell_label_width_298, cell_label_left_right_border_1"
+               text="\$dateTime" />
+        <Label alignment="CENTER" fx:id="billing" styleClass="cell_small_label, cell_label_width_90"
+               text="\$billing" />
+      </HBox>
+    </VBox>
+  </GridPane>
+</HBox>

@@ -5,55 +5,68 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us via email, as indicated below.
 
 ## Project team
 
-### John Doe
+---
 
-<img src="images/johndoe.png" width="200px">
+### Hu Jiajun `e0556371@u.nus.edu`
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/holmesjj.png" width="200px">
 
-* Role: Project Advisor
+[[github@holmesjj](http://github.com/holmesjj)]
+[[portfolio@holmesjj](team/holmesjj.md)]
 
-### Jane Doe
+* Role: Tech lead, Git expert
+* Responsibilities: Scheduling and tracking
 
-<img src="images/johndoe.png" width="200px">
+---
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Raja Sudalaimuthu Mukund `mukundrs001@gmail.com`
 
-* Role: Team Lead
-* Responsibilities: UI
+<img src="images/mukundrs.png" width="200px">
 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github@mukundrs](https://github.com/mukundrs)]
+[[portfolio@mukundrs](team/mukundrs.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation, deliverables and deadlines
 
-### Jean Doe
+---
 
-<img src="images/johndoe.png" width="200px">
+### Zhang Zhiyao `e0449925@u.nus.edu`
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/zzybluebell.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github@zzybluebell](http://github.com/zzybluebell)]
+[[portfolio@zzybluebell](team/zzybluebell.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Integration, Testing and Documents
+
+---
+
+### Chen Shi Yao, Stephanie `stephaniechenshiyao@gmail.com`
+
+<img src="images/stephanie-csy.png" width="200px">
+
+[[github@stephanie-csy](http://github.com/stephanie-csy)]
+[[portfolio@stephanie-csy](team/stephanie-csy.md)]
+
+* Role: Developer
+* Responsibilities: Code quality
+
+---
+
+### Yang Yuzhao `e0425130@u.nus.edu`
+
+<img src="images/morrow1ndy.png" width="200px">
+
+[[github@morrow1ndy](http://github.com/morrow1ndy)]
+[[portfolio@morrow1ndy](team/morrow1ndy.md)]
+
+* Role: Developer
+* Responsibilities: Integration
+
+---

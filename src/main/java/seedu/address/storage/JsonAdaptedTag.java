@@ -22,12 +22,17 @@ class JsonAdaptedTag {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Constructs a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
     }
 
+    /**
+     * Gets tag name.
+     *
+     * @return String of tag name.
+     */
     @JsonValue
     public String getTagName() {
         return tagName;

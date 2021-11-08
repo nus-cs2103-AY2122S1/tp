@@ -4,6 +4,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the functionalities of
+ * {@code UserPrefs}.
+ */
 public class UserPrefsTest {
 
     @Test
@@ -13,9 +17,9 @@ public class UserPrefsTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setEzFoodieFilePath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
-        assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> userPrefs.setEzFoodieFilePath(null));
     }
 
 }

@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes command start with "find";
+
+:Check command;
+
+if () then ([user command is valid])
+    :Parse arguments from command;
+    :Extract keywords from arguments;
+    :Create predicate with keywords;
+    :Filter members based on predicate;
+    :List filtered members;
+    :Show success message to user;
+else ([user command is invalid])
+    :Show error message to user;
+endif
+
+stop
+@enduml

@@ -1,0 +1,153 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+participant ":AddCommandPrefixParser" as AddCommandPrefixParser LOGIC_COLOR
+participant ":AddTransactionCommandParser" as AddTransactionCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":AddTransactionCommand" as AddTransactionCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "ezFoodie:EzFoodie" as EzFoodie MODEL_COLOR
+participant "uniqueMemberList:UniqueMemberList" as UniqueMemberList MODEL_COLOR
+participant "filteredList:FilteredList" as FilteredList MODEL_COLOR
+participant "transaction:Transaction" as Transaction MODEL_COLOR
+participant "memberToEdit:Member" as Member MODEL_COLOR
+end box
+
+[-> LogicManager : execute(add -txn/...)
+activate LogicManager
+
+LogicManager -> EzFoodieParser : parseCommand(add -txn/...)
+activate EzFoodieParser
+
+create AddCommandPrefixParser
+EzFoodieParser -> AddCommandPrefixParser : AddCommandPrefixParser()
+activate AddCommandPrefixParser
+
+AddCommandPrefixParser --> EzFoodieParser
+deactivate AddCommandPrefixParser
+
+EzFoodieParser -> AddCommandPrefixParser : parse(arguments)
+activate AddCommandPrefixParser
+
+create AddTransactionCommandParser
+AddCommandPrefixParser -> AddTransactionCommandParser : AddTransactionCommandParser()
+activate AddTransactionCommandParser
+
+AddTransactionCommandParser --> AddCommandPrefixParser
+deactivate AddTransactionCommandParser
+
+AddCommandPrefixParser --> EzFoodieParser
+deactivate AddCommandPrefixParser
+
+EzFoodieParser -> AddTransactionCommandParser : parse(arguments)
+activate AddTransactionCommandParser
+
+AddTransactionCommandParser -> ParserUtil : parseBilling(billing)
+activate ParserUtil
+
+ParserUtil --> AddTransactionCommandParser
+
+AddTransactionCommandParser -> ParserUtil : parseTimestamp(timestamp)
+ParserUtil --> AddTransactionCommandParser
+
+AddTransactionCommandParser -> ParserUtil : parseMemberId(memberId)
+ParserUtil --> AddTransactionCommandParser
+
+AddTransactionCommandParser -> ParserUtil : parseTransactionId(transactionId)
+ParserUtil --> AddTransactionCommandParser
+
+deactivate ParserUtil
+
+AddTransactionCommandParser -> Transaction : Transaction(transactionId, timestamp, billing)
+activate Transaction
+
+Transaction -> AddTransactionCommandParser
+deactivate Transaction
+
+create AddTransactionCommand
+AddTransactionCommandParser -> AddTransactionCommand : AddTransactionCommand(transaction, memberId)
+activate AddTransactionCommand
+
+AddTransactionCommand --> AddTransactionCommandParser
+deactivate AddTransactionCommand
+
+AddTransactionCommandParser --> EzFoodieParser
+deactivate AddTransactionCommandParser
+
+EzFoodieParser --> LogicManager
+deactivate EzFoodieParser
+
+LogicManager -> AddTransactionCommand : execute(model)
+activate AddTransactionCommand
+
+AddTransactionCommand -> Model : getUpdatedMemberList()
+activate Model
+
+Model --> AddTransactionCommand
+
+
+AddTransactionCommand -> AddTransactionCommand : createEditedMember(memberToEdit, transactionToAdd)
+
+
+AddTransactionCommand -> Member : getName()
+activate Member
+
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getPhone()
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getEmail()
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getAddress()
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getTimestamp()
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getTransactions()
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getReservations()
+Member -> AddTransactionCommand
+
+AddTransactionCommand -> Member : getTags()
+Member -> AddTransactionCommand
+
+deactivate Member
+
+AddTransactionCommand -> Model : setMember(memberToEdit, editedMember)
+
+Model -> EzFoodie : setMember(target, editedMember)
+activate EzFoodie
+
+EzFoodie -> UniqueMemberList : setMember(target, editedMember)
+activate UniqueMemberList
+
+deactivate UniqueMemberList
+deactivate EzFoodie
+
+AddTransactionCommand -> Model : updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS)
+
+
+Model -> FilteredList : setPredicate(predicate)
+activate FilteredList
+
+FilteredList --> Model
+deactivate FilteredList
+
+deactivate Model
+
+AddTransactionCommand --> LogicManager
+deactivate AddTransactionCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

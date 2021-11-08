@@ -1,0 +1,12 @@
+{
+  "members": [ {
+    "id": "00001",
+    "name": "Member with invalid name field: Ha!ns Mu@ster",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "timestamp": "1609459200000",
+    "credit": "0",
+    "point": "0"
+  } ]
+}

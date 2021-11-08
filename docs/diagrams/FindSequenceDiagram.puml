@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "predicate:IdContainsKeywordsPredicate" as IdContainsKeywordsPredicate LOGIC_COLOR
+participant "command:FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant ":FilteredList" as FilteredList MODEL_COLOR
+end box
+[-> LogicManager : execute("find -mem/ -id/00001")
+activate LogicManager
+
+LogicManager -> EzFoodieParser : parseCommand("find -mem/ -id/00001")
+activate EzFoodieParser
+
+create FindCommandParser
+EzFoodieParser -> FindCommandParser : FindCommandParser()
+activate FindCommandParser
+
+FindCommandParser --> EzFoodieParser
+deactivate FindCommandParser
+
+EzFoodieParser -> FindCommandParser : parse(" -mem/ -id/00001")
+activate FindCommandParser
+
+create IdContainsKeywordsPredicate
+FindCommandParser -> IdContainsKeywordsPredicate : IdContainsKeywordsPredicate([00001])
+activate IdContainsKeywordsPredicate
+
+IdContainsKeywordsPredicate --> FindCommandParser
+deactivate IdContainsKeywordsPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : FindCommand(predicate)
+activate FindCommand
+
+FindCommand --> FindCommandParser
+deactivate FindCommand
+
+FindCommandParser --> EzFoodieParser
+deactivate FindCommandParser
+
+FindCommandParser -[hidden]-> LogicManager : return
+destroy FindCommandParser
+
+EzFoodieParser --> LogicManager : command
+deactivate EzFoodieParser
+
+LogicManager -> FindCommand : execute(model)
+activate FindCommand
+
+FindCommand -> Model : updateFilteredMemberList(predicate)
+activate Model
+
+Model -> FilteredList : setPredicate(predicate)
+activate FilteredList
+
+FilteredList --> Model
+deactivate FilteredList
+
+Model --> FindCommand
+deactivate Model
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+FindCommand -[hidden]-> LogicManager : return
+destroy FindCommand
+
+IdContainsKeywordsPredicate -[hidden]-> LogicManager : return
+destroy IdContainsKeywordsPredicate
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

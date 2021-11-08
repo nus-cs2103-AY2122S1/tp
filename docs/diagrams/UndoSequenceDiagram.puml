@@ -3,42 +3,42 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":EzFoodieParser" as EzFoodieParser LOGIC_COLOR
+participant "command:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":VersionedEzFoodie" as VersionedEzFoodie MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+[-> LogicManager : execute("undo")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> EzFoodieParser : parseCommand("undo")
+activate EzFoodieParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+EzFoodieParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> EzFoodieParser : command
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+EzFoodieParser --> LogicManager : command
+deactivate EzFoodieParser
 
-LogicManager -> UndoCommand : execute()
+LogicManager -> UndoCommand : execute(model)
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undoEzFoodie()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> VersionedEzFoodie : undo()
+activate VersionedEzFoodie
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+VersionedEzFoodie -> VersionedEzFoodie :resetData(ReadOnlyEzFoodie)
+VersionedEzFoodie --> Model :
+deactivate VersionedEzFoodie
 
 Model --> UndoCommand
 deactivate Model

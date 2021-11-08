@@ -6,8 +6,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the functionalities of FileUtil.
+ */
 public class FileUtilTest {
 
+    /**
+     * Checks if the path is valid.
+     */
     @Test
     public void isValidPath() {
         // valid path

@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.PermissionException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,18 +24,36 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    /**
+     * Uses FXML to identify MainWindow.
+     */
     private static final String FXML = "MainWindow.fxml";
 
+    /**
+     * Uses logger to log events happen in MainWindow.
+     */
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    /**
+     * Stands for the main stage to contain all Ui parts in MainWindow.
+     */
     private Stage primaryStage;
+
+    /**
+     * Makes use of backend logic.
+     */
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private MemberListPanel memberListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MemberViewWindow memberViewWindow;
+    private SummaryWindow summaryWindow;
 
+    /**
+     * Stands for components to be used in FXML.
+     */
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -42,16 +61,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane memberListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane statusBarPlaceholder;
 
     /**
-     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
+     * Constructs a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -66,19 +85,30 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        memberViewWindow = new MemberViewWindow(logic);
+        summaryWindow = new SummaryWindow(logic);
     }
 
+    /**
+     * Gets primary stage.
+     *
+     * @return Stage for the primary stage.
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * Stands for the default accelerator setter for mainWindow.
+     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -110,14 +140,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        memberListPanel = new MemberListPanel(logic.getUpdatedMemberList());
+        memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getEzFoodieFilePath());
+        statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -147,6 +177,33 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the member view window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleMemberView() {
+        if (!memberViewWindow.isShowing()) {
+            memberViewWindow.show();
+        } else {
+            memberViewWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the summary window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleSummary() {
+        if (!summaryWindow.isShowing()) {
+            summaryWindow.show();
+        } else {
+            summaryWindow.focus();
+        }
+    }
+
+    /**
+     * Displays mainWindow to user.
+     */
     void show() {
         primaryStage.show();
     }
@@ -160,11 +217,18 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        memberViewWindow.hide();
+        summaryWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Gets all members in a list.
+     *
+     * @return memberListPanel component.
+     */
+    public MemberListPanel getMemberListPanel() {
+        return memberListPanel;
     }
 
     /**
@@ -172,7 +236,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, PermissionException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -182,12 +247,20 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowMemberView()) {
+                handleMemberView();
+            }
+
+            if (commandResult.isShowSummary()) {
+                handleSummary();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | PermissionException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

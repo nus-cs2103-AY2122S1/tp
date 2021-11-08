@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.application.Application;
 
+/**
+ * Tests the functionalities of
+ * {@code AppParameters}.
+ */
 public class AppParametersTest {
 
     private final ParametersStub parametersStub = new ParametersStub();

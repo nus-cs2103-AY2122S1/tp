@@ -3,42 +3,53 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Represents for Controlling a help page.
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    /**
+     * Uses FXML to identify HelpWindow.
+     */
     private static final String FXML = "HelpWindow.fxml";
 
-    @FXML
-    private Button copyButton;
-
-    @FXML
-    private Label helpMessage;
+    /**
+     * Uses logger to log events happen in HelpWindow.
+     */
+    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
 
     /**
-     * Creates a new HelpWindow.
+     * Stands for components to be used in FXML.
+     */
+    @FXML
+    private StackPane helpBoxPlaceholder;
+
+    /**
+     * Constructs a new {@code HelpWindow}.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        HelpBox helpBox = new HelpBox();
+        helpBoxPlaceholder.getChildren().add(helpBox.getRoot());
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            System.out.println(event.getCode());
+            if (event.getCode() == KeyCode.ESCAPE) {
+                Stage stage = (Stage) getRoot().getScene().getWindow();
+                stage.close();
+            }
+        });
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Constructs a new {@code HelpWindow}.
      */
     public HelpWindow() {
         this(new Stage());
@@ -46,7 +57,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
-     * @throws IllegalStateException
+     *
+     * @throws IllegalStateException if the user input does not conform the expected format.
      * <ul>
      *     <li>
      *         if this method is called on a thread other than the JavaFX Application Thread.
@@ -76,27 +88,18 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Hides the help window.
+     * Hides the opened help window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on current opened help window.
      */
     public void focus() {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
-    }
+
 }

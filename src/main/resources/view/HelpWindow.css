@@ -1,3 +1,5 @@
-#copyButton, #helpMessage {
-    -fx-font-family: "Open Sans";
+#copyButton {
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+    -fx-background-color: #555555;
 }
