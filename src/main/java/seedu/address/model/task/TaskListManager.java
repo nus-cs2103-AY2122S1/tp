@@ -61,6 +61,7 @@ public class TaskListManager {
         updateStatistics();
     }
 
+
     /**
      * Sets up the archive with all stored {@code Person}'s taskList upon application startup.
      */

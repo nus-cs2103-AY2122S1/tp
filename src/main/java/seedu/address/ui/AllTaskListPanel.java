@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.logging.Logger;
 
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -48,7 +50,7 @@ public class AllTaskListPanel extends UiPart<Region> {
         updateRootNode(personList);
 
         allTaskListView.showRootProperty().set(false);
-        allTaskListView.setCellFactory(listView -> new AllTaskListPanel.AllTaskListViewCell());
+        allTaskListView.setCellFactory(t -> new AllTaskListPanel.AllTaskListViewCell());
     }
 
     /**
@@ -159,6 +161,15 @@ public class AllTaskListPanel extends UiPart<Region> {
     }
 
     /**
+     * {@code extractor} used for listView to detect changes in
+     * {@code isOverdue} and {@code isDueSoon} variables of {@code Task}s.
+     */
+    public Callback<Tuple, Observable[]> extractor() {
+        return (Tuple t) -> new Observable[]{
+                t.getTask().getIsDueSoonBooleanProperty(), t.getTask().getIsOverdueBooleanProperty()};
+    }
+
+    /**
      * Custom {@code TreeCell} that displays the graphics of a {@code Task} using a {@code TaskCard}
      * or a {@code Name}.
      */
@@ -184,6 +195,12 @@ public class AllTaskListPanel extends UiPart<Region> {
                     tc.initialise(vbox, 150);
                     setGraphic(tc.getRoot());
                 }
+                tuple.getTask().getIsOverdueBooleanProperty().addListener(t -> {
+                    this.updateItem(tuple, empty);
+                });
+                tuple.getTask().getIsDueSoonBooleanProperty().addListener(t -> {
+                    this.updateItem(tuple, empty);
+                });
             }
         }
     }
