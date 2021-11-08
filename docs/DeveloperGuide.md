@@ -717,6 +717,7 @@ Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-
 * **Client**: A customer in the database, identified by their name. 
 * **Order**: A sales order from a customer scheduled for a target date.
 * **Task**: A task for the user that has a due date and a completion status.
+* **Tag**: A short string descriptor attached to a `Person` or `Task` object.
 
 --------------------------------------------------------------------------------------------------------------------
 
