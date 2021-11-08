@@ -229,7 +229,7 @@ illustrates the description for deleting **games**:
 
 <img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
-#### 4.1.2 Design considerations:
+#### 4.1.2 Design Considerations
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.
@@ -258,7 +258,7 @@ The implementation of `Model#linkFriend()` is as follows:
 
 ![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
-#### 4.2.2 Design considerations:
+#### 4.2.2 Design Considerations
 
 - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
@@ -315,7 +315,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 <img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
-#### 4.4.2 Design considerations:
+#### 4.4.2 Design Considerations
 
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
   would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
@@ -329,9 +329,9 @@ The implementation of `Model#unlinkFriend()` is as follows:
 * A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
   busy than free, so it would be easier for the user to just set when their friend is free.
 
-### 4.5 Recommend Feature:
+### 4.5 Recommend Feature
 
-#### 4.5.1 Description: 
+#### 4.5.1 Description
 
 The recommend feature provides the user a with a command (Format: `recommend -g GAME_ID -t HOUR DAY`) to enter into 
 the gitGud text box which causes gitGud to display a list of friends who are: 
@@ -342,7 +342,7 @@ the gitGud text box which causes gitGud to display a list of friends who are:
 This command allows the user to easily find the highest-skilled available friends who play the specified game to coordinate 
 gaming sessions with from the recommendations friends list displayed after the command is executed. 
 
-#### 4.5.2 Implementation: 
+#### 4.5.2 Implementation
 
 To help you understand how the recommendation functionality is implemented, the activity diagram below summarises the actions 
 gitGud undergoes to display the recommendations friends list to the user: 
@@ -384,7 +384,7 @@ notified and updated to display the filtered and sorted friends list based on th
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
 recommend feature.  
 
-#### 4.5.3 Design considerations:
+#### 4.5.3 Design Considerations
 
 * The recommend command allows users to filter by hour and day instead of filtering by minute and day.
   * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
@@ -436,7 +436,7 @@ An example execution of a `GetFriendCommand` is shown in the sequence diagram be
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
 
-#### 4.6.2 Design Consideration:
+#### 4.6.2 Design Considerations
 
 Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
 * `CommandResult` with a `Friend` object

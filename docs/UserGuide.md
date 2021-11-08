@@ -95,7 +95,7 @@ Before we jump into the commands, let us take a moment to familiarise ourselves 
 gitGud provides a gamer-themed user interface as shown in the image below with 6 main sections.
 
 ![Ui-labelled](images/ui-screenshots/ui-overview.png)
-<br><center><ins>Image: User interface layout of gitGud.</ins></center>
+<br><center><ins>Image: User interface layout of gitGud</ins></center>
 
 | Number | Section Name | Description |
 | -------| -------------- | ----------- | 
@@ -242,7 +242,7 @@ Screenshot:
 <br><center><ins>Image: Command feedback box after linking a friend `marcustxk` to a game `RocketLeague`</ins></center>
 
 ![Friend link Screenshot](images/ui-screenshots/friend-link.png)
-<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after linking a friend `marcustxk` 
+<br><center><ins>Image: gitGud after running `friend --get marcustxk` after linking a friend `marcustxk` 
 to a game `RocketLeague`</ins></center>
 
 #### 5.1.5 Unlinking a game from a friend: `friend --unlink`
@@ -266,7 +266,7 @@ Screenshot:
 `RocketLeague`</ins></center>
 
 ![Friend unlink screenshot](images/ui-screenshots/friend-unlink.png)
-<br><center><ins>Image: gitGud after running `friend --get marcustxk`, after unlinking a game `RocketLeague` from a 
+<br><center><ins>Image: gitGud after running `friend --get marcustxk` after unlinking the game `RocketLeague` from a 
 friend 
 `marcustxk`</ins></center>
 
@@ -294,8 +294,8 @@ Screenshot:
 friend `Draco`</ins></center>
 
 ![Friend skill screenshot](images/ui-screenshots/friend-skill-then-get.png)
-<br><center><ins>Image: gitGud after running `friend --get Draco`, after adding a skill value `7` for a 
-friend `Draco` for a game `Valorant`</ins></center>
+<br><center><ins>Image: gitGud after running `friend --get Draco` after adding a skill value `7` for a 
+friend `Draco` for the game `Valorant`</ins></center>
 
 #### 5.1.7 Scheduling a friend: `friend --schedule`
 
@@ -335,7 +335,7 @@ Screenshot:
 <br><center><ins>Image: Command feedback box after scheduling a friend's `Draco` availability</ins></center>
 
 ![Ui](images/ui-screenshots/friend-schedule.png)
-<br><center><ins>Image: gitGud after running `friend --get Draco`, after scheduling a friend's `Draco` 
+<br><center><ins>Image: gitGud after running `friend --get Draco` after scheduling a friend's `Draco` 
 availability</ins></center>
 
 #### 5.1.8 Recommending friends available to play with - `recommend`
@@ -358,7 +358,7 @@ Examples:
 
 Screenshot:
 ![Friend recommend screenshot](images/ui-screenshots/recommend.png)
-<br><center><ins>Image: Friends available on Saturday 1000 recommended in friends list</ins></center>
+<br><center><ins>Image: gitGud displaying friends available on Saturday 1000 recommended in friends list</ins></center>
 
 #### 5.1.9 Getting a single friend's complete data: `friend --get`
 
@@ -439,7 +439,7 @@ Examples:
 Screenshot:
 
 ![Ui](images/ui-screenshots/game-add.png)
-<br><center><ins>Image: Command feedback box after adding a game `RocketLeague`</ins></center>
+<br><center><ins>Image: Command feedback box showing that the game `RocketLeague` has been added</ins></center>
 
 #### 5.2.2 Deleting a game: `game --delete`
 
@@ -463,7 +463,7 @@ Examples:
 Screenshot:
 
 ![Ui](images/ui-screenshots/game-delete.png)
-<br><center><ins>Image: gitGud after deleting the game `Valorant`</ins></center>
+<br><center><ins>Image: Command feedback box showing that the game `Valorant` has been deleted</ins></center>
 
 #### 5.2.3 Getting a single game's complete data: `game --get`
 
@@ -519,7 +519,7 @@ Format: `help`
 Screenshot:
 
 ![Ui](images/ui-screenshots/help.png)
-<br><center><ins>Image: gitGud after running help command</ins></center>
+<br><center><ins>Image: Help command popup displaying link to gitGud's User Guide</ins></center>
 
 #### 5.3.2 Clearing the friends and games lists : `clear`
 
