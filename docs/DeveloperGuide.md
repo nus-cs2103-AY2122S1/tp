@@ -297,10 +297,10 @@ The implementation of `Model#unlinkFriend()` is as follows:
   `Friend#unlink()` is then called, which modifies `friendToEdit` so that it no longer contains a link to the game.
 - `UniqueFriendsList#setFriend()` then replaces `friendToUnlink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
-#### Design considerations:
- - As mentioned previously in the implementation for [link](#link-feature), the use of a separate `GameFriendLink` class to which only the `Friend` class has a reference to greatly simplifies the unlinking command as only the `Friend` objects (and not the `Game` objects) have to be changed.
-
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram2.png)
+
+#### Design considerations:
+ - As mentioned previously in the implementation for [link](#42-link-feature), the use of a separate `GameFriendLink` class to which only the `Friend` class has a reference to greatly simplifies the unlinking command as only the `Friend` objects (and not the `Game` objects) have to be changed.
 
 ### 4.4 Schedule Feature
 
