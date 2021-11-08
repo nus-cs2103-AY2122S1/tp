@@ -33,6 +33,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Updated the product scope and user stories.
     * Added introduction, overview and effort in the appendix.
+    * Added activity diagrams and use cases.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [#136](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/136), [#155](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/155)

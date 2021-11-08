@@ -473,6 +473,10 @@ The sequence diagram of this `viewShift` command is shown below:
 ![ViewShift Command Sequence Diagram](images/viewShiftCommand/ViewShiftSequenceDiagram.png)
 ![ViewShiftCommand Execution Diagram](images/viewShiftCommand/ViewShiftCommandExecutionSequenceDiagram.png)
 
+The following is an activity diagram showing the general activity of the find command:
+
+![activity](images/FindActivityDiagram.png) 
+
 Notes:
 
 1. The process is similar for a search by slot number.
@@ -551,10 +555,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | new user                                   | understand why my command fails| be guided towards using the App correctly                              |
-| `* * *`  | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
-| `* * *`  | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
+| `* *`    | user                                       | swap shifts between staff      | easily adjust shift changes                                            |
+| `*`      | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
+| `*`      | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
+| `*`      | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 
@@ -606,7 +611,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-*{More to be added}*
+**Use case: UC03 - Swap shifts between staff**
+
+**MSS**
+
+1. User chooses to swap shifts between 2 staff.
+2. User inputs relevant details.
+3. Staff'd displays the swapped shifts to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Staff'd detects an error in the entered data.
+
+    * 2a1. Staff'd displays an error message.
+    * 2a2. User enter new details.
+    * 2a3. Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 3.
+
 
 ### Non-Functional Requirements
 
