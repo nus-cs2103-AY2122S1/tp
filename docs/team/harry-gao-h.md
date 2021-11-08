@@ -5,13 +5,12 @@ title: Gao Haochun's Project Portfolio Page
 
 ## Project: MrTechRecruiter
 
-### Overview
+#### Overview
 MrTechRecruiter (MTR) is a desktop applicant management application designed for tech companies to keep track of job applicants.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-### Summary of Contributions
 #### **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=Harry-Gao-H&tabRepo=AY2122S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 #### **New Feature**
@@ -21,9 +20,7 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
   * Highlights: This enhancement affects existing commands and commands to be added in future and requires an analysis of design alternatives. The implementation was also challenging as it required changes to existing commands.
   * Credits: The design of undo feature is adapted from [here](https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java.).
-
-
-
+  
 #### **Enhancements to existing features**
 * Implemented command `add-position`, `edit-position`, `edit-applicant`, `delete-position` adapted from AB3
   * Relevant pull requests: [\#42](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/42/files),
