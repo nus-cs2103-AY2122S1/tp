@@ -63,15 +63,15 @@ public class EditCommand extends Command {
             + "[" + PREFIX_IMPORTANCE + "IMPORTANCE]"
             + "[" + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer less than or equal to "
             + Integer.MAX_VALUE + ")\n"
-            + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
-            + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
-            + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
-            + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
+            + "[" + PREFIX_TASK_DESCRIPTION + "TASK_NAME] "
+            + "[" + PREFIX_TASK_DATE + "TASK_DATE] "
+            + "[" + PREFIX_TASK_TIME + "TASK_TIME] "
+            + "[" + PREFIX_TASK_VENUE + "TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_TASK_INDEX + " 2 "
-            + PREFIX_TASK_DESCRIPTION + " Assignment Discussion";
+            + PREFIX_TASK_INDEX + "2 "
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

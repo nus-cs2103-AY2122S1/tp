@@ -26,9 +26,9 @@ public class DeleteTaskCommand extends Command {
             + ": Deletes the task, specified by the TASKINDEX, from person "
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer less than or equal to " + Integer.MAX_VALUE + ")\n"
-            + PREFIX_TASK_INDEX + " TaskIndex (must be a positive integer less than or equal to " + Integer.MAX_VALUE
+            + PREFIX_TASK_INDEX + "TaskIndex (must be a positive integer less than or equal to " + Integer.MAX_VALUE
             + ")\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + "2";
 
     public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, "
             + "from person specified by the INDEX";

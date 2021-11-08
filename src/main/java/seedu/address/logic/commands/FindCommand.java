@@ -35,7 +35,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_ADDRESS + " ADDRESS] "
             + "[" + PREFIX_TAG + " TAG]"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
-            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] "
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]"
             + "Example: " + COMMAND_WORD + " -n alex yeoh";
 
     private final AttributeContainsKeywordsPredicate predicate;
