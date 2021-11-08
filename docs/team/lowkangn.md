@@ -31,6 +31,9 @@ Given below are my contributions to the project.
     * Wrote additional tests for existing features to increase test coverage. (Pull requests 
       [\#87](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/87), 
       [\#91](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/91))
+    * Decoupled and ultimately removed the Person class. Initially we considered keeping the Person class in case 
+      we planned on reusing it in the future. However, as no use was found for the Person class we decided to remove it
+      altogether. (Pull request [\#62](https://github.com/AY2122S1-CS2103T-T10-2/tp/pull/62))
 
 * **Documentation**:
     * Developer Guide:
@@ -41,7 +44,7 @@ Given below are my contributions to the project.
     * User Guide
         * Added target audience, purpose of guide, how to use guide and glossary sections to User Guide.
         * Added screenshots of Managera to User Guide.
-        * Added documentation for the features `doneEvent` and `findParticipant`.
+        * Added documentation for the features `doneEvent` and `view`.
         * General vetting of user guide and numerous enhancements to existing sections.
 
 * **Community**:
