@@ -335,7 +335,7 @@ Switch to Ingredient [tab](#31-tabs) and list all ingredients.
 **Example(s):**<br />
 1. Command: `list ingredient`
 <br />Expected Output:<br />
-<img src="images/ingredientCommands/listIngredient.png" style="width:85%" >
+<img src="images/ingredientCommands/listIngredient.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
