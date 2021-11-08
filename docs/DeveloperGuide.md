@@ -9,13 +9,13 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and Getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `student -d 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -73,7 +73,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+`GroupListPanel`, `TaskListPanel`, StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +83,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person`, `Task` and `Group` objects residing in the `Model`.
 
 ### Logic component
 
@@ -98,7 +99,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("student -d 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -154,90 +155,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Uniquely identify persons/groups/tasks
 
 #### Implementation
@@ -276,33 +193,27 @@ When storing references of `HasUniqueId`, we can simply store their id, instead 
 
 #### Implementation
 
-Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task`
-object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object
-and the `Task` object.
+Task assignment to each student and group is facilitated through the `UniqueId` class. Each `Person` object, `Task`
+object and `Group` object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in the `Person` object and `Group` object.
 
 ![TaskAssignment](images/TaskAssignmentDiagram.png)
 
 The implementation currently supports two task commands:
-- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object,
-and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stored in the `Task` object
-- `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
-and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
+- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object.
+- `AssignTaskToGroupCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Group` object.
+- `UnassignTaskFromPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object.
+- `UnassignTaskFromGroupCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Group` object.
 
-#### Implementation rationale
+#### Implementation Rationale
 
-- `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects that are assigned to one another.
-- Storing assignments as a set in each `Person` and `Task` makes it easy to display and retrieve all assigned tasks for each `Person`
-and all assigned `Person` for each `Task`. It also makes implementation relatively simple, without having to use external lists.
+- `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects.
+- Storing assignments as a set in each `Person` and `Group` makes it easy to display and retrieve all assigned tasks for each `Person` or `Group`.
+It also makes implementation relatively simple, without having to use external lists.
 
 #### Alternatives considered
 
 Storing assignments as a separate set in the `AddressBook`. This may complicate command execution as the command needs to retrieve the
 entire set from the `AddressBook` and look up the persons and tasks in the set.
-
-#### \[Proposed\] Future implementation
-
-- Adds support for group assignment using similar assignment methods. Automatically assign task to all students in the group
-- Replace the set of `UniqueId`s with a set of `TaskCompletion` objects in order to track which student has done which task
 
 ### Edit a task
 
@@ -316,7 +227,7 @@ passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` o
 `LogicManager` class to be executed. The `EditTaskCommand` object will create a newly edited task with the edited details and
 set the edited task in place of the original task in the model. It also returns a `CommandResult` object that is returned
 to the `LogicManager` class. The `AddressBookParser` class and `EditTaskCommandParser` class were not added in the below
-diagram for simplicity. 
+diagram for simplicity.
 
 ![EditTask](images/EditTaskSequenceDiagram.png)
 
@@ -327,7 +238,8 @@ the original task. To tackle this issue, we created a new constructor for the `T
 uniqueId of the original task so that the id is retained and does not change. This simplifies matters when it comes to
 assigning and unassigning tasks to the students.
 
-#### Alternatives considered
+
+#### Alternatives Considered
 An alternative considered was to edit the list of uniqueIds of tasks assigned to each student after editing a particular
 task. However, this seemed inefficient and hence, we went with the current implementation.
 
@@ -338,18 +250,26 @@ task. However, this seemed inefficient and hence, we went with the current imple
 The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
 checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
 object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be
-executed. The `ViewPersonCommand` object gets the list of students via `Model#getfilteredPersonsList()`. It then obtains the
-target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying the details of the student in the 'Result Display'.
+executed.
 
-#### Implementation rationale
+The `ViewPersonCommand` object gets the list of students via `ModelManager#getfilteredPersonsList()`. It then obtains the
+target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying
+the details of the student in the 'Result Display'.
+
+The `ViewPersonCommand` calls the methods `ModelManager#setViewingType` and `ModelManager#setPersonToView` to modify the
+current UI of the application to display all details of a student in the Viewing Panel
+
+The `viewPersonCommandParser` class is not included in the sequence diagram below for simplicity.
+
+#### Implementation Rationale
 * `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands
   related to student.
 
-#### Alternatives considered
-View the student from the persons list itself as it also displays the students' details. This may not include other details
+#### Alternatives Considered
+View the student from the person panel itself as it also displays the students' details. This may not include other details
 relating to the student, such as the different `Task` object they have, and the `Group` they are in.
 
-The following sequence diagram shows how the view operation works.
+The following sequence diagram shows how the `view student` operation works.
 
 ![ViewDiagram](images/ViewStudentDiagram.png)
 
@@ -511,11 +431,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Adding a lesson**
 
+**MSS**
 1. User requests to list all students
 2. TutorMaster shows a list of students in the students list
 3. User requests to add a specific lesson to the student
 4. TutorMaster adds the lesson to the specific student
 5. TutorMaster displays the specific student in the viewing panel
+
+   Use case ends.
 
 **Extensions**
 
@@ -622,24 +545,18 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
    1. Test case: `student -d 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
    1. Test case: `student -d 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
    1. Other incorrect delete commands to try: `student -d`, `student -d x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Adding a lesson to a student
 
@@ -653,7 +570,6 @@ testers are expected to do more *exploratory* testing.
     message is shown.
     1. Test case: Use `student -al s/Biology st/23:00 et/23:59 d/Fri` <br>
     Expected: Error message is shown as no index is specified.
-    
 
 ### Grouping students
 
@@ -670,8 +586,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data files
+   1. Delete the `data` folder in the directory Tutor Master is in.
+   2. Navigate to the directory Tutor Master is in using Terminal and run `java -jar tutormaster.jar`.
+   Expected: Tutor Master UI contains initial sample data with no newly added data by user.
