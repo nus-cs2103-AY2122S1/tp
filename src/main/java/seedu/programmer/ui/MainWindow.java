@@ -274,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDownload() {
         JSONArray jsonData = new JSONArray();
         try {
-            jsonData = JsonUtil.getJsonData("data/programmerError.json");
+            jsonData = JsonUtil.getJsonData(DEFAULT_STORAGE_LOCATION);
         } catch (IllegalValueException e) {
             popupManager.displayPopup(FILE_NOT_FOUND_MESSAGE);
             return;

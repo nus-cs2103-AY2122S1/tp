@@ -160,10 +160,10 @@ At a high level, the `MainWindow` component interacts with 3 other main componen
 Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in Figure 4.2.2.
 
 1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
-2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
+2. Secondly, `MainWindow` conducts file operations on the UI through a `FileManager`.
    For instance, the `FileManager` handles situations where the user is required to select files or directories.
 3. Thirdly, to manage the display of popup windows to the user, `MainWindow` interacts with a `PopupManager` which handles
-   the configuration, creation and showing of popups on the Ui.
+   the configuration, creation and showing of popups on the UI.
 
 In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
 from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
@@ -173,7 +173,7 @@ to be displayed to the user.
     <img src="images/ui/UiClassDiagramOverview.png" width="700" />
 </p>
 <div style="text-align: center">
-    <em>Figure 4.2.1: Overview of Ui components</em>
+    <em>Figure 4.2.1: Overview of UI components</em>
 </div>
 <br>
 
@@ -185,7 +185,7 @@ the commonalities between classes that represent parts of the visible GUI. The f
     <img src="images/ui/UiClassDiagramMainComponents.png" width="600" />
 </p>
 <div style="text-align: center">
-    <em>Figure 4.2.2: MainWindow Ui components</em>
+    <em>Figure 4.2.2: MainWindow UI components</em>
 </div>
 <br>
 Note that the `UI` component uses the JavaFx UI framework.
