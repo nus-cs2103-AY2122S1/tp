@@ -480,13 +480,15 @@ The `show` feature allows users to show the performance analysis of a student, a
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
-<div style="page-break-after: always;"></div>
 
 The following activity diagrams summarize what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
 <center>
     <img src="images/ShowActivityDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
+
 <center>
     <img src="images/ShowStudentActivityDiagram.png" />
 </center>
