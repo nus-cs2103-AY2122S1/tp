@@ -57,11 +57,11 @@ public class ViewEventCommand extends Command {
     }
 
     public void setSingleEvent(Model model) throws CommandException {
-        List<Event> lastShownList = model.getFilteredEventList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        List<Event> filteredPersonList = model.getFilteredEventList();
+        if (targetIndex.getZeroBased() >= filteredPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
-        Event eventToShow = lastShownList.get(targetIndex.getZeroBased());
+        Event eventToShow = filteredPersonList.get(targetIndex.getZeroBased());
         model.setSingleEvent(eventToShow);
     }
 }
