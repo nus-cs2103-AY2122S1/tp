@@ -81,7 +81,7 @@ The current version of Academy Directory is specifically designed for
 **CS1101S Avengers**. Therefore, the main Target Audience of this user guide are CS1101S Avengers.
 As such, the following assumptions are made regarding the Target Audience:
 - Can type fast and are comfortable using a CLI.
-- Is comfortable downloading and installing software such as Java 11.
+- Is comfortable downloading and installing software such as Java 11
 onto their system.
 - Is familiar with the common terms relating to Computer Science.
 - Is familiar with CS1101S module structure and teaching pedagogy.

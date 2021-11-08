@@ -275,7 +275,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
 
 
 7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory.
-    1. Prerequisites:
+    1. Prerequisites:F
         - No student has a name which matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
           and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](DeveloperGuide.md) for more details.
         - Run each test case twice, the first time by having all students listed using the `list` command,
@@ -297,7 +297,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
     2. Test cases:
         1. `edit 1 te/@charles`<br>
            Expected: The first student in the list will have their telegram changed to `@charles`. Details of the added student shown in the status message. Result display remains the same. Changes in that student can be viewed immediately in Student Panel List on the left.
-        2. `delete 0 te/@charles`<br>
+        2. `edit 0 te/@charles`<br>
            Expected: No student is edited. Error details shown in the status message. Result display remains the same.
         3. `edit 1 as/@charles`<br>
            Expected: Edit command only works with personal details such as `NAME`(`n/`), `PHONE`(`p/`), `EMAIL`(`e/`) and `TELEGRAM`(`te/`). Assessment (`as/`) can not be edited by this edit command. No student will be edited. Error `Invalid command format!` will be shown alongside with a proper usage of command. Result display remains the same.
