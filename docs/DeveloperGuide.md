@@ -165,7 +165,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed.
 * stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* Stores a set of `Prefix` objects which is exposed to outsiders as an unmodifiable `Set<Prefix>` that can be 'observed' e.g. the UI can be bound to this set so that the UI can use this data.
+* stores a set of `Prefix` objects which is exposed to outsiders as an unmodifiable `Set<Prefix>` that can be 'observed' e.g. the UI can be bound to this set so that the UI can use this data.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
@@ -310,8 +310,6 @@ The following activity diagram shows possible user interactions with a `unpin` c
     * Pros: Harder to implement.
     * Cons: Less code duplication.
 
-<div style="page-break-before: always;"></div>
-
 ### Find feature
 
 #### Implementation
@@ -335,8 +333,6 @@ Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonLis
 Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated filtered list in `PersonListPanel`. Only contacts whose name contains `David` **while also having** `friend` **and**
 `football` tagged to them will be displayed.
 
-<div style="page-break-before: always;"></div>
-
 The following sequence diagram shows how the Find operation works:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
@@ -354,6 +350,8 @@ The following sequence diagram shows how the Find operation works:
 * **Option 2 (current choice):** Create a `FindPredicate` to store Name and Tag(s)
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
+
+<div style="page-break-before: always;"></div>
 
 ### FindAny feature
 
@@ -549,6 +547,8 @@ The following activity diagram shows possible user interactions with the command
 * **Option 2:** Generate `CommandHistory` as a normal class.
     * Pros: Makes testing easier as multiple `CommandHistory` objects can be created with different history to test different conditions.
     * Cons: Possible conflicting history if `CommandHistory` is not updated properly.
+
+<div style="page-break-before: always;"></div>
 
 ### Command Assistant feature
 
