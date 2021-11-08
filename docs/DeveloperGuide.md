@@ -784,7 +784,7 @@ Use case resumes from step 3.
 
 * 1a. Tables are not set yet.
     * 1a1. System requests user to set the tables.
-    * 1a2. User <u>sets the tables (UC16)</u>
+    * 1a2. User <u>sets the tables (UC21)</u>
 
     Use case resumes from step 1.
 
@@ -949,7 +949,7 @@ Use case resumes from step 2.
     * 1c1. System displays an error that no such supplier index exist in RHRH.
     * 1c2. User enters supplier index again.
 
-Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
+Steps 1c1 - 1c2 are repeated until the supplier to be added is unique. <br>
 Use case resumes from step 2.
 
 * 1d. System detects that editing of current supplier would cause duplicate suppliers in RHRH.
@@ -971,15 +971,27 @@ Use case resumes from step 2.
 
 **Extensions**
 
-* 1a. User keys in invalid format.
-    * 1a1. System displays an error, and the recommended format for editing a reservation.
-    
-    Use case ends.
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
 
-* 1b. User keys in command without prefix.
-    * 1b1. System displays an error that says that at least 1 field must be provided.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-      Use case ends.
+* 1b. System detects invalid command arguments.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that reservation to edit does not exist in RHRH.
+    * 1c1. System displays an error that no such reservation index exist in RHRH.
+    * 1c2. User enters reservation index again.
+
+Steps 1c1 - 1c2 are repeated until the reservation to be added is unique. <br>
+Use case resumes from step 2.
 
 **Use case (UC10): Delete a Customer**
 
@@ -1118,7 +1130,7 @@ Use case resumes from step 2.
 Steps 1c1 - 1c2 are repeated until the reservation to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
-**Use case (UC13): Find Customers in RHRH**
+**Use case (UC14): Find Customers in RHRH**
 
 **MSS**
 
@@ -1145,7 +1157,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC14): Find Employees in RHRH**
+**Use case (UC15): Find Employees in RHRH**
 
 **MSS**
 
@@ -1172,7 +1184,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC15): Find Suppliers in RHRH**
+**Use case (UC16): Find Suppliers in RHRH**
 
 1. User enters the command to find the suppliers in RHRH based on a sequence of keywords.
 2. The supplier list is filtered in RHRH based on matching of keywords.
@@ -1198,7 +1210,7 @@ Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 
-**Use case (UC20): Check for reservations made for a date and time**
+**Use case (UC17): Check for reservations made for a date and time**
 
 **MSS**
 
@@ -1221,7 +1233,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC21): Check for reservations made for a date**
+**Use case (UC18): Check for reservations made for a date**
 
 **MSS**
 
@@ -1244,7 +1256,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC22): Check for reservations made for a time on the current date**
+**Use case (UC19): Check for reservations made for a time on the current date**
 
 **MSS**
 
@@ -1267,90 +1279,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC16): Set the tables of the restaurant inside the app**
-
-**MSS**
-
-1. User enters the command to set the tables in RHRH.
-2. System shows the number of tables set in the restaurant.
-
-   Use case ends
-
-**Extensions:**
-
-* 1a. System detects invalid command format.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
-Use case resumes from step 2.
-
-
-**Use case (UC17): Sort Customers in RHRH**
-
-**MSS**
-
-1. User enters the command to sort the customer list in RHRH based on a sorting type and order.
-2. The customer list is sorted in RHRH according to specified sorting type and order.
-3. System confirms that the customers have been sorted.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. System detects invalid command format.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
-Use case resumes from step 2.
-
-* 1b. System detects invalid customer sorting type and order.
-    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments.
-    * 1b2. User enters command arguments again.
-
-Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
-Use case resumes from step 2.
-
-* 1c. System detects that there are no customers to sort in the current list.
-    * 1c1. System displays an error that there are no customers to sort in the current list.
-    
-    Use case ends.
-
-**Use case (UC18): Sort Employees in RHRH**
-
-**MSS**
-
-1. User enters the command to sort the employee list in RHRH based on a sorting type and order.
-2. The employee list is sorted in RHRH according to specified sorting type and order.
-3. System confirms that the employees have been sorted.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. System detects invalid command format.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
-Use case resumes from step 2.
-
-* 1b. System detects invalid employee sorting type and order.
-    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
-      and arguments.
-    * 1b2. User enters command arguments again.
-
-Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
-Use case resumes from step 2.
-
-* 1c. System detects that there are no employees to sort in the current list.
-    * 1c1. System displays an error that there are no employees to sort in the current list. 
-      
-  Use case ends.
-
-**Use case (UC19): Get customer who made a reservation in RHRH**
+**Use case (UC20): Get customer who made a reservation in RHRH**
 
 **MSS**
 
@@ -1385,13 +1314,96 @@ Steps 1c1 - 1c2 are repeated until the reservation to get customer information e
 Use case resumes from step 2.
 
 
-**Use case (UC19): Sort Suppliers in RHRH**
+**Use case (UC21): Set the tables of the restaurant inside the app**
+
+**MSS**
+
+1. User enters the command to set the tables in RHRH.
+2. System shows the number of tables set in the restaurant.
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+
+**Use case (UC22): Sort Customers in RHRH**
+
+**MSS**
+
+1. User enters the command to sort the customer list in RHRH based on a sorting type and order.
+2. The customer list is sorted in RHRH according to specified sorting type and order.
+3. System confirms that the customers have been sorted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid customer sorting type and order.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that there are no customers to sort in the current list.
+    * 1c1. System displays an error that there are no customers to sort in the current list.
+    
+    Use case ends.
+
+**Use case (UC23): Sort Employees in RHRH**
+
+**MSS**
+
+1. User enters the command to sort the employee list in RHRH based on a sorting type and order.
+2. The employee list is sorted in RHRH according to specified sorting type and order.
+3. System confirms that the employees have been sorted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid employee sorting type and order.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that there are no employees to sort in the current list.
+    * 1c1. System displays an error that there are no employees to sort in the current list. 
+      
+  Use case ends.
+
+**Use case (UC24): Sort Suppliers in RHRH**
 
 **MSS**
 
 1. User enters the command to sort the supplier list in RHRH based on a sorting type and order.
 2. The employee list is sorted in RHRH according to specified sorting type and order.
-3. System confirms that the employees have been sorted.
+3. System confirms that the suppliers have been sorted.
 
    Use case ends.
 
@@ -1418,7 +1430,7 @@ Use case resumes from step 2.
   Use case ends.
 
     
-**Use case (UC23): List all customers/employees/suppliers in default sorting order(by `name`)**
+**Use case (UC25): List all customers/employees/suppliers in default sorting order(by `name`)**
 
 {:no_toc}
 
