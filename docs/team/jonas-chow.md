@@ -23,7 +23,9 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to scroll through past commands.
     * What it does: Pressing the `up` and `down` keys will scroll through your previous commands, similar to any conventional CLI interface.
     * Justification: The case where the user would want to add scores for the same assessment to multiple students is one of many cases where a similar command has to be run multiple times. This feature allows one to input consecutive similar commands easily.
-    
+
+<div style="page-break-after: always;"></div>
+
 * **New Feature**: Added the ability to export data.
     * What it does: Allows the user to export the data to a CSV file. 
     * Justification: Exporting the data serves as both a way to share the data with the user's colleagues for them to import to their copy of the application, and a way to back up the data.
