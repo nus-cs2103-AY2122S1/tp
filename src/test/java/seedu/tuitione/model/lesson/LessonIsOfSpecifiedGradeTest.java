@@ -10,14 +10,14 @@ import seedu.tuitione.testutil.LessonBuilder;
 
 public class LessonIsOfSpecifiedGradeTest {
 
+    private Grade firstGrade = new Grade("S1");
+    private Grade secondGrade = new Grade("S2");
+
+    private LessonIsOfSpecifiedGrade firstPredicate = new LessonIsOfSpecifiedGrade(firstGrade);
+    private LessonIsOfSpecifiedGrade secondPredicate = new LessonIsOfSpecifiedGrade(secondGrade);
+
     @Test
     public void equals() {
-
-        Grade firstGrade = new Grade("S1");
-        Grade secondGrade = new Grade("S2");
-
-        LessonIsOfSpecifiedGrade firstPredicate = new LessonIsOfSpecifiedGrade(firstGrade);
-        LessonIsOfSpecifiedGrade secondPredicate = new LessonIsOfSpecifiedGrade(secondGrade);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -32,17 +32,17 @@ public class LessonIsOfSpecifiedGradeTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different student -> returns false
+        // different grade -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
     public void test_gradeMatches_returnsTrue() {
-        // Secondary prefix
-        LessonIsOfSpecifiedGrade predicate = new LessonIsOfSpecifiedGrade(new Grade("S1"));
-        assertTrue(predicate.test(new LessonBuilder().withGrade("S1").build()));
+        // Grade with secondary prefix
+        LessonIsOfSpecifiedGrade predicate = new LessonIsOfSpecifiedGrade(new Grade("S3"));
+        assertTrue(predicate.test(new LessonBuilder().withGrade("S3").build()));
 
-        // Primary prefix
+        // Grade with primary prefix
         predicate = new LessonIsOfSpecifiedGrade(new Grade("P1"));
         assertTrue(predicate.test(new LessonBuilder().withGrade("P1").build()));
     }
@@ -50,8 +50,7 @@ public class LessonIsOfSpecifiedGradeTest {
     @Test
     public void test_gradeDoesNotMatch_returnsFalse() {
         // Non-matching grade
-        LessonIsOfSpecifiedGrade predicate = new LessonIsOfSpecifiedGrade(new Grade("S1"));
-        assertFalse(predicate.test(new LessonBuilder().withGrade("S2").build()));
+        assertFalse(firstPredicate.test(new LessonBuilder().withGrade("P1").build()));
 
     }
 }

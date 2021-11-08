@@ -14,7 +14,7 @@ public class DeleteLessonCommandParserTest {
     private DeleteLessonCommandParser parser = new DeleteLessonCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsDeleteLessonCommand() {
         assertParseSuccess(parser, "1", new DeleteLessonCommand(INDEX_FIRST_STUDENT));
     }
 

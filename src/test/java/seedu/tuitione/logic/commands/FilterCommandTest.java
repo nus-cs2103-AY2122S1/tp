@@ -93,7 +93,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_gradeNotFoundInTuitione_noStudentFoundnoLessonFound() {
+    public void execute_gradeNotFoundInTuitione_noStudentAndLessonFound() {
         String expectedMessage = String.format("ℹ\tUpdate:\n" + MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
                 + "\n"
                 + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, 0);
@@ -102,8 +102,8 @@ public class FilterCommandTest {
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
-        assertEquals(Collections.emptyList(), model.getFilteredLessonList());
+        assertEquals(Collections.emptyList(), model.getFilteredStudentList()); // no student found
+        assertEquals(Collections.emptyList(), model.getFilteredLessonList()); // no lesson found
     }
 
     @Test
@@ -113,7 +113,7 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(null, subject);
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredLessonList());
+        assertEquals(Collections.emptyList(), model.getFilteredLessonList()); // no lesson found
     }
 
     @Test
@@ -127,8 +127,8 @@ public class FilterCommandTest {
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(List.of(localBenson), model.getFilteredStudentList());
-        assertEquals(Arrays.asList(localMathS2, PHYSICS_S2), model.getFilteredLessonList());
+        assertEquals(List.of(localBenson), model.getFilteredStudentList()); // student found
+        assertEquals(Arrays.asList(localMathS2, PHYSICS_S2), model.getFilteredLessonList()); // lessons found
     }
 
     @Test
@@ -138,11 +138,11 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(null, subject);
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(SCIENCE_P2), model.getFilteredLessonList());
+        assertEquals(List.of(SCIENCE_P2), model.getFilteredLessonList()); // lesson found
     }
 
     @Test
-    public void execute_gradeFoundSubjectFoundInTuitione_studentFoundLessonFound() {
+    public void execute_gradeFoundSubjectFoundInTuitione_studentAndLessonFound() {
         String expectedMessage = String.format(HEADER_UPDATE + MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
                 + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, 1);
@@ -153,7 +153,7 @@ public class FilterCommandTest {
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGradeAndSubject(grade, subject));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
-        assertEquals(List.of(localBenson), model.getFilteredStudentList());
-        assertEquals(List.of(localMathS2), model.getFilteredLessonList());
+        assertEquals(List.of(localBenson), model.getFilteredStudentList()); // student found
+        assertEquals(List.of(localMathS2), model.getFilteredLessonList()); // lesson found
     }
 }

@@ -33,10 +33,6 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_REMARK_1 = "friend";
     private static final String VALID_REMARK_2 = "neighbour";
-    private static final String VALID_REMARK_3 = "paid";
-    private static final String VALID_REMARK_4 = "problematic";
-    private static final String VALID_REMARK_5 = "financialAssistance";
-    private static final String VALID_REMARK_6 = "temporary";
 
     private static final String WHITESPACE = " \t\r\n";
 

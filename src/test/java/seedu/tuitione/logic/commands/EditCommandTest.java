@@ -39,8 +39,6 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
 
-    // To fix first 2 tests in v1.4
-
     @Test
     public void execute_allFieldsSpecifiedUnfilteredListStudentNoLessons_success() {
 
@@ -188,7 +186,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_gradeFieldChangedStudentUnenrolledFromLesson_success() {
+    public void execute_gradeFieldChanged_success() { // student unenrolled from existing lessons
         Model modelWithStudentsAndLessons = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
 
         // get student BENSON
@@ -214,8 +212,9 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_gradeFieldNotChangedStudentStillEnrolledForLesson_success() {
+    public void execute_gradeFieldNotChanged_success() { // student still enrolled in existing lessons
 
+        // create new model
         Model modelWithStudentsAndLessons = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
         // get student BENSON
         Student secondStudent = modelWithStudentsAndLessons

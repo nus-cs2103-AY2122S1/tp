@@ -31,7 +31,7 @@ public class StudentIsOfSpecifiedGradeTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different student -> returns false
+        // different grade -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

@@ -35,7 +35,7 @@ public class UnenrollCommandTest {
     }
 
     @Test
-    public void execute_validUnenrollment_success() {
+    public void execute_studentEnrolledInLesson_success() {
         UnenrollCommand unenrollCommand = new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_FOURTH_LESSON);
 
         Model expectedModel = new ModelManager(getTypicalTuitione(), new UserPrefs());
@@ -51,11 +51,11 @@ public class UnenrollCommandTest {
     }
 
     @Test
-    public void execute_invalidUnenrollment_failure() {
-        Lesson testLesson = model.getFilteredLessonList().get(INDEX_THIRD_LESSON.getZeroBased()); //
-        Student alice = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()); //ALICE
-        Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
-        Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); //CARL
+    public void execute_studentsNotEnrolledInLesson_failure() {
+        Lesson testLesson = model.getFilteredLessonList().get(INDEX_THIRD_LESSON.getZeroBased());
+        Student alice = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()); // ALICE
+        Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); // BENSON
+        Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); // CARL
 
         String expectedMessageAlice = String.format(STUDENT_NOT_ENROLLED_CONSTRAINT, alice.getName(),
                 testLesson.getLessonCode());
@@ -73,7 +73,7 @@ public class UnenrollCommandTest {
     }
 
     @Test
-    public void execute_invalidIndex_failure() {
+    public void execute_invalidStudentIndex_failure() {
         Index studentOutOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         Index lessonOutOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
 
@@ -87,7 +87,7 @@ public class UnenrollCommandTest {
     }
 
     @Test
-    public void execute_invalidUnenrollmentWrongLessonIndex_failure() {
+    public void execute_invalidLessonIndex_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
         UnenrollCommand unenrollCommand = new UnenrollCommand(INDEX_SECOND_STUDENT, outOfBoundIndex);
 
