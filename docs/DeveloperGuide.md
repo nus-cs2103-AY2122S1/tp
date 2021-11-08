@@ -1038,13 +1038,6 @@ as well as the number of labs unmarked for each class.
    1280x720 and higher, and screen scales 150%.
 
 
-- **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
-- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
-- **TA**: A CS2100 teaching assistant
-- **PE**: ProgrammerError
-- **CSV**: Comma-Separated Values
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## <a name="manual-testing"></a> **8. Appendix: Instructions for manual testing**
