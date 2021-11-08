@@ -1,6 +1,16 @@
 @startuml
 !include style.puml
 skinparam defaultFontSize 20
+skinparam maxMessageSize 10
+
+mainframe **sd**  execute LinkFriendCommand
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LinkFriendCommand" as LinkFriendCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
@@ -9,7 +19,12 @@ participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
 participant "friendToEdit:Friend" as Friend MODEL_COLOR
 end box
 
--> ModelManager : linkFriend(friendToLink, gameFriendLink)
+activate LogicManager
+
+LogicManager -> LinkFriendCommand : execute()
+activate LinkFriendCommand
+
+LinkFriendCommand -> ModelManager : linkFriend(friendToLink, gameFriendLink)
 activate ModelManager
 ModelManager -> FriendsList : linkFriend(friendToLink, gameFriendLink)
 activate FriendsList
@@ -32,5 +47,15 @@ UniqueFriendsList --> FriendsList
 deactivate UniqueFriendsList
 FriendsList --> ModelManager
 deactivate FriendsList
+ModelManager --> LinkFriendCommand
+deactivate ModelManager
+
+create CommandResult
+LinkFriendCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LinkFriendCommand
+deactivate CommandResult
+
 return
 @enduml

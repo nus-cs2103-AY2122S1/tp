@@ -7,8 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
 participant ":UnlinkFriendCommandParser" as UnlinkFriendCommandParser LOGIC_COLOR
-participant "command:UnlinkFriendCommand" as UnlinkFriendCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":UnlinkFriendCommand" as UnlinkFriendCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -45,42 +44,28 @@ create UnlinkFriendCommand
 UnlinkFriendCommandParser -> UnlinkFriendCommand
 activate UnlinkFriendCommand
 
-UnlinkFriendCommand --> UnlinkFriendCommandParser : command
+UnlinkFriendCommand --> UnlinkFriendCommandParser : unlinkFriendCommand
 deactivate UnlinkFriendCommand
 
-UnlinkFriendCommandParser --> FriendCommandParser : command
+UnlinkFriendCommandParser --> FriendCommandParser : unlinkFriendCommand
 deactivate UnlinkFriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 UnlinkFriendCommandParser -[hidden]-> FriendCommandParser
 destroy UnlinkFriendCommandParser
 
-FriendCommandParser --> MainParser : command
+FriendCommandParser --> MainParser : unlinkFriendCommand
 deactivate FriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FriendCommandParser -[hidden]-> MainParser
 destroy FriendCommandParser
 
-MainParser --> LogicManager : command
+MainParser --> LogicManager : unlinkFriendCommand
 deactivate MainParser
 
-LogicManager -> UnlinkFriendCommand : command.execute()
-activate UnlinkFriendCommand
+ref over LogicManager, Model: Executing UnlinkFriendCommand
 
-UnlinkFriendCommand -> Model : unlinkFriend(friendToUnlink, game)
-activate Model
-
-Model --> UnlinkFriendCommand
-deactivate Model
-
-create CommandResult
-UnlinkFriendCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> UnlinkFriendCommand
-deactivate CommandResult
-
-UnlinkFriendCommand --> LogicManager : result
-deactivate UnlinkFriendCommand
+LogicManager -[hidden]-> LogicManager
+UnlinkFriendCommand -[hidden]-> UnlinkFriendCommand
 
 [<--LogicManager
 deactivate LogicManager

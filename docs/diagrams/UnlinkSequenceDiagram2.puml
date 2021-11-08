@@ -2,6 +2,15 @@
 !include style.puml
 skinparam defaultFontSize 20
 
+mainframe **sd**  execute UnlinkFriendCommand
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UnlinkFriendCommand" as UnlinkFriendCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":FriendsList" as FriendsList MODEL_COLOR
@@ -9,7 +18,12 @@ participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
 participant "friendToEdit:Friend" as Friend MODEL_COLOR
 end box
 
--> ModelManager : unlinkFriend(friendToUnlink, game)
+activate LogicManager
+
+LogicManager -> UnlinkFriendCommand : execute()
+activate UnlinkFriendCommand
+
+UnlinkFriendCommand -> ModelManager : unlinkFriend(friendToUnlink, game)
 activate ModelManager
 ModelManager -> FriendsList : unlinkFriend(friendToUnlink, game)
 activate FriendsList
@@ -32,5 +46,15 @@ UniqueFriendsList --> FriendsList
 deactivate UniqueFriendsList
 FriendsList --> ModelManager
 deactivate FriendsList
+ModelManager --> UnlinkFriendCommand
+deactivate ModelManager
+
+create CommandResult
+UnlinkFriendCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UnlinkFriendCommand
+deactivate CommandResult
+
 return
 @enduml
