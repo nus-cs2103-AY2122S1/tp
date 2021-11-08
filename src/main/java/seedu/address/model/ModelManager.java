@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,34 +13,39 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.lesson.Lesson;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the mod book data.
  */
 public class ModelManager implements Model {
+    public static final String MESSAGE_MODULE_DOESNT_EXIST = "The module you chose does not exist";
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ModBook modBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Module> filteredModules;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given modBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModBook modBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(modBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with modBook " + modBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.modBook = new ModBook(modBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredModules = new FilteredList<>(this.modBook.getModuleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ModBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +73,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getModBookFilePath() {
+        return userPrefs.getModBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
-
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
-    }
-
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+    public void setModBookFilePath(Path modBookFilePath) {
+        requireNonNull(modBookFilePath);
+        userPrefs.setModBookFilePath(modBookFilePath);
     }
 
     @Override
@@ -143,9 +97,114 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return modBook.equals(other.modBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredModules.equals(other.filteredModules);
     }
 
+    //=========== ModBook ================================================================================
+
+    @Override
+    public void setModBook(ReadOnlyModBook modBook) {
+        this.modBook.resetData(modBook);
+    }
+
+    @Override
+    public ReadOnlyModBook getModBook() {
+        return modBook;
+    }
+
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modBook.hasModule(module);
+    }
+
+    @Override
+    public void deleteModule(Module target) {
+        modBook.removeModule(target);
+    }
+
+    @Override
+    public void addModule(Module module) {
+        modBook.addModule(module);
+        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+    }
+
+    @Override
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+        modBook.setModule(target, editedModule);
+    }
+
+    @Override
+    public Module getModule(ModuleCode modCode) throws CommandException {
+        Optional<Module> module = this.filteredModules.stream().filter(mod ->
+                mod.getCode().equals(modCode)).findAny();
+        if (module.isEmpty()) {
+            throw new CommandException(MESSAGE_MODULE_DOESNT_EXIST);
+        }
+        return module.get();
+    }
+
+    @Override
+    public void deleteExam(Module module, Exam target) {
+        modBook.removeExam(module, target);
+    }
+
+    @Override
+    public void deleteLesson(Module module, Lesson target) {
+        modBook.removeLesson(module, target);
+    }
+
+    @Override
+    public boolean moduleHasLesson(Module module, Lesson lesson) {
+        List<Lesson> lessons = module.getLessons();
+        return lessons.contains(lesson);
+    }
+
+    @Override
+    public void addLessonToModule(Module module, Lesson lesson) {
+        module.getLessons().add(lesson);
+    }
+
+    @Override
+    public boolean moduleHasExam(Module module, Exam exam) {
+        List<Exam> exams = module.getExams();
+        return exams.contains(exam);
+    }
+
+    @Override
+    public void addExamToModule(Module module, Exam exam) {
+        module.getExams().add(exam);
+    }
+
+    @Override
+    public void setExam(Module module, Exam target, Exam newExam) {
+        requireAllNonNull(module, target, newExam);
+        modBook.setExam(module, target, newExam);
+    }
+
+    @Override
+    public void setLesson(Module module, Lesson target, Lesson newLesson) {
+        requireAllNonNull(module, target, newLesson);
+        modBook.setLesson(module, target, newLesson);
+    }
+
+    //=========== Filtered Module List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
+     * {@code versionedModBook}
+     */
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
+        requireNonNull(predicate);
+        filteredModules.setPredicate(predicate);
+    }
 }

@@ -5,55 +5,50 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+## Project Team
 
-## Project team
+### Lee Xiong Jie, Isaac
 
-### John Doe
+<img src="images/luminousleek.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+Role: Team Lead
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* [GitHub](https://github.com/luminousleek)
+* [Project Portfolio Page](team/luminousleek.html)
 
-* Role: Project Advisor
+### Shezad Sulyman Imran Hassan
 
-### Jane Doe
+<img src="images/shezadhassan22.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+Role: Testing
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* [GitHub](https://github.com/shezadhassan22)
+* [Project Portfolio Page](team/shezadhassan22.html)
 
-* Role: Team Lead
-* Responsibilities: UI
+### Rohit Rajesh Bhat
 
-### Johnny Doe
+<img src="images/rohit0718.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+Role: Documentation
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+* [GitHub](https://github.com/rohit0718)
+* [Project Portfolio Page](team/rohit0718.html)
 
-* Role: Developer
-* Responsibilities: Data
+### TAN JUN RONG, BENJAMIN
 
-### Jean Doe
+<img src="images/bentanjunrong.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+Role: Code Quality
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* [GitHub](https://github.com/bentanjunrong)
+* [Project Portfolio Page](team/bentanjunrong.html)
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+### Benjamin Lim
 
-### James Doe
+<img src="images/itzblim.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+Role: Deliverables and Deadlines
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* [GitHub](https://github.com/itzblim)
+* [Project Portfolio Page](team/itzblim.html)
 
-* Role: Developer
-* Responsibilities: UI
