@@ -116,8 +116,8 @@ class JsonAdaptedPerson {
         }
 
         ModuleSet moduleSet = new ModuleSet();
-        String[] modGroupPairs = mods.split(" ");
         if (!mods.strip().isEmpty()) {
+            String[] modGroupPairs = mods.split(" ");
             for (String modGroupPair : modGroupPairs) {
                 String[] modGroupArray = modGroupPair.split(":");
                 if (modGroupArray.length != 2) {
@@ -130,7 +130,6 @@ class JsonAdaptedPerson {
                 if (!Module.MODULE_SYSTEM.hasModule(mod)) {
                     throw new IllegalValueException(String.format(Module.MESSAGE_DOES_NOT_EXIST, mod));
                 }
-                final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
 
                 String groups = modGroupArray[1];
                 if (groups.length() <= 1 || groups.charAt(0) != '[' || groups.charAt(groups.length() - 1) != ']') {
@@ -139,6 +138,8 @@ class JsonAdaptedPerson {
                 groups = ModuleSet.parseGroups(groups);
                 String[] groupArray = groups.split(",");
 
+                final Module modelModule = Module.MODULE_SYSTEM.getModule(mod);
+                Module module = new Module(modelModule.getCode());
                 for (String group : groupArray) {
                     if (!Group.isValidGroup(group)) {
                         throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
@@ -146,14 +147,11 @@ class JsonAdaptedPerson {
                     if (!modelModule.getGroupSystem().hasGroup(group)) {
                         throw new IllegalValueException(Group.MESSAGE_DOES_NOT_EXIST);
                     }
-                    final Group modelGroup = modelModule.getGroup(group);
-                    if (!modelModule.getGroupSystem().hasGroup(modelGroup)) {
-                        modelModule.getGroupSystem().addGroup(modelGroup);
-                    }
-                    moduleSet.addToSet(modelModule);
+                    moduleSet.add(module, new Group(group));
                 }
             }
         }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // TODO change `new AssignmentGradeMap()` to save grades

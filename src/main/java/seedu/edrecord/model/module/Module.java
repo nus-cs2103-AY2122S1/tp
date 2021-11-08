@@ -2,7 +2,6 @@ package seedu.edrecord.model.module;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
@@ -67,6 +66,10 @@ public class Module {
 
     public GroupSystem getGroupSystem() {
         return groupSystem;
+    }
+
+    public boolean hasAnyGroup() {
+        return groupSystem.hasAnyGroup();
     }
 
     /**
@@ -202,6 +205,6 @@ public class Module {
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, groupSystem);
+        return code.hashCode();
     }
 }

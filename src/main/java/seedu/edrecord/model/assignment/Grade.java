@@ -41,9 +41,9 @@ public class Grade {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Status: ").append(status).append(", ");
+        builder.append("Status: ").append(status);
         if (score.isPresent()) {
-            builder.append("Score: ");
+            builder.append(", Score: ");
             score.ifPresent(builder::append);
         }
         return builder.toString();

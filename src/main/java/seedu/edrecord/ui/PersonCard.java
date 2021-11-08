@@ -53,12 +53,16 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().name);
         phone.setText(person.getPhone().value);
         info.setText(person.getInfo().value);
-        if (person.getInfo().value.isBlank()) {
+        if (person.getInfo().isEmpty()) {
             info.setVisible(false);
             info.managedProperty().bind(info.visibleProperty());
         }
         email.setText(person.getEmail().value);
         module.setText(person.getModules().toString());
+        if (person.getModules().isEmpty()) {
+            module.setVisible(false);
+            module.managedProperty().bind(module.visibleProperty());
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
