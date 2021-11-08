@@ -10,7 +10,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to create shortcuts for commands.
+* **New Feature**: Added the ability to create shortcuts for commands (and supporting operations i.e. viewing and deleting created aliases).
     * What it does: Allows the user to create aliases for command words. Entering the user-defined shortcut for chosen command word will execute that command.
     * Justification: This feature improves user experience of the product significantly because our target users are fast typists well-versed with CLI applications. Aliasing is common in such applications, allowing our users the flexibility of defining their own command words to their preferences.
     * Highlights: Implementation was challenging for this enhancement as it required changes to how commands are parsed and commands had to be tracked.
@@ -27,8 +27,9 @@ Updating tests was also more complicated as many of the commands already relied 
 
 * **Team Tasks**:
     * Designed initial mockup for SportsPA v1.1
-    * Managed release `v1.2` - `v1.2.1` (2 releases) on GitHub
+    * Managed release `v1.2` - `v1.2.1` and `v1.4` (3 releases) on GitHub
     * Morphed existing product Address Book to include basic functionality supporting list of facilities (i.e `findf`, `clearf`, `deletef`, `editf`) (Pull requests [\#85](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/85), [\#89](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/89), [\#97](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/97), [\#111](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/111))
+    * Fixed bugs discovered from PED (Pull Requests [\#213](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/213), [\#263](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/263))
 
 * **Enhancements to existing features**:
     * Add test utilities to support Facilities and Facility List for easy and convenient testing (Pull request [\#98](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/98))
@@ -38,7 +39,7 @@ Updating tests was also more complicated as many of the commands already relied 
     * User Guide:
         * Added documentation for the features `deletem`,`setm` and `split` (Pull Request [\#66](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/66))
         * Added documentation for the features `alias`, `unalias` and `aliases` command (Pull Request [\#124](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/124))
-        * Did cosmetic and tonal tweaks to make User Guide more welcoming and visually aiding (i.e. screenshots, tips) (Pull Requests [\#135](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/135) [\#163](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/163))
+        * Did cosmetic and tonal tweaks to make User Guide more welcoming and visually aiding (i.e. screenshots, tips) (Pull Requests [\#135](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/135), [\#163](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/163))
     * Developer Guide:
         * Added implementation details of the `alias`, `unalias` and `aliases` feature as well as UML diagrams for illustration (Pull Request [\#124](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/124))
         * Review overall updates to Developer Guide Design section and update if necessary (Pull Request [\#259](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/259))  

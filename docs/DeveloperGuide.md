@@ -250,6 +250,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For all sequence diagrams where object deletion is shown, the lifeline for the object should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 ### Alias feature
 The alias feature creates a shortcut name for any command in SportsPA. The shortcut name must not be an existing command word in SportsPA.
 #### Implementation
@@ -294,10 +298,6 @@ members in the member list.
 The following sequence diagram shows how the system understands aliases:
 
 ![AliasSequenceDiagram](images/AliasSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListMembersCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
 
 Step 5. The user then realises that the shortcut <kbd>l</kbd> was not to their liking and deletes the alias by
 executing <kbd>unalias l</kbd>. The <kbd>unalias</kbd> command calls `Model#removeAlias(Shortcut)` and removes the mapping from `AliasMap`
@@ -379,10 +379,6 @@ The following sequence diagram shows how the split mechanism works.
 
 ![SplitSequenceDiagram](images/SplitSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 The following activity diagram summarizes what happens when a user executes the `split` command:
 
 <img src="images/SplitActivityDiagram.png" width="450" />
@@ -455,10 +451,6 @@ The following sequence diagram shows how the mark attendance operation works.
 
 ![MarkSequenceDiagram](images/MarkSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
 to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
@@ -469,7 +461,7 @@ The following activity diagram shows what happens when a user executes the `mark
 
 #### Design considerations:
 
-**Aspect: How mark & unmark executes:**
+**Aspect: How mark & unmark executes**
 
 * **Alternative 1 (current choice):** Uses index to mark attendance.
     * Pros: Easy to implement (e.g there will be no two members with the same index in list, so there will be no
@@ -534,11 +526,12 @@ The following activity diagram summarizes what happens when a user enters and ex
     * Cons: Compromising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
 
 ### Import members feature
+The import feature allows users to add and update the details of multiple members without having to repeatedly do so individually. 
 
 #### Implementation
 
 The import member mechanism is facilitated by `ModelManager` and `SportsPa`. `ModelManager` has access to SportsPA's
-data from the `SportsPa` object, from which member data will be read from when the `import` command is requested by the user.
+data from the `SportsPa` object, from which member data will be read from when the <kbd>import</kbd> command is requested by the user.
 
 **Before going further, here are some terms used that you should take note of:**
 * "invalid import" in this context refers to an imported member having the same name as an 
@@ -553,17 +546,17 @@ existing member AND the same phone number as another existing member.
 
 Given below is an example usage scenario and how the import mechanism behaves.
 
-Step 1. The user launches the application for the first time. The user then executes the command `addm n/Bob p/12345678`,
+Step 1. The user launches the application for the first time. The user then executes the command <kbd>addm n/Bob p/12345678</kbd>,
 which adds a member called Bob with a phone number 12345678 into the member list.
 
 ![ImportStep1ObjectDiagram](images/ImportStep1ObjectDiagram.png)
 
-Step 2. The user then realises he has many more members to add and wants to use the `import` command. He prepares a CSV file
+Step 2. The user then realises he has many more members to add and wants to use the <kbd>import</kbd> command. He prepares a CSV file
 called `myFile.csv` to import the members from. 
 
 ![CSVFileScreenShot](images/ImportImplementationCsv.png)
 
-Step 3. The user executes the command `import myFile.csv` to import the members from the CSV file. The `import` command first 
+Step 3. The user executes the command <kbd>import myFile.csv</kbd> to import the members from the CSV file. The <kbd>import</kbd> command first 
 parses the CSV file using a private method `ImportCommand#parseCsv()`, which returns a list of `Member` objects to be imported.
 
 After which, the command iterates through the list of `Member` objects. Each iteration goes as such:
@@ -589,13 +582,13 @@ The following sequence diagram shows how the import command works.
 
 ![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
 
-The following activity diagram summarizes what happens when a user executes the `import` command:
+The following activity diagram summarizes what happens when a user executes the <kbd>import</kbd> command:
 
 <img src="images/ImportActivityDiagram.png" width="250" />
 
 #### Design Considerations:
 
-**Aspect: how to deal with invalid imports:**
+**Aspect: how to deal with invalid imports**
 * **Alternative 1 (current choice):** Skip the invalid imports and notify the user of the invalid imports.
   * Pros: Easy to implement and users will be able to know which imports they need to rectify.
   * Cons: Might not be the desired interaction users want.
@@ -1355,7 +1348,7 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
     1. Prerequisites: List all members using the <kbd>listf</kbd> command. One or more members are in the list and the list does
        not contain any members with the same names as those in the test cases below.
 
-    2. Test case: <kbd>editf 1 n/Court 3 t/1800`</kbd><br>
+    2. Test case: <kbd>editf 1 n/Court 3 t/1800</kbd><br>
        Expected: First facility's name is changed to Adam and time is changed to 6pm. 
        Details of the edited facility is shown in the status message.
 
@@ -1392,4 +1385,30 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
    3. Rename <kbd>sportspa.txt</kbd> back to <kbd>sportspa.json</kbd>.
    4. Run SportsPA. 
    5. SportsPA will start up without any data being present.
-   
+
+## **Appendix: Effort**
+
+Our team has put in significant effort in evolving AB3 (Address Book Level 3) into SportsPA. In the following subsections, we list some notable contributions to the project as well as challenges that we faced during the course.
+
+### Contributions
+
+1. **Handling two entities, Members and Facilities**
+<br>AB3 handles only one entity type, Person, whereas we introduced another entity type, Facility. This introduced the complexity of handling the connection and interaction between the two entities. Since Facility objects kept references to Member objects, certain measures had to be implemented to maintain consistency. For example, Facility objects have to respond to changes to Member objects they have reference to, otherwise there may be a conflict in the data presented to the user.
+<br><br>
+2. **Enhancing User Experience for our Target Users**
+<br>Our team also put a lot of thought into designing and implementing features that would specifically enhance our target users’ user experience. Such features include the import and export command. Since this project is restricted to only one end user, we included this feature to help facilitate the communication between our target users, sports CCA leaders, and their members. Another feature is the alias command, which is a fairly staple feature for users who are familiar with CLI applications, giving our users the flexibility to personalise the commands.
+   <br><br>
+3. **Improving Documentation**
+   <br>The team significantly improved AB3’s documentation, especially the User Guide. We completely revamped the User Guide to become more reader-friendly and reader-focused, taking on a more welcoming tone and including more useful tips, notes and warnings for some of the features. We also added instructions on how to navigate and understand the documentation. Additionally, the Developer Guide was adapted to include diagrams, implementation details, design considerations, user stories and use cases to become more relevant to our project.
+
+### Challenges Faced
+1. **Handling Duplicates**
+<br>One of the more noteworthy challenges we faced was to decide whether we should allow duplicate members in SportsPA. Initially, SportsPA did not allow duplicate names, but allowed duplicate phone numbers. This problem surfaced from the PED when a reviewer mentioned that users may need to add members with the same name. By then, many of our commands were finalised and just a little tweak to the method could break many method chains as multiple commands were using the same mechanism. Our team had to perform an in-depth analysis on the dependencies of that method to avoid such complications.
+<br>Our team ultimately decided that SportsPA will not support duplicate members, that is, if they have the same name and/or phone number. We weighed the pros and cons of both alternatives and discovered that preserving the no-duplicates characteristic inherited from AB3 would require significantly less changes to our existing commands. Even though we eventually settled with disallowing duplicates, an additional duplicate phone number check was implemented and the import function had to be amended to support these changes.
+<br><br>
+2. **Coupling of Features**
+<br>Another challenge was that some features were dependent on the implementation of other features, so it was difficult to ensure that these implementations would complement each other and work as expected when different members worked on these different features. For example, one member implemented the split feature, while another worked on the setm features which sets the availability of the members. However, the split feature depends on setm in order to function properly. Hence, when merging these features together, it resulted in the split feature not working as expected, and thus needed more modifications and effort to integrate the features.
+
+### Final Thoughts
+Overall, the difficulty of the project was high due to the complexity of some of our features. However, with the combined efforts of every team member, we were able to release the final version of the product that we can be proud of.
+
