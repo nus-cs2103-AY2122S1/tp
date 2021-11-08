@@ -3,6 +3,7 @@ package seedu.edrecord.model.module;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.Assignment;
@@ -10,7 +11,6 @@ import seedu.edrecord.model.assignment.UniqueAssignmentList;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.group.GroupSystem;
 import seedu.edrecord.model.group.ReadOnlyGroupSystem;
-import seedu.edrecord.model.name.Name;
 
 /**
  * Represents a module in EdRecord.

@@ -2,7 +2,6 @@ package seedu.edrecord.model;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.beans.value.ObservableValue;
@@ -12,7 +11,6 @@ import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
-import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.ui.PersonListPanel;
@@ -61,7 +59,9 @@ public interface Model {
      */
     void setEdRecord(ReadOnlyEdRecord edRecord);
 
-    /** Returns EdRecord */
+    /**
+     * Returns EdRecord
+     */
     ReadOnlyEdRecord getEdRecord();
 
     /**
@@ -143,6 +143,7 @@ public interface Model {
 
     /**
      * Updates the module filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void setModuleFilter(PartOfModulePredicate predicate);
@@ -211,6 +212,7 @@ public interface Model {
 
     /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void setSearchFilter(Predicate<Person> predicate);
@@ -222,6 +224,7 @@ public interface Model {
 
     /**
      * Updates the currently selected view to the specified value.
+     *
      * @param newView The new view
      */
     void setSelectedView(PersonListPanel.View newView);

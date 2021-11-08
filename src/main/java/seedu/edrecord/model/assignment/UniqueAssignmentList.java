@@ -5,13 +5,11 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.edrecord.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.edrecord.model.name.Name;
 
 /**
  * A list of assignments that enforces uniqueness among its elements and does not allow nulls.
