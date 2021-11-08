@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "a:AppendCommand" as AppendCommand LOGIC_COLOR
+participant "adcopy:AppendPersonDescription" as AppendPersonDescription2 LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+
+end box
+create AppendCommand
+[-> AppendCommand : AppendCommand(3, ad)
+activate AppendCommand
+
+create AppendPersonDescription2
+AppendCommand -> AppendPersonDescription2 : AppendPersonDescription(ad)
+activate AppendPersonDescription2
+
+AppendPersonDescription2 --> AppendCommand
+deactivate AppendPersonDescription2
+
+[<-- AppendCommand : a
+deactivate AppendCommand
+
+[-> AppendCommand : execute(a)
+activate AppendCommand
+
+AppendCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AppendCommand
+
+AppendCommand -> Model : getViewedPerson()
+Model --> AppendCommand
+AppendCommand -[hidden]->
+
+AppendCommand -> AppendCommand : createAppendedPerson(personToAppendTo, appendPersonDescriptor)
+activate AppendCommand
+AppendCommand --> AppendCommand
+deactivate AppendCommand
+
+AppendCommand -> Model : setPerson(personToAppendTo, appendedToPerson)
+Model --> AppendCommand
+
+AppendCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+Model --> AppendCommand
+deactivate Model
+
+[<--AppendCommand : result
+deactivate AppendCommand
+
+AppendCommand -[hidden]-> : result
+destroy AppendCommand
+
+@enduml

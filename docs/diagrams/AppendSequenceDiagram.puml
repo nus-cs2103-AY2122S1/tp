@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AppendCommandParser" as AppendCommandParser LOGIC_COLOR
+participant "ad:AppendPersonDescription" as AppendPersonDescription LOGIC_COLOR
+participant "a:AppendCommand" as AppendCommand LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+
+end box
+[-> LogicManager : execute("append 3 l/python")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("append 3 l/python")
+activate AddressBookParser
+
+AddressBookParser -> AppendCommandParser: parse("3 l/python")
+activate AppendCommandParser
+
+create AppendPersonDescription
+AppendCommandParser -> AppendPersonDescription : AppendPersonDescriptor()
+activate AppendPersonDescription
+
+AppendPersonDescription --> AppendCommandParser
+deactivate AppendPersonDescription
+
+create AppendCommand
+AppendCommandParser -> AppendCommand: AppendCommand(3, ad)
+activate AppendCommand
+
+AppendCommand --> AppendCommandParser
+deactivate AppendCommand
+
+AppendCommandParser --> AddressBookParser
+deactivate AppendCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AppendCommand : execute(a)
+activate AppendCommand
+
+AppendCommand --> LogicManager : result
+deactivate AppendCommand
+
+AppendCommand -[hidden]-> LogicManager : result
+destroy AppendCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
