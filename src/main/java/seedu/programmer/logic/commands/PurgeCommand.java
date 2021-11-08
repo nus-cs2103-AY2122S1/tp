@@ -34,6 +34,7 @@ public class PurgeCommand extends Command {
 
     /**
      * Parses ProgrammerError and check if its empty.
+     *
      * @param model Input the model/data.
      * @return Whether the list is empty or not.
      */

@@ -35,6 +35,8 @@ public class AddLabCommand extends Command {
     private final Lab result;
 
     /**
+     * Constructor for AddLabCommand.
+     *
      * @param result the lab result to be added.
      * */
     public AddLabCommand(Lab result) {

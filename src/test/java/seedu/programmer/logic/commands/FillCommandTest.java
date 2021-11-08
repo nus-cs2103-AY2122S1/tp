@@ -11,7 +11,7 @@ import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.util.SampleDataUtil;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
+ * Contains integration tests (interaction with the Model) for FillCommand.
  */
 public class FillCommandTest {
 
