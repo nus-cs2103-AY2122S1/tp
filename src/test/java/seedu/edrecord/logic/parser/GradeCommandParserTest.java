@@ -1,40 +1,27 @@
 package seedu.edrecord.logic.parser;
 
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.edrecord.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.GROUP_DESC_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.INFO_DESC_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.edrecord.logic.commands.CommandTestUtil.MODULE_DESC_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.edrecord.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.edrecord.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.edrecord.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.edrecord.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.edrecord.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.edrecord.testutil.TypicalModules.setTypicalModuleSystem;
 
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.edrecord.commons.core.index.Index;
-import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.commands.GradeCommand;
 import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.assignment.Score;
-import seedu.edrecord.model.name.Name;
 
 public class GradeCommandParserTest {
-    private final Index INDEX_ONE = Index.fromOneBased(1);
-    private final Index INDEX_TWO = Index.fromOneBased(2);
-    private final Index INDEX_THREE = Index.fromOneBased(3);
-    private final Index INDEX_FIVE = Index.fromOneBased(5);
-    private final Index INDEX_NINETY_NINE = Index.fromOneBased(99);
+    private static final Index INDEX_ONE = Index.fromOneBased(1);
+    private static final Index INDEX_TWO = Index.fromOneBased(2);
+    private static final Index INDEX_THREE = Index.fromOneBased(3);
+    private static final Index INDEX_FIVE = Index.fromOneBased(5);
+    private static final Index INDEX_NINETY_NINE = Index.fromOneBased(99);
 
     private final GradeCommandParser parser = new GradeCommandParser();
 

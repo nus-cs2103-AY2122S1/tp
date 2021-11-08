@@ -6,13 +6,13 @@ import static seedu.edrecord.logic.parser.CommandParserTestUtil.assertParseFailu
 import static seedu.edrecord.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.logic.commands.DeleteGradeCommand;
 
 public class DeleteGradeCommandParserTest {
-    private final Index INDEX_ONE = Index.fromOneBased(1);
-    private final Index INDEX_TWO = Index.fromOneBased(2);
-    private final Index INDEX_THREE = Index.fromOneBased(3);
+    private static final Index INDEX_ONE = Index.fromOneBased(1);
+    private static final Index INDEX_THREE = Index.fromOneBased(3);
 
     private final DeleteGradeCommandParser parser = new DeleteGradeCommandParser();
 

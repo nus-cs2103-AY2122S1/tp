@@ -104,14 +104,14 @@ public class EdRecordParserTest {
                 + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_STATUS + "submitted")
                 instanceof GradeCommand);
         assertTrue(parser.parseCommand(GradeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_SCORE + "50" + " " + PREFIX_STATUS +
-                "graded") instanceof GradeCommand);
+                + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_SCORE + "50" + " " + PREFIX_STATUS
+                + "graded") instanceof GradeCommand);
     }
 
     @Test
     public void parseCommand_deleteGrade() throws Exception {
-        assertTrue(parser.parseCommand(DeleteGradeCommand.COMMAND_WORD + " " +
-                INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased())
+        assertTrue(parser.parseCommand(DeleteGradeCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased())
                 instanceof DeleteGradeCommand);
     }
 
