@@ -112,14 +112,17 @@ public class HelpGuide {
     public static final String DEL_P_EXAMPLE = "del -p 2";
     public static final String DEL_P_EXAMPLE_DESC = " deletes the progress of the 2nd student in TutorAid.";
 
-    public static final String FIND_TITLE = "Locate students or lessons by name";
-    public static final String FIND_DESC1 = "A case-insensitive search is done to find student or lesson names "
-            + "which contain any of the given keywords. Use ";
-    public static final String FIND_DESC2 = " flag to search for students and ";
-    public static final String FIND_DESC3 = " to search for lessons.";
-    public static final String FIND_COMMAND = "find FLAG KEYWORD [MORE_KEYWORDS]";
+    public static final String FIND_S_TITLE = "Finding students by name";
+    public static final String FIND_S_DESC1 = "Finds students whose names contain any of the given keywords by doing "
+            + "a case-insensitive search.";
+    public static final String FIND_S_COMMAND = "find -s FLAG KEYWORD...";
     public static final String FIND_S_EXAMPLE = "find -s John";
     public static final String FIND_S_EXAMPLE_DESC = " returns students who have the word 'john' in their names. ";
+
+    public static final String FIND_L_TITLE = "Finding lessons by name";
+    public static final String FIND_L_DESC1 = "Finds lessons whose names contain any of the given keywords by doing "
+            + "a case-insensitive search.";
+    public static final String FIND_L_COMMAND = "find =l FLAG KEYWORD...";
     public static final String FIND_L_EXAMPLE = "find -l Maths";
     public static final String FIND_L_EXAMPLE_DESC = " returns lessons that have the word 'maths' in their names.";
 
@@ -160,8 +163,33 @@ public class HelpGuide {
             + "format or data invalid, TutorAid will discard the invalid data file and replace it with "
             + "an empty data file at the next run.";
 
-    public static final String FAQ_TITLE = "FAQ1";
+    public static final String GLOSSARY_TITLE = "Glossary";
+    public static final String CLI = "CLI: CLI (also known as a _Command Line Interface_) refers to a form of "
+            + "interface that processes a user's input in the form of text.\n";
+    public static final String GUI = "GUI: GUI (also known as a _Graphical User Interface_) refers to a form of "
+            + "user interface that allows user to interact with the application through "
+            + "graphical icons, such as buttons.";
+    public static final String PROGRESS = "Progress: Refers to any remark you may want to add for a specific "
+            + "student, such as their performance in class and their homework progression.";
+
+    public static final String FAQ_TITLE = "FAQ";
     public static final String FAQ1 = "Q: How do I transfer my data to another Computer?\n"
             + "A: Install the app in the other computer and overwrite the empty data file "
-            + "it creates with the file that contains the data of your previous TutorAid home folder.";
+            + "it creates with the file that contains the data of your previous TutorAid home folder.\n\n";
+    public static final String FAQ2_PART1 = "Q: I am currently only able to view my students' latest progress entry, "
+            + "how can I view all the entries?\n"
+            + "A: To view all the progress entries of a student, you can key ";
+    public static final String FAQ2_PART2 = " into the Command Box and hit ENTER. You should be able to see you 10 "
+            + "most recently added progress entries. Please note that you will not be able to view all the progress "
+            + "entries of multiple students at any one time.\n\n";
+    public static final String FAQ3_PART1 = "Q: I just added a new progress entry for one of my students, and all "
+            + "my other students and lessons have disappeared. How do I view them again?\n"
+            + "A: To revert back to the original view of all students and all lessons, simply key in ";
+    public static final String FAQ3_PART2 = "into the Command Box and hit ENTER.\n\n";
+    public static final String FAQ4_PART1 = "Q: I have added more than 10 progress entries for a student, but why "
+            + "am I only able to see up to the 10 most recent entries?\n"
+            + "A: TutorAid only support storing up to 10 progress entries so that it is easier for tutors to manage " +
+            "and view all of their entries for each student.";
+
+
 }
