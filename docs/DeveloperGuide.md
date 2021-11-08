@@ -10,24 +10,30 @@ nav-text: Developer Guide
 Welcome to the SportsPA Developer Guide!
 </span>
 
-<div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents 
+<a name="table-of-contents"></a>
+<span style = "font-size: 32px; color: #e46c0a">
+Table of Contents
+</span>
+* Table of Contents
 {:toc}
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 
-SportsPA is a desktop application for NUS sports CCA Leaders to manage membership and
+SportsPA is a desktop application for NUS sports *CCA* Leaders to manage membership and
 training sessions, optimized for use via a *Command Line Interface* (CLI), while still preserving the benefits of a *Graphical User Interface* (GUI).
 
 SportsPA is highly optimized for *fast typists* and can be fully operated through keyboard commands.
 
-This developer guide is intended to be a one-stop source for anyone interested in extending and modifying `SportsPA`.
-For certain terms that are unique to `SportsPA`, a [glossary](#glossary) has been provided for readers.
+This developer guide is intended to be a one-stop source for anyone interested in extending and modifying SportsPA.
+For certain terms that are unique to SportsPA, a [glossary](#glossary) has been provided for readers.
 
 --------------------------------------------------------------------------------------------------------------------
-## Using this Developer Guide
+## **Using this Developer Guide**
 
 You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to your desired location in
 this Developer Guide. A link to return to the [Table of Contents](#table-of-contents) is also provided at the end of every section.
@@ -46,9 +52,6 @@ Syntax | Description
 
 [Back to Table of Contents](#table-of-contents)
 
-
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
@@ -64,6 +67,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 **:information_source: Note:** Readers are advised to [download](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases) SportsPA's latest release to test the application.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -125,6 +130,8 @@ the command `deletem 1`.
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -223,7 +230,7 @@ and a `UniqueFacilityList` object respectively).
 
 The `Storage` component,
 
-* can save both SportsPA data (data on members and facilities) and user preference data in json format, and read them back into corresponding
+* can save both SportsPA data (data on members and facilities) and user preference data in *json* format, and read them back into corresponding
   objects.
 * inherits from both `SportsPaStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
@@ -241,10 +248,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Alias feature
-
+The alias feature creates a shortcut name for any command in SportsPA. The shortcut name must not be an existing command word in SportsPA.
 #### Implementation
 
-The alias mechanism is facilitated by `SportsPaParser`. Aliases are stored in `AliasMap`, which keeps the mappings
+The *alias* mechanism is facilitated by `SportsPaParser`. Aliases are stored in `AliasMap`, which keeps the mappings
 between `Shortcut` and `CommandWord`, and is stored in `UserPref`. The association between `Shortcut` and `CommandWord`
 is represented as `Alias`. The class diagram for `AliasMap` is shown below. 
 
@@ -319,10 +326,10 @@ regularly used commands. Considering the target use of SportsPA and time constra
 likely to be repeated, we decided that it was sufficient to allow users to create shortcuts for commands only.
 
 ### Split members to facilities feature
-
+The split feature splits members into the facilities based on its capacity and members' availabilities. The `split` command only accepts **numbers 1-7** as a preamble e.g., `split 6` is valid and splits members on Saturday.
 #### Implementation
 
-The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
+The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br><br>`ModelManager` stores a list of
 filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
 `SportsPa` stores a list of all facilities in `UniqueFacilityList` as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
@@ -400,6 +407,8 @@ The lifelines should end at the destroy marker (X) but due to a limitation of Pl
   * Cons: Harder to implement and test. May require the use of supporting data structures which adds on to the complexity.
 
 ### Mark/unmark attendance feature
+The mark attendance feature marks the attendance of the members at the specified index/indices of the member list as present.<br>
+The unmark attendance feature unmarks the attendance of the members at the specific index/indices of the member list to be absent.<br>
 
 #### Implementation
 
@@ -444,6 +453,10 @@ The following sequence diagram shows how the mark attendance operation works.
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+The following activity diagram summarizes what happens when a user executes the `import` command:
+
+<img src="images/SplitActivityDiagram.png" width="250" />
+
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
 to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
@@ -465,7 +478,7 @@ to be unmarked via the `Member#setNotPresent()` and `ModelManager` references th
       attendance to mark.
 
 ### Find member feature
-
+The find member feature finds and displays all members that match the parameters specified. **At least one valid parameter** must be supplied.
 #### Implementation
 The find member mechanism is facilitated by `FindMemberCommandParser`.
 `FindMemberCommandParser` implements the following operations:<br>
@@ -605,18 +618,18 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Target user profile**:
 
-* a NUS Sports CCA leader
+* a NUS Sports *CCA* leader
 * has a need to manage a significant number of member’s contacts
-* has a need to organise training sessions in multiple facilities whilst adhering to group size regulations
-* can type faster than average
-* is reasonably comfortable using CLI apps
+* has a need to organise training sessions in multiple facilities whilst adhering to *group size regulations*
+* can *type faster than average*
+* is reasonably comfortable using *CLI* apps
 
 **Value proposition**:
 
-* Sports CCAs have many members and it can be hard for the leaders to keep track of everyone’s information and
+* Sports *CCAs* have many members and it can be hard for the leaders to keep track of everyone’s information and
   availability to organise training sessions, especially with the current pandemic restrictions.
-* SportsPA will help NUS Sports CCA leaders to be able to better manage their members’ contacts and attendance as well
-  as training facilities to better organise CCA sessions.
+* SportsPA will help NUS Sports *CCA* leaders to be able to better manage their members’ contacts and attendance as well
+  as training facilities to better organise *CCA* sessions.
 
 ### User stories
 
@@ -684,11 +697,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. SportsPA detects missing or invalid field(s)
+* 1a. The given field(s) are invalid
 
     * 1a1. SportsPA shows an error message
 
       Use case resumes from step 1.
+
+* 1b. The given member already exists in SportsPA
+
+    * 1b1. SportsPA shows an error message informing the user about the duplicate
+    
+        Use case ends
 
 **Use case: UC03 - List all members**
 
@@ -698,6 +717,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. SportsPA shows a list of all the members
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The member list is empty
+  
+    * 1a1. SportsPA shows an error message
+    
+      Use case ends.
 
 **Use case: UC04 - Search for members**
 
@@ -716,9 +743,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 1.
 
-* 3a. No members have fields matching the given request
+* 1a. No members have fields matching the given request
 
-    * 3a1. SportsPA informs user
+    * 1a1. SportsPA informs user
 
       Use case ends.
 
@@ -737,11 +764,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The list is empty
 
-  Use case ends.
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
 
 * 2a. The given index is invalid
 
     * 2a1. SportsPA shows an error message
+    * 2a2. User enters a valid index
 
       Use case resumes from step 2.
 
@@ -760,17 +790,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The list is empty
 
-  Use case ends.
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
 
 * 2a. The given index is invalid
 
     * 2a1. SportsPA shows an error message
+    
+    * 2a2. User enters a valid index
 
       Use case resumes from step 2.
 
-* 2b. SportsPA detects invalid field(s)
+* 2b. The given field(s) are invalid
 
     * 2b1. SportsPA shows an error message
+
+    * 2a2. User enters the valid field(s)
 
       Use case resumes from step 2.
 
@@ -805,18 +841,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The list is empty
+    
+    * 1a1. SportsPA shows an error message
 
   Use case ends.
 
 * 2a. One or more of the given member index is invalid
 
     * 2a1. SportsPA shows an error message
+    
+    * 2a2. User enters valid index
 
       Use case resumes from step 2.
 
 * 2b. The given availability is invalid
 
     * 2b1. SportsPA shows an error message
+    
+    * 2b2. User enters a valid availability
 
       Use case resumes from step 2.
     
@@ -835,11 +877,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The list is empty
 
+    * 1a1. SportsPA shows an error message
+
   Use case ends.
 
-* 2a. The index/indices given is/are invalid
+* 2a. One or more of the given member index is invalid
 
     * 2a1. SportsPA shows an error message
+    
+    * 2a2. User enters the valid index
   
       Use case resumes from step 2.
 
@@ -884,6 +930,14 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
    Use case ends.
 
+**Extensions**
+
+* 1a. The member list is empty
+
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
+
 **Use case: UC13 - Add a facility**
 
 **MSS**
@@ -898,6 +952,8 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * 1a. SportsPA detects missing or invalid field(s)
 
     * 1a1. SportsPA shows an error message
+    
+    * 1a2. User enters valid field(s)
 
       Use case resumes from step 1.
 
@@ -910,6 +966,14 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
    Use case ends.
 
+**Extensions**
+
+* 1a. The facility list is empty
+
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
+
 **Use case: UC15 - Search for facilities**
 
 **MSS**
@@ -921,9 +985,15 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **Extensions**
 
-* 1a. No facilities have locations matching the request
+* 1a. The facility list is empty
 
-    * 1a1. SportsPA informs user
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
+
+* 1b. No facilities have locations matching the request
+
+    * 1b1. SportsPA informs user
 
       Use case ends.
 
@@ -940,13 +1010,17 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **Extensions**
 
-* 1a. The list is empty
+* 1a. The facility list is empty
 
-  Use case ends.
+    * 1a1. SportsPA shows an error message
+
+      Use case ends.
 
 * 2a. The given index is invalid
 
     * 2a1. SportsPA shows an error message
+    
+    * 2a2. User enters the valid index
 
       Use case resumes from step 2.
 
@@ -970,12 +1044,16 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * 2a. The given index is invalid
   
     * 2a1. SportsPA shows an error message
+
+    * 2a2. User enters the valid index
   
       Use case resumes from step 2.
 
 * 2b. SportsPA detects invalid field(s)
 
     * 2b1. SportsPA shows an error message
+
+    * 2b2. User enters the valid field(s)
 
       Use case resumes from step 2.
     
@@ -1017,21 +1095,27 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **Extensions**
 
-* 3a. Any of the given indices are invalid
+* 3a. One or more of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
+    
+    * 3a2. User enters the valid index
       
       Use case resumes from step 3.
 
 * 3b. The given day is invalid
 
     * 3b1. SportsPA shows an error message
+    
+    * 3b2. User enters a valid day
 
       Use case resumes from step 3.
 
 * 3c. The specified member is not allocated to the specified facility
 
-    * 3b1. SportsPA shows an error message
+    * 3c1. SportsPA shows an error message
+    
+    * 3c2. User enters a member that is allocated to that facility
 
       Use case resumes from step 3.
 
@@ -1049,9 +1133,11 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 **Extensions**
 
-* 3a. Any of the given indices are invalid
+* 3a. One or more of the given indices are invalid
 
     * 3a1. SportsPA shows an error message
+
+    * 3a2. User enters the valid index
 
       Use case resumes from step 3.
 
@@ -1059,11 +1145,15 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
     * 3b1. SportsPA shows an error message
 
+    * 3b2. User enters a valid day
+
       Use case resumes from step 3.
 
 * 3c. The specified member is already allocated to the specified facility.
 
     * 3c1. SportsPA shows an error message
+    
+    * 3c2. User enters a member that is not allocated to that facility
 
       Use case resumes from step 3.
     
@@ -1084,6 +1174,14 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
    Use case ends.
 
+**Extensions**
+
+* 1a. The facility list is empty
+
+    * 1a1. SportsPA shows an error message
+    
+    Use case ends
+
 **Use case: UC23 - Exiting the program**
 
 **MSS**
@@ -1095,7 +1193,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed
+1. Should work on any *mainstream OS* as long as it has Java 11 or above installed
 2. Should be able to hold up to 1000 entries (members and facilities) without a noticeable sluggishness in performance
    for typical usage
 3. Should be able to process and execute user commands within 3 seconds
@@ -1108,8 +1206,11 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * **Graphical User Interface (GUI)**: A user interface that includes graphical representation like buttons and icons for
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
+* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format.
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
 * **Fast typists**: Types faster than 40wpm (words per minute)
+* **Alias**: A shortcut name for any command in SportsPA
+* **CCA**: In Singapore, a co-curricular activity (CCA), is a non-academic activity that students take part in.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1143,23 +1244,27 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a new member.
 
-   1. Prerequisites: The list of members does not already contain members with the same names as those in the test
+   1. Prerequisites: The list of members does not already contain members with the same names and/or phone numbers as those in the test
    cases below. 
    
    2. Test case: `addm n/Bob p/12345678`<br>
         Expected: New member with the same name and phone number is added to the bottom of the list
-        of members.
+        of members. The details of the member are shown in the status message.
    
    3. Test case: `addm n/Ch@rlie p/45678`<br>
         Expected: No new member added. Error details are shown in the status message.
    
-   4. Test case: `addm n/Adam p/01234`<br>
+   4. Test case: `addm n/Adam p/0b234`<br>
         Expected: Similar to previous.
    
    5. Test case: `addm n/Sam p/87654321` followed by `addm n/Sam p/23456789`<br>
         Expected: After the first command, a new member called Sam with the phone number 87654321
         is added to the list of members. After the second command, no member is added and error details
         are shown in the status message.
+      
+    6. Test case: `addm n/John p/98765432` followed by `addm n/Jane p/98765432`<br>
+        Expected: After the first command, a new member called John with the phone number 98765432 is added to the list of members.
+        After the second command, no member is added and error details are shown in the status message.
    
         
 
@@ -1169,13 +1274,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all members using the `listm` command. One or more members are in the list.
 
-    1. Test case: `deletem 1`<br>
+    2. Test case: `deletem 1`<br>
          Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
 
-    1. Test case: `deletem 0`<br>
+    3. Test case: `deletem 0`<br>
        Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 
@@ -1184,7 +1289,7 @@ testers are expected to do more *exploratory* testing.
 1. Edit the details of a member that is being shown in the list.
 
     1. Prerequisites: List all members using the `listm` command. One or more members are in the list and the list does
-        not contain any members with the same names as those in the test cases below.
+        not contain any members with the same names and/or phone number as those in the test cases below.
    
     2. Test case: `editm 1 n/Adam`<br>
         Expected: First member's name is changed to Adam. Details of the edited member is shown in the status message.

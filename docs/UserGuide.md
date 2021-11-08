@@ -19,12 +19,16 @@ guide provides an in-depth documentation on all the commands available. If this 
 we also provide a [quick start guide](#quick-start) that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
+
 <a name="table-of-contents"></a>
 <span style = "font-size: 32px; color: #e46c0a">
 Table of Contents
 </span>
 * Table of Contents
 {:toc}
+
+<div style="page-break-after: always;"></div>
+
 _____________________________________________________________________________________________________________
 ## How to use the User Guide
 
@@ -64,70 +68,11 @@ ________________________________________________________________________________
    <img src="images/FirstLook.png" height="500" align="center"/>
   </p>
 
-5. If you are on MacOS and encounter this issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
-<p align="center">
-   <img src="images/mac_error.png" height="300" align="center"/>
-</p>
+5. If you are on macOS and encounter the below issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
 
-
-
-
-
-
-[Back to Table of Contents](#table-of-contents)
-
-_____________________________________________________________________________________________________________
-
-## Command Format
-Before we start, let's take a look at what a typical command in SportsPA comprises of.
-
-Component | Description
------------------ | ------------------
-Command Word   | The keyword that represents a command in SportsPA
-Preamble        | The keyword that represents an `INDEX` / `DAY`
-Prefix    | The keyword preceding the parameter(s)
-Parameter | The argument proceeding the prefix
-
-To illustrate the above, we will use the edit member command:<br>
-`editm 1 n/John Doe p/92315540 d/2 3 t/exco`<br>
- `editm` is the command word and `1` is the preamble representing the index of the member to edit.`n/` `p/` `d/` `t/` are the prefixes and 
-`John Doe`, `92315540`, `2 3`, `exco` are the parameters.<br>
-The add member command also follows a similar format, but without the preamble:<br>
-`addm n/John Doe p/92315540 t/exco`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** There are 2 main 'objects' in SportsPA, Member and Facility.
-</div>
-
-For your easy reference, we have prepared a summary of prefixes and their required parameters below:
-
-Member-specific prefixes:
-
-Prefix        | Parameter                    | Requirements
------------------ | ------------------|------------------
-`p/ `             | `PHONE`             | Maximum of 15 digits
-`d/`              | `DAY(S)`              | Integer, 1-7 only
-`t/`              | `TAG`            | Alphanumeric characters and spaces
-`tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
-`tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
-`by` | `SORT_ORDER` | `name` or `tag` only 
-
-Facility-specific prefixes:
-
-Prefix | Parameter | Requirements
--------- | --------- | ----------------
-`l/` | `LOCATION` | Maximum of 50 alphanumeric characters and spaces
-`c/` | `CAPACITY`| Integer, 1-50 only
-`t/`  | `TIME` | 24-hour format e.g., 1400
-
-General prefixes:
-
-Prefix | Parameter | Requirements
--------- | --------- | ----------------
-`n/` | `NAME` | Maximum of 50 alphanumeric characters and spaces
-`s/` | `SHORTCUT` | Not an existing command word in SportsPA, 1 word only
-`cw/` | `COMMAND_WORD` | Existing command words in SportsPA
+    <p align="center">
+   <img src="images/mac_error.png" height="200" align="center"/>
+    </p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -164,11 +109,63 @@ Here are some example commands you can try:
 
 [Back to Table of Contents](#table-of-contents)
 
+_____________________________________________________________________________________________________________
+
+## Command Syntax
+Before we start, let's take a look at what a typical command in SportsPA comprises of.
+
+Component | Description
+----------------- | ------------------
+Command Word   | The keyword that represents a command in SportsPA
+Preamble        | The keyword that represents an `INDEX` / `DAY`
+Prefix    | The keyword preceding the parameter(s)
+Parameter | The argument proceeding the prefix
+
+To illustrate the above, we will use the edit member command:<br>
+`editm 1 n/John Doe p/92315540 d/2 3 t/exco`<br>
+`editm` is the command word and `1` is the preamble representing the index of the member to edit.`n/` `p/` `d/` `t/` are the prefixes and
+`John Doe`, `92315540`, `2 3`, `exco` are the parameters.<br>
+The add member command also follows a similar format, but without the preamble:<br>
+`addm n/John Doe p/92315540 t/exco`
+
+For your easy reference, we have prepared a summary of prefixes and their required parameters below.
+
+Member-Specific prefixes:
+
+Prefix        | Parameter                    | Requirements
+----------------- | ------------------|------------------
+`p/ `             | `PHONE`             | Maximum of 15 digits
+`d/`              | `DAY(S)`              | Integer, 1-7 only, 1 represents Monday, 2 represents Tuesday etc.
+`t/`              | `TAG`            | Maximum of 20 alphanumeric characters and spaces
+`tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
+`tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
+`by/` | `SORT_ORDER` | `name` or `tag` only
+
+Facility-Specific prefixes:
+
+Prefix | Parameter | Requirements
+-------- | --------- | ----------------
+`l/` | `LOCATION` | Maximum of 50 alphanumeric characters and spaces
+`c/` | `CAPACITY`| Integer, 1-50 only
+`t/`  | `TIME` | 24-hour format e.g., 1400
+
+General prefixes:
+
+Prefix | Parameter | Requirements
+-------- | --------- | ----------------
+`n/` | `NAME` | Maximum of 50 alphanumeric characters and spaces
+`s/` | `SHORTCUT` | Not an existing command word in SportsPA, 1 word only
+`cw/` | `COMMAND_WORD` | Existing command words in SportsPA
+
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
 This section documents all the commands available in SportsPA, guiding you through its function, format, example usages
 and any other noteworthy tips. **Note that examples ending with :camera: means that a screenshot of the outcome is provided below.**
+
+For a summary of all the prefixes and parameters, refer to the [Command Syntax](#command-syntax).
 
 For a summary of all the commands, refer to the [Command Summary](#command-summary). If this
 is your first read, do go through the following notes about the command format to help you better understand the
@@ -325,8 +322,6 @@ Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_A
 * **At least one** of the optional fields **must** be provided
 * `findm` is **case-insensitive**. e.g. `n/john` will match `John`
 * Only **full words** will be matched e.g. `n/Johnny` will not match `John`
-* `TODAY_ATTENDANCE` refers to a member's attendance for today and **must be either `true` or `false`**, `true` being present and `false` being absent
-* `TOTAL_ATTENDANCE` refers to a member's attendance in total and **must be a non-negative integer** 0, 1, 2, 3...
 * For `[t/TAG]...`, members matching **at least one tag** will be listed (i.e. OR search) 
 <br> e.g. `findm t/exco t/y2` will list members with tags `exco` `y2`, and also members with only one matching tag `y2` or `exco`
 * If multiple field keywords are supplied, only members that match **all** the given field keywords will be listed (i.e. AND search) 
@@ -357,15 +352,15 @@ Examples:
 
 #### Sorting member list: `sortm`
 
-Shows a list of all members, sorted alphabetically by either their names or their tags.
+Shows a list of all members, sorted by their names or their tags.
 
 Format: `sortm by/SORT_ORDER`
-* `SORT_ORDER` **must either be `name` or `tag`**
+* When sorting by names, members with lexicographically smaller names are displayed first
 * When sorting by tags, members with more tags are displayed first
 
 Examples:
 * `sortm by/name` returns a member list sorted alphabetically by their names
-* `sortm by/tag` returns a member list sorted alphabetically by their tags
+* `sortm by/tag` returns a member list sorted by the number of tags
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -377,8 +372,7 @@ The availability of your members can change frequently. Thus, instead of having 
 Format: `setm MEMBER_INDEX [MORE_INDICES]... d/DAY(S)`
 
 * Sets the availability of the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` to be the specified `DAY(S)`
-* `DAY(s)` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
-* `DAY(s)` **must be separated by a single space** e.g. `d/1 2 3`
+* `DAY(S)` **must be separated by a single space** e.g. `d/1 2 3`
 * `MEMBER_INDEX` and `MORE_INDICES` refer to the index number(s) shown in the displayed member list
 * `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3, …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
@@ -414,7 +408,7 @@ During a training session, you can mark the attendance of members present (repre
 
 Format: `mark MEMBER_INDEX [MORE_INDICES]...`
 
-* Marks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the current displayed member list as present
+* Marks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the currently displayed member list as present
 * `MEMBER_INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
 * `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
@@ -442,7 +436,7 @@ Unmarks attendance of members marked as present, represented by a cross.
 
 Format `unmark MEMBER_INDEX [MORE_INDICES]...`
 
-* Unmarks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the members list as not present
+* Unmarks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the members list as present
 * `MEMBER_INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
 * `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
@@ -516,6 +510,8 @@ All member data will be removed immediately after this command is executed. This
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Facility-Specific Features
 
 #### Adding a facility: `addf`
@@ -523,9 +519,6 @@ All member data will be removed immediately after this command is executed. This
 Adds a facility to your facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
-
-* `TIME` specifies the start time of the training session at the facility and **must be in the 24-hour format** `HHmm`
-* `CAPACITY` specifies the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**
 
 <div markdown="block" class="alert alert-info">
 
@@ -557,16 +550,16 @@ Format: `listf`
 
 Removes a facility from your facility list.
 
-Format: `deletef INDEX`
+Format: `deletef FACILITY_INDEX`
 
-* Deletes the facility at the specified `INDEX`
-* `INDEX` refers to the index number shown in the currently displayed facility list
-* `INDEX` **must be a positive integer** 1, 2, 3…
+* Deletes the facility at the specified `FACILITY_INDEX`
+* `FACILITY_INDEX` refers to the index number shown in the currently displayed facility list
+* `FACILITY_INDEX` **must be a positive integer** 1, 2, 3…
 
 Examples:
 
-* `listf` followed by `deletef 2` deletes the 2nd facility in the facility list
-* `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the `findf` command
+* `listf` followed by `deletef 2` deletes the second facility in the facility list
+* `findf Court 1` followed by `deletef 1` deletes the first facility in the results of the `findf` command
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -574,11 +567,11 @@ Examples:
 
 Edits an existing facility in your facility list.
 
-Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
+Format: `editf FACILITY_INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 
-* Edits the facility at the specified `INDEX`
-* `INDEX` refers to the index number shown in the displayed facility list
-* `INDEX` **must be a positive integer** 1, 2, 3…
+* Edits the facility at the specified `FACILITY_INDEX`
+* `FACILITY_INDEX` refers to the index number shown in the displayed facility list
+* `FACILITY_INDEX` **must be a positive integer** 1, 2, 3…
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 
@@ -595,8 +588,8 @@ another existing facility as they are considered duplicates.
 
 Examples:
 
-* `editf 1 n/Court 5` edits the name of the 1st facility to be `Court 5`
-* `editf 2 n/Court 20 l/University Sports Hall` edits the name and location of the 2nd facility to be `Court 20`
+* `editf 1 n/Court 5` edits the name of the first facility to be `Court 5`
+* `editf 2 n/Court 20 l/University Sports Hall` edits the name and location of the second facility to be `Court 20`
   and `University Sports Hall` respectively
 
 [Back to Table of Contents](#table-of-contents)
@@ -674,8 +667,7 @@ Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
 
 Examples:
-* `deallocate 2 4 5` removes the member at index 2 in the displayed member list from the allocation list of the facility
-  at index 4 in the displayed facility list on Friday
+* `deallocate 2 4 5` removes the first member in the displayed member list from the allocation list of the fourth facility in the displayed facility list on Friday
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -694,12 +686,13 @@ Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**
-Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
+* Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
+* You may allocate the same member to multiple facilities on the same day but please ensure that the timings are reasonable 
+  as SportsPa currently does not perform this check!
 </div>
 
 Examples:
-* `allocate 1 1 5` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
-  at index 1 in the displayed facility list on Friday :camera:
+* `allocate 1 1 5` adds the first member in the displayed member list to the allocation list <br> of the first facility in the displayed facility list on Friday :camera:
 
 <p align="center">
    <img src="images/allocateExample.png" height="500" align="center"/>
@@ -842,13 +835,13 @@ Action | Format, Examples
 --------|------------------
 **Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...` <br> e.g. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
 **List members**| `listm`
-**Delete member**| `deletem INDEX` <br> e.g. `deletem 1`
-**Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...` <br> e.g. `editm 1 n/Jonathan p/93837283`
+**Delete member**| `deletem MEMBER_INDEX` <br> e.g. `deletem 1`
+**Edit member**| `editm MEMBER_INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...` <br> e.g. `editm 1 n/Jonathan p/93837283`
 **Find member**| `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...` <br> e.g. `findm n/John`, `findm t/exco t/y2`
 **Sort members**| `sortm by/SORT_ORDER` <br> e.g. `sortm by/name`, `sortm by/tag`
-**Set member availability**| `setm INDEX [MORE_INDICES]... d/DAY(S)` <br> e.g.`setm 1 2 3 d/2 3 5`
-**Mark member attendance**| `mark INDEX [MORE_INDICES]...` <br> e.g. `mark 1 2`
-**Unmark member attendance**| `unmark INDEX [MORE_INDICES]...` <br> e.g. `unmark 1 2`
+**Set member availability**| `setm MEMBER_INDEX [MORE_INDICES]... d/DAY(S)` <br> e.g.`setm 1 2 3 d/2 3 5`
+**Mark member attendance**| `mark MEMBER_INDEX [MORE_INDICES]...` <br> e.g. `mark 1 2`
+**Unmark member attendance**| `unmark MEMBER_INDEX [MORE_INDICES]...` <br> e.g. `unmark 1 2`
 **Clear membber attendance**| `cleara`
 **Import multiple members**| `import CSV_FILE_PATH` <br> e.g.`import myFile.csv`
 **Clear members**| `clearm`
@@ -861,8 +854,8 @@ Action | Format, Examples
 --------|------------------
 **Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> e.g. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
 **List facilities**| `listf`
-**Delete facility**| `deletef INDEX` <br> e.g. `deletef 4`
-**Edit facility**| `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> e.g. `editf 2 n/Court 20 l/University Sports Hall`
+**Delete facility**| `deletef FACILITY_INDEX` <br> e.g. `deletef 4`
+**Edit facility**| `editf FACILITY_INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> e.g. `editf 2 n/Court 20 l/University Sports Hall`
 **Find facility**| `findf KEYWORD [MORE_KEYWORDS]...` <br> e.g. `findf Clementi`, `findf Utown`
 **Split members into facilities**| `split DAY` <br> e.g. `split 1`
 **Deallocate member from a facility**|`deallocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `deallocate 2 3 4`

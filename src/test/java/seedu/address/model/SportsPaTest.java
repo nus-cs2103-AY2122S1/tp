@@ -41,7 +41,7 @@ public class SportsPaTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlySportsPa_replacesData() {
         SportsPa newData = getTypicalSportsPa();
         sportsPa.resetData(newData);
         assertEquals(newData, sportsPa);
@@ -63,18 +63,18 @@ public class SportsPaTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInSportsPa_returnsFalse() {
         assertFalse(sportsPa.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInSportsPa_returnsTrue() {
         sportsPa.addMember(ALICE);
         assertTrue(sportsPa.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInSportsPa_returnsTrue() {
         sportsPa.addMember(ALICE);
         Member editedAlice = new MemberBuilder(ALICE).build();
         assertTrue(sportsPa.hasMember(editedAlice));

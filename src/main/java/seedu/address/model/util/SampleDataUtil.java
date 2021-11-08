@@ -74,7 +74,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlySportsPa getSampleAddressBook() {
+    public static ReadOnlySportsPa getSampleSportsPa() {
         SportsPa sampleAb = new SportsPa();
         for (Member sampleMember : getSamplePersons()) {
             sampleAb.addMember(sampleMember);

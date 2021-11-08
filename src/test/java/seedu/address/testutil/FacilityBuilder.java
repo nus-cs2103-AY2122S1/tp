@@ -23,7 +23,7 @@ public class FacilityBuilder {
     public static final String DEFAULT_LOCATION = "Tampines Hub Badminton Hall";
     public static final String DEFAULT_TIME = "1700";
     public static final String DEFAULT_CAPACITY = "5";
-    private Map<DayOfWeek, List<Member>> defaultAllocations = new EnumMap<>(DayOfWeek.class);
+    private final Map<DayOfWeek, List<Member>> defaultAllocations = new EnumMap<>(DayOfWeek.class);
 
     private FacilityName facilityName;
     private Location location;
