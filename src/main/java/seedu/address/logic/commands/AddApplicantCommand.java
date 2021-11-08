@@ -33,7 +33,7 @@ public class AddApplicantCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_POSITION + "software engineer"
+            + PREFIX_POSITION + "software engineer "
             + PREFIX_GITHUB_PROFILE + "https://github.com/empty";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s.";
@@ -43,7 +43,7 @@ public class AddApplicantCommand extends Command {
     private final ApplicantParticulars applicantParticulars;
 
     /**
-     * Creates an AddApplicantCommand to add the specified {@code Applicant}
+     * Creates an AddApplicantCommand to add the specified {@code Applicant}.
      */
     public AddApplicantCommand(ApplicantParticulars applicantParticulars) {
         requireNonNull(applicantParticulars);
@@ -71,7 +71,6 @@ public class AddApplicantCommand extends Command {
 
         return new CommandResult(successMessage);
     }
-
 
     @Override
     public boolean equals(Object other) {

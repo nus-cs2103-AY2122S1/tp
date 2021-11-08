@@ -26,5 +26,4 @@ public class ApplyingToPositionPredicate implements Predicate<Applicant> {
                 || (other instanceof ApplyingToPositionPredicate // instanceof handles nulls
                 && position.equals(((ApplyingToPositionPredicate) other).position)); // state check
     }
-
 }

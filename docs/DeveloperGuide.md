@@ -61,7 +61,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-applicant 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -82,18 +82,18 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Applicant` and `Position` objects residing in the `Model`.
 
-### Logic component [need changes]
+### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -112,7 +112,6 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete-position 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete-position 1` Command](images/DeleteSequenceDiagram.png)
-[this sequence diagram needs update to include the model.record() method]
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -139,6 +138,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** To avoid cluttering up the Model class diagram, classes like `ReadOnlyPositionBook`, `PositionBook` etc. are not added. However, they have similar relationships and structure as that of `ReadOnlyApplicantBook`, `ApplicantBook` etc.
+</div>
 
 ### Applicant and Position
 
@@ -176,7 +177,7 @@ The `Application` class:
 
 The `Storage` component,
 * can save both applicant book data, position book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `ApplicantBookStorage`, `PositionBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `ApplicantBookStorage`, `PositionBookStorage` and also `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -193,11 +194,11 @@ This section describes some noteworthy details on how certain features are imple
 
 **:information_source: Note:** <br>
 
-* All commands that modify the `ApplicantBook` or `PositionBook` will keep track of the state of the model before the modification using `Memento` class. 
-* The `Memento` class captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
+* All commands that modify the `ApplicantBook` or `PositionBook` will keep track of the state of the model before the modification using `memento`. 
+* The `memento` captures the existing model and success message from a command and stands by in the event of an `undo` scenario.
 * All such commands will have a :heavy_check_mark: symbol beside it. Others will have no symbol displayed beside it.
 
-* Such commands include add-applicant, add-position, delete-applicant & delete-position.
+* Such commands include `add-applicant`, `add-position`, `delete-applicant`, `delete-position`, `edit-applicant`, `edit-position`, and `mark`.
 
 </div>
 
@@ -210,7 +211,7 @@ Title of Position Applying to, GithubLink), parsed straight from the user input.
 
 The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
 applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
-`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
+`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to `Model` to add to
 `applicantBook`, using the `Model#addApplicantWithParticulars` method.
 
 Given below is an example usage scenario and how the add applicant feature behaves at each step.
@@ -223,7 +224,7 @@ block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The 
 
 The following sequence diagram shows the method invocation in this step.
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
-[** this diagram also lacks the memento part. **]
+
 
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
 `Model#addApplicantWithParticulars` method.
@@ -274,18 +275,8 @@ Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking t
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the DeleteApplicantCommand:
-[to be added]
 
-#### Design considerations:
 
-**Aspect: How to access and delete an applicant**
-
-* **Alternative 1 (current choice):** Let ModelManager handle the deletion but keep the ApplicantBook's methods separate from the ModelManager [to be added]
-    * Pros: More accessible since ModelManager already contains the applicantBook, and reduces complication of code.
-    * Cons: Higher coupling for ModelManager since it handles more commands.
-
-* **Alternative 2:** [to be added]
 
 ### Edit applicant feature :heavy_check_mark:
 
@@ -294,7 +285,7 @@ The implementation of the edit applicant feature uses the `EditApplicantCommand`
 class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
 
 The `EditApplicantCommand` method takes in an index and description of the target applicant with the help of the `EditApplicantDescriptor` class.
-It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
+It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a positive integer.
 It also has guard clauses verifying that the description has a valid `Title` which is a valid position title in the current `positionBook`. A final check is done to check that the applicant
 with the new description is not already existing in MTR. Once these criteria are met, the model then updates the target applicant with the new description via the
 `Model#setApplicant` and `Model#updateFilteredApplicantList` methods. <br>
@@ -310,19 +301,9 @@ Step 2. LogicManager executes this `EditApplicantCommand` instance, invoking the
 Step 3. The model then replace the existing applicant with the new one in the `applicantBook` via `Model#setApplicant` and reflect the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
-[to be added]
+![EditApplicantActivityDiagram](images/EditApplicantActivityDiagram.png)
 
-#### Design considerations:
 
-**Aspect: How to access and change an applicant**
-
-* **Alternative 1 (current choice):** Have a separate class handle changing details of an applicant. [to be added]
-    * Pros: Lowers coupling and makes logic of ModelManager simpler.
-    * Cons: If a change is needed for the EditApplicantCommand, more classes need to be changed, making it more troublesome.
-
-* **Alternative 2:** Create a separate ModelManager to handle applicant-related commands.
-    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
-    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
 
 
 ### Mark/update applicant's status feature :heavy_check_mark:
@@ -352,6 +333,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 #### Design considerations:
 
+
 **Aspect: Integration or separation with the 'Edit Applicant' feature**
 
 * **Alternative 1 (current choice):** Separate updating of applicant statuses into its own command
@@ -372,7 +354,8 @@ The filter feature is achieved using the functionality of the `FilteredList` cla
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
-</div>  
+
+#### Design considerations:
 
 Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
 The process is described by the following sequence diagram:
@@ -398,6 +381,7 @@ Note: The `FilterApplicantDescriptor` is not marked for deletion when the comman
 #### Rationale for implementation
 
 The `Descriptor` pattern (used similarly in features such as 'Edit Applicant') comes in handy whenever a command accepts a variable number of arguments & unspecified arguments are assumed to be ignored. For instance, the 'Edit Applicant' feature accepts a variable number of fields to be edited, and leaves all unspecified fields unedited.
+
 
 The filter feature fits such a description, as the user should be able to specify a variable number of filtering criteria, and unspecified criteria should be left out of the filter. Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`. It is also used in `FilterApplicantDescriptorVerifier`, to verify a variable number of filters.
 
@@ -447,9 +431,6 @@ Step 2. Model executes `FindApplicantCommand#execute` method, invoking the `Mode
 
 Step 3. Results of this new filtered list is then passed to the model and is reflected onto the UI.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the FindApplicantCommand:
-[to be added]
-
 
 #### Design considerations:
 
@@ -462,6 +443,44 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 * **Alternative 2:** Use the existing `FindCommand` or created `FilterApplicantCommand` and improve the command from there to achieve this functionality.
     * Pros: A singular class to handle all finding/filtering-related commands, making it easier for users.
     * Cons: Very difficult to code since it requires integrating of multiple existing classes, resulting in potentially many bugs and complicated logic.
+
+
+
+### Mark/update applicant's status feature :heavy_check_mark:
+
+#### Implementation
+The mark feature is achieved using the `MarkApplicantStatusCommand` class. It is a simple command which only modifies the 
+application status of the applicant for a particular position. It does so by taking in the applicant to be modified and the updated `ApplicationStatus`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There are currently only 3 states for applicants: `Accepted`, `Rejected` and `Pending`.
+</div>
+
+The `MarkApplicantStatusCommand#execute` first confirms the existence of the target applicant to be marked using guard clauses.
+If the applicant exists, the applicant is updated with the new application status and the model replaces this applicant.
+
+Given below is an example usage scenario of the mark applicant feature. <br>
+Preconditions: Applicant exists in MTR and valid mark status given.
+
+Step 1. User inputs `mark john doe status/rejected`. The app parser stores the target applicant name and new `ApplicationStatus` internally in the `MarkApplicantStatusCommand` as private fields.
+
+Step 2. LogicManager executes this `MarkApplicantStatusCommand` instance, invoking the `Applicant#markAs` method and `Model#setApplicant` method, which creates a new applicant and replaces the existing applicant with the created one.
+
+Step 3. UI-wise, the applicant should now appear with the updated application status.
+
+
+#### Design considerations:
+
+**Aspect: Accessing the applicant's application status**
+
+* **Alternative 1 (current choice):** Have application status as an enumeration under the `Application` class which serves as an association class between `Applicant` and `Position`.
+    * Pros: Simplifies code base since it is accessible via the `Application` class directly.
+    * Cons: Higher coupling for `Application` class.
+
+* **Alternative 2:** Have application status in a separate class with enumerations inside it.
+    * Pros: Separates code logic from Application, easier to digest and manipulate.
+    * Cons: Increases complexity of code. Separate class has little usage.
+
+
 
 
 ### List applicants feature
@@ -481,10 +500,7 @@ Step 1. User inputs `list-applicant`.
 Step 2. LogicManager executes this `ListApplicantCommand` instance, invoking the `Model#updateFilteredApplicantList`.
 
 Step 3. The UI is updated to show the current list of applicants.
-[display picture of current applicants here]
 
-The following activity diagram summarizes the actions taken when LogicManager executes the ListApplicantCommand:
-[to be added]
 
 #### Design considerations:
 
@@ -520,8 +536,7 @@ Step 2. LogicManager executes this `AddPositionCommand` instance, invoking the `
 
 Step 3. The UI for `positionBook` will now contain the new position added.
 
-The following sequence diagram shows the method invocation in this step.
-[to be added]
+
 
 #### Design considerations:
 
@@ -540,12 +555,13 @@ The following sequence diagram shows the method invocation in this step.
 
 #### Implementation
 
-The delete-position feature is achieved by the `DeletePositionCommand` class, in similar flavour to the `DeleteApplicantCommand`. 
+The delete position feature is achieved by the `DeletePositionCommand` class, in similar flavour to the `DeleteApplicantCommand`.
 The only parameter it takes in is the index position of the position in the `positionBook`.
 
 The `DeletePositionCommand#execute(Model model)` method will use the `Model#getFilteredPositionList()` to indirectly
 check whether the position exists by checking the size of the list against the index provided. The position to be deleted is then
 obtained from the list via the standard `List#get()` and is removed from the model via `Model#deletePosition()`.
+When a position is deleted, the applicants applying to the position are also deleted. 
 
 Given below is an example usage scenario and how the delete position feature behaves at each step.
 Preconditions: The app is already launched and there is a position existing in MTR.
@@ -554,22 +570,9 @@ Step 1: The user inputs the command `delete-position 1`. The app parser simply p
 
 Step 2: LogicManager executes this `DeletePositionCommand` instance, invoking the `Model#deletePosition()` method.
 
-Step 3: This then calls the internal method for `PositionBook`, `PositionBook#removeApplicant()`, which then removes the position thereafter.
+Step 3: This then calls the internal method for `PositionBook`, `PositionBook#removeApplicant()` and `ApplicantBook#removeApplicantsUnderPosition()`, 
+which then removes the position and related applicants.
 
-The following activity diagram summarizes the actions taken when LogicManager executes the DeletePositionCommand:
-[to be added]
-
-#### Design considerations:
-
-**Aspect: How to access and delete a position**
-
-* **Alternative 1 (current choice):** Let ModelManager handle the deletion but keep the PositionBook's methods separate from the ModelManager
-    * Pros: More accessible since ModelManager already contains the positionBook, and reduces complication of code.
-    * Cons: Higher coupling for ModelManager since it handles more commands.
-
-* **Alternative 2:** Create a separate ModelManager to handle position-related commands.
-    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
-    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
 
 
 ### Edit position feature :heavy_check_mark:
@@ -579,10 +582,10 @@ The implementation of the edit position feature uses the `EditPositionCommand` c
 class is that the user can simply edit any number of fields or attributes to a particular applicant, with at least 1 field being changed.
 
 The `EditPositionCommand` method takes in an index and description (including `title`) of the target position with the help of the `EditPositionDescriptor` class.
-It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a non-negative integer.
+It then checks if the input index is valid by comparing it to the size of the current applicant list in MTR, as well as ensuring it is a positive integer.
 It also has guard clauses verifying that the description is valid and different from the one in the MTR. Once these criteria are met, 
-the model then updates the target position with the new description via the `Model#setPosition` and `Model#updateFilteredPositionList` methods.
-It also ensures all applicant's positions are updated using the `Model#updateApplicantsWithPosition`.
+the model then updates the target position with the new description via the `Model#setPosition()` and `Model#updateFilteredPositionList()` methods.
+It also ensures all applicant's positions are updated using the `Model#updateApplicantsWithPosition()`.
 
 Given below is an example usage scenario and how the edit position feature behaves at each step. <br>
 Preconditions: The app is already launched, the target position exists.
@@ -590,24 +593,15 @@ Preconditions: The app is already launched, the target position exists.
 Step 1. User inputs command `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `.  The app parser will store
 all the user-input parameters into an `EditPositionDescriptor` object.
 
-Step 2. LogicManager executes this `EditPositionCommand` instance, invoking the `EditPositionDescriptor#createEditedPosition` method to create a new `Position` to replace the original one.
+Step 2. LogicManager executes this `EditPositionCommand` instance, invoking the `EditPositionDescriptor#createEditedPosition()` method to create a new `Position` to replace the original one.
 
-Step 3. The model then replaces the existing position with the new one in the `positionBook` via `Model#setPosition` and reflect the updated list in the UI.
+Step 3. The model then replaces the existing position with the new one in the `positionBook` via `Model#setPosition()` and reflects the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditPositionCommand:
-[to be added]
+![EditPositionActivityDiagram](images/EditPositionActivityDiagram.png)
 
-#### Design considerations:
 
-**Aspect: How to access and change a position**
 
-* **Alternative 1 (current choice):** Have a separate class handle changing details of a position. [to be added]
-    * Pros: Lowers coupling and makes logic of ModelManager simpler.
-    * Cons: If a change is needed for the EditPositionCommand, more classes need to be changed, making it more troublesome.
-
-* **Alternative 2:** Create a separate ModelManager to handle position-related commands.
-    * Pros: Better dissection of code and easier to read and test later on since it is separate from the ModelManager.
-    * Cons: May result in a lot more code and work in order to achieve the same level of logic.
     
 
 ### List positions feature
@@ -627,10 +621,7 @@ Step 1. User inputs `list-position`.
 Step 2. LogicManager executes this `ListPositionCommand` instance, invoking the `Model#updateFilteredPositionList`.
 
 Step 3. The UI is updated to show the current list of positions.
-[display picture of current positions here]
 
-The following activity diagram summarizes the actions taken when LogicManager executes the ListPositionCommand:
-[to be added]
 
 #### Design considerations:
 
@@ -655,7 +646,7 @@ Implements the following functions:
 * `ModelManager#hasPositionWithTitle()`  — Checks if a position with a given title exists in the MTR.
 * `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of total applicants and number of rejected applicants for that position.
 
-These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
+These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate()` respectively.
 
 Given below is an example usage scenario and how the rejection rate mechanism works at every step. <br>
 Preconditions: Position exists in MTR and there is at least 1 applicant for this position (regardless of status).
@@ -663,11 +654,11 @@ Preconditions: Position exists in MTR and there is at least 1 applicant for this
 Step 1. The user launches the application which is assumed to have some positions and corresponding applicants applying for them in the MTR.
 
 Step 2. The user executes `rate pos/software engineer` command to calculate the rejection rate of Software Engineer in the PositionBook.
-The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
+The `rate` command calls `Model#hasPositionWithTitle()`, causing the model to check whether `Software Engineer` exists in the database as a Position.
 
 Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the position as well as the number of rejected applicants of the same position.
 
-Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
+Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate()`. This resulting floating point number is then the rejection rate of the position.
 
 The following sequence diagram shows the method invocation in this step.
 ![SeqDiagram](images/rejection-rates/SeqDiagram.png)
@@ -729,37 +720,29 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
 
 #### Implementation
 
-The proposed undo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The [Memento Pattern](https://en.wikipedia.org/wiki/Memento_pattern) is used to implement undo feature. The undo functionality is facilitated by `Memento` and `History`. 
+Every command keeps a `memento` which stores the state of `model` before any modification is done by a command. 
+The `model` keeps track of the `history` which stores a stack of previous modification commands. 
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 1. The user launches the application. The `history` will be initialized with an empty command stack, and the `model` keeps track of the `history`.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 2. The user executes `delete-applicant 3` command to delete the 3rd applicant in the applicant book. The `delete-applicant` command updates its `memento` and calls `Model#addToHistory()`, causing the state of the `model` before the modification to be saved in `history`.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+Step 3. The user executes `add-applicant n/David …​` to add a new applicant. The `add-applicant` command also updates its `memento` and calls `Model#addToHistory()`, causing the state of the `model` before the modification to be saved in `history`.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a modification command fails its execution, it will not call `Model#addToHistory()`, so the model state will not be saved into the `history`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#recoverHistory()`, which will pop out the previous command from `history`, and restore the model in the `memento` of the previous command.
 
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the stack in the `history` is empty, then there are no previous model states to restore. The `undo` command uses `Model#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -772,19 +755,7 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -792,16 +763,16 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire model.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 2:** Individual command knows how to undo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete-position`, just save the position and applicants being deleted).
+    * Cons: It is time-consuming to ensure that the implementation of each individual command are correct. Since there are many interactions between `Position` and `Applicant`, the undo logic could become complicated. 
 
 
 
@@ -859,11 +830,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | general user                                  | update applicants' application statuses directly                    | quickly update and see positions' competitiveness.                              |
 | `* * *`  | general user                                  | see the current list of applicants                                  | have a quick overview of applicants that have applied to the various positions. |
 | `* * *`  | general user                                  | view the average rejection rates of all job positions               | gauge how competitive a position might be.                                      |
+| `* * *`  | general user                                  | visualize the number of applicants in job positions                 | gauge how popular a position might be.                                          |
 | `* * *`  | new user                                      | see usage instructions                                              | refer to instructions when I forget how to use the App.                         |
 | `* *  `  | user                                          | hide private applicant details                                      | ensure confidentiality of applicants' information.                              |
 | `* *  `  | user                                          | undo my last command/action                                         | retract mistakes or changes made in the command.                                |
 | `*    `  | user with many applicants in the address book | sort applicants by name                                             | locate an applicant easily.                                                     |
 | `*    `  | user                                          | see a graphical representation of statuses in a position            | have a quick visualisation on how competitive a position might be.              |
+
 
 
 ### Use cases
@@ -1306,7 +1279,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a position to MrTechRecruiter
    1. Prerequisites: -
-   2. Test case: `add-position tit/tester desc/test codes`<br>
+   2. Test case: `add-position tit/tester des/test codes`<br>
       Expected: The position `tester` is added to MTR. The detailed information is shown in the status message.
    3. Test case (followed by the previous test case): `add-position tit/tester desc/testing`<br>
       Expected: An error message will show, indicating that the position `tester` already exists in MTR.
@@ -1314,7 +1287,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a position
 1. Editing a position in MrTechRecruiter. 
    1. Prerequisites: There is at least one position in MTR. Assume there are two positions, `software engineer` at index `1` and `tester` at index `2`
-   2. Test case: `edit-position 1 tit/data engineer desc/create data pipeline`<br>
+   2. Test case: `edit-position 1 tit/data engineer des/create data pipeline`<br>
       Expected: The title of the position is changed to `data engineer`, and the description is also changed. 
    3. Test case: `edit-position 1 tit/tester`<br>
       Expected: An error message will show, indicating that the position `tester` already exists in MTR.

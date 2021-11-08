@@ -79,6 +79,7 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     *
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
@@ -124,6 +125,7 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code Config} using the file at {@code configFilePath}. <br>
+     *
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
      */
@@ -160,6 +162,7 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
+     *
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
@@ -205,5 +208,4 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
     }
-
 }

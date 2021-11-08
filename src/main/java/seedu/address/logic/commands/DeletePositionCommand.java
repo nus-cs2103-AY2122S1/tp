@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 
 /**
- * Deletes a position identified using it's displayed index from the position book.
+ * Deletes a position identified using its displayed index from the position book.
  */
 public class DeletePositionCommand extends Command {
 
@@ -26,6 +26,9 @@ public class DeletePositionCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteApplicantCommand according to the specified {@code targetIndex}.
+     */
     public DeletePositionCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

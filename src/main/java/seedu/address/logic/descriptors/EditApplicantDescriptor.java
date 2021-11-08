@@ -17,7 +17,7 @@ import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 /**
- * Stores the details to edit the applicant with. Each non-empty field value will replace the
+ * Stores the details to edit an applicant with. Each non-empty field value will replace the
  * corresponding field value of the position.
  */
 public class EditApplicantDescriptor {
@@ -35,6 +35,8 @@ public class EditApplicantDescriptor {
     /**
      * Copy constructor.
      * A defensive copy of {@code tags} is used internally.
+     *
+     * @param toCopy The EditApplicantDescriptor to be copied from.
      */
     public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
         setName(toCopy.name);
@@ -119,6 +121,9 @@ public class EditApplicantDescriptor {
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      * This version has application information.
+     *
+     * @param applicantToEdit The applicant whose details will change.
+     * @return The applicant with changed details.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit) {
         requireNonNull(applicantToEdit);
@@ -137,9 +142,12 @@ public class EditApplicantDescriptor {
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      * This version has only title information.
+     *
+     * @param applicantToEdit The applicant whose details will change.
+     * @model model The current state of the model.
+     * @return The applicant with changed details.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit, Model model) {
-
         requireNonNull(applicantToEdit);
         Name updatedName = getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = getPhone().orElse(applicantToEdit.getPhone());

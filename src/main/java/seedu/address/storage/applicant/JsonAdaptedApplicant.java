@@ -64,7 +64,7 @@ public class JsonAdaptedApplicant {
     /**
      * Converts this Jackson-friendly adapted applicant object into the model's {@code Applicant} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
+     * @throws IllegalValueException If there were any data constraints violated in the adapted applicant.
      */
     public Applicant toModelType(ReadOnlyPositionBook positionBook) throws IllegalValueException {
 
@@ -128,5 +128,4 @@ public class JsonAdaptedApplicant {
                 modelGitHubUrl);
         return modelApplicant.markAs(modelApplicationStatus);
     }
-
 }
