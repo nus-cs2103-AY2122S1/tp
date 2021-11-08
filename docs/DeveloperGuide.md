@@ -513,10 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-      Use case ends.
-
 **Use case: Export contacts**
-
 **MSS**
 
 1.  User requests to list/search persons
@@ -525,6 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  ProfBook exports list to JSON file
 
     Use case ends.
+
 
 **Extensions**
 
@@ -555,6 +553,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ProfBook rejects the command and shows an error message.
 
       Use case resumes at step 2.
+      
+**Use case: Undo last command**
+
+**MSS**
+
+1. User requests to undo the last command
+2. ProfBook checks if there are commands to undo
+3. ProfBook reverses the last command
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no commands to undo
+    * 2a1. ProfBook shows a message.
+
+      Use case ends.
+
+**Use case: Redo last command**
+
+**MSS**
+
+1. User requests to redo a command
+2. ProfBook checks if there are commands to redo
+3. ProfBook reverses the last undone command
+
+   Use case ends.
+   
+**Extensions**
+
+* 2a. There are no commands to redo
+    * 2a1. ProfBook shows a message.
+    
+      Use case ends.
     
 ### Non-Functional Requirements
 
@@ -747,10 +779,23 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `exportemail friends.txt`<br>
        Expected: Emails of last searched contacts are exported to emails.txt
     
+### Undo and Redo
+
+1. Test case: `undo` after program start up
+    1. Expected: Error detail shown for having no commands to undo
+2. Test case: `delete -a` followed by `undo`
+    1. Expected: `delete -a` deletes all contacts. `undo` brings back all deleted contacts.
+3. Test case: `redo`
+    1. Prerequisites: An `undo` command was successfully run immediately before
+    2. Expected: The effect of the `undo` command is reversed
+4. Test case: `redo`
+    1. Prerequisites: A command that is not `undo` was run immediately before
+    2. Expected: Error detail shown for having no commands to redo
+    
+    
 ### Loading/Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. Remove a `{` from data/profBook.json
       Expected: ProfBook will be empty on load.
 
@@ -762,16 +807,16 @@ testers are expected to do more *exploratory* testing.
       
       1. Test case: `exit`
          Expected: profBook.json will be recreated in the data directory
-   
 
 ## Effort
-The difficulty level for our project is at a relatively moderate level. 
-We did not make large changes to the AB3 but instead chose to enhance the existing features. <br>
+The difficulty level for our project is at a relatively moderate level. Instead of making large changes to AB3, we opted to enhance existing features and introduce new features which complement the existing functionalities.
+ 
+The challenges we faced were largely from figuring out the original implementation of AB3 so that we can introduce features by extending the structure of AB3 instead of overhauling.
 
-Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. 
-For example, when implementing the sort feature, there were so many lists in AB3 and some of them were immutable. <br>
+For example, when implementing the `sort` feature, there were many different list representations of the contacts used throughout the application, some of which were immutable. It required time and effort to walk through the code, and sufficiently test modifications to ensure that the `sort` feature modifies the correct mutable list, and that there were no unintended side effects from directly manipulating the list.
 
-We had to do a lot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
+Another feature which required much effort was the `undo` and `redo` commands. In order to implement them with minimal changes to existing code, we had to investigate how all data changes are propagated following the execution of their calling command. Then, we had to write an implementation which allowed us to decouple any new classes required from those that already existed. In the end, we settled on using functional interfaces and Java lambdas to offer an intuitive syntax and to follow software engineering principles. The only required changes to old code were to wrap existing methods in `ModelManager` in a lambda function which is passed to a new `OperationManager` class as `Runnable`, from which `OperationManager` handles all states changes, transparent to other developers. <br>
+
 In comparison to AB3, ProfBook was a harder project due to the large amounts of information attached to each contact.
 Managing all that information and making sure that each of our features work with the information in an intuitive way was one of the bigger achievements of ProfBook. <br>
 
