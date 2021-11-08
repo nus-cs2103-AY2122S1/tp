@@ -409,21 +409,21 @@ The following sequence diagram shows how the cost-sum-checking operation works:
 
 _{more aspects and alternatives to be added}_
 
-### Delete By Tag feature
+### Delete by tag feature
 
 #### Implementation
 
 The delete by tag mechanism is facilitated by `AddressBook`, which implements `ReadOnlyAddressBook`. 
 Additionally, it implements the following operation:
 
-* `AddressBook#removePerson()` — Removes specified person from `person` list in address book
+* `AddressBook#removePerson()` — Removes specified person from list of `persons` in address book
 
 This operation is exposed in the `Model` interface as `Model#deletePerson()`.
 
-Given below is an example usage scenario and how the delete by tag mechanism behaves at each step.
+Given below is an example usage scenario of how the delete by tag mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the
-`person` list consisting of all contacts (image adapted from Delete-by-name section).
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the list of
+`persons` consisting of all contacts (image adapted from Delete-by-name section).
 
 ![DeleteByTagState0](images/DeleteByNamePersonList0.png)
 
@@ -475,7 +475,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Report feature (Status)
+### Report feature (status)
 
 #### Implementation
 <div markdown="span" class="alert alert-info">
@@ -879,7 +879,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting persons with a specific tag
 
     1. Test case: `delete t/testTag`<br>
-       Expected: All contacts with tag, "testTag" are deleted from the list. A success command message stating that contacts under said tag has been removed is shown in the command box.
+       Expected: All contacts with tag, "testTag" are deleted from the list. A success command result stating that contacts under said tag has been removed is shown in the command box.
 
     1. Test case: `delete t/unknownTag`<br>
        Expected: Assuming that person with, "unknownTag" does not exist in the list. Error message stating contacts with such a tag cannot be found is shown in the command box. 
@@ -892,11 +892,11 @@ testers are expected to do more *exploratory* testing.
 1. Showing report consisting of a summary of the statuses and expenses across different tags.
 
     1. Test case: `report`<br>
-       Expected: Report is generated in a pop up window. A success command message indicating report window is opened is provided.
+       Expected: Report is generated in a pop up window. A command result indicating that the report window has been opened is provided.
 
     1. Test case: `report now`<br>
        Expected: As long as the first word in the command starts with, "report", additional words and spaces after the command are ignored.
-       The report is generated in a pop up window. A success command message indicating report window is opened is provided.
+       The report is generated in a pop up window. A command result indicating that the report window has been opened is provided.
 
     1. Incorrect report command to try: `1 report`,`reports` <br>
        Expected: Since both the above commands are invalid, an error message stating that an unknown command has been used is shown in the command box.
