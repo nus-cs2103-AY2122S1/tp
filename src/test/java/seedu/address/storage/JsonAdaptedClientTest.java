@@ -17,6 +17,7 @@ import seedu.address.model.client.DisposableIncome;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.LastMet;
 import seedu.address.model.client.Name;
+import seedu.address.model.client.NextMeeting;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
 
@@ -31,6 +32,9 @@ public class JsonAdaptedClientTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LASTMET = "40-01-1999";
     private static final String EXAMPLE_CURRENT_PLAN = "Prudential PRUShield";
+    private static final String OUTDATED_NEXTMEETING_BEFORELASTMET = "24-11-2020 (10:00~12:00), SOC";
+    private static final String OUTDATED_NEXTMEETING_AFTERLASTMET = "01-11-2021 (10:00~12:00), SOC";
+    private static final String UPDATED_LASTMET = "01-11-2021";
 
     private static final String VALID_CLIENTID = "10";
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -50,6 +54,32 @@ public class JsonAdaptedClientTest {
     public void toModelType_validClientDetails_returnsClient() throws Exception {
         JsonAdaptedClient client = new JsonAdaptedClient(BENSON);
         assertEquals(BENSON, client.toModelType());
+    }
+
+    @Test
+    public void toModelType_validClientDetailsWithOutdatedNextMeeting_returnsClientLastMetUnchanged() throws Exception {
+        JsonAdaptedClient client =
+            new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN, VALID_LASTMET,
+                OUTDATED_NEXTMEETING_BEFORELASTMET, VALID_TAGS);
+        JsonAdaptedClient expectedClient =
+            new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN, VALID_LASTMET,
+                NextMeeting.NO_NEXT_MEETING, VALID_TAGS);
+        assertEquals(expectedClient.toModelType(), client.toModelType());
+    }
+
+    @Test
+    public void toModelType_validClientDetailsWithOutdatedNextMeeting_returnsClientLastMetUpdated() throws Exception {
+        JsonAdaptedClient client =
+            new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN, VALID_LASTMET,
+                OUTDATED_NEXTMEETING_AFTERLASTMET, VALID_TAGS);
+        JsonAdaptedClient expectedClient =
+            new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN, UPDATED_LASTMET,
+                NextMeeting.NO_NEXT_MEETING, VALID_TAGS);
+        assertEquals(expectedClient.toModelType(), client.toModelType());
     }
 
     @Test
@@ -135,10 +165,11 @@ public class JsonAdaptedClientTest {
                 new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN, INVALID_LASTMET,
                         VALID_NEXTMEETING, VALID_TAGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-
+        String expectedMessage = LastMet.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
 
+    @Test
     public void toModelType_invalidRiskAppetite_throwsIllegalValueException() {
         JsonAdaptedClient client =
                 new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
@@ -154,8 +185,10 @@ public class JsonAdaptedClientTest {
                 VALID_EMAIL, VALID_ADDRESS, VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME,
                 EXAMPLE_CURRENT_PLAN, null, VALID_NEXTMEETING, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LastMet.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
 
+    @Test
     public void toModelType_nullRiskAppetite_throwsIllegalValueException() {
         JsonAdaptedClient client = new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, null, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN, VALID_LASTMET,
@@ -191,6 +224,24 @@ public class JsonAdaptedClientTest {
                 new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN,
                         VALID_LASTMET, VALID_NEXTMEETING, invalidTags);
+        assertThrows(IllegalValueException.class, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullCurrentPlan_throwsIllegalValueException() {
+        JsonAdaptedClient client =
+            new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, null,
+                VALID_LASTMET, VALID_NEXTMEETING, VALID_TAGS);
+        assertThrows(IllegalValueException.class, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullNextMeeting_throwsIllegalValueException() {
+        JsonAdaptedClient client =
+            new JsonAdaptedClient(VALID_CLIENTID, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, EXAMPLE_CURRENT_PLAN,
+                VALID_LASTMET, null, VALID_TAGS);
         assertThrows(IllegalValueException.class, client::toModelType);
     }
 
