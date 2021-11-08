@@ -217,8 +217,6 @@ Below is the `Storage` class diagram:
 
 Classes used by multiple components are in the `tutoraid.commons` package.
 
-<hr>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
