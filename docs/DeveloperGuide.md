@@ -126,7 +126,7 @@ The `UI` component,
 
 <img src="images/WeekShiftsPaneClassDiagram.png" width="300" />
 
-The `Schedule view` subcomponent of the `UI` component,
+The `Schedule view` subcomponent of the `UI` component meant to facilitate the display of the [schedule view](UserGuide.md#schedule-display),
 
 * displays 2 `SlotCard` for each `DayCard`
 * listens to changes in `Model` data to be updated with the modified data
