@@ -304,8 +304,21 @@ Shows a list of all tasks in the task list.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `list`
+- <code> `list` </code>
+
 </div>
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Example:**
+
+* `list` displays a list of all the task in the task list
+
+</div>
+
+After running the list command, the tasks in that given week are listed as shown below:
+
+![list_comman](images/listCommand.png)
 
 ### 4.7 Showing Tasks: `show`
 
@@ -333,13 +346,16 @@ Show all tasks that have been added to the app in a specific week.
 
 <div markdown="block" class="alert alert-success">
 
-**:green_book: Examples:**
-Examples:
-* `show 1` displays tasks in week `1`
+**:green_book: Example:**
+ 
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 </div>
 
-![show_command](images/showCommand41.jpeg)
+![show_command](images/showCommand.png)
+
+After running the show command, the tasks in that given week are shown in the display window as shown below:
+
+![show_command_after](images/showCommandAfter.png)
 
 
 ### 4.8 Sorting the tasks : `sort`
@@ -548,7 +564,7 @@ Action | Format, Examples
 **Edit** | <code>edit <i>task_id (n/task_name) (d/date) (t/time) (tg/tag) (p/level)</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
 **Find** | <code>find <i>keyword (more_keywords)... (d/date) (tg/tag)...</i></code> <br> e.g. `find quiz` <br> e.g. `find quiz d/2021-12-12` <br> e.g. `find quiz tg/GEQ1000` <br> e.g. `find quiz d/2021-12-12 tg/GEQ1000`
 **List** | <code>list</code>
-**Show** | <code>show <i>week_number</i></code> <br>e.g `show 13`
+**Show** | <code>show <i>week_number</i></code> <br><code>show <i>d/date</i></code> <br>e.g `show 13` <br>e.g `show d/2021-12-12`
 **Sort** | <code>sort <i>x/sort_by o/sort_order</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 3 4 </code>
 **Clear** | <code>clear</code> <br>
