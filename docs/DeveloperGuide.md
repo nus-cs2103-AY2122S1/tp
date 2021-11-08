@@ -481,8 +481,6 @@ Given below is an example usage scenario:
 
   We choose to combine these two similar and relevant features into one command for simplicity. Different and self-explanatory flags are used here to distinguish them.
 
-<div style="page-break-after: always;"></div>
-
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
