@@ -246,8 +246,8 @@ It is implemented with the following operation:
 
 * `FindCommand#execute()`  —  Obtains the contacts found to have the specified keyword(s).
 
-The feature makes use of `FindableContainsKeywordsPredicate`, which represents a boolean-valued function that indicates whether there is any _findable_ property of the contacts that contains the keyword(s) given.
-The operation `FindableContainsKeywordsPredicate#test` returns a boolean that indicates whether a specific contact has a _findable_ property that matches the keyword(s) provided by Tour Guide.
+The feature makes use of `isFindableContainsKeywordsPredicate`, which represents a boolean-valued function that indicates whether there is any _findable_ property of the contacts that contains the keyword(s) given.
+The operation `isFindableContainsKeywordsPredicate#test` returns a boolean that indicates whether a specific contact has a _findable_ property that matches the keyword(s) provided by Tour Guide.
 
 The aforementioned _findable_ properties of the contacts that are checked are as follows:
 
@@ -264,7 +264,7 @@ Step 1. The user executes the command `list` to look at all contacts.
 Step 2. The user executes the command `find bay ...` to find contacts with properties that contain the keywords *bay*, ...
 The `find` command calls `FindCommandParser#parse()`.
 
-Step 3. If user command is in the correct format, a `FindCommand` is created with the list of keywords attached to a `FindableContainsKeywordPredicate`.
+Step 3. If user command is in the correct format, a `FindCommand` is created with the list of keywords attached to a `isFindableContainsKeywordPredicate`.
 The `FindCommand` will then be executed. Otherwise, no command is executed and a `ParseException` is thrown.
 
 The following sequence diagram shows how the Find operation works to show the relevant contacts:
@@ -953,7 +953,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view the summary of the WhereTourGo.
+1. User requests to view the summary of WhereTourGo.
 
 2. WhereTourGo returns the summary on the GUI.
 
@@ -1115,7 +1115,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to exit the application.
+1. User requests to exit WhereTourGo.
 
 2. WhereTourGo closes.
 
@@ -1332,7 +1332,7 @@ testers are expected to do more *exploratory* testing.
   4. Other incorrect sort commands to try: `filter`, `filter c`, `filter c/`, `filter c/att c/x`, `filter c/x` (where x is not a valid category code)<br>
      Expected: No changes to Contacts Pane. Error details shown in Results Pane.
 
-2. Filtering contacts by multiple parameters
+1. Filtering contacts by multiple parameters
 
 * Prerequisites: WhereTourGo has multiple contacts with at least 1 contact with category code `ATT`, rating of 5 stars, and tagged as `fun`.<br><br>
 
@@ -1361,7 +1361,7 @@ testers are expected to do more *exploratory* testing.
   2. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
      Expected: Contacts are not sorted. Error details shown in Results Pane.
 
-2. Sorting contacts by rating
+1. Sorting contacts by rating
 
 * Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.<br><br>
 
@@ -1385,7 +1385,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `sum 2`<br>
        Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
 
-2. Modifying WhereTourGo with commands that involve summary
+1. Modifying WhereTourGo with commands that involve summary
 
 * Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.<br><br>
 
@@ -1453,9 +1453,10 @@ testers are expected to do more *exploratory* testing.
 ### Clicking on contacts
 1. Clicking on contacts shown in the contact list
 * Prerequisites: WhereTourGo has at least 1 contact shown in the contact list.<br><br>
-
     1. Test case: Click a contact within the Contact Pane.<br>
        Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message.
+    2. Test case: Clicking outside a contact within the Contact Pane.<br>
+       Expected: Nothing will happen.
 
 ### Undoing operations
 1. Undoing changes consecutively
@@ -1506,7 +1507,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect export commands to try: `export abc`, `export x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Exporting all contacts in filtered list
+1. Exporting all contacts in filtered list
 
 * Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.<br><br>
 
