@@ -674,9 +674,7 @@ Priorities: High, Low
 **MSS**
 
 1. User enters add customer command and keys in the customer’s details.
-
 2. Customer is added to RHRH.
-
 3. System confirms that the customer has been added.
 
    Use case ends.
@@ -707,14 +705,10 @@ Use case resumes from step 3.
 
 **Use case (UC02): Add an Employee**
 
-{:no_toc}
-
 **MSS**
 
 1. User enters add employee command and keys in the employee’s details.
-
 2. Employee is added to RHRH.
-
 3. System confirms that the employee has been added.
 
    Use case ends.
@@ -745,14 +739,10 @@ Use case resumes from step 3.
 
 **Use case (UC03): Add a Supplier**
 
-{:no_toc}
-
 **MSS**
 
 1. User enters add supplier command and keys in the supplier’s details.
-
 2. Supplier is added to RHRH.
-
 3. System confirms that the supplier has been added.
 
    Use case ends.
@@ -794,7 +784,7 @@ Use case resumes from step 3.
 
 * 1a. Tables are not set yet.
     * 1a1. System requests user to set the tables.
-    * 1a2. User <u>sets the tables (UC16)</u>
+    * 1a2. User <u>sets the tables (UC21)</u>
 
     Use case resumes from step 1.
 
@@ -959,7 +949,7 @@ Use case resumes from step 2.
     * 1c1. System displays an error that no such supplier index exist in RHRH.
     * 1c2. User enters supplier index again.
 
-Steps 1c1 - 1c2 are repeated until the employee to be added is unique. <br>
+Steps 1c1 - 1c2 are repeated until the supplier to be added is unique. <br>
 Use case resumes from step 2.
 
 * 1d. System detects that editing of current supplier would cause duplicate suppliers in RHRH.
@@ -981,15 +971,27 @@ Use case resumes from step 2.
 
 **Extensions**
 
-* 1a. User keys in invalid format.
-    * 1a1. System displays an error, and the recommended format for editing a reservation.
-    
-    Use case ends.
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
 
-* 1b. User keys in command without prefix.
-    * 1b1. System displays an error that says that at least 1 field must be provided.
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
 
-      Use case ends.
+* 1b. System detects invalid command arguments.
+    * 1b1. System displays error corresponding to the invalid argument and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that reservation to edit does not exist in RHRH.
+    * 1c1. System displays an error that no such reservation index exist in RHRH.
+    * 1c2. User enters reservation index again.
+
+Steps 1c1 - 1c2 are repeated until the reservation to be added is unique. <br>
+Use case resumes from step 2.
 
 **Use case (UC10): Delete a Customer**
 
@@ -1094,7 +1096,41 @@ Use case resumes from step 2.
 Steps 1c1 - 1c2 are repeated until the supplier to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
-**Use case (UC13): Find Customers in RHRH**
+**Use case (UC13): Delete a Reservation**
+
+**MSS**
+
+1. User enters the command to delete a reservation.
+2. The specified reservation is deleted from RHRH.
+3. System confirms that the reservation has been deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid reservation index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters reservation index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that reservation to delete does not exist in RHRH.
+    * 1c1. System displays an error that no such reservation index exist in RHRH.
+    * 1c2. User enters reservation index again
+
+Steps 1c1 - 1c2 are repeated until the reservation to delete exists in RHRH. <br>
+Use case resumes from step 2.
+
+**Use case (UC14): Find Customers in RHRH**
 
 **MSS**
 
@@ -1121,7 +1157,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC14): Find Employees in RHRH**
+**Use case (UC15): Find Employees in RHRH**
 
 **MSS**
 
@@ -1148,7 +1184,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC15): Find Suppliers in RHRH**
+**Use case (UC16): Find Suppliers in RHRH**
 
 1. User enters the command to find the suppliers in RHRH based on a sequence of keywords.
 2. The supplier list is filtered in RHRH based on matching of keywords.
@@ -1173,7 +1209,112 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-**Use case (UC16): Set the tables of the restaurant inside the app**
+
+**Use case (UC17): Check for reservations made for a date and time**
+
+**MSS**
+
+1. User enters the command to check the reservations made for a date and time.
+2. System shows the reservations that are on that date and time.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. System detects invalid command format of date/time.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again. 
+      
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. 
+Use case resumes from step 2.
+
+* 1b. System detects that there are no reservations made for that date and time
+    * 1b1. No reservations are displayed
+
+      Use case ends
+
+**Use case (UC18): Check for reservations made for a date**
+
+**MSS**
+
+1. User enters the command to check the reservations made for a date.
+2. System shows the reservations that are on that date.
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. System detects invalid command format of date/time.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+  
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. 
+Use case resumes from step 2.
+
+* 1b. System detects that there are no reservations made for that date
+    * 1b1. No reservations are displayed
+
+      Use case ends
+
+**Use case (UC19): Check for reservations made for a time on the current date**
+
+**MSS**
+
+1. User enters the command to check the reservations made for a time on the current date.
+2. System shows the reservations that are on that time on the current date
+
+   Use case ends
+
+**Extensions:**
+
+* 1a. System detects invalid command format of date/time.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+  
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+Use case resumes from step 2.
+
+* 1b. System detects that there are no reservations made for that time on the current date
+    * 1b1. No reservations are displayed
+
+      Use case ends
+
+**Use case (UC20): Get customer who made a reservation in RHRH**
+
+**MSS**
+
+1. User enters the command to get the customer who made a specified reservation.
+2. The corresponding customer information is shown.
+3. System confirms that the corresponding customer is listed.
+
+   Use case ends.
+
+**Extension**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects invalid reservation index.
+    * 1b1. System displays error corresponding to the invalid index and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters reservation index again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+* 1c. System detects that reservation to get customer information does not exist in RHRH.
+    * 1c1. System displays an error that no such reservation index exist in RHRH.
+    * 1c2. User enters reservation index again
+
+Steps 1c1 - 1c2 are repeated until the reservation to get customer information exists in RHRH. <br>
+Use case resumes from step 2.
+
+
+**Use case (UC21): Set the tables of the restaurant inside the app**
 
 **MSS**
 
@@ -1192,7 +1333,7 @@ Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 
-**Use case (UC17): Sort Customers in RHRH**
+**Use case (UC22): Sort Customers in RHRH**
 
 **MSS**
 
@@ -1224,7 +1365,7 @@ Use case resumes from step 2.
     
     Use case ends.
 
-**Use case (UC18): Sort Employees in RHRH**
+**Use case (UC23): Sort Employees in RHRH**
 
 **MSS**
 
@@ -1252,17 +1393,17 @@ Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 1c. System detects that there are no employees to sort in the current list.
-    * 1c1. System displays an error that there are no employees to sort in the current list.
-
+    * 1c1. System displays an error that there are no employees to sort in the current list. 
+      
   Use case ends.
 
-**Use case (UC19): Sort Suppliers in RHRH**
+**Use case (UC24): Sort Suppliers in RHRH**
 
 **MSS**
 
 1. User enters the command to sort the supplier list in RHRH based on a sorting type and order.
 2. The employee list is sorted in RHRH according to specified sorting type and order.
-3. System confirms that the employees have been sorted.
+3. System confirms that the suppliers have been sorted.
 
    Use case ends.
 
@@ -1288,80 +1429,8 @@ Use case resumes from step 2.
 
   Use case ends.
 
-
-**Use case (UC20): Check for reservations made for a date and time**
-
-**MSS**
-
-1. User enters the command to check the reservations made for a date and time.
-2. System shows the reservations that are on that date and time.
-
-   Use case ends.
-
-**Extensions:**
-
-* 1a. System detects invalid command format of date/time.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-  Use case resumes from step 2.
-
-* 1b. System detects that there are no reservations made for that date and time
-    * 1b1. No reservations are displayed
-
-      Use case ends
-
-**Use case (UC21): Check for reservations made for a date**
-
-**MSS**
-
-1. User enters the command to check the reservations made for a date.
-2. System shows the reservations that are on that date.
-
-   Use case ends
-
-**Extensions:**
-
-* 1a. System detects invalid command format of date/time.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-  Use case resumes from step 2.
-
-* 1b. System detects that there are no reservations made for that date
-    * 1b1. No reservations are displayed
-
-      Use case ends
-
-**Use case (UC22): Check for reservations made for a time on the current date**
-
-**MSS**
-
-1. User enters the command to check the reservations made for a time on the current date.
-2. System shows the reservations that are on that time on the current date
-
-   Use case ends
-
-**Extensions:**
-
-* 1a. System detects invalid command format of date/time.
-    * 1a1. System displays an error, showing unknown command.
-    * 1a2. User enters command again.
-
-  Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
-
-  Use case resumes from step 2.
-
-* 1b. System detects that there are no reservations made for that time on the current date
-    * 1b1. No reservations are displayed
-
-      Use case ends
     
-**Use case (UC23): List all customers/employees/suppliers in default sorting order(by `name`)**
+**Use case (UC25): List all customers/employees/suppliers in default sorting order(by `name`)**
 
 {:no_toc}
 
