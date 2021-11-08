@@ -59,8 +59,8 @@ public class IncludeCommandTest {
         ArrayList<Person> toAdd = model.toPersonList(new ResidentList(constructor1, constructor2));
         CommandResult expectedMessage = new CommandResult(String.format(IncludeCommand.MESSAGE_SUCCESS, toAdd.stream()
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
-                TypicalEvents.BASKETBALL.getEventName()));
-        model.addEvent(TypicalEvents.BASKETBALL);
+                TypicalEvents.VOLLEYBALL.getEventName()));
+        model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList(constructor1, constructor2));
         CommandResult result = command.execute(model);
@@ -82,14 +82,14 @@ public class IncludeCommandTest {
 
     @Test
     public void addMultipleNamesTest() throws CommandException {
-        String constructor1 = TypicalPersons.DANIEL.getName().toString() + ", "
+        String constructor1 = TypicalPersons.FIONA.getName().toString() + ", "
                 + TypicalPersons.ELLE.getName().toString();
-        String constructor2 = TypicalPersons.DANIEL.toString() + ", " + TypicalPersons.ELLE.toString();
+        String constructor2 = TypicalPersons.FIONA.toString() + ", " + TypicalPersons.ELLE.toString();
         ArrayList<Person> toAdd = model.toPersonList(new ResidentList(constructor1, constructor2));
         CommandResult expectedMessage = new CommandResult(String.format(IncludeCommand.MESSAGE_SUCCESS, toAdd.stream()
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
-                TypicalEvents.BASKETBALL.getEventName()));
-        model.addEvent(TypicalEvents.BASKETBALL);
+                TypicalEvents.VOLLEYBALL.getEventName()));
+        model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList(constructor1, constructor2));
         CommandResult result = command.execute(model);
@@ -109,6 +109,32 @@ public class IncludeCommandTest {
         model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList(TypicalPersons.DANIEL.getName().toString(), TypicalPersons.DANIEL.toString()));
+        assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void addInvalidNameTest() {
+        model.addEvent(TypicalEvents.VOLLEYBALL);
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
+                new ResidentList(ResidentList.DEFAULT_LIST, TypicalPersons.DANIEL.toString()));
+        assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void invalidIndex_fails() {
+        model.addEvent(TypicalEvents.VOLLEYBALL);
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(10),
+                new ResidentList(ResidentList.DEFAULT_LIST, TypicalPersons.DANIEL.toString()));
+        assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void exceedCapacity_fails() {
+        model.addEvent(TypicalEvents.BASKETBALL);
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
+                new ResidentList(TypicalPersons.DANIEL.getName().toString() + ", "
+                        + TypicalPersons.ELLE.getName().toString(), TypicalPersons.DANIEL.toString() + ", "
+                        + TypicalPersons.ELLE.toString()));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
