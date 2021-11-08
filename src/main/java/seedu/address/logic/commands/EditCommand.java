@@ -59,7 +59,6 @@ public class EditCommand extends Command {
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
         requireNonNull(editStudentDescriptor);
-
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
     }
@@ -82,21 +81,24 @@ public class EditCommand extends Command {
         if (studentToEdit.isSameStudent(editedStudent) || model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
-
         //if the name is changed, the student list of all classes the student is enrolled in has to be updated
         if (!studentToEdit.isSameStudent(editedStudent)) {
-            List<TuitionClass> enrolledClasses = editedStudent
-                    .getClasses().getClasses().stream().map(model::getClassById).collect(Collectors.toList());
-            for (TuitionClass tuitionClass: enrolledClasses) {
-                if (tuitionClass != null) {
-                    tuitionClass.updateStudent(studentToEdit, editedStudent);
-                    logger.info(String.format("student name in class %s to %s", studentToEdit, editedStudent));
-                }
-            }
+            updateStudentInTuitionClass(model, editedStudent, studentToEdit);
         }
         logger.info(String.format("Edited student: Details changed from %s to %s", studentToEdit, editedStudent));
         model.setStudent(studentToEdit, editedStudent);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+    }
+
+    private static void updateStudentInTuitionClass(Model model, Student editedStudent, Student studentToEdit) {
+        List<TuitionClass> enrolledClasses = editedStudent
+                .getClasses().getClasses().stream().map(model::getClassById).collect(Collectors.toList());
+        for (TuitionClass tuitionClass: enrolledClasses) {
+            if (tuitionClass != null) {
+                tuitionClass.updateStudent(studentToEdit, editedStudent);
+                logger.info(String.format("student name in class %s to %s", studentToEdit, editedStudent));
+            }
+        }
     }
 
     /**

@@ -313,16 +313,25 @@ Format: `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]`
 
 Examples:
 ```
-editclass 3 n/Trigonometry ts/Sun 10:00-11:00
+editclass 1 n/Math ts/Wed 10:00-12:00
 ```
 or
 
 ```
-ec 3 n/Trigonometry ts/Sun 10:00-11:00
+ec 1 n/Math ts/Wed 10:00-12:00
 ```
+<br>
 <div markdown="span" class="alert alert-primary">
 :information_source: Note: The edited timeslot cannot conflict with an en existing timeslot of another class.
 </div>
+<br>
+An example output of using the `editclass` command is shown below:
+
+<p align="center">
+    <img src="images/EditUserGuide.png" alt="Edit class" width="650" height="420"><br>
+    <i>Figure 4: Example of executing `editclass 1 n/Math ts/Wed 10:00-12:00` command</i>
+</p>
+
 
 ### 3.4 Delete student/tuition class
 Deletes a student or a tuition class from TutAssistor.
@@ -348,11 +357,11 @@ or
 ```
 del 1 2
 ```
-An example output is shown below:
+An example output of using the `delete` command is shown below:
 
 <p align="center">
     <img src="images/DeleteStudentUG.png" alt="Delete student" width="650" height="420"><br>
-    <i>Figure 4: Example of executing `delete 1 2` command</i>
+    <i>Figure 5: Example of executing `delete 1 2` command</i>
 </p>
 
 #### Deleting tuition classes: `deleteclass` | `delc`
@@ -432,7 +441,7 @@ Users can add, remove, or edit remarks through the editor window.
 
 <p align="center">
     <img src="images/remark_editor_student.png" width="520" height="250" alt="Remark editor"><br>
-    <i>Figure 5: Editing remarks with editor window</i>
+    <i>Figure 6: Editing remarks with editor window</i>
 </p>
 
 <div markdown="span" class="alert alert-primary">
@@ -515,7 +524,7 @@ The filtered list should look similar to the example shown below:
 
 <p align="center">
     <img src="images/find_screenshot.png" alt="Find student" width="540" height="500"><br>
-    <i>Figure 6: Example of executing `find alice tan` command</i>
+    <i>Figure 7: Example of executing `find alice tan` command</i>
 </p>
 
 ### 3.8 List all students/tuition classes
@@ -576,7 +585,7 @@ timetable
   
   If a lesson is shorter than one hour, the timetable may not display its details properly, such as using smaller font size or omitting the details completely due to limited space in the time block.
   
-  For example, in Figure 7 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
+  For example, in Figure 8 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
 </div>
 
 <p align="center">

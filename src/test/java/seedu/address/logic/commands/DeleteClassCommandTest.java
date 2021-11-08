@@ -23,6 +23,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tuition.TuitionClass;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for DeleteClassCommand.
+ */
 public class DeleteClassCommandTest {
 
     private Model model = new ModelManager(getAddressBookWithTypicalClasses(), new UserPrefs());

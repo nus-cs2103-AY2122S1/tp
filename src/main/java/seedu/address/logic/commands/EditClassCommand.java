@@ -75,8 +75,6 @@ public class EditClassCommand extends Command {
         if (editedClass.getLimit().getLimit() < classToEdit.getStudentCount()) {
             throw new CommandException(String.format(MESSAGE_INVALID_CLASS_LIMIT, classToEdit.getStudentCount()));
         }
-        logger.info(String.format("Starting to process timetable conflicts for this class: %s ", editedClass));
-
         //check if updated timeslot is taken
         List<TuitionClass> otherClasses = model.getFilteredTuitionList()
                 .stream().filter(x -> x.getId() != editedClass.getId()).collect(Collectors.toList());
@@ -84,7 +82,6 @@ public class EditClassCommand extends Command {
                 && editedClass.getTimeslot().checkTimetableConflicts(otherClasses)) {
             throw new CommandException(MESSAGE_INVALID_CLASS_SLOT);
         }
-
         if (!editedClass.getTimeslot().equals(classToEdit.getTimeslot())
                 || !editedClass.getName().equals(classToEdit.getName())) {
             updateStudentsInClass(classToEdit, editedClass, model);
@@ -94,7 +91,7 @@ public class EditClassCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_CLASS_SUCCESS, editedClass));
     }
 
-    private void updateStudentsInClass(TuitionClass classToEdit, TuitionClass editedClass, Model model) {
+    private static void updateStudentsInClass(TuitionClass classToEdit, TuitionClass editedClass, Model model) {
         for (String name : classToEdit.getStudentList().getStudents()) {
             Student student = model.getSameNameStudent(new Student(new Name(name)));
             if (student != null) {
