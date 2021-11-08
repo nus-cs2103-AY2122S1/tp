@@ -10,14 +10,15 @@ import seedu.address.logic.commands.EditPositionCommand;
 import seedu.address.logic.descriptors.EditPositionDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-
+/**
+ * Parses input arguments and creates a new EditPositionCommand object.
+ */
 public class EditPositionCommandParser implements Parser<EditPositionCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the EditPositionCommand
      * and returns an EditPositionCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public EditPositionCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -48,6 +49,4 @@ public class EditPositionCommandParser implements Parser<EditPositionCommand> {
 
         return new EditPositionCommand(index, editPositionDescriptor);
     }
-
-
 }

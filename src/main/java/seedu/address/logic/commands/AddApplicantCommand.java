@@ -43,7 +43,7 @@ public class AddApplicantCommand extends Command {
     private final ApplicantParticulars applicantParticulars;
 
     /**
-     * Creates an AddApplicantCommand to add the specified {@code Applicant}
+     * Creates an AddApplicantCommand to add the specified {@code Applicant}.
      */
     public AddApplicantCommand(ApplicantParticulars applicantParticulars) {
         requireNonNull(applicantParticulars);
@@ -71,7 +71,6 @@ public class AddApplicantCommand extends Command {
 
         return new CommandResult(successMessage);
     }
-
 
     @Override
     public boolean equals(Object other) {

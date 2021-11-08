@@ -49,5 +49,4 @@ public class ApplicantParticulars {
     public ProfileUrl getGitHubUrl() {
         return gitHubUrl;
     }
-
 }

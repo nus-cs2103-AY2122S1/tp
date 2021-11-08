@@ -11,8 +11,8 @@ import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.position.Position;
 
 /**
- * Wraps all applicant data at ApplicantBook level
- * Duplicates are not allowed (by .isSameApplicant comparison)
+ * Wraps all applicant data at ApplicantBook level.
+ * Duplicates are not allowed (by .isSameApplicant comparison).
  */
 public class ApplicantBook implements ReadOnlyApplicantBook {
 
@@ -32,7 +32,7 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     public ApplicantBook() {}
 
     /**
-     * Creates an ApplicantBook using the Applicants in the {@code toBeCopied}
+     * Creates an ApplicantBook using the Applicants in the {@code toBeCopied}.
      */
     public ApplicantBook(ReadOnlyApplicantBook toBeCopied) {
         this();
@@ -151,5 +151,4 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
 
         return copiedApplicantBook;
     }
-
 }

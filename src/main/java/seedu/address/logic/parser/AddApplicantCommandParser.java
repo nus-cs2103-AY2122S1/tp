@@ -21,14 +21,15 @@ import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Title;
 
 /**
- * Parses input arguments and creates a new AddApplicantCommand object
+ * Parses input arguments and creates a new AddApplicantCommand object.
  */
 public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddApplicantCommand
      * and returns an AddApplicantCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     *
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddApplicantCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -56,5 +57,4 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
 
         return new AddApplicantCommand(applicantParticulars);
     }
-
 }

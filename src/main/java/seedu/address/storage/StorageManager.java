@@ -36,7 +36,6 @@ public class StorageManager implements Storage {
     }
 
     // ================ UserPrefs methods ==============================
-
     @Override
     public Path getUserPrefsFilePath() {
         return userPrefsStorage.getUserPrefsFilePath();
@@ -52,10 +51,7 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
-
     // ================ PositionBook methods ==============================
-
     @Override
     public Path getPositionBookFilePath() {
         return positionBookStorage.getPositionBookFilePath();
@@ -84,7 +80,6 @@ public class StorageManager implements Storage {
     }
 
     // ================ ApplicantBook methods ==============================
-
     @Override
     public Path getApplicantBookFilePath() {
         return applicantBookStorage.getApplicantBookFilePath();

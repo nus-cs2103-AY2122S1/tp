@@ -10,7 +10,7 @@ import seedu.address.logic.descriptors.FilterApplicantDescriptorVerifier;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.ApplicantMatchesFiltersPredicate;
 
-/*
+/**
  * Filters the current list of applicants by the specified criteria.
  */
 public class FilterApplicantCommand extends Command {

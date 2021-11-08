@@ -29,6 +29,7 @@ public class ProfileUrl {
     /**
      * Constructs a {@code ProfileUrl}.
      * Assumes non-null and assumes non-empty string, i.e. assumes valid gitHub url.
+     *
      * @param url A valid github url.
      */
     public ProfileUrl(String url) {
@@ -39,7 +40,8 @@ public class ProfileUrl {
     /**
      * Returns a {@code ProfileUrl} containing the url given. If empty string is given,
      * emptyProfileUrl object instance is returned.
-     * @param url  string url to be stored in this ProfileUrl.
+     *
+     * @param url The url to be stored in this ProfileUrl.
      * @return ProfileUrl instance containing this url, if valid.
      */
     public static ProfileUrl ofNullable(String url) {
@@ -52,7 +54,7 @@ public class ProfileUrl {
     /**
      * Returns the one single instance of empty profile url.
      *
-     * @return the one single instance of empty profile url.
+     * @return A single instance of empty profile url.
      */
     public static ProfileUrl emptyProfileUrl() {
         return EMPTY_PROFILE_URL;
@@ -61,8 +63,8 @@ public class ProfileUrl {
     /**
      * Returns true if a given string is a valid url.
      *
-     * @param gitHubUrl given url to test.
-     * @return boolean whether this url is a valid url.
+     * @param gitHubUrl The given url to test.
+     * @return Boolean on whether this url is valid.
      */
     public static boolean isValidUrl(String gitHubUrl) {
         try {
@@ -78,7 +80,7 @@ public class ProfileUrl {
     /**
      * Checks whether this ProfileUrl is empty or not, i.e. testing whether there is an existing profile.
      *
-     * @return true is there is a profile stored, false if there is no profile.
+     * @return True is there is a profile stored, false if there is no profile.
      */
     public boolean hasProfile() {
         return this != EMPTY_PROFILE_URL;
@@ -91,7 +93,7 @@ public class ProfileUrl {
     /**
      * Returns a copied Profile Url.
      *
-     * @return a copy of this Profile Url.
+     * @return A copy of this Profile Url.
      */
     public ProfileUrl getCopiedProfileUrl() {
         return new ProfileUrl(url);

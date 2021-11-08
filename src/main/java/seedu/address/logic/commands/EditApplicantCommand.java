@@ -18,8 +18,9 @@ import seedu.address.logic.descriptors.EditApplicantDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 
-
-
+/**
+ * Edits an existing applicant's particulars using its displayed index in the applicant book.
+ */
 public class EditApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-applicant";
@@ -47,8 +48,10 @@ public class EditApplicantCommand extends Command {
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
-     * @param index of the applicant in the filtered applicant list to edit
-     * @param editApplicantDescriptor details to edit the applicant with
+     * Constructor of an EditApplicantCommand.
+     *
+     * @param index Index of the applicant in the filtered applicant list to edit.
+     * @param editApplicantDescriptor The details for the applicant to be edited.
      */
     public EditApplicantCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
@@ -114,5 +117,4 @@ public class EditApplicantCommand extends Command {
         return index.equals(e.index)
                 && editApplicantDescriptor.equals(e.editApplicantDescriptor);
     }
-
 }

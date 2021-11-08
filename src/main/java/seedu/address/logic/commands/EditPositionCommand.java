@@ -14,8 +14,9 @@ import seedu.address.logic.descriptors.EditPositionDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 
-
-
+/**
+ * Edits an existing position's details using its displayed index in the position book.
+ */
 public class EditPositionCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-position";
@@ -40,8 +41,10 @@ public class EditPositionCommand extends Command {
     private final EditPositionDescriptor editPositionDescriptor;
 
     /**
-     * @param index of the position in the filtered position list to edit
-     * @param editPositionDescriptor details to edit the position with
+     * Constructor of an EditPositionCommand.
+     *
+     * @param index                  Index of the position in the filtered position list to edit.
+     * @param editPositionDescriptor Descriptor containing new details for the targeted position.
      */
     public EditPositionCommand(Index index, EditPositionDescriptor editPositionDescriptor) {
         requireNonNull(index);
@@ -82,7 +85,6 @@ public class EditPositionCommand extends Command {
         return new CommandResult(successMessage);
     }
 
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -100,5 +102,4 @@ public class EditPositionCommand extends Command {
         return index.equals(e.index)
                 && editPositionDescriptor.equals(e.editPositionDescriptor);
     }
-
 }

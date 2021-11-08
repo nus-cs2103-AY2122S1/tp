@@ -17,32 +17,22 @@ import seedu.address.model.position.Title;
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
+    /** {@code Predicate} that always evaluate to true.*/
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
     //=========== User prefs related methods =============================================================
 
-    /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
-     */
+    /** Replaces user prefs data with the data in {@code userPrefs}. */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
-    /**
-     * Returns the user prefs.
-     */
+    /** Returns the user prefs. */
     ReadOnlyUserPrefs getUserPrefs();
 
-    /**
-     * Returns the user prefs' GUI settings.
-     */
+    /** Returns the user prefs' GUI settings. */
     GuiSettings getGuiSettings();
 
-    /**
-     * Sets the user prefs' GUI settings.
-     */
+    /** Sets the user prefs' GUI settings. */
     void setGuiSettings(GuiSettings guiSettings);
 
     //=========== Position related methods =============================================================
@@ -55,35 +45,26 @@ public interface Model {
      */
     void setPosition(Position position, Position editedPosition);
 
-    /**
-     * Returns true if a position with the same identity as {@code position} exists in the position book
-     */
+    /** Returns true if a position with the same identity as {@code position} exists in the position book. */
     boolean hasPosition(Position position);
 
-    /**
-     * Returns true if a position with {@code title} exists in the position book
-     */
+    /** Returns true if a position with {@code title} exists in the position book. */
     boolean hasPositionWithTitle(Title title);
 
-    /**
-     * Returns the position with {@code title}
-     */
+    /** Returns the position with {@code title}. */
     Position getPositionWithTitle(Title title);
 
-    /** Returns an unmodifiable view of the filtered applicant list */
+    /** Returns an unmodifiable view of the filtered applicant list. */
     ObservableList<Applicant> getFilteredApplicantList();
 
-    /**
-     * Returns an unmodifiable view of the filtered position list
-     */
+    /** Returns an unmodifiable view of the filtered position list. */
     ObservableList<Position> getFilteredPositionList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     * Adds the given position.
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}. Adds the given position.
      * {@code position} must not already exist in the position book.
+     *
+     * @throws NullPointerException If {@code predicate} is null.
      */
     void addPosition(Position position);
 
@@ -93,25 +74,23 @@ public interface Model {
      */
     void deletePosition(Position position);
 
-    /**
-     * Returns the user prefs' position book file path.
-     */
+    /** Returns the user prefs' position book file path. */
     Path getPositionBookFilePath();
 
-    /**
-     * Replaces position book data with the data in {@code positionBook}.
-     */
+    /** Replaces position book data with the data in {@code positionBook}. */
     void setPositionBook(ReadOnlyPositionBook positionBook);
 
     /**
-     * Returns the PositionBook
+     * Returns a read-only version of the position book.
+     *
+     * @return The position book.
      */
     ReadOnlyPositionBook getPositionBook();
 
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
-     * @throws NullPointerException if {@code predicate} is null.
+     * @throws NullPointerException If {@code predicate} is null.
      */
     void updateFilteredPositionList(Predicate<Position> predicate);
 
@@ -139,25 +118,16 @@ public interface Model {
      */
     Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
 
-    /**
-     * Returns true if {@code applicant} exists in MrTechRecruiter.
-     */
+    /** Returns true if {@code applicant} exists in MrTechRecruiter. */
     boolean hasApplicant(Applicant applicant);
 
-    /**
-     * Returns true if an applicant named {@code applicantName} exists in MrTechRecruiter.
-     */
+    /** Returns true if an applicant named {@code applicantName} exists in MrTechRecruiter. */
     boolean hasApplicantWithName(Name applicantName);
 
-    /**
-     * Returns true if MrTechRecruiter has applicants applying to
-     * the specified position.
-     */
+    /** Returns true if MrTechRecruiter has applicants applying to the specified position. */
     boolean hasApplicantsApplyingTo(Position position);
 
-    /**
-     * Returns the applicant with the specified name, if any.
-     */
+    /** Returns the applicant with the specified name, if any. */
     Applicant getApplicantWithName(Name name);
 
     /**
@@ -170,6 +140,7 @@ public interface Model {
 
     /**
      * Calculates the rejection rate of a given position.
+     *
      * @param title The title of the position to be calculated.
      * @return The rejection rate of the specified position.
      */
@@ -185,12 +156,12 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     *
+     * @throws NullPointerException If {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
 
     void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
-
 
     /**
      * Returns a deep-copied model.
@@ -213,5 +184,4 @@ public interface Model {
     String recoverHistory();
 
     String resetData(Memento memento);
-
 }

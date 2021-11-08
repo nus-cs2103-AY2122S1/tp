@@ -65,7 +65,6 @@ public class LogicManager implements Logic {
         return model.getFilteredPositionList();
     }
 
-
     @Override
     public Path getApplicantBookFilePath() {
         return model.getApplicantBookFilePath();
