@@ -75,6 +75,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 - **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
 - **TA**: A CS2100 teaching assistant
 - **PE**: ProgrammerError
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## <a name="Design"></a> **4. Design**
