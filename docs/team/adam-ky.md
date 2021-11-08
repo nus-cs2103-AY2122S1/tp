@@ -52,8 +52,8 @@ Given below are my contributions to the project. You may refer to my [RepoSense 
     
 **Developer Guide**:
   * Added implementation details of the `remark` feature [\#113](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/113/files), [\#140](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/140)
-  * Added [sequence diagram](https://github.com/AY2122S1-CS2103T-T12-4/tp/blob/master/docs/images/RemarkCommandSequenceDiagram.png) for `remark` implementation [\#122](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/122)
-  * Added manual testing instructions for `exit`, `remark`, and `help` [\#204](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/204)
+  * Added [sequence diagram](https://github.com/AY2122S1-CS2103T-T12-4/tp/blob/master/docs/images/RemarkCommandSequenceDiagram.png) for the `remark` implementation [\#122](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/122)
+  * Added manual testing instructions for `exit`, `remark`, and `help` features [\#204](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/204)
 
 ### Project management:
   * Managed and assigned 1.2 issues to track project tasks
