@@ -334,7 +334,7 @@ Currently, SalesNote supports sorting by the following fields, which have been a
 
 The ordering is represented using the `SortOrderingType` enumeration which is encapsulated as a `SortOrderingType` object. SalesNote supports sorting in: 
 1. Ascending order - Represented by `SortOrderingType.ASCENDING`
-2. Descending - Represented by `SortOrderingType.DESCENDING`
+2. Descending order - Represented by `SortOrderingType.DESCENDING`
 
 
 The class structure of the feature is shown in the diagram below:
@@ -358,17 +358,15 @@ When the `SortOrderCommand` is executed, the following interactions take place i
 
 ![SortOrdersModelSequenceDiagram](images/SortOrdersModelSequenceDiagram.png)
 
-After the `ObservableList<Order>` has been sorted, 
+After the `OrderBook` has been sorted by the amount field in ascending order, 
 
-Step 1.  the `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`. 
-
-Step 2.  a `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
-
-Step 3.  the UI proceeds to display the sorted list of orders.
+1.  The `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`.
+2.  A `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
+3.  The UI proceeds to display the sorted list of orders.
 
 #### Design choices
 
-* **Alternative 1:**  Mutating the `OrderList`.
+* **Alternative 1 (current choice):**  Mutating the `OrderList`.
     * Pros: Allows the sorting functionality to be less coupled with the `FilteredList` of orders.
       * This allows the user the flexibility to combine various filtering and sorting commands.
       * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
@@ -509,9 +507,9 @@ For the use cases that are very similar, only the differences between them have 
 
 Analogous to the use case for [adding a client](#use-case-add-a-client).
 
-**Extensions**
+**Additional Extensions**
 
-* 2b. The specified tag for the task does not correspond to an existing sales order.
+* 2b. The tag specified for the task does not correspond to an existing sales order.
 
   * 2b1. SalesNote shows an error message.
 
@@ -521,9 +519,9 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 Analogous to the use case for [adding a client](#use-case-add-a-client).
 
-**Extensions**
+**Additional Extensions**
 
-* 2b. The specified customer for the task does not correspond to an existing client.
+* 2b. The customer specified for the task does not correspond to an existing client.
 
     * 2b1. SalesNote shows an error message.
 
@@ -653,7 +651,7 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 Analogous to the use case for [editing a task](#use-case-edit-a-task).
 
-**Extensions**
+**Additional Extensions**
 
 * 4c. The user edits the name of the client.
 
