@@ -38,6 +38,7 @@ title: Developer Guide
       8. [Use Case: UC8 Create a lab record](#Use Case8)
       9. [Use Case: UC9 Edit a lab record](#Use Case9)
       10. [Use case: UC10 View dashboard of student records](#Use Case10)
+      11. [Use case: UC11 Filter student records](#Use Case11)
    4. [Non-Functional Requirements](#Non-Functional Requirements)
 8. [Appendix: Instructions for Manual Testing](#manual-testing)
    1. [Launch and Shutdown](#Launch and Shutdown)
@@ -842,13 +843,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 * 3a. The student details given are incomplete.
 
-    * 3a.1. ProgrammerError shows an error message.
+    * 3a1. ProgrammerError shows an error message.
 
     Use case resumes at step 3.
 
 * 3b. The student email or ID given are not unique.
 
-    * 3a.1. ProgrammerError shows an error message.
+    * 3b1. ProgrammerError shows an error message.
 
     Use case resumes at step 3.
 
@@ -864,14 +865,14 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **Extensions:**
 
-2a. CS2100 TA chooses to cancel the upload.
+* 2a. CS2100 TA chooses to cancel the upload.
 
-Use case ends.
+  Use case ends.
 
-3a. CSV file data is invalid.
-3s1. ProgrammerError informs the TA of the error.
+* 3a. CSV file data is invalid.
+  * 3a1. ProgrammerError informs the TA of the error.
 
-Use case ends.
+  Use case ends.
 
 #### <a name="Use Case4"></a> **7.3.4 Use case: UC4 View a student record**
 
@@ -938,15 +939,14 @@ Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a.1. ProgrammerError shows an error message.
+    * 3a1. ProgrammerError shows an error message.
 
     Use case resumes at step 2.
 
 * 3b. The given email or student id is not unique.
 
-    * 3b.1. ProgrammerError shows an error message.
-
-
+    * 3b1. ProgrammerError shows an error message.
+    
     Use case resumes at step 2.
 
 #### <a name="Use Case7"></a> **7.3.7 Use case: UC7 Download student records**
@@ -961,14 +961,14 @@ Use case ends.
 
 **Extensions:**
 
-1a. CS2100 TA chooses to cancel the upload.
+* 1a. CS2100 TA chooses to cancel the upload. 
 
-Use case ends.
+  Use case ends.
 
-3a. There is no student data.
-3a1. ProgrammerError informs the TA there is no data to download.
+* 3a. There is no student data.
+  * 3a1. ProgrammerError informs the TA there is no data to download.
 
-Use case ends.
+  Use case ends.
 
 #### <a name="Use Case8"></a> **7.3.8 Use case: UC8 Create a lab record**
 
@@ -984,8 +984,9 @@ Use case ends.
 **Extensions**
 
 * 3a. The given lab name is not unique or lab score < 0.
-  * 3a.1 ProgrammerError shows an error message.
-  Use case resumes at 2.
+  * 3a1. ProgrammerError shows an error message.
+  
+    Use case resumes at 2.
 
   Use case ends.
 
@@ -998,13 +999,14 @@ Use case ends.
 3. CS2100 TA specifies lab number and actual score or total score.
 4. ProgrammerError updates the student's record.
 
-  Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 3a. The given lab score < 0 or actual score > total score.
-    * 3a.1 ProgrammerError shows an error message.
-* Use case resumes at 2.
+    * 3a1. ProgrammerError shows an error message.
+  
+      Use case resumes at 2.
 
   Use case ends.
 
@@ -1018,6 +1020,23 @@ as well as the number of labs unmarked for each class.
 3. ProgrammerError automatically updates the dashboard when changes are made to the student data.
 
    Use case ends.
+
+### <a name="Use Case11"></a> **Use case: UC11 Filter student records**
+
+**MSS**
+
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to filter the records based on certain parameters.
+4. ProgrammerError displays a filtered list of student records.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 
 ### <a name="Non-Functional Requirements"></a> **7.4 Non-Functional Requirements**
