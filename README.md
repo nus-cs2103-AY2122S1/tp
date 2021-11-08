@@ -1,4 +1,4 @@
-# SociaLite <img src="docs/images/socialite.jpeg" width="60px">
+# <img src="docs/images/socialite.jpeg" width="40px"> SociaLite 
 
 [![CI Status](https://github.com/AY2122S1-CS2103T-F11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-F11-4/tp/actions) [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp/branch/master/graph/badge.svg?token=KPARXU5FYH)](https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp)
 
