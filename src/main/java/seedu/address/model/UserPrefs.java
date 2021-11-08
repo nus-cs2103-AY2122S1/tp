@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path conthacksFilePath = Paths.get("data" , "contHACKS.json");
+    private Path conthacksFilePath = Paths.get("data" , "conthacks.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
