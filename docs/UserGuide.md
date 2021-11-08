@@ -244,18 +244,18 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 :information_source: **Details:**
 
-* `NAME` can only be alphanumeric and within a maximum of 150 characters. `NAME` will also be set to have the first character of each space separated word to be capital while the rest becomes lower case (i.e. `samUel oNg` becomes `Samuel Ong`). This is to comply with the majority of naming regulations worldwide.
+* `NAME` can only be alphanumeric and within a maximum of **150** characters. `NAME` will also be set to have the first character of each space separated word to be capital while the rest becomes lower case (i.e. `samUel oNg` becomes `Samuel Ong`). This is to comply with the majority of naming regulations worldwide.
 
 * `PARENT_CONTACT` can only be 8 digits long and start with `6`, `8` or `9` (as this application is currently based for Singapore use).
 
-* `EMAIL` can only have a maximum of 100 characters and have the conventional `@` as well as a domain name.
+* `EMAIL` can only have a maximum of **100** characters and have the conventional `@` as well as a domain name.
   * As there can be a variety of possible email address namings and domains, the application will not run a through check on your input. If you happen to input the wrong email address, you can use the `edit` command [here](#editing-a-student--edit).
 
-* `ADDRESS` can only have a maximum of 150 characters.
+* `ADDRESS` can only have a maximum of **150** characters.
 
 * `GRADE` refers to the educational level of the student. It can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
-* `REMARK` can have a maximum of 25 characters, single worded without spacings in between them (e.g `smart` is valid, while `needs help` is invalid). A student can have any number of remarks, capped at 5 including 0.
+* `REMARK` can have a maximum of **25** characters, single worded without spacings in between them (e.g `smart` is valid, while `needs help` is invalid). A student can have any number of remarks, capped at **5** including 0.
 
 * Each student must have a unique name.
 
@@ -339,7 +339,7 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 
 * The index **must be a positive integer** `1`, `2`, `3`, … The index must also refer to an index number shown in the displayed student list.
 
-* You can edit a student to have any number of remarks, capped at 5 including 0. The number of characters each remark can have is capped at 25.
+* You can edit a student to have any number of remarks, capped at **5** including 0. The number of characters each remark can have is capped at **25**.
 
 * Remarks are unique, and you cannot tag more than one of the same remark to the same student. For example, `edit 2 r/overdueFees r/overdueFees` will only tag a single `overdueFees` remark to the student at index `2`.
 
@@ -443,7 +443,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * `GRADE` refers to the level of education a lesson is catering for. It follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
 
-* `SUBJECT` can only be a single word limited to `20` characters, and its first letter will be capitalized.
+* `SUBJECT` can only be a single word limited to **20** characters, and its first letter will be capitalized.
 
 * `DAY_OF_WEEK` can only be these form: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun` (the first letter need not be capitalized, i.e. `mon` is allowed but not `MON`).
 
@@ -453,7 +453,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * Lessons with the same `SUBJECT` and `GRADE` cannot have the same `DAY_OF_WEEK` and `START_TIME`.
 
-* The `COST` must be a non-negative number (e.g `0.0`, `2.0`, `3.3`, …). The currency used here is in Singapore dollar, SGD. The maximum `COST` for a lesson is capped at SGD $ 200.00 inclusive. The `COST` will be rounded off to two decimal places.
+* The `COST` must be a non-negative number (e.g `0.0`, `2.0`, `3.3`, …). The currency used here is in Singapore dollar, SGD. The maximum `COST` for a lesson is capped at **SGD $ 200.00** inclusive. The `COST` will be rounded off to two decimal places.
 
 Example(s):
 
