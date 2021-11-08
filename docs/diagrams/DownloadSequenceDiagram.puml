@@ -20,9 +20,10 @@ LogicManager -> SiasaParser : parseCommand("download")
 
 create DownloadCommand
 SiasaParser -> DownloadCommand
-
+activate DownloadCommand
 
 DownloadCommand --> SiasaParser : d
+deactivate DownloadCommand
 
 SiasaParser --> LogicManager : d
 
@@ -41,14 +42,16 @@ DownloadCommand -> DownloadCommand : build string list for number \n of policies
 
 DownloadCommand -> DownloadCommand : write commission per contact to CSV
 
-DownloadCommand -> DownloadCommand : write number policies per contact to CSV
+DownloadCommand -> DownloadCommand : write number of policies per contact to CSV
 
 create CommandResult
 DownloadCommand -> CommandResult
+activate CommandResult
 
 CommandResult --> DownloadCommand
+deactivate CommandResult
 
-DownloadCommand --> LogicManager : result
+DownloadCommand --> LogicManager : command result
 
 
 [<--LogicManager
