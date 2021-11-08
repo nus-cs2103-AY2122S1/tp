@@ -100,25 +100,32 @@ public class GitHubUtil {
                     "(?<=class=avatar avatar-user)(.*?)(?=\\s*/>)");
             Matcher m = p.matcher(htmlString);
             String target = "";
+
             while (m.find()) {
                 target = m.group();
             }
+
             target = target.split("src=")[1];
             URL url = null;
+
             try {
                 url = new URL(target);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
+
             InputStream in = null;
+
             try {
                 in = new BufferedInputStream(url.openStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
             int n = 0;
+
             while (true) {
                 try {
                     if (-1 == (n = in.read(buf))) {
@@ -129,12 +136,14 @@ public class GitHubUtil {
                 }
                 out.write(buf, 0, n);
             }
+
             try {
                 out.close();
                 in.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             byte[] response = out.toByteArray();
             return new Image(new ByteArrayInputStream(response));
         }
@@ -192,12 +201,14 @@ public class GitHubUtil {
             Pattern p = Pattern.compile("(?<=text-bold mr-1)(.*?)(?=</a>)");
             Matcher m = p.matcher(htmlString);
             HashMap<String, Double> repoLanguages = new HashMap<>();
+
             while (m.find()) {
                 String[] texts = StringUtil.clean(m.group(), ">").split("</span");
                 String language = texts[0];
                 String value = texts[1].replace(" <span", "").replace("%", "");
                 repoLanguages.put(language, Double.parseDouble(value) / 100);
             }
+
             return repoLanguages;
         }
     }
@@ -232,6 +243,7 @@ public class GitHubUtil {
         if (!Github.isValidGithub(userName)) {
             throw new RuntimeException("Invalid GitHib Account");
         }
+
         HashMap<String, Double> languageStats = new HashMap<>();
         repoNames.parallelStream().forEach(repo -> {
             HashMap<String, Double> tempStats = getRepoLanguages(userName, repo);
@@ -240,6 +252,7 @@ public class GitHubUtil {
             }
         });
         normalize(languageStats);
+
         return languageStats;
     }
 
@@ -268,9 +281,11 @@ public class GitHubUtil {
             while (m.find()) {
                 target = m.group();
             }
+
             if (target.isBlank()) {
                 return 0;
             }
+
             return Integer.parseInt(target.split("class=Counter>")[1]);
         }
     }
@@ -279,6 +294,7 @@ public class GitHubUtil {
      * Returns a {@code HashMap} object with the stats of the user including
      * % of language contributions and number of repositories.
      * @param userName The name of the user.
+     *
      * @return stats on the user
      * @throws RuntimeException If invalid username or the server did not respond well.
      */

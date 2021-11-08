@@ -1,0 +1,105 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UnfavoriteCommandParser" as UnfavoriteCommandParser LOGIC_COLOR
+participant ":UnfavoriteCommand" as UnfavoriteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("unfav 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("unfav 1")
+activate AddressBookParser
+
+create UnfavoriteCommandParser
+AddressBookParser -> UnfavoriteCommandParser
+activate UnfavoriteCommandParser
+
+UnfavoriteCommandParser --> AddressBookParser
+deactivate UnfavoriteCommandParser
+
+AddressBookParser -> UnfavoriteCommandParser : parse("1")
+activate UnfavoriteCommandParser
+
+create UnfavoriteCommand
+UnfavoriteCommandParser -> UnfavoriteCommand
+activate UnfavoriteCommand
+
+UnfavoriteCommand --> UnfavoriteCommandParser :
+deactivate UnfavoriteCommand
+
+UnfavoriteCommandParser --> AddressBookParser
+deactivate UnfavoriteCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> UnfavoriteCommand : execute()
+activate UnfavoriteCommand
+
+UnfavoriteCommand -> UnfavoriteCommand : execute(model)
+activate UnfavoriteCommand
+
+UnfavoriteCommand -> Model : getFilteredPersonList();
+activate Model
+
+Model -> UnfavoriteCommand : List<Person>
+deactivate Model
+
+UnfavoriteCommand -> UnfavoriteCommand : lastShownList.get(0)
+activate UnfavoriteCommand
+
+UnfavoriteCommand --> UnfavoriteCommand : target
+deactivate UnfavoriteCommand
+
+UnfavoriteCommand --> UnfavoriteCommand : CommandResult
+deactivate UnfavoriteCommand
+
+UnfavoriteCommand -> Model : model.unfavouritePerson(target)
+activate Model
+
+Model -> AddressBook
+activate AddressBook
+
+AddressBook -> UniquePersonList : unfavoritePerson(target)
+activate UniquePersonList
+
+UniquePersonList -> Person : setNotIsFavorite()
+activate Person
+
+Person -> UniquePersonList :
+deactivate Person
+
+UniquePersonList -> AddressBook :
+deactivate UniquePersonList
+
+AddressBook -> Model :
+deactivate AddressBook
+
+Model --> UnfavoriteCommand :
+deactivate Model
+
+create CommandResult
+UnfavoriteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UnfavoriteCommand : result
+deactivate CommandResult
+
+UnfavoriteCommand --> LogicManager : result
+deactivate UnfavoriteCommand
+
+[<--LogicManager
+
+@enduml
