@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniFyParser" as UniFyParser LOGIC_COLOR
+participant ":ShowCommandParser" as ShowCommandParser LOGIC_COLOR
+participant "d:ShowCommand" as ShowCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete 1 2 3")
+activate LogicManager
+
+LogicManager -> UniFyParser : parseCommand("delete 1 2 3")
+activate UniFyParser
+
+create ShowCommandParser
+UniFyParser -> ShowCommandParser
+activate ShowCommandParser
+
+ShowCommandParser --> UniFyParser
+deactivate ShowCommandParser
+
+UniFyParser -> ShowCommandParser : parse("1 2 3")
+activate ShowCommandParser
+
+create ShowCommand
+ShowCommandParser -> ShowCommand
+activate ShowCommand
+
+ShowCommand --> ShowCommandParser : d
+deactivate ShowCommand
+
+ShowCommandParser --> UniFyParser : d
+deactivate ShowCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ShowCommandParser -[hidden]-> UniFyParser
+destroy ShowCommandParser
+
+UniFyParser --> LogicManager : d
+deactivate UniFyParser
+
+LogicManager -> ShowCommand : execute()
+activate ShowCommand
+
+ShowCommand -> Model : updateWeeklyTaskList()
+activate Model
+
+Model --> ShowCommand :
+deactivate Model
+
+create CommandResult
+ShowCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ShowCommand
+deactivate CommandResult
+
+ShowCommand --> LogicManager : result
+deactivate ShowCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

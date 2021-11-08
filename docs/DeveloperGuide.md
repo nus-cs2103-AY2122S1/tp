@@ -275,22 +275,22 @@ The following demonstrates a usage scenario where the user wants to show the 48t
 
 
 The sequence diagram below illustrates the interactions within `LogicManager` for the usage scenario.
-![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+![Show48SequenceDiagram](images/Show48SequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### 3.3.2 Design Consideration
 
-##### Aspect: Reference to use to delete tasks
+##### Aspect: Reference to use to show tasks
 
-* **Alternative 1 (current choice):** Allow users to delete tasks using task id.
-    * Pros: Short and really quick for users to type
-    * Cons: If list is long, users might have to spend time scrolling to find task id before deletion
+* **Alternative 1 (current choice):** Allow users to show by week number or week of the given date.
+    * Pros: Straightforward and users can see the week's tasks instead of the date alone
+    * Cons: users are not able to set their own date range
 
-* **Alternative 2:** Allows users to delete tasks by task name
-    * Pros: Tasks sharing task name can be easily deleted together (e.g. user can delete every assignment in Uni-Fy by typing `delete assignment`)
-    * Cons: Might result in collateral deletion accidentally; Takes much longer to input
+* **Alternative 2:** Allows users to show by date
+    * Pros: Users can view a specified date (e.g. user can show a date's worth of tasks in Uni-fy by showing `show d/2021-08-09`)
+    * Cons: Users lose the ability to see a weekly perspective on tasks
 
 Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, we have decided to adopt Alternative 1 as our current implementation.
 
