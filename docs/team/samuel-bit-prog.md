@@ -37,15 +37,17 @@ Given below are my contributions to the project.
   * Highlights: The enhancement affects the lists displayed in the GUI, only showing the matches. Commands to list the entire list again can be used after the efind command.
   * Notable PRs: [PR#155](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/155)
 
-#### Code contributed
-[RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=samuel-bit-prog)
+#### Code contributed ([RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=samuel-bit-prog))
+
 #### Project management
 1. Opened issues that sought to properly track the progress of adding and enhancing features.
 2. Reviewed and approved team members' PRs for merging (more details in the [Community](#community) section)
+
 #### Enhancements to existing features
 1. Changed the implementation of find command to be renamed as mfind and to allow partial matches without caring about alphabetical-casing.
   * Previously find command has to rely on exact matches when searching for keywords. No partial matches were allowed.
   * Notable PR: [PR#98](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/98)
+
 #### Documentation
 * Developer guide
   1. Add implementation of `eadd` command and `emark` command. [PR#282](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/282)
@@ -55,6 +57,7 @@ Given below are my contributions to the project.
 * User guide
   1. Add, edited and/or updated commands, and their usage in the user guide. ([PR#163](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/163), [PR#166](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/166))
   2. Add user guide to the commands used for deleting. [PR#43](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/43)
+
 #### Community
 1. Reviewed PRs of fellow teammates. (Some with non-trivial review comments, E.g. ([PR#253](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/253), [PR#140](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/140)))
 2. Reported bugs and suggestions for other teams during [PE-D].(https://github.com/Samuel-bit-prog/ped/issues)
