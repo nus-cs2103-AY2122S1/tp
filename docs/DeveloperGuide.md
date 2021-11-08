@@ -1054,7 +1054,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Delete a NOK from a participant
 
-   1. Prerequisite: At least 1 participant and this participant has at least 1 NOK.
+   1. Prerequisite: At least 1 participant in the participant list, and the first participant has at least 1 NOK.
 
    2. Test case: `deleteNok 1 1`<br>
       Expected: First NOK of first participant removed. Details of action shown in the status message.
@@ -1128,7 +1128,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisite: All events listed using the `listEvents` command. At least one event in the event list.
    2. Test case: `filterEvents d/2021-09-30 t/1200`<br>
-      Expected: Events occurring on 30th September 2021 at 1200 will be shown in the event list. Could be empty if
+      Expected: Events occurring on 30th September 2021 at 12:00pm will be shown in the event list. Could be empty if
       no event occurs on this date and time.
 
 ### Sorting events by time
