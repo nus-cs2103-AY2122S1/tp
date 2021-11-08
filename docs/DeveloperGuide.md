@@ -10,7 +10,7 @@ title: Developer Guide
     * [Logic component](#logic-component)
     * [Model component](#model-component)
     * [Storage component](#storage-component)
-    * [Command classes](#common-classes)
+    * [Common classes](#common-classes)
 
 * [Implementation](#implementation)
     * [Tags](#tags)
@@ -35,6 +35,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-before: always;"></div>
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -56,13 +58,13 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of the main components and how they interact with each other.
 
+<div style="page-break-before: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
-
-<div style="page-break-before: always;"></div>
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -163,7 +165,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores and sorts the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Person` objects are sorted according to how they should be displayed.
 * stores and sorts the `Person` objects as a separate _sorted_ list according to their birthday which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* Stores a set of `Prefix` objects which is exposed to outsiders as an unmodifiable `Set<Prefix>` that can be 'observed' e.g. the UI can be bound to this set so that the UI can use this data.
+* stores a set of `Prefix` objects which is exposed to outsiders as an unmodifiable `Set<Prefix>` that can be 'observed' e.g. the UI can be bound to this set so that the UI can use this data.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
@@ -308,8 +310,6 @@ The following activity diagram shows possible user interactions with a `unpin` c
     * Pros: Harder to implement.
     * Cons: Less code duplication.
 
-<div style="page-break-before: always;"></div>
-
 ### Find feature
 
 #### Implementation
@@ -375,6 +375,8 @@ Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPerson
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
+<div style="page-break-before: always;"></div>
+
 The following sequence diagram shows how the FindAny operation works:
 
 ![FindAnySequenceDiagram](images/FindAnySequenceDiagram.png)
@@ -434,11 +436,11 @@ Given below is an example usage scenario and how the birthday reminders mechanis
 
 Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are colored green while birthdays that are within one week are colored blue. Additionally, a customized message with each contact's phone number and age will be displayed in the birthday reminder list.
 
-<div style="page-break-before: always;"></div>
-
 Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
 Step 3. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
+
+<div style="page-break-before: always;"></div>
 
 Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will be updated to include the new contact, ensuring the birthday reminder list remains sorted as shown below. 
 
@@ -459,7 +461,9 @@ Step 5. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person>
 * **Option 2:** Insert the contact into the list. 
     * Pros: Faster than the alternative.
     * Cons: Harder to implement and maintain.
-    
+
+<div style="page-break-before: always;"></div>
+
 ### Mailing List feature
 Allows users to download a CSV file mailing list of the current view.  
 Users can use arguments to specify which fields to include in their download.
@@ -482,6 +486,8 @@ Step 5. These `Prefix` arguments are stored in `Model`.
 
 Step 6. The user is prompted to pick a name and the download location for their generated CSV file.   
 
+<div style="page-break-before: always;"></div>
+
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.  
 
 ![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
@@ -492,12 +498,14 @@ Step 9. Individual rows are generated based on the `Prefix` arguments stored in 
 
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
+<div style="page-break-before: always;"></div>
+
 #### Front end design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 #### Back end design considerations:
-* **Option 1 (current choice):** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
+* **Option 1:** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
     * Pros: Straightforward.
     * Cons: Requires large changes to the attributes and purpose of CommandResult. 
 
@@ -528,6 +536,8 @@ Step 5. `CommandHistory` retrieves the previous command and returns it.
 
 Step 6. `CommandBox` displays the previous command in the Command Box.
 
+<div style="page-break-before: always;"></div>
+
 The following activity diagram shows possible user interactions with the command history feature.
 
 ![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
@@ -543,6 +553,8 @@ The following activity diagram shows possible user interactions with the command
 * **Option 2:** Generate `CommandHistory` as a normal class.
     * Pros: Makes testing easier as multiple `CommandHistory` objects can be created with different history to test different conditions.
     * Cons: Possible conflicting history if `CommandHistory` is not updated properly.
+
+<div style="page-break-before: always;"></div>
 
 ### Command Assistant feature
 
@@ -575,6 +587,8 @@ Step 5. CONNECTIONS will display a help message in `ResultDisplay`.
 * **Option 2 (current choice):** Create a new type of command called `SystemCommand` that does not extend from `Command`.
     * Pros: Prevents potential issues such as users using an additional command which they are not supposed to use.
     * Cons: Requires additional code to interface with `Logic`, `MainWindow` and `CommandBox`.
+
+<div style="page-break-before: always;"></div>
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
@@ -1372,6 +1386,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `mailingList`<br>
         Expected: Exporting a mailing list of 0 contacts is not allowed. Error details are shown in the status message.
+
+<div style="page-break-before: always;"></div>
 
 ### Saving data
 
