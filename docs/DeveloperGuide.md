@@ -564,7 +564,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-   
+
 
 ### Deleting a person
 
@@ -581,6 +581,15 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Sort Test
+1. Test case: `sort`
+   Expected: List is sorted by name.
+2. Test case: `sort -r`
+   Expected: List is sorted by name in reverse.
+3. Test case: `sort \T`
+   Expected: List is sorted by TutorialID
+4. Test case: `sort \a`
+   Expected: No change to list. Error details shown in status message.
 
 ### Import and Export
 
@@ -646,12 +655,14 @@ testers are expected to do more *exploratory* testing.
        Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
 
 
-
-       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+## Effort
+The difficulty level for our project is at a relatively moderate level. 
+We did not make large changes to the AB3 but instead chose to enhance the existing features. Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. For example, when implementing the sort feature, there were so many different lists in AB3 and some of them were immutable. So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
