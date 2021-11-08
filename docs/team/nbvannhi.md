@@ -24,9 +24,9 @@ Given below are my contributions to the project.
     * This feature is necessary for the target user to view the summary information together with the distribution graph. 
     * This enhancement is the only feature that was implemented jointly by three different members. The implementation required considerable efforts to understand the graph implementation built by others in order to integrate supplementary parts into the complete feature.
 
-<div style="page-break-after: always;"></div>
-
 * **Code contributed**: [RepoSense link](https://git.io/JPAzY)
+
+<div style="page-break-after: always;"></div>
 
 * **Project management**:
     * Released [`v1.3.demo` on GitHub](https://git.io/Ji2HC)
