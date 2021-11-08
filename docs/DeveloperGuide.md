@@ -538,7 +538,60 @@ Use case ends.
 
     Use case ends.
 
-**Use case: UC08 - Edit module details**
+- 1c. The module does not exist.
+
+  - 1c1. EdRecord shows an error mesage prompting user to create the module first. 
+
+    Use case ends.
+
+- 1d. The person is already in the specified class, in the specified module.
+
+  - 1d1. EdRecord shows an error mesage telling the user the person is already in the class.
+
+    Use case ends. 
+
+**Use case: UC08 - Remove a student from their class**
+
+**MSS**
+
+1.  User specifies a student contact and requests to remove him/her from a class.
+2.  EdRecord removes the student from the specified class.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. The student does not exist.
+
+  - 1a1. EdRecord shows an error message.
+
+    Use case ends.
+
+- 1b. The module does not exist.
+
+  - 1b1. EdRecord shows an error message prompting user to create the module first.
+
+    Use case ends.
+
+- 1c. The class does not exist.
+
+  - 1c1. EdRecord shows an error mesage prompting user to create the class first. 
+
+    Use case ends.
+
+- 1d. The person is not enrolled in the module.
+
+  - 1d1. EdRecord shows an error mesage telling the user the person is not in the module.
+
+    Use case ends. 
+
+- 1e. The person is not enrolled in the class.
+
+  - 1e1. EdRecord shows an error mesage telling the user the person is not in the class.
+
+    Use case ends.
+
+**Use case: UC09 - Edit module details**
 
 **MSS**
 
@@ -567,7 +620,7 @@ Use case ends.
 
     Use case resumes at step 2.
 
-**Use case: UC09 - Delete a module**
+**Use case: UC10 - Delete a module**
 
 **MSS**
 
@@ -590,7 +643,7 @@ Use case ends.
 
     Use case resumes at step 2.
     
-**Use case: UC10 - Create an assignment**
+**Use case: UC11 - Create an assignment**
 
 **MSS**
 
@@ -613,7 +666,7 @@ Use case ends.
 
     Use case ends.
 
-**Use Case: UC11 - List all assignments**
+**Use Case: UC12 - List all assignments**
 
 **MSS**
 
@@ -636,11 +689,11 @@ Use case ends.
 
     Use case ends.
 
-**Use case: UC12 - Edit assignment details**
+**Use case: UC13 - Edit assignment details**
 
 **MSS**
 
-1.  User requests to <u>list all assignments (UC10)</u>.
+1.  User requests to <u>list all assignments (UC12)</u>.
 2.  User requests to edit an assignment in the list and provides fields to be edited.
 3.  EdRecord edits the assignment details accordingly.
 
@@ -664,11 +717,11 @@ Use case ends.
 
     Use case resumes at step 1.
 
-**Use case: UC13 - Delete an assignment**
+**Use case: UC14 - Delete an assignment**
 
 **MSS**
 
-1.  User requests to <u>list all assignments (UC10)</u>.
+1.  User requests to <u>list all assignments (UC12)</u>.
 2.  User requests to delete an assignment in the list.
 3.  EdRecord deletes the assignment.
 
@@ -697,7 +750,7 @@ Use case ends.
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Private contact detail**: A contact detail that is not meant to be shared with others
-- **Module**: An NUS module. It consists of Module coordinators, TAs and students.
+- **Module**: An NUS module. A module can have multiple classes, and students can enroll in modules.
 - **TA**: Teaching Assistant. One TA can teach multiple modules in multiple semesters with multiple classes for each module.
 - **Class**: Collection of students taught by one TA. One class is associated with one module, and one venue and time.
 
