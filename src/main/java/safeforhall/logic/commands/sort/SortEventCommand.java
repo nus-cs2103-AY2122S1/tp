@@ -16,6 +16,9 @@ import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
 import safeforhall.model.event.Venue;
 
+/**
+ * Sorts list of events in the application.
+ */
 public class SortEventCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
