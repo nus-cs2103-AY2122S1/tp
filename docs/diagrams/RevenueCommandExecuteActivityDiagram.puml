@@ -4,11 +4,12 @@ start
 :Get client at index;
 :Add input revenue to the client's revenue;
 
-if () then ([total revenue is negative])
+if () then ([total revenue is negative \nor more than 20,000,000])
     :Revert client's revenue back to the \nvalue before the addition;
 else ([else])
     :Create new Revenue with the \nvalue of total revenue;
 endif
+
 :Return CommandResult;
 stop
 
