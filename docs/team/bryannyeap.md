@@ -58,7 +58,8 @@ Given below are my contributions to the project.
     
   * Updated Sample Data in RecruitIn:
     [\#230](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/230)
-    
+    [\#418](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/418)    
+
   * Added Javadocs:
     [\#414](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/414)
 
