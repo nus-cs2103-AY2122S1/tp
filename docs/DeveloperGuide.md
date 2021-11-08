@@ -203,6 +203,8 @@ This section describes some noteworthy details on how certain features are imple
 
 </div>
 
+
+
 ### Add applicant feature :heavy_check_mark:
 
 The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
@@ -256,6 +258,8 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Pros: Will reduce the usage of a new class, thereby reducing coupling.
     * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
     
+
+
 ### Delete applicant feature :heavy_check_mark:
 
 #### Implementation
@@ -275,7 +279,6 @@ Step 1: The user inputs the command `delete-applicant 1`. The app parser simply 
 Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
 
 Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
-
 
 
 
@@ -303,6 +306,7 @@ Step 3. The model then replace the existing applicant with the new one in the `a
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
 ![EditApplicantActivityDiagram](images/EditApplicantActivityDiagram.png)
+
 
 
 ### Mark/update applicant's status feature :heavy_check_mark:
@@ -344,6 +348,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
     * Cons: More troublesome to quickly update applicant statuses.
 
 
+
 ### Filter applicants feature
 
 #### Implementation
@@ -351,8 +356,6 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX, which filters its contents based on a specified `Predicate`.  
 This `Predicate` is constructed from the filters specified by the user whenever the `filter-applicant` command is called. 
 
-
-#### Design considerations:
 <div markdown="block" class="alert alert-info"> 
 * This command is used for filtering applicants by `Position` and `ApplicationStatus` only, not to be confused with `FindApplicantCommand`, which searches by 'Name', and has slightly different matching criteria.
 </div>  
@@ -392,9 +395,11 @@ The filter feature fits such a description, as the user should be able to specif
     * Pros: Well-defined behaviour when working through the API
     * Cons: More complex filtering operations are harder to achieve, as we are restricted by the operations defined by the API.
 
+
 * **Alternative 2: Manually manipulating the ApplicantList (e.g. using the Java Stream API)** 
     * Pros: Greater flexibility; do not have to rely on constructing predicates and passing them to FilteredList.
     * Cons: Directly manipulating the internal list breaks the abstraction provided by the FilteredList API, which can cause bugs.
+
 
 **Aspect: Reusing 'Descriptor' pattern from AB3's 'EditPersonDescriptor'**
 
@@ -406,6 +411,8 @@ The filter feature fits such a description, as the user should be able to specif
 * **Alternative 2: Delegate the responsibility of constructing Predicates to a new class**
     * Pros: Greater customizability in specifying different types of filters
     * Cons: The class needs to be written from the ground up - this will cause greater complexity & take more time. Tests will need to be written from the ground up as well to accomodate the  behaviour of the new class.
+
+
 
 ### Find applicants feature
 
@@ -483,6 +490,7 @@ Step 3. UI-wise, the applicant should now appear with the updated application st
     * Cons: Increases complexity of code. Separate class has little usage.
 
   
+
 ### List applicants feature
 
 #### Implementation
@@ -516,6 +524,7 @@ Step 3. The UI is updated to show the current list of applicants.
     * Cons: Although less code to be added, due to coupling, more things are needed to be changed intricately and carefully (i.e. prone to errors/bugs).
 
 
+
 ### Add position feature :heavy_check_mark:
 
 #### Implementation
@@ -538,7 +547,6 @@ Step 2. LogicManager executes this `AddPositionCommand` instance, invoking the `
 Step 3. The UI for `positionBook` will now contain the new position added.
 
 
-
 #### Design considerations:
 
 **Aspect: Adding positions**
@@ -551,6 +559,7 @@ Step 3. The UI for `positionBook` will now contain the new position added.
 * **Alternative 2:** Have a separate class which contains details of various positions like applicants.
     * Pros: Separates details from the actual class.
     * Cons: Unnecessary since positions have few fields and functions, additional class simply increases complexity. Defeats the purpose of the `Position` class.
+
 
 
 ### Delete position feature :heavy_check_mark:
@@ -604,6 +613,7 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 
 
+
 ### List positions feature
 
 #### Implementation
@@ -637,6 +647,7 @@ Step 3. The UI is updated to show the current list of positions.
     * Cons: Due to coupling, requires changing code intricately and carefully (i.e. prone to errors/bugs).
 
 
+
 ### Rejection Rate feature
 
 #### Proposed Implementation
@@ -666,6 +677,7 @@ The following sequence diagram shows the method invocation in this step.
 
 Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
 
+
 #### Design considerations:
 
 #### Aspect: How rejection rate executes:
@@ -683,6 +695,7 @@ Step 5. Any command the user executes next simply refreshes the current state to
 
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
+
 
 
 ### Visualize Positions feature
@@ -720,6 +733,8 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
 * **Alternative 2:** Full, `UiPart` class with FXML 
     * Pros: Greater customizability, styling options.
     * Cons: More complex, harder to maintain.
+
+
 
 ### Undo feature
 
