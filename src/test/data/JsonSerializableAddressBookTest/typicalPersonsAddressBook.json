@@ -42,5 +42,12 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ]
+  } ],
+  "folders" : [ {
+    "folderName" : "CS2103",
+    "contacts" : []
+  }, {
+    "folderName" : "Friends",
+    "contacts" : []
   } ]
 }

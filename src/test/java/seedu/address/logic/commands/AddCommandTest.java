@@ -20,6 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -47,7 +49,17 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithLongName_throwsCommandException() {
+        String longName = "ThisNameThatIsOverSeventyCharactersSoItShouldNotBeAcceptedAtAllAndFails";
+        Person validPerson = new PersonBuilder().withName(longName).build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -80,6 +92,13 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonFromFolder(
+                Person personToRemove,
+                Folder targetFolder) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -147,6 +166,52 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Folder> getFilteredFolderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredFolderList(Predicate<Folder> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addFolder(Folder folder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addContactToFolder(Person target, FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasFolderName(FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean folderContainsPerson(Person target, FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setNewFolder(Folder oldFolder, Folder newFolder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasFolder(Folder folder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteFolder(Folder folder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

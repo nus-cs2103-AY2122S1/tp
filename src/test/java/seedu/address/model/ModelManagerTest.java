@@ -3,8 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FOLDERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFolders.CCA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -89,13 +91,41 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasFolder_nullFolder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasFolder(null));
+    }
+
+    @Test
+    public void folderRemoved_folderInAddressBook_returnsTrue() {
+        modelManager.addFolder(CCA);
+        modelManager.deleteFolder(CCA);
+        assertFalse(modelManager.hasFolder(CCA));
+    }
+
+    @Test
+    public void hasFolder_folderNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasFolder(CCA));
+    }
+
+    @Test
+    public void hasFolder_folderInAddressBook_returnsTrue() {
+        modelManager.addFolder(CCA);
+        assertTrue(modelManager.hasFolder(CCA));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
     @Test
+    public void getFilteredFolderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFolderList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).withFolder(CCA).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,13 +146,20 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different filteredFolderList -> returns false
+        modelManager.updateFilteredFolderList(x -> false);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

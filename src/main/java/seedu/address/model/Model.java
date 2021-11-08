@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +15,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Folder> PREDICATE_SHOW_ALL_FOLDERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,26 +56,26 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in UNIon.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in UNIon.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in UNIon.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in UNIon.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in UNIon.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -84,4 +87,60 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the filtered folder list */
+    ObservableList<Folder> getFilteredFolderList();
+
+    /**
+     * Updates the filter of the filtered folder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredFolderList(Predicate<Folder> predicate);
+
+    /**
+     * Adds the given folder.
+     * {@code folder} must not already exist in UNIon.
+     */
+    void addFolder(Folder folder);
+
+    /**
+     * Replaces {@code oldFolder} with {@code newFolder}.
+     * {@code oldFolder} must exist in UNIon and
+     * {@code newFolder} must not already exist.
+     */
+    void setNewFolder(Folder oldFolder, Folder newFolder);
+
+    /**
+     * Adds a Contact to the Folder.
+     * The contact must not already exist in the Folder.
+     */
+    public void addContactToFolder(Person target, FolderName name);
+
+    /**
+     * Deletes a contact from its Folder.
+     * The contact must already exist in the Folder amd
+     * Folder must already exist as well.
+     */
+    public void deletePersonFromFolder(Person person, Folder folder);
+
+    /**
+     * Checks and returns true if folder already exists
+     */
+    boolean hasFolderName(FolderName name);
+
+    /**
+     * Checks and returns true if person has already been added to folder
+     */
+    boolean folderContainsPerson(Person target, FolderName name);
+
+    /**
+     * Returns true if a folder with the same identity as {@code folder} exists in UNIon.
+     */
+    boolean hasFolder(Folder folder);
+
+    /**
+     * Deletes the specified folder.
+     * {@code folder} must already exist in UNIon.
+     */
+    void deleteFolder(Folder folder);
 }

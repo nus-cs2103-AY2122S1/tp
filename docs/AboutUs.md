@@ -3,57 +3,66 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We believe in providing **simplicity** in everything we do here. If you're the kind of person who likes to organize your
+communication-based data easily with just a keyboard, you will enjoy UNIon. By re-purposing Unix commands, we ensure
+that you can get up to speed quickly and be productive with your data.
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+# Our Team
 
-## Project team
+## Lee Hur Sebastian
 
-### John Doe
+**Role: Team Lead**
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sebbycake.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[![Sebastian PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/sebbycake.html) &nbsp;
+[![Sebastian LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/sebastian-lee-329b45198/) &nbsp;
+[![Sebastian GitHub](images/github.png)](https://github.com/sebbycake)
 
-* Role: Project Advisor
+<br>
 
-### Jane Doe
+## Lye Wen Jun
 
-<img src="images/johndoe.png" width="200px">
+**Role: Code Quality**
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/xlzior.png" width="200px">
 
-* Role: Team Lead
-* Responsibilities: UI
+[![Wen Jun PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/xlzior.html) &nbsp;
+[![Wen Jun LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/wen-jun-lye/) &nbsp;
+[![Wen Jun GitHub](images/github.png)](https://github.com/xlzior/)
 
-### Johnny Doe
+<br>
 
-<img src="images/johndoe.png" width="200px">
+## Lee Wei, David
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+**Role: Documentation**
 
-* Role: Developer
-* Responsibilities: Data
+<img src="images/itsyme.png" width="200px">
 
-### Jean Doe
+[![David PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/itsyme.html) &nbsp;
+[![David LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/david-lee-4a147a1b1/) &nbsp;
+[![David GitHub](images/github.png)](https://github.com/itsyme)
 
-<img src="images/johndoe.png" width="200px">
+<br>
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+## Rehman Sajid
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+**Role: Integration**
 
-### James Doe
+<img src="images/rehmmann.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[![Rehman PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/rehmmann.html) &nbsp;
+[![Rehman LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/rehman-sajid/) &nbsp;
+[![Rehman GitHub](images/github.png)](https://github.com/rehmmann/)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<br>
 
-* Role: Developer
-* Responsibilities: UI
+## Ching Jia Rong
+
+**Role: Testing**
+
+<img src="images/jiarong15.png" width="200px">
+
+[![Jia Rong PPP](images/portfolio.png)](https://ay2122s1-cs2103-t16-1.github.io/tp/team/jiarong15.html) &nbsp;
+[![Jia Rong LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/jiarong15//) &nbsp;
+[![Jia Rong GitHub](images/github.png)](https://github.com/jiarong15)

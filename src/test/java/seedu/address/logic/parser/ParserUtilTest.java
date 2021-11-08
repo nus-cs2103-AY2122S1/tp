@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_OVERFLOW_INTEGER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,7 +15,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -38,22 +42,29 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a",
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE))));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_OVERFLOW_INTEGER, ()
+            -> ParserUtil.parseIndex("1000000000000",
+                new ParseException(MESSAGE_OVERFLOW_INTEGER)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1",
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE))));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  ",
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddToFolderCommand.MESSAGE_USAGE))));
     }
 
     @Test
@@ -77,6 +88,29 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseFolderName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFolderName((String) null));
+    }
+
+    @Test
+    public void parseFolderName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFolderName(INVALID_NAME));
+    }
+
+    @Test
+    public void parseFolderName_validValueWithoutWhitespace_returnsName() throws Exception {
+        FolderName expectedName = new FolderName(VALID_FOLDER_NAME_CCA);
+        assertEquals(expectedName, ParserUtil.parseFolderName(VALID_FOLDER_NAME_CCA));
+    }
+
+    @Test
+    public void parseFolderName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String folderNameWithWhitespace = WHITESPACE + VALID_FOLDER_NAME_CCA + WHITESPACE;
+        FolderName expectedFolderName = new FolderName(VALID_FOLDER_NAME_CCA);
+        assertEquals(expectedFolderName, ParserUtil.parseFolderName(folderNameWithWhitespace));
     }
 
     @Test

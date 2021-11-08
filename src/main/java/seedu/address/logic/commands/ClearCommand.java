@@ -6,18 +6,19 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears UNIon.
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String COMMAND_WORD = "rm -contacts";
+    public static final String MESSAGE_SUCCESS = "UNIon's contacts have been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        AddressBook newAddressBook = AddressBook.withFolders(model);
+        model.setAddressBook(newAddressBook);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

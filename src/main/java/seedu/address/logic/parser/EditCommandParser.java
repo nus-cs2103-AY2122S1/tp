@@ -35,12 +35,35 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         Index index;
+        String preamble = argMultimap.getPreamble();
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+
+        //Checks boundary cases
+        if (preamble.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        char firstElement = preamble.charAt(0);
+        if (preamble.length() == 1 && firstElement == 45) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        // Check for - symbol as first element (or negative index)
+        if (firstElement == 45) {
+            throw new ParseException(String.format(ParserUtil.MESSAGE_INVALID_INDEX, preamble));
+        }
+
+        // Check for String input as person index
+        for (int i = 0; i < preamble.length(); i++) {
+            char element = preamble.charAt(i);
+            if (!Character.isDigit(element)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditCommand.MESSAGE_USAGE));
+            }
+        }
+
+        index = ParserUtil.parseIndex(preamble, new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE)));
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

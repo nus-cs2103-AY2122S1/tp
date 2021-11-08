@@ -11,10 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of UNIon data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Folder> filteredFolders;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFolders = new FilteredList<>(this.addressBook.getFolderList());
     }
 
     public ModelManager() {
@@ -112,6 +116,60 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void addFolder(Folder folder) {
+        addressBook.addFolder(folder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+    }
+
+    /**
+     * Deletes a folder
+     */
+    public void deleteFolder(Folder folder) {
+        addressBook.deleteFolder(folder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+    }
+
+    @Override
+    public void setNewFolder(Folder oldFolder, Folder newFolder) {
+        requireAllNonNull(oldFolder, newFolder);
+        addressBook.setNewFolder(oldFolder, newFolder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+
+    }
+
+    @Override
+    public boolean hasFolder(Folder folder) {
+        requireNonNull(folder);
+        return addressBook.hasFolder(folder);
+    }
+
+    @Override
+    public void deletePersonFromFolder(
+            Person personToRemove,
+            Folder targetFolder) {
+        requireAllNonNull(personToRemove, targetFolder);
+        addressBook.deletePersonFromIndex(personToRemove, targetFolder);
+    }
+
+    @Override
+    public boolean hasFolderName(FolderName folderName) {
+        requireNonNull(folderName);
+        return addressBook.hasFolderName(folderName);
+    }
+
+    @Override
+    public boolean folderContainsPerson(Person target, FolderName name) {
+        requireAllNonNull(target, name);
+        return addressBook.folderContainsPerson(target, name);
+    }
+
+    @Override
+    public void addContactToFolder(Person target, FolderName folderName) {
+        requireAllNonNull(target, folderName);
+        addressBook.addContactToFolder(target, folderName);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -127,6 +185,23 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Folder List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Folder} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Folder> getFilteredFolderList() {
+        return filteredFolders;
+    }
+
+    @Override
+    public void updateFilteredFolderList(Predicate<Folder> predicate) {
+        requireNonNull(predicate);
+        filteredFolders.setPredicate(predicate);
     }
 
     @Override
@@ -145,7 +220,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredFolders.equals(other.filteredFolders);
     }
 
 }

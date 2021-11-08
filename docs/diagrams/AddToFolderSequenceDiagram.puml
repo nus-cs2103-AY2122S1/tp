@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "f:AddToFolderCommand" as AddToFolderCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(echo)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(echo)
+activate AddressBookParser
+
+create AddToFolderCommand
+AddressBookParser -> AddToFolderCommand
+activate AddToFolderCommand
+
+AddToFolderCommand --> AddressBookParser
+deactivate AddToFolderCommand
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> AddToFolderCommand : execute(m)
+activate AddToFolderCommand
+
+AddToFolderCommand -> Model : addContactToFolder(f.person,f.folderName)
+activate Model
+
+Model --> AddToFolderCommand
+deactivate Model
+
+AddToFolderCommand --> LogicManager : result
+deactivate AddToFolderCommand
+
+AddToFolderCommand -[hidden]-> LogicManager : result
+destroy AddToFolderCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

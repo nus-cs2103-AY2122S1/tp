@@ -7,7 +7,21 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
 
+    public static final String MESSAGE_INVALID_PERSON_IN_UNION = "This person does not exist in UNIon";
+    public static final String MESSAGE_NONEXISTENT_FOLDER_IN_CURRENT_LIST = "Folder name supplied "
+            + "is not found in the current folder's list below.";
+    private static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person%2$s listed!";
+    private static final String MESSAGE_FOLDERS_LISTED_OVERVIEW = "%1$d folder%2$s listed!";
+
+    private static String getPluralModifier(int numberOfObject) {
+        return numberOfObject != 1 ? "s" : "";
+    }
+
+    public static String getMessagePersonsListedOverview(int numberOfPersons) {
+        return String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, numberOfPersons, getPluralModifier((numberOfPersons)));
+    }
+    public static String getMessageFoldersListedOverview(int numberOfFolders) {
+        return String.format(MESSAGE_FOLDERS_LISTED_OVERVIEW, numberOfFolders, getPluralModifier((numberOfFolders)));
+    }
 }
