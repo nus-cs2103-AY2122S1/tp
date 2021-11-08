@@ -190,6 +190,44 @@ There are 2 possible outcomes of an `AddCommand`:
 1. The addition is rejected since a `Person` with the same name already exists. 
 2. The person is added to `InsurancePal`.
 
+### Edit command
+
+A `Person` in `InsurancePal` can be edited using the following method:
+1. Using the `EditCommand` to edit a `Person` in `InsurancePal`
+
+The processing of an edit command from the user can be split into 2 general steps:
+1. Parsing user input into an `EditCommand`
+2. Executing the `EditCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `EditCommandParser` which calls other
+helper classes to parse the text into editable attributes `XYZ` of `Person`, which are: 
+* `Name`
+* `Phone`
+* `Email`
+* `Address`
+* `Tags`
+* `Insurances`
+* `Notes`
+All fields are optional, but at least one must be provided
+
+![EditCommandSequenceDiagram](images/EditCommandSequenceDiagram.png)
+
+`EditCommandParser` then creates an `EditCommand` with an `EditPersonDescriptor`
+with the attributes of `Person` to edit.
+
+
+**Step 2**: Execution of `EditCommand`
+
+![EditCommandActivityDiagram](images/EditCommandActivityDiagram.png)
+
+There are 2 possible outcomes of an `EditCommand`:
+1. The edit is rejected since a `Person` with the same name already exists. 
+2. The person is edited in `InsurancePal`.
+
 ###  Revenue feature
 
 #### Current Implementation
