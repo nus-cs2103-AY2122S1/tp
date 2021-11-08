@@ -44,6 +44,8 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation and testing related information for the `delete by tag` and `report` features. Relevant diagrams were also included.
       (Pull request [\#214](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/214))
+    * Added a part of the documentation for use cases during the earlier stages of implementation
+      (Pull requests [\#24](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/88))
 
 * **Contributions to team-based tasks**:
   * Maintaining the issue tracker
