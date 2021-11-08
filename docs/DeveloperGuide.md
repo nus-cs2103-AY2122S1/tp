@@ -261,14 +261,6 @@ To create an assignment, the user has to `cd` into a module first. EdRecord does
 
   - Pros: Easier to implement. Better experience for user, who can `cd` into the module and use one command `lsasg` to view all assignments. In contrast, if the assignments are under groups, the user has to `cd` into the module and choose a group to view assignments, before he/she can view all assignments.
   - Cons: Not able to create assignments on the group level.
-    
-
-### Assignment View 
-
-#### New Command: `view (contacts/asg)` 
-
-This command toggles the view between assignments and the default contact list. The contacts view is optimized for looking through contacts, while the assignment view is optimized for displaying the list of assignments and grades for each student.
-
 
 ---
 
@@ -908,16 +900,67 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing an assignment
 
+1. Test case: With a module selected, with the assignment to edit having an ID of 1, `edasg 1 n/Midterm w/2.5`
+
+    Expected: The assignment with ID 1 is edited to have name Midterm with weighage 2.5
+
+2. Test case: With a module selected, with no assignment of ID 10, `edasg 10 n/test`
+
+    Expected: The console displays an error, reminding the user that there is no such assignment
+
+3. Test case: With a module selected, with all assignment weighage summing to 90% and an existing assignment of ID 1,  `edasg 1 w/20`
+
+    Expected: The console displays an error, reminding the user that the total weighage of assignments in a module cannot exceed 100%.
 
 ### Adding a grade
 
+1. Test case: With a module selected, with the assignment to grade having ID 1 and max score 100, and the student to grade having index 1, `grade 1 id/1 st/Graded s/90`
+
+    Expected: The grade of the student is updated, with status Graded and score 90.
+
+2. Test case: Same as 1, but with assignment has max score 10
+   
+    Expected: The console displays an error, reminding the user that the grade exceeds the maximum score of the assignment
+
+3. Test case: Same as 1, but with an invalid status such as `st/Late`
+   
+    Expected: The console displays an error, reminding the user of the valid statuses. 
+
 ### Deleting a grade
+
+1. Test case: With a module selected, with the graded assignment having ID 2 and the student having index 1, `dlgrade 1 id/2`
+
+    Expected: The grade of the student is removed.
+
+3. Test case: Same as 1, but with an invalid assignment ID or person index
+
+    Expected: The console displays an error, reminding the user of the valid format.
 
 ### Deleting an assignment
 
-### Deleting a group
+1. Test case: With a module selected, and an assignment to delete of ID 1, `dlasg 1`
+
+    Expected: The assignment is deleted.
+
+### Deleting a class
+
+1. Test case: With the module `CS2103` selected, and an existing class of `T03`, `dlclass m/cs2103 c/t03`
+
+    Expected: The class is deleted.
+
+2. Test case: Same as 1, but with an nonexistent module/class
+
+    Expected: The console displays an error, with relevant information.
 
 ### Deleting a module
+
+1. Test case: With the module to delete having a code of `CS2103`, `dlmod CS2103`
+
+    Expected: The module is deleted.
+
+2. Test case: Same as 1, but with an nonexistent module
+
+    Expected: The console displays an error, with relevant information.
 
 ### Deleting a person
 
