@@ -367,7 +367,7 @@ GUI is updated to display the propagated changes in the appointment list.
 
 #### Design considerations
 Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `UniqueAppointmentList` has to be iterated
-to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete them when they have references to the deleted `Patient` or `Doctor`.
+to update `Appointment` with references to `Patient` or `Doctor` which were edited or delete `Appointment` when they have references to the deleted `Patient` or `Doctor`.
 
 <div style="page-break-after: always;"></div>
 
@@ -1570,7 +1570,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive]. The search results are then displayed in the appointment list.
        
     10. Test case: `appt -f s/01/14/2021`<br>
-        Expected: Displayed appointments are not changed. Error details are shown in the status message indicating an invalid date.
+        Expected: Displayed appointments are not changed. Error details are shown in the status message indicating an invalid date HAz.
         
     11. Test case: `appt -f d/`<br>
         Expected: Displayed appointments are not changed. Error details are shown in the status message indicating that there is an empty parameter.
