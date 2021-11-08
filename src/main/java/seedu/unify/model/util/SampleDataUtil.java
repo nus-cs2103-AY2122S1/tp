@@ -21,33 +21,45 @@ import seedu.unify.model.task.Time;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new Name("Quiz 1"), new Time("10:10"),
-                new Date("2021-08-18"),
-                getTagSet("CS1234"), new State(State.ObjectState.DONE), new Priority()),
-            new Task(new Name("Training"), new Time("11:30"),
-                new Date("2021-10-28"),
-                getTagSet("CCA", "sports"), new Priority()),
-            new Task(new Name("Lab 2"), new Time("10:00"),
-                new Date("2021-11-03"),
-                getTagSet("CS2101"), new Priority(Priority.ObjectPriority.HIGH)),
-            new Task(new Name("Presentation 2"), new Time("16:00"),
-                new Date("2021-11-10"),
-                getTagSet("ES5678"), new Priority()),
-            new Task(new Name("Quiz 2"), new Time("23:59"),
-                new Date("2021-11-21"),
-                getTagSet("MA4321"), new Priority()),
-            new Task(new Name("Meeting"), new Time("12:00"),
-                new Date("2021-11-22"),
-                getTagSet("CS2222"), new Priority())
+            new Task(new Name("Tutorial"), new Time("14:00"),
+                new Date("2021-01-04"),
+                getTagSet("CS2103T"), new Priority("MEDIUM")),
+            new Task(new Name("Tutorial"), new Time("12:00"),
+                new Date("2021-01-05"),
+                getTagSet("GEQ1000"), new Priority("LOW")),
+            new Task(new Name("Assignment"), new Time("23:59"),
+                new Date("2021-01-05"), getTagSet("CS2103T"),
+                new State("DONE"), new Priority("HIGH")),
+            new Task(new Name("Assignment"), new Time("23:59"),
+                new Date("2021-01-05"),
+                getTagSet("CS2106"), new Priority("MEDIUM")),
+            new Task(new Name("Quiz"), new Time("23:59"),
+                new Date("2021-01-08"),
+                getTagSet("GEQ1000"), new Priority()),
+            new Task(new Name("Lab"), new Time("16:00"),
+                new Date("2021-01-12"),
+                getTagSet("CS2100"), new Priority()),
+            new Task(new Name("Gym"), new Time("19:00"),
+                new Date("2021-01-15"),
+                getTagSet("General"), new Priority()),
+            new Task(new Name("Presentation"), new Time("13:00"),
+                new Date("2021-01-13"),
+                getTagSet("CS1234"), new Priority("MEDIUM")),
+            new Task(new Name("Lab Report"), new Time("23:59"),
+                new Date("2021-01-13"),
+                getTagSet("CS1234"), new Priority("HIGH"))
         };
     }
 
+    /**
+     * Returns a sample UniFy.
+     */
     public static ReadOnlyUniFy getSampleUniFy() {
-        UniFy sampleAb = new UniFy();
+        UniFy sampleUniFy = new UniFy();
         for (Task sampleTask : getSampleTasks()) {
-            sampleAb.addTask(sampleTask);
+            sampleUniFy.addTask(sampleTask);
         }
-        return sampleAb;
+        return sampleUniFy;
     }
 
     /**
