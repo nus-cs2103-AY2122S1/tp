@@ -750,7 +750,7 @@ For example, if your input is `find n/Alex Bernice`, `Alex` and `Bernice` are yo
 
 * ##### EMPLOYMENT_TYPE `et/`
     * An EMPLOYMENT_TYPE parameter matches with an existing stored ***Employment Type*** only if the ***Employment Type*** **starts with** any of the keywords.
-    * All possible ***Employment Type*** terms that comply with the parameter specifications for add are given [**here**](#levelofeducation-l). Keywords that you provide as a LEVEL_OF_EDUCATION 
+    * All possible ***Employment Type*** terms that comply with the parameter specifications for add are given [**here**](#employmenttype-et). Keywords that you provide as a EMPLOYMENT_TYPE 
       parameter must be words that these terms start with.
     * For example:
         * A `Full time` or `full time` or `full` parameter will match only with ***Employment Type***s that are ```Full time```
@@ -859,7 +859,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES] [d/DONE]`<br> e.g., `find n/John Mary`
 **Filter interviews** | `filter_interview past` or `filter_interview future`
-**Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
+**Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/] [i/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
 **Delete marked** | `delete_marked`
