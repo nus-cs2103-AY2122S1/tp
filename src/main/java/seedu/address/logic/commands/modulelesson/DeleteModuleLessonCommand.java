@@ -23,8 +23,7 @@ public class DeleteModuleLessonCommand extends Command {
             + "Parameters: INDEX (positive integer and exists in contHACKS)\n"
             + "START_INDEX, END_INDEX (START_INDEX more than or equal to END_INDEX)\n"
             + "m/MODULE_CODE\n"
-            + "Example: deletec 1, deletec 1-3, deletec m/CS2040\n"
-            + "Click on the Help button at the top for more detailed information";
+            + "Example: deletec 1, deletec 1-3, deletec m/CS2040\n";
 
     public static final String MESSAGE_NUMBER_DELETED_LESSONS = "%d Deleted Lessons: \n";
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "%1$s \n";
