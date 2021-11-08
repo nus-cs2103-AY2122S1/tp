@@ -40,7 +40,7 @@ Given below are my contributions to the project.
 
 
 #### **Enhancements to existing features**:
-* Refactored the Tag class in the original code for Address Book 3 to Position. (Notably in [PR #112](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/112))
+* Refactored the Tag class in the original code for Address Book 3 to Position. (Notably in [PR #87](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/87))
 * Increase test coverage for the task section (including task commands, task command parsers and models).
 
 #### **Documentation**:
@@ -55,5 +55,5 @@ Given below are my contributions to the project.
     
 
 #### **Community**:
-* Reviewed PRs of fellow teammates (Some with non-trivial review comments, E.g. [PR #84](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/84))
+* Reviewed PRs of fellow teammates (Some with non-trivial review comments, E.g. [PR #113](https://github.com/AY2122S1-CS2103T-T15-2/tp/pull/113))
 * Reported bugs and suggestions for other teams during PE-D.
