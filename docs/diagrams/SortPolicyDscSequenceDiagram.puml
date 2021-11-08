@@ -21,7 +21,7 @@ activate logic LOGIC_COLOR
 logic -[LOGIC_COLOR]> model: "updateFilteredPolicyList(\nPOLICY_SORT_BY_TITLE_DSC)"
 activate model MODEL_COLOR
 
-model -[MODEL_COLOR]> contacts: "setPredicate(\nPOLICY_SORT_BY_TITLE_DSC)"
+model -[MODEL_COLOR]> contacts: "setComparator(\nPOLICY_SORT_BY_TITLE_DSC)"
 activate contacts MODEL_COLOR_T1
 
 contacts -[MODEL_COLOR_T1]> model

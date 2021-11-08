@@ -3,21 +3,21 @@ layout: page
 title: Developer Guide
 ---
 
--   Table of Contents
-    {:toc}
+* Table of Contents 
+{:toc}
 
 ---
 ## **Developer Guide Information**
 
-### **Purpose**
+### Purpose
 
 This developer guide aims to provide information regarding the design and implementation of Siasa, including the design considerations when implementing each feature.
 
-### **Target Audience**
+### Target Audience
 
 This developer guide is made for Java developers who are or were formerly **student financial advisors**, the target audience of Siasa. Thus, it is assumed that readers have basic background knowledge on Java and is familiar with common terms used in insurance policies.
 
-### **Acknowledgements**
+### Acknowledgements
 
 -   This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -55,7 +55,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `deletecontact 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -99,7 +99,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `SiasaParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPolicyCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -127,12 +127,11 @@ The `Model` component,
 - stores the SIASA data i.e., all `Contact` and `Policy` objects (which are contained in a `UniqueContactList` and
   `UniquePolicyList `object respectively).
 - stores the currently 'selected' `Contact` and `Policy` objects (e.g., results of a search query) in a separate filtered_list each
-  which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed'
+  which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed'
   e.g. the UI can be bound to this list so that the UI automatically updates when the data in the lists change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components
   (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
 
 ### Storage component
 
@@ -249,7 +248,7 @@ The set of sorting commands are `sortcontact` and `sortpolicy`, while the set of
 
 #### Design Considerations
 
-1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/fliters with significant code duplication.
+1. The sorting/filtering method has to be generic so that we can implement multiple different sorters/filters without significant code duplication.
 2. The sorting functionality has to work alongside the preexisting filtering functionality.
 3. The sorting and filtering functionality has to be *stackable*; Lists should allow filtering then sorting and vice-versa.
 
@@ -337,7 +336,7 @@ operations.
 - Pros:
     - Maintains the UI structure of ```MainWindow``` controlling all the smaller UI parts.
 - Cons:
-    - A more complex implementation to control ```WanringWindow```
+    - A more complex implementation to control ```WarningWindow```
 **Alternative 2:** Have the ```Command``` call a method in ```WarningWindow``` directly.
 - Pros:
     - A more straightforward implementation.
@@ -369,7 +368,6 @@ it breaks the structure of ```MainWindow``` being the main UI components to mana
 Our target audience is a student who,
 -   is working as a financial advisor
 -   has a need to quickly and easily keep track of their:
-
     1. contacts
     2. financial policies sold
 
@@ -384,7 +382,7 @@ Currently, there are no good contact applications on desktop that allow student 
 
 Siasa enables student financial advisors to quickly and easily keep track of their contacts (both potential clients and existing clients) and financial plans sold to aid their operations. The different payment structures also provide better customisation for student financial advisors, allowing them to better record any policies they may have sold.
 
-Siasa also provides valuable data and statistics in a `.txt` file for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
+Siasa also provides valuable data and statistics in `.csv` files for a quick summary and analysis of all the current policies, allowing such students to get the necessary information and data in a fast and efficient manner.
 
 ### User stories
 
@@ -427,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SIASA` and the **Actor** is the `user`, unless specified otherwise)
 
-#### **UC1: Displaying Help**
+#### UC1: Displaying Help
 
 **MSS**
 
@@ -436,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-#### **UC2: Add a Contact/Policy**
+#### UC2: Add a Contact/Policy
 
 **MSS**
 
@@ -455,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC3: Edit a Contact/Policy**
+#### UC3: Edit a Contact/Policy
 
 **MSS**
 
@@ -480,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC4: Delete a Contact/Policy**
+#### UC4: Delete a Contact/Policy
 
 **MSS**
 
@@ -505,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC5: List a Contact's Policies**
+#### UC5: List a Contact's Policies
 
 **MSS**
 
@@ -530,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC6: Clear a Contact's Policies**
+#### UC6: Clear a Contact's Policies
 
 **MSS**
 
@@ -555,7 +553,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC7: Sort Contact/Policy List**
+#### UC7: Sort Contact/Policy List
 
 **MSS**
 
@@ -580,7 +578,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 -   *a. User can request to view help at any time [(UC1)](#uc1-displaying-help).
 
-#### **UC8: Download Statistics**
+#### UC8: Download Statistics
 
 **MSS**
 
@@ -632,7 +630,8 @@ testers are expected to do more *exploratory* testing.
 1.  Initial launch
 
     1.  Download the jar file and copy into an empty folder
-    1.  Double-click the jar file Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
+    1.  Double-click the jar file<br>
+        Expected: Shows the GUI with a set of sample contacts and policies. The window size may not be optimum.
 
 1.  Saving window preferences
 
