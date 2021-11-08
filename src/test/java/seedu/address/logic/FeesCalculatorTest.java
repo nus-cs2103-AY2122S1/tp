@@ -164,7 +164,6 @@ class FeesCalculatorTest {
     }
 
     // @@author lingshanng.
-
     @Test
     public void startBeforeUpdate_endAfterToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-06T12:00"),
