@@ -990,7 +990,7 @@ Familiarising yourself with this section will make the User Guide easier to read
 Term | Meaning
 --------|------------------
 **Graphical User Interface (GUI)** | A GUI allows users to use graphics to interact with a device.
-**Command Line Interface (GUI)** | A CLI allows users to use commands in the form of text as input to a device.
+**Command Line Interface (CLI)** | A CLI allows users to use commands in the form of text as input to a device.
 **Java** | Java is a runtime environment that allows applications such as FAST to be run on your computer.
 **Command** | An instruction typed by a user, to be executed by FAST.
 **Parameter** | A section of a command that requires user input to be entered.
