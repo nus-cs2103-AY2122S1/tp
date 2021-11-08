@@ -16,7 +16,7 @@ public class PersonUnarchiveCommand extends PersonCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("unarchive", "uar");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Unarchives the person identified by the index number used in the displayed person archive list.\n";
+            ": Unarchives the person specified by the index.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION

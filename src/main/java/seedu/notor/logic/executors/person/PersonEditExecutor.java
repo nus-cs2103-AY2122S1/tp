@@ -19,7 +19,7 @@ import seedu.notor.model.person.Phone;
  */
 public class PersonEditExecutor extends PersonExecutor {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists!";
     private static final String MESSAGE_NO_FIELDS_CHANGED = "All parameters are the same; no changes were made";
 
     private final PersonEditDescriptor personEditDescriptor;

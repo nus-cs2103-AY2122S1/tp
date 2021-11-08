@@ -16,13 +16,11 @@ public class SuperGroupCreateCommand extends GroupCommand {
 
     public static final String COMMAND_WORD = "create";
     public static final List<String> COMMAND_WORDS = Arrays.asList("create", "c");
+    private static final String COMMAND_DESCRIPTION = ": Creates a group.\n";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group. "
-            + "Parameters: "
-            + COMMAND_WORD
-            + "GROUP \n"
-            + "Example: " + COMMAND_WORD
-            + "Orbital";
+    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " NAME /" + COMMAND_WORD
+            + COMMAND_DESCRIPTION
+            + "Example: " + GroupCommand.COMMAND_WORD + " Team 1 /" + COMMAND_WORD;
 
     private final GroupExecutor executor;
 

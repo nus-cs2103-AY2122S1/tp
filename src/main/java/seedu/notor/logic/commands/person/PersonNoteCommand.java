@@ -19,7 +19,7 @@ public class PersonNoteCommand extends PersonCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("note", "n");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Edits the notes of the person identified by the index number used in the current person listing.\n";
+            ": Allows user to edit the notes of the person specified by the index.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION

@@ -18,13 +18,12 @@ public class PersonFindCommand extends PersonCommand {
     public static final String COMMAND_WORD = "find";
     public static final List<String> COMMAND_WORDS = Arrays.asList("find", "f");
 
-    private static final String COMMAND_DESCRIPTION =
-            ": Finds a person via searching their name for a given query, and returns the person list filtered by "
-                    + "those who match the query\n";
+    private static final String COMMAND_DESCRIPTION = ": Finds a person via searching their name for a given query.\n"
+                    + "Returns the person list filtered by those who match the query\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION
-            + "Parameters: n:NAME_QUERY t:TAG_1, TAG_2 \n"
+            + "Parameters: n:NAME_QUERY and/or t:TAG_1, TAG_2 \n"
             + "Example: "
             + PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " n:Alex t:graduated, engineering";
 

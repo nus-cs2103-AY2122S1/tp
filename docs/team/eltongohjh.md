@@ -28,6 +28,9 @@ Given below are my contributions to the project.
         * Justification: This feature is needed to allow users to see how to see what information is updated in group.
             For instance, users may want to see what notes and what subgroups are in the group.
         * Credits: Jonathan for the Group, Subgroup card, and the idea on how to implement it.
+    
+     <div style="page-break-after: always;"></div>
+
     * [General Note Mainwindow UI](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/150)
         * What it does: Allows user to see the general note added easily. User will be able to access the reminders/todos
         easily on the UI.

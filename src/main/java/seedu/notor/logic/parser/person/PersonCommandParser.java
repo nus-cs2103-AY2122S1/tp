@@ -1,6 +1,7 @@
 package seedu.notor.logic.parser.person;
 
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.person.PersonCommand;
@@ -24,7 +25,8 @@ public abstract class PersonCommandParser extends Parser<PersonCommand> {
             try {
                 index = ParserUtil.parseIndex(unparsedIndex);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonCommand.MESSAGE_USAGE),
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, PersonCommand.MESSAGE_USAGE),
                         pe);
             }
         }

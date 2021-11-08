@@ -50,12 +50,12 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Notor file path.
      */
     Path getNotorFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Notor file path.
      */
     void setNotorFilePath(Path notorFilePath);
 

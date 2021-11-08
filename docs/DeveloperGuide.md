@@ -31,11 +31,15 @@ are:
 This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
+<div style="page-break-after: always;"></div>
+
+### Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -62,6 +66,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -116,10 +122,9 @@ Let's break down what happens when you call a command, like the find command. Th
 * `LogicManager` uses the Command API to call execute() on the command, which calls the execute method on the executor.
 * The executor updates the model and returns the command result, which is passed back to the `LogicManager`.
 
-
 #### In-depth example of Command Workflow, using the Person Note Command.
 
-Notor allows you to add note to itself, a person or group.
+Notor allows you to add notes to itself, a person or group.
 
 The following sequence diagram shows the detail when `PersonNoteCommand` is executed to add note for a person.
 
@@ -163,11 +168,17 @@ each of which implements `NoteWindow` interface.
 Here is the better class structure to be implemented:
 ![ModelClassDiagram2](images/BetterModelClassDiagram.png)
 
-* `Trie` allows tags to be autocompleted as commands are entered.
-* Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per object.
-* Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
-* This feature is planned for a future update, as the `Trie` data structure has already been implemented.
-* This feature could also not be implemented due to short form commands already being very user friendly.
+**API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/commons/core/trie/Trie.java)
+
+* Allows grouping and autocompletion of `Tag` and `Command` objects.
+  * Supports addition and deletion of items.
+  * Supports finding of first item.
+  * Supports finding of first item that starts with specified keyword.
+* Design considerations
+  * Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per object.
+  * Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
+* This feature is planned to be incorporated in a future update, as the `Trie` data structure has already been implemented.
+  * It was delayed as short form commands were judged sufficiently user friendly.
 
 ### Storage component
 
@@ -180,16 +191,8 @@ The `Storage` component,
 * now includes a new `Archive` Storage component
 * `Archive` allows users to temporarily remove `Person`s from Notor
 
-### Common classes
-
-**API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/commons/core/trie/Trie.java)
-
-* Allows grouping and autocompletion of `Tag` and `Command` objects.
-* Supports addition and deletion of items.
-* Supports finding of first item.
-* Supports finding of first item that starts with specified keyword.
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -214,6 +217,27 @@ for `CommandHistory` when using up arrow key  is as follows.
 
 ![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
 
+### \[Proposed\] Last Contact Feature
+
+Most CLI systems boast specific tools to help manage the frequency of meeting with the contacts. This feature was deferred, but here are some thoughts on implementation.
+
+![LastContactClassDiagram](images/LastContactClassDiagram.png)
+
+Each Person would have one LastContactDate and NextContactDate. These two can have specialised functions inside to determine if the NextContactDate is soon enough, and ability to sort the Person List by these two dates can also be implemented.
+
+#### Potential Commands
+
+* Commands to set the Last Contact Day
+  * Might have a default of the current date, or takes a parameter to set the last contact date to the last edited date of the note. 
+  * Alternatively takes a date for manual inputs.
+* Commands to set the Next Contact Day
+
+#### Design considerations
+
+* For ease of use, utility classes to parse different kinds of date strings might be useful. For example, parsing 7d as 7 days from today, then 1m means 1 month from the day, 1y meaning 1 year... etc.
+* User commands to update the last contact date to the next contact date before you change the next contact date might serve users well
+* It may be useful to set a new LastContactDate or NextContactDate for whole groups at once
+* With regards to UI, these dates might be observed by person card using the Observation design pattern. This would allow the UI to update these dates with colours depending on how soon the NextContactDate is or how far away the LastContactDay is.
 
 
 ### \[Proposed\] View Pane
@@ -265,7 +289,10 @@ The intended functionalities of `ViewCommand` is as follows:
 ##### Example of View Command Workflow, using the Person View Command
 To illustrate how the `View` command works, the activity diagram for `PersonViewCommand` is as follows.
 ![PersonViewCommandActivityDiagram](images/PersonViewCommand.png)
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -276,6 +303,8 @@ To illustrate how the `View` command works, the activity diagram for `PersonView
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -291,6 +320,8 @@ To illustrate how the `View` command works, the activity diagram for `PersonView
 * has groups of contacts that have different needs
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -326,6 +357,8 @@ Priorities:
 |general user, mentor professor, module professor, on the go user                            |archive students that are not as relevant in my current contacts                                              |keep my mentee list short and easy to read                 |Low         |           |Iteration 1.3b|
 |experienced user, module professor                                                          |set my own command aliases                                                                                    |use my own commands when I am used to them                 |Low         |           |Delay         |
 |experienced user, mentor professor, module professor                                        |use shorter commands                                                                                          |save time                                                  |Medium      |           |Delay         |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -548,6 +581,8 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -584,11 +619,11 @@ testers are expected to do more *exploratory* testing.
 2. Test case: `person /list CSENfeisvnldifosjeri`<br>
   Expected: Same as above -- following string is ignored.
 3. Test case: `group /list`<br>
-  Expected: List all groups in your Notor
+  Expected: List all groups in your Notor.
 4. Incorrect test cases to try: `grop /list` (or other typos) <br>
    Expected: Display error message.
 
-5. Prerequisite: On the person list.
+5. Prerequisite: List all groups using the `person /list` command or already in person list.
    1. `person (INDEX) /list` <br>
    Expected: Display error message.
 
@@ -606,7 +641,8 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ### Finding a person
 
-Prerequisites: Be in person list. Must have at least one person in the list.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+Must have at least one person in the list.
 
 1. Test case: `person /find n:John t:AI `<br>
   Expected: Display all people who's names include 'John' tagged with the specific tag 'AI'.
@@ -616,7 +652,7 @@ Prerequisites: Be in person list. Must have at least one person in the list.
 
 ### Finding a group
 
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command or already in group list.
 
 1. Test case: `Group /find n:Orbital `<br>
    Expected: Display all groups that have names that include 'Orbital'.
@@ -627,14 +663,13 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
 ### Finding a subgroup in a group
 
 Prerequisites: List all subgroups in a group using the `group x /list` command, where x is the index of a group.
-Must have at least one subgroup in the list.
 
 1. Similar to **Finding a group** except that all subgroups in a group is listed.
 
-
 ### Deleting a person
 
-Prerequisites: Be in person list. Must have at least one person in the list.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+Have at least one person in the list.
 
 1. Test case: `person 1 /delete`<br>
    Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
@@ -659,7 +694,8 @@ Prerequisites: Be in person list. Must have at least one person in the list.
 
 ### Deleting a group
    
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command or already in group list.
+At least one group in the list.
 
 1. Test case: `group 1 /delete`<br>
    Expected: A confirmation window popped. Upon confirmation, first group is deleted from the list.
@@ -674,7 +710,8 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
 
 ### Adding a person to a group
 
-Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+At least one person in the list.
 
 1. Test case: `person 1 /add g:Orbital`<br>
    Expected: Person is added to the group. Person is updated with a new group in the UI.
@@ -688,7 +725,8 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
 
 ### Removing a person from a group
 
-Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. First person is added to group Orbital.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+At least one person in the list.
 
 1. Test case: `person 1 /remove g:Orbital`<br>
        Expected: Person is removed to the group. Person is updated with group removed in the UI.
@@ -702,7 +740,8 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
 
 ### Adding a subgroup to a group
 
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command or already in group list. 
+At least one group in the list.
 
 1. Test case: `group 1 /create n:Artemis`<br>
    Expected: Artemis is added to the first group. Group is updated with a new subgroup in the UI.
@@ -716,7 +755,8 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
 
 ### Removing a subgroup from a group
 
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
+Prerequisites: List all groups using the `group 1 /list` command. 
+First group contains subgroup Artemis.
 
 1. Test case: `group 1 /delete n:Artemis`<br>
    Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group.
@@ -778,7 +818,7 @@ Must have at least one subgroup in the list.
 ### Clearing note of a person
 
 Prerequisites: List all persons using the `person /list` command or already in person list.
-    Must have at least one person in the list.
+Must have at least one person in the list.
 
 1. Test case: `person 1 /clearnote` <br>
    Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person.
@@ -793,7 +833,7 @@ Prerequisites: List all persons using the `person /list` command or already in p
 
 ### Clearing note of a group
 
-Prerequisites: List all groups using the `group /list` command or already in group list.
+Prerequisites: List all groups using the `group /list` command or already in group list. 
 Must have at least one group in the list.
 
 1. Similar to **Clearing note of a person** except that group is listed, and group clear note command is used.
@@ -809,15 +849,26 @@ Must have at least one subgroup in the list.
    
 ### Tagging a person
 
-{Todo...}
+Prerequisites: Have persons in the list panel.
+
+1. Test case: `person 1 /tag t:tag1, tag2`<br>
+   Expected: Tags with those names are added to person 1, unless person 1 already has both tags, in which case an error message is displayed. If Person1 already has a tag, it is not added twice.
+
+2. Test case: `person 1 /untag t:tag1, tag2`<br>
+   Expected: Tags with those names are removed from person 1, unless person 1 has neither tag, in which case an error message is displayed
+3. Test case: `person 1 /ct t:tag1, tag2`<br>
+    Expected: Similar to **Clearing note of a person**, a warning window will be displayed. The extra parameters do nothing.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Find the file `notor.json`, which should be located in data directory near Notor. Corrupt the file<br>
+      Expected: Corrupted file cannot be read, and Notor will begin again empty
+   2. Delete the file `notor.json`<br>
+   Expected: A new blank notor will be created
 
-1. _{ more test cases ... }_
-
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 

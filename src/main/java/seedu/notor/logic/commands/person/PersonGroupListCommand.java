@@ -18,12 +18,11 @@ public class PersonGroupListCommand extends PersonCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("list", "l");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Lists all person in a group\n";
+            ": Lists all persons in a group\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + "INDEX /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION
-            + "Example: "
-            + PersonCommand.COMMAND_WORD + "1 /" + COMMAND_WORD;
+            + "Example: " + PersonCommand.COMMAND_WORD + "1 /" + COMMAND_WORD;
 
     private final PersonGroupListExecutor executor;
 

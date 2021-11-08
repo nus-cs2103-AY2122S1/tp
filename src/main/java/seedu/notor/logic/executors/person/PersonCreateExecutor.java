@@ -1,6 +1,8 @@
 package seedu.notor.logic.executors.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.notor.commons.core.Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED;
+import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
@@ -13,7 +15,10 @@ import seedu.notor.model.person.Person;
  */
 public class PersonCreateExecutor extends PersonExecutor {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists!";
+    public static final String MESSAGE_GROUP_INDEX_NOT_FOUND = String.format("To specify a group index, group list"
+            + " must be displayed\n"
+            + MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
 
     private final Person person;
 
@@ -36,18 +41,19 @@ public class PersonCreateExecutor extends PersonExecutor {
             throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.createPerson(person);
-
         if (index != null) {
-            if (model.getFilteredGroupList().size() >= index.getOneBased()) {
+            if (model.isPersonList() || model.isArchiveList()) {
+                throw new ExecuteException(MESSAGE_GROUP_INDEX_NOT_FOUND);
+            }
+            if (model.getFilteredGroupList().size() >= index.getOneBased() && index.getOneBased() > 0) {
                 Group group = model.getFilteredGroupList().get(index.getZeroBased());
                 group.addPerson(person);
                 person.addGroup(group);
             } else {
-                // TODO: stub error message, this is supposed to be for when index is out of bounds.
-                throw new ExecuteException("Index is out of bounds");
+                throw new ExecuteException(MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
             }
         }
+        model.createPerson(person);
         return new CommandResult(String.format(MESSAGE_SUCCESS, person));
     }
 
