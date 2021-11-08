@@ -95,9 +95,12 @@ The UI consists of a `MainWindow` that is made up of parts such as:
 * `CommandBox`
 * `ResultDisplay`
 * `PersonListPanel`
+* `PersonComponent`
+* `TagComponent`
 * `StatusBarFooter`
 * `HelpWindow`
 * `StatsWindow`
+
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component,
