@@ -43,6 +43,7 @@ public class JsonAdaptedClientTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_RISKAPPETITE = BENSON.getRiskAppetite().toString();
     private static final String VALID_DISPOSABLEINCOME = BENSON.getDisposableIncome().toString();
+    private static final String VALID_CURRENTPLAN = BENSON.getCurrentPlan().toString();
     private static final String VALID_LASTMET = BENSON.getLastMet().toString();
     private static final String VALID_NEXTMEETING = BENSON.getNextMeeting().toString();
 
@@ -53,6 +54,15 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_validClientDetails_returnsClient() throws Exception {
         JsonAdaptedClient client = new JsonAdaptedClient(BENSON);
+        assertEquals(BENSON, client.toModelType());
+    }
+
+    @Test
+    public void toModelType_validClientDetailsBuildClient_returnsClient() throws Exception {
+        JsonAdaptedClient client =
+            new JsonAdaptedClient(BENSON.getClientId().toString(), VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_RISKAPPETITE, VALID_DISPOSABLEINCOME, VALID_CURRENTPLAN, VALID_LASTMET,
+                VALID_NEXTMEETING, VALID_TAGS);
         assertEquals(BENSON, client.toModelType());
     }
 
