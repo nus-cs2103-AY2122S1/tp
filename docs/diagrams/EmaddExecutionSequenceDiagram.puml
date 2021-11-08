@@ -13,7 +13,7 @@ participant "model:Model" as Model MODEL_COLOR
 participant "eventToList:Event" as Event MODEL_COLOR
 end box
 
-LogicManager -> EmaddCommand : execute(:Model)
+LogicManager -> EmaddCommand : execute(model)
 activate EmaddCommand
 
 EmaddCommand -> Model : getFilteredEventList()
