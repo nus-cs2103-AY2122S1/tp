@@ -5,12 +5,15 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
 Class Model
 Class ModelManager
+
+package "User Prefs Model" #FFFFFF {
+Interface ReadOnlyUserPrefs <<Interface>>
 Class UserPrefs
 Class ReadOnlyUserPrefs
+}
 
 package "Applicant Model" #FFFFFF {
 Interface ReadOnlyApplicantBook <<Interface>>
@@ -47,7 +50,7 @@ ModelManager --> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ApplicantBook *--> "1" UniqueApplicantList
-UniqueApplicantList --> "~* all" Applicant
+UniqueApplicantList -right-> "~* all" Applicant
 
 PositionBook *--> "1" UniquePositionList
 UniquePositionList --> "~* all" Position
