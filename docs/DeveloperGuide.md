@@ -14,6 +14,9 @@ This developer guide provides an overview and details of Uni-Fy's system archite
 ### 1.2 Acknowledgements
 
 - Adapted from  AddressBook Level-3 project created as part of the SE-EDU initiative
+- The application logo was generated with Wix Logo Maker. 
+- Our diagrams were mostly generated with PlantUML.
+
 
 ### 1.3 Setting up, getting started
 
@@ -245,6 +248,55 @@ Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, w
 
 ### 3.3 Show feature
 
+The show feature enables users to show tasks by specifying the given week or date.
+
+#### 3.3.1 Implementation
+
+##### ShowCommand class
+
+The `ShowCommand` class extends the `Command` class. It manages the showing of tasks specified by the user based on the week number or date provided. It contains an `Integer` representing the number of Weeks in a given Calendar Year, a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, a `String` representing an error message if the week provided is not valid, a `String` representing the successful execution of a show command through the use of the week number, a `String` representing the successful execution of a show command through the use a date, a `String` representing if the week is already shown, a `String`, `suppliedDate` which contains the date provided if any, a `String`,`dayOfDate` which contains the day of that date provided, a `String`, `weekNumber` which contains the provided week number of the command or the week which the given date of the command falls, a `Boolean`, `isValidWeekNumber` to store if the week number provided is a valid one, and an `int`, `commandType` which acts as a success message selector.
+
+The `execute` method in `ShowCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. It then checks if the week number is valid, and continues only if they are all valid (between 1, and the number of weeks in a calendar year). It then checks if the week number provided by the command and the week number of the provided model are equal, and continues only if they are not. A separate `CommandException` is thrown in cases of the same week. In the happy path, the Weekly Panel is updated through updating the week number of the model, which then updates the weekly Task List object of the model.
+
+##### ShowCommandParser class
+
+The `ShowCommandParser` class implements the `Parser<DeleteCommand>` interface. It manages the parsing of the arguments in the user input.
+The `parse` method in `ShowCommandParser` first checks for the presence of the `Date` in the argument. If the `Date` is present, it returns a `ShowCommand` back to `UniFyParser`, initialized with a `Date` and an `int` 2, which represents the message selector. Otherwise, it checks if the provided argument is a parsable `Integer` and continues only if the argument can be parsed as an `Integer` (Note that the `Integer` class is used here and not the `int` data type). A `ParseException` is thrown if the provided argument cannot be parsed as an `Integer`. In the happy path, it returns a `ShowCommand` back to `UniFyParser`, initialized with an `Integer` which represents the `weekNumber` and an `int` 1, which represents the message selector.
+
+##### Usage Scenario
+
+The following demonstrates a usage scenario where the user wants to show the 48th week.
+
+1. The method `execute("show 48")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String "show 48" as its parameter and initializes a `ShowCommandParser` object.
+3. It then calls the `parse` method in `ShowCommandParser` to parse the string `"48"` into an `Integer` type `48`.
+4. A `ShowCommand` object will be initialized, with `48` initialised as the `weekNumber`.
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `ShowCommand`.
+6. The `ShowCommand` then checks for a valid week number provided to the `execute` method and whether the week is already being shown.
+7. If no errors are found, the `updateWeeklyTaskList` method under `Model` is called to update the `WeeklyTaskList` in the Model to refelct the tasks of the provided week, `48` in this case.
+8. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
+
+
+The sequence diagram below illustrates the interactions within `LogicManager` for the usage scenario.
+![Show48SequenceDiagram](images/Show48SequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### 3.3.2 Design Consideration
+
+##### Aspect: Reference to use to show tasks
+
+* **Alternative 1 (current choice):** Allow users to show by week number or week of the given date.
+    * Pros: Straightforward and users can see the week's tasks instead of the date alone
+    * Cons: users are not able to set their own date range
+
+* **Alternative 2:** Allows users to show by date
+    * Pros: Users can view a specified date (e.g. user can show a date's worth of tasks in Uni-fy by showing `show d/2021-08-09`)
+    * Cons: Users lose the ability to see a weekly perspective on tasks
+
+Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, we have decided to adopt Alternative 1 as our current implementation.
+
 ### 3.4 Find task feature
 
 The find feature enables users to find tasks by specifying part of the task name or date.
@@ -346,6 +398,9 @@ The following demonstrates a usage scenario where the user wants to delete the f
 5. The method call then returns to `LogicManager`, which calls the `execute` method of `SortCommand`.
 6. By using a functional interface called ‘BiFunction’, the `SotCommand` sorts the task list by calling a method ‘sortTasks’ under ‘Model’.
 7. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
+
+The following activity diagram summarizes what happens when the user inputs a sort command.
+![SortActivityDiagram](images/SortActivityDiagram.png)
 
 ### 3.6 \[Proposed\] Undo/redo feature
 
@@ -578,18 +633,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to show tasks based on week number.
-2.  Uni-Fy displays the list of tasks occurring in that week.
+2.  Uni-Fy displays the weekly view of tasks for the given week number
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a1. The list is empty.
   
   Use case ends.
 
-* 2a. The given index is invalid.
+* 1a2. The given index is invalid.
     * 2a1. Uni-Fy shows an error message.
       
   Use case reverts to step 1.
+
+* 1a3. A date is given.
+    * 3a1. Uni-Fy displays the weekly view of tasks for the week which the date falls in
+      
+  Use case ends.
 
       
 **Use case: UC07 - Find a task**
@@ -649,10 +709,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Appendix E: Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **GUI**: A GUI (graphical user interface) is a system of interactive visual components for the user to interact with.
-* **Index**: The position of a task in the list. Indexes start from 1.
-* **Parameter**: Specific information to be provided for commands.
+|Term |Explanation |
+|-----|------------|
+|**Mainstream OS** | Windows, Linux, Unix, OS-X|
+|**GUI** | A GUI (graphical user interface) is a system of interactive visual components for the user to interact with. |
+|**Index**| The position of a task in the list. Indexes start from 1. |
+|**Parameter**| Specific information to be provided for commands. |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -728,6 +790,45 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Finding a task
+
+1. Finding a task from the task list
+    1. Test case: `find task`<br>
+       Expected: Task list is filtered to show only the tasks that matches the keyword task.
+       
+    2. Test case: `find weekly task d/2021-11-11 tg/CS2103T`<br>
+       Expected: Task list is filtered to show only the tasks that matches the keywords "weekly" and "task" with a due date of 2021-11-11 and a tag of CS2103T.
+
+    3. Test case: `find d/2021-11-11`<br>
+       Expected: Task list is not filtered. Error details for invalid command shown in the status message.
+
+    4. Other incorrect delete commands to try: `find`, `find tg/CS2103T`, `...`<br>
+       Expected: Similar to previous.
+
+### Showing tasks
+
+1. Show tasks using week number
+    1. Test case: `show 48`<br>
+       Expected: Weekly Panel shows the 48th Week and the tasks occurring on that week
+
+    2. Test case: `show 0`<br>
+       Expected: Week Number is invalid. Error details for invalid command shown in the status message.
+
+    4. Other incorrect delete commands to try: `show`, `show 78`, `...`<br>
+       Expected: Similar to previous.
+
+2. Show tasks using date
+    1. Test case: `show d/2021-08-07`<br>
+       Expected: Weekly Panel shows the week which the date 2021-08-07 falls under and the tasks for that entire week.
+
+    2. Test case: `show /d2021-08-07`<br>
+       Expected: Argument Selector is Invalid. Error details for invalid command usage shown in the status message.
+
+    2. Test case: `show d/2021-13-13`<br>
+       Expected: Date is Invalid. Error details for invalid command usage shown in the status message.
+
+    4. Other incorrect delete commands to try: `show d/2022-01-01`, `show 2021-01-01`, `...`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 

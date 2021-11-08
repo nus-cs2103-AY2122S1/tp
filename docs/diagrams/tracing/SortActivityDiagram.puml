@@ -1,0 +1,14 @@
+@startuml
+start
+:User inputs sort command;
+
+if () then ([valid command])
+    :System parses the provided sortType and sortOrder;
+    :System sorts the task list;
+    :Sorted list shown to the user;
+
+else ([else])
+    :Error message displayed to the user;
+endif
+stop
+@enduml
