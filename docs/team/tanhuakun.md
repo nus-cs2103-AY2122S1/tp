@@ -58,9 +58,6 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
     * Storage
         * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest.
     * Modified existing test cases such as JsonAdaptedPerson and Person.
-
-
-#### Other contributions:
 * ##### Team Tasks:
     * [Refactor commands](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/45) to be split into subsections. Original AB3 used "add, delete, edit" but refactored it to use
     "student -a, student -d, student -e" respectively.
