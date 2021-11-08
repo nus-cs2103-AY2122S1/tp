@@ -3,10 +3,9 @@ layout: page
 title: User Guide
 ---
 
-<h1 align="center"> LeadsForce User Guide </h1>
 <p align="center">
 
-<img src="images/LeadsForceLogo.jpg" alt="logo" width="125" />
+<img src="images/LeadsForceLogo.jpg" alt="logo" width="300" />
 
 </p>
 <p align="center">
