@@ -202,7 +202,7 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 {:start="5"}
 5. If this is your first time using TutorAid, we highly encourage you to check out our [Beginner's Tutorial](#4-beginners-tutorial) so that you can practise using a few of the commands and familiarise yourself with the app!
 
-6. After completing the tutorial, refer to the [Features](#8-command-summary) below to see all the commands available in TutorAid.
+6. After completing the tutorial, refer to the [Features](#5-features) below to see all the commands available in TutorAid.
 
 ***
 
