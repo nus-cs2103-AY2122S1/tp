@@ -773,7 +773,7 @@ Step 3. The user executes `add-applicant n/David …​` to add a new applicant.
 
 Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#recoverHistory()`, which will pop out the previous command from `History`, and restore the model in the `Memento` of the previous command.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the stack in the `history` is empty, then there are no previous model states to restore. The `undo` command uses `Model#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the stack in the `History` is empty, then there are no previous model states to restore. The `undo` command uses `Model#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
