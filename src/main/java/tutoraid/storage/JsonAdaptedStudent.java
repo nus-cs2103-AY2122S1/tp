@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutoraid.commons.exceptions.IllegalValueException;
+import tutoraid.model.student.InitialStudent;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.Progress;
 import tutoraid.model.student.ProgressList;
@@ -28,8 +28,7 @@ class JsonAdaptedStudent {
     private final String parentName;
     private final String parentPhone;
     private final ArrayList<String> progressList;
-    private final boolean hasPaid;
-    private final ArrayList<String> lessons;
+    private final ArrayList<String> lessonNames;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -39,16 +38,14 @@ class JsonAdaptedStudent {
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("progressList") ArrayList<String> progressList,
-            @JsonProperty("paymentStatus") boolean hasPaid,
-            @JsonProperty("lessons") ArrayList<String> lessons) {
+            @JsonProperty("lessons") ArrayList<String> lessonNames) {
 
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.progressList = progressList;
-        this.hasPaid = hasPaid;
-        this.lessons = lessons;
+        this.lessonNames = lessonNames;
     }
 
     /**
@@ -60,8 +57,7 @@ class JsonAdaptedStudent {
         parentName = source.getParentName().fullName;
         parentPhone = source.getParentPhone().value;
         progressList = source.getProgressList().getAllProgressAsStringArrayList();
-        hasPaid = source.getPaymentStatus().hasPaid;
-        lessons = source.getLessons().getAllLessonNamesAsStringArrayList();
+        lessonNames = source.getLessons().getAllLessonNamesAsStringArrayList();
     }
 
     /**
@@ -69,7 +65,7 @@ class JsonAdaptedStudent {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
-    public Student toModelType() throws IllegalValueException {
+    public InitialStudent toModelType() throws IllegalValueException {
         if (studentName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -101,20 +97,13 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
         }
         final ProgressList modelProgress = new ProgressList(progressList);
-
-        final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
-
-        if (lessons == null) {
+        if (lessonNames == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Lessons.class.getSimpleName()));
         }
-        if (!Lessons.isValidLessonNames(lessons)) {
-            throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
-        }
-        final Lessons modelLessons = new Lessons(lessons);
 
-        return new Student(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
-                modelProgress, modelPaymentStatus, modelLessons);
+        return new InitialStudent(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
+                modelProgress, lessonNames);
     }
 
 }

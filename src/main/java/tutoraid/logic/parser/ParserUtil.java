@@ -3,6 +3,7 @@ package tutoraid.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.StringUtil;
@@ -51,8 +52,7 @@ public class ParserUtil {
             Index index = parseIndex(indexInString);
             indexesToReturn.add(index);
         }
-
-        return indexesToReturn;
+        return indexesToReturn.stream().distinct().collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**

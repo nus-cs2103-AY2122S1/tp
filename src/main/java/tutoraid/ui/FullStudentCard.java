@@ -17,7 +17,6 @@ public class FullStudentCard extends Card<Student> {
     private static final String LABEL_PARENT_NAME = "Parent";
     private static final String LABEL_PARENT_PHONE = "Parent Mobile";
     private static final String LABEL_PROGRESS = "Progress";
-    private static final String LABEL_PAYMENT_STATUS = "";
     private static final String LABEL_LESSONS = "Lessons";
 
     /**
@@ -43,8 +42,6 @@ public class FullStudentCard extends Card<Student> {
     @FXML
     private Label progress;
     @FXML
-    private Label paymentStatus;
-    @FXML
     private Label lessons;
 
 
@@ -59,7 +56,6 @@ public class FullStudentCard extends Card<Student> {
         parentName.setText(formatCardLabel(LABEL_PARENT_NAME, student.getParentName().fullName));
         parentPhone.setText(formatCardLabel(LABEL_PARENT_PHONE, student.getParentPhone().value));
         progress.setText(formatCardLabel(LABEL_PROGRESS, student.getProgressList().toString()));
-        paymentStatus.setText(formatCardLabel(LABEL_PAYMENT_STATUS, student.getPaymentStatus().toString()));
         lessons.setText(formatCardLabel(LABEL_LESSONS, student.getLessons().toString()));
     }
 }

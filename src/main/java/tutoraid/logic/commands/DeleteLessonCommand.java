@@ -17,12 +17,14 @@ public class DeleteLessonCommand extends DeleteCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG
-            + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_FLAG + " 1";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Deletes a lesson from TutorAid."
+                    + "\nParameters:"
+                    + "\nINDEX (must be a positive integer)"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1",
+            COMMAND_WORD, COMMAND_FLAG);
 
-    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Successfully deleted %s.";
 
     private final Index targetIndex;
 
@@ -43,7 +45,7 @@ public class DeleteLessonCommand extends DeleteCommand {
         model.deleteLesson(lessonToDelete);
         model.deleteLessonFromStudents(lessonToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete.toNameString()));
     }
 
     @Override

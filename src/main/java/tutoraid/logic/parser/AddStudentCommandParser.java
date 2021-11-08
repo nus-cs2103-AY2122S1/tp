@@ -11,7 +11,6 @@ import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
@@ -49,11 +48,10 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Phone parentPhone = ParserUtil.parsePhone(
                 argMultimap.getValue(PREFIX_PARENT_PHONE).orElse(""));
         ProgressList progressList = new ProgressList();
-        PaymentStatus paymentStatus = new PaymentStatus(false);
         Lessons lessons = new Lessons();
 
         Student student = new Student(studentName, studentPhone, parentName, parentPhone,
-                progressList, paymentStatus, lessons);
+                progressList, lessons);
 
         return new AddStudentCommand(student);
     }

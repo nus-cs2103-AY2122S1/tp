@@ -1,15 +1,11 @@
 package tutoraid.model.lesson;
 
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_CAPACITY_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_TIMING_SCIENCE_TWO;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +25,6 @@ public class LessonTest {
         Lesson editedMathsOne = new LessonBuilder(TypicalLessons.MATHS_ONE).withLessonName("Maths 1")
                 .withCapacity("51")
                 .withPrice("101")
-                .withStudents(new ArrayList<>(Arrays.asList()))
                 .withTiming("1001-1201")
                 .build();;
         assertTrue(TypicalLessons.MATHS_ONE.isSameLesson(editedMathsOne));
@@ -39,10 +34,10 @@ public class LessonTest {
                 new LessonBuilder(TypicalLessons.MATHS_ONE).withLessonName(VALID_LESSON_NAME_MATHS_TWO).build();
         assertFalse(TypicalLessons.MATHS_ONE.isSameLesson(editedMathsOne));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Lesson editedMathsTwo = new LessonBuilder(TypicalLessons.MATHS_TWO).withLessonName(
                 VALID_LESSON_NAME_MATHS_TWO.toLowerCase()).build();
-        assertFalse(TypicalLessons.MATHS_TWO.isSameLesson(editedMathsTwo));
+        assertTrue(TypicalLessons.MATHS_TWO.isSameLesson(editedMathsTwo));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_LESSON_NAME_MATHS_TWO + " ";

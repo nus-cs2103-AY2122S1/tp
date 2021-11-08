@@ -44,7 +44,7 @@ public class LessonName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LessonName // instanceof handles nulls
-                && lessonName.equals(((LessonName) other).lessonName)); // state check
+                && lessonName.toLowerCase().equals(((LessonName) other).lessonName.toLowerCase())); // state check
     }
 
     @Override

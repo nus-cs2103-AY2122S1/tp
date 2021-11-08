@@ -28,8 +28,7 @@ public class ProgressTest {
         // invalid name
         assertFalse(Progress.isValidProgress("")); // empty string
         assertFalse(Progress.isValidProgress(" ")); // spaces only
-        assertFalse(Progress.isValidProgress("^")); // only non-alphanumeric characters
-        assertFalse(Progress.isValidProgress("exam*")); // contains non-alphanumeric characters
+
 
         // valid name
         assertTrue(Progress.isValidProgress("did homework")); // alphabets only
@@ -37,6 +36,7 @@ public class ProgressTest {
         assertTrue(Progress.isValidProgress("did 2 assignments")); // alphanumeric characters
         assertTrue(Progress.isValidProgress("Capital Tan")); // with capital letters
         assertTrue(Progress.isValidProgress("Still required to study 2103T")); // long progress
+        assertTrue(Progress.isValidProgress("exam*")); // contains non-alphanumeric characters
     }
 
     @Test

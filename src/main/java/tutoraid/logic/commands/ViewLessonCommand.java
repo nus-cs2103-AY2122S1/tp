@@ -17,12 +17,15 @@ public class ViewLessonCommand extends ViewCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FLAG
-            + ": Shows the lesson identified by the index number used in the displayed lesson list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Shows the lesson identified by the index "
+                    + "number as shown in the Lesson Panel."
+                    + "\nParameters:"
+                    + "\nINDEX (must be a positive integer)"
+                    + "\nExample:"
+                    + "\n%1$s %2$s 1",
+            COMMAND_WORD, COMMAND_FLAG);
 
-    public static final String MESSAGE_VIEW_LESSON_SUCCESS = "Viewing requested lesson";
+    public static final String MESSAGE_VIEW_LESSON_SUCCESS = "Showing %s and the students in this class.";
 
     private final Index targetIndex;
 
@@ -41,7 +44,7 @@ public class ViewLessonCommand extends ViewCommand {
 
         Lesson lessonToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewLesson(lessonToView);
-        return new CommandResult(MESSAGE_VIEW_LESSON_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_VIEW_LESSON_SUCCESS, lessonToView.toNameString()));
     }
 
     @Override

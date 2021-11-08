@@ -17,20 +17,19 @@ public class AddStudentCommand extends AddCommand {
 
     public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Adds a student to TutorAid. "
-            + "Parameters: "
-            + PREFIX_STUDENT_NAME + "STUDENT NAME "
-            + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
-            + PREFIX_PARENT_NAME + "PARENT NAME "
-            + PREFIX_PARENT_PHONE + "PARENT PHONE "
-            + "Example: " + COMMAND_FLAG + " "
-            + PREFIX_STUDENT_NAME + "John Doe "
-            + PREFIX_STUDENT_PHONE + "81234567 "
-            + PREFIX_PARENT_NAME + "Mrs Doe "
-            + PREFIX_PARENT_PHONE + "91234567 ";
+    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Adds a student to TutorAid. "
+                    + "\nParameters:"
+                    + "\n%3$sSTUDENT NAME"
+                    + "  [%4$sSTUDENT PHONE]"
+                    + "  [%5$sPARENT NAME]"
+                    + "  [%6$sPARENT PHONE]"
+                    + "\nExample:"
+                    + "\n%1$s %2$s %3$sJohn Doe %4$s81234567 %5$sMrs Doe %6$s91234567",
+            COMMAND_WORD, COMMAND_FLAG, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE, PREFIX_PARENT_NAME,
+            PREFIX_PARENT_PHONE);
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid.";
 
     private final Student toAdd;
 
@@ -51,7 +50,7 @@ public class AddStudentCommand extends AddCommand {
         }
 
         model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toNameString()));
     }
 
     @Override

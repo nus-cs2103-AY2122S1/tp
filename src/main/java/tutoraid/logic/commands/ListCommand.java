@@ -26,7 +26,7 @@ public class ListCommand extends Command {
     /**
      * Constructor for a list command that lists students. Fields are shown if {@code viewAll} is true.
      *
-     * @param detailLevel Whether to show fields
+     * @param detailLevel Level of detail for fields to be displayed
      */
     public ListCommand(DetailLevel detailLevel) {
         this.detailLevel = detailLevel;

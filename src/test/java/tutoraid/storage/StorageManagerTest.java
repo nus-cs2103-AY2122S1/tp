@@ -19,15 +19,17 @@ import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class StorageManagerTest {
+    private static final ReadOnlyLessonBook lb = TypicalLessons.getTypicalLessonBook();
 
     @TempDir
     public Path testFolder;
-
     private StorageManager storageManager;
 
     @BeforeEach
     public void setUp() {
-        JsonTutorAidStudentStorage studentBookStorage = new JsonTutorAidStudentStorage(getTempFilePath("sb"));
+
+        JsonTutorAidStudentStorage studentBookStorage =
+                new JsonTutorAidStudentStorage(getTempFilePath("sb"), lb);
         JsonTutorAidLessonStorage lessonBookStorage = new JsonTutorAidLessonStorage(getTempFilePath("lb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
@@ -60,7 +62,7 @@ public class StorageManagerTest {
          */
         StudentBook original = TypicalStudents.getTypicalStudentBook();
         storageManager.saveStudentBook(original);
-        ReadOnlyStudentBook retrieved = storageManager.readStudentBook().get();
+        ReadOnlyStudentBook retrieved = storageManager.readStudentBook(lb).get();
         assertEquals(original, new StudentBook(retrieved));
     }
 

@@ -13,8 +13,6 @@ import tutoraid.logic.commands.ExitCommand;
 import tutoraid.logic.commands.FindCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.commands.ListCommand;
-import tutoraid.logic.commands.PaidCommand;
-import tutoraid.logic.commands.UnpaidCommand;
 import tutoraid.logic.commands.ViewCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
@@ -71,12 +69,6 @@ public class TutorAidParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case PaidCommand.COMMAND_WORD:
-            return new PaidCommandParser().parse(arguments);
-
-        case UnpaidCommand.COMMAND_WORD:
-            return new UnpaidCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);

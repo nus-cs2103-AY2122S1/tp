@@ -177,30 +177,6 @@
                         <Label fx:id="viewLExample" text="Label" wrapText="true"/>
                         <Label fx:id="viewLExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
-
-                    <Label fx:id="paidTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="paidDesc" text="Label" wrapText="true"/>
-                    <TextFlow>
-                        <Label fx:id="format8" text="Format: " wrapText="true"/>
-                        <Label fx:id="paidCommand" text="Label" wrapText="true"/>
-                    </TextFlow>
-                    <TextFlow>
-                        <Label fx:id="example7" text="Label" wrapText="true"/>
-                        <Label fx:id="paidExample" text="Label" wrapText="true"/>
-                        <Label fx:id="paidExampleDesc" text="Label" wrapText="true"/>
-                    </TextFlow>
-
-                    <Label fx:id="unpaidTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="unpaidDesc" text="Label" wrapText="true"/>
-                    <TextFlow>
-                        <Label fx:id="format9" text="Format: " wrapText="true"/>
-                        <Label fx:id="unpaidCommand" text="Label" wrapText="true"/>
-                    </TextFlow>
-                    <TextFlow>
-                        <Label fx:id="example8" text="Label" wrapText="true"/>
-                        <Label fx:id="unpaidExample" text="Label" wrapText="true"/>
-                        <Label fx:id="unpaidExampleDesc" text="Label" wrapText="true"/>
-                    </TextFlow>
                     <TextFlow>
                         <Label fx:id="findTitle" text="Label" wrapText="true"/>
                         <Label fx:id="findDesc1" text="Label" wrapText="true"/>
@@ -219,6 +195,30 @@
                         <Label fx:id="findSExampleDesc" text="Label" wrapText="true"/>
                         <Label fx:id="findLExample" text="Label" wrapText="true"/>
                         <Label fx:id="findLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="addSlTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addSlDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format17" text="Format: " wrapText="true"/>
+                        <Label fx:id="addSlCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example14" text="Label" wrapText="true"/>
+                        <Label fx:id="addSlExample" text="Label" wrapText="true"/>
+                        <Label fx:id="addSlExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="delSlTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="delSlDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format18" text="Format: " wrapText="true"/>
+                        <Label fx:id="delSlCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example15" text="Label" wrapText="true"/>
+                        <Label fx:id="delSlExample" text="Label" wrapText="true"/>
+                        <Label fx:id="delSlExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
 
                     <Label fx:id="clearTitle" text="Label" wrapText="true"/>
@@ -241,9 +241,11 @@
                     <Label fx:id="editDataTitle" text="Label" wrapText="true"/>
                     <TextFlow>
                         <Label fx:id="editDataDesc1" text="Label" wrapText="true"/>
-                        <Label fx:id="editFilePath" text="Label" wrapText="true"/>
+                        <Label fx:id="editStudentsFilePath" text="Label" wrapText="true"/>
+                        <Label fx:id="editDataDesc2" text="Label" wrapText="true"/>
+                        <Label fx:id="editLessonsFilePath" text="Label" wrapText="true"/>
                     </TextFlow>
-                    <Label fx:id="editDataDesc2" text="Label" wrapText="true"/>
+                    <Label fx:id="editDataDesc3" text="Label" wrapText="true"/>
                     <Label fx:id="editCaution" text="Label" wrapText="true"/>
 
                     <Label fx:id="faqTitle" text="Label" wrapText="true"/>

@@ -12,12 +12,12 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> mainWin : fillInnerParts()
 activate mainWin STORAGE_COLOR
 
-mainWin -[STORAGE_COLOR]> mainWin: fillStudentCard(false)
+mainWin -[STORAGE_COLOR]> mainWin: fillStudentCard(MED)
 activate mainWin STORAGE_COLOR
 mainWin --[STORAGE_COLOR]> mainWin
 deactivate mainWin STORAGE_COLOR
 
-mainWin -[STORAGE_COLOR]> mainWin: fillLessonCard(false)
+mainWin -[STORAGE_COLOR]> mainWin: fillLessonCard(MED)
 activate mainWin STORAGE_COLOR
 mainWin --[STORAGE_COLOR]> mainWin
 deactivate mainWin STORAGE_COLOR

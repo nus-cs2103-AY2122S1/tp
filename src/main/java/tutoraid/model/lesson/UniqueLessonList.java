@@ -69,15 +69,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Refreshes this Unique Lesson List.
-     */
-    public void refreshUniqueLessonList() {
-        for (int i = 0; i < internalList.size(); i++) {
-            setLesson(internalList.get(i), internalList.get(i));
-        }
-    }
-
-    /**
      * Removes the equivalent lesson from the list.
      * The lesson must exist in the list.
      */
@@ -99,7 +90,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
-        if (!lessonsAreUnique(lessons)) {
+        if (!areLessonsUnique(lessons)) {
             throw new DuplicateLessonException();
         }
 
@@ -133,7 +124,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     /**
      * Returns true if {@code lessons} contains only unique lessons.
      */
-    private boolean lessonsAreUnique(List<Lesson> lessons) {
+    private boolean areLessonsUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
                 if (lessons.get(i).isSameLesson(lessons.get(j))) {

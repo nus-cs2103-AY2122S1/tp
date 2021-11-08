@@ -10,8 +10,8 @@ import static tutoraid.commons.util.AppUtil.checkArgument;
 public class Timing {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Timing must not be empty and can include alphanumeric, forward slash, hyphen and space";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z\\d-\\s/]+$";
+            "Timing must not be blank";
+    public static final String VALIDATION_REGEX = "[^ ].*";
     public final String timing;
 
     /**
