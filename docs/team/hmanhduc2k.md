@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Hoang Manh Duc's Project Portfolio Page
+title: Manh Duc's Project Portfolio Page
 ---
 
 ### Project: Academy Directory
@@ -46,17 +46,16 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `help` and `view`
-    * Added the Preview Section of UI and write some Q&A parts.
-    * Assist with writing introduction and quick start for usage instruction.
-  * Developer Guide:
+    * Added documentation for the features `help` ([\#39](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/39/files)), and `view` ([commit](https://github.com/AY2122S1-CS2103T-T15-3/tp/commit/0654cbc9ed719916b3f6c3ee14cd7e1aec5bb177#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb) [\#39](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/39/files)),...
+    * Added the Preview Section of UI and write some Q&A parts. [\#240](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/240/files), [commit](https://github.com/AY2122S1-CS2103T-T15-3/tp/commit/6c1685e68788e39d3d28867f6ee44894c13406fd#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb),...
+    * Assist with writing introduction and quick start for usage instruction. [\#39](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/39/files)
+  * Developer Guide: [\#39](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/39), [#98](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/98/files), [#229](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/229), [#236](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/236/files), [#240](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/240/files),... 
     * Added implementation details, design considerations, use case, and user stories, and manual testings for `view`, `help`, `clear`, `exit`, and `list`
     * Added class diagram and explain the architectural implementation of the UI component
     * Added manual testing instructions to Graphics User Interface of Academy Directory<br>
-  * Manage the README.md file, proofread and adding minor contents of other existing parts on the User Guide and Developer Guide.
+  * Manage the README.md file ([history](https://github.com/AY2122S1-CS2103T-T15-3/tp/commits/master/README.md)) proofread and adding minor contents of other existing parts on the User Guide and Developer Guide.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#49](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/49), [#79](https://github.com/AY2122S1-CS2103T-T15-3/tp/pull/79),...
   * Contributed to forum discussions: Helping others [\#354](https://github.com/nus-cs2103-AY2122S1/forum/issues/354), and asking questions [\#339](https://github.com/nus-cs2103-AY2122S1/forum/issues/339), [\#299](https://github.com/nus-cs2103-AY2122S1/forum/issues/299)
   * Report bugs to other teams in the PED and assist other teams with UI implementations (mostly through personal chat)
-  * Participated in all team meeting and discussion throughout the duration of the project.
