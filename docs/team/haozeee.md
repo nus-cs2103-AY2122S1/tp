@@ -7,7 +7,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to delete doctors and add remarks and tags to doctors ([#62](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/62), [#65](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/65))
    * What it does: Allows the users to delete doctors from the doctor list and also add tags and remarks to doctors.
-   * Justification: This features improves the application as the user can now store important information about a doctor using remarks and tags. Users can also now delete unneeded doctor from the database so that the doctor list will not be filled with unnecessary entries.
+   * Justification: This features improves the application as the user can now store important information about a doctor using remarks and tags. Users can also now delete unneeded doctors from the database so that the doctor list will not be filled with unnecessary entries.
    * Highlights: Since the Patient class also had similar features such as the ability to add tags and remarks, there would have been a lot of overlapping code when implementing this feature. Thus, some design considerations and OOP principles had to be taken into account in order to minimize the amount of overlapping code.
    
 * **New Feature**: Added ability to show doctors and appointments information in the UI ([#55](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/55), [#85](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/85), [#104](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/104))
@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added ability for users to filter appointments ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
    * What it does: Allows the users to filter through the appointments in the appointment list using filter parameters such as patient name and start date. Users have the option to filter through either all appointments or only the upcoming appointments.
    * Justification: This feature is essential to our application as it allows users to easily and quickly search for the relevant appointments in the appointment list. For instance, users can use this feature to see what appointments are there on a particular day or look through all the appointments a doctor has in order to locate free appointment slots to schedule a new appointment.
-   * Highlights: This was a large feature and one of the main difficulty when implementing it is testing the parser that parses the `FilterAppointmentCommand` input from the user. As the command has multiple optional inputs(start date, end date, patient name, doctor name), there were a lot of combinations of valid and invalid parameters that needed to be tested in order to ensure that the parser works as intended. Thus, test cases had to be carefully chosen so that the testing is both efficient and effective.
+   * Highlights: This was a large feature and one of the difficulty when implementing it is testing the parser that parses the `FilterAppointmentCommand` input from the user. As the command has multiple optional inputs(start date, end date, patient name, doctor name), there were a lot of combinations of valid and invalid parameters that needed to be tested in order to ensure that the parser works as intended. Thus, test cases had to be carefully chosen so that the testing is both efficient and effective.
 
 * **New Feature**: Added ability for users to list the current day's appointments ([#115](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/115))
    * What it is: Allowed the users to quickly view all the appointments a clinic has for the current day.
@@ -31,12 +31,12 @@ Given below are my contributions to the project.
     * Created and managed project milestone on Github
     * Assigned and kept track of issues on Github
     * Created a product demo for each iteration
+    * Fixed bugs found in the PED
     * Added "skeleton" code for the DG to have less merge conflicts ([#149](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/149))
-    * Fixed bugs found in the PED ([#190](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/190), [#205](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/205))
     
 * **Enhancements to existing features**:
     * Updated the UI colours and layout to match the mockup ([#35](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/35))
-    * Updated the UI to allow wrapping for long texts
+    * Updated the UI to allow wrapping for long texts ([#205](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/205), [#231](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/231))
     * Changed the default appointment list to show only today's appointments ([#133](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/133))
     * Changed person equality checks to be case-insensitive ([#67](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/67))
 
