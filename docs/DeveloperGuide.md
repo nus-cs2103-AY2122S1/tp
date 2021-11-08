@@ -203,10 +203,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to add a new person.
-2. Track2Gather requests for details of the person.
-3. User enters the requested details.
-4. Track2Gather adds the person and shows the details of the new person.
+1.  User chooses to add a new person.
+2.  Track2Gather requests for details of the person.
+3.  User enters the requested details.
+4.  Track2Gather adds the person and shows the details of the new person.
 
     Use case ends.
 
@@ -253,7 +253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  User enters the requested details.
 6.  Track2Gather edits the person.
 
-     Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -367,13 +367,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1.  User chooses to start a new SHN enforcement session.
-2.	Track2Gather resets all persons to 'not called' in the new session, and updates the display to show all persons.
+2.  Track2Gather resets all persons to 'not called' in the new session, and updates the display to show all persons.
 3.  User requests to update call statuses for specified person(s).
-4.	Track2Gather updates the call statuses for these person(s), and updates the display to remove all called person(s).
+4.  Track2Gather updates the call statuses for these person(s), and updates the display to remove all called person(s).
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
+
 * 2a. The list is empty.
 
   Use case ends.
@@ -401,9 +402,9 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
@@ -430,9 +431,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder.
+    1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file.
+    2. Double-click the jar file.
       
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -472,7 +473,7 @@ testers are expected to do more *exploratory* testing.
       
       Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
 
-### Editing a Person
+### Editing a person
 
 1. Editing a person while all persons are being shown
    
