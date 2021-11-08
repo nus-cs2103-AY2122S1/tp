@@ -57,5 +57,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/davelowqx)]
 [[portfolio](team/davelowqx.md)]
 
-- Role: Businessman
-- Responsibilities: Playing Golf
+- Role: Developer
+- Responsibilities: Documentation
