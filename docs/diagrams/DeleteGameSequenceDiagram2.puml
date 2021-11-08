@@ -38,7 +38,7 @@ Model --> DeleteGameCommand
 deactivate Model
 
 create CommandResult
-DeleteGameCommand -> CommandResult : CommandResult(messageToDisplay, CommandType.GAME_DELETE)
+DeleteGameCommand -> CommandResult : CommandResult(messageToDisplay,\n CommandType.GAME_DELETE)
 activate CommandResult
 
 CommandResult --> DeleteGameCommand
