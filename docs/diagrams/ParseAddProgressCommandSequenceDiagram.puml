@@ -36,7 +36,14 @@ deactivate AddCommandParser
 LogicManager <-- TutorAidParser
 deactivate TutorAidParser
 
+<<<<<<< HEAD:docs/diagrams/ParseAddProgressSequenceDiagram.puml
+destroy AddProgressCommandParser
+
+destroy AddCommandParser
+
+=======
 ref over LogicManager, AddProgressCommand : get commandResult
 <-- LogicManager : commandResult
 deactivate LogicManager
+>>>>>>> master:docs/diagrams/ParseAddProgressCommandSequenceDiagram.puml
 @enduml
