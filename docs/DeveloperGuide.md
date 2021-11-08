@@ -5,7 +5,7 @@ title: Developer Guide
 
 ## **Introduction**
 
-Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take
+Thank you for your interest in the development of Notor! This is an open-source project aimed at helping mentors take
 quick, efficient notes to facilitate effective and efficient mentoring of many mentees. The design principles
 scaffolding Notor are as follows.
 
@@ -174,7 +174,7 @@ API** : [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/
 The `Storage` component,
 
 * now includes a new `Archive` Storage component
-* `Archive` allows users to temporarily remove `Person`s from their Address Book
+* `Archive` allows users to temporarily remove `Person`s from Notor
 
 ### Common classes
 
