@@ -107,7 +107,7 @@ Shows command format and example as the command is entered for a smoother learni
 
 ### Command History
 
-View and use previously called commands to minimise typing of repeated commands.
+View and use previously called commands to minimize typing of repeated commands.
 
 Notes:
 * Only commands that have been used in the current program run can be viewed. Commands used in previous runs are not stored.
