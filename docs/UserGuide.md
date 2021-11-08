@@ -62,7 +62,7 @@ We hope that you will have a great time using Socius! :)
 
 Socius provides these main features:
 * Access details of students taking CS2103T.
-* Find any students with their name, tutorial group, nationality, tags, and more.
+* Find any student with their name, tutorial group, nationality, tags, and more.
 * Pin suitable tags to categorize students.
 * View statistics on nationality.
 
