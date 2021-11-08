@@ -57,7 +57,7 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 <img src="images/tanishq4331.png" width="200px">
 
 [[github](https://github.com/Tanishq4331)]
-[[portfolio](team/tanishq.md)]
+[[portfolio](team/tanishq4331.md)]
 
 * Role: Developer
 * Responsibilities: Testing
