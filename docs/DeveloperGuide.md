@@ -890,7 +890,7 @@ The app is initially populated with some sample data, based on real life animes.
        Expected: First anime is deleted from the list. Details of the deleted anime shown in the Command Result Panel
 
     3. Test case 2: `delete 0`<br>
-       Expected: No anime is deleted. Error details shown in the status message
+       Expected: No anime is deleted. Error details shown in the Command Result Panel
 
     4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete n/attack on titan`<br>
        Expected: Similar to previous
@@ -903,7 +903,55 @@ The app is initially populated with some sample data, based on real life animes.
       Expected: First anime is deleted from the list. Details of the deleted anime shown in the Command Result Panel
 
    3. Use `list` to list out all animes, make sure that the deleted anime is not shown here
-    
+
+### Renaming an anime
+
+1. Rename an anime while all animes are being shown
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Test case 1: `rename 1 n/Black Clover`<br>
+       Expected: The name of the first anime is now Black Clover. Details of the updated anime shown in the Command Result Panel
+
+    3. Test case 2: `rename 0 n/Black Clover`<br>
+       Expected: No anime is renamed. Error details shown in the Command Result Panel
+
+    4. Other incorrect delete commands to try: `rename`, `rename x n/Black Clover` (where x is larger than the list size), `rename 1 e/Black Clover`<br>
+       Expected: Similar to previous
+
+2. Rename an anime while not all animes are being shown
+
+    1. Use `list s/watching` to list out only the animes with a `watching` status
+
+    2. Use `rename 1 n/Black Clover` to delete the first anime<br>
+       Expected: The name of the first anime is now Black Clover. Details of the updated anime shown in the Command Result Panel
+
+    3. Use `list` to list out all animes, make sure that the anime is correctly renamed
+
+### Updating the episode of an anime
+
+1. Updating the episode of an anime while all animes are being shown
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Test case 1: `update 1 e/100`<br>
+       Expected: The episode of the first anime is updated to 100. Details of the updated anime shown in the Command Result Panel
+
+    3. Test case 2: `update 0 e/100`<br>
+       Expected: The episode of the anime is not updated. Error details shown in the Command Result Panel
+
+    4. Other incorrect delete commands to try: `update`, `update x e/1` (where x is larger than the list size), `update 1 n/attack on titan`<br>
+       Expected: Similar to previous
+
+2. Updating the episode of an anime while not all animes are being shown
+
+    1. Use `list s/watching` to list out only the animes with a `watching` status
+
+    2. Use `update 1 e/100` to delete the first anime<br>
+       Expected: The episode of the first anime is updated to 100. Details of the updated anime shown in the Command Result Panel
+
+    3. Use `list` to list out all animes, make sure that the episode of the anime is correctly updated
+
 ### Genres
 
 1. Adding Genres
