@@ -82,7 +82,7 @@ CONNECTIONS is a **desktop app for managing contacts and keeping tracks of birth
 
 <div style="page-break-after: always;"></div>
 ### Upcoming Birthdays
-The vertical tab provides upcoming birthdays at a glance.  
+The vertical tab provides upcoming birthdays at a glance. Having this means that you will never miss a birthday.
 It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, with the **nearest** upcoming birthday at the **top**.
 
 * Contacts color-coded in **GREEN** are celebrating their birthdays **today**.
@@ -93,7 +93,7 @@ It sorts all birthdays amongst all contacts in CONNECTIONS **chronologically**, 
 <div style="page-break-after: always;"></div>
 ### Command Assistant
 
-Shows command format and example as the command is entered.
+Shows command format and example as the command is entered for a smoother learning curve.
 
 #### Sample Usage:
 
@@ -107,7 +107,7 @@ Shows command format and example as the command is entered.
 
 ### Command History
 
-View and use previously called commands.
+View and use previously called commands to minimise typing of repeated commands.
 
 Notes:
 * Only commands that have been used in the current program run can be viewed. Commands used in previous runs are not stored.
@@ -128,7 +128,7 @@ Notes:
 
 ### Viewing help : `help`
 
-Shows a help message that explains the purpose and method of usage for each command.
+Shows a help message that explains the purpose and method of usage for each command for a smoother learning curve.
 
 #### Format:
 * `help` - List out all available commands.
@@ -213,7 +213,7 @@ Notes:
 <div style="page-break-after: always;"></div>
 ### Adding Tags : `tag`
 
-Adds one or more tags to an existing contact in CONNECTIONS.
+Adds one or more tags to an existing contact in CONNECTIONS. Facilitates the organization of contacts into groups.
 
 #### Format:
 * `tag INDEX t/TAG [t/MORE_TAGS]…​`
@@ -245,9 +245,11 @@ Notes:
     * Removes the tags `friend` and `NUS` from the 2nd contact.
 
 <div style="page-break-after: always;"></div>
+
 ### Locating contacts by name(s) and tag(s): `find`
 
-Finds all contacts who match **ALL** name and tag keywords provided.  
+Finds all contacts who match **ALL** name and tag keywords provided.
+This narrows your search so that you will be able to filter contacts with greater specificity.
 
 The commands `find` and `findAny` will filter the displayed contacts and only display the matching results.  
 ![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
@@ -277,7 +279,8 @@ Notes:
 
 ### Locating contacts by name(s) or tag(s): `findAny`
 
-Finds all contacts who match **ANY** name and tag keywords provided.
+Finds all contacts who match **ANY** name and tag keywords provided. 
+This broadens your search so that you will be able to filter contacts with greater flexibility.
 
 #### Format:
 * `findAny [c/] [n/NAME] …​ [t/TAG] …​`
@@ -307,7 +310,7 @@ Notes:
 
 ### Pinning a contact : `pin`
 
-Pins a contact to the top of the contact list.  
+Pins a contact to the top of the contact list. Easily refer to details of frequent contacts.
 
 Pinned contacts will appear at the top of the unfiltered list  
 ![two pinned contacts](images/pinUiDouble.jpg)  
@@ -367,7 +370,7 @@ Notes:
 
 ### Deleting multiple contacts : `deletem`
 
-Deletes the contacts within the range from CONNECTIONS.
+Deletes the contacts within the range from CONNECTIONS. Easily remove multiple contacts.
 
 #### Format:
 * `deletem START_INDEX - END_INDEX`
@@ -386,7 +389,7 @@ Notes:
 
 ### Exporting a mailing list of contacts : `mailingList`
 
-Exports a CSV file of the current view containing specified fields.
+Exports a CSV file of the current view containing specified fields. Allows you to make external notes when organizing birthday parties.
 
 #### Format:
 * `mailingList [p/] [e/] [a/] [b/] [t/]`
