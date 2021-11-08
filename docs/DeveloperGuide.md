@@ -373,6 +373,33 @@ calling `ModelManager#favoritePerson(Person target)`.
 The Sequence Diagrams below illustrates how the components interact with each other
 for the scenario where the user issues the command `fav 1`.
 
+![FavoriteSequenceDiagram](images/FavoriteSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How to keep track of isFavorite**
+
+* **Alternative 1 (Current Implementation):** Create a boolean flag within `Person` class
+which signifies that a `Person` is favorite if `true` and vice versa.
+    * Pros: Can be easily toggled since the execute method takes in model as arguments.
+    `Model#getFilteredPersonList()` retrieves the list of `Person`.
+    The status of the boolean flag can be easily identified by `Person#isFavorite()`
+    and easily toggled by `Person#SetIsFavorite()` or `Person#SetNotIsFavorite()`.
+    * Cons: Increased coupling. The toggling of `isFavorite` should ideally be handled
+    by another class, similar to the other fields in `Person` such as `Github` and `Telegram`.
+    
+* **Alternative 2:** Create a `Favorite` class which stores a boolean flag which signifies
+that a `Person` is favorite if `true` and vice versa.
+    * Pros: Reduced coupling. The toggling of `isFavorite` will no longer have to be handled
+    by the `Person` class. This is similar to that of other fields such as `Github` and
+    `Telegram` where the contents of the respective fields are handled by their
+    respective classes.
+    * Cons: Does not make sense to create a new class to store a single boolean value.
+    Unlike other fields which will require validation with the help of a validation regex,
+    `isFavorite` can only hold either a `true` or `false` value. There is absolutely
+    no need to validate the validity of the boolean values, much less create a validation
+    regex.
+
 ### Unfavorite command
 
 #### Implementation
@@ -419,6 +446,33 @@ calling `ModelManager#unfavoritePerson(Person target)`.
 
 The Sequence Diagrams below illustrates how the components interact with each other
 for the scenario where the user issues the command `unfav 1`.
+
+![UnfavoriteSequenceDiagram](images/UnfavoriteSequenceDiagram.png)
+
+#### Design considerations
+
+**Aspect: How to keep track of isFavorite**
+
+* **Alternative 1 (Current Implementation):** Create a boolean flag within `Person` class
+which signifies that a `Person` is favorite if `true` and vice versa.
+    * Pros: Can be easily toggled since the execute method takes in model as arguments.
+    `Model#getFilteredPersonList()` retrieves the list of `Person`.
+    The status of the boolean flag can be easily identified by `Person#isFavorite()`
+    and easily toggled by `Person#SetIsFavorite()` or `Person#SetNotIsFavorite()`.
+    * Cons: Increased coupling. The toggling of `isFavorite` should ideally be handled
+    by another class, similar to the other fields in `Person` such as `Github` and `Telegram`.
+    
+* **Alternative 2:** Create a `Favorite` class which stores a boolean flag which signifies
+that a `Person` is favorite if `true` and vice versa.
+    * Pros: Reduced coupling. The toggling of `isFavorite` will no longer have to be handled
+    by the `Person` class. This is similar to that of other fields such as `Github` and
+    `Telegram` where the contents of the respective fields are handled by their
+    respective classes.
+    * Cons: Does not make sense to create a new class to store a single boolean value.
+    Unlike other fields which will require validation with the help of a validation regex,
+    `isFavorite` can only hold either a `true` or `false` value. There is absolutely
+    no need to validate the validity of the boolean values, much less create a validation
+    regex.
 
 ### Export command
 
