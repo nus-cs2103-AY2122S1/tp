@@ -19,9 +19,9 @@ Given below are my contributions to the project.
   * Justification: This provides an avenue for users to categorise their tasks and links. This command groups all the tasks and links associated with a module together and filters out the rest. User only has to tag each task and link with their corresponding module and does not need to worry about the order for adding each task and link. This makes organisation simpler and easier for users.
   * Highlights: Since `Module` is referenced by `Task` and `Link`, this creates a dependency between the two pairs. The initial implementation in V1.2 resulted in too much coupling between these classes which makes unit testing difficult. We came up with a better implementation in V1.3 to reduce coupling which enhances the overall code quality.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=chowRuiYan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
-
 <div style="page-break-after: always;"></div>
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=chowRuiYan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme (Pull request [\#138](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/138))
