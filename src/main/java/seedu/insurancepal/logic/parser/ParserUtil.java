@@ -1,7 +1,7 @@
 package seedu.insurancepal.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.insurancepal.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.insurancepal.logic.parser.RevenueCommandParser.INVALID_REVENUE_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -116,7 +116,7 @@ public class ParserUtil {
         requireNonNull(revenue);
         String trimmedRevenue = revenue.trim();
         if (!Revenue.isValidRevenue(trimmedRevenue)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(INVALID_REVENUE_COMMAND_FORMAT,
                     RevenueCommand.COMMAND_WORD));
         }
         float number = Float.valueOf(trimmedRevenue);

@@ -20,8 +20,11 @@ public class RevenueCommand extends Command {
     public static final String COMMAND_WORD = "revenue";
 
     public static final String MESSAGE_ADD_REVENUE_SUCCESS = "Added revenue to Person: %1$s";
-    public static final String MESSAGE_ADD_REVENUE_FAIL = "Failed to add revenue from Person: %1$s, "
-            + "resulting revenue is negative!";
+    public static final String MESSAGE_ADD_REVENUE_FAIL_NEGATIVE = "Failed to add revenue to Person: %1$s. "
+            + "\nResulting revenue is negative!";
+    public static final String MESSAGE_ADD_REVENUE_FAIL_OVERFLOW = "Failed to add revenue to Person: %1$s, "
+            + "\nResulting revenue is too large, ensure that total revenue is not more than 19,999,998!";
+
 
     private final Index index;
     private final Revenue revenue;
@@ -47,14 +50,18 @@ public class RevenueCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                this.revenue.addRevenue(personToEdit.getRevenue()),
-                personToEdit.getAddress(), personToEdit.getTags(),
-                personToEdit.getInsurances(), personToEdit.getNote(),
-                personToEdit.getAppointment(), personToEdit.getClaims());
+                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    this.revenue.addRevenue(personToEdit.getRevenue()),
+                    personToEdit.getAddress(), personToEdit.getTags(),
+                    personToEdit.getInsurances(), personToEdit.getNote(),
+                    personToEdit.getAppointment(), personToEdit.getClaims());
+
+        if (editedPerson.getRevenue().isMaxRevenue()) {
+            throw new CommandException(String.format(MESSAGE_ADD_REVENUE_FAIL_OVERFLOW, personToEdit.getName()));
+        }
 
         if (!editedPerson.getRevenue().isValidResultingRevenue()) {
-            throw new CommandException((MESSAGE_ADD_REVENUE_FAIL));
+            throw new CommandException(String.format(MESSAGE_ADD_REVENUE_FAIL_NEGATIVE, personToEdit.getName()));
         }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
