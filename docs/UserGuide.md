@@ -20,8 +20,8 @@ classes. If you are familiar with Unix commands, this is definitely for you!
   3. [Data Features](#data-features)
       1. [Fill Sample Data: `fill`](#fill-sample-data)
       2. [Purge All Data: `purge`](#purge-all-data)
-      3. [Download Data: `download`](#download-data)
-      4. [Upload Data: `upload`](#upload-data)
+      3. [Upload Data: `upload`](#upload-data)
+      4. [Download Data: `download`](#download-data)
   4. [Student Features](#student-features)
       1. [Add Student: `add`](#add-student)
       2. [Edit Student Details: `edit`](#edit-student)
@@ -134,14 +134,10 @@ As this is a mass operation, it might take a couple of seconds to complete.
 Clears all data in PE. This can be used to delete pre-existing sample data or existing student data.
 Otherwise, throws an error if no pre-existing data.
 
-### <a name="download-data"></a>2.3 Download Data: `download` or F3 on keyboard
-
-Downloads the student data to a CSV file in the chosen directory. The file will be automatically named `programmerError.csv`.
-
-### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
+### <a name="upload-data"></a>2.3 Upload Data: `upload` or F4 on keyboard
 
 Uploads student data via a CSV file with the following header: `studentId,classId,name,email`. Note that the data
-should contain **only** the student ID, class ID, name and email field respectively and spaces directly before or after 
+should contain **only** the student ID, class ID, name and email field respectively and spaces directly before or after
 commas should be avoided.
 
 Here is an [example CSV file](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/sample_upload/validDataForUpload.csv) on GitHub.
@@ -150,16 +146,21 @@ You may download files from GitHub following the instructions [here](https://sta
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**
 the CSV should *not* contain students' lab results since this functionality is only meant for the TA to automate the adding of students to PE.
 
-- As such, simply uploading the CSV obtained via the `download` command will not be accepted
-- Furthermore, if there are already existing students, the upload will **overwrite** the existing data rather than
+- If there are already existing students, the upload will **overwrite** the existing data rather than
   append to it. This is because in a typical use case, the TA would not want to have the existing data kept if they
   would like to use student data from their own CSV file.
+- Furthermore, simply uploading the CSV obtained via the `download` command will result in the file being rejected
 </div>
 
 In summary:
 1. Select a valid CSV file (with header: `studentId,classId,name,email`) from the file chooser.
 2. Note that this command is **not** meant for uploading lab results. Rather, it is only for automating the adding of
    students to PE.
+
+### <a name="download-data"></a>2.4 Download Data: `download` or F3 on keyboard
+
+Downloads the student data to a CSV file in the chosen directory. The file will be automatically named `programmerError.csv`.
+
 
 ## <a name="student-features"></a>3. Student Features
 
