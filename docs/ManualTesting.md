@@ -38,12 +38,12 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
   * [Visual Design](#visual-design)
   * [User Interface Functionality](#user-interface-functionality)
 * [Performance Testing](#performance-testing)
-  * [Visualization with large Academy Directory](#visualization-with-large-academy-directory-)
-  * [Limit test Academy Directory capacity](#limit-test-academy-directory-capacity-)
+  * [Visualization with large Academy Directory](#visualization-with-large-academy-directory-_[coming-soon]_)
+  * [Limit test Academy Directory capacity](#limit-test-academy-directory-capacity-_[coming-soon]_)
 * [Compatibility Testing](#compatibility-testing)
-  * [Cross-OS Compatibility](#cross-os-compatibility-)
+  * [Cross-OS Compatibility](#cross-os-compatibility-_[coming-soon]_)
 * [Portability Testing](#portability-testing)
-  * [Transfer of Academy Directory](#transfer-of-academy-directory-)
+  * [Transfer of Academy Directory](#transfer-of-academy-directory-_[coming-soon]_)
 
 
 
