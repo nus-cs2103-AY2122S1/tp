@@ -51,16 +51,16 @@ public class GraphPanel extends UiPart<Region> {
         lineChart.getData().clear();
         lineChart.getData().add(series);
         series.getData().clear();
-        fillXYSeriesWithLastKDataPoints(series, averageProfits, k);
+        fillSeriesWithLastKDataPoints(series, averageProfits, k);
     }
 
     /**
-     * Fills an XYChartSeries with only the last k data points in dataPoints provided.
+     * Fills an XYChart Series with only the last k data points in dataPoints provided.
      * @param series The XYChart.Series to be filled
      * @param dataPoints A SortedMap object encapsulating the dataPoints
      * @param k An integer, k. Only the last k data points in dataPoints will be used to fill series
      */
-    private void fillXYSeriesWithLastKDataPoints(XYChart.Series<String, Number> series,
+    private void fillSeriesWithLastKDataPoints(XYChart.Series<String, Number> series,
                                                SortedMap<String, Double> dataPoints, int k) {
         int numDataPoints = dataPoints.size();
         int startIndex = numDataPoints - k + 1;
