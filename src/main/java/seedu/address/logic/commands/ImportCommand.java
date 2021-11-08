@@ -60,9 +60,9 @@ public class ImportCommand extends Command {
         int contactsAdded;
 
         try {
-            String os = System.getProperty("os.name");
+            String os = System.getProperty("os.name").toLowerCase();
 
-            if (os.equals("Windows")) {
+            if (os.contains("win")) {
                 importedFilePath = Paths.get("data", importedFileName);
             } else {
                 importedFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", importedFileName)

@@ -50,9 +50,9 @@ public class ExportCommand extends Command {
         Path outputFilePath;
 
         try {
-            String os = System.getProperty("os.name");
+            String os = System.getProperty("os.name").toLowerCase();
 
-            if (os.equals("Windows")) {
+            if (os.contains("win")) {
                 outputFilePath = Paths.get("data", outputFileName);
             } else {
                 outputFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", outputFileName).normalize();
