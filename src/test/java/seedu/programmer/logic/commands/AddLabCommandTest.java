@@ -1,5 +1,6 @@
 package seedu.programmer.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
@@ -61,5 +62,12 @@ public class AddLabCommandTest {
 
         assertCommandSuccess(addLabCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void equals_sameLab_returnsTrue() {
+        AddLabCommand sampleCommandACopy = new AddLabCommand(sampleLabA);
+        assertEquals(sampleCommandA, sampleCommandACopy);
+    }
 }
+
 

@@ -2,7 +2,7 @@ package seedu.programmer.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.programmer.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
+import static seedu.programmer.commons.core.Messages.MESSAGE_STUDENTS_FILTERED;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.TypicalStudents.ALICE;
 import static seedu.programmer.testutil.TypicalStudents.BENSON;
@@ -75,7 +75,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_zeroQueryArg_allStudentFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_FILTERED, 7);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -85,7 +85,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_singleNameQueryArg_oneStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_FILTERED, 1);
         StudentDetailContainsQueryPredicate predicate = preparePredicate("Elle", null, null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -95,7 +95,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_singleCidQueryArg_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_FILTERED, 2);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "B01", null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -105,7 +105,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_singleSidQueryArg_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_FILTERED, 2);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "a021", null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
@@ -115,7 +115,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleQueryArg_oneStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_FILTERED, 1);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(
                 "Pauline", "A0212425H", null, null);
         FilterCommand command = new FilterCommand(predicate);
@@ -126,7 +126,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleQueryArg_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_STUDENTS_FILTERED, 2);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(
                 null, "A02", "B0", null);
         FilterCommand command = new FilterCommand(predicate);

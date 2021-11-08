@@ -5,25 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.testutil.Assert.assertThrows;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.logic.commands.exceptions.CommandException;
-import seedu.programmer.model.Model;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyProgrammerError;
-import seedu.programmer.model.ReadOnlyUserPrefs;
+import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.DisplayableObject;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 import seedu.programmer.model.student.comparator.SortByLabNumber;
 import seedu.programmer.testutil.StudentBuilder;
 
@@ -72,11 +71,26 @@ public class AddCommandTest {
 
     @Test
     public void execute_invalidName_throwsCommandException() {
-        AddCommand addCommand = new AddCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
+        assertThrows(IllegalArgumentException.class, Name.MESSAGE_CONSTRAINTS, () ->
+                new AddCommand(new StudentBuilder().withName("Ali'ce").build()));
+    }
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT_ID, () ->
-            addCommand.execute(modelStub));
+    @Test
+    public void execute_invalidStudentId_throwsCommandException() {
+        assertThrows(IllegalArgumentException.class, StudentId.MESSAGE_CONSTRAINTS, () ->
+                new AddCommand(new StudentBuilder().withStudentId("AAAAAAAAA").build()));
+    }
+
+    @Test
+    public void execute_invalidClassId_throwsCommandException() {
+        assertThrows(IllegalArgumentException.class, ClassId.MESSAGE_CONSTRAINTS, () ->
+                new AddCommand(new StudentBuilder().withClassId("A19").build()));
+    }
+
+    @Test
+    public void execute_invalidEmail_throwsCommandException() {
+        assertThrows(IllegalArgumentException.class, Email.MESSAGE_CONSTRAINTS, () ->
+                new AddCommand(new StudentBuilder().withEmail("alice@gmail.com").build()));
     }
 
     @Test
@@ -101,153 +115,6 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
-     */
-    private static class ModelStub implements Model {
-
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getProgrammerErrorFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setProgrammerErrorFilePath(Path programmerErrorFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addStudent(Student student) throws CommandException {
-            throw new CommandException(AddCommand.MESSAGE_DUPLICATE_STUDENT_ID);
-        }
-
-        @Override
-        public void setProgrammerError(ReadOnlyProgrammerError programmerError) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyProgrammerError getProgrammerError() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasStudent(Student student) {
-            return false;
-        }
-
-        @Override
-        public boolean hasSameStudentId(Student student) {
-            return false;
-        }
-
-        @Override
-        public boolean hasSameStudentEmail(Student student) {
-            return false;
-        }
-
-        @Override
-        public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
-            return false;
-        }
-
-        @Override
-        public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
-            return false;
-        }
-
-        @Override
-        public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
-            return false;
-        }
-
-        @Override
-        public boolean hasLab(Lab lab) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteStudent(Student target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setStudent(Student target, Student editedStudent) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Student> getFilteredStudentList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Student> getAllStudents() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<DisplayableObject> getSelectedInformation() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Student getSelectedStudent() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setSelectedStudent(Student target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setSelectedLabs(List<Lab> labs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-
-        @Override
-        public void clearSelectedInformation() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setLabsTracker(List<Lab> labs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void clearLabsTracker() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredStudentList(Predicate<Student> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
      * A Model stub that contains a single person.
      */
     private static class ModelStubWithStudent extends ModelStub {
@@ -263,6 +130,17 @@ public class AddCommandTest {
             requireNonNull(student);
             return this.student.isSameStudent(student);
         }
+
+        @Override
+        public boolean hasSameStudentId(Student student) {
+            return this.student.isSameStudentId(student);
+        }
+
+        @Override
+        public boolean hasSameStudentEmail(Student student) {
+            return this.student.isSameStudentEmail(student);
+        }
+
     }
 
     /**

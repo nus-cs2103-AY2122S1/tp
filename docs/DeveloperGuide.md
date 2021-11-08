@@ -11,20 +11,21 @@ title: Developer Guide
 4. [Architecture](#Architecture)
 5. [UI components](#UI component)
 6. [Logic component](#Logic component)
-7. [Storage component](#Storage component)
-8. [Implementations](#Implementations)
-9. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-10. [Appendix: Requirements](#Appendix Requirements)
-11. [Common classes](#Common classes)
-12. [User Stories](#User Stories)
-13. [Use cases](#Use Cases)
-14. [Non-Functional Requirements](#Non-Functional Requirements)
-15. [Glossary](#Glossary)
-16. [Appendix: Instructions for manual testing](#Appendix)
+7. [Model](#Model component)
+8. [Storage component](#Storage component)
+9. [Common classes](#Common classes)
+10. [Implementations](#Implementations)
+11. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+12. [Appendix: Requirements](#Appendix Requirements)
+13. [User Stories](#User Stories)
+14. [Use cases](#Use Cases)
+15. [Non-Functional Requirements](#Non-Functional Requirements)
+16. [Glossary](#Glossary)
+17. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Acknowledgements"></a> **Acknowledgements**
+## <a name="Acknowledgements"></a> **1. Acknowledgements**
 
 ProgrammerError makes use of the following third-party libraries:
 
@@ -34,13 +35,13 @@ ProgrammerError makes use of the following third-party libraries:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Setting up"></a> **Setting up, getting started**
+## <a name="Setting up"></a> **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Design"></a> **Design**
+## <a name="Design"></a> **3. Design**
 
 <div markdown="span" class="alert alert-primary">
 
@@ -48,7 +49,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
-## <a name="Architecture"></a> Architecture
+## <a name="Architecture"></a> **4. Architecture**
 
 <img src="images/ArchitectureDiagram.png" width="280"/>
 
@@ -97,22 +98,39 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-## <a name="UI component"></a> UI component
+## <a name="UI component"></a> **5. UI component**
 
 The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.1).
+Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
 
-The main UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
-, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
-the commonalities between classes that represent parts of the visible GUI.
+![Structure of the UI Component](images/ui/UiClassDiagramOverview.png)
+<div style="text-align: center">
+    <em>Figure 5.1: Overview of Ui components</em>
+</div>
+<br>
+1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
+2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
+   For instance, the `FileManager` handles situations where the user is required to select files or directories.
+3. Thirdly, to manage the display of popup windows to the user, `MainWindow` interacts with a `PopupManager` which handles
+   the configuration, creation and showing of popups on the Ui.
 
 In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
 from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
 to be displayed to the user.
 
-The `UI` component uses the JavaFx UI framework.
+Now taking a closer look at the `MainWindow` component, it consists of a number of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
+, `StatusBarFooter` etc. (Figure 5.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
+
+![Structure of the UI Component](images/ui/UiClassDiagramMainComponents.png)
+<div style="text-align: center">
+    <em>Figure 5.2: MainWindow Ui components</em>
+</div>
+<br>
+Note that the `UI` component uses the JavaFx UI framework.
 
 - The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
   For example, the layout of
@@ -129,14 +147,13 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-## <a name="Logic component"></a> Logic component
+## <a name="Logic component"></a> **6. Logic component**
 
-**
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Logic Class Diagram](images/LogicClassDiagram.png)
 
 How the `Logic` component works:
 
@@ -150,14 +167,14 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/commands/DeleteCommand/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/commands/DeleteCommand/DeleteCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![Parser Class](images/ParserClasses.png)
 
 How the parsing works:
 
@@ -168,12 +185,11 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-## <a name="Model component"></a> Model component
+## <a name="Model component"></a> **7. Model component**
 
-**
-API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Component](images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -193,7 +209,7 @@ The `Model` component,
 
 </div>
 
-## <a name="Storage component"></a> Storage component
+## <a name="Storage component"></a> **8. Storage component**
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
@@ -208,13 +224,13 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-## <a name="Common classes"></a> Common classes
+## <a name="Common classes"></a> **9. Common classes**
 
 Classes used by multiple components are in the `seedu.programmer.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Implementations"></a> **Implementation**
+## <a name="Implementations"></a> **10. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -236,7 +252,6 @@ and `Model#redoProgrammerError()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-
 Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
 initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
 
@@ -250,7 +265,7 @@ state.
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also
+Step 3. The user executes `add -n David …​` to add a new student. The `add` command also
 calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
 the `programmerErrorStateList`.
 
@@ -294,7 +309,7 @@ Thus, the `programmerErrorStateList` remains unchanged.
 
 Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
 pointing at the end of the `programmerErrorStateList`, all ProgrammerError states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
+purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
 desktop applications follow.
 
 ![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
@@ -316,7 +331,62 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-### Student List Filtering
+### Add Student 
+#### Implementation 
+
+The add student feature allows the CS2100 to add a new student into the student list. Its implementation 
+introduces the following classes: 
+
+- `AddCommand` that extends `Command`
+- `AddCommandParser` that implements `Parser<AddCommand>`
+- Student information: `Student`, `Name`, `StudentId`, `ClassId`, `Email`, `UniqueStudentList` 
+
+The syntax of this command is `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`. For instance,
+`add -n Erwin -sid A0234596H -cid B02 -email e0543221@u.nus.edu` will create a student with the given name, student id, 
+class id and email. 
+
+Given below is a possible usage scenario:
+
+The CS2100 TA keys in the command `add -n Erwin -sid A0234596H -cid B02 -email e0543221@u.nus.edu`. 
+
+The mechanism is as described below: 
+- Upon detecting `add` as the command word. `ProgrammerErrorParser` will create a `AddCommandParser` with the input 
+name, student id, class id and email. 
+- `AddCommandParser` parses the name, student id, class id and email and creates a `Student` object. It will then 
+create a `AddCommand` with the new `Student` object. 
+- `AddCommand` receives the new `Student` object and checks if any student in `UniqueStudentList` shares the same `studentId` and `email`
+with the newly created student. 
+- If the new `Student` is unique it will be added to the `UniqueStudentList`. 
+- ProgrammerError will show a success message for adding the student. For example, `New student added: Erwin; Student ID: A0234596H; Class ID: B02; Email: e0543221@u.nus.edu`
+in the `resultDisplay`, informing the user that the add operation is valid. 
+
+
+The following (partial) sequence diagram shows how the add command works:
+- Note: toAdd in the sequence diagram represents the new `Student` object to be added.
+- Refer to [Logic component](#Logic component) for a review of the Logic Component.
+
+
+ ![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandAbstractSequenceDiagram.png)
+
+
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandActivityDiagram.png)
+
+#### Design considerations: 
+
+#### Aspect: Only unique Student ID and email is accepted: 
+- Each student object should have unique Student ID and email. 
+  - Pros: 
+    - Ensures that each student is unique and easily identifiable with the key attributes.
+    - Ensures that there are no duplicates and redundant data. 
+  - Cons: 
+    - The strict checks on the `UniqueStudentList` will affect `EditCommand` when the user tries to edit an existing student. 
+    This will happen when the user only wants to edit one of the attribute. (For example, studentId.)
+    This newly edited student will have an old copy of the email. This side effect will cause the newly created `student` to clash with its old instance in `UniqueStudentList`, 
+    causing the command to fail, even though it should be valid. As such, it makes it hard to implement, as we have to 
+    ensure that it works with `EditCommand` as well.
+
+### Filter Student List
 
 #### Implementation
 
@@ -332,35 +402,42 @@ the `QueryStudentDescriptor`.
 
 These operations are exposed in the `Model` interface as `Model#updateFilteredStudentList(Predicate<Student>)`.
 
-Given below is an example usage scenario and how the list filtering mechanism behaves at each step.
+Given below is an example usage scenario and how the list filtering mechanism behaves.
 
 Step 1. The CS2100 TA launches the application.
 
 Step 2. The CS2100 TA executes `filter -cid B01` to display all the students whose Class ID matches `B01`.
 
-The following UML sequence diagram shows how the filter command works.
+The following UML sequence diagrams shows how the filter command works:
 
-![FilterSequenceDiagram](images/commands/FilterCommand/FilterSequenceDiagram.png)
+1. In the following sequence diagram, the focus is on modelling the interactions between components to create the `FilterCommand` object.
+   
+![FilterSequenceDiagramParse](images/commands/FilterCommand/FilterSequenceDiagramParse.png)
+
+2. In the next sequence diagram, the focus is on the interactions between components when the `FilterCommand` is being executed.
+
+![FilterSequenceDiagramExecute](images/commands/FilterCommand/FilterSequenceDiagramExecute.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate`
 , `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML,
-the lifeline reaches the end of diagram.>
-
+the lifeline reaches the end of diagram.
 </div>
 
 The following UML activity diagram summarizes what happens when a CS2100 TA executes a new filter command.
+
+![FilterActivityDiagrm](images/commands/FilterCommand/FilterActivityDiagram.png)
 
 #### Design Consideration
 
 **Aspect: How filter command executes**
 
-* **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`
-  , `-sid`)
+* **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`, `-sid` and `-email`)
     * Pros: Allow for flexibility in the way the CS2100 TA wants to filter the list.
     * Cons: More difficult to implement and proper handling of the combinations of query parameters is needed.
 
 * **Alternative 2:** A different type of filter command to filter by each of the student's attribute.
     * Pros: Implementation does not need to consider the combination of query parameters.
-    * Cons: Multiple commands may be required to filter by more than one query dimension.
+    * Cons: Multiple commands have to be executed to filter the list in more than one query dimension.
 
 **Aspect: How to handle combination of query parameters**
 
@@ -368,7 +445,7 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
   query parameters.
     * Pros: Need not explicitly handle the different argument combinations at the higher-level abstractions
       (e.g. `FilterCommandParser` class). Code is more maintainable.
-    * Cons: Was more difficult to implement.
+    * Cons: Was more difficult to implement which required time to design the interactions among the components.
 
 * **Alternative 2:** Handle the different argument combinations in the `FilterCommandParser` class.
     * Pros: Easier to handle empty argument cases with explicit conditional checking.
@@ -382,7 +459,7 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
     * Cons: From the user experience perspective, it is slightly longer than type than other alternative.
 
 * **Alternative 2:** Calling it `view`.
-    * Pros: It is shorter to type and less refactoring required from the code that this project morphed from.
+    * Pros: It is shorter to type and less refactoring required from the code that this project evolved from.
     * Cons: `view` is not as intuitive as other alternatives.
 
 * **Alternative 3 (future consideration):** Providing a shortcut command for `filter`.
@@ -504,9 +581,17 @@ success.
    downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
    functionality of allowing the CS2100 TA to select a folder destination.
 
+
+### Purge Feature 
+
+
+This sequence diagram shows how the `purge` command works:
+![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Documentation"></a> **Documentation, logging, testing, configuration, dev-ops**
+## <a name="Documentation"></a> **11. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -516,17 +601,17 @@ success.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Appendix Requirements"></a> **Appendix: Requirements**
+## <a name="Appendix Requirements"></a> **12. Appendix: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
-CS2100 TAs who
+CS2100 Lab TAs who
 
 * have to manage a number of students across different classes
 * keep track of the students' lab results
-* keep track of the students' details (eg. studentId, email)
+* keep track of the students' details (eg. Student ID, email)
 * prefer and comfortable with CLI tools
 * can type fast
 * are proficient with Unix commands
@@ -534,9 +619,9 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
+CS2100 Lab TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
-## <a name="User Stories"></a> User Stories
+## <a name="User Stories"></a> **13. User Stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -570,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-## <a name="Use Cases"></a> Use Cases
+## <a name="Use Cases"></a> **14. Use Cases**
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
@@ -744,7 +829,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
   Use case ends.
 
 
-## <a name="Non-Functional Requirements"></a> Non-Functional Requirements
+## <a name="Non-Functional Requirements"></a> **15. Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
@@ -761,7 +846,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions
    1280x720 and higher, and screen scales 150%.
 
-## <a name="Glossary"></a> Glossary
+## <a name="Glossary"></a> **16. Glossary**
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
@@ -771,7 +856,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Appendix"></a> **Appendix: Instructions for manual testing**
+## <a name="Appendix"></a> **17. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 

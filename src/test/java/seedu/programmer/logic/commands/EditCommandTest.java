@@ -1,31 +1,48 @@
 package seedu.programmer.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.programmer.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.DESC_BOB;
-//import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
-//import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.programmer.logic.commands.EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS;
+import static seedu.programmer.logic.commands.EditCommand.MESSAGE_NO_LAB_EDITED;
 import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.programmer.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
+import static seedu.programmer.testutil.TypicalStudents.getTypicalStudents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.Messages;
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
-//import seedu.programmer.model.ProgrammerError;
+import seedu.programmer.model.ProgrammerError;
+import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.UserPrefs;
+import seedu.programmer.model.student.DisplayableObject;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.comparator.SortByClass;
+import seedu.programmer.model.student.comparator.SortByLabNumber;
+import seedu.programmer.model.student.comparator.SortByStudentName;
+import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 import seedu.programmer.testutil.EditStudentDescriptorBuilder;
-//import seedu.programmer.testutil.StudentBuilder;
+import seedu.programmer.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -34,37 +51,42 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
-    //    @Test
-    //    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-    //        Student editedStudent = new StudentBuilder().build();
-    //        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
-    //        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
-    //        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-    //        Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
-    //        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-    //        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    //    }
-    //
-    //    @Test
-    //    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-    //        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-    //        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
-    //
-    //        StudentBuilder studentInList = new StudentBuilder(lastStudent);
-    //        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withClassId(VALID_CLASS_ID_BOB).build();
-    //
-    //        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-    //                .withClassId(VALID_CLASS_ID_BOB).build();
-    //        EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
-    //
-    //        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-    //
-    //        Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
-    //        expectedModel.setStudent(lastStudent, editedStudent);
-    //
-    //        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    //
-    //    }
+    @Test
+    public void execute_allFieldsSpecified_success() {
+        Model modelStubWithStudents = new ModelStubWithStudents(getTypicalStudents());
+        Student editedStudent = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
+        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent) + "\n"
+                + MESSAGE_NO_LAB_EDITED, editedStudent);
+        Model expectedModel = new ModelStubWithStudents(getTypicalStudents());
+        expectedModel.setStudent(expectedModel.getAllStudents().get(INDEX_FIRST_STUDENT.getZeroBased()), editedStudent);
+        assertCommandSuccess(editCommand, modelStubWithStudents, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_someFieldsSpecified_success() {
+        Model modelStubWithStudents = new ModelStubWithStudents(getTypicalStudents());
+
+        Index indexLastStudent = Index.fromOneBased(modelStubWithStudents.getFilteredStudentList().size());
+        Student lastStudent = modelStubWithStudents.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+
+        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withClassId(VALID_CLASS_ID_BOB).build();
+
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withClassId(VALID_CLASS_ID_BOB).build();
+        EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
+
+        String expectedMessage = String.format(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent)
+                + "\n" + MESSAGE_NO_LAB_EDITED, editedStudent);
+
+        Model expectedModel = new ModelStubWithStudents(getTypicalStudents());
+        expectedModel.setStudent(lastStudent, editedStudent);
+
+        assertCommandSuccess(editCommand, modelStubWithStudents, expectedMessage, expectedModel);
+
+    }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_failure() {
@@ -75,21 +97,6 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, expectedMessage);
     }
-
-    //    @Test
-    //    public void execute_filteredList_success() {
-    //        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-    //        Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
-    //        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
-    //                new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
-    //
-    //        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-    //
-    //        Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
-    //        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-    //        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-    //        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    //    }
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
@@ -161,6 +168,157 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_STUDENT, DESC_BOB));
+    }
+
+
+    /**
+     * A Model stub that contains a list of student.
+     */
+    private static class ModelStubWithStudents extends ModelStub {
+        private final List<Student> students;
+
+        ModelStubWithStudents(List<Student> students) {
+            requireNonNull(students);
+            this.students = students;
+        }
+
+
+        @Override
+        public boolean hasOtherStudent(Student studentToEdit, Student editedStudent) {
+            requireAllNonNull(studentToEdit, editedStudent);
+            List<Student> studentListCopy = new ArrayList<>();
+            for (Student student : students) {
+                studentListCopy.add(student.copy());
+            }
+            studentListCopy.remove(studentToEdit);
+            return studentListCopy.stream().anyMatch(editedStudent::isSameStudent);
+        }
+
+        @Override
+        public boolean hasOtherSameStudentId(Student studentToEdit, Student editedStudent) {
+            requireAllNonNull(studentToEdit, editedStudent);
+            List<Student> studentListCopy = new ArrayList<>();
+            for (Student student : students) {
+                studentListCopy.add(student.copy());
+            }
+            studentListCopy.remove(studentToEdit);
+            return studentListCopy.stream().anyMatch(editedStudent::isSameStudentId);
+        }
+
+        @Override
+        public boolean hasOtherSameStudentEmail(Student studentToEdit, Student editedStudent) {
+            requireAllNonNull(studentToEdit, editedStudent);
+            List<Student> studentListCopy = new ArrayList<>();
+            for (Student student : students) {
+                studentListCopy.add(student.copy());
+            }
+            studentListCopy.remove(studentToEdit);
+            return studentListCopy.stream().anyMatch(editedStudent::isSameStudentEmail);
+        }
+
+        @Override
+        public void setStudent(Student target, Student editedStudent) {
+            requireAllNonNull(target, editedStudent);
+
+            int index = students.indexOf(target);
+            if (index == -1) {
+                throw new StudentNotFoundException();
+            }
+
+            students.set(index, editedStudent);
+            students.sort(new SortByClass().thenComparing(new SortByStudentName()));
+        }
+
+        @Override
+        public ObservableList<Student> getFilteredStudentList() {
+            return FXCollections.observableArrayList(students);
+        }
+
+        @Override
+        public ObservableList<Student> getAllStudents() {
+            return FXCollections.observableArrayList(students);
+        }
+
+        @Override
+        public void setSelectedStudent(Student target) {
+
+        }
+
+        @Override
+        public void setSelectedLabs(List<Lab> labs) {
+
+        }
+
+        @Override
+        public void setLabsTracker(List<Lab> labs) {
+
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof ModelStubWithStudents// instanceof handles nulls
+                    && students.equals(((ModelStubWithStudents) other).students)); // state check
+        }
+    }
+
+    /**
+     * A Model stub that always accept the student being edited.
+     */
+    private static class ModelStubAcceptingStudentEdited extends ModelStub {
+        final ArrayList<Student> studentsAdded = new ArrayList<>();
+        private ObservableList<DisplayableObject> selectedInformation = FXCollections.observableArrayList();
+        private Student selectedStudent;
+        private List<Lab> labsTracker = new ArrayList<>();
+
+        @Override
+        public boolean hasStudent(Student student) {
+            requireNonNull(student);
+            return studentsAdded.stream().anyMatch(student::isSameStudent);
+        }
+
+        @Override
+        public void addStudent(Student student) {
+            requireNonNull(student);
+            studentsAdded.add(student);
+        }
+
+        @Override
+        public ObservableList<DisplayableObject> getSelectedInformation() {
+            return selectedInformation;
+        }
+
+        @Override
+        public Student getSelectedStudent() {
+            return selectedStudent;
+        }
+
+        @Override
+        public void setSelectedStudent(Student target) {
+            this.selectedStudent = target;
+            if (selectedInformation.isEmpty()) {
+                this.selectedInformation.add(target);
+            } else {
+                ObservableList<Lab> labList = target.getLabList();
+                labList.sort(new SortByLabNumber());
+                this.selectedInformation.set(0, target);
+            }
+        }
+
+        @Override
+        public void setSelectedLabs(List<Lab> labs) {
+            assert selectedInformation != null;
+            if (!(selectedInformation.size() == 1)) {
+                selectedInformation.remove(1, selectedInformation.size());
+            }
+            labs.sort(new SortByLabNumber());
+            selectedInformation.addAll(labs);
+        }
+
+        @Override
+        public ReadOnlyProgrammerError getProgrammerError() {
+            return new ProgrammerError();
+        }
     }
 
 }
