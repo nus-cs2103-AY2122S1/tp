@@ -85,7 +85,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
              , [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files),
             [#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541#pullrequestreview-799559192)
 
-5. **Documentation - Updated documentations for user guide and developer's guide:**
+5. **Documentation - Updated documentations for user guide and developer guide:**
    - [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165)
          , [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240)
          , [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246),
