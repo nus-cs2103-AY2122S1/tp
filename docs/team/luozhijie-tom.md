@@ -18,11 +18,11 @@ Given below are my contributions to the project.
 * **New Feature**: Enabled module cards to show different color in the GUI. (Pull request [#92](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/92))
   * What is does: Each module in the module list is colored based on the current semester and which semester the module is taken.
   * Justification: This feature improves the product significantly because it allows user to see the selected module status intuitively.
-  * Highlights: Though the code written for this feature may not seem too much, to make this feature work correctly still needs significant efforts. For example, updating module cards' color when the current semester is changed needs a deeper understanding of the ListView class in `UI` and its link with `Model` which is not elaborated much in the original Developer guide.
+  * Highlights: Though the code written for this feature may not seem too much, to make this feature work correctly still needs significant efforts. For example, updating module cards' color when the current semester is changed needs a deeper understanding of the ListView class in `UI` and its link with `Model`.
 
 
 * **Enhancements to existing features**:
-  * Fixed bugs related to GUI. (Pull request [#165](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/165))
+  * Fixed bugs related to the GUI. (Pull request [#165](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/165))
   * Added command formats in the help window. (Pull request [#97](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/97))
   * Added a share of default modules to NUS Mod Tracker. (Pull request [165](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/165))
 
@@ -41,11 +41,10 @@ Given below are my contributions to the project.
   * User Guide: 
       * updated the documentation for `ViewCommand`(Pull request [#89](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/89))
   * Developer Guide(Pull request [#179](https://github.com/AY2122S1-CS2103T-W17-2/tp/pull/179)):
-      * Modified the explanation of `UI` and `Logic` component's architecture in Design section.
-      * Added the implementation details and UML sequence diagram for `view` and `set` features.
+      * Modified the explanation of the `UI` and `Logic` components' architecture in Design section.
+      * Added the implementation details and UML sequence diagrams for `view` and `set` features.
       * Added the use cases for set MC goal, set current semester and view modules in a specific semester.
       * Updated NFR, Glossary and instructions for manual testing.
-      * Added instructions for manual testing.
   
 * **Community**:
   * Reported bugs and suggestions for other teams in the class (examples [1](https://github.com/LuoZhijie-tom/ped/issues/2), [2](https://github.com/LuoZhijie-tom/ped/issues/8))
