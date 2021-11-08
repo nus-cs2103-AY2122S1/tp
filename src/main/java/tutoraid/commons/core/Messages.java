@@ -27,8 +27,6 @@ public class Messages {
             + " entries to delete from.";
     public static final String MESSAGE_CAPACITY_LESS_THAN_STUDENTS = "The given capacity is lower "
             + "than the number of students currently enrolled in the lesson!";
-    public static final String MESSAGE_JSON_INTEGRITY_LESSON_OVER_CAPACITY = "The save data is corrupted: One or more "
-            + "lessons has too many students. The student data will be discarded.";
     public static final String MESSAGE_JSON_INTEGRITY_LESSON_ERROR = "The lesson save data is corrupted and will be "
             + "discarded.";
     public static final String MESSAGE_JSON_INTEGRITY_STUDENT_ERROR = "The student save data is corrupted and will be "
