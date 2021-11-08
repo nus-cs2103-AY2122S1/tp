@@ -14,7 +14,6 @@ import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Student;
 
-
 /**
  * Edits a lab with new lab number and total score for all students.
  */

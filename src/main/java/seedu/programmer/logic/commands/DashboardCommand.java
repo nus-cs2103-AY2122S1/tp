@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import seedu.programmer.model.Model;
 
 /**
- * Dashboard command for user to see statistics.
+ * Shows ProgrammerError's Dashboard for user to see students' statistics.
  */
 public class DashboardCommand extends Command {
 

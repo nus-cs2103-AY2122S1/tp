@@ -17,7 +17,7 @@ import seedu.programmer.model.student.Student;
 import seedu.programmer.storage.Storage;
 
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
     /**

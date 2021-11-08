@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
 /**
- * A CommandResult that requires handling in the UI.
+ * A CommandResult that requires handling in the UI to download the data in ProgrammerError as a csv file.
  */
 public class DownloadCommandResult extends CommandResult {
 

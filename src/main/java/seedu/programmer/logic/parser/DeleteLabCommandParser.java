@@ -14,7 +14,7 @@ import seedu.programmer.model.student.LabNum;
 
 
 /**
- * Parses input arguments and creates a new CreateLabResultCommand object
+ * Parses input arguments and creates a new DeleteLabCommand object.
  */
 public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
 

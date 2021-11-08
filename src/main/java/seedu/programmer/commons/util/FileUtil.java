@@ -23,7 +23,7 @@ import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
 
 /**
- * Writes and reads files
+ * Writes and reads files.
  */
 public class FileUtil {
 

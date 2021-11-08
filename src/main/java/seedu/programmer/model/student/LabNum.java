@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a student's name in the ProgrammerError.
+ * Represents a Lab's number in the ProgrammerError.
  */
 public class LabNum {
     private final Integer labNum;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code LabNum}.
      *
-     * @param labNum A valid name.
+     * @param labNum A lab's number.
      */
     public LabNum(Integer labNum) {
         requireNonNull(labNum);

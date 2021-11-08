@@ -175,6 +175,9 @@ public class UniqueStudentList implements Iterable<Student> {
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
+    /**
+     * Replaces ProgrammerError's student list to the replacement list.
+     */
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

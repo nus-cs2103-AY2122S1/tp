@@ -26,6 +26,11 @@ public class ShowCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a ShowCommand to show the {@code Student} as indicated by the targetIndex
+     *
+     * @param targetIndex the index of the target student shown on ProgrammerError
+     */
     public ShowCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
