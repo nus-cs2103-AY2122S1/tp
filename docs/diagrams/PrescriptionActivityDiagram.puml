@@ -7,9 +7,8 @@ start
 
 if () then ([command is valid])
     :Add/remove prescription
-    from model;
-    :Save prescription to
-    corresponding appointment;
+    from Appointment object;
+    :Updates model;
     :Write to file;
 else ([else])
     :Show error
