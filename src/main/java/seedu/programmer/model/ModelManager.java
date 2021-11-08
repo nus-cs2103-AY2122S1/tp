@@ -168,6 +168,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasNoStudents() {
+        return programmerError.getStudentList().isEmpty();
+    }
+
+    @Override
     public ObservableList<DisplayableObject> getSelectedInformation() {
         return programmerError.getSelectedInformation();
     }

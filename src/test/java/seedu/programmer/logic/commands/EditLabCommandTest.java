@@ -1,5 +1,6 @@
 package seedu.programmer.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
@@ -24,8 +25,8 @@ public class EditLabCommandTest {
     private static Lab validLab;
     private static Lab sampleLabA;
     private static Lab sampleLabB;
-    private static LabNum newLabNum = new LabNum(15);
-    private static LabNum newLabNum1 = new LabNum(14);
+    private static LabNum newLabNum = new LabNum(11);
+    private static LabNum newLabNum1 = new LabNum(12);
     private static LabNum newLabNum2 = new LabNum(13);
     private static LabTotal newLabTotal = new LabTotal(40);
     private static EditLabCommand sampleCommandA;
@@ -52,7 +53,7 @@ public class EditLabCommandTest {
 
     @Test
     public void execute_labTitleDoesNotExist_throwsCommandException() {
-        Lab labToEdit = new Lab(new LabNum(120));
+        Lab labToEdit = new Lab(new LabNum(12));
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
 
         String expectedMessage = String.format(Lab.MESSAGE_LAB_NOT_EXISTS, labToEdit);
@@ -106,5 +107,11 @@ public class EditLabCommandTest {
         Model expectedModel2 = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
 
         assertCommandSuccess(editLabCommand2, model, expectedMessage2, expectedModel2);
+    }
+
+    @Test
+    public void equals_sameLab_returnsTrue() {
+        EditLabCommand sampleCommandACopy = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
+        assertEquals(sampleCommandA, sampleCommandACopy);
     }
 }

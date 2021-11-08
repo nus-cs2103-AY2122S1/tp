@@ -128,6 +128,10 @@ public interface Model {
      */
     ObservableList<Student> getAllStudents();
 
+    /**
+     * Returns true if the filtered student list is empty
+     */
+    boolean hasNoStudents();
 
     /**
      * Returns the selected information.

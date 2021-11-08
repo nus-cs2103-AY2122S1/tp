@@ -106,9 +106,32 @@ class JsonAdaptedStudent {
         if (labResultList != null) {
             List<Lab> studentLabResults = new ArrayList<>();
             for (JsonAdaptedLab adaptedLab : labResultList) {
-                Lab lab = new Lab(new LabNum(adaptedLab.getLabNum()),
-                        new LabResult(adaptedLab.getLabResult()),
-                        new LabTotal(adaptedLab.getLabTotal()));
+                if (adaptedLab == null) {
+                    throw new IllegalValueException(JsonAdaptedLab.NON_NULL_ADAPTED_LAB);
+                }
+
+                int labNum = adaptedLab.getLabNum();
+                int labResult = adaptedLab.getLabResult();
+                int labTotal = adaptedLab.getLabTotal();
+
+
+                if (!LabNum.isValidLabNum(labNum)) {
+                    throw new IllegalValueException(Lab.MESSAGE_LAB_NUMBER_CONSTRAINT);
+                }
+
+                if (!LabResult.isValidLabResult(labResult)) {
+                    throw new IllegalValueException(Lab.MESSAGE_LAB_SCORE_CONSTRAINT);
+                }
+
+                if (!LabTotal.isValidLabTotalScore(labTotal)) {
+                    throw new IllegalValueException(Lab.MESSAGE_LAB_TOTAL_SCORE_CONSTRAINT);
+                }
+
+                if (labResult > labTotal) {
+                    throw new IllegalValueException("Lab result should be smaller or equal to lab total score.");
+                }
+
+                Lab lab = new Lab(new LabNum(labNum), new LabResult(labResult), new LabTotal(labTotal));
                 studentLabResults.add(lab);
             }
             student.setLabResultRecord(studentLabResults);
