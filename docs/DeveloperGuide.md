@@ -16,7 +16,7 @@ scaffolding Notor are as follows.
     - We target fast-typers who are comfortable taking notes on their computer.
 
 In particular, we tackle the needs of mentor professors, who tend to be busy and are assigned mentees they are unlikely
-to personally know or run into often. A personal CRM like Notor is a useful tool to help mantain the mentor-mentee relationship. Key features of Notor which scaffold this
+to personally know or run into often. A personal CRM like Notor is a useful tool to help maintain the mentor-mentee relationship. Key features of Notor which scaffold this
 are:
 
 1. Powerful Organisation which is up to the user to manage many mentees
@@ -53,11 +53,11 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
-* **Supergroup**: SuperGroup is a group that can have many subgroups. We often use it interchangeably with `Group` as 
+* **Supergroup**: SuperGroup is a group that can have many subgroups. We often use it interchangeably with `Group` as
     `Supergroup` is more of an implementation detail.
-* **Subgroup**: A child of a `Supergroup` used to store multiple persons based on a more specific category than `Supergroup`. A **
-  Subgroup** can be created by specifying the parent group of the **Subgroup**. A person can be in the **Subgroup** only if 
-  the person is already in the parent `Supergroup`.
+* **Subgroup**: A child of a `Supergroup` used to store multiple persons based on a more specific category than `Supergroup`.
+    A `Subgroup` can be created by specifying the parent group of the `Subgroup`. A person can be in the `Subgroup` only if
+    the person is already in the parent `Supergroup`.
 * **Tag**: A string descriptor attached to `Group` objects or `Person` objects
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
@@ -138,8 +138,9 @@ Gui buttons in `PersonNoteWindow`.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 * `MainWindow` does not contain PersonListPanel anymore.
-Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or SubgroupListPanel.
-* `MainWindow` contains a new GeneralNote which displays the general note.
+Now it contains `ListPanel` which can be a `PersonListPanel`, `GroupListPanel` or `SubgroupListPanel`.
+* `MainWindow` contains `GeneralNote` which displays the general note.
+* `MainWindow` has dependency with  `PersonNoteWindow`, `GroupNoteWindow` and GeneralNoteWindow.
 
 
 ### Model Changes
@@ -193,9 +194,12 @@ The `Storage` component,
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Execution of person command
+The diagram below shows how a person command is executed.
+![/PersonCommandActivityDiagram](images/PersonCommandActivityDiagram.png)
 
-### Command History 
 
+### Command History
 `CommandHistory` allows user to access past successfully executed commands by using Up and Down Arrow keys. Since, our 
 implementation of `CommandHistory` only tracks past successfully executed commands pertaining to a single instance of 
 Notor, `CommandHistory` does not have dependency to `Model` and `Storage`.
@@ -244,12 +248,12 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities:<p>
+Priorities:
 
-* High - must have<p>
-* Medium - nice to have<p>
-* Low - unlikely to have<p>
-* Default - already implemented<p>
+* High - must have
+* Medium - nice to have
+* Low - unlikely to have
+* Default - already implemented
 
 |As a …                                                                                      |I want to …                                                                                                   |So that I can …                                            |Priority    |Status     |When?         |
 |--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|------------|-----------|--------------|
@@ -379,7 +383,7 @@ Precondition: User passes the wrong parameters, command, or data
     * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6.
     * 6b2.2 : User accepts to close the note without saving. Notor closes the note window. Not shown that note is saved.
 
-    
+
 ##### Use Case: Clear tags or notes
 
 **MSS**
@@ -630,7 +634,7 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
    Expected: Person is added to the group. Person is updated with a new group in the UI.
 
 1. Test case: `person 0 /add g:Orbital`<br>
-   Expected: Nothing happened. Error details shown in the status message.
+   Expected: No person is added to a group. Error details shown in the status message.
 
 1. Other incorrect delete commands to try: `person /add`, `person 1 /add g:NonExistent`, `...`
    (where x is larger than the list size)<br>
@@ -643,8 +647,8 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
 1. Test case: `person 1 /remove g:Orbital`<br>
        Expected: Person is removed to the group. Person is updated with group removed in the UI.
 
-1. Test case: `person 0 /remove g:Orbital`<br>
-   Expected: No person is removed. Error details shown in the status message.
+    1. Test case: `person 0 /remove g:Orbital`<br>
+       Expected: No person is removed from group. Error details shown in the status message.
 
 1. Other incorrect delete commands to try: `person /remove`, `person 1 /remove g:NonExistent`, `...`
    (where x is larger than the list size)<br>
@@ -787,15 +791,12 @@ To optimize for mentors who type fast, we implemented keyboard shortcuts to ensu
 ### List Views
 We decided to have groups and subgroups so that users can organize people in the list.
 AB3 only has support listing of people. Our team needed to create new UI elements to support that.
-Even when the new UI elements, it was still tough to create commands to support the operation of switching between views and
+Even when the new UI elements are created, it was still tough to create commands to support the operation of switching between views and
 updating the list view when a change has been made.
 
-
 ### GUI Test (Implemented but scrapped due to CI failure)
-
 We have initially decided to implement **GUI Testing** because many of our functionalities
-such as clearing notes, tags and Notor, and adding notes uses a pop up window.
-
+such as clearing notes, tags and Notor, and adding notes uses a pop up window.<br>
 The difficulty level of GUI Testing is moderate because there is very limited
 guides available on **TestFX** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally,
 all efforts are of no avail.

@@ -22,7 +22,7 @@ import seedu.notor.model.util.UniqueList;
  */
 public class Notor implements ReadOnlyNotor {
     private static final String INTIAL_NOTE = "Welcome to NOTOR v1.4! This application is a personal\n"
-            + " CLI designed for mentors to keep tabs on their mentees.\n"
+            + "CLI designed for mentors to keep tabs on their mentees.\n"
             + "If you need help, you can refer to the help page!\n\n"
             + "Some things this application can do are: \n"
             + "person /list : Lists all contacts.\n"
@@ -253,7 +253,6 @@ public class Notor implements ReadOnlyNotor {
      * Gets SuperGroup based on group name.
      */
     public SuperGroup findSuperGroup(String name) {
-        // TODO: Change this method when UniqueList is updated.
         for (SuperGroup superGroup : superGroups) {
             if (superGroup.getName().equals(name)) {
                 return superGroup;
@@ -266,7 +265,6 @@ public class Notor implements ReadOnlyNotor {
      * Returns true if SuperGroup exists.
      */
     public boolean hasSuperGroup(SuperGroup superGroup) {
-        // TODO: Change this method when UniqueList is updated.
         requireNonNull(superGroup);
         return superGroups.contains(superGroup);
     }
