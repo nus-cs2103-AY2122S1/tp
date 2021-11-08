@@ -101,8 +101,8 @@ public abstract class Group implements Notable {
 
     public UniqueList<Person> getPersons() {
         UniqueList<Person> persons = new UniqueList<>();
-        for (int i = 0; i < people.size(); i++) {
-            persons.add(people.get(i));
+        for (Person p : people.values()) {
+            persons.add(p);
         }
         return persons;
     }
