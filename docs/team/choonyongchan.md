@@ -2,8 +2,7 @@
 layout: page
 title: Chan Choon Yong's Project Portfolio Page
 ---
-
-## Project: Socius
+### Project: Socius
 
 **About the project**
 
@@ -13,9 +12,7 @@ JavaFX. Socius is written in Java, and has about 12 kLoC.
 
 **Code contributed**
 
-Click on the following link to view the code that I have contributed to the project:
-
-* [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=w08&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=choonyongchan&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&zFR=false)
+Click on the following link to view the code that I have contributed to the project: [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=w08&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=choonyongchan&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&zFR=false)
 
 **3 New features and enhancements added**
 
@@ -23,22 +20,18 @@ The following describes the enhancements and new features that I have added to t
 
 **3.1 Add and Delete Tags to people (Feature)** [#168](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/168), [#169](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/169)
 * What it does: This feature allows the user to add and delete meaningful tags to people to better categorise and manage their contact list.
-* Justification: Socius enables users to include many people into their contact list. 
-This feature allows users to tag people according to their relationship (e.g. CS2103T Group Mate, CAPT Neighbour, etc.). 
+* Justification: This feature allows users to tag people according to their relationship (e.g. CS2103T Group Mate, CAPT Neighbour, etc.). 
 This greatly helps users to classify and manage their contact list, especially if there are many people in their contact list.
-* Highlights: This enhancement affects existing commands and commands to be implemented. The implementation was challenging as it changes the Person model which is depended on by many other classes, including the GUI. 
-Many lines of test cases and test data were written to rigorously test this feature.
+* Highlights: This enhancement affects existing commands and commands to be implemented. The implementation was challenging as it changes the Person model which is depended on by many other classes, including the GUI.
 
 **3.2 Find contacts (Feature)** [#60](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/60), [#194](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/194)
 * What it does: This feature allows the user to search through their contacts using any keyword. 
 This enables user to efficiently manage their contact list and improve ease-of-use of Socius.
-* Justification: Socius enable users to include many people into their contact list. 
-This feature allows users to find people in their contact list by any personal parameters that Socius supports.
+* Justification: This feature allows users to find people in their contact list by any personal parameters that Socius supports.
 This helps users to navigate and manage through their contact list with great ease by filtering their displayed contacts 
 down to what they expect to see.
-* Highlights: This enhancement is particularly tedious to implement. To enable the finding of contacts through each parameter, 
-new Predicate classes were written for each parameter to support this feature while adhering to the Object-Oriented Principles applied
-throughout this program. Many lines of test cases and test data were written to rigorously test every new class and this feature.
+* Highlights: This enhancement is particularly tedious to implement. New Predicate classes were written for each parameter to support this feature while adhering to the Object-Oriented Principles applied
+throughout this program.
 
 **3.3 Test Classes and Test Data** [#287](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/287)
 * What it does: New test classes and test data were written to rigorously test the correctness of Socius. There is at least one test class
@@ -59,8 +52,6 @@ of test cases and test data were written to rigorously test the different aspect
 * Standardised the format of the content in the User Guide. [#328](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/328)
 * Added the 'Add Tag' and 'Delete Tag' section to the User Guide. [#206](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/206/files)
 * Added a 'Table of Contents' to the User Guide. [#58](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/58/files)
-* Corrected numerous discrepancies in the User Guide.
-* Frequently updated the User Guide to reflect the latest changes to Socius.
 
 **4.3 Developer Guide**
 * Added the 'Find Command' section in the Developer Guide. [#205](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/205)
