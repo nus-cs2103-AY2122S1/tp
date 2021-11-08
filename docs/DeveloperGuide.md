@@ -581,13 +581,13 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Sort Test
-1. Test case: `sort`
+1. Test case: `sort`<br>
    Expected: List is sorted by name.
-2. Test case: `sort -r`
+2. Test case: `sort -r`<br>
    Expected: List is sorted by name in reverse.
-3. Test case: `sort \T`
+3. Test case: `sort \T`<br>
    Expected: List is sorted by TutorialID
-4. Test case: `sort \a`
+4. Test case: `sort \a`<br>
    Expected: No change to list. Error details shown in status message.
 
 ### Import and Export
