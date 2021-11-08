@@ -1,14 +1,13 @@
 ---
 layout: page
-title: Ananya Ravi's Project Portfolio Page
+title: Ravi Ananya's Project Portfolio Page
 ---
 ### Project: WedFast
 
 WedFast is a program that aims to help users plan their wedding efficiently by organising
-the contacts of all the parties involved. These contacts include important details for a
-wedding such as pricing, attendance status, and foundational components such as name, email, address, and phone number. 
-The program is a desktop based application created using JavaFx GUI, and users work with the CLI to 
-input/manage their contact details.
+the contacts of all the parties involved. These contacts include details such as pricing, attendance status, name, email, 
+address, and phone number. The program is a desktop based application created using JavaFx GUI, 
+and users work with the CLI to input/manage their contact details.
 
 Given below are my contributions to the project.
 * **New Feature**: Add Price component to every Person.
@@ -18,7 +17,7 @@ Given below are my contributions to the project.
     is a critical aspect of wedding planning that should not be overlooked and improves the user's decision-making.
   * Highlights: Adding this feature affected the Person object, and almost all the different types of commands,
     which make use of Person objects. Therefore, several classes had to be updated, as well as their test classes.
-  * Credit: structure of the code was similar to that of the other Person components written for the original AB3 program.   
+  * Credit: structure of the code was based on the other Person components written for the original AB3 program.   
 
 * **New Feature**: Add Info component to every Person.
   * What it does: Lets the user to include any important information for each contact when adding/editing them. Displays
@@ -37,11 +36,11 @@ Given below are my contributions to the project.
   * Highlights and Credit: same as for Price and Info Component
 
 * **New Feature**: Add undo command
-  * What it does: This command helps to undo the most previous command .Summary of commands that can be undone: 
+  * What it does: This command helps to undo the most previous command. Summary of commands that can be undone: 
     add, delete (by index, name or tag), clear, group, and edit.
   * Benefit: Any accidental command implemented can be undone quickly
   * Highlights: Implementing the undo command meant having to understand how to revert each command it works for. Commands
-    such as delete had 3 methods of deletion, (name, info and tag), so each of these subcommands also had to be taken into
+    such as `delete` had 3 methods of deletion, (name, info and tag), so undoing each of these subcommands also had to be taken into
     consideration.
   * Credit: The general structure UndoCommand class was adopted from various other Command subclasses.
     
@@ -56,9 +55,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-     * Made updates to the `delete` and `find` command during the early stages of implementation. PR:  [\#36](//github.com/AY2122S1-CS2103T-W10-4/tp/pull/36)
+     * Made updates to the `list`, `delete` and `undo` commands during the early stages of implementation. PR:  [\#32](//github.com/AY2122S1-CS2103T-W10-4/tp/pull/32)
      * Added new information and images to the `add` and `undo` command. PR: [\#102](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/102)
-     * Changed all display images of the program for examples of `add`,`group`,`find`,`delete`, and`undo`.  PR: [\#202](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/202)
+     * Changed all display images of the program for examples of `add`,`group`,`find`,`delete`,`report` and`undo`.  PR: [\#221](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/221)
+
   * Developer Guide:  
      * Modified the user stories and glossary. PR: [\#21](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/21)
      * Added more glossary terms. PR: [\#36](https://github.com/AY2122S1-CS2103T-W10-4/tp/pull/36)
