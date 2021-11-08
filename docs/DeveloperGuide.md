@@ -656,6 +656,8 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+<a name="api"></a>
+* **API**: Application programming interfaces, or APIs, simplify software development and innovation by enabling applications to exchange data and functionality easily and securely.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -776,10 +778,3 @@ testers are expected to do more *exploratory* testing.
     
     2. Test case: `joinG p/1 g/1`
         Expected: Similar to previous test case result ( Test case 1(iii) ).
-
-
-
-## Glossary
-
-<a name="api"></a>
-* **API**: Application programming interfaces, or APIs, simplify software development and innovation by enabling applications to exchange data and functionality easily and securely.
