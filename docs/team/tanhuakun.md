@@ -3,8 +3,7 @@ layout: page
 title: Tan Hua Kun's Project Portfolio Page
 ---
 
-My name is Tan Hua Kun and I am one of the developers of Tutor Master. My role is a full stack developer, and I am mostly in
-charge of lessons, exams and the viewing panel.
+My name is Tan Hua Kun and I am one of the developers of Tutor Master.
 
 #### Project Tutor Master
 
@@ -16,8 +15,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
 
 * ##### Features
     * Logic
-        * Created Parsers and Commands to deal with lessons and exams.
-        * Created Parser and Command for adding people to a group.
+        * Created Parsers and Commands to deal with lessons and exams, adding people to a group.
         * Created command to view schedule.
     * Model
         * Person
@@ -26,21 +24,19 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
         * Lesson
             * Created the entire [lesson package](https://github.com/AY2122S1-CS2103T-W16-4/tp/tree/master/src/main/java/seedu/address/model/lesson).
         * Model
-            * Added enum ViewingType for viewing particular information
             * Update [ModelManager.java](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java) to include methods for ViewingType and viewing contents.
-                * This includes `ObjectProperty<ViewingType>`, `ObservableList<LessonWithAttendees>` and `ObjectProperty<PersonWithDetails>` members in ModelManager.java.
         * Id.UniqueIdMapper
-            * [Implemented this interface](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/id/UniqueIdMapper.java) and its method for retrieving HasUniqueId objects when given UniqueIds.
+            * [Implemented this interface](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/id/UniqueIdMapper.java) for retrieving HasUniqueId objects when given UniqueIds.
     * Storage
         * Enabled storage for Lessons and Exams. Basically [JsonAdaptedLesson](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedLesson.java),
           [JsonAdaptedExam](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedExam.java)
           and [JsonAdaptedTimeslot](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedTimeslot.java).
     * UI
         * Viewing Panel
-            * Created [ViewingPanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/ViewingPanel.java) and the logic behind it to view different things.
-            * Created [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java) to support viewing a single person. __Note__: Task completion was not done by me.
-            * Created [LessonScheduleCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonScheduleCard.java)
-              and [LessonSchedulePanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonSchedulePanel.java) for viewing schedule.
+            * Created [ViewingPanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/ViewingPanel.java),
+              [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java),
+              [LessonScheduleCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonScheduleCard.java)
+              and [LessonSchedulePanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonSchedulePanel.java) for the viewing panel.
             * Modified other UI components, css and FXML files to enable the viewing panel.
 * ##### Documentation
     * User Guide
@@ -49,8 +45,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
         * [Quick start: Managing Students](https://ay2122s1-cs2103t-w16-4.github.io/tp/UserGuide.html#managing-students)
     * Developer Guide
         * Wrote some user stories
-        * Add implementation details for [Changing View Panel](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#changing-view-panel);
-        * Add implementation details for [Lessons](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#lessons)
+        * Add implementation details for [Changing View Panel](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#changing-view-panel) and [Lessons](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#lessons).
         * Add some instructions for manual testing and an adding lesson use case.
 * ##### Testing
     * [Tests for lesson](https://github.com/AY2122S1-CS2103T-W16-4/tp/tree/master/src/test/java/seedu/address/model/lesson)
@@ -61,11 +56,8 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
     * Logic.Commands
         * [Add group command](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/commands/groups/AddGroupCommandIntegrationTest.java).
     * Storage
-        * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest
-    * Modified existing test cases such as JsonAdaptedPerson and Person when implementing features.
-
-
-#### Other contributions:
+        * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest.
+    * Modified existing test cases such as JsonAdaptedPerson and Person.
 * ##### Team Tasks:
     * [Refactor commands](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/45) to be split into subsections. Original AB3 used "add, delete, edit" but refactored it to use
     "student -a, student -d, student -e" respectively.
