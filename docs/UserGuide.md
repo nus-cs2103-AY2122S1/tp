@@ -810,7 +810,7 @@ Example:
     (i.e. RHRH must contain tables before making a reservation)
 
 
-* TABLE_SIZE and NUMBER_OF_TABLE_WITH_THIS_SIZE has to be a positive integer
+* \<TABLE_SIZE\> and \<NUMBER_OF_TABLE_WITH_THIS_SIZE\> has to be a positive integer
 
 </div>
 
