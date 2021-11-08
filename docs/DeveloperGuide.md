@@ -393,7 +393,7 @@ The following steps describe the execution of the `EditGroupCommand`.
 
 <div style="page-break-after: always;"></div>
 
-## Edit Task Command
+### Edit Task Command
 
 #### Implementation
 ![Sequence Diagram of EditTaskCommand](images/EditTaskCommandSequenceDiagram.png)
@@ -417,7 +417,7 @@ The following steps describe the execution of the `EditTaskCommand`.
 3. Finally, `Model` calls the `setTask` function of the `AddressBook` to update the `Task` data.
 
 
-#### Adding Todo Task
+### Adding Todo Task
 
 Given below is an example usage scenario and how the adding a todo task mechanism behaves at each step.
 
@@ -436,11 +436,13 @@ Given below is an example usage scenario and how the adding a todo task mechanis
 The above process is shown in the following sequence diagram:
 
 ![Reference Sequence Diagram of AddTodoTaskCommand](images/AddTodoTaskSequenceDiagram.png)
+
 **Sequence diagram showcasing the add todo task process**
 
 The following activity diagram summarizes what happens when a user executes a new command to find the members by keywords:
 
 ![Reference Activity Diagram of AddTodoTaskCommand](images/AddTodoTaskCommandActivityDiagram.png)
+
 **Activity diagram showcasing the  add todo task execution flow**
 
 <div style="page-break-after: always;"></div>
