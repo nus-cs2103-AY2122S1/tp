@@ -17,7 +17,7 @@ public class FillCommand extends Command {
     public static final String COMMAND_WORD = "fill";
     public static final String MESSAGE_SUCCESS = "ProgrammerError has been filled with sample data!";
     public static final String MESSAGE_FAIL = "There is existing data! Please purge the "
-                                                    + "existing data to import sample data";
+            + "existing data to import sample data";
 
 
     @Override

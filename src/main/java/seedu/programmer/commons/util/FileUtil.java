@@ -23,7 +23,7 @@ import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
 
 /**
- * Writes and reads files
+ * Writes and reads files.
  */
 public class FileUtil {
 
@@ -77,7 +77,7 @@ public class FileUtil {
     }
 
     /**
-     * Creates parent directories of file if it has a parent directory
+     * Creates parent directories of file if it has a parent directory.
      *
      * @param file File to create parent directories of.
      */
