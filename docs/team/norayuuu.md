@@ -28,12 +28,10 @@ Given below are my contributions to the project.
   * What it does: Stored tuition classes that each student attend using tuition class ID, and store students in each class using student names.
   * Justification: Previously students and tuition classes were saved as objects under each other. This takes extra space for storage and increases running time.
   * Highlights: Major modification is done for `addclass` and `addtoclass` features as well as `JsonAdaptedTuition` and `JsonAdaptedStudent` files for storage.
-<div style="page-break-after: always;"></div>
-
 * **Other Enhancements**: 
   * Enabled adding tags automatically when students are enrolled in a tuition class and disallowed users to add tags manually. [\#37](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/37), [\#114](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/114)
   * Prevents same student with names differ only in number of white spaces and letter cases to be added [\#186](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/186)
-* **Testing**: Wrote unit tests for `AddToClassCommand`, `StudentList`, `Timetable`, `SortCommand`, `SortCommandParser`, `TimetableCommand`, `TimetableParser`, and `UniqueTuitionList` classes. Increases code coverage for TutAssistor by 11.94%  ([\#142](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/142), [\#145](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/145)), [\#202](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/202))
+* **Testing**: Wrote unit tests for `AddToClassCommand`, `StudentList`, `Timetable`, `SortCommand`, `SortCommandParser`, `TimetableCommand`, `TimetableParser`, and `UniqueTuitionList` classes. Increases code coverage for TutAssistor by 11.94%  ([\#142](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/142), [\#145](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/145), [\#202](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/202))
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=T12&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=NoraYUuu&tabRepo=AY2122S1-CS2103T-T12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false).
 
 * **Documentation**:

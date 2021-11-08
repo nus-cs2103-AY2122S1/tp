@@ -49,7 +49,7 @@ public class Timetable {
      */
     public void showTimetable() {
         parseTime(this.tuitionClasses);
-        infoPage.setTableTime(start, end, totalRows);
+        infoPage.setTableTime(start, totalRows);
         insertSlot();
         if (notShown.size() > 0) {
             String notShownClasses = "";
