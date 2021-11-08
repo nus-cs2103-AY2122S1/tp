@@ -442,20 +442,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System shows a list of residents.
 3. Actor requests to delete a specific resident in the list.
 4. System deletes the resident.
-
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
 
 
 * 3a. The given index is invalid.
-
     * 3a1. System shows an error message.
-
       Use case resumes at step 2.
 
 
@@ -466,20 +462,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Actor navigates to the `Event` tab of the application.
 2. Actor requests to view an event from the list of events.
 3. System shows the relevant information of the event and list of residents involved in the event.
-
    Use case ends.
 
 **Extensions**
 
 * 2a. The given index is invalid.
-
     * 2a1. System shows an error message.
-
       Use case resumes at step 2.
 
 
 * 3a. The list is empty.
-
     Use case ends.
 
 
@@ -491,7 +483,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Hall admin views the event to include residents in.
 3. Hall admin enters the residents to be included in the selected event.
 4. SafeFor(H)all reflects the added residents in the side window.
-
     Use case ends.
 
 **Extensions**
@@ -502,7 +493,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a2 are repeated until the residents entered are valid.
-
       Use case resumes from step 4.
 
 **Use case: UC04 - Exclude a resident from an event**
@@ -513,7 +503,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Hall admin views the event to exclude residents from.
 3. Hall admin enters the residents to be excluded in the selected event.
 4. SafeFor(H)all reflects the remaining residents in the side window after removing the given residents.
-
     Use case ends.
 
 **Extensions**
@@ -524,7 +513,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a3 are repeated until the residents entered are valid.
-
       Use case resumes from step 4.
 
 **Use case: UC05 - List residents who missed their FET**
@@ -534,7 +522,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Hall admin navigates to the `Resident` Tab.
 2. Hall admin filters residents whose FET were due before today.
 3. SafeFor(H)all displays the filtered residents.
-
     Use case ends.
 
 **Extensions**
@@ -545,7 +532,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a3. Hall admin enters a new date.
 
       Steps 2a1-2a2 are repeated until the date entered are valid.
-
       Use case resumes from step 3.
 
 **Use case: UC06 - List residents whose FET or Test Kit collection dates are due soon**
@@ -628,7 +614,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. System detects duplicate file.
     * 2a1. System displays an error message.
-
       Use case resumes at step 2.
 
 **Use case: UC09 - Remind residents to take FET**
@@ -718,26 +703,26 @@ testers are expected to do more *exploratory* testing.
 1. Adding a resident and their information into the app
 
    1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. 
-    Success message is shown.
+      Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. 
+       Success message is shown.
 
 2. Adding a duplicate resident with the same name or same room
 
    1. Prerequisites: A resident with the same name `Tommy` or room `A123` is already in the app.
 
-   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br> 
-   Expected: Error message shown, `This resident or room already exists in the address book`
+   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: Error message shown, `This resident or room already exists in the address book`
    
    3. Test case: `add n/Tom r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: Error message shown, `This resident or room already exists in the address book`
+      Expected: Error message shown, `This resident or room already exists in the address book`
    
 3. Adding a resident with invalid parameters
 
    1. Test case: `add n/Tom! r/A201 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
+      Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
 
    2. Test case: `add n/Tom r/A201 p/87654321 e/tom@gmail.com v/true f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-   Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
+      Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
 
 ### Viewing a resident
 
@@ -817,30 +802,30 @@ testers are expected to do more *exploratory* testing.
 1. Sorting the list of residents by valid fields and order
 
    1. Test case: `sort by/n o/a`<br>
-   Expected: List of residents are sorted by their names in the alphabetical order.
+      Expected: List of residents are sorted by their names in the alphabetical order.
 
 
 2. Sorting the list of residents by invalid fields or order
 
    1. Test case: `sort by/z o/a`<br>
-    Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
+      Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
 
    2. Test case: `sort by/n o/z`<br>
-   Expected: Error message shown, `ORDER should be one of the following: a, d`
+      Expected: Error message shown, `ORDER should be one of the following: a, d`
    
 ### Exporting residents' emails
 
 1. Export email addresses of list of residents
 
    1. Test case: `export testEmailExport`<br>
-   Expected: Csv file filled with column of email addresses of the residents displayed in the app.
+      Expected: Csv file filled with column of email addresses of the residents displayed in the app.
    
 
 2. Duplicate filename provided
 
    1. Prerequisites: csv file `testDuplicateExport.csv` is already in existing `/data/exports` directory
    2. Test case: `export testDuplicateExport`<br>
-   Expected: Error message shown, `This filename already exists`
+      Expected: Error message shown, `This filename already exists`
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
@@ -853,14 +838,14 @@ For all Event commands, ensure that you are on the Events tab before continuing.
 1. View a list of all the events in the app, or the information of a specific event
 
     1. Test case: `view`<br>
-    Expected: A list of all the events is displayed in the app's GUI
+       Expected: A list of all the events is displayed in the app's GUI
 
     2. Test case: `view 3`<br>
     Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
        
 2. Invalid indexes provided
    1. Test case: `view x` (where x is larger than the list size)<br>
-   Expected: Error message shown, `The event index provided is invalid`
+      Expected: Error message shown, `The event index provided is invalid`
 
 ### Finding an event
 
