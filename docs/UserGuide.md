@@ -387,7 +387,7 @@ Format: **`find`** `PREFIX/VALUE [PREFIX/VALUE]…​`
      * `e/EMAIL`
      * `nat/NATIONALITY`
      * `tg/TUTORIAL_GROUP`
-     * `s/SOCIAL_HANDLE_USERID`
+     * `s/SOCIAL_HANDLE`
      * `r/REMARK`
      * `t/TAG`
 
