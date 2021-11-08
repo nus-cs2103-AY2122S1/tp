@@ -1,11 +1,11 @@
 package seedu.unify.model.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class PriorityTest {
 
@@ -53,10 +53,10 @@ public class PriorityTest {
         Priority priorityHigh = new Priority("HIGH");
 
         // the difference in priority levels
-        assertEquals(priorityLow.compareTo(priorityHigh),-2);
+        assertEquals(priorityLow.compareTo(priorityHigh), -2);
         assertEquals(priorityHigh.compareTo(priorityLow), 2);
 
         // same priorities
-        assertEquals(priorityLow.compareTo(priorityLow),0);
+        assertEquals(priorityLow.compareTo(priorityLow), 0);
     }
 }
