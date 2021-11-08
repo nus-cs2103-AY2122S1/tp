@@ -111,8 +111,10 @@ The sections below give more details of each component.
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the Window Components](images/UiWindowsDiagram.png)
+![Structure of the OtherComponents](images/UiOtherComponentsDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow` and `WelcomeWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -905,23 +907,23 @@ The `CommandHistory` class contains these key variables and methods:
 When CohortConnect UI is initialized, the `CommandBox` class representing the Command Box is created, containing a single instance of `CommandHistory`. It interacts with `CommandHistory` in 3 ways:
 1. If `KeyCode.UP` is detected in the `TextField`, `CommandHistory#getPrevious()` is called, and the returned String is set to the text field.
 
-<div markdown="span" class="alert alert-primary">
-:information_source: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
-</div>
+    <div markdown="span" class="alert alert-primary">
+    :information_source: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
+    </div>
 
-The activity diagram below illustrates what happens when a user presses the UP arrow key.
+    The activity diagram below illustrates what happens when a user presses the UP arrow key.
 
-![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
+    ![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
 
 2. If `KeyCode.DOWN` is detected in the `TextField`, `CommandHistory#getNext()` is called, and the returned String is set to the text field.
 
-<div markdown="span" class="alert alert-primary">
-:information_source: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
-</div>
+    <div markdown="span" class="alert alert-primary">
+    :information_source: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
+    </div>
 
-The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
+    The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
 
-![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
+    ![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
 
 3. When the user presses enter to execute a command, the command is saved using `CommandHistory#add(String)`, and the current index is reset using `CommandHistory#resetIndex()`.
 

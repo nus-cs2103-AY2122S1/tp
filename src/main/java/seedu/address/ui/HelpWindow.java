@@ -34,7 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete ALL Contacts";
     private static final String DELETE_CONTACTS_FEATURE_COMMAND = "clear";
     private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
-    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [p/] [g/] [e/] [a/] [t/]";
+    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [te/] [p/] [g/] [e/] [a/] [t/]";
     private static final String EDIT_PROFILE_FEATURE_NAME = "Edit Your Profile";
     private static final String EDIT_PROFILE_FEATURE_COMMAND = "edit profile [n/] [g/] [te/]";
     private static final String FIND_CONTACT_FEATURE_NAME_V1 = "Find a Contact (by Name)";
