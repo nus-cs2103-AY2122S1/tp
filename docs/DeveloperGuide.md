@@ -32,7 +32,7 @@ Take note of some syntax we will frequently use throughout the Developer Guide:
         - [Stateful PlannerMD](#stateful-plannermd)
         - [Toggle command](#toggle-command)
         - [Remark](#remark)
-        - [Propagating Person changes to Appointment list](#propagating-person-changes-to-appointment-list)
+        - [Propagating patient/doctor changes to appointments](#propagating-person-changes-to-appointment-list)
         - [Adding an appointment](#adding-an-appointment)
         - [Deleting an appointment](#deleting-an-appointment)
         - [Editing an appointment](#editing-an-appointment)
@@ -335,9 +335,9 @@ The GUI updates the patient record in the displayed list and displays a success 
 
 <div style="page-break-after: always;"></div>
 
-### Propagating Person changes to Appointment list  <a name="propagating-person-changes-to-appointment-list"/>
+### Propagating patient/doctor changes to appointments <a name="propagating-person-changes-to-appointment-list"/>
 Since specific patients and doctors within the records are directly referenced in appointments,
-changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
+changes in patients and doctors through user command or otherwise needs to be propagated through the appointment list.
 * When patients or doctor deleted, appointments they are a part of will be deleted as well.
   * `DeleteCommand`
 * When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
