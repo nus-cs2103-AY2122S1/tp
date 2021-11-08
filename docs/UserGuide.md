@@ -502,7 +502,7 @@ Command Format: `roster LESSON_INDEX`
 
 * The index **must be a positive integer** `1`, `2`, `3`, …. The index refers to the index number shown in the displayed lesson list.
 
-Examples:
+Example(s):
 * `roster 2` will display the students currently enrolled in the lesson indexed at `2` in the student panel.
 
 ![Outcome of `roster 2`](images/UserGuideImage/roster.PNG)
