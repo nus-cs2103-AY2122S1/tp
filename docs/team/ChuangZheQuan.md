@@ -33,8 +33,8 @@ Given below are my contributions to the project.
 * **Documentation**
   * User Guide:
     * Updated all documentation relating to Patient's and Doctor's personal details with the Birth Date field [#36](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/36)
-    * Create add appointment command documentation [#142](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/142)
-    * Create delete appointment command documentation [#142](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/142)
+    * Created add appointment command documentation [#142](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/142)
+    * Created delete appointment command documentation [#142](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/142)
     * Added why CLI and how to use CLI [#130](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/130)
     * Added introduction and table of contents [#130](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/130)
     * Reviewed, raised and fixed issues throughout the UG [#207](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/207)
