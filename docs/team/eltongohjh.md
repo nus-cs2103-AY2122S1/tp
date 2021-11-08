@@ -20,7 +20,7 @@ Given below are my contributions to the project.
         * Credits: Yukun helped with ideation of the data structure of groups and subgroups.
     * [Group and Subgroup note](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/127)
         * What it does: Allows users to add note to group and subgroup.
-        * Justification: It feels too restrictive to just be able to add notes to a person. We felt that it is very possible for 
+        * Justification: It feels too restrictive to just be able to add notes to a person. We felt that it is very possible for
             mentors to have note written for the whole group and subgroup.
         * Credits: The note model is already done by Elroy, so I can easily adapt it for groups and subgroups.
     * [Group and Subgroup List Views](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/143)

@@ -366,7 +366,7 @@ Examples:
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
   ![groupCreate](images/groupCreate.png)
-  
+
 #### _Deleting a group_
 
 Deletes an existing group.
