@@ -4,43 +4,92 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "role" : "Preschool Teacher",
+    "employmentType": "Full time",
+    "expectedSalary" : "2500",
+    "levelOfEducation" : "PhD",
+    "experience" : "0",
+    "tagged" : [ "friends" ],
+    "interview" : "2022-10-22, 10:00",
+    "notes" : "She is very passionate about this field.",
+    "done" : "Not Done"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "role" : "Doctor",
+    "employmentType": "Part time",
+    "expectedSalary" : "2700",
+    "levelOfEducation" : "Masters",
+    "experience" : "1",
+    "tagged" : [ "owesMoney", "friends" ],
+    "interview" : "2021-10-22, 10:00",
+    "notes" : "He does not seem like he would fit the job based off his resume.",
+    "done" : "Not Done"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tagged" : [ ]
+    "role" : "Electrical Engineer",
+    "employmentType": "Temporary",
+    "expectedSalary" : "5500",
+    "levelOfEducation" : "Elementary",
+    "experience" : "2",
+    "tagged" : [ ],
+    "interview" : "-",
+    "notes" : "He has past leadership skills, but do not have proper experience in this field.",
+    "done" : "Not Done"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "role" : "Sales Assistant",
+    "employmentType": "Internship",
+    "expectedSalary" : "3500",
+    "levelOfEducation" : "Middle School",
+    "experience" : "3",
+    "tagged" : [ "friends" ],
+    "interview" : "-",
+    "notes" : "He is a perfect candidate for this job!",
+    "done" : "Not Done"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tagged" : [ ]
+    "role" : "Toilet Cleaner",
+    "employmentType": "Full time",
+    "expectedSalary" : "5700",
+    "levelOfEducation" : "Bachelors",
+    "experience" : "4",
+    "tagged" : [ "old" ],
+    "interview" : "-",
+    "notes" : "Nothing outstanding about this applicant compared to the rest of the applicants.",
+    "done" : "Not Done"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tagged" : [ ]
+    "role" : "NTUC Cashier",
+    "employmentType": "Part time",
+    "expectedSalary" : "1900",
+    "levelOfEducation" : "High School",
+    "experience" : "5",
+    "tagged" : [ ],
+    "interview" : "-",
+    "notes" : "She has prior experience but in other countries.",
+    "done" : "Not Done"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "address" : "4th street",
-    "tagged" : [ ]
+    "role" : "Waiter",
+    "employmentType": "Internship",
+    "expectedSalary" : "900",
+    "levelOfEducation" : "University",
+    "experience" : "6",
+    "tagged" : [ ],
+    "interview" : "-",
+    "notes" : "Might be worth taking more time to interview this person",
+    "done" : "Not Done"
   } ]
 }

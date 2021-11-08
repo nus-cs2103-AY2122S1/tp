@@ -1,0 +1,34 @@
+@startuml
+start
+:User executes Unmark Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid with valid and
+ non-duplicated index/indexes])
+
+    if () then ([applicant(s) at all indexes
+  have been marked])
+    :Update specified applicant(s)
+              to be unmarked;
+
+    :GUI updated with specified applicant(s)
+          being unmarked with Not Done;
+
+    else ([else])
+    : GUI display shows
+        error message
+       for unmarking an
+    unmarked  applicant;
+
+    endif
+
+else([else])
+: GUI display shows error
+message for invalid format;
+
+
+endif
+stop
+@enduml

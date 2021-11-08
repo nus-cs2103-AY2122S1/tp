@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,11 +11,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.done.Done;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,23 +35,47 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String role;
+    private final String employmentType;
+    private final String expectedSalary;
+    private final String levelOfEducation;
+    private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String interview;
+    private final String notes;
+    private final String done;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("role") String role,
+            @JsonProperty("employmentType") String employmentType,
+            @JsonProperty("expectedSalary") String expectedSalary,
+            @JsonProperty("levelOfEducation") String levelOfEducation,
+            @JsonProperty("experience") String experience,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("interview") String interview,
+            @JsonProperty("notes") String notes,
+            @JsonProperty("done") String done) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.role = role;
+        this.employmentType = employmentType;
+        this.expectedSalary = expectedSalary;
+        this.levelOfEducation = levelOfEducation;
+        this.experience = experience;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.interview = interview;
+        this.notes = notes;
+        this.done = done;
     }
 
     /**
@@ -53,10 +85,17 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        role = source.getRole().role;
+        employmentType = source.getEmploymentType().employmentType;
+        expectedSalary = source.getExpectedSalary().value;
+        levelOfEducation = source.getLevelOfEducation().levelOfEducation;
+        experience = source.getExperience().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        interview = source.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime;
+        notes = source.getNotes().orElse(Notes.EMPTY_NOTES).information;
+        done = source.getDone().getDoneStatus();
     }
 
     /**
@@ -94,16 +133,79 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Role modelRole = new Role(role);
+
+        if (employmentType == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EmploymentType.class.getSimpleName()));
+        }
+        if (!EmploymentType.isValidEmploymentType(employmentType)) {
+            throw new IllegalValueException(EmploymentType.MESSAGE_CONSTRAINTS);
+        }
+        final EmploymentType modelEmploymentType = new EmploymentType(employmentType);
+
+        if (expectedSalary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExpectedSalary.class.getSimpleName()));
+        }
+        if (!ExpectedSalary.isValidExpectedSalary(expectedSalary)) {
+            throw new IllegalValueException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+        }
+        final ExpectedSalary modelExpectedSalary = new ExpectedSalary(expectedSalary);
+
+        if (levelOfEducation == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfEducation.class.getSimpleName()));
+        }
+        if (!LevelOfEducation.isValidLevelOfEducation(levelOfEducation)) {
+            throw new IllegalValueException(LevelOfEducation.MESSAGE_CONSTRAINTS);
+        }
+        final LevelOfEducation modelLevelOfEducation = new LevelOfEducation(levelOfEducation);
+
+        if (experience == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Experience.class.getSimpleName()));
+        }
+        if (!Experience.isValidExperience(experience)) {
+            throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
+        }
+        final Experience modelExperience = new Experience(experience);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final Optional<Interview> modelInterview;
+        if (interview == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Interview.class.getSimpleName()));
+        }
+        if (interview.equals("-")) {
+            modelInterview = Optional.ofNullable(Interview.EMPTY_INTERVIEW);
+        } else {
+            if (!Interview.isValidInterviewTime(interview)) {
+                throw new IllegalValueException(Interview.MESSAGE_CONSTRAINTS);
+            }
+            modelInterview = Optional.ofNullable(new Interview(interview));
+        }
+
+
+        if (notes == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Interview.class.getSimpleName()));
+        }
+        final Optional<Notes> modelNotes = Optional.ofNullable(new Notes(notes));
+
+        final Done modelDone = new Done(done);
+
+
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelEmploymentType,
+                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags,
+                modelInterview, modelNotes, modelDone);
     }
 
 }

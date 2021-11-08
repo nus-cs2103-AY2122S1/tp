@@ -5,55 +5,66 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Ajjagottu Kaushik Kumar Reddy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kaushikkrdy.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kaushikkrdy)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+Email: kaushikumar99@gmail.com
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+* Responsibilities: Documentation
 
-<img src="images/johndoe.png" width="200px">
+### Bryann Yeap Kok Keong
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/bryannyeap.png" width="200px">
+
+[[github](https://github.com/BryannYeap)]
+
+Email: bryannyeapkk@gmail.com
+
+* Role: Tech Lead
+
+* Responsibilities: Testing
+
+### Liu Chen En
+
+<img src="images/twothicc.png" width="200px">
+
+[[github](https://github.com/twothicc)]
+
+Email: chenenliuu@gmail.com
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doe
+* Responsibilities: UI/UX
 
-<img src="images/johndoe.png" width="200px">
+### Toh Wei Jie
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/tohweijie01.png" width="200px">
+
+[[github](https://github.com/TohWeiJie01)]
+
+Email: tohweijie01@gmail.com
 
 * Role: Developer
-* Responsibilities: UI
+
+* Responsibilities: Scheduling & Tracking
+
+### Yao Yi
+
+<img src="images/pulpy-y.png" width="200px">
+
+[[github](https://github.com/Pulpy-y)]
+
+Email: yaoyi2000326@gmail.com
+
+* Role: Developer
+
+* Responsibilities: Deliverables & Deadlines
+
+

@@ -3,10 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -44,11 +47,32 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+    public void resetData_withDuplicatePersonsSameContactNumberDifferentEmail_throwsDuplicatePersonException() {
+        // Two persons with the same contact number but different email
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY)
+                .withTags(VALID_TAG_HUSBAND).build();
+        List<Person> newPersons = Arrays.asList(AMY, editedBob);
+        AddressBookStub newData = new AddressBookStub(newPersons);
+
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicatePersonsSameEmailDifferentContactNumber_throwsDuplicatePersonException() {
+        // Two persons with the same email but different contact number
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_HUSBAND).build();
+        List<Person> newPersons = Arrays.asList(AMY, editedBob);
+        AddressBookStub newData = new AddressBookStub(newPersons);
+
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicatePersonsSameEmailSameContactNumber_throwsDuplicatePersonException() {
+        // Two persons with the same email but different contact number
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_HUSBAND).build();
+        List<Person> newPersons = Arrays.asList(AMY, editedBob);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
@@ -72,10 +96,38 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        addressBook.addPerson(AMY);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(addressBook.hasPerson(editedBob));
+    }
+
+    @Test
+    public void getDuplicate_noPersonInAddressBook_returnsEmptyList() {
+        assertTrue(addressBook.getDuplicate(AMY).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_noPersonWithSameIdentityFieldsInAddressBook_returnsEmptyList() {
+        addressBook.addPerson(AMY);
+        assertTrue(addressBook.getDuplicate(BOB).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_personWithSameIdentityFieldsInAddressBook_returnsDuplicatePerson() {
+        addressBook.addPerson(AMY);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertEquals(addressBook.getDuplicate(editedBob).get(0), AMY);
+    }
+
+    @Test
+    public void getDuplicate_personsWithSameIdentityFieldsInAddressBook_returnsDuplicatePersons() {
+        addressBook.addPerson(AMY);
+        addressBook.addPerson(BOB);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        List<Person> duplicates = addressBook.getDuplicate(editedBob);
+        assertEquals(duplicates.get(0), AMY);
+        assertEquals(duplicates.get(1), BOB);
     }
 
     @Test

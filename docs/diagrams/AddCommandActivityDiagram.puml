@@ -1,0 +1,34 @@
+@startuml
+start
+:User executes Add Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is
+valid])
+
+    :Create the new Person with the specified arguments;
+
+    if () then ([new Person already
+    exists in the AddressBook])
+
+        :GUI Result Display shows error message
+        containing existing Person(s);
+
+        stop
+
+    else ([else])
+    endif
+
+    :Add the new Person into the AddressBook;
+
+    :GUI updates with new correct list of applicants;
+else ([else])
+
+:GUI Result Display shows invalid command error message;
+
+endif
+stop
+@enduml
+

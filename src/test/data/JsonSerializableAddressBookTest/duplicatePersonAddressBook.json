@@ -3,12 +3,38 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+    "role": "Preschool Teacher",
+    "employmentType": "Full time",
+    "expectedSalary": "7500",
+    "levelOfEducation": "PhD",
+    "experience" : "0",
+    "tagged": [ "friends" ],
+    "interview": "-",
+    "notes": "-",
+    "done": "Not Done"
   }, {
-    "name": "Alice Pauline",
+    "name": "Janice Paula",
     "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "email": "Janice@example.com",
+    "role": "Preschool Teacher",
+    "employmentType": "Part time",
+    "expectedSalary": "7500",
+    "levelOfEducation": "PhD",
+    "experience": "1",
+    "interview": "-",
+    "notes": "-",
+    "done": "Not Done"
+  }, {
+    "name": "Annie Paul",
+    "phone": "99009900",
+    "email": "Janice@example.com",
+    "role": "Preschool Teacher",
+    "employmentType": "Part time",
+    "expectedSalary": "7500",
+    "levelOfEducation": "PhD",
+    "experience": "1",
+    "interview": "-",
+    "notes": "-",
+    "done": "Not Done"
   } ]
 }

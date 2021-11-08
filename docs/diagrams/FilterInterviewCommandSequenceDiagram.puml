@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterInterviewCommandParser" as FilterInterviewCommandParser LOGIC_COLOR
+participant ":ValidFilterInterviewArgs" as ValidInterviewArgs LOGIC_COLOR
+participant "filterInterviewCommand:FilterInterviewPastCommand" as FilterInterviewPastCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter_interview past")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter_interview past")
+activate AddressBookParser
+
+create FilterInterviewCommandParser
+
+
+
+AddressBookParser -> FilterInterviewCommandParser: FilterInterviewCommandParser
+activate FilterInterviewCommandParser
+
+FilterInterviewCommandParser --> AddressBookParser
+deactivate FilterInterviewCommandParser
+
+AddressBookParser -> FilterInterviewCommandParser : parse(" past")
+activate FilterInterviewCommandParser
+
+FilterInterviewCommandParser -> ValidInterviewArgs : getFilterInterviewCommand()
+activate ValidInterviewArgs
+
+ValidInterviewArgs --> FilterInterviewCommandParser : filterInterviewCommand
+deactivate ValidInterviewArgs
+
+FilterInterviewCommandParser --> AddressBookParser : filterInterviewCommand
+deactivate FilterInterviewCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterInterviewCommandParser -[hidden]-> AddressBookParser:
+destroy FilterInterviewCommandParser
+
+AddressBookParser --> LogicManager : filterInterviewCommand
+deactivate AddressBookParser
+
+LogicManager -> FilterInterviewPastCommand : execute()
+activate FilterInterviewPastCommand
+
+FilterInterviewPastCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> FilterInterviewPastCommand :
+deactivate Model
+
+create CommandResult
+FilterInterviewPastCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterInterviewPastCommand
+deactivate CommandResult
+
+FilterInterviewPastCommand --> LogicManager : result
+deactivate FilterInterviewPastCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

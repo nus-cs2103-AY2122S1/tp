@@ -3,20 +3,26 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -86,6 +92,33 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void getDuplicate_noPersonInAddressBook_returnsEmptyList() {
+        assertTrue(modelManager.getDuplicate(ALICE).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_noDuplicatePersonInAddressBook_returnsEmptyList() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.getDuplicate(BOB).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_duplicatePersonInAddressBook_returnsDuplicatePersonInAddressBook() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.getDuplicate(ALICE).get(0), ALICE);
+    }
+
+    @Test
+    public void getDuplicate_duplicatePersonsInAddressBook_returnsDuplicatePersonsInAddressBook() {
+        Person bobWithAmyPhone = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).build();
+        modelManager.addPerson(AMY);
+        modelManager.addPerson(BOB);
+        List<Person> duplicates = modelManager.getDuplicate(bobWithAmyPhone);
+        assertEquals(duplicates.get(0), AMY);
+        assertEquals(duplicates.get(1), BOB);
     }
 
     @Test

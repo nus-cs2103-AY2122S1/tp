@@ -67,6 +67,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns first occurrence of a person (if any) with same identity as {@code person} in the address book.
+     */
+    public List<Person> getDuplicate(Person person) {
+        requireNonNull(person);
+        return persons.getDuplicate(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -91,6 +99,36 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Marks the status of the person in the list to "Done".
+     */
+    public void markPerson(Person toMark) {
+        persons.markPerson(toMark);
+    }
+
+    /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Done" returns true; false otherwise.
+     */
+    public boolean checkForMarkedPerson(Person toCheck) {
+        return persons.checkForMarkedPerson(toCheck);
+    }
+
+    /**
+     * Unmarks the status of the person in the list to "Not Done".
+     */
+    public void unmarkPerson(Person toUnmark) {
+        persons.unmarkPerson(toUnmark);
+    }
+
+    /**
+     * Checks the status of the person in the list.
+     * If the status of the person is "Not Done" returns true; false otherwise.
+     */
+    public boolean checkForUnmarkedPerson(Person toCheck) {
+        return persons.checkForUnmarkedPerson(toCheck);
     }
 
     //// util methods

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,36 @@ public class ArgumentTokenizer {
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
+     * respective argument values. Only the given prefixes will be recognized in the arguments string. Does not
+     * include Preamble as an additional prefix.
+     *
+     * Take note that argsString must have a single space preceding the first prefix.
+     *
+     * @param argsString Arguments string of the form: {@code <prefix>value <prefix>value ...}
+     * @param prefixes   Prefixes to tokenize the arguments string with
+     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     */
+    public static ArgumentMultimap tokenizeWithoutPreamble(String argsString, Prefix... prefixes) {
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        return extractArgumentsWithoutPreamble(argsString, positions);
+    }
+
+    /**
+     * Finds and returns all prefixes existing in the given arguments string as a list sorted by
+     * the order in which the user input the prefix.
+     *
+     * @param argString Arguments string of the form: {@code <prefix> value <prefix>value ...}
+     * @param prefixes  Prefixes to find in the arguments string
+     * @return          List of prefixes in the given arguments string sorted by order of user input
+     */
+    public static List<Prefix> findAllPrefixSorted(String argString, Prefix... prefixes) {
+        List<PrefixPosition> prefixPositions = findAllPrefixPositions(argString, prefixes);
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::getStartPosition));
+        return prefixPositions.stream().map(PrefixPosition::getPrefix).collect(Collectors.toList());
     }
 
     /**
@@ -87,11 +118,43 @@ public class ArgumentTokenizer {
     private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
 
         // Sort by start position
-        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::getStartPosition));
 
         // Insert a PrefixPosition to represent the preamble
         PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
         prefixPositions.add(0, preambleMarker);
+
+        // Add a dummy PrefixPosition to represent the end of the string
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
+        prefixPositions.add(endPositionMarker);
+
+        // Map prefixes to their argument values (if any)
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        for (int i = 0; i < prefixPositions.size() - 1; i++) {
+            // Extract and store prefixes and their arguments
+            Prefix argPrefix = prefixPositions.get(i).getPrefix();
+            String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            argMultimap.put(argPrefix, argValue);
+        }
+
+        return argMultimap;
+    }
+
+    /**
+     * Extracts prefixes and their argument values, and returns an {@code ArgumentMultimap} object that maps the
+     * extracted prefixes to their respective arguments. Prefixes are extracted based on their zero-based positions in
+     * {@code argsString}. This is different from extractArguments as it does not insert a preamble prefix.
+     *
+     * Take note that argsString must have a single space preceding the first prefix.
+     *
+     * @param argsString      Arguments string of the form: {@code <prefix>value <prefix>value ...}
+     * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
+     * @return                ArgumentMultimap object that maps prefixes to their arguments
+     */
+    private static ArgumentMultimap extractArgumentsWithoutPreamble(String argsString,
+            List<PrefixPosition> prefixPositions) {
+        // Sort by start position
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::getStartPosition));
 
         // Add a dummy PrefixPosition to represent the end of the string
         PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());

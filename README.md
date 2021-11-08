@@ -1,14 +1,24 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+# RecruitIn
+[![CI Status](https://github.com/AY2122S1-CS2103T-F11-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-F11-2/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-F11-2/tp/branch/master/graph/badge.svg?token=5X6ISPCNZA)](https://codecov.io/gh/AY2122S1-CS2103T-F11-2/tp)
 
+### Preview
+- - -
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+### About
+- - -
+* RecruitIn is a desktop app for **recruiters in Singapore** to keep track of the plethora of clients with different skill sets, availability and experience. It is optimized for quick text-based inputs via a **Command Line Interface** (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives **easier** through categorisation and filter features to easily access candidates they have in mind.<br>
+
+### Example Usages
+- - -
+* as a main database for recruiters to keep track of their list of clients
+* as a quick tool to match employers to applicants
+* as a quick tool to filter employers and applicants
+
+### Notes
+- - -
+* It comes with a **reasonable level of user and developer documentation**.
+* It is named `RecruitIn` because it functions like LinkedIn as a tool for recruiters to manage employers and applicants.
+* For the detailed documentation of this project, see the **[RecruitIn Product Website](https://ay2122s1-cs2103t-f11-2.github.io/tp/)**.
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

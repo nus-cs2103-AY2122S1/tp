@@ -1,0 +1,24 @@
+@startuml
+start
+:User executes Show Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is
+valid with valid
+prefix])
+
+    :Retrieve list of unique inputs
+    for given prefix;
+    :GUI Result Display shows
+    list of unique inputs;
+else ([else])
+
+:GUI Result Display shows invalid command error message;
+
+endif
+stop
+@enduml
+
+

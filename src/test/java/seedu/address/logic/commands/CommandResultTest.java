@@ -51,4 +51,42 @@ public class CommandResultTest {
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
     }
+
+    @Test
+    public void isShowHelp() {
+        CommandResult commandResult;
+
+        // Cases where isShowHelp is true
+        commandResult = new CommandResult("feedback", true, true); // exit is true
+        assertTrue(commandResult.isShowHelp());
+
+        commandResult = new CommandResult("feedback", true, false); // exit is false
+        assertTrue(commandResult.isShowHelp());
+
+        // Cases where isShowHelp is false
+        commandResult = new CommandResult("feedback", false, true); // exit is true
+        assertFalse(commandResult.isShowHelp());
+
+        commandResult = new CommandResult("feedback", false, false); // exit is false
+        assertFalse(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void isExit() {
+        CommandResult commandResult;
+
+        // Cases where isExit is true
+        commandResult = new CommandResult("feedback", true, true); // showHelp is true
+        assertTrue(commandResult.isExit());
+
+        commandResult = new CommandResult("feedback", false, true); // showHelp is false
+        assertTrue(commandResult.isExit());
+
+        // Cases where isExit is false
+        commandResult = new CommandResult("feedback", true, false); // showHelp is true
+        assertFalse(commandResult.isExit());
+
+        commandResult = new CommandResult("feedback", false, false); // showHelp is false
+        assertFalse(commandResult.isExit());
+    }
 }
