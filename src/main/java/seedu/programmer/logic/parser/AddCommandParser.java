@@ -1,5 +1,6 @@
 package seedu.programmer.logic.parser;
 
+import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
@@ -39,8 +40,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                     String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), AddCommand.MESSAGE_USAGE));
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL)) {
             throw new ParseException(String.format(MESSAGE_MISSING_ARGUMENT, AddCommand.MESSAGE_USAGE));
         }
 

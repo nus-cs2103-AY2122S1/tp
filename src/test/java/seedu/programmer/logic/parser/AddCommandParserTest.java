@@ -1,5 +1,6 @@
 package seedu.programmer.logic.parser;
 
+import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_BOB;
@@ -52,26 +53,27 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_MISSING_ARGUMENT, AddCommand.MESSAGE_USAGE);
+        String expectedInvalidMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMissingArgMessage = String.format(MESSAGE_MISSING_ARGUMENT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+                expectedInvalidMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_STUDENT_ID_BOB + CLASS_ID_DESC_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+                expectedMissingArgMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + VALID_CLASS_ID_BOB + EMAIL_DESC_BOB,
-                expectedMessage);
+                expectedMissingArgMessage);
 
         // missing programmer prefix
         assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + VALID_EMAIL_BOB,
-                expectedMessage);
+                expectedMissingArgMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_STUDENT_ID_BOB + VALID_CLASS_ID_BOB + VALID_EMAIL_BOB,
-                expectedMessage);
+                expectedInvalidMessage);
     }
 }
