@@ -150,7 +150,8 @@ class LessonEditCommandParserTest {
         Index lessonTargetIndex = INDEX_FIRST_LESSON;
         String endDate = " " + PREFIX_RECURRING + VALID_DATE_FUTURE;
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-            + endDate + HOMEWORK_DESC_TEXTBOOK + SUBJECT_DESC + TIME_RANGE_DESC + FUTURE_DATE_DESC;
+                + endDate + HOMEWORK_DESC_TEXTBOOK + SUBJECT_DESC + TIME_RANGE_DESC + FUTURE_DATE_DESC
+                + OUTSTANDING_FEES_DESC;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withRecurrence()
@@ -158,6 +159,7 @@ class LessonEditCommandParserTest {
                 .withDate(VALID_DATE_FUTURE)
                 .withTimeRange(VALID_TIME_RANGE)
                 .withSubject(VALID_SUBJECT)
+                .withOutstandingFees(VALID_OUTSTANDING_FEES)
                 .withHomeworkSet(VALID_HOMEWORK_TEXTBOOK).build();
 
         LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
