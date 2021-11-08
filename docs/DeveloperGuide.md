@@ -298,26 +298,21 @@ Below is the sequence diagram that depicts an overview of a student contact bein
 
 #### Implementation
 
-The add progress to a student feature adds a progress entry to an existing student in TutorAid. Each student can have up to 10 progress entries.
-Adding a new entry to a student who already has 10 such entries will result in the deletion of the oldest entry.
+The add progress to a student feature adds a progress entry to an existing student in TutorAid. Each student can have up to 10 progress entries. Adding a new entry to a student who already has 10 such entries will result in the deletion of the oldest entry.
 
 This feature implements the following operations:
-* `AddProgressCommand#execute()` —Creates a `Progress` object and adds it to a `ProgressList` object of a `Student` object
-  in TutorAid.
+* `AddProgressCommand#execute()` —Creates a `Progress` object and adds it to a `ProgressList` object of a `Student` object in TutorAid.
 
 It is also facilitated by the methods below:
 * `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a progress entry.
 * `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a progress entry.
 * `AddProgressCommandParser#parse()` — Parses the individual arguments to create a `Progress` object.
 
-When a `Student` object is created, a `ProgressList` object is created for this `Student` object. This `ProgressList` object
-stores an `ArrayList` of type `Progress` that keeps track of a maximum of 10 `Progress` objects. We implement `ProgressList`
-as a field in `Student`.
+When a `Student` object is created, a `ProgressList` object is created for this `Student` object. This `ProgressList` object stores an `ArrayList` of type `Progress` that keeps track of a maximum of 10 `Progress` objects. We implement `ProgressList` as a field in `Student`.
 
 ![ProgressListClass](images/StudentWithProgressListClassDiagram.png)
 
-Given below is an example of what happens when the user attempts to add a progress entry to a student in TutorAid
-by entering a command:
+Given below is an example of what happens when the user attempts to add a progress entry to a student in TutorAid by entering a command:
 
 `add -p 2 Did Homework​`
 
@@ -326,34 +321,24 @@ Below is the sequence diagram that depicts the parsing of the `add -p` command:
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
-2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be
-   extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into
-   `AddCommandParser#parse()`.
+2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into `AddCommandParser#parse()`.
 
-3. `AddCommandParser#parse()` extracts the command flag `-p` at the start of its argument, which denotes the addition
-   of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse()`.
+3. `AddCommandParser#parse()` extracts the command flag `-p` at the start of its argument, which denotes the addition of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse()`.
 
-4. The remaining (`2 Did Homework​`) is then parsed into targetIndex `2` and progress with the description
-   `Did Homework`, which are then used to construct an `AddProgressCommand` object that will be returned to
-   `LogicManager`.
+4. The remaining (`2 Did Homework​`) is then parsed into targetIndex `2` and progress with the description `Did Homework`, which are then used to construct an `AddProgressCommand` object that will be returned to `LogicManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail 
-its execution and `ParseException` will be thrown.</div>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail its execution and `ParseException` will be thrown.</div>
 
-Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit and then add the progress
-to the student:
+Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit and then add the progress to the student:
 ![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
 
-5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the
-   index-specified `Student` instance.
+5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
 
 6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
 
 7. `AddProgressCommand` then calls the `Model#viewStudent()` to signal `Model` to view this student's details.
 
-8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is
-   returned to `LogicManager` and then returned to the user.
+8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
 
 #### Design considerations:
 
@@ -454,10 +439,7 @@ Given below is an example usage scenario for adding a lesson to TutorAid, and ho
 
 2. This in turn calls `AddCommandParser#parse()`, where the string `-l n/Maths 1 c/15` is passed in as the argument. Due to the command flag `-l` at the start of the argument, `AddLessonCommandParser#parse()` is called to parse the remaining parameters `n/Maths 1 c/15` into lesson details.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-At this point, if `AddLessonCommandParser#parse()` detects that no lesson name has been supplied, the command will fail 
-its execution and `ParseException` will be thrown.
-</div>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**At this point, if `AddLessonCommandParser#parse()` detects that no lesson name has been supplied, the command will fail its execution and `ParseException` will be thrown.</div>
 
 3. The original arguments (Maths 1 and 15) are used for the parameters `lessonName` and `capacity` respectively. Since the optional parameters (`price` and `timing`) are not provided in the command, a default argument (`""`)  is supplied for these parameters. These parameters are then used to create `LessonName`, `Price`, `Capacity` and `Timing` instances.
 
@@ -485,10 +467,7 @@ Below is the sequence diagram that depicts the adding of the newly created `Less
 
 #### Implementation
 
-The add student(s) to lesson(s) feature adds existing student(s) into existing lesson(s) in TutorAid. This feature allows
-the addition of multiple students into multiple lessons in a single command. For each student-lesson pair, if the student already attends
-the lesson, a warning will be given, otherwise a success message will be shown. This means that there can be simultaneously many warnings
-and success messages after one single add student to lesson command.
+The add student(s) to lesson(s) feature adds existing student(s) into existing lesson(s) in TutorAid. This feature allows the addition of multiple students into multiple lessons in a single command. For each student-lesson pair, if the student already attends the lesson, a warning will be given, otherwise a success message will be shown. This means that there can be simultaneously many warnings and success messages after one single add student to lesson command.
 
 This feature implements the following operations:
 * `AddStudentToLessonCommand#execute()` —Adds some existing `Student` objects to some existing `Lessons` objects and vice versa.
@@ -496,11 +475,9 @@ This feature implements the following operations:
 It is also facilitated by the methods below:
 * `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of students into lessons.
 * `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of students into lessons.
-* `AddStudentToLessonCommandParser#parse()` — Parses the individual arguments to create two `ArrayList`s of `Index`,
-one for student indexes and the other for lesson indexes.
+* `AddStudentToLessonCommandParser#parse()` — Parses the individual arguments to create two `ArrayList`s of `Index`, one for student indexes and the other for lesson indexes.
 
-Given below is an example of what happens when the user attempts to add some students into some lessons in TutorAid
-by entering a command:
+Given below is an example of what happens when the user attempts to add some students into some lessons in TutorAid by entering a command:
 
 `add -sl s/1 2 3 l/3 2 1​`
 
@@ -509,33 +486,22 @@ Below is the sequence diagram that depicts the parsing of the `add -sl` command:
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
-2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be
-   extracted, the remaining arguments of the command (`-sl s/1 2 3 l/3 2 1​`) are then passed into
-   `AddCommandParser#parse()`.
+2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be extracted, the remaining arguments of the command (`-sl s/1 2 3 l/3 2 1​`) are then passed into `AddCommandParser#parse()`.
 
-3. `AddCommandParser#parse()` extracts the command flag `-sl` at the start of its argument, which denotes the addition
-   of students into lessons. Thus, the remaining (`s/1 2 3 l/3 2 1​`) is then passed into `AddStudentToLessonCommandParser#parse()`.
+3. `AddCommandParser#parse()` extracts the command flag `-sl` at the start of its argument, which denotes the addition of students into lessons. Thus, the remaining (`s/1 2 3 l/3 2 1​`) is then passed into `AddStudentToLessonCommandParser#parse()`.
 
-4. The remaining (`s/1 2 3 l/3 2 1​`) is then parsed into two `ArrayList` of `Index` which are `studentIndexes` and `lessonIndexes`,
-   which are then used to construct an `AddStudentToLessonCommand` object that will be returned to `LogicManager`.
+4. The remaining (`s/1 2 3 l/3 2 1​`) is then parsed into two `ArrayList` of `Index` which are `studentIndexes` and `lessonIndexes`, which are then used to construct an `AddStudentToLessonCommand` object that will be returned to `LogicManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-At this point, if `AddStudentToLessonCommandParser#parse()` detects that invalid input has been supplied, the command will fail 
-its execution and `ParseException` will be thrown.</div>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**At this point, if `AddStudentToLessonCommandParser#parse()` detects that invalid input has been supplied, the command will fail its execution and `ParseException` will be thrown.</div>
 
-Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets the students and the lessons and then
-add these students into the lessons:
+Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets the students and the lessons and then add these students into the lessons:
 ![AddStudentToLesson](images/AddStudentToLessonSequenceDiagram.png)
 
-5. `LogicManager#execute()` then calls upon `AddStudentToLessonCommand#execute()`. It then loops through each studentIndex-lessonIndex 
-   pair and call another method of its own `AddStudentToLessonCommand#executeSingle()` to communicates with the `Model`
-   to get the index-specified `Student` instance and `Lesson` instance.
+5. `LogicManager#execute()` then calls upon `AddStudentToLessonCommand#execute()`. It then loops through each studentIndex-lessonIndex pair and call another method of its own `AddStudentToLessonCommand#executeSingle()` to communicates with the `Model` to get the index-specified `Student` instance and `Lesson` instance.
 
-6. For each student-lesson pair, `AddStudentToLessonCommand#executeSingle()` calls the `Lesson#addStudent()` to add the student to the lesson
-   and `Student#addLesson()` to add the lesson to the student.
+6. For each student-lesson pair, `AddStudentToLessonCommand#executeSingle()` calls the `Lesson#addStudent()` to add the student to the lesson and `Student#addLesson()` to add the lesson to the student.
 
-7. After going through all the student-lesson pairs, the result of the `AddStudentToLessonCommand` execution is then
-   encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
+7. After going through all the student-lesson pairs, the result of the `AddStudentToLessonCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
 
 #### Design considerations:
 
@@ -871,7 +837,7 @@ Pre-condition: The student's contact currently exists in TutorAid.
 
 **Extensions**
 
-* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices).
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indexes).
     * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 3a2. Tutor re-enters the command, along with the necessary arguments.
 
@@ -1033,7 +999,7 @@ Pre-conditions: The students have been added to TutorAid and the lessons have be
 
 1. Tutor requests the list of students and lessons.
 2. TutorAid displays the list of all students and lessons.
-3. Tutor identifies the student indices of the specific students and the lesson indices of the specific lessons to which they wish to add these students to. The Tutor then requests to add these students to these lessons by providing the indices.   
+3. Tutor identifies the student indexes of the specific students and the lesson indices of the specific lessons to which they wish to add these students to. The Tutor then requests to add these students to these lessons by providing the indices.   
 4. TutorAid adds the students to the lessons and displays a success message for each successful addition.
    
 Use case ends.
@@ -1074,7 +1040,7 @@ Pre-conditions: The students have been added to TutorAid and the lessons have be
 
 1. Tutor requests the list of students and lessons.
 2. TutorAid displays the list of all students and lessons.
-3. Tutor identifies the student indices of the specific students, and the lesson indices of the specific lessons from which they wish to delete the students. The Tutor then requests to delete these students from these lessons by providing the indices.
+3. Tutor identifies the student indexes of the specific students, and the lesson indices of the specific lessons from which they wish to delete the students. The Tutor then requests to delete these students from these lessons by providing the indices.
 4. TutorAid delete these students from these lessons and displays a success message for each successful deletion.
 
 Use case ends.
