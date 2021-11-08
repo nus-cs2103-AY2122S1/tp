@@ -60,7 +60,7 @@ to quickly navigate to the command of your choice.
 1. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`man`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -93,11 +93,11 @@ to quickly navigate to the command of your choice.
 * Parameters can be in any order.<br>
   e.g. if the command format is `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* If a parameter is expected only once in the command format but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
-  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this such as the find command. In such cases, if a parameter is expected only once, an error message will appear.
+* If a parameter is expected only once in the command format, but you specified it multiple times, only the last occurrence of the parameter will be accepted.<br>
+  e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be accepted.<br> There are a few exceptions to this which are the find command and the cat command. In such cases, if a parameter is expected only once and there are more than one standalone flag, the words after the first flag will be taken as keywords.
 
 * Extraneous parameters for commands that do not take in parameters (such as `ls`, `exit` and `clear`) will be ignored.<br>
-  e.g. if you specifiy `ls 123`, the command will be interpreted as `ls`.
+  e.g. if you specify `ls 123`, the command will be interpreted as `ls`.
 
 </div>
 
@@ -107,13 +107,15 @@ Shows you details of instructions that can be used to navigate the app.
 
 Format: `man [COMMAND_NAME]`
 
+Notes:
+
 * If no `[COMMAND_NAME]` is entered, you will see a table of instructions, in a new window, that can be used to navigate the app.
 
 * If you enter a valid `[COMMAND_NAME]`, you will see the details of that command, which includes the format and taskName of the command.
 
 Examples:
 * `man sort` Shows the full details of `sort` command as below.
-![result for `man sort`](images/mansortResult.png)
+![result for `man sort`](images/ManSortResult.png)
 
 ### Adding a person: `add`
 
@@ -142,6 +144,8 @@ Edits an existing person in ContactSH.
 
 Format: `edit INDEX [-nNAME] [-pPHONE] [-eEMAIL] [-aADDRESS] [-dDESCRIPTION] [-lLABEL]… [-imptIMPORTANCE]`
 
+Notes:
+
 * Edits the person at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -160,6 +164,8 @@ Examples:
 1. Deletes a specified person from ContactSH.
 
    Format: `rm INDEX`
+
+   Notes:
 
    * Deletes the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the persons list displayed.
@@ -187,6 +193,8 @@ Sorts persons by the alphabetical order of their name.
 
 Format: `sort [-r]`
 
+Notes:
+
 * The default sort with no options provided displays a list of persons sorted in ascending ASCII alphabetical order of their name.
 * If the optional `-r` flag is provided, a list of persons sorted in reverse order is displayed.
 
@@ -196,6 +204,8 @@ Finds persons whose attribute contains any of the given keywords.
 
 Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l LABEL] [-tn TASK_NAME]`
 
+Notes:
+
 * A space is **necessary** between a command word, a flag and a keyword.
 * Only 1 attribute can be specified per find command.
 * The search is case-insensitive. e.g. hans will match Hans
@@ -204,17 +214,18 @@ Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l 
 * At least one of the optional fields is required.
 * Abbreviations will be matched e.g. Han will match Hans
 * Persons matching **ALL** the keywords will be returned. e.g. A Y will return Alex Yeoh, Alexandra Yee, but not Aileen
+* Only one flag is allowed per command. e.g. `find -n Alex` is fine, but `find -n Alex -n Bernice` will search with the keywords "Alex -n Bernice".
 
 Examples:
 
 * `find -n Alex` Finds all people whose name matches the keyword "Alex".
 
-![result for `find -n Alex`](images/findAlexResult.png)
+![result for `find -n Alex`](images/FindAlexResult.png)
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
-start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do 
-in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with 
-the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name 
+start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do
+in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with
+the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name
 "Alex Yeoh".
 </div>
 
@@ -224,9 +235,11 @@ Adds a task to the current list of tasks attached to a person.
 
 Format: `add INDEX -tnTASK_NAME [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
 
+Notes:
+
 * Adds a task to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
-* `TASK_TIME` should follow the format of `HH:MM`.
+* `TASK_TIME` should follow the format of `HH:mm`.
 
 Examples:
 * `add 1 -tncall for meeting -td2021-12-03 -tt14:30` Adds the task `call for meeting` with date `2021-12-03` and time `14:30` to the task list of the 1st person listed.
@@ -236,26 +249,29 @@ Examples:
 
 Edits an existing task in ContactSH.
 
-Format: `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]…​`
+Format: `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
+
+Notes:
 
 * Edits a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks edited  is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
-* Multiple tasks of one person can be edited in one command. All fields provided after a `TASK_INDEX` are taken to be edited fields for the task at the `TASK_INDEX`.
 * Existing values will be updated to the input value.
-* For each `TASK_INDEX` provided, at least one of the optional fields must be provided.
+*At least one of the optional fields must be provided.
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
-* `TASK_TIME` should follow the format of `HH:MM`.
+* `TASK_TIME` should follow the format of `HH:mm`.
 
 Examples:
 
 * `edit 3 -ti2 -tnGroup Project Meeting` Changes the name of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
-* `edit 2 -ti3 -tnPresentation Meeting -taZoom -ti5 -td2021-12-20` Changes the 3rd and 5th task of the 2nd person in the list. Name and address of the 3rd task is changed to`Presentation Meeting` and `Zoom` respectively. Date of the 5th task is changed to `2021-12-20`.
+* `edit 2 -ti3 -tnPresentation Meeting -taZoom` Changes the 3rd task of the 2nd person in the list. Name and address of the 3rd task is changed to`Presentation Meeting` and `Zoom` respectively.
 
 ### Deleting a task: `rm`
 
 Deletes a task attached to a specified person.
 
 Format: `rm INDEX -tiTASK_INDEX…​`
+
+Notes:
 
 * Deletes a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The task deleted is specified by `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647.
@@ -277,42 +293,51 @@ Format: `cat INDEX`
 
 Shows you a list of tasks that has been attached to a specific person.
 
-Format: `cat INDEX [-f KEYWORDS]`
-
 1. Displays the list of tasks attached to the person at the specified `INDEX`.
+
+   Format: `cat INDEX`
+
+   Notes:
+
    * `INDEX` refers to the index number shown in the displayed person list.
    * `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 
    Examples:
 
    * `cat 1` Displays the list of tasks attached to the 1st person.
-   ![result for `cat 1`](images/catAlexResult.png)
+   ![result for `cat 1`](images/ViewTaskAlexResult.png)
 
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
    Format: `cat INDEX -f KEYWORDS…`
 
+   Notes:
+
    * Displays a filtered lists of tasks for a specific person according to the keywords provided.
    * Only tasks that matches the keywords will be shown. A task matches the keywords if the task name contains a word that starts with any of the `KEYWORDS`.
    * A space is **necessary** between the flag and the keywords.
+   * * Only one flag is allowed per command. e.g. `cat 1 -f work` is fine, but `cat 1 -f work -f nus` will search with the keywords "work -f nus".
 
    Examples:
 
    * Alex is the first person in the person list and has the tasks [Work, project meeting at NUS]. `cat 1 -f work` will display the task "work"
    * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
-   ![result for `cat 1 -f work`](images/cat-fResult.png)
+   ![result for `cat 1 -f work`](images/ViewTaskAlexFilteredResult.png)
 
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
 start of any word in a task name or if the keywords do not appear in the same order in the task name as they do in the
-given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name 
+given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name
 "Work at 5pm". However, `cat 1 -f ork` and `cat 1 -f 5pm work" will not match the same task with the name "Work at 5pm".
 </div>
 
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
-   ![result for `cat -A`](images/catAllResult.png)
+
+   Example:
+   * `cat -A`
+   ![result for `cat -A`](images/ViewAllTaskResult.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Alternatively, you could also click on the person in the GUI to open said person's tasks!
@@ -323,6 +348,8 @@ given input, it will not match that particular task. For instance, `cat 1 -f wor
 Marks an existing task in ContactSH as done.
 
 Format: `donetask INDEX -tiTASK_INDEX…​`
+
+Notes:
 
 * Marks tasks attached to the person at the specified `INDEX` as done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
@@ -338,6 +365,8 @@ Marks existing tasks in ContactSH as not done.
 
 Format: `undotask INDEX -tiTASK_INDEX…​`
 
+Notes:
+
 * Marks tasks attached to the person at the specified `INDEX` as not done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * Multiple tasks of one person can be marked as not done in one command.
@@ -351,12 +380,16 @@ Examples:
 
    Format: `reminder`
 
+   Notes:
+
     * The default value is 3 days.
 
 
 2. Sets the number of days prior to the date of tasks for them to be considered as due soon. This affects all tasks.
 
    Format: `reminder -s DAYS`
+
+   Notes:
 
    * `DAYS` refer to the number of days prior to a task's date.
      The day **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
@@ -427,7 +460,7 @@ Action | Format, Examples
 **Help** | `man`
 **Add Task** | `add INDEX -tnTASKNAME` <br> e.g., `add 2 -tnCelebrate $1 million revenue -tnContact Professor to get help`
 **Delete Task** | `rm INDEX -tiTASK_INDEX` <br> e.g., `rm 2 -ti2 -ti3`
-**Edit Task** | `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]…​` <br> e.g., `edit 1 -ti2 -tnInternship Interview -tt15:45 -ti4 -td2022-09-20`
+**Edit Task** | `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]` <br> e.g., `edit 1 -ti2 -tnInternship Interview -tt15:45`
 **Mark Task Done** | `donetask INDEX -tiTASK_INDEX…​` <br> e.g., `donetask 3 -ti2 -ti5`
 **Undo Mark Task Done** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti2 -ti5`
 **View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
@@ -448,7 +481,7 @@ Denotes if a Person is important | `-impt` | Input should be `true` or `false`, 
 Task Index of the Task | `-ti` | Task Index should be a positive integer less than or equal to 2147483647: 1, 2, 3, …​, 2147483647.<br>
 Name of the Task | `-tn` | Task name should contain at least one non-whitespace character.
 Date of the Task | `-td` | Task date should follow the format: `YYYY-MM-DD`.
-Time of the Task | `-tt` | Task time should follow the format: `HH:MM`.
+Time of the Task | `-tt` | Task time should follow the format: `HH:mm`.
 Address of the Task | `-ta` | Task address should contain at least one non-whitespace character.
 Reverse flag for `sort` command | `-r` | `-r` flag does not take in any input and should be used as a standalone flag.
 All flag for `cat` command | `-A` | `-A` flag does not take in any input and should be used as a standalone flag.

@@ -12,15 +12,13 @@ tasks done faster than traditional GUI apps.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to view a list of commands.
-    * What it does: Allows the user to view a list of commands in a new window and see what each command does. 
+    * What it does: Allows the user to view a list of commands in a new window and see what each command does.
     * Justification: This feature improves the product significantly because a new user who is familiar with Linux CLI might not understand what commands are possible in this application. They can access the full list of commands quite easily by using the same "man" command in Linux CLI. A current user might also forget the commands from time to time, so it is convenient to have a list of commands readily available within the application and not make it necessary to visit the user guide everytime one forgets the commands.
     * Highlights: This enhancement is affected by existing commands and commands to be added in the future.
     * Credits: Inspired by and reused some parts from https://github.com/greyguy21/ip/ (version from 01/10/2021) with modifications
 
 * **Code contributed**:
 [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kflim&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
-
-* **Project management**:
 
 * **Enhancements to existing features**:
     * Added `man` feature
@@ -38,7 +36,3 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [PED-Issues](https://github.com/kflim/ped/issues)
-
-* **Tools**:
-
-* _{you can add/remove categories in the list above}

@@ -126,7 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the previous user input into the `UserCommandCache`
-* stores a `TaskListManager` object which is responsible of managing task display operations. It maintains a `Name` object of the person whose tasks is currently displayed.  
+* stores a `TaskListManager` object which is responsible for managing task display operations. It maintains a `Name` object of the person whose tasks are currently displayed.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -212,7 +212,7 @@ The following activity diagram summarises what happens when a user executes a `c
 
   * Cons:
     * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
-      which reduces efficiency).
+    which reduces efficiency).
     * Lesser view of information.
 
 ### Command Cache
@@ -304,7 +304,6 @@ The following sequence diagram show how the find operation works:
 The following activity diagram summarises what happens when a user executes a `find -n Alex` command:
 
 ![ViewTaskListActivityDiagram](images/FindActivityDiagram.png)
-
 #### Design consideration:
 
 ##### Aspect: How to find based on the keywords
@@ -384,7 +383,7 @@ The following activity diagram summarizes what happens when a user executes `add
 ##### Aspect: How to either add a new person or task using the same `add` command word
 
 - **Alternative 1 (current choice):** If the command is to add a new task, invoke `AddTaskCommandParser` from `AddCommandParser`, returning a `AddTaskCommand`. Else if the command is to add a new person, return a `AddCommand` directly from `AddCommandParser`.
-    - Pros: 
+    - Pros:
         - Commands encapsulate the exact command to execute.
         - Easier to debug if either command demonstrates erroneous behaviour.
     - Cons:
@@ -394,7 +393,7 @@ The following activity diagram summarizes what happens when a user executes `add
     - Pros:
         - Simple implementation.
         - Less effort needed.
-    - Cons: 
+    - Cons:
         - Increased avenue for bugs.
 
 ### \[Proposed\] Undo/redo feature
@@ -445,7 +444,6 @@ The following sequence diagram shows how the undo operation works:
 </div>
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
@@ -782,16 +780,25 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the program
+
+    1. Use `exit` or close the window to end the program.
+
+### Adding a person
+
+1. Adding a person with description more than 500 characters long.
+
+    1. Enter the following command: `add -nJohn Doe -p98765432 -ejohnd@example.com -aJohn street, block 123 -dThis is a description that is more than 500 characters long. The rest of this message is randomly padded to make up 500 characters.0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789`<br>
+       Expected: Error message stating that description is too long.
 
 ### Deleting a person
 
@@ -850,8 +857,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete the data file located at `[JAR file location]/data/contactsh.json`.
+    2. Run the program. <br> Expected: A new data file with some example contacts will be created.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+    1. Modify the data file located at `[JAR file location]/data/contactsh.json` with incorrect modifications such as replacing phone numbers with a string of alphabets.
+    2. Run the program. <br> Expected: The data file is replaced with an empty file, program starts with no contacts. 
