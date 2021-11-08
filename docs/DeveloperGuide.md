@@ -296,7 +296,9 @@ public boolean test(Person person) {
 }
 ```
 
-Most variables are checked against using it's respective `equals` method except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support 1. Multiple keywords matching for name and 2. Room matching by block, level and block-level.
+Most variables are checked against using their respective `equals` methods except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support:
+1. Multiple keywords matching for name and 
+2. Room matching by block, level and block-level.
 
 #### Design considerations:
 
@@ -322,7 +324,7 @@ The following activity diagram illustrates how the `AddressBook#findPerson()` me
 The command extends the `Command` class and implements `IncludeCommand#execute()` to execute the command. 
 A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
 
-When `IncludeCommand#createEditedEvent()` is called, two methods of events are invoked:
+When `IncludeCommand#createEditedEvent()` is called, two methods of `Event` are invoked:
 * `Event#getCombinedDisplayString()` creates a display String with just the names of each `Person` in the combination 
   of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate.
 * `Event#getCombinedStorageString()` creates a storage String with the full information of each `Person` in the 
