@@ -25,7 +25,7 @@ import seedu.address.ui.PersonListPanel;
 public class GithubCommandTest {
 
     /**
-     * Checks if the command passes when there is a current person selected in Model.
+     * Checks if the command is executed when there is a current person selected in Model.
      */
     @Test
     public void execute_github_success() {
@@ -47,9 +47,9 @@ public class GithubCommandTest {
     }
 
     /**
-     * A stub Model which simulates the presence of a selected person
+     * A stub Model which simulates the presence of a selected person.
      */
-    private static class ModelStubWithSelectedPerson implements Model {
+    private class ModelStubWithSelectedPerson implements Model {
 
         private final int selectedIndex;
 
