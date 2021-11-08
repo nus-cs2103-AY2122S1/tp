@@ -249,7 +249,7 @@ The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 
@@ -261,7 +261,7 @@ How can we improve search for a student?
     * Allow user to search through partial names. This is done through an `anyMatch` using any part of (`contains`) `String` predicate.
     * *Pros:* Easier to implement, more convenient since there are no prefixes. Generally, this method results in a better user experience, since the user may not be exactly sure what the student name is if it is a complicated name.
     * *Cons:* No search by different fields, e.g. email.
-  
+
 * **Alternative 2**:
     * Allow search of students through different fields with multiple prefixes.
     * *Pros:* More freedom to find a student based on different fields.
@@ -336,7 +336,7 @@ The interaction between the `Logic` and `Model` classes are shown in the followi
 
 ![Reference Sequence Diagram of Add Member](images/AddMemberRefSequenceDiagram.png)
 
-A key difference to note about this command is that gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
+A key difference to note about this command is that it gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
 
 The follow steps describes the execution of the AddMember command:
 
@@ -349,8 +349,7 @@ The follow steps describes the execution of the AddMember command:
 1. `Model` then calls `setStudent` and `setGroup` to update these changes in `AddressBook`.
 1. Execution of this command then follows the usual execution path of all other commands in tApp.
 
-Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
-these changes in the `AddressBook`. 
+Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both these changes in the `AddressBook`.
 
 #### Design considerations:
 
@@ -443,7 +442,7 @@ The above process is shown in the following sequence diagram:
 
 **Sequence diagram showcasing the add todo task process**
 
-<div markdown="span" class="alert alert-info">:information_source: ℹ️ **Note:** The lifeline for `AddTodoTaskCommandParser` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTodoTaskCommandParser` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a new command to find the members by keywords:
@@ -499,41 +498,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                | mark tasks as complete                               | know which tasks have already been done                                |
 | `* * *`  | user                | view my todo list                                    | know what tasks I have to do                                           |
 | `* * *`  | user                | view my student list                                 | know what students I have                                              |
+| `* * *`  | user                | view my groups list                                 | know what groups I have                                              |
 | `* * *`  | user                | add a student                                | add my student into the list                                           |
 | `* * *`  | user                | delete a student                             | remove my student if he quits the course                               |
+| `* * *`  | user                | add a group                                | add a group into the list                                           |
+| `* * *`  | user                | delete a group                             | remove a group if I am not in charge of them anymore                               |
 | `* * *`  | user                | store my data in a file                              | easily export data from the application                                |
 | `* * *`  | user                | add GitHub links for each student            | easily access their Github to check their progress                     |
 | `* * *`  | user                | add GitHub links for each student group              | easily access their Github to check their progress                     |
+| `* * *`  | user                | record attendance during tutorials                   | accurately award attendance marks to students                       |
 | `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
 | `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
-| `* *`    | user                | set my current directory to either students or tasks | add students/tasks more easily                                         |
+| `* *`    | user                | set my current directory to either students or tasks or groups | add students/tasks/groups more easily                                         |
 | `* *`    | user                | access the ‘help’ page with all available commands   | refer to instructions when I forget how to use tApp                    |
-| `* *`    | user                | allocate students to different groups                | track their progress based on their groups                             |
-| `* *`    | user                | import data from CSV files                           | get started with the app quickly                                       |
+| `* *`    | user                | add students as members to different groups          | Keep track of different group members and their progress               |
+| `* *`    | user                | delete student members from groups                   | remove members if they quit their course or change their groups        |
+| `* *`    | user                | edit groups                                          | correct any errors I made without deleting and creating a new group    |
 | `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
+| `* *`    | user                | edit students                                        | correct any errors I made without deleting and creating a new student  |
 | `* *`    | user                | search for a student                                 | quickly access all information related to the student                  |
 | `* *`    | user                | search for a group                                   | quickly access all information related to the group                    |
 | `* *`    | user                | purge all current students                           | start a new semester with new students                                 |
 | `* *`    | user                | purge all current groups                             | start a new semester with new groups                                   |
 | `* *`    | user                | purge all current tasks                              | get rid of all my tasks                                                |
 | `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
-| `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
 | `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
-| `* *`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
-| `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
-| `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
+| `* *`    | user                | assign priority levels for tasks                     | know what tasks require my earliest attention                          |
 | `* *`    | user                | create events as a type of task                      | keep track of tasks that occur at a specified time                     |
-| `* *`    | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
-| `* *`    | user                | set automated reminders upon startup                 | not forget any task                                                    |
+| `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
+| `*`      | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
+| `*`      | user                | tag students to specific tasks                       | keep track of students related to a task                               |
+| `*`      | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
+| `*`      | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
+| `*`      | user                | set automated reminders upon startup                 | not forget any task                                                    |
 | `*`      | expert user         | create command line shortcuts to access tasks        | easily access data and save time                                       |
 | `*`      | user                | set recurring tasks                                  | not create tasks that I have to complete regularly                     |
 | `*`      | user                | customise the order of the menu                      | easily access the features I use most                                  |
 | `*`      | user                | broadcasts task to a certain group                   | efficiently add new module wide tasks                                  |
-| `*`      | user                | assign priority levels for tasks                     | what tasks require my earliest attention                               |
 | `*`      | user                | string multiple commands into a single line          | manage my tasks more efficiently                                       |
 | `*`      | user                | view both my students’ tasks and my own tasks        | be informed of the week’s progress                                     |
 | `*`      | expert user         | create custom commands                               | make managing tasks more convenient, and more tailored to my needs     |
 | `*`      | user                | filter the CS2103/T textbook                         | refresh my memory on concepts I forgot                                 |
+| `*`      | user                | import data from CSV files                           | get started with the app quickly                                       |
 
 ### Use cases
 
@@ -550,9 +556,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is already in the student directory.
+* 1a. Full student list is already displayed.
 
-  Use case resumes at step 2.
+  Use case ends.
 
 * 2a. The list is empty.
 
@@ -581,7 +587,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view students (UC2)
+1.  User requests to view students (UC1)
 2.  tApp displays the list of students
 3.  User requests to edit a specific student in the list by specifying the details to edit
 4.  tApp edits the student details
@@ -598,30 +604,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. tApp shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 **Use case: UC4 - Delete a student**
 
-**MSS**
-
-1.  User requests to view students (UC1)
-2.  tApp displays the list of students
-3.  User requests to delete a specific student in the list
-4.  tApp deletes the student
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The student list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. tApp shows an error message.
-
-      Use case resumes at step 2.
+Similar to UC3, except we are deleting a student and there is no need to edit the student details.
 
 **Use case: UC5 - Mark student as present**
 
@@ -650,7 +637,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. tApp shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 
 **Use case: UC6 - Mark student as participated**
@@ -702,6 +689,10 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
 **Extensions**
 
+* 1a. Full group list is already displayed.
+
+  Use case ends.
+
 * 2a. The group list is empty.
 
     * 2a1. tApp displays an empty list
@@ -720,15 +711,9 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
 **Extensions**
 
-* 1a. The group name is empty.
+* 1a. The group name is empty or invalid.
 
-    * 1a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
-
-  Use case ends.
-
-* 1b. The group name is invalid.
-
-    * 1b1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+    * 1a1. tApp displays an error message stating that the group name is invalid
 
   Use case ends.
 
@@ -754,7 +739,7 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
     * 3a1. tApp shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 **Use case: UC12 - Delete a group**
 
@@ -775,41 +760,29 @@ Similar to UC11 (Edit a group), except the group is deleted instead of edited.
 
 * 3a. The group name is empty or invalid.
 
-    * 3a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+    * 3a1. tApp displays an error message stating that the group name is invalid.
 
       Use case ends.
 
 * 3b. The student index is empty or invalid.
 
-    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+    * 3b1. tApp displays an error message stating that the command format is invalid.
 
       Use case ends.
 
-* 3c. The group name is valid, but the group does not exist.
+**Use case: UC14 - Delete student from group**
 
-    * 3c1. tApp displays an error message stating that the group does not exist
+Similar to UC13 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
 
-      Use case ends.
-
-* 3d. The student index is valid, but the student does not exist.
-
-    * 3d1. tApp displays an error message stating that the student already has a group
-
-      Use case ends.
-
-**Use case: UC13 - Delete student from group**
-
-Similar to UC12 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
-
-**Use case: UC14 - Find groups by name**
+**Use case: UC15 - Find groups by name**
 
 Similar to UC7 (Find student by name), except we are finding groups by group name.
 
-**Use case: UC15 - Clear group list**
+**Use case: UC16 - Clear group list**
 
 Similar to UC8 (Clear student list), except we are clearing the group list.
 
-**Use case: UC16 - View task list**
+**Use case: UC17 - View task list**
 
 **MSS**
 
@@ -820,11 +793,15 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
 **Extensions**
 
+* 1a. Full task list is already displayed.
+
+  Use case ends.
+
 * 2a. The task list is empty.
 
-    Use case ends.
+  Use case ends.
 
-**Use case: UC17 - Add a todo task**
+**Use case: UC18 - Add a todo task**
 
 **MSS**
 
@@ -846,9 +823,9 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
     * 1b1. tApp displays an error message requesting the user to follow the correct format
 
-  Use case ends.
+      Use case ends.
 
-**Use case: UC18 - Add a task with a specified deadline**
+**Use case: UC19 - Add a task with a specified deadline**
 
 **MSS**
 
@@ -872,11 +849,11 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
       Use case ends.
 
-**Use case: UC19 - Add a task with a specified event date**
+**Use case: UC20 - Add a task with a specified event date**
 
-Similar to UC18, except the deadline is an event date.
+Similar to UC19 (Add a task with a specified deadline), except the deadline is an event date.
 
-**Use case: UC20 - Edit a task**
+**Use case: UC21 - Edit a task**
 
 **MSS**
 
@@ -896,22 +873,23 @@ Similar to UC18, except the deadline is an event date.
 
 * 3a. The given index is invalid.
 
-    * 2a1. tApp shows an error message.
-      Use case resumes at step 2.
+    * 3a1. tApp shows an error message.
 
-**Use case: UC21 - Delete a task**
+        Use case ends.
 
-Similar to UC20 (Edit a task), except the task is deleted instead of edited.
+**Use case: UC22 - Delete a task**
 
-**Use case: UC22 - Mark a task as done**
+Similar to UC21 (Edit a task), except the task is deleted instead of edited.
 
-Similar to UC20 (Edit a task), except the task is marked as done instead of edited.
+**Use case: UC23 - Mark a task as done**
 
-**Use case: UC23 - Clear task list**
+Similar to UC21 (Edit a task), except the task is marked as done instead of edited.
+
+**Use case: UC24 - Clear task list**
 
 Similar to UC8 (Clear student list), except we are clearing the task list.
 
-**Use case: UC24 - Clear all entries in tApp**
+**Use case: UC25 - Clear all entries in tApp**
 
 Similar to UC8 (Clear student list), except we are clearing the whole address book.
 
@@ -929,9 +907,10 @@ Similar to UC8 (Clear student list), except we are clearing the whole address bo
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student**: A student contact.
-* **Group**: A CS2103 group consisting of multiple students.
+* **Group**: A CS2103 group consisting of multiple members, which are student contacts.
 * **Task**: A todo task, a deadline task (task with a deadline) or an event task (task with an event date).
 * **Directory**: The list of students, groups or tasks.
+* **Invalid**: An input is invalid when it does not follow the correct command input format. Inputs are also invalid if executing a command with that input would result in duplicate data items (`Student`, `Group`, or `Task`) in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -951,7 +930,7 @@ testers are expected to do more *exploratory* testing.
     1. Download the jar file and copy into an empty folder
 
     1. Double-click the jar file.
-       Expected: Shows the GUI with a set of sample students. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample students, tasks and groups. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -967,26 +946,26 @@ testers are expected to do more *exploratory* testing.
 1. Adding a student while all students are being shown
 
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
-    
+
     1. Test case: `addStudent n/John Doe e/john@u.nus.edu s/a0000001b u/johndoee r/ip`<br>
        Expected: A student is added to the bottom of the list, with GitHub link shown. Details of the student is shown in the status message. Letters in student number are automatically capitalized.
 
     1. Test case: `addStudent n/John Doe e/jondoe@u.nus.edu s/a0000002b u/jondoee r/ip`<br>
        Expected: Similar to previous, no error thrown, student with same name added.
-       
+
     1. Test case: `addStudent n/Mary Doe e/mary@u.nus.edu s/a0000001b` or any other student with conflicting student number or email<br>
        Expected: No student is added. Error message of duplicate student shown in status message.
-       
+
     1. Test case: `addStudent` with missing `n/`, `e/`, and/or `s/` prefixes <br>
        Expected: No student is added. Error message of invalid command format shown.
-       
+
 2. Adding a student while on another directory
-    
+
     1. Prerequisites: List all tasks or groups using the `tasks` or `groups` command.
-    
+
     1. Perform a successful `addStudent` command
-       Expected: A student is added, and the student list is displayed. 
-    
+       Expected: A student is added, and the student list is displayed.
+
 
 ### Deleting a student
 
@@ -1011,19 +990,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `editStudent 1 n/John Doe u/johndoee r/ip`<br>
        Expected: The first student in the list has details changed to the ones specified above. Details of the student is shown in the status message.
-       
+
     1. Test case: `editStudent 1 s/a0000001b` or any other student number or email or both to that conflicts with another student in the list<br>
        Expected: No student is edited. Error message of duplicate student shown in status message.
 
     1. Test case: `editStudent 999 n/test` where the index is greater than the number of students in the list.<br>
-       Expected: No student is edited. Error message invalid index shown. 
+       Expected: No student is edited. Error message invalid index shown.
 
     1. Test case: `editStudent 1` with no prefixes<br>
        Expected: No student is edited. Error message of missing edit fields shown.
-    
-   1. Test case: `editStudent 0 n/test`, where the index is 0 or smaller <br>
-      Expected: No student is edited. Error message of invalid command format shown.
-      
+
+    1. Test case: `editStudent 0 n/test`, where the index is 0 or smaller <br>
+       Expected: No student is edited. Error message of invalid command format shown.
+
 2. Editing a student while on another directory
 
     1. Prerequisites: List all tasks or groups using the `tasks` or `groups` command.
@@ -1156,8 +1135,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `deleteGroup 1`<br>
        Expected: First group is deleted from the list. Details of the deleted group shown in the status message. Members of the group in student list are no longer tagged to the group.
 
-   1. Test case: `deleteGroup 999` where the index of the group is greater than the size of the group list<br>
-      Expected: No group is deleted. Error message of invalid index shown in the status message.
+    1. Test case: `deleteGroup 999` where the index of the group is greater than the size of the group list<br>
+       Expected: No group is deleted. Error message of invalid index shown in the status message.
 
     1. Test case: `deleteGroup 0`<br>
        Expected: No group is deleted. Error message of invalid command format shown in the status message.
@@ -1169,11 +1148,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a group while all groups are being shown
 
-    1. Prerequisites: List all groups using the groups command. Multiple groups in the list. 
-       Student to be added to the group does not belong to any group.
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
 
     1. Test case: `editGroup 1 r/ip`<br>
-       Expected: The first group in the list has details changed to the ones specified above. 
+       Expected: The first group in the list has details changed to the ones specified above.
        Details of the group is shown in the status message.
 
     1. Test case: `editGroup 1 g/w14-4` changing group name a value conflicting another group in the list<br>
@@ -1188,7 +1166,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `editGroup 0 g/z11-1`, where the index is 0 or smaller <br>
        Expected: No group is edited. Error message of invalid command format shown.
 
-2. Editing a group while on another directory
+4. Editing a group while on another directory
 
     1. Prerequisites: List all tasks or students using the `tasks` or `students` command.
 
@@ -1199,7 +1177,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a group member while all groups are being shown
 
-    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+    1. Prerequisites: List all groups using the groups command. Multiple groups in the list.
+       Student to be added to the group does not belong to any group.
 
     1. Test case: `addMember 1 g/w14-4` where a group with the name of W14-4 exists<br>
        Expected: First student in the student list is added to group W14-4 as a member. Success message shown in the status message. Student in student list is tagged to the group.
@@ -1208,7 +1187,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No member is added. Error message of invalid index shown in the status message.
 
     1. Test case: `addMember 2 g/z11-1` where no group with name Z11-1 exists<br>
-       Expected: No member is added. Error message of invalid group name shown in the status message. 
+       Expected: No member is added. Error message of invalid group name shown in the status message.
 
     1. Test case: `addMember 0 g/w14-4`<br>
        Expected: No group is added. Error message of invalid command format shown in the status message.
@@ -1334,7 +1313,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `editTask 1 n/Tutorial p/high d/Covers important topics for finals.`<br>
        Expected: The first task in the list has details changed to the ones specified above. Details of the task is shown in the status message.
-    
+
     1. Test case: `editTask 999 n/test` where the index is greater than the number of tasks in the list. <br>
        Expected: No task is edited. Error message invalid index shown.
 
@@ -1353,16 +1332,16 @@ testers are expected to do more *exploratory* testing.
 
 3. Editing a deadline task
 
-   1. Prerequisites: There must be at least one Deadline Task present in the task list.
+    1. Prerequisites: There must be at least one Deadline Task present in the task list.
 
-   2. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the deadline task <br>
-      Expected: The Deadline Task is edited. Details of the task is shown in the status message.
+    2. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the deadline task <br>
+       Expected: The Deadline Task is edited. Details of the task is shown in the status message.
 
-   3. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the deadline task <br>
+    3. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the deadline task <br>
        Expected: No task is edited. Error message of invalid prefix is shown.
 
-   4. Test Case: `editTask 1 by/2021-20-12`, where the date provided is invalid. <br>
-      Expected: No task is edited. Error message of invalid date shown.
+    4. Test Case: `editTask 1 by/2021-20-12`, where the date provided is invalid. <br>
+       Expected: No task is edited. Error message of invalid date shown.
 
 4. Editing an event task
 
@@ -1375,7 +1354,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No task is edited. Error message of invalid prefix is shown.
 
     4. Test Case: `editTask 1 on/2021-20-12`, where the date provided is invalid. <br>
-        Expected: No task is edited. Error message of invalid date shown.
+       Expected: No task is edited. Error message of invalid date shown.
 
 5. Editing a todo task
 
@@ -1391,13 +1370,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a tasks while all tasks are being shown
 
-    1. Prerequisites: List all tasks using the `tasks` command. Multiple students in the list.
+    1. Prerequisites: List all tasks using the `tasks` command. Multiple tasks in the list.
 
     1. Test case: `deleteTask 1`<br>
        Expected: First tasks is deleted from the list. Details of the deleted task shown in the status message.
 
     1. Test case: `deleteTask 0`<br>
-       Expected: No student is deleted. Error details shown in the status message.
+       Expected: No task is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `deleteTask`, `deleteTask x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1413,16 +1392,16 @@ testers are expected to do more *exploratory* testing.
        Expected: First task is marked as completed. Status message shows details of the task.
 
     1. Test case: `doneTask 0`<br>
-       Expected: No student is marked. Error details shown in the status message.
+       Expected: No task is marked. Error details shown in the status message.
 
-    1. Other incorrect mark participation commands to try: `doneTask`, `doneTask x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect mark task commands to try: `doneTask`, `doneTask x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Marking a task as done while on another directory
 
-    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+    1. Prerequisites: Go to another directory, either by executing the `groups` or `students` commands, or performing a command that brings you to another directory (e.g `findStudent` command: `findStudent David`).
 
-    1. Test case: `doneTask`<br>
+    1. Test case: `doneTask 1`<br>
        Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks.
        Updated task list is shown.
 
@@ -1466,6 +1445,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: delete the `tApp.json` file from the `data` folder. Then, execute the `tApp.jar` file.
        Expected: tApp application opens with the sample data provided in [SampleDataUtil.java](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java).
 
+
 1. Dealing with corrupted data files
 
     1. Test case: delete the `tasks` section of the `tApp.json` file. Then, execute the `tApp.jar` file.
@@ -1481,6 +1461,6 @@ Our team has put in a significant amount of effort into making our application c
 Implementing this required a deep understanding of how AB3 was structured and implemented, in order to expand on its functionality.
 Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to the implementation.
 
-In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. 
+In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features.
 This required significant time and effort, as well as a good understanding of the `Logic` component of AB3. We also made significant changes to the UI, making it more appropriate
 for this app, such as the introduction of the different colours for the different tags. 

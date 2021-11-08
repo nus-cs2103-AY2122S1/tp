@@ -11,6 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
+/**
+ * Marks a given task in the task list as completed, or pending.
+ */
 public class MarkTaskDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "doneTask";
@@ -46,10 +49,6 @@ public class MarkTaskDoneCommand extends Command {
         }
 
         for (Index targetIndex : targetIndexList) {
-            if (targetIndex.getZeroBased() >= savedStateList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-            }
-
             Task taskToMarkCompleted = savedStateList.get(targetIndex.getZeroBased());
             model.toggleTaskIsDone(taskToMarkCompleted);
             result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS,
