@@ -30,7 +30,6 @@ Staff'd supports **salary calculation of staff**. By inputting the salaries and 
 --------------------------------------------------------------------------------------------------------------------
 # Table of Contents
 
-* Table of Contents
   {:toc}
 
 <br>
@@ -124,6 +123,7 @@ Refer to the [Features](#features) section for more details of each command.
 <br>
 
 ### User Guide Formatting
+
 Formatting Item|Description
 ---------------|-----------
 **Bold** | Emphasizes key points
@@ -139,6 +139,7 @@ _Italics_ | Examples to complement descrptions
 
 ## User Guide Usage
 ### User Guide Navigation
+
 Item to Clarify | Section in User Guide
 --------------- | ---------------------
 Navigation | [Table of Contents](#table-of-contents)
@@ -180,6 +181,7 @@ The following is an example of how a user can refer to the User Guide to **learn
 ### GUI Overview
 [TODO: ADD PICTURE HERE OF STAFF DETAILS GUI]
 [TODO: ADD PICTURE HERE OF STAFF SCHEDULE GUI]
+
 GUI Component | Description
 ------------- | -----------
 Menu Bar | Contains the **File** and **Help** buttons which contains an Exit button and Staff'd's User Guide respectively.
@@ -192,6 +194,7 @@ Staff Display | **Displays** the **staff information** or **schedule information
 
 ### Staff Display
 [TODO: ADD PICTURE THE ANNOTATIONS ON STAFF FIELDS + A TABLE FOR EACH OF THE COMPONENTS]
+
 Staff Field | Description
 ----------- | -----------
 Index | The index in the displayed staff list
