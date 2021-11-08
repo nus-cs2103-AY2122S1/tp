@@ -59,7 +59,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
     public static final String MESSAGE_SUCCESS = "New game added: \n%1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
-        + "game type and date/datetime already exists.";
+        + "game type and date already exists.";
     public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     public final GameEntry toAdd;
