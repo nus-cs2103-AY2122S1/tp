@@ -2,24 +2,23 @@ package seedu.address.model.group;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 
 public class Members {
 
-    public final ArrayList<Student> studentList;
+    public final ObservableList<Student> studentList = FXCollections.observableArrayList();
 
     /**
      * Constructs a {@code Members}.
      */
-    public Members() {
-        studentList = new ArrayList<>();
-    }
+    public Members() { }
 
     /**
      * Constructs a existing {@code Members}.
      */
     public Members(ArrayList<Student> studentList) {
-        this.studentList = new ArrayList<>();
         this.studentList.addAll(studentList);
     }
 
