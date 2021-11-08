@@ -5,8 +5,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an Applicant's employment type in RecruitIn.
+ */
 public class EmploymentType {
 
+
+    /**
+     * Enumeration of the possible types of employment supported by RecruitIn.
+     */
     public enum Type {
         FULL_TIME("Full time"),
         PART_TIME("Part time"),
@@ -18,6 +25,11 @@ public class EmploymentType {
             this.term = term;
         }
 
+        /**
+         * Gets all the types of EmploymentType.
+         *
+         * @return An array containing all the types of EmploymentType.
+         */
         public static ArrayList<String> getTerms() {
             ArrayList<String> terms = new ArrayList<>();
 
@@ -28,6 +40,11 @@ public class EmploymentType {
             return terms;
         }
 
+        /**
+         * Gets the regex to compare EmploymentType inputs to.
+         *
+         * @return The string to compare EmploymentType inputs to.
+         */
         public static String getRegex() {
             StringBuilder regex = new StringBuilder("(?i)\\b(?:");
             for (Type type: Type.values()) {
@@ -62,7 +79,7 @@ public class EmploymentType {
      * Returns true if a given string is a valid employment type.
      *
      * @param test String to be tested.
-     * @return Boolean indicating if given string is a valid employment type.
+     * @return boolean indicating if given string is a valid employment type.
      */
     public static boolean isValidEmploymentType(String test) {
         return test.equalsIgnoreCase(Type.FULL_TIME.term) || test.equalsIgnoreCase(Type.PART_TIME.term)
@@ -86,6 +103,12 @@ public class EmploymentType {
         return employmentType.hashCode();
     }
 
+    /**
+     * Converts the given input to match the same capitalisation as the Type enums.
+     *
+     * @param employmentType Given input to initialise an EmploymentType.
+     * @return the same input string except it is capitalised as in the Education enums.
+     */
     private String getCorrectCapitalization(String employmentType) {
         ArrayList<String> employmentTypes = EmploymentType.Type.getTerms();
         for (String et: employmentTypes) {
