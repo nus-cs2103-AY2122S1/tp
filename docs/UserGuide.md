@@ -8,7 +8,7 @@ title: User Guide
 * [Overview](#overview)
 * [Information About this User Guide](#information-about-this-user-guide)
   * [Purpose of User Guide](#purpose)
-  * [Target Audience of User Guide](#target-audience)
+  * [Target Audience of User Guide](#target-user)
 * [Quick Start](#quick-start)
 * [Preview](#preview)
 * [Features](#features)
@@ -76,7 +76,7 @@ of the command in Academy Directory
 - Answer some of the [frequently asked questions](#faq)
 - Provide a [summary of all commands](#command-summary) supported by Academy Directory
 
-### Target Audience
+### Target User
 The current version of Academy Directory is specifically designed for 
 **CS1101S Avengers**. Therefore, the main Target Audience of this user guide are CS1101S Avengers.
 As such, the following assumptions are made regarding the Target Audience:
@@ -126,8 +126,8 @@ Have you installed Academy Directory successfully? Let us now walk you through y
 
 Components of UI | Functionality
 --- | ---
-Menu bar | Provides an immediate mean to execute commands relating to student academic data or usage history. There are 4 menus to choose from.
-Student list | Shows the current list of students in your class, along with their tags and contact number. You can scroll through the list to see more students. Each student will be shown only their name, phone number (if have), email address, and tags (if have)
+Menu bar | Provides an immediate mean to execute commands relating to student academic data or usage history. There are 4 menus to browse from.
+Student list | Shows the current list of students in your class, along with their tags and contact number. You can scroll through the list to see more students. Each student will be shown only their name, phone number (if have), email address, and tags (if have). Note that Telegram handle will not be shown on the student cards due to some privacy concerns
 Command box | This is where you will enter your command and press Enter to use Academy Directory Command Line Interface
 Status message display | This is where Academy Directory will inform you of what is happening after the commands you entered
 Result visualizer display | This is where Academy Directory will visualize your data or results, on your request.
@@ -179,7 +179,7 @@ Adds a student to Academy Directory
 Format: `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have no phone number due to privacy concern.
+A student can be added without phone number as this is not the standard of communication for Avengers in CS1101S (unlike Telegram and Email). However, due to some recent privacy concerns regarding Telegram handle, we have decided to replace Telegram with Phone number instead on the display of Student card.
 </div>
 
 * `PHONE_NUMBER` is an optional field. The default value is `NA` which stands for "Not Applicable".
