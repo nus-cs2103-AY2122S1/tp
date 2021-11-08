@@ -120,6 +120,9 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-T14-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450"/>
+<img src="images/CcaClassDiagram.png" width="300"/>
+<img src="images/PersonClassDiagram.png" width="300"/>
+<img src="images/ReminderClassDiagram.png" width="300"/>
 
 The `Model` component,
 
@@ -128,7 +131,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-</div>
 
 ### Storage component
 
