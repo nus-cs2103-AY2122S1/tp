@@ -499,6 +499,8 @@ The following sequence diagram summarises what happens when the user inputs an `
     <img src="images/ShowStatsFromModelSequenceDiagram.png" />
 </center>
 
+<div style="page-break-after: always;"></div>
+
 ### Setting customised aliases for commands
 
 The `alias` feature allows users to define their own aliases for commands. This is useful to shorten the input for commands that the user uses often. 
@@ -520,6 +522,8 @@ Parsing of an alias command follows the following steps:
     
 If the command word of any future user input matches the alias, the first word of the user input will be replaced by the command word of the alias.
 The activity diagram of how a command is parsed can be found in the [Logic section of this guide](#logic-component).
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -670,6 +674,8 @@ Viewing and searching data:
 | `* * *`  | CS1101S Professor | Check a student’s grades | See individual performance |
 | `*`  | CS1101S Professor | Check attendance records for each student | Track if the student has been attending classes diligently |
 
+<div style="page-break-after: always;"></div>
+
 Analysing data:
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
@@ -683,6 +689,8 @@ Analysing data:
 | `*`  | CS1101S Professor | Compare between different batches of students | See if the module is too hard this semester as compared to previous semesters |
 | `*`  | CS1101S Professor | Check the overall performance of the tutors based on several indicators | Identify excellent tutors to be called back next semester |
 
+<div style="page-break-after: always;"></div>
+
 Others:
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
@@ -694,6 +702,8 @@ Others:
 | `*`  | Long-term user | Store meeting timings | Not miss any meetings that have been planned |
 | `*`  | Forgetful user | Have reminders about upcoming meetings | Avoid missing any important events |
 | `*`  | CS1101S Professor | Add TODO bug fixes accumulated throughout the semester | Fix them during CP3108 |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -840,6 +850,8 @@ Others:
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for Manual Testing**
 
@@ -1005,6 +1017,7 @@ The following features were relatively hard to implement:
     * Our application has three different classes (`Student`, `Assessment`, `Group`) that are highly coupled to each other. AB3 did not have such problems as it only contained one `Person` class. 
       It was difficult to ensure that our objects are sharing information with each other properly, while trying to keep the level of coupling as low as possible. This coupling also proved to be the source of several hard-to-find bugs. 
 
+<div style="page-break-after: always;"></div>
 
 ### Features scrapped
 
