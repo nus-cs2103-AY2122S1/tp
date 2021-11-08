@@ -20,7 +20,7 @@ import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.LabResult;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditCommand object.
  */
 public class EditCommandParser implements Parser<EditCommand> {
 

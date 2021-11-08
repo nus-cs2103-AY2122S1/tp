@@ -5,7 +5,7 @@ import java.util.Comparator;
 import seedu.programmer.model.student.ClassId;
 
 /**
- * A class to help sort ClassIds by their class number.
+ * Sorts ClassIds by their class number.
  */
 public class SortClassId implements Comparator<ClassId> {
 

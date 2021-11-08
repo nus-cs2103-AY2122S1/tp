@@ -21,7 +21,7 @@ import seedu.programmer.model.student.LabTotal;
 
 
 /**
- * Parses input arguments and creates a new CreateLabResultCommand object
+ * Parses input arguments and creates a new EditLabCommand object.
  */
 public class EditLabCommandParser implements Parser<EditLabCommand> {
 

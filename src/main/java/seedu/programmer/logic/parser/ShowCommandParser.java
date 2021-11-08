@@ -7,7 +7,7 @@ import seedu.programmer.logic.commands.ShowCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ShowCommand object
+ * Parses input arguments and creates a new ShowCommand object.
  */
 public class ShowCommandParser implements Parser<ShowCommand> {
 
