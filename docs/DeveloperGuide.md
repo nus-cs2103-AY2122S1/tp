@@ -56,8 +56,24 @@ title: Developer Guide
   - [Glossary](#glossary)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
   - [Launch and shutdown](#launch-and-shutdown)
+  - [Adding a participant](#adding-a-participant)
   - [Deleting a participant](#deleting-a-participant)
+  - [Editing a participant](#editing-a-participant)
+  - [Locating participants by name](#locating-participants-by-name)
+  - [Viewing a participant’s details](#viewing-a-participants-details)
+  - [Adding a Next-of-Kin to a participant](#adding-a-next-of-kin-to-a-participant)
+  - [Deleting a Next-of-Kin of a participant](#deleting-a-next-of-kin-of-a-participant)
+  - [Adding an event](#adding-an-event)
   - [Deleting an event](#deleting-an-event)
+  - [Editing an event](#editing-an-event)
+  - [Marking an event as done](#marking-event-as-done)
+  - [Locating events by name](#locating-events-by-name)
+  - [Filtering events by time](#filtering-events-by-time)
+  - [Sorting events by time](#sorting-events-by-time)
+  - [Showing an event’s details](#showing-an-events-details)
+  - [Adding a participant to an event](#adding-a-participant-to-an-event)
+  - [Removing a participant from an event](#removing-a-participant-from-an-event)
+  - [Showing an event’s participants](#showing-an-events-participants)
   - [Saving data](#saving-data)
   
 
@@ -968,41 +984,197 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a participant
+
+1. Add a participant without birthdate
+   
+   1. Test case: `add n/Hartin Menz p/91234567 e/hartin@gmail.com a/NUS` <br>
+      Expected: The participant is added to the participant list. Details of the participant are shown in the status message.
+
+2. Add a participant with birthdate
+
+   1. Test case: `add n/Hartin Menz p/99991234 e/menz@gmail.com a/NTU d/1970-11-11` <br>
+      Expected: The participant is added to the participant list. Details of the participant are shown in the status message.
 
 ### Deleting a participant
 
-1. Deleting a participant while all participants are being shown
+1. Delete a participant while all participants are shown
 
-   1. Prerequisites: List all participants using the `list` command. Multiple participants in the list.
+   1. Prerequisites: All participants listed using the `list` command. At least one participant is in the participant list.
 
    1. Test case: `delete 1`<br>
-      Expected: First participant is deleted from the list. Details of the deleted participant shown in the status 
+      Expected: The first participant in the participant list is deleted. Details of the deleted participant are shown in the status 
       message.
 
    1. Test case: `delete 0`<br>
-      Expected: No participant is deleted. Error details shown in the status message.
+      Expected: No participant is deleted. Error details are shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Editing a participant
+
+1. Edit a participant's name
+
+   1. Prerequisite: At least one participant is in the participant list. No other participants are named "Alexis Peoh".
+
+   2. Test case: `edit 1 n/Alexis Peoh`<br>
+      Expected: The participant at index 1 is renamed to "Alexis Peoh" with all other details unchanged.
+
+
+### Locating participants by name
+
+1. Find a participant with name "David"
+
+   1. Prerequisite: All participants listed using the `list` command. At least one participant is in the participant list.
+
+   2. Test case: `find David`<br>
+      Expected: The participant list is filtered to show only participants with "David" in their names. The list may be empty if
+      no participant has "David" in their name.
+
+### Viewing a participant’s details
+
+1. View details of a participant
+
+   1. Prerequisite: All participants listed using the `list` command. At least one participant is in the participant list.
+
+   2. Test case: `view 1`<br>
+      Expected: Details of the first participant in the participant list are shown in the status message.
+
+### Adding a Next-of-Kin to a participant
+
+1. Add a Next-of-Kin(NOK) to a participant
+
+   1. Prerequisite: At least one participant is in the participant list.
+   
+   2. Test case: `addNok 1 n/Patrick Yeoh p/91234444 tag/Cousin`<br>
+      Expected: The NOK is added to the first participant in the list. Details of the action are shown in the status message.
+
+### Deleting a Next-of-Kin of a participant
+
+1. Delete a NOK from a participant
+
+   1. Prerequisite: At least one participant is in the participant list, and the first participant has at least one NOK.
+
+   2. Test case: `deleteNok 1 1`<br>
+      Expected: The first NOK of the first participant is removed. Details of the action are shown in the status message.
+
+### Adding an event
+
+1. Add an event without time
+
+   1. Test case: `addEvent n/CS2103T finals d/2021-11-23`<br>
+      Expected: The event is added to the event list. Details of the event are shown in the status message.
+   
+2. Add an event with time
+
+   1. Test case: `addEvent n/Graduation d/2024-05-25 t/1200`<br>
+      Expected: The event is added to the event list. Details of the event are shown in the status message.
 
 ###  Deleting an event
 
-1. Deleting an event while all events are being shown
+1. Delete an event while all events are shown
 
-   1. Prerequisites: List all events using the `listEvents` command. Multiple events in the list.
+   1. Prerequisites: All events listed using the `listEvents` command. At least one event is in the event list.
 
    2. Test case: `deleteEvent 1`<br>
-      Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+      Expected: The first event in the event list is deleted. Details of the deleted event are shown in the status message.
 
    3. Test case: `deleteEvent 0`<br>
-      Expected: No event is deleted. Error details shown in the status message.
+      Expected: No event is deleted. Error details are shown in the status message.
 
    4. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x`, `...` (where x is larger than the 
       list size)<br>
       Expected: Similar to previous.
 
+### Editing an event
 
+1. Edit an event
+
+   1. Prerequisite: At least one event is in the event list. No other events are named "CS2100 finals" **and** fall on 20th November 2021.
+
+   2. Test case: `editEvent 1 n/CS2100 finals d/2021-11-20`<br>
+      Expected: The name and date of the event are edited, but time is unchanged. Details of the new event are shown in the status message.
+
+### Marking event as done
+
+1. Mark an event as done
+
+   1. Prerequisite: At least one event is in event list. The first event must be "Uncompleted".
+
+   2. Test case: `done 1`<br>
+      Expected: The first event in the event list is marked as done. Details of the completed event are shown in the status message.
+
+### Locating events by name
+
+1. Find events by event name
+
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event is in the event list.
+
+   2. Test case: `findEvent Monthly`<br>
+      Expected: Event list is filtered to show only events with "Monthly" in their names. The list may be empty if
+      no event has "Monthly" in their name.
+
+### Filtering events by time
+
+1. Filter by date only
+
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event is in the event list.
+   2. Test case: `filterEvents d/2021-09-30`<br>
+      Expected: Events occurring on 30th September 2021 will be shown in the event list. The list may be empty if no event
+      occurs on this date.
+
+2. Filter by date and time
+
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event is in the event list.
+   2. Test case: `filterEvents d/2021-09-30 t/1200`<br>
+      Expected: Events occurring on 30th September 2021 at 12:00pm will be shown in the event list. The list may be empty if
+      no event occurs on this date and time.
+
+### Sorting events by time
+
+1. Sort the event list in chronological order
+
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event is in the event list.
+   2. Test case: `sortEvents`<br>
+      Expected: The events in the event list will be sorted chronologically. For events with the same date, events without time will be placed higher than events with time specified.
+
+### Showing an event’s details
+
+1. Show the details of an event
+
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event is in the event list.
+   2. Test case: `showDetails 1`<br>
+      Expected: Details of the first event in the event list are shown in the status message.
+
+### Adding a participant to an event
+
+1. Enroll a participant into an event
+
+   1. Prerequisite: All events and participants listed using `listEvents` and `list` commands respectively. At least one event and one participant are
+      in the event and participant lists respectively. The participant should not be already enrolled in the event.
+   2. Test case: `enroll 1 1`<br>
+      Expected: The first participant in the participant list is enrolled into the first event in the event list. Details of the action
+      are shown in the status message.
+
+### Removing a participant from an event
+
+1. Expel a participant from an event
+
+   1. Prerequisite: All events and participants listed using `listEvents` and `list` commands respectively. At least one event and one participant are
+      in the event and participant lists respectively. The participant should be already enrolled in the event.
+   2. Test case: `expel 1 1`<br>
+      Expected: The first participant in the participant list is expelled from the first event in the event list. Details of the action
+      are shown in the status message.
+
+### Showing an event’s participants
+
+1. Show a list of an event's participants
+
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event is in the event list. There should be at least
+      one participant enrolled in the event.
+   2. Test case: `showParticipants 1`<br>
+      Expected: The list of participants in the event is shown in the status message.
 
 ### Saving data
 
