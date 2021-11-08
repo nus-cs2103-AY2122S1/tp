@@ -7,7 +7,7 @@ title: Elton's Project Portfolio Page
 
 Notor aims to help mentors who wish to informally keep tabs on their mentees, by providing a quick way to take notes and
 mantain records on their mentees. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is
-written in Java, and has about 10 kLoC.
+written in Java, and has about 13 kLoC.
 
 Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     1. Added test cases for groups and subgroups.
 * **Documentation**:
     * User Guide:
-        1. Feature list & Command Summary(with [Jonathan](halphasx.md) and [Elroy](elroygohjy.md)).
+        1. Feature list & Command Summary (with [Jonathan](halphasx.md) and [Elroy](elroygohjy.md)).
         1. Updated User Guide with updated group and subgroup commands.
         1. Fixed User Guide bugs.
   * Developer Guide:
