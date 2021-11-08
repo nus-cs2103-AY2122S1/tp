@@ -409,33 +409,33 @@ The following sequence diagram shows how the cost-sum-checking operation works:
 
 _{more aspects and alternatives to be added}_
 
-### Delete By Tag feature
+### Delete by tag feature
 
 #### Implementation
 
 The delete by tag mechanism is facilitated by `AddressBook`, which implements `ReadOnlyAddressBook`. 
 Additionally, it implements the following operation:
 
-* `AddressBook#removePerson()` — Removes specified person from `person` list in address book
+* `AddressBook#removePerson()` — Removes specified person from list of `persons` in address book
 
 This operation is exposed in the `Model` interface as `Model#deletePerson()`.
 
 Given below is an example usage scenario and how the delete by tag mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the
-`person` list consisting of all contacts (image adapted from Delete-by-name section).
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the list of
+`persons` consisting of all contacts (image adapted from Delete-by-name section).
 
 ![DeleteByTagState0](images/DeleteByNamePersonList0.png)
 
 Step 2. The user executes `delete t/friends` command to delete contacts consisting of the friends tag. The `delete` command first calls 
 `Model#getFilteredPersonList()` and then iterates through the given list to filter out `person` objects that have the friends tag. While doing so, relevant
-`person` objects are placed into a separate list known as `deletedlist`. Assuming that Alex Yeoh and Bernice Yu are the only contacts with the friends tag, 
-the deletedlist is updated as follows.
+`person` objects are placed into a separate list known as `deletedList`. Assuming that Alex Yeoh and Bernice Yu are the only contacts with the friends tag, 
+the deletedList is updated as follows.
 
 ![DeleteByTagState1](images/DeletedList.png)
 
-Step 3. The `delete` command then fully iterates through `deletedlist`, and calls `Model#deletePerson()` at each iteration to remove 
-every person identified as part of the `deletedlist` from the `AddressBook`.
+Step 3. The `delete` command then fully iterates through `deletedList`, and calls `Model#deletePerson()` at each iteration to remove 
+every person identified as part of the `deletedList` from the `AddressBook`.
 
 ![DeleteByTagState2](images/DeleteByTagAfter.png)
 
@@ -464,34 +464,36 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How delete by tag executes:**
 
-* **Alternative 1 (current choice):** Deletes all contacts with tag.
+* **Alternative 1 (current choice):** Deletes all contacts under a specific tag.
     * Pros: Easy to implement.
     * Cons: May be inconvenient for users who wish to delete selected range of contacts (e.g. delete pending contacts under friends).
 
-* **Alternative 2:** Deletes selected contacts within tag.
+* **Alternative 2:** Deletes selected contacts under a specific tag.
     * Pros: Increases ease of deleting multiple contacts with different statuses for user
     * Cons: Difficult to implement, and could potentially add confusion with an increase in syntax required to 
       differentiate various functions for delete.
 
 _{more aspects and alternatives to be added}_
 
-### Report feature (Status)
+### Report feature (status)
 
 #### Implementation
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:**<br>
 The following details on implementation only cover the information on how the status count across different tags
 is computed within the report. Implementation details regarding expenditure calculations and overall contact status count are left out.
+
 </div>
 
-The report mechanism is facilitated by `Model`. Additionally, it implements the following operation:
+The report mechanism is used to generate a report with the summarized statuses(and prices) across different tags.
+It is facilitated by `Model`. Additionally, it implements the following operation:
 
-* `Model#getFilteredPersonList()` — Provides`person` list in address book based on the predicate provided
+* `Model#getFilteredPersonList()` — Provides list of `persons` in address book based on the predicate provided
 
 Given below is an example usage scenario and how the report behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the
-`person` list consisting of all contacts (image adapted from Delete-by-name section).
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the list of
+`persons` consisting of all contacts (image adapted from Delete-by-name section).
 
 ![Report0](images/DeleteByNamePersonList0.png)
 
@@ -726,7 +728,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * plans a wedding for himself/herself
-* has a need to manage a significant number of contacts of who will be involving/in-charged for the wedding
+* is required to manage many contacts such as those who are involved/in-charge of the wedding
 * prefers desktop applications over other types
 * can type fast on keyboards
 * prefers typing to mouse interactions
@@ -950,7 +952,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting persons with a specific tag
 
     1. Test case: `delete t/testTag`<br>
-       Expected: All contacts with tag, "testTag" are deleted from the list. A success command message stating that contacts under said tag has been removed is shown in the command box.
+       Expected: All contacts with tag, "testTag" are deleted from the list. A success command result stating that contacts under said tag has been removed is shown in the command box.
 
     1. Test case: `delete t/unknownTag`<br>
        Expected: Assuming that person with, "unknownTag" does not exist in the list. Error message stating contacts with such a tag cannot be found is shown in the command box. 
@@ -963,14 +965,14 @@ testers are expected to do more *exploratory* testing.
 1. Showing report consisting of a summary of the statuses and expenses across different tags.
 
     1. Test case: `report`<br>
-       Expected: Report is generated in a pop up window. A success command message indicating report window is opened is provided.
+       Expected: Report is generated in a pop up window. A command result indicating that the report window has been opened is provided.
 
     1. Test case: `report now`<br>
-       Expected: As long as the first word in the command starts with,"report", additional words and spaces after the command are ignored.
-       The report is generated in a pop up window. A success command message indicating report window is opened is provided.
+       Expected: As long as the first word in the command is, "report", additional words and spaces after the command are ignored.
+       The report is generated in a pop up window. A command result indicating that the report window has been opened is provided.
 
     1. Incorrect report command to try: `1 report`,`reports` <br>
-       Expected: Since both the above commands are invalid, an error message stating unknown message is shown in the command box.
+       Expected: Since both the above commands are invalid, an error message stating that an unknown command has been used is shown in the command box.
 
 ### Undoing information
 
