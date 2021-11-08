@@ -455,7 +455,7 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
 {:.no_toc}
 
 The insurance policies a client has is represented by the `insurances` field under `Person`,
-which is repreented by a `HashSet<Insurance>` object. 
+which is represented by a `HashSet<Insurance>` object. 
 
 The `Insurance` object contains a `InsuranceType` object, an `Enum` with values `LIFE_INSURACE`, 
 `HEALTH_INSURANCE`, and `GENERAL_INSURANCE`, and a `brand` representing the insurance policy's brand, 
