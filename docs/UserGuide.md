@@ -407,7 +407,6 @@ Notes:
 * `mailingList p/`
   * Prepares a CSV of the current view containing Name and Phone as the fields.
 
-<div style="page-break-after: always;"></div>
 ### Clearing all entries : `clear`
 
 Clears all entries from CONNECTIONS.
@@ -415,6 +414,7 @@ Clears all entries from CONNECTIONS.
 #### Format:
 * `clear`
 
+<div style="page-break-after: always;"></div>
 ### Exiting the program : `exit`
 
 Exits the program.
