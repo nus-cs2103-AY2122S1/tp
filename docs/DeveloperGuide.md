@@ -153,11 +153,11 @@ Common commands for the task model:
 * `list` - Shows all tasks in the list
 * `clear` - Removes all the tasks in the list
 
-#### Rationale
+##### Rationale
 
 The tApp is supposed to cater to TA, who are very busy. They have their own modules to prepare for and as well as prepare for weekly tutorial sessions. Hence, they have lots of things to keep track and a task manager feature is necessary. And there are primarily 3 types of tasks - todos, deadlines and events. tApp has supports all of these features to assist TAs in performing their tasks more efficiently and accurately.
 
-#### Current Implementation
+##### Current Implementation
 
 To adhere to Object-Oriented Programming principles, we have decided to make the `Task` class as an abstract parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
 
@@ -171,7 +171,7 @@ The `Task` class, and all its subclasses,
 In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object.
 
 
-#### Student and Group component
+#### Student and Group Component
 
 ![Structure of the Student and Group Class](images/StudentGroupClassDiagram.png)
 
@@ -1162,10 +1162,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a group while all groups are being shown
 
-    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+    1. Prerequisites: List all groups using the groups command. Multiple groups in the list. 
+       Student to be added to the group does not belong to any group.
 
     1. Test case: `editGroup 1 r/ip`<br>
-       Expected: The first group in the list has details changed to the ones specified above. Details of the group is shown in the status message.
+       Expected: The first group in the list has details changed to the ones specified above. 
+       Details of the group is shown in the status message.
 
     1. Test case: `editGroup 1 g/w14-4` changing group name a value conflicting another group in the list<br>
        Expected: No group is edited. Error message of duplicate group shown in status message.
@@ -1176,10 +1178,10 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `editGroup 1` with no prefixes <br>
        Expected: No group is edited. Error message of missing edit fields shown.
 
-    1. Test case: `editStudent 0 g/z11-1`, where the index is 0 or smaller <br>
-       Expected: No student is edited. Error message of invalid command format shown.
+    1. Test case: `editGroup 0 g/z11-1`, where the index is 0 or smaller <br>
+       Expected: No group is edited. Error message of invalid command format shown.
 
-2. Editing a student while on another directory
+2. Editing a group while on another directory
 
     1. Prerequisites: List all tasks or students using the `tasks` or `students` command.
 
