@@ -32,7 +32,4 @@ deactivate bookKeepingStorage
 storage --[STORAGE_COLOR]> logic
 deactivate storage
 
-
-deactivate logic
-
 @enduml
