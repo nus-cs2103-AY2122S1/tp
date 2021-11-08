@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlacebookParser" as PlacebookParser LOGIC_COLOR
+participant ":AddAppCommandParser" as AddAppCommandParser LOGIC_COLOR
+participant "AddAppCommand" as AddAppCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addApp ...")
+activate LogicManager
+
+LogicManager -> PlacebookParser : parseCommand("addApp ...")
+activate PlacebookParser
+
+create AddAppCommandParser
+PlacebookParser -> AddAppCommandParser
+activate AddAppCommandParser
+
+AddAppCommandParser --> PlacebookParser
+deactivate AddAppCommandParser
+
+PlacebookParser -> AddAppCommandParser : parse("...")
+activate AddAppCommandParser
+
+create AddAppCommand
+AddAppCommandParser -> AddAppCommand
+activate AddAppCommand
+
+AddAppCommand --> AddAppCommandParser
+deactivate AddAppCommand
+
+AddAppCommandParser --> PlacebookParser
+deactivate AddAppCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddAppCommandParser -[hidden]-> PlacebookParser
+destroy AddAppCommandParser
+
+PlacebookParser --> LogicManager
+deactivate PlacebookParser
+
+LogicManager -> AddAppCommand : execute()
+activate AddAppCommand
+
+AddAppCommand -> Model : addApp
+activate Model
+
+Model --> AddAppCommand
+deactivate Model
+
+create CommandResult
+AddAppCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAppCommand
+deactivate CommandResult
+
+AddAppCommand --> LogicManager : result
+deactivate AddAppCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":PlacebookParser" as PlacebookParser LOGIC_COLOR
+Participant ":AddAppCommandParser" as addAppCommandParser LOGIC_COLOR
+
+user -[USER_COLOR]> ui : "addApp ..."
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : executeCommand("addApp ...")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> PlacebookParser : parseCommand("addApp ...")
+activate PlacebookParser LOGIC_COLOR
+
+PlacebookParser -[LOGIC_COLOR]> addAppCommandParser : parse("...")
+activate addAppCommandParser LOGIC_COLOR
+
+addAppCommandParser --[LOGIC_COLOR]> PlacebookParser: AddAppCommand
+deactivate addAppCommandParser LOGIC_COLOR
+
+PlacebookParser --[LOGIC_COLOR]> logic: AddAppCommand
+deactivate PlacebookParser LOGIC_COLOR
+
+@enduml

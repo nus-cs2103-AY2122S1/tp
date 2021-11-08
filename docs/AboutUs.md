@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chai Yew Meng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/necrowolf28.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/NecroWolf28)]
+[[portfolio](team/necrowolf28.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Proof-reading and Documentation
 
-### Jean Doe
+### Chen Yanyu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yalechen299.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jYaleChen299)]
+[[portfolio](team/yalechen299.md)]
+
+* Role: UI design and implementation
+* Responsibilities: Merging PRs and implement UI.
+
+### Li Lehao
+
+<img src="images/li-lehao.png" width="200px">
+
+[[github](https://github.com/Li-Lehao)]
+[[portfolio](team/li-lehao.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Creating Commands, Implement Models and testing
 
-### James Doe
+### Nicholas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nwhloo99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nwhloo99)]
+[[portfolio](team/nwhloo99.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Creating Commands
+
+### Teng Chiong
+
+<img src="images/tchiong.png" width="200px">
+
+[[github](http://github.com/tchiong)]
+[[portfolio](team/tchiong.md)]
+
+* Role: Developer
+* Responsibilities: Testing

@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: black;
+    background-color: black; /* Used in the default.html file */
 }
 
 .label {
@@ -107,6 +107,11 @@
     -fx-background-color: #515658;
 }
 
+.list-cell:empty {
+    /* Empty cells will not have alternating colours */
+    -fx-background: #383838;
+}
+
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
 }
@@ -140,6 +145,21 @@
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+}
+
+.titled_pane {
+    -fx-text-fill: white;
+    -fx-font-size: 12pt;
+}
+
+.titled_pane > .title {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent;
+}
+
+.titled_pane > *.content  {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent;
 }
 
 .status-bar {
@@ -221,7 +241,6 @@
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
@@ -312,6 +331,11 @@
     -fx-border-width: 0;
 }
 
+#appointmentCardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
@@ -349,4 +373,13 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#themeButton {
+    -fx-padding: 0 0 0 0;
+    -fx-border-width: 0;
+}
+
+.client_names {
+    -fx-fill: white;
 }
