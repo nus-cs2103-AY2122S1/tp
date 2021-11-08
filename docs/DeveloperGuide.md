@@ -222,7 +222,7 @@ Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd
 block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The app parser will store all the user-input parameters into an
 `applicantParticulars` object, and return the `AddApplicantCommand` instance.
 
-The following sequence diagram shows the method invocation in this step.
+The following sequence diagram shows the method invocation in this step:
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
 
 
@@ -239,7 +239,8 @@ will not be created.
 
 </div>
 
-The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
+The following activity diagram summarizes the actions taken when LogicManager executes the `AddApplicantCommand`:
+
 ![AddApplicantActivityDiagram1](images/add-applicant/AddApplicantActivityDiagram1.png)
 
 #### Design considerations:
