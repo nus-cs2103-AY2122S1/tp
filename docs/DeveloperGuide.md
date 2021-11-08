@@ -9,7 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [JavaFX](https://gluonhq.com/products/javafx/) for providing the API to render GUI.
+* [Jackson](https://github.com/FasterXML/jackson) for providing the API to parse JSON files.
+* [JUnit5](https://github.com/junit-team/junit5) for providing a unit testing framework.
+* WedFast is built using the features from [AB3](https://github.com/se-edu/addressbook-level3).
 
 --------------------------------------------------------------------------------------------------------------------
 
