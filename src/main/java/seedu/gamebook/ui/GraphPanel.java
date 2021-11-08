@@ -3,6 +3,7 @@ package seedu.gamebook.ui;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
@@ -50,16 +51,27 @@ public class GraphPanel extends UiPart<Region> {
         lineChart.getData().clear();
         lineChart.getData().add(series);
         series.getData().clear();
-        int averageProfitsSize = averageProfits.size();
-        int startIndex = averageProfitsSize - k + 1;
+        fillXYSeriesWithLastKDataPoints(series, averageProfits, k);
+    }
+
+    /**
+     * Fills an XYChartSeries with only the last k data points in dataPoints provided.
+     * @param series The XYChart.Series to be filled
+     * @param dataPoints A SortedMap object encapsulating the dataPoints
+     * @param k An integer, k. Only the last k data points in dataPoints will be used to fill series
+     */
+    private void fillXYSeriesWithLastKDataPoints(XYChart.Series<String, Number> series,
+                                               SortedMap<String, Double> dataPoints, int k) {
+        int numDataPoints = dataPoints.size();
+        int startIndex = numDataPoints - k + 1;
         int counter = 1;
 
-        for (Map.Entry<String, Double> entry : averageProfits.entrySet()) {
+        for (Map.Entry<String, Double> dataPoint : dataPoints.entrySet()) {
             if (counter < startIndex) {
                 counter++;
                 continue;
             }
-            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+            series.getData().add(new XYChart.Data<>(dataPoint.getKey(), dataPoint.getValue()));
             counter++;
         }
     }
