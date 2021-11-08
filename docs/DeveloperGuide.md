@@ -90,6 +90,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 The sections below give more details of each component.
 
 <div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -108,6 +109,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 <div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -138,6 +140,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -153,6 +156,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -171,6 +175,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -200,6 +205,7 @@ Step 6. The user decides to remove the tag `student` from a contact at index 3, 
 Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 <div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 * **Option 1 (Current choice): Tags are saved within a `Set<Tag>` within `Person`**
@@ -282,6 +288,7 @@ The following sequence diagram shows how the pin operation works:
     * Cons: Less code duplication.
 
 <div style="page-break-after: always;"></div>
+
 ### Find feature
 
 #### Implementation
@@ -461,6 +468,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -495,6 +503,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 * easy to use
 
 <div style="page-break-after: always;"></div>
+
 ### User stories
 
 
@@ -896,6 +905,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
       Use case ends.
 
 <div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -912,6 +922,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -939,6 +950,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 <div style="page-break-after: always;"></div>
+
 ### Adding a contact
 
 1. Adding a contact with all fields
@@ -967,6 +979,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No contact is added. Error details are shown in the status message.
 
 <div style="page-break-after: always;"></div>
+
 ### Finding a contact
 1. Finding a contact by name
 
@@ -994,6 +1007,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 <div style="page-break-after: always;"></div>
+
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -1022,6 +1036,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No contact is deleted. Error details are shown in the status message.
 
 <div style="page-break-after: always;"></div>
+
 ### Deleting multiple contacts
 
 1. Deleting multiple contacts while all contacts are being shown
@@ -1049,6 +1064,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 <div style="page-break-after: always;"></div>
+
 ### Pinning a contact
 
 1. Pinning a contact
@@ -1079,6 +1095,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 <div style="page-break-after: always;"></div>
+
 ### Tagging a contact
 
 1. Tagging a contact with multiple tags
@@ -1112,7 +1129,9 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes made. Error details are shown in the status message.
 
 <div style="page-break-after: always;"></div>
+
 ### Export Mailing List Command
+
 1.  Export contact list 
     1. Prerequisites: List all contacts using the `list` command.
 
