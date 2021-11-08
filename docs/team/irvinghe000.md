@@ -32,26 +32,27 @@ Given below are my contributions to the project.
     * Updated existing fields name to adapt our product (Pull requests
       [\#29](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/29))
     * Add new attributes to Person (Pull requests
-      [\#37](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/37)
+      [\#37](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/37),
       [\#93](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/93))
 
 * **Documentation**:
     * User Guide:
         * Add documentation for features `addShift` and `setShiftTime`
           (Pull requests
-          [\#73](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/73)
-          [\#132](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/132)
+          [\#73](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/73),
+          [\#132](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/132),
           [\#241](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/241))
         * Add UI mockup at the beginning
           (Pull requests
-          [\#16](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/16)
+          [\#16](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/16),
           [\#40](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/40))
 
     * Developer Guide:
-        * Add documentation for implementing `addShift` command
+        * Add documentation for implementing `addShift` command and update documentation for other commands
           (Pull requests
-          [\#116](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/116)
-          [\#120](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/120))
+          [\#116](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/116),
+          [\#120](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/120),
+          [\#324](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/324))
         * Add documentation for acknowledgement, manual testing, and proposed future features
           (Pull requests
           [\#292](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/292))
