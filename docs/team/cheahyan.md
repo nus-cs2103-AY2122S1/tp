@@ -32,7 +32,7 @@ Given below are my contributions to the project.
 input (eg. feb, fEB, FEB) ([#110](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/110))
 
 **Contributions to User Guide** 
-* Wrote documentation for `revenue` feature ([#44](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/44), [#113](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/113))
+* Wrote documentation for `revenue` feature ([#44](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/44), [#113](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/113), [#210](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/210))
 
 **Contributions to Developer Guide**
 * Added target user profile, value proposition and user stories to the developer guide ([#45](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/45))
