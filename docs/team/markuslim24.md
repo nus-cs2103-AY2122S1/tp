@@ -28,15 +28,15 @@ Given below are my contributions to the project.
     * Difficulty: Pretty simple as the window for the help command was already in place, though it involved converting the window into a scroll pane so users could easily view the command summary in a smaller window.
 
 * **Minor Enhancements**:
-  * Helped create the UI mockup for ManageMe using Figma(Pull requests [\#18](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/18))
-  * Initialized the code skeleton for Task-related components(Pull requests [\#48](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/48))
+  * Helped create the UI mockup for ManageMe using Figma(Pull request [\#18](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/18))
+  * Initialized the code skeleton for Task-related components(Pull request [\#48](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/48))
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=markuslim24&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
 * **Other Contributions**
   * **Documentation**:
     * User Guide:
-      * Created the Introductions and Quick start section (Pull requests [\#145](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/145))
+      * Created the Introductions and Quick start section (Pull request [\#145](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/145))
       * Added documentation for the `addTask`, `editTask`, `findTask`, `listTask` , `markTask`
         `archive` and `help`features: (Pull requests [\#86](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/86), 
         [\#129](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/129))
@@ -54,4 +54,4 @@ Given below are my contributions to the project.
     * As I was in charge of the Task functionalities with Cheng Chuan, most of the reviews for his PRs were done by me.I approved and merge all of his PRs after reviewing to make sure there was no erroneous code.
     * Helped test other team's software and provided feedback and bug reports([Link to feedback](https://github.com/markuslim24/ped/issues))
     * Responsible for writing testcases for all Task-related models (Pull requests [\#56](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/56), [\#60](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/60), [\#77](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/77))
-    * Created Task-related testing utilities and wrote out testcases for the `addTask` command (Pull requests [\#77](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/77))
+    * Created Task-related testing utilities and wrote out testcases for the `addTask` command (Pull request [\#77](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/77))
