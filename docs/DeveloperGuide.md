@@ -538,11 +538,11 @@ testers are expected to do more *exploratory* testing.
 2. Test case: `person /list CSENfeisvnldifosjeri`<br>
   Expected: Same as above -- following string is ignored.
 3. Test case: `group /list`<br>
-  Expected: List all groups in your Notor
+  Expected: List all groups in your Notor.
 4. Incorrect test cases to try: `grop /list` (or other typos) <br>
    Expected: Display error message.
 
-5. Prerequisite: On the person list.
+5. Prerequisite: List all groups using the `person /list` command or already in person list.
    1. `person (INDEX) /list` <br>
    Expected: Display error message.
 
@@ -560,7 +560,8 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ### Finding a person
 
-Prerequisites: Be in person list. Must have at least one person in the list.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+Must have at least one person in the list.
 
 1. Test case: `person /find n:John t:AI `<br>
   Expected: Display all people who's names include 'John' tagged with the specific tag 'AI'.
@@ -570,7 +571,7 @@ Prerequisites: Be in person list. Must have at least one person in the list.
 
 ### Finding a group
 
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command or already in group list.
 
 1. Test case: `Group /find n:Orbital `<br>
    Expected: Display all groups that have names that include 'Orbital'.
@@ -581,14 +582,13 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
 ### Finding a subgroup in a group
 
 Prerequisites: List all subgroups in a group using the `group x /list` command, where x is the index of a group.
-Must have at least one subgroup in the list.
 
 1. Similar to **Finding a group** except that all subgroups in a group is listed.
 
-
 ### Deleting a person
 
-Prerequisites: Be in person list. Must have at least one person in the list.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+Have at least one person in the list.
 
 1. Test case: `person 1 /delete`<br>
    Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
@@ -613,7 +613,8 @@ Prerequisites: Be in person list. Must have at least one person in the list.
 
 ### Deleting a group
    
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command or already in group list.
+At least one group in the list.
 
 1. Test case: `group 1 /delete`<br>
    Expected: A confirmation window popped. Upon confirmation, first group is deleted from the list.
@@ -628,7 +629,8 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
 
 ### Adding a person to a group
 
-Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+At least one person in the list.
 
 1. Test case: `person 1 /add g:Orbital`<br>
    Expected: Person is added to the group. Person is updated with a new group in the UI.
@@ -642,7 +644,8 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
 
 ### Removing a person from a group
 
-Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. First person is added to group Orbital.
+Prerequisites: List all persons using the `person /list` command or already in person list. 
+At least one person in the list.
 
 1. Test case: `person 1 /remove g:Orbital`<br>
        Expected: Person is removed to the group. Person is updated with group removed in the UI.
@@ -656,7 +659,8 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
 
 ### Adding a subgroup to a group
 
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+Prerequisites: List all groups using the `group /list` command or already in group list. 
+At least one group in the list.
 
 1. Test case: `group 1 /create n:Artemis`<br>
    Expected: Artemis is added to the first group. Group is updated with a new subgroup in the UI.
@@ -670,7 +674,8 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
 
 ### Removing a subgroup from a group
 
-Prerequisites: List all groups using the `group /list` command. Multiple groups in the list. First group contains subgroup Artemis.
+Prerequisites: List all groups using the `group 1 /list` command. 
+First group contains subgroup Artemis.
 
 1. Test case: `group 1 /delete n:Artemis`<br>
    Expected: Confirmation window pops up. Upon confirmation, Artemis is removed from the first group.
@@ -732,7 +737,7 @@ Must have at least one subgroup in the list.
 ### Clearing note of a person
 
 Prerequisites: List all persons using the `person /list` command or already in person list.
-    Must have at least one person in the list.
+Must have at least one person in the list.
 
 1. Test case: `person 1 /clearnote` <br>
    Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person.
@@ -747,7 +752,7 @@ Prerequisites: List all persons using the `person /list` command or already in p
 
 ### Clearing note of a group
 
-Prerequisites: List all groups using the `group /list` command or already in group list.
+Prerequisites: List all groups using the `group /list` command or already in group list. 
 Must have at least one group in the list.
 
 1. Similar to **Clearing note of a person** except that group is listed, and group clear note command is used.
