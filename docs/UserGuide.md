@@ -545,28 +545,32 @@ Format: `listclass`
 ### 3.9 Sort tuition classes: `sort` | `s`
 
 Sorts tuition class list according to time or alphabetical order.
-
-<div markdown="block" class="alert alert-primary"> 
-  
-:information_source: Note: <br>
-  
-  * After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
-  
-  * The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
-
-  * For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
-
-  * For time order, the sorting assumes Gregorian calendar format. i.e. Sunday is considered the start of a week and 
-    Saturday is considered the end of a week.
-
-
-</div>
+* After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
+* The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
 
 The possible usages of `sort` are given below:
 * `sort` sorts by time
 * `sort o/asc` sorts by ascending alphabetical order
 * `sort o/desc` sorts by descending alphabetical order
 * `sort o/time` sorts by time
+
+<div markdown="block" class="alert alert-primary"> 
+
+:information_source: Note: <br>
+
+* For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
+
+* For time order, the sorting assumes Gregorian calendar format. i.e. Sunday is considered the start of a week and
+  Saturday is considered the end of a week.
+
+</div>
+
+An example output is shown below:
+
+<p align="center">
+    <img src="images/sort.png" alt="Sort by ascending order" width="650" height="420"><br>
+    <i>Figure 7: Example of executing `sort o/asc` command</i>
+</p>
 
 ### 3.10 View timetable: `timetable` | `tt`
 Shows classes scheduled in this week in a timetable.
