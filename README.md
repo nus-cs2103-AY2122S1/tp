@@ -11,7 +11,7 @@ Example usages:
 * Track students’ details
 * Enroll students for lessons
 * Unenroll students from lessons
-* [Coming soon] Update students’ details
+* [Coming soon] Sorting students in different ways (eg. number of lessons enrolled, grade level etc.)
 
 For the detailed documentation of this project, see the **[TuitiONE Product Website](https://ay2122s1-cs2103t-f13-4.github.io/tp/)**.
 
