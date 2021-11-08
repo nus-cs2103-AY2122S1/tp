@@ -68,6 +68,10 @@ public class Module {
         return groupSystem;
     }
 
+    public boolean hasAnyGroup() {
+        return groupSystem.hasAnyGroup();
+    }
+
     /**
      * Returns a view of this module's assignment list as an unmodifiable {@code ObservableList}.
      */
@@ -138,6 +142,14 @@ public class Module {
      */
     public boolean hasAssignment(Assignment a) {
         return assignmentList.contains(a);
+    }
+
+    /**
+     * Returns true if adding the assignment {@code toAdd} will bring
+     * the total weightage of all assignments to above 100%.
+     */
+    public boolean isTotalWeightageExceeded(Assignment toAdd) {
+        return assignmentList.isTotalWeightageExceeded(toAdd);
     }
 
     /**

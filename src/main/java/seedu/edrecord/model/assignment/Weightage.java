@@ -7,7 +7,7 @@ import static seedu.edrecord.commons.util.AppUtil.checkArgument;
  * Represents an Assignment's weightage in edrecord.
  * Guarantees: immutable; is valid as declared in {@link #isValidWeightage(String)}
  */
-public class Weightage {
+public class Weightage implements Comparable<Weightage> {
     public static final String MESSAGE_CONSTRAINTS =
             "Assignment weightage should be a non-negative integer or float (max 2 decimal numbers) from 0 to 100";
 
@@ -39,6 +39,11 @@ public class Weightage {
     @Override
     public String toString() {
         return String.format("%.2f%%", weightage);
+    }
+
+    @Override
+    public int compareTo(Weightage other) {
+        return this.weightage.compareTo(other.weightage);
     }
 
     @Override

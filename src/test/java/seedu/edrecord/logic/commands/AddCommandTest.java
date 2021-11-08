@@ -236,6 +236,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isTotalWeightageExceeded(Assignment toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }

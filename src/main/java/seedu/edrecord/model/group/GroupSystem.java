@@ -73,6 +73,13 @@ public class GroupSystem implements ReadOnlyGroupSystem {
     }
 
     /**
+     * Returns true if the group system does not contain any group.
+     */
+    public boolean hasAnyGroup() {
+        return groups.hasAnyGroup();
+    }
+
+    /**
      * Adds a group to the group system.
      * The group must not already exist in the module system.
      */

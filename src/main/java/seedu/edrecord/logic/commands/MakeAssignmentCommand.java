@@ -25,8 +25,9 @@ public class MakeAssignmentCommand extends Command {
             + PREFIX_SCORE + "50";
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
-
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in this module";
+    public static final String MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100 =
+            "Adding this assignment brings the total module weightage above 100%";
 
     private final Assignment toAdd;
 
@@ -46,6 +47,9 @@ public class MakeAssignmentCommand extends Command {
         }
         if (model.hasAssignmentInCurrentModule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+        }
+        if (model.isTotalWeightageExceeded(toAdd)) {
+            throw new CommandException(MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100);
         }
         model.addAssignment(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
