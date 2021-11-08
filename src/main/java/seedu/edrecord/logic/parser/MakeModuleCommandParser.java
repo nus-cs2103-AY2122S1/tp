@@ -21,7 +21,7 @@ public class MakeModuleCommandParser implements Parser<MakeModuleCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
         if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MakeGroupCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MakeModuleCommand.MESSAGE_USAGE));
         }
 
         Module mod;
