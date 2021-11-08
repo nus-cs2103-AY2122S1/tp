@@ -1,0 +1,14 @@
+{
+  "modules" : [ {
+    "code" : "CS2103",
+    "assignments" : [ {
+      "name" : "Valid assignment",
+      "weightage" : "5.0",
+      "maxScore" : "10.0"
+    }, {
+      "name" : "Invalid assignment with non numeric weightage field",
+      "weightage" : "asdf",
+      "maxScore" : "42.0"
+    } ]
+  } ]
+}

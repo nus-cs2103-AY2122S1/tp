@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package "ModuleSystem Model" {
+Interface ReadOnlyModuleSystem <<Interface>>
+Class ModuleSystem
+Class UniqueModuleList
+Class Module
+Class UniqueAssignmentList
+Class Assignment
+
+Interface ReadOnlyGroupSystem <<Interface>>
+Class GroupSystem
+Class UniqueGroupList
+Class Group
+
+Class ModuleSet
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside .> ReadOnlyModuleSystem
+HiddenOutside --> ModuleSystem
+HiddenOutside .> Person
+Person *--> ModuleSet
+Person *--> AssignmentGradeMap
+AssignmentGradeMap --> "*" Assignment
+AssignmentGradeMap --> "*" Grade
+
+ModuleSystem .up.|> ReadOnlyModuleSystem
+ModuleSystem *--> "1" UniqueModuleList
+UniqueModuleList --> "*" Module
+Module *-> "1" GroupSystem
+ModuleSet *--> "*" Module
+
+GroupSystem .up.|> ReadOnlyGroupSystem
+GroupSystem *--> "1" UniqueGroupList
+UniqueGroupList --> "*" Group
+
+Module *--> "1" UniqueAssignmentList
+UniqueAssignmentList --> "*" Assignment
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+mainframe sd add Asg
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "selected:Module" as Module MODEL_COLOR
+participant ":UniqueAssignmentList" as UAL MODEL_COLOR
+end box
+
+[-> Model : addAssignment()
+activate Model
+
+Model -> Module : addAssignment()
+activate Module
+
+Module -> UAL : add()
+activate UAL
+
+UAL -> UAL : contains()
+activate UAL
+return
+
+UAL --> Module
+deactivate UAL
+
+'Hidden arrows to add some space
+Module -[hidden]-> UAL
+UAL -[hidden]-> Module
+Module -> Module : setSearchFilter(ALL_PERSONS)
+activate Module
+return
+
+Module --> Model
+deactivate Module
+
+[<--Model
+deactivate Model
+
+@enduml

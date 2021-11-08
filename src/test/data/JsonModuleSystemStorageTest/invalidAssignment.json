@@ -1,0 +1,10 @@
+{
+  "modules" : [ {
+    "code" : "CS2103",
+    "assignments" : [ {
+      "name" : "Assignment with invalid name and weightage: M!ss!on o.O",
+      "weightage" : "Assignment with invalid weightage: Non-numeric",
+      "maxScore" : "10.0"
+    } ]
+  } ]
+}

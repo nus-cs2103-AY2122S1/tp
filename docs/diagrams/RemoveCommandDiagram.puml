@@ -1,0 +1,23 @@
+@startuml
+!pragma useVerticalIf on
+start
+:User executes remove command;
+
+if (Module exists in ModuleSystem) then (yes)
+  if (Class exists in Module in ModuleSystem) then (yes)
+    if (Person has Module and Group) then (yes)
+        :Remove Group from Person's Module;
+        if (Person's Module has other groups) then (no)
+            :Remove Module from Person;
+        else (no)
+        endif
+        stop
+    else (no)
+    endif
+  else (no)
+  endif
+else (no)
+endif
+:Display relevant error message;
+stop
+@enduml

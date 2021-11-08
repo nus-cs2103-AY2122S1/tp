@@ -1,0 +1,6 @@
+{
+  "modules" : [ {
+    "code" : "Module with invalid code : CS 2103",
+    "assignments" : [ ]
+  } ]
+}
