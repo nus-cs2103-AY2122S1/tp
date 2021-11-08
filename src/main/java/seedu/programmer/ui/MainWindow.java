@@ -46,6 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
     private static final String UPLOAD_FAIL_NO_STUDENTS_MESSAGE = String.format(UPLOAD_FAIL_MESSAGE,
                                                                                 "No students found in your file!");
+    private static final String DEFAULT_STORAGE_LOCATION = "data/programmerError.json" ;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -261,7 +262,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDownload() {
-        JSONArray jsonData = JsonUtil.getJsonData("data/programmerError.json");
+        JSONArray jsonData = JsonUtil.getJsonData(DEFAULT_STORAGE_LOCATION);
         assert (jsonData != null);
 
         if (jsonData.length() == 0) {
