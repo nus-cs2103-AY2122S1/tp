@@ -24,9 +24,9 @@ Given below are my contributions to the project:
 
 * **Documentation**:
   * User Guide:
-      * Added documentation for `sortorders`, `edittask` commands. [\#249](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/249), [\#43](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/43)
+      * Added documentation for `sortorders`, `edittask` commands. [\#159](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/159), [\#43](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/43)
       * Added documentation for `incompleteorders`, `completedorders`, `incompletetask`, `completedtasks` commands. [\#142](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/142/files)
-      * Added documentation for supported date formats. [\#157](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/157)
+      * Added documentation for supported date formats. [\#159](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/159)
       * Maintained the Command Summary Table in the User Guide. [\#142](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/142)
   * Developer Guide:
       * Added implementation details for the `sortorders` feature. [\#291](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/291)
