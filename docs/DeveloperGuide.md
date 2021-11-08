@@ -1078,7 +1078,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all events using the `listEvents` command. Multiple events in the event list.
 
    2. Test case: `deleteEvent 1`<br>
-      Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+      Expected: First event is deleted from the event list. Details of the deleted event shown in the status message.
 
    3. Test case: `deleteEvent 0`<br>
       Expected: No event is deleted. Error details shown in the status message.
