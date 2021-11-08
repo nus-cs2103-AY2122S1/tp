@@ -1400,26 +1400,25 @@ The effort required to evolve `AB3` to `RecruitIn` could be estimated to be appr
 Our team have contributed roughly 11000 lines of functional code, automated unit and integration testing, and documentation.
 Listed below are some features and enhancements, and an explanation of the difficulty or effort required to implement them:
 
-  ### Addition of categories
-      * `AB3` initially had the `Name`, `Phone Number`, `Email`, `Address`, and `Tag` categories.
-      * `RecruitIn` removed the `Address` category, and introduced the `Applied Role`, `Employment Type`, `Expected Salary`,
-        `Level of Education`, `Years of Experience`, `Interview`, and `Notes` categories, as well as a `Done` status.
-      * The addition of the categories itself was relatively low effort as we were already reusing most of `AB3`'s existing categories.
-      * Furthermore, we did not have to make any additional design decisions and could follow the existing architecture in order to add the new categories.
+### Addition of categories
+* `AB3` initially had the `Name`, `Phone Number`, `Email`, `Address`, and `Tag` categories.
+* `RecruitIn` removed the `Address` category, and introduced the `Applied Role`, `Employment Type`, `Expected Salary`, `Level of Education`, `Years of Experience`, `Interview`, and `Notes` categories, as well as a `Done` status.
+* The addition of the categories itself was relatively low effort as we were already reusing most of `AB3`'s existing categories.
+* Furthermore, we did not have to make any additional design decisions and could follow the existing architecture in order to add the new categories.
     
-  ### Integration of categories
-      * This includes integration of the new categories into the existing `add`, `edit` and `find` command.
-      * The integration of the new categories into the `add` command was done without much relative difficulty.
-      * The integration of the new categories into the `edit` command did involve a refactoring of the entire edit command parser, and thus required relatively more effort.
-      * The integration of the new categories into the `find` command was very high effort, because of the following 3 reasons:
-          1. Each category was filtered by the `find` command differently, and thus involved multiple differing implementations of how to filter each category.
-          2. The `find` command was improved to allow for searching of multiple categories at the same time.
-          2. The `find` command was modified to validate parameters for each category.
+### Integration of categories
+* This includes integration of the new categories into the existing `add`, `edit` and `find` command.
+* The integration of the new categories into the `add` command was done without much relative difficulty.
+* The integration of the new categories into the `edit` command did involve a refactoring of the entire edit command parser, and thus required relatively more effort.
+* The integration of the new categories into the `find` command was very high effort, because of the following 3 reasons:
+  1. Each category was filtered by the `find` command differently, and thus involved multiple differing implementations of how to filter each category.
+  2. The `find` command was improved to allow for searching of multiple categories at the same time.
+  3. The `find` command was modified to validate parameters for each category.
   
-  ### Implementation of new features
-      * This includes the implementation of the `show`, `mark`, `unmark`, `delete_marked`, and `filter_interview` commands.
-          * The implementation of new features was generally high effort due to having to create each command from scratch.
-          * Difficulties arose mostly from having to make our own design decisions, while at the same time having to following important software engineering principles and practices.
-      * Additionally, the `delete` command was improved to allow for deletion of multiple indexes at the same time.
-          * The modification of the existing `delete` command was generally low effort and only required additions of a few lines of functional code.
+### Implementation of new features
+* This includes the implementation of the `show`, `mark`, `unmark`, `delete_marked`, and `filter_interview` commands.
+  * The implementation of new features was generally high effort due to having to create each command from scratch.
+  * Difficulties arose mostly from having to make our own design decisions, while at the same time having to following important software engineering principles and practices.
+* Additionally, the `delete` command was improved to allow for deletion of multiple indexes at the same time.
+  * The modification of the existing `delete` command was generally low effort and only required additions of a few lines of functional code.
 
