@@ -449,7 +449,7 @@ When editing tags, all existing tags of the client will be replaced with the new
 
 You can delete the specified client from FAST. This is useful when a client has stopped using your services.
 
-**Format 1**: `del INDEX...`
+**Format 1**: `del INDEX...` <br>
 **Format 2**: `del INDEX-INDEX`
 
 * Deletes the client(s) at the specified `INDEX`.
