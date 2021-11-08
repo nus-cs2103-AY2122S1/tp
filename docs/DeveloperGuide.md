@@ -6,11 +6,11 @@ title: Developer Guide
 ## **Table of Contents**
 
 1. [**Acknowledgements**](#Acknowledgements)
-2. [**Setting up, getting started**](#Setting up)
+2. [**Getting started**](#Setting up)
 3. [**Glossary**](#Glossary)
 4. [**Design**](#Design)
    1. [Architecture](#Architecture)
-   2. [UI Components](#UI component)
+   2. [UI Component](#UI component)
    3. [Logic Component](#Logic component)
    4. [Model Component](#Model component)
    5. [Storage Component](#Storage component)
@@ -115,10 +115,10 @@ is responsible for,
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): ProgrammerError's UI.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of ProgrammerError in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#UI component): ProgrammerError's UI.
+* [**`Logic`**](#Logic component): The command executor.
+* [**`Model`**](#Model component): Holds the data of ProgrammerError in memory.
+* [**`Storage`**](#Storage component): Reads data from, and writes data to, the hard disk.
 
 **How the architecture components interact with each other**
 
@@ -416,7 +416,7 @@ The following UML sequence diagrams shows how the filter command works:
    
 <p align="center">
     <img src="images/commands/FilterCommand/FilterSequenceDiagramParse.png"/>
-</p>p>
+</p>
 <div style="text-align: center">
     <em>Figure 5.2.1: Partial sequence diagram showing the creation of FilterCommand object</em>
 </div>
