@@ -1366,13 +1366,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a tasks while all tasks are being shown
 
-    1. Prerequisites: List all tasks using the `tasks` command. Multiple students in the list.
+    1. Prerequisites: List all tasks using the `tasks` command. Multiple tasks in the list.
 
     1. Test case: `deleteTask 1`<br>
        Expected: First tasks is deleted from the list. Details of the deleted task shown in the status message.
 
     1. Test case: `deleteTask 0`<br>
-       Expected: No student is deleted. Error details shown in the status message.
+       Expected: No task is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `deleteTask`, `deleteTask x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -1388,16 +1388,16 @@ testers are expected to do more *exploratory* testing.
        Expected: First task is marked as completed. Status message shows details of the task.
 
     1. Test case: `doneTask 0`<br>
-       Expected: No student is marked. Error details shown in the status message.
+       Expected: No task is marked. Error details shown in the status message.
 
-    1. Other incorrect mark participation commands to try: `doneTask`, `doneTask x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect mark task commands to try: `doneTask`, `doneTask x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Marking a task as done while on another directory
 
-    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+    1. Prerequisites: Go to another directory, either by executing the `groups` or `students` commands, or performing a command that brings you to another directory (e.g `findStudent` command: `findStudent David`).
 
-    1. Test case: `doneTask`<br>
+    1. Test case: `doneTask 1`<br>
        Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks.
        Updated task list is shown.
 
