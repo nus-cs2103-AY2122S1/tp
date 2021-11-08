@@ -250,6 +250,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For all sequence diagrams where object deletion is shown, the lifeline for the object should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 ### Alias feature
 The alias feature creates a shortcut name for any command in SportsPA. The shortcut name must not be an existing command word in SportsPA.
 #### Implementation
@@ -294,10 +298,6 @@ members in the member list.
 The following sequence diagram shows how the system understands aliases:
 
 ![AliasSequenceDiagram](images/AliasSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListMembersCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
 
 Step 5. The user then realises that the shortcut <kbd>l</kbd> was not to their liking and deletes the alias by
 executing <kbd>unalias l</kbd>. The <kbd>unalias</kbd> command calls `Model#removeAlias(Shortcut)` and removes the mapping from `AliasMap`
@@ -379,10 +379,6 @@ The following sequence diagram shows how the split mechanism works.
 
 ![SplitSequenceDiagram](images/SplitSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 The following activity diagram summarizes what happens when a user executes the `split` command:
 
 <img src="images/SplitActivityDiagram.png" width="450" />
@@ -454,10 +450,6 @@ and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by ca
 The following sequence diagram shows how the mark attendance operation works.
 
 ![MarkSequenceDiagram](images/MarkSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
 
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
