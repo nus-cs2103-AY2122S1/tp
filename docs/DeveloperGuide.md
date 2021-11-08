@@ -1061,7 +1061,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC013 - Exiting RecruitIn**
+**Use case: UC014 - Exiting RecruitIn**
 
 **MSS**
 
