@@ -296,8 +296,8 @@ Step 3. A `FindPredicate`  which will only return `true` if contact's name conta
 
 Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
 
-Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel` which will only contain contacts whose name contains `David` **while also having** `friend` **and**
-`football` tagged to them.
+Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated filtered list in `PersonListPanel`. Only contacts whose name contains `David` **while also having** `friend` **and**
+`football` tagged to them will be displayed.
 
 #### Design considerations:
 
