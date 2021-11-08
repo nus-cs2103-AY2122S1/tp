@@ -10,17 +10,24 @@ import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassException;
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
 import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.exceptions.DuplicateTutorialGroupException;
 import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 
 
 public class UniqueTutorialClassListTest {
 
-    private final UniqueTutorialClassList uniqueTutorialClassList = new UniqueTutorialClassList();
+    private UniqueTutorialClassList uniqueTutorialClassList;
+
+    @BeforeEach
+    public void setUp() {
+        uniqueTutorialClassList = new UniqueTutorialClassList();
+    }
 
     @Test
     public void contains_nullTutorialClass_throwsNullPointerException() {
@@ -52,9 +59,15 @@ public class UniqueTutorialClassListTest {
     }
 
     @Test
-    public void add_duplicateTutorialClass_throwsDuplicateStudentException() {
+    public void add_duplicateTutorialClass_throwsDuplicateTutorialClassException() {
         uniqueTutorialClassList.add(G01);
         assertThrows(DuplicateTutorialClassException.class, () -> uniqueTutorialClassList.add(G01));
+    }
+
+    @Test
+    public void add_duplicateTutorialGroup_throwsDuplicateTutorialGroupException() {
+        uniqueTutorialClassList.add(G01);
+        assertThrows(DuplicateTutorialGroupException.class, () -> uniqueTutorialClassList.add(TUT_01));
     }
 
     @Test
@@ -70,20 +83,30 @@ public class UniqueTutorialClassListTest {
     }
 
     @Test
-    public void remove_tutorialClassDoesNotExist_throwsStudentNotFoundException() {
+    public void remove_tutorialClassDoesNotExist_throwsTutorialClassNotFoundException() {
         assertThrows(TutorialClassNotFoundException.class, () -> uniqueTutorialClassList.remove(G01));
     }
 
     @Test
-    public void remove_tutorialGroupDoesNotExist_throwsStudentNotFoundException() {
+    public void remove_tutorialGroupDoesNotExist_throwsTutorialGroupNotFoundException() {
         assertThrows(TutorialGroupNotFoundException.class, () -> uniqueTutorialClassList.remove(TUT_01));
     }
 
     @Test
-    public void remove_existingTutorialClass_removesStudent() {
+    public void remove_existingTutorialClass_removesTutorialClass() {
         uniqueTutorialClassList.add(G01);
         uniqueTutorialClassList.remove(G01);
         UniqueTutorialClassList expectedUniqueTutorialClassList = new UniqueTutorialClassList();
+        assertEquals(expectedUniqueTutorialClassList, uniqueTutorialClassList);
+    }
+
+    @Test
+    public void remove_existingTutorialGroup_removesTutorialGroup() {
+        uniqueTutorialClassList.add(G01);
+
+        uniqueTutorialClassList.remove(TUT_01);
+        UniqueTutorialClassList expectedUniqueTutorialClassList = new UniqueTutorialClassList();
+        expectedUniqueTutorialClassList.add(G01);
         assertEquals(expectedUniqueTutorialClassList, uniqueTutorialClassList);
     }
 

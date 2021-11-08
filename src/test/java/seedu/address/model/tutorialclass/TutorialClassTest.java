@@ -1,5 +1,6 @@
 package seedu.address.model.tutorialclass;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G01;
@@ -9,17 +10,42 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G02;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTutorialClasses.G01;
 import static seedu.address.testutil.TypicalTutorialClasses.G02;
+import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.TutorialClassBuilder;
 
 public class TutorialClassTest {
+    private final TutorialClass tutorialClass = new TutorialClassBuilder().build();
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        TutorialClass tutorialClass = new TutorialClassBuilder().build();
+
         assertThrows(UnsupportedOperationException.class, () -> tutorialClass.getTags().remove(0));
+    }
+
+    @Test
+    public void contains_nullTutorialGroup() {
+        assertThrows(NullPointerException.class, () -> tutorialClass.contains(null));
+    }
+
+    @Test
+    public void contains_noTutorialGroup_retrunsFalse() {
+        assertFalse(tutorialClass.contains(TUT_01));
+    }
+
+    @Test
+    public void contains_tutorialGroupInClass_returnsTrue() {
+        tutorialClass.addTutorialGroup(TUT_01);
+        assertTrue(tutorialClass.contains(TUT_01));
+    }
+
+    @Test
+    public void remove_tutorialExistingGroup() {
+        tutorialClass.addTutorialGroup(TUT_01);
+        tutorialClass.removeTutorialGroup(TUT_01);
+        assertEquals(tutorialClass, new TutorialClassBuilder().build());
     }
 
     @Test

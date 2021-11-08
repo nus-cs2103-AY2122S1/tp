@@ -50,6 +50,9 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
 
         // finds the tutorial class that the tutorial group belongs to
         TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toCheck.getClassCode());
+        if (!contains(toCheckTutorialClass)) {
+            return false;
+        }
         Optional<TutorialClass> result = internalList.stream()
                 .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
         return result.get().getTutorialGroups().contains(toCheck);
@@ -111,7 +114,7 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     public void remove(TutorialGroup toRemove) {
         requireNonNull(toRemove);
 
-        if (!internalList.remove(toRemove)) {
+        if (!this.contains(toRemove)) {
             throw new TutorialGroupNotFoundException();
         }
 
