@@ -246,10 +246,12 @@ public class MainWindow extends UiPart<Stage> {
         } catch (DuplicateStudentException e) {
             logger.info("Aborting: file contains duplicate student");
             popupManager.displayPopup(String.format(UPLOAD_FAIL_MESSAGE, e.getMessage()));
+            return;
         }
 
         popupManager.displayPopup(String.format(UPLOAD_SUCCESS_MESSAGE, stuList.size()));
         labResultListPanelPlaceholder.getChildren().clear();
+        dashboardWindow.update(); // Remember to refresh dashboard with new students
         logger.info("Uploaded CSV data successfully!");
     }
 
