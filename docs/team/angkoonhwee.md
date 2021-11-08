@@ -15,8 +15,7 @@ Given below are my contributions to the project.
   * What it does: This feature allows users to undo an accidental command with incorrect/undesired input. Users can also redo an undone command if the undone command was accidental.
   * Justifications: This feature improves the user experience as users can be less afraid to enter an incorrect command or make a mistake. Undo/Redo feature is also a very common feature across modern applications.
   * Highlights: This feature is compatible across all commands that modify data. The implementation of this feature was quite tedious due to AB3's implementation of the `FindCommand`. When executing `undo` on a filtered list,
-  it is crucial to ensure that the indexes which the commands are operating on are consistent across all types of list (UniquePersonsList vs FilteredPersonsList). Furthermore, to ensure that the displayed panels in JavaFX would follow the change caused by `undo` command 
-  e.g. `undo` a command that edited a student, then execute a `day` command to view calendar. Executing `undo` should result in Center panel to change back to UniquePersonList person list panel. Similar challenges were faced for `redo` command.
+  it is crucial to ensure that the indexes which the commands are operating on are consistent across all types of list (UniquePersonsList vs FilteredPersonsList). Similar challenges were faced for `redo` command.
   * Credits: For `UndoRedoStack` implementation - [SE-EDU AddressBook 4](https://github.com/nus-cs2103-AY1718S2/addressbook-level4/blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java)
 
 * **New Feature**: Automated fees update feature that updates the fees for lessons that have passed automatically.
