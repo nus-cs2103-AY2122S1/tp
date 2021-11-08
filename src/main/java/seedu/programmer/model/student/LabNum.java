@@ -10,7 +10,7 @@ public class LabNum {
     private final Integer labNum;
 
     /**
-     * Constructs a {@code LanNum}.
+     * Constructs a {@code LabNum}.
      *
      * @param labNum A lab's number.
      */
