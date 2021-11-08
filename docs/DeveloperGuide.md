@@ -356,7 +356,7 @@ The class structure of the feature is shown in the diagram below:
 Orders are sorted using the `SortDescriptor`, which implements the `Comparator<Order>` interface.
 Its `compare` method uses the `SortField` and `SortOrdering` to compare orders based on the user specified arrangement.
 
-#### Usage
+#### Execution
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `parseCommand("sortorder f/a o/asc")` API call. 
 Details about tokenizing the user input to retrieve the field and ordering have been omitted.
