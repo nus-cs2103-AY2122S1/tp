@@ -53,8 +53,6 @@ Given below are my contributions to the project.
   * Update tag doctor/patient command to propagate changes to appointments and updated test cases to test for propagation([#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122))
   * Update delete doctor/patient command to propagate deletion to appointments and updated test cases to test for propagation([#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122))
 
-<div style="page-break-after: always;"></div>
-
 * **Documentation**:
   * Contributions to the UG:
     * Update documentation for v1.2 ([#18](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/18))
