@@ -13,7 +13,7 @@ title: Developer Guide
 ### 1.1 Purpose
 
 This guide covers the architecture, implementation and design choices in DonnaFin to give the reader a clear picture
-of the technical details and the inner workings of DonnaFin.
+of the technical details, and the inner workings of DonnaFin.io (referred to as DonnaFin in this document for brevity).
 
 ### 1.2 Target Audience
 
@@ -78,9 +78,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the 
-[diagrams](https://github.com/ay2122S1-CS2103T-W16-1/tp/tree/master/docs/diagrams/) folder. Refer to the 
-[_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create 
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the
+[diagrams](https://github.com/ay2122S1-CS2103T-W16-1/tp/tree/master/docs/diagrams/) folder. Refer to the
+[_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
 and edit diagrams.
 </div>
 
@@ -98,14 +98,14 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#415-common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Ui`**](#411-ui-component): The UI of the App.
+* [**`Logic`**](#412-logic-component): The command executor.
+* [**`Model`**](#413-model-component): Holds the data of the App in memory.
+* [**`Storage`**](#414-storage-component): Reads data from, and writes data to, the hard disk.
 
 
 Each of the four main components (also shown in the diagram above).
@@ -115,9 +115,7 @@ Each of the four main components (also shown in the diagram above).
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java`. Other components interact with a given component through its interface as much as possible
 rather than the concrete class or through any lower-level class, as illustrated in the (partial) class diagram below.
-Experienced programmers may recognise this as the Facade design pattern.[^facadeFootnote]
-
-[^facadeFootnote]: [Facade Design Pattern](https://refactoring.guru/design-patterns/facade)
+Experienced programmers may recognise this as the Facade design pattern. (See: [Facade Design Pattern](https://refactoring.guru/design-patterns/facade))
 
 <img alt="Component Managers" src="images/ComponentManagers.png" width="300" />
 
@@ -136,11 +134,11 @@ critical features over adhering to the design pattern.
 
 [`Ui.java`](https://github.com/AY2122S1-CS2103T-W16-1/tp/blob/master/src/main/java/donnafin/ui/Ui.java) specifies the API of this component.
 
-![Structure of the UI Component](images/UIClassDiagram.png)
+![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel` in
 home view and `CommandBox`, `ResultDisplay`, and `ClientPanel` in client view. All these,
-including the `MainWindow`, inherit from the abstract `UIPart` class which captures the commonalities between
+including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between
 classes that represent parts of the visible GUI.
 
 The UI that is displayed has 6 main states to switch between.
@@ -152,20 +150,20 @@ The UI that is displayed has 6 main states to switch between.
  6. `NOTES`
 
  The first state, `PERSON_LIST_PANEL` represents the home view of the client. It is where the user sees the information of multiple clients at the same time. The other 5 are tabs specific to
-each client and will thus display different information for each client. The `UI` keeps track of the current tab it is
-observing through the `UI`State, which is set on each tab switch command. Further details for the tab switch command can be found
+each client and will thus display different information for each client. The `Ui` keeps track of the current tab it is
+observing through the `UiState`, which is set on each tab switch command. Further details for the tab switch command can be found
 [here](#423-ui-browsing-commands).
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+The `Ui` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of the
 [`MainWindow`](https://github.com/AY2122S1-CS2103T-W16-1/tp/tree/master/src/main/java/donnafin/ui/MainWindow.java) is
 specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W16-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `Ui` component,
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the `UI` can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* keeps a reference to the `Logic` component, because the `Ui` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 #### 4.1.2 Logic component
@@ -181,7 +179,7 @@ How the `Logic` component works:
 to parse the user command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned by `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -193,7 +191,7 @@ How the parsing works:
 the `ABCParser` (`ABC` is a placeholder for the specific parser strategy e.g.,`ContactTabParser`) creates
 an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the
 other classes above to parse the user command and create a `XYZCommand` object. Further details can be seen in the
-implementation of commands section [here](#42-implementation-and-commands).
+implementation of commands section [here](#42-implementation).
 
 
 <img alt="Parser Strategy" src="images/ParserStrategy.png" width="600"/>
@@ -210,7 +208,7 @@ implementation of commands section [here](#42-implementation-and-commands).
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the `UI` can be bound to this list so that the `UI` automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the `Ui` can be bound to this list so that the `Ui` automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * stores `Storage` object and communicates with it to save address book to user files.
 
@@ -272,7 +270,33 @@ Here is an example of a `Person` in JSON form:
 
 Classes used by multiple components are in the `donnafin.commons` package.
 
-### 4.2 Implementation and Commands
+There are three main groups of Common classes, and here is a brief description of each and examples of how they are used
+in this codebase.
+
+**Type classes**
+
+There are two classes that can be found under`donnafin.commons.core.types`:
+* `Index`: Abstracts away the difference between one-based index (display / user input) and zero-based index (native
+  Java indexing of data structures). Serves to minimise programming errors, particularly those of the 'off-by-one' 
+  category that can happen when dealing with these incompatible numbering styles.
+* `Money`: Provides a numerically sound structure that can be used to represent monetary values with precision and
+  support arithmetic operations without foregoing easy in built conversion to a human-readable format with the currency
+  symbol ('$').
+
+**Utility classes**
+There are multiple classes in `donnafin.commons.core.util` that serve a variety of purpose. In general, they can be seen
+as a common library of pure functions that can be used throughout the application to fulfil certain purposes. It reduces
+on code duplication and improves the cohesion of our code. For example, we often do defensive programming checks to 
+ensure that multiple objects are not null, and the `CollectionUtil` package has useful static functions that can be 
+called on to do this.
+
+**Exception classes**
+There are custom-built exceptions `donnafin.commons.exception`, that are used throughout the code base. Some custom 
+exceptions (like `ParseException`) are only used in certain packages, and are therefore can be found in those packages.
+In this package, we currently have `DataConversionException` and `IllegalValueException`, both of which handle a very
+common issue throughout the application of handling and reporting bad formats (syntax) or bad inputs (semantics).
+
+### 4.2 Implementation
 
 **How the architecture components interact with each other through commands**
 
@@ -301,28 +325,28 @@ Commands that fall under this category are :<br>
 4. List <br>
 </div>
 
-The `Delete` command is one of the commands that fall under this category.
-We will be using the `Delete` command as the example to illustrate and explain all commands under this category.
+The `delete` command is one of the commands that fall under this category.
+We will be using the `delete` command as the example to illustrate and explain all commands under this category.
 
 | Full sequence diagram  |
-|<img alt="Architecture Sequence Diagram" src="images/DeleteSequenceDiagramUIPart.png" width="800" /> |
+|<img alt="Architecture Sequence Diagram" src="images/DeleteSequenceDiagramUiPart.png" width="800" /> |
 | Logic specific sequence diagram |
 |<img alt="Architecture Sequence Diagram" src="images/DeleteSequenceDiagram.png" width="1200" /> |
 
-Here is an explanation of what takes place when the user enters the command `delete 1` which falls under first [category](#42-implementation-and-commands).
+Here is an explanation of what takes place when the user enters the command `delete 1` which falls under first [category](#42-implementation).
 The full sequence diagram gives the overview of what happens when a command runs. Since the main legwork is done
 in logic, the logic specific sequence diagram as shown above takes a deeper dive into the inner details the full
 sequence diagram.
 
 Explanation of diagram above:
-* The `UI` takes in the input command from the user and passes it to the `Logic` component.
+* The `Ui` takes in the input command from the user and passes it to the `Logic` component.
 * The `Logic` component parses the command and returns the `Delete` command.
 * The `Logic` component executes the `Delete` command. The `deletePerson` method in `Model` is called which then deletes the `Person` from `donnafin.json`.
 * The `Logic` component then accepts the `LogicConsumer` produced from the `CommandResult`. This consumer will alter the logic component depending on the `CommandResult`. In this case, for the `delete` command, the consumer makes no change to logic.
 * The `Logic` component then continues with the `execute` command and calls the `saveAddressBook` method to save the updated `addressBook` with the deleted person.
 This does not involve a consumer in any way and is always part of execute command.
 * The `Model` component then calls `saveAddressBook` method that engages the `Storage` component to save the updated changes to storage locally.
-* The `UI` component then accepts the ``UI`Consumer` produced from the `CommandResult`. This consumer will alter the UI component depending on the `CommandResult`. In this case, for the `delete` command, the consumer makes no change to logic.
+* The `Ui` component then accepts the `Consumer<Ui>` produced from the `CommandResult`. This consumer will alter the UI component depending on the `CommandResult`. In this case, for the `delete` command, the consumer makes no change to logic.
 
 #### 4.2.2 Client-level commands
 
@@ -343,23 +367,23 @@ Commands that fall into the second category are:<br>
 </div>
 
 `Edit` command is a command that edits the information of a specific client. Other commands like append and remove,
-also deal directly with a specific client's information. Thus, they fall under the second [category](#42-implementation-and-commands)
-Like other commands in the other two [categories](#42-implementation-and-commands), edit command follows the same general
+also deal directly with a specific client's information. Thus, they fall under the second [category](#42-implementation)
+Like other commands in the other two [categories](#42-implementation), edit command follows the same general
 structure. We will be using the `Edit` command as the example to illustrate and explain all commands under this category.
 
 Explanation:
-* The `UI` takes in the input command from the user and passes it to the `Logic` component.
+* The `Ui` takes in the input command from the user and passes it to the `Logic` component.
 * The `Logic` component parses the input and the `Edit` command is returned. **A consumer for `PersonAdapter` is created here.**
 * The `Logic` component executes the `Edit` command.
 * During the execution of the `Edit` command above, the `PersonAdapter` accepts the consumer that edits
 the specified person.
 * A `EditCommandResult` is returned from the execution of `Edit` Command. This `CommandResult`,
-like the two other [categories](#42-implementation-and-commands) contain both a consumer for `UI` and `Logic`.
+like the two other [categories](#42-implementation) contain both a consumer for `Ui` and `Logic`.
 * The `Logic` component then accepts the `LogicConsumer` produced from the `CommandResult`.
-* The `UI` component then accepts the `UIConsumer` produced from the `CommandResult`. **The `UI` is here to display the newly
+* The `Ui` component then accepts the `Consumer<Ui>` produced from the `CommandResult`. **The `Ui` is here to display the newly
 edits made**.
 
-<div markdown="span" class="alert alert-warning">**Explanation of PersonAdapter:** 
+<div markdown="span" class="alert alert-warning">**Explanation of PersonAdapter:**
 <br>
 
 In this category of commands, the class `PersonAdapter` is doing most of the legwork here.
@@ -376,7 +400,7 @@ Such an implementation supports the user viewing and controlling a single client
 1. The commands do not interact with model.<br>
 2. The commands have to handle the changing of `ParserStrategy`, from the current one<br>
 to `ABCParser` of the new tab.
-3. The commands need to update the `UIState` of `UI` to keep track of which tab the user is currently on.
+3. The commands need to update the `UiState` of `Ui` to keep track of which tab the user is currently on.
 <br>
 <br>
 Commands that fall into this category are:<br>
@@ -385,19 +409,18 @@ Commands that fall into this category are:<br>
 3. Home<br>
 </div>
 
-Switch tab command is a command that explicitly involves the changing of tabs, which fall under the third
-[category](#42-implementation-and-commands).
+Switch tab command is a command that explicitly involves the changing of tabs, which fall under the third [category](#42-implementation)
 We will be using the `SwitchTab` command as the example to illustrate and explain all commands under this category.
 
 <img alt="SwitchTabExecution" src="images/SwitchTabExecutionSequenceDiagram.png" width="600"/>
 
 Explanation of diagram above:
-* The `UI` takes in the input command from the user and passes it to the `Logic` component that is responsible for parsing the input.
+* The `Ui` takes in the input command from the user and passes it to the `Logic` component that is responsible for parsing the input.
 * The `Logic` component parses the command and returns the `SwitchTab` command.
 * The `Logic` component executes the `SwitchTab` command and returns the `SwitchTabCommandResult`
 * The `Logic` component then accepts the `LogicConsumer` produced from the `SwitchTabCommandResult`.
 In this case, for the `SwitchTab` command, a new `ParserStrategy` is set here.
-* The `UI` component then accepts the `UIConsumer` produced from the `CommandResult`. `UIState` is set here.
+* The `Ui` component then accepts the `Consumer<Ui>` produced from the `CommandResult`. `UiState` is set here.
 
 
 <div markdown="span" class="alert alert-warning">**Explanation of ParserContext:**
@@ -406,20 +429,85 @@ In this case, for the `SwitchTab` command, a new `ParserStrategy` is set here.
 1. When a `XYZCommand` class (e.g. `HomeCommand`, `ViewCommand`,...) is executed, it returns a `CommandResult` object containing a logic action if the `XYZCommand` requires a change in tab or view. <br>
 2. `LogicManager` accepts this `CommandResult` object and executes the logic action here.`LogicManager` is a facade that is able to set and change the current `ParserStrategy`.<br>
 3. `ParserContext` in `LogicManager` is updated to contain the `ABCParser` of the new view or tab.<br>
-d. `UI` is updated to change its state, which is kept track of by `UIState` by accepting the consumer also in the `CommandResult`.<br>
+4. `Ui` is updated to change its state, which is kept track of by `UiState` by accepting the consumer also in the `CommandResult`.<br>
 </div>
 
-#### 4.3 Notes tab
+#### 4.3 Contact Tab
+
+The following screenshot shows the user in the Client View. You may notice that the primary controller for this view is
+not the `MainWindow`, but a different class, `ClientPanel`. This JavaFX controller encapsulate all the logic for Client
+View specific actions.
+
+![Contacts Tab Screenshot](./images/ContactsTabDevGuideScreenshot.png)
+
+*The dark blue rectangle indicates a `VBox` (vertical box) containing 4 `AttributePanel` instances (1 for each attribute: `Name`, `Email`, `Phone`, `Address`.*
+
+On every call to changing tab or refreshing, the `ClientPanel` takes the following steps:
+
+1. The `VBox` container in `ClientPanel` will clear all its children 
+1. `ClientPanel` will create a list of `AttributePanel`s (a handy class for constructing a display for any single valued attribute)
+1. The `VBox` container will add the list of `AttributePanel`s as its child.
+
+#### 4.4 Policies, Assets and Liabilities Tab
+
+These tabs all behave and are implemented identically, so they will be discussed together, with the Policies tab used
+as an example.
+
+![Policy Tab Screenshot](./images/PolicyTabDevGuideScreenshot.png)
+
+*The dark blue rectangle indicates an `AnchorPane` that contains the entire `AttributeTable`.*
+*The red rectangle is the table heading.*
+*The green rectangle is an 'aggregator' label, that shows some aggregated measurement of the data.*
+*The purple rectangle is the standard JavaFX `TableView` component.*
+
+`AttributeTable` is a generic class that aims to provide a standardised rich table view of any multi-valued attribute.
+In aid of this, it was written as a generic class with the 'open-closed principle' in mind.
+(See SE-EDU: [Open Closed Principle](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/chapters/principles.html#open-closed-principle))
+You can look at a very minimal example of how to create `TableConfig` and set up an attribute for `AttributeTable`
+in [`AttributeTableTest`](../src/test/java/donnafin/ui/AttributeTableTest.java). In short, you have the `TableConfig`
+holds the following:
+
+* Table heading
+* Aggregator function that takes a list of the attribute (`Policy` in this case) and turn it into an aggregate label
+  (e.g. Total value of commissions)
+* A list of `ColumnConfig` that specifies the property name, the column heading to show, the preferred and max widths
+  for each column, as well.
+
+The steps taken in constructing these tabs are very similar to those for the Contact tab.
+
+1. The `VBox` container in `ClientPanel` will clear all its children.
+1. The attribute intended to be used (policy in this case) will provide the `TableConfig` required as a public static member.
+1. `ClientPanel` will create an `AttributeTable` using this configuration and the data (list of values from the `PersonAdapter`)
+1. The `VBox` container will add the `AttributeTable` as its child.
+
+
+**`AttributeTable`**
+
+#### 4.5 Notes tab
 
 The `NotesTabParser` is different from other `tabSpecificParsers` in that it has no tab specific command. However, the
 `TextArea` of the notes tab allows the user to type in any quick notes that the
 user would want, updating it in realtime. This is opposed to the commands however, since for commands
-changes to any other component only happen when the command is executed. Hence the notes tab takes advantage of a
+changes to any other component only happen when the command is executed. Hence, the notes tab takes advantage of a
 different process.
 
-Key features about notes:
+This is a planned deviation in user workflow, and done so as notes are more infrequently used, and there is an expectation
+that users would write at length in a multi-line field. As such, we deemed the gains from force fitting editing notes 
+into a command line style  edit and accommodating a switch from the single line Command Bar was deemed unnecessarily 
+complicated and unintuitive.
+
+![Notes Tab Screenshot](./images/NotesTabDevGuideScreenshot.png)
+
+*The dark blue rectangle indicates an `TextArea`.*
+
+1. The `VBox` container in `ClientPanel` will clear all its children.
+1. `ClientPanel` will get the current value in the `PersonAdapter`'s notes field and create a `TextArea` with it.
+1. The `TextArea` will be configured to support saving edits (explained later in this section).
+1. The `VBox` container will add the `AttributeTable`s as its children.
+
+Key details of the `TextArea`:
 1. A listener is attached to the `TextArea` of the notes tab. This allows for realtime updates
-when typing in the `TextArea`. If there are any changes, the function `edit` in `PersonAdapter` is called.
+   when typing in the `TextArea`. If there are any changes, the function `edit` in `PersonAdapter` is called.
 2. The `edit` function in `PersonAdapter` saves the information straight away, hence making the updates realtime.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -494,7 +582,7 @@ Priorities: (must have) - `HIGH`, Medium (nice to have) - `MEDIUM`, Low (unlikel
 | `LOW`      | new user                                   | follow a tutorial when adding policies to a client's list of policies       |  learn how to add policies to the list of policies of a specific client   |
 | `LOW`      | new user                                   | follow a tutorial when deleting policies from a client's list of policies       |  learn how to delete policies from the list of policies of a specific client   |
 | `LOW`      | new user                                   | follow a tutorial when adding assets to a client's list of assets      |   learn how to add assets to the list of assets of a specific client  |
-| `LOW`      | new user                                   | follow a tutorial when adding delete from a client's list of asssets   |   learn how to delete assets from the list of assets of a specific client  |
+| `LOW`      | new user                                   | follow a tutorial when adding delete from a client's list of assets   |   learn how to delete assets from the list of assets of a specific client  |
 | `LOW`      | new user                                   | follow a tutorial when adding liabilities to a client's list of liabilities      |   learn how to add liabilities to the list of liabilities of a specific client  |
 | `LOW`      | new user                                   | follow a tutorial when deleting liabilities from a client's list of liabilities      |   learn how to delete liabilities from the list of liabilities of a specific client  |
 | `LOW`      | new user                                   | follow a tutorial when jotting down notes for a client |   learn how to jot down quick notes regarding general information of the client |
@@ -510,14 +598,15 @@ State: Home Window
 
 **MSS**
 
-1.  User requests to add client along with the relevant details.
-2.  DonnaFin announces that the client has been successfully added.\
-    Use Case ends.
+1. User requests to add client along with the relevant details.
+2. DonnaFin announces that the client has been successfully added.
+
+   Use case ends.
 
 **Extensions**
-* 1a. The user types the command using the wrong syntax.
+* 1a. User’s input does not conform with the specified format.
   * 1a1. DonnaFin shows an error message and displays the correct format for the user to use and a correct example.\
-         Use Case resumes from step 1.
+         Use case resumes from step 1.
 
 **UC02: Deleting a client from DonnaFin** \
 State: Home Window
@@ -526,49 +615,48 @@ State: Home Window
 
 1. User requests to delete a client from DonnaFin using the right syntax.
 2. DonnaFin announces that the client has been successfully deleted.\
-Use case ends.
+   
+   Use case ends.
 
 **Extensions**
 
 * 1a. The given index is invalid.
-
-    * 1a1. DonnaFin shows an error message.
-
-      Use case resumes from step 1.
+    * 1a1. DonnaFin shows an error message. 
+           Use case resumes from step 1.
 
 **UC03: Finding a client by name** \
 State: Home Window
 
 **MSS**
-1. User chooses to find a client within DonnaFin using the right syntax.
+1. User chooses to find a client within DonnaFin.
 2. DonnaFin displays the clients that match the input keyword.
 
    Use case ends.
 
 **Extensions**
-* 1a. The user types the command using the wrong syntax.
+* 1a. User’s input does not conform with the specified format.
   * 1a1. DonnaFin shows an error message.\
-         Use Case resumes at step 1.
+         Use case resumes from step 1.
 * 1b. The keyword does not match any client.
   * 1b1. DonnaFin does not display any client.\
-         Use Case ends.
+         Use case ends.
 
 **UC04: Viewing the details of a client** \
 State: Home Window
 
 **MSS**
-1. User requests to view a client using the right syntax.
+1. User requests to view a client.
 2. DonnaFin displays details on the client.
 
    Use case ends.
 
 **Extensions**
-* 1a. The user types the command using the wrong syntax.
+* 1a. User’s input does not conform with the specified format.
     * 1a1. DonnaFin shows an error message.\
-      Use Case resumes at step 1.
+      Use case resumes from step 1.
 * 1b. The given index is invalid.
     * 1b1. DonnaFin shows an error message.\
-      Use Case resumes at step 1.
+      Use case resumes from step 1.
 
 
 **UC05: Getting help** \
@@ -599,12 +687,9 @@ State: Client Window
    Use case ends.
 
 **Extensions**
-* 1a. The user types the wrong command.
-  * 1a1. DonnaFin shows an error message. \
-         Use case resumes at step 1.
-* 1b. The user types the wrong tab title.
-  * 1b1. DonnaFin shows an error message and tells the user that the tab they request does not match any existing tab. \
-         Use case resumes at step 1.
+* 1a. The user's input cannot be mapped to any tab.
+  * 1a1. DonnaFin shows an error message and tells the user that the tab they request does not match any existing tab. \
+         Use case resumes from step 1.
 
 **UC08: Returning to Home Window**
 
@@ -617,15 +702,9 @@ State: Client Window
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The user types the wrong command.
-  * 1a1. DonnaFin shows an error message. \
-        Use case resumes at step 1.
-
 **UC09: Editing a client's contact information**
 
-State: Client Window (Contacts Tab)
+State: Client Window (Contact Tab)
 
 **MSS**
 
@@ -636,12 +715,9 @@ State: Client Window (Contacts Tab)
 
 **Extensions**
 
-* 1a. The user types the wrong command.
-    * 1a1. DonnaFin shows an error message. \
-      Use case resumes at step 1.
-* 1b. The user types in the new field with the unsupported format.
-    * 1b1. Contact is not updated and DonnaFin shows an error message. \
-      Use case resumes at step 1.
+* 1a. User’s input does not conform with the specified format.
+    * 1a1. Contact is not updated and DonnaFin shows an error message. \
+      Use case resumes from step 1.
 
 **UC10: Adding an asset to a client**
 
@@ -658,7 +734,7 @@ State: Client Window (Assets Tab)
 
 * 1a. User's input does not conform with the specified format.
     * 1a1. DonnaFin shows an error message. \
-      Use case resumes at step 1.
+      Use case resumes from step 1.
 
 **UC11: Removing an asset from a client**
 
@@ -674,11 +750,11 @@ State: Client Window (Assets Tab)
 **Extensions**
 
 * 1a. User's input does not conform with the specified format.
-    * 1a1. DonnaFin shows an error message and displays the correct format for the user to use with a correct example\
-      Use Case resumes at step 1.
+    * 1a1. DonnaFin shows an error message and displays the correct format for the user to use with a correct example.\
+      Use case resumes from step 1.
 * 1b. User's given index is invalid.
     * 1b1. DonnaFin shows an error message.\
-      Use Case resumes at step 1.
+      Use case resumes from step 1.
 
 **UC12: Adding a liability to a client**
 
@@ -695,7 +771,7 @@ State: Client Window (Liabilities Tab)
 
 * 1a. User's input does not conform with the specified format.
     * 1a1. DonnaFin shows an error message. \
-      Use case resumes at step 1.
+      Use case resumes from step 1.
 
 **UC13: Removing a liability from a client**
 
@@ -711,11 +787,11 @@ State: Client Window (Liabilities Tab)
 **Extensions**
 
 * 1a. User's input does not conform with the specified format.
-    * 1a1. DonnaFin shows an error message and displays the correct format for the user to use with a correct example\
-      Use Case resumes at step 1.
+    * 1a1. DonnaFin shows an error message and displays the correct format for the user to use with a correct example.\
+      Use case resumes from step 1.
 * 1b. User's given index is invalid.
     * 1b1. DonnaFin shows an error message.\
-      Use Case resumes at step 1.
+      Use case resumes from step 1.
 
 **UC14: Adding a policy to a client**
 
@@ -732,7 +808,7 @@ State: Client Window (Policies Tab)
 
 * 1a. User's input does not conform with the specified format.
     * 1a1. DonnaFin shows an error message. \
-      Use case resumes at step 1.
+      Use case resumes from step 1.
 
 **UC15: Removing a policy from a client**
 
@@ -748,11 +824,11 @@ State: Client Window (Policies Tab)
 **Extensions**
 
 * 1a. User's input does not conform with the specified format.
-    * 1a1. DonnaFin shows an error message and displays the correct format for the user to use with a correct example\
-      Use Case resumes at step 1.
+    * 1a1. DonnaFin shows an error message and displays the correct format for the user to use with a correct example.\
+      Use case resumes from step 1.
 * 1b. User's given index is invalid.
     * 1b1. DonnaFin shows an error message.\
-      Use Case resumes at step 1.
+      Use case resumes from step 1.
 
 **UC16: Exiting the application** \
 State: Works on both Home and Client Window
@@ -782,7 +858,7 @@ State: Works on both Home and Client Window
 * **Private client detail**: A client detail that is not meant to be shared with others
 * **Asset**: Things of present or future value owned by a client
 * **Liability**: Things that the client owes to a debtor which would lead to an outflow of money in the future.
-* **Policy**: A contract between an insurer and policyholder (the client in this case) where the policy holder receives
+* **Policy**: A contract between an insurer and policyholder (the client in this case) where the policyholder receives
 financial protection or reimbursement against losses.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -810,43 +886,134 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### 7.2 Adding a client
 
-### 7.2 Deleting a client
+1. Adding a client in the home window.
+
+   1. Test case: `add n/Steve Rogers p/91820392 e/thefirstavenger@test.com a/33 Apple Road, 928103`
+      Expected: New client with the details are added to the end of the list. Details of the added client are shown in 
+      the result display.
+   
+   2. Test case: `add e/thefirstavenger@test.com add n/Steve Rogers a/33 Apple Road, 928103 p/91820392`
+      Expected: Similar to previous as the input order of the parameters does not matter as long as the command word 
+      (`add` in this case) is the first word.
+   
+   3. Test case: `add n/@$%^&&* p/91820392 e/thefirstavenger@test.com a/33 Apple Road, 928103`
+      Expected: Client is not added. Error details shown in the result display.
+   
+   4. Other incorrect add commands to try: `add n/@$%^&&* p/abcde e/thefirstavenger@test.com a/33 Apple Road, 928103`,
+      `add n/@$%^&&* p/92810283 e/thefirstavenger a/33 Apple Road, 928103`, `...`.
+      Expected: Similar to previous.
+   
+3. Adding a client in the client window.
+
+   1. Test case: `add n/Steve Rogers p/91820392 e/thefirstavenger@test.com a/33 Apple Road, 928103`
+      Expected: Client is not added as add is a home window command that cannot be executed in the client window. Error 
+      details shown in the result display.
+
+### 7.3 Deleting a client
 
 1. Deleting a client while all clients are being shown (home window)
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First client is deleted from the list. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First client is deleted from the list. Details of the deleted client shown in the result display.
 
-   1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: Client is not deleted. Error details shown in the result display.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+   
+2. Deleting a client while being in the client window.
+
+   1. Test case: `delete 1` <br>
+      Expected: Client is not deleted as delete is a home window command that cannot be executed in the client window. 
+      Error details shown in the result display.
+   
+### 7.4 Viewing and editing a client's contact details
+
+1. Entering a client window
+
+    1. Prerequisites: Currently in the home window and a client exists in the list.
+
+    2. Test case: `view 1`<br>
+       Expected: Client window will be shown, and you can inspect the details of the client.
+
+    3. Test case: `view -4`<br>
+       Expected: As it is not a valid index, you will remain in the home window with an error command output.
+   
+    4. Other incorrect view commands to try: `view`, `view a`, `view X`, `...` (where x is larger than the list size)
+       <br>
+       Expected: Similar to previous.
+
+2. Editing a client's details.
+
+   1. Prerequisites: Currently in the client window and in the contact tab.
+   
+   2. Test case: `edit n/John` <br>
+      Expected: The name of the client will be changed to John. Details of the newly edited client will be shown in the 
+      result display.
+   
+   3. Test case: `edit n/Jane p/82893109` <br>
+      Expected: Details of the client will change according to the input as multi-field editing is supported. Details 
+      of the newly edited client will be shown in the result display.
+   
+   4. Test case: `edit n/&$^@*@!` <br>
+      Expected: Details of the client will not change as an invalid format has been used. Error details shown in the 
+      result display.
+
+   5. Other incorrect edit commands to try: `edit p/test`, `...` <br>
+      Expected: Similar to previous.
+   
+### 7.5 Appending and removing a client's asset/policy/liability list
+
+1. Appending an asset/liability to a client.
+
+   1. Prerequisites: Currently in the client window and in the assets/liabilities tab (according to what financial
+      information you want to append).
+   
+   2. Test case: `append n/Good Class Bungalow ty/Property v/$10000000 r/newly bought with bank loan` <br>
+      Expected: An asset/liability with the input details will be added to the client's financial information. The list
+      of assets/liabilities will be sorted (including the newly added asset/liability). A message confirming that the
+      asset/liability has been appended will appear in the result display.
+   
+   3. Test case: `append n/Good Class Bungalow v/$10000000 r/newly bought with bank loan` <br>
+      Expected: Asset/Liability will be not  added as an invalid format has been used. An error message showing the 
+      correct format will be shown in the result display.
+   
+2. Appending a policy to a client.
+
+   1. Prerequisites: Currently in the client window and in the policies tab.
+
+   2. Test case: `append n/Diamond Policy i/AIA iv/$10000 pr/$200 c/$1000` <br>
+      Expected: A policy with the input details will be added to the client's financial information. The list of
+      policies will be sorted (including the newly added policy). A message confirming that the policy has been appended
+      will appear in the result display.
+   
+   3. Test case: `append n/Diamond Policy iv/$10000 pr/$200 c/$1000` <br>
+      Expected: Policy will not be added as an invalid format has been used. An error message showing the
+      correct format will be shown in the result display.
+   
+3. Removing an asset/liability/policy from a client.
+
+   1. Prerequisites: Currently in the client window and in the assets/liabilities/policies tab (according to which 
+      financial information to remove). Additionally, there are assets/liabilities/policies to be removed.
+   
+   2. Test case: `remove 1` <br>
+      Expected: The first asset/liability/policy is removed from the list. A message to notify that the 
+      asset/liability/policy has been removed will be shown in the result display.
+   
+   3. Test case: `remove 0` <br>
+      Expected: Asset/Liability/Policy will not be removed from the list. An error message showing the
+      correct format will be shown in the result display.
+   
+   4. Other incorrect remove commands to try: `remove`, `remove a`, `remove @`, `remove X`, `...` (where x is larger
+      than the number of assets/liabilities/policies listed).
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
-### 7.3 Viewing and editing a client
-
-1. Enter client window
-
-    1. Prerequisites: Currently in the home window
-
-    1. Test case: `view 1`<br>
-       Expected: client window will be shown, and you can inspect the details of the client.
-
-    1. Test case: `view -4`<br>
-       Expected: As it is not a valid index, you will remain in the home window with an error command output.
-
-    1. Test case: editing fields
-       Expected: Switching tabs and editing fields with the commands listed in the user guide [here](./UserGuide.md#Client-Window-Commands) works correctly.
-
-1. _{ more test cases …​ }_
-
-### 7.4 Saving data
+### 7.6 Saving data
 
 1. Dealing with missing/corrupted data files
 
