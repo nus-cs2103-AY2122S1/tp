@@ -45,14 +45,7 @@ public class ListTransactionCommand extends ListCommand {
         // If no id specified, display all past transactions
         if (transactionId.isEmpty()) {
 
-            String cost = String.format("%.2f", model.getBookKeeping().getCost());
-            String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
-            String profit = String.format("%.2f", model.getBookKeeping().getProfit());
-
-            String addMessage = "Total costs: " + cost + ", Total revenue: "
-                    + revenue + ", Total profit: " + profit;
-
-            String finalMessage = MESSAGE_SUCCESS_ALL + "\n" + addMessage;
+            String finalMessage = MESSAGE_SUCCESS_ALL + "\n" + model.getBookKeeping();
 
             model.updateFilteredDisplayList(DISPLAY_TRANSACTION_LIST, PREDICATE_SHOW_ALL_ITEMS);
             return new CommandResult(finalMessage);
