@@ -313,11 +313,11 @@ When the `SortOrderCommand` is executed, the following interactions take place i
 
 ![SortOrdersModelSequenceDiagram](images/SortOrdersModelSequenceDiagram.png)
 
-After the `ObservableList<Order>` has been sorted, 
+After the `OrderBook` has been sorted, 
 
-1.  the `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`.
-2.  a `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
-3.  the UI proceeds to display the sorted list of orders.
+1.  The `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`.
+2.  A `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
+3.  The UI proceeds to display the sorted list of orders.
 
 #### Design choices
 
