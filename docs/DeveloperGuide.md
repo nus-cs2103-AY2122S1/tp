@@ -1436,10 +1436,10 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 **<u>Difficulty: Medium to Hard</u>**
 
-We felt that our project overall is not extremely difficult to implement but requires a fair amount of understanding of the code base. Many commands created and classes implemented
-were predominantly based off of AB3 and enhanced to a great extent; others were freshly added in to be in tune with our product. Hence despite having different features from AB3,
-the overall project is still doable.
-
+Our project requires a fair amount of understanding of the code base. Although some commands implemented were based off of AB3, we introduced the interaction between `Position` and `Applicant`.
+The rule that the position each applicant applies to must exist in MrTechRecruiter cannot be violated after any commands, and it is not easy to ensure that.
+In addition to the great enhancement based on original features, some commands were freshly added in to be in tune with our product, which requires understanding of JavaFX and careful design. 
+Therefore, we rate the difficulty level of our project as Medium to Hard. 
 
 **<u>Challenges faced:</u>** Implementing multiple entity types, improving existing CRUD features.
 
@@ -1451,13 +1451,12 @@ Also since Applicant and Position are associated, when implementing the CRUD com
 implement additional logic wherever it made sense for our target user (e.g. when we delete a Position, all Applicants to that Position are deleted as well to avoid 
 Applicants to a non-existing Position).
 
-**<u>Effort required:</u>** 110 - 120%
+**<u>Effort required:</u>** approximately 120%
 
-Many commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`) so not much work was needed to adapt it to what we wanted. However, besides our weekly 
-inputs of coding, we had to brainstorm and constantly adapt our code to better fit our user's needs. The challenges faced as mentioned also delayed many features into later weeks, 
-requiring more effort to be put into the project. But overall, our product is not strikingly outstanding with fancy UI, "clever" logical code or AI-integrated but rather maintaining
-a realistic, simplistic code base for future developers to further improve on. 
-
+Some commands are adaptations of the original AB3 code (e.g. `add-applicant`, `delete-applicant`), but much effort was required to handle the interaction between `Position` and `Applicant` as stated above. 
+Also, we brainstormed and constantly adapted our code to better fit our user's needs. Features were implemented to enable the calculation and visualization of statistics, 
+and allow users to undo previous modifications.
+Considering the above points, we think the effort required for our project is approximately 120%.
 
 **<u>Achievements:</u>** Better understood JavaFX, interweaving code bases, planning and delivering, software engineering on a whole
 We feel that many of the initial outcomes of the project were achieved, such as integrating software engineering related principles into our project while at the same
