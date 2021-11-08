@@ -36,6 +36,8 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
    ![Ui](images/Ui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## User Interface (UI) of Tutor Master
 
    ![Labelled UI](images/imagesInUG/labelledUI.png)
@@ -60,7 +62,6 @@ Let us
 We shall type commands in the Command Panel and hit `Enter` to execute it.
 
 Here are some starting commands to help you navigate around the application:
-
 
 ### Managing Students
 
@@ -132,6 +133,8 @@ You can refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -161,6 +164,8 @@ You can refer to the [Features](#features) below for details of each command.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Students
 
 #### Adding a student: `student -a`
@@ -179,7 +184,7 @@ Examples:
 * `student -a n/Barbara p/12344321 e/barber@gmail.com a/123 Sesame Street t/graduate t/actress`<br>
   adds a student with the name Barbara, phone number 12344321, email barber@gmail.com, address at 123 Sesame Street, and tags graduate and actress
 
-
+<div style="page-break-after: always;"></div>
 #### Viewing a student: `student -v`
 
 Views a particular student's details in the Person Panel.
@@ -194,6 +199,7 @@ Examples:
 
 ![studentview](images/imagesInUG/student-view.png)
 
+<div style="page-break-after: always;"></div>
 
 #### Editing a student: `student -e`
 
@@ -327,6 +333,8 @@ Example:
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Groups
 
 #### Grouping students: `group -a`
@@ -415,6 +423,8 @@ Example:
 * `group -dl 1 1` deletes the first lesson from the first group.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Tasks
 
 #### Adding a task: `task -a`
@@ -583,6 +593,8 @@ Examples:
 * `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### Others
 
 #### Viewing schedule : `schedule`
@@ -608,6 +620,7 @@ Exits the program.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 #### Saving the data
 
@@ -626,6 +639,7 @@ If your changes to the data file makes its format invalid, Tutor Master will dis
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -635,6 +649,7 @@ _Details coming soon ..._
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
