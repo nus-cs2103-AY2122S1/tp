@@ -25,7 +25,7 @@ Given below are my contributions to the project.
   * Improve sample data with lessons [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183)
   * Improve index error messages [\#280](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/280)
   * Improve lesson ordering [\#311](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/311)
-  
+  * Refactor code to adhere to coding standards [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183)
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=lingshan&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=lingshanng&tabRepo=AY2122S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
@@ -55,4 +55,3 @@ Given below are my contributions to the project.
     [\#191](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/191)
     [\#208](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/208)
 
-* _{you can add/remove categories in the list above}_
