@@ -19,7 +19,7 @@ activate GameCommandParser
 GameCommandParser --> MainParser
 deactivate GameCommandParser
 
-MainParser -> GameCommandParser : parse("--delete DOTA")
+MainParser -> GameCommandParser : parse(" --delete DOTA")
 activate GameCommandParser
 
 create DeleteGameCommandParser
@@ -34,21 +34,21 @@ activate DeleteGameCommandParser
 create DeleteGameCommand
 DeleteGameCommandParser -> DeleteGameCommand : new DeleteGameCommand(gameId)
 activate DeleteGameCommand
-DeleteGameCommand --> DeleteGameCommandParser
+DeleteGameCommand --> DeleteGameCommandParser : c
 deactivate DeleteGameCommand
 
 
-DeleteGameCommandParser --> GameCommandParser : command
+DeleteGameCommandParser --> GameCommandParser : c
 deactivate DeleteGameCommandParser
 DeleteGameCommandParser -[hidden]-> GameCommandParser
 destroy DeleteGameCommandParser
 
-GameCommandParser --> MainParser : command
+GameCommandParser --> MainParser : c
 deactivate GameCommandParser
 GameCommandParser -[hidden]-> MainParser
 destroy GameCommandParser
 
-[<--MainParser : command
+[<--MainParser : c
 deactivate MainParser
 
 group ref execute DeleteGameCommand
