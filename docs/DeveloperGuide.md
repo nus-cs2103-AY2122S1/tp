@@ -245,6 +245,65 @@ Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, w
 
 ### 3.3 Show feature
 
+The show feature enables users to show tasks by specifying the given week or date.
+
+#### 3.3.1 Implementation
+
+The following are the changes made to achieve this feature:
+
+* A `` class is added under the `model/task` package.
+* The `NameContainsKeywordsPredicate` class is modified to allow partial words.
+* `ShowCommand` class is modified to accept multiple predicate object.
+* `ShowCommandParser` class is modified to parser both task name and date.
+
+Given below is a usage scenario of this feature using both name and date as inputs.
+
+Step 1. The user executes `add n/Math Quiz 5 d/2021-10-10 t/18:00 tg/Important` to add a task named Math Quiz 5 and with a deadline of 6pm, 10 October 2021.
+
+Step 2. The user executes `add n/Math Assignment 2 d/2021-10-12 t/18:00 tg/Important` to add a task named Math Assignment 2 and with a deadline of 6pm, 12 October 2021.
+
+Step 3. The user executes `find Quiz` command to find all task with the name "Quiz".
+
+Step 4. The user executes `find Math d/2021-10-10` command to find all Math task with a dateline of 10 October 2021.
+
+Step 5. The user executes `list` command to view the full list of tasks.
+
+The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Math d/2021-10-10` command as in Step 4.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note on sequence diagram:**<br>
+
+* The lifeline for `findCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+</div>
+
+In the **Logic** Component, when user inputs `find Math d/2021-10-10`, these are the key methods invoked:
+* `LogicManager#execute("find Math d/2021-10-10")`: The `LogicManager` takes in the command text string ("find Math d/2021-10-10").
+* `UniFyParser#parseCommand("find")`: The `UniFyParser` parses the users' input and recognizes the command word, "find", and a `FindCommand` is created.
+* `FindCommand#execute(model)`: The `FindCommand` uses the `updateFilteredTaskList` method of `Model` to update the displayed patient list and returns a `CommandResult` object which represents the result of a
+  command execution.
+
+In the **Model** Component, This is the key method invoked:
+* `Model#updateFilteredTaskList(predicate)`: `Model` uses this method to update the displayed patients list.
+
+The following activity diagram summarizes what happens when the user inputs a find command.
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+#### 3.3.2 Design Consideration
+
+##### Aspect: What to use as reference to find the task?
+
+* **Alternative 1 (current choice):** Allow users to enter task name with date.
+    * Pros: Easier for users to find the task if they know the task name and what date the task in on.
+    * Cons: Harder to implement because multiple predicates have to be used.
+
+* **Alternative 2:** Users can only enter name
+    * Pros: Easy to implement, and only one predicate is required.
+    * Cons: Inconvenient for users if they have recurring task on different dates.
+
 ### 3.4 Find task feature
 
 The find feature enables users to find tasks by specifying part of the task name or date.
