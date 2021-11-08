@@ -122,7 +122,7 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete-position 1")` API call.
 
 **Interactions Inside the Logic Component for the `delete-position 1` Command**
-<img src="images/DeleteSequenceDiagram.png" width="1080" height="500"/>
+<img src="images/DeleteSequenceDiagram.png" width="1400" height="500"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -185,7 +185,7 @@ The `Application` class:
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="650" />
 
 The `Storage` component,
 * can save both applicant book data, position book data and user preference data in json format, and read them back into corresponding objects.
