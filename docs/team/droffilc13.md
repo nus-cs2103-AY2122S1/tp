@@ -14,8 +14,8 @@ Given below are my contributions to the project.
   * Justification: This feature is the main feature that differentiates TA<sup>2</sup> from AB3 which this project is based on. It forms the foundation for future commands that manipulate assignments.
   * Highlights: This enhancement forms the bedrock of what TA<sup>2</sup> is. Any future commands added will need assignments and assignment list panel to perform their operations. This implementation is challenging because it requires research and trial and error to design front end using JavaFx.  Also, the analysis of how backend code interacts with frontend is necessary to understand how they are linked.
 
-* **New Feature**: Improve `give`, `remove` and `mark` assignments input format to make it less cumbersome. ([\#118](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/118))
-  * What it does: Change from `NAME` to `INDEX` to reference the student to `give` assignments to. For `remove` and `mark`, change from `NAME` to reference just the person whose assignment is currently displayed.
+* **New Feature**: Improve `give`, `remove` and `done` assignments input format to make it less cumbersome. ([\#118](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/118))
+  * What it does: Change from `NAME` to `INDEX` to reference the student to `give` assignments to. For `remove` and `done`, change from `NAME` to reference just the person whose assignment is currently displayed.
   * Justification: This feature improves the product significantly because it is faster, less cumbersome and less error-prone  to type the `INDEX` of student/assignments compared to the `NAME` of the student.
   * Highlights: This change is challenging because there is a need to understand how the commands work previously to be able to  change accordingly.
 
