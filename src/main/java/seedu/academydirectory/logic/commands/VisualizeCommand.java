@@ -2,6 +2,7 @@ package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.model.VersionedModel.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,8 @@ public class VisualizeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "visualize class performance in assessment with box and whisker plot. ";
 
-    public static final String MESSAGE_VISUALIZE_SUCCESS = "Class Performance in Assessment shown";
+    public static final String MESSAGE_VISUALIZE_SUCCESS = "Class performance in assessments shown";
+    public static final String MESSAGE_NO_STUDENT_TO_VISUALIZE = "No students found to visualize";
 
     /**
      * Executes the command and returns the result message.
@@ -50,7 +52,19 @@ public class VisualizeCommand extends Command {
         model.setAdditionalViewType(AdditionalViewType.VISUALIZE);
         model.setAdditionalInfo(AdditionalInfo.of(orderedAssessmentResults));
 
-        return new CommandResult(MESSAGE_VISUALIZE_SUCCESS);
+        if (studentList.size() == 0) {
+            return new CommandResult(MESSAGE_NO_STUDENT_TO_VISUALIZE);
+        } else {
+            return new CommandResult(MESSAGE_VISUALIZE_SUCCESS);
+        }
+    }
+
+    private static LinkedHashMap<String, List<Integer>> emptyAssessmentResults() {
+        LinkedHashMap<String, List<Integer>> emptyMap = new LinkedHashMap<>();
+        for (String assessment: Assessment.ASSESSMENT_LIST) {
+            emptyMap.put(assessment, new ArrayList<>());
+        }
+        return emptyMap;
     }
 
     /**
@@ -67,6 +81,10 @@ public class VisualizeCommand extends Command {
                 .collect(Collectors.groupingBy(
                         Map.Entry::getKey,
                         Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+
+        if (classAssessmentResults.isEmpty()) {
+            return emptyAssessmentResults();
+        }
 
         LinkedHashMap<String, List<Integer>> orderedAssessmentResults = new LinkedHashMap<>();
 
