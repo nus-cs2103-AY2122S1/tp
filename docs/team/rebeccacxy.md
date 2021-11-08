@@ -5,17 +5,17 @@ title: Rebecca's Project Portfolio Page
 
 ### Project: Fridgy
 
-Fridgy is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
+**Fridgy** is a desktop Food Inventory Manager that makes it easy to reduce food waste by keeping track of what you have and when it expires. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 14 kLoC.
 
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to manage ingredients in Fridgy
-  * What it does: It allows the user to add, delete, edit and list ingredients to Fridgy.
-    * Justification: With this feature, users will be able to organise their inventory of ingredients. This also sets the basis for ingredients to be managed by Recipes.
+  * What it does: It allows the user to `add`, `delete`, `edit` and `list` ingredients to Fridgy.
+    * Justification: With this feature, users will be able to organise their inventory of ingredients. This also sets the foundation for ingredients to be managed by Recipes.
   * Highlights: This feature required amendments to the existing command syntax to allow the respective commands to be associated with ingredient type. It required an in-depth analysis of design alternatives.
 
-* **New Feature**: Added the quantity and optional description attributes to ingredients.
-  * What it does: The quantity attribute is essential to the core functionality of both the ingredient and recipe manager. The description attribute is a nice-to-have additional field for tracking of ingredients.
+* **New Feature**: Added the `quantity` and optional `description` attributes to ingredients.
+  * What it does: The `quantity` attribute is essential to the core functionality of both the ingredient and recipe manager. The `description` attribute is a nice-to-have additional field for tracking of ingredients.
   * Highlights: These attributes integrate into other commands that need to specify a quantity and description. They were also integrated throughout the storage-related code so that the quantity and description can be exported to a file.
 
 * **New Feature**: Added automatic sorting of ingredients and their tags
@@ -44,6 +44,6 @@ Given below are my contributions to the project.
 
 * **Statistics**:
   * PRs reviewed: [40](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Arebeccacxy)
-  * PRs raised: [22](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
+  * PRs raised: [24](https://github.com/AY2122S1-CS2103T-W11-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Arebeccacxy)
   * Issues raised: [25](https://github.com/AY2122S1-CS2103T-W11-1/tp/issues?q=is%3Aissue+author%3Arebeccacxy+is%3Aclosed)
 
