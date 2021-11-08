@@ -224,7 +224,12 @@ public class EditCommand extends Command {
         TaskTime updatedTime = editTaskDescriptor.getTaskTime().orElse(taskToEdit.getTime());
         Venue updatedVenue = editTaskDescriptor.getTaskVenue().orElse(taskToEdit.getVenue());
 
-        return new Task(updatedName, updatedDate, updatedTime, updatedVenue);
+        Task editedTask = new Task(updatedName, updatedDate, updatedTime, updatedVenue);
+        editedTask.updateDueDate();
+        if (taskToEdit.getDone()) {
+            editedTask.setDone();
+        }
+        return editedTask;
     }
 
     /**

@@ -63,7 +63,7 @@ public class ModelManager implements Model {
 
         onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyFilteredPersons);
-        viewAllTaskListPersons = FXCollections.observableArrayList(addressBook.getPersonList());
+        viewAllTaskListPersons = FXCollections.observableArrayList(this.addressBook.getPersonList());
     }
 
     public ModelManager() {

@@ -67,7 +67,6 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-
         CommandResult commandResult = new CommandResult(generateSuccessMessage(toAdd));
         commandResult.setWriteCommand();
         return commandResult;

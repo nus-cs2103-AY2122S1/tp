@@ -107,6 +107,8 @@ Shows you details of instructions that can be used to navigate the app.
 
 Format: `man [COMMAND_NAME]`
 
+Notes:
+
 * If no `[COMMAND_NAME]` is entered, you will see a table of instructions, in a new window, that can be used to navigate the app.
 
 * If you enter a valid `[COMMAND_NAME]`, you will see the details of that command, which includes the format and taskName of the command.
@@ -142,6 +144,8 @@ Edits an existing person in ContactSH.
 
 Format: `edit INDEX [-nNAME] [-pPHONE] [-eEMAIL] [-aADDRESS] [-dDESCRIPTION] [-lLABEL]… [-imptIMPORTANCE]`
 
+Notes:
+
 * Edits the person at the specified `INDEX`. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -160,6 +164,8 @@ Examples:
 1. Deletes a specified person from ContactSH.
 
    Format: `rm INDEX`
+
+   Notes:
 
    * Deletes the person at the specified `INDEX`.
    * `INDEX` refers to the index number shown in the persons list displayed.
@@ -187,6 +193,8 @@ Sorts persons by the alphabetical order of their name.
 
 Format: `sort [-r]`
 
+Notes:
+
 * The default sort with no options provided displays a list of persons sorted in ascending ASCII alphabetical order of their name.
 * If the optional `-r` flag is provided, a list of persons sorted in reverse order is displayed.
 
@@ -195,6 +203,8 @@ Format: `sort [-r]`
 Finds persons whose attribute contains any of the given keywords.
 
 Format: `find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l LABEL] [-tn TASK_NAME]`
+
+Notes:
 
 * A space is **necessary** between a command word, a flag and a keyword.
 * Only 1 attribute can be specified per find command.
@@ -213,9 +223,9 @@ Examples:
 ![result for `find -n Alex`](images/FindAlexResult.png)
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
-start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do 
-in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with 
-the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name 
+start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do
+in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with
+the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name
 "Alex Yeoh".
 </div>
 
@@ -224,6 +234,8 @@ the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not mat
 Adds a task to the current list of tasks attached to a person.
 
 Format: `add INDEX -tnTASK_NAME [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
+
+Notes:
 
 * Adds a task to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
@@ -238,6 +250,8 @@ Examples:
 Edits an existing task in ContactSH.
 
 Format: `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
+
+Notes:
 
 * Edits a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks edited  is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
@@ -256,6 +270,8 @@ Examples:
 Deletes a task attached to a specified person.
 
 Format: `rm INDEX -tiTASK_INDEX…​`
+
+Notes:
 
 * Deletes a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The task deleted is specified by `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647.
@@ -277,9 +293,12 @@ Format: `cat INDEX`
 
 Shows you a list of tasks that has been attached to a specific person.
 
-Format: `cat INDEX [-f KEYWORDS]`
-
 1. Displays the list of tasks attached to the person at the specified `INDEX`.
+
+   Format: `cat INDEX`
+
+   Notes:
+
    * `INDEX` refers to the index number shown in the displayed person list.
    * `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 
@@ -291,6 +310,8 @@ Format: `cat INDEX [-f KEYWORDS]`
 2. Displays a filtered list of tasks that has been attached to a specific person.
 
    Format: `cat INDEX -f KEYWORDS…`
+
+   Notes:
 
    * Displays a filtered lists of tasks for a specific person according to the keywords provided.
    * Only tasks that matches the keywords will be shown. A task matches the keywords if the task name contains a word that starts with any of the `KEYWORDS`.
@@ -306,13 +327,16 @@ Format: `cat INDEX [-f KEYWORDS]`
 <div markdown="span" class="alert alert-primary">
 :memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
 start of any word in a task name or if the keywords do not appear in the same order in the task name as they do in the
-given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name 
+given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name
 "Work at 5pm". However, `cat 1 -f ork` and `cat 1 -f 5pm work" will not match the same task with the name "Work at 5pm".
 </div>
 
 3. Displays the task list of all persons in ContactSH.
 
    Format: `cat -A`
+
+   Example:
+   * `cat -A`
    ![result for `cat -A`](images/ViewAllTaskResult.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -324,6 +348,8 @@ given input, it will not match that particular task. For instance, `cat 1 -f wor
 Marks an existing task in ContactSH as done.
 
 Format: `donetask INDEX -tiTASK_INDEX…​`
+
+Notes:
 
 * Marks tasks attached to the person at the specified `INDEX` as done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
@@ -339,6 +365,8 @@ Marks existing tasks in ContactSH as not done.
 
 Format: `undotask INDEX -tiTASK_INDEX…​`
 
+Notes:
+
 * Marks tasks attached to the person at the specified `INDEX` as not done. `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks marked is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number displayed in the tasklist of said person. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * Multiple tasks of one person can be marked as not done in one command.
@@ -352,12 +380,16 @@ Examples:
 
    Format: `reminder`
 
+   Notes:
+
     * The default value is 3 days.
 
 
 2. Sets the number of days prior to the date of tasks for them to be considered as due soon. This affects all tasks.
 
    Format: `reminder -s DAYS`
+
+   Notes:
 
    * `DAYS` refer to the number of days prior to a task's date.
      The day **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
