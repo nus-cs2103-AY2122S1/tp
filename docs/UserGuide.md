@@ -254,6 +254,13 @@ You will know that you are in the Notes tab if you see a big white text box belo
 type into it, and you will save all the edits you make. Unlike the command box, this supports multi-line input and
 allows you to indent lines with spaces.
 
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note:**
+A discerning user may notice that Notes stands out from all the other tabs. Unlike other fields, Notes support
+multi-line input. As you may write at length in these multi-line fields, we deemed that force-fitting your note-taking
+workflow through a single-line command input would be counter-productive and unintuitive.
+</div>
+
 ![Notes Tab of DonnaFin](images/Notes.png)
 
 ### 3.4 Command Format
