@@ -16,6 +16,10 @@ return
 InsurancePalParser -> AddCommandParser : parse("add ...")
 activate AddCommandParser LOGIC_COLOR
 AddCommandParser -> ParserUtil : parseXYZ(...)
+note right
+XYZ = Name, Phone,
+Email, etc.
+end note
 activate ParserUtil LOGIC_COLOR
 return XYZ
 opt note is present

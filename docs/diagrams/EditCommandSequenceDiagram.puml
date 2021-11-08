@@ -22,16 +22,18 @@ create EditPersonDescriptor
 EditCommandParser -> EditPersonDescriptor
 activate EditPersonDescriptor LOGIC_COLOR
 return
-loop fields XYZ of Person
-    opt XYZ is present
-        EditCommandParser -> ParserUtil : parseXYZ(...)
-        activate ParserUtil LOGIC_COLOR
-        return newXYZ
-        EditCommandParser -> EditPersonDescriptor : editXYZ(newXYZ)
-        activate EditPersonDescriptor LOGIC_COLOR
-        return
-    end alt
-end loop
+opt XYZ is present
+    EditCommandParser -> ParserUtil : parseXYZ(...)
+    activate ParserUtil LOGIC_COLOR
+    return newXYZ
+    EditCommandParser -> EditPersonDescriptor : editXYZ(newXYZ)
+    activate EditPersonDescriptor LOGIC_COLOR
+    return
+end alt
+note left
+XYZ = Name, Phone,
+Email, etc.
+end note
 create EditCommand
 EditCommandParser -> EditCommand : EditCommand(epd)
 activate EditCommand LOGIC_COLOR
