@@ -249,7 +249,7 @@ The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 
@@ -443,7 +443,7 @@ The above process is shown in the following sequence diagram:
 
 **Sequence diagram showcasing the add todo task process**
 
-<div markdown="span" class="alert alert-info">:information_source: ℹ️ **Note:** The lifeline for `AddTodoTaskCommandParser` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddTodoTaskCommandParser` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes a new command to find the members by keywords:
@@ -506,10 +506,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                | add GitHub links for each student group              | easily access their Github to check their progress                     |
 | `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
 | `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
-| `* *`    | user                | set my current directory to either students or tasks | add students/tasks more easily                                         |
+| `* * *`  | user                | add a group                                          | add a group into the list                        |
+| `* *`    | user                | set my current directory to either students, groups or tasks | add students/groups/tasks more easily                          |
 | `* *`    | user                | access the ‘help’ page with all available commands   | refer to instructions when I forget how to use tApp                    |
 | `* *`    | user                | allocate students to different groups                | track their progress based on their groups                             |
-| `* *`    | user                | import data from CSV files                           | get started with the app quickly                                       |
 | `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
 | `* *`    | user                | search for a student                                 | quickly access all information related to the student                  |
 | `* *`    | user                | search for a group                                   | quickly access all information related to the group                    |
@@ -524,16 +524,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
 | `* *`    | user                | create events as a type of task                      | keep track of tasks that occur at a specified time                     |
 | `* *`    | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
-| `* *`    | user                | set automated reminders upon startup                 | not forget any task                                                    |
+| `* *`    | user                | assign priority levels for tasks                     | what tasks require my earliest attention                               |
+| `*`      | user                | set automated reminders upon startup                 | not forget any task                                                    |
 | `*`      | expert user         | create command line shortcuts to access tasks        | easily access data and save time                                       |
 | `*`      | user                | set recurring tasks                                  | not create tasks that I have to complete regularly                     |
 | `*`      | user                | customise the order of the menu                      | easily access the features I use most                                  |
 | `*`      | user                | broadcasts task to a certain group                   | efficiently add new module wide tasks                                  |
-| `*`      | user                | assign priority levels for tasks                     | what tasks require my earliest attention                               |
 | `*`      | user                | string multiple commands into a single line          | manage my tasks more efficiently                                       |
 | `*`      | user                | view both my students’ tasks and my own tasks        | be informed of the week’s progress                                     |
 | `*`      | expert user         | create custom commands                               | make managing tasks more convenient, and more tailored to my needs     |
 | `*`      | user                | filter the CS2103/T textbook                         | refresh my memory on concepts I forgot                                 |
+| `*`      | user                | import data from CSV files                           | get started with the app quickly                                       |
 
 ### Use cases
 
@@ -581,7 +582,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view students (UC2)
+1.  User requests to view students (UC1)
 2.  tApp displays the list of students
 3.  User requests to edit a specific student in the list by specifying the details to edit
 4.  tApp edits the student details
@@ -602,26 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC4 - Delete a student**
 
-**MSS**
-
-1.  User requests to view students (UC1)
-2.  tApp displays the list of students
-3.  User requests to delete a specific student in the list
-4.  tApp deletes the student
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The student list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. tApp shows an error message.
-
-      Use case resumes at step 2.
+Similar to UC5, except the student is deleted instead of edited.
 
 **Use case: UC5 - Mark student as present**
 
@@ -720,15 +702,9 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
 **Extensions**
 
-* 1a. The group name is empty.
+* 1a. The group name is empty or invalid.
 
     * 1a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
-
-  Use case ends.
-
-* 1b. The group name is invalid.
-
-    * 1b1. tApp displays an error message stating that the group name is invalid and to follow the correct format
 
   Use case ends.
 
@@ -754,7 +730,7 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
     * 3a1. tApp shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 **Use case: UC12 - Delete a group**
 
@@ -775,41 +751,29 @@ Similar to UC11 (Edit a group), except the group is deleted instead of edited.
 
 * 3a. The group name is empty or invalid.
 
-    * 3a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+    * 3a1. tApp displays an error message stating that the group name is invalid.
 
       Use case ends.
 
 * 3b. The student index is empty or invalid.
 
-    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+    * 3b1. tApp displays an error message stating that the command format is invalid.
 
       Use case ends.
 
-* 3c. The group name is valid, but the group does not exist.
+**Use case: UC14 - Delete student from group**
 
-    * 3c1. tApp displays an error message stating that the group does not exist
+Similar to UC13 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
 
-      Use case ends.
-
-* 3d. The student index is valid, but the student does not exist.
-
-    * 3d1. tApp displays an error message stating that the student already has a group
-
-      Use case ends.
-
-**Use case: UC13 - Delete student from group**
-
-Similar to UC12 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
-
-**Use case: UC14 - Find groups by name**
+**Use case: UC15 - Find groups by name**
 
 Similar to UC7 (Find student by name), except we are finding groups by group name.
 
-**Use case: UC15 - Clear group list**
+**Use case: UC16 - Clear group list**
 
 Similar to UC8 (Clear student list), except we are clearing the group list.
 
-**Use case: UC16 - View task list**
+**Use case: UC17 - View task list**
 
 **MSS**
 
@@ -824,7 +788,7 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
     Use case ends.
 
-**Use case: UC17 - Add a todo task**
+**Use case: UC18 - Add a todo task**
 
 **MSS**
 
@@ -846,9 +810,9 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
     * 1b1. tApp displays an error message requesting the user to follow the correct format
 
-  Use case ends.
+      Use case ends.
 
-**Use case: UC18 - Add a task with a specified deadline**
+**Use case: UC19 - Add a task with a specified deadline**
 
 **MSS**
 
@@ -872,11 +836,11 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
       Use case ends.
 
-**Use case: UC19 - Add a task with a specified event date**
+**Use case: UC20 - Add a task with a specified event date**
 
-Similar to UC18, except the deadline is an event date.
+Similar to UC19 (Add a task with a specified deadline), except the deadline is an event date.
 
-**Use case: UC20 - Edit a task**
+**Use case: UC21 - Edit a task**
 
 **MSS**
 
@@ -897,21 +861,22 @@ Similar to UC18, except the deadline is an event date.
 * 3a. The given index is invalid.
 
     * 2a1. tApp shows an error message.
-      Use case resumes at step 2.
 
-**Use case: UC21 - Delete a task**
+      Use case ends.
 
-Similar to UC20 (Edit a task), except the task is deleted instead of edited.
+**Use case: UC22 - Delete a task**
 
-**Use case: UC22 - Mark a task as done**
+Similar to UC21 (Edit a task), except the task is deleted instead of edited.
 
-Similar to UC20 (Edit a task), except the task is marked as done instead of edited.
+**Use case: UC23 - Mark a task as done**
 
-**Use case: UC23 - Clear task list**
+Similar to UC21 (Edit a task), except the task is marked as done instead of edited.
+
+**Use case: UC24 - Clear task list**
 
 Similar to UC8 (Clear student list), except we are clearing the task list.
 
-**Use case: UC24 - Clear all entries in tApp**
+**Use case: UC25 - Clear all entries in tApp**
 
 Similar to UC8 (Clear student list), except we are clearing the whole address book.
 
@@ -929,9 +894,10 @@ Similar to UC8 (Clear student list), except we are clearing the whole address bo
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student**: A student contact.
-* **Group**: A CS2103 group consisting of multiple students.
+* **Group**: A CS2103 group consisting of multiple members, which are student contacts.
 * **Task**: A todo task, a deadline task (task with a deadline) or an event task (task with an event date).
 * **Directory**: The list of students, groups or tasks.
+* **Invalid**: An input is invalid when it does not follow the correct command input format. Inputs are also invalid if executing a command with that input would result in duplicate data items (`Student`, `Group`, or `Task`) in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -951,7 +917,7 @@ testers are expected to do more *exploratory* testing.
     1. Download the jar file and copy into an empty folder
 
     1. Double-click the jar file.
-       Expected: Shows the GUI with a set of sample students. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample students, tasks and groups. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -1465,6 +1431,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: delete the `tApp.json` file from the `data` folder. Then, execute the `tApp.jar` file.
        Expected: tApp application opens with the sample data provided in [SampleDataUtil.java](https://github.com/AY2122S1-CS2103-W14-4/tp/blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java).
+   
 
 1. Dealing with corrupted data files
 
