@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
@@ -39,15 +38,5 @@ public class TaskUtil {
      */
     public static String getTdelCommand(Index taskId) {
         return TdelCommand.COMMAND_WORD + " " + PREFIX_TASK_INDEX + Integer.toString(taskId.getOneBased());
-    }
-
-    /**
-     * Returns the part of command string for the given {@code taskId} and {@code memberId}'s details.
-     */
-    public static String getTaskIdDetails(Index taskId, Index memberId) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_TASK_INDEX + Integer.toString(taskId.getOneBased()) + " ");
-        sb.append(PREFIX_MEMBER_INDEX_DEL + Integer.toString(memberId.getOneBased()));
-        return sb.toString();
     }
 }
