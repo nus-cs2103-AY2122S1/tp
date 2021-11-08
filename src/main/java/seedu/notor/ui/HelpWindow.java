@@ -16,8 +16,9 @@ import seedu.notor.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w08-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String COMMAND_SUMMARY_PERSON = "Here are the person commands: \n"
+    public static final String HELP_MESSAGE =
+            "Refer to the user guide for more details: " + USERGUIDE_URL;
+    public static final String COMMAND_SUMMARY_PERSON = "PERSON COMMANDS: \n"
             + "Create : person (NAME) /create | p (NAME) /c \n"
             + "Edit : person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL] | p (INDEX) /e [n:NAME] [p:phone] [e:email]\n"
             + "Delete : person (INDEX) /delete | p (INDEX) /d \n"
@@ -39,7 +40,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Archive All : person /archive | p /ar\n"
             + "List Archived Persons : `person /listarchive` | `p /lar`\n"
             + "Unarchive : `person (INDEX) /unarchive` | `p (INDEX) /uar\n\n";
-    public static final String COMMAND_SUMMARY_GROUP = "Here are the group commands: \n"
+    public static final String COMMAND_SUMMARY_GROUP = "GROUP COMMANDS: \n"
             + "Create Group : group (GROUP_NAME) /create | g (GROUP_NAME) /c\n"
             + "Create Subgroup : group (INDEX) /create n:SUBGROUP_NAME | g (INDEX) /c n:SUBGROUP_NAME\n"
             + "Delete : group (INDEX) /delete | g (INDEX) /d\n"
@@ -47,7 +48,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "List Groups : group /list | g /l\n"
             + "List Out Subgroups : group (INDEX) /list | g (INDEX) /l\n"
             + "Find : group /find (n:QUERY) | g /f (n:QUERY)\n\n";
-    public static final String COMMAND_SUMMARY_GENERAL = "Here are the general commands: \n"
+    public static final String COMMAND_SUMMARY_GENERAL = "GENERAL COMMANDS: \n"
             + "Help : help | h\n"
             + "Exit : exit | e\n"
             + "Clear : clear | c\n"
@@ -72,7 +73,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        commandSummary.setText(COMMAND_SUMMARY_PERSON + COMMAND_SUMMARY_GROUP + COMMAND_SUMMARY_GENERAL);
+        commandSummary.setText(COMMAND_SUMMARY_GENERAL + COMMAND_SUMMARY_PERSON + COMMAND_SUMMARY_GROUP);
         helpMessage.setText(HELP_MESSAGE);
     }
 
