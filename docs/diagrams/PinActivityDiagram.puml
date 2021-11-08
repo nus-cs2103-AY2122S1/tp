@@ -2,17 +2,18 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User enters command: pin 3;
+:User enters command: pin <index>;
 switch()
-case ([Contact at index 3 exists])
-  :CONNECTIONS checks if contact is already pinned;
+case ([Contact at specified index exists])
+  :CONNECTIONS retrieves contact at specified index;
+  -CONNECTIONS checks if contact is already pinned
   if () then ([Contact not yet pinned])
-    : CONNECTIONS pin contact to top of contact list;
-    -CONNECTIONS displays contact details
+    :CONNECTIONS pin contact to top of contact list;
+    -CONNECTIONS displays success message with contact details
   else ([Contact already pinned])
-    : CONNECTIONS displays message: "Contact is already pinned!";
+    :CONNECTIONS displays message: "Contact is already pinned!";
   endif
-case ([No contact at index 3])
+case ([No contact at specified index])
   :CONNECTIONS displays error message: "The contact index provided is out of range.";
 endswitch
 
