@@ -218,7 +218,17 @@ public class SampleDataUtil {
                 new Experience("2"),
                 getTagSet(),
                 Optional.empty(),
-                Optional.of(new Notes("He would not fit the job based off his resume.")))
+                Optional.of(new Notes("He would not fit the job based off his resume."))),
+            new Person(new Name("Tony Stark"), new Phone("96162884"),
+                new Email("tony@starkindustries.com"),
+                new Role("Engineer"),
+                new EmploymentType("Full Time"),
+                new ExpectedSalary("10000"),
+                new LevelOfEducation("Masters"),
+                new Experience("20"),
+                getTagSet(),
+                Optional.empty(),
+                Optional.of(new Notes("He has extensive knowledge of robotics and AI."))),
         };
     }
 
