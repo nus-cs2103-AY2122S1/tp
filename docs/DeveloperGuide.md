@@ -5,9 +5,7 @@ title: Developer Guide
 **Table of Contents**
 
 * [Acknowledgements](#acknowledgements)
-
 * [Setting up, getting started](#setting-up-getting-started)
-
 * [Design](#design)
     * [Architecture](#architecture)
     * [UI Component](#ui-component)
@@ -18,16 +16,15 @@ title: Developer Guide
     
 
 * [Implementation](#implementation)
-    * [Adding a game entry](#adding-a-gameentry)
-    * [Editing a game entry](#editing-a-gameentry)
-    * [Deleting a game entry](#deleting-a-gameentry)
+    * [Adding a game entry](#adding-a-game-entry)
+    * [Editing a game entry](#editing-a-game-entry)
+    * [Deleting a game entry](#deleting-a-game-entry)
     * [Finding game entries](#finding-game-entries)  
     * [Graphical analysis of game entries](#graphical-analysis-of-game-entries)
     * [Additional game statistics](#additional-game-statistics)
     
 
 * [Appendix: Additional guides](#appendix-additional-guides)
-
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
@@ -247,6 +244,7 @@ destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the
 </div>
 
 ### Editing a game entry
+
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
 is valid if
 * The list of games currently displayed is not empty, and the chosen index is a valid index.
@@ -280,6 +278,7 @@ destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the
 </div>
 
 ### Deleting a game entry
+
 Deleting a game entry requires user input from the CLI. The format of input should
 be `delete [INDEX]`.
 The user should obtain the index of the game entry to be deleted
@@ -338,8 +337,8 @@ Below are the activity and sequence diagrams for the find command
 
 ![Sequence Diagram for find command](images/FindSequenceDiagram(Logic).png)
 
-Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
-details about how classes in UI and Logic interact to execute a find command.
+Please refer to the sequence diagrams in [UI Component](#ui-component) for
+details about how classes in UI interact to execute a find command.
 
 
 ### Graphical analysis of game entries

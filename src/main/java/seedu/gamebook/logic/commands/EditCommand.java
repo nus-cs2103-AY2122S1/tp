@@ -66,7 +66,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_FIELDS_ARE_IDENTICAL =
             "At least one field must be different from original game entry.";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
-            + "game type and date/datetime already exists.";
+            + "game type and date already exists.";
     public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     private final Index index;
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * @param index              of the game in the filtered game list to edit
+     * @param index of the game in the filtered game list to edit
      * @param editGameDescriptor details to edit the game with
      */
     public EditCommand(Index index, EditGameEntryDescriptor editGameDescriptor) {
