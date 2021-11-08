@@ -3,7 +3,7 @@ layout: page
 title: Tee Chin's Project Portfolio Page
 ---
 
-### Project: DonnaFin
+### Project: DonnaFin.io
 
 DonnaFin.io is a desktop address book application used by financial advisors to keep track of their client information and related tasks.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
