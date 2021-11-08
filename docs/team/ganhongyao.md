@@ -23,6 +23,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Set up project issue tracker with relevant issue tags
+<div style="page-break-after: always;"></div>
 
 * **Enhancements to existing features**:
   * Adapted code from Address Book 3 to suit the context of Source Control (Pull requests [\#92](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/92), [\#94](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/94))
