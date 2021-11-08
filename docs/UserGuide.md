@@ -76,7 +76,7 @@ Orange text     | Headings and subheadings of various size
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#5-features) below for details of each command.
 
 <div markdown="block" class="alert alert-info">
 :exclamation: Try not to edit the **data file** directly!  
@@ -87,7 +87,7 @@ Orange text     | Headings and subheadings of various size
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Understanding the 'Features' section
-In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#features) section. 
+In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#5-features) section. 
 
 ### 4.1 Terminologies used
 Unique terms specific to *ComputingConnection*
@@ -96,7 +96,7 @@ Term            | Meaning
 ----------------|-----------------
 Contact         | Represents a person in *ComputingConnection*
 Organisation    | Represents an organisation in *ComputingConnection*
-Data field      | Categorised data that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields
+Data field      | Categorised data that you can assign to a contact <br/> See [Structure of a contact](#42-structure-of-a-contact) for the full list of data fields
 Item            | An element of a specific data field
 
 ### 4.2 Structure of a contact
