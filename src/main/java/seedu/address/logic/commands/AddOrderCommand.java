@@ -53,6 +53,7 @@ public class AddOrderCommand extends Command {
             throw new CommandException(MESSAGE_CLIENT_NOT_FOUND);
         }
 
+        toAdd.confirmId();
         model.addOrder(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.ORDER);
     }

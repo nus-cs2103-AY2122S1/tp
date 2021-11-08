@@ -7,7 +7,7 @@ participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
 participant ":SortOrdersCommandParser" as SortOrdersCommandParser LOGIC_COLOR
 participant ":SortDescriptor" as SortDescriptor LOGIC_COLOR
 participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
-participant "d:SortOrdersCommand" as SortOrderCommand LOGIC_COLOR
+participant "d:SortOrdersCommand" as SortOrdersCommand LOGIC_COLOR
 end box
 
 -> SalesNoteParser : parseCommand("sortorders f/a o/asc")
@@ -42,12 +42,12 @@ activate SortDescriptor
 SortDescriptor --> SortOrdersCommandParser : sortDescriptor
 deactivate SortDescriptor
 
-create SortOrderCommand
-SortOrdersCommandParser -> SortOrderCommand  : SortOrderCommand(sortDescriptor)
-activate SortOrderCommand
+create SortOrdersCommand
+SortOrdersCommandParser -> SortOrdersCommand  : SortOrdersCommand(sortDescriptor)
+activate SortOrdersCommand
 
-SortOrderCommand --> SortOrdersCommandParser : sortOrdersCommand
-deactivate SortOrderCommand
+SortOrdersCommand --> SortOrdersCommandParser : sortOrdersCommand
+deactivate SortOrdersCommand
 
 SortOrdersCommandParser --> SalesNoteParser : sortOrdersCommand
 deactivate SortOrdersCommandParser
