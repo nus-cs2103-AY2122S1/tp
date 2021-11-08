@@ -414,7 +414,7 @@ Example:
 {:.no_toc}
 Finds students whose names contain any of the given keywords.
 
-Format: `find -s KEYWORD [MORE_KEYWORDS]`
+Format: `find -s KEYWORD...`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -529,7 +529,7 @@ Example:
 {:.no_toc}
 Finds lessons whose names contain any of the given keywords.
 
-Format: `find -l KEYWORD [MORE_KEYWORDS]`
+Format: `find -l KEYWORD...`
 
 * The search is case-insensitive. e.g. `math` will match `Math`
 * The order of the keywords does not matter. e.g. `Math Upper` will match `Upper Math`
@@ -646,7 +646,7 @@ Action | Format and Examples
 **[Delete student](#deleting-a-student-del--s)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **[Edit student](#editing-a-student-edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **[View student](#viewing-a-student-view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
-**[Find student](#finding-students-by-name-find--s)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
+**[Find student](#finding-students-by-name-find--s)** | `find -s KEYWORD...`<br>e.g., `find -s roy`
 **[Add Progress](#adding-progress-for-a-student-add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student-del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
@@ -659,7 +659,7 @@ Action | Format and Examples
 **[Delete lesson](#deleting-a-lesson-del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
 **[View lesson](#viewing-a-lesson-view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
-**[Find lesson](#finding-lessons-by-name-find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
+**[Find lesson](#finding-lessons-by-name-find--l)** | `find -l KEYWORD...`<br>e.g., `find -l maths`
 
 ### 8.3 Student and Lesson Commands
 
