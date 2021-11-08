@@ -24,7 +24,7 @@ public class CommandResult {
     private final boolean showMemberTab;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with all its fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
                          boolean showFacilityTab, boolean showMemberTab) {

@@ -19,17 +19,19 @@ public class AliasMap implements Serializable {
     }
 
     /**
-     * Adds the given alias into {@code AliasMap}.
+     * Adds an alias into {@code AliasMap}.
+     *
+     * @param alias the alias to add into the mappings.
      */
     public void add(Alias alias) {
         mappings.put(alias.getShortcut(), alias.getCommandWord());
     }
 
     /**
-     * Removes the given alias from {@code AliasMap}.
+     * Removes the specified alias from {@code AliasMap}.
      *
      * @param shortcut the shortcut to remove.
-     * @return CommandWord associated with {@code shortcut}, null if does not exist.
+     * @return CommandWord associated with {@code shortcut}, null the alias does not exist.
      */
     public CommandWord remove(Shortcut shortcut) {
         return mappings.remove(shortcut);
@@ -37,6 +39,9 @@ public class AliasMap implements Serializable {
 
     /**
      * Replaces input with the original command if alias was defined for given input.
+     *
+     * @param input the shortcut to search for.
+     * @return the command if shortcut exists, input if otherwise.
      */
     public String convertAliasIfPresent(String input) {
         if (!Shortcut.isValidShortcut(input)) {
@@ -54,7 +59,7 @@ public class AliasMap implements Serializable {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof AliasMap)) { //this handles null as well.
+        if (!(other instanceof AliasMap)) {
             return false;
         }
 
@@ -74,7 +79,6 @@ public class AliasMap implements Serializable {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(mappings);
     }
 }

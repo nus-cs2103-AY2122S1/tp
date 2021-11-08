@@ -16,8 +16,8 @@ import seedu.address.model.member.Member;
 public class MarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSGE_USAGE = COMMAND_WORD
-            + ": Marks the members identified by the indices used"
-            + "in the members list as present.\n"
+            + ": Marks the members identified by the indices used in the currently displayed member list "
+            + "as present.\n"
             + "Parameters: INDEX [MORE_INDICES]... (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + "1 2 3";
     public static final String MESSAGE_SUCCESS = "Marked attendance of members for today";
@@ -42,7 +42,7 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
         }
         if (!model.isWithinListIndex(indices)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
         }
 
         assert indices != null : "indices should be initialised";

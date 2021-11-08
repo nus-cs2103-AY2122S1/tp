@@ -32,6 +32,19 @@ public class AddAliasCommandTest {
                 model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_addDuplicateShortcutReplacesExisting_success() {
+        ModelManager model = new ModelManager();
+        model.addAlias(new Alias(new Shortcut("l"), new CommandWord("listf")));
+
+        Model expectedModel = new ModelManager(model.getSportsPa(), new UserPrefs());
+        Alias alias = new Alias(new Shortcut("l"), new CommandWord("listm"));
+        expectedModel.addAlias(alias);
+
+        String expectedMessage = String.format(AddAliasCommand.MESSAGE_SUCCESS, "listm", "l");
+        assertCommandSuccess(new AddAliasCommand(alias), model, expectedMessage, expectedModel);
+
+    }
 
     @Test
     public void equals() {

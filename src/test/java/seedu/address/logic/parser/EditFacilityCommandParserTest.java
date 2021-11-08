@@ -135,6 +135,4 @@ public class EditFacilityCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
-
 }

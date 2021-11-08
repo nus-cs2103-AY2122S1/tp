@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -20,7 +22,7 @@ public class SetMemberAvailabilityCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the availability of the members identified "
-            + "by the indices used in the last member listing. "
+            + "by the indices used in the currently displayed member list. "
             + "Existing availability will be overwritten by the input.\n"
             + "Parameters: INDEX [MORE_INDICES]... (must be positive integers) "
             + "d/DAY(S) (where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"
@@ -49,13 +51,14 @@ public class SetMemberAvailabilityCommand extends Command {
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_EMPTY_LIST, Messages.MESSAGE_MEMBER));
         }
-        StringBuilder names = new StringBuilder();
 
         for (Index i : indices) {
             if (i.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDICES);
             }
         }
+
+        List<Member> membersToEdit = new ArrayList<>();
 
         for (Index i : indices) {
             Member memberToEdit = lastShownList.get(i.getZeroBased());
@@ -64,11 +67,13 @@ public class SetMemberAvailabilityCommand extends Command {
                     memberToEdit.getTotalAttendance(), memberToEdit.getTags());
 
             model.setMember(memberToEdit, editedMember);
-            names.append(lastShownList.get(i.getZeroBased()).getName());
-            names.append(", ");
+            membersToEdit.add(lastShownList.get(i.getZeroBased()));
             model.removeMemberFromAllocations(memberToEdit);
         }
         model.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
+
+        String names = membersToEdit.stream().map(member -> member.getName().toString())
+                .collect(Collectors.joining(", "));
 
         return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability),
                 false, false, true);

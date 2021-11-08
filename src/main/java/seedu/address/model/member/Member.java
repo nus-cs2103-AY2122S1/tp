@@ -109,17 +109,31 @@ public class Member {
     }
 
     /**
-     * Returns true if both persons have the same name or same phone number.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both members have the same name or same phone number.
+     * This defines a weaker notion of equality between two members.
      */
     public boolean isSameMember(Member otherMember) {
         if (otherMember == this) {
             return true;
         }
 
+        return hasSameName(otherMember) || hasSamePhoneNumber(otherMember);
+    }
+
+    /**
+     * Returns true if both members have the same name.
+     */
+    public boolean hasSameName(Member otherMember) {
         return otherMember != null
-                && (otherMember.getName().equals(getName())
-                    || otherMember.getPhone().equals(getPhone()));
+                && otherMember.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both members have the same phone number.
+     */
+    public boolean hasSamePhoneNumber(Member otherMember) {
+        return otherMember != null
+                && (otherMember.getPhone().equals(getPhone()));
     }
 
     /**

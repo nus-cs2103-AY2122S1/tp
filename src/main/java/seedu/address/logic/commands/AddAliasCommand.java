@@ -21,7 +21,6 @@ public class AddAliasCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SHORTCUT + "lf "
             + PREFIX_COMMAND_WORD + "listf";
-    public static final String MESSAGE_INVALID_COMMAND_WORD = "This command is unknown. Alias cannot be created.";
     public static final String MESSAGE_SUCCESS = "Alias for %1$s successfully defined as %2$s";
 
     private final Alias alias;

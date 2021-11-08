@@ -14,7 +14,7 @@ ui -[UI_COLOR]> logic : execute("deletem 1")
 activate logic LOGIC_COLOR
 
 
-logic -[LOGIC_COLOR]> model : deleteMember(p)
+logic -[LOGIC_COLOR]> model : deleteMember(m)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAPACITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -41,7 +40,6 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CHARLIE = "33333333";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_AVAILABILITY_AMY = "1 2 3";
     public static final String VALID_AVAILABILITY_BOB = "1 2 3";
     public static final String VALID_AVAILABILITY_CHARLIE = "1 2 3";
@@ -49,12 +47,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_Y2 = "y2";
 
     public static final String VALID_FACILITY_NAME_COURT = "Court 1";
-    public static final String VALID_LOCATION_COURT = "University Sports Hall";
-    public static final String VALID_TIME_COURT = "1130";
-    public static final String VALID_CAPACITY_COURT = "5";
     public static final String VALID_FACILITY_NAME_FIELD = "NUS Field 2";
+    public static final String VALID_LOCATION_COURT = "University Sports Hall";
     public static final String VALID_LOCATION_FIELD = "Opp University Hall";
+    public static final String VALID_TIME_COURT = "1130";
     public static final String VALID_TIME_FIELD = "1330";
+    public static final String VALID_CAPACITY_COURT = "5";
     public static final String VALID_CAPACITY_FIELD = "8";
     public static final Map<DayOfWeek, List<Member>> VALID_ALLOCATION_MAP = new EnumMap<>(
             Map.ofEntries(Map.entry(DayOfWeek.MONDAY, new ArrayList<>()),
@@ -68,6 +66,15 @@ public class CommandTestUtil {
     public static final String VALID_SORT_ORDER_NAME = "name";
     public static final String VALID_SORT_ORDER_TAG = "tag";
 
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String TAG_DESC_Y2 = " " + PREFIX_TAG + VALID_TAG_Y2;
+    public static final String TAG_DESC_EXCO = " " + PREFIX_TAG + VALID_TAG_EXCO;
+    public static final String AVAILABILITY_DESC_AMY = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AMY;
+    public static final String AVAILABILITY_DESC_BOB = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_BOB;
+
     public static final String NAME_DESC_COURT = " " + PREFIX_NAME + VALID_FACILITY_NAME_COURT;
     public static final String LOCATION_DESC_COURT = " " + PREFIX_LOCATION + VALID_LOCATION_COURT;
     public static final String TIME_DESC_COURT = " " + PREFIX_TIME + VALID_TIME_COURT;
@@ -76,16 +83,6 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_FIELD = " " + PREFIX_LOCATION + VALID_LOCATION_FIELD;
     public static final String TIME_DESC_FIELD = " " + PREFIX_TIME + VALID_TIME_FIELD;
     public static final String CAPACITY_DESC_FIELD = " " + PREFIX_CAPACITY + VALID_CAPACITY_FIELD;
-
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String TAG_DESC_Y2 = " " + PREFIX_TAG + VALID_TAG_Y2;
-    public static final String TAG_DESC_EXCO = " " + PREFIX_TAG + VALID_TAG_EXCO;
-    public static final String AVAILABILITY_DESC_AMY = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AMY;
-    public static final String AVAILABILITY_DESC_BOB = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

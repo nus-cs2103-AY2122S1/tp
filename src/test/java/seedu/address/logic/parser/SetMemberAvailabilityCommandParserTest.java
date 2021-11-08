@@ -30,15 +30,14 @@ public class SetMemberAvailabilityCommandParserTest {
 
     @Test
     public void parse_emptyIndices_exceptionThrown() {
-        assertParseFailure(parser, AVAILABILITY_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetMemberAvailabilityCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, AVAILABILITY_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_multipleIndicesMultipleAvailability_success() throws ParseException {
         List<Index> expectedIndices = new ArrayList<>();
         String indicesString = "1 2 3";
-        String[] indicesArray = indicesString.split(" ");
+        String[] indicesArray = indicesString.split("\\s+");
         for (String s : indicesArray) {
             expectedIndices.add(ParserUtil.parseIndex(s));
         }
@@ -48,12 +47,25 @@ public class SetMemberAvailabilityCommandParserTest {
     }
 
     @Test
+    public void parse_multipleIndicesWithMultipleWhitespace_success() throws ParseException {
+        List<Index> expectedIndices = new ArrayList<>();
+        String indicesString = "1  2   3";
+        String[] indicesArray = indicesString.split("\\s+");
+        for (String s : indicesArray) {
+            expectedIndices.add(ParserUtil.parseIndex(s));
+        }
+        List<DayOfWeek> expectedAvailability = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY);
+        assertParseSuccess(parser, " 1 2  3" + AVAILABILITY_DESC_BOB,
+                new SetMemberAvailabilityCommand(expectedIndices, new Availability(expectedAvailability)));
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SetMemberAvailabilityCommand.MESSAGE_USAGE);
 
         // missing index/indices
-        assertParseFailure(parser, AVAILABILITY_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, AVAILABILITY_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // missing availability prefix
         assertParseFailure(parser, "1 2 3" + NAME_DESC_BOB, expectedMessage);
@@ -61,10 +73,8 @@ public class SetMemberAvailabilityCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SetMemberAvailabilityCommand.MESSAGE_USAGE);
         // invalid index/indices
-        assertParseFailure(parser, "one two three" + AVAILABILITY_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, "one two three" + AVAILABILITY_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // invalid availability
         assertParseFailure(parser, "1 2 3" + INVALID_AVAILABILITY_DESC, Availability.MESSAGE_CONSTRAINTS);
@@ -74,7 +84,7 @@ public class SetMemberAvailabilityCommandParserTest {
     public void parse_emptyAvailability_success() throws ParseException {
         List<Index> expectedIndices = new ArrayList<>();
         String indicesString = "1 2 3";
-        String[] indicesArray = indicesString.split(" ");
+        String[] indicesArray = indicesString.split("\\s+");
         for (String s : indicesArray) {
             expectedIndices.add(ParserUtil.parseIndex(s));
         }

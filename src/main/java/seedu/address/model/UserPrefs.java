@@ -69,11 +69,24 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.aliases = aliases;
     }
 
+    /**
+     * Adds an alias into the mappings.
+     *
+     * @param alias the alias to add.
+     */
     public void addAlias(Alias alias) {
+        requireNonNull(alias);
         aliases.add(alias);
     }
 
+    /**
+     * Removes an alias from the mappings.
+     *
+     * @param shortcut the key of the mapping remove.
+     * @return the CommandWord associated with the alias that was removed.
+     */
     public CommandWord removeAlias(Shortcut shortcut) {
+        requireNonNull(shortcut);
         return aliases.remove(shortcut);
     }
 
