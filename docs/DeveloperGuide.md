@@ -469,6 +469,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**MSS**
+
+1. User requests to undo the last command
+2. AddressBook checks if there are commands to undo
+3. AddressBook reverses the last command
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no commands to undo
+  
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+
+**MSS**
+
+1. User requests to redo a command
+2. AddressBook checks if there are commands to redo
+3. AddressBook reverses the last undone command
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no commands to redo
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
