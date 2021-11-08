@@ -15,7 +15,7 @@ https://github.com/AY2021S1-CS2103T-W16-3/tp/pull/179/commits/aec461182c194c9ca2
 <!--@@author
 -->
 
-# 1. Introduction
+# **1. Introduction**
 
 Welcome to the TutorAid User Guide, the one-stop manual where you will find everything that you need to know about how to use the app!
 
@@ -37,11 +37,11 @@ Just downloaded TutorAid? Check out the [About](#2-about) and [Quick Start](#3-q
 
 ***
 
-# 2. About
+# **2. About**
 
 This section contains information and terms that may help you to understand the user guide.
 
-## 2.1 User Guide Formatting
+## **2.1 User Guide Formatting**
 
 Formats discussed in this section may be used in relevant areas of this user guide.
 
@@ -65,7 +65,7 @@ Commands in these highlighted boxes are typically used to show exactly what you 
 
 ***
 
-## 2.2 TutorAid Visual Components
+## **2.2 TutorAid Visual Components**
 
 This section details the various components in TutorAid and how they will be referred to throughout the guide.
 ![Labelled Ui](images/labelled-ui.jpg)
@@ -107,7 +107,7 @@ The Status Bar shows the path where you can find the saved file for TutorAid.
 
 ***
 
-## 2.3 Command Format
+## **2.3 Command Format**
 
 Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands can be divided into a few components, each of which serve different a purpose. The following diagram depicts the components of a command:
 
@@ -149,7 +149,8 @@ A Parameter can be further divided into 2 components:
 
 Putting together both the prefix and the argument, `sn/Matthew Judge` tells TutorAid that the name of the third student should updated to _Matthew Judge_. Similarly, `sp/91263740` tells TutorAid that the phone number of the third student should be updated to _91263740_.
 
-### 2.3.1 Command Syntax in this Guide
+### **2.3.1 Command Syntax in this Guide**
+
 In this guide, the syntax / format of a command is shown like this:
 
 ```
@@ -169,7 +170,7 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 ***
 
-# 3. Quick Start
+# **3. Quick Start**
 
 1. Ensure that you have Java `11` or above installed in your computer.
 
@@ -202,13 +203,15 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 ***
 
-# 4. Beginner's Tutorial
+# **4. Beginner's Tutorial**
 
 Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use a few of our commands to manage the details of your students and lessons on a day-to-day basis :smile:
 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you.
 
-### 4.0: Tips before you get started
+
+### **Tips before you get started:**
+{:.no_toc}
 
 * As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
 
@@ -218,8 +221,8 @@ If this is your first time launching TutorAid, you will be able to see that some
   > :bulb: For more information on changing the viewing modes in TutorAid, you can refer to the detailed documentation for [List](#listing-all-students-and-lessons-list) commands.
 
 
-### 4.1: Adding a student and editing his/her details
-{:.no_toc}
+### **4.1: Adding a student and editing his/her details**
+
 Imagine that a new student, John Yeo, has just approached you for your tutoring services. He has also provided you with the following contact details for your own reference:
 * John's phone number: 98765432
 * John's parent's name: Mary Yeo
@@ -250,8 +253,8 @@ Now, John has just informed you that he has changed his contact number to 846329
 
     You can then key in the `list -a` into the Command Box and press ENTER to return back to your original view.
 
-### 4.2: Adding a lesson and editing its details
-{:.no_toc}
+### **4.2: Adding a lesson and editing its details**
+
 Now that you have added your first student (and perhaps a few others too), it is time to add a lesson to TutorAid. Let us add a lesson named _History 1_ into TutorAid with the following details:
 * Lesson timing: 10AM - 11AM on Mondays
 * Lesson capacity: 10 students
@@ -278,7 +281,8 @@ Next, let us assume that you have decided to charge your students $125.90 per mo
    
    You can then key in the `list -a` into the Command Box and hit ENTER if you wish to return back to your original view.
 
-### 4.3: Adding a student to a lesson
+### **4.3: Adding a student to a lesson**
+
 Now that you have set up the lesson _History 1_, let us add one of your existing students who wishes to enrol in the class, Roy Balakrishnan. You can do this in TutorAid by following the steps below:
 
 1. Key in `add -sl s/6 l/2` into the Command Box and press ENTER.
@@ -289,8 +293,8 @@ Now that you have set up the lesson _History 1_, let us add one of your existing
 
    ![](images/addToLesson.png)
 
-### 4.4: Adding a progress entry for a student
-{:.no_toc}
+### **4.4: Adding a progress entry for a student**
+
 Now, imagine you have ended your 'Maths 1' lesson. You realised that one of your students, Alex Yeoh, seems to struggle with the topic 'Vectors', and you wish to take 
 note of it so that you can provide him with extra practice. To do so, you can easily add a progress entry for Alex on TutorAid by following the steps below: 
 
@@ -308,8 +312,8 @@ Now, the next time you open TutorAid, you will be able to see Alex's latest prog
 
 > :bulb: You will be able to add up to **10** such progress entries for each student. When you attempt to add an 11th entry, your very first entry will be automatically deleted, and your new entry will be added in. <br>
 
-### 4.5: Deleting a student
-{:.no_toc}
+### **4.5: Deleting a student**
+
 Lastly, imagine that your student, Alex Yeoh, has graduated from secondary school and wishes to discontinue his lessons. Since he is no longer your student, you would like to remove his details from TutorAid. 
 You can easily delete his data from TutorAid by following the steps below:
    
@@ -321,8 +325,8 @@ You can easily delete his data from TutorAid by following the steps below:
 
    ![](images/deleteAlex.png)
 
-### End
-{:.no_toc}
+### **4.6: Next Steps**
+
 Congratulations on successfully completing TutorAid's beginner's tutorial :tada: <br>
 
 But why quit now? Since you have completed the tutorial, you can go ahead and key in `clear` in the Command Box to remove all the sample data and to add in a few of your own students and lessons.<br>
@@ -618,9 +622,9 @@ TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAi
 
 # 6. Glossary
 
-**CLI**: CLI (also known as a _Command Line Interface_) refers to a form of interface that processes a user's input in the form of text.<br>
-**GUI**: GUI (also known as a _Graphical User Interface_) refers to a form of user interface that allows user to interact with the application through graphical icons, such as buttons.<br>
-**Progress**: Refers to any remark you may want to add for a specific student, such as their performance in class and their homework progression.
+* **CLI**: CLI (also known as a _Command Line Interface_) refers to a form of interface that processes a user's input in the form of text.
+* **GUI**: GUI (also known as a _Graphical User Interface_) refers to a form of user interface that allows user to interact with the application through graphical icons, such as buttons.
+* **Progress**: Refers to any remark you may want to add for a specific student, such as their performance in class and their homework progression.
 
 ***
 
