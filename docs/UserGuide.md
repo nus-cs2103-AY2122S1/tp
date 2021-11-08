@@ -320,13 +320,13 @@ Archives every person displayed in the list panel.
 Format: `person /archive`
 Advanced user Format: `p /ar`
 
-#### _Listing Archived Persons_ :
+#### _Listing Archived Persons_ 
 Shows the list of archived Persons.
 
 Format: `person /listarchive`
 Advanced user Format: `p /lar`
 
-#### _Unarchiving_ :
+#### _Unarchiving_ 
 Restores the archived person back to your person list in Notor.
 
 Format: `person (INDEX) /unarchive`
@@ -343,6 +343,11 @@ of a group to organize people based on a more specific category.
 
 Creates a group.
 
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Creating a group command will only work when persons are listed in Notor.
+The rest of group commands below will work only when groups or subgroups are listed.
+</div>
+
 Format: `group (GROUP_NAME) /create`<br>
 Advanced user Format: `g (GROUP_NAME) /c`
 
@@ -355,12 +360,7 @@ Examples:
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
   ![groupCreate](images/groupCreate.png)
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Creating a group command will only work when persons are listed in Notor.
-The rest of group commands below will work only when groups or subgroups are listed.
-</div>
-
+  
 #### _Deleting a group_
 
 Deletes an existing group.
@@ -381,7 +381,7 @@ Creates a new subgroup.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 This command only works when group are listed and not when subgroups are listed.
-</div>
+</div> <br>
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
 Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
@@ -473,7 +473,7 @@ Lists all the subgroups within a group.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
-</div>
+</div> <br>
 
 * Only works if you have listed out all groups or subgroups in Notor.
 * Do not confuse this with the list all persons command, whose first command word is `person`
