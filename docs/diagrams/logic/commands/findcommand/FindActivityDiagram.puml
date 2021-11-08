@@ -1,0 +1,22 @@
+@startuml
+start
+:App executes FindPerson command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+    if () then ([any invalid parameter])
+        :App shows error message;
+    else ([else])
+        :User input parsed successfully;
+        :FindCompositePredicate object created;
+if () then ([no filtering predicate])
+    :App shows error message;
+else ([else])
+    :Resident details are updated;
+    :App shows success message;
+endif
+endif
+stop
+@enduml
