@@ -574,7 +574,7 @@ Step 5. CONNECTIONS will display a help message in `ResultDisplay`.
 
 * **Option 2 (current choice):** Create a new type of command called `SystemCommand` that does not extend from `Command`.
     * Pros: Prevents potential issues such as users using an additional command which they are not supposed to use.
-    * Cons: Requires additional code to interface with `Logic`, 'MainWindow` and `CommandBox`.
+    * Cons: Requires additional code to interface with `Logic`, `MainWindow` and `CommandBox`.
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
