@@ -365,6 +365,8 @@ Command | Format & Examples
 **Upload** | `upload`
 
 ## <a name="glossary"></a>Glossary
-- PE: ProgrammerError
-- TA: Teaching Assistant (for CS2100 Lab)
-- CSV: Comma-Separated Values
+- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
+- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
+- **TA**: A CS2100 teaching assistant
+- **PE**: ProgrammerError
+- **CSV**: Comma-Separated Values
