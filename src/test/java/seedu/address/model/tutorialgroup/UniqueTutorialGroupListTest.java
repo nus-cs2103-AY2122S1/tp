@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G02;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTutorialClasses.G01;
 import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tutorialclass.UniqueTutorialClassList;
 import seedu.address.model.tutorialgroup.exceptions.DuplicateTutorialGroupException;
 import seedu.address.model.tutorialgroup.exceptions.TutorialGroupNotFoundException;
 import seedu.address.testutil.TutorialGroupBuilder;
