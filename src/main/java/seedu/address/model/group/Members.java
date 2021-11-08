@@ -1,6 +1,6 @@
 package seedu.address.model.group;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,7 @@ public class Members {
     /**
      * Constructs a existing {@code Members}.
      */
-    public Members(ArrayList<Student> studentList) {
+    public Members(List<Student> studentList) {
         this.studentList.addAll(studentList);
     }
 

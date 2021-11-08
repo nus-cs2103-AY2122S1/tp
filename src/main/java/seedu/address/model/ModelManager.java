@@ -259,6 +259,7 @@ public class ModelManager implements Model {
         List<Student> students = target.getMembersList();
         addressBook.clearGroupFromStudents(students);
         addressBook.deleteGroup(target);
+        displayType = GROUPS;
     }
 
     @Override

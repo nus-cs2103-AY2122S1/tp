@@ -178,13 +178,7 @@ public class Group {
      * @return a cloned Group with the exact same data fields as the original.
      */
     public Group clone() {
-        return new Group(
-                new GroupName(name.name),
-                new Members(new ArrayList<>(getMembersList())),
-                new LinkYear(year.year),
-                new RepoName(repoName.repoName),
-                new HashSet<>(tags)
-        );
+        return new Group(name, new Members(getMembersList()), year, repoName, new HashSet<>(tags));
     }
 
     /**
