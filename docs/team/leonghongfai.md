@@ -9,15 +9,13 @@ Source Control is a desktop application for CS1101S professors to manage the per
 
 Given below are my contributions to the project.
 
+* **New Feature**: Added the ability to add an individual student.
+    * What it does: allows the user to add an individual student into the database. If groups are provided, then the student is added to the group too.
+    * Justification: The feature is necessary for the target user as there needs to be a way to add in individual students after using the import function. This makes adding students to the database quicker for smaller number of additions than doing edits on the csv file.
+    * Highlights: This feature is the alternative method for adding students into the database besides the import function. Implementation was not too challenging, but involved a lot of refactoring as a whole from the old AddressBook3 for the team. 
+    
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=leonghongfai&tabRepo=AY2122S1-CS2103T-W08-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
-
-
-* **New Feature**:
-    * Added an `addstudent` command for users to add new students into the database. (Pull requests
-      [\#120](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/120),
-      [\#123](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/123))
-    * Fixed a bug where the student being added was being added to multiple of the same groups when these same groups are specified in the command
-      [\#255](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/255)
 
 
 * **Project management**:
@@ -55,7 +53,8 @@ Given below are my contributions to the project.
         * Added `addstudent` feature implementation (Pull requests
           [\#147](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/147),
           [\#190](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/190),
-          [\#191](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/191))
+          [\#191](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/191),
+          [\#288](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/288))
 
 
 * **Community**:
