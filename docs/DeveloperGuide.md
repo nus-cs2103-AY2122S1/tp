@@ -428,7 +428,7 @@ The following steps describes the execution of the `joinG` command:
 
 **Value proposition**: 
 
-Thunder Cats is able to manage contacts faster than a typical mouse/GUI driven app.It centralises all information the user needs about a person and even allows users to group multiple contacts.
+ThunderCat is able to manage contacts faster than a typical mouse/GUI driven app. It centralises all information the user needs about a person and even allows users to group multiple contacts.
 
 ThunderCat provides a practical way for users to gain confidence using a CLI to navigate an application and manipulate JSON files.
 
