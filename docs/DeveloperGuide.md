@@ -973,7 +973,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### <a name="Use Cases"></a> **7.3 Use Cases**
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
-`CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
+CS2100 Teaching Assistant (CS2100 TA in short), unless otherwise specified.
 
 #### <a name="Use Case1"></a> **7.3.1 Use case: UC1 Purge/Delete all sample student records**
 
@@ -1084,13 +1084,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-#### <a name="Use Case6"></a> **7.3.6 Use case: UC6 Update a student record**
+#### <a name="Use Case6"></a> **7.3.6 Use case: UC6 Edit a student record**
 
 **MSS**
 
 1. CS2100 TA requests to list student records.
 2. ProgrammerError shows a list of student records.
-3. CS2100 TA requests to update a specific student record.
+3. CS2100 TA requests to edit a specific student record.
 4. ProgrammerError updates the student record.
 
    Use case ends.
@@ -1107,7 +1107,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-* 3b. The given email or student id is not unique.
+* 3b. CS2100 TA requests to edit a lab number without providing a new lab score
 
     * 3b1. ProgrammerError shows an error message.
     
@@ -1139,15 +1139,15 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 **MSS**
 
 1. CS2100 TA requests to create a new lab record.
-2. ProgrammerError requests for lab details.
-3. CS2100 TA specifies the lab name and total score.
+2. ProgrammerError requests for the lab number and lab total score.
+3. CS2100 TA specifies the lab number and total score.
 4. ProgrammerError creates a lab record for every student.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given lab name is not unique or lab score < 0.
+* 3a. The given lab number is not unique, or lab number not an integer between 1 and 13 (inclusive), or lab score not a positive integer between 1 and 100 (inclusive).
   * 3a1. ProgrammerError shows an error message.
   
     Use case resumes at 2.
@@ -1167,7 +1167,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **Extensions**
 
-* 3a. The given lab score < 0 or actual score > total score.
+* 3a. The given lab score is not a positive integer between 1 and 100 (inclusive), or actual score > total score.
     * 3a1. ProgrammerError shows an error message.
   
       Use case resumes at 2.
