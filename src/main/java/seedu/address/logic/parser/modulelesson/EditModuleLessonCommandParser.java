@@ -58,7 +58,7 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
             index = ParserUtil.parseIndex(validArgumentMultimap.getPreamble());
         } catch (ParseException e) {
             logger.info("[Parsing failed due to invalid index][" + validArgumentMultimap.getPreamble() + "]");
-            throw new ParseException(MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
