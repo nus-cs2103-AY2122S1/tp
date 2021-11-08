@@ -1,41 +1,54 @@
 package seedu.insurancepal.commons.core;
 
+import java.math.BigDecimal;
+
 public class Money {
     private static final int CONVERT_BETWEEN_DOLLARS_AND_CENTS = 100;
-    private int dollars;
-    private int cents;
-    private boolean isNegative;
+    private BigDecimal moneyValue;
 
-    public Money(int dollars, int cents, boolean isNegative) {
-        this.dollars = dollars;
-        this.cents = cents;
-        this.isNegative = isNegative;
+    public Money(String revenueString) {
+        this.moneyValue = new BigDecimal(revenueString);
+    }
+
+    public Money(BigDecimal moneyValue) {
+        this.moneyValue = moneyValue;
     }
 
     public boolean isNegative() {
-        return this.isNegative;
+        return moneyValue.signum() == -1;
     }
 
-    public int getDollars() {
-        return this.dollars;
+    public boolean isMoreThan(int lowerBoundary) {
+        return moneyValue.compareTo(new BigDecimal(lowerBoundary)) == 1;
     }
 
-    public int getCents() {
-        return this.cents;
+    public Money addValue(Money otherMoney) {
+        return new Money(this.moneyValue.add(otherMoney.moneyValue));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Money // instanceof handles nulls
-                && (cents == ((Money) other).cents)
-                && (dollars == ((Money) other).dollars)); // state check
+                && moneyValue.equals(((Money) other).moneyValue));
     }
 
     @Override
     public String toString() {
-        assert this.cents < 100 : "Final cents display should be less than 100.";
-        return "S$" + this.dollars + "." + String.format("%02d", this.cents);
+        return "S$" + this.moneyValue.setScale(2).toString();
+    }
+
+    public static boolean isPlusSignPresent(String test) {
+        return test.startsWith("+");
+    }
+
+    public static boolean isValidMoney(String test) {
+        try {
+            BigDecimal value = new BigDecimal(test);
+            return Math.max(0, value.stripTrailingZeros().scale()) <= 2;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
@@ -44,10 +57,6 @@ public class Money {
      * @return String input by user for revenue field.
      */
     public String stringInputByUser() {
-        if (this.isNegative) {
-            return "-" + this.dollars + "." + this.cents;
-        } else {
-            return this.dollars + "." + this.cents;
-        }
+        return moneyValue.toString();
     }
 }

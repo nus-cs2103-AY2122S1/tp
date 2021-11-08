@@ -16,9 +16,9 @@ public class RevenueTest {
 
     @Test
     public void addRevenue_addingValidRevenue_success() {
-        Revenue originalRevenue = new Revenue(new Money(100,21,false));
-        Revenue expectedRevenue = new Revenue(new Money(350,0,false));
-        Revenue updatedRevenue = originalRevenue.addRevenue(new Revenue(new Money(249,79, false)));
+        Revenue originalRevenue = new Revenue(new Money("100.21"));
+        Revenue expectedRevenue = new Revenue(new Money("350.00"));
+        Revenue updatedRevenue = originalRevenue.addRevenue(new Revenue(new Money("249.79")));
         assertEquals(updatedRevenue, expectedRevenue);
     }
 }

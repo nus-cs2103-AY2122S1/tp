@@ -116,23 +116,13 @@ public class ParserUtil {
         requireNonNull(revenue);
         String trimmedRevenue = revenue.trim();
         if (!Revenue.isValidRevenue(trimmedRevenue)) {
-            throw new ParseException(String.format(INVALID_REVENUE_COMMAND_FORMAT,
-                    RevenueCommand.COMMAND_WORD));
+            throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);
         }
-        boolean isNegative;
-        if (trimmedRevenue.contains("-")) {
-            isNegative = true;
-        } else {
-            isNegative = false;
-        }
-        String[] dollarsAndCents = trimmedRevenue.split(".", 2);
-        int dollars = Integer.valueOf(dollarsAndCents[0]);
-        int cents = Integer.valueOf(dollarsAndCents[1]);
-        if (isNegative) {
-            dollars = dollars * -1;
+        if (Revenue.isPlusSignPresent(revenue)) {
+            throw new ParseException(Revenue.MESSAGE_INVALID_REVENUE_PLUS_SIGN);
         }
 
-        return new Revenue(new Money(dollars, cents, isNegative));
+        return new Revenue(new Money(trimmedRevenue));
     }
 
     /**

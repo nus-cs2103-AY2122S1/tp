@@ -1,5 +1,6 @@
 package seedu.insurancepal.storage;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -141,7 +142,7 @@ class JsonAdaptedPerson {
 
         final Revenue modelRevenue;
         if (revenue == null) {
-            modelRevenue = new Revenue(new Money(0,0, false));
+            modelRevenue = new Revenue(new Money(BigDecimal.ZERO));
         } else {
             modelRevenue = ParserUtil.parseRevenue(revenue);
         }

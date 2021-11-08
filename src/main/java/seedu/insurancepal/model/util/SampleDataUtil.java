@@ -29,7 +29,7 @@ import seedu.insurancepal.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Revenue SOME_REVENUE = new Revenue(new Money(100, 21, false));
+    public static final Revenue SOME_REVENUE = new Revenue(new Money("100.21"));
 
     public static Person[] getSamplePersons() {
         return new Person[] {
