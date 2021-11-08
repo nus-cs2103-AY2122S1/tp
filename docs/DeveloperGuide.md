@@ -524,7 +524,7 @@ Given below is an example usage scenario and how viewing tag is executed:
 Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the user with UI components.<br>
 <img src="images/ViewTagSequenceDiagramUi.png" width="800" />
 
-*Figure I.3.1: View tags UI sequence diagram*
+*Figure I.3.1: View tags sequence diagram with UI components.*
 
 #### Design considerations
 **Aspect: Data structure for storing tags**
