@@ -14,15 +14,15 @@ title: Developer Guide
 
 Welcome to the TutorAid Developer Guide! This document details the key implementations and design considerations that have been incorporated into the development of TutorAid thus far.
 
-### **Setting up, getting started**
+### Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
-### **Acknowledgements**
+### Acknowledgements
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-### **Design**
+### Design
 
 <div markdown="span" class="alert alert-primary">
 
@@ -85,7 +85,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below provide more details on the following components: `UI`, `Logic`, `Model` and `Storage`.
 
-#### **UI component**
+#### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/ui/Ui.java)
 
@@ -105,7 +105,7 @@ When taking a closer look at the UI component, notice that the UI consists of a 
 
 The `UI` component also uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-#### **Logic component**
+#### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/logic/Logic.java)
 
@@ -179,7 +179,7 @@ Below are the other classes in `Logic` (omitted from the class diagrams above) t
 :bulb: All `XYCommandParser` and `XYZCommandParser` classes (e.g., `AddCommandParser`, `AddStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing
 </div>
 
-#### **Model component**
+#### Model component
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -200,7 +200,7 @@ Taking a closer look into `Model` componenet, each `Lesson` and `Student` object
 ![](images/LessonClassDiagram.png)
 
 
-#### **Storage component**
+#### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W16-3/tp/blob/master/src/main/java/tutoraid/storage/Storage.java)
 
@@ -213,7 +213,7 @@ Below is the `Storage` class diagram:
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-### **Common classes**
+### Common classes
 
 Classes used by multiple components are in the `tutoraid.commons` package.
 
@@ -227,7 +227,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### **Add student feature**
 
-#### **Implementation**
+#### Implementation
 
 This feature adds a student contact to TutorAid. A student contact consists of the student's name, student's contact number, the parent's name and parent's contact number.
 
@@ -282,7 +282,7 @@ Below is the sequence diagram that depicts the adding of a newly created `Studen
 ![AddStudent](images/AddStudentSequenceDiagram.png)
 
 
-#### **Design considerations**
+#### Design considerations
 
 **Aspect: How to differentiate the `add -s` command from other `add` commands:**
 
@@ -296,7 +296,7 @@ Below is the sequence diagram that depicts the adding of a newly created `Studen
 
 ***
 
-### Add a progress entry to a student feature
+### **Add a progress entry to a student feature**
 
 #### Implementation
 
@@ -346,7 +346,7 @@ Below is the sequence diagram that depicts how `AddProgressCommand` gets the stu
 
 8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How to keep track of all the progress entries of a student:**
 
@@ -362,7 +362,7 @@ Below is the sequence diagram that depicts how `AddProgressCommand` gets the stu
 
 ### **Add lesson feature**
 
-#### **Implementation**
+#### Implementation
 
 This feature adds a lesson to TutorAid. A lesson consists of the lesson name, capacity, pricing, timing and student list.
 
@@ -422,7 +422,7 @@ Below is the sequence diagram that depicts the adding of the newly created `Less
 
 ### **View student/lesson feature**
 
-#### **Implementation**
+#### Implementation
 
 The proposed view student/lesson mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `modelManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -448,7 +448,7 @@ The following sequence diagram shows how the view student operation works:
 
 A similar execution scenario can be expected for 'view lesson' mechanism.
 
-#### **Design considerations**
+#### Design considerations
 
 **Aspect: How 'view student'/'view lesson' commands are executes:**
 
@@ -499,7 +499,7 @@ The panels default to `StudentCard` and `LessonCard` for the application launch,
 
 ***
 
-### Add student(s) to lesson(s) feature
+### **Add student(s) to lesson(s) feature**
 
 #### Implementation
 
@@ -542,7 +542,7 @@ Below is the sequence diagram that depicts how `AddStudentToLessonCommand` gets 
 
 7. After going through all the student-lesson pairs, the result of the `AddStudentToLessonCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager` and then returned to the user.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How to add students into lessons:**
 
@@ -570,9 +570,9 @@ Listed below are guides that provide a thorough documentation of the other aspec
 
 ## **Appendix: Requirements**
 
-### **Product scope**
+### Product scope
 
-#### **Target user profile**
+#### Target user profile
 
 A **private tutor** that:
 
@@ -586,7 +586,7 @@ A **private tutor** that:
 
 ***
 
-### **User stories**
+### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -618,11 +618,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### **Use cases**
+### Use cases
 
 (For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
 
-#### **Use cases that have been added to TutorAid**
+#### Use cases that have been added to TutorAid
 
 **Use Case 1: Add a student**
 
@@ -1043,7 +1043,7 @@ Use case ends.
    
 Use case ends.
 
-#### **Use cases that are to be added to TutorAid in the future**
+#### Use cases that are to be added to TutorAid in the future
 
 **Use case 14: Edit a student's progress**
 
@@ -1313,7 +1313,7 @@ Use case ends.
 
 ***
 
-### **Glossary**
+### Glossary
 
 * **Lesson**: Contains all the details of a particular tutoring session, such as the name and time of the session (e.g. Physics, Wednesday 3-4pm)
 * **Milestone**: An upcoming/important assessment students
@@ -1331,7 +1331,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### **Launch and shutdown of TutorAid**
+### Launch and shutdown of TutorAid
 
 1. Initial launch
    
@@ -1347,7 +1347,7 @@ testers are expected to do more *exploratory* testing.
       
       Expected: The most recent window size and location is retained.
 
-### **Deleting a student from TutorAid**
+### Deleting a student from TutorAid
 
 1. Deleting a student while all students are being shown
    
@@ -1365,11 +1365,11 @@ testers are expected to do more *exploratory* testing.
       
       Expected: Similar to previous.
 
-### **Saving data**
+### Saving data
 
 1. Dealing with corrupted/missing data files
    
-    1. Prerequisites: The file `data/tutorAidLessons.json` exists.
+    1. Prerequisites: The file `[JAR file location]/data/tutorAidLessons.json` exists.
        
     2. Test case: Adding a duplicate lesson directly into `tutoraidLessons.json`<br>
     
