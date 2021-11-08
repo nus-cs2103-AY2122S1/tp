@@ -787,7 +787,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `eadd /n Music Concert /d 11/09/2022`<br>
        Expected: A new event will be added to the event list. Name and date of the added event is shown in the status message.
 
-    3. Test case: `eadd /n Music Concert /d 11/09/2022 /m 2 /m 3`<br>
+    3. Test case: `eadd /n December Meeting /d 11/09/2022 /m 2 /m 3`<br>
        Expected: A new event will be added to the event list with second and third member of the member list. Name and date of the added event is shown in the status message.
        In the event list, in the card for the event added, two red labels representing the second and third members are present.
        
@@ -817,7 +817,7 @@ testers are expected to do more *exploratory* testing.
        List all events using the `elist` command. Multiple members and events in member and event list respectively.
        At least two events in event list and three members in member list.
 
-    2. Test case: `eedit /e 1 /n Freshman Orientation Project Discussion /d 22/11/2021`<br>
+    2. Test case: `eedit /e 1 /n Freshman Orientation /d 22/11/2021`<br>
        Expected: First event has new name and date displayed on its card in the event list.
        New name and date of the edited event shown in the status message.
 
@@ -866,7 +866,7 @@ testers are expected to do more *exploratory* testing.
 1. Marks all members of an event.
 
     1. Prerequisites: List all events using the `elist` command. 
-       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+       At least one event in the list with at least two members. If not, use `eadd` and/or `emadd` to obtain this event.
 
     2. Test case: `emarkall /e 1`<br>
        Expected: First event has all its members marked as attended. The member labels on its card are all green and no red. 
@@ -876,7 +876,7 @@ testers are expected to do more *exploratory* testing.
 1. Marks members of an event.
 
     1. Prerequisites: List all members attending the first event using `mlist /e 1`.
-       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+       At least one event in the list with at least two members. If not, use `eadd` and/or `emadd` to obtain this event.
 
     2. Test case: `emark /e 1 /m 1`<br>
        Expected: First event has the first member marked as attended. The member label on its card for the first member is green.
@@ -891,12 +891,12 @@ testers are expected to do more *exploratory* testing.
 1. Unmark members of an event.
 
     1. Prerequisites: List all members attending the first event using `mlist /e 1`.
-       At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
+       At least one event in the list with at least two members. If not, use `eadd` and/or `emadd` to obtain this event.
 
     2. Test case: `eunmark /e 1 /m 1`<br>
        Expected: First event has the first member marked as absent. The member label on its card for the first member is red.
 
-    2. Test case: `emark /e 1 /m 1 /m 2`<br>
+    2. Test case: `eunmark /e 1 /m 1 /m 2`<br>
        Expected: First event has the first member and second member marked as absent.
        The member label on its card for the first and second members are red.
 
