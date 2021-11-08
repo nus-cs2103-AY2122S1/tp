@@ -14,13 +14,13 @@ Given below are my contributions to the project:
 
 * **New Features**:
   * Implemented the sort order functionality, which lets users sort their orders based on different fields in a specified ordering. 
-   This allows the user to prioritize larger orders or orders that are due soon. 
+   This allows the user to prioritize larger orders or orders that are due soon. [\#154](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/154)
   * Added the ability to filter tasks and orders based on their completion status. This allows the user to quickly view their
-   incomplete tasks and pending orders.
+   incomplete tasks and pending orders. [\#96](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/96), [\#95](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/95)
 
 * **Enhancements to existing features**:
-  * Added date parsing and validation to support a range of different date formats.
-  * Implemented the edit task command.
+  * Added date parsing and validation to support a range of different date formats. [\#157](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/157)
+  * Implemented the edit task command. [\#44](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/44)
 
 * **Documentation**:
   * User Guide:
@@ -29,8 +29,8 @@ Given below are my contributions to the project:
       * Added documentation for supported date formats.
       * Maintained the Command Summary Table in the User Guide.
   * Developer Guide:
-      * Added implementation details for the `sortorders` feature.
-      * Maintained the Use Cases and the Glossary section of the Developer Guide.
+      * Added implementation details for the `sortorders` feature. 
+      * Maintained the Use Cases and the Glossary section of the Developer Guide. 
 
 * **Contributions to team-based tasks**:
   * Adapted the existing AB3 person command formats to fit SalesNote's client commands. [\#250](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/250)
