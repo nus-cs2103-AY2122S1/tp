@@ -80,5 +80,5 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
   I asked for help on handling CI testing in the forums(e.g. https://github.com/nus-cs2103-AY2122S1/forum/issues/323 ,  https://github.com/nus-cs2103-AY2122S1/forum/issues/363)
 
 ## **Tools**:
-
   I used IntelliJ and Git Bash for my main source code window and my terminal window, and to create the UI, I used Scenebuilder.
+  
