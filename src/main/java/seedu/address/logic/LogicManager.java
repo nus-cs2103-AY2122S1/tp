@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -9,12 +10,18 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.filters.TaskFilter;
 import seedu.address.storage.Storage;
 
 /**
@@ -40,13 +47,23 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command = addressBookParser.parse(commandText);
+        // If successfully parsed, add to history
+        model.addCommandToHistory(commandText);
+        return executeCommand(command);
+    }
 
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+    @Override
+    public CommandResult executeCommand(Command command) throws CommandException {
+        CommandResult commandResult = command.execute(model);
+
+        if (command instanceof UndoableCommand) {
+            model.getCommandHistory().pushCommand((UndoableCommand) command);
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveTaskList(model.getTaskList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,8 +72,43 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void addTaskFilter(TaskFilter taskFilter) {
+        model.addTaskFilter(taskFilter);
+    }
+
+    @Override
+    public void removeTaskFilter(TaskFilter taskFilter) {
+        model.removeTaskFilter(taskFilter);
+    }
+
+    @Override
+    public void setTaskFilters(List<TaskFilter> taskFilters) {
+        model.setTaskFilters(taskFilters);
+    }
+
+    @Override
+    public ObservableList<TaskFilter> getSelectableTaskFilters() {
+        return model.getSelectableTaskFilters();
+    }
+
+    @Override
+    public ObservableList<TaskFilter> getSelectedTaskFilters() {
+        return model.getSelectedTaskFilters();
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
+    }
+
+    @Override
+    public ReadOnlyTaskList getTaskList() {
+        return model.getTaskList();
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 
     @Override
@@ -77,5 +129,33 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public CommandResult undoCommand() {
+        try {
+            return executeCommand(new UndoCommand());
+        } catch (CommandException e) {
+            return new CommandResult(e.getMessage());
+        }
+    }
+
+    @Override
+    public CommandResult redoCommand() {
+        try {
+            return executeCommand(new RedoCommand());
+        } catch (CommandException e) {
+            return new CommandResult(e.getMessage());
+        }
+    }
+
+    @Override
+    public String getHistoryCommand(boolean isNext, String currentString) {
+        return model.getHistoryCommand(isNext, currentString);
+    }
+
+    @Override
+    public void resetHistoryPosition() {
+        model.resetHistoryPosition();
     }
 }

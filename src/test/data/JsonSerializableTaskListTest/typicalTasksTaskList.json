@@ -1,0 +1,37 @@
+{
+  "tasks" : [ {
+    "title" : "Buy groceries",
+    "description" : "Two eggs, one carton of milk and five tomatoes",
+    "timestamp" : "27-07-2021",
+    "isDone" : "Not Done",
+    "tagged" : [ ],
+    "contacts" : [ ]
+  }, {
+    "title" : "Do homework",
+    "description" : "Math, physics and chemistry",
+    "timestamp" : "27-07-2021",
+    "isDone" : "Not Done",
+    "tagged" : [ "important", "homework" ],
+    "contacts" : [ ]
+  }, {
+    "title" : "Clean my room",
+    "description" : "Two eggs, one carton of milk and five tomatoes",
+    "timestamp" : "27-07-2021",
+    "isDone" : "Not Done",
+    "tagged" : [ "important" ],
+    "contacts" : [ {
+      "name" : "Mother",
+      "isInAddressBook" : false
+    } ]
+  }, {
+    "title" : "Arrange meeting",
+    "description" : "Two eggs, one carton of milk and five tomatoes",
+    "timestamp" : "27-07-2021",
+    "isDone" : "Done",
+    "tagged" : [ "work", "important" ],
+    "contacts" : [ {
+      "name" : "Amy Bee",
+      "isInAddressBook" : false
+    } ]
+  } ]
+}

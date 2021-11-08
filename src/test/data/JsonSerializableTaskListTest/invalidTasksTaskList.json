@@ -1,0 +1,43 @@
+{
+  "tasks" : [ {
+    "title" : "Finish CS2103 tasks",
+    "description" : "1. Settle merge conflicts \n2. Create new PR\n3. Triage PE-D Bugs",
+    "timestamp" : "invalid timestamp",
+    "isDone" : "Not Done",
+    "tagged" : [ "todo", "urgent" ],
+    "contacts" : [ {
+      "name" : "Jeremy",
+      "isInAddressBook" : false
+    }, {
+      "name" : "Roy Balakrishnan",
+      "isInAddressBook" : true
+    } ]
+  }, {
+    "title" : "Finish CS2105 Assignment",
+    "description" : "Finish up the last question",
+    "timestamp" : "08-11-2021",
+    "isDone" : "Not Done",
+    "tagged" : [ ],
+    "contacts" : [ ]
+  }, {
+    "title" : "Submit CS2100 Assignment",
+    "description" : "Upload to Luminus",
+    "timestamp" : "08-11-2021",
+    "isDone" : "Done",
+    "tagged" : [ "todo", "urgent" ],
+    "contacts" : [ ]
+  }, {
+    "title" : "Finish this mod",
+    "description" : "Submit this project",
+    "timestamp" : "08-11-2021",
+    "isDone" : "Not Done",
+    "tagged" : [ "todo", "urgent" ],
+    "contacts" : [ {
+      "name" : "Jeremy",
+      "isInAddressBook" : false
+    }, {
+      "name" : "Roy Balakrishnan",
+      "isInAddressBook" : true
+    } ]
+  } ]
+}

@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import java.util.function.Consumer;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -13,9 +17,12 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.Task;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,10 +53,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane taskListPanelPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -74,10 +82,48 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        primaryStage.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+            EventTarget target = event.getTarget();
+            boolean isTargetEditableTextInput = (target instanceof TextInputControl) && ((TextInputControl) target)
+                    .isEditable();
+            if (!isTargetEditableTextInput && event.getCode().equals(KeyCode.SLASH)) {
+                event.consume();
+                commandBox.focus();
+            }
+        });
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.Y && e.isShortcutDown()
+                    || e.isShortcutDown() && e.isShiftDown() && e.getCode() == KeyCode.Z) {
+                CommandResult result = this.logic.redoCommand();
+                resultDisplay.setFeedbackToUser(result.getFeedbackToUser());
+                e.consume();
+            } else if (e.getCode() == KeyCode.Z && e.isShortcutDown()) {
+                CommandResult result = this.logic.undoCommand();
+                resultDisplay.setFeedbackToUser(result.getFeedbackToUser());
+                e.consume();
+            }
+        });
+
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            EventTarget target = event.getTarget();
+            boolean isTargetEditableTextInput = (target instanceof TextInputControl) && ((TextInputControl) target)
+                    .isEditable();
+            String currentString = commandBox.getContent();
+            if (isTargetEditableTextInput && event.getCode() == KeyCode.UP) {
+                commandBox.setCommandText(logic.getHistoryCommand(false, currentString));
+                event.consume();
+            } else if (isTargetEditableTextInput && event.getCode() == KeyCode.DOWN) {
+                commandBox.setCommandText(logic.getHistoryCommand(true, currentString));
+                event.consume();
+            } else if (commandBox.isEmpty()) {
+                logic.resetHistoryPosition();
+            }
+        });
     }
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,16 +156,42 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        Consumer<Task> addTask = task -> {
+            try {
+                logic.executeCommand(new AddTaskCommand(task));
+            } catch (CommandException e) {
+                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error occurred when adding task", e);
+            }
+        };
+
+        Consumer<Command> commandExecutor = command -> {
+            try {
+                logic.executeCommand(command);
+            } catch (CommandException e) {
+                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error occurred when doing GUI action", e);
+            }
+        };
+
+        TaskListPanel taskListPanel = new TaskListPanel(
+                logic.getFilteredTaskList(),
+                logic.getSelectableTaskFilters(),
+                logic.getSelectedTaskFilters(),
+                logic::addTaskFilter,
+                logic::removeTaskFilter,
+                addTask,
+                commandExecutor
+        );
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
