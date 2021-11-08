@@ -29,12 +29,12 @@ import seedu.insurancepal.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Revenue ZERO_REVENUE = new Revenue(new Money(0));
+    public static final Revenue SOME_REVENUE = new Revenue(new Money("100.21"));
 
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Revenue(new Money(0)), new Address("Blk 30 Geylang Street 29, #06-40"),
+                SOME_REVENUE, new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"), getInsuranceSet("Life"), new Note("Likes chicken"),
                 new Appointment("12-Feb-2022 12:12"),
                 ofValidClaimSet("Heart Surgery", "by Dr. Chan Keng Song at TTSH", "pending")),
