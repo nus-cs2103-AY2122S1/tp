@@ -872,7 +872,7 @@ desktop applications follow.
 The following activity diagram in Figure 5.7.8 summarizes what happens when a CS2100 TA executes a new command:
 
 <p align="center">
-    <img src="images/CommitActivityDiagram.png" width="700"/>
+    <img src="images/CommitActivityDiagram.png" width="400"/>
 </p>
 <div style="text-align: center">
     <em>Figure 5.7.8: Activity diagram showing the saving of state after command execution</em>
