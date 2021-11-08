@@ -20,6 +20,8 @@ Class JsonInsurancePalStorage
 Class JsonSerializableInsurancePal
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedClaim
+Class JsonAdaptedInsurance
 }
 
 }
@@ -39,5 +41,7 @@ JsonInsurancePalStorage .up.|> InsurancePalStorage
 JsonInsurancePalStorage ..> JsonSerializableInsurancePal
 JsonSerializableInsurancePal --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "*" JsonAdaptedClaim
+JsonAdaptedPerson --> "*" JsonAdaptedInsurance
 
 @enduml
