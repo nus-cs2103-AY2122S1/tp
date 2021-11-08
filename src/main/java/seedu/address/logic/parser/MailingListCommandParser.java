@@ -31,7 +31,7 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
      *
      * @param args user input.
      * @return {@code MailingListCommand} which generates a csv file with displayed contacts.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public MailingListCommand parse(String args) throws ParseException {
         requireNonNull(args);

@@ -76,7 +76,7 @@ public class CommandResult {
     /**
      * Checks if {@code this} is a {@code ResultType.SHOW_HELP}.
      *
-     * @return if {@code this} is a {@code ResultType.SHOW_HELP}
+     * @return if {@code this} is a {@code ResultType.SHOW_HELP}.
      */
     public boolean isShowHelp() {
         return resultType.equals(ResultType.SHOW_HELP);
@@ -85,7 +85,7 @@ public class CommandResult {
     /**
      * Checks if {@code this} is a {@code ResultType.EXIT}.
      *
-     * @return if {@code this} is a {@code ResultType.EXIT}
+     * @return if {@code this} is a {@code ResultType.EXIT}.
      */
     public boolean isExit() {
         return resultType.equals(ResultType.EXIT);
@@ -94,7 +94,7 @@ public class CommandResult {
     /**
      * Checks if {@code this} is a {@code ResultType.EXPORT_CSV}.
      *
-     * @return if {@code this} is a {@code ResultType.EXPORT_CSV}
+     * @return if {@code this} is a {@code ResultType.EXPORT_CSV}.
      */
     public boolean isChooseFile() {
         return resultType.equals(ResultType.EXPORT_CSV);

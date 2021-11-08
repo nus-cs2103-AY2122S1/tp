@@ -18,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new {@code UntagCommand} object
+ * Parses input arguments and creates a new {@code UntagCommand} object.
  */
 public class UntagCommandParser implements Parser<UntagCommand> {
 
@@ -28,7 +28,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
      *
      * @param args user input.
      * @return {@code UntagCommand} which untags a contact at the specific index.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -55,7 +55,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * @throws ParseException if tags contain empty string
+     * @throws ParseException if tags contain empty string.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;

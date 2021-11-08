@@ -8,7 +8,7 @@ import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new {@code DeleteMultipleCommand} object
+ * Parses input arguments and creates a new {@code DeleteMultipleCommand} object.
  */
 public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand> {
     /**

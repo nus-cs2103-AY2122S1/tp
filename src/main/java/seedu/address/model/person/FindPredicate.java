@@ -18,10 +18,10 @@ public class FindPredicate implements Predicate<Person> {
     private final boolean isCaseSensitive;
 
     /**
-     * Creates a FindPredicate
+     * Creates a FindPredicate.
      *
-     * @param nameList refers to the list of Names to be searched for
-     * @param tagList refers to the list of Tags to be searched for
+     * @param nameList refers to the list of Names to be searched for.
+     * @param tagList refers to the list of Tags to be searched for.
      */
     public FindPredicate(List<Name> nameList, List<Tag> tagList, boolean isCaseSensitive) {
         this.nameList = nameList;

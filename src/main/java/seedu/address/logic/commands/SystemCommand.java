@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+/** Displays help message when user is typing. */
 public class SystemCommand {
 
     /**

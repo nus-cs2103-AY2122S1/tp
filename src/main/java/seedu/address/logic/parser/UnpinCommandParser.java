@@ -7,7 +7,7 @@ import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new {@code UnpinCommand} object
+ * Parses input arguments and creates a new {@code UnpinCommand} object.
  */
 public class UnpinCommandParser implements Parser<UnpinCommand> {
 
@@ -17,7 +17,7 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
      *
      * @param args user input.
      * @return {@code UnpinCommand} which unpins a contact at the specific index.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public UnpinCommand parse(String args) throws ParseException {
         try {

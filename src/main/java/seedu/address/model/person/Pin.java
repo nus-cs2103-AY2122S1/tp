@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+/** Represents a Person's pin status. */
 public class Pin {
     public static final String MESSAGE_CONSTRAINTS = "Pin status should be either true or false";
     public static final String PINNED_STRING = "true";

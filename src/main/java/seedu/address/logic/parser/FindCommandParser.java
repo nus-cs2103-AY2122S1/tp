@@ -26,7 +26,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      *
      * @param args user input.
      * @return {@code FindCommand} which searches for contacts that fulfill the criteria.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
