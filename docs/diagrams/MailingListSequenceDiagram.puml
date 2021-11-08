@@ -18,7 +18,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-UI -> LogicManager : execute
+UI -> LogicManager : execute( "mailingList")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand
