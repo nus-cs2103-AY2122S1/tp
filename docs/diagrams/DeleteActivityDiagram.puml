@@ -6,10 +6,10 @@ start
 :User enters command: delete <index>;
 switch()
 case ([<index> is positive])
-  :Is <index> <= number of contacts displayed?;
-  if () then ([True])
+  :Compares if <index> is greater than number of contacts displayed;
+  if () then ([<index> smaller than or equals to number of contacts displayed])
     :Delete contact at <index>;
-  else ([False])
+  else ([<index> greater than the number of contacts displayed]])
     :Displays error message: "The contact index provided is out of range!";
   endif
 case ([<index> is non-positive])
