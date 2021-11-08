@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
+participant ":AddLesson\nCommandParser" as AddLessonCommandParser LOGIC_COLOR
+participant "al:AddLesson\nCommand" as AddLessonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "l:Lesson" as Lesson MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("add-l ...")
+activate LogicManager
+
+LogicManager -> TuitioneParser : parseCommand\n("add-l ...")
+activate TuitioneParser
+
+create AddLessonCommandParser
+TuitioneParser -> AddLessonCommandParser
+activate AddLessonCommandParser
+
+AddLessonCommandParser --> TuitioneParser
+deactivate AddLessonCommandParser
+
+TuitioneParser -> AddLessonCommandParser : parse("...")
+activate AddLessonCommandParser
+
+create Lesson
+AddLessonCommandParser -> Lesson
+activate Lesson
+
+Lesson --> AddLessonCommandParser : l
+deactivate Lesson
+
+create AddLessonCommand
+AddLessonCommandParser -> AddLessonCommand
+activate AddLessonCommand
+
+AddLessonCommand --> AddLessonCommandParser : al
+deactivate AddLessonCommand
+
+AddLessonCommandParser --> TuitioneParser : al
+deactivate AddLessonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddLessonCommandParser -[hidden]-> TuitioneParser
+destroy AddLessonCommandParser
+
+TuitioneParser --> LogicManager : al
+deactivate TuitioneParser
+
+ref over LogicManager, Model : AddLessonCommand execution
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+start
+:User executes delete lesson command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Search for lesson in TuitiONE;
+
+if () then ([lesson exists in TuitiONE])
+
+    :Find students enrolled in lesson;
+
+    if () then ([there are students enrolled])
+        :Unenroll students from lesson;
+
+    else ([else])
+
+    endif
+
+    :Remove lesson from TuitiONE;
+
+    :Save new TuitiONE to Storage;
+
+    :Update UI with new TuitiONE;
+
+else ([else])
+
+    :TuitiONE informs that lesson does not exist;
+
+endif
+
+stop
+@enduml

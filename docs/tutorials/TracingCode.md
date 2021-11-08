@@ -16,11 +16,11 @@ When trying to understand an unfamiliar code base, one common strategy used is t
 
 Before we jump into the code, it is useful to get an idea of the overall structure and the high-level behavior of the application. This is provided in the 'Architecture' section of the developer guide. In particular, the architecture diagram (reproduced below), tells us that the App consists of several components.
 
-![ArchitectureDiagram](../images/ArchitectureDiagram.png)
+![ArchitectureDiagram](../images/DeveloperGuideImage/ArchitectureDiagram.png)
 
 It also has a sequence diagram (reproduced below) that tells us how a command propagates through the App.
 
-<img src="../images/ArchitectureSequenceDiagram.png" width="550" />
+<img src="../images/DeveloperGuideImage/ArchitectureSequenceDiagram.png" width="550" />
 
 Note how the diagram shows only the execution flows _between_ the main components. That is, it does not show details of the execution path *inside* each component. By hiding those details, the diagram aims to inform the reader about the overall execution path of a command without overwhelming the reader with too much details. In this tutorial, you aim to find those omitted details so that you get a more in-depth understanding of how the code works.
 
@@ -37,9 +37,9 @@ As you know, the first step of debugging is to put in a breakpoint where you wan
 
 In our case, we would want to begin the tracing at the very point where the App start processing user input (i.e., somewhere in the UI component), and then trace through how the execution proceeds through the UI component. However, the execution path through a GUI is often somewhat obscure due to various *event-driven mechanisms* used by GUI frameworks, which happens to be the case here too. Therefore, let us put the breakpoint where the `UI` transfers control to the `Logic` component.
 
-<img src="../images/ArchitectureSequenceDiagram.png" width="550" />
+<img src="../images/DeveloperGuideImage/ArchitectureSequenceDiagram.png" width="550" />
 
-According to the sequence diagram you saw earlier (and repeated above for reference), the `UI` component yields control to the `Logic` component through a method named `execute`. Searching through the code base for an `execute()` method that belongs to the `Logic` component yields a promising candidate in `seedu.address.logic.Logic`.
+According to the sequence diagram you saw earlier (and repeated above for reference), the `UI` component yields control to the `Logic` component through a method named `execute`. Searching through the code base for an `execute()` method that belongs to the `Logic` component yields a promising candidate in `seedu.tuitione.logic.Logic`.
 
 <img src="../images/tracing/searchResultsForExecuteMethod.png" />
 
@@ -48,7 +48,7 @@ According to the sequence diagram you saw earlier (and repeated above for refere
 :bulb: **Intellij Tip:** The ['**Search Everywhere**' feature](https://www.jetbrains.com/help/idea/searching-everywhere.html) can be used here. In particular, the '**Find Symbol**' ('Symbol' here refers to methods, variables, classes etc.) variant of that feature is quite useful here as we are looking for a _method_ named `execute`, not simply the text `execute`.
 </div>
 
-A quick look at the `seedu.address.logic.Logic` (an extract given below) confirms that this indeed might be what we’re looking for.
+A quick look at the `seedu.tuitione.logic.Logic` (an extract given below) confirms that this indeed might be what we’re looking for.
 
 ```java
 public interface Logic {
@@ -67,7 +67,7 @@ public interface Logic {
 But apparently, this is an interface, not a concrete implementation.
 That should be fine because the [Architecture section of the Developer Guide](../DeveloperGuide.html#architecture) tells us that components interact through interfaces. Here's the relevant diagram:
 
-<img src="../images/ComponentManagers.png" width="300" />
+<img src="../images/DeveloperGuideImage/ComponentManagers.png" width="300" />
 
 Next, let's find out which statement(s) in the `UI` code is calling this method, thus transferring control from the `UI` to the `Logic`.
 
@@ -85,7 +85,7 @@ Now let’s set the breakpoint. First, double-click the item to reach the corres
 
 ## Tracing the execution path
 
-Recall from the User Guide that the `edit` command has the format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` For this tutorial we will be issuing the command `edit 1 n/Alice Yeoh`.
+Recall from the User Guide that the `edit` command has the format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK]…​` For this tutorial we will be issuing the command `edit 1 n/Alice Yeoh`.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -189,22 +189,22 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
    @Override
    public CommandResult execute(Model model) throws CommandException {
        ...
-       Person personToEdit = lastShownList.get(index.getZeroBased());
-       Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-       if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+       Person studentToEdit = lastShownList.get(index.getZeroBased());
+       Person editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
+       if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
        }
-       model.setPerson(personToEdit, editedPerson);
+       model.setPerson(studentToEdit, editedStudent);
        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-       return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+       return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedStudent));
    }
    ```
 
 1. As suspected, `command#execute()` does indeed make changes to the `model` object. Specifically,
-   * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the person data.
-   * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ persons.<br>
-     FYI, The 'filtered list' is the list of persons resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the persons so that the user can see the edited person along with all other persons. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
-     To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of persons is being tracked.
+   * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the student data.
+   * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ students.<br>
+     FYI, The 'filtered list' is the list of students resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the students so that the user can see the edited student along with all other students. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
+     To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of students is being tracked.
      <img src="../images/ModelClassDiagram.png" width="450" /><br>
    * :bulb: This may be a good time to read through the [`Model` component section of the DG](../DeveloperGuide.html#model-component)
 
@@ -231,7 +231,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
      * {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(
+        students.addAll(
             source.getPersonList()
                   .stream()
                   .map(JsonAdaptedPerson::new)

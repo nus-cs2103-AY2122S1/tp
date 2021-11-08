@@ -1,0 +1,90 @@
+{
+  "students" : [ {
+    "name" : "Leena",
+    "phone" : "87438812",
+    "email" : "leenah@example.com",
+    "grade" : "S1",
+    "remarks" : [ "b", "c", "d", "e", "friends" ],
+    "address" : "Blk 32 Geylang Street 29, #06-40",
+    "lessonCodes" : [
+      "Science-S1-Mon-1330",
+      "Science-S1-Tue-1330",
+      "Science-S1-Wed-1330",
+      "Science-S1-Thu-1330",
+      "Science-S1-Fri-1330",
+      "Science-S1-Sat-1330",
+      "Science-S1-Sun-1330",
+      "Science-S1-Thu-1730",
+      "Science-S1-Fri-1730",
+      "Science-S1-Sat-1730",
+      "Science-S1-Sun-1730"
+    ]
+  } ],
+  "lessons" : [ {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Mon",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Tue",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Wed",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Thu",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Fri",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Sat",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1330",
+    "day" : "Sun",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1730",
+    "day" : "Thu",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1730",
+    "day" : "Fri",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1730",
+    "day" : "Sat",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1730",
+    "day" : "Sun",
+    "price" : 10.5
+  } ]
+}

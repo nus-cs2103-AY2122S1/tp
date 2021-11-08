@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
+participant ":DeleteLesson\nCommandParser" as DeleteLessonCommandParser LOGIC_COLOR
+participant "dl:DeleteLesson\nCommand" as DeleteLessonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("delete-l 1")
+activate LogicManager
+
+LogicManager -> TuitioneParser : parseCommand\n("delete-l 1")
+activate TuitioneParser
+
+create DeleteLessonCommandParser
+TuitioneParser -> DeleteLessonCommandParser
+activate DeleteLessonCommandParser
+
+DeleteLessonCommandParser --> TuitioneParser
+deactivate DeleteLessonCommandParser
+
+TuitioneParser -> DeleteLessonCommandParser : parse("1")
+activate DeleteLessonCommandParser
+
+create DeleteLessonCommand
+DeleteLessonCommandParser -> DeleteLessonCommand
+activate DeleteLessonCommand
+
+DeleteLessonCommand --> DeleteLessonCommandParser : dl
+deactivate DeleteLessonCommand
+
+DeleteLessonCommandParser --> TuitioneParser : dl
+deactivate DeleteLessonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteLessonCommandParser -[hidden]-> TuitioneParser
+destroy DeleteLessonCommandParser
+
+TuitioneParser --> LogicManager : dl
+deactivate TuitioneParser
+
+ref over LogicManager, Model : DeleteLessonCommand execution
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

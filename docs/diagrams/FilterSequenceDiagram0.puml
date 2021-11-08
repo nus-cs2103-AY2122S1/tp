@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
+participant "fp:FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("filter g/S2 s/English")
+activate LogicManager
+
+LogicManager -> TuitioneParser : parseCommand\n("filter g/S2 s/English")
+activate TuitioneParser
+
+create FilterCommandParser
+TuitioneParser -> FilterCommandParser
+activate FilterCommandParser
+
+FilterCommandParser --> TuitioneParser
+deactivate FilterCommandParser
+
+TuitioneParser -> FilterCommandParser : parse\n("g/S2 s/English")
+activate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser : f
+deactivate FilterCommand
+
+FilterCommandParser --> TuitioneParser : f
+deactivate FilterCommandParser
+
+FilterCommandParser -[hidden]-> TuitioneParser
+destroy FilterCommandParser
+
+TuitioneParser --> LogicManager : f
+deactivate TuitioneParser
+
+ref over LogicManager, Model : FilterCommand execution
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

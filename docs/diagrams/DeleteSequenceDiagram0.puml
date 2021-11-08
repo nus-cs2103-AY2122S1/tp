@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
+participant ":DeleteCommand\nParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("delete 1")
+activate LogicManager
+
+LogicManager -> TuitioneParser : parseCommand\n("delete 1")
+activate TuitioneParser
+
+create DeleteCommandParser
+TuitioneParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> TuitioneParser
+deactivate DeleteCommandParser
+
+TuitioneParser -> DeleteCommandParser : parse("1")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> TuitioneParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> TuitioneParser
+destroy DeleteCommandParser
+
+TuitioneParser --> LogicManager : d
+deactivate TuitioneParser
+
+ref over LogicManager, Model : DeleteCommand execution
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

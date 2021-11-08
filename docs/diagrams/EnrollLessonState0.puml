@@ -1,0 +1,21 @@
+@startuml
+
+title Initial state
+
+package TuitiONE <<rectangle>> {
+    package Lessons <<rectangle>> {
+        object "<u>l1:Lesson" as Lesson {
+        lessonCode = Math-P2-Wed-1800
+        grade = P2
+        size = 0
+        }
+    }
+    package Students <<rectangle>> {
+        object "<u>s1:Student" as Student {
+        name = Alice
+        grade = P2
+        }
+    }
+}
+
+@end

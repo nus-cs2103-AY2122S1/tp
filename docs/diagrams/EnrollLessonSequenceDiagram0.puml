@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
+participant ":EnrollCommand\nParser" as EnrollCommandParser LOGIC_COLOR
+participant "e:EnrollCommand" as EnrollCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("enroll 1 l/1")
+activate LogicManager
+
+LogicManager -> TuitioneParser : parseCommand\n("enroll 1 l/1")
+activate TuitioneParser
+
+create EnrollCommandParser
+TuitioneParser -> EnrollCommandParser
+
+activate EnrollCommandParser
+EnrollCommandParser --> TuitioneParser
+deactivate EnrollCommandParser
+
+TuitioneParser -> EnrollCommandParser : parse("1 l/1")
+activate EnrollCommandParser
+
+create EnrollCommand
+EnrollCommandParser -> EnrollCommand :
+activate EnrollCommand
+
+EnrollCommand --> EnrollCommandParser : e
+deactivate EnrollCommand
+
+EnrollCommandParser --> TuitioneParser : e
+deactivate EnrollCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EnrollCommandParser -[hidden]-> TuitioneParser
+destroy EnrollCommandParser
+
+TuitioneParser --> LogicManager  : e
+deactivate TuitioneParser
+
+ref over LogicManager, Model : EnrollCommand execution
+
+[<--LogicManager : result
+deactivate LogicManager
+
+@enduml

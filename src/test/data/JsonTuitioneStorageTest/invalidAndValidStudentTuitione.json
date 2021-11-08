@@ -1,0 +1,20 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "phone": "94824244",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "grade" : "S1",
+    "remarked": [ "friends" ],
+    "lessonCodes" : [ ]
+  }, {
+    "name": "Student With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "grade" : "S1",
+    "remarked": [ "friends" ],
+    "lessonCodes" : [ ]
+  } ],
+  "lessons": [ ]
+}

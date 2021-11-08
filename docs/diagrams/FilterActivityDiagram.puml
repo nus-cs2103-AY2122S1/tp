@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+if () then ([filter grade & subject])
+    if () then ([valid grade])
+        :Lesson &
+        student list
+        filtered by
+        grade &
+        subject;
+    else ([invalid grade])
+        :TuitiONE
+        informs
+        user of
+        incorrect
+        input;
+    endif
+else ([filter by single variable])
+    if () then ([filter by grade])
+        if () then ([valid grade])
+            :Lesson &
+            student list
+            filtered by
+            grade;
+        else ([invalid grade])
+            :TuitiONE
+            informs user
+            of incorrect
+            input;
+        endif
+    else ([filter by subject])
+        :Lesson list
+        filtered by
+        subject;
+
+    endif
+endif
+:UI updated with
+the corresponding result
+(with filter applied or
+error message);
+stop
+
+@enduml

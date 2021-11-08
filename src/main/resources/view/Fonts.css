@@ -19,6 +19,11 @@
 }
 
 @font-face {
+    font-family: "Open Sans Bold";
+    src: url("/fonts/open-sans/OpenSans-Bold.ttf");
+}
+
+@font-face {
     font-family: "Open Sans Extra Bold";
     src: url("/fonts/open-sans/OpenSans-ExtraBold.ttf");
 }

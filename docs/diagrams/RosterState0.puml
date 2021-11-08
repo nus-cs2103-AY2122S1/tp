@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+title Initial state
+
+package TuitiONE <<rectangle>> {
+    package lessonList <<rectangle>> {
+        object "<u>l1:Lesson" as Lesson1 {
+        lessonCode = Math-P4-Wed-1800
+        lessonListIndex = 1
+        }
+
+        object "<u>l2:Lesson" as Lesson2 {
+        lessonCode = Science-S1-Fri-1330
+        lessonListIndex = 2
+        }
+    }
+
+    package studentList <<rectangle>> {
+        object "<u>s1:Student" as Student1 {
+        name = Bernice
+        lesson(s) = Math-P4-Wed-1800
+        }
+
+        object "<u>s2:Student" as Student2 {
+        name = Alex
+        lesson(s) = Science-S1-Fri-1330
+        }
+    }
+}
+
+studentList -[hidden]up-> lessonList
+
+Lesson1 <--> Student1
+
+Lesson2 <--> Student2
+
+@end

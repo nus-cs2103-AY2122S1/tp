@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  RosterCommand execution
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "f:RosterCommand" as RosterCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+LogicManager -> RosterCommand : execute()
+activate RosterCommand
+
+RosterCommand -> Model
+activate Model
+
+
+Model -> Model : updateFilteredLessonList()
+Model -> Model : updateFilteredStudentList()
+
+
+Model --> RosterCommand
+deactivate Model
+
+create CommandResult
+RosterCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RosterCommand
+deactivate CommandResult
+
+LogicManager <-- RosterCommand  : result
+deactivate RosterCommand
+
+RosterCommand -[hidden]-> LogicManager
+destroy RosterCommand
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+start
+:CSO executes
+add lesson command
+with the relevant fields;
+
+:TuitiONE starts to parse
+and check the validity
+of each field entered ;
+
+if () then ([All required fields are entered])
+
+    if() then (
+    [All required fields entered
+    are within the respective constraints]
+    )
+
+    :Create a new lesson with
+    the respective fields and
+    add into TuitiONE;
+
+    :Save TuitiONE
+    into Storage;
+
+    :Update TuitiONE's UI with
+    the new lesson;
+
+
+    else ([else])
+
+    :TuitiONE informs that
+    the respective field entered
+    is invalid and shows the
+    constraint of the respective
+    field;
+
+    endif
+
+    else ([else])
+
+    :TuitiONE informs
+    that the command entered
+    is invalid and shows an
+    example of the proper
+    command syntax;
+
+
+endif
+
+stop
+@enduml

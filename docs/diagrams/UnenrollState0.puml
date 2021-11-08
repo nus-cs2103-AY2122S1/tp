@@ -1,0 +1,32 @@
+@startuml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial state
+
+package TuitiONE <<rectangle>> {
+    package Lessons <<rectangle>> {
+        object "<u>l:Lesson" as Lesson {
+            lessonCode = Math-P2-Wed-1800
+            grade = P2
+            size = 2
+        }
+    }
+    package Students <<rectangle>> {
+        object "<u>:Student" as Alice {
+            name = Alice
+            grade = P2
+        }
+        object "<u>:Student" as John {
+            name = John
+            grade = P2
+        }
+    }
+}
+
+John -[hidden]-> Alice
+
+Lesson <-r-> John
+Lesson <-r-> Alice
+
+@end

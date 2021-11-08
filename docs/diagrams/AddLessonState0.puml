@@ -1,0 +1,30 @@
+DeleteLessonState1.puml@startuml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial state
+
+package TuitiONE <<rectangle>> {
+    package <b>Lessons</b> as Lessons <<rectangle>> {
+    }
+    package Students <<rectangle>> {
+        object "<u>:Student" as Alice {
+            name = Alice
+            grade = P2
+        }
+        object "<u>:Student" as John {
+            name = John
+            grade = P2
+        }
+    }
+}
+
+package ToAdd <<rectangle>> {
+    object "<u>l:Lesson" as Lesson {
+        lessonCode = Science-P2-Wed-1200
+        grade = P5
+        size = 0    // Size of lesson always starts with 0.
+    }
+}
+
+@end

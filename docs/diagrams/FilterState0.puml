@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+title Initial state
+
+package TuitiONE <<rectangle>> {
+    package lessonList <<rectangle>> {
+        object "<u>l1:Lesson" as Lesson1 {
+        subject = "English"
+        grade = "S2"
+        }
+
+        object "<u>l2:Lesson" as Lesson2 {
+        subject = "Math"
+        grade = "S2"
+        }
+    }
+    package studentList <<rectangle>> {
+        object "<u>s1:Student" as Student1 {
+        grade = "S2"
+        }
+
+        object "<u>s2:Student" as Student2 {
+        grade = "P6"
+        }
+    }
+}
+
+lessonList -[hidden]up-> studentList
+
+
+@end

@@ -1,3 +1,12 @@
 #copyButton, #helpMessage {
-    -fx-font-family: "Open Sans";
+    -fx-font-family: "Montserrat";
+}
+
+#copyButton {
+    -fx-wrap-text: true;
+}
+
+#helpHeader {
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 28px;
 }

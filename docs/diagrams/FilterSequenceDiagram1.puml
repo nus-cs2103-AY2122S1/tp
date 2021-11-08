@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  FilterCommand execution
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+FilterCommand -> Model
+activate Model
+
+alt "grade and subject are present"
+    Model -> Model : filter students subject, and\nfilter lessons by subject & grade
+
+else "only subject is present"
+    Model -> Model : filter lessons by subject
+
+else "only grade is present"
+    Model -> Model : filter students & lessons by grade
+end
+
+Model --> FilterCommand
+deactivate Model
+
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterCommand
+deactivate CommandResult
+
+LogicManager <-- FilterCommand  : result
+deactivate FilterCommand
+
+FilterCommand -[hidden]-> LogicManager
+destroy FilterCommand
+@enduml

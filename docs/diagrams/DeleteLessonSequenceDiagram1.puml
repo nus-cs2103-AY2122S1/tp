@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "dl:DeleteLesson\nCommand" as DeleteLessonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "l:Lesson" as Lesson MODEL_COLOR
+end box
+
+mainframe **sd**  DeleteLessonCommand execution
+
+LogicManager -> DeleteLessonCommand : execute()
+activate DeleteLessonCommand
+
+DeleteLessonCommand -> Lesson : unenrollStudents()
+activate Lesson
+
+Lesson --> DeleteLessonCommand
+deactivate Lesson
+
+DeleteLessonCommand -> Model : deleteLesson(l)
+activate Model
+
+Model -> Lesson : deleteLesson(l)
+destroy Lesson
+
+Model --> DeleteLessonCommand
+deactivate Model
+
+create CommandResult
+DeleteLessonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteLessonCommand
+deactivate CommandResult
+
+DeleteLessonCommand --> LogicManager : result
+deactivate DeleteLessonCommand
+
+DeleteLessonCommand -[hidden]-> LogicManager
+destroy DeleteLessonCommand
+
+@enduml

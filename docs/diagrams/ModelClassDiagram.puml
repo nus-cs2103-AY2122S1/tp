@@ -5,50 +5,85 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyTuitione <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Tuitione
+Class ReadOnlyTuitione
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class UniqueStudentList
+Class UniqueLessonList
 
-
-Class UniquePersonList
-Class Person
+Package "Student\n\n" <<Rectangle>> #F4F6F6{
+Class "Student" as s
 Class Address
 Class Email
 Class Name
-Class Phone
-Class Tag
+Class ParentContact
+Class Remark
+Class "Grade" as g1
+}
+
+Package "Lesson\n\n" <<Rectangle>> #F4F6F6{
+Class "Lesson" as l
+Class LessonCode
+Class LessonTime
+Class Price
+Class Subject
+Class "Grade" as g2
+}
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Tuitione .up.|> ReadOnlyTuitione
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyTuitione
+ModelManager -left-> "1" Tuitione
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Tuitione *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" s
+s *--> Name
+s *--> ParentContact
+s *--> Email
+s *--> Address
+s *--> "0..5" Remark
+s *--> g1
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]down-> ParentContact
+ParentContact -[hidden]down-> g1
+g1 -[hidden]down-> Remark
 
-ModelManager -->"~* filtered" Person
+ParentContact -[hidden]down-> Address
+Address -[hidden]down-> Email
+
+UniqueStudentList --[hidden]right--> UniqueLessonList
+
+Tuitione *--> "1" UniqueLessonList
+UniqueLessonList -right-> "~* all" l
+l *--> LessonCode
+l *--> LessonTime
+l *--> Price
+l *--> Subject
+l *--> g2
+
+Subject -[hidden]down-> LessonTime
+LessonTime -[hidden]down-> Price
+
+Subject -[hidden]down-> LessonCode
+LessonCode -[hidden]down-> g2
+
+s "0..15" <-left-> "0..10" l
+
+ModelManager ---->"~* filtered" s
+ModelManager ---->"~* filtered" l
 @enduml

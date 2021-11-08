@@ -6,55 +6,126 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/TuitiONE.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css"/>
+        <URL value="@Fonts.css" />
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="File">
+            <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="8.0" top="8.0" />
+               </padding>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <HBox fx:id="displayPanel" prefHeight="34.0" prefWidth="602.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+
+          <VBox fx:id="studentList" minWidth="340.0" prefWidth="312.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+            </padding>
+                  <HBox prefHeight="30.0" prefWidth="319.0">
+                     <children>
+                        <VBox prefHeight="76.0" prefWidth="18.0">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/student_shrinked.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                  <VBox fx:id="studentListLabel" styleClass="pane-with-no-border">
+                           <Text fill="#572d03" text="Student List" wrappingWidth="277.484375" style="-fx-font-weight: bold">
+                              <font>
+                                 <Font name="Montserrat Medium" size="22.0" />
+                              </font>
+                             <VBox.margin>
+                               <Insets bottom="5.0" left="12.0" top="5.0" />
+                             </VBox.margin>
+                           </Text>
+                  </VBox>
+                     </children>
+                  </HBox>
+            <StackPane fx:id="studentListPanelPlaceholder" prefHeight="18.0" prefWidth="318.0" style="-fx-border-color: #b2814c" VBox.vgrow="ALWAYS" />
+
+          </VBox>
+
+          <VBox fx:id="lessonList" minWidth="260" prefWidth="260.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+            </padding>
+                  <HBox prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                  <VBox fx:id="lessonListLabel" prefHeight="76.0" prefWidth="18.0" styleClass="pane-with-no-border">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lesson_shrinked.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                  </VBox>
+                        <VBox>
+                           <children>
+                       <Text fill="#572d03" text="Lesson List" wrappingWidth="188.37109375" style="-fx-font-weight: bold">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="12.0" top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+            <StackPane fx:id="lessonListPanelPlaceholder" prefHeight="18.0" style="-fx-border-color: #b2814c" VBox.vgrow="ALWAYS" />
+          </VBox>
+
+        </HBox>
+
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="173.0" minHeight="160" prefHeight="160.0" prefWidth="602.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
       </VBox>
     </Scene>
   </scene>
