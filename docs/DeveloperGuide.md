@@ -263,7 +263,7 @@ Step 8. Contact's `Pin` attribute will change to indicate that the contact is no
 
 Step 9. CONNECTIONS UI will update to show the contact behind other pinned contacts using a `PersonCard`. 
 
-The following sequence diagram shows how the `pin operation works:
+The following sequence diagram shows how the `pin` operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
