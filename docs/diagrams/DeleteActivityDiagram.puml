@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+
+(*) -> "User chooses an index to delete"
+if "Is index positive?"
+    if "Is index <= number of displayed contacts?"
+        ---> [True] "Deletes the contact from CONNECTIONS"
+    else
+        --> [False] "Displays an 'index out of range' message"
+    endif
+else
+    ---> [False] "Displays an 'invalid command' message"
+endif
+
+"Displays an 'index out of range' message" ----> "User chooses an index to delete"
+"Displays an 'invalid command' message" -> "User chooses an index to delete"
+"Deletes the contact from CONNECTIONS" --> (*)
+
+@enduml
