@@ -25,7 +25,7 @@ public class RevenueCommandParserTest {
     public void parse_validArgs_returnsRevenueCommand() {
         // no leading and trailing whitespaces
         RevenueCommand expectedRevenueCommand =
-                new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(new Money(100.21f)));
+                new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(new Money("100.21")));
         assertParseSuccess(parser, "1 r/100.21", expectedRevenueCommand);
     }
 
@@ -34,5 +34,17 @@ public class RevenueCommandParserTest {
         // no leading and trailing whitespaces
         assertParseFailure(parser, "1 r10", String.format(INVALID_REVENUE_COMMAND_FORMAT,
                 RevenueCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parse_invalidRevenue_throwsParseException() {
+        // no leading and trailing whitespaces
+        assertParseFailure(parser, "1 r/iudsiu8w", String.format(Revenue.MESSAGE_CONSTRAINTS));
+    }
+
+    @Test
+    public void parse_missingRevenue_throwsParseException() {
+        // no leading and trailing whitespaces
+        assertParseFailure(parser, "1", INVALID_REVENUE_COMMAND_FORMAT);
     }
 }

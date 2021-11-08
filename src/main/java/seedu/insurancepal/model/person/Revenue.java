@@ -11,7 +11,10 @@ import seedu.insurancepal.commons.core.Money;
 public class Revenue {
 
     public static final String MESSAGE_CONSTRAINTS = "Revenue can be any positive number with up to 2 decimal places "
-            + "that is not more than 19,999,998";
+            + "that is not more than 20,000,000";
+
+    public static final String MESSAGE_INVALID_REVENUE_PLUS_SIGN = "There is no need to add a plus sign in front"
+            + " of revenue, it is positive by default until a minus sign is placed in front of the number.";
 
     public final Money value;
 
@@ -26,29 +29,28 @@ public class Revenue {
     }
 
     /**
-     * Returns true if the resulting Revenue value is a valid.
+     * Returns true if the resulting Revenue value is valid.
      */
     public boolean isValidResultingRevenue() {
-        return this.value.getInDollars() >= 0;
+        return !this.value.isNegative();
     }
 
     /**
-     * Returns true if the resulting Revenue value is Integer.MAX_VALUE.
+     * Returns true if the resulting Revenue value is more than 20,000,000.
      */
-    public boolean isMaxRevenue() {
-        return this.value.getInDollars() >= 20000000;
+    public boolean isMoreThanMaxRevenue() {
+        return this.value.isMoreThan(20000000);
     }
 
     /**
      * Returns true if a given string is a valid revenue.
      */
     public static boolean isValidRevenue(String test) {
-        try {
-            float number = Float.valueOf(test);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return Money.isValidMoney(test);
+    }
+
+    public static boolean isPlusSignPresent(String test) {
+        return Money.isPlusSignPresent(test);
     }
 
     @Override
@@ -74,10 +76,7 @@ public class Revenue {
      * @return A new revenue object with its value the result of the 2 added revenues.
      */
     public Revenue addRevenue(Revenue revenueToBeAdded) {
-        long updatedValue = this.value.getCents() + revenueToBeAdded.value.getCents();
-        float updatedValueInDollars = updatedValue / 100f;
-        Revenue revenue = new Revenue(new Money(updatedValueInDollars));
-        return revenue;
+        return new Revenue(this.value.addValue(revenueToBeAdded.value));
     }
 
     @Override

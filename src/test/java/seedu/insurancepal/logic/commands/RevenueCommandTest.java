@@ -12,8 +12,9 @@ import static seedu.insurancepal.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.insurancepal.commons.core.Messages;
-import seedu.insurancepal.commons.core.Money;
 import seedu.insurancepal.commons.core.index.Index;
+import seedu.insurancepal.logic.parser.ParserUtil;
+import seedu.insurancepal.logic.parser.exceptions.ParseException;
 import seedu.insurancepal.model.InsurancePal;
 import seedu.insurancepal.model.Model;
 import seedu.insurancepal.model.ModelManager;
@@ -24,7 +25,8 @@ import seedu.insurancepal.testutil.PersonBuilder;
 
 public class RevenueCommandTest {
 
-    private static final String REVENUE_STUB = "100.21f";
+    private static final String REVENUE_STUB = "100.21";
+    private static final String NEGATIVE_REVENUE_STUB = "-100.21";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -64,33 +66,33 @@ public class RevenueCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidPersonIndexUnfilteredList_failure() throws ParseException {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        Money moneyOfBob = new Money(Float.valueOf(VALID_REVENUE_BOB));
-        RevenueCommand revenueCommand = new RevenueCommand(outOfBoundIndex, new Revenue(moneyOfBob));
+        Revenue revenueOfBob = ParserUtil.parseRevenue(VALID_REVENUE_BOB);
+        RevenueCommand revenueCommand = new RevenueCommand(outOfBoundIndex, revenueOfBob);
 
         assertCommandFailure(revenueCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidPersonIndexFilteredList_failure() throws ParseException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        Money moneyOfBob = new Money(Float.valueOf(VALID_REVENUE_BOB));
+        Revenue revenueOfBob = ParserUtil.parseRevenue(VALID_REVENUE_BOB);
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        RevenueCommand revenueCommand = new RevenueCommand(outOfBoundIndex, new Revenue(moneyOfBob));
+        RevenueCommand revenueCommand = new RevenueCommand(outOfBoundIndex, revenueOfBob);
 
         assertCommandFailure(revenueCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_resultingRevenueNegativeUnfilteredList_failure() {
+    public void execute_resultingRevenueNegativeUnfilteredList_failure() throws ParseException {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        Money negativeMoneyOfBob = new Money((-1) * Float.valueOf(REVENUE_STUB));
-        RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(negativeMoneyOfBob));
+        Revenue negativeRevenueOfBob = ParserUtil.parseRevenue(NEGATIVE_REVENUE_STUB);
+        RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON, negativeRevenueOfBob);
         String errorMessage = String.format(RevenueCommand.MESSAGE_ADD_REVENUE_FAIL_NEGATIVE, firstPerson.getName());
 
         assertCommandFailure(revenueCommand, model, errorMessage);

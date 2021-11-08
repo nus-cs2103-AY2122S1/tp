@@ -2,6 +2,7 @@ package seedu.insurancepal.model.person;
 
 import static seedu.insurancepal.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.revenue = new Revenue(new Money(0));
+        this.revenue = new Revenue(new Money(BigDecimal.ZERO));
         this.address = address;
         this.tags.addAll(tags);
         this.insurances.addAll(insurances);

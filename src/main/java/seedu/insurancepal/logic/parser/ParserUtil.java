@@ -1,7 +1,6 @@
 package seedu.insurancepal.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.insurancepal.logic.parser.RevenueCommandParser.INVALID_REVENUE_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,7 +10,6 @@ import seedu.insurancepal.commons.core.Money;
 import seedu.insurancepal.commons.core.index.Index;
 import seedu.insurancepal.commons.exceptions.IllegalValueException;
 import seedu.insurancepal.commons.util.StringUtil;
-import seedu.insurancepal.logic.commands.RevenueCommand;
 import seedu.insurancepal.logic.parser.exceptions.ParseException;
 import seedu.insurancepal.model.appointment.Appointment;
 import seedu.insurancepal.model.claim.Description;
@@ -116,12 +114,13 @@ public class ParserUtil {
         requireNonNull(revenue);
         String trimmedRevenue = revenue.trim();
         if (!Revenue.isValidRevenue(trimmedRevenue)) {
-            throw new ParseException(String.format(INVALID_REVENUE_COMMAND_FORMAT,
-                    RevenueCommand.COMMAND_WORD));
+            throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);
         }
-        float number = Float.valueOf(trimmedRevenue);
+        if (Revenue.isPlusSignPresent(revenue)) {
+            throw new ParseException(Revenue.MESSAGE_INVALID_REVENUE_PLUS_SIGN);
+        }
 
-        return new Revenue(new Money(number));
+        return new Revenue(new Money(trimmedRevenue));
     }
 
     /**
@@ -166,7 +165,7 @@ public class ParserUtil {
         try {
             return Insurance.of(insuranceType, insuranceName);
         } catch (IllegalValueException exception) {
-            throw new ParseException(Insurance.MESSAGE_CONSTRAINTS);
+            throw new ParseException(exception.getMessage());
         }
     }
 

@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java) //TODO update link
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,9 +114,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java) //TODO update link
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java) //TODO update link
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -153,6 +153,82 @@ Classes used by multiple components are in the `seedu.insurancepal.commons` pack
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add command
+
+A `Person` can be added to `InsurancePal` using the following method:
+1. Using the `AddCommand` to add a `Person` to `InsurancePal`
+
+The processing of an add command from the user can be split into 2 general steps:
+1. Parsing user input into an `AddCommand`
+2. Executing the `AddCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `AddCommandParser` which calls other
+helper classes to parse the text into various attributes `XYZ` of `Person`, which are: 
+* `name`
+* `phone`
+* `email`
+* `address`
+* `tags` (optional)
+* `insurances` (optional)
+* `note` (optional)
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
+`AddCommandParser` then creates an `AddCommand` based on created objects, 
+as well as an empty `Appointment` object and an empty `HashSet` of `Claims`.
+
+**Step 2**: Execution of `AddCommand`
+
+![AddCommandActivityDiagram](images/AddCommandActivityDiagram.png)
+
+There are 2 possible outcomes of an `AddCommand`:
+1. The addition is rejected since a `Person` with the same name already exists. 
+2. The person is added to `InsurancePal`.
+
+### Edit command
+
+A `Person` in `InsurancePal` can be edited using the following method:
+1. Using the `EditCommand` to edit a `Person` in `InsurancePal`
+
+The processing of an edit command from the user can be split into 2 general steps:
+1. Parsing user input into an `EditCommand`
+2. Executing the `EditCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `EditCommandParser` which calls other
+helper classes to parse the text into editable attributes `XYZ` of `Person`, which are: 
+* `name`
+* `phone`
+* `email`
+* `revenue`
+* `address`
+* `tags`
+* `insurances`
+* `note`
+
+All fields are optional, but at least one must be provided
+
+![EditCommandSequenceDiagram](images/EditCommandSequenceDiagram.png)
+
+`EditCommandParser` then creates an `EditCommand` with an `EditPersonDescriptor`
+with the attributes of `Person` to edit.
+
+
+**Step 2**: Execution of `EditCommand`
+
+![EditCommandActivityDiagram](images/EditCommandActivityDiagram.png)
+
+There are 2 possible outcomes of an `EditCommand`:
+1. The edit is rejected since a `Person` with the same name already exists. 
+2. The person is edited in `InsurancePal`.
 
 ###  Revenue feature
 
@@ -196,7 +272,7 @@ the new revenue and client's original revenue is negative
 #### Design considerations
 {:.no_toc}
 
-*Aspect*: User interface of adding and editing revenue.
+*Aspect 1*: User interface of adding and editing revenue.
 
 * **Alternative 1 (Current Choice):** `revenue` command adds to existing `revenue`
 of client. `edit` command sets the `revenue` of client.
@@ -207,12 +283,20 @@ of client. `edit` command sets the `revenue` of client.
   * Pros: Fewer commands for the user to remember
   * Cons: It will be difficult to give proper error messages since we are not sure
   of the user's intentions
-### Add command
 
-A user can use the add command to add a clients. A sequence diagram of this action is as shown:
+*Aspect 2*: Limit set for `revenue` of clients.
 
-![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
-
+* **Alternative 1 (Current Choice):** `revenue` field for each client is set to have a limit 
+of 20,000,000.
+  * Pros: Ensures that there will be no precision errors within the possible range of `revenue`
+  field
+  * Cons: `revenue` of the client can never be higher than 20,000,000. However, this may not be 
+  very significant as S$20,000,000 earned from a client as an insurance agent is a high and unrealistic
+  amount.
+* **Alternative 2:** `revenue` field for each client is set to have no limit.
+  * Pros: `revenue` of the client can be much higher in the rare case that there is a client providing 
+  very high revenue to the insurance agent.
+  * Cons: More prone to bugs and precision errors as value of `revenue` approaches the limit for `BigDecimal`
 
 ###  Note feature
 
@@ -304,7 +388,7 @@ missing fields imply that the user wants to edit or delete an existing claim. Th
 
 <img src="images/ClaimCommandExecuteActivityDiagram.png" width="500" />
 
-There are 3 possible outcomes from the execution of a ClaimCommand.
+There are 3 possible outcomes from the execution of a ClaimCommand (shown in blue above).
 1. Add a new claim to the client
 2. Edit an existing claim of the client
 3. Delete an existing claim of the client
@@ -356,19 +440,30 @@ parse the text into the data classes `Index` and `Appointment`.
 
 <img src="images/ScheduleCommandParserSequenceDiagram.png" width="800" />
 
+During this process, the Appointment object is being created using the user input.
+Depending on the input, there are 2 possible outcomes:
+1. A valid appointment containing a meeting time is created.
+2. An empty appointment is created. This happens when the user input for `m/` is an empty string.
+
+This process is illustrated by this diagram:
+
+<img src="images/AppointmentConstructorActivityDiagram.png" width="600" />
+
 `ScheduleCommandParser` then creates a `ScheduleCommand` using the `Index` and `Appointment` objects created.
 
 **Step 2:** Executing the ScheduleCommand
 
-<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="400" />
+<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="600" />
 
-There are 3 possible outcomes from the execution of a ScheduleCommand.
+There are 4 possible outcomes from the execution of a ScheduleCommand.
 1. Schedule a new appointment with the client
 2. Reschedule an appointment with the client
 3. Delete an existing appointment with the client
+4. Do nothing.
 
 #### Design considerations
 {:.no_toc}
+* Appointments with expired dates are not automatically deleted and scheduling appointments that are expired are permitted. This is because the user might want to check how long it has since they met a specific client.
 
 *Aspect*: User interface of adding, editing and deleting appointments
 
@@ -381,21 +476,28 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
     
 ### Insurance feature
 
-#### Implementation
+#### Current implementation
 {:.no_toc}
 
-`Insurance` is currently composed of two objects:
+The insurance policies a client has is represented by the `insurances` field under `Person`,
+which is represented by a `HashSet<Insurance>` object. 
 
-* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
-* `brand`, a `String` representing the brand of insurance.
-
-A `Person` can have any number of different `Insurances`, stored as a `HashSet`.
-
-`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command.
-
-A class diagram of `Insurance` is as shown:
+The `Insurance` object contains an `insuranceType`, which is an `InsuranceType` enumeration,
+and a `brand` representing the insurance policy's brand, represented as a `String`.
 
 ![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding insurance policies
+
+* **Alternative 1**: One `Insurance` command adds and edits insurances
+  * Pros: Easier for user to remember all insurance-related commands with one command
+  * Cons: Overkill for a lightweight object
+* **Alternative 2 (chosen)**: Integrate `Insurance` with existing `add` and `edit` commands 
+  * Pros: Easy for user to remember as a lightweight property, similar to existing `Tag` 
+  * Cons: Harder to scale in the future if more properties are added to `Insurance`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -439,21 +541,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | insurance agent                                     | add total costs from each of my clients         | determine how much to spend on gifts for clients.|
 | `* * *`  | user                                                | save my total costs for future use         | save time on having to type them everytime.|
 | `* * *`  | insurance agent                                     | keep notes about the client      | remember the health condition and ailments of all my clients.|
-
 | `* * *`  | insurance agent                                     | add the time and place of my appointments for my respective clients in the contact page        | be punctual|
 | `* * *`  | user                                     | save my contacts upon closing my address book        | save time on having to type them everytime |
 | `* * *`  | organised user                                    | sort the clients in my address book by their first name         | locate a client easily|
-
 | `* * *`  | organised and shrewd insurance agent                                     | sort my clients based on how much money I am making from them         | know which clients to prioritise|
 | `* * *`  | insurance agent                                     | calculate the commissions I get from my client        | know the revenue obtained from the policy my client buys. |
 | `* * *`  | organised insurance agent                                    | remember what insurance my client already has        |  sell the client insurance he/she does not have yet |
-
 | `* * *`  | user with many contacts in the address book                                     | search for contacts in my contacts list whose name matches my input         |  navigate to the person I am looking for quickly |
 | `* * *`  | user                                     | delete clients from my contact list         | remove a client from my contact list I no longer need to keep in contact with|
 | `* * *`  | user                                    | use programs on Windows and Mac         | use it on all my laptops |
-| `* * *`  | user                                    | exit the program safely        | free up resources on his computer |
+| `* * *`  | user                                    | exit the program safely        | free up resources on my computer |
 | `* * *`  | new user                                     |  install the application        | I can use it |
-| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
 | `* *`    | insurance agent                                      | keep track of the birthday of my clients   | maintain customer relations with them|
 | `* *`    | insurance agent that labels my clients    | delete labels that I have assigned  | correct mislabels and inaccurate labels
@@ -467,8 +565,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | edit the information of entries in my address book   | ensure the information is accurate and up to date.|
 | `* *`    | insurance agent with a lot of clients                                       | create labels for my clients   |  classify and keep track of each of their characteristics|
 | `*`      | user | see how much space the program is using          | easily manage my computer memory |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -498,6 +594,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given details are of an invalid format
 
     * 1a1. InsurancePal shows an error message
+
+      Use case ends.
+
+* 1b. A client with the same name already exists in InsurancePal
+
+    * 1b1. InsurancePal shows an error message
 
       Use case ends.
 
@@ -538,7 +640,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
+* 3b. The given details are of an invalid format
 
+    * 3b1. InsurancePal shows an error message
+
+      Use case resumes at step 2.
+
+* 3c. A client with the same name already exists in InsurancePal
+
+    * 3c1. InsurancePal shows an error message
+
+      Use case resumes at step 2.
 **Use case: Finding a client**
 
 **MSS**
@@ -601,8 +713,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given revenue is of an invalid format
+* 3b. The given revenue is of an invalid format.
     * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The given revenue when added to the current revenue becomes negative.
+  * 3c1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3d. The given revenue when added to the current revenue becomes larger than 20,000,000.
+  * 3d1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
 
@@ -713,20 +835,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. New users should be able to easily see where to find information on how to use the application.
+4. New users should be able to see where to find information on how to use the application within 2 actions upon launching the application.
 5. Should inform user of the necessary amendments to make to their input when receiving a bad input.
 6. Data should be transferable between different devices that are both running InsurancePal.
 7. Each command should be successfully executed within 1 second.
-8. Should not exit unexpectedly as a result of software implementation regardless of user input.
+8. Should not exit or crash without explicit permission or instruction by the user.
 9. Should not modify information stored without explicit permission or instruction by the user.
-10. Should not allow duplicate entries.
+10. Should not allow duplicate entries of clients.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Notes**: A short paragraph that is written for a person to remind the user about details of that person
 * **Client**: A person the user is selling or trying to sell insurance to
-
+* **Appointment**: A meeting the user will be having with a client
+* **Revenue**: The total profit the user has made off a client
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -754,8 +877,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -770,13 +891,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
