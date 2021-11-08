@@ -5,13 +5,13 @@ title: Jovyn Tan's Project Portfolio Page
 
 ### Project: ePoch
 
-ePoch is a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). It has been designed for the busy NUS student, allowing the user to create contacts for persons and to create CCAs; connect those persons and CCAs together; and to create periodic reminders for those CCAs.
+ePoch is a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+It has been designed for the busy NUS student, allowing the user to create contacts for persons and to create CCAs, link those persons and CCAs together, and to create periodic reminders for those CCAs.
 
 Given below are my contributions to the project.
 
-- Code contributed: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=jovyntls&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&zA=jovyntls&zR=AY2122S1-CS2103-T14-2%2Ftp%5Bmaster%5D&zACS=207.23809523809524&zS=2021-09-17&zFS=jovyntls&zU=2021-11-01&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
+- **Code contributed:** [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=jovyntls&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&zA=jovyntls&zR=AY2122S1-CS2103-T14-2%2Ftp%5Bmaster%5D&zACS=207.23809523809524&zS=2021-09-17&zFS=jovyntls&zU=2021-11-01&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 - **Project management:**
-  - Managed issue tracker
   - Managed releases `v1.1`-`v1.4` (5 releases) on GitHub
 - **Enhancements implemented:** 
   - Light theme and UI improvements (PRs [#219](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/219), [#256](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/256), [#261](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/261), [#269](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/269))
@@ -29,4 +29,6 @@ Given below are my contributions to the project.
     - Implementation details for CCAs (PR [#92](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/92))
     - UML diagrams for ArchitectureSequenceDiagram and DeleteSequenceDiagram (PRs [#238](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/238), [#241](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/241))
     - Product scope section (PR [#33](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/33))
-- **PRs reviewed:** [#106](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/106), [#120](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/120), [#65](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/65), 
+- **Contribution to team-based tasks:**
+  - PRs reviewed: [#106](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/106), [#120](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/120), [#65](https://github.com/AY2122S1-CS2103-T14-2/tp/pull/65),
+  - Managed and maintained issue tracker
