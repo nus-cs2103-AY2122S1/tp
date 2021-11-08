@@ -26,17 +26,16 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
             + ": Sorts all contacts by a specified property in ascending order.\n\n"
-            + "Parameter: FIELD_PREFIX/\n"
-            + "FIELD_PREFIX/ can be any of the following:\n"
-            + "[" + PREFIX_NAME + "] "
-            + "[" + PREFIX_GENDER + "] "
-            + "[" + PREFIX_PHONE + "] "
-            + "[" + PREFIX_EMAIL + "] "
-            + "[" + PREFIX_NATIONALITY + "] "
-            + "[" + PREFIX_TUTORIAL_GROUP + "] "
-            + "[" + PREFIX_REMARK + "] "
-            + "\n\n"
-            + "Example: " + COMMAND_WORD + " n/";
+            + "Parameter: PREFIX\n"
+            + "PREFIX can be any of the following:\n"
+            + PREFIX_NAME + "\n"
+            + PREFIX_GENDER + "\n"
+            + PREFIX_PHONE + "\n"
+            + PREFIX_EMAIL + "\n"
+            + PREFIX_NATIONALITY + "\n"
+            + PREFIX_TUTORIAL_GROUP + "\n"
+            + PREFIX_REMARK + "\n\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by %s in ascending order";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_PREFIX_ABSENT = String.format(

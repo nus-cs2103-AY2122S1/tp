@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 
 /**
@@ -12,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS = "Gender should only be "
-            + "'M' for male, 'F' for female and 'O' for others.\n\n"
+            + "'M' for male, 'F' for female and 'O' for others (case-insensitive).\n\n"
             + "Note:\n"
             + "In edit command, gender can be removed from a person by leaving the gender value blank "
             + "(i.e. " + PREFIX_GENDER + " ).";
