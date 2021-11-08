@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TaskAssignable;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 
 public class UnassignTaskFromGroupCommand extends UnassignTaskCommand {
@@ -55,6 +56,8 @@ public class UnassignTaskFromGroupCommand extends UnassignTaskCommand {
         model.setGroup(groupToEdit, newGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setGroupToView(newGroup);
+        model.setViewingType(ViewingType.GROUP);
     }
 
     @Override

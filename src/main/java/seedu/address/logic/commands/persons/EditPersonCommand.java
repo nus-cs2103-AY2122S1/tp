@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.persons;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PERSON_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.id.UniqueIdMapper;
@@ -44,8 +46,9 @@ public class EditPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "-e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = PERSON_COMMAND + " " + COMMAND_WORD
+            + ": Edits the details of the student identified "
+            + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -53,12 +56,12 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + PERSON_COMMAND + " " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -96,6 +99,8 @@ public class EditPersonCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateLessonWithAttendeesList();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPersonToView(editedPerson);
+        model.setViewingType(ViewingType.PERSON);
         return new CommandResult(String.format(successMsg, editedPerson));
     }
 
@@ -349,7 +354,7 @@ public class EditPersonCommand extends Command {
             try {
                 personToEdit = removeLessons(personToEdit, lessonsToRemove);
             } catch (IndexOutOfBoundsException index) {
-                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
             }
             // adding lessons
             try {

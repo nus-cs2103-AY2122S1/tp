@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.persons;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.INVALID_COMMAND_INVALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
@@ -27,8 +28,15 @@ public class PersonRemoveExamParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "...", INVALID_FORMAT);
+        // empty
+        assertParseFailure(parser, "", INVALID_FORMAT);
 
-        assertParseFailure(parser, "abc 1", INVALID_FORMAT);
+        // missing index
+        assertParseFailure(parser, " " + INDEX_FIRST_PERSON.getOneBased(), INVALID_FORMAT);
+
+        // one invalid index
+        assertParseFailure(parser, "..." + " " + INDEX_FIRST_EXAM.getOneBased(), INVALID_COMMAND_INVALID_INDEX);
+
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + "abc", INVALID_COMMAND_INVALID_INDEX);
     }
 }

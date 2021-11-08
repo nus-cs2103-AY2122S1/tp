@@ -2,9 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Map;
 import java.util.Set;
 
-import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.task.Task;
 
 /**
@@ -14,33 +15,39 @@ import seedu.address.model.task.Task;
 public class PersonWithDetails {
 
     private Person person;
-    private Set<Group> groups;
+    private Set<GroupWithDetails> groupsWithDetails;
     private Set<Task> tasks;
-
-    //TODO add Task details?
+    private Map<Task, Boolean> tasksCompletion;
 
     /**
      * Creates an object that holds a person with some of his other details!
      *
      * @param person to hold
-     * @param groups details to hold
+     * @param groupsWithDetails to hold
+     * @param tasks to hold
      */
-    public PersonWithDetails(Person person, Set<Group> groups, Set<Task> tasks) {
-        requireAllNonNull(person, groups, tasks);
+    public PersonWithDetails(Person person, Set<GroupWithDetails> groupsWithDetails,
+                             Set<Task> tasks, Map<Task, Boolean> tasksCompletion) {
+        requireAllNonNull(person, groupsWithDetails, tasks, tasksCompletion);
         this.person = person;
-        this.groups = groups;
+        this.groupsWithDetails = groupsWithDetails;
         this.tasks = tasks;
+        this.tasksCompletion = tasksCompletion;
     }
 
     public Person getPerson() {
         return person;
     }
 
-    public Set<Group> getGroups() {
-        return groups;
+    public Set<GroupWithDetails> getGroups() {
+        return groupsWithDetails;
     }
 
     public Set<Task> getTasks() {
         return tasks;
+    }
+
+    public Map<Task, Boolean> getTasksCompletion() {
+        return tasksCompletion;
     }
 }

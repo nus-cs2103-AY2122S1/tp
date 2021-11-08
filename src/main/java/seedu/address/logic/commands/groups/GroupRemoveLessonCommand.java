@@ -8,11 +8,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 
 public class GroupRemoveLessonCommand extends Command {
 
-    public static final String MESSAGE_SUCCESS = "Lesson deleted: %s1$s";
+    public static final String MESSAGE_SUCCESS = "Lesson deleted";
 
     private Index groupIndex;
     private Index lessonIndex;
@@ -45,6 +46,8 @@ public class GroupRemoveLessonCommand extends Command {
 
         model.setGroup(toRemoveFrom, removedLesson);
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
+        model.setGroupToView(removedLesson);
+        model.setViewingType(ViewingType.GROUP);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

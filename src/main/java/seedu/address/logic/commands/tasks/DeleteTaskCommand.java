@@ -15,6 +15,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
@@ -24,10 +25,10 @@ public class DeleteTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "-d";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = "task " + COMMAND_WORD
             + ": Deletes the task identified by the index number used in the displayed task list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + "task " + COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     private final Index targetIndex;
@@ -83,6 +84,7 @@ public class DeleteTaskCommand extends Command {
 
         model.deleteTask(taskToDelete);
         model.updateLessonWithAttendeesList();
+        model.setViewingType(ViewingType.SCHEDULE);
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 

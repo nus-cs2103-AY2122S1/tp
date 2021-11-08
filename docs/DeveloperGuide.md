@@ -9,13 +9,13 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and Getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `student -d 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -98,7 +98,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("student -d 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -154,90 +154,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Uniquely identify persons/groups/tasks
 
 #### Implementation
@@ -288,7 +204,7 @@ and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stor
 - `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
 and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
 
-#### Implementation rationale
+#### Implementation Rationale
 
 - `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects that are assigned to one another.
 - Storing assignments as a set in each `Person` and `Task` makes it easy to display and retrieve all assigned tasks for each `Person`
@@ -306,27 +222,29 @@ entire set from the `AddressBook` and look up the persons and tasks in the set.
 
 ### Edit a task
 
-### Implementation
+#### Implementation
 This command is implemented to allow tutors to edit the details of the tasks stored in TutorMaster.
 
 The tutor's input to edit a particular task is executed by the Logic Manager. The logic manager passes the input to the
 `AddressBookParser` class which checks for the matching command. The arguments of the input are passed to `TaskCommandsParser`
 class which will then check for the matching action word. In this case, the action word will be '-e' and the arguments will be
-passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` object. This command object is return to the
+passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` object. This command object is returned to the
 `LogicManager` class to be executed. The `EditTaskCommand` object will create a newly edited task with the edited details and
 set the edited task in place of the original task in the model. It also returns a `CommandResult` object that is returned
-to the `LogicManager` class.
+to the `LogicManager` class. The `AddressBookParser` class and `EditTaskCommandParser` class were not added in the below
+diagram for simplicity. 
 
 ![EditTask](images/EditTaskSequenceDiagram.png)
 
-### Implementation Rationale
+#### Implementation Rationale
 When a new task is created with the details input by the user, the uniqueId of the task also changes. This implies that
 the list of uniqueIds of tasks assigned to each student will have to be edited so store the newly created task in place of
 the original task. To tackle this issue, we created a new constructor for the `Task` class such that we can pass in the
 uniqueId of the original task so that the id is retained and does not change. This simplifies matters when it comes to
 assigning and unassigning tasks to the students.
 
-### Alternatives considered
+
+#### Alternatives Considered
 An alternative considered was to edit the list of uniqueIds of tasks assigned to each student after editing a particular
 task. However, this seemed inefficient and hence, we went with the current implementation.
 
@@ -337,20 +255,57 @@ task. However, this seemed inefficient and hence, we went with the current imple
 The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
 checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
 object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be
-executed. The `ViewPersonCommand` object gets the list of students via `Model#getfilteredPersonsList()`. It then obtains the
-target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying the details of the student in the 'Result Display'.
+executed. 
 
-#### Implementation rationale
+The `ViewPersonCommand` object gets the list of students via `ModelManager#getfilteredPersonsList()`. It then obtains the
+target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying 
+the details of the student in the 'Result Display'.
+
+The `ViewPersonCommand` calls the methods `ModelManager#setViewingType` and `ModelManager#setPersonToView` to modify the
+current UI of the application to display all details of a student in the Viewing Panel
+
+The `viewPersonCommandParser` class is not included in the sequence diagram below for simplicity.
+
+#### Implementation Rationale
 * `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands
   related to student.
 
-#### Alternatives considered
-View the student from the persons list itself as it also displays the students' details. This may not include other details
+#### Alternatives Considered
+View the student from the person panel itself as it also displays the students' details. This may not include other details
 relating to the student, such as the different `Task` object they have, and the `Group` they are in.
 
-The following sequence diagram shows how the view operation works.
+The following sequence diagram shows how the `view student` operation works.
 
 ![ViewDiagram](images/ViewStudentDiagram.png)
+
+### Changing View Panel
+
+On the right side of the GUI, there exists a panel with contents that change depending on the user's selected view. For example
+it can show the current schedule or more details of a person.
+
+#### Implementation
+
+![ViewTypeDiagram](images/ViewTypes.png)
+
+The UI listens to changes in the Model via an ObservableProperty within the ModelManager. It does this by
+registering a ChangeListener on initialisation.
+
+If a Viewing Panel should be updated when the Command executes, the Command will set the appropriate ViewingType within the Model.
+This will update the ObservableProperty that the UI is listening on, hence updating the UI with the correct ViewingType.
+
+The contents of the ViewingType are obtained through other Observables in the Model as well. These are updated independently
+of the ViewingType.
+
+#### Implementation Rationale
+
+This method of using a ChangeListener is in line with the overall architecture of the application, where the UI responds to any
+changes in the Model. This also removes the need for Model and Logic packages to be dependent on the UI.
+
+#### Alternatives Considered
+
+We had considered using CommandResult to inform the UI what the ViewingType should be, which the UI can obtain after executing
+the command. This works well, but could get complicated if we used the CommandResult for all sorts of feedback to the UI. Using
+event listeners was more convenient and allowed us to store less information in the CommandResult itself.
 
 ### Lessons
 
@@ -362,10 +317,10 @@ a `Subject` and a `Timeslot`, which describes a Lesson well.
 A `NoOverlapLessonList` contains a list of lessons, in which the lessons within must not overlap. Overlap is defined as falling on the
 same day and with timings that run within each other.
 
-`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular
+`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular for transporting lesson information around.
 
-The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use maintain knowledge of a
-lesson and its attendees. For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
+The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use lessons.
+For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
 a `LessonAssignable`.
 
 ![LessonDiagram](images/LessonDiagram.png)
@@ -377,7 +332,7 @@ is a useful wrapper class to obtain the full details of a lesson (the lesson det
 does not have a direct reference to its attendee.
 
 Lessons were created to be held by other classes, and thus does not hold information about its attendees. We acknowledge that a
-`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided let other classes be
+`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided to let other classes be
 in charge of knowing who _attends_ each `Lesson`.
 
 #### Alternatives considered
@@ -430,10 +385,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                           | So that I can…​                                                     |
 | -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new student                            |                                                                        |
+| `* * *`  | user                                       | add a new student                            | manage students I have that are not present in the app                 |
 | `* * *`  | user                                       | delete a student                             | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a student by name                       | locate details of persons without having to go through the entire list |
-| `* * *`  | user                                       | group students together                      | locate similar through their groupings easily                          |
+| `* * *`  | user                                       | group students together                      | locate similar students through their groupings easily                          |
 | `* * *`  | tutor                                      | add a new task                               | remember tasks I have created easily                                   |
 | `* * *`  | tutor                                      | assign tasks to students                     | reuse similar tasks for my students                                    |
 | `* * *`  | tutor                                      | mark tasks as completed                      | track my students' task progress                                       |
@@ -479,6 +434,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Adding a lesson**
+
+**MSS**
+1. User requests to list all students
+2. TutorMaster shows a list of students in the students list
+3. User requests to add a specific lesson to the student
+4. TutorMaster adds the lesson to the specific student
+5. TutorMaster displays the specific student in the viewing panel
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. <br>
+    Use case ends
+* 3a. The request details are incorrect or insufficient.<br>
+    * 3a1. TutorMaster displays an error message. <br>
+    Use case resumes at step 3.
+* 3b. The lesson overlaps with other lessons that the student has. <br>
+    * 3b1. TutorMaster displays an error message. <br>
+    Use case ends.
 
 **Use case: Delete a task**
 
@@ -574,29 +550,48 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Deleting a student
 
-### Deleting a person
+1. Deleting a student while all students are being shown
 
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+   1. Test case: `student -d 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+   1. Test case: `student -d 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `student -d`, `student -d x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Adding a lesson to a student
+
+1. Adding a lesson while all students are being shown
+    1. Prerequisites: List all students using the list command. Multiple students in the list.
+    1. Test case: `student -al 1 s/Biology st/23:00 et/23:59 d/Fri` <br>
+    Expected: Lesson is added to first student in the list. Student details are shown in the viewing panel on the right.
+    Lesson can be seen under "Lessons" in the viewing panel.
+    1. Test case: Repeat `student -al 1 s/Biology st/23:00 et/23:59 d/Fri` after previous test case. <br>
+    Expected: Lesson cannot be added to first student because it overlaps with the lesson from previous test case. Error
+    message is shown.
+    1. Test case: Use `student -al s/Biology st/23:00 et/23:59 d/Fri` <br>
+    Expected: Error message is shown as no index is specified.
+
+### Grouping students
+
+1. Adding students to a group while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. At least 2 students in the list.
+    1. Successful test case: `group -a 1 2 n/New Group` <br>
+    Expected: First two students are added into the group. Group details appear in the viewing panel on the right.
+    Using `student -v 1` and `student -v 2` shows that the group name __New Group__ shows up in the student view.
+    1. Test case: `group -a 1 2` <br>
+    Expected: No new group is created, error message is shown as there is no group name specified.
+    1. Test case: `group -a 0 1 n/New Group` <br>
+    Expected: No new group is created, error message is shown as the index __0__ is invalid.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Dealing with corrupted data files
+   1. Delete the `data` folder in the directory Tutor Master is in.
+   2. Navigate to the directory Tutor Master is in using Terminal and run `java -jar tutormaster.jar`.
+   Expected: Tutor Master UI contains initial sample data with no newly added data by user.

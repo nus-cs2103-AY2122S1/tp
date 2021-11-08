@@ -1,18 +1,23 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.task.Task;
@@ -33,7 +38,7 @@ public class PersonViewCard extends UiPart<Region> {
      */
 
     @FXML
-    private HBox cardPane;
+    private VBox cardPane;
     @FXML
     private Label name;
     @FXML
@@ -47,7 +52,15 @@ public class PersonViewCard extends UiPart<Region> {
     @FXML
     private VBox lessons;
     @FXML
+    private Label groupLessonsLabel;
+    @FXML
+    private VBox groupLessons;
+    @FXML
     private VBox tasks;
+    @FXML
+    private Label groupTasksLabel;
+    @FXML
+    private VBox groupTasks;
     @FXML
     private VBox exams;
     @FXML
@@ -77,9 +90,18 @@ public class PersonViewCard extends UiPart<Region> {
             return;
         }
 
+        updatePersonDetails(personWithDetails);
+        updateGroupRelatedItems(personWithDetails.getGroups());
+    }
+
+    /**
+     * Update all person related details
+     * @param personWithDetails to update
+     */
+    private void updatePersonDetails(PersonWithDetails personWithDetails) {
         Person person = personWithDetails.getPerson();
-        Set<Group> personGroups = personWithDetails.getGroups();
         Set<Task> personTasks = personWithDetails.getTasks();
+        Map<Task, Boolean> personTasksCompletion = personWithDetails.getTasksCompletion();
 
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
@@ -89,18 +111,61 @@ public class PersonViewCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        updateListingVBox(lessons, person.getLessons());
-        updateListingVBox(tasks, personTasks);
-        updateListingVBox(exams, person.getExams());
-        updateListingVBox(groups, personGroups);
+
+        // add person lessons
+        UiUtil.addIndexedLabels(lessons, person.getLessons().stream().map((lessons) ->
+                lessons.toString()).collect(Collectors.toList()), Optional.of("No lessons yet!"));
+
+        // add person tasks
+        UiUtil.addIndexedLabels(tasks, personTasks.stream().map(task -> {
+            Boolean isDone = personTasksCompletion.get(task);
+            assert !isDone.equals(null);
+            return task.toCompletionString(isDone);
+        }).collect(Collectors.toList()), Optional.of("No tasks yet!"));
+
+        // add person exams
+        UiUtil.addIndexedLabels(exams, person.getExams().stream().map(exam ->
+                exam.toString()).collect(Collectors.toList()), Optional.of("No exams yet!"));
     }
 
-    private void updateListingVBox(VBox toUpdate, Collection<? extends Object> objectsCollection) {
-        toUpdate.getChildren().clear();
-        int index = 1;
-        for (Object object : objectsCollection) {
-            toUpdate.getChildren().add(new Label(String.format("%d. %s", index, object)));
-            index++;
+    /**
+     * Update all group related details
+     * @param personGroups to update
+     */
+    private void updateGroupRelatedItems(Set<GroupWithDetails> personGroups) {
+        // create a list to hold the lesson details in groups that person belongs to
+        List<String> groupLessonsList = getDetailsWithGroupName(personGroups, groupWithDetails ->
+                groupWithDetails.getGroup().getLessons());
+        // create a list to hold the task details in groups that person belongs to
+        List<String> groupTasksList = getDetailsWithGroupName(personGroups, groupWithDetails ->
+                groupWithDetails.getTasks());
+
+        // remove the group lessons and tasks labels if is empty
+        groupLessonsLabel.setVisible(!groupLessonsList.isEmpty());
+        groupLessonsLabel.setManaged(!groupLessonsList.isEmpty());
+        groupTasksLabel.setVisible(!groupTasksList.isEmpty());
+        groupTasksLabel.setManaged(!groupTasksList.isEmpty());
+
+        // add group lessons, no empty message
+        UiUtil.addIndexedLabels(groupLessons, groupLessonsList, Optional.empty());
+
+        // add group tasks, no empty message
+        UiUtil.addIndexedLabels(groupTasks, groupTasksList, Optional.empty());
+
+        // add person group names
+        UiUtil.addIndexedLabels(groups, personGroups.stream().map(group ->
+                group.getGroup().getName().toString()).collect(Collectors.toList()), Optional.of("No groups yet!"));
+    }
+
+    private List<String> getDetailsWithGroupName(Set<GroupWithDetails> groups,
+            Function<GroupWithDetails, Collection<? extends Object>> function) {
+        List<String> list = new ArrayList<>();
+        for (GroupWithDetails groupWithDetails : groups) {
+            String groupName = groupWithDetails.getGroup().getNameInString();
+            for (Object obj : function.apply(groupWithDetails)) {
+                list.add(String.format("%s with group %s", obj, groupName));
+            }
         }
+        return list;
     }
 }

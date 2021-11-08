@@ -2,6 +2,7 @@ package seedu.address.logic.parser.tasks;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_GIVEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
@@ -28,13 +29,9 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DEADLINE);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (argMultimap.getPreamble().isEmpty() || !argMultimap.preambleHasExpectedSegments(1)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditTaskCommand.MESSAGE_USAGE), pe);
+                    EditTaskCommand.MESSAGE_USAGE));
         }
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
@@ -48,6 +45,15 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
+        }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
         return new EditTaskCommand(index, editTaskDescriptor);

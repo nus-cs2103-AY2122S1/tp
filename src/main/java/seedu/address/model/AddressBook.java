@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
@@ -223,24 +226,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public PersonWithDetails getPersonWithDetails(Person person) {
-        Set<Group> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds());
+        Set<GroupWithDetails> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds()).stream()
+                .map(this::getGroupWithDetails)
+                .collect(Collectors.toSet());
         Set<Task> tasksPersonHas = tasks.getFromUniqueIds(person.getAssignedTaskIds());
-        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas);
+        Map<Task, Boolean> tasksCompletion = new HashMap<>();
+        Map<UniqueId, Boolean> tasksCompletionId = person.getTasksCompletion();
+        tasksPersonHas.forEach(task -> {
+            UniqueId taskId = task.getId();
+            Boolean isDone = tasksCompletionId.get(taskId);
+            assert !isDone.equals(null);
+            tasksCompletion.put(task, isDone);
+        });
+        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas, tasksCompletion);
     }
 
     public GroupWithDetails getGroupWithDetails(Group group) {
         Set<Person> studentsInGroup = persons.getFromUniqueIds(group.getAssignedPersonIds());
-        return new GroupWithDetails(group, studentsInGroup);
+        Set<Task> tasksInGroup = tasks.getFromUniqueIds(group.getAssignedTaskIds());
+        return new GroupWithDetails(group, studentsInGroup, tasksInGroup);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons"
-                + tasks.asUnmodifiableObservableList().size() + " tasks"
+        return persons.asUnmodifiableObservableList().size() + " persons, "
+                + tasks.asUnmodifiableObservableList().size() + " tasks, "
                 + groups.asUnmodifiableObservableList().size() + " groups";
-        // TODO: refine later
     }
 
     @Override

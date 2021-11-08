@@ -15,6 +15,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -83,6 +84,8 @@ public class MarkTaskDoneStudentCommand extends Command {
         model.setPerson(personToEdit, newPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.setPersonToView(newPerson);
+        model.setViewingType(ViewingType.PERSON);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskAssigned.getDescription(), newPerson.getName()));
     }
