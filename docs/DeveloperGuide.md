@@ -441,21 +441,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a task at a certain date and time.
+1.  User requests to add a task at a certain date, time, priority level and tags.
 2.  Uni-Fy adds the task at the given date and time and displays success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User requests to add a task at a certain date without time.
+* 1a. User requests to add a task at a certain date, a priority level and tags but without time.
     * 1a1. Uni-Fy adds the task at the given date and time of 23:59 and displays success message
 
       Use case ends.
-* 1b. User enters invalid date format.
-  * 1b1. Uni-Fy shows an error message.
+* 1b. User requests to add a task without a priority level.
+  * 1b1. Uni-Fy adds the task at the given date, time and tags with the default priority level LOW.
+
+    Use case ends.
+* 1c. User enters invalid date format.
+  * 1c1. Uni-Fy shows an error message.
 
     Use case resumes at step 1.
+
 
 
 **Use case: UC02 - Tag a task**
