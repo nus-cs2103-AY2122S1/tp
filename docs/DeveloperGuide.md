@@ -294,12 +294,68 @@ After the `LogicManager` receives the new `EmaddCommand` object, `EmaddCommand` 
 <img src="images/EmaddExecutionSequenceDiagram.png" width = "600" />
 
 ### Add event to Event List
+This feature allows the user to add an event with a name, date and the participating members if any. Members to be
+included have their `MEMBER_INDEX` displayed in the currently shown member list.
 
-[comment]: <> (TODO: SAMUEL)
+This feature can be accessed by using `eadd` command with parameters of
+* `/n NAME`: the name of the event to add
+* `/d DATE`: the date of the event to add
+* zero to multiple uses of `/m MEMBER_INDEX`: target member identified by the index displayed in the currently shown member list
+
+Given below is the sequence diagram when a user provides a valid `eadd` command: `eadd /n Chess Competition /d 11/12/2022 /m 1 /m 2`
+to add a new event with its name, date and the first and second member displayed in the currently shown member list as 
+the members for this event.
+
+<img src="images/event/EventAddSequenceDiagram.png" width="600" />
+
+As seen in the diagram above, once the user entered the `eadd` command,
+the `Logic` component will parse the parameters, creating an `EaddCommandParser`. This parser will proceed to 
+create an `Event` object based on the parameters and a `EaddCommand` object afterwards.
+
+The diagram below shows the execution of `EaddCommand` after `LogicManager` receives the `EaddCommand` object. 
+
+<img src="images/event/EventAddExecutionSequenceDiagram.png" width = "600" />
+
+As seen in the diagram above,
+1. `LogicManager` will call the `execute` method of `EaddCommand`.
+2. `EaddCommand` will call `Model#getFilteredMemberList` to get the last shown member list.
+3. `EaddCommand` will call `Model#addParticipants(membersToBeAdded)` to add the members indicated in the parameters to the event.
+4. `EaddCommand` will call `Model#hasEvent(event)`, throwing an error if the model already has that event.
+5. If not,`EaddCommand` will call `Model#addEvent(event)` to add that event to the model.
+6. `EaddCommand` will then create a `CommandResult` object and return it to `LogicManager`.
+
 
 ### Mark event members as attended
+This feature allows the user to mark members of the event as attended. Include which members to mark based on
+`MEMBER_INDEX` displayed in the currently shown member list. Only valid members belonging to the event will be able to be marked,
+with an error being thrown if there is an invalid member. It is recommended to filter the member list to those of the
+event involved in the command through the `mlist \e EVENT_INDEX` command.
 
-[comment]: <> (TODO: SAMUEL)
+This feature can be accessed by using `emark` command with parameters of
+* `/e EVENT_INDEX`: target event identified by the index displayed in the currently shown event list
+* multiple uses of `/m MEMBER_INDEX`: target member identified by the index displayed in the currently shown member list
+
+Given below is the sequence diagram when a user provides a valid `emark` command: `emark /e 1 /m 2 /m 4`
+to mark the two members provided as having attended the event. It is shown in the GUI with their member labels in the
+designated event card shown as green.
+
+<img src="images/event/EventMarkSequenceDiagram.png" width="600" />
+
+As seen in the diagram above, once the user entered the `emark` command,
+the `Logic` component will parse the parameters, creating an `EmarkCommandParser`. This parser will proceed to
+create an `EmarkCommand` object afterwards.
+
+The diagram below shows the execution of `EmarkCommand` after `LogicManager` receives the `EmarkCommand` object.
+
+<img src="images/event/EventMarkExecutionSequenceDiagram.png" width = "600" />
+
+As seen in the diagram above,
+1. `LogicManager` will call the `execute` method of `EmarkCommand`.
+2. `EmarkCommand` will call `Model#getFilteredEventList` to get the last shown event list.
+2. `EmarkCommand` will call `Model#getFilteredMemberList` to get the last shown member list.
+5. If not,`EmarkCommand` will call `Event#markAttendance(members)` for the selected event to mark the members.
+6. `EmarkCommand` will then create a `CommandResult` object and return it to `LogicManager`.
+
 
 ### Task add command: `tadd`
 This feature allows Ailurus users to add a new task for multiple members identified by their `MEMBER_INDEX` displayed in the currently shown member list.

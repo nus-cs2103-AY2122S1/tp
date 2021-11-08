@@ -12,7 +12,7 @@ participant "model:Model" as Model MODEL_COLOR
 participant ":Task" as Task MODEL_COLOR
 end box
 
-LogicManager -> TdoneCommand : execute(:Model)
+LogicManager -> TdoneCommand : execute(model)
 activate TdoneCommand
 
 TdoneCommand -> Model : getFilteredTaskList()
