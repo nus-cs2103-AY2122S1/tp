@@ -192,33 +192,27 @@ When storing references of `HasUniqueId`, we can simply store their id, instead 
 
 #### Implementation
 
-Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task`
-object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object
-and the `Task` object.
+Task assignment to each student and group is facilitated through the `UniqueId` class. Each `Person` object, `Task`
+object and `Group` object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in the `Person` object and `Group` object.
 
 ![TaskAssignment](images/TaskAssignmentDiagram.png)
 
 The implementation currently supports two task commands:
-- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object,
-and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stored in the `Task` object
-- `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
-and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
+- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object.
+- `AssignTaskToGroupCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Group` object.
+- `UnassignTaskFromPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object.
+- `UnassignTaskFromGroupCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Group` object.
 
 #### Implementation Rationale
 
-- `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects that are assigned to one another.
-- Storing assignments as a set in each `Person` and `Task` makes it easy to display and retrieve all assigned tasks for each `Person`
-and all assigned `Person` for each `Task`. It also makes implementation relatively simple, without having to use external lists.
+- `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects.
+- Storing assignments as a set in each `Person` and `Group` makes it easy to display and retrieve all assigned tasks for each `Person` or `Group`. 
+It also makes implementation relatively simple, without having to use external lists.
 
 #### Alternatives considered
 
 Storing assignments as a separate set in the `AddressBook`. This may complicate command execution as the command needs to retrieve the
 entire set from the `AddressBook` and look up the persons and tasks in the set.
-
-#### \[Proposed\] Future implementation
-
-- Adds support for group assignment using similar assignment methods. Automatically assign task to all students in the group
-- Replace the set of `UniqueId`s with a set of `TaskCompletion` objects in order to track which student has done which task
 
 ### Edit a task
 
