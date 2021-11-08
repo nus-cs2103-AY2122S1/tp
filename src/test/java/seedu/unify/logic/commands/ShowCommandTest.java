@@ -1,16 +1,16 @@
 package seedu.unify.logic.commands;
 
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_ASSIGNMENT;
+import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.UserPrefs;
 import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Task;
-
-import static seedu.unify.logic.commands.CommandTestUtil.*;
-import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 public class ShowCommandTest {
 
