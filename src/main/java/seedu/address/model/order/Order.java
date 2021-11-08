@@ -24,10 +24,15 @@ public class Order implements Comparable<Order> {
         this.date = date;
         this.amount = amount;
         this.label = label;
-        this.id = Order.count;
         this.isComplete = false;
+    }
 
-        Order.count++;
+    /**
+     * Confirms the id when the application is sure the order is valid.
+     */
+    public void confirmId() {
+        this.id = count;
+        count++;
     }
 
     public boolean getIsComplete() {
@@ -35,7 +40,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Mark an order as completed by setting isComplete to true.
+     * Marks an order as completed by setting isComplete to true.
      * @return boolean indicating whether isComplete has been changed or not.
      */
     public boolean markCompleted() {
