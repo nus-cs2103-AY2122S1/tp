@@ -528,16 +528,17 @@ Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the us
 #### Design considerations
 **Aspect: Data Structures to support lesson operations**
 
-* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
+* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a private field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
   - Pros:
     - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
   - Cons:
-    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
+    - Each `Person` object has its own set of `Tag` objects which may be repetitive and memory-consuming if there were multiple duplicate tags with the same tag name.
     - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
 
 * **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
   - Pros:
-    - Faster retrieval of the number of persons under each tag.
+    - Does not require additional data structure for storing the number of persons labelled with a certain tag.
+    - Direct retrieval of the number of persons under each tag.
   - Cons:
     - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
     - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
