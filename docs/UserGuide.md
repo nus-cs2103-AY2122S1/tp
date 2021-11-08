@@ -21,6 +21,8 @@ Key features of Notor are:
 * Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
+
 ### Using this User Guide
 
 If you're new to Notor, hop over to [Quick Start](#quick-start) to install and begin using it. If you already know what you want, use the Table of Contents to find the feature you are looking for, or the [Command Summary](#command-summary) to view all commands available. 
@@ -35,7 +37,7 @@ Some terminology that might help:
 
 Pay attention to these callouts:
 <div markdown="block" class="alert alert-info">
-This block is used to highlight information you should pay attention to
+This block is used to highlight information you should pay attention to.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
@@ -47,6 +49,7 @@ Used to highlight dangers.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 <a name = "quick-start"></a>
 ## Quick Start
@@ -77,6 +80,8 @@ Some example commands you can try sequentially to get familiarise with Notor:
 
 Refer to the [Features](#features) below for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 <a name = "features"></a>
@@ -102,6 +107,8 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <a name = "general"></a>
 ### General Commands
 
@@ -122,7 +129,7 @@ Format: `help`
 Clears all entries from Notor. 
 
 Format: `clear`
-* Take care not to confuse this command with the more specific`/clearnote` command.
+* Take care not to confuse this command with the more specific `/clearnote` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Data will be deleted and **will not be saved**. The intended use of this
@@ -142,6 +149,8 @@ Exports all the data of Notor into a CSV file. The exported CSV will be located 
 
 Format: `export`
 
+<div style="page-break-after: always;"></div>
+
 <a name = "person-command"></a>
 ### Working with people
 The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
@@ -157,7 +166,7 @@ Creates a person.
 Format: `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`<br>
 Advanced user Format: `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
 
-* Creates a person with the `NAME`.
+* Creates a person with the `NAME`. This name cannot start with a number.
 * Optional arguments:
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
@@ -182,6 +191,8 @@ Examples:
 * `person 1 /add g:Orbital`
 * `p 2 /a g:Orbital`
 
+<div style="page-break-after: always;"></div>
+
 #### _Adding a person to a subgroup_
 
 Adds a person at the given index `INDEX` to a specified subgroup.
@@ -192,6 +203,8 @@ Advanced user Format: `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
 Examples:
 * `person 1 /add g:Orbital sg:Artemis`
 * `p 2 /a g:Orbital sg:Artemis`
+
+<div style="page-break-after: always;"></div>
 
 #### _Deleting a person_
 
@@ -239,6 +252,8 @@ Examples:
 * `person 1 /remove g:Orbital`
 * `p 2 /r g:Orbital`
 
+<div style="page-break-after: always;"></div>
+
 #### _Removing a person from subgroup_
 
 Removes an existing person from a subgroup.
@@ -275,6 +290,8 @@ Examples:
 
 * `person 1 /clearnote`
 * `p 2 /cn`
+
+<div style="page-break-after: always;"></div>
 
 #### _Tagging a person_
 
@@ -315,6 +332,7 @@ Advanced user Format: `p (INDEX) /ct`
 * Tags the person with specified `INDEX` with `TAG1, TAG2, ...`.
 * Please specify at least one tag to be added.
 
+<div style="page-break-after: always;"></div>
 
 <a name = "archiving-people"></a>
 ### Archiving People
@@ -352,6 +370,8 @@ Advanced user Format:`p (INDEX) /uar`
 You must be on the list of archived persons in order to use this command, as it needs the index of the person to unarchive.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <a name = "group-command"></a>
 
 ### Working with groups/subgroups
@@ -359,12 +379,15 @@ You can also create a group to organize people based on their common traits. In 
 of a group to organize people based on a more specific category. 
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-You can sort your contacts in Notor by the group that they are in, as well as taking general notes on the group. A few ideas on how you can use groups are:
+You can sort your contacts in Notor by the group that they are in, as well as taking general notes on the group. <br>
+A few ideas on how you can use groups are:<br>
 
-* Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts
-* Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest
-* Group mentees who you need to achieve certain checkpoints with. For example, if in your job as a mentor you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.
-
+<ul>
+  <li>Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts</li>
+  <li>Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest</li>
+  <li>Group mentees who you need to achieve certain checkpoints with. For example, if in your job as a mentor
+    you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.</li>
+</ul>
 </div>
 
 #### _Creating a group_
@@ -378,7 +401,7 @@ Creating a group command works no matter what list is in the List Pane. **Howeve
 Format: `group (GROUP_NAME) /create`<br>
 Advanced user Format: `g (GROUP_NAME) /c`
 
-* Creates a new group with the name `GROUP_NAME`.
+* Creates a new group with the name `GROUP_NAME`. This name cannot start with a number, and may contain `-` or `.` characters
 * The new group must not have a same name with other existing groups.
 
 Examples:
@@ -386,6 +409,8 @@ Examples:
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
   ![groupCreate](images/groupCreate.png)
+
+<div style="page-break-after: always;"></div>
 
 #### _Deleting a group_
 
@@ -409,22 +434,21 @@ This command only works when groups are listed in the list pane, and not when su
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
 Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
-å
-* Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
-* The new subgroup must not have the same name as other existing subgroups in the same group.
-* The new subgroup's name must not include any backslash (`/`) or underscore (`_`).
 
->>>>>>> master
+* Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
+* This name cannot start with a number, and may contain `-` or `.` characters
+* The new subgroup must not have the same name as other existing subgroups in the same group.
 
 Examples :
 
 * `group 1 /create n:Artemis` will create a new subgroup Artemis in group at index 1.
 * `g 1 /create n:Artemis`
 
+<div style="page-break-after: always;"></div>
 
 #### _Adding notes to a group or subgroup_
 
-* Pops up a note window to add note to group or subgroup.
+Pops up a note window to add note to group or subgroup.
 
 Format: `group (INDEX) /note`<br>
 Advanced user Format: `group (INDEX) /n`
@@ -451,6 +475,8 @@ Examples:
 
 * `group 1 /clearnote`
 * `g 2 /cn`
+
+<div style="page-break-after: always;"></div>
 
 ## Filtering with Notor
 
@@ -493,6 +519,8 @@ Examples:
 * `person 1 /list`
 * `p 2 /l`
 
+<div style="page-break-after: always;"></div>
+
 #### _Listing all subgroups in a group_
 
 Lists all the subgroups within a group.
@@ -520,6 +548,8 @@ Advanced user Format: `p /lar`
 
 ![archivedList](images/archivePersonList.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Find
 
 Find allows you to obtain the results that match with the keyword specified. You can filter in this way on people, groups, and subgroups. In addition, you may add additional parameters to your search, in order to narrow the search further.
@@ -544,6 +574,8 @@ Examples:
 
 ![personFind](images/personFind.png)
 
+<div style="page-break-after: always;"></div>
+
 #### _Finding groups or subgroups_
 
 Finds all the groups with the keyword specified. This will search for the keyword within the group's name.
@@ -561,6 +593,7 @@ Examples of finding group:
 * `g /f n:GroupA`
 * `group /f n:Test`
 
+
 ## Miscellaneous information
 
 ### Saving the data
@@ -569,7 +602,7 @@ Notor data are saved in the hard disk automatically after any command that chang
 
 ### Editing the data file
 
-Notor data are saved as a JSON file `[JAR file location]/data/notor.json`. Advanced users are welcome to update data
+Notor data are saved as a JSON file at Notor's Directory. Advanced users are welcome to update data
 directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
@@ -577,6 +610,7 @@ If your changes to the data file makes its format invalid, Notor will discard al
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 <a name = "tips-on-using-notor"></a>
 ## Tips on Using Notor
@@ -605,12 +639,14 @@ Shortcut Key            | Linux/Window                                   | MacOS
 - Example: `Fri., Oct. 22 2021 00:07`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <a name = "command-summary"></a>
 
 ## Command Summary
 <div markdown="block" class="alert alert-info">
-Round brackets `()` refer to COMPULSORY arguments.
-Square brackets `[]` refer to optional arguments.<p>
+Round brackets `()` refer to COMPULSORY arguments. <br>
+Square brackets `[]` refer to optional arguments.
 </div>
 
 ### Person
@@ -642,19 +678,22 @@ Action                    | Format                                              
 
 <div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b>
 <ul>
-<li>For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
-  the card.</li>
+  <li>For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
+    the card.
+  </li>
 </ul>
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-<ul>
-<li> For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, please use the <b>List</b> command to make sure the <code>Group</code> you want to
-  use the command on is displayed before using them via <code>GROUP_INDEX</code>.</li>
-<li> For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> command to list out all the subgroups in a Group you want to view,
-  then list out the persons inside that subgroup by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out. </li>
-</ul>
+  <ul>
+    <li> For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, please use the <b>List</b> command to make sure the <code>Group</code> you want to
+      use the command on is displayed before using them via <code>GROUP_INDEX</code>.</li>
+    <li> For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> command to list out all the subgroups in a Group you want to view,
+      then list out the persons inside that subgroup by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out. </li>
+  </ul>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Group
 Refer to the details of the group commands [here](#group-command).
@@ -677,6 +716,9 @@ Before using the group actions, remember to use <code>g /list</code> or <code>g 
 for the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, depending on what is in the list display.
 Change the <code>person /list</code> or <code>group /list</code>.
 </div>
+
+
+<div style="page-break-after: always;"></div>
 
 ### General
 Refer to the details of the general commands [here](#general).
