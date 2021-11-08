@@ -253,7 +253,6 @@ public class Notor implements ReadOnlyNotor {
      * Gets SuperGroup based on group name.
      */
     public SuperGroup findSuperGroup(String name) {
-        // TODO: Change this method when UniqueList is updated.
         for (SuperGroup superGroup : superGroups) {
             if (superGroup.getName().equals(name)) {
                 return superGroup;
@@ -266,7 +265,6 @@ public class Notor implements ReadOnlyNotor {
      * Returns true if SuperGroup exists.
      */
     public boolean hasSuperGroup(SuperGroup superGroup) {
-        // TODO: Change this method when UniqueList is updated.
         requireNonNull(superGroup);
         return superGroups.contains(superGroup);
     }

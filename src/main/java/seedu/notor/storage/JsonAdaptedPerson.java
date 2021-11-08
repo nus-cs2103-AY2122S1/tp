@@ -14,7 +14,6 @@ import seedu.notor.commons.exceptions.IllegalValueException;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
@@ -119,7 +118,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
         }
 
-        if (!subGroups.stream().allMatch(SubGroup::isValidGroupName)) {
+        if (!subGroups.stream().allMatch(Person::isValidDisplaySubGroup)) {
             throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
         }
 

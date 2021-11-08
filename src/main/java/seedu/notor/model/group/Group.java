@@ -111,8 +111,7 @@ public abstract class Group implements Notable {
      * Returns true if a given string is a valid group name.
      */
     public static boolean isValidGroupName(String test) {
-        // TODO: Check if this is the only condition.
-        return !test.matches(".*[:/].*") && !test.isEmpty();
+        return Name.isValidName(test);
     }
 
     public void addPerson(Person p) {
