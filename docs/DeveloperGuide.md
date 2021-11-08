@@ -674,16 +674,42 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample residents. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a resident
+
+1. Adding a resident and their information into the app
+
+   1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`
+   Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. 
+    Success message is shown.
+
+2. Adding a duplicate resident with the same name or same room
+
+   1. Prerequisites: A resident with the same name `Tommy` or room `A123` is already in the app.
+
+   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020` 
+   Expected: Error message shown, `This resident or room already exists in the address book`
+   
+   3. Test case: `add n/Tom r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`
+   Expected: Error message shown, `This resident or room already exists in the address book`
+   
+3. Adding a resident with invalid parameters
+
+   1. Test case: `add n/Tom! r/A201 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`
+   Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
+
+   2. Test case: `add n/Tom r/A201 p/87654321 e/tom@gmail.com v/true f/SOC fd/10-10-2020 cd/20-10-2020`
+   Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
 
 ### Viewing a resident
 
@@ -691,15 +717,35 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: NIL
 
-    1. Test case: `view`<br>
+    2. Test case: `view`<br>
        Expected: A list of all the residents is displayed in the app's GUI
 
-    1. Test case: `view 3`<br>
+    3. Test case: `view 3`<br>
        Expected: The details of the resident at index 3 (meaning the 3rd resident in the list when `view` without the 
        index parameter is called) of the address book are displayed in the GUI.
 
-    1. Other incorrect delete commands to try: `view 0`, `view x` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `view 0`, `view x` (where x is larger than the list size)<br>
        Expected: Error message shown
+
+### Listing residents by FET/Collection Deadlines
+1. Listing residents' deadline with normal keyword and valid dates
+    1. Prerequisites: There are residents whose FET deadline lies between the 2 gates given
+    2. Test case: `deadline k/f d1/10-10-2021 d2/15-10-2021`<br>
+       Expected: Residents whose FET deadline lies between these 2 dates are listed.
+
+
+2. Listing residents' deadline with late keyword and valid dates
+    1. Prerequisites: There are residents whose FET deadline is due before the given date
+    2. Test case: `deadline k/lf d1/10-10-2021`<br>
+       Expected: Residents whose FET is due before the given date is listed.
+
+3. Listing residents' deadline with invalid parameters
+    1. Test case: `deadline k/f d1/10-10-2021`<br>
+       Expected: The result box will indicate that the given command format is invalid.
+
+    2. Test case: `deadline k/f d1/12-10-2021 d2/10-10-2021`<br>
+       Expected: The result box will indicate that the second date is earlier than the first.
+
 
 ### Editing residents
 
@@ -732,6 +778,53 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Sorting residents
+
+1. Sorting the list of residents by valid fields and order
+
+   1. Test case: `sort by/n o/a`
+   Expected: List of residents are sorted by their names in the alphabetical order.
+
+2. Sorting the list of residents by invalid fields or order
+
+   1. Test case: `sort by/z o/a`
+    Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
+
+   2. Test case: `sort by/n o/z`
+   Expected: Error message shown, `ORDER should be one of the following: a, d`
+   
+### Exporting residents' emails
+
+1. Export email addresses of list of residents
+
+   1. Test case: `export testEmailExport`
+   Expected: Csv file filled with column of email addresses of the residents displayed in the app.
+   
+2. Duplicate filename provided
+
+   1. Prerequisites: csv file `testDuplicateExport.csv` is already in existing `/data/exports` directory
+   2. Test case: `export testDuplicateExport`
+   Expected: Error message shown, `This filename already exists`
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+For all Event commands, ensure that you are on the Events tab before continuing.
+</div>
+
+
+### Viewing an event
+
+1. View a list of all the events in the app, or the information of a specific event
+
+    1. Test case: `view`
+    Expected: A list of all the events is displayed in the app's GUI
+
+    2. Test case: `view 3`
+    Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
+       
+2. Invalid indexes provided
+   1. Test case: `view x` (where x is larger than the list size)
+   Expected: Error message shown, `The event index provided is invalid`
 
 ### Finding an event
 
@@ -770,42 +863,30 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all events using the `view` command (without any parameters). Multiple events in the list.
 
-    1. Test case: `delete 3`<br>
+    2. Test case: `delete 3`<br>
        Expected: The third event is deleted from the list. Details of the deleted event shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No event is deleted. Error details shown.
 
-    1. Other incorrect delete commands to try: `delete -1`, `delete x` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete -1`, `delete x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Switch between tabs
+### Sorting events
 
-1. Switch between the event and resident tabs
+1. Sorting the list of events by valid fields and order
 
-    1. Prerequisites: NIL
+    1. Test case: `sort by/n o/a`
+       Expected: List of events are sorted by their names in the alphabetical order.
 
-    1. Test case: `switch`<br> when the user is at the Event tab
-       Expected: The GUI switches from displaying the Event tab to the Resident tab
+2. Sorting the list of events by invalid fields or order
 
-### Listing residents by FET/Collection Deadlines
-1. Listing residents' deadline with normal keyword and valid dates
-    1. Prerequisites: There are residents whose FET deadline lies between the 2 gates given
-    2. Test case: `deadline k/f d1/10-10-2021 d2/15-10-2021`<br>
-       Expected: Residents whose FET deadline lies between these 2 dates are listed.
-       
+    1. Test case: `sort by/z o/a`
+       Expected: Error message shown, `FIELD should be one of the following: n, d, c, v`
 
-2. Listing residents' deadline with late keyword and valid dates
-    1. Prerequisites: There are residents whose FET deadline is due before the given date
-    2. Test case: `deadline k/lf d1/10-10-2021`<br>
-       Expected: Residents whose FET is due before the given date is listed.
-
-3. Listing residents' deadline with invalid parameters
-    1. Test case: `deadline k/f d1/10-10-2021`<br>
-       Expected: The result box will indicate that the given command format is invalid.
-       
-    2. Test case: `deadline k/f d1/12-10-2021 d2/10-10-2021`<br>
-       Expected: The result box will indicate that the second date is earlier than the first.
+    2. Test case: `sort by/n o/z`
+       Expected: Error message shown, `ORDER should be one of the following: a, d`
+    
 
 ### Adding residents to an Event
 1. Add a single valid resident by name to a valid Event
@@ -908,6 +989,16 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `exclude 1 r/A101`<br>
        Expected: The given resident is not removed from the event. The result box will show that no residents with the
        given information could be found.
+
+### Switch between tabs
+
+1. Switch between the event and resident tabs
+
+    1. Prerequisites: NIL
+
+    1. Test case: `switch`<br> when the user is at the Event tab
+       Expected: The GUI switches from displaying the Event tab to the Resident tab
+
 
 ### Saving data
 
