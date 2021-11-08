@@ -22,7 +22,7 @@ Given below are my contributions to the project.
     * What it does: allows the user to list all games stored in gitGud, with the ability to optionally filter by `GAME_ID` containing any of the given keywords.
     * Justification: This feature improves the product significantly because a user can easily view all games they have and apply any filters to easily find specific games.
   * Added the schedule friend's availability command.
-    * What it does: allows the user store the schedule of their friend, to record when they are free to play or busy during the week.
+    * What it does: allows the user to store the schedule of their friend, to record when they are free to play or busy during the week.
     * Challenge: This feature required creating of the `Schedule` and `Day` fields, so the logic (command, parser), model (schedule, day, util for to handle time conversion) and storage (Serialization/Deserialization of new fields into/out of JSON) packages all had to be updated to support the feature.
     * Justification: This feature improves the product significantly because a user can easily save the schedule of their friend and not have to manually remember when they are free or busy.
   * Added the UI to display schedule of friend when friend get command is input.
@@ -46,7 +46,7 @@ Given below are my contributions to the project.
     * Added user story `list` feature.
     * Updated the logic component section of the Developer Guide to follow gitGud's implementation.
     * Added implementation section of `friend --schedule` feature.
-    * Added use cases for all existing features Updated existing use cases for all implemented features to be consistent
+    * Added use cases for all newly implemented features.
   
 * **Contributions to team-based tasks**:
   * Refactored the parser to support new syntax of commands for games and friends each having their own CRUD commands using the flag system.

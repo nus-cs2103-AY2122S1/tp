@@ -78,9 +78,9 @@ This table describes the main symbols used in the user guide and their respectiv
 e.g. typing `help` and pressing `Enter` will open the help window.<br>
    Here are some example commands you can try:
 
-   * `friend --add Draco -n Marcus` : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
+   * `friend --add Draco -n Marcus` : Adds a friend `Marcus` with gitGud `FRIEND_ID` of `Draco` to the application.
 
-   * `friend --delete Draco` : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
+   * `friend --delete Draco` : Deletes friend with gitGud `FRIEND_ID` of `Draco`.
 
    * `exit` : Exits the app.
    
@@ -173,7 +173,7 @@ Examples:
 
 Updates the friend's name to a new name for an existing friend with the given `FRIEND_ID`. 
 
-Format: `friend --edit FRIEND_ID -n NEW_NAME`
+Format: `friend --edit FRIEND_ID -n NEW_FRIEND_NAME`
 
 Command constraints: 
 * The `FRIEND_ID` used must currently exist in the friends list.
@@ -564,7 +564,7 @@ Game Identifier | A unique identifier you assign to a game to refer to that spec
 Action | Format, Examples
 --------|------------------
 **Add friend** | `friend --add FRIEND_ID [-n NAME]` <br> e.g., `friend --add Draco -n Marcus Tang`
-**Edit friend**| `friend --edit FRIEND_ID -n NEW_NAME` <br> e.g., `friend --edit Draco -n Kevin` 
+**Edit friend**| `friend --edit FRIEND_ID -n NEW_FRIEND_NAME` <br> e.g., `friend --edit Draco -n Kevin` 
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
 **Link game and friend** | `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`<br> e.g., `friend --link Draco -g Valorant -u taufiq007`
 **Unlink game and friend** | `friend --unlink FRIEND_ID -g GAME_ID` <br> e.g., `friend --unlink Draco -g DOTA`

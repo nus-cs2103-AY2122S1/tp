@@ -17,7 +17,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kevin9foong.md)]
 
 * Role: Team Lead, Deadlines & Delivery
-* Responsibilities: In charge of the `add`, `edit` and `recommend` features and the Storage component. 
+* Responsibilities: In charge of the `add`, `edit` and `recommend` features and the Storage component.
 
 ### Marcus Tang Xin Kye
 
@@ -27,7 +27,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/marcustxk.md)]
 
 * Role: Integration, Code Quality
-* Responsibilities: In charge of `list` feature, `schedule` feature and Logic component.
+* Responsibilities: In charge of `list` feature and schedule feature.
 
 ### Taufiq Bin Abdul Rahman
 
