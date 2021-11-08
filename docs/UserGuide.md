@@ -8,7 +8,7 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Introduction 
+## Introduction
 
 TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
@@ -17,7 +17,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 1. Install Tutor Master by following the instructions in the [Installation Guide](#installation-guide).
 2. Get familiar with the various components of the app by referring to the [User Interface Guide](#user-interface-ui-of-tutor-master).
 3. If you are a new user, you can follow our guide in [Quick Start](#quick-start) to familiarise yourself with the app.
-4. If you are familiar with the app, you can refer to the [Features](#features) section to see details of all commands or 
+4. If you are familiar with the app, you can refer to the [Features](#features) section to see details of all commands or
     look at [Command Summary](#command-summary) to see all commands easily.
 5. Refer to our [FAQ](#faq) if you have any questions.
 
@@ -45,16 +45,16 @@ The UI consists of a:
 * Result Display - Displays result of executed command
 * Person Panel - Displays all added persons
 * Task Panel - Displays all added tasks
-* Group Panel - Displays all added groups 
+* Group Panel - Displays all added groups
 * Viewing Panel - Displays either the schedule, group or person to be viewed
 
 ## Quick Start
 
 Now that you have installed Tutor Master, let us give it a try!
 
-Let us 
-* Create a student named "David" 
-* Add him to a group named "CS2103T" 
+Let us
+* Create a student named "David"
+* Add him to a group named "CS2103T"
 * Add and assign a task named "CS2103T Project" to "David".
 
 We shall type commands in the Command Panel and hit `Enter` to execute it.
@@ -76,13 +76,13 @@ Let's try adding a student with the following details:
    * You will now be able to see __David__ at the entry in the Person Panel on the left,
    as shown in the image below.
    ![Add David](images/imagesInUG/student-addDavid.png)
-     
+
 2. Now lets try editing his address. Note the index number beside his name in the person panel, in this case it is 4.<br>
    Type the following command `student -e 4 a/Kent Ridge` and hit `Enter`.
    * This updates the address of David, who is at index __4__ to "Kent Ridge".
    * Note that the other details are unchanged, you can choose which fields you want to edit.
 <br><br>
-     
+
 3. You can add a lesson to David. Let's assign a __Math__ lesson from __10:00__ to __12:00__ on __Friday__. <br>
    Type the following command `student -al 4 s/Math st/10:00 et/12:00 d/Fri` and hit `Enter`.
    * This adds a lesson to David with the given details.
@@ -102,7 +102,7 @@ Let us now add "David" to a group named "CS2103T".
     * "CS2103T" is now added to the Group Panel. It has an `INDEX` of 3 in the Group Panel.
     * This group currently has "David" inside
       ![Add David To Group](images/imagesInUG/group-addDavidInGroup.png)
-      
+
 2. Type `group -v 3` in the "Command Panel" and hit `Enter`.
     * This displays the details of the group at `INDEX` 3 in the Viewing Panel.
 

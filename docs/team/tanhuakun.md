@@ -15,7 +15,7 @@ It is CLI oriented and is made for those who are good with typing.
 ### What I have contributed:
 
 View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=tanhuakun&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=tanhuakun&tabRepo=AY2122S1-CS2103T-W16-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
- 
+
 * #### Features
     * Logic
         * Created Parsers and Commands to deal with lessons and exams.
@@ -35,7 +35,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
             * [Implemented this interface](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/id/UniqueIdMapper.java) and its method for retrieving HasUniqueId objects when given UniqueIds.
     * Storage
         * Enabled storage for Lessons and Exams. Basically [JsonAdaptedLesson](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedLesson.java),
-          [JsonAdaptedExam](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedExam.java) 
+          [JsonAdaptedExam](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedExam.java)
           and [JsonAdaptedTimeslot](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedTimeslot.java).
     * UI
         * Viewing Panel
@@ -65,7 +65,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
     * Storage
         * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest
     * Modified existing test cases such as JsonAdaptedPerson and Person when implementing features.
-    
+
 
 ### Other contributions:
 * #### Team Tasks:
