@@ -30,7 +30,7 @@ public class PopupManager {
     /**
      * Displays a popup message at the top-center with respect to the primaryStage.
      *
-     * @param Message to be displayed in the popup object on the primaryStage.
+     * @param message to be displayed in the popup object on the primaryStage.
      */
     public void displayPopup(String message) {
         // We should not display an empty popup
