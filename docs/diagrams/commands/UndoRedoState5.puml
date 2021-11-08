@@ -3,12 +3,12 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "clear"
+title After command "purge"
 
 package States <<rectangle>> {
     class State1 as "__pe0:ProgrammerError__"
     class State2 as "__pe1:ProgrammerError__"
-    class State3 as "__pe2:ProgrammerError__"
+    class State3 as "__pe3:ProgrammerError__"
 }
 
 State1 -[hidden]right-> State2

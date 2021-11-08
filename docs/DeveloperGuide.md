@@ -57,7 +57,7 @@ title: Developer Guide
 
 ## <a name="Acknowledgements"></a> **1. Acknowledgements**
 
-ProgrammerError makes use of the following third-party libraries:
+ProgrammerError(PE) makes use of the following third-party libraries:
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson)
   , [JSON In Java](https://mvnrepository.com/artifact/org.json/json), [opencsv](http://opencsv.sourceforge.net/)
@@ -74,9 +74,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## <a name="Glossary"></a> **3. Glossary**
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
-- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
-- **TA**: A CS2100 teaching assistant
+- **Student ID**: NUS student matriculation number (AXXXXXXXY)
+- **Email**: NUS student email (eXXXXXXX@u.nus.edu)
+- **TA**: CS2100 lab teaching assistant
 - **PE**: ProgrammerError
 - **CSV**: Comma-Separated Values
 
@@ -93,8 +93,11 @@ the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diag
 ### <a name="Architecture"></a> **4.1 Architecture**
 
 <img src="images/ArchitectureDiagram.png" width="280"/>
-
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+<div style="text-align: center">
+    <em>Figure 4.1.1: Architecture diagram of PE</em>
+</div>
+<br>
+The ***Architecture Diagram*** given above in Figure 4.1.1 explains the high-level design of PE.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -117,11 +120,14 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+The *Sequence Diagram* in Figure 4.1.2 shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
+<div style="text-align: center">
+    <em>Figure 4.1.2: Sequence diagram showing interactions between the components</em>
+</div>
+<br>
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -131,10 +137,13 @@ Each of the four main components (also shown in the diagram above),
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
-implementation of a component), as illustrated in the (partial) class diagram below.
+implementation of a component), as illustrated in Figure 4.1.3 below.
 
 <img src="images/ComponentManagers.png" width="300" />
-
+<div style="text-align: center">
+    <em>Figure 4.1.3: Partial class diagram showing interactions through interfaces</em>
+</div>
+<br>
 The sections below give more details of each component.
 
 ### <a name="UI component"></a> **4.2 UI component**
@@ -142,12 +151,12 @@ The sections below give more details of each component.
 The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
-At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.1).
+At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.2.1).
 Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
 
 ![Structure of the UI Component](images/ui/UiClassDiagramOverview.png)
 <div style="text-align: center">
-    <em>Figure 5.1: Overview of Ui components</em>
+    <em>Figure 4.2.1: Overview of Ui components</em>
 </div>
 <br>
 1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
@@ -161,12 +170,12 @@ from the abstract class `PopupWindow`, which captures the commonalities between 
 to be displayed to the user.
 
 Now taking a closer look at the `MainWindow` component, it consists of a number of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
-, `StatusBarFooter` etc. (Figure 5.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+, `StatusBarFooter` etc. (Figure 4.2.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
 
 ![Structure of the UI Component](images/ui/UiClassDiagramMainComponents.png)
 <div style="text-align: center">
-    <em>Figure 5.2: MainWindow Ui components</em>
+    <em>Figure 4.2.2: MainWindow Ui components</em>
 </div>
 <br>
 Note that the `UI` component uses the JavaFx UI framework.
@@ -190,10 +199,13 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Figure 4.3.1 shows a (partial) class diagram of the `Logic` component:
 
 ![Logic Class Diagram](images/LogicClassDiagram.png)
-
+<div style="text-align: center">
+    <em>Figure 4.3.1: Overview of Logic components</em>
+</div>
+<br>
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `ProgrammerErrorParser` class to parse the user
@@ -203,18 +215,23 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
+The Sequence Diagram in Figure 4.3.2 below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/commands/DeleteCommand/DeleteCommandSequenceDiagram.png)
-
+<div style="text-align: center">
+    <em>Figure 4.3.2: Sequence diagram illustrating interactions within the Logic component</em>
+</div>
+<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+Figure 4.3.3 illustrates the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 ![Parser Class](images/ParserClasses.png)
-
+<div style="text-align: center">
+    <em>Figure 4.3.3: Partial class diagram showing the structure of the  Parser classes</em>
+</div>
+<br>
 How the parsing works:
 
 * When called upon to parse a user command, the `ProgrammerErrorParser` class creates an `XYZCommandParser` (`XYZ` is a
@@ -229,9 +246,11 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
 ![Model Component](images/ModelClassDiagram.png)
-
-
-The `Model` component,
+<div style="text-align: center">
+    <em>Figure 4.4.1: Overview of the Model components</em>
+</div>
+<br>
+The `Model` components as seen in Figure 4.4.1,
 
 * stores the ProgrammerError data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list
@@ -248,8 +267,11 @@ The `Model` component,
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
-
-The `Storage` component,
+<div style="text-align: center">
+    <em>Figure 4.5.1: Overview of Storage components</em>
+</div>
+<br>
+The `Storage` components as seen in Figure 4.5.1,
 
 * can save both ProgrammerError data and user preference data in json format, and read them back into corresponding
   objects.
@@ -299,16 +321,22 @@ with the newly created student.
 in the `resultDisplay`, informing the user that the add operation is valid. 
 
 
-The following (partial) sequence diagram shows how the add command works:
+The following (partial) sequence diagram in Figure 5.1.1 shows how the add command works:
 - Note: toAdd in the sequence diagram represents the new `Student` object to be added.
 - Refer to [Logic component](#Logic component) for a review of the Logic Component.
 
-
  ![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandAbstractSequenceDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.1.1: Sequence diagram illustrating the execution of add command</em>
+</div>
+<br>
+The following activity diagram in Figure 5.1.2 summarizes what happens when a CS2100 TA executes a new command:
 
-
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
 ![AddCommandActivityDiagram](images/commands/AddCommand/AddCommandActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.1.2: Activity diagram for executing add command</em>
+</div>
+<br>
 
 #### Design considerations: 
 
@@ -362,24 +390,34 @@ Step 2. The CS2100 TA executes `filter -cid B01` to display all the students who
 
 The following UML sequence diagrams shows how the filter command works:
 
-1. In the following sequence diagram, the focus is on modelling the interactions between components to first create the
-`FilterCommand` object.
+* Figure 5.2.1 focuses on modelling the interactions between components to first create the `FilterCommand` object.
    
 ![FilterSequenceDiagramParse](images/commands/FilterCommand/FilterSequenceDiagramParse.png)
-
-2. In the next sequence diagram, the focus is on the interactions between components when the `FilterCommand` is being
-executed.
+<div style="text-align: center">
+    <em>Figure 5.2.1: Partial sequence diagram showing the creation of FilterCommand object</em>
+</div>
+<br>
+* In the next sequence diagram, Figure 5.2.2 focuses on the interactions between components when the `FilterCommand` is
+being executed.
 
 ![FilterSequenceDiagramExecute](images/commands/FilterCommand/FilterSequenceDiagramExecute.png)
+<div style="text-align: center">
+    <em>Figure 5.2.2: Partial sequence diagram showing the execution of FilterCommand object</em>
+</div>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate`
 , `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML,
 the lifeline reaches the end of diagram.
 </div>
 
-The following UML activity diagram summarizes what happens when a CS2100 TA executes a new filter command.
+Figure 5.2.3 shows the UML activity diagram summarizing what happens when a CS2100 TA executes a new filter command.
 
 ![FilterActivityDiagram](images/commands/FilterCommand/FilterActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.2.3: Activity diagram for executing filter command</em>
+</div>
+<br>
 
 #### Design Consideration
 
@@ -423,7 +461,6 @@ The following UML activity diagram summarizes what happens when a CS2100 TA exec
 
 ### <a name="show lab"></a> **5.3 `Show` Lab Results Feature**
 
-
 #### Implementation
 
 The show lab results feature allows the CS2100 TA to view the lab result list of a particular student. Its
@@ -459,13 +496,21 @@ index 2
 Step 3. The CS2100 TA keys in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the
 user that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
 
-The following sequence diagram shows how the show command works:
+The following sequence diagram in Figure 5.3.1 shows how the show command works:
 
 ![ShowSequenceDiagram](images/commands/ShowCommand/ShowSequenceDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.3.1: Sequence diagram illustrating the execution of show command</em>
+</div>
+<br>
 
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+The following activity diagram in Figure 5.3.2 summarizes what happens when a CS2100 TA executes a new command:
 
 ![ShowActivityDiagram](images/commands/ShowCommand/ShowActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.3.2: Activity diagram for executing show command</em>
+</div>
+<br>
 
 #### Design considerations:
 
@@ -506,7 +551,7 @@ The CS2100 TA keys in the command `editlab -ln 1 -nln 2 -ts 20`.
 
 The mechanism is as described below:
 
-* Upon detecting 'editlab' as the command word. `ProgrammerErrorParser` will create a `EditLabCommandParser` with the input
+* Upon detecting `editlab` as the command word. `ProgrammerErrorParser` will create a `EditLabCommandParser` with the input
   lab number, new lab number and total score.
 
 
@@ -519,13 +564,20 @@ The mechanism is as described below:
 * ProgrammerError will then show a success message for editing the lab. For example, `Updated Lab 1!` in the
 `resultDisplay`, informing the user that the editlab operation is valid.
 
-The following sequence diagram shows how the editlab command works:
+The following sequence diagram in Figure 5.4.1 shows how the `editlab` command works:
 
 ![EditLabSequenceDiagram](images/commands/EditLabCommand/EditLabSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+<div style="text-align: center">
+    <em>Figure 5.4.1: Sequence diagram illustrating the execution of editlab command</em>
+</div>
+<br>
+The following activity diagram in Figure 5.4.2 summarizes what happens when a CS2100 TA executes a new command:
 
 ![EditLabActivityDiagram](images/commands/EditLabCommand/EditLabActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.4.2: Activity diagram for executing editlab command</em>
+</div>
+<br>
 
 #### Design considerations:
 
@@ -559,13 +611,21 @@ In the `Logic` components, the `download` command works in a similar fashion to 
 not require its own parser.
 
 
-This sequence diagram shows how the `download` command works at a lower level:
+This sequence diagram in Figure 5.5.1 shows how the `download` command works at a lower level:
 
 ![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.5.1: Sequence diagram illustrating the execution of download command</em>
+</div>
+<br>
 
-The following activity diagram summarizes what happens when a CS2100 TA executes the download command:
+The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the download command:
 
 ![DownloadActivityDiagram](images/commands/DownloadCommand/DownloadActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.5.2: Activity diagram for executing download command</em>
+</div>
+<br>
 
 #### Design Considerations
 
@@ -616,13 +676,20 @@ The mechanism is as described below:
   `ProgrammerError has been purged of data!` in the
   `resultDisplay`, informing the user that the purge operation is valid.
 
-The following sequence diagram shows how the purge command works:
+The following sequence diagram in Figure 5.6.1 shows how the purge command works:
 
 ![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+<div style="text-align: center">
+    <em>Figure 5.6.1: Sequence diagram illustrating the execution of purge command</em>
+</div>
+<br>
+The following activity diagram in Figure 5.6.2 summarizes what happens when a CS2100 TA executes a new command:
 
 ![PurgeActivityDiagram](images/commands/PurgeCommand/PurgeActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.6.2: Activity diagram for executing purge command</em>
+</div>
+<br>
 
 #### Design considerations:
 
@@ -656,23 +723,35 @@ and `Model#redoProgrammerError()` respectively.
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
-initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
+initial ProgrammerError state, and the `currentStatePointer` pointing to that single ProgrammerError state as seen in
+Figure 5.7.1.
 
 ![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
+<div style="text-align: center">
+    <em>Figure 5.7.1: Object diagram after Step 1</em>
+</div>
+<br>
 
 Step 2. The user executes `delete 5` command to delete the 5th student in the ProgrammerError. The `delete` command
 calls `Model#commitProgrammerError()`, causing the modified state of the ProgrammerError after the `delete 5` command executes
 to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted ProgrammerError
-state.
-
+state as seen in Figure 5.7.2.
 
 ![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
+<div style="text-align: center">
+    <em>Figure 5.7.2: Object diagram after Step 2</em>
+</div>
+<br>
 
 Step 3. The user executes `add -n David …​` to add a new student. The `add` command also
 calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
-the `programmerErrorStateList`.
+the `programmerErrorStateList` as seen in Figure 5.7.3.
 
 ![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
+<div style="text-align: center">
+    <em>Figure 5.7.3: Object diagram after Step 3</em>
+</div>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitProgrammerError()`, so the ProgrammerError state will not be saved into the `programmerErrorStateList`.
 
@@ -680,18 +759,26 @@ the `programmerErrorStateList`.
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous ProgrammerError state, and restores the ProgrammerError to that state.
+once to the left, pointing it to the previous ProgrammerError state, and restores the ProgrammerError to that state as
+seen in Figure 5.7.4.
 
 ![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
+<div style="text-align: center">
+    <em>Figure 5.7.4: Object diagram after Step 4</em>
+</div>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ProgrammerError state, then there are no previous ProgrammerError states to restore. The `undo` command uses `Model#canUndoProgrammerError()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
-
 </div>
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram in Figure 5.7.5 shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/commands/UndoCommand/UndoSequenceDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.7.5: Sequence diagram illustrating the execution of undo command</em>
+</div>
+<br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -706,20 +793,31 @@ to the right, pointing to the previously undone state, and restores the Programm
 
 Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the ProgrammerError, such
 as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
-Thus, the `programmerErrorStateList` remains unchanged.
+Thus, the `programmerErrorStateList` remains unchanged as seen in Figure 5.7.6.
 
 ![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
+<div style="text-align: center">
+    <em>Figure 5.7.6: Object diagram after Step 5</em>
+</div>
+<br>
 
 Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
 pointing at the end of the `programmerErrorStateList`, all ProgrammerError states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
+purged as seen in Figure 5.7.7. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
 desktop applications follow.
 
 ![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+<div style="text-align: center">
+    <em>Figure 5.7.7: Object diagram after Step 6</em>
+</div>
+<br>
+The following activity diagram in Figure 5.7.8 summarizes what happens when a CS2100 TA executes a new command:
 
 ![CommitActivityDiagram](images/CommitActivityDiagram.png)
+<div style="text-align: center">
+    <em>Figure 5.7.8: Activity diagram showing the saving of state after command execution</em>
+</div>
+<br>
 
 
 #### Design considerations:
@@ -1064,7 +1162,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### <a name="Launch and Shutdown"></a>8.1 Launch and Shutdown
+### <a name="Launch and Shutdown"></a>**8.1 Launch and Shutdown**
 
 1. Initial launch 
    1. Download the jar file and copy into an empty folder 
@@ -1078,7 +1176,7 @@ testers are expected to do more *exploratory* testing.
 
 3. _{ more test cases …​ }_
 
-### <a name="Del student"></a>8.2 Deleting a Student
+### <a name="Del student"></a>**8.2 Deleting a Student**
 
 - Deleting a student while all students are being shown
 
@@ -1093,7 +1191,7 @@ testers are expected to do more *exploratory* testing.
 4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
-### <a name="show lab student"></a>8.3 Show a Student's Lab Results
+### <a name="show lab student"></a>**8.3 Show a Student's Lab Results**
 - Showing a student's lab results while all students are being shown
 1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 2. Test case: `show 1` shows the information and list of lab results of the student with index 1 on the right panel.
@@ -1127,20 +1225,20 @@ testers are expected to do more *exploratory* testing.
         * If the right panel is currently empty, it remains to be empty.
         * If the right panel is showing a student's lab results,  the `Lab1` tag is updated to `Lab2` and the Lab card with title `Lab1` is edited to have title `Lab2`.
 
-### <a name="upload-data"></a>8.4 Upload Data
+### <a name="upload-data"></a>**8.4 Upload Data**
 
 1. Select CSV file from file chooser window to upload data from:
     1. To cancel, click 'cancel' to return to the main window.
     2. If the data in the CSV file is valid, ProgrammerError will save the student data.
 
-### <a name="download-data"></a>8.5 Download Data
+### <a name="download-data"></a>**8.5 Download Data**
 
 1. Select folder from directory chooser window to save data to:
    1. To cancel, click 'cancel' to return to the main window. 
    2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
 
-### <a name="dashboard"></a>8.6 Dashboard
+### <a name="dashboard"></a>**8.6 Dashboard**
 
 1. Enter dashboard as a command or press F5 to view the dashboard. 
    1. CS2100 TA will be able to view the number of students, number of classes, number of labs. 
@@ -1151,20 +1249,20 @@ testers are expected to do more *exploratory* testing.
 ## <a name="Appendix Effort"></a> **9. Appendix: Effort**
 The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
 
-### <a name="Rewriting the Command Syntax"></a>9.1 Rewriting the Command Syntax
+### <a name="Rewriting the Command Syntax"></a>**9.1 Rewriting the Command Syntax**
   * This was challenging as it required a nuanced understanding of how CLI syntax is constructed and following standard conventions. 
   * Not all of us were familiar with Unix syntax, which made it more difficult to design a solution that would be suitable for users who prefer typing.
 
-### <a name="Designing New UI components"></a>9.2 Designing New UI components
+### <a name="Designing New UI components"></a>**9.2 Designing New UI components**
   * AB3 uses simple components with an (arguably) poor user interface (UI) and user experience (UX). On the other hand, our team revamped the look and feel of the application, customizing the dark theme specially (using GitHub's color scheme) to suit TAs. This involved much experimentation with color schemes and building new components, such as popup windows to enhance the user experience. 
   * Other examples include: color-coding the labs which are marked or unmarked (displayed as green or red respectively), as well as customizing the Help window and Dashboard Window to incorporate our new Dark Theme.
 
-### <a name="Working with Third-Party Libraries"></a>9.3 Working with Third-Party Libraries
+### <a name="Working with Third-Party Libraries"></a>**9.3 Working with Third-Party Libraries**
   * Compared to AB3 which uses minimal third-party libraries for its features, our team integrated two additional external libraries to develop our `upload` and `download` features. 
   * This was more challenging than it initially seemed as it required trying out multiple potential candidate libraries to find those which are most suitable for our use case and would be compatible across multiple operating systems. 
   * Through this process, we also encountered dependency issues with the new libraries and spent significant time and effort debugging these issues.
 
-### <a name="Implementing Dynamic Features"></a>9.4 Implementing Dynamic Features
+### <a name="Implementing Dynamic Features"></a>**9.4 Implementing Dynamic Features**
   * AB3's features typically work by having the user type in text commands to be executed. We felt this was core, but we wanted to go a step further and implement our features to minimize the TA having to type unnecessary commands.
   * For instance, the list of students always remains sorted whenever updates are made to the student data. This required many checks and careful organization of the student data so that the sorting can be done efficiently at minimal cost to the user TA.
   * Additionally, the `show` panel and `dashboard` window were also designed to update dynamically whenever changes are made to the student data. This saves the TA much time in keeping track of the labs they have yet to mark, thereby enhancing their user experience and satisfaction.
