@@ -58,4 +58,4 @@ You can reach us at the email `e0543894[at]u.nus.edu`
 [[portfolio](team/benjaminlhr.md)]
 
 * Role: Developer
-* Responsibilities: Refactoring Ui components and MainApp from AB3, implementation of sorting and changing behaviour towards duplicate entries.
+* Responsibilities: Refactoring `Ui` and `Main` from AB3 in v1.2, implementation of sorting and changing behaviour towards duplicate entries.
