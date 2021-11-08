@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AB3](https://github.com/se-edu/addressbook-level3) source code for the initial starting code
+* [opencsv](http://opencsv.sourceforge.net/) was used to read and write csv files
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,9 +198,10 @@ The workflow of the Delete command is shown in the Activity diagram illustrated 
 
 This command allows the user to edit residents or events to the SafeFor(H)All application depending on the currently active tab.
 
-The workflow of the Edit command is shown in the Activity diagram illustrated below.
+The workflow of `EditPersonCommand` is shown in the Activity diagram illustrated below.
 
 ![EditActivityDiagram](images/logic/commands/editcommand/EditActivityDiagram.png)
+`EditEventCommand` follows a similar flow of actions.
 
 Note:
 - Mass operations for residents can be carried out by inputting multiple indexes after the command `edit`, each separated by a whitespace.
@@ -232,9 +234,10 @@ How it works:
 3. When the `ViewCommand` is executed without index parameters, the main panel will show all residents or events, and the sidebar will be cleared.
 4. If the command is run in the `ResidentTab`, the details of the resident with the corresponding index being displayed in the sidebar. Vice versa for `EventTab`.
 
-The following sequence diagram demonstrates what happens when the `ViewCommand` is executed:
+The following sequence diagram demonstrates what happens when the `ViewPersonCommand` is executed:
 
-![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
+![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewPersonCommandSequenceDiagram.png)
+`ViewEventCommand` follows a similar sequence of interactions.
 
 #### Design considerations:
 
@@ -663,6 +666,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC11 - Find close contacts of a resident**
+
+**MSS**
+
+1. Actor views the list of residents and locates the resident to trace.
+2. Actor filters the resident list by that resident's name or room and specifies a number of days to trace back to.
+3. System shows a filtered resident list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. System cannot find the resident in question.
+    * 2a1. System displays an error message.
+    * 2a2. System requests for a valid name or room.
+    * 2a3. Actor retries with different information.
+
+      Use case resumes from step 2.
+
+* 2b. System detects an invalid duration that is negative or more than a month.
+    * 2b1. System displays an error message.
+    * 2b2. System requests for a valid duration.
+    * 2b3. Actor retries with different input.
+
+      Use case resumes from step 2.
+
+**Use case: UC12 - Inform close contacts of a resident**
+
+**MSS**
+
+1. Actor <u>filters for residents who are close contacts of a given resident (UC11)</u>
+2. Actor <u>exports current list of residents' email as csv (UC08)</u>
+3. Actor sends an email to these residents to remind them to self-isolate.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC13 - Find all residents on the same floor as a positive case**
+
+**MSS**
+
+1. Actor views all residents.
+2. Actor locates the positive resident and finds their room number.
+3. Actor filters the resident list based on the block and floor extracted from the room number.
+4. System shows a filtered resident list.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. System detects and invalid block character or out of range floor number.
+    * 3a1. System displays an error message.
+    * 3a2. System requests for a valid block floor combination.
+    * 3a3. Actor retries with different information.
+
+      Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
@@ -685,6 +749,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: A Graphical User Interface (GUI) is a form of user interface through which users interact with electronic devices via visual indicator representations.
 * **CLI**: A Command Line Interface (CLI) processes commands to a computer program in the form of lines of text.
 * **FET**: Fast and Easy Test for COVID-19, which is self-administered using Antigen Rapid Test (ART) kits.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -711,7 +776,10 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+For all Resident commands, ensure that you are on the Residents tab before continuing.
+</div>
 
 ### Adding a resident
 
@@ -779,13 +847,41 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `deadline k/f d1/12-10-2021 d2/10-10-2021`<br>
        Expected: The result box will indicate that the second date is earlier than the first.
 
+### Finding residents
+1. Finding residents' who are not vaccinated
+
+    1. Prerequisites: A non-empty resident list
+
+    2. Test case: `find v/f`<br>
+       Expected: Residents who are not vaccinated (no syringe icon) are listed.
+
+
+2. Finding residents' who are from `SoC` faculty and are vaccinated
+
+    1. Prerequisites: A non-empty resident list
+
+    2. Test case: `find f/soc v/t`<br>
+       Expected: Residents who are vaccinated (syringe icon) and from `SoC` are listed.
+
+
+3. Finding residents' who have the word `alex` in their name and are from  block `A`
+
+    1. Prerequisites: A non-empty resident list
+    
+    2. Test case: `find n/alex r/a`<br>
+       Expected: Residents who fit the criteria are listed.
+
+4. Finding residents' who are in an invalid block `P`
+
+    2. Test case: `find n/alex r/p`<br>
+       Expected: Error message specifying that an invalid room is entered.
 
 ### Editing residents
 
 1. Edit multiple residents' details while all residents are being shown
    
     1. Prerequisites: View all residents using the `view` command. Multiple residents in the list. 
-       Edited resident does not already exist in the address book. Edited details are not the same as the original details.
+       Edited resident does not already exist in the address book.
 
     1. Test case: `edit 1 2 v/T`<br>
        Expected: First and second residents' vaccination statuses are updated to vaccinated. First and second residents' names shown in the status message.
@@ -811,6 +907,31 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Tracing residents
+1. Tracing a resident who has been in contact with 2 others in one event over the past week
+
+    1. Prerequisites: A resident in room `A213` who shares an event with 2 others in the past week
+
+    2. Test case: `trace r/a213`<br>
+       Expected: 2 close contact residents are listed.
+
+2. Tracing a resident who has been in contact with 2 others in one event over the past week, of which one has been in contact with another in the past 9 days.
+
+    1. Prerequisites: A resident in room `A213` who shares an event with 2 others of which one shares another event with one other in the past 9 days.
+
+    2. Test case: `trace r/a213 d/2 t/9`<br>
+       Expected: 3 close contact residents are listed.
+
+3. Tracing a resident for a 0 depth
+
+    2. Test case: `trace r/a213 d/0`<br>
+       Expected: Error message specifying that an invalid depth is entered.
+
+4. Tracing a resident for over 31 days
+
+    2. Test case: `trace r/a213 t/58`<br>
+       Expected: Error message specifying that an invalid duration is entered.
+
 ### Sorting residents
 
 1. Sorting the list of residents by valid fields and order
@@ -826,7 +947,29 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort by/n o/z`<br>
       Expected: Error message shown, `ORDER should be one of the following: a, d`
-   
+
+### Importing resident data
+
+1. Import 5 residents from a correctly formatted csv
+
+     1. Prerequisites: A correctly formatted csv with 6 rows named `safeforhall`
+
+     1. Test case: `import safeforhall`<br>
+       Expected: 5 residents displayed with correct information and all resident lists cleared from events.
+
+2. Non existent filename provided
+
+    1. Prerequisites: csv file `nonexistent.csv` should not be present in the `data/` folder
+    2. Test case: `import nonexistent`<br>
+       Expected: Error message shown specifying the csv file has not been found.
+
+2. Missing fields for a specific resident row
+
+    1. Prerequisites: csv file `safeforhall.csv` has one resident row with missing vaccination status
+
+    2. Test case: `import safeforhall`<br>
+       Expected: Error message shown specifying the row at which the error occurred.
+
 ### Exporting residents' emails
 
 1. Export email addresses of list of residents
@@ -846,6 +989,29 @@ testers are expected to do more *exploratory* testing.
 For all Event commands, ensure that you are on the Events tab before continuing.
 </div>
 
+### Adding an event
+
+1. Adding an event and its information into the app
+
+    1. Test case: `add n/Swim v/Pool d/10-10-2021 t/1900 c/10` <br>
+       Expected: An event named `swim` with the relevant information is added into the app, shown in the GUI. Success message is shown.
+
+2. Adding a duplicate event
+
+    1. Prerequisites: An event with the same name, venue, date and time exists.
+    2. Test case: `add n/Swim v/Pool d/10-10-2021 t/1900 c/10` <br>
+       Expected: Error message shown specifying that such an event already exists.
+
+3. Adding an event with invalid parameters
+
+    1. Test case: `add n/Swim v/Pool d/10-10-2021 t/1900 c/0` <br>
+       Expected: Error message shown specifying that capacity needs to be a positive integer.
+
+    1. Test case: `add n/Swim v/Pool d/10-10-2021 t/2500 c/5` <br>
+       Expected: Error message shown specifying that time provided is invalid.
+
+    1. Test case: `add n/Swim v/Pool d/30-02-2021 t/1900 c/0` <br>
+       Expected: Error message shown specifying that date provided is invalid.
 
 ### Viewing an event
 
@@ -881,7 +1047,7 @@ For all Event commands, ensure that you are on the Events tab before continuing.
 1. Edit an event's details while all events are being shown
 
     1. Prerequisites: View all events using the `view` command. Multiple events in the list.
-       Edited event does not already exist in the address book. Edited details are not the same as the original details.
+       Edited event does not already exist in the address book.
 
     1. Test case: `edit 1 c/5`<br>
        Expected: First event capacity is updated to 5. Updated event details shown in the status message.

@@ -32,16 +32,32 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=gordonlzy&tabRepo=AY2122S1-CS2103T-T15-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#149](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/149))
-  * Refactoring `list` to `deadline` to better suit its function name [\#122](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/122)
+  * Refactoring `list` to `deadline` to better suit its function name [PR #122](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/122)
+  * Contributions to testing:
+    * Added testing for the `include`, `exclude` and `deadline` features as well as new predicates, `ResidentList`, `LastDate`, `ModelManager` and `AddressBook`
+    * Added ~1.4 kLoC in total for testing
+    * Created new test utils, `TypicalEvents` and `EventBuilder`, for `Event` class
+    * Updated `PersonBuilder` to build person with new `LastDate`
+  * Contributions to the UI:
+    * Show the number of days a resident is late for FET [PR #59](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/59)
+    * Coming up with a Figma mockup for the UI design [Figma](https://www.figma.com/file/Xt0MjUdFjvB438sHOwurRm/safeforhall?node-id=0%3A1)
+    * Revamped original GUI color scheme, css styles and fxml files to better fit the UI mockup [PR #149](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/149)
+  * Contributions to Storage:
+    * Added a way to store multiple residents in a string and a way to extract them for JsonAdaptedEvent [PR #128](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/128)
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `list`(now `deadline`) and `include` [\#93](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/93)
-    * Added documentation for the features `exclude` and `command suggestion` [\#152](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/152)
-    * Did cosmetic tweaks to existing documentation of command summary: [\#228](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/228)
+    * Added documentation for the features `list`(now `deadline`) and `include` [PR #93](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/93)
+    * Added documentation for the features `exclude` and `command suggestion` [PR #152](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/152)
+    * Did cosmetic tweaks to existing documentation of command summary: [PR #228](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/228)
+    * Added annotated diagrams for `deadline`, `include` and `exclude`[PR #261](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/261).
   * Developer Guide:
-    * Added implementation details of the `include` feature [\#94](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/94).
+    * Updated target user profile [PR #21](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/21).
+    * Added implementation details of the `include` feature [PR #94](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/94).
+    * Added manual testing for `include`, `exclude` and `deadline` [PR #260](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/260).
+    * Added use cases for `include`, `exclude` and `deadline` [PR #260](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/260).
+    * Updated storage uml diagram [PR #260](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/260).
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#63](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/63), [\#145](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/145), [\#146](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/146), [\#151](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/151)
+  * PRs reviewed (with non-trivial review comments): [PR #63](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/63), [PR #145](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/145), [PR #146](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/146), [PR #151](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/151)
+  * Reported [bugs and suggestions](https://github.com/gordonlzy/ped/issues) for other teams in the class.

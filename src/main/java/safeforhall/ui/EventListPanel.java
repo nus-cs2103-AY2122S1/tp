@@ -60,6 +60,8 @@ public class EventListPanel extends UiPart<Region> {
                 new ViewEventCommand(
                         Index.fromZeroBased(eventListView.getSelectionModel().getSelectedIndex()))
                     .setSingleEvent(logic.getModel());
+            } catch (IndexOutOfBoundsException e) {
+                logger.info("Non card area selected");
             } catch (CommandException e) {
                 logger.info("Invalid card selected");
             }

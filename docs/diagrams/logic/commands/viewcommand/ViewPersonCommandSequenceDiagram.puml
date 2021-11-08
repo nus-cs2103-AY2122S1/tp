@@ -1,0 +1,78 @@
+@startuml
+!include ../../../style.puml
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ViewCommand" as ViewCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant "current:Person" as currPerson MODEL_COLOR
+end box
+
+
+activate MainWindow
+
+MainWindow -> LogicManager : getSinglePerson()
+activate LogicManager
+
+[-> LogicManager : execute("view 1")
+
+create ViewCommand
+
+note over LogicManager, ViewCommand
+  The lower-level parsing details have been omitted
+end note
+
+LogicManager -> ViewCommand : execute(:Model)
+activate ViewCommand
+
+ViewCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model -> AddressBook : getFilteredPersonList()
+activate AddressBook
+
+AddressBook --> Model :
+deactivate AddressBook
+
+Model --> ViewCommand : filteredPersonList
+deactivate Model
+
+create currPerson
+ViewCommand -> currPerson : filteredPersonList.get(0)
+activate currPerson
+
+currPerson --> ViewCommand : personToShow
+deactivate currPerson
+
+ViewCommand -> Model : setSinglePerson(personToShow)
+activate Model
+
+Model --> ViewCommand
+deactivate Model
+
+create CommandResult
+ViewCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewCommand
+deactivate CommandResult
+
+ViewCommand --> LogicManager : viewCommandResult
+deactivate ViewCommand
+
+LogicManager --> MainWindow : viewCommandResult
+deactivate LogicManager
+
+[<--MainWindow
+deactivate MainWindow
+
+@enduml

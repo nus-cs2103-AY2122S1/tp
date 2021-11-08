@@ -68,12 +68,15 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String keyword, LastDate date1) {
         requireNonNull(keyword);
+        assert keyword.equals(LATE_FET_KEYWORD) || keyword.equals(LATE_ART_KEYWORD)
+                || keyword.equals(FET_KEYWORD) || keyword.equals(ART_KEYWORD);
+
         this.keyword = keyword;
         this.date1 = date1;
         this.date2 = date1;
-        if (keyword.equals("lf")) {
+        if (keyword.equals(LATE_FET_KEYWORD)) {
             this.predicate = new NameMissedDeadlinePredicate(FET_KEYWORD, date1);
-        } else if (keyword.equals("lc")) {
+        } else if (keyword.equals(LATE_ART_KEYWORD)) {
             this.predicate = new NameMissedDeadlinePredicate(ART_KEYWORD, date1);
         } else {
             this.predicate = new NameNearLastDatePredicate(keyword, date1);
@@ -87,6 +90,9 @@ public class DeadlineCommand extends Command {
         requireNonNull(keyword);
         requireNonNull(date1);
         requireNonNull(date2);
+        assert keyword.equals(LATE_FET_KEYWORD) || keyword.equals(LATE_ART_KEYWORD)
+                || keyword.equals(FET_KEYWORD) || keyword.equals(ART_KEYWORD);
+
         this.date1 = date1;
         this.date2 = date2;
         this.keyword = keyword;
