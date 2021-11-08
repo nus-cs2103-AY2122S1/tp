@@ -188,8 +188,7 @@ Examples:
   adds a student with the name John, phone number 12345678, email john@mail.com and address at 42 Wallaby Way, Sydney
 * `student -a n/Barbara p/12344321 e/barber@gmail.com a/123 Sesame Street t/graduate t/actress`<br>
   adds a student with the name Barbara, phone number 12344321, email barber@gmail.com, address at 123 Sesame Street, and tags graduate and actress
-
-<div style="page-break-after: always;"></div>
+  
 #### Viewing a student: `student -v`
 
 Views a particular student's details in the Person Panel.
@@ -506,6 +505,8 @@ Examples:
 
 ![taskfind](images/imagesInUG/task-find.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Assigning tasks to students: `task -as`
 
 Assigns a specific task to students’ task list.
@@ -541,6 +542,8 @@ Format: `task -unas STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -unas 2 4` removes the task at the index 4 from the student at the index 2
+
+<div style="page-break-after: always;"></div>
 
 #### Unassigning tasks from groups: `task -unag`
 
@@ -578,6 +581,8 @@ Format: `task -dog GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -dog 2 4` marks the task at the index 4 as done by the group at the index 2
+
+<div style="page-break-after: always;"></div>
 
 #### Marking a task as not done by student: `task -undo`
 
