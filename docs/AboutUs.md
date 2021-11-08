@@ -13,21 +13,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/el0hime.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/el0hime)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/el0hime.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation
 
 ### LUO ZHIJIE
 
 <img src="images/luozhijie-tom.png" width="200px">
 
 [[github](http://github.com/luozhijie-tom)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/luozhijie-tom.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Team lead, UI
 
 ### Jodi Choo
 
@@ -36,17 +36,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jodichoo)] [[portfolio](team/jodichoo.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code quality
 
 ### Chen Xiaotong
 
 <img src="images/wuaaaj.png" width="200px">
 
 [[github](http://github.com/WuaaAj)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/wuaaaj.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and deadlines
 
 ### Weng Ying
 
@@ -56,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/wengying227.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
