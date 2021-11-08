@@ -41,7 +41,7 @@ Given below are my contributions to the project. You may refer to my [RepoSense 
   * Ensured consistent formatting throughout the whole UG, including the table of contents, navigational links, and size of screenshots [\#113](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/113/files), [\#129](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/129/files)
   * Designed the [TutAssistor logo](https://github.com/AY2122S1-CS2103T-T12-4/tp/blob/master/docs/images/ta_logo_cropped_white_bg.png) [\#133](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/133/files)
   * Added relevant screenshots, including the UI mock up, Help Window, and Student Info Page [\#121](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/121), [\#28](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/28), [\#129](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/129)
-  * Documented for `remark` and `remarkclass` features [\#54](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/54/files)
+  * Documented `remark` and `remarkclass` features [\#54](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/54/files)
     
 **Developer Guide**:
   * Documented implementation details of the `remark` feature [\#113](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/113/files), [\#140](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/140)
@@ -53,6 +53,6 @@ Given below are my contributions to the project. You may refer to my [RepoSense 
   * Facilitated team direction for week 7 tP requirements
 
 #### Community:
-  * Reported [10 bugs](https://github.com/adam-ky/ped/issues) for T10-3 during the mock Practical Exam (PE)
+  * Reported [10 bugs](https://github.com/adam-ky/ped/issues) for team T10-3 during the mock Practical Exam (PE)
   * PRs reviewed (with non-trivial review comments): [\#95](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/95), [\#111](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/111), [\#136](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/136)
 
