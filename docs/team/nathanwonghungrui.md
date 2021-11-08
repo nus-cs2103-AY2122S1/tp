@@ -28,7 +28,7 @@ The following describes the enhancements and new features that I have contribute
 * **New Feature**: Added the ability to customise the colour of a tag by preference.
     * What it does: Allows the user to input their preferred tag colour either by colour code or colour name.
     * Justification: This feature improves the aesthetic appeal, and more importantly, the flexibility and customisability, which is what we pride our application in.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. The implementation was somewhat challenging as it required some significant changes to how data would be stored in the JSON file to accomodate the tag colours now that it was customisable. Test cases and test data also have to be updated accordingly.
+    * Highlights: This feature affects existing commands and commands to be added in future. The implementation was somewhat challenging as it required some significant changes to how data would be stored in the JSON file to accomodate the tag colours now that it was customisable. Test cases and test data also have to be updated accordingly.
 
 #### 3.2 Change GUI
 
@@ -37,12 +37,28 @@ The following describes the enhancements and new features that I have contribute
     * Justification: This feature allows users a better user experience.
     * Highlights: The implementation of this feature was challenging as it required knowledge of how the GUI works, which meant knowledge of how JavaFX and CSS was integrated into the program. 
 
-#### 3.3 Make Person's Fields Customisable
+#### 3.3 Make Person's Fields Optional  
 
-* **New Feature**: Added the ability to customise the colour of a tag by preference.
-    * What it does: allows the user to input their preferred tag colour either by colour code or colour name.
-    * Justification: This feature improves the aesthetic appeal, and more importantly, the flexibility and customisability, which is what we pride our application in.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. The implementation too was somewhat challenging as it required some significant changes to how data would be stored in the JSON file to accomodate the tag colours now that it was customisable. Test cases and test data also have to be updated accordingly.
+* **New Enhancement**: Added the ability to not include additional fields aside from `Name` when adding a new contact.
+    * What it does: Allows the user to add a new contact without having to include every field.
+    * Justification: We took into consideration the scenario that users might not wish to share certain personal contact details and felt this change was necessary. This feature improves user experience and the flexibility and customisability of our application.
+    * Highlights: This enhancement affects existing commands and commands to be added in future. The implementation was tedious, but slightly more straightforward as it required minor adjustments to all existing fields. It also required some adjustments to how data would be stored now that majority of the fields were customisable. Test cases and test data also have to be updated accordingly.
+
+### 4 Contributions to Documentations
+
+#### 4.1 README
+* Prepared the initial iterations of the README document [\#32](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/32/files)
+
+#### 4.2 User Guide
+* Edited the User Guide to fit our product [\#34](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/34/files)
+* Updated the User Guide for release v1.2 [\#96](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/96)
+* 
+
+#### 4.3 Developer Guide
+* Added Use Cases [\#27](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/27/files)
+* Updated the User Stories, Use Cases NFR and other miscellaenous portions [\#275](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/275)
+* Added UML diagrams for the AddCommand feature [\#95](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/95/files)
+
 
 * **Code contributed**: [RepoSense link]()
 
