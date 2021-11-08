@@ -25,6 +25,9 @@ HiddenOutside .> ReadOnlyModuleSystem
 HiddenOutside --> ModuleSystem
 HiddenOutside .> Person
 Person *--> ModuleSet
+Person *--> AssignmentGradeMap
+AssignmentGradeMap --> "*" Assignment
+AssignmentGradeMap --> "*" Grade
 
 ModuleSystem .up.|> ReadOnlyModuleSystem
 ModuleSystem *--> "1" UniqueModuleList
