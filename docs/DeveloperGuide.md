@@ -521,7 +521,7 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 **Additional Extensions**
 
-* 2b. The customer specified for the task does not correspond to an existing client.
+* 2b. The customer specified for the order does not correspond to an existing client.
 
     * 2b1. SalesNote shows an error message.
 
@@ -723,7 +723,7 @@ Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-
 
 1. User requests to list orders.
 2. SalesNote shows a list of orders.
-3. User requests to sort the orders by either the date or amount field in ascending or descending order.  
+3. User requests to sort the orders by a specified field in either ascending or descending order.  
 4. SalesNote displays the sorted list of orders.
 
    Use case ends.
