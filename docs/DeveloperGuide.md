@@ -493,9 +493,6 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 <center>
     <img src="images/ShowSequenceDiagram.png" />
-</center>
-<br>
-<center>
     <img src="images/ShowStatsFromModelSequenceDiagram.png" />
 </center>
 
@@ -803,6 +800,7 @@ Others:
     * 1a1. Source Control shows an error message.
       Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 #### Use case: Creating an alias for an existing command
 
@@ -827,6 +825,7 @@ Others:
   * 1c1. Source Control shows an error message.
     Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 ### Non-functional requirements
 
@@ -881,6 +880,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `exit`<br>Expected: Source Control exits and shut down automatically.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a group
 
 1. Adding a group successfully.
@@ -917,6 +918,8 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a Student
 
 1. Deleting a student while a list of all students are being shown.
@@ -940,6 +943,8 @@ testers are expected to do more *exploratory* testing.
    
     3. Other incorrect delete commands to try: `delete`, `delete x` (where x is an invalid number)<br>
        Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an alias
 
@@ -967,6 +972,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `alias -c addgroup -as addstudent `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that default command cannot be overwritten.
    
    2. Test case: `alias -c addstudent -as add student `<br> Expected: No alias will be created. Error detail shown in the status message to inform user that alias can only be one alphanumeric word.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
