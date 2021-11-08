@@ -280,7 +280,7 @@ The following activity diagram shows possible user interactions with a `pin` com
 ![PinActivityDiagram](images/PinActivityDiagram.png)
 
 
-The following activity diagram shows possible user interaction with a `unpin` command.
+The following activity diagram shows possible user interactions with a `unpin` command.
 ![UnpinActivityDiagram](images/UnpinActivityDiagram.png)
 
 
