@@ -2,6 +2,7 @@
 !include style.puml
 
 box UI UI_COLOR
+skinparam minClassWidth 120
 participant "UI" as UI UI_COLOR
 end box
 
@@ -67,21 +68,27 @@ deactivate LogicManager
 MailingListCommand -[hidden]-> LogicManager
 destroy MailingListCommand
 
-UI --> Model : getFilteredPersonList()
+UI --> LogicManager : getFilteredPersonList()
+activate LogicManager
+LogicManager --> Model
 activate Model
-Model --> UI : filteredPersonList
+Model --> LogicManager : filteredPersonList
 deactivate Model
-UI --> Model : getPrefixes()
+LogicManager --> UI : filteredPersonList
+deactivate LogicManager
+
+UI --> LogicManager : getPrefixes()
+activate LogicManager
+LogicManager --> Model
 activate Model
-Model --> UI : prefixes
+Model --> LogicManager : prefixes
 deactivate Model
+LogicManager --> UI : prefixes
+deactivate LogicManager
+
 
 UI --> CsvUtil : modelToCsv(filteredPersonList, path, prefixes)
 activate CsvUtil
-
-CsvUtil --> CsvUtil : modelToCsv
-activate CsvUtil
 CsvUtil --> UI
-deactivate CsvUtil
 deactivate CsvUtil
 @enduml

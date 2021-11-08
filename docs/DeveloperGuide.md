@@ -434,6 +434,7 @@ Step 1. The user filters the contacts using other commands, eg. `find`.
 Step 2. The `FilteredList` in `Model` is updated.  
 Step 3. The UI is updated to reflect this new state.  
 Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
+![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
 Step 5. These `Prefix` arguments are stored in `Model`.  
 Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
@@ -445,11 +446,19 @@ Step 8. The header row is created based on `Prefix` arguments stored in `Model`,
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-#### Design considerations:
+#### Front end design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
-<div style="page-break-before: always;"></div>
+#### Back end design considerations:
+* **Option 1 (current choice):** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
+    * Pros: Straightforward.
+    * Cons: Requires large changes to the attributes and purpose of CommandResult. 
+
+* **Option 2 (current choice):** Store data in model and access using logic
+      * Pros: Minimal changes to commandResult structure are necessary.
+    * Cons: Additional calls to logic and model are needed to get the required information.
+
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
