@@ -905,23 +905,23 @@ The `CommandHistory` class contains these key variables and methods:
 When CohortConnect UI is initialized, the `CommandBox` class representing the Command Box is created, containing a single instance of `CommandHistory`. It interacts with `CommandHistory` in 3 ways:
 1. If `KeyCode.UP` is detected in the `TextField`, `CommandHistory#getPrevious()` is called, and the returned String is set to the text field.
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
-</div>
+    <div markdown="span" class="alert alert-primary">
+    :bulb: **Note:** If the history is empty, UP will return an empty string. If the current index is at the earliest command, it will continue to return the same command. 
+    </div>
 
-The activity diagram below illustrates what happens when a user presses the UP arrow key.
+    The activity diagram below illustrates what happens when a user presses the UP arrow key.
 
-![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
+    ![CommandHistoryActivityDiagramUp](images/CommandHistoryActivityDiagramUp.png)
 
 2. If `KeyCode.DOWN` is detected in the `TextField`, `CommandHistory#getNext()` is called, and the returned String is set to the text field.
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
-</div>
+    <div markdown="span" class="alert alert-primary">
+    :bulb: **Note:** If the history is empty or the current index is at the latest command, DOWN will return an empty string.   
+    </div>
 
-The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
+    The activity diagram below illustrates what happens when a user presses the DOWN arrow key.
 
-![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
+    ![CommandHistoryActivityDiagramDown](images/CommandHistoryActivityDiagramDown.png)
 
 3. When the user presses enter to execute a command, the command is saved using `CommandHistory#add(String)`, and the current index is reset using `CommandHistory#resetIndex()`.
 
