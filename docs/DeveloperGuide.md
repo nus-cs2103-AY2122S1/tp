@@ -307,12 +307,16 @@ Given below is an example usage scenario and how the ModuleSet will behave:
 **Step 1. The user creates a new person, and inputs a module and group.**
 The ModuleSystem checks if the module and specific group in the module exists. The application will then add the Group into the Module's GroupSystem, and place the Module into the Person's ModuleSet.
 
-**Step 2. The user adds another group, with same module**
+**Step 2. The user adds the person to another group, with same module**
 The ModuleSystem checks if the module and specific group in the module exists in the system. The application then checks if ModuleSet contains the module. It then adds the Group to the Module's GroupSystem.
 
-**Step 3. The user has 1 group in the module, and removes the group**
+<img src="images/MoveCommandDiagram.png" width="300" />
+
+
+**Step 3. The user removes person from a group, in a module**
 The ModuleSystem checks if the module and specific group in the module exists in the system. The application then checks if ModuleSet contains the module. It then removes the Group from the Module's GroupSystem. After that, the application checks if the GroupSystem is empty. If it is, remove the Module from the ModuleSet too.
 
+<img src="images/RemoveCommandDiagram.png" width="250" />
 
 Alternate implentation: ModuleSet as a HashMap between Modules and a List of Groups.
 However, this implementation was passed over, as this would not be utilizing the Module's own GroupSystem. The GroupSystem should be utilized as the single source of truth, and having 2 lists of Groups for 1 single Module would be very confusing and error-prone.
