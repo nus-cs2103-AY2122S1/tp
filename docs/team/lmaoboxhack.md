@@ -22,7 +22,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * Added the feature to visualize job positions with a pie chart [PR: [\#106](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/106)]
   * **What it does**: Allows the user to a position & its applicants' statuses as a pie chart.
-  * **Justification**: Gives the user a quick, visual overview of a position, which is crucial when dealing with large volumes of applicants/positions, as it is hard to get an overall sense from the detailed list view alone.
+  * **Justification**: Gives the user a quick, visual overview of a position, which is crucial when dealing with large volumes of applicants/positions.
   * **Highlights**:
     * Processing MTR data into the format required by the PieChart API.
     * Created a lightweight component used to display a pie chart on the UI, written with *reusability* (extensible to future iterations of the feature, e.g. pie chart of all applicants) and *maintainability* (minimal dependencies, no separate FXML file) in mind.
@@ -32,13 +32,12 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * **Justification**: As users are likely to frequently update applicant statuses, providing a dedicated command for this (separate from the 'edit' command) helps streamline user workflow.
   * **Highlight**: Multiple levels of input validation (e.g. specified applicant exists, specified status is valid, specified status is different from current status)
 
-* Added `Application` class to model the relationship between applicants and positions [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92)]
-  * **Highlights**: 
-    * Modeling the complex relationship between applicants and positions & preserving immutability of all classes involved.
+* Added `Application` class to model the applicant-position relationship [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92)]
+    * Modeled the complex relationship between applicants and positions while preserving immutability of all classes involved.
     * Added the `ApplicationStatus` enum to reflect an applicant's status & associated methods for serialization & deserialization.
 
 * Added logic to the model for interactions between applicants and positions [PRs: [\#53](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/53), [\#67](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/67), [\#194](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/194)]
-  * **Highlight**: Capturing the interactions that arise from having two interdependent entities in the model (e.g. when a position is deleted, additional steps need to be taken to delete the applicants to that position, to avoid applicants to an already-deleted position).
+  * Captured the interactions that arise from having two interdependent entities in the model (e.g. when a position is deleted, additional steps need to be taken to delete the applicants to that position, to avoid applicants to an already-deleted position).
 
 * Wrote tests for existing features to increase coverage [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92), [\#194](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/194)]
 
@@ -49,15 +48,12 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 #### **Contributions to the DG**
 * Added product scope, NFRs, glossary, contributed to user stories, use cases [PR: [\#24](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/24)]
 * Added `Applicant` and `Position` classes to the 'Design' section [PR: [\#200](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/200)]
-* For the `filter-applicant`, `visualize` and  `mark` commands: [PR: [\#200](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/200)]
-  * Added explanations & UML diagrams (of different types) to the 'Implementation' section
-  * Added to the 'Instructions for manual testing'
+* Added explanations, UML diagrams (of different types) to the 'Implementation' section & 'Instructions for manual testing' for the `filter-applicant`, `visualize` and `mark` commands [PR: [\#200](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/200)]
 
 #### **Contributions to team-based tasks**
-* Setup of GitHub team org & repo
+* Setup of: GitHub team org & repo, GitHub Pages, GitHub Actions, Gradle
 * Repo maintenance (Proper tagging of issues, milestone management, linking issues to PRs, etc.)
 * Renaming of packages [PR: [\#59](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/59)] (Scrapped due to potential complications)
-* Setup of tools: GitHub Pages (for product website), GitHub Actions (for CI), Gradle
 
 #### **Review contributions**
 * Significant PR reviews: [Review of \#50](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/50#pullrequestreview-785391113), [Review of \#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81#pullrequestreview-783478563), [Review of \#111](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/111#pullrequestreview-790827571)
