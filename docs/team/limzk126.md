@@ -13,9 +13,9 @@ Given below are my contributions to the project.
 
 ## **Code contributed**:
 
-The code i contributed can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=limzk&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
+The code I contributed can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=limzk&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
-###**Implemented functionality to view tasks of a specified person**
+### **Implemented functionality to view tasks of a specified person**
 1. What it does: Allow users to view task list of specified person using either a mouse-click, or a CLI command.
 2. Justification: One of the core functionalities of ContactSh
 3. Challenges: Had to link and modify different functionalities such as editing, removing and editing
@@ -25,7 +25,7 @@ Relevant PRs include:
 [#49](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/49),
 [#67](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/67)
 
-###**Implemented functionality to view all person's tasks**
+### **Implemented functionality to view all person's tasks**
 1. What it does: Allow users to view all person's tasks in a single list
 2. Justification: Implemented using TreeView JavaFx control as it was the best choice, however implementation
    was hard as I had to design my own algorithm to ensure the TreeView structure is modified correctly whenever
@@ -35,13 +35,13 @@ Relevant PRs include:
 
 Relevant PRs include: [#85](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/85)
 
-###**Implemented functionality to find tasks within the view all person's tasks panel**
+### **Implemented functionality to find tasks within the view all person's tasks panel**
 1. What it does: Filter/narrow down the tasks they wish to see using keywords, when viewing all person's tasks.
 2. Justification: Important feature as it allows users the flexibility of viewing the tasks they want to see.
 
 Relevant PRs include: [#104](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/104)
 
-###**Implemented functionality to view overall tasks statistics**
+### **Implemented functionality to view overall tasks statistics**
 1. What it does: 
    * View tasks completion statistics using a pieChart. 
    * taskStatusChecker: A class which uses a thread to automatically check and update all task's status (once every 5 seconds), such
@@ -53,14 +53,16 @@ Relevant PRs include: [#104](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
    with task viewing functionalities such that tasks updated automatically are reflected on the GUI correctly.
    
 Relevant PRs include: [#95](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/95)
-###**Implemented functionality to set when to remind users of tasks that are due soon**
+
+### **Implemented functionality to set when to remind users of tasks that are due soon**
 1. What it does: sets when tasks are reminded to users that it is due soon. The input is the number of days
    prior to a task's happening/due date.
 2. Justification: Essential functionality as it allows the users to have the flexibility of when they are reminded that their tasks
    are due soon.
+
 Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/110)
 
-##**Team tasks:**
+## **Team tasks:**
 1. Managed Releases: `v1.2.1(trial release for v1.3`, `v1.3`, `v1.3.1(Revision of v1.3)`.
 2. Created and Changed product icon, name for the GUI.
 3. Maintained issue tracker: Created and managed issues in most milestones. Wrapped up milestones v1.3 and v1.3.1.
@@ -68,14 +70,17 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
    * Relevant PRs: [#209](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/209),
   [#220](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/220)
 
-##**Documentation**:
-###**User Guide**:
+## **Documentation**:
+
+### **User Guide**:
 * Added documentation for the feature `cat`, `cat -A`.[#20](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/20)
 * Added documentation for the feature `reminder`.
 * Added Table of contents, Introduction, Guide on using the UG and product Icon [#87](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/87/files),
   [#116](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/116/files)
+
 ###**Developer Guide**:
-* Added user stories and product scope [\#23](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/23),
+* Added user stories and product scope [#23](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/23),
   [#195](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/195)
 * Added Implementation for view tasks functionality [#73](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/73)
-##**Community**:
+
+## **Community**:
