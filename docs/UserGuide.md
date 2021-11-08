@@ -51,7 +51,7 @@ Section | Explanation
 **Input Box** | Input your command here. The command suggestion box will suggest parameters upon typing
 **Result Box** | The result of the inputted command will be displayed here
 **List of Residents** | Displays the list of residents in the app. You can view details about a specific resident by clicking on it, or by using the `view` command
-**Individual resident information** | In the example shown, the resident has a late FETs test which is 21 days overdue.
+**Individual resident information** | In the example shown, the resident has a late FET test which is 21 days overdue.
 
 ### Formats
 
