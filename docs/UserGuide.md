@@ -373,11 +373,13 @@ of money gained from successfully receiving orders and selling items. Profit = R
 of the items inside this sample inventory. If you would like to start afresh, please use the `clear` command.
 
 **Q**: What's the difference between remove and delete?<br>
-**A**: `delete` is specifically for wrongly inputted item. Thus, when an item is deleted, the cost incurred will be
-retracted. Furthermore, the item will no longer be in the inventory. Contrast this with `remove` where the cost incurred
-won't be retracted and if there is no more stock, the count will be reflected as 0 (not deleted from inventory). 
-This is slightly problematic if the user has already transacted/sold one or more of the wrongly inputted items or 
-modified the items, thus it's one of the current limitations of the app.
+**A**: `delete` is meant for items wrongly added into the inventory. BogoBogo retracts an item cost when an item 
+is deleted. `remove`, on the other hand, is for items added but not sold (e.g. expired goods). Because the item is 
+correctly added, cost is still incurred.
+
+<div class="code-example bg-grey-lt-000">
+:exclamation: BogoBogo only retracts the costs of unsold items. If items are sold, cost will forever be incurred!
+</div>
 
 **Q**: I have edited the cost price of my item. Why isn't the change reflected in my total cost?<br>
 **A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. Any
