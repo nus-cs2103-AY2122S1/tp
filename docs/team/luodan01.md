@@ -11,10 +11,10 @@ AniList was created based off AddressBook - Level 3, an address book application
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the functionality to view user statistics and created the associated UI components.
-  * What it does: allows users to view their user statistics (such as their top genres) calculated from anime(s) in the list.
+* **New Feature**: Added the functionality to view user statistics and created the associated UI.
+  * What it does: allows users to view their user statistics (such as top genres) calculated from anime(s) in the list.
     The user statistics are represented with a bar chart and pie chart, displayed in a pop-up window upon
-    executing that `stats` command.
+    executing the `stats` command.
   * Justification: Since our app is an anime tracker, this feature greatly enhances the user experience by
     granting users insights into their own preferences. It fits together well with our other features (such as the functionality to 
     tag anime(s) with genres) to form a cohesive product.
