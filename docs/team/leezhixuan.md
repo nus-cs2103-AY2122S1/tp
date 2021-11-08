@@ -63,8 +63,8 @@ Given below are my contributions to the project.
   <br></br>
 
 * **Community**:
-  * Reported 37 bugs and suggestions for other teams in class
+  * Reported 37 bugs and suggestions for other teams in class.
     * You can find the entire log [here](https://github.com/leezhixuan/ped)
-  * Contributed to forum [discussion](https://github.com/nus-cs2103-AY2122S1/forum/issues/135):
+  * Contributed to forum [discussion].(https://github.com/nus-cs2103-AY2122S1/forum/issues/135):
   * PRs reviewed with non-trivial comments: (Some examples: [1](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/42),
     [2](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/94), [3](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/119))
