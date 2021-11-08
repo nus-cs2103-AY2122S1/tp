@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_INSURANCE + "INSURANCE]... "
+            + "[" + PREFIX_INSURANCE + "INSURANCE_TYPE INSURANCE_BRAND]... "
             + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
-            + PREFIX_INSURANCE + "Life "
+            + PREFIX_INSURANCE + "Life Prudential "
             + PREFIX_NOTE + "Has a medical condition";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

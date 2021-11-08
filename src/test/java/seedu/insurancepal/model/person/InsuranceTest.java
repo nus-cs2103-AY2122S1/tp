@@ -50,5 +50,11 @@ public class InsuranceTest {
                 Insurance.of("General", "ABc"));
         assertNotEquals(new Insurance(InsuranceType.GENERAL, "ABC"),
                 Insurance.of("General", "ABC "));
+
+        assertThrows(IllegalValueException.class, () -> Insurance.of(
+                "UnknownInsurance", "somebrand"));
+
+        assertThrows(IllegalValueException.class, () -> Insurance.of(
+                "General", "Loooooooooooooooong brand"));
     }
 }
