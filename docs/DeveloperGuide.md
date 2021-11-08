@@ -340,6 +340,10 @@ the initial `Period` without the input `Period`. This command is facilitated by 
 `addShift` is a command for the app to add a shift into a staff's schedule. When the user want to use this command, the
 target staff, and the specific shift should be indicated.
 
+The activity diagram of `addShift` command is shown below:
+![AddShiftActivity](images/AddShiftActivityDiagram.png)
+
+
 The add shift functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
 
 - `ModelManager#findPersonByName()` — Find the first person with given Name from the address book. If the person is not
@@ -378,7 +382,8 @@ Step 5. `Modelmanager#addShift()` updates the schedule of the `targetStaff` with
 
 The sequence diagram of this `addShift` command is shown below:
 
-![AddShiftActivity](images/AddShiftSequenceDiagram.png)
+![AddShiftSequence](images/AddShiftSequenceDiagram.png)
+
 
 Notes:
 
@@ -460,7 +465,10 @@ Notes:
 
 `viewShift` is a command for the app to search for the staff working at a specific day and shift. The search is either conducted
 by a specific time or by the slot number. When the command is used, whether it is a search by slot number or search by time
-should be indicated with the respective tags `-d` and `-t`.
+should be indicated with the respective tags `-d` and `-ti`.
+
+The activity diagram of `viewShift` command is shown below:
+![ViewShiftActivity](images/ViewShiftActivityDiagram.png)
 
 The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
 
@@ -474,7 +482,7 @@ Also, `FindCommandParser` was created to achieve this functionality.
 The way of implementing `viewShift` follows the architecture of the app. Given below is an example usage scenarios and the 
 workflow of the `find` command.
 
-Step 1. The user executes command `viewShift -t monday-17:00`.
+Step 1. The user executes command `viewShift -ti monday-17:00`.
 `Ui` component reads the command as a string from user's input. After that, `MainWindow`
 passes the string to `LogicManager` to manipulate the command.
 
@@ -498,9 +506,14 @@ The sequence diagram of this `viewShift` command is shown below:
 Notes:
 
 1. The process is similar for a search by slot number.
-1. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
-1. The viewShift Command operates on the overall staff list and not just the displayed list.
-1. Inputting `viewShift` alone also outputs the staff currently working.
+
+2. A command is considered as a valid `viewShift` command if it follows these formats:
+- `viewShift -d dayofweek-slotnumber`
+- `viewShift -ti dayofweek-time`
+
+3. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
+4. The viewShift Command operates on the overall staff list and not just the displayed list.
+5. Inputting `viewShift` alone also outputs the staff currently working.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Proposed future features** ##
@@ -586,7 +599,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Staff'd` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Edit staff details**
+**Use case: UC01 - Add a new staff**
+
+**MSS**
+1. User chooses to add a new staff.
+1. User inputs relevant details.
+1. Staff’d requests for confirmation.
+1. User confirms.
+1. Staff’d adds the new staff to the address book.
+    
+    Use case ends.
+
+**Extensions**
+
+* 3a. Staff'd detects an error in the entered data.
+
+    * 3a1. Staff'd displays an error message.
+    * 3a2. User enters new data.
+    * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+    
+**Use case: UC02 - Edit staff details**
 
 **MSS**
 
@@ -606,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: UC02 - Edit staff schedule**
+**Use case: UC03 - Edit staff schedule**
 
 **MSS**
 
