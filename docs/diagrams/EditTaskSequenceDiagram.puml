@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskCommandsParser" as TaskCommandsParser LOGIC_COLOR
+participant ":EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("task -e 3 n/Report 4")
+activate LogicManager
+
+LogicManager -> TaskCommandsParser : parseCommand("task -e 3 n/Report 4")
+activate TaskCommandsParser
+
+create EditTaskCommand
+TaskCommandsParser -> EditTaskCommand : parseCommand("3 n/Report 4")
+activate EditTaskCommand
+
+EditTaskCommand --> TaskCommandsParser
+deactivate EditTaskCommand
+
+TaskCommandsParser --> LogicManager : command
+deactivate TaskCommandsParser
+
+LogicManager -> EditTaskCommand : execute()
+activate EditTaskCommand
+
+EditTaskCommand -> Model : setTask(taskToEdit, editedTask)
+activate Model
+
+Model --> EditTaskCommand
+deactivate Model
+
+EditTaskCommand -> Model : updateFilteredTaskList(true)
+activate Model
+
+Model --> EditTaskCommand
+deactivate Model
+
+EditTaskCommand --> LogicManager : CommandResult
+deactivate EditTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

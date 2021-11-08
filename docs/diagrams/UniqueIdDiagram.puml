@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Interface HasUniqueId <<Interface>>
+Class UniqueId
+Class Person
+Class Task
+Class Group
+
+Task .up.|> HasUniqueId
+Person .up.|> HasUniqueId
+Group .up.|> HasUniqueId
+
+HasUniqueId "1" <-right-> "1" UniqueId
+@enduml

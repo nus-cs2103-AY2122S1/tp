@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam classAttributeFontColor classFontColor
+
+package "Lesson classes"{
+Class NoOverlapLessonList
+class Lesson {
+    DayOfWeek dayOfWeek
+}
+Class Subject
+Class Timeslot
+Interface Attendee <<Interface>>
+Interface LessonAssignable <<Interface>>
+Class LessonWithAttendees
+}
+
+Class HiddenOutside #FFFFFF
+Class HiddenOutside2 #FFFFFF
+
+NoOverlapLessonList -down-> "*" Lesson
+Lesson *--> "1" Subject
+Lesson *--> "1" Timeslot
+
+LessonWithAttendees -up-> "1" Lesson
+LessonWithAttendees -up-> "*" Attendee
+
+LessonAssignable .down.> Lesson
+HiddenOutside2 ..|> LessonAssignable
+HiddenOutside ..|> Attendee
+@enduml
