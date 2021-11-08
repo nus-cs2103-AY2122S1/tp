@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105.0" GridPane.columnIndex="0">
+        <padding>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+        </padding>
+        <HBox alignment="CENTER_LEFT">
+            <Label fx:id="id" styleClass="cell_big_label">
+                <minWidth>
+                    <!-- Ensures that the label text is never truncated -->
+                    <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+            </Label>
+            <Label fx:id="description" styleClass="cell_big_label_multiline" text="\$description" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <CheckBox fx:id="status" />
+            <padding>
+               <Insets bottom="2.0" />
+            </padding>
+        </HBox>
+        <FlowPane fx:id="overdue">
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+            <padding>
+               <Insets bottom="3.0" />
+            </padding></FlowPane>
+        <FlowPane fx:id="names">
+            <VBox.margin>
+               <Insets />
+            </VBox.margin></FlowPane>
+        <HBox HBox.hgrow="NEVER">
+            <children>
+                <ImageView fx:id="dateLogo" fitWidth="17" preserveRatio="true">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin></ImageView>
+                <Label fx:id="date" styleClass="cell_small_label" text="\$date">
+                  <HBox.margin>
+                     <Insets left="7.0" />
+                  </HBox.margin>
+                </Label>
+            </children>
+            <VBox.margin>
+               <Insets bottom="5.0" />
+            </VBox.margin>
+            <padding>
+               <Insets top="5.0" />
+            </padding>
+        </HBox>
+        <HBox HBox.hgrow="NEVER">
+            <children>
+                <ImageView fx:id="timeLogo" fitWidth="17" preserveRatio="true">
+                  <HBox.margin>
+                     <Insets top="1.0" />
+                  </HBox.margin></ImageView>
+                <Label fx:id="time" styleClass="cell_small_label" text="\$time">
+                    <HBox.margin>
+                        <Insets left="7.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+            <VBox.margin>
+               <Insets bottom="3.0" />
+            </VBox.margin>
+        </HBox>
+        <Label fx:id="recurring" styleClass="cell_small_label" text="\$recurring" />
+    </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+</GridPane>
+</HBox>

@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+start
+partition Model UI_COLOR_T1 {
+if () then ([If it's a
+ recurring task])
+    if () then ([If its DateTime
+has passed]\n)
+        :Update task's DateTime
+        Mark task as not completed;
+    else ([else])
+    endif
+else ([else])
+endif
+if () then ([If it's overdue])
+    if () then ([If it should be overdue])
+    else ([else]\n\n)
+        :Mark task as not overdue;
+    endif
+else ([else])
+    if () then ([If it should
+be overdue]\n)
+        :Mark task as overdue;
+    else ([else])
+    endif
+    endif
+}
+
+stop
+@enduml

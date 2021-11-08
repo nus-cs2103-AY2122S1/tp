@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":NurseyBookParser" as NurseyBookParser LOGIC_COLOR
+participant ":DeleteNokCommandParser" as DeleteNokCommandParser LOGIC_COLOR
+participant "d:DeleteNokCommand" as DeleteNokCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteNok 1")
+activate LogicManager
+
+LogicManager -> NurseyBookParser : parseCommand("deleteNok 1")
+activate NurseyBookParser
+
+create DeleteNokCommandParser
+NurseyBookParser -> DeleteNokCommandParser
+activate DeleteNokCommandParser
+
+DeleteNokCommandParser --> NurseyBookParser
+deactivate DeleteNokCommandParser
+
+NurseyBookParser -> DeleteNokCommandParser : parse("1")
+activate DeleteNokCommandParser
+
+create DeleteNokCommand
+DeleteNokCommandParser -> DeleteNokCommand
+activate DeleteNokCommand
+
+DeleteNokCommand --> DeleteNokCommandParser : d
+deactivate DeleteNokCommand
+
+DeleteNokCommandParser --> NurseyBookParser : d
+deactivate DeleteNokCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteNokCommandParser -[hidden]-> NurseyBookParser
+destroy DeleteNokCommandParser
+
+NurseyBookParser --> LogicManager : d
+deactivate NurseyBookParser
+
+LogicManager -> DeleteNokCommand : execute()
+activate DeleteNokCommand
+
+DeleteNokCommand -> Model : getFilteredElderlyList()
+activate Model
+
+Model --> DeleteNokCommand : filteredElderlies
+deactivate Model
+
+DeleteNokCommand -> Model : setElderly(\nelderlyToDeleteNokFrom, \nupdatedElderly)
+activate Model
+
+Model --> DeleteNokCommand
+deactivate Model
+
+|||
+
+create CommandResult
+DeleteNokCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteNokCommand
+deactivate CommandResult
+
+DeleteNokCommand --> LogicManager : result
+deactivate DeleteNokCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

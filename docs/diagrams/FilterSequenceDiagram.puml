@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":NurseyBookParser" as NurseyBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:ElderlyHasTagPredicate" as ElderlyHasTagPredicate MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter t/diabetes")
+activate LogicManager
+
+LogicManager -> NurseyBookParser : parseCommand("filter t/diabetes")
+activate NurseyBookParser
+
+create FilterCommandParser
+NurseyBookParser -> FilterCommandParser
+activate FilterCommandParser
+
+FilterCommandParser --> NurseyBookParser
+deactivate FilterCommandParser
+
+NurseyBookParser -> FilterCommandParser: parse("t/diabetes")
+activate FilterCommandParser
+
+create ElderlyHasTagPredicate
+FilterCommandParser -> ElderlyHasTagPredicate: ElderlyHasTagPredicate(tagSet)
+activate ElderlyHasTagPredicate
+
+ElderlyHasTagPredicate --> FilterCommandParser
+deactivate ElderlyHasTagPredicate
+
+create FilterCommand
+FilterCommandParser -> FilterCommand : FilterCommand(p)
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser
+deactivate FilterCommand
+
+FilterCommandParser --> NurseyBookParser
+deactivate FilterCommandParser
+
+NurseyBookParser --> LogicManager : f
+deactivate NurseyBookParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

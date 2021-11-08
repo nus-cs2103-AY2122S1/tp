@@ -1,0 +1,14 @@
+{
+  "elderlies": [ {
+    "name": "Hans Muster",
+    "age": "40",
+    "gender" : "M",
+    "roomNumber": "52",
+    "nokName": "Valid Nok",
+    "relationship": "Mother",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street"
+  } ],
+  "tasks": []
+}

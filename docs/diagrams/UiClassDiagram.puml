@@ -5,16 +5,19 @@ skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
-Interface Ui <<Interface>>
+Interface "<<Interface>>\nUi"
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class ElderlyListPanel
+Class ElderlyCard
+Class TaskListPanel
+Class TaskCard
 Class StatusBarFooter
 Class CommandBox
+Class ElderlyDetailsPanel
 }
 
 package Model <<Rectangle>> {
@@ -26,32 +29,43 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside ..> "<<Interface>>\nUi"
 
-UiManager .left.|> Ui
+UiManager .left.|> "<<Interface>>\nUi"
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ElderlyListPanel
+MainWindow *-down-> "1" TaskListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow -down-> "0..1" HelpWindow
+MainWindow -down-> "0..1" ElderlyDetailsPanel
 
-PersonListPanel -down-> "*" PersonCard
+ElderlyListPanel -down> "*" ElderlyCard
+TaskListPanel -down--> "*" TaskCard
 
 MainWindow -left-|> UiPart
 
+
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+ElderlyListPanel --|> UiPart
+ElderlyCard --|> UiPart
+TaskListPanel --|> UiPart
+TaskCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ElderlyDetailsPanel --|> UiPart
 
-PersonCard ..> Model
+ElderlyCard ..> Model
+TaskCard ..> Model
+ElderlyDetailsPanel ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+TaskCard -[hidden]left- ElderlyCard
+TaskListPanel -[hidden]left- ElderlyListPanel
+ElderlyListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
