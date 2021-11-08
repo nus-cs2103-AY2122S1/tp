@@ -1115,7 +1115,7 @@ as well as the number of labs unmarked for each class.
 
    Use case ends.
 
-### <a name="Use Case11"></a> **Use case: UC11 Filter student records**
+#### <a name="Use Case11"></a> **7.3.11 Use case: UC11 Filter student records**
 
 **MSS**
 
