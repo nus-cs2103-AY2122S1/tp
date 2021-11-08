@@ -748,15 +748,23 @@ testers are expected to do more *exploratory* testing.
        
 ### Editing a person
 
+1. Prerequisites: The person must exist in contHACKS and can be accessed via a valid index.
+
+2. Test case: `edit 1 n/John Doe`<br>
+   Expected: The name of the first person shown in contHACKS will be changed to `John Doe`
+
+3. Test case: `edit -1 n/John Doe`<br>
+   Expected: No person is edited. Error details shown in the result display. Text in the command box turns red.
+
 ### Editing a lesson
 
-1. Prerequisites: The lesson must exist in contHACKS and could be access via a valid index.
+1. Prerequisites: The lesson must exist in contHACKS and can be accessed via a valid index.
 
 2. Test case: `editc 1 d/3`<br>
    Expected: The day of the first lesson shown in contHACKS will be changed to `Wednesday`
 
 3. Test case: `editc -1 d/3`<br>
-   Expected: An error message will be shown in the result display, showing that the index provided is invalid. Text in the command box turns red.
+   Expected: No lesson is edited. Error details shown in the result display. Text in the command box turns red.
 
 ### Deleting a person
 

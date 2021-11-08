@@ -5,7 +5,7 @@ title: Zhi Bin's Project Portfolio Page
 
 ### Project: ContHACKS
 
-contHACKS is a desktop app for Teaching Assistants (TAs) to manage contacts and lessons. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+contHACKS is a desktop app for Teaching Assistants (TAs) to manage contacts and lessons. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
@@ -37,10 +37,7 @@ Given below are my contributions to the project.
 
 **Testing**:
   * Wrote tests for all new and enhanced features:
-    * [#52](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/52)
-    * [#122](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/122)
-    * [#123](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/123)
-    * [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137)
+    * [#52](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/52), [#122](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/122), [#123](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/123), [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137)
 
 **Documentation**:
   * User Guide:
@@ -49,26 +46,21 @@ Given below are my contributions to the project.
       * Add more example for various commands: [#147](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/147)
       * Add documentation for the features `listc`, `editc`, `clearc`: [#150](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/150)
   * Developer Guide:
-      * Updated the UML diagram and documentation for Parser component[#101](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/101)
+      * Updated the UML diagram and documentation for Parser component: [#101](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/101)
+      * Updated the manual testing section: [#238](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/238)
+      * Updated the UML diagram and documentation for the implementation of alias: [#246](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/246)
 
 **Team-Based Tasks**:
   * Setting up the GitHub team org/repo
-    * [#8](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/8)
-    * [#39](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/39)
+    * [#8](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/8), [#39](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/39)
   * Manged releases `v1.2` on GitHub
   * Updating UG that are not specific to a feature
-    * [#154](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/154)
-    * [#200](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/200)
-    * [#201](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/201)
+    * [#154](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/154), [#200](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/200), [#201](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/201)
+  * Refactor `ModuleLesson` to remove the use of a `Set` to save the `ModuleCode`
+    * [#132](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/132/files)
+  * Create skeleton files for all `XYZModuleLessonCommand` and `XYZModuleLessonCommandParser`, and refactor all `XYZCommand` and `XYZCommandParser` to `XYZPersonCommand` and `XYZPersonCommandPerson`
+    * [#119](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/119/files)
 
 **Community**:
   * PRs reviewed (with non-trivial review comments):
-    * [#45](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45)
-    * [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57)
-    * [#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77)
-    * [#84](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/84)
-    * [#100](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/100)
-    * [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131)
-    * [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135)
-    * [#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136)
-    * [#139](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/139)
+    * [#45](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45), [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57), [#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77), [#84](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/84), [#100](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/100), [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131), [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135), [#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136), [#139](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/139)
