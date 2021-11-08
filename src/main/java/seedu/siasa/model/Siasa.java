@@ -158,10 +158,10 @@ public class Siasa implements ReadOnlySiasa {
     public Map<Contact, Double> getCommissionPerContact() {
         HashMap<Contact, Double> hashMap = new HashMap<>();
         contacts.forEach(contact -> {
-            double commission = 0;
+            double commission = 0.0;
             for (Policy policy : policies) {
                 if (policy.getOwner().equals(contact)) {
-                    commission += policy.getTotalCommission();
+                    commission = commission + policy.getTotalCommission();
                 }
             }
             hashMap.put(contact, commission);

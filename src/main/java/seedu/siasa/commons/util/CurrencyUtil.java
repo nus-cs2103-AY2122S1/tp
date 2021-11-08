@@ -9,6 +9,9 @@ public class CurrencyUtil {
      * @return Dollars in string.
      */
     public static String centsToDollars(double moneyInCents) {
+        assert moneyInCents >= 0 : "money in cents should not be negative";
+
+
         DecimalFormat integerFormat = new DecimalFormat("#");
         double cents = moneyInCents % 100;
         double dollars = (moneyInCents - cents) / 100;
