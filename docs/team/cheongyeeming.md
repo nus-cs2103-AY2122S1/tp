@@ -35,15 +35,15 @@ Given below are my contributions to the project.
 * **Favorite Command**:
     * Pull requests [\#127](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/127)
     * What it does: Allows user to favorite an existing contact.
-    * Justification: This feature allows for users to sort out contacts that might be
-    of importance to them, such as their family and friends.
+    * Justification: Allow users to sort out contacts that are important to them,
+     such as their family and friends.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
     
 * **Unfavorite Command**:
     * Pull requests [\#131](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/131)
     * What it does: Allows user to unfavorite an existing contact.
-    * Justification: This feature allows for users to sort out contacts that might no
+    * Justification: Allow users to sort out contacts that might no
      longer be of importance to them.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
@@ -120,9 +120,7 @@ UserPrefsTest (Pull requests
 * ConfigTest,
 GuiSettingsTest,
 LogsCenterTest,
-MessagesTest,
-JsonUserPrefsStorageTest,
-JsonUserProfileStorageTest (Pull requests
+MessagesTest (Pull requests
 [\#273](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/273))
 * StorageManagerTest (Pull requests
 [\#273](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/273),
