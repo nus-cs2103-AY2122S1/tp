@@ -12,8 +12,8 @@
             <Label fx:id="taskName" styleClass="cell_big_label" text="\$taskName" wrapText="true" />
          </HBox>
          <HBox alignment="CENTER_LEFT" spacing="30">
-            <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />
-            <Label fx:id="taskTime" styleClass="cell_small_label" text="\$taskTime" />
+            <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" wrapText="true"/>
+            <Label fx:id="taskTime" styleClass="cell_small_label" text="\$taskTime" wrapText="true"/>
             <Label fx:id="taskVenue" styleClass="cell_small_label" text="\$taskVenue" wrapText="true" />
          </HBox>
       </VBox>
