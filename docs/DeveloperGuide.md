@@ -50,7 +50,7 @@ title: Developer Guide
 9. [Appendix: Effort](#Appendix Effort)
    1. [Challenges Faced and Achievements Made](#Challenges Faced)
       1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
-      2. [Designing New UI Components](Designing New UI components)
+      2. [Designing New UI Components](#Designing New UI components)
       3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
       4. [Implementing Dynamic Features](#Implementing Dynamic Features)
 
@@ -1142,7 +1142,7 @@ testers are expected to do more *exploratory* testing.
    2. CS2100 TA will also be able to see the number of labs left to mark for each class.
   
   
-## <a name="Effort"></a> **18. Appendix: Effort**
+## <a name="Appendix Effort"></a> **18. Appendix: Effort**
 
 ### <a name="Challenges Faced"></a> Challenges Faced and Achievements Made
 The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
