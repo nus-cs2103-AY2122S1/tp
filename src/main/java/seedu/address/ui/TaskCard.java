@@ -80,8 +80,12 @@ public class TaskCard extends UiPart<Region> {
         taskDate.setBackground(new Background(
                 new BackgroundFill(javafx.scene.paint.Paint.valueOf("blue"), CornerRadii.EMPTY, Insets.EMPTY)));
 
+        taskDate.setMinWidth(80);
+
         taskTime.setBackground(new Background(
                 new BackgroundFill(javafx.scene.paint.Paint.valueOf("blueviolet"), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        taskTime.setMinWidth(50);
 
         taskVenue.setBackground(new Background(
                 new BackgroundFill(javafx.scene.paint.Paint.valueOf("brown"), CornerRadii.EMPTY, Insets.EMPTY)));
