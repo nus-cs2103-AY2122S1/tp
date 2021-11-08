@@ -28,7 +28,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Overloaded constructor for an {@code Order} that also sets initializes its {@code id}.
+     * Overloaded constructor for an {@code Order} that also initializes its {@code id}.
      */
     public Order(Label label, Customer customer, Date date, Amount amount, int id) {
         this.customer = customer;
