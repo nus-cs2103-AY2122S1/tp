@@ -536,7 +536,7 @@ Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the us
     - Each `Person` object has its own set of `Tag` objects which may be repetitive and memory-consuming if there were multiple tags with the same tag name.
     - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
 
-* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag. (Referenced from [Billboard - Tagging](https://ay1920s1-cs2103t-f12-4.github.io/main/DeveloperGuide.html#tagging) with modifications)
+* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag. (Referenced from [Billboard - Tagging](https://ay1920s1-cs2103t-f12-4.github.io/main/DeveloperGuide.html#aspect-data-structure-to-support-tag-commands) with modifications)
   - Pros:
     - Does not require additional data structure for storing the number of persons labelled with a certain tag.
     - Direct retrieval of the number of persons under each tag.
