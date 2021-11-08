@@ -380,7 +380,8 @@ Format: `revenue INDEX r/AMOUNT`
 
 * Existing value will be updated with the current value added to the `AMOUNT` given.
 * Default value for revenue of a client will be 0 when he/she is added to the address book.
-* Revenue of an existing client in the address book should never be **negative**.
+* Revenue of an existing client in the address book can never be **negative**.
+* Revenue of an existing client in the address book can never be more than S$20,000,000.
 
 Examples:
 * `revenue 1 r/100.95` will update the revenue of first client in the contact list to be `100.95`. (Assuming revenue of
