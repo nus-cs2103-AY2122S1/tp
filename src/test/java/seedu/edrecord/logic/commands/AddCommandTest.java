@@ -28,7 +28,6 @@ import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
-import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.testutil.PersonBuilder;
@@ -231,7 +230,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasAssignmentInCurrentModule(Assignment assignment) {
+        public boolean hasSameNameInCurrentModule(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -246,7 +245,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Optional<Assignment> searchAssignment(Name name) {
+        public Optional<Assignment> getAssignment(int id) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -267,6 +266,16 @@ public class AddCommandTest {
 
         @Override
         public void setAssignment(Assignment target, Assignment editedAssignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAssignmentCounter() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignmentCounter(int i) {
             throw new AssertionError("This method should not be called.");
         }
     }

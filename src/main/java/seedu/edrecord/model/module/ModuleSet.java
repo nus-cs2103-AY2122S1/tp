@@ -25,12 +25,13 @@ public class ModuleSet {
      */
     public void add(Module mod, Group group) {
         if (!containsModule(mod)) {
-            modules.add(mod);
+            Module newModule = new Module(mod.getCode());
+            this.getModules().add(newModule);
         }
 
         if (!containsGroupInModule(mod, group)) {
-            for (Module module : modules) {
-                if (module.equals(mod)) {
+            for (Module module : this.getModules()) {
+                if (module.isSameModule(mod)) {
                     module.addGroup(group);
                 }
             }
@@ -41,11 +42,11 @@ public class ModuleSet {
      * Used for testing purposes only.
      */
     public void addToSet(Module mod) {
-        modules.add(mod);
+        this.getModules().add(mod);
     }
 
     public void addAll(ModuleSet mods) {
-        modules.addAll(mods.getModules());
+        this.getModules().addAll(mods.getModules());
     }
 
     /**
@@ -54,8 +55,8 @@ public class ModuleSet {
      */
     public void removeMod(Module mod) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
-                modules.remove(module);
+            if (module.isSameModule(mod)) {
+                this.getModules().remove(module);
                 return;
             }
         }
@@ -67,11 +68,12 @@ public class ModuleSet {
      */
     public void removeGroup(Module mod, Group grp) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
-                if (module.hasGroup(grp)) {
-                    module.deleteGroup(grp);
-                    return;
+            if (module.getCode().equals(mod.getCode()) && module.hasGroup(grp)) {
+                module.deleteGroup(grp);
+                if (module.getGroupSystem().isEmpty()) {
+                    removeMod(module);
                 }
+                return;
             }
         }
     }
@@ -84,13 +86,20 @@ public class ModuleSet {
     }
 
     /**
+     * Checks if the underlying set is empty.
+     */
+    public boolean isEmpty() {
+        return this.modules.isEmpty();
+    }
+
+    /**
      * Checks if the given module is in the set based on correct code.
      * The module does not need to have the same classes.
      * @return boolean to show if the set contains the given module.
      */
     public boolean containsModule(Module mod) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
+            if (module.isSameModule(mod)) {
                 return true;
             }
         }
@@ -103,10 +112,20 @@ public class ModuleSet {
      */
     public boolean containsGroupInModule(Module mod, Group grp) {
         for (Module module : this.getModules()) {
-            if (module.getCode().equals(mod.getCode())) {
-                if (module.hasGroup(grp)) {
-                    return true;
-                }
+            if (module.isSameModule(mod) && module.hasGroup(grp)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * Checks if the module contains any groups.
+     * This method should be called with containsModule
+     */
+    public boolean hasAnyGroup(Module mod) {
+        for (Module module : this.getModules()) {
+            if (module.isSameModule(mod) && module.hasAnyGroup()) {
+                return true;
             }
         }
         return false;
@@ -128,13 +147,17 @@ public class ModuleSet {
 
     @Override
     public int hashCode() {
-        return modules.hashCode();
+        return this.getModules().hashCode();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Module module : modules) {
+        if (modules.isEmpty()) {
+            return "";
+        }
+
+        for (Module module : this.getModules()) {
             sb.append(module.getCode())
                     .append(":")
                     .append(module.getGroupSystem())

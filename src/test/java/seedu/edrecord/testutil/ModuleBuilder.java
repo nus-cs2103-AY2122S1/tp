@@ -31,6 +31,14 @@ public class ModuleBuilder {
     }
 
 
+    /**
+     * Sets the {@code assignmentCounter} of the {@code Module} that we are building.
+     */
+    public ModuleBuilder withCounter(int i) {
+        module.setAssignmentCounter(i);
+        return this;
+    }
+
     public Module build() {
         return module;
     }

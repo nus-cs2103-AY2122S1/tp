@@ -84,7 +84,11 @@ public class RemoveCommand extends Command {
                     String.format(MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON, personToMove.getName(), savedMod, group));
         }
 
-        personToMove.getModules().removeGroup(savedMod, group);
+        moduleSet.removeGroup(savedMod, group);
+        if (moduleSet.hasAnyGroup(savedMod)) {
+            moduleSet.removeMod(savedMod);
+        }
+
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MOVE_PERSON_SUCCESS, personToMove.getName(), savedMod, group));
     }

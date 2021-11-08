@@ -22,10 +22,13 @@ class JsonAdaptedModule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module's %s field is missing!";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Assignment list for this module contains duplicates.";
+    public static final String INVALID_COUNTER = "Assignment counter for this module is invalid.";
+    public static final String INVALID_ID = "ID for this assignment is invalid.";
 
     private final String code;
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
     private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
+    private final Integer assignmentCounter;
 
     /**
      * Constructs a {@code JsonAdaptedModule} with the given module code, groups and assignments.
@@ -33,7 +36,8 @@ class JsonAdaptedModule {
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("code") String code,
                              @JsonProperty("groups") List<JsonAdaptedGroup> groups,
-                             @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
+                             @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
+                             @JsonProperty("id") Integer assignmentCounter) {
         this.code = code;
         if (groups != null) {
             this.groups.addAll(groups);
@@ -41,6 +45,7 @@ class JsonAdaptedModule {
         if (assignments != null) {
             this.assignments.addAll(assignments);
         }
+        this.assignmentCounter = assignmentCounter;
     }
 
     /**
@@ -54,7 +59,7 @@ class JsonAdaptedModule {
         assignments.addAll(source.getAssignmentList().stream()
                 .map(JsonAdaptedAssignment::new)
                 .collect(Collectors.toList()));
-
+        assignmentCounter = source.getAssignmentCounter();
     }
 
     /**
@@ -82,10 +87,19 @@ class JsonAdaptedModule {
         }
 
         Module module = new Module(code, groupSystem);
+
+        if (assignmentCounter == null || assignmentCounter <= 0) {
+            throw new IllegalValueException(INVALID_COUNTER);
+        } else {
+            module.setAssignmentCounter(assignmentCounter);
+        }
+
         for (JsonAdaptedAssignment jsonAdaptedAssignment : assignments) {
             Assignment asg = jsonAdaptedAssignment.toModelType();
-            if (module.hasAssignment(asg)) {
+            if (module.hasSameNameAssignment(asg) || module.hasSameIdAssignment(asg)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ASSIGNMENT);
+            } else if (asg.getId() < 1 || asg.getId() > assignmentCounter) {
+                throw new IllegalValueException(INVALID_ID);
             }
             module.addAssignment(asg);
         }

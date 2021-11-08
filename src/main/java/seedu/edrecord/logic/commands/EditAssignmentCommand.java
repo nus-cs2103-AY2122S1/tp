@@ -68,14 +68,18 @@ public class EditAssignmentCommand extends Command {
         }
         List<Assignment> assignmentList = model.getSelectedModule().getValue().getAssignmentList();
 
-        if (index.getZeroBased() >= assignmentList.size()) {
+        if (index.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment asgToEdit = assignmentList.get(index.getZeroBased());
+        Assignment asgToEdit = assignmentList.stream()
+                .filter(asg -> asg.getId() == index.getOneBased())
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
+
         Assignment editedAsg = createEditedAssignment(asgToEdit, editDescriptor);
 
-        if (model.hasAssignmentInCurrentModule(editedAsg)) {
+        if (model.hasSameNameInCurrentModule(editedAsg)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
@@ -98,14 +102,16 @@ public class EditAssignmentCommand extends Command {
      * Creates and returns an {@code Assignment} with the details of {@code toEdit}
      * edited with {@code editDescriptor}.
      */
-    private static Assignment createEditedAssignment(Assignment toEdit, EditAssignmentDescriptor editDescriptor) {
+    private static Assignment createEditedAssignment(Assignment toEdit,
+                                                     EditAssignmentDescriptor editDescriptor) {
         requireNonNull(toEdit);
 
         Name updatedName = editDescriptor.getName().orElse(toEdit.getName());
         Weightage updatedWeightage = editDescriptor.getWeightage().orElse(toEdit.getWeightage());
         Score updatedMaxScore = editDescriptor.getMaxScore().orElse(toEdit.getMaxScore());
+        int id = toEdit.getId();
 
-        return new Assignment(updatedName, updatedWeightage, updatedMaxScore);
+        return new Assignment(updatedName, updatedWeightage, updatedMaxScore, id);
     }
 
     /**
@@ -115,7 +121,7 @@ public class EditAssignmentCommand extends Command {
     private static Assignment createDeltaAssignment(Assignment edited, Assignment current) {
         Weightage deltaWeightage = new Weightage(
                 String.valueOf(edited.getWeightage().weightage - current.getWeightage().weightage));
-        return new Assignment(edited.getName(), deltaWeightage, edited.getMaxScore());
+        return new Assignment(edited.getName(), deltaWeightage, edited.getMaxScore(), current.getId());
     }
 
     @Override

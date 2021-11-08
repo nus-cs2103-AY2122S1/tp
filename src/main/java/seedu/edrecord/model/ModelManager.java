@@ -25,7 +25,6 @@ import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.module.ModuleSystem;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
-import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.ui.PersonListPanel;
@@ -248,8 +247,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAssignmentInCurrentModule(Assignment assignment) {
-        return hasSelectedModule() && selectedModule.get().hasAssignment(assignment);
+    public boolean hasSameNameInCurrentModule(Assignment assignment) {
+        return hasSelectedModule() && selectedModule.get().hasSameNameAssignment(assignment);
     }
 
     @Override
@@ -278,14 +277,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Optional<Assignment> searchAssignment(Name name) {
-        return selectedModule.get().searchAssignment(name);
+    public Optional<Assignment> getAssignment(int id) {
+        return selectedModule.get().getAssignment(id);
     }
 
     @Override
     public void addAssignment(Assignment assignment) {
         selectedModule.get().addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public int getAssignmentCounter() {
+        return selectedModule.get().getAssignmentCounter();
+    }
+
+    @Override
+    public void setAssignmentCounter(int i) {
+        selectedModule.get().setAssignmentCounter(i);
     }
 
     //=========== Current View =============================================================================
