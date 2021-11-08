@@ -1094,16 +1094,16 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: At least one event in the event list.
 
    2. Test case: `editEvent 1 n/CS2100 finals d/2021-11-20`<br>
-      Expected: Event name and date are edited, time remains the same. Details of new event shown in status message.
+      Expected: The name and date of the event are edited, but time remains the same. Details of the new event are shown in the status message.
 
 ### Marking event as done
 
 1. Mark an event as done
 
-   1. Prerequisite: At least one event in event list. Event must be "Uncompleted".
+   1. Prerequisite: At least one event in event list. The first event must be "Uncompleted".
 
    2. Test case: `done 1`<br>
-      Expected: First event in event list is marked as done. Details of completed event shown in status message.
+      Expected: The first event in the event list is marked as done. Details of the completed event are shown in the status message.
 
 ### Locating events by name
 
@@ -1137,7 +1137,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisite: All events listed using the `listEvents` command. At least one event in the event list.
    2. Test case: `sortEvents`<br>
-      Expected: Events will be sorted chronologically. For events with the same date, events without time will be placed higher than events with time specified.
+      Expected: The events in the event list will be sorted chronologically. For events with the same date, events without time will be placed higher than events with time specified.
       of those with time.
 
 ### Showing an event’s details
@@ -1146,7 +1146,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisite: All events listed using the `listEvents` command. At least one event in the event list.
    2. Test case: `showDetails 1`<br>
-      Expected: Details of the first event in the event list is shown in the status message.
+      Expected: Details of the first event in the event list are shown in the status message.
 
 ### Adding a participant to an event
 
