@@ -1,8 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.programmer.logic.commands.CommandTestUtil.*;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_SECOND_LAB;
@@ -22,38 +21,23 @@ import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.testutil.LabBuilder;
 
 public class EditLabCommandTest {
-    private static Lab validLab;
-    private static Lab sampleLabA;
-    private static Lab sampleLabB;
-    private static LabNum newLabNum = new LabNum(11);
-    private static LabNum newLabNum1 = new LabNum(12);
-    private static LabNum newLabNum2 = new LabNum(13);
-    private static LabTotal newLabTotal = new LabTotal(40);
-    private static EditLabCommand sampleCommandA;
-    private static EditLabCommand sampleCommandB;
-    private static EditLabCommand sampleCommandC;
+    private static LabNum newLabNum = new LabNum(VALID_EDIT_LAB_NO);
+    private static LabNum newLabNum2 = new LabNum(VALID_EDIT_LAB_NO2);
+    private static LabNum newLabNum3 = new LabNum(VALID_EDIT_LAB_NO3);
+    private static LabNum invalidLabNum = new LabNum(INVALID_EDIT_LAB_NO);
+    private static LabTotal newLabTotal = new LabTotal(VALID_NEW_LAB_TOTAL);
 
     private Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
-    @BeforeAll
-    public static void oneTimeSetUp() {
-        // Initialize sample students and Commands once before all tests
-        validLab = new LabBuilder().build();
-        sampleLabA = new LabBuilder().withLabNum(10).withTotal(20).build();
-        Lab sampleLabB = new LabBuilder().withLabNum(11).withTotal(30).build();
-        sampleCommandA = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
-        sampleCommandB = new EditLabCommand(sampleLabB, newLabNum);
-        sampleCommandC = new EditLabCommand(sampleLabB, newLabTotal);
-    }
-
     @Test
     public void constructor_nullLab_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddLabCommand(null));
+        assertThrows(NullPointerException.class, () -> new EditLabCommand(null, newLabNum, newLabTotal));
     }
 
     @Test
     public void execute_labTitleDoesNotExist_throwsCommandException() {
-        Lab labToEdit = new Lab(new LabNum(12));
+        model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
+        Lab labToEdit = new Lab(invalidLabNum);
         EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
 
         String expectedMessage = String.format(Lab.MESSAGE_LAB_NOT_EXISTS, labToEdit);
@@ -63,8 +47,9 @@ public class EditLabCommandTest {
 
     @Test
     public void execute_newlabTitleAlreadyExists_throwsCommandException() {
+        model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
         Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
-        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, new LabNum(1));
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, new LabNum(VALID_LAB_NO));
 
         String expectedMessage = String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, labToEdit);
 
@@ -73,9 +58,10 @@ public class EditLabCommandTest {
 
     @Test
     public void execute_labEditedAllFields_success() {
+        model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
         Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
-        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum1, newLabTotal);
-        Lab newLab = new Lab(newLabNum1, newLabTotal);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum2, newLabTotal);
+        Lab newLab = new Lab(newLabNum2, newLabTotal);
 
         String expectedMessage = String.format(EditLabCommand.MESSAGE_EDIT_LAB_SUCCESS, newLab);
 
@@ -86,10 +72,11 @@ public class EditLabCommandTest {
 
     @Test
     public void execute_labEditedOnlyOneField_success() {
+        model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
         // only change labNum
-        Lab labToEdit = getTypicalLabList().get(NUMBER_SECOND_LAB);
-        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum2);
-        Lab newLab = new Lab(newLabNum2);
+        Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum3);
+        Lab newLab = new Lab(newLabNum3);
 
         String expectedMessage = String.format(EditLabCommand.MESSAGE_EDIT_LAB_SUCCESS, newLab);
 
@@ -111,6 +98,8 @@ public class EditLabCommandTest {
 
     @Test
     public void equals_sameLab_returnsTrue() {
+        Lab sampleLabA = new LabBuilder().withLabNum(VALID_LAB_NO).withTotal(VALID_TOTAL_SCORE).build();
+        EditLabCommand sampleCommandA = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
         EditLabCommand sampleCommandACopy = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
         assertEquals(sampleCommandA, sampleCommandACopy);
     }

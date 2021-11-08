@@ -47,6 +47,7 @@ public class EditLabCommand extends Command {
      * @param original the lab to be edited.
      * */
     public EditLabCommand(Lab original, LabNum newLabNum, LabTotal total) {
+        requireNonNull(original);
         this.original = original;
         this.newLabNum = newLabNum;
         this.total = total;
@@ -55,6 +56,7 @@ public class EditLabCommand extends Command {
      * @param original the lab to be edited.
      * */
     public EditLabCommand(Lab original, LabTotal total) {
+        requireNonNull(original);
         this.original = original;
         this.total = total;
         this.newLabNum = new LabNum(0);
@@ -65,6 +67,7 @@ public class EditLabCommand extends Command {
      * @param newLabNum the new lab number
      * */
     public EditLabCommand(Lab original, LabNum newLabNum) {
+        requireNonNull(original);
         this.original = original;
         this.newLabNum = newLabNum;
         this.total = original.getLabTotal();

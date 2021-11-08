@@ -44,6 +44,11 @@ public class CommandTestUtil {
     public static final Integer VALID_LAB_NO2 = 1;
     public static final Integer VALID_ACTUAL_SCORE2 = 15;
     public static final Integer VALID_TOTAL_SCORE2 = 20;
+    public static final Integer VALID_EDIT_LAB_NO = 11;
+    public static final Integer INVALID_EDIT_LAB_NO = 12;
+    public static final Integer VALID_EDIT_LAB_NO2 = 13;
+    public static final Integer VALID_EDIT_LAB_NO3 = 7;
+    public static final Integer VALID_NEW_LAB_TOTAL = 40;
     public static final String NEW_LAB_NUM = " " + PREFIX_LAB_NEW_LAB_NUM + VALID_LAB_NO2;
     public static final String LAB_NUM = " " + PREFIX_LAB_NUM + VALID_LAB_NO;
     public static final String LAB_TOTAL = " " + PREFIX_LAB_TOTAL + VALID_ACTUAL_SCORE;
