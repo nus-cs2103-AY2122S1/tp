@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User executes export report command;
+:MyCRM parses user inputs;
+if () then ([Invalid inputs])
+    :Throws ParseException;
+    :Displays unsuccessful message;
+else ([Valid inputs])
+    if () then ([Report window is generated])
+        :Gets job report information from report window;
+        :Export job report;
+        :Displays successful message;
+    else ([else])
+        :Generates a job report;
+        :Export job report;
+        :Displays successful message;
+    endif
+endif
+stop
+
+@enduml

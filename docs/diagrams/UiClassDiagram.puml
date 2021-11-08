@@ -9,17 +9,58 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
+
+Class ThemeManager
+
 Class CommandBox
+Class ResultDisplay
+
+package "MainDisplay Section" #F4F6F6{
+Class MainDisplay
+Class JobListPanel
+Class JobCard
+Class MailListPanel
+Class MailCard
 }
+
+package "SideDisplay Section" #F4F6F6{
+Class SideDisplay
+Class ContactListPanel
+Class ContactCard
+
+Class ProductListPanel
+Class ProductCard
+
+Class TemplateListPanel
+Class TemplateCard
+
+Class HistoryListPanel
+Class HistoryCard
+}
+
+package "ReportWindow Section" #F4F6F6{
+Class ReportWindow
+Class GraphDisplay
+Class JobDisplay
+}
+
+Class StatusBarFooter
+Class HelpWindow
+
+
+note "All classes in these sections\ninherit from **UiPart** class." as N1
+N1 .. "SideDisplay Section"
+N1 .. "MainDisplay Section"
+N1 .. "ReportWindow Section"
+}
+
+
 
 package Model <<Rectangle>> {
 Class HiddenModel #FFFFFF
 }
+
+Model -[hidden]up- "MainDisplay"
 
 package Logic <<Rectangle>> {
 Class HiddenLogic #FFFFFF
@@ -30,31 +71,55 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+MainWindow -left-> "1" ThemeManager
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" MainDisplay
+MainWindow *-down-> "1" SideDisplay
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-
-PersonListPanel -down-> "*" PersonCard
+MainWindow --> "0..1" ReportWindow
+HelpWindow -[hidden]- CommandBox
+StatusBarFooter -[hidden]- ResultDisplay
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
+UiManager -right-> Logic
+MainWindow -right-> Logic
+
+' Main display package
+MainDisplay *-down-> "1" JobListPanel
+MainDisplay *-down-> "1" MailListPanel
+JobListPanel -down-> "*" JobCard
+MailListPanel -down-> "*" MailCard
+JobCard .down.> Model
+MailCard .down.> Model
+
+' Side display package
+SideDisplay *-down-> "1" ContactListPanel
+SideDisplay *-down-> "1" ProductListPanel
+SideDisplay *-down-> "1" TemplateListPanel
+SideDisplay *-down-> "1" HistoryListPanel
+ContactListPanel -down-> "*" ContactCard
+ProductListPanel -down-> "*" ProductCard
+TemplateListPanel -down-> "*" TemplateCard
+HistoryListPanel -down-> "*" HistoryCard
+ContactCard .down.> Model
+ProductCard .down.> Model
+TemplateCard .down.> Model
+HistoryCard .down.> Model
+
+' Report window package
+ReportWindow *-down-> "1" GraphDisplay
+GraphDisplay -[hidden]down- JobDisplay
+ReportWindow *-down-> "1" JobDisplay
+JobDisplay .down.> Model
+
+' Inherit UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+ResultDisplay --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
-
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
-
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml

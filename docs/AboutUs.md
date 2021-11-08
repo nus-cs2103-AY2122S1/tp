@@ -7,53 +7,70 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## Project Team
 
-### John Doe
+### Timothy Chua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ooawagaeri.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ooawagaeri)]
+[[portfolio](team/ooawagaeri.md)]
 
-* Role: Project Advisor
+* Role: Team Lead, Scheduling and Tracking
+* Responsibilities:
+  * Focus on issues.
+  * Defining, assigning, and tracking project tasks.
+  * Ensuring everyone has manageable task.
 
-### Jane Doe
+### Hang Zelin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images\hangzelin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/hangzelin)]
+[[portfolio](team/hangzelin.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code Quality / Integration handler
+* Responsibilities:
+  * Pull request reviewer.
+  * Merging of pull requests.
+  * Ensure adherence to coding standards.
 
-### Johnny Doe
+<br><br>
+### Zhang Yubin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images\kimowarui.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/Kimowarui)]
+[[portfolio](team/kimowarui.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deliverables and Deadlines
+* Responsibilities:
+  * Focus on milestones page.
+  * Update milestones according to CS2103 website.
+  * Ensure project deliverables are done on time and in the right format.
+  * Chase people if need be.
 
-### Jean Doe
+### Fan Tianhao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images\ttraveller7.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/TTraveller7)]
+[[portfolio](team/ttraveller7.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documents
+* Responsibilities:
+  * Ensure quality of various project documents
+  * UI mockup and design
 
-### James Doe
+### Dhruv Shah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dhshah1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/dhshah1)]
+[[portfolio](team/dhshah1.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Tester
+* Responsibilities:
+  * Ensure proper tests are written for all modules
+  * Ensure new features/modules don't introduce bugs
+  * Ensure application works as expected

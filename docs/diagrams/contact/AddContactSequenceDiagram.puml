@@ -1,0 +1,57 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "contactToAdd:AddContactCommand" as AddContactCommand LOGIC_COLOR
+participant "c:CommandResult" as CommandResult LOGIC_COLOR
+participant ":StateManager" as StateManager LOGIC_COLOR
+participant "modifiedResult:CommandResult" as CommandResult2 LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("addContact n/Sans c/83921823 e/Sans@gmail.com a/MaxWell...")
+activate LogicManager
+
+ref over LogicManager, AddContactCommand : parse add contact
+
+LogicManager -> AddContactCommand : execute()
+activate AddContactCommand
+
+AddContactCommand -> Model : addContact(contactToAdd)
+activate Model
+
+Model --> AddContactCommand
+deactivate Model
+
+create CommandResult
+AddContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddContactCommand : c
+deactivate CommandResult
+
+AddContactCommand -> StateManager : handleContact(contactToAdd, c)
+activate StateManager
+
+create CommandResult2
+StateManager -> CommandResult2
+activate CommandResult2
+
+CommandResult2 --> StateManager : modifiedResult
+deactivate CommandResult2
+
+StateManager --> AddContactCommand : modifiedResult
+deactivate StateManager
+
+AddContactCommand --> LogicManager : modifiedResult
+deactivate AddContactCommand
+
+AddContactCommand -[hidden]-> LogicManager
+destroy AddContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

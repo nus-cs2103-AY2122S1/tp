@@ -1,0 +1,20 @@
+@startuml
+start
+:User executes delete template command;
+:MyCRM parses user inputs;
+if () then ([Invalid inputs])
+    :Throws ParseException;
+    :Displays unsuccessful delete template on UI;
+else ([Valid inputs])
+    if () then ([Index out of range])
+        :Throws CommandException;
+        :Displays unsuccessful delete template on UI;
+    else ([Else])
+        :Retrieves template to be deleted;
+        :Deletes template from MyCRM;
+        :Displays successful delete template on UI;
+    endif
+endif
+stop
+
+@enduml

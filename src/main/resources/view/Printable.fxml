@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+  prefWidth="505.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
+    <children>
+        <StackPane fx:id="graphDisplayPlaceholder" />
+        <HBox prefHeight="570.0" prefWidth="595.0">
+                <children>
+                    <VBox>
+                        <Label fx:id="completedJobListTitle">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="completedJobList" prefWidth="200.0" wrapText="true"
+                        style="-fx-background-color: #fff; -fx-border-color: #fff;
+                         -fx-border-width: 0; -fx-border-image-width: 0;
+                          -fx-background-image: null; -fx-region-background:
+                           null;-fx-border-insets: 0; -fx-background-size:0; -fx-border-image-insets:0;" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox>
+                        <Label fx:id="inProgressJobListTitle">
+                            <font>
+                                <Font name="System Bold"  size="12.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="inProgressJobList" prefWidth="200.0" wrapText="true"
+                        style="-fx-background-color: #fff; -fx-border-color: #fff;
+                         -fx-border-width: 0; -fx-border-image-width: 0;
+                          -fx-background-image: null; -fx-region-background:
+                           null;-fx-border-insets: 0; -fx-background-size:0; -fx-border-image-insets:0;" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox>
+                        <Label fx:id="topThreeProductListTitle"  >
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="topThreeProductList" prefWidth="200.0" wrapText="true"
+                        style="-fx-background-color: #fff; -fx-border-color: #fff;
+                         -fx-border-width: 0; -fx-border-image-width: 0;
+                          -fx-background-image: null; -fx-region-background:
+                           null;-fx-border-insets: 0; -fx-background-size:0; -fx-border-image-insets:0;" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </children>
+            </HBox>
+    </children>
+</VBox>
