@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.programmer.model.student.Lab;
 
 public class JsonAdaptedLab {
+    public static final String NON_NULL_ADAPTED_LAB = "The adaptedLab cannot be null.";
+
     private final int labNumValue;
     private final int actualScoreValue;
     private final int totalScoreValue;

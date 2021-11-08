@@ -1,12 +1,12 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.core.Messages.MESSAGE_STUDENTS_FILTERED;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
-import seedu.programmer.commons.core.Messages;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
@@ -41,7 +41,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
+                String.format(MESSAGE_STUDENTS_FILTERED, model.getFilteredStudentList().size()));
     }
 
     @Override

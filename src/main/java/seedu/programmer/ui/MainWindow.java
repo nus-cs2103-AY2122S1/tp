@@ -249,6 +249,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         popupManager.displayPopup(String.format(UPLOAD_SUCCESS_MESSAGE, stuList.size()));
+        labResultListPanelPlaceholder.getChildren().clear();
         logger.info("Uploaded CSV data successfully!");
     }
 

@@ -1,0 +1,40 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "d:QueryStudentDescriptor" as QueryStudentDescriptor MODEL_COLOR
+participant "p:StudentDetailContainsPredicate" as StudentDetailContainsPredicate MODEL_COLOR
+end box
+
+[-> FilterCommandParser : parseCommand("filter -cid BO1")
+activate FilterCommandParser
+
+create QueryStudentDescriptor
+FilterCommandParser -> QueryStudentDescriptor : QueryStudentDescriptor(null, null, "B01")
+activate QueryStudentDescriptor
+
+QueryStudentDescriptor --> FilterCommandParser
+deactivate QueryStudentDescriptor
+
+create StudentDetailContainsPredicate
+FilterCommandParser -> StudentDetailContainsPredicate : StudentDetailContainsPredicate(d)
+activate StudentDetailContainsPredicate
+
+StudentDetailContainsPredicate --> FilterCommandParser
+deactivate StudentDetailContainsPredicate
+
+create FilterCommand
+FilterCommandParser -> FilterCommand: FilterCommand(p)
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser
+deactivate FilterCommand
+
+[<-- FilterCommandParser: f
+
+@enduml

@@ -4,8 +4,8 @@ title: User Guide
 ---
 
 ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
-Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this
-application is optimized to track personal particulars, emails and lab results of your students across different
+Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab Teaching
+Assistants (TAs), this application is optimized to track personal particulars, emails and lab results of your students across different
 classes. If you are familiar with Unix commands, this is definitely for you!
 
 ## Table of Contents
@@ -94,7 +94,7 @@ Parameter | What it means | Constraints
 **-email** | Email of Student | eXXXXXXX@u.nus.edu, where X is a digit from 0 to 9
 **-ln** | Lab Number | An integer between 1 and 13 (inclusive)
 **-nln** | New Lab Number | An integer between 1 and 13 (inclusive)
-**-ts** | Lab Total Score | A non-negative integer between 1 and 100 (inclusive)
+**-ts** | Lab Total Score | A positive integer between 1 and 100 (inclusive)
 **-s** | Lab Score of Student | A non-negative integer, not greater than the corresponding lab total score
 
 ## <a name="general-features"></a>1. General Features
@@ -131,6 +131,7 @@ As this is a mass operation, it might take a couple of seconds to complete.
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
 
 Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
+Otherwise, throws an error if no pre-existing data.
 
 ### <a name="download-data"></a>2.3 Download Data: `download` or F3 on keyboard
 
@@ -165,7 +166,7 @@ In summary:
 
 ### <a name="add-student"></a>3.1 Add Student: `add`
 
-Adds a student to ProgrammerError with their student ID and class ID. Both the student ID and class ID must be unique.
+Adds a student to ProgrammerError with their student ID, class ID and email. Both the student ID and email must be unique.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
@@ -174,14 +175,14 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Example:**
 
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
-  A1234567X and class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
+  A1234567X, class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
 
 </div>
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 
-Edits the details or grade of an existing student's in the PE.
-* Both the student ID and class ID must be unique.
+Edits the details or grade of an existing student in the PE.
+* Both the student ID and email must be unique.
 * 1-indexing is used here as according to the displayed list.
 * Any combination of the optional arguments can be provided.
 * At least one of the optional argument must be provided.
@@ -197,7 +198,7 @@ Format:`edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [
 **Examples:**
 
 - `edit 1 -n Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
-- `edit 1 -ln 4 -s 29` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
+- `edit 1 -ln 4 -s 29` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.
 
 </div>
 
@@ -230,6 +231,7 @@ sequence of characters provided in the argument string.
 
 Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
 
+Below shows an example when `filter -cid B01` is executed with 4 students from class B01 filtered out.
 ![filter](images/commands/FilterCommand/filter.png)
 
 
@@ -329,11 +331,11 @@ Command | Format & Examples
 --------| ----------------------
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Add Lab** | `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
-**Delete** | `delete <INDEX_IN_LIST>`
 **Dashboard** | `dashboard`
+**Delete** | `delete <INDEX_IN_LIST>`
 **Delete Lab** | `dellab -ln <LAB_NUM>`
 **Download** | `download`
-**Edit** | Format 1:<br/> `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
+**Edit** | `edit <INDEX_IN_LIST> [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>] [-ln <LAB_NUMBER> -s <ACTUAL_SCORE>]`
 **Edit Lab** | `editlab -ln <LAB_NUM> [-nln <NEW_LAB_NUM>] [-ts <NEW_LAB_SCORE>]`
 **Exit** | `exit`
 **Fill** | `fill`
