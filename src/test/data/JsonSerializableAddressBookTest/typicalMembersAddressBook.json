@@ -1,0 +1,101 @@
+{
+  "_comment": "AddressBook save file which contains the same Member values as in TypicalMembers#getTypicalAddressBook()",
+  "members" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "attachedPosition" : [ "friends" ],
+    "attachedTasks": [{
+      "taskName": "team meeting",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }, {
+      "taskName": "group project",
+      "isDone": false,
+      "deadline": "21/10/2021 23:59"
+    }, {
+      "taskName": "check payment",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }, {
+      "taskName": "check vaccination status",
+      "isDone": false,
+      "deadline": "22/10/2021 08:00"
+    }, {
+      "taskName": "rehearse 2 times",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "attachedPosition" : [ "owesMoney", "friends" ],
+    "attachedTasks": [{
+      "taskName": "team meeting",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }, {
+      "taskName": "group project",
+      "isDone": false,
+      "deadline": "21/10/2021 23:59"
+    }, {
+      "taskName": "check payment",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }, {
+      "taskName": "check vaccination status",
+      "isDone": false,
+      "deadline": "22/10/2021 08:00"
+    }, {
+      "taskName": "rehearse 2 times",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "attachedPosition" : [ ],
+    "attachedTasks": [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "attachedPosition" : [ "friends" ],
+    "attachedTasks": [ ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "attachedPosition" : [ ],
+    "attachedTasks": [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "attachedPosition" : [ ],
+    "attachedTasks": [ ]
+  }, {
+    "name" : "Jerry Smith",
+    "phone" : "123456789",
+    "email" : null,
+    "address" : null,
+    "attachedPosition" : [ ],
+    "attachedTasks": [ ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "attachedPosition" : [ ],
+    "attachedTasks": [ ]
+  } ],
+  "events": []
+}

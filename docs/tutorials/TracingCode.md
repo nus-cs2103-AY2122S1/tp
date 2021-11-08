@@ -85,7 +85,7 @@ Now let’s set the breakpoint. First, double-click the item to reach the corres
 
 ## Tracing the execution path
 
-Recall from the User Guide that the `edit` command has the format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` For this tutorial we will be issuing the command `edit 1 n/Alice Yeoh`.
+Recall from the User Guide that the `medit` command has the format: `medit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/POSITION]…​` For this tutorial we will be issuing the command `medit 1 n/Alice Yeoh`.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -94,7 +94,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. To start the debugging session, simply `Run` \> `Debug Main`
 
-1. When the GUI appears, enter `edit 1 n/Alice Yeoh` into the command box and press `Enter`.
+1. When the GUI appears, enter `medit 1 n/Alice Yeoh` into the command box and press `Enter`.
 
 1. The Debugger tool window should show up and show something like this:<br>
    ![DebuggerStep1](../images/tracing/DebuggerStep1.png)
@@ -153,7 +153,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 1. _Step over_ the statements in that method until you reach the `switch` statement. The 'Variables' window now shows the value of both `commandWord` and `arguments`:<br>
     ![Variables](../images/tracing/Variables.png)
 
-1. We see that the value of `commandWord` is now `edit` but `arguments` is still not processed in any meaningful way.
+1. We see that the value of `commandWord` is now `medit` but `arguments` is still not processed in any meaningful way.
 
 1. Stepping through the `switch` block, we end up at a call to `EditCommandParser().parse()` as expected (because the command we typed is an edit command).
 
@@ -171,7 +171,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. Stepping through the method shows that it calls `ArgumentTokenizer#tokenize()` and `ParserUtil#parseIndex()` to obtain the arguments and index required.
 
-1. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `edit` command and store any possible changes in an `EditPersonDescriptor`. Recall that we can verify the contents of `editPersonDesciptor` through the 'Variables' window.<br>
+1. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `medit` command and store any possible changes in an `EditMemberDescriptor`. Recall that we can verify the contents of `editMemberDesciptor` through the 'Variables' window.<br>
    ![EditCommand](../images/tracing/EditCommand.png)
 
 1. As you just traced through some code involved in parsing a command, you can take a look at this class diagram to see where the various parsing-related classes you encountered fit into the design of the `Logic` component.
@@ -180,7 +180,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 1. Let’s continue stepping through until we return to `LogicManager#execute()`.
 
     The sequence diagram below shows the details of the execution path through the Logic component. Does the execution path you traced in the code so far match the diagram?<br>
-    ![Tracing an `edit` command through the Logic component](../images/tracing/LogicSequenceDiagram.png)
+    ![Tracing an `medit` command through the Logic component](../images/tracing/LogicSequenceDiagram.png)
 
 1. Now, step over until you read the statement that calls the `execute()` method of the `EditCommand` object received, and step into that `execute()` method (partial code given below):
 
@@ -189,21 +189,21 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
    @Override
    public CommandResult execute(Model model) throws CommandException {
        ...
-       Person personToEdit = lastShownList.get(index.getZeroBased());
-       Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-       if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+       Member personToEdit = lastShownList.get(index.getZeroBased());
+       Member editedMember = createEditedMember(personToEdit, editMemberDescriptor);
+       if (!personToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
        }
-       model.setPerson(personToEdit, editedPerson);
-       model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-       return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+       model.setMember(personToEdit, editedMember);
+       model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+       return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedMember));
    }
    ```
 
 1. As suspected, `command#execute()` does indeed make changes to the `model` object. Specifically,
-   * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the person data.
-   * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ persons.<br>
-     FYI, The 'filtered list' is the list of persons resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the persons so that the user can see the edited person along with all other persons. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
+   * it uses the `setMember()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the person data.
+   * it uses the `updateFilteredMemberList` method to ask the `Model` to populate the 'filtered list' with _all_ persons.<br>
+     FYI, The 'filtered list' is the list of persons resulting from the most recent operation that will be shown to the user immediately after. For the `medit` command, we populate it with all the persons so that the user can see the edited person along with all other persons. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
      To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of persons is being tracked.
      <img src="../images/ModelClassDiagram.png" width="450" /><br>
    * :bulb: This may be a good time to read through the [`Model` component section of the DG](../DeveloperGuide.html#model-component)
@@ -232,14 +232,14 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(
-            source.getPersonList()
+            source.getMemberList()
                   .stream()
-                  .map(JsonAdaptedPerson::new)
+                  .map(JsonAdaptedMember::new)
                   .collect(Collectors.toList()));
     }
     ```
 
-1. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the `JsonSerializableAddressBook`.
+1. It appears that a `JsonAdaptedMember` is created for each `Member` and then added to the `JsonSerializableAddressBook`.
    This is because regular Java objects need to go through an _adaptation_ for them to be suitable to be saved in JSON format.
 
 1. While you are stepping through the classes in the `Storage` component, here is the component's class diagram to help you understand how those classes fit into the structure of the component.<br>
@@ -275,15 +275,15 @@ Here are some quick questions you can try to answer based on your execution path
 
     1.  `redit 1 n/Alice Yu`
 
-    2.  `edit 0 n/Alice Yu`
+    2.  `medit 0 n/Alice Yu`
 
-    3.  `edit 1 n/Alex Yeoh`
+    3.  `medit 1 n/Alex Yeoh`
 
-    4.  `edit 1`
+    4.  `medit 1`
 
-    5.  `edit 1 n/アリス ユー`
+    5.  `medit 1 n/アリス ユー`
 
-    6.  `edit 1 t/one t/two t/three t/one`
+    6.  `medit 1 t/one t/two t/three t/one`
 
 2.  What components will you have to modify to perform the following
     enhancements to the application?
@@ -296,6 +296,6 @@ Here are some quick questions you can try to answer based on your execution path
 
     4.  Add a new command
 
-    5.  Add a new field to `Person`
+    5.  Add a new field to `Member`
 
     6.  Add a new entity to the address book

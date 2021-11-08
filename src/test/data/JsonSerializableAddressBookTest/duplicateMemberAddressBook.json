@@ -1,0 +1,38 @@
+{
+  "members": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "attachedPosition": [ "friends" ],
+    "attachedTasks": [{
+      "taskName": "team meeting",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }, {
+      "taskName": "group project",
+      "isDone": false,
+      "deadline": "21/10/2021 23:59"
+    }, {
+      "taskName": "check payment",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }, {
+      "taskName": "check vaccination status",
+      "isDone": false,
+      "deadline": "22/10/2021 08:00"
+    }, {
+      "taskName": "rehearse 2 times",
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
+    }]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "address": "4th street",
+    "attachedPosition": [ ],
+    "attachedTasks": [ ]
+  } ],
+  "events": []
+}

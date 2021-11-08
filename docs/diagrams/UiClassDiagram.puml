@@ -11,10 +11,14 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class MemberListPanel
+Class MemberListCard
 Class StatusBarFooter
 Class CommandBox
+Class EventListPanel
+Class EventListCard
+Class TaskListPanel
+Class TaskListCard
 }
 
 package Model <<Rectangle>> {
@@ -26,35 +30,45 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside .right..> Ui
 
-UiManager .left.|> Ui
+UiManager .right.|> Logic
+MainWindow .right.|> Logic
+Logic -[hidden]down- UiManager
+
+UiManager .up.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
+MainWindow -right-|> UiPart
+MainWindow *-down-> "1" MemberListPanel
+MainWindow *-down-> "1" EventListPanel
+MainWindow *-down-> "1" TaskListPanel
+MainWindow *-right-> "1" StatusBarFooter
+MainWindow *-right->  "1" CommandBox
+MainWindow *-right-> "1" ResultDisplay
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
-
-MainWindow -left-|> UiPart
+StatusBarFooter -[hidden]left- HelpWindow
+ResultDisplay -[hidden]left- StatusBarFooter
+CommandBox -[hidden]left- ResultDisplay
+EventListPanel -[hidden]left- MemberListPanel
+TaskListPanel -[hidden]left- MemberListPanel
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+MemberListPanel -up-|> UiPart
+MemberListCard -up-|> UiPart
+EventListPanel -up-|> UiPart
+EventListCard -up-|> UiPart
+TaskListPanel -up-|> UiPart
+TaskListCard -up-|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+MemberListPanel -down-> "*" MemberListCard
+EventListPanel -down-> "*" EventListCard
+TaskListPanel -down-> "*" TaskListCard
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
+EventListCard -..> Model
+MemberListCard -..> Model
+TaskListCard -..> Model
 @enduml

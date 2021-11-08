@@ -112,7 +112,7 @@
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #0b0ef8;
     -fx-border-width: 1;
 }
 
@@ -328,7 +328,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #memberListPanel, #memberWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -337,16 +337,64 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#positions {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
+#positions .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #7e57c2;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#participants .label {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#participants {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#participants .label {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#tasks {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tasks .label {
+    -fx-text-fill: white;
+    -fx-background-color: #b43360;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#titleHolder {
+    -fx-background-color: #36454f;
+}
+
+.title {
+    -fx-background-color: #36454f;
+    -fx-font-weight: bold;
+}
+
+#memberListTitle, #taskListTitle, #eventListTitle {
+    -fx-text-fill: white;
 }

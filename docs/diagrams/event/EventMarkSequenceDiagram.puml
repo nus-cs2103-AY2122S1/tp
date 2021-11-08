@@ -1,0 +1,49 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EmarkCommandParser" as EmarkCommandParser LOGIC_COLOR
+participant ":EmarkCommand" as EmarkCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("emark /e 1 /m 2 /m 4")
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/e 1 /m 2 /m 4")
+activate AddressBookParser
+
+create EmarkCommandParser
+AddressBookParser -> EmarkCommandParser
+activate EmarkCommandParser
+
+EmarkCommandParser --> AddressBookParser
+deactivate EmarkCommandParser
+
+AddressBookParser -> EmarkCommandParser : parse("/e 1 /m 2 /m 4")
+activate EmarkCommandParser
+
+create EmarkCommand
+EmarkCommandParser -> EmarkCommand
+activate EmarkCommand
+
+EmarkCommand --> EmarkCommandParser
+deactivate EmarkCommand
+
+EmarkCommandParser --> AddressBookParser
+deactivate EmarkCommandParser
+
+EmarkCommandParser -[hidden]-> AddressBookParser
+destroy EmarkCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+ref over LogicManager, Model : EmarkCommand Execution
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+start
+repeat
+:User chooses to look into one of the modules;
+switch ()
+case ([Event chosen])
+    :Ailurus lists all events;
+    :User types in event commands;
+    :Ailurus executes event command;
+case ([Member chosen])
+    if () then ([select members of an event with filters])
+        :Ailurus lists members of event with filters;
+    else ([else])
+        :Ailurus lists all members;
+    endif
+    :User types in member commands;
+    :Ailurus executes member command;
+case ([Task chosen])
+    if () then ([select tasks with filters])
+        :Ailurus lists corresponding tasks of a member;
+    else ([else])
+        :Ailurus lists all tasks of a member;
+    endif
+    :User types in task commands;
+    :Ailurus executes task command;
+endswitch
+:Ailurus saves changes to Storage;
+repeat while () is ([else])
+->//[Program exited?]//;
+stop
+@enduml

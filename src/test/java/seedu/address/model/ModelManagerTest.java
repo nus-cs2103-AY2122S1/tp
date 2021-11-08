@@ -3,19 +3,26 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalEvents.ICEBREAKER;
+import static seedu.address.testutil.TypicalEvents.PERFORMANCE;
+import static seedu.address.testutil.TypicalMembers.ALICE;
+import static seedu.address.testutil.TypicalMembers.BENSON;
+import static seedu.address.testutil.TypicalMembers.CARL;
+import static seedu.address.testutil.TypicalTasks.PROJECT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.model.module.member.Member;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -73,29 +80,93 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasMember_nullMember_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasMember(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasMember_memberNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasMember(ALICE));
+
+        modelManager.addMember(ALICE);
+        modelManager.deleteMember(ALICE);
+        assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasMember_memberInAddressBook_returnsTrue() {
+        modelManager.addMember(ALICE);
+        assertTrue(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(ICEBREAKER));
+
+        modelManager.addEvent(ICEBREAKER);
+        modelManager.setCurrentEvent(ICEBREAKER);
+        modelManager.deleteEvent(ICEBREAKER);
+        assertFalse(modelManager.hasEvent(ICEBREAKER));
+    }
+
+    @Test
+    public void hasEvent_eventEditedInAddressBook() {
+        modelManager.addEvent(ICEBREAKER);
+        modelManager.setEvent(ICEBREAKER, PERFORMANCE);
+        assertFalse(modelManager.hasEvent(ICEBREAKER));
+        assertTrue(modelManager.hasEvent(PERFORMANCE));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(ICEBREAKER);
+        assertTrue(modelManager.hasEvent(ICEBREAKER));
+    }
+
+    @Test
+    public void hasEventMember_eventMemberInAddressBook_returnsTrue() {
+        modelManager.addEvent(ICEBREAKER);
+        Set<Member> memberSet = new HashSet<>();
+        memberSet.add(ALICE);
+        modelManager.addEventMembers(ICEBREAKER, memberSet);
+        assertTrue(modelManager.hasEvent(ICEBREAKER));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        modelManager.addMember(CARL);
+        assertFalse(modelManager.hasTask(CARL, PROJECT));
+
+        modelManager.addTask(CARL, PROJECT);
+        modelManager.deleteTask(PROJECT);
+        assertFalse(modelManager.hasTask(CARL, PROJECT));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        modelManager.addMember(ALICE);
+        assertTrue(modelManager.hasTask(ALICE, PROJECT));
+    }
+
+    @Test
+    public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredMemberList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTaskList_withoutSelectedMember_returnsEmptyList() {
+        assertTrue(modelManager.getFilteredTaskList().isEmpty());
+    }
+
+    @Test
+    public void getFilteredTaskList_withSelectedMember_returnsTrue() {
+        modelManager.addMember(CARL);
+        assertTrue(modelManager.getFilteredTaskList(CARL).isEmpty());
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(ALICE).withMember(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -106,6 +177,13 @@ public class ModelManagerTest {
 
         // same object -> returns true
         assertTrue(modelManager.equals(modelManager));
+
+        // check address book
+        ModelManager modelManagerWithAddressBook = new ModelManager(addressBook, userPrefs);
+        modelManagerWithAddressBook.setAddressBook(addressBook);
+        assertTrue(modelManager.equals(modelManagerWithAddressBook));
+        modelManagerWithAddressBook.setAddressBook(differentAddressBook);
+        assertFalse(modelManager.equals(modelManagerWithAddressBook));
 
         // null -> returns false
         assertFalse(modelManager.equals(null));
@@ -118,11 +196,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredMemberList(new NameContainsKeywordsPredicate<Member>(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

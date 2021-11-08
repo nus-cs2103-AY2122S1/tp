@@ -1,0 +1,63 @@
+@startuml
+!include ../style.puml
+mainframe **sd** EaddCommand Execution
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EaddCommand" as EaddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "event:Event" as Event MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+LogicManager -> EaddCommand : execute(model)
+activate EaddCommand
+
+EaddCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model --> EaddCommand : filteredMemberList
+deactivate Model
+
+EaddCommand -> Event : addParticipants(membersToBeAdded)
+activate Event
+
+Event --> EaddCommand : event
+deactivate Event
+
+EaddCommand --> Model : hasEvent(event)
+activate Model
+
+Model --> EaddCommand : boolean
+deactivate Model
+
+alt boolean == true
+    EaddCommand --> LogicManager : CommandException(MESSAGE_DUPLICATE_EVENT)
+
+else boolean == false
+    EaddCommand --> Model : addEvent(event)
+    activate Model
+
+    Model --> EaddCommand
+    deactivate Model
+
+    create CommandResult
+    EaddCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> EaddCommand
+    deactivate CommandResult
+
+    EaddCommand --> LogicManager : result
+    deactivate EaddCommand
+
+    EaddCommand -[hidden]-> LogicManager
+    destroy EaddCommand
+end
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
