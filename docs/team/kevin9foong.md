@@ -15,35 +15,33 @@ Given below are my contributions to the project.
 
 #### New Features
   1. Add Friend functionality <br>
-     What it does: Allows users to add friends to the gitGud friends list. 
-     <br>
-     Justification: Core functionality for users to store list of friends.  
+     **What it does**: Allows users to add friends to the gitGud friends list.<br>
+     **Justification**: Core functionality for users to store list of friends.  
      
   2. Edit Friend functionality <br>
-     What it does: Allows users to edit friend's name.  
-     <br>
-     Justification: A friend can store a lot of information linked to it - e.g. linked games, skill values, schedule etc. 
+     **What it does**: Allows users to edit friend's name.<br>
+     **Justification**: A friend can store a lot of information linked to it - e.g. linked games, skill values, schedule etc. 
      Hence, it is important to be able to update information tied to a friend without having to delete and add again which 
      requires user to have to re-provide the previous information of the deleted friend when adding again.
      
   3. Add Game functionality <br>
-     What it does: Allows users to add games to the gitGud games list.<br>
-     Justification: Core functionality for users to store list of games. 
+     **What it does**: Allows users to add games to the gitGud games list.<br>
+     **Justification**: Core functionality for users to store list of games. 
      
   4. Implemented Storage support for Friends and Games <br>
-     What it does: Allows friends and games data to be persisted across multiple application runs by storing in json files. This 
-     allows our application to fulfill its main objective of being able to record friends' gaming information.
-     Justification: Without support for persistent storage, users would have to re-enter the same information with each run of 
+     **What it does**: Allows friends and games data to be persisted across multiple application runs by storing in json files. This 
+     allows our application to fulfill its main objective of being able to record friends' gaming information.<br>
+     **Justification**: Without support for persistent storage, users would have to re-enter the same information with each run of 
      our application to use other functionality, making the use of our application cumbersome and unproductive.
      
-  5. Add friend skill functionality<br>
-     What it does: Allows user to store and update friends' skill at different games. 
-     Justification: A core feature which allows our application of fulfilling its main objective of being able to record friends' 
+  5. Add friend skill functionality <br>
+     **What it does**: Allows user to store and update friends' skill at different games.<br>
+     **Justification**: A core feature which allows our application of fulfilling its main objective of being able to record friends' 
      skill values at specific games, so they can keep track of and find the most-highly skilled friends to play with.
      
   6. Friend recommendation functionality <br>
-     What it does: Recommends friends for user to play with for a given game and given time based on highest skill value of friend.<br>
-     Justification: This functionality solves our user's problem of finding optimal friends to play with that both fits into their busy schedules and 
+     **What it does**: Recommends friends for user to play with for a given game and given time based on highest skill value of friend.<br>
+     **Justification**: This functionality solves our user's problem of finding optimal friends to play with that both fits into their busy schedules and 
      provides the highest potential win rate for competitive gaming by providing preferred(highest skilled) friends available during a specified time 
      with a single command.
 
@@ -59,12 +57,10 @@ Given below are my contributions to the project.
 
 #### Contribution to team based tasks
 1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. <br>
-       What it involves:
-        * Refactoring of Persons and Tags to Friends and Games classes for team usage.
-        * Updating of relevant test cases
-          <br>
-          Justification: Refactoring the codebase for gitGud's structure provides a base for our team to extend
-          and develop gitGud specific features on top of.
+    * **What it involves**:
+      * Refactoring of Persons and Tags to Friends and Games classes for team usage.
+      * Updating of relevant test cases
+    * **Justification**: Refactoring the codebase for gitGud's structure provides a base for our team to extend and develop gitGud specific features on top of.
 
 2. Setting up of tools 
    1. Integrated the Github plugin (codecov) to the team repo.
