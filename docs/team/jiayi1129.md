@@ -34,7 +34,7 @@ Given below are my contributions to the project
   * Managed release `v1.2`, `v1.2.1`, `v1.3` and `v1.4` (4 releases) on Github
 
 * **Enhancements to existing features**:
-  * Added persistent Storage in Json for the Doctor class [#72](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/72)
+  * Added persistent storage in Json for the Doctor class [#72](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/72)
   * Added persistent storage in Json for the Appointment class [#117](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/117)
   * Updated the `isSamePerson` to check for more fields to define equality between people instead of just comparing the names [#38](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/38)
   * Changed `clear` command to `IWANTTOCLEAREVERYTHING` and updated the corresponding documentation [#206](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/206)
