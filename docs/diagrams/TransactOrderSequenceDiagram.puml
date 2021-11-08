@@ -8,8 +8,8 @@ Participant ":InventoryStorage" as inventoryStorage STORAGE_COLOR_T2
 Participant ":TransactionStorage" as transactionStorage STORAGE_COLOR_T2
 Participant ":BookKeepingStorage" as bookKeepingStorage STORAGE_COLOR_T2
 
+-> logic :execute()
 activate logic LOGIC_COLOR
-
 
 logic -[LOGIC_COLOR]> storage : saveInventory()
 activate storage STORAGE_COLOR
@@ -32,4 +32,6 @@ deactivate bookKeepingStorage
 storage --[STORAGE_COLOR]> logic
 deactivate storage
 
+<-- logic
+deactivate logic
 @enduml
