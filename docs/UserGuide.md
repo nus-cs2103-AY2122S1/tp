@@ -277,7 +277,7 @@ This **resets the displayed staff list** in both the staff view and schedule vie
 
 ### Setting Role Requirements : `setRoleReq`
 
-**Sets the role requirements**, which is the minimum number of staff required for each [role](#glossary):mag: in each shift.
+**Sets the role requirements**, which is the minimum number of staff required for each [role](#glossary):mag: in all shifts.
 * The default role requirements are 0 for all three roles.
 * The [Clear Command](#clearing-all-entries--clear) also resets the role requirements to the default.
 * Refer to the [flag legend](#flag-legend):triangular_flag_on_post: for more information on how to format the input for role requirements.
