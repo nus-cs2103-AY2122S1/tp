@@ -5,10 +5,18 @@ import java.util.function.Predicate;
 
 import seedu.address.model.person.Person;
 
+/**
+ * Tests that a {@code Person}'s {@code Done} any of the keywords given.
+ */
 public class DoneContainsKeywordsPredicate implements Predicate<Person> {
 
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code DoneContainsKeywordsPredicate}.
+     *
+     * @param keywords {@code List} of keywords to match against a {@code Done}.
+     */
     public DoneContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

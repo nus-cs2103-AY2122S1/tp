@@ -9,7 +9,7 @@ import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new MarkingCommand object
+ * Parses input arguments and creates a new {@code MarkingCommand} object
  */
 public class MarkingCommandParser implements Parser<MarkingCommand> {
 
@@ -22,6 +22,7 @@ public class MarkingCommandParser implements Parser<MarkingCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the MarkingCommand
      * and returns a MarkingCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkingCommand parse(String args) throws ParseException {

@@ -14,7 +14,7 @@ public class Notes {
     /**
      * Constructs a {@code Notes}.
      *
-     * @param information A valid level of education.
+     * @param information A valid notes.
      */
     public Notes(String information) {
         requireNonNull(information);

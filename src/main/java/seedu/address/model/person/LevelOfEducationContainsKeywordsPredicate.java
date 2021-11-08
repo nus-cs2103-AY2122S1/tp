@@ -10,6 +10,11 @@ public class LevelOfEducationContainsKeywordsPredicate implements Predicate<Pers
 
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code LevelOfEducationContainsKeywordsPredicate}.
+     *
+     * @param keywords {@code List} of keywords to match against a {@code LevelOfEducation}.
+     */
     public LevelOfEducationContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

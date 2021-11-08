@@ -12,6 +12,11 @@ public class NotesContainsKeywordsPredicate implements Predicate<Person> {
 
     private final String keyword;
 
+    /**
+     * Constructs a {@code NotesContainsKeywordsPredicates}.
+     *
+     * @param keyword {@code List} of keywords to match against a {@code Notes}.
+     */
     public NotesContainsKeywordsPredicate(String keyword) {
         this.keyword = keyword;
     }
