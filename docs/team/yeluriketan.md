@@ -36,7 +36,7 @@ the user's efficiency through its typing-based interface.
     2. Wrote unit/integration tests for `friend --get` and `game --get` commands.
     3. Update unit/integration [tests](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/231) for `model` component to reach 100% class coverage, 100% method coverage, and 99% line coverage.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=YeluriKetan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=YeluriKetan&tabRepo=AY2122S1-CS2103T-W13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=YeluriKetan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=YeluriKetan&tabRepo=AY2122S1-CS2103T-W13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements to existing features**:
     1. [Refactor](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/152) `Friend` to keep track of the `GameFriendLink`s in the form of a Map instead of the traditional Set used in AB3.
@@ -58,4 +58,11 @@ the user's efficiency through its typing-based interface.
 <br>
 
 * **Community**:
-    * Performed peer [testing and bug hunting](https://github.com/YeluriKetan/ped/issues) for a fellow team 
+    * Performed peer [testing and bug hunting](https://github.com/YeluriKetan/ped/issues) for a fellow team
+
+* **Stats**:
+    * 11 weeks of development period
+    * [25 issues found](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues?q=is%3Aissue+is%3Aclosed+author%3AYeluriKetan)
+    * [25 issues assigned](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues?q=is%3Aissue+is%3Aclosed+assignee%3AYeluriKetan)
+    * [19 accepted Pull Requests authored](https://github.com/AY2122S1-CS2103T-W13-4/tp/pulls?q=is%3Apr+is%3Aclosed+author%3AYeluriKetan)
+    * [3700+ lines contributed in 128 files](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=YeluriKetan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=YeluriKetan&tabRepo=AY2122S1-CS2103T-W13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
