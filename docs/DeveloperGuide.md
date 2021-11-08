@@ -172,7 +172,7 @@ It then returns a `AddCommand` back to `UniFyParser`, initialized with the `Task
 
 ##### Usage Scenario
 
-The following demonstrates a usage scenario where the user wants to add a task with name Test, date 2021-10-10, time 23:59 (default time), priority level LOW(default priority level)) and tag CS2103
+The following demonstrates a usage scenario where the user wants to add a task with name Test, date 2021-10-10, time 23:59 (default time), priority level LOW(default priority level) and tag CS2103
 
 1. The method `execute("add n/Test d/2021-10-10 tg/CS2103")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
 2. `parseCommand` in `UniFyParser` takes in the String `"add n/Test d/2021-10-10 tg/CS2103"` as its parameter and initializes a `AddCommandParser` object.
@@ -468,6 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC02 - List all tasks**
 
+
 **MSS**
 
 1.  User requests to list every task in Uni-Fy.
@@ -645,20 +646,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a task
 
-1. Deleting a task while all tasks are being shown
+1. Adding a task 
 
-    1. Prerequisites: List all tasks using the `list` command. At least one task in the list.
-
-    2. Test case: `add n/CS2103 d/2021-11-11 t/20:00 p/LOW tg/Important`<br>
+   1. Test case: `add n/CS2103 d/2021-11-11 t/20:00 p/LOW tg/Important`<br>
        Expected: Task is added to the list with the index being the length of the list. Details of the added task is shown in the status message.
-    3. Test case: `add n/CS2103 d/2021-11-11`<br>
-       Expected: Task is added with the default value of `23:59` for time and `LOW` for priority level and empty `Set<Tag>` for tags.Details of the added task is shown in the status message.
+   2. Test case: `add n/CS2103 d/2021-11-11`<br>
+      Expected: Task is added with the default value of `23:59` for time and `LOW` for priority level and empty `Set<Tag>` for tags.Details of the added task is shown in the status message.
 
-    4. Test case: `add n/Task`<br>
-        Expected: No task is added. Error details for invalid command shown in the status message. Status bar remains the same.
+   3. Test case: `add n/Task`<br>
+       Expected: No task is added. Error details for invalid command shown in the status message. Status bar remains the same.
 
-    5. Other incorrect delete commands to try: `add`, `add abcd`, `...`<br>
-        Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `add`, `add abcd`, `...`<br>
+       Expected: Similar to previous.
 
 
 ### Deleting a task
