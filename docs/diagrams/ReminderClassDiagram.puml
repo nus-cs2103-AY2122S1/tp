@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Reminder <<Rectangle>>{
+Class Reminder
+Class ReminderName
+Class ReminderOccurrence
+Class ReminderStartDate
+Class ReminderFrequency
+}
+
+Reminder *--> "1" ReminderName
+Reminder *--> "1" ReminderOccurrence
+Reminder *--> "1" ReminderStartDate
+Reminder *--> "1" ReminderFrequency
+
+@enduml

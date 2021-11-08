@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Jivesh Mohan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jivesh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jivesh)]
+[[portfolio](team/jivesh.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Integration, Git expert
 
-### Jane Doe
+### Jovyn Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jovyntls.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jovyntls)]
+[[portfolio](team/jovyntls.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking, Deliverables and deadlines
 
-### Johnny Doe
+### Neo Wei Qing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weiquu.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/weiquu)]
+[[portfolio](team/weiqing.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation, Code Quality
 
-### James Doe
+### Tan Yan Feng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/justintanyf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/justintanyf)]
+[[portfolio](team/justintanyf.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Intellij Expert, SourceTree Expert
+
+### Teo Keane
+
+<img src="images/okyntary.png" width="200px">
+
+[[github](http://github.com/okyntary)]
+[[portfolio](team/okyntary.md)]
+
+* Role: Developer
+* Responsibilities: Gradle Expert, `Storage` component expert 
