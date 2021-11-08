@@ -26,7 +26,7 @@ You can reach us at the email `AniList@nus.edu.sg`
 [[github](https://github.com/auhc99)]
 [[portfolio](team/auhc99.md)]
 
-* Role: Code Quality
+* Role: Developer
 * Responsibilities: Looks after code quality, ensures adherence to coding standards
 
 ### Ryan Chung Yi Sheng
@@ -36,7 +36,7 @@ You can reach us at the email `AniList@nus.edu.sg`
 [[github](https://github.com/NekrozQliphort)]
 [[portfolio](team/nekrozqliphort.md)]
 
-* Role: Documentation
+* Role: Developer
 * Responsibilities: Ensuring quality of various project documents
 
 ### Luo Dan
@@ -46,7 +46,7 @@ You can reach us at the email `AniList@nus.edu.sg`
 [[github](http://github.com/luodan01)]
 [[portfolio](team/luodan01.md)]
 
-* Role: Integration
+* Role: Developer
 * Responsibilities: Versioning the code, maintaining the code repository
 
 ### Muhammad Faruq
@@ -56,5 +56,5 @@ You can reach us at the email `AniList@nus.edu.sg`
 [[github](http://github.com/muhammad-faruq)]
 [[portfolio](team/muhammad-faruq.md)]
 
-* Role: Scheduling and UI manager
+* Role: Developer
 * Responsibilities: Defining, assigning, tracking project tasks. Managing UI matters.
