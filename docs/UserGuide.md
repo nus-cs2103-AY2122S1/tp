@@ -493,7 +493,6 @@ Note that `help help` will result in a general help window. We do not provide in
 Examples:
 * `help`
 * `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
-  or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Avengers can also browse the fourth menu on the top left (with the question symbol) to execute a general `help` command instead.
