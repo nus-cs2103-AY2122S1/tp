@@ -45,11 +45,11 @@ public class SocialHandleContainsKeywordsPredicateTest {
     public void test_socialHandleContainsKeywords_returnsTrue() {
         // One keyword
         SocialHandleContainsKeywordsPredicate predicate =
-                new SocialHandleContainsKeywordsPredicate(Collections.singletonList("Alice"));
+                new SocialHandleContainsKeywordsPredicate(Collections.singletonList("tg:Alice"));
         assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
 
         // Mixed-case keywords
-        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("aLIce"));
+        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("tg:aLIce"));
         assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
     }
 
