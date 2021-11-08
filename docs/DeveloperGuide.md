@@ -646,7 +646,7 @@ testers are expected to do more *exploratory* testing.
       3. Test case: `add n/John Doe a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
          <br> Expected: Invalid command format!
 
-### Get Statistics of last searched list of contacts
+### Statistics Test
 
 1. Showing statistics of all persons are being shown
 
@@ -760,7 +760,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `export friends.json`<br>
       Expected: Last searched contacts are exported to json file, friends.json
 
-### Export emails of last searched list of contacts
+### Export Emails Test
 
 1. Exporting the emails of all persons shown
 
@@ -779,33 +779,38 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `exportemail friends.txt`<br>
        Expected: Emails of last searched contacts are exported to emails.txt
     
-### Undo and Redo
+### Undo and Redo Test
 
-1. Test case: `undo` after program start up
-    1. Expected: Error detail shown for having no commands to undo
-2. Test case: `delete -a` followed by `undo`
-    1. Expected: `delete -a` deletes all contacts. `undo` brings back all deleted contacts.
-3. Test case: `redo`
-    1. Prerequisites: An `undo` command was successfully run immediately before
-    2. Expected: The effect of the `undo` command is reversed
-4. Test case: `redo`
-    1. Prerequisites: A command that is not `undo` was run immediately before
-    2. Expected: Error detail shown for having no commands to redo
+1. Undoing the most recent command
+   1. Test case: `undo` after program start up
+      Expected: Error detail shown for having no commands to undo
+   2. Test case: `delete -a` followed by `undo`
+      Expected: `delete -a` deletes all contacts. `undo` brings back all deleted contacts.
+2. Redoing a successful `undo` command run immediately before
+   1. Test case: `redo`
+       1. Expected: The effect of the `undo` command is reversed
+3. Redoing a most recent command with no `undo` command immediately before
+   1. Test case: `redo`
+      1. Expected: Error detail shown for having no commands to redo
     
     
 ### Loading/Saving data
 
 1. Dealing with missing/corrupted data files
    1. Remove a `{` from data/profBook.json
+
       Expected: ProfBook will be empty on load.
 
       1. Test case: `exit`
+      
          Expected: profBook.json will be overwritten and no longer corrupted.
    
-   2. Delete data/profBook.json
+   2. Delete data/profBook.json 
+   
       Expected: ProfBook will be populated with dummy data on load.
       
       1. Test case: `exit`
+         
          Expected: profBook.json will be recreated in the data directory
 
 ## Effort
