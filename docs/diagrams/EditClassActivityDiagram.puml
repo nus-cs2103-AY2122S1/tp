@@ -1,0 +1,25 @@
+@startuml
+
+title EditClassCommand
+
+:start;
+:User executes "editclass 1 l/5 ts/Mon 10:00-11:00";
+
+if () then ([valid limit])
+
+    if () then ([no timetable conflicts
+ due to new timeslot])
+    :Update class tags of enrolled students;
+    :Update limit and timing of the class;
+    :Update tuition and student lists
+    shown to the user;
+    else ([else])
+        :Alert user of timetable conflict;
+    endif
+    else ([else])
+        :Alert user of the required
+        minimum capacity of the class;
+    endif
+
+stop
+@enduml

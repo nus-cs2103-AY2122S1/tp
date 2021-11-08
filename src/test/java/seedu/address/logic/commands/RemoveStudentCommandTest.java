@@ -31,7 +31,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.TuitionClass;
 import seedu.address.testutil.StudentBuilder;
 
-
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for RemoveStudentCommandTest.
+ */
 public class RemoveStudentCommandTest {
 
     private Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
@@ -149,8 +151,6 @@ public class RemoveStudentCommandTest {
         assertFalse(removeStudentCommand.equals(command));
 
     }
-
-
 
     private Model setStudentsInClasses(Model expectedModel, TuitionClass tuitionClass, Index ... indices) {
         List<Student> students = Arrays.stream(indices).map(i -> model.getStudent(i)).collect(Collectors.toList());

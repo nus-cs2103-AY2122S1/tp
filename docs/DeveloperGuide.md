@@ -225,7 +225,7 @@ Step5: The complete timetable is displayed to user through the `UI` component.
 The following *Activity Diagram* summarizes what happens when a user executes a "timetable" command:<br>
 
 <p align="center">
-  img="images/TimetableCommandActivityDiagram.png" />
+  <img src="images/TimetableCommandActivityDiagram.png" />
 </p>
 
 #### Design considerations
@@ -364,7 +364,7 @@ Given below is an example usage scenario of how an `editclass` command is execut
 #### Steps
 Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
 
-Step 2: The `EditClassCommand` class will first check if any field of the tuition class has been updated.
+Step 2: The `EditClassCommand` class will first check if any field of the tuition class has been updated using `TuitionClass#sameClassDetails()`.
 If there are no changes, a `CommandException` will be thrown to alert the user that the class details are up-to-date.
 Otherwise, it proceeds to verify that the updated `limit` is at least equal to the current number of students.
 
@@ -375,6 +375,13 @@ If there are conflicts, a `CommandException` will be thrown to the user to alert
 Step 4: If there are no conflicts, the class tag of the students enrolled in the class which shows the `ClassName` and`Timeslot` of the updated class.
 
 Step 5: Finally, it replaces the existing class with the updated class in the database using `ModelManager#setTuition(TuitionClass, TuitionClass)`.
+
+#### Activity Diagram
+
+The user flow is shown in the *Activity Diagram* below.<br>
+<p align="center">
+  <img src="images/EditClassActivityDiagram.png">
+</p>
 
 ### [Developed] Deleting Students
 This feature allows students to be deleted using the `deletestudent` or `del` command.

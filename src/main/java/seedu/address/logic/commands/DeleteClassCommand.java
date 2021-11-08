@@ -48,14 +48,7 @@ public class DeleteClassCommand extends Command {
                 invalidClasses.add(currIndex.getOneBased());
                 continue;
             }
-            //remove the class from all its enrolled students
-            for (String name : classToDelete.getStudentList().getStudents()) {
-                if (name != null && model.getSameNameStudent(new Student(new Name(name))) != null) {
-                    Student student = model.getSameNameStudent(new Student(new Name(name)));
-                    Student updatedStudent = student.removeClass(classToDelete);
-                    model.setStudent(student, updatedStudent);
-                }
-            }
+            removeClassFromEnrolledStudents(model, classToDelete);
             removed.add(classToDelete.getName().name + "|" + classToDelete.getTimeslot());
             model.deleteTuition(classToDelete);
         }
@@ -63,6 +56,16 @@ public class DeleteClassCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DELETE_CLASSES_FAILURE, invalidClasses));
         }
         return new CommandResult(getMessage(removed, invalidClasses));
+    }
+
+    private static void removeClassFromEnrolledStudents(Model model, TuitionClass classToDelete) {
+        for (String name : classToDelete.getStudentList().getStudents()) {
+            if (name != null && model.getSameNameStudent(new Student(new Name(name))) != null) {
+                Student student = model.getSameNameStudent(new Student(new Name(name)));
+                Student updatedStudent = student.removeClass(classToDelete);
+                model.setStudent(student, updatedStudent);
+            }
+        }
     }
 
     private String getMessage(List<String> removed, List<Integer> invalidClasses) {

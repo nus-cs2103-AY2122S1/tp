@@ -24,6 +24,9 @@ import seedu.address.model.tuition.TuitionClass;
 import seedu.address.testutil.EditClassDescriptorBuilder;
 import seedu.address.testutil.TuitionClassBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for EditClassCommand.
+ */
 public class EditClassCommandTest {
 
     private Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()) ,
