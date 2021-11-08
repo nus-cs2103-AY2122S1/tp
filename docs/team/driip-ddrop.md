@@ -26,6 +26,8 @@ Given below are my contributions to the project.
 * Updated Developer Guide user stories and refactor UML Diagrams.
 * Updated README to fit our project
 
+<div style="page-break-after: always;"></div>
+
 **Testing**:
 * Wrote tests for all new and enhanced features:
  ( [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57),
