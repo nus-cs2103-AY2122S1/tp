@@ -150,6 +150,7 @@ Notes:
   * Opens a link to the documentation.
   ![help link](images/helpLink.png)
 
+<div style="page-break-after: always;"></div>
 ### Adding a contact: `add`
 
 Adds a contact to CONNECTIONS.
@@ -187,6 +188,7 @@ Shows a list of all contacts in CONNECTIONS.
 #### Format:
 * `list`
 
+<div style="page-break-after: always;"></div>
 ### Editing a contact : `edit`
 
 Edits an existing contact in CONNECTIONS.
@@ -208,6 +210,7 @@ Notes:
 * `edit 2 n/Betsy Crower t/`
   * Edits the name of the 2nd contact in the displayed contact list to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
 ### Adding Tags : `tag`
 
 Adds one or more tags to an existing contact in CONNECTIONS.
@@ -241,6 +244,7 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd contact.
 
+<div style="page-break-after: always;"></div>
 ### Locating contacts by name(s) and tag(s): `find`
 
 Finds all contacts who match **ALL** name and tag keywords provided.
@@ -271,6 +275,7 @@ Notes:
   * returns `Shin`, who is tagged with `FRIENDS`.
     ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
+<div style="page-break-after: always;"></div>
 ### Locating contacts by name(s) or tag(s): `findAny`
 
 Finds all contacts who match **ANY** name and tag keywords provided.
@@ -302,6 +307,7 @@ Notes:
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
     ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
 
+<div style="page-break-after: always;"></div>
 ### Pinning a contact : `pin`
 
 Pins a contact to the top of the contact list. 
@@ -401,6 +407,7 @@ Notes:
 * `mailingList p/`
   * Prepares a CSV of the current view containing Name and Phone as the fields.
 
+<div style="page-break-after: always;"></div>
 ### Clearing all entries : `clear`
 
 Clears all entries from CONNECTIONS.
@@ -438,6 +445,7 @@ If your changes to the data file makes its format invalid, CONNECTIONS will disc
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## Command Summary
 
 Action | Summary | Format, Examples
