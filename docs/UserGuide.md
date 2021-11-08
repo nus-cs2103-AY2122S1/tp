@@ -127,7 +127,7 @@ Have you installed Academy Directory successfully? Let us now walk you through y
 Components of UI | Functionality
 --- | ---
 Menu bar | Provides an immediate mean to execute commands relating to student academic data or usage history. There are 4 menus to browse from.
-Student list | Shows the current list of students in your class, along with their tags and contact number. You can scroll through the list to see more students. Each student will be shown only their name, phone number (if have), email address, and tags (if have). Note that Telegram handle will not be shown on the student cards due to some privacy concerns
+Student list | Shows the current list of students in your class, along with their tags and contact number. You can scroll through the list to see more students. Each student will be shown only their name, phone number (if have), email address, and tags (if have).
 Command box | This is where you will enter your command and press Enter to use Academy Directory Command Line Interface
 Status message display | This is where Academy Directory will inform you of what is happening after the commands you entered
 Result visualizer display | This is where Academy Directory will visualize your data or results, on your request.
@@ -179,7 +179,7 @@ Adds a student to Academy Directory
 Format: `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can be added without phone number as this is not the standard of communication for Avengers in CS1101S (unlike Telegram and Email). However, due to some recent privacy concerns regarding Telegram handle, we have decided to replace Telegram with Phone number instead on the display of Student card.
+A student can be added without phone number
 </div>
 
 * `PHONE_NUMBER` is an optional field. The default value is `NA` which stands for "Not Applicable".
@@ -586,6 +586,9 @@ look at the files in this folder.
 
 **Q**: When I run Academy Directory via Command Prompt, a warning message appears that there are unsupported JavaFX configurations. Do I need to be concerned about this?<br>
 **A**: **No, both usability and functionality wise.** Academy Directory was not developed as a modular-based application, however, some features of our app do implement external modules not declared, and thus is the warning message. The problem has been addressed while our application was developed, but we have decided to left the warning as it is as addressing the warning is outside the scope of CS2103T and our project requirement itself.
+
+**Q**: Why is Telegram a compulsory field and not shown on the student card, yet phone number is optional and is shown on the student card?<br>
+**A**: There are many internal considerations when we design this. Initially, we have planned to put all 3 fields into the student card. However, due to some privacy concerns regarding Telegram handle, as well as the fact that it does not look nice on the card, we decided to remove Telegram out of the card and leave it only for `view`. We may add Telegram again in the future iterations depending on the future.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Invalid changes to any of the version control files may result in undefined behavior as this is not an intended use case. Proceed at your own risk.
