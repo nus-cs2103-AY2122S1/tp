@@ -627,18 +627,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to show tasks based on week number.
-2.  Uni-Fy displays the list of tasks occurring in that week.
+2.  Uni-Fy displays the weekly view of tasks for the given week number
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a1. The list is empty.
   
   Use case ends.
 
-* 2a. The given index is invalid.
+* 1a2. The given index is invalid.
     * 2a1. Uni-Fy shows an error message.
       
   Use case reverts to step 1.
+
+* 1a3. A date is given.
+    * 3a1. Uni-Fy displays the weekly view of tasks for the week which the date falls in
+      
+  Use case ends.
 
       
 **Use case: UC07 - Find a task**
@@ -792,6 +797,31 @@ testers are expected to do more *exploratory* testing.
        Expected: Task list is not filtered. Error details for invalid command shown in the status message.
 
     4. Other incorrect delete commands to try: `find`, `find tg/CS2103T`, `...`<br>
+       Expected: Similar to previous.
+
+### Showing tasks
+
+1. Show tasks using week number
+    1. Test case: `show 48`<br>
+       Expected: Weekly Panel shows the 48th Week and the tasks occurring on that week
+
+    2. Test case: `show 0`<br>
+       Expected: Week Number is invalid. Error details for invalid command shown in the status message.
+
+    4. Other incorrect delete commands to try: `show`, `show 78`, `...`<br>
+       Expected: Similar to previous.
+
+2. Show tasks using date
+    1. Test case: `show d/2021-08-07`<br>
+       Expected: Weekly Panel shows the week which the date 2021-08-07 falls under and the tasks for that entire week.
+
+    2. Test case: `show /d2021-08-07`<br>
+       Expected: Argument Selector is Invalid. Error details for invalid command usage shown in the status message.
+
+    2. Test case: `show d/2021-13-13`<br>
+       Expected: Date is Invalid. Error details for invalid command usage shown in the status message.
+
+    4. Other incorrect delete commands to try: `show d/2022-01-01`, `show 2021-01-01`, `...`<br>
        Expected: Similar to previous.
 
 ### Saving data
