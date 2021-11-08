@@ -32,7 +32,7 @@ Class Tag
 
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside<<Hidden>> #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
