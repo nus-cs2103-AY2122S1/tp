@@ -14,9 +14,9 @@ title: Uni-Fy User Guide
 
 Welcome to the Uni-Fy User Guide!
 
-Uni-Fy is a **desktop app for managing your university workload** and it is designed **by university students for university students**.
+Uni-Fy is a **desktop app for managing your university workload**, designed **by university students for university students**.
 This application is optimized for use via a **Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI).
+while still having the benefits of a **Graphical User Interface** (GUI).
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
 
 Interested to jump right in? Take a look at [**3. Getting started**](#3-getting-started). Enjoy!
