@@ -10,40 +10,46 @@ title: Developer Guide
 3. [Glossary](#Glossary)
 4. [Design](#Design)
 5. [Architecture](#Architecture)
-6. [UI Components](#UI component)
-7. [Logic Component](#Logic component)
-8. [Model Component](#Model component)
-9. [Storage component](#Storage component)
-10. [Common Classes](#Common Classes)
-11. [Implementations](#Implementations)
-    1. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
-    2. [`Add` Student Feature](#add student)
-    3. [`Filter` Student List Feature](#filter student)
-    4. [`Show` lab results Feature](#show lab)
-    5. [`EditLab` Feature](#edit lab)
-    6. [`Download` Data Feature](#download data)
-    7. [`Purge` Feature](#purge data)
-12. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-13. [Appendix: Requirements](#Appendix Requirements)
-    1. [Product Scope](#Product Scope)
-14. [User Stories](#User Stories)
-15. [Use Cases](#Use Cases)
-    1. [Use Case: UC1 Purge/Delete all sample student records](#Use Case1)
-    2. [Use Case: UC2 Create a student record](#Use Case2)
-    3. [Use Case: UC3 View a student record](#Use Case3)
-    4. [Use Case: UC4 Delete a student record](#Use Case4)
-    5. [Use Case: UC5 Update a student record](#Use Case5)
-    6. [Use Case: UC6 Download student records](#Use Case6)
-    7. [Use Case: UC7 Create a lab record](#Use Case7)
-    8. [Use Case: UC8 Edit a lab record](#Use Case8)
-16. [Non-Functional Requirements](#Non-Functional Requirements)
-17. [Appendix: Instructions for Manual Testing](#Appendix Testing)
+6. [Design](#Design)
+   1. [Architecture](#Architecture)
+   2. [UI Components](#UI component)
+   3. [Logic Component](#Logic component)
+   4. [Model Component](#Model component)
+   5. [Storage component](#Storage component)
+   6. [Common Classes](#Common Classes)
+7. [Implementations](#Implementations)
+   1. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
+   2. [`Add` Student Feature](#add student)
+   3. [`Filter` Student List Feature](#filter student)
+   4. [`Show` lab results Feature](#show lab)
+   5. [`EditLab` Feature](#edit lab)
+   6. [`Download` Data Feature](#download data)
+   7. [`Purge` Feature](#purge data)
+   8. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
+8. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+9. [Appendix: Requirements](#Appendix Requirements)
+   1. [Product Scope](#Product Scope)
+   2. [User Stories](#User Stories)
+   3. [Use Cases](#Use Cases)
+      1. [Use Case: UC1 Purge/Delete all sample student records](#Use Case1)
+      2. [Use Case: UC2 Create a student record](#Use Case2)
+      3. [Use Case: UC3 Upload student records](#Use Case3)
+      4. [Use Case: UC4 View a student record](#Use Case4)
+      5. [Use Case: UC5 Delete a student record](#Use Case5)
+      6. [Use Case: UC6 Update a student record](#Use Case6)
+      7. [Use Case: UC7 Download student records](#Use Case7)
+      8. [Use Case: UC8 Create a lab record](#Use Case8)
+      9. [Use Case: UC9 Edit a lab record](#Use Case9)
+      10. [Use case: UC10 View dashboard of student records](#Use Case10)
+   4. [Non-Functional Requirements](#Non-Functional Requirements)
+10. [Appendix: Instructions for Manual Testing](#Appendix Testing)
     1. [Launch and Shutdown](#Launch and Shutdown)
     2. [Deleting a Student](#Del student)
     3. [Show a Student's Lab Result](#show lab student)
-    4. [Download Data](download-data)
-    5. [Dashboard](dashboard)
-18. [Appendix: Effort](#Appendix Effort)
+    4. [Upload Data](upload-data)
+    5. [Download Data](download-data)
+    6. [Dashboard](dashboard)
+11. [Appendix: Effort](#Appendix Effort)
     1. [Challenges Faced and Achievements Made](#Challenges Faced)
        1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
        2. [Designing New UI Components](Designing New UI components)
@@ -266,104 +272,6 @@ Classes used by multiple components are in the `seedu.programmer.commons` packag
 ## <a name="Implementations"></a> **11. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-## <a name="undoredo"></a> **\[Proposed\] Undo/redo feature**
-
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an
-undo/redo history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it
-implements the following operations:
-
-* `VersionedProgrammerError#commit()` — Saves the current ProgrammerError state in its history.
-* `VersionedProgrammerError#undo()` — Restores the previous ProgrammerError state from its history.
-* `VersionedProgrammerError#redo()`
-* ores a previously undone ProgrammerError state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
-and `Model#redoProgrammerError()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
-initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
-
-![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the ProgrammerError. The `delete` command
-calls `Model#commitProgrammerError()`, causing the modified state of the ProgrammerError after the `delete 5` command executes
-to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted ProgrammerError
-state.
-
-
-![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
-
-Step 3. The user executes `add -n David …​` to add a new student. The `add` command also
-calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
-the `programmerErrorStateList`.
-
-![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitProgrammerError()`, so the ProgrammerError state will not be saved into the `programmerErrorStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous ProgrammerError state, and restores the ProgrammerError to that state.
-
-![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ProgrammerError state, then there are no previous ProgrammerError states to restore. The `undo` command uses `Model#canUndoProgrammerError()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/commands/UndoCommand/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the ProgrammerError to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `pProgrammerErrorStateList.size() - 1`, pointing to the latest ProgrammerError state, then there are no undone ProgrammerError states to restore. The `redo` command uses `Model#canRedoProgrammerError()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the ProgrammerError, such
-as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
-Thus, the `programmerErrorStateList` remains unchanged.
-
-![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
-
-Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
-pointing at the end of the `programmerErrorStateList`, all ProgrammerError states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire ProgrammerError.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ## <a name="add student"></a> **`Add` Student Feature**
 
@@ -736,6 +644,103 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
     * Pros: Prevents user from accidentally deleting his/her own data
     * Cons: Hard to implement, as we have to distinguish between sample data and user data.
     Need to implement a new prompt from scratch.
+
+## <a name="undoredo"></a> **\[Proposed\] Undo/redo feature**
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedProgrammerError`. It extends `ProgrammerError` with an
+undo/redo history, stored internally as an `programmerErrorStateList` and `currentStatePointer`. Additionally, it
+implements the following operations:
+
+* `VersionedProgrammerError#commit()` — Saves the current ProgrammerError state in its history.
+* `VersionedProgrammerError#undo()` — Restores the previous ProgrammerError state from its history.
+* `VersionedProgrammerError#redo()`
+* ores a previously undone ProgrammerError state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitProgrammerError()`, `Model#undoProgrammerError()`
+and `Model#redoProgrammerError()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedProgrammerError` will be initialized with the
+initial ProgrammerErrorstate, and the `currentStatePointer` pointing to that single ProgrammerError state.
+
+![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th student in the ProgrammerError. The `delete` command
+calls `Model#commitProgrammerError()`, causing the modified state of the ProgrammerError after the `delete 5` command executes
+to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted ProgrammerError
+state.
+
+
+![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
+
+Step 3. The user executes `add -n David …​` to add a new student. The `add` command also
+calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
+the `programmerErrorStateList`.
+
+![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitProgrammerError()`, so the ProgrammerError state will not be saved into the `programmerErrorStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing
+the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, which will shift the `currentStatePointer`
+once to the left, pointing it to the previous ProgrammerError state, and restores the ProgrammerError to that state.
+
+![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ProgrammerError state, then there are no previous ProgrammerError states to restore. The `undo` command uses `Model#canUndoProgrammerError()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/commands/UndoCommand/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoProgrammerError()`, which shifts the `currentStatePointer` once
+to the right, pointing to the previously undone state, and restores the ProgrammerError to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `pProgrammerErrorStateList.size() - 1`, pointing to the latest ProgrammerError state, then there are no undone ProgrammerError states to restore. The `redo` command uses `Model#canRedoProgrammerError()` to check if this is the case. If so, it will return an error to the CS2100 TA rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The CS2100 TA then decides to execute the command `list`. Commands that do not modify the ProgrammerError, such
+as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
+Thus, the `programmerErrorStateList` remains unchanged.
+
+![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
+
+Step 6. The CS2100 TA executes `purge`, which calls `Model#commitProgrammerError()`. Since the `currentStatePointer` is not
+pointing at the end of the `programmerErrorStateList`, all ProgrammerError states after the `currentStatePointer` will be
+purged. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
+desktop applications follow.
+
+![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire ProgrammerError.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
       
 
 --------------------------------------------------------------------------------------------------------------------
@@ -816,10 +821,10 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of sample student records
-3. CS2100 TA requests to purge sample student records
-4. ProgrammerError deletes all sample student records
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of sample student records.
+3. CS2100 TA requests to purge sample student records.
+4. ProgrammerError deletes all sample student records.
 
    Use case ends.
 
@@ -827,10 +832,10 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA specifies the student's details
-4. ProgrammerError creates a student record
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA specifies the student's details.
+4. ProgrammerError creates a student record.
 
    Use case ends.
 
@@ -852,14 +857,35 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 3.
 
-### <a name="Use Case3"></a> **Use case: UC3 View a student record**
+### <a name="Use Case3"></a> **Use case: UC3 Upload student records**
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to view a specific student record
-4. ProgrammerError shows the student record's details
+1. CS2100 TA requests to upload student records from a CSV file.
+2. ProgrammerError requests for the TA to select a CSV file.
+3. ProgrammerError uploads the student records from the CSV file.
+
+   Use case ends.
+
+**Extensions:**
+
+2a. CS2100 TA chooses to cancel the upload.
+
+Use case ends.
+
+3a. CSV file data is invalid.
+3s1. ProgrammerError informs the TA of the error.
+
+Use case ends.
+
+### <a name="Use Case4"></a> **Use case: UC4 View a student record**
+
+**MSS**
+
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to view a specific student record.
+4. ProgrammerError shows the student record's details.
 
    Use case ends.
 
@@ -875,14 +901,14 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-### <a name="Use Case4"></a> **Use case: UC4 Delete a student record**
+### <a name="Use Case5"></a> **Use case: UC5 Delete a student record**
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to delete a specific student record in the list
-4. ProgrammerError deletes the student record
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to delete a specific student record in the list.
+4. ProgrammerError deletes the student record.
 
    Use case ends.
 
@@ -898,14 +924,14 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-### <a name="Use Case5"></a> **Use case: UC5 Update a student record**
+### <a name="Use Case6"></a> **Use case: UC6 Update a student record**
 
 **MSS**
 
-1. CS2100 TA requests to list student records
-2. ProgrammerError shows a list of student records
-3. CS2100 TA requests to update a specific student record
-4. ProgrammerError updates the student record
+1. CS2100 TA requests to list student records.
+2. ProgrammerError shows a list of student records.
+3. CS2100 TA requests to update a specific student record.
+4. ProgrammerError updates the student record.
 
    Use case ends.
 
@@ -921,62 +947,82 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 2.
 
-* 3b. The given email or student id is not unique
+* 3b. The given email or student id is not unique.
 
     * 3b.1. ProgrammerError shows an error message.
 
 
     Use case resumes at step 2.
 
-### <a name="Use Case6"></a> **Use case: UC6 Download student records**
+### <a name="Use Case7"></a> **Use case: UC7 Download student records**
 
 **MSS**
 
-1. CS2100 TA <ins>creates (UC2) </ins> /  <ins>views (UC3) </ins> /  <ins>delete (UC4) </ins> /  <ins>update (
-   UC5) </ins> a student record
-2. ProgrammerError automatically save the changed student records to hard disk
-3. CS2100 TA restarts the application
-4. ProgrammerError shows the saved data
+1. CS2100 TA requests to download student data to a CSV file.
+2. ProgrammerError requests for the TA to select a directory to download the CSV file to.
+3. ProgrammerError downloads the student data to a CSV file in the chosen directory.
 
    Use case ends.
 
-### <a name="Use Case7"></a> **Use case: UC7 Create a lab record**
+**Extensions:**
+
+1a. CS2100 TA chooses to cancel the upload.
+
+Use case ends.
+
+3a. There is no student data.
+3a1. ProgrammerError informs the TA there is no data to download.
+
+Use case ends.
+
+### <a name="Use Case8"></a> **Use case: UC8 Create a lab record**
 
 **MSS**
 
-1. CS2100 TA requests to create a new lab record
-2. ProgrammerError requests for lab details
-3. CS2100 TA specifies the lab name and total score
-4. ProgrammerError creates a lab record for every student
+1. CS2100 TA requests to create a new lab record.
+2. ProgrammerError requests for lab details.
+3. CS2100 TA specifies the lab name and total score.
+4. ProgrammerError creates a lab record for every student.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The given lab name is not unique or lab score < 0
+* 3a. The given lab name is not unique or lab score < 0.
   * 3a.1 ProgrammerError shows an error message.
-  Use case resumes at 2
+  Use case resumes at 2.
 
   Use case ends.
 
-### <a name="Use Case8"></a> **Use case: UC8 Edit a lab record**
+### <a name="Use Case9"></a> **Use case: UC9 Edit a lab record**
 
 **MSS**
 
-1. CS2100 TA requests to  <ins>view a particular student's record using a show command (UC3) <ins/>
-2. ProgrammerError show the student's record
-3. CS2100 TA specifies lab number and actual score or total score
-4. ProgrammerError updates the student's record
+1. CS2100 TA requests to  <ins>view a particular student's record using a show command (UC3) <ins/>.
+2. ProgrammerError show the student's record.
+3. CS2100 TA specifies lab number and actual score or total score.
+4. ProgrammerError updates the student's record.
 
   Use case ends.
 
 **Extensions**
 
-* 3a. The given lab score < 0 or actual score > total score
+* 3a. The given lab score < 0 or actual score > total score.
     * 3a.1 ProgrammerError shows an error message.
-* Use case resumes at 2
+* Use case resumes at 2.
 
   Use case ends.
+
+### <a name="Use Cas10"></a> **Use case: UC10 View dashboard of student records**
+
+**MSS**
+
+1. CS2100 TA requests to view the dashboard of student data.
+2. ProgrammerError displays the dashboard showing the number of students, classes, labs.
+as well as the number of labs unmarked for each class.
+3. ProgrammerError automatically updates the dashboard when changes are made to the student data.
+
+   Use case ends.
 
 
 ## <a name="Non-Functional Requirements"></a> **16. Non-Functional Requirements**
@@ -997,6 +1043,12 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
    1280x720 and higher, and screen scales 150%.
 
 
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
+- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
+- **TA**: A CS2100 teaching assistant
+- **PE**: ProgrammerError
+- **CSV**: Comma-Separated Values
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1072,6 +1124,12 @@ testers are expected to do more *exploratory* testing.
         * If the right panel is currently empty, it remains to be empty.
         * If the right panel is showing a student's lab results,  the `Lab1` tag is updated to `Lab2` and the Lab card with title `Lab1` is edited to have title `Lab2`.
 
+### <a name="upload-data"></a>Upload Data
+
+1. Select CSV file from file chooser window to upload data from:
+    1. To cancel, click 'cancel' to return to the main window.
+    2. If the data in the CSV file is valid, ProgrammerError will save the student data.
+
 ### <a name="download-data"></a>Download Data
 
 1. Select folder from directory chooser window to save data to:
@@ -1079,11 +1137,11 @@ testers are expected to do more *exploratory* testing.
    2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
 
-### <a name="dashboard"></a>### Dashboard
+### <a name="dashboard"></a>Dashboard
 
 1. Enter dashboard as a command or press F5 to view the dashboard. 
    1. CS2100 TA will be able to view the number of students, number of classes, number of labs. 
-   2. CS2100 TA will also be able to see the number of labs left to mark.
+   2. CS2100 TA will also be able to see the number of labs left to mark for each class.
   
   
 ## <a name="Effort"></a> **18. Appendix: Effort**
