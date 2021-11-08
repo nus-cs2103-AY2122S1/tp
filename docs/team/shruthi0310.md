@@ -47,7 +47,9 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added implementation details of the `mark` and `unmark` feature, including UML diagrams. [\#219](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/219)
         * Update Ui section and its diagrams. [\#243](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/243)
-
+        * Review DG and make necessary changes to diagrams and texts [\#287](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/287)
+    
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#121](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/121), [\#124](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/124), 
       [\#144](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/144)
+    * Reported bugs for other groups during PED: [PED](https://github.com/Shruthi0310/ped)
