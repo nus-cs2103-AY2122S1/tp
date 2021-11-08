@@ -62,7 +62,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
             editStudentDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
-            editStudentDescriptor.setGradeIsEdited(true);
         }
 
         parseRemarksForEdit(argMultimap.getAllValues(PREFIX_REMARK)).ifPresent(editStudentDescriptor::setRemarks);

@@ -197,7 +197,6 @@ public class EditCommandTest {
         Student editedStudent = studentInList.withGrade("S3").build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(secondStudent).withGrade("S3").build();
-        descriptor.setGradeIsEdited(true);
         EditCommand editCommand = new EditCommand(INDEX_SECOND_STUDENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
