@@ -30,12 +30,16 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewShiftCommand.HELP_MESSAGE);
     public static final ParseException INVALID_VIEW_SHIFT_COMMAND_EXCEPTION =
             new ParseException(INVALID_VIEW_SHIFT_COMMAND);
+    private static final String INVALID_NUMBER_OF_DATES = "Wrong number of dates input. Expecting 0 or 1, "
+            + "received %d date inputs.";
+
 
     private DayOfWeek currDayOfWeek = DayOfWeek.from(LocalDate.now());
     private LocalTime currTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
     public final ViewShiftCommand errorCommand = new ViewShiftCommand(currDayOfWeek,
             ViewShiftCommand.INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES, currTime,
             new Period(LocalDate.now()));
+
 
     @Override
     public ViewShiftCommand parse(String args) throws ParseException {
@@ -77,6 +81,11 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
             }
         } catch (ParseException pe) {
             throw INVALID_VIEW_SHIFT_COMMAND_EXCEPTION;
+        }
+        if (argMultimap.getAllValues(PREFIX_DATE).size() != 1
+                && argMultimap.getAllValues(PREFIX_DATE).size() != 0) {
+            throw new ParseException(String.format(INVALID_NUMBER_OF_DATES,
+                    argMultimap.getAllValues(PREFIX_DATE).size()));
         }
 
         return new ViewShiftCommand(dayOfWeek, slotNum, time, new Period(dates[0], dates[1]));

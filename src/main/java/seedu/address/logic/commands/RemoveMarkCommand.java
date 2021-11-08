@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,8 +46,12 @@ public class RemoveMarkCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
             + PREFIX_DATE + "2021-11-11" + " " + PREFIX_DATE + "2021-11-13";
 
-    public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified.";
-    public static final String STAFF_UNMARKED = "Staff unmarked:\n%1$s";
+
+    public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";
+    public static final String STAFF_NOT_MARKED = "The following staff is not marked for the period specified (%2$s),"
+            + " no change has been done: \n%1$s";
+
+    public static final String STAFF_UNMARKED = "Staff unmarked for period %2$s:\n%1$s";
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -86,6 +91,15 @@ public class RemoveMarkCommand extends Command {
         if (toEdit.size() == 0) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
+        List<String> conflicts = new ArrayList<>();
+        for (Person p : toEdit) {
+            if (p.unMark(period).equals(p)) {
+                conflicts.add(p.getName().toString());
+            }
+        }
+        if (conflicts.size() != 0) {
+            throw new CommandException(String.format(STAFF_NOT_MARKED, listToString(conflicts), period));
+        }
         for (Person p : toEdit) {
             model.setPerson(p, checkPerson(p));
         }
@@ -93,7 +107,7 @@ public class RemoveMarkCommand extends Command {
                 .map(Person::getName)
                 .map(Object::toString)
                 .collect(Collectors.toList());
-        return new CommandResult(String.format(STAFF_UNMARKED, listToString(toPrint)));
+        return new CommandResult(String.format(STAFF_UNMARKED, listToString(toPrint), period));
     }
 
 
@@ -104,7 +118,7 @@ public class RemoveMarkCommand extends Command {
         }
         Person toTest = model.getFilteredPersonList().get(index);
         model.setPerson(toTest, checkPerson(toTest));
-        return new CommandResult(String.format(STAFF_UNMARKED, toTest.getName()));
+        return new CommandResult(String.format(STAFF_UNMARKED, toTest.getName(), period));
     }
 
     /**
@@ -139,7 +153,7 @@ public class RemoveMarkCommand extends Command {
         Person result = toTest.unMark(period);
         //when nothing has changed
         if (result.equals(toTest)) {
-            throw new CommandException(NO_STAFF_SATISFIES_QUERY);
+            throw new CommandException(String.format(STAFF_NOT_MARKED, toTest.getName(), period));
         }
         return result;
 

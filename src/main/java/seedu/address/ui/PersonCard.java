@@ -66,14 +66,15 @@ public class PersonCard extends UiPart<Region> {
         salary.setText(staff.getSalary().convertToDollars());
         status.setText(staff.getStatus().getValue());
 
-        String[] periodArray = staff.getAbsentDates().stream().map(Period::toDisplayString).toArray(String[]::new);
+        String[] periodArray =
+                staff.getAbsentDates().stream().map(Period::toDisplayString).sorted().toArray(String[]::new);
         periodListView.setItems(FXCollections.observableArrayList(periodArray));
 
         staff.getRoles().stream()
                 .sorted(Comparator.comparing(Role::toString))
                 .forEach(role -> roles.getChildren().add(new Label(role.toString())));
 
-        String[] tagArray = staff.getTags().stream().map(tag -> tag.tagName).toArray(String[]::new);
+        String[] tagArray = staff.getTags().stream().map(tag -> tag.tagName).sorted().toArray(String[]::new);
         tagsListView.setItems(FXCollections.observableArrayList(tagArray));
     }
 

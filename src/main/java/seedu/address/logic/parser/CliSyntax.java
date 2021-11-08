@@ -16,8 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DATE = new Prefix("da/");
     public static final Prefix PREFIX_SHIFT_TIME = new Prefix("st/");
-    public static final Prefix PREFIX_MORNING = new Prefix("morn/");
-    public static final Prefix PREFIX_AFTERNOON = new Prefix("aft/");
+    public static final Prefix PREFIX_ROLE_REQUIREMENTS = new Prefix("rr/");
 
     // Used when searching
     public static final Prefix PREFIX_DASH_INDEX = new Prefix("-i");

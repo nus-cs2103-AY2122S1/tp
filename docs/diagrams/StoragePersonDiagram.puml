@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+Class HiddenOutside #FFFFFF
+package "Person Storage" {
+class JsonAdaptedPerson
+package "Schedule Storage" #F4F6F6{
+class JsonAdaptedSchedule
+class JsonAdaptedShift
+class JsonAdaptedRecurrencePeriod
+}
+
+
+class JsonAdaptedPeriod
+class JsonAdaptedTag
+class JsonAdaptedRole
+
+}
+
+JsonAdaptedPerson --> "*" JsonAdaptedPeriod
+JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "0..3" JsonAdaptedRole
+HiddenOutside ..> JsonAdaptedPerson
+JsonAdaptedSchedule --> "0..14" JsonAdaptedShift
+JsonAdaptedShift --> "*" JsonAdaptedRecurrencePeriod
+JsonAdaptedPerson -left-> "1" JsonAdaptedSchedule
+
+
+
+
+
+@enduml

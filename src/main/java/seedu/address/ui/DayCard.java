@@ -19,7 +19,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code staffList}
+ * of the staff who work in a given date.
  */
 public class DayCard extends UiPart<Region> {
 
@@ -42,7 +43,8 @@ public class DayCard extends UiPart<Region> {
     private Label dayDateLabel;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code DayCard} with the given {@code LocalDate firstDate}
+     * and {@code ObservableList<Person> staffList} to display.
      */
     public DayCard(LocalDate firstDate, int dayCardNumber, ObservableList<Person> stafflist, Period currentPeriod) {
         super(FXML);

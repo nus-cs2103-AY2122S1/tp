@@ -15,11 +15,11 @@
                 <ColumnConstraints hgrow="ALWAYS" prefWidth="100.0" />
                 <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
                 <ColumnConstraints hgrow="ALWAYS" prefWidth="90.0" />
-                <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
-                <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
                 <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="55.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="100.0" />
+                <ColumnConstraints hgrow="NEVER" prefWidth="180.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -29,11 +29,11 @@
                 <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label_centered" text="\$name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <ListView fx:id="periodListView" GridPane.columnIndex="4"/>
-                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <ListView fx:id="tagsListView" GridPane.columnIndex="5" />
                 <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                 <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label_centered" text="\$salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <ListView fx:id="tagsListView" GridPane.columnIndex="8" />
+                <ListView fx:id="periodListView" GridPane.columnIndex="8"/>
             </children>
         </GridPane>
     </VBox>

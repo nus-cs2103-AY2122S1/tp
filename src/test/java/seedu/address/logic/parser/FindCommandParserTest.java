@@ -50,11 +50,11 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_index_test() {
-        FindCommand expectedFindCommand = new FindCommand(DEFAULT_TEST_INDEX);
+        FindCommand expectedFindCommand = new FindCommand(DEFAULT_TEST_INDEX, new PersonContainsFieldsPredicate());
         assertParseSuccess(parser, " " + PREFIX_DASH_INDEX + " 2", expectedFindCommand);
 
         //EP: 0
-        expectedFindCommand = new FindCommand(0);
+        expectedFindCommand = new FindCommand(0, new PersonContainsFieldsPredicate());
         assertParseSuccess(parser, " " + PREFIX_DASH_INDEX + " 1", expectedFindCommand);
 
         //EP:1
