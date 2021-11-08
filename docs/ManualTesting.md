@@ -38,8 +38,8 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
   * [Visual Design](#visual-design)
   * [User Interface Functionality](#user-interface-functionality)
 * [Performance Testing](#performance-testing)
-  * [Visualization with large `AcademyDirectory`](#visualization-with-large-academydirectory-_coming-soon_)
-  * [Limit test `AcademyDirectory` capacity](#limit-test-academydirectory-capacity-_coming-soon_)
+  * [Visualization with large AcademyDirectory](#visualization-with-large-academydirectory-_coming-soon_)
+  * [Limit test AcademyDirectory capacity](#limit-test-academydirectory-capacity-_coming-soon_)
 * [Compatibility Testing](#compatibility-testing)
   * [Cross-OS Compatibility](#cross-os-compatibility-_coming-soon_)
 * [Portability Testing](#portability-testing)
@@ -931,12 +931,12 @@ These tests are primarily focused on testing both the appearance and the functio
 
 ## Performance testing
 
-### Visualization with large `AcademyDirectory` _[Coming soon]_
+### Visualization with large AcademyDirectory _[Coming soon]_
 
 * Testing of large number of the `Visualize` function with a large number of students in `AcademyDirectory`
   * Potentially affects runtime and if so, `AcademyDirectory` might require optimization.
 
-### Limit test `AcademyDirectory` capacity _[Coming soon]_
+### Limit test AcademyDirectory capacity _[Coming soon]_
 
 * Testing the `Student` capacity that `AcademyDirectory` can handle
   * Things to look out for: 
