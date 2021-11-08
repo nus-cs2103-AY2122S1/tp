@@ -447,6 +447,10 @@ The sequence diagram of this `Find` command is shown below:
 
 ![Find Command Sequence Diagram](images/findCommand/FindSequenceDiagram.png)
 
+The following is an activity diagram showing the general activity of the find command:
+
+![activity](images/FindActivityDiagram.png)
+
 Notes:
 
 1. The process is similar for a search by index, but with `NameContainsKeywordsPredicate` replaced with `StaffHasCorrectIndexPredicate`
@@ -505,9 +509,6 @@ The sequence diagram of this `viewShift` command is shown below:
 ![ViewShift Command Sequence Diagram](images/viewShiftCommand/ViewShiftSequenceDiagram.png)
 ![ViewShiftCommand Execution Diagram](images/viewShiftCommand/ViewShiftCommandExecutionSequenceDiagram.png)
 
-The following is an activity diagram showing the general activity of the find command:
-
-![activity](images/FindActivityDiagram.png) 
 
 Notes:
 
