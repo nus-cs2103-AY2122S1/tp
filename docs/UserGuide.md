@@ -387,7 +387,7 @@ Format: `import CSV_NAME`
 * The file format (`.csv`) is not to be included in `CSV_NAME`
 </div>
 
-<div>
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Caution:**<br>
 
@@ -399,15 +399,15 @@ Here's a step by step guide:<br>
 
 1. Create your csv file in the correct format (shown below).
 
-![CSV](images/importcommand/csvFormat.png)
+![CSV](images/logic/commands/importcommand/csvFormat.png)
 
 2. Place your csv file in the `data/` folder.
 
-![FileStructure](images/importcommand/filefolder.png)
+![FileStructure](images/logic/commands/importcommand/filefolder.png)
 
 3. Run `import CSV_NAME`.
 
-![NewResidents](images/importcommand/newresidents.png)
+![NewResidents](images/logic/commands/importcommand/newresidents.png)
 
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
