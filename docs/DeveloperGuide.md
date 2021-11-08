@@ -557,8 +557,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.  
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-      1a2. User makes another request to edit a friend with a different `FRIEND_ID`.  
-      Use case continues from step 2.  
+    * 1a2. User makes another request to edit a friend with a different `FRIEND_ID`.  
+    * Use case continues from step 2.  
 
 **Use case: UC03 - Delete a friend**
 
@@ -573,8 +573,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.  
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-      1a2. User makes another request to delete a friend with a different `FRIEND_ID`.  
-      Use case continues from step 2.  
+    * 1a2. User makes another request to delete a friend with a different `FRIEND_ID`
+    * Use case continues from step 2.  
 
 **Use case: UC04 - Link a game to a friend**
 
@@ -589,8 +589,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-      1a2. User makes another request to link a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
-      Use case continues from step 2.     
+    * 1a2. User makes another request to link a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
+    * Use case continues from step 2.     
 
 **Use case: UC05 - Unlink a game from a friend**
 
@@ -605,15 +605,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-      1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
-      Use case continues from step 2.
+    * 1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID`.  
+    * Use case continues from step 2.
 
 * 1b. gitGud detects that the `FRIEND_ID` and`GAME_ID` link does not exist.
     * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
-      1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
-      Use case continues from step 2.
+    * 1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
+    * Use case continues from step 2.
 
-**Use case: UC06 - Assigning a skill value for a linked game to a friend**
+**Use case: UC06 - Assign a skill value for a linked game to a friend**
 
 **MSS**
 
@@ -626,15 +626,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
-      1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID`.  
-      Use case continues from step 2.
+    * 1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID`.  
+    * Use case continues from step 2.
 
 * 1b. gitGud detects that the `FRIEND_ID` and`GAME_ID` link does not exist.
     * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
-      1b2. User makes another request to assign a skill value a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
-      Use case continues from step 2.
+    * 1b2. User makes another request to assign a skill value a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`.  
+    * Use case continues from step 2.
 
-**Use case: UC07 - Scheduling a friend**
+**Use case: UC07 - Schedule a friend**
 
 **MSS**
 
@@ -647,10 +647,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-      1a2. User makes another request to schedule a friend with a different `FRIEND_ID`.  
-      Use case continues from step 2.
+    * 1a2. User makes another request to schedule a friend with a different `FRIEND_ID`.  
+    * Use case continues from step 2.
 
-**Use case: UC08 - Recommending friends available to play with**
+**Use case: UC08 - Recommend friends available to play with**
 
 **MSS**
 
@@ -663,8 +663,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `GAME_ID` does not exist.
     * 1a1. gitGud informs user that no game was found with specified `GAME_ID`.  
-      1a2. User makes another request to recommend friends for a game with a different `GAME_ID`.  
-      Use case continues from step 2.
+    * 1a2. User makes another request to recommend friends for a game with a different `GAME_ID`.  
+    * Use case continues from step 2.
 
 **Use case: UC09 - Get a friend's complete information**
 
@@ -679,8 +679,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. gitGud detects that the `FRIEND_ID` does not exist.
     * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
-      1a2. User makes another request to retrieve data a friend with a different `FRIEND_ID`.  
-      Use case continues from step 2.
+    * 1a2. User makes another request to retrieve data a friend with a different `FRIEND_ID`.  
+    * Use case continues from step 2.
 
 **Use case: UC10 - List/filter friends whose `FRIEND_ID` contains a keyword**
 
@@ -695,7 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The user does not provide a `KEYWORD`.  
     * 1a1. All friends are listed.  
-      Use case ends.
+    * Use case ends.
 
 **Use case: UC11 - Add a game**
 * **MSS** and **Extensions** similar to <u> Add a Friend (UC1) </u>, except it is for a game with `GAME_ID`.
