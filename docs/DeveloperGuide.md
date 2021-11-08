@@ -10,7 +10,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This software is built upon [SE-EDU's AddressBook Level-3](https://se-education.org/addressbook-level3/) project.
-* Implementation of CLI History Navigation feature referenced from [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T.
+* The CLI History Navigation feature was inspired by [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T,
+  though its implementation in this project is new.
 * Implementation of opening User Guide in user's browser feature referenced from [samyipsh's tP](https://github.com/samyipsh/tp) for CS2103T.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -56,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -243,9 +244,57 @@ Step 2.1. The user clicks `Ok`  and the remark for the student is automatically 
 
 Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the remark will remain unchanged.
 
-### \[Developed\] CLI input history navigation
-Users are able to navigate through their previously entered String inputs from the Command Box in the UI, using the up and down arrow keys.
+### [Developed] CLI input history navigation
+Users are able to navigate through their previously entered inputs from the Command Box in the UI, 
+using the `↑`up and `↓`down arrow keys.
 This is facilitated by the `InputHistory` class.
+
+#### Current Implementation
+
+The `InputHistory` class consists of an `ArrayList<String>` and an `int` which serves as a pointer/position marker for navigation through the list.
+
+The `CommandBox` object in UI has an `InputHistory` object when initialized.
+
+When Users enter a non-empty String into the Command Box and press the `Enter` key, the text entered will be added to its `InputHistory`. 
+When interacting with the Command Box, Users can press the `↑`up or `↓`down keys on their keyboard.
+This event is detected and handled by `CommandBox` and previous inputs can be navigated. This is facilitated by the following methods:
+
+* `CommandBox#handleButtonPressed(KeyEvent)` - Handles events of Users pressing arrow keys.
+* `InputHistory#add(String)` - Adds a given String to a list if the String is not equal to the last String added to the list. 
+  Resets the navigation position to the end of the list.
+* `InputHistory#getPreviousInput()` - Returns the String stored just before the current pointer position in the list. 
+    * If list is empty, returns an empty String. 
+    * If the pointer is already at the start of the list, returns first String in the list.
+* `InputHistory#getNextInput()` - Returns the String stored just after the current pointer position in the list.
+    * If the pointer is already at the end of the list, returns an empty String.
+  
+The activity diagram below shows the work flow of how input history is navigated.
+
+![activity diagram](images/NavigateInputHistoryActivityDiagram.png)
+
+Given below is an example usage scenario of how CLI history may be used.
+
+#### Steps
+
+Step 1: When the User launches TutAssistor, `CommandBox` creates a new `InputHistory` with an empty list.
+
+Step 2: The User types `addclass n/Chemistry l/2 ts/Mon 12:00-13:00` into the Command Box and presses the `Enter` key.
+
+Step 3: As the input is not an empty String, `CommandBox` passes the given User input to `InputHistory` as a String via the `InputHistory#add(String)` method.
+
+Step 4: Since `InputHistory`'s `ArrayList<String>` is empty, the input is not equal to the last added String.
+`InputHistory#add(String)` adds the input to the `ArrayList<String>` and sets the pointer to the end of the list.
+
+Step 5: The User presses the `↑`up key on their keyboard.
+
+Step 6: The key press event is detected by `CommandBox#handleButtonPressed(KeyEvent)`. `InputHistory#getPreviousInput()` is called. 
+As the input history list is not empty, and the current pointer position is not at the start of the list, `"addclass n/Chemistry l/2 ts/Mon 12:00-13:00"` is returned.
+
+Step 7: The text in the Command Box UI is set to `addclass n/Chemistry l/2 ts/Mon 12:00-13:00`.
+
+#### Acknowledgement
+This feature was inspired by a similar feature in [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T,
+though its implementation in this project is new.
 
 ### [Developed] Editing a Student
 Users can edit a student by editing the following fields: `Name`, `Phone`, `Email` and `Address`.
@@ -295,7 +344,7 @@ Similar to `EditCommand`, the `EditClassCommand` receives an index that indicate
 The tuition class is then updated with the help of the following methods: 
 
 * `TuitionClass#sameClassDetails()` - Checks if any field of the tuition class has been updated. 
-* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken or overlaps with another class's timselot.
+* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken or overlaps with another class's timeslot.
 * `ModelManager#setTuition(TuitionClass, TuitionClass)` - Updates the tuition class.
 
 Given below is an example usage scenario of how an `editclass` command is executed.
@@ -368,7 +417,7 @@ Step 2: The `DeleteClassCommandParser` will parse the class index to ensure that
 
 Step 3: The `DeleteClassCommand` is executed. Class index - 1, is used to retrieve the class by calling the `ModelManager#getTuitionClass(Index)` method.
 
-Step 4: If the tuition class exists, `Student#removeClass(TuitionClass)` is called to remove the Tuition class using it's id from the all the students. 
+Step 4: If the tuition class exists, `Student#removeClass(TuitionClass)` is called to remove the Tuition class using its id from the all the students. 
 It also removes the class tag for all the enrolled students by using the `ClassName` and unique `TimeSlot` of the tuition class.
 
 Step 5: `ModelManager#deleteTuition(TuitionClass)` to delete the tuition class and update the list of tuition classes accordingly.
@@ -626,7 +675,7 @@ Use case ends.
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-    * 1a1. TutAssitor reminds the tutor the right format.
+    * 1a1. TutAssistor reminds the tutor the right format.
     * 1a2. Tutor enters a new command.
 
       Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
@@ -637,15 +686,15 @@ Use case ends.
 
 **MSS**
 
-1. Tutor chooses to delete an existing Student/Tution Class.
-2. TutAssitor deletes the Student/Tuition Class and displays successful information.
+1. Tutor chooses to delete an existing Student/Tuition Class.
+2. TutAssistor deletes the Student/Tuition Class and displays successful information.
 
 Use case ends.
 
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-    * 1a1. TutAssitor reminds the tutor the right format.
+    * 1a1. TutAssistor reminds the tutor the right format.
     * 1a2. Tutor enters a new command.
 
      Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
@@ -689,7 +738,7 @@ Use case ends.
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-  * 1a1. TutAssitor reminds the tutor the right format.
+  * 1a1. TutAssistor reminds the tutor the right format.
   * 1a2. Tutor enters a new command.
 
       Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
