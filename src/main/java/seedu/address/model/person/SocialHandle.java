@@ -194,6 +194,13 @@ public class SocialHandle {
     }
 
     /**
+     * Returns true if the given {@code platform} string matches with own platform.
+     */
+    public boolean isSamePlatform(String platform) {
+        return this.platform.equals(parsePlatform(platform));
+    }
+
+    /**
      * Returns true if {@code platform} and {@code value} are valid.
      */
     public boolean isValid() {

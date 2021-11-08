@@ -19,9 +19,10 @@ public class SocialHandleContainsKeywordsPredicate implements Predicate<Person> 
     public boolean test(Person person) {
         return !keywords.isEmpty()
                 && keywords.stream()
-                .allMatch(keyword -> !keyword.trim().isEmpty() && person.getSocialHandles().stream()
-                .allMatch(handle -> handle.value.trim().toLowerCase()
-                .contains(keyword.trim().toLowerCase())));
+                .map(keyword -> keyword.split(":", 2))
+                .allMatch(keyword -> person.getSocialHandles().stream()
+                .anyMatch(handle -> handle.isSamePlatform(keyword[0]) && handle.value.trim().toLowerCase()
+                .contains(keyword[1].trim().toLowerCase())));
     }
 
     @Override

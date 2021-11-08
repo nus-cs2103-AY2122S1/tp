@@ -118,10 +118,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NATIONALITY).isPresent()
             && !argMultimap.getValue(PREFIX_NATIONALITY).get().trim().isEmpty()) {
             List<String> nationalityKeywords = argMultimap.getAllValues(PREFIX_NATIONALITY);
-
+            /*
             for (String nationality : nationalityKeywords) {
-                ParserUtil.parseName(nationality);
+                ParserUtil.parseNationality(nationality);
             }
+             */
             int numOfEmptyValue = (int) nationalityKeywords.stream()
                     .filter(String::isEmpty).count();
 
@@ -135,10 +136,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()
             && !argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get().trim().isEmpty()) {
             List<String> tutorialGroupKeywords = argMultimap.getAllValues(PREFIX_TUTORIAL_GROUP);
-
+            /*
             for (String tutorialGroup : tutorialGroupKeywords) {
-                ParserUtil.parseName(tutorialGroup);
+                ParserUtil.parseTutorialGroup(tutorialGroup);
             }
+             */
             int numOfEmptyValue = (int) tutorialGroupKeywords.stream()
                     .filter(String::isEmpty).count();
 
@@ -153,9 +155,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 && !argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get().trim().isEmpty()) {
             List<String> socialHandleKeywords = argMultimap.getAllValues(PREFIX_SOCIAL_HANDLE);
 
-            for (String socialHandle : socialHandleKeywords) {
-                ParserUtil.parseName(socialHandle);
-            }
+            ParserUtil.parseSocialHandles(socialHandleKeywords);
+
             int numOfEmptyValue = (int) socialHandleKeywords.stream()
                     .filter(String::isEmpty).count();
 
@@ -171,7 +172,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> remarkKeywords = argMultimap.getAllValues(PREFIX_REMARK);
 
             for (String remark : remarkKeywords) {
-                ParserUtil.parseName(remark);
+                ParserUtil.parseRemark(remark);
             }
             int numOfEmptyValue = (int) remarkKeywords.stream()
                     .filter(String::isEmpty).count();
