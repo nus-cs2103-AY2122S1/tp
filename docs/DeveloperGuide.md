@@ -52,9 +52,6 @@ Syntax | Description
 
 [Back to Table of Contents](#table-of-contents)
 
-
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
