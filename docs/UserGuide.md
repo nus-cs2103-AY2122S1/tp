@@ -113,9 +113,8 @@ Next, let us add a task with description __Lab Report__ and deadline __12 Novemb
    which is 3 in this case. Type `task -e 3 n/Science Report` in the "Command Panel" and hit `Enter`.
     * This updates the description of the task at index __3__ to __Science Report__.
     * The description remains unchanged.
-<br><br>
 
-<div style="page-break-after: always;"></div>
+    <div style="page-break-after: always;"></div>
 
 3. You can also assign this task, __Science Report__ to __David__.
     * Take note of the index of the task you would like to
