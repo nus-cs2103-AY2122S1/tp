@@ -40,10 +40,11 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to existing features**:
-  * Fix a bug where adding an asset with no remarks did not throw the correct error message. (PR [#309](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/309))
+  * Fixed a bug where adding an asset with no remarks did not throw the correct error message. (PR [#309](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/309))
   * Fixed a bug where list command showed an inaccurate output on the result display. (PR [#305](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/305))
   * Wrote additional tests for the Parser class to raise CodeCov percentage from 69-76%.  (PR [#309](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/309))
   * Wrote additional tests for the PersonAdapter class to raise CodeCov percentage from 62-66%. (PR [#85](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/85))
+  * Fixed a bug where the message shown by the result display shows 'All Clients Listed' despite there being no client. (PR [#369](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/369))
 
 * **Documentation**:
     * User Guide:
@@ -54,13 +55,14 @@ Given below are my contributions to the project.
       * Added the user story for the feature `edit` and added explanation for the sequence diagram. (PR [#175](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/175))
       * Restructure the developer guide, and add introduction to the developer guide. (PR [#314](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/314))
       * Added the user story for the feature `edit` and added explanation for the sequence diagram. (PR [#175](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/175))
-      * Added the overview of DonnaFina nad the problem it aimed to solve  (PR [#329](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/329))
-        * Drew PUML OODM diagram to show the problem domain that DonnaFin is able to solve.
+      * Added the overview of DonnaFin and the problem it aimed to solve  (PR [#329](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/329))
+        * Drew a OODM diagram on Plant UML to show the problem domain that DonnaFin is able to solve.
+      * Updated the manual test cases for the developers ot try and test (PR [#367](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/367))
 
 
 * **Community**:
-  * PRs reviewed: 
-  * Forum Posts
+* Reviewed and gave useful comments on PRs and performed manual testing on branches to find bugs
+* Contributed to forum discussions (examples: [#320](https://github.com/nus-cs2103-AY2122S1/forum/issues/320), [#266](https://github.com/nus-cs2103-AY2122S1/forum/issues/266), [#259](https://github.com/nus-cs2103-AY2122S1/forum/issues/259)
 
 * **Tools**:
 
