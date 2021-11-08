@@ -21,7 +21,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **3. Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -77,7 +77,7 @@ The sections below give more details of each component.
 The `UI` component is responsible for managing the user interface of the application so that it responds correctly to any command to user inputs.
 
 The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files 
-that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 **Functionality** :
 
@@ -103,7 +103,7 @@ etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` c
 
 ### 3.3 Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -119,7 +119,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `friend --delete draco` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+**:information_source: Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -258,7 +261,7 @@ The parsing of a link command is handled by the following classes:
 - `LinkFriendCommand` - Represents link friend command that is executed by gitGud.
     - It calls `Model#linkFriend()` with a `Friend` object argument and a `GameFriendLink` object argument.
 
-The sequence diagram of the parsing is similar to that of the other friend commands.
+![Implementation of parsing for link command](images/LinkSequenceDiagram1.png)
 
 The implementation of `Model#linkFriend()` is as follows:
 
@@ -267,7 +270,7 @@ The implementation of `Model#linkFriend()` is as follows:
   `Friend#link()` is then called, which modifies `friendToEdit` so that it now contains the new `GameFriendLink`.
 - `UniqueFriendsList#setFriend()` then replaces `friendToLink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
-![Implementation of link command in model](images/LinkSequenceDiagram.png)
+![Implementation of link command in model](images/LinkSequenceDiagram2.png)
 
 #### 4.2.2 Design Considerations
 
@@ -288,7 +291,7 @@ The parsing of the unlink command is handled by the following classes:
 - `UnlinkFriendCommand` - Represents unlink friend command that is executed by gitGud.
     - It calls `Model#unlinkFriend()` with a `Friend` object and a `Game` object.
 
-The sequence diagram of the parsing is similar to that of the other friend commands.
+![Implementation of the parsing of unlink command](images/UnlinkSequenceDiagram1.png)
 
 The implementation of `Model#unlinkFriend()` is as follows:
 
@@ -297,7 +300,10 @@ The implementation of `Model#unlinkFriend()` is as follows:
   `Friend#unlink()` is then called, which modifies `friendToEdit` so that it no longer contains a link to the game.
 - `UniqueFriendsList#setFriend()` then replaces `friendToUnlink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
-![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
+![Implementation of unlink command in model](images/UnlinkSequenceDiagram2.png)
+
+#### Design considerations:
+ - As mentioned previously in the implementation for [link](#42-link-feature), the use of a separate `GameFriendLink` class to which only the `Friend` class has a reference to greatly simplifies the unlinking command as only the `Friend` objects (and not the `Game` objects) have to be changed.
 
 ### 4.4 Schedule Feature
 
@@ -362,7 +368,7 @@ gitGud undergoes to display the recommendations friends list to the user:
 
 <ins>Step 1: Parsing and triggering recommend command execution</ins><br>
 
-Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
+Similar to [delete](#41-delete-feature) and [link](#42-link-feature) features above, the parse and execute actions shown in the activity 
 diagram are implemented via invoking`RecommendCommandParser#parse(String)`, which extracts a specified game and timing from the 
 user input and constructs a `RecommendCommand` instance with the extracted data. 
 
@@ -388,27 +394,46 @@ produces the list of friend recommendations.
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
-In Java, the implementation of JavaFX's `FilteredList` and `SortedList` in Java are just `ObservableList` wrapped 
-with a wrapper that filters and sorts the content respectively. Therefore, JavaFX's `FilteredList` and 
-`SortedList` listens for and tracks changes just like an `ObservableList` whenever the`FilteredList#setPredicate(Predicate)` or 
-`SortedList#setComparator(Comparator)` methods are invoked. The user 
-interface is notified and updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
+The user interface is then notified of the changes to the `FilteredList` and `SortedList` managed by the `ModelManager` made in Step 2 
+and is automatically updated to reflect the changes to the user (as explained in the [Model](#34-model-component) component).
 
-Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
-recommend feature.  
+Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the recommend feature.  
 
 #### 4.5.3 Design Considerations
 
-* The recommend command allows users to filter by hour and day instead of filtering by minute and day.
-  * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
-  the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
-  target users (students) usually have weekly schedules based on hourly blocks.
+<ins>Aspect: How should the user be allowed to filter friends timing by?</ins>
 
-* Usage of predicates and comparators for filtering and ordering the filtered and sorted friends list.
-  * We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
-  between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
-  such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
-  on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
+The user is able to retrieve an ordered list by skill for friends filtered by a specified game and timing. However, our first 
+design consideration is the format the user should use for specifying the timing to filter by.
+
+Below are the options we could allow the user to filter by: <br> 
+* Option #1: Filter by 24-hour clock and day (i.e. `1000` and `1` to represent `1000` on Monday)
+* Option #2: Filter by minute, hour and day (i.e `0`, `10` and `1` to represent `1000` on Monday)
+* Option #3: Filter by hour and day (i.e. `10` and `1` to represent `1000` on Monday)
+
+<ins>Decision</ins>
+
+We decided to limit the filtering to by **hour and day** for 3 main reasons: 
+1. to be consistent with the [schedule](#44-schedule-feature) feature which stores schedules based on hours 
+2. we found that accuracy to the exact minute is not necessary as our target users (students) usually have weekly schedules based on hourly blocks. 
+3. we avoided the use of the 24-hour clock as a time filter as it can also represent minutes and could potentially mislead users, since `1059` 
+seems to be a valid input but is not supported by our application which only supports schedules in hour blocks(rationale in point #2). 
+
+Hence, we specifically limited the timing filter to hour and day only. 
+
+<ins>Aspect: Implementation of sorting and filtering functionality</ins> 
+
+To implement sorting and filtering of the friends list to be displayed, we had 2 main options: 
+* Option #1: Implement specific sorting and filter methods at the ModelManager class, then invoke them with the specified game and timing as arguments.
+* Option #2: Implement a general `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` method and pass in 
+`FriendRecommendFilterPredicate` and `Comparator` instances as arguments. 
+
+<ins>Decision</ins>
+
+We decided to implement predicates and comparators for the implementation of Recommend command (option #2) for two key reasons: 
+1. Option #2 reduces the coupling between the `RecommendCommand` and the `Model` component. Since the implemented general methods 
+such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` are not dependent on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
+2. Option #1 mixes Recommendation and Model concerns together, leading to reduced cohesion and increased coupling, which leads to poor software design. 
 
 ### 4.6 Get Feature
 
@@ -532,7 +557,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a friend and specifies a `FRIEND_ID`.
+1. User requests to add a friend and specifies a `FRIEND_ID` and optionally specifies a `NAME`.
 2. gitGud adds a friend into the friends list and informs user of successful addition of friend.
 
     Use case ends.
@@ -540,125 +565,205 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions** 
 
 * 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique.
-    * 1a1. gitGud informs user that it has failed to add a friend.<br>
-      1a2. User makes another request to add a friend with a different `FRIEND_ID`.<br>
-      Use case continues from step 2.
+    * 1a1. gitGud informs user that it has failed to add a friend.
+    * 1a2. User makes another request to add a friend with a different valid and unique `FRIEND_ID`.
+    * Use case continues from step 2.
 
-**Use case: UC02 - Delete a friend**
+* 1b. gitGud detects that the `FRIEND_ID`/`NAME` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. 1b1. gitGud informs user that `FRIEND_ID`/`NAME` provided is invalid.
+    * 1b2. User makes another request to add a friend with a different valid `FRIEND_ID`/`NAME` and unique `FRIEND_ID`.
+    * Use case continues from step 2.
+
+**Use case: UC02 - Edit a friend**
 
 **MSS**
 
-1. User requests to delete a friend using the friend's `FRIEND_ID`
-2. gitGud deletes the person
+1. User requests to edit a friend and specifies a `FRIEND_ID` and new `NAME` to update.  
+2. gitGud updates friend and informs user of successful edit of friend.  
+
+   Use case ends.  
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.  
+    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+    * 1a2. User makes another request to edit a friend with a different `FRIEND_ID` for an existing friend.  
+    * Use case continues from step 2.  
+
+* 1b. gitGud detects that the `NAME` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `NAME` provided is invalid.
+    * 1b2. User makes another request to edit friend with `FRIEND_ID` with a different valid `NAME`.
+    * Use case continues from step 2.
+
+**Use case: UC03 - Delete a friend**
+
+**MSS**
+
+1. User requests to delete a friend using a friend's `FRIEND_ID`.  
+2. gitGud deletes the friend from friend list and informs user of successful deletion of friend.  
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given `FRIEND_ID` is invalid.
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.  
+    * 1a1. gitGud informs user that it has no friend was found with specified `FRIEND_ID`.  
+    * 1a2. User makes another request to delete a friend with a different `FRIEND_ID` for an existing friend.
+    * Use case continues from step 2.  
 
-    * 2a1. gitGud shows an error message.
-
-      Use case resumes at step 1.
-
-
-**Use case: UC03 - List friends whose `FRIEND_ID` contains a keyword**
+**Use case: UC04 - Link a game to a friend**
 
 **MSS**
 
-1. User requests to list friends in gitGud using a keyword filter.
-2. gitGud shows a filtered list of friends whose `FRIEND_ID` contains the keyword.
+1. User requests to link a game with `GAME_ID` to a friend using with `FRIEND_ID`,  and an `IN_GAME_USERNAME`.
+2. gitGud links the friend to the game, stores their in-game username and informs user of successful linking of friend.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The user does not provide a keyword.
+* 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+    * 1a2. User makes another request to link a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game.  
+    * Use case continues from step 2.     
 
-    * 2a1. All friends are listed.
+* 1b. gitGud detects that the `IN_GAME_USERNAME` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `IN_GAME_USERNAME` provided is invalid.
+    * 1b2. User makes another request to link a friend with a game, with existing `FRIEND_ID` and `GAME_ID` and valid `IN_GAME_USERNAME`.
+    * Use case continues from step 2.
 
-      Use case ends.
-
-
-**Use case: UC04 - List games whose `GAME_ID` contains a keyword**
+**Use case: UC05 - Unlink a game from a friend**
 
 **MSS**
 
-1. User requests to list games in gitGud using a keyword filter.
-2. gitGud shows a filtered list of games whose `GAME_ID` contains the keyword.
+1. User requests to unlink a game with `GAME_ID` from a friend with `FRIEND_ID`.
+2. gitGud unlinks the friend from the game and informs user of successful unlinking of friend.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The user does not provide a keyword.
+* 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
+    * 1a1. gitGud informs user that no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+    * 1a2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game.  
+    * Use case continues from step 2.
 
-    * 2a1. All games are listed.
+* 1b. gitGud detects that the `FRIEND_ID` and `GAME_ID` link does not exist.
+    * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
+    * 1b2. User makes another request to unlink a friend with a game, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game with an existing link.
+    * Use case continues from step 2.
 
-      Use case ends.
-
-
-**Use case: UC05 - Link a friend to a particular game**
-
-**MSS**
-
-1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_ID`) and the username for that game 
-   (using `USERNAME`).
-2. gitGud associates the friend with the game provided.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given `FRIEND_ID` is invalid.
-
-    * 2a1. gitGud shows an error message.
-    * 2a2. User can list friends currently in gitGud or add new friends.
-
-      Use case resumes at step 1.
-
-
-* 2b. The given `GAME_ID` is invalid.
-
-    * 2b1. gitGud shows an error message.
-    * 2b2. User can list games currently in gitGud or add new games.
-
-      Use case resumes at step 1.
-
-
-**Use case: UC06 - Get a friend's complete information**
+**Use case: UC06 - Assign a skill value for a linked game to a friend**
 
 **MSS**
 
-1. User <u>list friends (UC03)</u> and chooses a `FRIEND_ID`.
-2. User requests for complete information about `FRIEND_ID`.
-3. gitGud displays the complete information related to  `FRIEND_ID`.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given `FRIEND_ID` is invalid.
-    * 2a1. gitGud shows an error message.
-
-      Use case resumes at step 1.
-
-**Use case: UC07 - Get a game's complete information**
-
-**MSS**
-
-1. User <u>list games (UC04)</u> and chooses a `GAME_ID`.
-2. User requests for complete information about `GAME_ID`.
-3. gitGud displays the complete information related to  `GAME_ID`.
+1. User requests to assign a `SKILL_VALUE` for a linked game with `GAME_ID` to a friend with `FRIEND_ID`.
+2. gitGud assigns the friend a skill value for the linked game and informs user of successful assigning of skill value.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The given `GAME_ID` is invalid.
-    * 2a1. gitGud shows an error message.
+* 1a. gitGud detects that the `FRIEND_ID`/`GAME_ID` does not exist.
+    * 1a1. gitGud informs user that it has no friend/game was found with specified `FRIEND_ID`/`GAME_ID`.  
+    * 1a2. User makes another request to assign a skill value, with a different `FRIEND_ID`/`GAME_ID` for an existing friend/game with an existing link.  
+    * Use case continues from step 2.
 
-      Use case resumes at step 1.
+* 1b. gitGud detects that the `FRIEND_ID` and `GAME_ID` link does not exist.
+    * 1b1. gitGud informs user that it has no friend and game link was found with specified `FRIEND_ID` and `GAME_ID`.  
+    * 1b2. User makes another request to assign a skill value to a friend with a game, with a different `FRIEND_ID` and/or `GAME_ID`  for an existing friend and/or game.  
+    * Use case continues from step 2.
+
+* 1c. gitGud detects that the `SKILL_VALUE` provided is invalid and does not meet specifications provided in User Guide.
+    * 1c1. gitGud informs user that `SKILL_VALUE` provided is invalid.
+    * 1c2. User makes another request to assign a skill value to a friend with a game, with existing `FRIEND_ID` and `GAME_ID` with existing game link and valid `SKILL_VALUE`.
+    * Use case continues from step 2.
+
+**Use case: UC07 - Schedule a friend's availability**
+
+**MSS**
+
+1. User requests to update a friend's schedule using a friend's `FRIEND_ID`, the time period (`START_HOUR` to `END_HOUR`) of the `DAY` they wish to set, as well as whether the friend `IS_FREE` then.
+2. gitGud updates the friend's schedule and informs user of successful scheduling of friend's availability.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.
+    * 1a1. gitGud informs user that no friend was found with specified `FRIEND_ID`.  
+    * 1a2. User makes another request to schedule a friend with a different `FRIEND_ID` for an existing friend.  
+    * Use case continues from step 2.
+
+* 1b. gitGud detects that the `START_HOUR`/`END_HOUR`/`DAY`/`IS_FREE` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `START_HOUR`/`END_HOUR`/`DAY`/`IS_FREE` provided is invalid.
+    * 1b2. User makes another request to schedule friend with `FRIEND_ID` with a different valid `START_HOUR`/`END_HOUR`/`DAY`/`IS_FREE`.
+    * Use case continues from step 2.
+
+**Use case: UC08 - Recommend friends available to play with**
+
+**MSS**
+
+1. User requests to recommend friends who play a game of `GAME_ID`, who are free during `HOUR` in `DAY`.
+2. gitGud displays a list of friends free to play with during the time specified, sorted by the friends' skill for the game with `GAME_ID` and  informs user of successful recommendation of friends.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `GAME_ID` does not exist.
+    * 1a1. gitGud informs user that no game was found with specified `GAME_ID`.  
+    * 1a2. User makes another request to recommend friends for a game with a different `GAME_ID` for an existing game.  
+    * Use case continues from step 2.
+
+* 1b. gitGud detects that the `HOUR`/`DAY` provided is invalid and does not meet specifications provided in User Guide.
+    * 1b1. gitGud informs user that `HOUR`/`DAY` provided is invalid.
+    * 1b2. User makes another request to recommend friends for a game with `GAME_ID` with a different valid `HOUR`/`DAY`.
+    * Use case continues from step 2.
+
+**Use case: UC09 - Get a friend's complete information**
+
+**MSS**
+
+1. User requests for complete information about a friend of `FRIEND_ID`.
+2. gitGud displays the complete information related to `FRIEND_ID` and informs user of successful retrieval of friend information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. gitGud detects that the `FRIEND_ID` does not exist.
+    * 1a1. gitGud informs user that no friend was found with specified `FRIEND_ID`.  
+    * 1a2. User makes another request to retrieve data of an existing friend with a different `FRIEND_ID`.
+    * Use case continues from step 2.
+
+**Use case: UC10 - List/filter friends whose `FRIEND_ID` contains a keyword**
+
+**MSS**
+
+1. User requests to list friends in gitGud using a `KEYWORD` filter.
+2. gitGud displays a filtered list of friends whose `FRIEND_ID` contains the `KEYWORD` and informs user of successful listing of friends.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user does not provide a `KEYWORD`.  
+    * 1a1. All friends are listed.  
+    * Use case ends.
+
+**Use case: UC11 - Add a game**
+* **MSS** and **Extensions** similar to <u> Add a Friend (UC1) </u>, except it is for a game with `GAME_ID`.
+
+**Use case: UC12 - Delete a game**
+* **MSS** and **Extensions** similar to <u> Delete a Friend (UC3) </u>, except it is for a game with `GAME_ID`.
+
+**Use case: UC13 - Get a game's complete information**
+* **MSS** and **Extensions** similar to <u> Get a friend's complete information (UC09) </u>, except it is for a game with `GAME_ID`.
+
+**Use case: UC14 - List/filter games whose `GAME_ID` contains a keyword**
+* **MSS** and **Extensions** similar to <u> List/filter friends whose `FRIEND_ID` contains a keyword (UC10) </u>, except it lists games whose `GAME_ID` contains the `KEYWORD`.
+    
 
 ### 6.4 Non-Functional Requirements
 
@@ -680,11 +785,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
+
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:**<br>
-
-These instructions only provide a starting point for testers to work on;
+**:information_source: Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>

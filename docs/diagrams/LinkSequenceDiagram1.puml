@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MainParser" as MainParser LOGIC_COLOR
+participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
+participant ":LinkFriendCommandParser" as LinkFriendCommandParser LOGIC_COLOR
+participant "c:LinkFriendCommand" as LinkFriendCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("friend --link draco\n -g Valorant -u DracoPlat")
+activate LogicManager
+
+LogicManager -> MainParser : parseCommand("friend --link draco\n -g Valorant -u DracoPlat")
+activate MainParser
+
+create FriendCommandParser
+MainParser -> FriendCommandParser
+activate FriendCommandParser
+
+FriendCommandParser --> MainParser
+deactivate FriendCommandParser
+
+MainParser -> FriendCommandParser : parse(" --link draco\n -g Valorant -u DracoPlat")
+activate FriendCommandParser
+
+create LinkFriendCommandParser
+FriendCommandParser -> LinkFriendCommandParser
+activate LinkFriendCommandParser
+
+LinkFriendCommandParser --> FriendCommandParser
+deactivate LinkFriendCommandParser
+
+FriendCommandParser -> LinkFriendCommandParser : parse("--link draco\n -g Valorant -u DracoPlat")
+activate LinkFriendCommandParser
+
+create LinkFriendCommand
+LinkFriendCommandParser -> LinkFriendCommand
+activate LinkFriendCommand
+
+LinkFriendCommand --> LinkFriendCommandParser : c
+deactivate LinkFriendCommand
+
+LinkFriendCommandParser --> FriendCommandParser : c
+deactivate LinkFriendCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LinkFriendCommandParser -[hidden]-> FriendCommandParser
+destroy LinkFriendCommandParser
+
+FriendCommandParser --> MainParser : c
+deactivate FriendCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FriendCommandParser -[hidden]-> MainParser
+destroy FriendCommandParser
+
+MainParser --> LogicManager : c
+deactivate MainParser
+
+ref over LogicManager, Model: Executing LinkFriendCommand
+
+LogicManager -[hidden]-> LogicManager
+LinkFriendCommand -[hidden]-> LinkFriendCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
