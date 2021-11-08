@@ -40,15 +40,11 @@ Given below are my contributions to the project.
     * Reviewed, raised and fixed issues throughout the UG [#207](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/207)
     
   * Developer Guide:
-    * Added target user profile [#15](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/15)
-    * Added value propositions [#15](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/15)
-    * Added user stories [#15](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/15)
-    * Added use cases [#15](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/15)
+    * Added use cases, target user profile, value propositions and user stories [#15](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/15)
     * Updated Architecture section [#110](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/110)
     * Added cases for manual testing for adding and deleting appointments [#223](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/223)
     * Added cases for manual testing for adding and deleting patients/doctors [#243](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/243)
-    * Added implementation for adding appointments [#144](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/144)
-    * Added implementation for deleting appointments [#144](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/144)
+    * Added implementation for adding and deleting appointments [#144](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/144)
     * Added introduction and table of contents [#110](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/110)
     * Reviewed, raised and fixed issues throughout the DG [#215](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/215)
   
