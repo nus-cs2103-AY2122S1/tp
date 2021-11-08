@@ -6,9 +6,10 @@ title: User Guide
 # Welcome to Socius User Guide!
 
 Welcome to Socius User Guide! 
-This User Guide familarises you with the commands and functionality of Socius, enabling you to get the most out of Socius.
 
-If you are an experienced Socius user, a [command summary table](#command-summary) is available at the end of the user guide for your reference!
+If you are a CS2103T student who is using Socius, or just someone who wants to find out more about what Socius can do, you are at the right place!
+
+In this user guide, you will find step-by-step instructions on how you can install Socius and guide on how to use all of its features.
 
 Are you a developer? Make sure to check out our [Developer Guide]((https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/docs/DeveloperGuide.md)) too!
 
@@ -73,6 +74,12 @@ type fast, Socius can get your contact management tasks done faster than traditi
 --------------------------------------------------------------------------------------------------------------------
 
 ## Using this guide
+
+This User Guide familarises you with all the latest features of Socius, enabling you to get the most out of Socius!
+
+If you are a **new user**, this guide provides you with all the basic knowledge to [get started](#quick-start) with Socius.
+
+If you are an **experienced user**, a [Command Summary](#command-summary) table is available at the end of the user guide for your reference.
 
 Before exploring the features of Socius, you should be familiar with these symbols used in this user guide.
 
