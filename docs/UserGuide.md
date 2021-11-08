@@ -415,6 +415,8 @@ Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a lesson from a group: `group -dl`
 
 Deletes a lesson from the specified group
@@ -430,7 +432,6 @@ Example:
 * `group -dl 1 1` deletes the first lesson from the first group.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Tasks
 
@@ -446,6 +447,8 @@ Format: `task -a n/NAME d/DEADLINE`
 
 Examples:
 * `task -a n/CS2100 Lab 1 d/2021-10-10` adds the task "CS2100 Lab 1"
+
+<div style="page-break-after: always;"></div>
 
 #### Editing a task: `task -e`
 
@@ -502,8 +505,6 @@ Examples:
 
 ![taskfind](images/imagesInUG/task-find.png)
 
-<div style="page-break-after: always;"></div>
-
 #### Assigning tasks to students: `task -as`
 
 Assigns a specific task to students’ task list.
@@ -539,8 +540,6 @@ Format: `task -unas STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -unas 2 4` removes the task at the index 4 from the student at the index 2
-
-<div style="page-break-after: always;"></div>
 
 #### Unassigning tasks from groups: `task -unag`
 
@@ -578,8 +577,6 @@ Format: `task -dog GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -dog 2 4` marks the task at the index 4 as done by the group at the index 2
-
-<div style="page-break-after: always;"></div>
 
 #### Marking a task as not done by student: `task -undo`
 
