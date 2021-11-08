@@ -191,7 +191,7 @@ Views a particular student's details in the Person Panel.
 
 Format: `student -v INDEX`
 
-* View the student details specified at `INDEX`. `INDEX` should be a positive number.
+* Views the student details specified at `INDEX`. `INDEX` should be a positive number.
 * `-v` refers to the view command.
 
 Examples:
