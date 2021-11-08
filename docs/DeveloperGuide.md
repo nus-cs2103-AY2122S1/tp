@@ -847,12 +847,12 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. Exiting the program
 
-   1. Close the window or click on **File** > **Exit** in the top left corner.
-       Expected: The user logs off the programme.
+   1. Close the window or click on **File** > **Exit** in the top left corner.<br>
+      Expected: The user logs off the programme.
 
 ### Deleting a student
 
@@ -898,8 +898,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing help for TutAssistor
    
-   1. Enter help and press enter
+   1. Enter help and press enter.<br>
       Expected: A help message is displayed in a separate help window. It also contains a **Open User Guide** button which opens up the TutAssistor user guide.
+   
+   1. After opening the help window, click on the **Open User Guide** button.<br>
+      Expected: The TutAssistor user guide opens in your browser.
 
 ### Saving data
 
