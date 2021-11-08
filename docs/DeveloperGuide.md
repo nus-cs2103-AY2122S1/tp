@@ -1223,18 +1223,18 @@ testers are expected to do more *exploratory* testing.
 ### Editing a contact
 1. Editing a contact
 
-* Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
-    1. Test case: `edit 1 n/Singapore Flyers` <br>
+    2. Test case: `edit 1 n/Singapore Flyers` <br>
        Expected: The first contact's name is changed to "Singapore Flyers". Details of the edited contact shown in the status message. Summary is updated and displayed.
 
-    2. Test case: `edit 0`<br>
+    3. Test case: `edit 0`<br>
        Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
-    3. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
+    4. Test case: `123 edit n/VALID_NAME` (Valid names should not be blank, contains only alphanumeric characters and spaces and cannot be longer than 100 characters) <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
 
-    4. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
+    5. Other incorrect delete commands to try: `edit`, `edit x n/VALID_NAME` (where x is larger than the list size, or negative), `edit 00001 n/VALID_NAME`, `edit 1 n/`, `edit 1 n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
        Expected: Similar to previous.
 
 
@@ -1242,18 +1242,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a contact while all contacts are being shown
 
-* Prerequisites: List all contacts using the `list` command, contact with name 'Singapore Flyers' exists. Multiple contacts in the list.
+   1. Prerequisites: List all contacts using the `list` command, contact with name 'Singapore Flyers' exists. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Summary is updated and displayed.
 
-   2. Test case: `delete n/Singapore Flyers`<br>
+   3. Test case: `delete n/Singapore Flyers`<br>
        Expected: Contact with name 'Singapore Flyers' is deleted. Details of the deleted contact shown in the status message. Summary is displayed.
 
-   3. Test case: `delete 0`<br>
+   4. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Summary is displayed.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
+   5. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, or negative), `delete 00001`, `delete 1 n/`, `delete n/INVALID_NAME`(invalid name that does not exist in WhereTourGo)<br>
       Expected: Similar to previous.
 
 ### Listing all contacts
@@ -1270,7 +1270,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding contacts by keywords
 
-* Prerequisites: There are 5 contacts in the contact list. The contact details are as follows:
+    1. Prerequisites: There are 5 contacts in the contact list. The contact details are as follows:
     * category: ATT, name: Marina Bay Sands, phone: 66888868, email: marinabaysands@example.com,
     address: 10 Bayfront Ave, Singapore 018956, review: amazing
     * category: COM, name: VivoCity, phone: 63776860, email: vivocity@example.com,
@@ -1282,32 +1282,32 @@ testers are expected to do more *exploratory* testing.
     * category: FNB, name: Prive Somerset, phone: 66334422, email: privesomerset@example.com,
     address: 313 Orchard Rd, #01-28, Singapore 238895, review: its alright<br><br>
       
-    1. Test case: `find sands`<br>
-    Expected: Contacts Pane shows the contact with the name "Marina Bay Sands".
+    2. Test case: `find sands`<br>
+       Expected: Contacts Pane shows the contact with the name "Marina Bay Sands".
 
-    2. Test case: `find marina`<br>
+    3. Test case: `find marina`<br>
        Expected: Contacts Pane shows 2 contacts  —  the contact with the name "Marina Bay Sands" and the contact with the address "18 Marina Gardens Dr, Singapore 018953".
 
-    3. Test case: `find bay`<br>
+    4. Test case: `find bay`<br>
        Expected: Contacts Pane shows 2 contacts  —  the contact with the name "Marina Bay Sands" and the contact with the name "Gardens By The Bay".
 
-    4. Test case: `find orchard`<br>
+    5. Test case: `find orchard`<br>
        Expected: Contacts Pane shows 2 contacts  —  the cnotact with the address "362 Orchard Rd, International Building, Singapore 238887"
        and the contact with the address "313 Orchard Rd, #01-28, Singapore 238895".
 
-    5. Test case: `find 66`<br>
+    6. Test case: `find 66`<br>
        Expected: Contacts Pane shows 3 contacts  —  the contacts with the phone numbers "66888868", "66112233" and "66334422" respectively.
 
-    6. Test case: `find amazing excellent`<br>
+    7. Test case: `find amazing excellent`<br>
        Expected: Contacts Pane shows 2 contacts  —  the contacts with the reviews "amazing" and "Excellent burgers" respectively.
 
-    7. Test case: `find example`<br>
+    8. Test case: `find example`<br>
        Expected: Contacts Pane shows all 5 contacts  —  the contacts with their emails containing the word "example".
 
-    8. Test case: `find test`<br>
+    9. Test case: `find test`<br>
        Expected: No contact is shown in the Contacts Pane.
 
-    9. Other incorrect find commands to try: `find`, `find x`, `...` (where x is any keyword that does match any contacts'
+    10. Other incorrect find commands to try: `find`, `find x`, `...` (where x is any keyword that does match any contacts'
        names, phones, emails, addresses or reviews)<br>
        Expected: Error details shown in Results Pane.
 
@@ -1316,36 +1316,36 @@ testers are expected to do more *exploratory* testing.
 
 1. Filtering contacts by one parameter (category code)
 
-  * Prerequisites: WhereTourGo has at least 1 contact with category code `ATT` and no contacts with the category code `FNB`.<br><br>
+    1. Prerequisites: WhereTourGo has at least 1 contact with category code `ATT` and no contacts with the category code `FNB`.
   
-    1. Test case: `filter c/att`<br>
+    2. Test case: `filter c/att`<br>
        Expected: Only contacts with the category code `ATT` are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    2. Test case: `filter c/fnb`<br>
+    3. Test case: `filter c/fnb`<br>
        Expected: No contacts shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    3. Test case: `filter c/att c/tpt`<br>
+    4. Test case: `filter c/att c/tpt`<br>
        Expected: Only contacts with the category code `ATT` or `TPT` are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    4. Other incorrect sort commands to try: `filter`, `filter c`, `filter c/`, `filter c/att c/x`, `filter c/x` (where x is not a valid category code)<br>
+    5. Other incorrect sort commands to try: `filter`, `filter c`, `filter c/`, `filter c/att c/x`, `filter c/x` (where x is not a valid category code)<br>
        Expected: No changes to Contacts Pane. Error details shown in Results Pane.
 
 2. Filtering contacts by multiple parameters
 
-  * Prerequisites: WhereTourGo has multiple contacts with at least 1 contact with category code `ATT`, rating of 5 stars, and tagged as `fun`.<br><br>
+    1. Prerequisites: WhereTourGo has multiple contacts with at least 1 contact with category code `ATT`, rating of 5 stars, and tagged as `fun`.
   
-    1. Test case: `filter c/att ra/5 t/fun`<br>
+    2. Test case: `filter c/att ra/5 t/fun`<br>
        Expected: All contacts with category code `ATT`, a rating of 5 stars, and a tag `fun` are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    2. Test case: `filter ra/5 t/fun t/outdoor`<br>
+    3. Test case: `filter ra/5 t/fun t/outdoor`<br>
        Expected: All contacts tagged `fun` and `outdoor` with a rating of 5 stars are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    3. Test case: `filter c/att c/tpt c/com ra/4`<br>
+    4. Test case: `filter c/att c/tpt c/com ra/4`<br>
        Expected: All Attraction, Transport, and Commerce contacts with a rating of 4 stars are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
@@ -1353,24 +1353,24 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting contacts by name
 
-  * Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.<br><br>
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
   
-    1. Test case: `sort name`<br>
+    2. Test case: `sort name`<br>
        Expected: Contacts are sorted based on their names in lexicographical order and are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    2. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
+    3. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
        Expected: Contacts are not sorted. Error details shown in Results Pane.
 
 2. Sorting contacts by rating
 
-  * Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.<br><br>
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
   
-    1. Test case: `sort rating`<br>
+    2. Test case: `sort rating`<br>
        Expected: Contacts are sorted based on their rating values in descending order and are shown in Contacts Pane.
        Success message is shown in Results Pane.
   
-    2. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
+    3. Other incorrect sort commands to try: `sort`, `sort x`, `...` (where x is any word other than `name` and `rating`)<br>
        Expected: Contacts are not sorted. Error details shown in Results Pane.
 
 
@@ -1378,60 +1378,60 @@ testers are expected to do more *exploratory* testing.
 
 1. Using the `sum` command
 
-  * Prerequisites: WhereTourGo has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.<br><br>
+      1. Prerequisites: WhereTourGo has at least 1 contact. Used any command that hides summary such as:  `edit`, `view`.
   
-      1. Test case: `sum`<br>
+      2. Test case: `sum`<br>
          Expected: Displays summary with the correct information.
   
-      2. Test case: `sum 2`<br>
+      3. Test case: `sum 2`<br>
          Expected: Error details shown in the status message, with instructions on how to use the `sum` command. No summary is displayed.
 
 2. Modifying WhereTourGo with commands that involve summary
 
-  * Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.<br><br>
+      1. Prerequisites: List all contacts using the `list` command. First contact does not have a 'fnb' category code. Multiple contacts in the list.
   
-      1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
+      2. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br>
          Expected: Contact with name 'Singapore Flyers', rating of 4 stars and category of attraction is added. Summary is updated and displayed (Total number of contacts, category and rating charts updated).
   
-      2. Test case: `edit 1 c/fnb`<br>
+      3. Test case: `edit 1 c/fnb`<br>
          Expected: Category code of first contact in the list is updated to 'fnb'. Summary is updated and displayed (Number of contacts remains the same, category code chart updated with 1 more 'fnb', and one less of the original category code).
   
-      3. Test case: `clear`<br>
+      4. Test case: `clear`<br>
          Expected: Entire contact list is deleted. Summary is updated and displayed (Charts are empty, total number of contacts equals 0).
   
-      4. Test case: `delete 1`<br>
+      5. Test case: `delete 1`<br>
          Expected: First contact in WhereTourGo is deleted. Summary is updated and displayed (Number of contacts decreases by 1, contact's category code and rating removed from pie chart segment).
   
-      5. Test case: `find VALID_SEARCH_QUERY` (any keyword in WhereTourGo) <br>
+      6. Test case: `find VALID_SEARCH_QUERY` (any keyword in WhereTourGo) <br>
          Expected: Displays results of the `find` command. Summary is displayed.
   
-      6. Test case: `filter c/fnb` <br>
+      7. Test case: `filter c/fnb` <br>
          Expected: Displays results of the `filter` command. Summary is displayed.
   
-      7. Test case: `list` <br>
+      8. Test case: `list` <br>
          Expected: Displays results of the `list` command (Displays all contacts). Summary is displayed.
   
-      8. Test case: `undo` (A command affecting WhereTourGo must be run first, such as `delete`) <br>
+      9. Test case: `undo` (A command affecting WhereTourGo must be run first, such as `delete`) <br>
          Expected: Undoes previous command. Summary is updated and displayed (i.e. summary reflects the undone command).
   
-      9. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
+      10. Test case: `redo` (Previous test case, `undo`, must be executed first) <br>
          Expected: Redoes the previous command that was undone. Summary is updated and displayed (i.e. summary reflects the redone command).
 
 ### Viewing a contact
 1. Viewing a contact while all contacts are being shown
 
-* Prerequisites: List all contacts using the `list` command, contact with name ‘Marina Bay Sands’ exists. Multiple contacts in the list.<br><br>
+    1. Prerequisites: List all contacts using the `list` command, contact with name ‘Marina Bay Sands’ exists. Multiple contacts in the list.
 
-    1. Test case: `view 1`<br>
+    2. Test case: `view 1`<br>
        Expected: Details of first contact is displayed in the Display Pane. Details of the first contact shown in the status message.
 
-    2. Test case: `view n/Marina Bay Sands`<br>
+    3. Test case: `view n/Marina Bay Sands`<br>
        Expected: Details of contact with name ‘Marina Bay Sands’ is displayed in Display Pane. Details of the displayed contact shown in the status message.
 
-    3. Test case: `view 0`<br>
+    4. Test case: `view 0`<br>
        Expected: No contact is displayed. Error details shown in the status message. Display Pane remains unchanged.
 
-    4. Other incorrect delete commands to try: `view`, `view x` (where x is larger than the list size, or negative), `view 00001`, `view 1 n/`, `view n/INVALID_NAME` (invalid name that does not exist in the addressBook)<br>
+    5. Other incorrect delete commands to try: `view`, `view x` (where x is larger than the list size, or negative), `view 00001`, `view 1 n/`, `view n/INVALID_NAME` (invalid name that does not exist in the addressBook)<br>
        Expected: Similar to previous.
 
 ### Navigating input history
@@ -1454,67 +1454,66 @@ testers are expected to do more *exploratory* testing.
 ### Clicking on contacts
 1. Clicking on contacts shown in the contact list
 
-* Prerequisites: WhereTourGo has at least 1 contact shown in the contact list.<br><br>
+    1. Prerequisites: WhereTourGo has at least 1 contact shown in the contact list.
   
-    1. Test case: Click a contact within the Contact Pane.<br>
+    2. Test case: Click a contact within the Contact Pane.<br>
        Expected: Contact Card will light up for a short duration. Details will be displayed in both the display panel and the status message.
-    2. Test case: Clicking outside a contact within the Contact Pane.<br>
+    3. Test case: Clicking outside a contact within the Contact Pane.<br>
        Expected: Nothing will happen.
 
 ### Undoing operations
 1. Undoing changes consecutively
 
-* Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order:<br>
+    1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order:<br>
        a. `delete n/Marina Bay Sands`<br>
        b. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
 
-    1. Test case: `undo`<br>
+    2. Test case: `undo`<br>
        Expected: Previously added contact, `Singapore Flyers` is removed from address book. Undo success message shown in the status message.
 
-    2. Test case: `undo`<br>
+    3. Test case: `undo`<br>
         Expected: Previously deleted contact, `Marina Bay Sands` is added back to address book. Undo success message shown in the status message.
 
-    3. Test case: `undo`<br>
+    4. Test case: `undo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
 
 ### Redoing operations
-1. Redoing changes consecutively
-
-* Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order:<br>
+1. Redoing changes consecutively 
+  1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order:<br>
         a. `delete n/Marina Bay Sands`<br>
         b. `edit 1 e/123@example.com`<br>
         c. `undo`<br>
         d. `undo`<br><br>
 
-  1. Test case: `redo`<br>
+  2. Test case: `redo`<br>
     Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
 
-  2. Test case: `redo`<br>
+  3. Test case: `redo`<br>
        Expected: Previous edits made to `Singapore Flyers` is restored, email of `Singapore Flyers` changed back to `123@example.com`. Redo success message shown in the status message.
 
-  3. Test case: `redo`<br>
+  4. Test case: `redo`<br>
        Expected: No changes to address book or contact list. Error details shown in the status message.
 
 ### Exporting data
 
 1. Exporting a contact while all contacts are being shown
 
-  * Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.<br><br>
+      1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.<br><br>
   
-      1. Test case: `export 1`<br>
+      2. Test case: `export 1`<br>
          Expected: First contact is exported from the list. Details of the exported contact found in the specified export .txt file.
   
-      2. Test case: `export 0`<br>
+      3. Test case: `export 0`<br>
          Expected: No contact is exported. Error details shown in the status message.
   
-      3. Other incorrect export commands to try: `export abc`, `export x`, `...` (where x is larger than the list size)<br>
+      4. Other incorrect export commands to try: `export abc`, `export x`, `...` (where x is larger than the list size)<br>
          Expected: Similar to previous.
 
 2. Exporting all contacts in filtered list
 
-  * Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.<br><br>
+      1. Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.
   
-      1. Test case: `export`<br>
+      2. Test case: `export`<br>
          Expected: All contacts are exported from the list. Details of the exported contacts found in the specified export .txt file.
 
 ### Clearing all entries
