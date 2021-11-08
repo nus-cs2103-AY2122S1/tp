@@ -14,6 +14,13 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
 
+    /**
+     * This method attempts to clear the contents
+     * of the existing address book.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

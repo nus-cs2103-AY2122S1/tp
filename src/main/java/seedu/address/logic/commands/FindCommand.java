@@ -35,10 +35,21 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Creates a FindCommand which contains the predicate provided.
+     *
+     * @param predicate used to filter through search results.
+     */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * This method attempts to find an existing contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -50,6 +61,14 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Method to compare two FindCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the FindCommand object that called this method.
+     * @return boolean representation of whether the FindCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

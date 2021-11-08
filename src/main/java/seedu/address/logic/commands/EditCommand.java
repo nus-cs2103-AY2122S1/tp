@@ -87,6 +87,9 @@ public class EditCommand extends Command {
 
     /**
      * Executes the command to edit user's profile.
+     *
+     * @param model used to retrieve the user profile.
+     * @return CommandResult holds the outcome of this method.
      */
     public CommandResult executeEditProfile(Model model) {
         requireNonNull(model);
@@ -122,7 +125,11 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Executes the command to edit a contact.
+     * This method attempts to edit the details of an existing contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
      */
     public CommandResult executeEditContact(Model model) throws CommandException {
         requireNonNull(model);
@@ -147,6 +154,15 @@ public class EditCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
+
+    /**
+     * This method determines if the editing command is meant to
+     * edit the profile or edit a contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (editPersonDescriptor.getIsProfile()) {
@@ -158,6 +174,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param editPersonDescriptor details to edit the person with.
+     * @param personToEdit is the person to edit.
+     * @return Person object of the edited person.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -175,6 +195,14 @@ public class EditCommand extends Command {
                 updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedIsFavorite);
     }
 
+    /**
+     * Method to compare two EditCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the EditCommand object that called this method.
+     * @return boolean representation of whether the EditCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -213,6 +241,8 @@ public class EditCommand extends Command {
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy contains details of person to be edited.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -228,6 +258,9 @@ public class EditCommand extends Command {
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return Boolean representation of whether either of
+         * the fields have been edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, telegram, github, phone, email, address, tags);
@@ -300,6 +333,8 @@ public class EditCommand extends Command {
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param tags to be set.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
@@ -314,6 +349,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Method to compare two EditPersonDescriptor objects.
+         *
+         * @param other is the object that is going to be compared
+         *              to the EditPersonDescriptor object that called this method.
+         * @return boolean representation of whether the EditPersonDescriptor
+         * object is equal to the other object passed as parameter.
+         */
         @Override
         public boolean equals(Object other) {
             // short circuit if same object

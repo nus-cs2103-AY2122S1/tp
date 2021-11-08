@@ -12,6 +12,9 @@ public class AppUtil {
 
     /**
      * Gets an {@code Image} from the specified path.
+     *
+     * @param imagePath path of the image.
+     * @return Image.
      */
     public static Image getImage(String imagePath) {
         requireNonNull(imagePath);
@@ -21,6 +24,7 @@ public class AppUtil {
     /**
      * Checks that {@code condition} is true. Used for validating arguments to methods.
      *
+     * @param condition of the argument.
      * @throws IllegalArgumentException if {@code condition} is false.
      */
     public static void checkArgument(Boolean condition) {
@@ -32,6 +36,8 @@ public class AppUtil {
     /**
      * Checks that {@code condition} is true. Used for validating arguments to methods.
      *
+     * @param condition of the argument.
+     * @param errorMessage of the argument.
      * @throws IllegalArgumentException with {@code errorMessage} if {@code condition} is false.
      */
     public static void checkArgument(Boolean condition, String errorMessage) {

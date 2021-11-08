@@ -24,6 +24,11 @@ public class Version implements Comparable<Version> {
 
     /**
      * Constructs a {@code Version} with the given version details.
+     *
+     * @param major of the version.
+     * @param minor of the version.
+     * @param patch of the version.
+     * @param isEarlyAccess if true else otherwise.
      */
     public Version(int major, int minor, int patch, boolean isEarlyAccess) {
         this.major = major;
@@ -32,18 +37,40 @@ public class Version implements Comparable<Version> {
         this.isEarlyAccess = isEarlyAccess;
     }
 
+    /**
+     * Returns the major of the version.
+     *
+     * @return major.
+     */
     public int getMajor() {
         return major;
     }
 
+    /**
+     * Returns the minor of the version.
+     *
+     * @return minor.
+     */
     public int getMinor() {
         return minor;
     }
 
+
+    /**
+     * Returns the patch of the version.
+     *
+     * @return patch.
+     */
     public int getPatch() {
         return patch;
     }
 
+    /**
+     * Returns true if version isEarlyAccess.
+     *
+     * @return boolean representation of whether the version
+     * is early access or not.
+     */
     public boolean isEarlyAccess() {
         return isEarlyAccess;
     }
@@ -93,6 +120,14 @@ public class Version implements Comparable<Version> {
         return 1;
     }
 
+    /**
+     * Method to compare two Version objects.
+     *
+     * @param obj is the object that is going to be compared
+     *              to the Version object that called this method.
+     * @return boolean representation of whether the Version
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

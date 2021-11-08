@@ -24,10 +24,23 @@ public class FavoriteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a Favorite Command containing the
+     * index of person to be favorited.
+     *
+     * @param targetIndex Index of target person.
+     */
     public FavoriteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * This method attempts to favorite an existing contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -53,6 +66,14 @@ public class FavoriteCommand extends Command {
         return new CommandResult(successMessage);
     }
 
+    /**
+     * Method to compare two FavoriteCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the FavoriteCommand object that called this method.
+     * @return boolean representation of whether the FavoriteCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

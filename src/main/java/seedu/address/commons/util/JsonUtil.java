@@ -139,6 +139,13 @@ public class JsonUtil {
             super(vc);
         }
 
+        /**
+         * Constructor for _deserialize.
+         *
+         * @param value of deserialize.
+         * @param ctxt context of deserialization.
+         * @return a _deserialize object.
+         */
         @Override
         protected Level _deserialize(String value, DeserializationContext ctxt) {
             return getLoggingLevel(value);
@@ -154,6 +161,11 @@ public class JsonUtil {
             return Level.parse(loggingLevelString);
         }
 
+        /**
+         * Returns the handled type.
+         *
+         * @return Class of the handled type.
+         */
         @Override
         public Class<Level> handledType() {
             return Level.class;

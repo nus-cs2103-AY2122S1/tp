@@ -14,6 +14,14 @@ public class IsFavoritePredicate implements Predicate<Person> {
         return isFavorite == person.isFavorite();
     }
 
+    /**
+     * Method to compare two IsFavoritePredicate objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the IsFavoritePredicate object that called this method.
+     * @return boolean representation of whether the IsFavoritePredicate
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

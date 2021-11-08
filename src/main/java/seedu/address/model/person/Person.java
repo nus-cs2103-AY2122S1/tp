@@ -222,6 +222,11 @@ public class Person implements Comparable<Person> {
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
+     *
+     * @param other is the object that is going to be compared
+     *              to the Person object that called this method.
+     * @return boolean representation of whether the Person
+     * object is equal to the other object passed as parameter.
      */
     @Override
     public boolean equals(Object other) {
@@ -238,6 +243,11 @@ public class Person implements Comparable<Person> {
                 || otherPerson.getGithub().equals(getGithub());
     }
 
+    /**
+     * Returns the {@code hashCode} of Person.
+     *
+     * @return hashCode of Person.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -249,6 +259,11 @@ public class Person implements Comparable<Person> {
         return name.compareTo(p.getName());
     }
 
+    /**
+     * Returns the String representation of Person.
+     *
+     * @return String representation of Person.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

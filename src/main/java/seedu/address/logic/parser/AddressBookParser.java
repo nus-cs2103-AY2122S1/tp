@@ -58,8 +58,10 @@ public class AddressBookParser {
 
     /**
      * Parses user input into command (that doesn't accept arguments) for execution.
+     *
      * @param commandWord command type
      * @return the command based on the user input
+     * @throws ParseException if there is an error while parsing commandWard.
      */
     public Command parseCommandWithoutDescription(String commandWord) throws ParseException {
         switch (commandWord) {
@@ -82,8 +84,10 @@ public class AddressBookParser {
 
     /**
      * Parses user input into command (that accepts arguments) for execution.
+     *
      * @param commandWord command type
      * @return the command based on the user input
+     * @throws ParseException if there is an error while parsing commandWard or arguments.
      */
     public Command parseCommandWithDescription(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {

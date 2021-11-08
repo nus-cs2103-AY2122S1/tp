@@ -40,6 +40,8 @@ public class TagCommandParser implements Parser<TagCommand> {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      *
+     * @param args to be parsed.
+     * @return TagCommand containing the target index to be tagged.
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagCommand parse(String args) throws ParseException {

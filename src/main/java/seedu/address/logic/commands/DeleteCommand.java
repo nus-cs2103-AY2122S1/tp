@@ -26,10 +26,23 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand object containing
+     * the index of target to be deleted.
+     *
+     * @param targetIndex Index of the target to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * This method attempts to delete the Person from the existing model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -44,6 +57,14 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
+    /**
+     * Method to compare two DeleteCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the DeleteCommand object that called this method.
+     * @return boolean representation of whether the DeleteCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

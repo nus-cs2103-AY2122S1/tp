@@ -59,6 +59,13 @@ public class ExportCommand extends Command {
         this.fileName = fileName;
     }
 
+    /**
+     * This method attempts to export existing contacts.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         ReadOnlyAddressBook currentAddressBook = model.getAddressBook();

@@ -30,6 +30,14 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         this.isHighlighted = isHighlighted;
     }
 
+    /**
+     * Test if the input {@code person} matches the predicate
+     * by comparing the names.
+     *
+     * @param person to be tested against.
+     * @return Boolean representation of whether the
+     * person is the same as the predicate.
+     */
     @Override
     public boolean test(Person person) {
         boolean result = keywords.stream()
@@ -48,6 +56,14 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         return result;
     }
 
+    /**
+     * Method to compare two NameContainsKeywordsPredicate objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the NameContainsKeywordsPredicate object that called this method.
+     * @return boolean representation of whether the NameContainsKeywordsPredicate
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

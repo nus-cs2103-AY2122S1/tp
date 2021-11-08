@@ -35,17 +35,32 @@ public class Name implements Comparable<Name> {
 
     /**
      * Returns true if a given string is a valid name.
+     *
+     * @param test String of name to be tested against the validation regex.
+     * @return Boolean representation of validity of String of name.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-
+    /**
+     * Returns the String representation of Name.
+     *
+     * @return String representation of Name.
+     */
     @Override
     public String toString() {
         return fullName;
     }
 
+    /**
+     * Method to compare two Name objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the Name object that called this method.
+     * @return boolean representation of whether the Name
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -54,6 +69,11 @@ public class Name implements Comparable<Name> {
                         (Name) other).fullName.toLowerCase(Locale.ROOT))); // state check
     }
 
+    /**
+     * Returns the {@code hashCode} of Name.
+     *
+     * @return hashCode of Name.
+     */
     @Override
     public int hashCode() {
         return fullName.hashCode();

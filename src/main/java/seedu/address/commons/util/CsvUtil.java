@@ -116,11 +116,25 @@ public class CsvUtil {
         serializeObjectToCsvFile(csvSerializableAddressBook, filePath);
     }
 
+    /**
+     * This method serializes objects to Csv file.
+     *
+     * @param csvSerializableAddressBook is the Csv serializable address book.
+     * @param csvFile is the Csv file.
+     * @throws IOException if there is error in writing to the Csv file.
+     */
     private static void serializeObjectToCsvFile(CsvSerializableAddressBook csvSerializableAddressBook, Path csvFile)
             throws IOException {
         FileUtil.writeToFile(csvFile, toCsvString(csvSerializableAddressBook));
     }
 
+    /**
+     * This method converts the Csv serializable address book to string form.
+     *
+     * @param csvSerializableAddressBook is the Csv serializable address book.
+     * @return String representation of the csvSerializableAddressBook.
+     * @throws IOException if there is error in convering the Csv file to String.
+     */
     private static String toCsvString(CsvSerializableAddressBook csvSerializableAddressBook) throws IOException {
         csvMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         CsvSchema csvSchema = csvMapper.schemaFor(CsvAdaptedPerson.class).withHeader();
