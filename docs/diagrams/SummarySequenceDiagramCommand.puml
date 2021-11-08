@@ -68,7 +68,13 @@ Summary --> Command : summary
 deactivate Summary
 
 Command --> LogicManager : commandResult
+deactivate Command
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Command -[hidden]-> LogicManager
+destroy Command
+
 [<-- LogicManager : commandResult
+deactivate LogicManager
 
 
 @enduml

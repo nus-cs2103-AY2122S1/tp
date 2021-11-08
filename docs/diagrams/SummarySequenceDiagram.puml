@@ -73,6 +73,9 @@ deactivate Summary
 Summary --> ModelManager : summary
 deactivate Summary
 
+ModelManager --> MainApp : model
+deactivate ModelManager
+
 
 
 

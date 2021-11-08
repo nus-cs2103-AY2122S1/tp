@@ -52,6 +52,9 @@ deactivate EditCommand
 
 EditCommandParser -> AddressBookParser
 deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
 
 AddressBookParser -> LogicManager
 deactivate AddressBookParser
@@ -93,6 +96,9 @@ deactivate CommandResult
 
 EditCommand -> LogicManager
 deactivate EditCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommand -[hidden]-> LogicManager
+destroy EditCommand
 
 [<--LogicManager
 deactivate LogicManager
