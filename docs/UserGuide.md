@@ -572,7 +572,7 @@ Adds a [shift](#flag-legend):triangular_flag_on_post: to a specified staff's sch
 ### Swapping shifts : `swapShift`
 Swaps a shift between two staff.
 
-* The two staff are only identified using their [names](#flag-legend). The name provided has to exactly match the name of the staff to swapped.
+* The two staff are only identified using their [names](#flag-legend):triangular_flag_on_post:. The name provided has to exactly match the name of the staff to swapped.
 * Takes [0, 1 or 2 date inputs](#flag-legend):triangular_flag_on_post: representing the period to swap.
 * The staff identified using the first name provided, is associated with the first shift. The staff identified using the second name provided, is associated with the second shift.
 * This command resets any changes in shift timing done using the [setShiftTime](#updating-the-start-time-and-end-time-for-a-shift--setshifttime) command.
