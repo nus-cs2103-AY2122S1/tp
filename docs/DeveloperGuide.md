@@ -1007,7 +1007,7 @@ testers are expected to do more *exploratory* testing.
       message.
 
    1. Test case: `delete 0`<br>
-      Expected: No participant is deleted. Error details shown in the status message.
+      Expected: No participant is deleted. Error details are shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
