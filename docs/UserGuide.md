@@ -411,7 +411,7 @@ The similar applies for `<number_of_tag_columns>`.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The import command overwrites the current data with the newly imported data. Make sure you don't need the existing data before importing new data. 
 
-You can use the `export` command (explained in the next section) to get a backup of the current data before importing new data.
+You can use the [`export`](#exporting-data--export) command (explained in the next section) to get a backup of the current data before importing new data.
 </div>
 
 An example of how the CSV should be formatted is shown below:
@@ -456,7 +456,9 @@ Format: `export`
 Clears all existing data.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+
+You can't undo this command! You can use the [`export`](#exporting-data--export) command to get a backup of the data before clearing.
+
 </div>
 
 Format: `clear`
