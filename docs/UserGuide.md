@@ -9,30 +9,7 @@ contact management tasks done faster than traditional GUI apps. ProfBook helps C
 and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
-
-- [Quick start](#quick-start)
-- [Features](#features)
-  - [Viewing help : `help`](#viewing-help--help)
-  - [Attribute Summary:](#attribute-summary)
-  - [Adding a person: `add`](#adding-a-person-add)
-  - [Listing all persons : `list`](#listing-all-persons--list)
-  - [View Statistics of last searched list : `stat`](#view-statistics-of-last-searched-list--stat)
-  - [Editing a person : `edit`](#editing-a-person--edit)
-  - [Locating persons by name: `find`](#locating-persons-by-name-find)
-  - [Deleting a person : `delete`](#deleting-a-person--delete)
-  - [Bulk Tag Persons : `bulk_tag`](#bulk-tag-persons--bulk_tag)
-  - [Sort contacts by attribute: `sort`](#sort-contacts-by-attribute-sort)
-  - [Import existing contacts from JSON: `import`](#import-existing-contacts-from-json-import)
-  - [Export filtered contacts to JSON: `export`](#export-filtered-contacts-to-json-export)
-  - [Export emails of filtered contacts to txt: `export email`](#export-emails-of-filtered-contacts-to-txt-exportemail)
-  - [Undoing a command: `undo`](#undoing-a-command-undo)
-  - [Redoing a command: `redo`](#redoing-a-command-redo)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
-- [FAQ](#faq)
-- [Command summary](#command-summary)
-
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
