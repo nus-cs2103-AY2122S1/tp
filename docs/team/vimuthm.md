@@ -12,8 +12,7 @@ Given below are my contributions to the project.
     * Changed package name from `seedu.address` to `safeforhall`
     * Enhanced the `Person` model to fit that of a resident
     * Updated the ui to show all details of a resident
-    * Updated storage for residents
-    * Added testing for all new files
+    * Updated storage for residents and added testing for all new files
 
 * **New Feature**: Added the ability to contact trace residents
     * What it does:
@@ -22,7 +21,7 @@ Given below are my contributions to the project.
     * Justification:
         * This feature adds significant value to the product and is strongly in line with the value proposition. It provides the admin with an easy way to find all close contacts in case of a positive case.
     * Highlights:
-        * This enhancement required working with the model to access the list of events. There was a need for a good understanding of the design structure to be able to check event details without breaking existing abstraction and design. It was fun and challenging to implement the depth and duration restrictions.
+        * This enhancement required working with the model to access the list of events. There was a need for a good understanding of the design structure to not breaking existing abstraction and design. It was fun and challenging to implement the depth and duration restrictions.
 
 * **New Feature**: Added the ability to import data from a csv
     * What it does:
@@ -30,7 +29,7 @@ Given below are my contributions to the project.
     * Justification:
         * This feature greatly improves the transition from an admins existing workflow to our product. It removes the need for entry of countless tedious add commands and improves the user experience.
     * Highlights:
-        * This enhancement required thorough reading of the opencsv documentation. It required a number of decisions to be taken where I had to balance usabilty vs complicated implementations. There was a need to understand how the `AddressBook` functioned to be able to reset the resident data and to remove the residents from the existing events. Allowing optional fields and ensuring no duplicate persons within the given csv were challenging tasks but rewarding nonetheless.
+        * This enhancement required thorough reading of the opencsv documentation. It required a number of decisions to be taken where I had to balance usabilty vs complicated implementations.
     * Credits: The third part library, [opencsv](http://opencsv.sourceforge.net/), was used to ease the reading of csv files.
 
 * **New Feature**: Added the ability to traverse the history of command inputs
@@ -47,8 +46,6 @@ Given below are my contributions to the project.
           * Allows the user to filter by other variables such as vaccination, faculty, email in addition to name.
       * Justification:
           * This significantly increases the usability of the `find` feature. In the context of the app, there's a need to be able to filter by vaccination status, different blocks, levels and faculties for the admin to disemminate information to the right students.
-      * Highlights:
-          * This enhancement required significant modification to the initial feature. Prefixes were now to be accepted and along with that, a host of validation to be done. In addition, implementation was hard but a very elegant solution was found using predicates and stream functions.
   * Implement tab-specific behaviour of the same command keyword [\#80](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/80)
   * Contributions to the UI:
       * Show vaccinated icons next to such residents [\#61](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/61)
@@ -63,6 +60,9 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=VimuthM&tabRepo=AY2122S1-CS2103T-T15-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipSortBy=lineOfCode)
 
 * **Project management**:
+    * Set up the GitHub team org/repo and tools such as CodeCov and Gradle
+    * Did work related to renaming the product and changing the product icon
+    * Delegated work and issues and managed the issue tracker throughout
     * Managed [releases](https://github.com/AY2122S1-CS2103T-T15-4/tp/releases) `v1.2`, `v1.3.trial`, `v1.3` and `v.1.3.1` (4 releases) on GitHub
 
 * **Documentation**:
@@ -73,7 +73,7 @@ Given below are my contributions to the project.
         * Added a section on introducing the ui and included screenshots [\#154](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/154)
     * Developer Guide:
         * Added implementation details of the `find` feature [\#97](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/97)
-        * Added list of non-functional requirements [\#26](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/26)
+        * Added list of non-functional requirements, use cases and manual testing [\#26](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/26)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#85](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/85), [\#81](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/81), [\#62](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/62), [\#57](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/57), [\#51](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/51)
