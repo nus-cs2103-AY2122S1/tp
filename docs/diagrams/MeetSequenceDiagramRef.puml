@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+mainframe sd execute MeetCommand
+
+box Logic LOGIC_COLOR_T1
+participant ":MeetCommand" as MeetCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":NonConflictMeetingList" as NonConflictMeetingList MODEL_COLOR
+end box
+
+opt no conflict
+    MeetCommand -> ModelManager : addMeeting(m)
+    activate ModelManager
+
+    ModelManager -> AddressBook : addMeeting(m)
+    activate AddressBook
+
+    AddressBook -> NonConflictMeetingList : addMeeting(m)
+    activate NonConflictMeetingList
+
+    NonConflictMeetingList --> AddressBook
+    deactivate NonConflictMeetingList
+
+    AddressBook --> ModelManager
+    deactivate AddressBook
+
+    ModelManager --> MeetCommand
+    deactivate ModelManager
+end
+
+create CommandResult
+MeetCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MeetCommand
+deactivate CommandResult
+@enduml

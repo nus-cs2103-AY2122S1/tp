@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MeetingParser" as MeetingParser LOGIC_COLOR
+participant ":MeetCommandParser" as MeetCommandParser LOGIC_COLOR
+participant "m:Meeting" as Meeting LOGIC_COLOR
+participant "a:MeetCommand" as MeetCommand LOGIC_COLOR
+end box
+
+
+
+[-> LogicManager : execute("meet \nd/2040-12-12 12:12 ...")
+activate LogicManager
+
+LogicManager -> MeetingParser : parseCommand("meet \nd/2040-12-12 12:12 ...")
+activate MeetingParser
+
+create MeetCommandParser
+MeetingParser -> MeetCommandParser
+activate MeetCommandParser
+
+MeetCommandParser --> MeetingParser
+deactivate MeetCommandParser
+
+MeetingParser -> MeetCommandParser : parse(arguments)
+activate MeetCommandParser
+
+create Meeting
+MeetCommandParser -> Meeting : Meeting("2040-12-12 12:12", ...)
+activate Meeting
+
+Meeting --> MeetCommandParser : m
+deactivate Meeting
+
+create MeetCommand
+MeetCommandParser -> MeetCommand : MeetCommand(m)
+activate MeetCommand
+
+MeetCommand --> MeetCommandParser : a
+deactivate MeetCommand
+
+MeetCommandParser --> MeetingParser : a
+deactivate MeetCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MeetCommandParser -[hidden]-> MeetingParser
+destroy MeetCommandParser
+
+MeetingParser --> LogicManager : a
+deactivate MeetingParser
+
+LogicManager -> MeetCommand : execute()
+activate MeetCommand
+
+ref over MeetCommand
+execute MeetCommand
+end
+
+MeetCommand --> LogicManager : result
+deactivate MeetCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

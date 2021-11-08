@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="studentCardPane" fx:id="studentCardPane" minWidth="450.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane hgap="3.0" minWidth="450.0" HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="270.0" />
+         <ColumnConstraints maxWidth="180.0" minWidth="10.0" percentWidth="40.0" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="200.0" prefWidth="150.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <padding>
+        <Insets bottom="5" left="15" right="5" top="5" />
+      </padding>
+      <HBox alignment="CENTER_LEFT" prefWidth="150.0" spacing="5">
+        <Label fx:id="id" styleClass="cell_big_label" wrapText="true" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
+      </HBox>
+         <HBox prefWidth="150.0">
+            <children>
+            <Label fx:id="formClass" alignment="CENTER" contentDisplay="CENTER" maxWidth="300.0" minWidth="30.0" styleClass="cell_small_label" text="\$formClass" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="involvement" alignment="CENTER" contentDisplay="CENTER" maxWidth="300.0" minWidth="80.0" styleClass="cell_small_label" text="\$involvement" textAlignment="JUSTIFY" wrapText="true">
+                  <HBox.margin>
+                     <Insets left="4.0" />
+                  </HBox.margin>
+               </Label>
+            <Label fx:id="medicalHistory" ellipsisString="..." maxWidth="150.0" styleClass="cell_small_label" text="\$medicalHistory">
+                  <HBox.margin>
+                     <Insets left="4.0" />
+                  </HBox.margin>
+               </Label>
+            </children>
+         </HBox>
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" />
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" VBox.vgrow="ALWAYS" />
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
+      <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" wrapText="true" />
+      <Label fx:id="emergencyContact" styleClass="cell_small_label" text="\$emergencyContact" wrapText="true" />
+    </VBox>
+      <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="175.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="ALWAYS">
+         <children>
+            <FlowPane fx:id="tags" alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefWrapLength="140.0" HBox.hgrow="SOMETIMES">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </FlowPane>
+         </children>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </HBox>
+      <rowConstraints>
+         <RowConstraints vgrow="ALWAYS" />
+      </rowConstraints>
+  </GridPane>
+</HBox>

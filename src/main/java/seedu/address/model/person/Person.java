@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in NewAddressBook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -19,20 +19,22 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Involvement involvement;
+    private final Gender gender;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Gender gender, Involvement involvement, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, gender, involvement, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.gender = gender;
+        this.involvement = involvement;
         this.tags.addAll(tags);
     }
 
@@ -48,8 +50,12 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Involvement getInvolvement() {
+        return involvement;
     }
 
     /**
@@ -61,7 +67,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -91,14 +97,15 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getGender().equals(getGender())
+                && otherPerson.getInvolvement().equals(getInvolvement())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, gender, tags);
     }
 
     @Override
@@ -109,8 +116,10 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Gender: ")
+                .append(getGender())
+                .append("; Involvement: ")
+                .append(getInvolvement());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -119,5 +128,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

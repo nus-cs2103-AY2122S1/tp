@@ -1,8 +1,21 @@
 {
-  "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
+  "students": [ {
+    "name": "Student with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "gender" : "M",
+    "involvement": "Math class",
+    "address": "4th street",
+    "emergencyContact" : "95614132",
+    "formClass" : "4E1",
+    "medicalHistory" : ""
+  } ],
+  "teachers": [ {
+    "name": "Teacher with invalid name field: Ha!ns Mu@ster",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "gender" : "M",
+    "involvement": "Math class",
+    "officeTable": "1"
   } ]
 }

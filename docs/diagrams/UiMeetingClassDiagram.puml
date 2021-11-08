@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package MeetingWindowUI <<Rectangle>> {
+Class "{abstract}\nUiPart" as UiPart
+Class MeetingWindow
+Class MeetingListPanel
+Class MeetingCard
+Class ResultDisplay
+Class CommandBox
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+package Logic <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside -down-> MeetingWindow
+MeetingWindow *-down->  "1" CommandBox
+MeetingWindow *-down-> "1" ResultDisplay
+MeetingWindow *-down-> "1" MeetingListPanel
+MeetingListPanel -down-> "*" MeetingCard
+
+ResultDisplay --|> UiPart
+CommandBox --|> UiPart
+MeetingWindow --|> UiPart
+MeetingListPanel --|> UiPart
+MeetingCard --|> UiPart
+
+MeetingCard ..> Model
+MeetingWindow -right-> Logic
+
+MeetingWindow -left-|> UiPart
+CommandBox -[hidden]left- ResultDisplay
+MeetingListPanel -[hidden]left=- ResultDisplay
+@enduml

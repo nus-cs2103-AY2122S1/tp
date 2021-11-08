@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CopyStudentCommandParser" as CopyStudentCommandParser LOGIC_COLOR
+participant "c:CopyStudentCommand" as CopyStudentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR_T4
+end box
+
+[-> LogicManager : execute("copyStudent c/name")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("copyStudent c/name")
+activate AddressBookParser
+
+create CopyStudentCommandParser
+AddressBookParser -> CopyStudentCommandParser
+activate CopyStudentCommandParser
+
+CopyStudentCommandParser --> AddressBookParser
+deactivate CopyStudentCommandParser
+
+AddressBookParser -> CopyStudentCommandParser : parse(arguments)
+activate CopyStudentCommandParser
+
+create CopyStudentCommand
+CopyStudentCommandParser -> CopyStudentCommand
+activate CopyStudentCommand
+
+CopyStudentCommand --> CopyStudentCommandParser : c
+deactivate CopyStudentCommand
+
+CopyStudentCommandParser --> AddressBookParser : c
+deactivate CopyStudentCommandParser
+CopyStudentCommandParser -[hidden]-> AddressBookParser
+destroy CopyStudentCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> CopyStudentCommand : execute()
+activate CopyStudentCommand
+
+CopyStudentCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> CopyStudentCommand
+deactivate Model
+
+create CommandResult
+CopyStudentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CopyStudentCommand
+deactivate CommandResult
+
+CopyStudentCommand --> LogicManager : result
+deactivate CopyStudentCommand
+CopyStudentCommand -[hidden]-> LogicManager
+destroy CopyStudentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

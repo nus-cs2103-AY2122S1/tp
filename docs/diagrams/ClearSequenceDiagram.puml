@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "c:ClearStudentCommand" as ClearStudentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clearStudent")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("clearStudent")
+activate AddressBookParser
+
+create ClearStudentCommand
+AddressBookParser -> ClearStudentCommand
+activate ClearStudentCommand
+
+ClearStudentCommand --> AddressBookParser : c
+deactivate ClearStudentCommand
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> ClearStudentCommand : execute()
+activate ClearStudentCommand
+
+ClearStudentCommand -> Model : clearStudent()
+activate Model
+
+Model --> ClearStudentCommand
+deactivate Model
+
+create CommandResult
+ClearStudentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearStudentCommand
+deactivate CommandResult
+
+ClearStudentCommand --> LogicManager : result
+deactivate ClearStudentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

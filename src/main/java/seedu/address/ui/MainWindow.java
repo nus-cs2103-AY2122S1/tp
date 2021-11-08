@@ -13,16 +13,17 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.Window;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -31,9 +32,12 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
+    private TeacherListPanel teacherListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private MeetingWindow meetingWindow;
+    private MedicalWindow medicalWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +46,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private MenuItem meetingMenuItem;
+
+    @FXML
+    private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane teacherListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -63,9 +73,14 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        meetingWindow = new MeetingWindow(new Stage(), logic);
+        meetingWindow.setWindowDefaultSize(new GuiSettings(500, 600, 191, 45));
+        medicalWindow = new MedicalWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -110,8 +125,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+
+        teacherListPanel = new TeacherListPanel(logic.getFilteredTeacherList());
+        teacherListPanelPlaceholder.getChildren().add(teacherListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -147,6 +165,32 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the medical window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleMedical(Student student) {
+        medicalWindow.setContent(student);
+        if (!medicalWindow.isShowing()) {
+            medicalWindow.show();
+        } else {
+            medicalWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the meeting window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleMeeting() {
+        if (!meetingWindow.isShowing()) {
+            meetingWindow.show();
+            meetingWindow.fillInnerParts(logic.getMeetingList());
+        } else {
+            meetingWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,21 +204,29 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        meetingWindow.hide();
+        medicalWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+
+
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
+    }
+
+    public TeacherListPanel getTeacherListPanel() {
+        return teacherListPanel;
     }
 
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.Logic#execute(String, Window)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText, Window.MAIN);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -184,6 +236,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowMedical()) {
+                handleMedical(commandResult.getStudent());
+            }
+
+            if (commandResult.isShowMeeting()) {
+                handleMeeting();
             }
 
             return commandResult;

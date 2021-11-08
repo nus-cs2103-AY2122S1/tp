@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/sequence-diagram'
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterStudentCommandParser" as FilterStudentCommandParser LOGIC_COLOR
+participant "d:FilterStudentCommand" as FilterStudentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filterStudent class")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filterStudent class")
+activate AddressBookParser
+
+create FilterStudentCommandParser
+AddressBookParser -> FilterStudentCommandParser
+activate FilterStudentCommandParser
+
+FilterStudentCommandParser --> AddressBookParser
+deactivate FilterStudentCommandParser
+
+AddressBookParser -> FilterStudentCommandParser : parse(arguments)
+activate FilterStudentCommandParser
+
+create FilterStudentCommand
+FilterStudentCommandParser -> FilterStudentCommand : FilterStudentCommand(predicate)
+activate FilterStudentCommand
+
+
+FilterStudentCommand --> FilterStudentCommandParser :d
+deactivate
+
+FilterStudentCommandParser --> AddressBookParser :d
+deactivate FilterStudentCommandParser
+FilterStudentCommandParser -[hidden]-> AddressBookParser
+destroy FilterStudentCommandParser
+
+AddressBookParser --> LogicManager :d
+deactivate AddressBookParser
+
+LogicManager -> FilterStudentCommand : execute()
+activate FilterStudentCommand
+
+FilterStudentCommand -> Model : updateFilteredStudentList(predicate)
+activate Model
+
+Model --> FilterStudentCommand
+deactivate Model
+
+FilterStudentCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> FilterStudentCommand
+deactivate Model
+
+create CommandResult
+FilterStudentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterStudentCommand
+deactivate CommandResult
+
+FilterStudentCommand --> LogicManager : result
+deactivate FilterStudentCommand
+FilterStudentCommand -[hidden]-> LogicManager
+destroy FilterStudentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

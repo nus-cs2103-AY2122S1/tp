@@ -3,6 +3,8 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+show members
+hide empty members
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
@@ -11,19 +13,22 @@ Interface Model <<Interface>>
 Class AddressBook
 Class ReadOnlyAddressBook
 Class Model
-Class ModelManager
+'make it private?
+Class ModelManager {
+    history : Stack<AddressBook>
+}
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
+Class UniqueStudentList
+Class UniqueTeacherList
+Class UniqueTeacherList
+Class NonConflictMeetingList
+Class Student
+Class Teacher
+Class Meeting
+Class "{abstract}\nPerson" as Person
 }
 
 Class HiddenOutside #FFFFFF
@@ -38,17 +43,17 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueStudentList
+AddressBook *--> "1" UniqueTeacherList
+AddressBook *--> "1" NonConflictMeetingList
+UniqueStudentList --> "~* all" Student
+UniqueTeacherList --> "~* all" Teacher
+NonConflictMeetingList --> "~* all" Meeting
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ModelManager -->"~* filtered" Student
+ModelManager -->"~* filtered" Teacher
 
-ModelManager -->"~* filtered" Person
+Teacher --|> Person
+Student --|> Person
+
 @enduml

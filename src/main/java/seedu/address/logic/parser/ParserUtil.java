@@ -9,10 +9,18 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.meeting.Attendee;
+import seedu.address.model.meeting.DateTime;
+import seedu.address.model.meeting.Description;
+import seedu.address.model.meeting.DescriptionType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Involvement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.student.Address;
+import seedu.address.model.person.student.FormClass;
+import seedu.address.model.person.teacher.OfficeTable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +33,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -96,6 +105,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String involvement} into an {@code Involvement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Involvement} is invalid.
+     */
+    public static Involvement parseInvolvement(String involvement) throws ParseException {
+        requireNonNull(involvement);
+        String trimmedInvolvement = involvement.trim();
+        if (!Involvement.isValidInvolvement(trimmedInvolvement)) {
+            throw new ParseException(Involvement.MESSAGE_CONSTRAINTS);
+        }
+        return new Involvement(trimmedInvolvement);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +144,111 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String formClass} into an {@code FormClass}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code FormClass} is invalid.
+     */
+    public static FormClass parseFormClass(String formClass) throws ParseException {
+        requireNonNull(formClass);
+        String trimmedFormClass = formClass.trim();
+        if (!FormClass.isValidFormClass(trimmedFormClass)) {
+            throw new ParseException(FormClass.MESSAGE_CONSTRAINTS);
+        }
+        return new FormClass(trimmedFormClass);
+    }
+
+    /**
+     * Parses a {@code String Gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String genderUpperCase = gender.toUpperCase();
+        String trimmedGender = genderUpperCase.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String tableNumber} into a {@code OfficeTable}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tableNumber} is invalid.
+     */
+    public static OfficeTable parseOfficeTable(String tableNumber) throws ParseException {
+        requireNonNull(tableNumber);
+        String trimmedTableNumber = tableNumber.trim();
+        if (!OfficeTable.isValidTable(trimmedTableNumber)) {
+            throw new ParseException(OfficeTable.MESSAGE_CONSTRAINTS);
+        }
+        return new OfficeTable(tableNumber);
+    }
+
+    /**
+     * Parses a {@code String title} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code title} is invalid.
+     */
+    public static Description parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!Description.isValidDescription(trimmedTitle)) {
+            throw new ParseException(Description.getMessageConstraints(DescriptionType.TITLE));
+        }
+        return new Description(title);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code DateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static DateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        if (!DateTime.isValidDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new DateTime(dateTime);
+    }
+
+    /**
+     * Parses a {@code String venue} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static Description parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Description.isValidDescription(trimmedVenue)) {
+            throw new ParseException(Description.getMessageConstraints(DescriptionType.VENUE));
+        }
+        return new Description(venue);
+    }
+
+    /**
+     * Parses a {@code String attendee} into a {@code seedu.address.model.meeting.Attendee}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendee} is invalid.
+     */
+    public static Attendee parseAttendee(String attendee) throws ParseException {
+        requireNonNull(attendee);
+        String trimmedAttendee = attendee.trim();
+        if (!Attendee.isValidAttendee(trimmedAttendee)) {
+            throw new ParseException(Attendee.MESSAGE_CONSTRAINTS);
+        }
+        return new Attendee(attendee);
     }
 }
