@@ -1,18 +1,24 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.SlotBlockedException;
+import seedu.address.model.blockedslot.BlockedSlot;
+import seedu.address.model.event.Date;
+import seedu.address.model.event.Event;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    Predicate<BlockedSlot> PREDICATE_SHOW_ALL_BLOCKED_SLOTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +41,116 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' schedule file path.
      */
-    Path getAddressBookFilePath();
+    Path getScheduleFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' schedule file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setScheduleFilePath(Path scheduleFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces schedule data with the data in {@code schedule}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setSchedule(ReadOnlySchedule schedule);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Schedule */
+    ReadOnlySchedule getSchedule();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Deletes the given event.
+     * The event must exist in the schedule.
      */
-    boolean hasPerson(Person person);
+    void deleteEvent(Event target);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Adds the given event.
+     * {@code event} must not already exist in the schedule.
+     * @throws SlotBlockedException if the Date and TimeSlot of the Event to add coincides with the blocked period.
      */
-    void deletePerson(Person target);
+    void addEvent(Event event);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Replaces the given event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in the schedule.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the schedule.
      */
-    void addPerson(Person person);
+    void setEvent(Event target, Event editedEvent);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Adds the given BlockedSlot.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void addBlockedSlot(BlockedSlot blockedSlot);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Deletes the given blocked slot.
+     * @param blockedSlot BlockedSlot to delete.
+     */
+    void deleteBlockedSlot(BlockedSlot blockedSlot);
+
+    /**
+     * Checks if the given Overlappable is blocked by a BlockedSlot.
+     * @param overlappable the Overlappable to be checked.
+     * @return true if the Overlappable is blocked, false otherwise.
+     */
+    boolean isBlockedByBlockedSlot(Overlappable overlappable);
+
+    /**
+     * Checks if the given Overlappable is blocked by a BlockedSlot other than the given one.
+     * @param overlappable the Overlappable to be checked.
+     * @param excluding the BlockedSlot to exclude from the check.
+     * @return true if the Overlappable is blocked, false otherwise.
+     */
+    boolean isBlockedByBlockedSlot(Overlappable overlappable, Overlappable excluding);
+
+    /**
+     * Checks if the given Overlappable is blocked by an Event.
+     * @param overlappable the Overlappable to be checked.
+     * @return true if the Overlappable is blocked, false otherwise.
+     */
+    boolean isBlockedByEvent(Overlappable overlappable);
+
+    /**
+     * Checks if the given Overlappable is blocked by an Event other than the given one.
+     * @param overlappable the Overlappable to be checked.
+     * @param excluding the Event to exclude from the check.
+     * @return true if the Overlappable is blocked, false otherwise.
+     */
+    boolean isBlockedByEvent(Overlappable overlappable, Overlappable excluding);
+
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
+
+    /** Returns an unmodifiable view of the filtered blocked slot list */
+    ObservableList<BlockedSlot> getFilteredBlockedSlotList();
+
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Updates the filter of the filtered blocked slot list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBlockedSlotList(Predicate<BlockedSlot> predicate);
+
+    /** Returns the BlockedSlot list in String format */
+    String filteredBlockedSlotListToString();
+
+    /**
+     * Gets the first event in the filtered list.
+     */
+    Event nextEventInTheList();
+
+    /**
+     * Gets a list of all free slots from now to 2359 of date with last event/block slot.
+     *
+     * @param date Today's date
+     * @param now time now
+     * @return ArrayList of freeSlots
+     */
+    ArrayList<FreeSlot> getFreeSlots(Date date, LocalTime now);
 }

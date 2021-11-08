@@ -1,17 +1,19 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.getTypicalSchedule;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.SlotBlockedException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.blockedslot.BlockedSlot;
+import seedu.address.model.event.Event;
+import seedu.address.testutil.EventBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -22,24 +24,36 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalSchedule(), new UserPrefs());
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newEvent_success() {
+        Event validEvent = new EventBuilder().withDate("2020-01-01").withTimeSlot("1000", "1100").build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        Model expectedModel = new ModelManager(model.getSchedule(), new UserPrefs());
+        expectedModel.addEvent(validEvent);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddCommand(validEvent), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_eventClashesWithBlockedSlot_throwsSlotBlockedException() {
+        Model model = new ModelManager(getTypicalSchedule(), new UserPrefs());
+        Event clashingEvent = new EventBuilder().withDate("2020-02-06").withTimeSlot("1130", "1230").build();
+
+        assertThrows(SlotBlockedException.class, BlockedSlot.SLOT_BLOCKED, () ->
+            new AddCommand(clashingEvent).execute(model));
+    }
+
+    @Test
+    public void execute_eventClashesWithEvent_throwsSlotBlockedException() {
+        Model model = new ModelManager(getTypicalSchedule(), new UserPrefs());
+        Event clashingEvent = new EventBuilder().withDate("2020-01-01").withTimeSlot("0830", "0930").build();
+
+        assertThrows(SlotBlockedException.class, Event.SLOT_BLOCKED, () ->
+            new AddCommand(clashingEvent).execute(model));
     }
 
 }

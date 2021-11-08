@@ -1,0 +1,19 @@
+{
+  "_comment": "In this file, the blocked slot is of the wrong format.",
+  "events": [ {
+    "name" : "Alice Pauline",
+    "date" : "2020-01-01",
+    "startTime" : "0800",
+    "endTime" : "0900",
+    "location" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "remark": "A nice girl."
+  } ],
+  "blockedSlots" : [
+    {
+      "date" : "2020-01-02",
+      "startTime" : "11:00",
+      "endTime" : "12:00"
+    }
+  ]
+}

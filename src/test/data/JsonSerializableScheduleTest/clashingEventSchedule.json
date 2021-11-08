@@ -1,0 +1,25 @@
+{
+  "_comment": "In this file, Alice and Benson's events clash.",
+  "events": [ {
+    "name" : "Alice Pauline",
+    "date" : "2020-01-01",
+    "startTime" : "0800",
+    "endTime" : "0900",
+    "location" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "remark": "A nice girl."
+  }, {
+    "name" : "Benson Meier",
+    "date" : "2020-01-01",
+    "startTime" : "0830",
+    "endTime" : "0930",
+    "location" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ],
+    "remark": "A weird boy."
+  } ],
+  "blockedSlots" : [ {
+      "date" : "2020-01-02",
+      "startTime" : "1100",
+      "endTime" : "1200"
+    } ]
+}

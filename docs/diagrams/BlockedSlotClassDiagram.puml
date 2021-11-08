@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class Schedule
+
+Interface Overlappable <<Interface>> {
+    boolean isOverlappingWith(Overlappable)
+}
+Interface SortedOverlappableList <<Interface>> {
+    boolean isOverlappingWith(Overlappable)
+}
+
+Schedule *--> "1" SortedEventList
+Schedule *--> "1" SortedBlockedSlotList
+
+Class SortedBlockedSlotList
+Class BlockedSlot
+
+Class SortedEventList
+Class Event
+
+Class Location
+Class TimeSlot
+Class Name
+Class Date
+Class Tag
+
+Event .up.|> Overlappable
+BlockedSlot .up.|> Overlappable
+
+SortedEventList .up.|> SortedOverlappableList
+SortedBlockedSlotList .up.|> SortedOverlappableList
+
+SortedEventList --> Event
+SortedBlockedSlotList --> BlockedSlot
+
+Event *--> Name
+Event *--> Date
+Event *--> TimeSlot
+Event *--> Location
+Event *--> "*" Tag
+
+BlockedSlot *--> Date
+BlockedSlot *--> TimeSlot
+
+BlockedSlot -[hidden]right-> Event
+Schedule -[hidden]right-> SortedOverlappableList
+@enduml

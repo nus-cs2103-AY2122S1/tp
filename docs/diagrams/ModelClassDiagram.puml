@@ -5,23 +5,25 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlySchedule <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Schedule
+Class ReadOnlySchedule
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
+Class SortedBlockedSlotList
+Class BlockedSlot
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class SortedEventList
+Class Event
+Class Location
+Class TimeSlot
 Class Name
-Class Phone
+Class Date
 Class Tag
 
 }
@@ -29,26 +31,31 @@ Class Tag
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Schedule .up.|> ReadOnlySchedule
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlySchedule
+ModelManager -left-> "1" Schedule
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Schedule *--> "1" SortedEventList
+SortedEventList --> "~* all" Event
+SortedBlockedSlotList --> "~* all" BlockedSlot
+Event *--> Name
+Event *--> Date
+Event *--> TimeSlot
+Event *--> Location
+Event *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Schedule *--> "1" SortedBlockedSlotList
+BlockedSlot *--> Date
+BlockedSlot *--> TimeSlot
 
-ModelManager -->"~* filtered" Person
+Name -[hidden]right-> Date
+Date -[hidden]right-> Location
+Location -[hidden]right-> TimeSlot
+
+ModelManager -->"~* filtered" Event
 @enduml

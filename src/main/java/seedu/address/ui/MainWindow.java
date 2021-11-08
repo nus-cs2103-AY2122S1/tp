@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -31,9 +32,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandSummaryWindow commandSummaryWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,10 +44,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private MenuItem commandSummaryMenuItem;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane eventListPanelPlaceholder;
+
+    @FXML
+    private VBox resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -65,6 +70,8 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        commandSummaryWindow = new CommandSummaryWindow();
+
         helpWindow = new HelpWindow();
     }
 
@@ -78,7 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination time of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -110,13 +117,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getScheduleFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -147,6 +154,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the command summary window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleCommandSummary() {
+        if (!commandSummaryWindow.isShowing()) {
+            commandSummaryWindow.show();
+        } else {
+            commandSummaryWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -159,12 +178,13 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        commandSummaryWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
     }
 
     /**
@@ -180,6 +200,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowCommands()) {
+                handleCommandSummary();
             }
 
             if (commandResult.isExit()) {

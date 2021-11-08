@@ -1,19 +1,48 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: DukePro(f)
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
-
+[![CI Status](https://github.com/AY2122S1-CS2103T-T11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T11-4/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T11-4/tp/branch/master/graph/badge.svg?token=L1BNXI5CA9)](https://codecov.io/gh/AY2122S1-CS2103T-T11-4/tp)
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+DukePro(f) is a schedule-planning desktop application that assists **university professors** in managing
+their **consultations**, through the usage of an intuitive **Command-Line Interface (CLI)**<sup>1</sup>
+and an easy-to-navigate **Graphical User Interface (GUI)**<sup>2</sup>.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+It is named `DukePro(f)` (Duke-Professor) because our project's target audience is professors, and it is also a nod
+to our CS2103T iP (individual Project), which was named `Duke`.
+
+Amidst long hours of lectures and tutorials in the week, professors may still need to cater timeslots for student
+consultations, which can be hard to come by and difficult to keep track of. This is where Dukepro(f)
+comes in to help you out! 
+
+With DukePro(f), you will be able to:
+
+* Add your consultations (With details such as names of student(s), location of consultation, any remarks)
+* Delete your consultations
+* Edit your consultation details
+* List all of your consultations
+* List your next consultation
+* List your free time slots for consultation booking
+* Block certain time slots (to ensure your consultations don't clash with other commitments)
+
+Want to get started using DukePro(f)?
+[**Click here**](https://ay2122s1-cs2103t-t11-4.github.io/tp/UserGuide.html#4-quick-start) for the User Guide!
+
+Want to try your hand at improving DukePro(f)? [**Click here**](https://ay2122s1-cs2103t-t11-4.github.io/tp/DeveloperGuide.html) for the Developer Guide!
+
+<hr />
+
+<sup>1</sup>Command-Line Interface (CLI): How you interact with the application, i.e. by
+typing in text (commands).<br>
+<sup>2</sup>Graphical User Interface (GUI): The visual component of DukePro(f), and the form by which you
+interact with it.
+
 
 
 **Acknowledgements**
 
+* This project is adapted from [SE-EDU initiative's](https://se-education.org#https://se-education.org/) AddressBook-Level3 project.
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

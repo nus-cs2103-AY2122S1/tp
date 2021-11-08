@@ -3,8 +3,10 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import javafx.scene.control.Label;
+
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the schedule.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
@@ -49,6 +51,31 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    /**
+     * Creates a Label depending on the tag name
+     *
+     * @return a label with a background depending on the tag name.
+     * The tag name "URGENT" returns a label with a red background
+     * The tag name "supplementary" returns a label with a yellow background
+     */
+    public Label createLabel() {
+        Label l;
+        if (tagName.equals("URGENT")) {
+            l = new UrgentLabel();
+        } else if (tagName.equals("supplementary")) {
+            l = new SupplementaryLabel();
+        } else {
+            l = new Label(tagName);
+        }
+        l.setMaxWidth(100);
+        l.setWrapText(true);
+        return l;
+    }
+
+    public String getTagName() {
+        return tagName;
     }
 
 }

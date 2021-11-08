@@ -1,0 +1,75 @@
+{
+  "_comment": "Schedule save file which contains the same Event values as in TypicalEvents#getTypicalSchedule()",
+  "events" : [ {
+    "name" : "Alice Pauline",
+    "date" : "2020-01-01",
+    "startTime" : "0800",
+    "endTime" : "0900",
+    "location" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ],
+    "remark": "A nice girl."
+  }, {
+    "name" : "Benson Meier",
+    "date" : "2020-01-02",
+    "startTime" : "0830",
+    "endTime" : "0930",
+    "location" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ],
+    "remark": "A weird boy."
+  }, {
+    "name" : "Carl Kurz",
+    "date" : "2020-01-03",
+    "startTime" : "0930",
+    "endTime" : "1030",
+    "location" : "wall street",
+    "tagged" : [ ],
+    "remark": "May change schedule."
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2020-01-04",
+    "startTime" : "1000",
+    "endTime" : "1100",
+    "location" : "10th street",
+    "tagged" : [ "friends" ],
+    "remark": ""
+  }, {
+    "name" : "Elle Meyer",
+    "date" : "2020-01-05",
+    "startTime" : "1030",
+    "endTime" : "1130",
+    "location" : "michegan ave",
+    "tagged" : [ ],
+    "remark": ""
+  }, {
+    "name" : "Fiona Kunz",
+    "date" : "2020-01-06",
+    "startTime" : "1100",
+    "endTime" : "1200",
+    "location" : "little tokyo",
+    "tagged" : [ ],
+    "remark": ""
+  }, {
+    "name" : "George Best",
+    "date" : "2020-01-07",
+    "startTime" : "1130",
+    "endTime" : "1230",
+    "location" : "4th street",
+    "tagged" : [ ],
+    "remark": ""
+  } ],
+  "blockedSlots" : [
+    {
+      "date" : "2020-02-06",
+      "startTime" : "1100",
+      "endTime" : "1200"
+    }, {
+      "date" : "2020-02-06",
+      "startTime" : "1200",
+      "endTime" : "1300"
+    }, {
+      "date" : "2020-02-06",
+      "startTime" : "1300",
+      "endTime" : "1400"
+    }
+  ]
+}

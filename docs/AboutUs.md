@@ -5,55 +5,45 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+## CS2103T T11 Team 4
 
-## Project team
+### Jacob Ng
 
-### John Doe
+<img src="images/jacobnbh.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/jacobnbh)][[portfolio](team/jacobnbh.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Poh Hui-En Ruth
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruthpohrp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ruthpohrp)][[portfolio](team/ruthpohrp.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Chan Shi Yuan Galvin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/csygalvin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/csygalvin)][[portfolio](team/csygalvin.md)]
 
 * Role: Developer
-* Responsibilities: UI
+
+
+### Quan Teng Foong
+
+<img src="images/kaldius.png" width="200px" alt="kaldius_photo">
+
+[[github](http://github.com/kaldius)][[portfolio](team/kaldius.md)]
+
+* Role: Developer
+
+### Yousef Lulu Saud A
+
+<img src="images/luluyousef.png" width="200px">
+
+[[github](https://github.com/luluyousef)][[portfolio](team/luluyousef.md)]
+
+* Role: Developer

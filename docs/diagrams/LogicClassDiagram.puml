@@ -5,12 +5,13 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
+Class ScheduleParser
 
-Class AddressBookParser
+package Command {
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
-
+}
 
 Interface Logic <<Interface>>
 Class LogicManager
@@ -27,8 +28,8 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager -down->"1" ScheduleParser
+ScheduleParser .right.> XYZCommand : creates >
 
 XYZCommand -up-|> Command
 LogicManager .left.> Command : executes >

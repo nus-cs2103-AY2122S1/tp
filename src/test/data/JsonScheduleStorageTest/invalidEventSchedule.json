@@ -1,0 +1,10 @@
+{
+  "events": [ {
+    "name": "Event with invalid name field: Ha!ns Mu@ster",
+    "date": "2020-01-01",
+    "startTime": "1300",
+    "endTime" : "1400",
+    "location": "4th street",
+    "remark": "This is a remark."
+  } ]
+}

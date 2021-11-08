@@ -4,18 +4,28 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+Schedule *-right-> "1" SortedEventList
+Schedule *-right-> "1" UniqueTagList
+Schedule *--> "1" SortedBlockedSlotList
+UniqueTagList -[hidden]down- SortedEventList
+UniqueTagList -[hidden]down- SortedEventList
+SortedBlockedSlotList -down-> BlockedSlot
+BlockedSlot -down-> Date
+BlockedSlot -down-> TimeSlot
 
-UniqueTagList *-right-> "*" Tag
-UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+UniqueTagList *-down-> "*" Tag
+SortedEventList -right-> Event
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Event -up-> "*" Tag
+
+Event *--> Name
+Event *--> Date
+Event *--> TimeSlot
+Event *--> Location
+
+TimeSlot -[hidden]right-> Date
+TimeSlot -[hidden]right-> Name
+Name -[hidden]right-> Location
+Location -[hidden]right-> Tag
 @enduml
