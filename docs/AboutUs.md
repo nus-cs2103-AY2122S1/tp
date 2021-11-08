@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/lowkangn.md)]
 
 - Role: Developer
-- Responsibilities: Testing + Deliverables and deadlines
+- Responsibilities: Testing + Deliverables and deadlines + Documentation
 
 ### Ye Xinjian
 
@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/ntwbruce.md)]
 
 - Role: Developer
-- Responsibilities: Logic + Testing
+- Responsibilities: Testing + Code Quality
 
 ### Dave Low
 
