@@ -31,7 +31,7 @@ deactivate Comparator
 
 ref over RecommendCommand, Model: Updating of filtered and sorted friends list
 
-<-- RecommendCommand: CommandResult
+<-- RecommendCommand
 deactivate RecommendCommand
 
 @enduml
