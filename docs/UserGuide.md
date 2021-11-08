@@ -206,8 +206,8 @@ Flag    |  Argument     | Description                     | Remarks
 &nbsp;  | index         | index of the item to edit.      | Index is 1 based.
 `n/`    | name          | new name for the item.          | Only alphanumeric characters (and spaces) are allowed.
 `id/`   | id number     | new id number for the item.     | Must be an integer with no more than 6 digits.
-`cp/`   | cost price    | new cost price for the item.    | Must be a positive number.
-`sp/`   | sell price    | new sell price for the item.    | Must be a positive number.
+`cp/`   | cost price    | new cost price for the item.    | Must be non-negative.
+`sp/`   | sell price    | new sell price for the item.    | Must be non-negative.
 `t/`    | tag           | new tag(s) for the item.        | Only alphanumeric characters are allowed.
 
 - Feel free to edit multiple fields at once!
@@ -376,6 +376,9 @@ changes to cost price is assumed to be for future restocking of the item.<br>
 **A**: Due to the calculation of total cost and revenue, BogoBogo needs to know the reason for the change in count.
 Use `add` for stocking items, `delete` to delete accidentally added items, `remove` to remove unsold items (e.g. expired
 goods), and `iorder` to account for sold items.
+
+**Q**: Why can't I see my cost prices in my past transactions?<br>
+**A**: Past transactions only store important transaction related details. Storing cost price can be misleading since costs can change over time!
 
 **Q**: My business is really growing lately, why does my BogoBogo calculation of revenue, profit, and cost seem wrong?<br>
 **A**: BogoBogo was built for small businesses in mind. On that note, it doesn't calculate revenue and cost beyond $999,999,999. 
