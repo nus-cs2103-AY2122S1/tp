@@ -40,22 +40,22 @@ create ScheduleFriendCommand
 ScheduleFriendCommandParser -> ScheduleFriendCommand
 activate ScheduleFriendCommand
 
-ScheduleFriendCommand --> ScheduleFriendCommandParser : c
+ScheduleFriendCommand --> ScheduleFriendCommandParser : scheduleCommand
 deactivate ScheduleFriendCommand
 
-ScheduleFriendCommandParser --> FriendCommandParser : c
+ScheduleFriendCommandParser --> FriendCommandParser : scheduleCommand
 deactivate ScheduleFriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 ScheduleFriendCommandParser -[hidden]-> FriendCommandParser
 destroy ScheduleFriendCommandParser
 
-FriendCommandParser --> MainParser : c
+FriendCommandParser --> MainParser : scheduleCommand
 deactivate FriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FriendCommandParser -[hidden]-> MainParser
 destroy FriendCommandParser
 
-MainParser --> LogicManager : c
+MainParser --> LogicManager : scheduleCommand
 deactivate MainParser
 
 group ref [execute ScheduleFriendCommand]

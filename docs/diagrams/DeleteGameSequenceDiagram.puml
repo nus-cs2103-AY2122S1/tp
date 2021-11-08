@@ -34,24 +34,24 @@ activate DeleteGameCommandParser
 create DeleteGameCommand
 DeleteGameCommandParser -> DeleteGameCommand : new DeleteGameCommand(gameId)
 activate DeleteGameCommand
-DeleteGameCommand --> DeleteGameCommandParser : c
+DeleteGameCommand --> DeleteGameCommandParser : deleteGameCommand
 deactivate DeleteGameCommand
 
 
-DeleteGameCommandParser --> GameCommandParser : c
+DeleteGameCommandParser --> GameCommandParser : deleteGameCommand
 deactivate DeleteGameCommandParser
 DeleteGameCommandParser -[hidden]-> GameCommandParser
 destroy DeleteGameCommandParser
 
-GameCommandParser --> MainParser : c
+GameCommandParser --> MainParser : deleteGameCommand
 deactivate GameCommandParser
 GameCommandParser -[hidden]-> MainParser
 destroy GameCommandParser
 
-[<--MainParser : c
+[<--MainParser : deleteGameCommand
 deactivate MainParser
 
-group ref execute DeleteGameCommand
+group ref [execute DeleteGameCommand]
 LogicManager -[hidden]-> LogicManager
 DeleteGameCommand -[hidden]-> DeleteGameCommand
 end
