@@ -74,7 +74,6 @@ public class DoneCommand extends Command {
         Person editedPerson = createEditedPersonWithUpdatedTasks(personToEdit, tasks);
 
         model.setPerson(personToEdit, editedPerson);
-        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return generateWriteCommandResult(alreadyDone, editedPerson);
     }
