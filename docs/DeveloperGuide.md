@@ -521,7 +521,7 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 **Additional Extensions**
 
-* 2b. The customer specified for the task does not correspond to an existing client.
+* 2b. The customer specified for the order does not correspond to an existing client.
 
     * 2b1. SalesNote shows an error message.
 
