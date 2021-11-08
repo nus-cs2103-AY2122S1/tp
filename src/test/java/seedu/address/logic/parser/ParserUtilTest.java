@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,10 +14,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Phone;
+import seedu.address.model.contact.Rating;
+import seedu.address.model.contact.Review;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_RATING = "0";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_RATING = "3";
+    private static final String VALID_REVIEW = "Great Place!";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -48,12 +53,18 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseIndex_leadingZero_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+            -> ParserUtil.parseIndex("000001"));
+    }
+
+    @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_CONTACT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_CONTACT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -149,6 +160,75 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseRating_noArguments_returnsEmptyRating() {
+        Rating expectedRating = new Rating();
+        assertEquals(expectedRating, ParserUtil.parseRating());
+    }
+
+    @Test
+    public void parseRating_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRating(null));
+    }
+
+    @Test
+    public void parseRating_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRating(INVALID_RATING));
+    }
+
+
+    @Test
+    public void parseRating_validValueWithoutWhitespace_returnsRating() throws Exception {
+        Rating expectedRating = new Rating(VALID_RATING);
+        assertEquals(expectedRating, ParserUtil.parseRating(VALID_RATING));
+    }
+
+    @Test
+    public void parseRating_validValueWithWhitespace_returnsTrimmedRating() throws Exception {
+        String ratingWithWhitespace = WHITESPACE + VALID_RATING + WHITESPACE;
+        Rating expectedRating = new Rating(VALID_RATING);
+        assertEquals(expectedRating, ParserUtil.parseRating(ratingWithWhitespace));
+    }
+
+    @Test
+    public void parseReview_noArguments_returnNoReview() throws Exception {
+        String expectedReview = Review.EMPTY_REVIEW;
+        assertEquals(expectedReview, ParserUtil.parseReview("").value);
+    }
+
+    @Test
+    public void parseReview_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseReview((String) null));
+    }
+
+    @Test
+    public void parseRating_invalidReview_throwsParseException() {
+        String exactly499Chars =
+                "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
+                        + "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesting"
+                        + "testingtetestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesti"
+                        + "ngtestingtestingtetestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtes"
+                        + "tingtestingtestingtestingtetestingtestingtestingtestingtestingtestingtestingtestingtestingt"
+                        + "estingtestingtestingtestingtestingt";
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseReview(exactly499Chars + "ab"));
+    }
+
+
+    @Test
+    public void parseReview_validReviewWithoutWhitespace_returnsReview() throws Exception {
+        Review expectedReview = new Review(VALID_REVIEW);
+
+        assertEquals(expectedReview, ParserUtil.parseReview(VALID_REVIEW));
+    }
+
+    @Test
+    public void parseReview_validValueWithWhitespace_returnsTrimmedReview() throws Exception {
+        String reviewWithWhitespace = WHITESPACE + VALID_REVIEW + WHITESPACE;
+        Review expectedReview = new Review(VALID_REVIEW);
+        assertEquals(expectedReview, ParserUtil.parseReview(reviewWithWhitespace));
+    }
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
@@ -193,4 +273,23 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseSortCmd_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortCommand(null));
+    }
+
+    @Test
+    public void parseSortCmd_validValueWithoutWhitespace_returnsCmd() {
+        String expectedCmd = "name";
+        assertEquals(expectedCmd, ParserUtil.parseSortCommand("name"));
+    }
+
+    @Test
+    public void parseTag_validValueWithWhitespace_returnsTrimmedCmd() {
+        String cmdWithWhitespace = WHITESPACE + "rating" + WHITESPACE;
+        String expectedCmd = "rating";
+        assertEquals(expectedCmd, ParserUtil.parseSortCommand(cmdWithWhitespace));
+    }
+
 }

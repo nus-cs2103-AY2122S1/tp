@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommandName" as DeleteCommandName LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete n/VivoCity")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete n/VivoCity")
+activate AddressBookParser
+
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
+
+AddressBookParser -> DeleteCommandParser : parse("VivoCity")
+activate DeleteCommandParser
+
+create DeleteCommandName
+DeleteCommandParser -> DeleteCommandName
+activate DeleteCommandName
+
+DeleteCommandName --> DeleteCommandParser : d
+deactivate DeleteCommandName
+
+DeleteCommandParser --> AddressBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteCommandName : execute(model)
+activate DeleteCommandName
+
+DeleteCommandName -> Model : deleteContact(contact)
+activate Model
+
+Model --> DeleteCommandName
+deactivate Model
+
+create CommandResult
+DeleteCommandName -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommandName
+deactivate CommandResult
+
+DeleteCommandName --> LogicManager : result
+deactivate DeleteCommandName
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandName -[hidden]-> LogicManager
+destroy DeleteCommandName
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

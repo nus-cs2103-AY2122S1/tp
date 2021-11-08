@@ -1,3 +1,18 @@
 #copyButton, #helpMessage {
-    -fx-font-family: "Open Sans";
+    -fx-font-size: 11pt;
+    -fx-font-family: "RNS Sanz Bold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+HBox {
+    -fx-background-color: #7e6453;
+}
+
+Button {
+    -fx-background-color: derive(#7e6453, 30%);
+}
+
+Button:pressed {
+    -fx-background-color: #B5A88F;
 }

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.util.Help;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,9 +34,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private Help helpWindow;
+    private HelpWindow backUpHelpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contactListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -64,8 +68,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
+        helpWindow = new Help();
+        backUpHelpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -78,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -110,9 +114,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -121,6 +122,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList(), logic.getSummary(), commandBox);
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
     }
 
     /**
@@ -129,6 +133,8 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+        primaryStage.setMinHeight(guiSettings.getMinWindowHeight());
+        primaryStage.setMinWidth(guiSettings.getMinWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -136,14 +142,66 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * A helper method that opens either user guide or command summary in the user's default browser depending on
+     * the input {@code type}.
+     * @param type an int that determines the page to be opened.
+     * @throws IOException if the user default browser is not found, or it fails to be launched, or the default handler
+     * application failed to be launched.
+     */
+    private void openSupport(int type) throws IOException {
+        if (type == 1) {
+            helpWindow.openUserGuide();
+        } else if (type == 2) {
+            helpWindow.openCommandSummary();
+        } else {
+            handleBackUpHelp();
+        }
+    }
+
+    /**
+     * A method that opens either user guide or command summary in the user's default browser depending on
+     * the input {@code type}.
+     * When type == 1, user guide will be attempted to be opened.
+     * When type == 2, command summary will be attempted to be opened.
+     * @param type an int that determines the page to be opened.
+     */
+    private void handleSupport(int type) {
+        assert type == 1 || type == 2;
+        if (Desktop.isDesktopSupported()) {
+            try {
+                openSupport(type);
+            } catch (IOException | SecurityException | UnsupportedOperationException ex) {
+                logger.info(ex.getMessage());
+                handleBackUpHelp();
+            }
+        } else {
+            handleBackUpHelp();
+        }
+    }
+
+    /**
+     * Opens the Online User Guide if possible, else opens the secondary internal help window.
+     */
+    public void handleHelp() {
+        handleSupport(1);
+    }
+
+    /**
+     * Opens the online Command Summary if possible, else opens the secondary internal help window.
+     */
+    public void handleCommandSummary() {
+        handleSupport(2);
+    }
+
+    /**
+     * Opens the secondary help window.
      */
     @FXML
-    public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+    public void handleBackUpHelp() {
+        if (!backUpHelpWindow.isShowing()) {
+            backUpHelpWindow.show();
         } else {
-            helpWindow.focus();
+            backUpHelpWindow.focus();
         }
     }
 
@@ -159,12 +217,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ContactListPanel getContactListPanel() {
+        return contactListPanel;
     }
 
     /**
@@ -178,12 +235,24 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowCommandSummary()) {
+                handleCommandSummary();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isDisplayContact()) {
+                contactListPanel.handleDisplay(commandResult.getContactToDisplay());
+            }
+
+            if (commandResult.isDisplaySummary()) {
+                contactListPanel.handleDisplay(commandResult.getSummaryToDisplay());
             }
 
             return commandResult;

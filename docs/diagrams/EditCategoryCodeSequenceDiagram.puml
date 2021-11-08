@@ -1,0 +1,106 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+'participant "editContactDescriptor:EditContactDescriptor" as EditContactDescriptor LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Parser STORAGE_COLOR_T1
+participant ":ParserUtil" as ParserUtil STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "editedContact:Contact" as Contact MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 c/att")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit 1 c/att")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser -> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser: parse("edit 1 c/att")
+activate EditCommandParser
+
+create ParserUtil
+EditCommandParser -> ParserUtil
+activate ParserUtil
+
+ParserUtil -> EditCommandParser
+deactivate ParserUtil
+
+create EditCommand
+EditCommandParser -> EditCommand: EditCommand(1, contactDescriptor)
+activate EditCommand
+
+EditCommand -> EditCommandParser
+deactivate EditCommand
+
+EditCommandParser -> AddressBookParser
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> AddressBookParser
+destroy EditCommandParser
+
+AddressBookParser -> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> EditCommand: execute(model)
+deactivate LogicManager
+
+activate EditCommand
+EditCommand -> EditCommand: createEditedContact(contactToEdit, editContactDescriptor)
+note bottom: editContactDescriptor object holds the updated fields
+activate EditCommand
+
+create Contact
+EditCommand -> Contact
+activate Contact
+
+Contact -> EditCommand
+deactivate Contact
+deactivate EditCommand
+
+EditCommand -> Model: setContact(contactToEdit, editedContact)
+activate Model
+
+Model -> EditCommand
+deactivate Model
+
+EditCommand -> Model: updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS)
+activate Model
+
+Model -> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult -> EditCommand
+deactivate CommandResult
+
+EditCommand -> LogicManager
+deactivate EditCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommand -[hidden]-> LogicManager
+destroy EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

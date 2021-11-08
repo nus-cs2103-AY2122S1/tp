@@ -1,0 +1,87 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "list:FilteredList<Contact>" as filteredContact MODEL_COLOR
+participant "p:IsFilterablePredicate" as IsFilterablePredicate MODEL_COLOR
+end box
+
+[-> LogicManager : execute("filter c/att")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter c/att")
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser
+activate FilterCommandParser
+
+FilterCommandParser --> AddressBookParser
+deactivate FilterCommandParser
+
+AddressBookParser -> FilterCommandParser : parse("c/att")
+activate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+create IsFilterablePredicate
+FilterCommand -> IsFilterablePredicate : IsFilterablePredicate(att)
+activate IsFilterablePredicate
+
+IsFilterablePredicate --> FilterCommand  : p
+deactivate IsFilterablePredicate
+
+FilterCommand --> FilterCommandParser : f
+deactivate FilterCommand
+
+FilterCommandParser --> AddressBookParser : f
+deactivate FilterCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterCommandParser -[hidden]-> AddressBookParser
+destroy FilterCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+FilterCommand -> Model : updateFilteredContactList(p)
+activate Model
+
+Model -> filteredContact : setPredicate(p)
+activate filteredContact
+
+filteredContact --> Model : list
+deactivate filteredContact
+
+Model --> FilterCommand
+deactivate Model
+
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FilterCommand
+deactivate CommandResult
+
+FilterCommand --> LogicManager : result
+deactivate FilterCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterCommand -[hidden]-> LogicManager
+destroy FilterCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

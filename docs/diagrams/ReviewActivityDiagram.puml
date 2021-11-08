@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User adds contact;
+:Parse command;
+if () then ([contains review field])
+  :Parse Review;
+  if () then ([contains at least  1 character])
+  :Create Review Object;
+  else ([else])
+  :Create Review Object with "-No Review-";
+  endif
+
+else ([else])
+endif
+
+:Create Contact Object;
+:Add Contact to Contacts;
+:Save AddressBook;
+
+stop
+
+@enduml

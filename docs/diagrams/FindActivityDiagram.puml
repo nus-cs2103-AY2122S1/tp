@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+
+start
+:User finds contacts using keyword(s);
+:Parse command;
+if () then ([User types in the correct format])
+    if () then ([any keyword matches any contact])
+      :Contacts Pane shows contact(s) found;
+    else ([no keyword matches any contact])
+        :Contacts Pane shows nothing;
+    endif
+else ([User types in the wrong format])
+    :Results Pane shows "Invalid command format!"
+    and the details of Find command;
+    :Contacts Pane shows current list of contacts;
+endif
+stop
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+start
+:User adds contact;
+:Parse command;
+if () then ([contains rating field])
+    :Parse rating;
+    if () then ([valid rating])
+        :Create Rating object;
+    else ([else])
+        :Throw error;
+    endif
+else ([else])
+endif
+:Create Contact object;
+:Add Contact to contacts;
+:Save AddressBook;
+stop
+
+@enduml

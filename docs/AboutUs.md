@@ -9,51 +9,57 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ryan Tian Jun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ryantianj.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ryantianj)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/ryantianj.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Commands, DG
 
-### Johnny Doe
+### Marcus Chua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marcuschj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/marcuschj)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/marcuschj.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code quality, UI, DG, scheduling & tracking
 
-### James Doe
+### Ong Hong Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/imerbear.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Imerbear)]
+
+[[portfolio](team/imerbear.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:  Deliverables & Deadlines, Model, DG
+
+### Natania Yovela Purwanto
+
+<img src="images/nataniayp.png" width="200px">
+
+[[github](http://github.com/nataniayp)]
+
+[[portfolio](team/nataniayp.md)]
+
+* Role: Developer
+* Responsibilities: Testing, Parser, Scheduling & Tracking, README
+
+### Lethicia Renissa Santoso
+
+<img src="images/lethiciars.png" width="200px">
+
+[[github](http://github.com/lethiciars)]
+
+[[portfolio](team/lethiciars.md)]
+
+* Role: Developer
+* Responsibilities: Documentation, Storage, README

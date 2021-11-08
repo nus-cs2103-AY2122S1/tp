@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User edits contact;
+:Parse command;
+if () then ([valid command])
+    :Parse index;
+    if() then ([valid index])
+        :Create editContactDescriptor Object;
+        if() then ([valid category])
+            :Update editContactDescriptor with new category code;
+            :Create new Contact Object with updated fields;
+            :Replace old Contact Object with new Contact Object;
+            :Save AddressBook;
+        else([else])
+            :Invalid Category Message shown on GUI;
+            endif
+    else([else])
+        :Invalid Index Message shown on GUI;
+    endif
+else ([else])
+:Invalid Command Message shown on GUI;
+endif
+stop
+
+@enduml

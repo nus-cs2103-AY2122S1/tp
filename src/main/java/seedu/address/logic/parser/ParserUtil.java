@@ -9,10 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.contact.Address;
+import seedu.address.model.contact.CategoryCode;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Phone;
+import seedu.address.model.contact.Rating;
+import seedu.address.model.contact.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,7 +35,38 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+        if (trimmedIndex.charAt(0) == '0') {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static CategoryCode parseCategory(String code) throws ParseException {
+        requireNonNull(code);
+        String trimmedName = code.trim();
+        if (!CategoryCode.isValidCategory(trimmedName)) {
+            throw new ParseException(CategoryCode.MESSAGE_CONSTRAINTS);
+        }
+        return new CategoryCode(trimmedName);
+    }
+
+    /**
+     * Parses a {@code Collection<String> codes} into a {@code Set<CategoryCode>}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Set<CategoryCode> parseCategories(Collection<String> codes) throws ParseException {
+        requireNonNull(codes);
+        final Set<CategoryCode> categoryCodes = new HashSet<>();
+        for (String code : codes) {
+            categoryCodes.add(parseCategory(code));
+        }
+        return categoryCodes;
     }
 
     /**
@@ -81,6 +115,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String review} into an {@code Review}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code review} is invalid.
+     */
+    public static Review parseReview(String review) throws ParseException {
+        requireNonNull(review);
+        String trimmedReview = review.trim();
+        if (!Review.isValidReview(trimmedReview)) {
+            throw new ParseException(Review.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedReview.equals("")) {
+            trimmedReview = Review.EMPTY_REVIEW;
+        }
+        return new Review(trimmedReview);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +172,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        String trimmedRating = rating.trim();
+        if (!Rating.isValidRating(trimmedRating)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Rating(trimmedRating);
+    }
+
+    /**
+     * Parses an {@code empty rating} into a {@code Rating}.
+     */
+    public static Rating parseRating() {
+        return new Rating();
+    }
+
+    /**
+     * Parses a {@code String command} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseSortCommand(String command) {
+        requireNonNull(command);
+        String trimmedCmd = command.trim();
+        return trimmedCmd;
     }
 }

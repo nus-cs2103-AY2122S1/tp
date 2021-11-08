@@ -1,0 +1,102 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExportCommandParser" as ExportCommandParser LOGIC_COLOR
+participant "e:ExportCommandAll" as ExportCommandAll LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":ExportStorage" as ExportStorage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("export")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("export")
+activate AddressBookParser
+
+create ExportCommandParser
+AddressBookParser -> ExportCommandParser
+activate ExportCommandParser
+
+ExportCommandParser -> AddressBookParser
+deactivate ExportCommandParser
+
+AddressBookParser -> ExportCommandParser: parse("export")
+activate ExportCommandParser
+
+create ExportCommandAll
+ExportCommandParser -> ExportCommandAll: ExportCommandAll()
+activate ExportCommandAll
+
+ExportCommandAll -> ExportCommandParser
+deactivate ExportCommandAll
+
+ExportCommandParser -> AddressBookParser
+deactivate ExportCommandParser
+
+AddressBookParser -> LogicManager
+deactivate AddressBookParser
+
+destroy ExportCommandParser
+
+LogicManager -> ExportCommandAll: execute(model)
+deactivate LogicManager
+
+activate ExportCommandAll
+
+ExportCommandAll -> ModelManager: getFilteredContactList()
+activate ModelManager
+
+ModelManager -> ExportCommandAll
+deactivate ModelManager
+
+ExportCommandAll -> ExportStorage: clearStorage()
+activate ExportStorage
+
+ExportStorage -> ExportCommandAll
+deactivate ExportStorage
+
+loop filteredContacts.size
+
+ExportCommandAll -> AddressBook: exportContact(contactToExport)
+activate AddressBook
+
+AddressBook -> ExportStorage: addToStorage(key)
+activate ExportStorage
+
+ExportStorage -> AddressBook
+deactivate ExportStorage
+
+AddressBook -> ExportCommandAll
+deactivate AddressBook
+
+end
+
+create CommandResult
+ExportCommandAll -> CommandResult
+activate CommandResult
+
+CommandResult -> ExportCommandAll
+deactivate CommandResult
+
+ExportCommandAll -> LogicManager
+deactivate ExportCommandAll
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExportCommandAll -[hidden]-> LogicManager
+destroy ExportCommandAll
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

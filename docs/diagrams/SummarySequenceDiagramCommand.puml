@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+'https://plantuml.com/sequence-diagram
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":Command" as Command LOGIC_COLOR
+participant ":AddressBook" as AddressBook LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Summary" as Summary MODEL_COLOR
+participant "contact:Contact" as Contact MODEL_COLOR
+end box
+
+[-> LogicManager : execute(commandText)
+activate LogicManager
+
+LogicManager -> Command : execute(model)
+activate Command
+
+create Summary
+Command -> Summary : Summary(ReadOnlyAddressBook)
+
+activate Summary
+
+Summary -> AddressBook : getContactList()
+activate AddressBook
+
+AddressBook --> Summary : contactList
+deactivate AddressBook
+
+Summary -> Summary : setNumberOfContacts()
+activate Summary
+
+Summary --> Summary
+deactivate Summary
+
+Summary -> Summary : setPercentageRatings()
+activate Summary
+
+loop addressBookSize
+Summary -> Contact : getRating()
+activate Contact
+
+Contact --> Summary
+deactivate Contact
+end
+Summary --> Summary
+deactivate Summary
+
+Summary -> Summary : setPercentageCategory()
+activate Summary
+
+loop addressBookSize
+Summary -> Contact : getCategoryCode()
+activate Contact
+
+Contact --> Summary
+deactivate Contact
+end
+
+Summary --> Summary
+deactivate Summary
+
+Summary --> Command : summary
+deactivate Summary
+
+Command --> LogicManager : commandResult
+deactivate Command
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+Command -[hidden]-> LogicManager
+destroy Command
+
+[<-- LogicManager : commandResult
+deactivate LogicManager
+
+
+@enduml
