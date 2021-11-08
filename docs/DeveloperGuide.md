@@ -249,7 +249,7 @@ would be implemented for `Person`, `Group`, `Subgroup`, and `Note` to change the
 with `ViewPane` class, which can contain a `PersonViewCard`, `GroupViewCard`, `SubgroupViewCard`, or `GeneralNote`, all of which
   implements `ViewCard` interface.
 * The proposed class diagram for the `ViewPane` UI is as follows.
-![ViewPaneClassDiagram](images/viewPaneClassDiagram.png)
+![ViewPaneClassDiagram](images/ViewPaneClassDiagram.png)
   
 The following diagram only illustrates the UI of the `ViewPane`. Further details on the `View`
   
@@ -288,7 +288,7 @@ The intended functionalities of `ViewCommand` is as follows:
 
 ##### Example of View Command Workflow, using the Person View Command
 To illustrate how the `View` command works, the activity diagram for `PersonViewCommand` is as follows.
-![PersonViewCommandActivityDiagram](images/PersonViewCommand.png)
+![PersonViewCommandActivityDiagram](images/PersonViewCommandActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
