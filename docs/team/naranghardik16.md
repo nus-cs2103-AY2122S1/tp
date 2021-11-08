@@ -51,7 +51,7 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#343](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/343), [\#344](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/344), [\#209](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/209), [\#208](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/208)
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2122S1-CS2103T-W08-2/tp/issues/198), [2](https://github.com/AY2122S1-CS2103T-W08-2/tp/issues/208), [3](https://github.com/AY2122S1-CS2103T-W08-2/tp/issues/210))
   * Contributed to team discussions: [1](https://docs.google.com/document/d/1TmplkyQY3q2S0ZLLVPJjo6Isc8zxYnXRj32cDAxKhuk/edit)
 
   
