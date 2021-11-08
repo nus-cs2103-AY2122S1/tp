@@ -13,6 +13,8 @@ You can use *ComputingConnection* to efficiently record information such as facu
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 2. About (using this user guide)
 In this section, you will learn how to use the *ComputingConnection* user guide efficiently and effectively.
 
@@ -36,6 +38,7 @@ Syntax          | Interpretation
 Orange text     | Headings and subheadings of various size
 ------          | Dividers for section breaks
 
+<div style="page-break-after: always;"></div>
 
 ### 2.3 Meaning of icons and symbols
 :information_source: : Additional information <br/>
@@ -51,6 +54,7 @@ Orange text     | Headings and subheadings of various size
 > Quotes are used to explain examples of commands and features!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3. Quick start
 
@@ -85,6 +89,7 @@ Orange text     | Headings and subheadings of various size
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Understanding the 'Features' section
 In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#5-features) section. 
@@ -129,6 +134,8 @@ Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
 Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
 
+<div style="page-break-after: always;"></div>
+
 ### 4.4 ComputingConnection command formats
 <div markdown="block" class="alert alert-info">
 
@@ -157,6 +164,7 @@ Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumer
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 5. Features
 Features and commands are categorised based on 
@@ -178,11 +186,15 @@ Shows a list of all contacts in the address book. <br/>
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ##### Sorting contacts : `sort`
 Sorts all contacts permanently and shows the list in alphabetical order. <br/>
 
 Format: `sort`
 ![result for 'sort'](images/SortCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ##### Filtering contacts : `filter`
 Filters the contacts by data fields of the person including faculty, major, skill, framework, language and tag.
@@ -201,6 +213,7 @@ Examples:
 *  You can add multiple fields in one command to see all filters together.
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ##### Clearing all entries : `clear`
 Clears all contacts from ComputingConnection.
@@ -211,6 +224,8 @@ Format: `clear`
 :exclamation: Be **careful**
 * The confirmation for clearing data will be implemented in future releases. 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.2 Contact-specific commands
 Commands that are related to a specific contact.
@@ -257,6 +272,8 @@ Example:
   specifying any tags after it.
 * However, you can't do this for compulsory data fields!
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ##### Appending items to data fields : `append`
 Appends a new item to an optional data field of the existing contact at the specified `INDEX`.
@@ -316,6 +333,8 @@ Examples:
 * Date must be in the format of `YYYY-MM-DD`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ##### Viewing a specific contact in detail : `view`
 Displays a detailed view of a existing contact at a specified `INDEX`.
 
@@ -333,6 +352,8 @@ Examples:
 * Details of specific contact shown on right side of screen.
 * Index is based on current list displayed on left side of screen. 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ##### Locating contacts by name : `find`
 Finds contacts whose names contain any of the given keywords.
@@ -362,6 +383,8 @@ Examples:
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ##### Deleting a contact : `delete`
 Deletes a contact at the specified `INDEX`.
 
@@ -381,6 +404,8 @@ Examples:
 :exclamation: Be **careful!**
 * The confirmation for deleting a contact will be implemented in future releases.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.3 Organisation-specific commands
 Commands that are related to organisations.
@@ -419,6 +444,8 @@ Examples:
 * `deleteorg 3`
 > Deletes the 3rd organisation from the organisation list.
 ![result for 'deleteorg'](images/deleteorgscreenshot.png)
+> 
+<div style="page-break-after: always;"></div>
 
 ##### Adding person to an organisation: `addtoorg`
 Adds the person at the specified index in the displayed list to an organisation with the specified name.
@@ -436,6 +463,8 @@ Examples:
 * Multiple addition will be implemented in future versions.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ##### Removing person from an organisation: `deletefromorg`
 Deletes the person at the specified index in the person list of an organisation with the specified name.
 
@@ -449,6 +478,8 @@ Examples:
 <div markdown="block" class="alert alert-info">
 :information_source: The person and organisation will not be deleted, just the relation.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.4 Future commands
 Commands to be implemented in future versions.
@@ -468,6 +499,7 @@ _Details coming soon ..._
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6. FAQ
 
@@ -478,6 +510,7 @@ _Details coming soon ..._
 **A**: Compatibility field as the name suggests records down how compatible you think you are with the contact of interest. This information can be used in a versatile way. A common use case is to filter by compatibility when one is looking for a suitable partner for a project.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 7. Command summary
 
