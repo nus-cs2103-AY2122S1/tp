@@ -75,6 +75,7 @@ title: Developer Guide
   - [Removing a participant from an event](#removing-a-participant-from-an-event)
   - [Showing an event’s participants](#showing-an-events-participants)
   - [Saving data](#saving-data)
+- [**Appendix: Effort**](#appendix-effort)
   
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1187,3 +1188,24 @@ testers are expected to do more *exploratory* testing.
    3. Restart Managera.
 
    4. Managera will start with no events and participants.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+A significant volume of effort was put in developing Managera from AB3: AB3 deals primarily with only one entity Person,
+whereas we designed Managera to handle two entities, Participant and Event, and their interactions.
+
+Major modifications include:
+- Adding an entirely new entity type Event
+- Adapting the Person class into a Participant class, removing Tag and adding BirthDate and NextOfKin attributes
+- Adding the ParticipantID class to simplify storage process and coupling of participants and events
+- Designing new commands for both Event and Participant for filtering, sorting, viewing details and adding and removing 
+  participants to and from events
+- Rerouting some CommandResult outputs to the results display for better user readability
+- Redesigning the GUI
+
+While some of the command classes from Person were adapted or used in a similar way by Event and Participant, necessary
+changes were made to accommodate the new attributes (eg. removing Tag and adding BirthDate parameters when adding or 
+editing a participant, changing the definition of duplicate participants), and new logic was designed for the adding and
+removing of participants to and from events.

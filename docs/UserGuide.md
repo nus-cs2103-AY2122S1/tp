@@ -313,7 +313,7 @@ Deletes a Next-of-Kin (NOK) of a participant.
 
 Format: `deleteNok NOK_INDEX PARTICIPANT_INDEX`
 
-* Deletes the NOK at specified `NOK_INDEX` of the participant at specified index `PARTICIPANT_INDEX`.
+* Deletes the NOK at specified `NOK_INDEX` of the participant at specified `PARTICIPANT_INDEX`.
 * `NOK_INDEX` refers to the index number of the NOK as shown in the participant's list of NOKs.
 * `PARTICIPANT_INDEX` refers to the index number of the participant as shown in the displayed participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -461,9 +461,9 @@ Example Usage:
 Sorts the displayed event list in chronological order with earlier events at the top and later events 
 at the bottom.
 
-<br>![result for 'sortEvents'](images/UG-screenshots/sortEventsResult.png)
-
 Format: `sortEvents`
+
+<br>![result for 'sortEvents'](images/UG-screenshots/sortEventsResult.png)
 
 ### Listing all events: `listEvents`
 
@@ -494,7 +494,7 @@ Adds a participant with the first specified index to the event with the second s
 
 Format: `enroll PARTICIPANT_INDEX EVENT_INDEX`
 
-* Adds the participant at specified `PARTICIPANT_INDEX` to the event at specified index `EVENT_INDEX`.
+* Adds the participant at specified `PARTICIPANT_INDEX` to the event at specified `EVENT_INDEX`.
 * `PARTICIPANT_INDEX` refers to the index number of the participant as shown in the displayed participant list.
 * `EVENT_INDEX` refers to the index number of the event as shown in the displayed event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
@@ -512,7 +512,7 @@ Removes the participant with the first specified index from the event with the s
 
 Format: `expel PARTICIPANT_INDEX EVENT_INDEX`
 
-* Removes the participant at specified `PARTICIPANT_INDEX` from the event at specified index `EVENT_INDEX`.
+* Removes the participant at specified `PARTICIPANT_INDEX` from the event at specified `EVENT_INDEX`.
 * `PARTICIPANT_INDEX` refers to the index number of the participant as shown in the displayed participant list.
 * `EVENT_INDEX` refers to the index number of the event as shown in the displayed event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
