@@ -1,30 +1,36 @@
 @startuml
 !include style.puml
+skinparam defaultFontSize 30
 
 box Logic GAME_DELETE_BOX_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser MAIN_PARSER_COLOR
 participant ":GameCommandParser" as GameCommandParser GAME_PARSER_COLOR
 participant ":DeleteGameCommandParser" as DeleteGameCommandParser DELETE_GAME_PARSER_COLOR
 participant ":DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
 end box
 
-[-> MainParser : parse("game --delete DOTA")
+
+[-> LogicManager : parse("game --delete DOTA")
+activate LogicManager
+
+LogicManager -> MainParser : parseCommand("game --delete DOTA")
 activate MainParser
 
 create GameCommandParser
 MainParser -> GameCommandParser : new GameCommandParser()
 activate GameCommandParser
 
-GameCommandParser -> MainParser
+GameCommandParser --> MainParser
 deactivate GameCommandParser
 
-MainParser -> GameCommandParser : parse("--delete DOTA")
+MainParser -> GameCommandParser : parse(" --delete DOTA")
 activate GameCommandParser
 
 create DeleteGameCommandParser
 GameCommandParser -> DeleteGameCommandParser : new DeleteGameCommandParser()
 activate DeleteGameCommandParser
-DeleteGameCommandParser -> GameCommandParser
+DeleteGameCommandParser --> GameCommandParser
 deactivate DeleteGameCommandParser
 
 GameCommandParser -> DeleteGameCommandParser : parse("--delete  DOTA")
@@ -33,27 +39,32 @@ activate DeleteGameCommandParser
 create DeleteGameCommand
 DeleteGameCommandParser -> DeleteGameCommand : new DeleteGameCommand(gameId)
 activate DeleteGameCommand
-DeleteGameCommand -> DeleteGameCommandParser
+DeleteGameCommand --> DeleteGameCommandParser : deleteGameCommand
 deactivate DeleteGameCommand
 
 
-DeleteGameCommandParser -> GameCommandParser : command
+DeleteGameCommandParser --> GameCommandParser : deleteGameCommand
 deactivate DeleteGameCommandParser
 DeleteGameCommandParser -[hidden]-> GameCommandParser
 destroy DeleteGameCommandParser
 
-GameCommandParser -> MainParser : command
+GameCommandParser --> MainParser : deleteGameCommand
 deactivate GameCommandParser
 GameCommandParser -[hidden]-> MainParser
 destroy GameCommandParser
 
-[<--MainParser : command
+LogicManager <--MainParser : deleteGameCommand
 deactivate MainParser
 
-[-> DeleteGameCommand : command.execute()
-activate DeleteGameCommand
-[<--DeleteGameCommand : commandResult
-deactivate DeleteGameCommand
+ref over LogicManager, DeleteGameCommand: Executing DeleteGameCommand
+
+LogicManager -[hidden]-> LogicManager
+DeleteGameCommand -[hidden]-> DeleteGameCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+
 [<-[hidden]- DeleteGameCommand
 destroy DeleteGameCommand
 

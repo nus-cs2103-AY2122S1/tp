@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 18
+skinparam maxMessageSize 10
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "c:GetFriendCommand" as GetFriendCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FriendsList" as FriendsList MODEL_COLOR
+participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
+
+end box
+
+activate LogicManager
+
+LogicManager -> GetFriendCommand : execute()
+activate GetFriendCommand
+
+GetFriendCommand -> Model : getFriend(FRIEND_ID)
+activate Model
+
+Model -> FriendsList: getFriend(FRIEND_ID)
+activate FriendsList
+
+FriendsList -> UniqueFriendsList : getFriend(FRIEND_ID)
+activate UniqueFriendsList
+
+UniqueFriendsList --> FriendsList : FRIEND
+deactivate UniqueFriendsList
+
+FriendsList  --> Model : FRIEND
+deactivate FriendsList
+
+Model --> GetFriendCommand : FRIEND
+deactivate Model
+
+create CommandResult
+GetFriendCommand -> CommandResult : CommandResult(messageToDisplay, CommandType.FRIEND_GET, FRIEND)
+activate CommandResult
+
+CommandResult --> GetFriendCommand
+deactivate CommandResult
+
+GetFriendCommand --> LogicManager : CommandResult
+
+@enduml

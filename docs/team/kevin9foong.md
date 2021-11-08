@@ -80,7 +80,8 @@ Given below are my contributions to the project.
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
     3. Discovery of bugs related to Use Case Extension numbering.  
-    3. Added documentation for Storage component (e.g. UML diagram, description etc). 
+    4. Added documentation for Storage component (e.g. UML diagram, description etc). 
+    5. Added implementation details for Recommend command. 
   * README:
     1. Updated Github Actions build status badge to reflect status of gitGud team repository.
     2. Updated description and organised layout of README.
@@ -91,6 +92,7 @@ Given below are my contributions to the project.
     * [Discovery of 'hidden bug' which led to defensive programming fix in Schedule PR](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/113)
       The hidden bug is for corrupted data files not containing schedule fields in the json format data, the 
       schedule commands fail.
+    * [Highlighting of important DG bugs in UML diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
   
 * **Tools**:
   1. Integrated the Github plugin (codecov) to the team repo.
