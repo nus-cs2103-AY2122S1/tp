@@ -42,13 +42,13 @@ public class DeleteProgressCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToEdit = lastShownStudentList.get(targetIndex.getZeroBased());
+        Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
 
         if (studentToEdit.isProgressListEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NO_PROGRESS_TO_DELETE);
