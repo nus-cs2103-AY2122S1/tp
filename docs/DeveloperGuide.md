@@ -468,8 +468,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | edit tasks                     | more easily change specifics of a task without deleting and re-adding  |
 | `* *`    | user                                       | show tasks                     | show the tasks that I have for the week                                |
 | `* *`    | user                                       | tag tasks                      | add a category for the task                                            |
-| `* *`    | user with many tasks in the address book   | search for tasks               | locate a task easily                                                   |
-| `* *`    | user with many tasks in the address book   | sort tasks                     | organise my tasks in a better way                                      |
+| `* *`    | user with many tasks in the task list   | search for tasks               | locate a task easily                                                   |
+| `* *`    | user with many tasks in the task list   | sort tasks                     | organise my tasks in a better way                                      |
 | `*`      | unmotivated student                        | track my weekly progress       | get a sense of achievement on completion of tasks                      |
 
 
