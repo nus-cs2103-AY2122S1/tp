@@ -17,15 +17,11 @@ This user guide will give you a comprehensive understanding of using ManageMe to
 <br><br>
 
 --------------------------------------------------------------------------------------------------------------------
-## <font color="#f0932b">How to navigate this User Guide</font>
-
-Better add this in. Include things like the information icon, or perhaps shift the note in Features here.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## <font color="#f0932b">Quick Start</font>
 This section aims to provide a quick introduction to using ManageMe.
 It should take **less than 5 minutes to read** and will provide new users with the necessary knowledge to install and start using the application.
+
 
 ### <font color="#f0932b">Steps for installation</font>
 1. Ensure you have Java 11 or above installed on your computer.
@@ -34,6 +30,8 @@ It should take **less than 5 minutes to read** and will provide new users with t
 4. Move the jar file into your desired folder. ManageMe will use this folder to store its data by default.
 5. Start the app by double-clicking on the jar file, or if you are using the command line, type `java -jar manageme.jar`.
 6. Enjoy using the application!
+
+<div style="page-break-after: always;"></div>
 
 ### <font color="#f0932b">User Interface</font>
 Below is a screenshot of our User Interface (UI). As you can see, there are management panels for Modules, Tasks, Calendar, and Links.
@@ -77,6 +75,8 @@ There will also be tips along the way to ensure a greater user experience for yo
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### <font color="#6ab04c">Tasks:</font>
 
 #### <font color="#6ab04c">Adding a task:</font> `addTask`
@@ -89,7 +89,7 @@ Format: `addTask n/NAME d/DESCRIPTION [mod/ASSOCIATED_MODULE_NAME] [s/START_DATE
 * It is optional to include an associated module name, a start datetime and an end datetime.
 * A task created with a start datetime **must** also have an end datetime.
 * Format for `START_DATETIME`/`END_DATETIME` is as follows: `yyyy-MM-ddThh:mm` e.g. `2021-10-29T23:59`.
-* Take note that the **T** must be in the date that you entered. 
+* Take note that the **T** must be in the date that you entered.
   Example: `e/2021-10-25T16:00`
 
 Example: `addTask n/Do CS2103T Assignment d/Refer to lecture 10 for examples mod/CS2103T s/2021-10-05T11:00 e/2021-10-07T23:59`
@@ -105,8 +105,10 @@ Format: `editTask INDEX [n/NAME] [d/DESCRIPTION] [mod/ASSOCIATED_MODULE_NAME] [s
 * Existing values will be updated to the input values.
 * Format for a `DATETIME` is as follows: `yyyy-MM-ddThh:mm` e.g. `2021-10-29T23:59`.
 * Take note that the **T** must be in the date that you entered.
-  Example: `editTask 3 d/Complete assignments e/2021-10-25T16:00`
+  Example: `editTask 10 d/Complete assignments e/2021-10-25T16:00`
   <br><br>
+
+<div style="page-break-after: always;"></div>
 
 #### <font color="#6ab04c">Deleting a task:</font> `deleteTask`
 Deletes the specified task from the task list.
@@ -126,7 +128,7 @@ Example: `deleteTask 2`
 * Deleting a task is irreversible.<br>
 
 </div>
-<br>
+<br><br><br>
 
 #### <font color="#6ab04c">Find a task by keyword:</font> `findTask`
 Finds all tasks whose names contain any of the specified keywords.
@@ -139,9 +141,13 @@ Format: `findTask KEYWORD [MORE_KEYWORDS]`
 * Tasks matching at least one keyword will be returned (i.e. OR search).
 
 Example: `findTask assignment` <br><br>
+
+<div style="page-break-after: always;"></div>
+
 Before findTask:<br><br>
 ![findTask](images/findTask_before.png)<br><br>
 
+<div style="page-break-after: always;"></div>
 
 After findTask:<br><br>
 ![findTask](images/findTask_after.png)
@@ -187,6 +193,7 @@ Format: `deleteDoneTask`
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
 
 ### <font color="#22a6b3">Modules:</font>
 #### <font color="#22a6b3">Adding a module:</font> `addMod`
@@ -211,6 +218,8 @@ Examples: `readMod 2`
 *Pop-up window for readMod*
 <br><br>
 
+<div style="page-break-after: always;"></div>
+
 #### <font color="#22a6b3">Edit a module:</font> `editMod`
 Edits an existing module in the module list.
 
@@ -220,7 +229,7 @@ Format: `editMod INDEX n/NAME`
 * The index **must be a positive integer** 1, 2, 3, ...
 * Existing values will be updated to the input values.
 
-Example: `editMod 2 n/CS2103T`
+Example: `editMod 2 n/CS3230`
 <br><br>
 
 #### <font color="#22a6b3">Delete a module:</font> `deleteMod`
@@ -254,7 +263,7 @@ Format: `findMod KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. "CS210" will match "CS2101".
 * Modules matching at least one keyword will be returned (i.e. OR search).
 
-Example: `findMod computer` returns `Computer Organization` and `Computer Architecture`.
+Example: `findMod cs2100` returns `CS2100`
 <br><br>
 
 #### <font color="#22a6b3">List all modules:</font> `listMod`
@@ -266,20 +275,22 @@ Format: `listMod`
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### <font color="#7d3415">Links:</font>
 #### <font color="#7d3415">Add a link:</font> `addLink`
 Adds a link into the link list. A link contains its name and a website link for online learning.
 
 Format: `addLink n/NAME a/LINK_ADDRESS [mod/ASSOCIATED_MODULE_NAME]` <br/>
 * A link can be a url to a webpage or a file path.
-* No duplicate links can be added. A link is considered a duplicate if it has the same `NAME` **and** `ADDRESS` with any existing links. 
+* No duplicate links can be added. A link is considered a duplicate if it has the same `NAME` **and** `ADDRESS` with any existing links.
   In this way, you can name multiple links the same as e.g. "Lecture", "Tutorial" etc, but associate them with different mods.
 * A link should be in a valid uri format, beginning with https://, ftp:// of file:/ .
 * After tagging the module, the link will appear in the readMod panel of the particular module.
 * No space is allowed in the webpage address or file path.
 * A file path should be an **absolute directory** with file:// at the front, and `/` to separate subdirectories. For example, if you are using windows, and a document is at `Documents/doc.docx`, you may need to type `file://C:/users/YOUR_USERNAME/Documents/doc.docs` for our app to recognize your file directory properly.
 
-Examples: `addLink n/google a/https://www.google.com mod/CS1101S`
+Examples: `addLink n/Yahoo a/https://www.yahoo.com`
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip: How to find the absolute directory of my file?** <br><br>
@@ -304,6 +315,8 @@ Then you will see this window. Copy and paste the “path” section:<br><br>
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### <font color="#7d3415">Edit a link:</font> `editLink`
 Edits an existing link in the link list.
 
@@ -314,7 +327,7 @@ Format: `editLink INDEX [n/NAME] [a/LINK_ADDRESS] [mod/ASSOCIATED_MODULE_NAME]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Example: `editLink 2 n/amazon`
+Example: `editLink 5 n/Amazon a/https://www.amazon.com`
 <br><br>
 
 #### <font color="#7d3415">Delete a link:</font> `deleteLink`
@@ -325,7 +338,7 @@ Format: `deleteLink INDEX`
 * The index refers to the index number shown in the displayed link list.
 * The index **must be a positive integer** 1, 2, 3, ...
 
-Example: `deleteLink 2`.
+Example: `deleteLink 2`
 <br><br>
 
 <div markdown="block" class="alert alert-info">
@@ -344,8 +357,10 @@ Format: `openLink INDEX`
 * The index refers to the index number shown in the displayed link list.
 * The index **must be a positive integer** 1, 2, 3, ...
 
-Example: `openLink 1`.
+Example: `openLink 1`
 <br><br>
+
+<div style="page-break-after: always;"></div>
 
 #### <font color="#7d3415">Find a link by keyword:</font> `findLink`
 Finds all links whose name contain the specified keyword.
@@ -358,7 +373,7 @@ Format: `findLink KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. "You" will match "Youtube".
 * Links with a name matching at least one keyword will be returned (i.e. OR search).
 
-Example: `findLink zoom` returns `CS2100 Tutorial Zoom` and `CS2105 Lecture Zoom`.
+Example: `findLink cs2100` returns `CS2100 Lecture`
 <br><br>
 
 #### <font color="#7d3415">List all links:</font> `listLink`
@@ -369,6 +384,7 @@ Format: `listLink`
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
 
 ### <font color="#eb4d4b">Calendar:</font>
 #### <font color="#eb4d4b">Change calendar to next month:</font> `nextMonth`
@@ -396,6 +412,7 @@ Example: `readDay 2021-10-19`
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
 
 ### <font color="#4834d4">Others:</font>
 
@@ -418,9 +435,15 @@ overdue.
 
 #### <font color="#4834d4">Reset ManageMe:</font> `clear`
 
-Resets the application data. After you are familiar with the various commands, this command can be used to clear the sample data and you can start filling in your own data.
+Resets the application data. After you are familiar with the various commands, this command can be used to clear the sample data, and you can start filling in your own data. <br><br>
 
-<br><br>
+<div markdown="block" class="alert alert-info">
+
+**:warning: Caution**<br>
+
+* Clearing ManageMe's data is irreversible.<br>
+
+</div>
 
 #### <font color="#4834d4">Viewing help:</font> `help`
 
@@ -429,7 +452,8 @@ Shows the command summary and the URL to the full User Guide.
 
 #### <font color="#4834d4">Archive current data:</font> `archive`
 
-Resets the application data and saves the deleted application data into a timestamped file located in the data folder.
+Saves a copy of the current application data into a timestamped file located in the data folder.
+
 <br><br>
 
 
@@ -446,6 +470,8 @@ Data is saved in the hard disk automatically after any command that changes the 
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## <font color="#f0932b">Command summary</font>
@@ -456,19 +482,19 @@ Action | Format, Examples
 **AddTask** | `addTask n/NAME d/DESCRIPTION [mod/ASSOCIATED_MODULE_NAME] [s/START_DATETIME] [e/END_DATETIME]`<br>e.g., `addTask n/Do Assignment d/Read Lecture 7 mod/CS2100 s/2021-10-05T12:00 e/2021-10-07T23:59`
 **EditTask** | `editTask INDEX [n/NAME] [d/DESCRIPTION] [mod/ASSOCIATED_MODULE_NAME] [s/START_DATETIME] [e/END_DATETIME]`<br>e.g., `editTask 3 d/start tutorial 3`
 **DeleteTask** | `deleteTask INDEX`<br>e.g., `deleteTask 3`
-**findTask** | `findTask KEYWORD [MORE_KEYWORDS]`<br>e.g., `findTask work`
+**findTask** | `findTask KEYWORD [MORE_KEYWORDS]`<br>e.g., `findTask cut hair`
 **ListTask** | `listTask`
 **MarkTask** | `markTask INDEX`<br>e.g., `markTask 1`
 **DeleteDoneTask** | `deleteDoneTask`
-**AddModule** | `addMod n/NAME`<br>e.g.,`addMod n/CS2103`
+**AddModule** | `addMod n/NAME`<br>e.g.,`addMod n/MA1101R`
 **ReadModule** | `readMod INDEX`<br>e.g., `readMod 2`
-**EditModule** | `editMod INDEX [n/NAME] [l/LINK]`<br>e.g., `editMod 2 n/CS2103T l/https://...`
+**EditModule** | `editMod INDEX [n/NAME]`<br>e.g., `editMod 2 n/CS2103`
 **DeleteModule** | `deleteMod INDEX`<br>e.g., `deleteMod 2`
-**FindModule** | `findMod KEYWORD [MORE_KEYWORDS]`<br>e.g., `findMod computer`
+**FindModule** | `findMod KEYWORD [MORE_KEYWORDS]`<br>e.g., `findMod cs`
 **ListModule** | `listMod`
-**AddLink** | `addLink n/NAME l/LINK_ADDRESS [mod/ASSOCIATED_MODULE_NAME]`<br>e.g., `addLink n/google a/https://www.google.com`
+**AddLink** | `addLink n/NAME a/LINK_ADDRESS [mod/ASSOCIATED_MODULE_NAME]`<br>e.g., `addLink n/google a/https://www.google.com`
 **DeleteLink** | `deleteLink INDEX`<br>e.g., `deleteLink 2`
-**EditLink** | `editLink INDEX [n/NAME] [a/LINK_ADDRESS] [mod/ASSOCIATED_MODULE_NAME]`<br>e.g.,`editLink 2 n/amazon`
+**EditLink** | `editLink INDEX [n/NAME] [a/LINK_ADDRESS] [mod/ASSOCIATED_MODULE_NAME]`<br>e.g.,`editLink 5 n/Amazon a/https://www.amazon.com`
 **OpenLink** | `openLink INDEX` <br>e.g.,`openLink 1`
 **FindLink** | `findLink KEYWORD`<br>e.g.,`findLink google`
 **ListLink** | `listLink`

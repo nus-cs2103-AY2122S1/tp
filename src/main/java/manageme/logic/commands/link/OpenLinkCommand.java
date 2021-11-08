@@ -12,11 +12,15 @@ import manageme.logic.commands.exceptions.CommandException;
 import manageme.model.Model;
 import manageme.model.link.Link;
 
+/**
+ * Open a link. If the link is a website address, it will be opened in the browser.
+ * If the link is a file path, the target file will be opened with its default app.
+ */
 public class OpenLinkCommand extends Command {
     public static final String COMMAND_WORD = "openLink";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Open the link identified by the index number used in the displayed link list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer between 1 and 2147483647)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_OPEN_LINK_SUCCESS = "Opened Link: %1$s";

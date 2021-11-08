@@ -133,13 +133,13 @@ public class EditTaskCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of ManageMe
      */
     @Test
     public void execute_invalidTaskIndexFilteredList_failure() {
         showTaskAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ManageMe list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getManageMe().getTaskList().size());
 
         EditTaskCommand editTaskCommand = null;

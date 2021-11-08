@@ -93,14 +93,26 @@ public class TaskTime {
                 && time.equals((((TaskTime) other).time)); // state check
     }
 
+    /**
+     * Constructor for an empty TaskTime
+     * @return An empty TaskTime
+     */
     public static TaskTime empty() {
         return new TaskTime();
     }
 
+    /**
+     * Checks whether the TaskTime object is empty
+     * @return true if the TaskTime object is empty, false otherwise
+     */
     public boolean isEmpty() {
         return time.isEmpty();
     }
 
+    /**
+     * Gets the current time stored in TaskTime
+     * @return The `LocalDateTime` stored in the TaskTime object, null if there is no time value present
+     */
     public LocalDateTime getTime() {
         if (time.isEmpty()) {
             return null;

@@ -1,0 +1,39 @@
+@startuml
+start
+:User executes openLink command;
+if () then ([Command has missing/invalid parameters])
+    :Throws Parse Exception;
+else ([Command has valid parameters])
+    if () then ([Provided index is not valid])
+        :Throws Command Exception;
+    else ([Index is valid])
+        if () then ([The link is a website URL])
+            :Open the link using an available web browser through command line;
+            if () then ([Open link is not successful])
+                : Throw LinkNotOpenException;
+            endif
+        else ([The link is a local filepath])
+            if () then ([Linux is used])
+                : Executes the open file command through command line;
+                if () then ([Command line returns error message])
+                    : Read error message from command line;
+                    : Throw FileNotOpenException with command line error message;
+                endif
+            else ([Windows or MacOS is used])
+                if () then ([Java desktop is supported])
+                    : Try to open the file using java desktop;
+                    if () then ([Opening file is not successful])
+                       : Throw LinkNotOpenException;
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+if () then ([No exception was thrown in the process])
+    : Print success message;
+else
+    : Print error message of the exeption;
+endif
+stop
+@enduml

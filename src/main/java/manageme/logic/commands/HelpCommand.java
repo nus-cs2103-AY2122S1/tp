@@ -3,7 +3,7 @@ package manageme.logic.commands;
 import manageme.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Shows a pop-up window that contains a summary of all commands.
  */
 public class HelpCommand extends Command {
 

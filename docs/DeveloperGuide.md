@@ -36,6 +36,8 @@ Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -119,6 +121,8 @@ The `UI` component,
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W11-3/tp/blob/master/src/main/java/manageme/logic/Logic.java)
@@ -150,6 +154,8 @@ How the parsing works:
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 Here's a class diagram of the `Model` component:
 
@@ -157,22 +163,20 @@ Here's a class diagram of the `Model` component:
 
 <img src="images/MMModelClassDiagram.png" width="700" />
 
-
 The `Model` component,
 
-* store the object data of ManageMe i.e., all `Module`, `Task` and `Link` objects (which are contained in a`UniqueModuleList` object, a `UniqueTaskList` and a `UniqueLinkList` respectively).
-* stores the currently 'selected' `Task` objects (e.g., results of a search query) as a separate _filtered_ list
-  which is exposed to outsiders as an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be
-  bound to this list so that the UI automatically updates when the data in the list change. The `Module` and `Link`
-  objects similarly follow this implementation.
+* stores the object data of ManageMe i.e., all `Module`, `Task` and `Link` objects (which are contained in a`UniqueModuleList` object, a `UniqueTaskList` and a `UniqueLinkList` respectively).
+* All `Module`, `Task` and `Link` objects are a `ManageMeObject`.
+* stores the currently 'selected' `Task` objects (e.g., results of a search query) as a separate _filtered_ list 
+  which is exposed to outsiders as an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change. The `Module` and `Link` objects similarly follow this implementation.
 * As `TaskModule` and `TaskTime` are optional fields, their values are internally stored within a Java `Optional`
   object.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-[comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>)
-
 Return to [Table of Contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -194,6 +198,8 @@ Classes used by multiple components are in the `manageme.commons` package.
 
 Return to [Table of Contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Time component
 
 **API** : [`Time.java`](https://github.com/AY2122S1-CS2103T-W11-3/tp/blob/master/src/main/java/manageme/time/Time.java)
@@ -212,9 +218,11 @@ Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
-
+ 
 ### Task Feature
 In this section, the functionality of the Task feature and the sequence diagram for its related commands will be
 discussed.
@@ -240,22 +248,34 @@ Shown below is the sequence diagrams for when  `MarkTaskCommand` and `DeleteDone
 ![DeleteDoneTaskSequenceDiagram](images/DeleteDoneTaskSequenceDiagram.png) <br>
 *Sequence diagram of deleting all done tasks*
 
-### Read Module Feature
-ManageMe allows you to type in `readMod` for a particular module, and see all `Task` and `Link` related to it in a pop-up window.
+<div style="page-break-after: always;"></div>
 
-#### Implementation
+### Module Feature
+Similar to the commands available in AB3, a user is able to add, edit, delete, find and list modules and is
+implemented as the `AddModuleCommand`,`EditModuleCommand`, `DeleteModuleCommand`, `FindModuleCommand` and `ListModuleCommand`
+respectively. ManageMe also allows you to type in `readMod` for a particular module, and see all `Task` and `Link` related to it in a pop-up window.
+
+#### Implementation for Delete and Edit Module Feature
+When a module is deleted or edited, all `TagModule` references in all available `Task` and `Link` are updated accordingly.
+
+![EditModSequenceDiagram](images/EditModSequenceDiagram.png) <br>
+*Sequence diagram for editMod command* <br>
+
+<div style="page-break-after: always;"></div>
+
+#### Implementation for Read Module Feature
 Read module makes use of both the UI component which creates a pop-up window for display, and the Logic component
 which parses user commands and decide which module to read.
 
-In the UI component, the `MmMainWindow` class, which controls the display of the UI homepage, 
-calls the `executeCommand` function of the Logic component and gets back a `CommandResult`, which contains 
-information about the results of the execution. A boolean value in `CommandResult`, `isReadModule`, indicates whether a 
-Read Module window should be popped up. Once `isReadModule` is true, `MmMainWindow` will call the `ModuleWindow` 
+In the UI component, the `MmMainWindow` class, which controls the display of the UI homepage,
+calls the `executeCommand` function of the Logic component and gets back a `CommandResult`, which contains
+information about the results of the execution. A boolean value in `CommandResult`, `isReadModule`, indicates whether a
+Read Module window should be popped up. Once `isReadModule` is true, `MmMainWindow` will call the `ModuleWindow`
 class and generate a pop-up window.
 
 In the Logic component, once `executeCommand` is called in `LogicManager`, `ManageMeParser` and `ReadModuleCommandParser`
 parses the module index the user inputted, and generates a `ReadModuleCommand` object. `LogicManager` then executes the
-`ReadModuleCommand` object, which sets what module is to be read in the `Model` component. A `CommandResult` 
+`ReadModuleCommand` object, which sets what module is to be read in the `Model` component. A `CommandResult`
 is generated with `isReadModule` boolean value being true and sent back to `MmMainWindow`.
 
 ![ReadModSequenceDiagram](images/ReadModSequenceDiagram.png) <br>
@@ -263,6 +283,22 @@ is generated with `isReadModule` boolean value being true and sent back to `MmMa
 
 ![ReadModSequenceDiagram](images/ReadModRef.png) <br>
 *Referenced Sequence diagram* <br>
+
+<div style="page-break-after: always;"></div>
+
+### Link Feature
+ManageMe has a link feature for users to store and open local filepath or website URL conveniently.
+
+#### Implementation
+Similar to the commands available in AB3, a user is able to add, edit, delete, find and list links and is
+implemented as the `AddLinkCommand`,`EditLinkCmmand`, `DeleteLinkCommand`, `FindLinkCommand` and `ListLinkCommand`
+respectively. We also implemented a `OpenLinkCommand` to open the filepath using system default app or the website URL in
+a browser.
+
+![AddTaskActivityDiagram](images/OpenLinkActivityDiagram.png) <br>
+*OpenLink activity diagram*
+
+<div style="page-break-after: always;"></div>
 
 ### Calendar Feature
 ManageMe has a calendar feature for users to view all of their upcoming tasks for the month.
@@ -279,12 +315,15 @@ The following sequence diagram demonstrates how the Calendar is created.
 Since the `CalendarPanel` is constructed with an `ObservableList<Task>`, changes to `UniqueTaskList` made by user using `addTask`, `deleteTask` and `editTask` will be reflected in the calendar automatically. <br><br>
 Calendar has three functionality, `prevMonth`, `nextMonth` and `readDay`, all of which manipulate `referenceDate`, which is the key component for generating the whole calendar GUI. Both `prevMonth` and `nextMonth` subtracts or adds the current `referenceDate` by a month respectively. While `readDay` takes in a `LocalDate` as argument and replace the `referenceDate` with it.
 
+<div style="page-break-after: always;"></div>
+
 ##### Design Consideration
 The main consideration for the design of calendar is how many days should be displayed. The initial implementation was a "Week Calendar" which uses the current version of [NUSMODS](https://nusmods.com/timetable/sem-1) as reference. However, this design implies that there cannot be an overlap in the timing of different tasks. It would work for NUSMODS since it is a timetable and classes are not supposed to clash. However, it will not be as suitable for a calendar since multiple tasks can be happening or due at the same time. We decided to use the current implementation which is a "Month Calendar" with markings to represent the existence of tasks in the respective day-of-month and a task-list panel to display the tasks in greater details.<br><br>
 <br>
 ![Calendar](images/Calendar.png) <br>
 *Screenshot of GUI of calendar in ManageMe.*
 
+<div style="page-break-after: always;"></div>
 
 ### Reminder Feature
 In this section, the functionality of the reminder feature and its activity diagram will be discussed.
@@ -324,11 +363,14 @@ The following actions occur when the **Time Thread** is started:
 will continue to scan for tasks that need the user's attention.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Archive Feature
 In this section, the archive feature and its activity diagram will be discussed.
 
 #### Implementation
-The archive feature is implemented as the `ArchiveCommand` and allows the user to archive the current data into a timestamped file in the data folder and resets the application with a new data file.
+The archive feature is implemented as the `ArchiveCommand` and allows the user to archive the current data 
+into a timestamped file in the data folder. 
 
 The following Activity diagram demonstrates the execution path of the archive command: <br><br>
 <img src="images/ArchiveActivityDiagram.png" width="500" /> <br>
@@ -338,6 +380,8 @@ The following Activity diagram demonstrates the execution path of the archive co
 Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -350,6 +394,7 @@ Return to [Table of Contents](#table-of-contents).
 Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix A: Product scope**
 
@@ -373,6 +418,8 @@ A Digital-Age, university student who...
 Return to [Table of Contents](#table-of-contents).
 
 -----------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: User stories**
 
@@ -407,13 +454,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Experienced User                           | Close the command summary                                             | I can save screen space after I am familiar with the commands.                 |
 | `*`      | Long-term user                             | Archive all the data                                                  | I can store old data to make space for new data.                               |
 
->>>>>>> 54783f6e88eda4d7c37efc165252b34a2a3bb6f5
-
 Return to [Table of Contents](#table-of-contents).
 
 ----------------------------------------------------------------------------------------------------------------
 
-## **Appendix C: Common Use cases**
+<div style="page-break-after: always;"></div>
+
+## **Appendix C: Common Use Cases**
 
 (For all use cases below, the **System** is `ManageMe` unless specified otherwise)
 
@@ -434,10 +481,10 @@ Return to [Table of Contents](#table-of-contents).
 
 **Extensions:**
 * 1a. Compulsory parameters are missing, including names, description for tasks, and address for links.
-  * 1a1. The system shows the missing parameter error message and shows the correct format. 
+  * 1a1. The system shows the missing parameter error message and shows the correct format.
   * Use case resumes from step 1.
 * 1b. Parameters entered are invalid, including invalid characters in the name, invalid date-time in the task, and invalid addresses in links.
-  * 1b1. System shows error in format. 
+  * 1b1. System shows error in format.
   * Use case resumes from step 1.
 
 
@@ -450,11 +497,13 @@ Return to [Table of Contents](#table-of-contents).
 
 **Extensions:**
 * 1a. User enters an invalid index. <br>
-    * 1a1. System shows error in reading index. 
+    * 1a1. System shows error in reading index.
     * Use case resumes from step 1.
 * 1b. Parameters entered are of invalid format, including invalid characters in names, invalid date-time for tasks, and invalid address for links.
-    * 1b1. System shows error in parsing data. 
+    * 1b1. System shows error in parsing data.
     * Use case resumes from step 1. <br><br>
+
+<div style="page-break-after: always;"></div>
 
 ### Use case 03: Generic Delete
 
@@ -467,9 +516,9 @@ Return to [Table of Contents](#table-of-contents).
 **Extension:**
 
 * 1a. User enters an invalid index
-    * 1a1. System shows error in reading index. 
+    * 1a1. System shows error in reading index.
     * Use case resumes from step 1.
-    
+
 ### Use case 04: Generic Find
 
 **MSS:**
@@ -481,7 +530,7 @@ Return to [Table of Contents](#table-of-contents).
 **Extension:**
 
 * 1a. User does not enter a keyword. <br>
-    * 1a1. System shows invalid format error. 
+    * 1a1. System shows invalid format error.
     * Use case resumes from step 1.
 
 
@@ -496,6 +545,8 @@ Return to [Table of Contents](#table-of-contents).
 Return to [Table of Contents](#table-of-contents).
 
 -------------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix D: Non-Functional Requirements**
 
@@ -519,6 +570,8 @@ Return to [Table of Contents](#table-of-contents).
 Return to [Table of Contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix F: Instructions for manual testing**
 
@@ -545,7 +598,7 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-       
+
 ### Deleting a task
 
 1. Deleting a task while all tasks are being shown
@@ -564,11 +617,11 @@ testers are expected to do more *exploratory* testing.
 
 ### Pop-up window
 
-1. Test whether the pop-up window works in the app 
+1. Test whether the pop-up window works in the app
 
    1. Add a task with a starting time just 1 minute away from your current time .<br>
    Expected: A reminder will appear in a pop-up window for this ongoing task 1 min later.
-   
+
    2. Type readMod for an existing module (if no module exists, add one with a simple name)
    Expected: A window appears that show all tasks and links associated with a module
 

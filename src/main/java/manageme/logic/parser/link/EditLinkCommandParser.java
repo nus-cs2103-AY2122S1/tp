@@ -20,8 +20,8 @@ import manageme.logic.parser.exceptions.ParseException;
 public class EditLinkCommandParser implements Parser<EditLinkCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditLinkCommand
+     * and returns an EditLinkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditLinkCommand parse(String args) throws ParseException {

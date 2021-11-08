@@ -67,7 +67,7 @@ public class DeleteLinkCommandTest {
         showLinkAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ManageMe list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getManageMe().getLinkList().size());
 
         DeleteLinkCommand deleteLinkCommand = new DeleteLinkCommand(outOfBoundIndex);

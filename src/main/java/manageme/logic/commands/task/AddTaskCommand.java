@@ -15,16 +15,19 @@ import manageme.model.Name;
 import manageme.model.module.Module;
 import manageme.model.task.Task;
 
+/**
+ * Adds a task to ManageMe.
+ */
 public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "addTask";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list.\n"
             + "Parameters: "
             + PREFIX_NAME + "TASK_NAME "
             + PREFIX_DESCRIPTION + "TASK_DESCRIPTION "
             + PREFIX_MODULE + "ASSOCIATED_MODULE_NAME "
             + PREFIX_START + "TASK_START_DATETIME "
-            + PREFIX_END + "TASK_END_DATETIME \n"
+            + PREFIX_END + "TASK_END_DATETIME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Do homework "
             + PREFIX_DESCRIPTION + "Complete CS2103T quiz on testing. "

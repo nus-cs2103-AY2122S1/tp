@@ -27,8 +27,10 @@ public class EditModuleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the module identified "
             + "by the index number used in the displayed module list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] ";
+            + "Parameters: INDEX (must be a positive integer between 1 and 2147483647) "
+            + "[" + PREFIX_NAME + "NAME]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_NAME + "CS1101S";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -65,7 +67,7 @@ public class EditModuleCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
-        model.editModuleInTasksWithModule(moduleToEdit, new manageme.model.TagModule(editedModule.getName().value));
+        model.editModuleInTasksWithModule(moduleToEdit, new TagModule(editedModule.getName().value));
         model.editModuleInLinksWithModule(moduleToEdit, new TagModule(editedModule.getName().value));
         model.set(moduleToEdit, editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);

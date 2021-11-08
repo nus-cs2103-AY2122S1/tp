@@ -53,7 +53,7 @@ public interface Logic {
     ObservableList<Link> getUnfilteredLinkList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' ManageMe file path.
      */
     Path getManageMeFilePath();
 

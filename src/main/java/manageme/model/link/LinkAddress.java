@@ -52,6 +52,8 @@ public class LinkAddress {
         }
     }
 
+    //@author {Tianqi-Zhu}-reused
+    //https://mkyong.com/java/open-browser-in-java-windows-or-linux/
     /**
      * Opens url in available web broswer.
      *

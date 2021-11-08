@@ -10,7 +10,7 @@ import manageme.model.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all mods in app whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case insensitive. Partial words will be matched.
  */
 
 public class FindModuleCommand extends Command {

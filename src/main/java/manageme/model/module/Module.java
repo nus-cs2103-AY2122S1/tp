@@ -11,9 +11,6 @@ import manageme.model.module.exceptions.ModuleNotFoundException;
  */
 public class Module extends ManageMeObject {
 
-    /**
-     * Link optional
-     */
     public Module(Name name) {
         super(name);
     }

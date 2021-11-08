@@ -14,13 +14,13 @@ import manageme.model.link.Link;
 import manageme.model.module.Module;
 
 /**
- * Adds a link to the address book.
+ * Adds a link to ManageMe.
  */
 public class AddLinkCommand extends Command {
 
     public static final String COMMAND_WORD = "addLink";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a link to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a link to ManageMe.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ADDRESS + "LINK_ADDRESS "
@@ -30,10 +30,10 @@ public class AddLinkCommand extends Command {
             + PREFIX_ADDRESS + "https://luminus.nus.edu.sg/dashboard "
             + PREFIX_MODULE + "CS2103T"
             + "\nPlease take note that there should not be any space in the link. If there is a space in the file path"
-            + "that you want to add, please rename the file to remove the spaces.";
+            + " that you want to add, please rename the file to remove the spaces.";
 
     public static final String MESSAGE_SUCCESS = "New link added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in ManageMe";
     public static final String MESSAGE_NONEXISTENT_MODULE = "The module you have associated does not exist";
 
     private final Link toAdd;

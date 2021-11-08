@@ -31,11 +31,11 @@ public class EditTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer between 1 and 2147483647) ";
+            + "Parameters: INDEX (must be a positive integer between 1 and 2147483647)";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in ManageMe.";
     public static final String MESSAGE_START_LATER_THAN_END = "The task cannot have start date later than the end date";
     public static final String MESSAGE_START_WITHOUT_END = "The task cannot have a start without an end date";
     public static final String MESSAGE_TASK_NAME_TOO_LONG = "Maximum Length of Edited Task Name is 50 Characters";
@@ -153,7 +153,6 @@ public class EditTaskCommand extends Command {
         private TagModule module;
         private TaskTime start;
         private TaskTime end;
-        // private Set<Tag> tags;
 
         public EditTaskDescriptor() {
         }
@@ -168,7 +167,6 @@ public class EditTaskCommand extends Command {
             setModule(toCopy.module);
             setStart(toCopy.start);
             setEnd(toCopy.end);
-            // setTags(toCopy.tags);
         }
 
         /**
@@ -218,23 +216,6 @@ public class EditTaskCommand extends Command {
             return Optional.ofNullable(end);
         }
 
-        ///**
-        // * Sets {@code tags} to this object's {@code tags}.
-        // * A defensive copy of {@code tags} is used internally.
-        // */
-        //public void setTags(Set<Tag> tags) {
-        //    this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        //}
-
-        ///**
-        // * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-        // * if modification is attempted.
-        // * Returns {@code Optional#empty()} if {@code tags} is null.
-        // */
-        //public Optional<Set<Tag>> getTags() {
-        //    return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        //}
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -255,7 +236,6 @@ public class EditTaskCommand extends Command {
                     && getModule().equals(e.getModule())
                     && getStart().equals(e.getStart())
                     && getEnd().equals(e.getEnd());
-            //        && getTags().equals(e.getTags());
         }
     }
 }

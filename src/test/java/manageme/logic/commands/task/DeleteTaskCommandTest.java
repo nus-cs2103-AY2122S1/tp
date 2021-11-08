@@ -68,7 +68,7 @@ public class DeleteTaskCommandTest {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
         Index outOfBoundIndex = INDEX_SECOND_TASK;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ManageMe list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getManageMe().getTaskList().size());
 
         DeleteTaskCommand deleteCommand = new DeleteTaskCommand(outOfBoundIndex);

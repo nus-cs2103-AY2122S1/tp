@@ -49,7 +49,7 @@ public class JsonManageMeStorageTest {
     }
 
     @Test
-    public void readManageMe_invalidPersonManageMe_throwDataConversionException() {
+    public void readManageMe_invalidLinkManageMe_throwDataConversionException() {
         Assert.assertThrows(DataConversionException.class, () -> readManageMe("invalidLinkManageMe.json"));
     }
 
@@ -59,7 +59,7 @@ public class JsonManageMeStorageTest {
     }
 
     @Test
-    public void readManageMe_invalidAndValidPersonManageMe_throwDataConversionException() {
+    public void readManageMe_invalidAndValidLinkManageMe_throwDataConversionException() {
         Assert.assertThrows(DataConversionException.class, ()
             -> readManageMe("invalidAndValidLinkManageMe.json"));
     }

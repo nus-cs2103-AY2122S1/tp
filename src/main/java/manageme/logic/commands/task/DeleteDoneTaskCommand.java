@@ -21,7 +21,7 @@ public class DeleteDoneTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes all tasks that are marked as done.";
 
-    public static final String MESSAGE_DELETE_ALL_TASK_SUCCESS = "Deleted All Tasks marked as done";
+    public static final String MESSAGE_DELETE_ALL_TASK_SUCCESS = "Deleted all tasks marked as done";
 
     public DeleteDoneTaskCommand() {
     }

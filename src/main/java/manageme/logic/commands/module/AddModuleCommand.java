@@ -13,11 +13,11 @@ import manageme.model.module.Module;
 public class AddModuleCommand extends Command {
     public static final String COMMAND_WORD = "addMod";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to ManageMe. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to ManageMe.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "CS1100 ";
+            + PREFIX_NAME + "CS1100";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the app.";

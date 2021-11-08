@@ -13,7 +13,7 @@ import manageme.model.Model;
 import manageme.model.link.Link;
 
 /**
- * Deletes a link identified using it's displayed index from the address book.
+ * Deletes a link identified using it's displayed index from ManageMe.
  */
 public class DeleteLinkCommand extends Command {
 
@@ -21,7 +21,7 @@ public class DeleteLinkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the link identified by the index number used in the displayed link list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer between 1 and 2147483647)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_LINK_SUCCESS = "Deleted Link: %1$s";

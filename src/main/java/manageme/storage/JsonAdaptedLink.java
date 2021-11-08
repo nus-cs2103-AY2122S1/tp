@@ -22,7 +22,7 @@ public class JsonAdaptedLink {
 
 
     /**
-     * Constructs a {@code JsonAdaptedLink} with the given person details.
+     * Constructs a {@code JsonAdaptedLink} with the given link details.
      */
     @JsonCreator
     public JsonAdaptedLink(@JsonProperty("name") String name, @JsonProperty("address") String address,

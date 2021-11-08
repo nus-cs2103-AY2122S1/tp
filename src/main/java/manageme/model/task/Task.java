@@ -31,8 +31,8 @@ public class Task extends ManageMeObject {
     private final TaskTime end;
 
     /**
-     * Task with a start and end date(Event). Includes module.
-     * Every field must be present and not TaskTime.empty().
+     * Constructor for a Task object set to undone by default.
+     * Every field must be present.
      */
     public Task(Name name, TaskDescription description, TagModule module, TaskTime start,
                 TaskTime end) {
@@ -47,8 +47,8 @@ public class Task extends ManageMeObject {
     }
 
     /**
-     * Task with a start and end date(Event). Includes module.
-     * Every field must be present and not TaskTime.empty().
+     * Constructor for a Task object with a specified TaskIsDone value.
+     * Every field must be present.
      */
     public Task(Name name, TaskDescription description, TaskIsDone isDone, TagModule module, TaskTime start,
                 TaskTime end) {

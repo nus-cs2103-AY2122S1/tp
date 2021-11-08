@@ -33,7 +33,7 @@ public class OpenLinkCommandTest {
         showLinkAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ManageMe list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getManageMe().getLinkList().size());
 
         OpenLinkCommand deleteLinkCommand = new OpenLinkCommand(outOfBoundIndex);

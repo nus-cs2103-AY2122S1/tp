@@ -8,7 +8,7 @@ import manageme.logic.commands.CommandResult;
 import manageme.model.Model;
 
 /**
- * Lists all tasks in the address book to the user.
+ * Lists all tasks in ManageMe to the user.
  */
 public class ListTaskCommand extends Command {
 

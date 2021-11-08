@@ -17,7 +17,7 @@ public class EditModuleDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditModuleDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditModuleDescriptor} with fields containing {@code Module}'s details
      */
     public EditModuleDescriptorBuilder(Module module) {
         descriptor = new EditModuleCommand.EditModuleDescriptor();

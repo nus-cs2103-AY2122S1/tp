@@ -20,13 +20,13 @@ import manageme.model.link.Link;
 import manageme.model.link.LinkAddress;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddLinkCommand object
  */
 public class AddLinkCommandParser implements Parser<AddLinkCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddLinkCommand
+     * and returns an AddLinkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddLinkCommand parse(String args) throws ParseException {

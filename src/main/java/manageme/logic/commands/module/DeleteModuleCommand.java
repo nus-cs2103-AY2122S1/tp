@@ -14,14 +14,14 @@ import manageme.model.TagModule;
 import manageme.model.module.Module;
 
 /**
- * Deletes a module identified using it's displayed index from the task manager.
+ * Deletes a module identified using it's displayed index from ManageMe.
  */
 public class DeleteModuleCommand extends Command {
     public static final String COMMAND_WORD = "deleteMod";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the module identified by the index number used in the displayed module list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer between 1 and 2147483647)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";

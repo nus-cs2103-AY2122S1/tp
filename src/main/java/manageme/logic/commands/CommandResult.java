@@ -44,6 +44,9 @@ public class CommandResult {
         return feedbackToUser;
     }
 
+    /**
+     * Returns feedback meant for usage by the system and users will not have access to this through the UI.
+     */
     public String getFeedbackToSystem() {
         return FEEDBACK_TO_SYSTEM;
     }

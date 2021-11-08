@@ -1,0 +1,81 @@
+
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Interface ReadOnlyManageMe <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
+Interface Model <<Interface>>
+Class ReadOnlyManageMe
+Class Model
+Class ReadOnlyUserPrefs
+Class ManageMe
+Abstract class ManageMeObject
+Class ModelManager
+Class UserPrefs
+Class UniqueObjectList
+Class Name
+Class TagModule
+
+Class UniqueTaskList
+Class Task
+Class TaskDescription
+Class TaskTime
+Class TaskIsDone
+
+Class UniqueModuleList
+Class Module
+
+Class UniqueLinkList
+Class Link
+Class LinkAddress
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+ManageMe .up.|> ReadOnlyManageMe
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyManageMe
+ModelManager -left-> "1" ManageMe
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+
+ManageMe *--> "1" UniqueTaskList
+UniqueObjectList <|-- UniqueTaskList
+UniqueTaskList --> "~* all" Task
+ManageMeObject <|-- Task
+Task -->"1" Name
+Task -->"1" TaskDescription
+Task -->"0..1" TagModule
+note bottom of TaskTime : Used to represent the Start\n and End time for a Task.
+Task --> "0..2" TaskTime
+Task -->"1" TaskIsDone
+
+ModelManager --->"~* filtered" Task
+
+ManageMe *--> "1" UniqueModuleList
+UniqueObjectList <|-- UniqueModuleList
+UniqueModuleList --> "~* all" Module
+ManageMeObject <|-- Module
+Module -->"1" Name
+
+ModelManager --->"~* filtered" Module
+
+ManageMe *--> "1" UniqueLinkList
+UniqueObjectList <|-- UniqueLinkList
+UniqueLinkList -->"~* all" Link
+ManageMeObject <|-- Link
+Link -->"1" Name
+Link -->"1" LinkAddress
+Link -->"0..1" TagModule
+
+ModelManager --->"~* filtered" Link
+
+@enduml

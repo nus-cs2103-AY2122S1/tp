@@ -7,6 +7,10 @@ import manageme.logic.commands.Command;
 import manageme.logic.commands.CommandResult;
 import manageme.model.Model;
 
+/**
+ * Lists all links in the app to the user. Used to go back to
+ * the full link list after a findlink command.
+ */
 public class ListLinkCommand extends Command {
     public static final String COMMAND_WORD = "listLink";
 
