@@ -1,0 +1,24 @@
+@startuml
+!pragma useVerticalIf on
+start
+:User executes move command;
+
+if (Module exists in ModuleSystem) then (yes)
+  if (Class exists in Module in ModuleSystem) then (yes)
+    if (Person already has Module and Group) then (no)
+        if (Person already has Module) then (yes)
+            :Add Group to Person's Module;
+        else (no)
+            :Add Module and Group to Person;
+        endif
+        stop
+    else (yes)
+    endif
+  else (no)
+  endif
+else (no)
+endif
+:Display relevant error message;
+
+stop
+@enduml
