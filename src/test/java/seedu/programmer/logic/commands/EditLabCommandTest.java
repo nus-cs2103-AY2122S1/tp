@@ -1,14 +1,20 @@
 package seedu.programmer.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.programmer.logic.commands.CommandTestUtil.*;
+
+import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_EDIT_LAB_NO;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EDIT_LAB_NO;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EDIT_LAB_NO2;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EDIT_LAB_NO3;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_LAB_NO;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NEW_LAB_TOTAL;
+import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
 import static seedu.programmer.testutil.TypicalIndexes.NUMBER_SECOND_LAB;
 import static seedu.programmer.testutil.TypicalLabs.getTypicalLabList;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.model.Model;
@@ -18,7 +24,6 @@ import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.LabTotal;
-import seedu.programmer.testutil.LabBuilder;
 
 public class EditLabCommandTest {
     private static LabNum newLabNum = new LabNum(VALID_EDIT_LAB_NO);
@@ -96,11 +101,4 @@ public class EditLabCommandTest {
         assertCommandSuccess(editLabCommand2, model, expectedMessage2, expectedModel2);
     }
 
-    @Test
-    public void equals_sameLab_returnsTrue() {
-        Lab sampleLabA = new LabBuilder().withLabNum(VALID_LAB_NO).withTotal(VALID_TOTAL_SCORE).build();
-        EditLabCommand sampleCommandA = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
-        EditLabCommand sampleCommandACopy = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
-        assertEquals(sampleCommandA, sampleCommandACopy);
-    }
 }
