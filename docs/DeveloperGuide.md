@@ -35,6 +35,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-before: always;"></div>
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -56,13 +58,13 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of the main components and how they interact with each other.
 
+<div style="page-break-before: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
-
-<div style="page-break-before: always;"></div>
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -375,6 +377,8 @@ Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPerson
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
 
+<div style="page-break-before: always;"></div>
+
 The following sequence diagram shows how the FindAny operation works:
 
 ![FindAnySequenceDiagram](images/FindAnySequenceDiagram.png)
@@ -433,8 +437,6 @@ The list of birthdays is generated in the `ModelManager`, which implements the f
 Given below is an example usage scenario and how the birthday reminders mechanism behaves at each step.
 
 Step 1. On app startup, contacts with a birthday are sorted by birth month and day. Contacts with birthdays that fall on the present day are colored green while birthdays that are within one week are colored blue. Additionally, a customized message with each contact's phone number and age will be displayed in the birthday reminder list.
-
-<div style="page-break-before: always;"></div>
 
 Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
