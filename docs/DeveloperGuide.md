@@ -71,7 +71,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="700"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="700" />
+<img src="images/ModelClassDiagram.png" width="850" />
 
 
 The `Model` component,
@@ -717,7 +717,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a resident and their information into the app
 
-   1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`
+   1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
    Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. 
     Success message is shown.
 
@@ -725,18 +725,18 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: A resident with the same name `Tommy` or room `A123` is already in the app.
 
-   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020` 
+   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br> 
    Expected: Error message shown, `This resident or room already exists in the address book`
    
-   3. Test case: `add n/Tom r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`
+   3. Test case: `add n/Tom r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
    Expected: Error message shown, `This resident or room already exists in the address book`
    
 3. Adding a resident with invalid parameters
 
-   1. Test case: `add n/Tom! r/A201 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`
+   1. Test case: `add n/Tom! r/A201 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
    Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
 
-   2. Test case: `add n/Tom r/A201 p/87654321 e/tom@gmail.com v/true f/SOC fd/10-10-2020 cd/20-10-2020`
+   2. Test case: `add n/Tom r/A201 p/87654321 e/tom@gmail.com v/true f/SOC fd/10-10-2020 cd/20-10-2020`<br>
    Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
 
 ### Viewing a resident
@@ -757,17 +757,23 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing residents by FET/Collection Deadlines
 1. Listing residents' deadline with normal keyword and valid dates
+
     1. Prerequisites: There are residents whose FET deadline lies between the 2 gates given
+   
     2. Test case: `deadline k/f d1/10-10-2021 d2/15-10-2021`<br>
        Expected: Residents whose FET deadline lies between these 2 dates are listed.
-
+    
 
 2. Listing residents' deadline with late keyword and valid dates
+
     1. Prerequisites: There are residents whose FET deadline is due before the given date
+   
     2. Test case: `deadline k/lf d1/10-10-2021`<br>
        Expected: Residents whose FET is due before the given date is listed.
 
+
 3. Listing residents' deadline with invalid parameters
+
     1. Test case: `deadline k/f d1/10-10-2021`<br>
        Expected: The result box will indicate that the given command format is invalid.
 
@@ -810,28 +816,30 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting the list of residents by valid fields and order
 
-   1. Test case: `sort by/n o/a`
+   1. Test case: `sort by/n o/a`<br>
    Expected: List of residents are sorted by their names in the alphabetical order.
+
 
 2. Sorting the list of residents by invalid fields or order
 
-   1. Test case: `sort by/z o/a`
+   1. Test case: `sort by/z o/a`<br>
     Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
 
-   2. Test case: `sort by/n o/z`
+   2. Test case: `sort by/n o/z`<br>
    Expected: Error message shown, `ORDER should be one of the following: a, d`
    
 ### Exporting residents' emails
 
 1. Export email addresses of list of residents
 
-   1. Test case: `export testEmailExport`
+   1. Test case: `export testEmailExport`<br>
    Expected: Csv file filled with column of email addresses of the residents displayed in the app.
    
+
 2. Duplicate filename provided
 
    1. Prerequisites: csv file `testDuplicateExport.csv` is already in existing `/data/exports` directory
-   2. Test case: `export testDuplicateExport`
+   2. Test case: `export testDuplicateExport`<br>
    Expected: Error message shown, `This filename already exists`
 
 
@@ -844,14 +852,14 @@ For all Event commands, ensure that you are on the Events tab before continuing.
 
 1. View a list of all the events in the app, or the information of a specific event
 
-    1. Test case: `view`
+    1. Test case: `view`<br>
     Expected: A list of all the events is displayed in the app's GUI
 
-    2. Test case: `view 3`
+    2. Test case: `view 3`<br>
     Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
        
 2. Invalid indexes provided
-   1. Test case: `view x` (where x is larger than the list size)
+   1. Test case: `view x` (where x is larger than the list size)<br>
    Expected: Error message shown, `The event index provided is invalid`
 
 ### Finding an event
@@ -904,15 +912,15 @@ For all Event commands, ensure that you are on the Events tab before continuing.
 
 1. Sorting the list of events by valid fields and order
 
-    1. Test case: `sort by/n o/a`
+    1. Test case: `sort by/n o/a`<br>
        Expected: List of events are sorted by their names in the alphabetical order.
 
 2. Sorting the list of events by invalid fields or order
 
-    1. Test case: `sort by/z o/a`
+    1. Test case: `sort by/z o/a`<br>
        Expected: Error message shown, `FIELD should be one of the following: n, d, c, v`
 
-    2. Test case: `sort by/n o/z`
+    2. Test case: `sort by/n o/z`<br>
        Expected: Error message shown, `ORDER should be one of the following: a, d`
     
 
