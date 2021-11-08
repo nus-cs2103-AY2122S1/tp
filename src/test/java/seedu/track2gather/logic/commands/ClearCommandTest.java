@@ -1,11 +1,14 @@
 package seedu.track2gather.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.track2gather.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.track2gather.testutil.TypicalPersons.ALICE;
 import static seedu.track2gather.testutil.TypicalPersons.BENSON;
 import static seedu.track2gather.testutil.TypicalPersons.getTypicalTrack2Gather;
 
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 
@@ -37,4 +40,30 @@ public class ClearCommandTest {
         assertCommandSuccess(new ClearCommand(clock), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void equals() {
+        Clock defaultClock = Clock.systemDefaultZone();
+
+        ClearCommand firstCommand = new ClearCommand();
+
+        // same object -> returns true
+        assertTrue(firstCommand.equals(firstCommand));
+
+        // same Clock -> returns true
+        ClearCommand defaultClockCommand = new ClearCommand(defaultClock);
+        assertTrue(firstCommand.equals(defaultClockCommand));
+
+        // different timezones -> returns false
+        ZoneId zoneCalcutta = ZoneId.of("Asia/Calcutta");
+        Clock clockCalcutta = defaultClock.withZone(zoneCalcutta);
+        ClearCommand differentTimeZoneClockCommand = new ClearCommand(clockCalcutta);
+        assertFalse(firstCommand.equals(differentTimeZoneClockCommand));
+
+        // time set differently, same zone
+        ClearCommand differentOffsetClockCommand = new ClearCommand(Clock.offset(defaultClock, Duration.ofHours(72)));
+        assertFalse(firstCommand.equals(differentOffsetClockCommand));
+
+        // null -> returns false
+        assertFalse(firstCommand.equals(null));
+    }
 }
