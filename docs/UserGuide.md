@@ -121,10 +121,7 @@ on any operating system including Windows, macOS or Linux
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
    
    ![Ui](images/Ui.png)
-   
-   <div markdown="block" class="alert alert-info">
-   :information_source: More icons will be added in future iterations<br>
-   </div>
+
    
 1. When you first start up, FAST will contain some sample data for you to explore the different features.
 1. You are now ready to start managing your clients!
@@ -419,7 +416,8 @@ This can be used if the client's information has changed, or if you entered an i
 * For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
 </div>
 
-<div markdown="span" class="alert alert-warning"> :exclamation:
+
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
 
 * At least one of the optional fields must be provided.
 * When editing tags, all existing tags of the client will be replaced with the new tags.
@@ -459,16 +457,15 @@ will be deleted.
 ![DeleteExample](images/deleteexample.png)
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Can be used to delete up to **10** contacts in a single `del` command by supplying more `INDEX`.
 </div>
 
-<div markdown="span" class="alert alert-primary">:exclamation: Warning:
+<div markdown="span" class="alert alert-warining">:exclamation: **Caution:**
 If *Format 1* is used, there should be a space in between each `INDEX` if multiple `INDEX` are input. <br>
 If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`.
 </div>
 
-**Examples**:
 * `del 2 4 6 8 10` deletes the 2nd, 4th, 6th, 8th and 10th person in FAST.
 * `del 3-5` deletes the 3rd, 4th and 5th person in FAST.
 
@@ -497,8 +494,8 @@ which should mostly be one or two words.<br>
 * [`INDEX`](#index)
 * [`REMARK`](#remark)
 
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
-To delete a remark, leave the remark parameter `[r/[`REMARK`](#remark)]` empty.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To delete a remark, leave the remark parameter `[r/[REMARK](#remark)]` empty.
 </div>
 
 **Examples**:
@@ -932,6 +929,8 @@ Action | Format, Examples
 **Add Remark** | `rmk INDEX [r/REMARK]`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 
+<div style="page-break-after: always"></div>
+
 ### Appointment Management
 
 Action | Format, Examples
@@ -942,6 +941,8 @@ Action | Format, Examples
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 **Undo Marked Appointment** | `ua INDEX` <br> e.g. `ua 1`
 
+<div style="page-break-after: always"></div>
+
 ### Tag Management
 
 Action | Format, Examples
@@ -949,6 +950,8 @@ Action | Format, Examples
 **Edit Tag** |`tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
 **Investment Plan Tag** | Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>
 **Priority Tag** | Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
+
+<div style="page-break-after: always"></div>
 
 ### Navigation
 
