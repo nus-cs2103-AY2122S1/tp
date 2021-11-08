@@ -15,7 +15,8 @@ https://github.com/AY2021S1-CS2103T-W16-3/tp/pull/179/commits/aec461182c194c9ca2
 <!--@@author
 -->
 
-# **1. Introduction**
+# 1. Introduction
+
 
 Welcome to the TutorAid User Guide, the one-stop manual where you will find everything that you need to know about how to use the app!
 
@@ -37,7 +38,8 @@ Just downloaded TutorAid? Check out the [About](#2-about) and [Quick Start](#3-q
 
 ***
 
-# **2. About**
+# 2. About
+
 
 This section contains information and terms that may help you to understand the user guide.
 
@@ -68,7 +70,7 @@ Commands in these highlighted boxes are typically used to show exactly what you 
 ## **2.2 TutorAid Visual Components**
 
 This section details the various components in TutorAid and how they will be referred to throughout the guide.
-![Labelled Ui](images/labelled-ui.jpg)
+![Labelled Ui](images/labelled-ui.png)
 
 #### Menu Bar
 {:.no_toc}
@@ -117,7 +119,7 @@ In this section, we will be using this as an example to study and understand the
 
 #### Command Word
 {:.no_toc}
-The Command Word is how you can tell TutorAid what kind of operation you want to do. These command words can also be found here [here](#8-command-summary). All commands must contain a Command Word.
+The Command Word is how you can tell TutorAid what kind of operation you want to do. These command words can also be found [here](#8-command-summary). All commands must contain a Command Word.
 
 In the example above, `edit` tells TutorAid to perform an _edit_ operation.
 
@@ -142,12 +144,12 @@ Parameter typically refers to additional details that you need to provide in ord
 A Parameter can be further divided into 2 components:
 
 * Prefix: Prefix refers to the starting few characters of a parameter (up till and including the `/`). These prefixes act as labels for you and for TutorAid to differentiate between various details that you add in a command.<br><br> 
-  In the example above, `sn/` and `sp` help to distinguish between the _student name_ and the _student phone number_ respectively. 
+  In the example above, `sn/` and `sp/` help to distinguish between the _student name_ and the _student phone number_ respectively. 
   
 * Argument: Argument refers to the sequence of character that follow immediately after the `/` and before the start of the next prefix (if any). They are the information that you pass into a command and act as values for Prefixes.<br><br>
   In the example above, `Matthew Judge` is the value for the _student name_.
 
-Putting together both the prefix and the argument, `sn/Matthew Judge` tells TutorAid that the name of the third student should updated to _Matthew Judge_. Similarly, `sp/91263740` tells TutorAid that the phone number of the third student should be updated to _91263740_.
+Putting together both the prefix and the argument, `sn/Matthew Judge` tells TutorAid that the name of the third student should be updated to _Matthew Judge_. Similarly, `sp/91263740` tells TutorAid that the phone number of the third student should be updated to _91263740_.
 
 ### **2.3.1 Command Syntax in this Guide**
 
@@ -170,7 +172,7 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 
 ***
 
-# **3. Quick Start**
+# 3. Quick Start
 
 1. Ensure that you have Java `11` or above installed in your computer.
 
@@ -200,18 +202,18 @@ add -sl s/STUDENT_INDEX... n/LESSON_INDEX...
 {:start="5"}
 5. If this is your first time using TutorAid, we highly encourage you to check out our [Beginner's Tutorial](#4-beginners-tutorial) so that you can practise using a few of the commands and familiarise yourself with the app!
 
-6. After completing the tutorial, refer to the [Features](#8-command-summary) below to see all the commands available in TutorAid.
+6. After completing the tutorial, refer to the [Features](#5-features) below to see all the commands available in TutorAid.
 
 ***
 
-# **4. Beginner's Tutorial**
+# 4. Beginner's Tutorial
 
 Welcome to TutorAid's beginner's tutorial! Here, you will learn how you can use a few of our commands to manage the details of your students and lessons on a day-to-day basis :smile:
 
 If this is your first time launching TutorAid, you will be able to see that some sample data has been provided to you.
 
 
-### **Tips before you get started:**
+### Tips before you get started
 {:.no_toc}
 
 * As you follow the tutorial, we also encourage you to further experiment with the various commands on your own to understand the ways in which TutorAid can help you!
@@ -354,7 +356,7 @@ For more information about how to interpret any of the commands, you check out t
 
 > :bulb: This section provides a detailed documentation of all the commands in TutorAid. Thus, it is best for users to visit this after gaining familiarity with the command format, command syntax and a few of the frequently used commands in TutorAid.
 
-## 5.1 Student Commands
+## **5.1 Student Commands**
 
 ### Adding a student: `add -s`
 {:.no_toc}
@@ -366,6 +368,9 @@ Examples:
 * `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` adds a student with name `John Does`, student phone number `81234567`, parent's name `Mrs Doe` and parent's phone number `91234567`.
 
 * The student's phone number, parent's name and parent's phone number are optional details for you to include.
+* Names can only contain alphanumerical characters and spaces.
+* Phone numbers can only contain digits 0-9 and should not contain any spaces.
+* Phone numbers must be minimally 3 digits long.
 
 > :bulb: TutorAid does not allow you to add duplicate students. A student is considered as a duplicate if he/she has the exact same name (case-insensitive) as an existing student in the app.
 > For example, TutorAid will consider 'John Doe' and 'john doe' as the same student, but not 'John Doe' and 'John'.
@@ -449,20 +454,20 @@ Examples:
 
 ### Deleting progress from a student: `del -p`
 {:.no_toc}
-Removes a progress entry from the student at the specified student index.
+Removes the latest progress entry from the student at the specified student index.
 
 Format: `del -p STUDENT_INDEX`
 
-* Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
+* Deletes the most recently added `PROGRESS` from the student at the specified `STUDENT_INDEX`.
 * The index refers to the index number shown in the Student Panel.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `del -p 2` deletes the progress of the 2nd student displayed in the Student Panel.
+* `list` followed by `del -p 2` deletes the latest progress of the 2nd student displayed in the Student Panel.
 
 > :bulb: Using this command will update the Student Panel to only display the edited student.
 
-## 5.2 Lesson Commands
+## **5.2 Lesson Commands**
 
 ### Adding a lesson: `add -l`
 {:.no_toc}
@@ -542,7 +547,7 @@ Format: `find -l KEYWORD...`
 Examples:
 * `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
 
-## 5.3 Student and Lesson Commands
+## **5.3 Student and Lesson Commands**
 
 ### Listing all students and lessons: `list`
 {:.no_toc}
@@ -585,7 +590,7 @@ Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 Examples:
 * `del -sl s/1 2 3 l/1` deletes the students with indexes 1, 2 and 3 from the lesson with index 1.
 
-## 5.4 Other Commands
+## **5.4 Other Commands**
 
 ### Viewing help: `help`
 {:.no_toc}
@@ -607,7 +612,7 @@ Exits the program.
 
 Format: `exit`
 
-## 5.5 Saving and Editing Data
+## **5.5 Saving and Editing Data**
 
 ### Saving the data
 {:.no_toc}
@@ -617,7 +622,7 @@ TutorAid data are saved in the hard disk automatically after any command that ch
 {:.no_toc}
 TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAidStudents.json`, while TutorAid lesson data are saved as a JSON file `[JAR file location]/data/tutorAidLessons.json`. Advanced users are welcome to update data directly by editing any of the two data files.
 
-> :exclamation: **If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.**
+> :exclamation: **If your changes to a data file makes its format invalid, TutorAid will discard all data and start with all empty data files in the next run.**
 
 ***
 
@@ -632,13 +637,22 @@ TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAi
 # 7. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous TutorAid home folder.
+**A**: Install the app in the other computer and overwrite the empty data files it creates with the files that contains the data of your previous TutorAid home folder.<br><br>
+
+**Q**: I am currently only able to view my students' latest progress entry, how can I view all the entries?<br>
+**A**: To view all the progress entries of a student, you can key `view -s STUDENT_INDEX` into the Command Box and hit ENTER. You should be able to see you 10 most recently added progress entries. Please note that you will not be able to view all the progress entries of multiple students at any one time.<br><br> 
+
+**Q**: I just added a new progress entry for one of my students, and all my other students and lessons have disappeared. How do I view them again?
+**A**: To revert back to the original view of all students and all lessons, simply key in `list -a` into the Command Box and hit ENTER.
+
+**Q**: I have added more than 10 progress entries for a student, but why am I only able to see up to the 10 most recent entries?<br>
+**A**: TutorAid only support storing up to 10 progress entries so that it is easier for tutors to manage and view all of their entries for each student.
 
 ***
 
 # 8. Command Summary
 
-### 8.1 Student Commands
+### **8.1 Student Commands**
 
 |---
 Action | Format and Examples
@@ -651,7 +665,7 @@ Action | Format and Examples
 **[Add Progress](#adding-progress-for-a-student-add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student-del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 
-### 8.2 Lesson Commands
+### **8.2 Lesson Commands**
 
 |---
 Action | Format and Examples
@@ -662,7 +676,7 @@ Action | Format and Examples
 **[View lesson](#viewing-a-lesson-view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **[Find lesson](#finding-lessons-by-name-find--l)** | `find -l KEYWORD...`<br>e.g., `find -l maths`
 
-### 8.3 Student and Lesson Commands
+### **8.3 Student and Lesson Commands**
 
 |---
 Action | Format and Examples
@@ -671,7 +685,7 @@ Action | Format and Examples
 **[Add student(s) to lesson(s)](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
 **[Delete student(s) from lesson(s)](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 
-### 8.4 Other Commands
+### **8.4 Other Commands**
 
 |---
 Action | Format and Examples

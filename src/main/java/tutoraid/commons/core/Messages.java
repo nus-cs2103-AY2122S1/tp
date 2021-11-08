@@ -13,8 +13,13 @@ public class Messages {
     public static final String MESSAGE_INVALID_FIND_COMMAND = "Invalid find command format! "
             + "Must start with 'find -s' or 'find -l'.";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid.";
+    public static final String MESSAGE_INVALID_STUDENTS_DISPLAYED_INDEX = "One or more of the student indexes provided "
+            + "is invalid.";
+
     public static final String MESSAGE_LIST_SUCCESS = "Listed all students and lessons.";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid.";
+    public static final String MESSAGE_INVALID_LESSONS_DISPLAYED_INDEX = "One or more of the lesson indexes provided "
+            + "is invalid.";
     public static final String MESSAGE_INVALID_EDIT_COMMAND = "Invalid edit command format! "
             + "Must start with 'edit -s' or 'edit -l'.";
     public static final String MESSAGE_INVALID_JSON_CAPACITY = "One or more lessons is over capacity.";
@@ -27,9 +32,7 @@ public class Messages {
             + " entries to delete from.";
     public static final String MESSAGE_CAPACITY_LESS_THAN_STUDENTS = "The given capacity is lower "
             + "than the number of students currently enrolled in the lesson!";
-    public static final String MESSAGE_JSON_INTEGRITY_LESSON_ERROR = "The lesson save data is corrupted and will be "
-            + "discarded.";
-    public static final String MESSAGE_JSON_INTEGRITY_STUDENT_ERROR = "The student save data is corrupted and will be "
+    public static final String MESSAGE_JSON_INTEGRITY_ERROR = "The save data is corrupted and will be "
             + "discarded.";
     public static final String MESSAGE_NO_STUDENT_DATA = "No student data found. Starting with sample students.";
     public static final String MESSAGE_NO_LESSON_DATA = "No lesson data found. Starting with sample lessons.";

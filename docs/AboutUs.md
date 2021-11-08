@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### Ivan Wong
+### Wong Pin Rui, Ivan
 
 <img src="images/wpinrui.png" width="200px">
 
@@ -47,7 +47,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Documentation
 
-### Dickson
+### Tan Zheng Jie, Dickson
 
 <img src="images/dt-td.png" width="200px">
 

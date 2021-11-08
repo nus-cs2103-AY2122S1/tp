@@ -49,8 +49,10 @@ public class ParserUtil {
         ArrayList<Index> indexesToReturn = new ArrayList<>();
 
         for (String indexInString : trimmedMultipleIndexes) {
-            Index index = parseIndex(indexInString);
-            indexesToReturn.add(index);
+            if (!indexInString.isBlank()) {
+                Index index = parseIndex(indexInString);
+                indexesToReturn.add(index);
+            }
         }
         return getUniqueIndexes(indexesToReturn);
     }

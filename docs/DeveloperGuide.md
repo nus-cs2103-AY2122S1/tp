@@ -206,7 +206,7 @@ Taking a closer look into `Model` componenet, each `Lesson` and `Student` object
 
 The `Storage` component,
 * can save students' data, lessons' data and user preference data in json format, and read them back into corresponding objects.
-* inherits from `TutorAidStudentStorage`, `TutorAidLessonStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `TutorAidStudentStorage`, `TutorAidLessonStorage` and `UserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 Below is the `Storage` class diagram:
@@ -230,10 +230,10 @@ This section describes some noteworthy details on how certain features are imple
 This feature adds a student contact to TutorAid. A student contact consists of the student's name, student's contact number, the parent's name and parent's contact number.
 
 The feature is mainly implemented by the following methods:
-* `AddStudentCommand::execute()` — Adds a `Student` object to TutorAid.
+* `AddStudentCommand#execute()` — Adds a `Student` object to TutorAid.
 
 It is also additionally facilitated by these methods:
-* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a `student.
+* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a student.
 * `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a student.
 * `AddStudentCommandParser#parse()` — Parses the individual arguments to create a `Student` object.
 * `ModelManager#addStudent()` — Represents the in-memory model of TutorAid's student book data.
@@ -825,29 +825,29 @@ Use case ends.
 
 **Extensions**
 
-* 1a. Lesson appears to overlap with another class as intended by the Tutor.
-    * 1a1. TutorAid displays a warning message.
-    * 1a2. Tutor dismisses the warning message.
-    
-Use case resumes at Step 2.
-
-* 1b. Class appears to overlap with another class due to a mistake of the Tutor.
-    * 1b1. TutorAid shows a warning message.
-    * 1b2. Tutor acknowledges the warning message and cancels the creation of the class.
-    
-Use case resumes at Step 2.
-
 * 1a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid index)
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. Tutor re-enters the command, along with the necessary arguments.
+  * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+  * 1a2. Tutor re-enters the command, along with the necessary arguments.
 
 Steps 1a1-1a2 are repeated until the command entered is correct.
 
 Use case resumes from Step 2.
 
+* 1b. Lesson appears to overlap with another class as intended by the Tutor.
+    * 1b1. TutorAid displays a warning message.
+    * 1b2. Tutor dismisses the warning message.
+    
+Use case resumes at Step 2.
+
+* 1c. Class appears to overlap with another class due to a mistake of the Tutor.
+    * 1c1. TutorAid shows a warning message.
+    * 1c2. Tutor acknowledges the warning message and cancels the creation of the class.
+    
+Use case ends.
+
 <div markdown="span" class="alert alert-primary">
 
-:exclamation: Extensions 1a and 1b are to be implemented in the future.
+:exclamation: Extensions 1b and 1c are to be implemented in the future.
 </div>
 
 **Use Case 8: Delete a lesson**
