@@ -957,7 +957,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC010 - Marking an applicant**
+**Use case: UC10 - Marking an applicant**
 
 **MSS**
 
@@ -1009,7 +1009,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC012 - Deleting marked applicants**
+**Use case: UC12 - Deleting marked applicants**
 
 **MSS**
 
@@ -1040,7 +1040,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC013 - Clear all applicants**
+**Use case: UC13 - Clear all applicants**
 
 **MSS**
 
@@ -1061,7 +1061,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC014 - Exiting RecruitIn**
+**Use case: UC14 - Exiting RecruitIn**
 
 **MSS**
 
