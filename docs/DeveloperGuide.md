@@ -1200,7 +1200,8 @@ Major modifications include:
 - Adding an entirely new entity type Event
 - Adapting the Person class into a Participant class, removing Tag and adding BirthDate and NextOfKin attributes
 - Adding the ParticipantID class to simplify storage process and coupling of participants and events
-- Designing new commands for both Event and Participant for filtering, sorting, viewing details and adding and removing participants to and from events
+- Designing new commands for both Event and Participant for filtering, sorting, viewing details and adding and removing 
+  participants to and from events
 - Rerouting some CommandResult outputs to the results display for better user readability
 - Redesigning the GUI
 
