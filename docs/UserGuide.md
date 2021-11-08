@@ -262,8 +262,11 @@ or
 ```
 vs 2
 ```
-![view student](images/student_view.png)
-<p align="center"><i>Figure 2: Displaying a student's details in the information page</i></p>
+
+<p align="center">
+    <img src="/tp/images/student_view.png" alt="view student" width="650" height="180"><br>
+    <i>Figure 2: Displaying a student's details in the information page</i>
+</p>
 
 #### 3.2.2 Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
@@ -276,8 +279,10 @@ or
 ```
 vc 3
 ```
-![view class](images/class_view.png)
-<p align="center"><i>Figure 3: Displaying details of a class in the information page</i></p>
+<p align="center">
+    <img src="/tp/images/class_view.png" alt="view class" width="650" height="180"><br>
+    <i>Figure 3: Displaying details of a class in the information page</i>
+</p>
 
 ### 3.3 Edit student/tuition class
 Edits an existing student or tuition class.
@@ -422,8 +427,10 @@ Upon entering the command, a pop-up window with a text box is displayed for you 
 Users can add, remove, or edit remarks through the editor window.
 </div>
 
-![Remark editor](images/remark_editor_student.png)
-<p align="center"><i>Figure 5: Editing remarks with editor window</i></p>
+<p align="center">
+    <img src="/tp/images/remark_editor_student.png" width=520 height=250 alt="Remark editor"><br>
+    <i>Figure 5: Editing remarks with editor window</i>
+</p>
 
 <div markdown="span" class="alert alert-primary">
 :warning: For MacOS users, the remarks editor may open as a new tab instead of a window, which can cause a UI bug where the buttons are not displayed correctly. To open as a new window instead, go to System preferences > General > Prefer tabs and choose never. 
