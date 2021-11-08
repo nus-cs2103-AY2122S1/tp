@@ -20,7 +20,7 @@ Student *--> "0..2" Phone
 Student *--> "1"ParentName
 Student *--> "1"ProgressList
 ProgressList *--> "0..10"Progress
-Student *-right-> "*"Lessons
+Student *-right-> "1"Lessons
 Lessons --> "*"Lesson
 
 

@@ -1,6 +1,7 @@
 package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.ui.DetailLevel.HIGH;
 
 import tutoraid.commons.core.Messages;
 import tutoraid.model.Model;
@@ -8,7 +9,7 @@ import tutoraid.model.student.NameContainsSubstringsPredicate;
 
 /**
  * Finds and lists all students in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindStudentCommand extends FindCommand {
 
@@ -31,6 +32,7 @@ public class FindStudentCommand extends FindCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.viewList(HIGH);
         model.updateFilteredStudentList(predicate);
 
         return new CommandResult(

@@ -28,21 +28,17 @@ public class ProgressList {
     /**
      * Constructs a {@code ProgressList}.
      *
-     * @param progressListInStringArrayList an arraylist of progress descriptions of the student
+     * @param progressStringArrayList an arraylist of progress descriptions of the student
      */
-    public ProgressList(ArrayList<String> progressListInStringArrayList) {
-        requireNonNull(progressListInStringArrayList);
-        AppUtil.checkArgument(isValidProgressList(progressListInStringArrayList), MESSAGE_CONSTRAINTS);
+    public ProgressList(ArrayList<String> progressStringArrayList) {
+        requireNonNull(progressStringArrayList);
+        AppUtil.checkArgument(isValidProgressList(progressStringArrayList), MESSAGE_CONSTRAINTS);
 
         this.progressList = new ArrayList<>();
 
-        for (int i = 0; i < progressListInStringArrayList.size(); i++) {
-            String currentProgressDescription = progressListInStringArrayList.get(i);
-            Progress currentProgress = new Progress(currentProgressDescription);
-
-            if (!currentProgress.isEmptyProgress()) {
-                this.addProgress(currentProgress);
-            }
+        for (String progressString : progressStringArrayList) {
+            Progress currentProgress = new Progress(progressString);
+            addProgress(currentProgress);
         }
     }
 

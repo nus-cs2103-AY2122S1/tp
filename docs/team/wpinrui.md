@@ -19,6 +19,8 @@ Given below are my contributions to the project.
 * **Edit [student](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/86) / [lesson](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/118) commands**
   * Justification: Being able to edit is a feature that makes it a lot more convenient for users to change fields for students / lessons. Without this feature, they would have to delete the original entry and create a new one. This is inconvenient especially if only a single field has changed.
 * **Other features and enhancements to existing features**:
+  * Link between students and lessons: Re-implemented the way that the JSON files are read to ensure that Student objects and Lesson objects are always kept in sync, even with edits to students / lessons or their names [(PR #243)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/243)
+  * Added ability to link and unlink multiple students with multiple lessons [(PR #269)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/269) based on the initial attempt done by [ErnestCuong](https://github.com/ErnestCuong) [(PR #125)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/125)
   * Add lesson to student / Add student to lesson: Fixed a bug where editing the student or lesson would cause the two entities to go out of sync [(PR #143)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/143)
   * Progress: Improved formatting as it appears on the Student Panel [(PR #142)](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/142)
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=wpinrui&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17).

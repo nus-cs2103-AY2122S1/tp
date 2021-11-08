@@ -12,7 +12,7 @@ end box
 [-> LogicManager : execute("add -p 2 Did Homework")
 activate LogicManager
 
-LogicManager -> TutorAidParser : parseCommand("-p 2 Did Homework")
+LogicManager -> TutorAidParser : parseCommand("add -p 2 Did Homework")
 activate TutorAidParser
 
 TutorAidParser -> AddCommandParser : parse("-p 2 Did Homework")
@@ -22,7 +22,7 @@ AddCommandParser -> AddProgressCommandParser : parse("2 Did Homework")
 activate AddProgressCommandParser
 
 create AddProgressCommand
-AddProgressCommandParser -> AddProgressCommand : AddProgressCommand()
+AddProgressCommandParser -> AddProgressCommand : AddProgressCommand(targetIndex, progress)
 activate AddProgressCommand
 AddProgressCommandParser <-- AddProgressCommand
 deactivate AddProgressCommand
@@ -33,11 +33,17 @@ deactivate AddProgressCommandParser
 TutorAidParser <-- AddCommandParser
 deactivate AddCommandParser
 
-LogicManager <-- TutorAidParser : AddProgressCommand
+LogicManager <-- TutorAidParser
 deactivate TutorAidParser
 
+<<<<<<< HEAD:docs/diagrams/ParseAddProgressSequenceDiagram.puml
 destroy AddProgressCommandParser
 
 destroy AddCommandParser
 
+=======
+ref over LogicManager, AddProgressCommand : get commandResult
+<-- LogicManager : commandResult
+deactivate LogicManager
+>>>>>>> master:docs/diagrams/ParseAddProgressCommandSequenceDiagram.puml
 @enduml

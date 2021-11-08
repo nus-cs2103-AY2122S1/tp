@@ -8,7 +8,7 @@ Class Student
 Class ProgressList
 Class Progress
 
-Student *--> ProgressList
+Student *--> "1" ProgressList
 
-ProgressList ..> "0...10" Progress
+ProgressList *--> "0...10" Progress
 @enduml
