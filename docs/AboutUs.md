@@ -11,7 +11,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/yatbun.png" width="200px">
 
-[[github](http://github.com/yatbun)]
+[[github](http://github.com/yatbun)][[portfolio](team/yatbun.md)]
 
 * Role: Team Lead
 * Responsibilities: Logic IC
