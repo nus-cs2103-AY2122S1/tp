@@ -19,8 +19,10 @@ import seedu.tracker.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String ADD_COMMAND = "Adding a module to the database:\n     Example: add c/CODE t/TITLE d/DESCRIPTION m/MC [tag/TAG]";
-    public static final String CLEAR_COMMAND = "Removing all modules from a specific semester in the academic plan:\n     "
+    public static final String ADD_COMMAND = "Adding a module to the database:\n     "
+            + "Example: add c/CODE t/TITLE d/DESCRIPTION m/MC [tag/TAG]";
+    public static final String CLEAR_COMMAND = "Removing all modules from a specific "
+            + "semester in the academic plan:\n     "
             + "Example: clear y/YEAR s/SEMESTER";
     public static final String COMMAND_FORMAT = "Below shows the format of all commands : ";
     public static final String DELETE_COMMAND = "Deleting a module from the database:\n     Example: delete INDEX";
@@ -36,8 +38,10 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String LIST_COMMAND = "Listing all the modules in the database :\n     Example: list";
     public static final String SET_COMMAND = "Setting user's MC goal or current semester:\n     "
             + "Example: set m/MC or set y/YEAR s/SEMESTER";
-    public static final String TAKE_COMMAND = "Taking a module and adding it into the academic plan:\n     Example: take INDEX y/YEAR s/SEMESTER";
-    public static final String UNTAKE_COMMAND = "Removing(\"untake\") a module from the academic plan:\n     Example: untake INDEX";
+    public static final String TAKE_COMMAND = "Taking a module and adding it into the academic plan:\n     "
+            + "Example: take INDEX y/YEAR s/SEMESTER";
+    public static final String UNTAKE_COMMAND = "Removing(\"untake\") a module from the academic plan:\n     "
+            + "Example: untake INDEX";
     public static final String VIEW_COMMAND = "Viewing modules taken in a specific semester:\n     "
             + "Example: view y/YEAR s/SEMESTER";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
