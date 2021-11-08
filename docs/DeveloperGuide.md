@@ -2,11 +2,16 @@
 layout: page
 title: Developer Guide
 ---
+# **Introduction**
+
+![Ui](images/ailurusLogo.png)
 
 Ailurus is a **desktop application** designed to aid Organising Committees from the Computing Faculty in managing and accounting for their administrative concerns. It provides users with the ability to plan and manage events and tasks for their members. 
 
 The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands.
 It also informs developers of the requirements and instructions for manual testing for Ailurus.
+
+# **Table of Contents**
 
 * Table of Contents
 {:toc}
@@ -17,7 +22,7 @@ It also informs developers of the requirements and instructions for manual testi
 * This project is an extension of [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
 * Our document formatting and content is referenced from [AY2122S1-CS2103T-T15-1](https://ay2122s1-cs2103t-t15-1.github.io/tp)
 * Our project uses Scene Builder for UI components
-* Libraries included: [JavaFX 8](https://docs.oracle.com/javase/8/javafx), [Jackson](https://github.com/FasterXML/jackson), [Junit5](https://github.com/junit-team/junit5)
+* Libraries included: [JavaFX 8](https://docs.oracle.com/javase/8/javafx), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -99,9 +104,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Member`, `Event` and `Task` object residing in the `Model`.
 
-#### Current Implementations of UI
-
-The GUI currently reflects the entered events, members and tasks recorded in Ailurus. Currently, there are three main columns that reflect the `Event`, `Member` and `Task` objects that are residing in the `Model`. Directly adding or removing `Event`, `Member` or `Task` would update the `EventListPanel`, `MemberListPanel` and `TaskListPanel` to show their respective `EventListCard`, `MemberListCard` and `TaskListCard` respectively. Each of the `EventListCard`, `MemberListCard` and `TaskListCard` would display the fields under the 
+The GUI reflects the entered events, members and tasks recorded in Ailurus. There are three main columns that reflect the `Event`, `Member` and `Task` objects that are residing in the `Model`. Directly adding or removing `Event`, `Member` or `Task` would update the `EventListPanel`, `MemberListPanel` and `TaskListPanel` to show their respective `EventListCard`, `MemberListCard` and `TaskListCard` respectively. Each of the `EventListCard`, `MemberListCard` and `TaskListCard` would display the fields under the 
 corresponding `Event`, `Member` and `Task` objects as discussed under [Model Component](#model-component).
 
 ### Logic component
@@ -141,7 +144,6 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), all `Event` objects (which are contained in a `UniqueEventList` object).
@@ -158,19 +160,17 @@ Within the `Model` component,
 
 An alternative (arguably, a more OOP) model design is given below,
 
-<img src="images/AlternativeModelClassDiagram.png" width="600" />
+<img src="images/AlternativeModelClassDiagram.png" width="450" />
 
 * `AddressBook` also stores all `Task` objects (which are contained in a `UniqueTaskList` object).
 * Each `Member` object references `Task` object in the `UniqueTaskList`, instead of needing its own list of tasks.
 However, this design has some issues in storage,
-* Since Ailurus uses json files to store user data, json format members should at least store the unique identifier of each task the member had.
+* Since Ailurus uses JSON files to store user data, JSON format members should at least store the unique identifier of each task the member had.
 In our implementation, the unique identifier is `Name` and `TaskDeadline`, which are actually the main part of a `Task`.
-* At the same time, json format member need to store the completion status of each referencing task.
-* In all, implementing the storage of this member-task relation by using json file is likely to incur redundancy and error-prone,
-so we decided to use an easier implementation, which is the current one.
+* At the same time, JSON format member need to store the completion status of each referencing task.
+* In all, implementing the storage of this member-task relation by using JSON file is likely to incur redundancy and error-prone, so we decided to use an easier implementation, which is the current one.
 
-A better implementation of the alternative design may involve using database management system like PostgreSQL,
-a proposed entity relationship model diagram for the member-task relation is given here:[ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
+A better implementation of the alternative design may involve using database management system like PostgreSQL, a proposed entity relationship model diagram for the member-task relation is given here: [ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
 
 
 [comment]: <> (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably,) 
@@ -189,21 +189,21 @@ a proposed entity relationship model diagram for the member-task relation is giv
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component converts data from Ailurus to `json` format and back. It utilizes the `Jackson` library for this purpose.
+The `Storage` component converts data from Ailurus to `JSON` format and back. It utilizes the `Jackson` library for this purpose.
 Address book data is both saved and read from `./data/ailurus.json` while user preference data is from `./preferences.json`.
 If the files and directories do not exist, they are created with sample data when the Ailurus application is launched.
 
 The `Storage` component,
-* can save both address book data and user preference data in `json` format, and read them back into corresponding objects.
+* can save both address book data and user preference data in `JSON` format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (only one) depending on which functionality is needed.
-* depends on some classes such as `Member`, `Event` and `Task` in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model` thus depends on them to convert data to json format).
+* depends on some classes such as `Member`, `Event` and `Task` in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model` thus depends on them to convert data to JSON format).
 
-From the name of the classes(beginning with JsonAdapted), we can tell which class they are storing in `json` format. All of these data are stored
+From the name of the classes(beginning with JsonAdapted), we can tell which class they are storing in `JSON` format. All of these data are stored
 in the `JsonSerializableAddressBook`.
 
 For Example,
-* `JsonAdaptedTask` stores `Task` in `json` format.
-* `JsonAdaptedEvent` stores `Event` in `json` format. 
+* `JsonAdaptedTask` stores `Task` in `JSON` format.
+* `JsonAdaptedEvent` stores `Event` in `JSON` format. 
 
 
 ### Common classes
@@ -223,59 +223,13 @@ Here is the Activity Diagram for a User when choosing the module and command to 
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
-<!--- TODO
-#### Current Implementation of Event
-New feature: Events
-* Events can be added and deleted from event list via `eadd` and `edel` commands
-* The participating members can be listed using the command `mlist /e EVENT_INDEX`
-* New events created can have many participants selected from member list.
-* <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
-  for adding participants separately, eadd command allows creation of complete event to
-  minimise commands required to add them individually. The format is similar to `mdel` and `mlist` commands
-  for familiarity with similar commands for other modules.
-
-#### Future Plans for Event
-Future plans for Events
-* Include searching for the list of events for a participant
-* Include filtering of events by month or events that are happening today.
-* Include sorting of events by date, name or number of participants.
-    * Dates should be in reverse chronological order so that upcoming events are shown first
-* Include additional remarks or description for an event
-#### Current Implementation for adding tasks
-The proposed feature is achieved by getting the member(s) from the filtered member list
-and use API from the model manager to add the task with given task name to each of the members.
-The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
-Given below is an example usage scenario:
-The user executes `tadd /n Take Attendance /d 21/10/2021 23:59 /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
-The parser will then parse the input to create a TaddCommand with task name as "Take Attendance", task deadline of "21/10/2021 23:59" and member indexes 1 and 2.
-This command will add the task "Take Attendance" to the first and second member of the member list.
-#### Current Implementation for deleting tasks
-The proposed feature is achieved by getting the member(s) from the filtered member list
-and use API from the model manager to delete the task with given task index from the member with given member index.
-The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
-Given below is an example usage scenario:
-The user executes `tdel /t 1`. The parser will be called upon to create a TdelCommandParser.
-The parser will then parse the input to create a TdelCommand with task index as 1.
-This command will delete the first task from the task list.
-### List tasks feature for a member
-#### Current Implementation for lists
-The proposed feature is achieved by getting the member with given member index from the filtered member list
-and use API from the model manager to list all the tasks of the member.
-The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
-Given below is an example usage scenario:
-The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
-The parser will then parse the input to create a TlistCommand with member index as 1.
-This command will display all the tasks of the first member of the member list.
--->
-
 ### List members who attended event
 
 This feature allows Ailurus users to list all members who have attended a particular event, identified by the event's `EVENT_INDEX` displayed in the current event list shown.
 
 This feature can be accessed using `mlist` command with parameters `/e EVENT_INDEX` and `/att`. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("mlist /e 1 /att")` API call.
 
-<img src="images/MlistSequenceDiagram.png" width = "600" />
+![MlistSequenceDiagram](images/MlistSequenceDiagram.png)
 
 After the `LogicManager` receives the new `MlistCommand` object, `MlistCommand` would call the appropriate commands from `Model` and `Event` to get the correct index of the event from the filtered event list, get the list of members who attended the specific event, and set the current event while updating the filtered member list, as shown below.
 
@@ -287,7 +241,7 @@ This feature allows Ailurus users to add a list of members, identified by the me
 
 This feature can be accessed using `emadd` command with parameters `/e EVENT_INDEX` and multiple `/m MEMBER_INDEX` to add multiple members to an event. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("emadd /e 1 /m 1 /m 2")` API call.
 
-<img src="images/EmaddSequenceDiagram.png" width = "600" />
+![EmaddSequenceDiagram](images/EmaddSequenceDiagram.png)
 
 After the `LogicManager` receives the new `EmaddCommand` object, `EmaddCommand` would call the appropriate commands from `Model` and `Event` to get the indices from the current filtered event and member list, and add the members to be added in the event as shown below.
 
@@ -422,12 +376,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `mdel`, just save the member being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -461,7 +409,6 @@ _{Explain here how the data archiving feature will be implemented}_
 * contact and personal information of members collated in an easily accessible location
 * able to update details relating to members
 * categorise members into groups for smoother planning
-
 
 ### User stories
 
@@ -1049,7 +996,9 @@ We also faced difficulties in deciding our architecture for our `Model` componen
 
 * The `CRUD` commands for `Event`, `Member` and `Task` were mostly referred from AB3’s `Person` commands and classes. However, some fields were created and tested by the team, such as the use of `LocalDateTime` and `LocalDate` from the Java library for `Event` and `Task` respectively, to capture the date and time parsed as string by user.
 
-* We increased user experience by color coding the tasks of members and members of events with red and green, red being undone tasks or absent members, while red being done tasks or present members who attended the event.
+* We increased user experience by color coding the tasks of members and members of events with red and green, red being undone tasks or absent members, while green being done tasks or present members who attended the event.
+
+* We realised the power of using streams to handle sets of data. The use of streams is especially useful in the case of deciding how the labels (e.g. `Member` in `Event List`, `Task` in `Member List`) will appear in `FlowPane`.
 
 * We enforced commands to require a space between the prefix and the parameter, to allow easier readability of parameter, and it is also more intuitive to use `/prefix` commands with `/` before the prefix, similar to chatbots and UNIX commands usually have the symbol before the flag or prefix.
 
