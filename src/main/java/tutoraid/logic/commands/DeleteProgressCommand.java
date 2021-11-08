@@ -19,7 +19,8 @@ public class DeleteProgressCommand extends DeleteCommand {
 
     public static final String COMMAND_FLAG = "-p";
 
-    public static final String MESSAGE_USAGE = String.format("%1$s %2$s: Deletes a progress entry from a student."
+    public static final String MESSAGE_USAGE = String.format(
+            "%1$s %2$s: Deletes the latest progress entry from a student."
                     + "\nParameters:"
                     + "\nINDEX (must be a positive integer)"
                     + "\nExample:"
@@ -32,7 +33,7 @@ public class DeleteProgressCommand extends DeleteCommand {
     private final Index targetIndex;
 
     /**
-     * @param targetIndex of the student in the filtered student list to delete progress
+     * @param targetIndex of the student in the filtered student list to delete the latest progress entry
      */
     public DeleteProgressCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -41,13 +42,13 @@ public class DeleteProgressCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToEdit = lastShownStudentList.get(targetIndex.getZeroBased());
 
         if (studentToEdit.isProgressListEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NO_PROGRESS_TO_DELETE);

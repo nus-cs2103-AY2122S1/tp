@@ -35,20 +35,18 @@ public class ProgressListTest {
         assertFalse(ProgressList.isValidProgressList(nullElements));
 
         ArrayList<String> invalidProgress = new ArrayList<>();
-        invalidProgress.add("exam*"); // valid progress description
         invalidProgress.add(" "); // invalid progress description
         assertFalse(ProgressList.isValidProgressList(invalidProgress));
 
         // valid progress list
         ArrayList<String> lessThanTenElements = new ArrayList<>();
         for (int i = 0; i < 9; i++) { // less than 10 elements
-            moreThanTenElements.add("abc"); // valid progress description
+            lessThanTenElements.add("abc"); // valid progress description
         }
         assertTrue(ProgressList.isValidProgressList(lessThanTenElements));
-
         ArrayList<String> tenElements = new ArrayList<>();
         for (int i = 0; i < 10; i++) { // 10 elements
-            moreThanTenElements.add("abc"); // valid progress description
+            tenElements.add("abc"); // valid progress description
         }
         assertTrue(ProgressList.isValidProgressList(tenElements));
     }

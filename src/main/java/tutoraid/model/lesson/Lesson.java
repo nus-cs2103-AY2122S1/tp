@@ -9,7 +9,7 @@ import tutoraid.model.student.Student;
 
 /**
  * Represents a Lesson in the TutorAid.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Lesson {
 

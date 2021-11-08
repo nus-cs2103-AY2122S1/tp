@@ -8,7 +8,7 @@ import tutoraid.model.student.Progress;
 
 
 /**
- * Parses input arguments and creates a new PaidCommand object
+ * Parses input arguments and creates a new AddProgressCommand object
  */
 public class AddProgressCommandParser implements Parser<AddProgressCommand> {
 

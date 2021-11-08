@@ -42,8 +42,8 @@ public class DeleteStudentFromLessonCommand extends DeleteCommand {
     /**
      * Constructs a DeleteStudentFromLessonCommand.
      *
-     * @param studentIndexes of the student in the filtered student list to add to the lesson
-     * @param lessonIndexes  of the lesson in the filtered lesson list to add to the student
+     * @param studentIndexes of the students in the filtered student list to add to the lessons
+     * @param lessonIndexes  of the lessons in the filtered lesson list to add to the students
      */
     public DeleteStudentFromLessonCommand(ArrayList<Index> studentIndexes, ArrayList<Index> lessonIndexes) {
         // Indexes are guaranteed to be distinct from ParserUtil

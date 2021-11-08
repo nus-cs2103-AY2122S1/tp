@@ -9,8 +9,8 @@ import tutoraid.model.lesson.exceptions.StudentNotFoundInLessonException;
 import tutoraid.model.student.Student;
 
 /**
- * Represents a Lesson's students in TutorAid.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Lesson's list of students in TutorAid.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Students {
 
@@ -69,19 +69,6 @@ public class Students {
             throw new StudentNotFoundInLessonException();
         }
         return this;
-    }
-
-    /**
-     * Returns a string Array that contains all the student names in the correct order.
-     */
-    public ArrayList<String> getAllStudentNamesAsStringArrayList() {
-        ArrayList<String> allStudentNamesAsStringArrayList = new ArrayList<>();
-        for (Student student : students) {
-            String currentLessonName = student.toNameString();
-            allStudentNamesAsStringArrayList.add(currentLessonName);
-        }
-        return allStudentNamesAsStringArrayList;
-
     }
 
     /**
