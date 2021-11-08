@@ -388,7 +388,7 @@ produces the list of friend recommendations.
 
 <ins>Step 3: Displaying the recommended friends</ins> 
 
-The user interface is notified of the changes to the `FilteredList` and `SortedList` managed by the `ModelManager` in Step 2 
+The user interface is notified of the changes to the `FilteredList` and `SortedList` managed by the `ModelManager` made in Step 2 
 and is automatically updated to reflect the changes to the user (as explained in the [Model](#34-model-component) component).
 
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the recommend feature.  
