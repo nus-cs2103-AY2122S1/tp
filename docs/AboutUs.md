@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Ricky Andrew
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rickyaandrew.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/rickyaandrew)]
+[[portfolio](team/rickyaandrew.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Debugging and Testing of Code
 
-### Jean Doe
+### Mok Kai Wen Darren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mokdarren.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/mokdarren)]
+[[portfolio](team/mokdarren.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Task scheduling, Contacts feature
+
+### Ngo Xian Yi Justin
+
+<img src="images/whoisjustinngo.png" width="200px">
+
+[[github](http://github.com/whoisjustinngo)]
+[[portfolio](team/whoisjustinngo.md)]
+
+* Role: Developer
+* Responsibilities: UI, Documentation
+
+### Lui Kai Siang
+
+<img src="images/kslui99.png" width="200px">
+
+[[github](https://github.com/kslui99)]
+[[portfolio](team/kslui99.md)]
+
+* Role: Developer
+* Responsibilities: Logic, Code Quality
+
+### Bryan Tee Pak Hong
+
+<img src="images/spdpnd98.png" width="200px">
+
+[[github](https://github.com/SpdPnd98)]
+[[portfolio](team/spdpnd98.md)]
+
+* Role: Developer
+* Responsibilities: Merge PRs

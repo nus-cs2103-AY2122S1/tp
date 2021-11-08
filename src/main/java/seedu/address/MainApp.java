@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,7 +37,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -62,6 +63,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+        model.updateFilteredScheduleList(schedule -> LocalDateTime.now().compareTo(schedule.getTaskDateTimeTo()) < 0);
 
         logic = new LogicManager(model, storage);
 

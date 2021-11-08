@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.Tab;
+
 /**
  * Represents the result of a command execution.
  */
@@ -17,6 +19,14 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should switch to a new tab */
+    private final boolean switchTab;
+
+    private final Tab tabId;
+
+    /** A new window should be shown to the user. */
+    private final boolean showImport;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,6 +34,9 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.switchTab = false;
+        this.tabId = null;
+        this.showImport = false;
     }
 
     /**
@@ -34,8 +47,39 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * {@code switchTab}, and {@code tabId}, and other fields set to their default
+     * value.
+     */
+    public CommandResult(String feedbackToUser, boolean switchTab, Tab tabId) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.switchTab = switchTab;
+        this.tabId = tabId;
+        this.showImport = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and {@code showImport}, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showImport) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.switchTab = false;
+        this.tabId = null;
+        this.showImport = showImport;
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Tab getTabId() {
+        return tabId;
     }
 
     public boolean isShowHelp() {
@@ -44,6 +88,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isSwitchTab() {
+        return switchTab;
+    }
+
+    public boolean isShowImport() {
+        return showImport;
     }
 
     @Override

@@ -1,9 +1,14 @@
 package seedu.address.logic;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -14,7 +19,11 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.analytics.ClientAnalytics;
+import seedu.address.model.customGoal.CustomGoal;
+import seedu.address.model.event.Schedule;
 import seedu.address.model.person.Person;
+import seedu.address.model.todo.Todo;
 import seedu.address.storage.Storage;
 
 /**
@@ -22,6 +31,8 @@ import seedu.address.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String FAILED_SCHEDULES_MESSAGE =
+            "There are {%d} timeslots that do not fit in your current schedule!";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -38,11 +49,19 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public List<CommandResult> execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        // user input command
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+
+        // go to where the context is run
+        CommandResult goToContextCommandResult;
+        Command contextCommand = addressBookParser.goToContextTab();
+
+        // executing go to context, then user input
+        goToContextCommandResult = contextCommand.execute(model);
         commandResult = command.execute(model);
 
         try {
@@ -51,7 +70,11 @@ public class LogicManager implements Logic {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
-        return commandResult;
+        List<CommandResult> commandResults = new ArrayList<>();
+        commandResults.add(goToContextCommandResult); // run tabswitch first, so that the last command run can be safe
+        commandResults.add(commandResult);
+
+        return commandResults;
     }
 
     @Override
@@ -62,6 +85,48 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Person> getSelectedPersonList() {
+        return model.getSelectedPersonList();
+    }
+
+    @Override
+    public IntegerProperty getSelectedPersonIndex() {
+        return model.getSelectedPersonIndex();
+    }
+
+    @Override
+    public ObservableList<Todo> getFilteredTodoList() {
+        return model.getFilteredTodoList();
+    }
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return model.getFilteredScheduleList();
+    }
+
+    @Override
+    public ObservableList<CustomGoal> getFilteredCustomGoalList() {
+        return model.getFilteredCustomGoalList();
+    }
+
+    /**
+     * Generates schedules
+     */
+    @Override
+    public void importSchedule(File openedFile)
+            throws IOException, ParseException, CommandException {
+        List<Schedule> scheduleList = model.importSchedule(openedFile);
+        List<Schedule> getValidSchedules = scheduleList.stream()
+                .filter(schedule -> !(model.hasScheduleClash(schedule) && model.hasSchedule(schedule)))
+                .collect(Collectors.toList());
+        if (getValidSchedules.size() != scheduleList.size()) {
+            throw new CommandException(String.format(FAILED_SCHEDULES_MESSAGE,
+                    scheduleList.size() - getValidSchedules.size()));
+        }
+        getValidSchedules.forEach(schedule -> model.addSchedule(schedule));
     }
 
     @Override
@@ -77,5 +142,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ClientAnalytics getAnalytics() {
+        return model.getAnalytics();
     }
 }

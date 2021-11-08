@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -17,9 +19,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.todo.Todo;
+import seedu.address.model.todo.predicates.DescriptionContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTodoDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -28,6 +33,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_RELATIONSHIP_AMY = "client";
+    public static final String VALID_RELATIONSHIP_BOB = "client";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -39,6 +46,8 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String RELATIONSHIP_DESC_AMY = " " + PREFIX_RELATIONSHIP + VALID_RELATIONSHIP_AMY;
+    public static final String RELATIONSHIP_DESC_BOB = " " + PREFIX_RELATIONSHIP + VALID_RELATIONSHIP_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -49,6 +58,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_RELATIONSHIP_DESC = " " + PREFIX_RELATIONSHIP + "dog"; // only client and friend
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
@@ -59,6 +69,22 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditTodoCommand.EditTodoDescriptor DESC_READ;
+    public static final EditTodoCommand.EditTodoDescriptor DESC_TRAVEL;
+
+    public static final String VALID_DESCRIPTION_READ = "read";
+    public static final String VALID_DESCRIPTION_TRAVEL = "travel";
+    public static final String VALID_TAG_LEARNING = "learning";
+    public static final String VALID_TAG_LEISURE = "leisure";
+
+    public static final String VALID_DATE = "14-4-2022";
+    public static final String VALID_TIMEFROM = "1200";
+    public static final String VALID_TIMETO = "1400";
+
+    public static final String DESCRIPTION_READ = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_READ;
+    public static final String DESCRIPTION_TRAVEL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TRAVEL;
+    public static final String TAG_DESC_LEARNING = " " + PREFIX_TAG + VALID_TAG_LEARNING;
+    public static final String TAG_DESC_LEISURE = " " + PREFIX_TAG + VALID_TAG_LEISURE;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -67,6 +93,8 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_READ = new EditTodoDescriptorBuilder().withDescription(VALID_DESCRIPTION_READ).build();
+        DESC_TRAVEL = new EditTodoDescriptorBuilder().withDescription(VALID_DESCRIPTION_TRAVEL).build();
     }
 
     /**
@@ -111,6 +139,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -125,4 +154,18 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the todo at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTodoAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTodoList().size());
+
+        Todo todo = model.getFilteredTodoList().get(targetIndex.getZeroBased());
+        final String[] splitDescription = todo.getDescription().split("\\s+");
+        model.updateFilteredTodoList(
+                new DescriptionContainsKeywordsPredicate(Arrays.asList(splitDescription[0])));
+
+        assertEquals(1, model.getFilteredTodoList().size());
+    }
 }

@@ -13,7 +13,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Policy;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Todo;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,15 +24,16 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    private static final String INTEGER_MESSAGE_CONSTRAINTS = "Number must be an integer.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is not integer.
+     * @throws IndexOutOfBoundsException if the specified index is an integer but is zero or negative.
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (!StringUtil.isInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -48,6 +52,72 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String insurerName} into a {@code insurerName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Name parseInsurerName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!name.matches(Policy.NAME_VALIDATION_REGEX)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code policyName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Name parsePolicyName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!name.matches(Policy.NAME_VALIDATION_REGEX)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+    /**
+     * Ensure non-null and is numeric
+     */
+    public static long parsePolicyNumber(String number) throws ParseException {
+        requireNonNull(number);
+        if (!number.matches(Policy.NUMBER_VALIDATION_REGEX)) {
+            throw new ParseException(INTEGER_MESSAGE_CONSTRAINTS);
+        }
+        return Long.valueOf(number);
+    }
+
+    /**
+     * Ensure non-null and is numeric
+     */
+    public static double parseCommission(String number) throws ParseException {
+        requireNonNull(number);
+        if (!number.matches(Policy.COMMISSION_VALIDATION_REGEX)) {
+            throw new ParseException(INTEGER_MESSAGE_CONSTRAINTS);
+        }
+        return Double.valueOf(number);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Relationship parseRelationship(String relationship) throws ParseException {
+        requireNonNull(relationship);
+        String trimmedRelationship = relationship.trim().toLowerCase();
+        if (!Relationship.isValidRelationship(trimmedRelationship)) {
+            throw new ParseException(Relationship.MESSAGE_CONSTRAINTS);
+        }
+        return new Relationship(trimmedRelationship);
     }
 
     /**
@@ -107,6 +177,9 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (!Tag.isValidTagLength(trimmedTag)) {
+            throw new ParseException((Tag.MESSAGE_INVALID_TAG_LENGTH));
+        }
         return new Tag(trimmedTag);
     }
 
@@ -121,4 +194,32 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code Collection<Policy> policies} into a {@code Set<Policy>}.
+     */
+    public static Set<Policy> parsePolicies(Collection<Policy> policies, Policy toAdd) throws ParseException {
+        requireNonNull(policies);
+        final Set<Policy> policySet = new HashSet<>();
+        for (Policy policy : policies) {
+            policySet.add(policy);
+        }
+        return policySet;
+    }
+
+    /**
+     * Parses a {@code String description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static String parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Todo.isValidDescriptionLength(trimmedDescription)) {
+            throw new ParseException(Todo.MESSAGE_INVALID_DESCRIPTION_LENGTH);
+        }
+        return trimmedDescription;
+    }
+
 }

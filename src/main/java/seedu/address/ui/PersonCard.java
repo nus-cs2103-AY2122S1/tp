@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+
 import java.util.Comparator;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -31,6 +34,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label relationship;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -49,14 +54,29 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        relationship.setText(person.getRelationship().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        setStatusUi(person);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(setTagUi(tag)));
     }
 
+    private void setStatusUi(Person person) {
+        Label status = new Label(person.getStatus().name().toLowerCase(Locale.ROOT));
+        status.setStyle("-fx-background-color: darkblue;");
+        if (person.getRelationship().value.equals("client")) {
+            tags.getChildren().add(status);
+        }
+    }
+    private Label setTagUi(Tag tag) {
+        Label label = new Label(tag.tagName);
+        label.setWrapText(true);
+        label.setMaxWidth(100);
+        return label;
+    }
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

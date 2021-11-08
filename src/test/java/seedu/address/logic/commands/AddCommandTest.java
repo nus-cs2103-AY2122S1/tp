@@ -6,21 +6,31 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.analytics.ClientAnalytics;
+import seedu.address.model.customGoal.CustomGoal;
+import seedu.address.model.event.Schedule;
 import seedu.address.model.person.Person;
+import seedu.address.model.todo.Todo;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -114,6 +124,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addTodo(Todo todo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -129,7 +144,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasTodo(Todo todo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCustomGoal(CustomGoal toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTodo(Todo target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,12 +169,115 @@ public class AddCommandTest {
         }
 
         @Override
+        public ClientAnalytics getAnalytics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTodo(Todo target, Todo editedTodo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public ObservableList<Person> getSelectedPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public IntegerProperty getSelectedPersonIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Todo> getFilteredTodoList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateSelectedPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSelectedPersonIndex(int i) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Schedule> getFilteredScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<CustomGoal> getFilteredCustomGoalList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void updateFilteredTodoList(Predicate<Todo> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSchedule(Schedule target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCustomGoal(CustomGoal toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateCustomGoal(Index goalToUpdate, float valueToUpdateBy) {
+
+        }
+
+        @Override
+        public int getNumOfCustomGoals() {
+            return 0;
+        }
+
+        @Override
+        public void deleteCustomGoal(Index goalToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Schedule> importSchedule(File file) throws IOException, ParseException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasScheduleClash(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSchedule(Schedule target, Schedule editedSchedule) {
             throw new AssertionError("This method should not be called.");
         }
     }

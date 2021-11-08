@@ -8,6 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,14 +19,18 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_RELATIONSHIP = "client";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_STATUS = "FRESH";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
+    private Relationship relationship;
     private Phone phone;
     private Email email;
     private Address address;
+    private Status status;
     private Set<Tag> tags;
 
     /**
@@ -32,9 +38,11 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        relationship = new Relationship(DEFAULT_RELATIONSHIP);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        status = Status.valueOf(DEFAULT_STATUS);
         tags = new HashSet<>();
     }
 
@@ -43,9 +51,11 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        relationship = personToCopy.getRelationship();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        status = personToCopy.getStatus();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -57,6 +67,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Relationship} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRelationship(String relationship) {
+        this.relationship = new Relationship(relationship);
+        return this;
+    }
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
@@ -82,6 +99,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStatus(String status) {
+        this.status = Status.valueOf(status);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -90,7 +115,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, relationship, phone, email, address, tags, new HashSet<>(), status, "");
     }
 
 }
