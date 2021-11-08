@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Erwin Quek's Project Portfolio Page
 ---
 ### Project: ProgrammerError
@@ -55,7 +55,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 1. **Code
    contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=erwinqxy&tabRepo=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
-2. **Project management**: Managed releases `v1.2a`, `v1.4` (2 releases) on GitHub
+2. **Project management**: Managed releases `v1.2a`, `v1.4`, `v1.4.1` (3 releases) on GitHub
 
 3. **Enhancements to existing features**:
     * Refactor the entire project structure to fit our
@@ -72,26 +72,27 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * Fix duplicate email [#427](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/427)
 
 4. **PRs Reviewed:**
-   * [#98](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/98)
-             , [#100](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/100)
-             , [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108),
-             [#109](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/109)
-             , [#110](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/110)
-             , [#152](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/152),
-             [#153](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/153)
-             , [#252](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/252)
-             , [#413](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/413),
-             [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417)
-             , [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files),
-            [#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541#pullrequestreview-799559192)
+    * [#98](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/98)
+      , [#100](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/100)
+      , [#108](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/108),
+      [#109](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/109)
+      , [#110](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/110)
+      , [#152](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/152),
+      [#153](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/153)
+      , [#252](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/252)
+      , [#413](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/413),
+      [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417)
+      , [#460](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/460/files),
+      [#541](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/541#pullrequestreview-799559192)
 
 5. **Documentation - Updated documentations for user guide and developer guide:**
-   - [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165)
-         , [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240)
-         , [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246),
-         [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474)
-         , [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482) , [#496](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/496),
-         [#522](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/522), [#533](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/533)
+    - [#165](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/165)
+      , [#240](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/240)
+      , [#246](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/246),
+      [#474](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/474)
+      , [#482](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/482) , [#496](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/496),
+      [#522](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/522), [#533](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/533),
+      [#614](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/614), [#615](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/615), [#616](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/616)
 
 6. **Community Contributions**:
     * Provided some feedback and bug reporting to another team during
