@@ -1010,7 +1010,7 @@ testers are expected to do more *exploratory* testing.
       correct format will be shown in the result display.
    
    4. Other incorrect remove commands to try: `remove`, `remove a`, `remove @`, `remove X`, `...` (where x is larger
-      than the number of assets/liabilities/policies listed).
+      than the number of assets/liabilities/policies listed). <br>
       Expected: Similar to previous.
 
 ### 7.6 Clearing client list
@@ -1036,7 +1036,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: User is currently in the client window.
    2. Test case: `tab c`, `tab contact`, `tab contacts` <br>
    Expected: The tab will be changed to contact tab of the client in focus and the 'Switched tab' message will appear on the result display.
-   3. Test case: `tab contact us`
+   3. Test case: `tab contact us` <br>
    Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
       be shown in the result display.
 
@@ -1044,7 +1044,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: User is currently in the client window.
     2. Test case: `tab p`, `tab policy`, `tab policies` <br>
    Expected: The tab will be changed to policies tab of the client in focus and the 'Switched tab' message will appear on the result display.
-   3. Test case: `tab polici`
+   3. Test case: `tab polici` <br>
       Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
       be shown in the result display.
 
@@ -1052,7 +1052,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: User is currently in the client window.
     2. Test case: `tab a`, `tab asset`, `tab assets` <br>
    Expected: The tab will be changed to assets tab of the client in focus and the 'Switched tab' message will appear on the result display.
-    3. Test case: `tab assetes`
+    3. Test case: `tab assetes` <br>
        Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
        be shown in the result display.
 
@@ -1060,7 +1060,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: User is currently in the client window.
     2. Test case: `tab l`, `tab liability`, `tab liabilities` <br>
    Expected: The tab will be changed to liabilities tab of the client in focus and the 'Switched tab' message will appear on the result display.
-    3. Test case: `tab liabileeties`
+    3. Test case: `tab liabileeties` <br>
     Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
        be shown in the result display.
 
@@ -1068,7 +1068,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: User is currently in the client window.
     2. Test case: `tab n`, `tab note`, `tab notes` <br>
    Expected: The tab will be changed to notes tab of the client in focus and the 'Switched tab' message will appear on the result display.
-    3. Test case: `tab noties`
+    3. Test case: `tab noties` <br>
        Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
        be shown in the result display.
 
