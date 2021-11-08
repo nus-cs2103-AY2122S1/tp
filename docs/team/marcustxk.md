@@ -5,9 +5,9 @@ title: Marcus Tang's Project Portfolio Page
 
 ### Project: gitGud
 
-gitGud is a desktop application for managing friends' gaming information. gitGud uses a simple Graphical User Interface
-(GUI) combined with an optimized Command Line Interface (CLI) to give you a smooth and efficient experience. If you can
-type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
+gitGud is a **desktop application for storing and managing your friends' gaming information and schedules**.
+It is dedicated to gamers like you and provides a gamer-themed experience with a focus on increasing your efficiency through
+its typing-based interface.
 
 Given below are my contributions to the project.
 
@@ -31,7 +31,7 @@ Given below are my contributions to the project.
     * Justification: This feature improves the product significantly because a user can easily view the free timeslots of their friend to know when they are able to play with them.
 
 * **Testing**: 
-  * Added unit tests for classes in the logic package to help attain 100% methods and almost 100% lines coverage.  
+  * Added unit tests for classes in the logic package to help attain 100% methods and 98% lines coverage.  
   * Added unit tests for all relevant classes (logic/util/model etc.) involved in the list friend, list game and schedule friend features.
   
 * **Documentation**:
@@ -43,14 +43,21 @@ Given below are my contributions to the project.
 
   * Developer Guide:
     * Added target user profiles for gitGud.
-    * Added user story and use cases for `list` feature.
+    * Added user story `list` feature.
     * Updated the logic component section of the Developer Guide to follow gitGud.
     * Added implementation section of `friend --schedule` feature.
+    * Added/Updated use cases for all existing implemented features.
 
 * **Contributions to team-based tasks**:
   * Refactored the parser to support new syntax of commands for games and friends each having their own CRUD commands using the flag system.
   * Updated application name and logo to gitGud's.
+  * Updated `Ui.png` and README.md for inital project setup (`v1.1`).
+  * Created and managed milestones `v1.3b` and `v1.4`.   
+  * Added branch protection for `master` branch to support transition to feature branch workflow and prevent accidental pushes to `master` branch.
+  * Added Pull Request checks, for at least 1 Approval and for all checks to pass before allowing the PR to be merged, to ensure `master` branch code is always working.
   
 * **Review/mentoring contributions**:
-  * [Bugs found after testing of new UI for v1.3b](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/128)
-  * [Bugs found after testing of new UI for v1.3](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/107)
+  * Some examples:
+    * [Found bugs after testing of new UI for v1.3b](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/128)
+    * [Found bugs after testing of new UI for v1.3](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/107)
+    * [Prevented broken links and wrong sequence diagram for DG from being pushed](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/246)
