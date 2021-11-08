@@ -31,8 +31,8 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    3.2 <a href="#32-view-studenttuition-class">View student/class</a><br><br>
    3.3 <a href="#33-edit-studenttuition-class">Edit student/class</a><br><br>
    3.4 <a href="#34-delete-studenttuition-class">Delete student/class</a><br><br>
-   3.5 <a href="#35-addremove-student-from-class">Move student</a><br><br>
-   3.6 <a href="36-add-remark-to-studenttuition-class">Add remark</a><br><br>
+   3.5 <a href="#35-addremove-student-from-class">Add/Remove student from class</a><br><br>
+   3.6 <a href="#36-add-remark-to-studenttuition-class">Add remark</a><br><br>
    3.7 <a href="#37-find-studenttuition-class">Find students/classes</a><br><br>
    3.8 <a href="#38-list-all-studentstuition-classes">List students/classes</a><br><br>
    3.9 <a href="#39-sort-tuition-classes-sort--s">Sort classes</a><br><br>
