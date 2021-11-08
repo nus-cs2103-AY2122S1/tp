@@ -19,30 +19,65 @@ Given below are my contributions to the project.
     * Highlights:
     * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used 
       in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-1. Added foundation for View Command
+  
+1. Added foundation for View Command [#63](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/63/files)
    * **What it does:** <br>
-   View command allows the user to examine the client's details with greater attention. It allows the user to also 
-   make edits to the client's details and financial information when they need to do so.
+   View command allows the user to examine the client's details with greater attention. It allows the user to access the
+   commands that allows the user to make edits to the client's details and financial information.
    
    * **Justification:** <br>
    View command is essential for DonnaFin to function as most of the new commands implemented revolve around the client,
-   and it is executed when the user is in the client window. 
+   and it is executed when the user is in the client window.
   
-  * Added foundation for Notes functionality
-  * Added foundation for Edit Command
-  * Added foundation for Append Command
-  * Added foundation for Remove Command
+2. Added foundation for Notes field [#122](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/122/files)
+   * **What it does:** <br>
+   The notes field allows the user to store additional information regarding the client that does not fit in the
+   provided fields. This can be accessed by viewing the client and going to the notes tab.
 
-  * **Code contributed**: [RepoSense link]()
+   * **Justification:** <br>
+   The notes field is extremely useful to note down additional information such as likes and dislikes of the particular
+   client. It is an extremely common feature that can be found in many "address book" applications.
 
-  * **Project management**:
+   * **Highlights:** <br>
+   Initially, the notes field did not have a save functionality yet. However, this save functionality was added later
+   on by [Tee Chin](bluntsord.md)
+   
+
+3. Added foundation for Append Command [#155](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/155/files)
+  * **What it does:** <br>
+  The append command allows the user to add an asset/liability/policy to the client's portfolio. This command can be
+  accessed by switching to their respective tab (appending an asset in the Assets tab etc.)
+
+  * **Justification:** <br>
+  As our application is targeted towards financial advisors, they need to be able to keep track their client's
+  assets/liabilities/policies in order to gain more utility out of DonnaFin.
+
+4. Added foundation for Remove Command [#155](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/155/files)
+  * **What it does:** <br>
+  The remove command allows the user to remove an asset/liability/policy from the client's portfolio. This command can
+  be accessed by switching to their respective tab (removing a policy in the Policies tab etc.).
+
+  * **Justification:** <br>
+  If the client's asset/liability/policy ever expire or if the client wants to change their plan, then the financial
+  advisor can just conveniently remove and add a new asset/liability/policy.
+  
+
+* **Code contributed**: [RepoSense link]()
+
+
+* **Project management**:
+  * Worked together with teammates to minimise merge conflicts.
 
 
 * **Enhancements to existing features**:
-
-* Fixed issue regarding
-* Wrote tests for Append Command
-* 
+    1. Bug Fixes:
+       1. Prevent duplicate assets/liabilities/policies from being added.
+    2. Tests:
+       1. Append Command
+       2. Remove Command
+    3. Reworked Edit Command [#155](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/155/files) <br>
+       Edit command now only works in the client window.
+  
 
 * **Documentation**:
     * User Guide:
@@ -56,6 +91,7 @@ Given below are my contributions to the project.
       * Added Manual Test Cases [#357](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/357)
 
 * **Community**:
+  * Provided comments and feedback on teammates' PRs. 
 
 * **Tools**:
   * Used Draw-io to make Activity Diagram.

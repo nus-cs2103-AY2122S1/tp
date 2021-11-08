@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/donnys57.png" width="200px">
 
 [[github](http://github.com/DonnyS57)]
-[[portfolio](team/donny.md)]
+[[portfolio](team/donnys57.md)]
 
 * Role: Developer
 * Responsibilities: Logic Layer
