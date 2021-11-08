@@ -162,7 +162,7 @@ In summary:
 
 Downloads the student data to a CSV file in the chosen directory. The file will be automatically named `programmerError.csv`.
 
-### <a name="edit-data-file"></a>2.4 Edit The Data File Directly (For advanced users)
+### <a name="edit-data-file"></a>3.5 Edit The Data File Directly (For advanced users)
 
 Instead of using commands to edit students' details and lab results, you may change the json file directly.
 
@@ -202,7 +202,7 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 </div>
 
-### <a name="edit-student"></a>4.2 Edit Student's Details or Grade : `edit`
+### <a name="edit-student"></a>4.2 Edit Student's Details or Lab Result : `edit`
 
 Edits the details or grade of an existing student in PE as specified by the `INDEX_IN_LIST` argument.
 The corresponding fields of the student will be updated according to the input arguments.
@@ -365,8 +365,8 @@ Command | Format & Examples
 **Upload** | `upload`
 
 ## <a name="glossary"></a>Glossary
-- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
-- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
-- **TA**: A CS2100 teaching assistant
+- **Student ID**: NUS student matriculation number (AXXXXXXXY)
+- **Email**: NUS student email (eXXXXXXX@u.nus.edu)
+- **TA**: CS2100 lab teaching assistant
 - **PE**: ProgrammerError
 - **CSV**: Comma-Separated Values
