@@ -37,7 +37,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Upgraded the `help` command to open the User Guide in the browser [\#70](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/70).
   * Tweaked the in-built help window to follow the overall colour scheme of the app [\#70](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/70/files).
-  * Updated `edit` and `add` commands [/#45](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/45/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57).
+  * Updated `edit` and `add` commands [\#45](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/45/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57).
   * Wrote additional tests for existing and new features to increase coverage. [\#98](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/98/files) [\#57](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/57/files).
 
 
