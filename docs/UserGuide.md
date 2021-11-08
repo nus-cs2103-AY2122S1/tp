@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 nav-text: User Guide
 ---
-![](images/sportsPA_logo.png)
+<img src = "images/sportsPA_logo.png" width="400"/> <br>
+
 <span style = "font-size: 32px; color: #e46c0a">
 Welcome to the SportsPA User Guide!
 </span>
@@ -685,7 +686,9 @@ Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**
-Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
+* Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
+* You may allocate the same member to multiple facilities on the same day but please ensure that the timings are reasonable 
+  as SportsPa currently does not perform this check!
 </div>
 
 Examples:
