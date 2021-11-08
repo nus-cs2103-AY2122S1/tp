@@ -316,7 +316,7 @@ Examples:
 *  `view 2`
 > Displays the details of contact indexed at 2 in the currently displayed list.
 
-![result for 'view 2'](images/viewscreenshot.PNG)
+![result for 'view 2'](images/viewscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: Different columns
