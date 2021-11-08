@@ -44,7 +44,7 @@ title: Developer Guide
     4. [Download Data](download-data)
     5. [Dashboard](dashboard)
 18. [Appendix: Effort](#Appendix Effort)
-    1. Challenges Faced and Achievements Made 
+    1. [Challenges Faced and Achievements Made](#Challenges Faced)
        1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
        2. [Designing New UI Components](Designing New UI components)
        3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
@@ -1031,8 +1031,8 @@ testers are expected to do more *exploratory* testing.
   
   
 ## <a name="Effort"></a> **18. Appendix: Effort**
-  
-### Challenges Faced and Achievements Made
+
+### <a name="Challenges Faced"></a> Challenges Faced and Achievements Made
 The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
 
 ### <a name="Rewriting the Command Syntax"></a> **1. Rewriting the Command Syntax** 
