@@ -4,8 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_TUES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_11;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
-import static seedu.address.logic.commands.modulelesson.FindModuleLessonCommand.MESSAGE_INVALID_DAY;
-import static seedu.address.logic.commands.modulelesson.FindModuleLessonCommand.MESSAGE_INVALID_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
