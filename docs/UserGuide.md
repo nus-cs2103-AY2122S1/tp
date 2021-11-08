@@ -23,7 +23,7 @@ This section provides instructions to begin using Siasa.
 1. Ensure you have Java `11` or above installed in your Computer. Siasa has been tested on Java `11` and running it on other versions might result in bugs.
 2. Download the latest release [here](https://github.com/AY2122S1-CS2103-F10-4/tp/releases) and move it to the folder you wish to use as the home folder for Siasa.
 3. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-   
+
 ![First Startup UI Image](images/Ui.png)
 
 4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
@@ -32,8 +32,8 @@ This section provides instructions to begin using Siasa.
    * `deletecontact 2`: Deletes the 2nd contact shown in the current contact list.
    * `clear`: Deletes all contacts and policies.
    * `exit`: Exits the app.
-  
-5. Refer to the [Features](#features) below for details of each command. 
+
+5. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ Examples:
   * `COMMISSION_%`: percentage of each payment that goes to commission
   * `NUM_OF_COMM`: the number of payments that the agent will receive commission for
   *  E.g. `/c 6 5` Receives 6% commission for the first 5 payments.
-  
+
 * **Contact that the policy belongs to** - `cl/CONTACT_INDEX`
   * Current index of that contact in the contact list.
   * The index **must be a positive integer** 1, 2, 3, …​
