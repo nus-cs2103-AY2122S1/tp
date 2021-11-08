@@ -3,13 +3,14 @@ package seedu.track2gather.logic.commands;
 import seedu.track2gather.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Shows a message explaining how to access the help page.
  */
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows a message explaining how "
+            + "to access the help page.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";

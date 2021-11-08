@@ -38,7 +38,7 @@ import seedu.track2gather.model.person.attributes.ShnPeriod;
 import seedu.track2gather.model.person.attributes.WorkAddress;
 
 /**
- * Edits the details of an existing person in the contacts list.
+ * Edits the details of the person identified by the index number used in the displayed persons list.
  */
 public class EditCommand extends Command {
 
@@ -49,7 +49,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_CASE_NUMBER + "CASE_NUMBER] "
             + "[" + PREFIX_HOME_ADDRESS + "HOME_ADDRESS] "

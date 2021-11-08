@@ -19,16 +19,16 @@ import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
 
 /**
- * Adds a person to the contacts list.
+ * Adds a person to the persons list for tracking.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the contacts list. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the persons list for tracking. \n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+            + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_CASE_NUMBER + "CASE_NUMBER "
             + PREFIX_HOME_ADDRESS + "HOME_ADDRESS "
