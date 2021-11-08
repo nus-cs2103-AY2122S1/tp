@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deletegroup gn/Bali")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("deletegroup gn/Bali")
+activate AweParser
+
+note right
+Refer to ref frame for
+details on creation of
+the DeleteGroupCommand object
+end note
+group ref [get deleteGroupCommand]
+create DeleteGroupCommand
+AweParser -> DeleteGroupCommand
+activate DeleteGroupCommand
+DeleteGroupCommand --> AweParser
+deactivate DeleteGroupCommand
+end group
+
+AweParser --> LogicManager : deleteGroupCommand
+deactivate AweParser
+
+LogicManager -> DeleteGroupCommand : execute()
+activate DeleteGroupCommand
+
+DeleteGroupCommand -> Model : getGroupByName(new GroupName("Bali"))
+activate Model
+Model -> DeleteGroupCommand : group
+
+deactivate Model
+
+DeleteGroupCommand -> Model : deleteGroup(group)
+activate Model
+Model --> DeleteGroupCommand
+deactivate Model
+
+create CommandResult
+DeleteGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteGroupCommand : result
+deactivate CommandResult
+
+DeleteGroupCommand --> LogicManager : result
+deactivate DeleteGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

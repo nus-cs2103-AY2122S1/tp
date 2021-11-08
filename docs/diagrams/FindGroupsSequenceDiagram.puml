@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AweParser" as AweParser LOGIC_COLOR
+participant ":FindGroupsCommand" as FindGroupsCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findgroups London")
+activate LogicManager
+
+LogicManager -> AweParser : parseCommand("findgroups London")
+activate AweParser
+
+note right
+Refer to ref frame for
+details on creation of
+the FindGroupsCommand object
+end note
+group ref [get findGroupsCommand]
+create FindGroupsCommand
+AweParser -> FindGroupsCommand
+activate FindGroupsCommand
+FindGroupsCommand --> AweParser
+deactivate FindGroupsCommand
+end group
+
+AweParser --> LogicManager : command
+deactivate AweParser
+
+LogicManager -> FindGroupsCommand : execute()
+activate FindGroupsCommand
+
+FindGroupsCommand -> Model : updateFilteredGroupList(predicate)
+activate Model
+
+Model --> FindGroupsCommand
+deactivate Model
+
+create CommandResult
+FindGroupsCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindGroupsCommand : result
+deactivate CommandResult
+
+FindGroupsCommand --> LogicManager : result
+deactivate FindGroupsCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindGroupsCommand -[hidden]-> AweParser
+destroy FindGroupsCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

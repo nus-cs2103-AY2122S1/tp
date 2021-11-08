@@ -3,9 +3,9 @@ layout: page
 title: John Doe's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: Awe Level 3
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Awe - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 22 kLoC.
 
 Given below are my contributions to the project.
 
@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Did cosmetic tweaks to existing documentation of features `clearalldata`, `exit`: [\#74]()
   * Developer Guide:
     * Added implementation details of the `delete` feature.
 

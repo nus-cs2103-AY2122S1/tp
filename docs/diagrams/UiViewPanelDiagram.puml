@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package "View Panel" <<Rectangle>>{
+Class ViewPanel
+Class GroupListPanel
+Class GroupCard
+Class PersonListPanel
+Class PersonCard
+Class ExpenseListPanel
+Class ExpenseCard
+Class TransactionSummaryListPanel
+Class TransactionSummaryCard
+Class PaymentListPanel
+Class PaymentCard
+
+note "All components in View Panel\nextends UiPart" as N1
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> ViewPanel
+
+ViewPanel *-down-> "1" PersonListPanel
+ViewPanel *-down-> "1" GroupListPanel
+ViewPanel *-down-> "1" ExpenseListPanel
+ViewPanel *-down-> "1" TransactionSummaryListPanel
+ViewPanel *-down-> "1" PaymentListPanel
+
+PersonListPanel -down-> "*" PersonCard
+GroupListPanel -down-> "*" GroupCard
+ExpenseListPanel -down-> "*" ExpenseCard
+TransactionSummaryListPanel -down-> "*" TransactionSummaryCard
+PaymentListPanel -down-> "*" PaymentCard
+
+
+PersonCard ..> Model
+GroupCard ..> Model
+ExpenseCard ..> Model
+TransactionSummaryCard ..> Model
+PaymentCard ..> Model
+
+@enduml
