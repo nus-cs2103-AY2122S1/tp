@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+group Parse Statistic Command
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":StatisticsCommandParser" as StatisticsCommandParser LOGIC_COLOR
+participant "s:StatisticsCommand" as StatisticsCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("stat T09")
+activate AddressBookParser
+
+create StatisticsCommandParser
+AddressBookParser -> StatisticsCommandParser
+activate StatisticsCommandParser
+
+StatisticsCommandParser -> AddressBookParser
+deactivate StatisticsCommandParser
+
+AddressBookParser -> StatisticsCommandParser : parse("stat T09")
+activate StatisticsCommandParser
+
+create StatisticsCommand
+StatisticsCommandParser -> StatisticsCommand
+activate StatisticsCommand
+
+StatisticsCommand --> StatisticsCommandParser : s
+deactivate StatisticsCommand
+
+StatisticsCommandParser -> AddressBookParser : s
+deactivate StatisticsCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+StatisticsCommandParser -[hidden]-> AddressBookParser
+destroy StatisticsCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+end
+@enduml

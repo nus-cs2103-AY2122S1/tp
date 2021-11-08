@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -28,28 +29,32 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "File successfully exported as JSON format to %s";
     public static final String MESSAGE_IO_ERROR =
             "Problem while writing to the file. Please try again";
-    public static final String MESSAGE_WRONG_FORMAT = "File can only be exported to JSON format";
+    public static final String MESSAGE_WRONG_FORMAT = "File can only be exported to JSON format "
+            + "and cannot contain any special characters";
 
-    private final Path outputFilePath; // fileName.json
+    private final String outputFileName; // fileName.json
 
     /**
      * Creates an ExportCommand to export the current data to the specified {@code outputFileName}
      */
     public ExportCommand(String outputFileName) {
         requireNonNull(outputFileName);
-        this.outputFilePath = Paths.get("data", outputFileName);
+        this.outputFileName = outputFileName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         requireNonNull(model.getAddressBook());
-        requireNonNull(outputFilePath);
+        requireNonNull(outputFileName);
+        Path outputFilePath;
 
         try {
+            outputFilePath = Paths.get(FileUtil.getCurrentPath(), "..", "data", outputFileName).normalize();
+
             FileUtil.createIfMissing(outputFilePath);
             JsonUtil.saveJsonFile(new JsonSerializableAddressBook(model.getAddressBook()), outputFilePath);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
 
@@ -60,6 +65,6 @@ public class ExportCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ExportCommand // instanceof handles nulls
-                && outputFilePath.equals(((ExportCommand) other).outputFilePath));
+                && outputFileName.equals(((ExportCommand) other).outputFileName));
     }
 }
