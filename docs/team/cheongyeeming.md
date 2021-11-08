@@ -43,8 +43,8 @@ Given below are my contributions to the project.
 * **Unfavorite Command**:
     * Pull requests [\#131](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/131)
     * What it does: Allows user to unfavorite an existing contact.
-    * Justification: Allow users to sort out contacts that might no
-     longer be of importance to them.
+    * Justification: Allow users to sort out contacts that are
+     no longer important to them.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
     
