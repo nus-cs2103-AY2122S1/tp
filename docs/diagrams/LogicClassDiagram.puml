@@ -18,13 +18,13 @@ Class LogicManager
 }
 
 package Model{
-Class HiddenModel #FFFFFF
+Class HiddenModel<<Hidden>> #FFFFFF
 }
 
 package Storage{
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside <<Hidden>> #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic

@@ -13,7 +13,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows information of the client "
             + "by his/her client id. \n"
-            + "Parameters: view {client id of the customer} \n"
+            + "Parameters: view CLIENT_ID \n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     private final ClientHasId predicate;

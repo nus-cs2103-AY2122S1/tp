@@ -3,10 +3,9 @@ layout: page
 title: User Guide
 ---
 
-<h1 align="center"> LeadsForce User Guide </h1>
 <p align="center">
 
-<img src="images/LeadsForceLogo.jpg" alt="logo" width="125" /> 
+<img src="images/LeadsForceLogo.jpg" alt="logo" width="300" />
 
 </p>
 <p align="center">
@@ -35,7 +34,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [5.8 Locating clients by keywords: search](#58-locating-clients-by-keywords--search)
     * [5.9 Filter current list: filter](#59-filter-current-list-by-keywords--filter)
     * [5.10 Clearing all entries: clear](#510-clearing-all-entries--clear)
-    * [5.11 Getting help](#511-getting-help--help)
+    * [5.11 Getting help: help](#511-getting-help--help)
     * [5.12 Exiting the program: exit](#512-exiting-the-program--exit)
     * [5.13 Saving data](#513-saving-the-data)
     * [5.14 Edit data file](#514-edit-data-file)
@@ -50,6 +49,8 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
 * [**10. Command Summary**](#10-command-summary)
     * [10.1 Client Management Commands](#101-client-management-commands)
     * [10.2 Multiple Address Book Commands](#102-multiple-address-book-commands)
+* [**11. Appendix**](#11-appendix)
+   * [11.1 Glossary](#111-glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -111,23 +112,23 @@ When reading our User Guide, here are some important information to take note of
 ## 3. Client Information
 
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that
-is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s). 
+is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s).
 The attribute prefix and value specified here constitute the parameter format to be used in the commands of several [features](#5-features).
 
 
-Attribute | Prefix | Value
------------------|-----------------|-----------------
-ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`.
-Name | n/ | `NAME`<br><br>• `NAME`: should only contain alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`.
-Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com` (Character limit: 100).
-Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`.
-Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`.
-Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`. <br>• If no value is given, default Disposable Income for a client will be set to `0.00`.
-Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute).
-Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.<br>• More information [below](#33-last-met-attribute).
-Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`.
-Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance.
-Tag | t/ | `TAG`<br><br>• `TAG`: should be alphanumeric `e.g. friends`.<br>• More information [below](#34-tag-attribute).
+Attribute | Prefix | Value | Multiplicity
+-----------------|-----------------|-----------------|-----------------
+ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`. | 1
+Name | n/ | `NAME`<br><br>• `NAME`: should only contain alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`. | 1
+Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com` (Character limit: 100). | 1
+Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`. | 0 to 1
+Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`. | 0 to 1
+Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`. <br>• If no value is given, default Disposable Income for a client will be set to `0.00`. | 0 to 1
+Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute). | 0 to 1
+Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.<br>• More information [below](#33-last-met-attribute). | 0 to 1
+Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`. | 0 to 1
+Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance. | 0 to 1
+Tag | t/ | `TAG`<br><br>• `TAG`: should be alphanumeric `e.g. friends`.<br>• More information [below](#34-tag-attribute). | 0 or more
 
 ### 3.1 Duplicate Clients
 
@@ -149,7 +150,7 @@ LeadsForce has checks that prevent users from creating duplicated contacts.
 The `Next Meeting` attribute refers to the next meeting that the financial advisor using has with the client.
 Each `Next Meeting` consists of a `DATE`, `START_TIME`, `END_TIME` and a `LOCATION`.
 
-| Parameter Format | `[m/DATE (START_TIME~END_TIME), LOCATION]` |
+| Parameter Format | `m/DATE (START_TIME~END_TIME), LOCATION` |
 :---: | ---
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop` |
 | <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME` are in `hh:mm` (24 hour format). <br>• `LOCATION` can take any value, but it cannot be blank. <br>• `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
@@ -158,7 +159,7 @@ Each `Next Meeting` consists of a `DATE`, `START_TIME`, `END_TIME` and a `LOCATI
 
 The `Last Met` attribute refers to the last date the user have met the client.
 
-| Parameter Format | `[l/DATE]` |
+| Parameter Format | `l/DATE` |
 :---: | ---
 | Example | `l/25-10-2021`|
 | <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `Last Met` cannot take dates in the future, but any other past dates up to today's date is OK. |
@@ -167,10 +168,10 @@ The `Last Met` attribute refers to the last date the user have met the client.
 
 The `Tag` attribute refers to the tags associated with the client. A client can have multiple tags, including zero tags.
 
-| Parameter Format | `[t/TAG]...` |
+| Parameter Format | `t/TAG` |
 :---: | ---
-| Example | `t/family t/friends` |
-| <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. For example, to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. For example, if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. | 
+| Example | `t/family` |
+| <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. e.g. to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. e.g. if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -189,8 +190,8 @@ application. An overview of LeadsForce's interface is shown below.
 <p align="center">
 <img src="images/CommandViewInterface.png" width="500"/>
 </p>
-<br> 
-The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br> 
+<br>
+The command view is where you will be able to input commands into LeadsForce. The command view consist of the following components: <br>
 
 
 1. **Toolbar** <br>
@@ -198,7 +199,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
    • File bar where users can exit the app <br>
    • Address Book bar which allows users to switch between address books <br>
    • Themes bar which allows users to switch between different themes <br>
-   
+
 2. **Command Box** <br>
    • This is where users can input their commands into LeadsForce <br>
 
@@ -254,14 +255,18 @@ used in the management of client information and client meetings.
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * `<attribute>` refers to an arbitrary attribute prefix. (i.e. any attribute prefix can be substituted unless otherwise stated). For a comprehensive list of client's attributes available, please refer to this [section](#3-client-information).
-* Items with `...` after them can be used multiple times, including zero times if it is also optional.
+* We use `...` to indicate multiplicity. Parameters with `...` after them can be used multiple times, including zero times if it is also optional.
 e.g. `KEYWORD...` can be used as `John`, `alex david` etc. Whereas, `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order.
+* Parameters with prefix `e.g. n/NAME` can be in any order.
 e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Prefix-less parameters must occur before parameters with prefix.
+e.g. if the command specifies `KEYWORD... p/PHONE_NUMBER`, then `p/PHONE_NUMBER KEYWORD...` is not acceptable.
 * If a parameter is expected only once in the command (i.e. not appended with `...`), but you specified it multiple times, only the last occurrence of the parameter will be taken.
 e.g. if you specify `p/12341234 p/56785678`, only` p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Some attributes are hidden due to space constraints, e.g. `[<attribute>/VALUE]...` means that you can optionally (indicated by `[]`) provide one or more (indicated by `...`) parameters of the format `<attribute>/VALUE`.
+* For multiplicity of hidden attributes, please refer to this [section](#3-client-information).
 
 </div>
 
@@ -276,11 +281,11 @@ Adds a new client to the address book.
 | <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
 
 **Expected Outcome:** <br>
-For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br> 
+For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br>
 <p align="center" >
 <img src="images/ExpectedAddCommand.png" width="400"/>
-</p> 
-   
+</p>
+
 ### 5.2 Retrieve Particular Contact : `view`
 
 View client's information in detail.
@@ -306,7 +311,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a
   space.
 
-| Format | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...`|
+| Format | `edit CLIENT_ID... <attribute>/CHANGED_VALUE...`|
 | :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
@@ -316,7 +321,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
 <img src="images/ExpectedEditCommand.png" width="500"/>
-</p> 
+</p>
 
 ### 5.4 Delete particular contact : `delete`
 
@@ -341,23 +346,23 @@ Shows the full list of all clients in the address book.
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `list`, the command will still work regardless of the additional inputs. <br> eg. the command `list asdknkjsaf` will still work |
 
 **Expected Outcome:** <br>
-All clients in an address book would be shown in the client view list. 
+All clients in an address book would be shown in the client view list.
 
 ### 5.6 Sort Contacts : `sort`
 
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
 based on the given `SORT DIRECTION`.
 
-| Format | `sort [<attribute>/SORT_DIRECTION]...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
+| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :---: | :--- |
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
 
 **Expected Outcome:** <br>
-For instance, if you were to sort clients by risk appetite. 
+For instance, if you were to sort clients by risk appetite.
 
-| `sort r/asc`| `sort r/dsc` |  
+| `sort r/asc`| `sort r/dsc` |
 | :---: | :--- |
 | <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
 
@@ -382,14 +387,14 @@ For instance, using `schedule 30-11-2021` will produce the following result. <br
 
 Finds clients whose contacts match with the given keywords.
 
-| Format | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :---: | :--- |
 | **Examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
 | <img src="images/info_icon.png" width="50"/> | • If no `KEYWORD` is provided, search will be based on `<attribute>/ATTRIBUTE_KEYWORD` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
 **Expected Outcome:** <br>
 For instance, using `search Alex` will produce the following result. <br>
-   
+
 | Before | After |
 | --- | --- |
 | <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
@@ -398,7 +403,7 @@ For instance, using `search Alex` will produce the following result. <br>
 
 Filters the current list by the given keywords.
 
-| Format | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `{ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
+| Format | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` <br> <br>• `KEYWORD` will be used to match with all attribute of the client. <br> • `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.|
 | :---: | :--- |
 | **Examples** | • `filter John` returns `john` and `John Doe` <br> • `filter alex david` returns `Alex Yeoh`, `David Li` |
 | <img src="images/info_icon.png" width="50"/> | • Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts. <br> • If no `KEYWORD` is provided, then filter will be based on `<attribute>/ATTRIBUTE_KEYWORD` <br> • The filter is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`. <br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.|
@@ -509,7 +514,7 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 
 ### 6.4 List all address book : `ab list`
 
-List all the name of all the existing address books. 
+List all the name of all the existing address books.
 
 | Format | `ab list` |
 | --- | --- |
@@ -517,7 +522,7 @@ List all the name of all the existing address books.
 
 **Expected Outcome:** <br>
 If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command result view.
-<p align="center"> 
+<p align="center">
 <img src="images/ExpectedAbListCommand.png" width="500"/>
 </p><br>
 
@@ -603,13 +608,13 @@ Action | Format | Examples
 --------|---------|---------
 **Create** | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`| add n/benedict e/benedict@gmail.com p/90909898 r/3
 **View** | `view CLIENT_ID` | view 123
-**Edit** | `edit CLIENT_ID... [<attribute>/CHANGED_VALUE]...` | edit 12 n/Dominic p/12345678
+**Edit** | `edit CLIENT_ID... <attribute>/CHANGED_VALUE...` | edit 12 n/Dominic p/12345678
 **Delete** | `delete CLIENT_ID...` | delete 4
 **List** | `list` | -
-**Sort** | `sort [<attribute>/SORT_DIRECTION]...` | sort r/asc
+**Sort** | `sort <attribute>/SORT_DIRECTION...` | sort r/asc
 **Schedule** | `schedule [DATE]` | schedule 25-12-2021
-**Search** | `search KEYWORD... [<attribute>/KEYWORD]...` | search e/doe@gmail.com r/5
-**Filter** | `filter KEYWORD... [<attribute>/VALUE]...` | filter e/doe@gmail.com p/9
+**Search** | `search KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | search e/doe@gmail.com r/5
+**Filter** | `filter KEYWORD... [<attribute>/ATTRIBUTE_KEYWORD]...` | filter e/doe@gmail.com p/9
 **Clear** | `clear` | -
 **Help** | `help` | -
 **Exit** | `exit` | -
@@ -622,3 +627,17 @@ Action | Format | Examples
 **Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
 **Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
 **List Address Book** | `ab list` | -
+
+## 11. Appendix
+
+### 11.1 Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Command Line Interface (CLI)**: Text-based user interface that is used to view and manage device files
+* **Graphical User Interface (GUI)**: A visual way of interacting with a device using a variety of items
+* **Leads**: refers to contact with a potential customer, also known as a “prospect”
+* **Risk Appetite**: level of risk that a lead is prepared to accept in pursuit of his/her objectives, before action is deemed necessary to reduce the risk
+* **Disposable Income**: total clientele income minus clientele current taxes
+* **Client list**: the list of clients that is displayed in the GUI
+* **Address Book**: the list of clients where all clients inserted are kept
+* **Multiplicity**: the expected quantity of an item. A `0 to 1` multiplicity means that we expect there are zero to one of such items present. <br> For example, a `Client` can have 0 or 1 `Contact number` and `Address` (optional values) but must have exactly 1 `Name` and `Email` (compulsory values).
