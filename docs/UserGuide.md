@@ -79,6 +79,8 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="parameter-summary"></a>1. Parameter Summary
 <div markdown="span" class="alert alert-warning">
 
@@ -98,6 +100,8 @@ Parameter | What it means | Constraints
 **-nln** | New Lab Number | An integer between 1 and 13 (inclusive)
 **-ts** | Lab Total Score | A positive integer between 1 and 100 (inclusive)
 **-s** | Lab Score of Student | A non-negative integer, not greater than the corresponding lab total score
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="general-features"></a>2. General Features
 
@@ -119,6 +123,8 @@ Displays a dashboard window showing the following data:
 ### <a name="exit"></a>2.3 Exit: `exit` or F1 on keyboard
 
 Exits ProgrammerError and closes the GUI.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="data-features"></a>3. Data Features
 
@@ -184,6 +190,8 @@ Here are some examples of corrupted data that is not accepted by ProgrammerError
       "actualScoreValue" : 15,
       "totalScoreValue" : 20
       }
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="student-features"></a>4. Student Features
 
@@ -290,6 +298,10 @@ Format: `show <INDEX_IN_LIST>`
 
 Displays a list of all students in the left panel. This list is ordered first by class ID followed by student name.
 
+
+<div style="page-break-after: always;"></div>
+
+
 ## <a name="lab-features"></a>5. Lab Features
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
@@ -343,6 +355,8 @@ Format: `dellab -ln <LAB_NUM>`
 - `dellab -ln 1`: Deletes lab 1 for all students if it exists.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="command-summary"></a>Command Summary
 
