@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam NoteFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":GetCustomerReservingCommand" as Command LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> Command : execute("getC 1")
+activate Command
+
+Command -> Model : getFilteredReservationList()
+activate Model
+
+Model --> Command : lastShownList
+deactivate Model
+
+note right of Command : the specified reservation is retrieved and\n customer list is filtered to contains the\n corresponding customer
+
+Command -> Model : updateFilteredCustomerList(pred)
+activate Model
+
+Model --> Command
+deactivate Model
+
+create CommandResult
+Command -> CommandResult : CommandResult()
+activate CommandResult
+
+CommandResult --> Command
+deactivate CommandResult
+
+note left of CommandResult : switch Ui to\ncustomer view
+
+Command -->[ : result
+deactivate Command
+
+@enduml

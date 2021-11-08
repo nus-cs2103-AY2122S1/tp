@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam NoteFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":RhrhParser" as RhrhParser LOGIC_COLOR
+participant ":FindCustomerCommandParser" as FindCustomerCommandParser LOGIC_COLOR
+participant "f:FindCustomerCommand" as FindCustomerCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findC Chetwin")
+activate LogicManager
+
+LogicManager -> RhrhParser : parseCommand("findc Chetwin")
+activate RhrhParser
+
+create FindCustomerCommandParser
+RhrhParser -> FindCustomerCommandParser
+activate FindCustomerCommandParser
+
+RhrhParser <-- FindCustomerCommandParser
+deactivate FindCustomerCommandParser
+
+RhrhParser -> FindCustomerCommandParser : parse("Chetwin")
+activate FindCustomerCommandParser
+
+create FindCustomerCommand
+FindCustomerCommandParser -> FindCustomerCommand : FindCustomerCommand(p)
+activate FindCustomerCommand
+
+FindCustomerCommandParser <-- FindCustomerCommand : f
+deactivate FindCustomerCommand
+
+FindCustomerCommandParser --> RhrhParser : f
+deactivate FindCustomerCommandParser
+
+RhrhParser --> LogicManager : f
+deactivate RhrhParser
+destroy FindCustomerCommandParser
+
+
+note left of Model : The Predicate p for filtering is\nis created in Model.\nDetails are not shown here
+
+
+LogicManager -> FindCustomerCommand : execute()
+activate FindCustomerCommand
+
+FindCustomerCommand -> Model : updateFilteredCustomerList(p)
+activate Model
+FindCustomerCommand <-- Model
+deactivate Model
+
+
+create CommandResult
+FindCustomerCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCustomerCommand
+deactivate CommandResult
+
+FindCustomerCommand --> LogicManager : result
+deactivate FindCustomerCommand
+@enduml

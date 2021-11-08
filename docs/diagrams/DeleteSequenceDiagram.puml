@@ -1,11 +1,12 @@
 @startuml
 !include style.puml
+skinparam NoteFontSize 20
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":RhrhParser" as RhrhParser LOGIC_COLOR
+participant ":DeleteSupplierCommandParser" as DeleteSupplierCommandParser LOGIC_COLOR
+participant "d:DeleteSupplierCommand" as DeleteSupplierCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +14,57 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("deleteS 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> RhrhParser : parseCommand("deleteS 1")
+activate RhrhParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteSupplierCommandParser
+RhrhParser -> DeleteSupplierCommandParser
+activate DeleteSupplierCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DeleteSupplierCommandParser --> RhrhParser
+deactivate DeleteSupplierCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+RhrhParser -> DeleteSupplierCommandParser : parse("1")
+activate DeleteSupplierCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteSupplierCommand
+DeleteSupplierCommandParser -> DeleteSupplierCommand
+activate DeleteSupplierCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteSupplierCommand --> DeleteSupplierCommandParser : d
+deactivate DeleteSupplierCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+DeleteSupplierCommandParser --> RhrhParser : d
+deactivate DeleteSupplierCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeleteSupplierCommandParser -[hidden]-> RhrhParser
+destroy DeleteSupplierCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+RhrhParser --> LogicManager : d
+deactivate RhrhParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteSupplierCommand : execute()
+activate DeleteSupplierCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteSupplierCommand -> Model : deleteSupplier(Supplier)
 activate Model
+note left of Model : Index parsed from the\n user input is used to\n obtain the supplier to \ndelete from Model
 
-Model --> DeleteCommand
+Model --> DeleteSupplierCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteSupplierCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteSupplierCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteSupplierCommand --> LogicManager : result
+deactivate DeleteSupplierCommand
 
 [<--LogicManager
 deactivate LogicManager

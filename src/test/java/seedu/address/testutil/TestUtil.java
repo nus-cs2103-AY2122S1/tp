@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.employee.Employee;
 
 /**
  * A utility class for test cases.
@@ -36,20 +37,26 @@ public class TestUtil {
      * Returns the middle index of the person in the {@code model}'s person list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredCustomerList().size() / 2);
     }
 
     /**
      * Returns the last index of the person in the {@code model}'s person list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredCustomerList().size());
     }
 
     /**
-     * Returns the person in the {@code model}'s person list at {@code index}.
+     * Returns the customer in the {@code model}'s customer list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Customer getCustomer(Model model, Index index) {
+        return model.getFilteredCustomerList().get(index.getZeroBased());
+    }
+    /**
+     * Returns the employee in the {@code model}'s employee list at {@code index}.
+     */
+    public static Employee getEmployee(Model model, Index index) {
+        return model.getFilteredEmployeeList().get(index.getZeroBased());
     }
 }

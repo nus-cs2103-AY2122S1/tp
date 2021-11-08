@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class DeleteSupplierCommand
+class CommandResult
+}
+
+Class Index
+
+package Model {
+class ModelManager
+class Rhrh
+class UniqueSupplierList
+class Supplier
+Interface Model <<Interface>>
+}
+
+DeleteSupplierCommand ..> Model
+DeleteSupplierCommand -> Index
+ModelManager .up.|> Model
+ModelManager -left> "1" Rhrh
+Rhrh *--> "1" UniqueSupplierList
+UniqueSupplierList --> "*" Supplier
+DeleteSupplierCommand ..> "0..1" CommandResult : creates >
+
+@enduml

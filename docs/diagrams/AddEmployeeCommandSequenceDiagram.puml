@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam NoteFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as logicManager LOGIC_COLOR
+participant ":RhrhParser" as rhrhParser LOGIC_COLOR
+participant ":AddEmployeeCommandParser" as addEmployeeCommandParser LOGIC_COLOR
+participant ":AddEmployeeCommand" as command LOGIC_COLOR
+participant ":CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as model MODEL_COLOR
+end box
+
+
+[-> logicManager : execute(addE n/John Doe...)
+
+logicManager -[LOGIC_COLOR]> rhrhParser : parseCommand(addE...)
+activate logicManager
+activate rhrhParser
+
+create addEmployeeCommandParser
+rhrhParser -[LOGIC_COLOR]-> addEmployeeCommandParser
+activate addEmployeeCommandParser
+
+addEmployeeCommandParser --[LOGIC_COLOR]> rhrhParser
+deactivate addEmployeeCommandParser
+
+rhrhParser -[LOGIC_COLOR]> addEmployeeCommandParser :parse(n/John Doe...)
+activate addEmployeeCommandParser
+
+create command
+addEmployeeCommandParser -[LOGIC_COLOR]> command :AddEmployeeCommand(e)
+activate command
+
+command -[LOGIC_COLOR]-> addEmployeeCommandParser :AddEmployeeCommand
+deactivate command
+
+addEmployeeCommandParser -[LOGIC_COLOR]-> rhrhParser :AddEmployeeCommand
+deactivate addEmployeeCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+addEmployeeCommandParser -[hidden]-> rhrhParser
+destroy addEmployeeCommandParser
+
+note left of model : The Employee e added to\nModel is created in Model.\nDetails are not shown here.
+
+rhrhParser -[LOGIC_COLOR]-> logicManager : AddEmployeeCommand
+deactivate rhrhParser
+
+logicManager -[LOGIC_COLOR]-> command : execute()
+activate command
+
+command -[LOGIC_COLOR]-> model : addEmployee(e)
+activate model
+
+model -[LOGIC_COLOR]-> command
+deactivate model
+
+create commandResult
+command -[LOGIC_COLOR]-> commandResult
+activate commandResult
+
+commandResult -[LOGIC_COLOR]-> command : result
+deactivate commandResult
+
+command -[LOGIC_COLOR]-> logicManager : result
+deactivate command
+
+[<-- logicManager : result
+deactivate logicManager
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User calls Sort Supplier command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command syntax is valid])
+if () then ([input arguments are valid])
+
+    :Parse input into SortBySupplier and SortOrder;
+
+    :Create supplier comparator;
+
+    :SortSupplierCommand is created
+    and executed by LogicManager;
+
+    :Sort supplier list based on comparator;
+
+    :Update UI;
+
+    :Display success message to user with
+    details of sorting type and order;
+
+    stop
+
+else ([else])
+    endif
+else ([else])
+    endif
+    :Display error to user;
+stop
+
+@enduml

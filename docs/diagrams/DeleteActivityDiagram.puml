@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User calls Delete Supplier command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command syntax is valid])
+if () then ([input arguments are valid])
+
+    :Parse input into an Index representing the
+    index of supplier to delete from the supplier list;
+
+    :DeleteSupplierCommand is created
+    and executed by LogicManager;
+
+    :Delete the supplier from the supplier list;
+
+    :Update UI;
+
+    :Display success message to user
+    with details of supplier deleted;
+
+    stop
+
+else ([else])
+    endif
+else ([else])
+    endif
+    :Display error to user;
+stop
+
+@enduml

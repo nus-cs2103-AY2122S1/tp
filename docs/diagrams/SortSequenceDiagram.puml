@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+skinparam NoteFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":RhrhParser" as RhrhParser LOGIC_COLOR
+participant ":SortSupplierCommandParser" as SortSupplierCommandParser LOGIC_COLOR
+participant "s:SortSupplierCommand" as SortSupplierCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sortS by/dd o/a")
+activate LogicManager
+
+LogicManager -> RhrhParser : parseCommand("sortS by/dd o/a")
+activate RhrhParser
+
+create SortSupplierCommandParser
+RhrhParser -> SortSupplierCommandParser
+activate SortSupplierCommandParser
+
+SortSupplierCommandParser --> RhrhParser
+deactivate SortSupplierCommandParser
+
+RhrhParser -> SortSupplierCommandParser : parse("dd a")
+activate SortSupplierCommandParser
+
+create SortSupplierCommand
+SortSupplierCommandParser -> SortSupplierCommand
+activate SortSupplierCommand
+
+SortSupplierCommand --> SortSupplierCommandParser : s
+deactivate SortSupplierCommand
+
+SortSupplierCommandParser --> RhrhParser : s
+deactivate SortSupplierCommandParser
+SortSupplierCommandParser -[hidden]> RhrhParser
+destroy SortSupplierCommandParser
+
+RhrhParser --> LogicManager : s
+deactivate RhrhParser
+
+LogicManager -> SortSupplierCommand : execute()
+activate SortSupplierCommand
+
+SortSupplierCommand -> Model : getSortableSupplierList()
+activate Model
+
+Model -> Model : sort()
+
+note left of Model : The SortableSupplierList \nis sorted in Model.\nDetails are not shown here
+
+
+Model --> SortSupplierCommand : sortedList
+deactivate Model
+
+SortSupplierCommand -> Model : setSupplierComparator(s.comparator)
+activate Model
+
+Model --> SortSupplierCommand
+deactivate Model
+
+
+create CommandResult
+SortSupplierCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortSupplierCommand
+deactivate CommandResult
+
+SortSupplierCommand --> LogicManager : result
+deactivate SortSupplierCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

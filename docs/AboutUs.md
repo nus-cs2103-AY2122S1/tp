@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Javier Phon Zhee Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/javiier-pzk.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/javiier-pzk)]
+[[portfolio](team/javiier-pzk.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: In charge of deliverables, deadlines, scheduling and tracking
 
-### Johnny Doe
+### Low Qi Hong Chetwin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chetwinlow.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/chetwinlow)]
+[[portfolio](team/chetwinlow.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
+* Responsibilities: In charge of quality of user guide and developer guide
 
-### Jean Doe
+### Kong Fanji
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clementkfj.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/clementkfj)] 
+[[portfolio](team/clementkfj.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Git and IntelliJ Expert
+* Responsibilities: Integration and helping the team with Git issues
 
-### James Doe
+### Lee Hern Ping
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hernpiblo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/hernpiblo)]
+[[portfolio](team/hernpiblo.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Code quality checker
+* Responsibilities: Checks code quality and ensures all team members adhere to coding standards
+
+### Pham Ba Thang
+
+<img src="images/pbthang.png" width="200px">
+
+[[github](http://github.com/pbthang)]
+[[portfolio](team/pbthang.md)]
+
+* Role: Testing and Debug
+* Responsibilities: Ensures testing of code is done properly and on time

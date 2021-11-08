@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class EditCustomerCommand
+class CommandResult
+}
+
+
+package Model {
+class EditCustomerDescriptor
+class Customer
+class LoyaltyPoints
+class Allergies
+class SpecialRequests
+class Person
+class Address
+class Email
+class Name
+class Phone
+class Tag
+Interface Model <<Interface>>
+class ModelManager
+class Rhrh
+class UniqueCustomerList
+}
+
+EditCustomerCommand ..> Model
+ModelManager ..right|> Model
+ModelManager --> "1" Rhrh
+Rhrh *-right-> "1" UniqueCustomerList
+UniqueCustomerList -right-> "*" Customer
+EditCustomerCommand .right.> "1" Customer
+EditCustomerCommand ..> "0..1" CommandResult : creates >
+EditCustomerCommand -right-> "1" EditCustomerDescriptor
+EditCustomerCommand --> "1" Index
+EditCustomerDescriptor -up-> "0..1" LoyaltyPoints
+EditCustomerDescriptor -up-> "*" Allergies
+EditCustomerDescriptor -up-> "*" SpecialRequests
+EditCustomerDescriptor -up-> "0..1" Address
+EditCustomerDescriptor -up-> "0..1" Phone
+EditCustomerDescriptor -up-> "0..1" Email
+EditCustomerDescriptor -up-> "0..1" Name
+EditCustomerDescriptor -up-> "*" Tag
+Customer --> "1" LoyaltyPoints
+Customer --|> Person
+Customer --> "*" Allergies
+Customer --> "*" SpecialRequests
+Person --> "1" Address
+Person --> "1" Phone
+Person --> "1" Email
+Person --> "1" Name
+Person --> "*" Tag
+
+@enduml

@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ReserveCommand" as ReserveCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "rm:ReservationManager" as ReservationManager MODEL_COLOR
+participant "r:Reservation" as Reservation MODEL_COLOR
+end box
+
+[-> ReserveCommand : execute("2 p/9876...")
+activate ReserveCommand
+
+ReserveCommand -> Model : hasCustomerWithPhone(phone)
+activate Model
+
+Model --> ReserveCommand
+deactivate Model
+
+ReserveCommand -> Model : getReservationManager()
+activate Model
+
+Model --> ReserveCommand : rm
+deactivate Model
+
+ReserveCommand -> ReservationManager : getAvailableTable()
+activate ReservationManager
+
+ReservationManager --> ReserveCommand : tableToBeAssigned
+deactivate ReservationManager
+
+ReserveCommand -[hidden]-> ReservationManager
+destroy ReservationManager
+
+create Reservation
+ReserveCommand -> Reservation : Reservation()
+activate Reservation
+
+Reservation --> ReserveCommand: r
+deactivate Reservation
+
+ReserveCommand -> Model : addReservation(r)
+activate Model
+
+Model --> ReserveCommand
+deactivate Model
+
+create CommandResult
+ReserveCommand -> CommandResult : CommandResult()
+activate CommandResult
+
+CommandResult --> ReserveCommand
+deactivate CommandResult
+
+ReserveCommand -->[ : result
+deactivate ReserveCommand
+
+@enduml

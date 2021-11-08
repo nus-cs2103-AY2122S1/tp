@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class AddEmployeeCommand
+class CommandResult
+}
+
+
+package Model {
+class Employee
+class JobTitle
+class Leaves
+class Salary
+class Shift
+class Person
+class Address
+class Email
+class Name
+class Phone
+class Tag
+Interface Model <<Interface>>
+class ModelManager
+class Rhrh
+class UniqueEmployeeList
+}
+
+AddEmployeeCommand ..> Model
+ModelManager ..up|> Model
+ModelManager --> "1" Rhrh
+Rhrh *--> "1" UniqueEmployeeList
+UniqueEmployeeList --> "*" Employee
+AddEmployeeCommand ..> "0..1" CommandResult : creates >
+AddEmployeeCommand --> "1" Employee
+Employee --> "1" JobTitle
+Employee --> "1" Leaves
+Employee --> "1" Salary
+Employee --> "*" Shift
+Employee --|> Person
+Person --> "1" Address
+Person --> "1" Phone
+Person --> "1" Email
+Person --> "1" Name
+Person --> "*" Tag
+
+@enduml

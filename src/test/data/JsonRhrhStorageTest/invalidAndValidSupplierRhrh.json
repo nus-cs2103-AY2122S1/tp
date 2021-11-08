@@ -1,0 +1,31 @@
+{
+  "customers": [
+
+  ],
+  "employees": [
+
+  ],
+  "suppliers": [ {
+    "name": "Valid Supplier",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "tagged": [ ],
+    "supplyType": "Chicken",
+    "deliveryDetails": "2021-12-25 1200"
+  }, {
+    "name": "Supplier With Invalid Phone and Delivery Details Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "tagged": [ ],
+    "supplyType": "Chicken",
+    "deliveryDetails": "Tomorrow"
+  } ],
+  "reservations": [
+
+  ],
+  "tables": [
+
+  ]
+}

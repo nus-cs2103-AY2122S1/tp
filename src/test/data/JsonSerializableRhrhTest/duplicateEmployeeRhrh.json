@@ -1,0 +1,34 @@
+{
+  "employees": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tagged": [ "friends" ],
+    "leaves" : "14",
+    "salary" : "5000",
+    "jobTitle" : "Account Manager",
+    "shifts" : [ "2021-12-10 0830" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "address": "4th street",
+    "leaves" : "14",
+    "salary" : "5000",
+    "jobTitle" : "Account Manager",
+    "shifts" : [ "2021-12-10 0830" ]
+  } ],
+  "customers": [
+
+  ],
+  "suppliers": [
+
+  ],
+  "reservations": [
+
+  ],
+  "tables": [
+
+  ]
+}

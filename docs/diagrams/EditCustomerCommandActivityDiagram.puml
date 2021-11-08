@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User calls Edit Customer command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command syntax is valid])
+if () then ([input arguments are valid])
+
+    :Parse input into Index and EditCustomerDescriptor;
+
+    :Create customer descriptor;
+
+    :EditCustomerCommand is created
+    and executed by LogicManager;
+
+    :Update customer list with edited customer;
+
+    :Update UI;
+
+    :Display success message to user with
+    details of edited customer;
+
+    stop
+
+else ([else])
+    endif
+else ([else])
+    endif
+    :Display error to user;
+stop
+
+@enduml

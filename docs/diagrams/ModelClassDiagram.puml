@@ -5,50 +5,53 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyRhrh <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Rhrh
+Class ReadOnlyRhrh
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
+Class UniqueEmployeeList
+Class UniqueCustomerList
+Class UniqueSupplierList
+Class Customer
+Class Employee
+Class Supplier
+Class ReservationManager
+Class ReservationList
+Class Reservation
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Rhrh .up.|> ReadOnlyRhrh
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyRhrh
+ModelManager -down-> "1" Rhrh
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Rhrh *--down> "1" UniqueEmployeeList
+Rhrh *--down> "1" UniqueCustomerList
+Rhrh *--down> "1" UniqueSupplierList
+Rhrh *--> "1" ReservationManager
+ReservationManager *--down> "1" ReservationList
+UniqueCustomerList -down-> "~* all" Customer
+UniqueEmployeeList -down-> "~* all" Employee
+UniqueSupplierList --> "~*all" Supplier
+ReservationList --> "~* all" Reservation
+ReservationManager ..> Reservation
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager -->"~* filtered" Person
+ModelManager -down->"~* filtered" Employee
+ModelManager -down->"~* filtered" Customer
+ModelManager -right->"~* filtered" Supplier
+ModelManager -down->"~* filtered" Reservation
 @enduml

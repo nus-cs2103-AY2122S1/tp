@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Model {
+class Customer
+class LoyaltyPoints
+class SpecialRequest
+class Allergy
+class Employee
+class JobTitle
+class Leaves
+class Salary
+class Shift
+class Supplier
+class DeliveryDetails
+class SupplyType
+class Person
+class Address
+class Email
+class Name
+class Phone
+class Tag
+class Reservation {
+    numberOfPeople: int
+}
+class LocalDateTime
+class Remark
+}
+
+Customer --> "1" LoyaltyPoints
+Customer --> "*" Allergy
+Customer --> "*" SpecialRequest
+Customer -down-|> Person
+Employee --> "1" JobTitle
+Employee --> "1" Salary
+Employee --> "1" Leaves
+Employee --> "*" Shift
+Employee -down-|> Person
+Supplier --> "1" SupplyType
+Supplier --> "1" DeliveryDetails
+Supplier -down-|> Person
+Person --> "1" Name
+Person --> "1" Phone
+Person --> "1" Email
+Person --> "1" Address
+Person --> "*" Tag
+Reservation -up-> "1" Phone
+Reservation -right-> "1" LocalDateTime
+Reservation -left-> "0..1" Remark
+Reservation -up-> "*" Tag
+
+show Reservation members
+@enduml
+

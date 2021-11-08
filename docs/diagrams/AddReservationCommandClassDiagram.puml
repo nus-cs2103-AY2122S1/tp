@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Logic {
+class ReserveCommand {
+    {field} numberOfPeople: int
+}
+class CommandResult
+}
+
+package Model {
+class Phone
+class LocalDateTime
+class Remark
+class Tag
+class Reservation {
+    {field} numberOfPeople: int
+}
+}
+
+ReserveCommand ---> "1" Phone
+ReserveCommand ---> "1" LocalDateTime
+ReserveCommand ---> "0..1" Remark
+ReserveCommand ---> "*" Tag
+
+ReserveCommand ..> Reservation : creates >
+ReserveCommand ..r..> "0..1" CommandResult : creates >
+
+Reservation -u-> "1" Phone
+Reservation -u-> "1" LocalDateTime
+Reservation -u-> "0..1" Remark
+Reservation -u-> "*" Tag
+
+show ReserveCommand members
+show Reservation members
+
+@enduml

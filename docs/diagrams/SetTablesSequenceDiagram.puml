@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam NoteFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":RhrhParser" as RhrhParser LOGIC_COLOR
+participant ":SetTablesCommandParser" as SetTablesCommandParser LOGIC_COLOR
+participant "s:SetTablesCommand" as SetTablesCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("settables 10x2,4")
+activate LogicManager
+
+LogicManager -> RhrhParser : parseCommand("settables 10x2,4")
+activate RhrhParser
+
+create SetTablesCommandParser
+RhrhParser -> SetTablesCommandParser
+activate SetTablesCommandParser
+
+SetTablesCommandParser --> RhrhParser
+deactivate SetTablesCommandParser
+
+RhrhParser -> SetTablesCommandParser : parse("10x2,4")
+activate SetTablesCommandParser
+
+create SetTablesCommand
+SetTablesCommandParser -> SetTablesCommand
+activate SetTablesCommand
+
+SetTablesCommand --> SetTablesCommandParser : s
+deactivate SetTablesCommand
+
+SetTablesCommandParser --> RhrhParser : s
+deactivate SetTablesCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SetTablesCommandParser -[hidden]-> RhrhParser
+destroy SetTablesCommandParser
+
+RhrhParser --> LogicManager : s
+deactivate RhrhParser
+
+LogicManager -> SetTablesCommand : execute()
+activate SetTablesCommand
+
+SetTablesCommand -> Model : setTableList(LIST_OF_TABLES)
+activate Model
+
+note left of Model : The tables are created\nand set in Model\nDetails are not shown here
+
+
+Model --> SetTablesCommand
+deactivate Model
+
+create CommandResult
+SetTablesCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SetTablesCommand
+deactivate CommandResult
+
+SetTablesCommand --> LogicManager : result
+deactivate SetTablesCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

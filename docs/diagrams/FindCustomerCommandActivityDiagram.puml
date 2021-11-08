@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User calls Find Customer command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command syntax is valid])
+if () then ([input arguments are valid])
+
+    :Parse input into keywords;
+
+    :Create customer predicate;
+
+    :FindCustomerCommand is created
+    and executed by LogicManager;
+
+    :Filter customer list based on predicate;
+
+    :Update UI;
+
+    :Display success message to user with
+    number of customers that satisfy predicate;
+
+    stop
+
+else ([else])
+    endif
+else ([else])
+    endif
+    :Display error to user;
+stop
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+start
+:User calls settables command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command syntax is valid])
+if () then ([input arguments are valid])
+
+    :Parse input into list of integers
+    representing individual table sizes;
+
+    :SetTablesCommand is created and executed;
+
+    :Reset the table IDs to start from 1;
+
+    :Remove all reservations;
+
+    :Create tables with specified sizes;
+
+    :Overwrite the previous table list with
+    new list of tables in the TableManager;
+
+    :Print success message to user
+    with the number of tables set;
+
+    stop
+
+else ([else])
+    endif
+else ([else])
+    endif
+    :Display error to user;
+stop
+@enduml

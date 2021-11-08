@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +17,20 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SortOrder;
+import seedu.address.model.person.customer.Allergy;
+import seedu.address.model.person.customer.LoyaltyPoints;
+import seedu.address.model.person.customer.SortByCustomer;
+import seedu.address.model.person.customer.SpecialRequest;
+import seedu.address.model.person.employee.JobTitle;
+import seedu.address.model.person.employee.Leaves;
+import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
+import seedu.address.model.person.employee.SortByEmployee;
+import seedu.address.model.person.supplier.DeliveryDetails;
+import seedu.address.model.person.supplier.SortBySupplier;
+import seedu.address.model.person.supplier.SupplyType;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,7 +38,26 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String[] DATE_TIME_PATTERNS = {
+        "yyyy-MM-dd HHmm", "HHmm yyyy-MM-dd",
+        "dd-MM-yyyy HHmm", "HHmm dd-MM-yyyy",
+        "yyyy-MM-dd HH:mm", "HH:mm yyyy-MM-dd",
+        "dd-MM-yyyy HH:mm", "HH:mm dd-MM-yyyy"
+    };
+
+    public static final DateTimeFormatter[] DATE_TIME_FORMATTERS =
+            Arrays.stream(DATE_TIME_PATTERNS).map(DateTimeFormatter::ofPattern).toArray(DateTimeFormatter[]::new);
+
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE =
+            "Number of people is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE_TIME_FORMAT =
+            "Date time is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy "
+            + "format and a time in HH:mm or HHmm (24hr clock) format (eg: 1800 or 18:00 for 6 pm). "
+            + "You can choose to entire enter a date first or time first in any of the formats mentioned";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +70,28 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code numIfPeople} into an a non-zero unsigned integer and returns it.
+     * Leading and trailing whitespaces will be trimmed
+     * @param numOfPeople number of people as a string
+     * @return number of people as an integer
+     * @throws ParseException if the specified number of people is invalid (not non-zero unsigned integer).
+     */
+    public static int parseNumberOfPeople(String numOfPeople) throws ParseException {
+        int result;
+
+        try {
+            result = Integer.parseInt(numOfPeople.trim());
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_PEOPLE);
+        }
+
+        if (result <= 0) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_PEOPLE);
+        }
+        return result;
     }
 
     /**
@@ -96,7 +155,76 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String loyaltyPoints} into an {@code loyaltyPoints}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code loyaltyPoints} is invalid.
+     */
+    public static LoyaltyPoints parseLoyaltyPoints(String loyaltyPoints) throws ParseException {
+        requireNonNull(loyaltyPoints);
+        String trimmedLoyaltyPoints = loyaltyPoints.trim();
+        if (!LoyaltyPoints.isValidLoyaltyPoints(trimmedLoyaltyPoints)) {
+            throw new ParseException(LoyaltyPoints.MESSAGE_CONSTRAINTS);
+        }
+        return new LoyaltyPoints(trimmedLoyaltyPoints);
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Allergy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code allergy} is invalid.
+     */
+    public static Allergy parseAllergy(String allergy) throws ParseException {
+        requireNonNull(allergy);
+        String trimmedAllergy = allergy.trim();
+        if (!Allergy.isValidAllergyName(trimmedAllergy)) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
+        return new Allergy(trimmedAllergy);
+    }
+
+    /**
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
+     */
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+        requireNonNull(allergies);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergyName : allergies) {
+            allergySet.add(parseAllergy(allergyName));
+        }
+        return allergySet;
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Allergy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialRequest} is invalid.
+     */
+    public static SpecialRequest parseSpecialRequest(String specialRequest) throws ParseException {
+        requireNonNull(specialRequest);
+        String trimmedSpecialRequest = specialRequest.trim();
+        if (!SpecialRequest.isValidSpecialRequestName(trimmedSpecialRequest)) {
+            throw new ParseException(SpecialRequest.MESSAGE_CONSTRAINTS);
+        }
+        return new SpecialRequest(trimmedSpecialRequest);
+    }
+
+    /**
+     * Parses {@code Collection<String> specialRequests} into a {@code Set<SpecialRequest>}.
+     */
+    public static Set<SpecialRequest> parseSpecialRequests(Collection<String> specialRequests) throws ParseException {
+        requireNonNull(specialRequests);
+        final Set<SpecialRequest> specialRequestSet = new HashSet<>();
+        for (String specialRequestName : specialRequests) {
+            specialRequestSet.add(parseSpecialRequest(specialRequestName));
+        }
+        return specialRequestSet;
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
@@ -120,5 +248,206 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String leaves} into a {@code Leaves}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code leaves} is invalid.
+     */
+    public static Leaves parseLeaves(String leaves) throws ParseException {
+        requireNonNull(leaves);
+        String trimmedLeaves = leaves.trim();
+        if (!Leaves.isValidLeaves(trimmedLeaves)) {
+            throw new ParseException(Leaves.MESSAGE_CONSTRAINTS);
+        }
+        return new Leaves(trimmedLeaves);
+    }
+
+    /**
+     * Parses a {@code String salary} into a {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
+    }
+
+    /**
+     * Parses a {@code String job title} into a {@code JobTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code jobTitle} is invalid.
+     */
+    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
+        requireNonNull(jobTitle);
+        String trimmedJobTitle = jobTitle.trim();
+        if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
+            throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new JobTitle(trimmedJobTitle);
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Allergy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialRequest} is invalid.
+     */
+    public static Shift parseShift(String shift) throws ParseException {
+        requireNonNull(shift);
+        String trimmedShift = shift.trim();
+        if (!Shift.isValidShift(trimmedShift)) {
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+        }
+        return new Shift(trimmedShift);
+    }
+
+    /**
+     * Parses {@code Collection<String> specialRequests} into a {@code Set<SpecialRequest>}.
+     */
+    public static Set<Shift> parseShifts(Collection<String> shifts) throws ParseException {
+        requireNonNull(shifts);
+        final Set<Shift> shiftSet = new HashSet<>();
+        for (String shift : shifts) {
+            shiftSet.add(parseShift(shift));
+        }
+        return shiftSet;
+    }
+
+    /**
+     * Parses a {@code String supplyType} into a {@code SupplyType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SupplyType parseSupplyType(String supplyType) throws ParseException {
+        requireNonNull(supplyType);
+        String trimmedSupplyType = supplyType.trim();
+        if (!SupplyType.isValidSupplyType(trimmedSupplyType)) {
+            throw new ParseException(SupplyType.MESSAGE_CONSTRAINTS);
+        }
+        return new SupplyType(trimmedSupplyType);
+    }
+
+    /**
+     * Parses a {@code String deliveryDetails} into a {@code DeliveryDetails}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static DeliveryDetails parseDeliveryDetails(String deliveryDetails) throws ParseException {
+        requireNonNull(deliveryDetails);
+        String trimmedDeliveryDetails = deliveryDetails.trim();
+        if (!DeliveryDetails.isValidDeliveryDetail(trimmedDeliveryDetails)) {
+            throw new ParseException(DeliveryDetails.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryDetails(trimmedDeliveryDetails);
+    }
+
+    /**
+     * Parses a {@code String sortingOrder} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortOrder parseSortingOrder(String sortingOrder) throws ParseException {
+        requireNonNull(sortingOrder);
+        String trimmedSortingOrder = sortingOrder.trim().toLowerCase();
+        if (!SortOrder.isValidSortBy(trimmedSortingOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortingOrder);
+    }
+
+    /**
+     * Parses a {@code String sortBy} into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortByEmployee parseSortByEmployee(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim().toLowerCase();
+        if (!SortByEmployee.isValidSortBy(trimmedSortBy)) {
+            throw new ParseException(SortByEmployee.MESSAGE_CONSTRAINTS);
+        }
+        return new SortByEmployee(trimmedSortBy);
+    }
+
+    /**
+     * Parses a {@code String sortBy} into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortByCustomer parseSortByCustomer(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim().toLowerCase();
+        if (!SortByCustomer.isValidSortBy(trimmedSortBy)) {
+            throw new ParseException(SortByCustomer.MESSAGE_CONSTRAINTS);
+        }
+        return new SortByCustomer(trimmedSortBy);
+    }
+
+    /**
+     * Parses a {@code String sortBy} into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortBySupplier parseSortBySupplier(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim().toLowerCase();
+        if (!SortBySupplier.isValidSortBy(trimmedSortBy)) {
+            throw new ParseException(SortBySupplier.MESSAGE_CONSTRAINTS);
+        }
+        return new SortBySupplier(trimmedSortBy);
+    }
+
+    /**
+     * Parses {@code dateTime} into a {@code LocalDateTime} object.
+     * @throws ParseException if {@code dateTime} is of invalid format.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+
+        for (DateTimeFormatter formatter : DATE_TIME_FORMATTERS) {
+            try {
+                LocalDateTime result = LocalDateTime.parse(trimmedDateTime, formatter);
+                return result;
+            } catch (DateTimeParseException dtpe) {
+                // continue parsing with another format
+            }
+        }
+
+        // cannot parse using the formatters
+        throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Parses {@code remark} into a {@code Remark} object.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if {@code remark} is of invalid format.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+
+        if (trimmedRemark.isEmpty()) {
+            return new Remark("");
+        }
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 }
