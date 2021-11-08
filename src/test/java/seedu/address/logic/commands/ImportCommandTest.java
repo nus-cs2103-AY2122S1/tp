@@ -114,18 +114,6 @@ public class ImportCommandTest {
     }
 
     /**
-     * Tests if Import command fails when there is the file provided is of the wrong type.
-     * This should not happen as file type should be verified in ImportCommandParser.
-     * However, it is still checked here for completeness.
-     */
-    @Test
-    public void execute_fileNameWrongFileType_importFail() {
-        String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_FILE_WRONG_TYPE, INVALID_FILENAME_TXT);
-        ImportCommand importNewPerson = new ImportCommand(PATH_TEST_FILES, INVALID_FILENAME_TXT);
-        assertCommandFailure(importNewPerson, modelStub, expectedMessage);
-    }
-
-    /**
      * Tests if Import command fails when the json file is wrongly formatted.
      */
     @Test

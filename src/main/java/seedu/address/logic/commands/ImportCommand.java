@@ -19,6 +19,9 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.storage.CsvAddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 
+/**
+ * A command which imports a list of contacts from an external Json or Csv file.
+ */
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
@@ -67,6 +70,11 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> personList;
+
+        // Verify file extension. Should have been checked in ImportCommandParser.
+        assert StringUtil.isCsv(fileName) || StringUtil.isJson(fileName);
+
+        // Retrieve list of Persons.
         if (StringUtil.isJson(fileName)) {
             personList = getImportedPersonsFromJson();
         } else if (StringUtil.isCsv(fileName)) {
@@ -75,8 +83,7 @@ public class ImportCommand extends Command {
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
         }
 
-        assert StringUtil.isCsv(fileName) || StringUtil.isJson(fileName);
-
+        // Add Persons to Model
         for (Person p: personList) {
             try {
                 model.addPerson(p);
@@ -84,6 +91,7 @@ public class ImportCommand extends Command {
                 // do nothing; skip the current person if it already exists
             }
         }
+
         if (model.getPersonListControl() != null) {
             model.setTabIndex(0);
         }
@@ -91,6 +99,12 @@ public class ImportCommand extends Command {
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, fileName));
     }
 
+    /**
+     * Retrieves a list of {@code Person} objects from the specified Json file.
+     *
+     * @return List of {@code Person}.
+     * @throws CommandException if the Json file is wrongly formatted or does not exist.
+     */
     private List<Person> getImportedPersonsFromJson() throws CommandException {
         Path filePath = Path.of(testPath + fileName);
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
@@ -109,6 +123,12 @@ public class ImportCommand extends Command {
         return fileData.getPersonList();
     }
 
+    /**
+     * Retrieves a list of {@code Person} objects from the specified Csv file.
+     *
+     * @return List of {@code Person}.
+     * @throws CommandException if the Csv file is wrongly formatted or does not exist.
+     */
     private List<Person> getImportedPersonsFromCsv() throws CommandException {
         Path filePath = Path.of(testPath + fileName);
         CsvAddressBookStorage temporaryStorage = new CsvAddressBookStorage(filePath);
