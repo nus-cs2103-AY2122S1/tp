@@ -48,7 +48,7 @@ public class EnrollCommandTest {
     }
 
     @Test
-    public void execute_validEnrollment_success() {
+    public void execute_studentNotEnrolledInLesson_success() {
         EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_LESSON);
 
         Model expectedModel = new ModelManager(getTypicalTuitione(), new UserPrefs());
@@ -62,7 +62,7 @@ public class EnrollCommandTest {
     }
 
     @Test
-    public void execute_invalidEnrollmentNotSameGrade_failure() {
+    public void execute_studentGradeDoesNotMatchLessonGrade_failure() {
         Lesson testLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
         Student alice = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()); //ALICE
         Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); //CARL
@@ -83,7 +83,7 @@ public class EnrollCommandTest {
     }
 
     @Test
-    public void execute_invalidEnrollmentAlreadyInLesson_failure() {
+    public void execute_studentAlreadyEnrolledInLesson_failure() {
         Lesson testLesson = model.getFilteredLessonList().get(INDEX_FOURTH_LESSON.getZeroBased());
         LessonCode code = testLesson.getLessonCode();
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON

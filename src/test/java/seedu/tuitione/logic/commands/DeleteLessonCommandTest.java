@@ -82,7 +82,7 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
-    public void execute_deleteLessonWithStudents_success() {
+    public void execute_lessonWithStudents_success() {
         Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIFTH_LESSON.getZeroBased());
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIFTH_LESSON);
 
@@ -130,13 +130,5 @@ public class DeleteLessonCommandTest {
 
         // different student -> returns false
         assertFalse(deleteLessonFirstCommand.equals(deleteLessonSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoLesson(Model model) {
-        model.updateFilteredLessonList(p -> false);
-        assertTrue(model.getFilteredLessonList().isEmpty());
     }
 }
