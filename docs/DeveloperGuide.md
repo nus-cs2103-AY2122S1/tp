@@ -1311,8 +1311,15 @@ Our team has put in a significant amount of effort to get Academy Directory to t
 
 ### Notable Features
 
-Notable features we implemented from scratch include <TO BE ADDED: SOME USEFUL COMMANDS E.G. FILTER SORT ETC.>
-We came up with these features as they fit well in helping CS1101S avengers be more effective and efficient.
+Some notable features that we have designed specifically for the Avengers include the ability to record and track
+students' studio attendance, studio participation, and grades. These tools are tailored to fit the module requirements, and 
+they complement the Avengers in tracking their students' progress.
+
+To improve user experience, we implemented several new features that will aid Avengers in their weekly tutoring work,
+such as Show, Sort, Visualize, and a set of version control tools (Undo, Redo, History, Revert).
+The data visualization tools allow Avengers to perform better analysis, and customize their teaching to maximize their students'
+learning experience. With the version control tools, Academy Directory is much more forgiving and this allows
+Avengers to feel more confident and at ease while using our product.
 
 The implementation details and design considerations for these features could be found in [Implementation](#implementation) section
 and the [Design](#design) section respectively.
