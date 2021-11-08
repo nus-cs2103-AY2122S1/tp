@@ -20,6 +20,8 @@ Given below are my contributions to the project.
   Also, since the remark would likely be updated frequently to reflect patients' current considerations, having a separate command without the relatively more sophisticated logic used in the execution path (including parsing) of edit command allows the execution of remark command to be quicker.
   * Highlights: Since this is an entirely new command added which edits `Patient` details, the execution path required not only consideration for parsing the user input but also interactions with the current list of patients.
 
+<div style="page-break-after: always;"></div>
+
 * **New Feature**: Implemented functionality and test cases for toggle command ([#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58)).
   * What it does: Allows the user to toggle between patient state and doctor state.
   * Justification: This feature improves the product because it allows the user to toggle between the two states to execute commands according to the state.
@@ -39,8 +41,9 @@ Given below are my contributions to the project.
   * What it does: Implement state within the architecture of PlannerMD
   * Justification: To keep our commands as simple as possible, without explicitly referencing patient or doctor.
   * Highlights: This enhancement affects existing commands and commands to be added as commands executed now depends on the state as well. Existing parser thus needed to be updated to be sensitive to the state as well. 
-<br>
-<br>
+
+<div style="page-break-after: always;"></div>
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=hpkoh&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hpkoh&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements to existing features**:
