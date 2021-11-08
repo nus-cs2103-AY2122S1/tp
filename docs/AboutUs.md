@@ -24,10 +24,10 @@ You can reach us at the email `e0540149@u.nus.edu`
 <img src="images/kelvinsoo.png" width="200px">
 
 [[github](http://github.com/KelvinSoo)]
-[[portfolio](team/KelvinSoo.md)]
+[[portfolio](team/kelvinsoo.md)]
 
 * Role: Developer
-* Responsibilities: Find feature + Javadocs
+* Responsibilities: Find + Progress Feature
 
 ### Hardik Narang
 
