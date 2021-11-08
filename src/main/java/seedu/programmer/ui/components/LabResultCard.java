@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.programmer.model.student.Lab;
+import seedu.programmer.ui.UiPart;
 
 /**
  * An UI component that displays information of the lab result.

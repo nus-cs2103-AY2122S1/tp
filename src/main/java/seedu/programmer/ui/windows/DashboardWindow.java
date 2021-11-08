@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.windows;
 
 import java.util.HashSet;
 import java.util.TreeMap;

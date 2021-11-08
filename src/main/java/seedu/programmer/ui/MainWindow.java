@@ -31,6 +31,15 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
+import seedu.programmer.ui.components.CommandBox;
+import seedu.programmer.ui.components.LabResultListPanel;
+import seedu.programmer.ui.components.ResultDisplay;
+import seedu.programmer.ui.components.StatusBarFooter;
+import seedu.programmer.ui.components.StudentListPanel;
+import seedu.programmer.ui.managers.FileManager;
+import seedu.programmer.ui.managers.PopupManager;
+import seedu.programmer.ui.windows.DashboardWindow;
+import seedu.programmer.ui.windows.HelpWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing

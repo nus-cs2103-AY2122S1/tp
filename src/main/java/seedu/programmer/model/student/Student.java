@@ -123,7 +123,7 @@ public class Student implements DisplayableObject {
      * Deletes a lab from all the student records.
      *
      * @param lab The lab to be deleted.
-     * @returns ture if lab is successfully deleted.
+     * @returns true If lab is successfully deleted.
      */
     public boolean deleteLab(Lab lab) {
         return this.labList.remove(lab);
