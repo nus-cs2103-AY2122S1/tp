@@ -39,7 +39,8 @@ public class GameBook implements ReadOnlyGameBook {
     }
 
     /**
-     * Returns true if a game entry with the same identity as {@code gameEntry} exists in the game book.
+     * Returns true if a game entry with the same identity as {@code gameEntry} exists in the game book. Game entries
+     * have the same identity if they have the same game type and date.
      */
     public boolean hasGameEntry(GameEntry gameEntry) {
         requireNonNull(gameEntry);

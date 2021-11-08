@@ -21,7 +21,8 @@ public class GameEntryList implements Iterable<GameEntry> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent GameEntry as the given argument.
+     * Returns true if the list contains an equivalent GameEntry as the given argument. Game entries are considered
+     * equivalent if they have the same game type and date.
      */
     public boolean contains(GameEntry toCheck) {
         requireNonNull(toCheck);

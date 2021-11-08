@@ -13,8 +13,8 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
-    private static final String INVALID_DURATION = "Please enter a valid duration value between -2,147,483,648 and"
-        + " 2,147,483,647";
+    private static final String INVALID_DURATION = "Please enter a valid duration value that is at most"
+        + " 2,147,483,647 minutes long";
     private static final Duration EMPTY = new Duration();
     private final int durationMinutes;
 
@@ -94,14 +94,17 @@ public class Duration {
                 return Integer.valueOf(durationString);
             } else if (durationString.matches(VALID_FORMATS[1])) {
                 String[] vals = durationString.split(":");
-                return Integer.valueOf(vals[0]) * 60 + Integer.valueOf(vals[1]);
+                int hours = Integer.valueOf(vals[0]);
+                int minutes = Integer.valueOf(vals[1]);
+                return toMinutes(hours, minutes);
             } else if (durationString.matches(VALID_FORMATS[2])) {
-                return Integer.valueOf(durationString.substring(0, durationString.length() - 1)) * 60;
+                int hours = Integer.valueOf(durationString.substring(0, durationString.length() - 1));
+                return toMinutes(hours, 0);
             } else if (durationString.matches(VALID_FORMATS[3])) {
                 String[] vals = durationString.split(" ");
                 int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 1));
                 int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 1));
-                return 60 * hours + minutes;
+                return toMinutes(hours, minutes);
             } else if (durationString.matches(VALID_FORMATS[4])) {
                 return Integer.valueOf(durationString.substring(0, durationString.length() - 1));
             } else {
@@ -113,8 +116,19 @@ public class Duration {
         }
     }
 
+    private static int toMinutes(int hours, int minutes) {
+        long h = hours;
+        long m = minutes;
+        long totalMinutes = 60 * h + m;
+        if (totalMinutes <= Integer.MAX_VALUE) {
+            return ((int) totalMinutes);
+        } else {
+            throw new IllegalArgumentException(INVALID_DURATION);
+        }
+    }
+
     public int getDurationMinutes() {
-        return this.durationMinutes;
+        return durationMinutes;
     }
 
     @Override

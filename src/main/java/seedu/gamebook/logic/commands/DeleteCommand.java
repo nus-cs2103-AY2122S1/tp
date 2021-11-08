@@ -32,6 +32,10 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
 
     public static final String MESSAGE_DELETE_GAME_ENTRY_SUCCESS = "Deleted game entry: \n%1$s";
+    public static final String COMMAND_NOT_ACCEPTED_WITHOUT_GAME_LIST = "This command can only be used when a game list"
+        + " is shown. Please use \"list\" to show all game entries.";
+    public static final String MESSAGE_FAILURE_WITHOUT_GAME_LIST = COMMAND_FORMAT + "\n"
+        + COMMAND_NOT_ACCEPTED_WITHOUT_GAME_LIST;
 
     private final Index targetIndex;
 

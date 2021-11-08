@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         + PREFIX_GAMETYPE + "blackjack "
         + PREFIX_STARTAMOUNT + "200 "
         + PREFIX_ENDAMOUNT + "250 "
-        + PREFIX_DATE + "03/10/21 "
+        + PREFIX_DATE + "2021-10-10 "
         + PREFIX_DURATION + "50 "
         + PREFIX_LOCATION + "Sentosa"
         + PREFIX_TAG + "friends";

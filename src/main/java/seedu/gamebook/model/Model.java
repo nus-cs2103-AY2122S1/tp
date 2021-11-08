@@ -49,7 +49,7 @@ public interface Model {
      */
     void setGameBook(ReadOnlyGameBook gameBook);
 
-    /** Returns the AddressBook */
+    /** Returns the GameBook */
     ReadOnlyGameBook getGameBook();
 
     /**
