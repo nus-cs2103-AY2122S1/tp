@@ -1,0 +1,25 @@
+{
+  "recipes": [ {
+    "name" : "Burger",
+    "ingredients" : [ {
+      "name" : "Patty",
+      "quantity" : "100.000 g"
+    }, {
+      "name" : "Bread",
+      "quantity" : "2"
+    } ],
+    "steps" : [ "Burger STEP 1", "Burger STEP 2" ],
+    "description" : "Very Nice"
+  }, {
+    "name" : "Burger",
+    "ingredients" : [ {
+      "name" : "Patty",
+      "quantity" : "100.000 g"
+    }, {
+      "name" : "Bread",
+      "quantity" : "2"
+    } ],
+    "steps" : [ "Maggie STEP 1", "Maggie STEP 2" ],
+    "description" : "Very Nice"
+  } ]
+}

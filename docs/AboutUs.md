@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Li Bailin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rootkie.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/rootkie)]
+[[portfolio](team/rootkie.md)]
 
-* Role: Project Advisor
+* Role: DevOps / Team Lead
+* Responsibilities: Project Architecture + Code quality
 
-### Jane Doe
+### Rebecca Chin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rebeccacxy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/rebeccacxy)]
+[[portfolio](team/rebeccacxy.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing + UI
 
-### Jean Doe
+### Nay Lin Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/naylin-h99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/NayLin-H99)]
+[[portfolio](team/naylin-h99.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code quality + Integration
+
+### Alissa
+
+<img src="images/alissayarmantho.png" width="200px">
+
+[[github](http://github.com/alissayarmantho)]
+[[portfolio](team/alissayarmantho.md)]
+
+* Role: Developer
+* Responsibilities: Scheduling and tracking + Git expert
+
+### Patrick Tan
+
+<img src="images/pattan9955.png" width="200px">
+
+[[github](http://github.com/pattan9955)]
+[[portfolio](team/pattan9955.md)]
+
+* Role: Developer
+* Responsibilities: Documentation + Testing

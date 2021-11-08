@@ -1,6 +1,6 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   color: #e46c0a;
 }
 
@@ -30,5 +30,9 @@ h2, h3, h4, h5, h6 {
   .alert-#{$color} {
     @include alert-variant(color-level($value, $alert-bg-level), color-level($value, $alert-border-level), color-level($value, $alert-color-level));
   }
+}
+
+.ug-image {
+    border: 3px solid black;
 }
 

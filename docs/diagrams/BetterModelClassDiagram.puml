@@ -4,18 +4,20 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+class "UniqueDataList <<Ingredient>>" as UniqueIngredientList
+
+Inventory *-right-> "1" UniqueIngredientList
+Inventory *-right-> "1" UniqueTagList
+UniqueTagList -[hidden]down- UniqueIngredientList
+UniqueTagList -[hidden]down- UniqueIngredientList
 
 UniqueTagList *-right-> "*" Tag
-UniquePersonList -right-> Person
+UniqueIngredientList -right-> Ingredient
 
-Person -up-> "*" Tag
+Ingredient -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Ingredient *--> Name
+Ingredient *--> Quantity
+Ingredient *--> ExpiryDate
+Ingredient *--> Description
 @enduml
