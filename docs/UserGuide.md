@@ -36,36 +36,22 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 1. Refer to the [Features](#features) below for details of each command.
 
 -------------------------------------------------------------------------------------------------------------
-## Let's take a tour
+## App Interface
 
-### The left bar
+Refer to the diagram below to understand how our app, SafeFor(H)All looks like.
 
-The top-most 2 icons represent the main tabs: Residents and Events. <br> 
- - You can view the relevant data when either is selected.
+![Ui](images/interface.png)
 
-The third will open the help window and the last will exit the application.
-
-![Ui](images/leftBar.png)
-
-### Viewing data
-
-Resident and Event information is organized in this panel. <br>
-You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#viewing-residents-information--view))
-> Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
-> 
-> Vaccinated residents include the syringe icon towards the right-side of the card
-> 
-> Past Events are highlighted grey.
-
-![Ui](images/data.png)
-
-### Interacting
-
-This is where you can enter commands to interact with the data. <br>
-The [Command Suggestion](#command-suggestion) box will suggest parameters on typing. <br>
-The result of executing the input command will be displayed the lower-most box.
-
-![Ui](images/commandBox.png)
+Section | Explanation
+|--------|-------
+**Residents Tab** | When selected, it allows you to view the list of residents and their associated information
+**Events Tab** | When selected, it allows you to view the list of events and their associated information
+**Help Window** | When clicked, a pop-up will appear containing a list of commands and how to use them
+**Exit app** | Closes the app
+**Input Box** | Input your command here. The command suggestion box will suggest parameters upon typing
+**Result Box** | The result of the inputted command will be displayed here
+**List of Residents** | Displays the list of residents in the app. You can view details about a specific resident by clicking on it, or by using the `view` command
+**Individual resident information** | In the example shown, the resident has a late FET test which is 21 days overdue.
 
 ### Formats
 
