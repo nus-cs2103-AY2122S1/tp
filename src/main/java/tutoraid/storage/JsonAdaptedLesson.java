@@ -1,5 +1,8 @@
 package tutoraid.storage;
 
+import java.util.Objects;
+import java.util.stream.Stream;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,7 +18,7 @@ import tutoraid.model.lesson.Timing;
  */
 public class JsonAdaptedLesson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "One or more fields of Lesson is missing!";
 
     private final String lessonName;
     private final String capacity;
@@ -51,10 +54,10 @@ public class JsonAdaptedLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Lesson toModelType() throws IllegalValueException {
-        if (lessonName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LessonName.class.getSimpleName()));
+        if (Stream.of(lessonName, capacity, price, timing).anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
+
         if (!LessonName.isValidLessonName(lessonName)) {
             throw new IllegalValueException(LessonName.MESSAGE_CONSTRAINTS);
         }
@@ -70,9 +73,6 @@ public class JsonAdaptedLesson {
         }
         final Price modelLessonPrice = new Price(price);
 
-        if (timing == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName()));
-        }
         if (!timing.equals("") && !Timing.isValidTiming(timing)) {
             throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
         }
