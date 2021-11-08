@@ -166,12 +166,12 @@ Adds a task to the task list. The parameters for the command can be input in any
 <div markdown="block" class="alert alert-success">
 
 :green_book: **Examples:**
-* `add n/Test d/2021-12-01 t/16:30 tg/CS2103 p/MEDIUM` adds the `Test` task on `2021-12-01`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `MEDIUM`
+* `add n/Quiz d/2021-01-06 t/16:30 tg/CS2103 p/MEDIUM` adds the `Test` task on `2021-01-06`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `MEDIUM`
 </div>
 
 ![add_command](images/addCommand.jpeg)
 
-After running the add command the task gets added to the task list as shown below:
+After running the add command the task gets added to the task list and on the weekly panel as shown below:
 
 
 ![add_command_after](images/addCommandAfter.jpeg)
@@ -192,6 +192,7 @@ Adds tags to a task.
 **:information_source: Interpretation:**<br>
 * Adds <code><i>tg/tag</i></code> tag to the task having index <code><i>task_id</i></code>
 * Adds multiple tags if more than one <code><i>tg/tag</i></code> used
+* The tags entered will overwrite the pre-existing tags
 </div>
 
 
@@ -199,9 +200,16 @@ Adds tags to a task.
 <div markdown="block" class="alert alert-success">
 
 **:green_book: Examples:**
-* `tag 5 tg/CS2103` sets the tag of task 5 in the task list to `CS2103`
-* `tag 4 tg/CS2106 tg/tough` sets the tags of task 4 in the task list to `CS2106` and `tough`
+* `tag 3 tg/CS2103T tg/Homework` sets the tags of task 3 in the task list to `CS2103T` and `Homework`
 </div>
+
+![tag_command](images/tagCommand.jpeg)
+
+After running the tag command the task gets tagged and displayed on the task list as shown below:
+
+
+![tag_command_after](images/tagCommandAfter.jpeg)
+
 
 
 ### 4.3 Mark your tasks as DONE : `done`
@@ -328,9 +336,16 @@ Sorts the tasks in the task list of Uni-Fy.
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
 
-* `sort x/time o/asc` sorts the tasks in ascending order of time
+
 * `sort x/priority o/desc` sorts the tasks in the descending order of priority i.e. from `HIGH` to `LOW`
 </div>
+
+![sort_command](images/sortCommand.jpeg)
+
+After running the sort command the task gets sorted and displayed on the task list and weekly panel as shown below:
+
+
+![sort_command_after](images/sortCommandAfter.jpeg)
 
 ### 4.9 Editing tasks : `edit`
 
