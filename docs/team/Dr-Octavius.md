@@ -12,7 +12,6 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=KelvinSoo&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&tabOpen=true&tabType=authorship&tabAuthor=KelvinSoo&tabRepo=AY2122S1-CS2103T-W17-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **New Feature**: Tasks appear green if the daily panel reflects the current date
-  * What it does: allows the user to visualise weekly progress
   * Justification: This feature improves the product significantly because a user is able to keep track of their weekly task completion progress.
   * Highlights: This enhancement affects existing commands and commands to be added in future (commands that perform changes to the task). It required an in-depth understanding of `model`, `logic` and `JavaFX` components. The implementation too was challenging as it required updating of the UI using `Observables` and ensuring that all commands that modify/changes tasks also updates the bar.
   * Contribution: Created the `progress bar` UI element and linking it to `model`: [\#191](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/191)
