@@ -77,9 +77,6 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
-        if (editStudentDescriptor.gradeIsEdited) {
-            this.editStudentDescriptor.setGradeIsEdited(true);
-        }
     }
 
     @Override
@@ -103,7 +100,7 @@ public class EditCommand extends Command {
         // update lessons associated with student to edit
         while (!studentLessons.isEmpty()) {
             Lesson lesson = studentLessons.get(0);
-            if (editStudentDescriptor.gradeIsEdited) {
+            if (!editedStudent.getGrade().equals(studentToEdit.getGrade())) {
                 lesson.unenrollStudent(studentToEdit);
             } else {
                 // grade is not modified, hence must be update lessons about student change
@@ -183,8 +180,6 @@ public class EditCommand extends Command {
         private Grade grade;
         private Set<Remark> remarks;
         private Set<Remark> remarksToDelete;
-
-        private boolean gradeIsEdited = false;
 
         public EditStudentDescriptor() {}
 
@@ -305,13 +300,6 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
                     && getRemarks().equals(e.getRemarks());
-        }
-
-        /**
-         * Toggles the gradeIsEdited value
-         */
-        public void setGradeIsEdited(boolean b) {
-            gradeIsEdited = b;
         }
 
     }
