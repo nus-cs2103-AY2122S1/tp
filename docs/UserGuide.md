@@ -210,7 +210,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] 
 - Edits the elderly at the specified `INDEX`. The index refers to the index number shown in the displayed elderly list. The index **must be a positive integer**.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- A warning message will be shown if the new `VISIT` datetime entered is in the past.
 - A warning message will be shown if the new `LAST_VISIT` datetime entered is in the future.
 
 <div markdown="block" class="alert alert-info">
