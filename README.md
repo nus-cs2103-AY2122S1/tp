@@ -10,15 +10,15 @@ Want to download and start using TutorAid? Head over to the [_Quick Start_ secti
 
 ## About Us
 
-To learn more about our team, head over to the [**About Us**](AboutUs.html) page.
+To learn more about our team, head over to the [**About Us**](https://ay2122s1-cs2103t-w16-3.github.io/tp/AboutUs.html) page.
 
 ## User Guide
 
-If you are interested in using TutorAid, refer to the [**User Guide**](UserGuide.html).
+If you are interested in using TutorAid, refer to the [**User Guide**](https://ay2122s1-cs2103t-w16-3.github.io/tp/UserGuide.html).
 
 ## Developer Guide
 
-If you are interested about developing TutorAid, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+If you are interested about developing TutorAid, the [**Developer Guide**](https://ay2122s1-cs2103t-w16-3.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 ## Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
