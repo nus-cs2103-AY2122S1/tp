@@ -42,6 +42,12 @@ public class Money {
         return test.startsWith("+");
     }
 
+    /**
+     * Returns true if the given string is a valid input for Money. Ensure that it has up to 2 decimal places.
+     *
+     * @param test Given String to be checked.
+     * @return A boolean that is true if the given string is a valid input for Money.
+     */
     public static boolean isValidMoney(String test) {
         try {
             BigDecimal value = new BigDecimal(test);

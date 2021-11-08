@@ -13,8 +13,8 @@ public class Revenue {
     public static final String MESSAGE_CONSTRAINTS = "Revenue can be any positive number with up to 2 decimal places "
             + "that is not more than 20,000,000";
 
-    public static final String MESSAGE_INVALID_REVENUE_PLUS_SIGN = "There is no need to add a plus sign in front of revenue,"
-            + "it is positive by default until a minus sign is placed in front of the number.";
+    public static final String MESSAGE_INVALID_REVENUE_PLUS_SIGN = "There is no need to add a plus sign in front"
+            + "of revenue, it is positive by default until a minus sign is placed in front of the number.";
 
     public final Money value;
 

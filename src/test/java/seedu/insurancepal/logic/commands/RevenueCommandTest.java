@@ -12,7 +12,6 @@ import static seedu.insurancepal.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.insurancepal.commons.core.Messages;
-import seedu.insurancepal.commons.core.Money;
 import seedu.insurancepal.commons.core.index.Index;
 import seedu.insurancepal.logic.parser.ParserUtil;
 import seedu.insurancepal.logic.parser.exceptions.ParseException;

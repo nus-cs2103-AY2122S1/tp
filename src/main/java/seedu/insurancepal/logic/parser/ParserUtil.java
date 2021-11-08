@@ -1,7 +1,6 @@
 package seedu.insurancepal.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.insurancepal.logic.parser.RevenueCommandParser.INVALID_REVENUE_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,7 +10,6 @@ import seedu.insurancepal.commons.core.Money;
 import seedu.insurancepal.commons.core.index.Index;
 import seedu.insurancepal.commons.exceptions.IllegalValueException;
 import seedu.insurancepal.commons.util.StringUtil;
-import seedu.insurancepal.logic.commands.RevenueCommand;
 import seedu.insurancepal.logic.parser.exceptions.ParseException;
 import seedu.insurancepal.model.appointment.Appointment;
 import seedu.insurancepal.model.claim.Description;
