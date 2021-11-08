@@ -634,6 +634,77 @@ The following activity diagram summarizes what happens when a user tries to undo
     
 _{more aspects and alternatives to be added}_
 
+### Report on Group feature
+#### Implementation
+The group mechanism is implemented through the interface command `addressbook#getpersonList`. The idea is to go through the list of contacts currently recorded in the addressbook, and update the names in the user input by
+adding the target tag into each person that is present in the app. In the module, the `tagName` and the `targetNames` will be obtained from the inputs. Each `name` in the `targetName` that is present in the `AddressBook#getPersonList`
+will receive the specific tag named `tagName` using the method `addTagToContact`.
+
+step 1. User execute the command as shown in the diagram
+
+![groupCommandInput](images/groupCommandInput.png)
+
+step 2. All userName under `targetName` will update and get an additional tag.
+
+![groupCommandResult](images/groupCommandResult.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Group command has low error tolerance. If the an invalid name is inputted in the middle of the targetNames, the command will stop editing the individuals and send the error message.
+</div>
+
+#### Design considerations:
+
+**Aspect: How group executes:**
+
+* **Alternative 1 (current choice):** obtain a list of names from the user and edit from the input list
+  * Pros: Easy to implement, less chance of bugs.
+  * Cons: User experience depreciates as they need to manually input large volume of text.
+* **Alternative 2:** group command add tags to all names in the displayed filter list
+  * Pros: User experience improve the amount of commands needed to input decrease
+  * Cons: Potential bugs due to increase complexity. User experience may not increase as much as the user may have difficulty trying to get the required filter list using only the commands.
+
+_{more aspects and alternatives to be added}_
+### Report on tag information feature
+#### Implementation
+The tagInfo mechanism is facilitated by `TagInfoCommand`. It implements a feature that allows the user to obtain a report for the total number of contacts under each command.
+It uses `Model#getUniqueTagTable` to obtain the `number` of contacts under the specific tags/
+
+step 1. User execute a specific tagInfo command.
+
+There are two types of command:
+
+a) Using `list` as the parameter, as shown in the photo below. This will generate a report that encapsulates all recorded tags in the system.
+
+![tagInfoListDiagram](images/tagInfoListDiagram.png)
+
+b) Using `t/` followed by `tagNames...` as parameter as shown in the photo below. This will generate a report that contains only the specified tags in the input
+
+![tagInfoTagNameDiagram](images/tagInfoTagNameDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Since all tagNames are alphanumeric, only alphanumeric inputs are allowed. Each individual tagName are to be separated by an empty space. 
+</div>
+
+
+step 2. WebFast will create a `reportwindow` will contains a report with the `total number` of `contacts` for each `specified tags` in the user input
+
+![tagInfoReportDiagram](images/tagInfoReportDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How tagInfo executes:**
+
+* **Alternative 1 (current choice):** creates a new hashtable each time the tagInfo command is executed.
+  * Pros: Easy to implement, less chance of bugs, increase abstraction within the tagInfo command.
+  * Cons: Increase running time for tagInfo command, could slow down the execution if large number of contacts is present in the app.
+* **Alternative 2:** Create a global attribute hashtable in the model that is consistently updated based on each command
+  * Pros: Reduce running time for tagInfo command
+  * Cons: Increase complexity of the entire app. Very difficult to implement as each command will have to link to an additional global variable. High potential for bugs.
+
+_{more aspects and alternatives to be added}_
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -1007,7 +1078,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Error message shown. Invalid command format. 
     
    1.11. Test case for invalid price: `find pr/1`, `find pr/=a` <br>
-      Expected: Error message shown. Invalid price format. 
+      Expected: Error message shown. Invalid price format.
 
 ### Saving data
 
