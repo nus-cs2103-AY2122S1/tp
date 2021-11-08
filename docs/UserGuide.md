@@ -40,6 +40,7 @@ This section provides instructions to begin using Siasa.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Technical Terms:
+
 | Term      | Description                                                                            |
 |-----------|----------------------------------------------------------------------------------------|
 | Parameter | A parameter is a piece of information that the user needs to provide in a command.     |
@@ -279,7 +280,7 @@ These are the current sorters implemented:
 
 ### Statistics
 
-#### Download useful statistics as TXT : `download`
+#### Download useful statistics as CSV : `download`
 
 Download CSV files containing useful statistics for the user. This includes
 - Most valuable contacts + total commission from each of contact
