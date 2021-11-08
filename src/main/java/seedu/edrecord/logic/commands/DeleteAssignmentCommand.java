@@ -2,8 +2,6 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.edrecord.commons.core.Messages;
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
@@ -18,16 +16,16 @@ public class DeleteAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "dlasg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes an assignment using its index number used in the displayed assignment list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes an assignment using its ID number used in the displayed assignment list.\n"
+            + "Parameters: ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted assignment: %1$s";
 
-    private final Index index;
+    private final Index id;
 
-    public DeleteAssignmentCommand(Index index) {
-        this.index = index;
+    public DeleteAssignmentCommand(Index id) {
+        this.id = id;
     }
 
     @Override
@@ -37,15 +35,12 @@ public class DeleteAssignmentCommand extends Command {
         if (!model.hasSelectedModule()) {
             throw new CommandException(Messages.MESSAGE_NO_MODULE_SELECTED);
         }
-        List<Assignment> assignmentList = model.getAssignmentList();
 
-        if (index.getOneBased() >= model.getAssignmentCounter()) {
+        if (id.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment asgToDelete = assignmentList.stream()
-                .filter(asg -> asg.getId() == index.getOneBased())
-                .findFirst()
+        Assignment asgToDelete = model.getAssignment(id.getOneBased())
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
         model.deleteAssignment(asgToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, asgToDelete));
@@ -55,6 +50,6 @@ public class DeleteAssignmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteAssignmentCommand // instanceof handles nulls
-                && index.equals(((DeleteAssignmentCommand) other).index)); // state check
+                && id.equals(((DeleteAssignmentCommand) other).id)); // state check
     }
 }

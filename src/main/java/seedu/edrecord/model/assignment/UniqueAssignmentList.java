@@ -24,7 +24,7 @@ import seedu.edrecord.model.assignment.exceptions.DuplicateAssignmentException;
  * @see Assignment#isSameAssignment(Assignment)
  */
 public class UniqueAssignmentList implements Iterable<Assignment> {
-    private static final Weightage maximumTotalWeightage = new Weightage("100");
+    private static final float MAXIMUM_TOTAL_WEIGHTAGE = 100f;
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
@@ -45,8 +45,8 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      * the total weightage of all assignments in this list to above 100%.
      */
     public boolean isTotalWeightageExceeded(Assignment toAdd) {
-        Weightage addedWeightage = getTotalAddedWeightage(toAdd);
-        return addedWeightage.compareTo(maximumTotalWeightage) > 0;
+        Float addedWeightage = getTotalAddedWeightage(toAdd);
+        return addedWeightage > MAXIMUM_TOTAL_WEIGHTAGE;
     }
 
     /**
@@ -185,13 +185,13 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      * Returns the total weightage of all assignments in this list, plus
      * the weightage of assignment {@code toAdd}.
      */
-    private Weightage getTotalAddedWeightage(Assignment toAdd) {
+    private Float getTotalAddedWeightage(Assignment toAdd) {
         Float total = 0f;
         for (Assignment assignment : internalList) {
             total += assignment.getWeightage().weightage;
         }
         total += toAdd.getWeightage().weightage;
-        return new Weightage(String.valueOf(total));
+        return total;
     }
 }
 
