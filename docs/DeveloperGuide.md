@@ -756,27 +756,27 @@ Note: The `PositionPieChart` is not marked for deletion when the command finishe
 #### Implementation
 
 The [Memento Pattern](https://en.wikipedia.org/wiki/Memento_pattern) is used to implement undo feature. The undo functionality is facilitated by `Memento` and `History`. 
-Every command keeps a `memento` which stores the state of `model` before any modification is done by a command. 
-The `model` keeps track of the `history` which stores a stack of previous modification commands. 
+Every command keeps a `Memento` which stores the state of `model` before any modification is done by a command. 
+The `Model` keeps track of the `History` which stores a stack of previous modification commands. 
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Step 1. The user launches the application. The `history` will be initialized with an empty command stack, and the `model` keeps track of the `history`.
+Step 1. The user launches the application. The `History` will be initialized with an empty command stack, and the `Model` keeps track of the `History`.
 
 
-Step 2. The user executes `delete-applicant 3` command to delete the 3rd applicant in the applicant book. The `delete-applicant` command updates its `memento` and calls `Model#addToHistory()`, causing the state of the `model` before the modification to be saved in `history`.
+Step 2. The user executes `delete-applicant 3` command to delete the 3rd applicant in the applicant book. The `delete-applicant` command updates its `Memento` and calls `Model#addToHistory()`, causing the state of the `Model` before the modification to be saved in `History`.
 
 
-Step 3. The user executes `add-applicant n/David …​` to add a new applicant. The `add-applicant` command also updates its `memento` and calls `Model#addToHistory()`, causing the state of the `model` before the modification to be saved in `history`.
+Step 3. The user executes `add-applicant n/David …​` to add a new applicant. The `add-applicant` command also updates its `Memento` and calls `Model#addToHistory()`, causing the state of the `Model` before the modification to be saved in `History`.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a modification command fails its execution, it will not call `Model#addToHistory()`, so the model state will not be saved into the `history`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a modification command fails its execution, it will not call `Model#addToHistory()`, so the model state will not be saved into the `History`.
 
 </div>
 
-Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#recoverHistory()`, which will pop out the previous command from `history`, and restore the model in the `memento` of the previous command.
+Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#recoverHistory()`, which will pop out the previous command from `History`, and restore the model in the `Memento` of the previous command.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the stack in the `history` is empty, then there are no previous model states to restore. The `undo` command uses `Model#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the stack in the `History` is empty, then there are no previous model states to restore. The `undo` command uses `Model#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
