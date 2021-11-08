@@ -291,6 +291,32 @@ Each student object will keep track of a list of assignments and respective grad
 
 The `Grade` object contains the completion status of the assignment (Not submitted, Submitted, Graded) and the score that the student has achieved.
 
+## **Implementation**
+
+This section will explain important considerations taken during the design of certain components.
+
+### ModuleSet
+The ModuleSet is a HashSet of modules designed for a Person to hold.
+Additionally, it is important in the implementation of the following commands: 
+
+- MoveCommand - Add a module and group from a selected person's module set.
+- RemoveCommand - Remove a module and group from a selected person's module set. 
+
+Given below is an example usage scenario and how the ModuleSet will behave:
+
+**Step 1. The user creates a new person, and inputs a module and group.**
+The ModuleSystem checks if the module and specific group in the module exists. The application will then add the Group into the Module's GroupSystem, and place the Module into the Person's ModuleSet.
+
+**Step 2. The user adds another group, with same module**
+The ModuleSystem checks if the module and specific group in the module exists in the system. The application then checks if ModuleSet contains the module. It then adds the Group to the Module's GroupSystem.
+
+**Step 3. The user has 1 group in the module, and removes the group**
+The ModuleSystem checks if the module and specific group in the module exists in the system. The application then checks if ModuleSet contains the module. It then removes the Group from the Module's GroupSystem. After that, the application checks if the GroupSystem is empty. If it is, remove the Module from the ModuleSet too.
+
+
+Alternate implentation: ModuleSet as a HashMap between Modules and a List of Groups.
+However, this implementation was passed over, as this would not be utilizing the Module's own GroupSystem. The GroupSystem should be utilized as the single source of truth, and having 2 lists of Groups for 1 single Module would be very confusing and error-prone.
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -735,3 +761,20 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+---
+## Effort 
+In general, our team has managed to implement the essential features of the applications to allow EdRecord to become a usable application. Our team closely adhered towards the given deadlines, making sure that each of the important features were done by a specific milestone. The enhancements made on top of AddressBook-3 is equal or slightly more than our individual projects.
+
+### **Challenges Encountered:**
+1. Closely associated objects
+    - EdRecord has ModuleSystem, Module, Group, ModuleSet, Assignments and Grades. Compared to AB3, with a `Person` object containing many fields, their nature made them deeply nested. This made their creation, deletion and manipulating them very tedious, and contributed to most of the bugs found in the dry run. This was eventually solved having multiple checks at each command.
+
+2. Closely associated objects (2)
+    - As they are closely coupled together, writing tests for multiple classes together is more difficult. Furthermore, our team did not have enough time to write tests for every single new component.
+
+### **Achievements Accomplished:**
+1. Different selection and views
+    - EdRecord implemented the ability to change views between contacts and assignments, and also having the ability to select modules. This was a big change from AddressBook-3, needing new UI, and also having the ability to quickly swap from view to view. 
+
