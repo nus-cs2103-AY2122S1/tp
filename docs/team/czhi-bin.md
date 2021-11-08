@@ -31,6 +31,8 @@ Given below are my contributions to the project.
 
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=czhi-bin&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=czhi-bin&tabRepo=AY2122S1-CS2103T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
+<div style="page-break-after: always;"></div>
+
 **Enhancements to existing features**:
   * Added the ability to sort the contact by their name and module code, but was removed because sorting by module isn't needed anymore, and our team agreed that sorting by name should be done automatically instead of the user having to type a command just to sort. [52](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/52)
   * Add automatic sorting of contact & lesson after any command is executed. [#75](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/75)
