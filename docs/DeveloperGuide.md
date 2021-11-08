@@ -12,7 +12,7 @@ title: Developer Guide
 
 ## **Introduction**
 
-Welcome to the TutorAid Developer Guide! This document details the key implementations and design decisions that have been involved in the creation of TutorAid thus far.
+Welcome to the TutorAid Developer Guide! This document details the key implementations and design considerations that have been incorporated into the development of TutorAid thus far.
 
 ### **Setting up, getting started**
 
@@ -271,7 +271,7 @@ Below is the sequence diagram that depicts the adding of a newly created `Studen
 ![AddStudent](images/AddStudentSequenceDiagram.png)
 
 
-### **Design considerations**
+#### **Design considerations**
 
 **Aspect: How to differentiate the `add -s` command from other `add` commands:**
 
@@ -562,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
 
-### **Use cases that have been added to TutorAid**
+#### **Use cases that have been added to TutorAid**
 
 **Use Case 1: Add a student**
 
@@ -966,7 +966,7 @@ Use case resumes from Step 4.
    
 Use case ends.
 
-### **Use cases that are to be added to TutorAid in the future**
+#### **Use cases that are to be added to TutorAid in the future**
 
 **Use case 14: Edit a student's progress**
 
