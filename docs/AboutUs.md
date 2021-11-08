@@ -13,7 +13,7 @@ You can reach us at the email `caikaian[at]comp.nus.edu.sg`
 
 <img src="images/caipng.png" width="200px">
 
-[[github](http://github.com/caipng)]
+[[github](http://github.com/caipng)][[PPP](https://ay2122s1-cs2103-w14-3.github.io/tp/team/caipng.html)]
 
 * Role: Integration, Deliverable and Deadlines
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of
@@ -23,7 +23,7 @@ You can reach us at the email `caikaian[at]comp.nus.edu.sg`
 
 <img src="images/chaiwanlin.png" width="200px">
 
-[[github](http://github.com/chaiwanlin)]
+[[github](http://github.com/chaiwanlin)][[PPP](https://ay2122s1-cs2103-w14-3.github.io/tp/team/chaiwanlin.html)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
@@ -32,7 +32,7 @@ You can reach us at the email `caikaian[at]comp.nus.edu.sg`
 
 <img src="images/marcusc55.png" width="200px">
 
-[[github](http://github.com/marcusc55)]
+[[github](http://github.com/marcusc55)][[PPP](https://ay2122s1-cs2103-w14-3.github.io/tp/team/marcusc55.html)]
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents
@@ -41,7 +41,7 @@ You can reach us at the email `caikaian[at]comp.nus.edu.sg`
 
 <img src="images/fergusmok.png" width="200px">
 
-[[github](http://github.com/fergusmok)]
+[[github](http://github.com/fergusmok)][[PPP](https://ay2122s1-cs2103-w14-3.github.io/tp/team/fergusmok.html)]
 
 * Role: Team Lead, Scheduling and Tracking
 * Responsibilities: Responsible for overall project coordination; In charge of defining, assigning, and tracking project
@@ -51,7 +51,7 @@ You can reach us at the email `caikaian[at]comp.nus.edu.sg`
 
 <img src="images/uyencfi.png" width="200px">
 
-[[github](http://github.com/uyencfi)]
+[[github](http://github.com/uyencfi)][[PPP](https://ay2122s1-cs2103-w14-3.github.io/tp/team/uyencfi.html)]
 
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time
