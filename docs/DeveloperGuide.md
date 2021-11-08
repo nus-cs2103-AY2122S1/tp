@@ -16,7 +16,7 @@ scaffolding Notor are as follows.
     - We target fast-typers who are comfortable taking notes on their computer.
 
 In particular, we tackle the needs of mentor professors, who tend to be busy and are assigned mentees they are unlikely
-to personally know or run into often. A personal CRM like Notor is a useful tool to help mantain the mentor-mentee relationship. Key features of Notor which scaffold this
+to personally know or run into often. A personal CRM like Notor is a useful tool to help maintain the mentor-mentee relationship. Key features of Notor which scaffold this
 are:
 
 1. Powerful Organisation which is up to the user to manage many mentees
@@ -55,9 +55,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
 * **Supergroup**: SuperGroup is a group that can have many subgroups. We often use it interchangeably with `Group` as
     `Supergroup` is more of an implementation detail.
-* **Subgroup**: A child of a `Supergroup` used to store multiple persons based on a more specific category than `Supergroup`. A **
-  Subgroup** can be created by specifying the parent group of the **Subgroup**. A person can be in the **Subgroup** only if
-  the person is already in the parent `Supergroup`.
+* **Subgroup**: A child of a `Supergroup` used to store multiple persons based on a more specific category than `Supergroup`.
+    A `Subgroup` can be created by specifying the parent group of the `Subgroup`. A person can be in the `Subgroup` only if
+    the person is already in the parent `Supergroup`.
 * **Tag**: A string descriptor attached to `Group` objects or `Person` objects
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
@@ -704,15 +704,12 @@ To optimize for mentors who type fast, we implemented keyboard shortcuts to ensu
 ### List Views
 We decided to have groups and subgroups so that users can organize people in the list.
 AB3 only has support listing of people. Our team needed to create new UI elements to support that.
-Even when the new UI elements, it was still tough to create commands to support the operation of switching between views and
+Even when the new UI elements are created, it was still tough to create commands to support the operation of switching between views and
 updating the list view when a change has been made.
 
-
 ### GUI Test (Implemented but scrapped due to CI failure)
-
 We have initially decided to implement **GUI Testing** because many of our functionalities
-such as clearing notes, tags and Notor, and adding notes uses a pop up window.
-
+such as clearing notes, tags and Notor, and adding notes uses a pop up window.<br>
 The difficulty level of GUI Testing is moderate because there is very limited
 guides available on **TestFX** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally,
 all efforts are of no avail.
