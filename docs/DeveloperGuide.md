@@ -198,9 +198,10 @@ The workflow of the Delete command is shown in the Activity diagram illustrated 
 
 This command allows the user to edit residents or events to the SafeFor(H)All application depending on the currently active tab.
 
-The workflow of the Edit command is shown in the Activity diagram illustrated below.
+The workflow of `EditPersonCommand` is shown in the Activity diagram illustrated below.
 
 ![EditActivityDiagram](images/logic/commands/editcommand/EditActivityDiagram.png)
+`EditEventCommand` follows a similar flow of actions.
 
 Note:
 - Mass operations for residents can be carried out by inputting multiple indexes after the command `edit`, each separated by a whitespace.
@@ -236,7 +237,6 @@ How it works:
 The following sequence diagram demonstrates what happens when the `ViewPersonCommand` is executed:
 
 ![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewPersonCommandSequenceDiagram.png)
-
 `ViewEventCommand` follows a similar sequence of interactions.
 
 #### Design considerations:
