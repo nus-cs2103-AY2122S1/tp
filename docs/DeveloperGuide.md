@@ -5,7 +5,7 @@ title: Developer Guide
 
 SalesNote is a **desktop app for tailors, optimized for use via a Command Line Interface** (CLI), suitable for fast
 typists. SalesNote aims to help tailors simplify their administrative tasks, with the main features split between helping to manage:
-* Client Information (e.g. Contact details, measurements, notes)
+* Client Information (e.g. contact details, measurements, notes)
 * Tasks to be done
 * Sales orders and accounts
 
@@ -17,12 +17,14 @@ The purpose of the Developer Guide is to guide you through our application's arc
 - [Setting up, getting started](#setting-up-getting-started)
 - [Design](#design)
     - [Architecture](#architecture)
-    - [UI Component](#ui-component)
-    - [Logic Component](#logic-component)
-    - [Model Component](#model-component)
-    - [Storage Component](#storage-component)
+    - [UI component](#ui-component)
+    - [Logic component](#logic-component)
+    - [Model component](#model-component)
+    - [Storage component](#storage-component)
     - [Common classes](#common-classes)
 - [Implementation](#implementation)
+    - [Task and order packages](#task-and-order-package)
+    - [Adding order feature](#adding-order-feature)
     - [Updating person changes in order list and task list](#updating-person-changes-in-order-list-and-task-list)
     - [Sorting orders feature](#sorting-orders-feature)
     - [Displaying clients' total orders feature](#displaying-clients-total-orders-feature)
@@ -31,7 +33,7 @@ The purpose of the Developer Guide is to guide you through our application's arc
     - [Product scope](#product-scope)
     - [User stories](#user-stories)
     - [Use cases](#use-cases)
-    - [Non-functional Requirements](#non-functional-requirements)
+    - [Non-functional requirements](#non-functional-requirements)
     - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     - [Launch and shutdown](#launch-and-shutdown)
@@ -205,7 +207,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Task and Order Package
+### Task and order package
 
 #### Implementation
 The implementation of both of these packages is largely similar to the `person` package. In the original AB3, there is a
@@ -274,8 +276,8 @@ should be recognised as the same a `Person` with `Name` `JOHN DOE`.
 We updated the equality check to account for this, and also updated the input validation for `Name` to allow at most one
 space between blocks of characters (previously `John   Doe` would be different from `John Doe`. We felt this likely to be
 a mistake and should be avoided).
-
-### Add Order feature
+    
+### Adding order feature
 As mentioned above, to add an `Order`, the `Person` the `Order` is addressed to should already be in `SalesNote`. The
 following is a sequence diagram showing the execution of the command:
 
@@ -325,6 +327,7 @@ The sequence diagram below shows the interaction within the Logic component for 
 The changes in person objects are updated in their order and task objects.
 
 ### Other related commands
+
 Note that similar considerations are addressed in the following commands:
 * `DeleteOrderCommand` where `Task` objects related to the deleted `Order` is also deleted.
   
@@ -757,7 +760,7 @@ Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-
 
       Use case resumes from step 3.
 
-### Non-Functional Requirements
+### Non-functional requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
