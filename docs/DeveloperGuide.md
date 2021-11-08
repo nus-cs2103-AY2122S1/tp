@@ -157,15 +157,8 @@ The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
 At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.2.1).
-Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
+Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in Figure 4.2.2.
 
-<p align="center">
-    <img src="images/ui/UiClassDiagramOverview.png" width="700" />
-</p>
-<div style="text-align: center">
-    <em>Figure 4.2.1: Overview of Ui components</em>
-</div>
-<br>
 1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
 2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
    For instance, the `FileManager` handles situations where the user is required to select files or directories.
@@ -175,6 +168,14 @@ Note that the components under `MainWindow` have been omitted for simplicity and
 In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
 from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
 to be displayed to the user.
+
+<p align="center">
+    <img src="images/ui/UiClassDiagramOverview.png" width="700" />
+</p>
+<div style="text-align: center">
+    <em>Figure 4.2.1: Overview of Ui components</em>
+</div>
+<br>
 
 Now taking a closer look at the `MainWindow` component, it consists of a number of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
 , `StatusBarFooter` etc. (Figure 4.2.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
