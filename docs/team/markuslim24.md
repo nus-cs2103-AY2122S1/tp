@@ -28,7 +28,7 @@ Given below are my contributions to the project.
     * Difficulty: Pretty simple as the window for the help command was already in place, though it involved converting the window into a scroll pane so users could easily view the command summary in a smaller window.
 
 * **Minor Enhancements**:
-  * Helped create the first UI mockup for ManageMe using Figma(Pull requests [\#106](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/106))
+  * Helped create the UI mockup for ManageMe using Figma(Pull requests [\#18](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/18))
   * Initialized the code skeleton for Task-related components(Pull requests [\#48](https://github.com/AY2122S1-CS2103T-W11-3/tp/pull/48))
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=markuslim24&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
