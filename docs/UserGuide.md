@@ -210,6 +210,10 @@ Examples:
 
 #### _Removing a person from group_
 
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+This command only works when persons are listed in Notor.
+</div> <br>
+
 Removes an existing person from a group.
 
 Format: `person (INDEX) /remove (g:GROUP_NAME)`<br>
@@ -323,16 +327,16 @@ Advanced user Format: `p /ar`
 #### _Listing Archived Persons_ 
 Shows the list of archived Persons.
 
-Format: `person /listarchive`
+Format: `person /listarchive` <br>
 Advanced user Format: `p /lar`
 
 #### _Unarchiving_ 
 Restores the archived person back to your person list in Notor.
 
-* You must be on the list of archived persons in order to use this command, as it takes the index as a compulsory parameter
-
-Format: `person (INDEX) /unarchive`
+Format: `person (INDEX) /unarchive` <br>
 Advanced user Format:`p (INDEX) /uar`
+
+* You must be on the list of archived persons in order to use this command, as it takes the index as a compulsory parameter
 
 
 
@@ -491,7 +495,7 @@ Examples:
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
-Format: `person /listarchive`
+Format: `person /listarchive` <br>
 Advanced user Format: `p /lar`
 
 ![archivedList](images/archivePersonList.png)
