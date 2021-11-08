@@ -1073,7 +1073,7 @@ a
 
 ###  Deleting an event
 
-1. Deleting an event while all events are being shown
+1. Delete an event while all events are being shown
 
    1. Prerequisites: List all events using the `listEvents` command. Multiple events in the event list.
 
@@ -1133,7 +1133,7 @@ a
 
 ### Sorting events by time
 
-1. Sorts the event list in chronological order
+1. Sort the event list in chronological order
 
    1. Prerequisite: List all events using the `listEvents` command. Multiple events in the event list.
    2. Test case: `sortEvents`<br>
@@ -1142,7 +1142,7 @@ a
 
 ### Showing an event’s details
 
-1. Shows the details of an event
+1. Show the details of an event
 
    1. Prerequisite: List all events using the `listEvents` command. At least 1 event in the event list.
    2. Test case: `showDetails 1`<br>
@@ -1150,7 +1150,7 @@ a
 
 ### Adding a participant to an event
 
-1. Enrolls a participant into an event
+1. Enroll a participant into an event
 
    1. Prerequisite: List all events and participants using `listEvents` and `list` commands. At least 1 event and 1 participant
       in the event and participant list respectively. Participant should not be already enrolled in the event.
@@ -1160,7 +1160,7 @@ a
 
 ### Removing a participant from an event
 
-1. Expels a participant from an event
+1. Expel a participant from an event
 
    1. Prerequisite: List all events and participants using `listEvents` and `list` commands. At least 1 event and 1 participant
       in the event and participant list respectively. Participant should be already enrolled in the event.
@@ -1170,7 +1170,7 @@ a
 
 ### Showing an event’s participants
 
-1. Shows a list of participants in an event
+1. Show a list of participants in an event
 
    1. Prerequisite: List all events using `listEvents` command. At least 1 event in the event list. There should be at least
       1 participant enrolled in the event.
