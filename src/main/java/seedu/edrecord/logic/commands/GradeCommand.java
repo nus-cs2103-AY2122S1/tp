@@ -2,7 +2,7 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -36,39 +36,39 @@ public class GradeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a grade to the student "
             + "identified by the index number used in the displayed student list. \n"
+            + "Reference the assignment using the assignment ID displayed in the assignments view.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "ASSIGNMENT NAME "
+            + PREFIX_ID + "ASSIGNMENT ID "
             + PREFIX_STATUS + "STATUS "
             + "[" + PREFIX_SCORE + "SCORE] \n"
             + "Status has 3 possible inputs: Not submitted, Submitted or Graded. \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Assignment 2 "
+            + PREFIX_ID + "3 "
             + PREFIX_STATUS + "Graded "
             + PREFIX_SCORE + "73 ";
 
     public static final String MESSAGE_SUCCESS = "Graded student: %s \nfor assignment: %s \nwith grade: %s";
-    public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
     public static final String MESSAGE_SCORE_GREATER_THAN_MAX = "Student's score is greater than the "
             + "maximum score for this assignment";
     public static final String MESSAGE_STATUS_SCORE_MISMATCH = "Assignment has not been graded and should not "
             + "have a score.";
 
     private final Index index;
-    private final Name name;
+    private final Index id;
     private final Grade grade;
 
     /**
      * @param index Index of the student to grade.
-     * @param name  Name of the assignment to grade.
+     * @param id    ID of the assignment to grade.
      * @param grade Grade of the assignment.
      */
-    public GradeCommand(Index index, Name name, Grade grade) {
+    public GradeCommand(Index index, Index id, Grade grade) {
         requireNonNull(index);
-        requireNonNull(name);
+        requireNonNull(id);
         requireNonNull(grade);
 
         this.index = index;
-        this.name = name;
+        this.id = id;
         this.grade = grade;
     }
 
@@ -87,9 +87,11 @@ public class GradeCommand extends Command {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
 
-        // Get assignment
-        Assignment assignment = model.searchAssignment(name)
-                .orElseThrow(() -> new CommandException(MESSAGE_NO_SUCH_ASSIGNMENT));
+        if (id.getOneBased() >= model.getAssignmentCounter()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
+        }
+        Assignment assignment = model.getAssignment(id.getOneBased())
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
         // Check if ungraded assignment has score or score is more than the assignment's maximum score.
         if (grade.getScore().isPresent()) {
@@ -148,7 +150,7 @@ public class GradeCommand extends Command {
         // state check
         GradeCommand e = (GradeCommand) other;
         return index.equals(e.index)
-                && name.equals(e.name)
+                && id.equals(e.id)
                 && grade.equals(e.grade);
     }
 }

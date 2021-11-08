@@ -5,13 +5,11 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.edrecord.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.edrecord.model.name.Name;
 
 /**
  * A list of assignments that enforces uniqueness among its elements and does not allow nulls.
@@ -20,18 +18,19 @@ import seedu.edrecord.model.name.Name;
  * so as to ensure that the assignment being added or updated is unique in terms of identity in the
  * UniqueAssignmentList. However, the removal of an assignment uses Assignment#equals(Object) so as
  * to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Assignment#isSameAssignment(Assignment)
  */
 public class UniqueAssignmentList implements Iterable<Assignment> {
-
     private static final Weightage maximumTotalWeightage = new Weightage("100");
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    private int assignmentCounter = 1;
 
     /**
      * Returns true if the list contains an assignment with the same identity as the given argument.
@@ -53,6 +52,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     /**
      * Adds an assignment to the list.
      * The assignment must not already exist in the list.
+     *
      * @param toAdd The assignment to be added.
      */
     public void add(Assignment toAdd) {
@@ -60,6 +60,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         if (contains(toAdd)) {
             throw new DuplicateAssignmentException();
         }
+        assignmentCounter++;
         internalList.add(toAdd);
     }
 
@@ -74,10 +75,6 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new AssignmentNotFoundException();
-        }
-
-        if (!target.isSameAssignment(editedAssignment) && contains(editedAssignment)) {
-            throw new DuplicateAssignmentException();
         }
 
         internalList.set(index, editedAssignment);
@@ -116,17 +113,34 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
-     * Returns an {@code Optional} containing the assignment with the given name, if it exists.
+     * Returns true if there is another assignment with the same name in the list.
      */
-    public Optional<Assignment> searchAssignment(Name name) {
-        // Create dummy assignment to search by name
-        Assignment a = new Assignment(name, new Weightage("0"), new Score("0"));
-        int index = internalUnmodifiableList.indexOf(a);
-        if (index == -1) {
-            return Optional.empty();
-        } else {
-            return Optional.of(internalUnmodifiableList.get(index));
-        }
+    public boolean hasSameName(Assignment assignment) {
+        requireNonNull(assignment);
+        return internalList.stream().anyMatch(asg -> !(asg.equals(assignment)) && asg.isSameAssignment(assignment));
+    }
+
+    /**
+     * Returns true if there is another assignment with the same ID in the list.
+     */
+    public boolean hasSameId(Assignment assignment) {
+        requireNonNull(assignment);
+        return internalList.stream().anyMatch(asg -> !(asg.equals(assignment))
+                && asg.getId().equals(assignment.getId()));
+    }
+
+    /**
+     * Returns the current counter for this module's assignment ID.
+     */
+    public int getAssignmentCounter() {
+        return assignmentCounter;
+    }
+
+    /**
+     * Sets the counter for this module's assignment ID to the given value.
+     */
+    public void setAssignmentCounter(int i) {
+        assignmentCounter = i;
     }
 
     /**

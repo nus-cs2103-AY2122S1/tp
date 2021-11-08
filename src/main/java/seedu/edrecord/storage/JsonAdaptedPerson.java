@@ -3,6 +3,7 @@ package seedu.edrecord.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.edrecord.commons.exceptions.IllegalValueException;
+import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
@@ -27,6 +30,8 @@ import seedu.edrecord.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String INVALID_ASSIGNMENT = "Assignment does not exist.";
+    public static final String GRADE_SCORE_MORE_THAN_ASSIGNMENT = "Grade score is more than assignment max score.";
 
     private final String name;
     private final String phone;
@@ -34,6 +39,7 @@ class JsonAdaptedPerson {
     private final String info;
     private final String mods;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedGrade> grades = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,7 +48,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String info,
                              @JsonProperty("modules") String mods,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("grades") List<JsonAdaptedGrade> grades) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +57,9 @@ class JsonAdaptedPerson {
         this.mods = mods;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (grades != null) {
+            this.grades.addAll(grades);
         }
     }
 
@@ -65,6 +75,12 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        AssignmentGradeMap grades = source.getGrades();
+        grades.getGrades().keySet().forEach(asg -> {
+            int id = asg.getId();
+            Grade grade = grades.findGrade(asg);
+            this.grades.add(new JsonAdaptedGrade(id, grade));
+        });
     }
 
     /**
@@ -154,9 +170,25 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        // TODO change `new AssignmentGradeMap()` to save grades
-        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleSet, modelTags,
-                new AssignmentGradeMap());
+        final AssignmentGradeMap modelGrades = new AssignmentGradeMap();
+
+        if (!grades.isEmpty()) {
+            Module mod = moduleSet.getModules().stream().findFirst().get();
+            for (JsonAdaptedGrade grade : grades) {
+                Map.Entry<Integer, Grade> pair = grade.toModelType();
+                int id = pair.getKey();
+                Grade modelGrade = pair.getValue();
+                Assignment assignment = mod.getAssignment(id)
+                        .orElseThrow(() -> new IllegalValueException(INVALID_ASSIGNMENT));
+                if (modelGrade.getScore().isPresent()
+                        && modelGrade.getScore().get().compareTo(assignment.getMaxScore()) > 0) {
+                    throw new IllegalValueException(GRADE_SCORE_MORE_THAN_ASSIGNMENT);
+                }
+                modelGrades.add(assignment, pair.getValue());
+            }
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleSet, modelTags, modelGrades);
     }
 
 }
