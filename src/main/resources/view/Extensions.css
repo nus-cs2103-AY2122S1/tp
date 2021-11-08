@@ -1,11 +1,18 @@
 
 .error {
-    -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
+    -fx-text-fill: #ff9e9e !important; /* The error class should always override the default text-fill style */
 }
 
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
-    -fx-background: #383838;
+    -fx-background: #f5f6fa;
+}
+
+.barcode_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #4d4d4d !important;
+    -fx-graphic: url("../images/barcode.png");
 }
 
 .tag-selector {

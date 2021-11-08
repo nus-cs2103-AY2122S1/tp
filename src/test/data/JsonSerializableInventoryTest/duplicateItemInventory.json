@@ -1,0 +1,17 @@
+{
+  "items": [ {
+    "name": "Milk Cookie",
+    "id": 943512,
+    "count": 5,
+    "costPrice": 1.0,
+    "salesPrice": 2.0,
+    "tagged": [ "bestseller" ]
+  }, {
+    "name": "Milk Cookie",
+    "id": 943512,
+    "count": 5,
+    "costPrice": 1.0,
+    "salesPrice": 2.0,
+    "tagged": [ "bestseller" ]
+  } ]
+}

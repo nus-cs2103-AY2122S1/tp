@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant ":SortCommand" as SortCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":ItemNameComparator" as ItemNameComparator MODEL_COLOR
+end box
+[-> LogicManager : execute(find n/chocolate)
+activate LogicManager
+
+
+LogicManager -> AddressBookParser : parseCommand(find n/chocolate)
+activate AddressBookParser
+
+create SortCommandParser
+AddressBookParser -> SortCommandParser
+activate SortCommandParser
+
+create SortCommand
+SortCommandParser -> SortCommand : parse(n/)
+activate SortCommand
+
+SortCommand --> LogicManager
+deactivate SortCommand
+
+LogicManager -> SortCommand : execute()
+activate SortCommand
+
+create ItemNameComparator
+LogicManager -> ItemNameComparator : execute()
+activate ItemNameComparator
+
+SortCommand -> Model : SortItems()
+activate Model
+
+ItemNameComparator --> Model
+deactivate ItemNameComparator
+
+Model --> SortCommand
+deactivate Model
+
+SortCommand --> LogicManager : result
+deactivate SortCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

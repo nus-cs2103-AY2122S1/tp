@@ -1,5 +1,6 @@
-title: "AB-3"
-theme: minima
+title: "BogoBogo"
+remote_theme: pmarsceill/just-the-docs  #Comment this out when working locally
+#theme: "just-the-docs" #Commmen this out when working remotely
 
 header_pages:
   - UserGuide.md
@@ -8,7 +9,7 @@ header_pages:
 
 markdown: kramdown
 
-repository: "se-edu/addressbook-level3"
+repository: "AY2122S1-CS2103-F10-2/tp"
 github_icon: "images/github-icon.png"
 
 plugins:

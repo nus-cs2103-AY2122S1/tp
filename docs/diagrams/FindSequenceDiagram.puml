@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate MODEL_COLOR
+end box
+[-> LogicManager : execute(sort n/)
+activate LogicManager
+
+
+LogicManager -> AddressBookParser : parseCommand(sort n/)
+activate AddressBookParser
+
+create FindCommandParser
+AddressBookParser -> FindCommandParser
+deactivate FindCommand
+
+create FindCommand
+FindCommandParser -> FindCommand : parse(n/chocolate)
+activate FindCommand
+
+create NameContainsKeywordsPredicate
+FindCommandParser -> NameContainsKeywordsPredicate : parse(n/chocolate)
+activate NameContainsKeywordsPredicate
+
+NameContainsKeywordsPredicate --> FindCommand
+deactivate NameContainsKeywordsPredicate
+
+FindCommand --> LogicManager
+deactivate FindCommand
+
+LogicManager -> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> Model : updateFilteredItemList()
+activate Model
+
+Model -> NameContainsKeywordsPredicate : test()
+activate NameContainsKeywordsPredicate
+
+NameContainsKeywordsPredicate --> Model
+deactivate NameContainsKeywordsPredicate
+
+Model --> FindCommand
+deactivate Model
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

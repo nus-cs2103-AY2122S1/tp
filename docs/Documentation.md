@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Documentation guide
+parent: For Developers
+nav_order: 5
 ---
 
 **Setting up and maintaining the project website:**

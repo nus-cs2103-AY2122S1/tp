@@ -6,13 +6,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,51 +49,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
-    }
-
-    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +73,75 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String price} into a {@code Double}.
+     * Price must be between [0, 10000000]
+     */
+    public static Double parsePrice(String price) throws ParseException {
+        double priceValue;
+        try {
+            priceValue = Double.parseDouble(price);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PRICE_FORMAT);
+        }
+
+        if (priceValue < 0 || priceValue >= 10000000) {
+            throw new ParseException(Messages.MESSAGE_INVALID_PRICE_RANGE);
+        }
+
+        // Round off to 2 decimal places
+        return (double) Math.round(priceValue * 100) / 100;
+    }
+
+    /**
+     * Parses {@code String id} into an {@code Integer}.
+     */
+    public static Integer parseId(String id) throws ParseException {
+        Integer idValue;
+        try {
+            idValue = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_ID_FORMAT);
+        }
+
+        if (id.length() > 6 || idValue < 0) {
+            throw new ParseException(Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
+        }
+
+        return idValue;
+    }
+
+    /**
+     * Parses {@code Collection<String> idStrings} into a {@code Set<Integers>}.
+     */
+    public static Set<Integer> parseIds(Collection<String> idStrings) throws ParseException {
+        requireNonNull(idStrings);
+        final Set<Integer> idSet = new HashSet<>();
+        for (String idString : idStrings) {
+            idSet.add(parseId(idString));
+        }
+        return idSet;
+    }
+
+    /**
+     * Parses {@code String count} into a {@code Integer}.
+     * Count must be between [1, 999999]
+     */
+    public static Integer parseCount(String count) throws ParseException {
+        int countInteger;
+        try {
+            countInteger = Integer.parseInt(count);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
+        }
+
+        // Check range is valid
+        if (countInteger <= 0 || countInteger > 999999) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
+        }
+
+        return countInteger;
     }
 }

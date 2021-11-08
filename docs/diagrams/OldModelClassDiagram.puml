@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Interface ReadOnlyInventory <<Interface>>
+Interface Model <<Interface>>
+Interface Displayable <<Interface>>
+Interface ReadOnlyTransactionList <<Interface>>
+Interface ReadOnlyBookKeeping <<Interface>>
+Class Model
+Class ReadOnlyInventory
+Class ReadOnlyTransactionList
+Class ReadOnlyBookKeeping
+Class Displayable
+
+Class ModelManager
+Class Inventory
+Class Order
+Class TransactionList
+
+Class UniqueItemList
+Class TransactionRecord
+Class ItemCard
+Class TransactionCard
+
+Class Item {
+    -name: Name
+    -id: Integer
+    -salePrice: Double
+    -costPrice: Double
+}
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+Model .down.> Displayable
+Model .left.> ReadOnlyInventory
+Model .right.> ReadOnlyTransactionList
+
+ModelManager .up.|> Model
+ModelManager -left-> "1" Inventory
+ModelManager -right-> "0..1" Order
+ModelManager -down-> "1" TransactionList
+
+Inventory .right.> Order
+Inventory .up.|> ReadOnlyInventory
+
+Order *--> "1" UniqueItemList
+Inventory *--> "1" UniqueItemList
+
+UniqueItemList -right-> "~* all" Item
+
+Item .up.|> Displayable
+TransactionRecord -[hidden]left-> Item
+TransactionRecord .up.|> Displayable
+
+TransactionRecord .up.|> Order
+Item .up.|> Order
+
+Item .down.> ItemCard
+TransactionRecord .down.> TransactionCard
+
+TransactionList .up.|> ReadOnlyTransactionList
+
+@enduml

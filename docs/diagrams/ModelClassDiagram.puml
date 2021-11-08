@@ -5,50 +5,44 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
+Interface ReadOnlyInventory <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Interface ReadOnlyTransactionList <<Interface>>
+Interface ReadOnlyBookKeeping <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
 Class Model
 Class ModelManager
-Class UserPrefs
+Class ReadOnlyInventory
+Class ReadOnlyTransactionList
+Class ReadOnlyBookKeeping
 Class ReadOnlyUserPrefs
 
-
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
+Class Inventory
+Class TransactionList
+Class BookKeeping
+Class Order
+Class UserPrefs
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Model ..> ReadOnlyBookKeeping
+Model ..> ReadOnlyTransactionList
+Model ..> ReadOnlyInventory
+Model ..> ReadOnlyUserPrefs
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+
+BookKeeping .up.|> ReadOnlyBookKeeping
+Inventory .up.|> ReadOnlyInventory
+TransactionList .up.|> ReadOnlyTransactionList
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModelManager .up.|> Model
+ModelManager --> "1" BookKeeping
+ModelManager --> "1" Inventory
+ModelManager --> "1" TransactionList
+ModelManager --> "0..1" Order
+ModelManager --> "1" UserPrefs
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager -->"~* filtered" Person
 @enduml

@@ -37,6 +37,8 @@ skinparam BackgroundColor #FFFFFFF
 
 skinparam Shadowing false
 
+skinparam classAttributeIconSize 0
+
 skinparam Class {
     FontColor #FFFFFF
     BorderThickness 1
@@ -44,6 +46,18 @@ skinparam Class {
     StereotypeFontColor #FFFFFF
     FontName Arial
 }
+
+skinparam Object {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam classAttributeFontColor #FFFFFF
+
+skinparam methods #FFFFFF
 
 skinparam Actor {
     BorderColor USER_COLOR
@@ -71,5 +85,6 @@ skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
 hide footbox
-hide members
+hide empty methods
+hide empty attributes
 hide circle

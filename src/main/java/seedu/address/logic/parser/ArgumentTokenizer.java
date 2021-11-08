@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -15,15 +17,19 @@ import java.util.stream.Collectors;
  */
 public class ArgumentTokenizer {
 
+    // Regex matching any series of non-whitespace characters followed by "/"
+    public static final String PREFIX_REGEX = "[^\\s]*/";
+
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
-     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     * respective argument values.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixes   Prefixes to tokenize the arguments string with
+     * @param prefixes   Expected prefixes
      * @return           ArgumentMultimap object that maps prefixes to their arguments
+     * @throws           ParseException if an unexpected prefix is detected
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
     }
@@ -32,47 +38,26 @@ public class ArgumentTokenizer {
      * Finds all zero-based prefix positions in the given arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixes   Prefixes to find in the arguments string
+     * @param prefixes   Expected prefixes
      * @return           List of zero-based prefix positions in the given arguments string
      */
-    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
-        return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
-                .collect(Collectors.toList());
-    }
+    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes)
+            throws ParseException {
+        Matcher m = Pattern.compile(PREFIX_REGEX).matcher(argsString);
 
-    /**
-     * {@see findAllPrefixPositions}
-     */
-    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
-        List<PrefixPosition> positions = new ArrayList<>();
+        List<PrefixPosition> prefixPositionList = new ArrayList<>();
+        while (m.find()) {
+            Prefix found = new Prefix(m.group());
 
-        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
-        while (prefixPosition != -1) {
-            PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
-            positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+            // If prefix is unexpected, throw parse exception
+            if (!List.of(prefixes).contains(found)) {
+                throw new ParseException(String.format("Unexpected prefix identified: %s", m.group()));
+            }
+
+            prefixPositionList.add(new PrefixPosition(found, m.start()));
         }
 
-        return positions;
-    }
-
-    /**
-     * Returns the index of the first occurrence of {@code prefix} in
-     * {@code argsString} starting from index {@code fromIndex}. An occurrence
-     * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
-     * such occurrence can be found.
-     *
-     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
-     * {@code fromIndex} = 0, this method returns -1 as there are no valid
-     * occurrences of "p/" with whitespace before it. However, if
-     * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
-     * {@code fromIndex} = 0, this method returns 5.
-     */
-    private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
-        int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
-        return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+        return prefixPositionList;
     }
 
     /**

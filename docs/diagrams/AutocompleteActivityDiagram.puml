@@ -1,0 +1,20 @@
+@startuml
+
+skinparam defaultTextAlignment center
+
+start
+:User inputs command;
+
+switch()
+case ( User enters command)
+  :BogoBogo handles command;
+  :Input textfield is cleared;
+case ( User requests autocomplete)
+  :BogoBogo suggests a completed command;
+  :Input textfield is updated;
+endswitch
+
+
+stop
+
+@enduml

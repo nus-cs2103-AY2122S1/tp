@@ -7,26 +7,33 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBookKeeping;
+import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.ReadOnlyTransactionList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Inventory data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private InventoryStorage inventoryStorage;
     private UserPrefsStorage userPrefsStorage;
+    private TransactionStorage transactionStorage;
+    private BookKeepingStorage bookKeepingStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code InventoryStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(InventoryStorage inventoryStorage, UserPrefsStorage userPrefsStorage,
+                          TransactionStorage transactionStorage, BookKeepingStorage bookKeepingStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.inventoryStorage = inventoryStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.transactionStorage = transactionStorage;
+        this.bookKeepingStorage = bookKeepingStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -47,33 +54,87 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Inventory methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getInventoryFilePath() {
+        return inventoryStorage.getInventoryFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyInventory> readInventory() throws DataConversionException, IOException {
+        return readInventory(inventoryStorage.getInventoryFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyInventory> readInventory(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return inventoryStorage.readInventory(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveInventory(ReadOnlyInventory inventory) throws IOException {
+        saveInventory(inventory, inventoryStorage.getInventoryFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveInventory(ReadOnlyInventory inventory, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        inventoryStorage.saveInventory(inventory, filePath);
     }
 
+    // ================ Transaction methods ==============================
+
+    @Override
+    public Path getTransactionFilePath() {
+        return transactionStorage.getTransactionFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyTransactionList> readTransactionList() throws DataConversionException, IOException {
+        return readTransactionList(transactionStorage.getTransactionFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyTransactionList> readTransactionList(Path filePath)
+            throws DataConversionException, IOException {
+        return transactionStorage.readTransactionList(filePath);
+    }
+
+    @Override
+    public void saveTransactionList(ReadOnlyTransactionList transactionList) throws IOException {
+        saveTransactionList(transactionList, transactionStorage.getTransactionFilePath());
+    }
+
+    @Override
+    public void saveTransactionList(ReadOnlyTransactionList transactionList, Path filePath) throws IOException {
+        transactionStorage.saveTransactionList(transactionList, filePath);
+    }
+
+    // ================ BookKeeping methods ==============================
+
+    @Override
+    public Path getBookKeepingPath() {
+        return bookKeepingStorage.getBookKeepingPath();
+    }
+
+    @Override
+    public Optional<ReadOnlyBookKeeping> readBookKeeping() throws DataConversionException, IOException {
+        return readBookKeeping(bookKeepingStorage.getBookKeepingPath());
+    }
+
+    @Override
+    public Optional<ReadOnlyBookKeeping> readBookKeeping(Path filePath) throws DataConversionException, IOException {
+        return bookKeepingStorage.readBookKeeping(filePath);
+    }
+
+    @Override
+    public void saveBookKeeping(ReadOnlyBookKeeping bookKeeping) throws IOException {
+        saveBookKeeping(bookKeeping, bookKeepingStorage.getBookKeepingPath());
+    }
+
+    @Override
+    public void saveBookKeeping(ReadOnlyBookKeeping bookKeeping, Path filePath) throws IOException {
+        bookKeepingStorage.saveBookKeeping(bookKeeping, filePath);
+    }
 }

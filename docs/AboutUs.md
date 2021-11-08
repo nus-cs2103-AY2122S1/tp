@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About Us
+parent: The Team
 ---
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
@@ -9,51 +10,38 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Bryan Wee Shun Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bryanwee023.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bryanwee023)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: UI, Scheduling and Tracking, Git Expert
 
-### Johnny Doe
+### Hay Man Hnin Lwin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gracewang2322.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gracewang2322)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation, Deliverables and Deadlines
 
-### James Doe
+### Wang Pei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wangpeialex.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/wangpeialex)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, Storage
+
+### Bernardus Krishna
+
+<img src="images/bernarduskrishna.png" width="200px">
+
+[[github](https://github.com/bernarduskrishna)]
+
+* Role: Developer
+* Responsibilities: Model, Logic

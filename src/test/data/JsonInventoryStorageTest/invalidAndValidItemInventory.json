@@ -1,0 +1,16 @@
+{
+  "items": [ {
+    "name": "Valid Item",
+    "count": 1,
+    "costPrice": 1.0,
+    "salesPrice": 2.0,
+    "id": "9482424"
+  }, {
+    "name": "Item With Invalid Tag",
+    "count": 1,
+    "id": "9482424",
+    "costPrice": 1.0,
+    "salesPrice": 2.0,
+    "tagged": ["invalid tag!"]
+  } ]
+}

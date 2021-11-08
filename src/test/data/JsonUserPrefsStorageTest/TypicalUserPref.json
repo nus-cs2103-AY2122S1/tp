@@ -7,5 +7,7 @@
       "y" : 100
     }
   },
-  "addressBookFilePath" : "addressbook.json"
+  "inventoryFilePath" : "inventory.json",
+  "transactionFilePath" : "transaction.json",
+  "bookKeepingFilePath" : "bookKeeping.json"
 }

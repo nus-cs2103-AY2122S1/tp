@@ -5,37 +5,43 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private static final int INITIAL_SEED = 9;
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     * Returns true if any of the phrases in {@code sentence} starts with the {@code query}.
+     * Ignores case.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsWordIgnoreCase("ABc def", "DE") == true
+     *       containsWordIgnoreCase("ABc def", "def ghi") == false
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param query cannot be null
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean phrasesStartsWithQuery(String sentence, String query) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(query);
 
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String preppedQuery = query.trim().toLowerCase();
+        checkArgument(!preppedQuery.isEmpty(), "query parameter cannot be empty");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String preppedSentence = sentence.toLowerCase();
+        // Indexes of start of each word in the sentence
+        IntStream phrasesIndexes = IntStream.range(0, sentence.length() - 1).filter(
+            x -> sentence.charAt(x) != ' '
+                 && (x == 0 || sentence.charAt(x - 1) == ' ')
+        );
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        // True if any phrase starts with the query
+        return phrasesIndexes
+                .anyMatch(i -> preppedSentence.startsWith(preppedQuery, i));
     }
 
     /**
@@ -64,5 +70,33 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+
+    /**
+     * Generates a random alphanumeric string with default length 10
+     * and the given random seed.
+     * Credit to: https://www.baeldung.com/java-random-string
+     */
+    public static String generateRandomString(long randomSeed) {
+        final int leftLimit = 97; // letter 'a'
+        final int rightLimit = 122; // letter 'z'
+        int defaultLength = 10;
+        Random random = new Random(randomSeed);
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(defaultLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
+    }
+
+    /**
+     * Generates a random alphanumeric string with default random seed as system time.
+     */
+    public static String generateRandomString() {
+        return generateRandomString(new Random(INITIAL_SEED).nextInt());
     }
 }
