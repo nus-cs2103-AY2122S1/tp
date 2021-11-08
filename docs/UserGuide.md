@@ -658,7 +658,7 @@ If your changes to the data file make its format invalid, contHACKS will discard
     <td> Listing all lessons</td>
     <td>
         <code>listc</code><br>
-        <code>lc</code>
+        <code>lsc</code>
     </td>
     <td>
         <code>listc</code>
