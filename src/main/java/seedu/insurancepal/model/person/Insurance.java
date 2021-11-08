@@ -14,13 +14,15 @@ public class Insurance {
     public static final String INSURANCE_SUFFIX = " ins.";
     public static final String INVALID_ARG_SUFFIX = " is not an insurance type";
     public static final String LONG_INSURANCE_PREFIX = "Insurance '";
-    public static final String LONG_INSURANCE_SUFFIX = "' is longer than 20 characters";
+    public static final int MAX_INSURANCE_LENGTH = 24;
+    public static final String LONG_INSURANCE_SUFFIX = "' is longer than "
+            + MAX_INSURANCE_LENGTH + " characters";
     public static final String MESSAGE_CONSTRAINTS =
             "Insurance type must be one of the following: "
             + String.join(", ", Arrays.stream(InsuranceType.values())
                     .map(InsuranceType::getTypeName)
                     .collect(Collectors.toList()));
-    public static final int MAX_INSURANCE_LENGTH = 24;
+
 
     private InsuranceType type;
     private String brand;
