@@ -17,11 +17,17 @@ import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new {@code UntagCommand} object
+ */
 public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code UntagCommand}
-     * and returns an UntagCommand object for execution.
+     * and returns an {@code UntagCommand} object for execution.
+     *
+     * @param args user input.
+     * @return {@code UntagCommand} which untags a contact at the specific index.
      * @throws ParseException if the user input does not conform the expected format
      */
     public UntagCommand parse(String args) throws ParseException {

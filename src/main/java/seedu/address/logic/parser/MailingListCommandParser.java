@@ -16,7 +16,7 @@ import seedu.address.logic.commands.MailingListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses the command
+ * Parses input arguments and creates a new {@code MailingListCommand} object.
  */
 public class MailingListCommandParser implements Parser<MailingListCommand> {
 
@@ -28,6 +28,9 @@ public class MailingListCommandParser implements Parser<MailingListCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the MailingListCommand
      * and returns a MailingListCommand object for execution.
+     *
+     * @param args user input.
+     * @return {@code MailingListCommand} which generates a csv file with displayed contacts.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MailingListCommand parse(String args) throws ParseException {

@@ -19,7 +19,7 @@ import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Pins a contact identified using it's displayed index from the address book.
+ * Pins a contact identified using it's displayed index from the contact list.
  */
 public class PinCommand extends Command {
 
