@@ -49,7 +49,7 @@ user guide below.
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
-- [Using Commands in combinations](#using-commands-in-combinations)
+- [Using commands in combinations](#using-commands-in-combinations)
 - [Command Summary](#command-summary)
             
             
@@ -668,7 +668,7 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Using Commands in combinations
+## Using commands in combinations
 
 One of the most common use patterns we expect you to go through, is using our `findClient`/`findOrder`/`findTask`
 to first filter the list to items of interest, before then using other commands. We provide an example here. Suppose you 
