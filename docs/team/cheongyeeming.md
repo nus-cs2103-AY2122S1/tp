@@ -14,19 +14,13 @@ Given below are my contributions to the project.
 
 ### New Features
 
-* **Telegram Class**:
-    * Pull requests [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54)
-    * What it does: Allows user to store the Telegram handles of people in their contacts.
+* **Telegram and Github Class**:
+    * Pull requests 
+    [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54) and
+    [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88)
+    * What it does: Allows user to store the Telegram handle and Github username of people.
     * Justification: Provides convenience when looking to connect with any of the
-     existing contacts.
-    * Highlights: The implementation was rather challenging as it required simultaneous
-    changes to occur in the Model and Logic component.
-    
-* **Github Class**:
-    * Pull requests [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88)
-    * What it does: Allows user to store the Github usernames of people in their contacts.
-    * Justification: Provides convenience before looking to connect with any of the
-     existing contacts.
+     existing contacts without having to source for ways to communicate and understand.
     * Highlights: The implementation was rather challenging as it required simultaneous
     changes to occur in the Model and Logic component.
     
