@@ -328,8 +328,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+  
 
 
 
@@ -385,9 +384,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | curious user                               | view statistics about the contacts that I have added | derive more information about my contacts
 | `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
-
-
-*{More to be added}*
 
 ### Use cases
 
@@ -569,7 +565,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be usable by a novice who has never used any similar application.
 5. The project is expected to adhere to a schedule that delivers a new version every 2 weeks.
-*{More to be added}*
+
 
 ### Glossary
 
@@ -604,6 +600,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -619,16 +616,14 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Sort Test
-1. Test case: `sort`
+1. Test case: `sort`<br>
    Expected: List is sorted by name.
-2. Test case: `sort -r`
+2. Test case: `sort -r`<br>
    Expected: List is sorted by name in reverse.
-3. Test case: `sort \T`
+3. Test case: `sort \T`<br>
    Expected: List is sorted by TutorialID
-4. Test case: `sort \a`
+4. Test case: `sort \a`<br>
    Expected: No change to list. Error details shown in status message.
 
 ### Add Test
@@ -659,13 +654,76 @@ testers are expected to do more *exploratory* testing.
 2. Test case: `bulk_tag t/friends t/passed`
    <br> Expected: Added the Tags [passed] [friends] to the Persons. Now tag `passed` is added to all the person and `friends` already existed for all the persons
    
+### Import and Export
+
+1. Exporting then importing back original list of contacts
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `export currList.json`<br>
+       Expected: The current contact list is exported to the file currList.json
+    
+       1. Test case: `edit 0 n/Amanda`<br>
+       Expected: First contact name is updated to Amanda
+       
+       2. Test case: `import currList.json`<br>
+       Expected: The previous unedited old contact will be added into the current contact list
+       
+    3. Other incorrect delete commands to try: `import`, `export` <br>
+       Expected: Error details shown in the status message.
+
+2. Export last searched list of contacts
+
+   1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+   1. Test case: `export friends.json`<br>
+      Expected: Last searched contacts are exported to json file, friends.json
+
+### Export emails of last searched list of contacts
+
+
+1. Export emails of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `exportemail emails.txt`<br>
+       Expected: Emails of all contacts are exported to emails.txt
+
+    1. Other incorrect delete commands to try: `exportemail` <br>
+       Expected: Error details shown in the status message.
+
+1. Export emails of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `exportemail friends.txt`<br>
+       Expected: Emails of last searched contacts are exported to emails.txt
+
+
+
+### Get Statistics of last searched list of contacts
+
+1. Show statistics of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of all the contacts are shown in the display
+
+1. Show statistics of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
+   
 
 ## Effort
 The difficulty level for our project is at a relatively moderate level. 
