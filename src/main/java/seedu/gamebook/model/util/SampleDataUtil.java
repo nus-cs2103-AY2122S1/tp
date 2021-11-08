@@ -10,7 +10,7 @@ import seedu.gamebook.model.gameentry.GameEntry;
 import seedu.gamebook.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code GameBook} with sample data.
  */
 public class SampleDataUtil {
     public static GameEntry[] getSampleGameEntries() {

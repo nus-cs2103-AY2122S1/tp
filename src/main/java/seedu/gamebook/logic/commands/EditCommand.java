@@ -43,9 +43,9 @@ public class EditCommand extends Command {
         + "[" + PREFIX_LOCATION + "LOCATION] "
         + "[" + PREFIX_TAG + "TAGS]";
     public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
-        + "number of entries in your game list.";
+        + "number of entries in the displayed game list.";
     public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
-        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.\n/s and /e are not allowed as inputs.";
     public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
         + COMMAND_WORD + " 1 "
         + PREFIX_GAMETYPE + "poker "
@@ -56,14 +56,17 @@ public class EditCommand extends Command {
         + "Format:\n" + COMMAND_FORMAT + "\n\n"
         + COMMAND_NOTE + "\n\n"
         + "Example:\n" + COMMAND_EXAMPLE;
-
+    public static final String COMMAND_NOT_ACCEPTED_WITHOUT_GAME_LIST = "This command can only be used when a game list"
+        + " is shown. Please use \"list\" to show all game entries.";
+    public static final String MESSAGE_FAILURE_WITHOUT_GAME_LIST = COMMAND_FORMAT + "\n"
+        + COMMAND_NOT_ACCEPTED_WITHOUT_GAME_LIST;
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_FIELDS_ARE_IDENTICAL =
             "At least one field must be different from original game entry.";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
-            + "game type and date/datetime already exists.";
+            + "game type and date already exists.";
     public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     private final Index index;
@@ -75,7 +78,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * @param index              of the game in the filtered game list to edit
+     * @param index of the game in the filtered game list to edit
      * @param editGameDescriptor details to edit the game with
      */
     public EditCommand(Index index, EditGameEntryDescriptor editGameDescriptor) {

@@ -15,7 +15,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final FindCommand DUMMY = new FindCommand();
-    public static final String COMMAND_FORMAT = COMMAND_WORD + " [KEYWORDS]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " KEYWORDS";
     public static final String COMMAND_NOTE = "Multiple keywords are allowed. Each keyword should be separated by a "
         + "whitespace.";
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_NOTE;

@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 
 public class DatePlayed implements Comparable<DatePlayed> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should a valid date and be in \"yyyy-MM-dd HH:mm\" or \"yyyy-MM-dd\" format.";
+            "Date should be a valid date and be in \"yyyy-MM-dd HH:mm\" or \"yyyy-MM-dd\" format.";
     public static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DatePlayed EMPTY = new DatePlayed(new Date(0));
@@ -45,8 +45,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
                 date = DATE_FORMAT.parse(trimmedString);
                 this.isTimeIndicated = false;
             } catch (ParseException parseException) {
-                // Will never happen
-                date = null;
+                throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
             }
         }
 
@@ -150,7 +149,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
             return true;
         } else if (other instanceof DatePlayed) {
             DatePlayed tmp = (DatePlayed) other;
-            if (isTimeIndicated && !tmp.isTimeIndicated || !isTimeIndicated && tmp.isTimeIndicated) {
+            if (isTimeIndicated ^ tmp.isTimeIndicated) {
                 return false;
             }
             return isTimeIndicated && tmp.isTimeIndicated
