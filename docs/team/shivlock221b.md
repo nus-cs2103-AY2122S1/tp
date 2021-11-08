@@ -3,7 +3,7 @@ layout: page
 title: Shivam Tiwari's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: ComputingConnection
 
 *ComputingConnection* is for entrepreneurial students in NUS Computing who want to **keep track of other students’ skill sets so that they can easily look for suitable people to work with on future projects.** *ComputingConnection* is optimized for Command Line Interface (CLI) over a Graphical User Interface (GUI) for efficiency with a keyboard.
 
