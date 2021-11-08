@@ -8,13 +8,9 @@ title: User Guide
 Welcome to Socius User Guide! 
 This User Guide familarises you with the commands and functionality of Socius, enabling you to get the most out of Socius.
 
-Choose a section from the table of contents below to find step-by-step guides on how to use Socius! If you are an experienced Socius user, a command summary table is available at the end of the user guide for your reference!
+If you are an experienced Socius user, a [command summary table](#command-summary) is available at the end of the user guide for your reference!
 
-The Socius User Guide gets you started with Socius.
-This User Guide familarises you with the commands and functionality of Socius, enabling you to get the most out of Socius.
-If you are an experienced Socius user, a command summary table is available at the end of the user guide for your reference!
-
-Are you a developer? Make sure to check out our Developer Guide too! You can find the Developer Guide [here](https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/docs/DeveloperGuide.md).
+Are you a developer? Make sure to check out our [Developer Guide]((https://github.com/AY2122S1-CS2103T-W08-4/tp/blob/master/docs/DeveloperGuide.md)) too!
 
 We hope that you will have a great time using Socius! :)
 
