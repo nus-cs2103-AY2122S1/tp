@@ -794,7 +794,7 @@ Use case resumes from step 3.
 
 * 1a. Tables are not set yet.
     * 1a1. System requests user to set the tables.
-    * 1a2. User <u>sets the tables (UC12)</u>
+    * 1a2. User <u>sets the tables (UC16)</u>
 
     Use case resumes from step 1.
 
@@ -1192,7 +1192,7 @@ Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 
-**Use case (UC17): Sort Customers in RHRH*
+**Use case (UC17): Sort Customers in RHRH**
 
 **MSS**
 
