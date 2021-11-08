@@ -46,17 +46,17 @@ It is intended to be used by NUS students, to help keep track of the students an
 
 Attribute Name | Type | Argument Tag | Example
 ---------------|------|--------------|--------
-Index (CCA ID, Person ID or Reminder ID) | Integer | (NONE) | `1`, `5`, `10`
-Name | String (alphanumeric characters or spaces) | `n/` | `n/Alice`, `n/NUSSO`
+Index (CCA ID, Person ID or Reminder ID) | Positive integer | (NONE) | `1`, `5`, `10`
+Name | String (alphanumeric English characters or spaces) | `n/` | `n/Alice`, `n/NUSSO`
 Phone Number | String containing integers only | `p/` | `p/91234567`, `p/0123`
-Email | String | `e/` | `e/alice@mail.com`, `e/nusso123@nus`
+Email | String representing email in RFC822 specification | `e/` | `e/alice@mail.com`, `e/nusso123@nus`
 Address | String | `a/` | `a/22 College Avenue East`
 Start date | Date in yyyy-MM-dd format | `sd/` | `sd/2021-10-5`
 Frequency | A positive integer followed by a time period; the time period is either `d` (daily), `w` (weekly), `m` (monthly) or `y` (yearly); the integer may range from 1 to 100 (inclusive) | `f/` | `f/3d`, `f/2w`, `f/6m`, `f/1y`
 Occurrences | Positive integer from 1 to 50 (inclusive) | `o/` | `o/10`
-Person ID | Integer | `pid/` | `pid/1`
-CCA ID | Integer | `cid/` | `cid/1`
-Tag | String (alphanumeric characters with no spaces) | `t/` | `t/friend`
+Person ID | Positive integer | `pid/` | `pid/1`
+CCA ID | Positive integer | `cid/` | `cid/1`
+Tag | String (alphanumeric English characters with no spaces) | `t/` | `t/friend`
 
 --------------------------------------------------------------------------------------------------------------------
 
