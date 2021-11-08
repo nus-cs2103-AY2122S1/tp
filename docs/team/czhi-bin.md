@@ -69,12 +69,4 @@ Given below are my contributions to the project.
 
 **Community**:
   * PRs reviewed (with non-trivial review comments):
-    * [#45](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45)
-    * [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57)
-    * [#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77)
-    * [#84](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/84)
-    * [#100](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/100)
-    * [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131)
-    * [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135)
-    * [#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136)
-    * [#139](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/139)
+    * [#45](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/45), [#57](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/57), [#77](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/77), [#84](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/84), [#100](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/100), [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131), [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135), [#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136), [#139](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/139)
