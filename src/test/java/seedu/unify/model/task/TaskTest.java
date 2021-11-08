@@ -66,7 +66,7 @@ public class TaskTest {
         Task editedQuiz = new TaskBuilder(CS1234_QUIZ).withName(VALID_NAME_QUIZ).build();
         assertFalse(CS1234_QUIZ.equals(editedQuiz));
 
-        // different phone -> returns false
+        // different time -> returns false
         editedQuiz = new TaskBuilder(CS1234_QUIZ).withTime(VALID_TIME_QUIZ).build();
         assertFalse(CS1234_QUIZ.equals(editedQuiz));
 
