@@ -20,8 +20,8 @@ import seedu.programmer.model.student.LabNum;
 public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteLabCommand
+     * and returns an DeleteLabCommand object for execution.
      *
      * @param args The String arguments as given by the user.
      * @throws ParseException if the user input does not conform the expected format.

@@ -27,8 +27,8 @@ import seedu.programmer.model.student.LabTotal;
 public class EditLabCommandParser implements Parser<EditLabCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditLabCommand
+     * and returns an EditLabCommand object for execution.
      *
      * @param args The String arguments as given by the user.
      * @throws ParseException if the user input does not conform the expected format.

@@ -28,6 +28,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an {@code AddCommand} object for execution.
      *
+     * @param args The String arguments as given by the user.
      * @throws ParseException if the user input does not conform the expected format.
      */
     public AddCommand parse(String args) throws ParseException {

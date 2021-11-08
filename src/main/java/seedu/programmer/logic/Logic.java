@@ -17,11 +17,12 @@ import seedu.programmer.model.student.Student;
 import seedu.programmer.storage.Storage;
 
 /**
- * API of the Logic component
+ * API of the Logic component.
  */
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -36,13 +37,17 @@ public interface Logic {
      */
     ReadOnlyProgrammerError getProgrammerError();
 
-    /** Returns an unmodifiable view of the filtered list of students */
+    /**
+     * Returns an unmodifiable view of the filtered list of students.
+     */
     ObservableList<Student> getFilteredStudentList();
 
-    /** Returns tan unmodifiable view of all students  */
+    /** Returns tan unmodifiable view of all students.  */
     ObservableList<Student> getAllStudents();
 
-    /** Returns the selected labs. */
+    /**
+     * Returns the selected labs.
+     */
     ObservableList<DisplayableObject> getSelectedInformation();
 
     /**

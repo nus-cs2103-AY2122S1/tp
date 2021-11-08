@@ -26,6 +26,11 @@ public class ShowCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Class constructor specifying the student at which index to show.
+     *
+     * @param targetIndex The index as displayed on the list (1-indexed) corresponding the student to be shown.
+     */
     public ShowCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

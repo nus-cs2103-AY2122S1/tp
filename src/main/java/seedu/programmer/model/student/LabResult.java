@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a student's name in the ProgrammerError.
+ * Represents a lab result in the ProgrammerError.
  */
 public class LabResult {
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
@@ -12,9 +12,9 @@ public class LabResult {
 
 
     /**
-     * Constructs a {@code Name}.
+     * Class constructor for {@code LabResult}.
      *
-     * @param labResult A valid name.
+     * @param labResult A valid lab result.
      */
     public LabResult(Integer labResult) {
         requireNonNull(labResult);
@@ -28,6 +28,9 @@ public class LabResult {
 
     /**
      * Returns true if a given string is a valid labNum.
+     *
+     * @param test The Integer to be tested against.
+     * @return true if the lab result is valid.
      */
     public static boolean isValidLabResult (Integer test) {
         return test.compareTo(-1) >= 0;
