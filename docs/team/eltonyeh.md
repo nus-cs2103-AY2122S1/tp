@@ -15,17 +15,17 @@ Contributed code: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dash
 
 - **Internal Design**: Create the `UniqueId` class
   - What it does: this allows we to uniquely identify entities including students, groups, tasks, lessons and exams by generating unique id for each object.
-  - Justification: the idea of "unique" id is not that trivial; we need to ensure that there is nearly no possibility to have duplicate ids while trying to make the system easy to implement. For example, we may not assign ids by the order 1, 2, 3, ... since we need to store the largest id now. It will be inconvenient to retrieve that, and there is an upper bound for integer.
+  - Justification: the idea of "unique" id is not that trivial; we need to ensure that there is nearly no possibility to have duplicate ids while trying to make the system easy to implement. [Detail explanation](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#design-consideration)
 - **Internal Design**: Create the interfaces `HasUniqueId` and `TaskAssignable`
   - What it does: `HasUniqueId` is used when a class has a unique id. `TaskAssignable` is used when a class can be assigned a task.
-  - Justification: The main reason to implement these interfaces is to make the code structure more inheritable and decrease duplicate code. For instance, in this way, we can assign and unassign a task to `TaskAssignable` instead of `Student` and `Group` separately.
+  - Justification: The main reason to implement these interfaces is to make the code structure more inheritable and decrease duplicate code. For instance, we can (un)assign tasks to `TaskAssignable` instead of `Student` and `Group` separately.
 - **New Feature**: Ability to add tasks to the app
   - What it does: This allows users to create new tasks and store them in Tutor Master through a command. They can assign tasks to students/groups later. Task added is reusable, i.e., tasks can be assigned to multiple student/group.
 - **New Feature**: Ability to assign tasks to `TaskAssignable` (Students and Groups)
   - What it does: this allows users to assign tasks to their students or student groups through a command.
-  - Justification: My main contribution is:
+  - Justification: My main contribution is
     - Combine the command of assigning tasks to students and assigning tasks to groups into a more generic command.
-    - Reduce duplicate code and increase the code reusability by creating interfaces and inheritance.
+    - Reduce duplicate code and increase the code reusability by interfaces and inheritance.
   - Credit: this feature is based on the command of assigning tasks to students created by my teammate. 
 - **New Feature**: Ability to unassign tasks from `TaskAssignable` (Students and Groups)
   - This allows users to unassign tasks from students/groups. It is the reverse action compared to the feature above.
