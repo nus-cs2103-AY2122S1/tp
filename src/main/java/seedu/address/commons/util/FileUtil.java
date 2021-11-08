@@ -97,7 +97,7 @@ public class FileUtil {
      */
     public static boolean isValidJsonFileName(String test) {
         if (test.isEmpty()) {
-            return true;
+            return false;
         }
         return test.matches(VALIDATION_REGEX);
     }

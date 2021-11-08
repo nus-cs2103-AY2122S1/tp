@@ -33,7 +33,7 @@ public class ImportCommand extends Command {
             + "Parameters: FILENAME\n"
             + "Example: " + COMMAND_WORD + " t35.json";
 
-    public static final String MESSAGE_SUCCESS = "File successfully imported from.\n%s new contacts added";
+    public static final String MESSAGE_SUCCESS = "File successfully imported.\n%s new contacts added";
     public static final String MESSAGE_INCORRECT_FORMAT = String.format("Data file not in the correct format. "
             + "Please make sure that all fields are valid and that the file is in JSON format\n%s", MESSAGE_USAGE);
     public static final String MESSAGE_IO_ERROR =
