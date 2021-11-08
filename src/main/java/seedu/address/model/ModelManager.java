@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupGroupNameEqualsPredicate;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.student.ContainsStudentNamePredicate;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,26 +30,28 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final CsBook csBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Group> filteredGroups;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given csBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCsBook csBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(csBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + csBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.csBook = new CsBook(csBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.csBook.getStudentList());
+        filteredGroups = new FilteredList<>(this.csBook.getGroupList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new CsBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +79,233 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getCsBookFilePath() {
+        return userPrefs.getCsBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setCsBookFilePath(Path csBookFilePath) {
+        requireNonNull(csBookFilePath);
+        userPrefs.setCsBookFilePath(csBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== CsBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setCsBook(ReadOnlyCsBook csBook) {
+        this.csBook.resetData(csBook);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyCsBook getCsBook() {
+        return csBook;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return hasStudent(student.getName());
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public boolean hasStudent(Name name) {
+        requireNonNull(name);
+        return getStudentByName(name) != null;
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void changeStudentGroup(Student student, Group newGroup) {
+        requireNonNull(student);
+        Student foundStudent = getStudentByName(student.getName());
+        Name name = foundStudent.getName();
+        TelegramHandle telegramHandle = foundStudent.getTelegramHandle();
+        Email email = foundStudent.getEmail();
+        Note note = foundStudent.getNote();
+        GroupName groupName = newGroup.getGroupName();
+        UniqueAssessmentList assessments = foundStudent.getUniqueAssessmentList();
+        Student updatedStudent = new Student(name, telegramHandle, email, note, groupName, assessments);
+        csBook.setStudent(foundStudent, updatedStudent);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public Student updateStudentNote(Student student, Note updatedNote) {
+        Name name = student.getName();
+        TelegramHandle telegramHandle = student.getTelegramHandle();
+        Email email = student.getEmail();
+        GroupName groupName = student.getGroupName();
+        UniqueAssessmentList assessments = student.getUniqueAssessmentList();
+        Student editedStudent = new Student(name, telegramHandle, email, updatedNote, groupName, assessments);
+        csBook.setStudent(student, editedStudent);
+        return editedStudent;
+    }
+
+    @Override
+    public void deleteStudent(Student target) {
+        // Retrieve existing group in model
+        GroupName groupName = target.getGroupName();
+        Group retrievedGroup = getGroupByGroupName(groupName);
+
+        // Remove reference to student from the group that the student belonged to
+        retrievedGroup.removeStudentName(target.getName());
+
+        csBook.removeStudent(target);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        // Retrieve existing group in model
+        GroupName groupName = student.getGroupName();
+        Group retrievedGroup = getGroupByGroupName(groupName);
+
+        // Add reference to student into the group
+        retrievedGroup.addStudentName(student.getName());
+
+        csBook.addStudent(student);
+    }
+
+    @Override
+    public Student getStudentByName(Name studentName) {
+        FilteredList<Student> tempFilteredStudents = new FilteredList<>(this.csBook.getStudentList());
+        tempFilteredStudents.setPredicate(new ContainsStudentNamePredicate(studentName));
+
+        // return null if the student is not found
+        if (tempFilteredStudents.isEmpty()) {
+            return null;
+        }
+
+        assert tempFilteredStudents.size() == 1 : "Students name should be unique";
+
+        Student retrievedStudent = tempFilteredStudents.get(0);
+
+        return retrievedStudent;
+    }
+
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+
+        csBook.setStudent(target, editedStudent);
+
+        // remove old student name from its group
+        getGroupByGroupName(target.getGroupName()).removeStudentName(target.getName());
+
+        // add new student name to its group
+        getGroupByGroupName(editedStudent.getGroupName()).addStudentName(editedStudent.getName());
+    }
+
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return hasGroup(group.getGroupName());
+    }
+
+    @Override
+    public boolean hasGroup(GroupName groupName) {
+        requireNonNull(groupName);
+        return getGroupByGroupName(groupName) != null;
+    }
+
+    @Override
+    public void updateGroupStudent(Group group, Student student) {
+        requireAllNonNull(group, student);
+        // get students original group
+        GroupName oldGroupName = student.getGroupName();
+        Group oldGroup = getGroupByGroupName(oldGroupName);
+
+        // remove reference to student in old group
+        oldGroup.removeStudentName(student.getName());
+
+        // get new group
+        GroupName newGroupName = group.getGroupName();
+        Group newGroup = getGroupByGroupName(newGroupName);
+
+        // add reference to student in new group
+        newGroup.addStudentName(student.getName());
+    }
+
+    @Override
+    public void deleteGroup(Group target) {
+        Set<Name> namesOfStudentsToDelete = target.getStudentNames();
+
+        // Delete all students associated with the group
+        for (Name studentName : namesOfStudentsToDelete) {
+            updateFilteredStudentList((student -> student.getName().equals(studentName)));
+            // Should have only 1 student found since we cant have students with same name
+            assert(filteredStudents.size() == 1);
+            csBook.removeStudent(filteredStudents.get(0));
+        }
+        //Resets filtered student list to show all students
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        csBook.removeGroup(target);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        csBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public Group getGroupByGroupName(GroupName groupName) {
+        FilteredList<Group> tempFilteredGroups = new FilteredList<>(this.csBook.getGroupList());
+        tempFilteredGroups.setPredicate(new GroupGroupNameEqualsPredicate(groupName));
+
+        // return null if the group is not found
+        if (tempFilteredGroups.isEmpty()) {
+            return null;
+        }
+
+        assert tempFilteredGroups.size() == 1 : "Group names should be unique";
+
+        Group retrievedGroup = tempFilteredGroups.get(0);
+        return retrievedGroup;
+    }
+
+    @Override
+    public boolean hasAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        return csBook.hasAssessment(student, assessment);
+    }
+
+    @Override
+    public void addAssessment(Student student, Assessment assessment) {
+        csBook.addAssessment(student, assessment);
+    }
+
+    @Override
+    public void deleteAssessment(Student student, Assessment assessment) {
+        csBook.deleteAssessment(student, assessment);
+    }
+
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * {@code versionedCsBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
+    }
+
+    //=========== Filtered Group List Accessors =============================================================
+
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
+    }
+
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +322,10 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return csBook.equals(other.csBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents)
+                && filteredGroups.equals(other.filteredGroups);
     }
 
 }

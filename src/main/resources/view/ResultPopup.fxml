@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.text.Font?>
+
+
+<?import javafx.geometry.Insets?>
+<Label fx:id="result" alignment="CENTER" style="-fx-background-color: DAF1CF; -fx-text-alignment: center; -fx-border-radius: 20;"
+       wrapText="true" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets top="5" right="5" bottom="5" left="15" />
+   </padding>
+   <font>
+      <Font size="25.0" />
+   </font>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <effect>
+      <InnerShadow />
+   </effect>
+</Label>

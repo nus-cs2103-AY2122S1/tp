@@ -1,0 +1,13 @@
+{
+  "students": [ {
+    "name": "Student with invalid name field: Ha!ns Mu@ster",
+    "telegramHandle": "@student",
+    "email": "hans@example.com",
+    "groupName": "CS2103T",
+    "assessments" : []
+  } ],
+  "groups" : [ {
+    "name" : "CS2103T",
+    "description" : "A Software engineering module"
+  } ]
+}

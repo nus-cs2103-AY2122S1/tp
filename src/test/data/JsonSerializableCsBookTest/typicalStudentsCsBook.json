@@ -1,0 +1,72 @@
+{
+  "_comment": "CsBook save file which contains the same Student values as in TypicalStudents#getTypicalCsBook()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "telegramHandle" : "@alice_pauline",
+    "email" : "alice@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : [ {
+      "assessmentName" : "Midterms",
+      "score" : "20/100"
+    }, {
+      "assessmentName" : "Quiz1",
+      "score" : "40/50"
+    }]
+  }, {
+    "name" : "Benson Meier",
+    "telegramHandle" : "@benson_meier",
+    "email" : "johnd@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : [ {
+      "assessmentName" : "Midterms",
+      "score" : "20/100"
+    }, {
+      "assessmentName" : "Quiz1",
+      "score" : "40/50"
+    }]
+  }, {
+    "name" : "Carl Kurz",
+    "telegramHandle" : "@carl_kurz",
+    "email" : "heinz@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : []
+  }, {
+    "name" : "Daniel Meier",
+    "telegramHandle" : "@daniel_meier",
+    "email" : "cornelia@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : []
+  }, {
+    "name" : "Elle Meyer",
+    "telegramHandle" : "@elle_meyer",
+    "email" : "werner@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : []
+  }, {
+    "name" : "Fiona Kunz",
+    "telegramHandle" : "@fiona_kunz",
+    "email" : "lydia@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : []
+  }, {
+    "name" : "George Best",
+    "telegramHandle" : "@george_best",
+    "email" : "anna@example.com",
+    "note" : "",
+    "groupName": "CS2103T",
+    "assessments" : []
+  } ],
+  "groups" : [ {
+    "name" : "CS2103T",
+    "description" : "A Software engineering module"
+  }, {
+    "name" : "CS2101",
+    "description" : "An effective communication module"
+  } ]
+}

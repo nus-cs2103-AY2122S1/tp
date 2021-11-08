@@ -10,9 +10,14 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class ResultPopup
+Class AssessmentListPanel
+Class AssessmentCard
+Class StudentListPanel
+Class StudentCard
+Class GroupListPanel
+Class GroupCard
+Class DetailedStudentCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -31,30 +36,44 @@ HiddenOutside ..> Ui
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "0..1" ResultPopup
+MainWindow *-down-> "0..1" StudentListPanel
+MainWindow *-down-> "0..1" GroupListPanel
+MainWindow *-down-> "0..1" AssessmentListPanel
+MainWindow *-down-> "0..1" DetailedStudentCard
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+StudentListPanel -down-> "*" StudentCard
+GroupListPanel -down-> "*" GroupCard
+AssessmentListPanel -down-> "*" AssessmentCard
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
+ResultPopup --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+AssessmentListPanel --|> UiPart
+AssessmentCard --|> UiPart
+DetailedStudentCard --|> UiPart
+StudentListPanel --|> UiPart
+StudentCard --|> UiPart
+GroupListPanel --|> UiPart
+GroupCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+DetailedStudentCard ..> Model
+AssessmentCard ..> Model
+StudentCard ..> Model
+GroupCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+StudentListPanel -[hidden]left- HelpWindow
+GroupListPanel -[hidden]left- StudentListPanel
 HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+CommandBox -[hidden]left- ResultPopup
+ResultPopup -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml

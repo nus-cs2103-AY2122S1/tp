@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":JsonCsBookStorage" as JsonCsBookStorage STORAGE_COLOR
+participant ":JsonSerializableCsBook" as JsonSerializableCsBook STORAGE_COLOR
+participant ":JsonAdaptedGroup" as JsonAdaptedGroup STORAGE_COLOR
+participant ":JsonAdaptedStudent" as JsonAdaptedStudent STORAGE_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "csBook:CsBook" as CsBook MODEL_COLOR
+participant "group:Group" as Group MODEL_COLOR
+end box
+
+[-> JsonCsBookStorage : readCsBook()
+activate JsonCsBookStorage
+
+JsonCsBookStorage -> JsonSerializableCsBook : toModelType()
+activate JsonSerializableCsBook
+
+JsonSerializableCsBook -> JsonSerializableCsBook : addGroupsToCsBook()
+activate JsonSerializableCsBook
+loop For each JsonAdaptedGroup
+    JsonSerializableCsBook -> JsonAdaptedGroup : toModelType()
+    activate JsonAdaptedGroup
+        return group
+    deactivate JsonAdaptedGroup
+
+end
+deactivate JsonSerializableCsBook
+
+
+JsonSerializableCsBook -> JsonSerializableCsBook : addStudentsToCsBook()
+activate JsonSerializableCsBook
+loop For each JsonAdaptedStudent
+    JsonSerializableCsBook -> JsonAdaptedStudent : toModelType(groupList)
+    activate JsonAdaptedStudent
+    return student
+    deactivate JsonAdaptedStudent
+
+end
+deactivate JsonSerializableCsBook
+
+JsonSerializableCsBook -> JsonSerializableCsBook : addStudentsToGroup(csBook)
+activate JsonSerializableCsBook
+
+JsonSerializableCsBook -> CsBook : getGroupList()
+activate CsBook
+return groupList
+deactivate CsBook
+
+loop Each group in groupList
+JsonSerializableCsBook -> Group : addAll(studentsInGroup)
+activate Group
+return groupWithStudentList
+JsonSerializableCsBook -> CsBook : setGroup(group, groupWithStudentList)
+activate CsBook
+deactivate CsBook
+end
+deactivate JsonSerializableCsBook
+
+JsonSerializableCsBook --> JsonCsBookStorage : CsBook
+deactivate JsonCsBookStorage
+
+
+@enduml

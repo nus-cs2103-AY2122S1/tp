@@ -1,60 +1,99 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.CsBook;
+import seedu.address.model.ReadOnlyCsBook;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.Score;
+import seedu.address.model.group.Description;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code CsBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+    public static Student[] getSampleStudents() {
+
+        Student alex = new Student(new Name("Alex Yeoh"), new TelegramHandle("@alex_yeoh"),
+                new Email("alexyeoh@u.nus.edu"), new Note("Weak in UML diagrams"), new GroupName("CS2103T"));
+        alex.addAssessment(new Assessment(new AssessmentName("iP"), new Score(20, 20)));
+        alex.addAssessment(new Assessment(new AssessmentName("tP"), new Score(47, 50)));
+        alex.addAssessment(new Assessment(new AssessmentName("Finals"), new Score(13, 30)));
+
+        Student bernice = new Student(new Name("Bernice Yu"), new TelegramHandle("@bernice_yu"),
+                new Email("berniceyu@u.nus.edu"), new Note("Can work on articulation of vowels"),
+                new GroupName("CS2101"));
+        bernice.addAssessment(new Assessment(new AssessmentName("OP 1"), new Score(73, 100)));
+        bernice.addAssessment(new Assessment(new AssessmentName("OP 2"), new Score(71, 100)));
+
+        Student charlotte = new Student(new Name("Charlotte Oliveiro"), new TelegramHandle("@charlotte"),
+                new Email("charlotte@u.nus.edu"), new Note("Very convincing presentations"), new GroupName("CS2101"));
+        charlotte.addAssessment(new Assessment(new AssessmentName("OP 1"), new Score(85, 100)));
+        charlotte.addAssessment(new Assessment(new AssessmentName("OP 2"), new Score(91, 100)));
+
+        Student david = new Student(new Name("David Li"), new TelegramHandle("@david_li"),
+                new Email("lidavid@u.nus.edu"), new Note("Weak in OOP principles"), new GroupName("CS2103T"));
+        david.addAssessment(new Assessment(new AssessmentName("iP"), new Score(17, 20)));
+        david.addAssessment(new Assessment(new AssessmentName("tP"), new Score(36, 50)));
+        david.addAssessment(new Assessment(new AssessmentName("Finals"), new Score(27, 30)));
+
+        Student edgar = new Student(new Name("Edgar Oliveiro"), new TelegramHandle("@edgar_oliveiro"),
+                new Email("edgar@u.nus.edu"), new Note(""), new GroupName("CS2103T"));
+        edgar.addAssessment(new Assessment(new AssessmentName("iP"), new Score(14, 20)));
+        edgar.addAssessment(new Assessment(new AssessmentName("tP"), new Score(49, 50)));
+        edgar.addAssessment(new Assessment(new AssessmentName("Finals"), new Score(20, 30)));
+
+        Student irfan = new Student(new Name("Irfan Ibrahim"), new TelegramHandle("@irfan_ibrahim"),
+                new Email("irfan@u.nus.edu"), new Note("Need more help with general oratorical skills"),
+                new GroupName("CS2101"));
+        irfan.addAssessment(new Assessment(new AssessmentName("OP 1"), new Score(55, 100)));
+        irfan.addAssessment(new Assessment(new AssessmentName("OP 2"), new Score(45, 100)));
+
+        Student roy = new Student(new Name("Roy Balakrishnan"), new TelegramHandle("@roy_balakrishnan"),
+                new Email("royb@u.nus.edu"), new Note(""), new GroupName("CS2103T Consult Group 1"));
+        roy.addAssessment(new Assessment(new AssessmentName("iP"), new Score(9, 20)));
+        roy.addAssessment(new Assessment(new AssessmentName("tP"), new Score(39, 50)));
+        roy.addAssessment(new Assessment(new AssessmentName("Finals"), new Score(25, 30)));
+
+        return new Student[] {
+            alex, bernice, charlotte, david, edgar, irfan, roy
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    private static Group[] getSampleGroups() {
+        Group cs2103T = new Group(new GroupName("CS2103T"), new Description("SWE Module"));
+        cs2103T.addAllStudentNames(Arrays.asList(new Name("Alex Yeoh"),
+                new Name("David Li"), new Name("Edgar Oliveiro")));
+
+        Group cs2101 = new Group(new GroupName("CS2101"), new Description("Communications Module"));
+        cs2101.addAllStudentNames(Arrays.asList(new Name("Bernice Yu"),
+                new Name("Charlotte Oliveiro"), new Name("Irfan Ibrahim")));
+
+        Group cs2103TConsultGroup = new Group(new GroupName("CS2103T Consult Group 1"),
+                new Description("Consultion group 1 for CS2103T"));
+        cs2103TConsultGroup.addStudentName(new Name("Roy Balakrishnan"));
+
+        return new Group[]{cs2103T, cs2101, cs2103TConsultGroup};
+    }
+
+    public static ReadOnlyCsBook getSampleCsBook() {
+        CsBook sampleAb = new CsBook();
+        for (Student sampleStudent : getSampleStudents()) {
+            sampleAb.addStudent(sampleStudent);
         }
+
+        for (Group sampleGroup : getSampleGroups()) {
+            sampleAb.addGroup(sampleGroup);
+        }
+
         return sampleAb;
     }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
-    }
-
 }

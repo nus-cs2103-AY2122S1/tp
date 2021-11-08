@@ -1,0 +1,19 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "telegramHandle": "@student",
+    "email": "hans@example.com",
+    "groupName": "CS2103T",
+    "assessments" : []
+  }, {
+    "name": "Student With Invalid Telegram Handle Field",
+    "telegramHandle": "948asdf2424",
+    "email": "hans@example.com",
+    "groupName": "CS2103T",
+    "assessments" : []
+  } ],
+  "groups" : [ {
+    "name" : "CS2103T",
+    "description" : "A Software engineering module"
+  } ]
+}

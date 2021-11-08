@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+
+box Commons COMMONS_COLOR_T1
+participant "<<class>>\nEncryptedJsonUtil" as EncryptedJsonUtil COMMONS_COLOR
+participant "<<class>>\nEncryptionUtil" as EncryptionUtil COMMONS_COLOR
+end box
+
+[-> EncryptedJsonUtil : saveEncryptedJsonFile(serializableCsBook, filePath)
+activate EncryptedJsonUtil
+
+EncryptedJsonUtil -> EncryptionUtil : encryptSerializableObject(serializableCsBook)
+activate EncryptionUtil
+
+EncryptionUtil --> EncryptedJsonUtil : sealedObject
+deactivate EncryptionUtil
+
+@enduml

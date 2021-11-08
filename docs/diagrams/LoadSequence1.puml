@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":JsonSerializableCsBook" as JsonSerializableCsBook STORAGE_COLOR
+participant ":JsonAdaptedGroup" as JsonAdaptedGroup STORAGE_COLOR
+participant ":JsonAdaptedStudent" as JsonAdaptedStudent STORAGE_COLOR
+end box
+[-> JsonSerializableCsBook : addGroupsToCsBook()
+activate JsonSerializableCsBook
+loop For each JsonAdaptedGroup
+    JsonSerializableCsBook -> JsonAdaptedGroup : toModelType()
+    activate JsonAdaptedGroup
+        return group
+    deactivate JsonAdaptedGroup
+
+end
+deactivate JsonSerializableCsBook
+
+
+[-> JsonSerializableCsBook : addStudentsToCsBook()
+activate JsonSerializableCsBook
+loop For each JsonAdaptedStudent
+    JsonSerializableCsBook -> JsonAdaptedStudent : toModelType(groupList)
+    activate JsonAdaptedStudent
+    return student
+    deactivate JsonAdaptedStudent
+
+end
+deactivate JsonSerializableCsBook
+
+
+@enduml
