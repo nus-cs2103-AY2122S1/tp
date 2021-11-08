@@ -30,7 +30,8 @@ Staff'd supports **salary calculation of staff**. By inputting the salaries and 
 --------------------------------------------------------------------------------------------------------------------
 # Table of Contents
 
-  {:toc}
+* Table of Contents
+{:toc}
 
 <br>
 
