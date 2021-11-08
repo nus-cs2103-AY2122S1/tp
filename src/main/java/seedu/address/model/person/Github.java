@@ -32,16 +32,32 @@ public class Github {
 
     /**
      * Returns true if a given string is a valid Github username.
+     *
+     * @param test String of github to be tested against the validation regex.
+     * @return Boolean representation of validity of String of github.
      */
     public static boolean isValidGithub(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the String representation of Github.
+     *
+     * @return String representation of Github.
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * Method to compare two Github objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the Github object that called this method.
+     * @return boolean representation of whether the Github
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -50,6 +66,11 @@ public class Github {
                         (Github) other).value.toLowerCase(Locale.ROOT))); // state check
     }
 
+    /**
+     * Returns the {@code hashCode} of Github.
+     *
+     * @return hashCode of Github.
+     */
     @Override
     public int hashCode() {
         return value.hashCode();
