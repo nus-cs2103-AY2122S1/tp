@@ -367,7 +367,7 @@ Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls t
 Step 4. The user executes a `deleteam 1` command. The `deleteam` command calls `DeleteAllMarkCommand#deleteAllStudentMark()`, then subsequently `Model#setStudent()`and `Model#updateFilteredStudentList()`, modifying and saving the state of ClassMATE by deleting all marks for the 1st student at the given index in the `UniqueStudentList`. This updated list will be displayed to the user.
 
 Using the example of the `AddMarkCommand`,
-when the user enters the `addm` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#logic-component).
+when the user enters the `addm` command to add a tutorial class, the user input command undergoes the same command parsing as described in [“Logic component”](#logic-component).
 During the parsing, a new `Student` instance is created. This `Student` instance will be received by the `AddMarkCommand` when it is created.
 
 The *Sequence Diagram* below summarizes the aforementioned steps.
@@ -408,10 +408,10 @@ ClassMATE allows user to assign a Student or a Tutorial Group to a Tutorial Clas
 
 #### Current Implementation
 The class `ClassCode` facilitates all operations related to classCode. `ClassCode` is implemented such that a
-Tutorial Class with the corresponding ClassCode must exist before the ClassCode can be added. Tutorial Class `G00` is a
-default class that do not need to be created and is an empty ClassCode. It is assigned to a Student whose Tutorial Class has been deleted. 
+Tutorial Class with the corresponding `ClassCode` must exist before the `ClassCode` can be added. Tutorial Class `G00` is a
+default class that do not need to be created and is an empty `ClassCode`. It is assigned to a Student whose Tutorial Class has been deleted. 
 
-Given below is an example of how classCode can be used.
+Given below is an example of how `ClassCode` can be used.
 
 Step 1: After launching the application for the first time, user executes `addstu n/Abigail p/91199119 e/ab@gmail.com a/Downling Park #15-20 c/G08`.
 The `addstu` command calls `Model#hasTutorialClass()`, and the model component checks if the TutorialClass specified by the
@@ -477,7 +477,7 @@ command, except it removes that tutorial group from ClassMATE after checking if 
 in that tutorial group.
 
 Using the example of the `AddGroupCommand`,
-when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#logic-component).
+when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [![img_1.png](img_1.png)“Logic component”](#logic-component).
 During the parsing, a new TutorialGroup instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
 
 The *Sequence Diagram* below summarizes how tutorial groups are added to a tutorial class.
@@ -515,7 +515,7 @@ ClassMATE will then support the following command classes:
 
 Given below is an example of how the Add and Delete Student from Tutorial Groups features can be used:
 
-Step 1. The user launches the application for the first time. The existing set of `tutorialGroups` for each Student would be retrieved from the initial
+Step 1. The user launches the application for the first time. The existing set of `TutorialGroup` for each Student would be retrieved from the initial
 ClassMATE state, and would be displayed with the details the Student. 
 
 Step 2. The user enters `liststu` to list all the existing Students in ClassMATE
@@ -918,8 +918,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a student
 
