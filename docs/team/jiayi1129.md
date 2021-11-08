@@ -11,19 +11,13 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
 Given below are my contributions to the project
 
 
-* **New Feature**: Added the `Patient` class and Risk field to the Patient class [#39](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/39)
+* **New Feature**: Added the `Patient` class and Risk field to the `Patient` class [#39](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/39)
   * What it does: Allows the user to add, edit and remove the risk field from the `Patient` class
   * Justification: This feature improves the product significantly as clinic receptionists now can conveniently view, add, edit and remove the risk profiles of their patients quickly and identify whether any extra follow-ups or measures need to be taken.
   * Highlights: This feature requires the creation of a new `Patient` class that extends from the `Person` class to avoid code duplication as we planned to have another `Doctor` class that extends from the same `Person` class as well (Both `Patient` and `Doctor` is a `Person`).
     Much refactoring has to be done to the codebase as well to change the common class used from `Person` to `Patient`, as `Patient` becomes our object of concern in this project.
 
-* **New Feature**: Added persistent Storage in Json for the Doctor class [#72](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/72)
-  * What it does: Allows the user to save and load the Doctor objects created while using the application.
-  * Justification: This feature is crucial to the product as clinic receptionists can now type in a command, exit the application, and come back and restart the application to see the exact same state the application is in since they last left.
-    The ability to save and load data is universally crucial for most applications today.
-  * Highlights: This feature requires the creation of a `JsonAdaptedDoctor` class that extends from the `JsonAdapatedPerson` class to avoid code and logic duplication. 
-
-* **New Feature**: Added functionality required for the `Model` and `Logic` classes to use the Appointment entity in the application [#108](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/108)
+* **New Feature**: 
   * What it does: Allows the user to execute commands pertaining to appointments and receive feedback in the appointment list.
   * Justification: This feature is crucial to the product as clinic receptionists as the `Model` and `Logic` class is essential for the logical flow of the application. 
     The `Model` class is in charge of holding the appointment list and filtering it to display to the clinic receptionists.
@@ -31,14 +25,7 @@ Given below are my contributions to the project
     Without these two key components, the application would be incomplete as any standalone commands like `AddAppointmentCommand` is unable to be executed an affect any change.
   * Highlights: This feature requires the creation of a new `UniqueAppointmentList` to be used in the `Model` class to manage an appointment list. 
     The `Appointment` class now implements the `Comparable` interface to have natural ordering, and the UI then displays a sorted appointment list that uses this natural comparator.
-
-* **New Feature**: Added persistent storage in Json for the Appointment class [#117](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/117)
-  * What it does: Allows the user to save and load the Appointment objects created while using the application.
-  * Justification: This feature is crucial to the product as clinic receptionists can now type in a command, exit the application, and come back and restart the application to see the exact same state the application is in since they last left.
-    The ability to save and load data is universally crucial for most applications today.
-  * Highlights: This feature requires the creation of a `JsonAdaptedAppointment` and `JsonAdaptedSession` class.
-    To be defensive, I added a layer of check in the function `toModelType` in `JsonSerializablePlannerMd.java` to ensure that the `Patient` and `Doctor` objects in the loaded `Appointment` objects do indeed exist in the application (since we have loaded all the `Patient` and `Doctor` objects prior to this).
-
+    
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=jiayi1129&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=jiayi1129&tabRepo=AY2122S1-CS2103T-T11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project Management**:
@@ -48,6 +35,8 @@ Given below are my contributions to the project
   * Managed release `v1.2`, `v1.2.1`, `v1.3` and `v1.4` (4 releases) on Github
 
 * **Enhancements to existing features**:
+  * Added persistent Storage in Json for the Doctor class [#72](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/72)
+  * Added persistent storage in Json for the Appointment class [#117](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/117)
   * Updated the `isSamePerson` to check for more fields to define equality between people instead of just comparing the names (It is a known fact that people can share the same names) [#38](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/38)
   * Changed `clear` command to `IWANTTOCLEAREVERYTHING` and updated the corresponding documentation [#206](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/206)
   * Consistently added additional tests to improve our test suites [#76](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/76) [#196](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/196)
