@@ -304,10 +304,14 @@ Notes:
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
 
 <div style="page-break-after: always;"></div>
+
 ### Pinning a contact : `pin`
 
-Pins a contact to the top of the contact list. 
+Pins a contact to the top of the contact list.  
 
+Pinned contacts will appear at the top of the unfiltered list  
+![single pinned contact`](images/pinUiSingle.jpg)  
+![two pinned contacts](images/pinUiDouble.jpg)  
 #### Format: 
 * `pin INDEX`
   
