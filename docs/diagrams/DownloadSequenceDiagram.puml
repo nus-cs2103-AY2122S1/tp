@@ -54,6 +54,6 @@ deactivate CommandResult
 DownloadCommand --> LogicManager : command result
 
 
-[<--LogicManager
+[<--LogicManager : command result
 destroy DownloadCommand
 @enduml
