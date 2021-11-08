@@ -330,18 +330,118 @@ The following sequence diagram visually describes the steps above:
 
 ![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
 
-
-#### 4.3.2 Design considerations
-
-**Aspect: How interactions is stored:**
-
-* **Alternative 1 (current choice):** As a list of interactions in the Person object.
+  #### 4.3.2 Design considerations
+  **Aspect: How interactions is stored:**
+  
+  * **Alternative 1 (current choice):** As a list of interactions in the Person object.
   * Pros: Easy to implement, intuitive design and navigatability
   * Cons: Heavy coupling with the person class
-
-* **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
+  
+  * **Alternative 2:** As a list by itself, containing a reference to the Person it is attached to.
   * Pros: More isolated from the Person class, so less changes to overall code
   * Cons: Navigatability is reduced significantly
+
+###  View feature
+
+#### Implementation
+The view mechanism utilizes the same concept as other commands 
+like `add` and `edit`, but has a few distinct changes.
+
+Given below is an example usage scenario and how the view mechanism
+behaves at each step.
+
+Step 1. The user inputs the command `view 2`
+
+Step 2. The command passes through the `LogicManager`. 
+`LogicManager` creates a `AddressBookParser` which would help to 
+parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a view command and creates a
+`ViewCommandParser` object.
+
+Step 4. `ViewCommandParser` helps to extract out the tokens and 
+generate a `ViewCommand`.
+
+Step 5. `ViewCommand` helps to call the updateViewedPerson method,
+so that the GUI shows the correct Person.
+
+The following sequence diagram visually describes the steps above:
+
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+#### Design considerations:
+**Aspect: How viewedPerson is stored:**
+
+* **Alternative 1 (current choice):** As a FilteredList in the ModelManager.
+  * Pros: Easy to implement, similar logic to filteredPersons, making it easy
+    to understand. Easy to implement future versions in case there is a need
+    to add functionality to view multiple contacts at once.
+  * Cons: Not necessarily a good usage of a FilteredList since there should
+    only be a single contact viewed at once for the current version.
+
+* **Alternative 2:** As a single Person instance in the ModelManager.
+  * Pros: More intuitive as there is only a single contact viewed at once currently.
+  * Cons: More rigid and harder to improve upon for future versions.
+
+
+###  Filter feature
+
+#### Implementation
+The filter mechanism utilizes the same concept as other commands like `find` with some tweaks.
+
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user inputs the command `filter f/computing`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's a filter command and creates an `FilterCommandParser` object.
+
+Step 4. `FilterCommandParser` helps to extract out the tokens and generate a `FilterCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![InteractionSequenceDiagram](images/FilterCommandSequenceDiagram.png)
+
+###  Organisations feature
+
+#### Implementation
+The Organisation commands utilize the same concept as other commands like `add` and `delete` with some tweaks.
+
+Given below is an example usage scenario and how the organisation commands behave at each step.
+
+Step 1. The user inputs the command `addorg n/Facebook e/hello@facebook.com`
+
+Step 2. The command passes through the `LogicManager`. `LogicManager` creates a `AddressBookParser` which would help to parse and tokenize the command.
+
+Step 3. `AddressBookParser` sees that it's an AddOrg command and creates a `AddOrgCommandParser` object.
+
+Step 4. `AddOrgCommandParser` helps to extract out the tokens and generate a `AddOrgCommand`. The input validation is mostly done at this stage.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Most input validation will be done at this stage.
+</div>
+
+The following sequence diagram visually describes the steps above:
+
+![OrganisationSequenceDiagram](images/OrganisationSequenceDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How persons in organisations are stored:**
+
+* **Alternative 1 (current choice):** As a list of persons in each organisation in the Address Book.
+    * Pros: Easy to implement, intuitive design
+    * Cons: Any updates to a person in Address Book have to be checked and updated in each organisation
+
+* **Alternative 2:** List of persons in each organisation stores the references to the persons
+    * Pros: Any updates to a person in Address Book is synchronised with the organisations the person is in
+    * Cons: Harder to implement
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -387,8 +487,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user                              | append data fields to a contact | add on new data fields to existing ones                          |
 | `* * *`  | beginner user                              | remove specific data fields | precisely remove incorrect data fields of a contact                       |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
-| `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
+| `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
+| `* * *`  | slightly familiar user                 | delete an organisation                | remove any organisations that are irrelevant or errors                                   |
+| `* * *`  | slightly familiar user                 | add a person to an organisation                | record a person's link to an organsiation                                   |
+| `* * *`  | slightly familiar user                 | delete a person from an organisation                | remove a person's link to an organisation or errors                                   |
 | `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
 | `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
 | `* * `  | slightly familiar user                 | list all my interactions               | have an overview of my interactions with a particular contact                                  |
@@ -429,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to update a contact
 2.  ComputingConnection shows the current details of the contact with editable fields
 3.  User edits the fields
-4.  ComputingConnecction updates the contact accordingly
+4.  ComputingConnection updates the contact accordingly
 
     Use case ends.
 
@@ -495,6 +598,60 @@ Use case ends.
 
   Use case ends.
 
+**Use case: Delete an organisation**
+
+**MSS**
+
+1.  User requests to delete an organisation
+2.  ComputingConnection deletes the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The index provided is invalid.
+    * 1a1. ComputingConnection shows an error message.
+
+  Use case ends.
+
+**Use case: Add a person to an organisation**
+
+**MSS**
+
+1.  User requests to add a person to an organisation
+2.  ComputingConnection adds the person to the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The person index provided is invalid.
+    * 1a1. ComputingConnection shows an error message.
+* 2a. The organisation name provided is invalid.
+    * 2a1. ComputingConnection shows an error message.
+* 3a. The person already exists in the organisation.
+    * 3a1. ComputingConnection shows an error message.
+    
+  Use case ends.
+
+**Use case: Removing a person to an organisation**
+
+**MSS**
+
+1.  User requests to remove a person from an organisation
+2.  ComputingConnection removes the person from the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The person index provided is invalid.
+    * 1a1. ComputingConnection shows an error message.
+* 2a. The organisation name provided is invalid.
+    * 2a1. ComputingConnection shows an error message.
+
+  Use case ends.
+
 **Use case: Delete a specific contact**
 
 **MSS**
@@ -526,6 +683,23 @@ Use case ends.
 **Extensions**
 
 * 1a. The input tag formats are incorrect.
+    * 1a1. ComputingConnection shows an error message.
+
+  Use case ends.
+
+**Use case: View a specific contact**
+
+**MSS**
+
+1.  User requests to view a contact
+2.  ComputingConnection shows the contact's details in the app,
+    with details like remarks and interactions.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input index is invalid.
     * 1a1. ComputingConnection shows an error message.
 
   Use case ends.
