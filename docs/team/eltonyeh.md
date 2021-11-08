@@ -54,6 +54,6 @@ Contributed code: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dash
   - Solved 16 issues assigned to myself. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues?q=is%3Aissue+author%3Aeltonyeh)
   - Created 23 pull requests for our team. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+author%3Aeltonyeh)
     - Some notable PRs: [#62](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/62), [#81](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/81), [#129](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/129), [#213](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/213), [#237](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/237)
-  - Reviewed 17 pull requests created by my teammates. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+reviewed-by%3A%40me)
+  - Reviewed 17 pull requests created by my teammates. [Full list](https://github.com/AY2122S1-CS2103T-W16-4/tp/pulls?q=is%3Apr+reviewed-by%3Aeltonyeh)
     - Some notable reviews: [#71](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/71), [#74](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/74)
   - Report 12 bugs/suggestions for Group W08-2 to help them enhance their product. [Full list](https://github.com/eltonyeh/ped/issues)
