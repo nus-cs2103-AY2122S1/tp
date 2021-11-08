@@ -674,9 +674,7 @@ Priorities: High, Low
 **MSS**
 
 1. User enters add customer command and keys in the customer’s details.
-
 2. Customer is added to RHRH.
-
 3. System confirms that the customer has been added.
 
    Use case ends.
@@ -707,14 +705,10 @@ Use case resumes from step 3.
 
 **Use case (UC02): Add an Employee**
 
-{:no_toc}
-
 **MSS**
 
 1. User enters add employee command and keys in the employee’s details.
-
 2. Employee is added to RHRH.
-
 3. System confirms that the employee has been added.
 
    Use case ends.
@@ -745,14 +739,10 @@ Use case resumes from step 3.
 
 **Use case (UC03): Add a Supplier**
 
-{:no_toc}
-
 **MSS**
 
 1. User enters add supplier command and keys in the supplier’s details.
-
 2. Supplier is added to RHRH.
-
 3. System confirms that the supplier has been added.
 
    Use case ends.
@@ -1356,8 +1346,8 @@ Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 1c. System detects that there are no employees to sort in the current list.
-    * 1c1. System displays an error that there are no employees to sort in the current list.
-
+    * 1c1. System displays an error that there are no employees to sort in the current list. 
+      
   Use case ends.
 
 **Use case (UC19): Get customer who made a reservation in RHRH**
