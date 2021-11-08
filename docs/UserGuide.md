@@ -588,7 +588,7 @@ look at the files in this folder.
 **A**: **No, both usability and functionality wise.** Academy Directory was not developed as a modular-based application, however, some features of our app do implement external modules not declared, and thus is the warning message. The problem has been addressed while our application was developed, but we have decided to left the warning as it is as addressing the warning is outside the scope of CS2103T and our project requirement itself.
 
 **Q**: Why is Telegram a compulsory field and not shown on the student card, yet phone number is optional and is shown on the student card?<br>
-**A**: There are many internal considerations when we design this. Initially, we have planned to put all 3 fields into the student card. However, due to some privacy concerns regarding Telegram handle, as well as the fact that it does not look nice on the card, we decided to remove Telegram out of the card and leave it only for `view`. We may add Telegram again in the future iterations depending on the future.
+**A**: There are many internal considerations when we design this. Initially, we have planned to put all 3 fields into the student card. However, due to some privacy concerns regarding the Telegram handles, as well as the fact that it does not look nice on the card, we decided to remove Telegram out of the card and leave it only for `view`. We may add Telegram again in the future iterations depending on the future.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Summary
