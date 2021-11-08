@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<fx:root minHeight="600" minWidth="450" title="Dashboard" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <icons>
+    <Image url="@/images/programmer_error.png" />
+  </icons>
+  <scene>
+    <Scene fx:id="primaryScene">
+      <stylesheets>
+        <URL value="@../css/Fonts.css" />
+        <URL value="@../css/DarkTheme.css" />
+        <URL value="@../css/Dashboard.css" />
+      </stylesheets>
+
+      <VBox>
+        <SplitPane dividerPositions="0.25" VBox.vgrow="NEVER" orientation="VERTICAL" centerShape="false">
+          <items>
+            <StackPane fx:id="overallStatsPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER" minHeight="150" maxHeight="150">
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+              <Label fx:id="overallStatsLabel" styleClass="overall-stats" />
+            </StackPane>
+            <ScrollPane fx:id="labsMarkedList" VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="scroll-pane-bg">
+              <content>
+                <VBox alignment="center" fx:id="labVBox" styleClass="sroll-pane-bg">
+                  <Label fx:id="labsUnmarkedLabel" styleClass="labs-unmarked" />
+                </VBox>
+              </content>
+            </ScrollPane>
+          </items>
+        </SplitPane>
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>

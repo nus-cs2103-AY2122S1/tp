@@ -1,0 +1,11 @@
+@startuml
+start
+:User executes show command with an index;
+
+if () then ([Valid index])
+    : Show the student's lab results;
+else ([Invalid index])
+    : Display error message in resultDisplay;
+endif
+stop
+@enduml

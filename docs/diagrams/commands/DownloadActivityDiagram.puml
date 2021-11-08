@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes Download command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if (data is present) then ([command downloads data])
+    : user selects destination folder;
+    : write ProgrammerError.json data to CSV file;
+    : display success pop-up message;
+else ([else])
+    : display error pop-up message;
+endif
+stop
+@enduml

@@ -1,0 +1,13 @@
+{
+  "students": [ {
+    "name": "Valid Person",
+    "studentId": "A0212352F",
+    "classId": "B01",
+    "email": "e0518441@u.nus.edu"
+  }, {
+    "name": "Person With Invalid email",
+    "studentId": "A0212352F",
+    "classId": "B01",
+    "email": "e@.com"
+  } ]
+}

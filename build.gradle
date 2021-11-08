@@ -6,7 +6,7 @@ plugins {
     id 'jacoco'
 }
 
-mainClassName = 'seedu.address.Main'
+mainClassName = 'seedu.programmer.Main'
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
@@ -18,6 +18,10 @@ repositories {
 
 checkstyle {
     toolVersion = '8.29'
+}
+
+run {
+    enableAssertions = true
 }
 
 test {
@@ -44,6 +48,10 @@ dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
 
+    compile group: 'org.json', name: 'org.json', version: 'chargebee-1.0'
+    implementation 'com.opencsv:opencsv:4.6'
+
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -66,7 +74,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ProgrammerError.jar'
 }
 
 defaultTasks 'clean', 'test'

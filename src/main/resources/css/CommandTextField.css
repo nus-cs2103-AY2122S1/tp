@@ -1,0 +1,24 @@
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Semibold";
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandTextField {
+    -fx-background-color: transparent -fx-main-bg-color transparent -fx-main-bg-color;
+    -fx-background-insets: 0;
+    -fx-border-color: -fx-main-bg-color -fx-main-bg-color #ffffff -fx-main-bg-color;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+#commandTextField:hover {
+    -fx-border-color: #383838 #383838 -fx-highlight-color #383838;
+}

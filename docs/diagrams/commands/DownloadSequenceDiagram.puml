@@ -1,0 +1,33 @@
+@startuml
+!include ../style.puml
+
+
+box UI UI_COLOR_T1
+Participant ":MainWindow" as mw UI_COLOR
+end box
+
+box Util STORAGE_COLOR
+Participant "<<class>>\nJsonUtil" as ju STORAGE_COLOR
+end box
+
+--> mw : DownloadCommandResult
+
+activate mw
+
+mw -> mw : handleDownload()
+activate mw
+    mw -> ju : getJsonData(filePath)
+    activate ju
+    mw <-- ju : jsonData
+    deactivate ju
+
+    mw -> mw : promptUserForFileDestination()
+    mw -> ju :writeJsonToCsv(jsonData, file)
+
+    activate ju
+    mw <-- ju
+    deactivate mw
+    <-- mw
+deactivate mw
+
+@enduml

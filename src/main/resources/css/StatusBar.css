@@ -1,0 +1,20 @@
+.status-bar {
+    -fx-background-color: derive(-fx-main-bg-color, 30%);
+}
+
+.status-bar .label {
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+    -fx-pref-height: 30px;
+}
+
+.status-bar-with-border {
+    -fx-background-color: derive(-fx-main-bg-color, 30%);
+    -fx-border-color: derive(-fx-main-bg-color, 25%);
+    -fx-border-width: 1px;
+}
+
+.status-bar-with-border .label {
+    -fx-text-fill: white;
+}

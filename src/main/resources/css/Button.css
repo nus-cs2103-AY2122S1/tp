@@ -1,0 +1,24 @@
+/*
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-background-color: -fx-main-bg-color;
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: -fx-light-bg-color;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-main-bg-color;
+}

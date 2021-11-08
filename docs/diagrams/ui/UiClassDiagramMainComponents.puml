@@ -1,0 +1,50 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR_T4
+
+package UI <<Rectangle>> UI_COLOR_T1 {
+Class "{abstract}\nUiPart<Region>" as UiPart UI_COLOR_T4
+Class MainWindow
+Class ResultDisplay
+Class StudentListPanel
+Class StudentCard
+Class LabResultListPanel
+Class LabResultCard
+Class StatusBarFooter
+Class CommandBox
+Class CommandHistory
+}
+
+package Model MODEL_COLOR_T1 {}
+package Logic LOGIC_COLOR_T1 {}
+
+Class HiddenOutside #FFFFFF
+
+HiddenOutside ..> MainWindow
+MainWindow *-down->  "1" CommandBox
+MainWindow *-down-> "\t\t1" ResultDisplay
+MainWindow *-down-> "\t1" StatusBarFooter
+MainWindow *-down-> "\t1" StudentListPanel
+MainWindow *-down-> "\t1" LabResultListPanel
+
+CommandBox -down--> "\t1" CommandHistory
+StudentListPanel --> "   *" StudentCard
+LabResultListPanel --> "1\t" StudentCard
+LabResultListPanel -down-> "\t*" LabResultCard
+
+ResultDisplay --|> UiPart
+CommandBox --|> UiPart
+StudentListPanel --|> UiPart
+StudentCard --|> UiPart
+LabResultListPanel --|> UiPart
+StatusBarFooter -|> UiPart
+
+StudentCard .right.> Model
+MainWindow -right-> Logic
+
+ResultDisplay -[hidden]left- StatusBarFooter
+StatusBarFooter -[hidden]left- LabResultListPanel
+
+@enduml

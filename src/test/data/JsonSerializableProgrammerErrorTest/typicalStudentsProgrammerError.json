@@ -1,0 +1,39 @@
+{
+  "_comment": "ProgrammerError save file which contains the same Person values as in TypicalStudents#getTypicalProgrammerError()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "studentId": "A0212425H",
+    "classId": "B01",
+    "email": "e0518331@u.nus.edu"
+  }, {
+    "name" : "Benson Meier",
+    "studentId": "A0212325H",
+    "classId": "B02",
+    "email": "e0512331@u.nus.edu"
+  }, {
+    "name" : "Carl Kurz",
+    "studentId": "A0112425H",
+    "classId": "B03",
+    "email": "e0538331@u.nus.edu"
+  }, {
+    "name" : "Daniel Meier",
+    "studentId": "A0512425H",
+    "classId": "B02",
+    "email": "e0518334@u.nus.edu"
+  }, {
+    "name" : "Elle Meyer",
+    "studentId": "A0612425H",
+    "classId": "B01",
+    "email": "e0513331@u.nus.edu"
+  }, {
+    "name" : "Fiona Kunz",
+    "studentId": "A0912425H",
+    "classId": "B11",
+    "email": "e0418331@u.nus.edu"
+  }, {
+    "name" : "George Best",
+    "studentId": "A0852425H",
+    "classId": "B11",
+    "email": "e1418331@u.nus.edu"
+  } ]
+}

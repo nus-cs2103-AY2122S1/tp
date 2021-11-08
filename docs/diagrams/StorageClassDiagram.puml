@@ -14,12 +14,11 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "ProgrammerError Storage" #F4F6F6{
+Interface ProgrammerErrorStorage <<Interface>>
+Class JsonProgrammerErrorStorage
+Class JsonSerializableProgrammerError
+Class JsonAdaptedStudent
 }
 
 }
@@ -29,15 +28,14 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" ProgrammerErrorStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> ProgrammerErrorStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonProgrammerErrorStorage .up.|> ProgrammerErrorStorage
+JsonProgrammerErrorStorage ..> JsonSerializableProgrammerError
+JsonSerializableProgrammerError --> "*" JsonAdaptedStudent
 
 @enduml

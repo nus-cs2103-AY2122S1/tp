@@ -1,0 +1,6 @@
+.popup-label {
+    -fx-background-color: -fx-highlight-color;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-padding: 10;
+}

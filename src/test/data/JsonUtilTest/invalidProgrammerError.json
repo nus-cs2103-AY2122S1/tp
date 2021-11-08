@@ -1,0 +1,218 @@
+{
+    "name" : "Allard Quek",
+    "studentId" : "A0212421H",
+    "classId" : "B01",
+    "email" : "e0518431@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Perkin Tant",
+    "studentId" : "A0214266F",
+    "classId" : "B01",
+    "email" : "e0518241@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Remington Meiner",
+    "studentId" : "A0214256A",
+    "classId" : "B01",
+    "email" : "e0518231@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Warde Mularkey",
+    "studentId" : "A0224127F",
+    "classId" : "B01",
+    "email" : "e0518251@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Dennie Povey",
+    "studentId" : "A0214257B",
+    "classId" : "B02",
+    "email" : "e0518232@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Gavrielle Staner",
+    "studentId" : "A0214267G",
+    "classId" : "B02",
+    "email" : "e0518242@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Samay Sagar",
+    "studentId" : "A0212422H",
+    "classId" : "B02",
+    "email" : "e0513441@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Thorndike Conor",
+    "studentId" : "A0224128A",
+    "classId" : "B02",
+    "email" : "e0518252@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Cole Jacques",
+    "studentId" : "A0224129E",
+    "classId" : "B03",
+    "email" : "e0518253@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Erwin Quek",
+    "studentId" : "A0212423H",
+    "classId" : "B03",
+    "email" : "e0538441@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Linette Mitri",
+    "studentId" : "A0214258C",
+    "classId" : "B03",
+    "email" : "e0518233@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Salomo Evreux",
+    "studentId" : "A0214268A",
+    "classId" : "B03",
+    "email" : "e0518243@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Bea Affron",
+    "studentId" : "A0214259D",
+    "classId" : "B04",
+    "email" : "e0518234@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Berny Murie",
+    "studentId" : "A0214269B",
+    "classId" : "B04",
+    "email" : "e0518244@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "David Li",
+    "studentId" : "A0212424H",
+    "classId" : "B04",
+    "email" : "e0518641@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Ferdinand Westrey",
+    "studentId" : "A0224130T",
+    "classId" : "B04",
+    "email" : "e0518254@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Darn Siddons",
+    "studentId" : "A0214260E",
+    "classId" : "B05",
+    "email" : "e0518235@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Irfan Ibrahim",
+    "studentId" : "A0212425H",
+    "classId" : "B05",
+    "email" : "e0558441@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Sonja Hake",
+    "studentId" : "A0224131G",
+    "classId" : "B05",
+    "email" : "e0518255@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Teirtza Fish",
+    "studentId" : "A0214270C",
+    "classId" : "B05",
+    "email" : "e0518245@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Inessa Mellmoth",
+    "studentId" : "A0214261A",
+    "classId" : "B06",
+    "email" : "e0518236@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Meade Thomen",
+    "studentId" : "A0224132D",
+    "classId" : "B06",
+    "email" : "e0518256@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Ronnie Claworth",
+    "studentId" : "A0214271D",
+    "classId" : "B06",
+    "email" : "e0518246@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Roy Balakrishnan",
+    "studentId" : "A0212426H",
+    "classId" : "B06",
+    "email" : "e0518481@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Andra Caville",
+    "studentId" : "A0214272E",
+    "classId" : "B07",
+    "email" : "e0518247@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Ernst Sproston",
+    "studentId" : "A0214262B",
+    "classId" : "B07",
+    "email" : "e0518237@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Nadeen Kliemke",
+    "studentId" : "A0224133E",
+    "classId" : "B07",
+    "email" : "e0518257@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Tom Jerry",
+    "studentId" : "A0267423H",
+    "classId" : "B07",
+    "email" : "e0535541@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Judd Chatenet",
+    "studentId" : "A0224134B",
+    "classId" : "B08",
+    "email" : "e0518258@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Kala Worsell",
+    "studentId" : "A0224124F",
+    "classId" : "B08",
+    "email" : "e0518248@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Trude Antwis",
+    "studentId" : "A0214263C",
+    "classId" : "B08",
+    "email" : "e0518238@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Ammamaria McJarrow",
+    "studentId" : "A0214264D",
+    "classId" : "B09",
+    "email" : "e0518239@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Pebrook Chaim",
+    "studentId" : "A0224135A",
+    "classId" : "B09",
+    "email" : "e0518259@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Walker Hartzenberg",
+    "studentId" : "A0224125G",
+    "classId" : "B09",
+    "email" : "e0518249@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Ansley Silverlock",
+    "studentId" : "A0214265E",
+    "classId" : "B10",
+    "email" : "e0518240@u.nus.edu",
+    "labResultList" : [ ]
+  }, {
+    "name" : "Nancie Strivens",
+    "studentId" : "A0224126A",
+    "classId" : "B10",
+    "email" : "e0518250@u.nus.edu",
+    "labResultList" : [ ]
+  } ]
+}
