@@ -374,13 +374,13 @@ This `Predicate` is constructed from the filters specified by the user whenever 
 Given below is a trace of the command's execution. In particular, we first examine the parsing of user input into a `FilterApplicantCommand` object.
 The process is described by the following sequence diagram:
 
-<img src="images/filterapplicantsequencediagram0.png" width="950" />
+<img src="images/FilterApplicantSequenceDiagram0.png" width="950" />
 
 The role of the `FilterApplicantDescriptor` class is to store the details of the parsed filters for the `Model` component's use, when the `FilterApplicantCommand` is subsequently executed.
 
 The execution of the `FilterApplicantCommand` is shown below in a sequence diagram (as a continuation of the diagram above):
 
-<img src="images/filterapplicantsequencediagram1.png" width="1100" />
+<img src="images/FilterApplicantSequenceDiagram1.png" width="1100" />
 
 The `FilterApplicantDescriptorVerifier` class verifies the 
 original `FilterApplicantDescriptor` against the `Model`,
@@ -893,7 +893,7 @@ Guarantees: New position is saved with information displayed.
 * 1b. The position already exists in MTR.
     * 1b1. MrTechRecruiter shows an error message for duplicate position. <br>
       Use case ends.
-
+      
 
 **<u>Use Case: UC2 - Delete a position</u>** 
 
