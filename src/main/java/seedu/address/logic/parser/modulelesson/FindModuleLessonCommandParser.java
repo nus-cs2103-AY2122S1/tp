@@ -1,9 +1,12 @@
 package seedu.address.logic.parser.modulelesson;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.modulelesson.FindModuleLessonCommand.MESSAGE_INVALID_DAY;
+import static seedu.address.logic.commands.modulelesson.FindModuleLessonCommand.MESSAGE_INVALID_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.model.modulelesson.LessonTime.isValidTime;
 
 import java.util.Arrays;
 import java.util.List;
@@ -92,6 +95,17 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         List<String> lessonDayKeywordsList = Arrays.stream(days.split("\\s+"))
                 .collect(Collectors.toList());
 
+        for (String day : lessonDayKeywordsList) {
+            try {
+                int dayValue = Integer.parseInt(day);
+                if (dayValue < 1 || dayValue > 7) {
+                    throw new ParseException(MESSAGE_INVALID_DAY);
+                }
+            } catch (NumberFormatException e) {
+                throw new ParseException(MESSAGE_INVALID_DAY);
+            }
+        }
+
         return new FindModuleLessonCommand(new LessonDayContainsKeywordsPredicate(lessonDayKeywordsList));
     }
 
@@ -105,6 +119,12 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
 
         List<String> lessonTimeKeywordsList = Arrays.stream(times.split("\\s+"))
                 .collect(Collectors.toList());
+
+        for (String time : lessonTimeKeywordsList) {
+            if (!isValidTime(time)) {
+                throw new ParseException(MESSAGE_INVALID_TIME);
+            }
+        }
 
         return new FindModuleLessonCommand(new LessonTimeContainsKeywordsPredicate(lessonTimeKeywordsList));
     }
