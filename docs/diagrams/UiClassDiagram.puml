@@ -57,6 +57,7 @@ DailyPanel --|> UiPart
 WeeklyPanel --|> UiPart
 
 TaskCard ..> Model
+WeeklyPanel .right.> Model
 
 UiManager -right-> Logic
 MainWindow -left-> Logic
