@@ -10,7 +10,7 @@ import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
- * Adds a lab with total score and default score for all the students in the list.
+ * Deletes a lab with the specified lab number for all the students in the list.
  */
 public class DeleteLabCommand extends Command {
 

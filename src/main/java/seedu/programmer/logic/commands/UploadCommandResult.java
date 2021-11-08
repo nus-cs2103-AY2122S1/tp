@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
 /**
- * A CommandResult that requires handling in the UI.
+ * Represents a CommandResult that requires handling in the UI to upload a csv file to ProgrammerError.
  */
 public class UploadCommandResult extends CommandResult {
 
@@ -9,7 +9,6 @@ public class UploadCommandResult extends CommandResult {
      * Creates an UploadCommandResult.
      *
      * @param feedbackToUser Message to show user.
-     * @param model Current model.
      */
     public UploadCommandResult(String feedbackToUser) {
         super(feedbackToUser);

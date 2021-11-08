@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import seedu.programmer.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Uploads a csv file of students' data to ProgrammerError's storage.
  */
 public class UploadCommand extends Command {
 
