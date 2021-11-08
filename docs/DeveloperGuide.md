@@ -870,7 +870,7 @@ Use case resumes from step 2.
     * 1d1. System displays an error that customer already exists in RHRH.
     * 1d2. User enters customer index again.
 
-Steps 1d1 - 1d2 are repeated until the employee to be added is unique. <br>
+Steps 1d1 - 1d2 are repeated until the customer to be added is unique. <br>
 Use case resumes from step 2.
 
 **Use case (UC07): Edit an Employee**
@@ -1054,7 +1054,7 @@ Use case resumes from step 2.
 Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
-* 1c. System detects that customer to delete does not exist in RHRH.
+* 1c. System detects that employee to delete does not exist in RHRH.
     * 1c1. System displays an error that no such employee index exist in RHRH.
     * 1c2. User enters employee index again
 
@@ -1362,8 +1362,8 @@ Use case resumes from step 2.
 
 * 1c. System detects that there are no customers to sort in the current list.
     * 1c1. System displays an error that there are no customers to sort in the current list.
-    
-    Use case ends.
+  
+      Use case ends.
 
 **Use case (UC23): Sort Employees in RHRH**
 
@@ -1393,16 +1393,16 @@ Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
 Use case resumes from step 2.
 
 * 1c. System detects that there are no employees to sort in the current list.
-    * 1c1. System displays an error that there are no employees to sort in the current list. 
-      
-  Use case ends.
+    * 1c1. System displays an error that there are no employees to sort in the current list.
+  
+      Use case ends.
 
 **Use case (UC24): Sort Suppliers in RHRH**
 
 **MSS**
 
 1. User enters the command to sort the supplier list in RHRH based on a sorting type and order.
-2. The employee list is sorted in RHRH according to specified sorting type and order.
+2. The supplier list is sorted in RHRH according to specified sorting type and order.
 3. System confirms that the suppliers have been sorted.
 
    Use case ends.
@@ -1426,18 +1426,18 @@ Use case resumes from step 2.
 
 * 1c. System detects that there are no suppliers to sort in the current list.
     * 1c1. System displays an error that there are no suppliers to sort in the current list.
-
-  Use case ends.
+  
+      Use case ends.
 
     
-**Use case (UC25): List all customers/employees/suppliers in default sorting order(by `name`)**
+**Use case (UC25): Reset all customers/employees/suppliers in default sorting state**
 
 {:no_toc}
 
 **MSS**
 
-1. User enters the command to list all customers/employees/suppliers in default sorting order.
-2. List of all customers/employees/suppliers in default sorting order is displayed in view.
+1. User enters the command to reset all customers/employees/suppliers in default sorting state.
+2. List of all customers/employees/suppliers in default sorting state is displayed in view.
 
    Use case ends.
 
@@ -1525,6 +1525,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a customer/employee/supplier
 
 1. Add a Customer to the Customer list
+
     1. Test case: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive lp/1000 alg/Kiwi sr/outdoors` <br>
         Expected: Customer John Doe has been added to the Customer list. Details of the Customer John Doe will be shown on the result display area.
     2. Test case: `addC n/John Doey` <br>
@@ -1545,6 +1546,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Customer will not be added, and an error message `SpecialRequests names should be alphanumeric` will be displayed due to * being non-alphanumeric.
        
 2. Add an Employee to the Employee List
+
     1. Test case: `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive sal/4000 jt/Head Chef l/14 sh/2021-12-08 0800` <br>
         Expected: Employee John Doe has been added to the Employee List. Details of Employee John Doe will be shown on the result display area.
     2. Test case: `addE n/John Doey` <br>
@@ -1559,6 +1561,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Employee will not be added, and an error message that shows the user the correct format for entering shifts will be displayed, due to the error in formatting for time.
        
 3. Add a Supplier to the Supplier List
+
     1. Test case: `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/30 Geylang Drive dd/2021-12-08 1200 st/Beef` <br>
         Expected: Supplier John Doe has been added to the Supplier List. Details of the Supplier John Doe will be shown on the result display area.
     2. Test case: `addS n/John Doey` <br>
@@ -1585,6 +1588,7 @@ testers are expected to do more *exploratory* testing.
       * `PHONE` is valid (belong to a customer) but `DATE_TIME` is invalid (of incorrect format or the restaurant is full at that time)<br>
       Expected: No reservation is added. Error details shown in the status message. Status bar remains the same.
 
+
 2. The tables are not set yet.
    
    1. Prerequisite: the `tables` array in the data file is empty.
@@ -1594,8 +1598,11 @@ testers are expected to do more *exploratory* testing.
 ### Listing customers/employees/suppliers/reservations
 
 1. Switching the view to display the customer/employee/supplier/reservation list. 
+
    1. Test case: `listC` / `listE` / `listS` / `listR` <br>
-         Expected: List of all customers/employees/suppliers/reservations will be displayed. Success message `Switched to X View` will be displayed(X corresponding to the specific `list` command used).
+         Expected: List of all customers/employees/suppliers/reservations will be displayed. Success message 
+      `Switched to X View` will be displayed (where X refers to either `Customer`,
+      `Employee`, `Supplier` or `Reservation` depending on which `list` command is used).
    2. Test case: `lisC` / `leestE` / ... <br>
       Expected: Any form of misspelling will result in no changes to the current view. Error message `Unknown command` will be displayed.
 
@@ -1610,12 +1617,14 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `deleteC 0`/`deleteE -1`/`deleteS -50`/`deleteR 0`<br>
       Expected: Nobody is deleted. Error details shown in the results display with a result message `Invalid comamnd 
       format...`
-   4. Other incorrect delete commands to try: `deleteS`, `deleteC x`, `delete 1` (where x is larger than the customer 
-      list size) <br>
-      Expected: Nobody is deleted. Error details shown in the results display. Entering the first 2 commands will 
-      produce the same error message as test case 1.3 while entering `delete 1` will produce the error message 
-      `Unknown command`
+   4. Other incorrect delete commands to try: `deleteS`, `deleteC x`, `delete 1` (where x is an integer larger than the 
+      customer list size) <br>
+      Expected: Nobody is deleted. Error details shown in the results display. Entering `deleteS` will 
+      produce the same error message as test case 1.3 while entering `deleteC x` (where x is an integer larger than the
+      customer list size) and  `delete 1` will produce the error message `Customer index is invalid` and `Unknown 
+      command` respectively.
       
+
 2. Deleting a customer/employee/supplier/reservation while customer list is filtered.
    
    1. Prerequisites: Filter display list by using the `findC KEYWORD`/`findE KEYWORD`/`findS KEYWORD`/`check DATE` command,
@@ -1625,6 +1634,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a customer
 
 1. Editing a customer while all customers are being shown.
+
     1. Prerequisites: List all customers using the `listC` command.
     2. Test case: `editC 1 n/Chetwin lp/5000` <br>
        Expected: First customer in the list will be updated to have "Chetwin" and "5000" as his `name` and `loyalty points` respectively. Details of the edited
@@ -1640,7 +1650,7 @@ testers are expected to do more *exploratory* testing.
        produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
        `Unknown command` and the last one resulting in error message `The customer index provided is invalid`
 
-2. Editing a customer while customer list is filtered.
+3. Editing a customer while customer list is filtered.
 
     1. Prerequisites: Filter display list by using the `findC KEYWORD` command,
        where `KEYWORD` must exist in at least 1 of the customers.
@@ -1649,6 +1659,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a supplier
 
 1. Editing a supplier while all suppliers are being shown.
+
     1. Prerequisites: List all suppliers using the `listS` command.
     2. Test case: `editS 1 n/Chetwin st/chicken` <br>
        Expected: First customer in the list will be updated to have "Chetwin" and "chicken" as his `name` and `supply type` respectively. Details of the edited
@@ -1664,7 +1675,7 @@ testers are expected to do more *exploratory* testing.
        produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
        `Unknown command` and the last one resulting in error message `The supplier index provided is invalid`
 
-2. Editing a supplier while supplier list is filtered.
+3. Editing a supplier while supplier list is filtered.
 
     1. Prerequisites: Filter display list by using the `findS KEYWORD` command,
        where `KEYWORD` must exist in at least 1 of the suppliers.
@@ -1673,6 +1684,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing an employee
 
 1. Editing an employee while all employees are being shown.
+
     1. Prerequisites: List all employees using the `listE` command.
     2. Test case: `editE 1 n/Chetwin s/5000` <br>
        Expected: First employee in the list will be updated to have "Chetwin" and "5000" as his `name` and `salary` respectively. Details of the edited
@@ -1688,7 +1700,7 @@ testers are expected to do more *exploratory* testing.
        produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
        `Unknown command` and the last one resulting in error message `The employee index provided is invalid`
 
-2. Editing an employee while employee list is filtered.
+3. Editing an employee while employee list is filtered.
 
     1. Prerequisites: Filter display list by using the `findE KEYWORD` command,
        where `KEYWORD` must exist in at least 1 of the employees.
@@ -1843,6 +1855,7 @@ testers are expected to do more *exploratory* testing.
        can only be 1 of the customer fields...`
    
 2. Sorting the customer list while the customer list is filtered.
+
    1. Prerequisites: Filter and display the customer list using `findC KEYWORDS`
    2. Test case: `sortC by/n o/d` when filtered customer list is `empty` <br>
       Expected: Customer list is not sorted. Error details shown in the result display, with a result message 
@@ -1871,6 +1884,7 @@ testers are expected to do more *exploratory* testing.
        can only be 1 of the employee fields...`
 
 2. Sorting the employee list while the employee list is filtered.
+
     1. Prerequisites: Filter and display the employee list using `findE KEYWORDS`
     2. Test case: `sortE by/n o/d` when filtered employee list is `empty` <br>
        Expected: Employee list is not sorted. Error details shown in the result display, with a result message
@@ -1900,6 +1914,7 @@ testers are expected to do more *exploratory* testing.
        can only be 1 of the supplier fields...`
 
 2. Sorting the supplier list while the supplier list is filtered.
+
     1. Prerequisites: Filter and display the supplier list using `findE KEYWORDS`
     2. Test case: `sortS by/dd o/a` when filtered supplier list is `empty` <br>
        Expected: Supplier list is not sorted. Error details shown in the result display, with a result message
@@ -1909,8 +1924,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Resetting the customer/employee/supplier
 
-1. Switching the view to display the customer/employee/supplier list to its default sorting order(by `name`).
+1. Switching the view to display the customer/employee/supplier list to its default sorting order (by `name` in 
+   `ascending` order).
+
     1. Test case: `resetC` / `resetE` / `resetS` <br>
-       Expected: List of all customers/employees/suppliers in default ordering will be displayed. Success message `X list sorting has been reset to default (name).` will be displayed(X corresponding to the specific `reset` command used).
+       Expected: List of all customers/employees/suppliers in default ordering will be displayed. Success message `X 
+       list sorting has been reset to default (name).` will be displayed (where X refers to either `Customer`, 
+       `Employee` or `Supplier` depending on which `reset` command is used).
     2. Test case: `reesetC` / `resagE` / ... <br>
        Expected: Any form of misspelling will result in no changes to the current view. Error message `Unknown command` will be displayed.

@@ -59,6 +59,7 @@ restaurants.
 * Released JAR files on GitHub team repo for [v1.3 (trial)](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases/tag/v1.3(trial)) and [v1.3 (final)](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases/tag/v1.3(final))
 
 #### Review and Mentoring contributions
+* Reviewed [59](https://github.com/AY2122S1-CS2103T-T17-1/tp/pulls?q=is%3Apr+reviewed-by%3A%40me+is%3Aclosed) PRs in total
 * PRs reviewed with non-trivial comments: PRs [\#33](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/33), 
       [\#127](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/127), [\#189](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/189)
 
@@ -68,7 +69,7 @@ restaurants.
   * Found 6 bugs in team [CS2103T-T15-3's](https://github.com/Javiier-pzk/ped/issues) product during PE-D.
   
 #### Contributions to the User Guide (UG):
-* Added [Overview, Target Audience and Purpose]() in the UG
+* Added [Overview, Target Audience and Purpose](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/202/commits/3152d192958e1acafda51b9dc52a2af3ec517080) in the UG
 * Documented all [`Supplier`](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/138) related functionality in the UG
 * Filled in the [Command Summary](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/139/commits/b5b235adaaa69f8aa6f563afa2dab364e80d7000) section in the UG
 * Fixed minor [formatting](https://github.com/AY2122S1-CS2103T-T17-1/tp/commit/5546f827656a3165d52abfc85f62dc9cae3886ce) and [grammatical mistakes](https://github.com/AY2122S1-CS2103T-T17-1/tp/commit/13bc3512c6774fc966a25c11f96265ae78f46fd3) in the UG
@@ -76,4 +77,8 @@ restaurants.
 #### Contributions to the Developer Guide (DG):
 * Renamed AB3 references in the DG to fit RHRH.
 * Drew [Class](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/214/commits/2fbf6aabae8eec9c463b794495f02616f1cb0914), [Sequence](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/214/commits/d154a22dda6de4c8f871ca38189e9200ef349850) and [Activity diagrams](https://github.com/AY2122S1-CS2103T-T17-1/tp/commit/04d4d1ee8c9b6c516714776345ff6aaa8b32951d) `DeleteSupplierCommand` and `SortSupplierCommand`
-* Added [use case](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/31) for `Add Reservation` in DG
+* Restructured and improved [existing use cases](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/251/commits/17fc9a41faab8c390b0f0855c1b426d4a76f5b3a) in DG.
+* Added [use cases](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/251/commits/044aa225ce89b231742f4146af4b28fd450039e6) for `Deleteing` and 
+  `Sorting` Customers, Employees and Suppliers in RHRH.
+* Added [manual testing](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/251/commits/54d748e180d670c7f1f463df93034ae3450cb6af) for `Delete` and `Sort` 
+  commands for `Customers`, `Employees` and `Suppliers`.
