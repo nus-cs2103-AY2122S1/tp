@@ -35,6 +35,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Allowed adding and deleting individual tags from a patient's record instead of overwriting all existing tags and added test cases [#40](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/40)
 
+<div style="page-break-after: always;"></div>
 
 * **Documentation**:
   * User Guide:
