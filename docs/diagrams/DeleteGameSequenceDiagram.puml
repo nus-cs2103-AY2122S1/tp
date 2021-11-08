@@ -1,6 +1,6 @@
 @startuml
 !include style.puml
-skinparam defaultFontSize 30
+skinparam defaultFontSize 20
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -11,10 +11,10 @@ participant "deleteGameCommand:DeleteGameCommand" as DeleteGameCommand LOGIC_COL
 end box
 
 
-[-> LogicManager : parse("game --delete DOTA")
+[-> LogicManager : parse("game \n--delete DOTA")
 activate LogicManager
 
-LogicManager -> MainParser : parseCommand("game --delete DOTA")
+LogicManager -> MainParser : parseCommand("game \n--delete DOTA")
 activate MainParser
 
 create GameCommandParser
@@ -28,12 +28,12 @@ MainParser -> GameCommandParser : parse(" --delete DOTA")
 activate GameCommandParser
 
 create DeleteGameCommandParser
-GameCommandParser -> DeleteGameCommandParser : new DeleteGameCommandParser()
+GameCommandParser -> DeleteGameCommandParser : new \n DeleteGameCommandParser()
 activate DeleteGameCommandParser
 DeleteGameCommandParser --> GameCommandParser
 deactivate DeleteGameCommandParser
 
-GameCommandParser -> DeleteGameCommandParser : parse("--delete  DOTA")
+GameCommandParser -> DeleteGameCommandParser : parse("--delete  \n DOTA")
 activate DeleteGameCommandParser
 
 create DeleteGameCommand
