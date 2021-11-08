@@ -69,7 +69,7 @@ public class InitialStudent {
             if (lesson.toNameString().equals(lessonName) && lesson.isFull()) {
                 fullLessonList.forEach(Lesson::removeAllStudents);
                 throw new IOException();
-            } else if (lesson.toNameString().equals(lessonName)) {
+            } else if (lesson.toNameString().equals(lessonName) && !student.hasLesson(lesson)) {
                 lessons.addLesson(lesson);
                 lesson.addStudent(student);
             }
