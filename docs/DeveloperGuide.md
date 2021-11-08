@@ -47,8 +47,7 @@ title: Developer Guide
 15. [Use Cases](#Use Cases)
     1. [Use Case: UC1 Purge/Delete all sample student records](#Use Case1)
     2. [Use Case: UC2 Create a student record](#Use Case2)
-<<<<<<< HEAD
-    3. [Use Case: UC3 Create a student record](#Use Case3)
+    3. [Use Case: UC3 Upload student records](#Use Case3)
     4. [Use Case: UC4 View a student record](#Use Case4)
     5. [Use Case: UC5 Delete a student record](#Use Case5)
     6. [Use Case: UC6 Update a student record](#Use Case6)
@@ -56,17 +55,7 @@ title: Developer Guide
     8. [Use Case: UC8 Create a lab record](#Use Case8)
     9. [Use Case: UC9 Edit a lab record](#Use Case9)
     10. [Use case: UC10 View dashboard of student records](#Use Case10)
-15. [Non-Functional Requirements](#Non-Functional Requirements)
-16. [Glossary](#Glossary)
-=======
-    3. [Use Case: UC3 View a student record](#Use Case3)
-    4. [Use Case: UC4 Delete a student record](#Use Case4)
-    5. [Use Case: UC5 Update a student record](#Use Case5)
-    6. [Use Case: UC6 Download student records](#Use Case6)
-    7. [Use Case: UC7 Create a lab record](#Use Case7)
-    8. [Use Case: UC8 Edit a lab record](#Use Case8)
 16. [Non-Functional Requirements](#Non-Functional Requirements)
->>>>>>> master
 17. [Appendix: Instructions for Manual Testing](#Appendix Testing)
     1. [Launch and Shutdown](#Launch and Shutdown)
     2. [Deleting a Student](#Del student)
@@ -880,7 +869,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
     Use case resumes at step 3.
 
-### <a name="Use Case3"></a> **Use case 3: UC3 Upload student records**
+### <a name="Use Case3"></a> **Use case: UC3 Upload student records**
 
 **MSS**
 
