@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
+participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
+participant "searchCommand\n:SearchCommand" as SearchCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "predicate\n:NameContains\nKeywordsPredicate" as NameContainsKeywordsPredicate MODEL_COLOR
+
+end box
+
+[-> LogicManager : execute("search\n -n Alex Yu")
+activate LogicManager
+
+LogicManager -> SourceControlParser : parseCommand(\n"search -n Alex Yu")
+activate SourceControlParser
+
+create SearchCommandParser
+SourceControlParser -> SearchCommandParser
+activate SearchCommandParser
+
+SearchCommandParser --> SourceControlParser
+deactivate SearchCommandParser
+
+SourceControlParser -> SearchCommandParser : parse(" -n Alex")
+activate SearchCommandParser
+
+create NameContainsKeywordsPredicate
+SearchCommandParser -> NameContainsKeywordsPredicate : NameContainsKeywords\nPredicate(["Alex", "Yu"])
+activate NameContainsKeywordsPredicate
+
+NameContainsKeywordsPredicate --> SearchCommandParser : predicate
+deactivate NameContainsKeywordsPredicate
+
+create SearchCommand
+SearchCommandParser -> SearchCommand : SearchCommand(\npredicate)
+activate SearchCommand
+
+SearchCommand --> SearchCommandParser : searchCommand
+deactivate SearchCommand
+
+SearchCommandParser --> SourceControlParser : SearchCommand
+deactivate SearchCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SearchCommandParser -[hidden]-> SourceControlParser
+destroy SearchCommandParser
+
+SourceControlParser --> LogicManager : SearchCommand
+deactivate SourceControlParser
+
+LogicManager -> SearchCommand : execute()
+activate SearchCommand
+
+SearchCommand -> Model : updateFiltered\nStudentList(\npredicate)
+activate Model
+
+Model --> SearchCommand
+deactivate Model
+
+SearchCommand --> LogicManager : result
+deactivate SearchCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

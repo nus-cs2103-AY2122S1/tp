@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox alignment="CENTER_LEFT" minHeight="105">
+    <padding>
+      <Insets top="5" right="5" bottom="5" left="10" />
+    </padding>
+      <HBox spacing="5" alignment="CENTER_LEFT">
+        <Label fx:id="name" styleClass="cell_big_label" />
+      </HBox>
+        <Label fx:id="info1" styleClass="cell_small_label" />
+        <Label fx:id="info2" styleClass="cell_small_label" />
+        <Label fx:id="info3" styleClass="cell_small_label" />
+        <Label fx:id="info4" styleClass="cell_small_label" />
+        <Label fx:id="info5" styleClass="cell_small_label" />
+  </VBox>
+</StackPane>

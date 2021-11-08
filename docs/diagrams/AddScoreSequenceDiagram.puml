@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
+participant ":AddScoreCommandParser" as AddScoreCommandParser LOGIC_COLOR
+participant "scoreDescriptor\n:ScoreDescriptor" as ScoreDescriptor LOGIC_COLOR
+participant "addScoreCommand\n:AddScoreCommand" as AddScoreCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addscore \n-a Midterm -n Van Nhi -s 95")
+activate LogicManager
+
+LogicManager -> SourceControlParser : parseCommand("addscore \n-a Midterm -n Van Nhi -s 95")
+activate SourceControlParser
+
+create AddScoreCommandParser
+SourceControlParser -> AddScoreCommandParser
+activate AddScoreCommandParser
+
+AddScoreCommandParser --> SourceControlParser
+deactivate AddScoreCommandParser
+
+SourceControlParser -> AddScoreCommandParser : parse("-a Midterm \n-n Van Nhi -s 95")
+activate AddScoreCommandParser
+
+create ScoreDescriptor
+AddScoreCommandParser -> ScoreDescriptor
+activate ScoreDescriptor
+
+ScoreDescriptor --> AddScoreCommandParser : scoreDescriptor
+deactivate ScoreDescriptor
+
+
+create AddScoreCommand
+AddScoreCommandParser -> AddScoreCommand : AddScoreCommand(scoreDescriptor)
+activate AddScoreCommand
+
+AddScoreCommand --> AddScoreCommandParser : addScoreCommand
+deactivate AddScoreCommand
+
+AddScoreCommandParser --> SourceControlParser : addScoreCommand
+deactivate AddScoreCommandParser
+
+destroy ScoreDescriptor
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy AddScoreCommandParser
+
+SourceControlParser --> LogicManager : addScoreCommand
+deactivate SourceControlParser
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy SourceControlParser
+
+LogicManager -> AddScoreCommand : execute()
+activate AddScoreCommand
+
+ref over AddScoreCommand, Model : add score to model
+
+create CommandResult
+AddScoreCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddScoreCommand
+deactivate CommandResult
+
+AddScoreCommand --> LogicManager
+deactivate AddScoreCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

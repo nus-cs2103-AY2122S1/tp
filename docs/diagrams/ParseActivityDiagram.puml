@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+start
+:Parser parses command;
+:Command word and arguments are parsed;
+
+if () then ([command word is valid])
+else ([else])
+  :Display an error message;
+  stop
+endif
+
+while () is ([command word is an alias])
+  :Replace aliased command word\nwith default command word;
+endwhile ([else])
+
+if () then ([command has arguments])
+  :Parse arguments;
+  if () then ([arguments are valid])
+    :Create command;
+  else ([else])
+    :Display an error message;
+    stop
+  endif
+else ([else])
+    :Create command;
+endif
+
+:Execute created command;
+
+stop
+@enduml

@@ -1,0 +1,82 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "id" : "E0543948",
+    "groups" : [ "T07A", "R01C" ],
+    "assessments" : [ "P01" ],
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "id" : "E0473477",
+    "groups" : [ "T04B", "R01D" ],
+    "assessments" : [ "P01", "P02" ],
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "id" : "E0538201",
+    "groups" : [ "T07D", "R03A" ],
+    "assessments" : [ "P01" ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "id" : "E0438241",
+    "groups" : [ "T07D", "R02C" ],
+    "assessments" : [ ],
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "id" : "E0582305",
+    "groups" : [ ],
+    "assessments" : [ "P01" ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "id" : "E0537266",
+    "groups" : [ "T03K", "R01C" ],
+    "assessments" : [ "P01" ],
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "id" : "E0555001",
+    "groups" : [ "T05H", "R05B" ],
+    "assessments" : [ ],
+    "tagged" : [ ]
+  } ],
+  "groups": [{
+    "name": "T07A"
+  }, {
+    "name": "R01C"
+  }, {
+    "name": "T04B"
+  }, {
+    "name": "R01D"
+  }, {
+    "name": "T07D"
+  }, {
+    "name": "R03A"
+  }, {
+    "name": "R02C"
+  }, {
+    "name": "T03K"
+  }, {
+    "name": "T05H"
+  }, {
+    "name": "R05B"
+  }],
+  "assessments": [{
+    "name": "P01",
+    "scores": {
+      "E0543948": "100",
+      "E0473477": "100",
+      "E0538201": "100",
+      "E0582305": "73",
+      "E0537266": "84"
+    }
+  }, {
+    "name": "P02",
+    "scores": {
+      "E0473477": "100"
+    }
+  }]
+}

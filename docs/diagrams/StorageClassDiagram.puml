@@ -14,12 +14,24 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "SourceControl Storage" #F4F6F6{
+Interface SourceControlStorage <<Interface>>
+Class JsonSourceControlStorage
+Class JsonSerializableSourceControl
+Class JsonAdaptedStudent {
++ name: String
++ id: String
++ groups: String [*]
++ assessments: String [*]
+}
 Class JsonAdaptedTag
+Class JsonAdaptedAssessment {
++ name: String
++ scores: Map<String, String>
+}
+Class JsonAdaptedGroup {
++ name: String
+}
 }
 
 }
@@ -29,15 +41,17 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" SourceControlStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> SourceControlStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonSourceControlStorage .up.|> SourceControlStorage
+JsonSourceControlStorage ..> JsonSerializableSourceControl
+JsonSerializableSourceControl --> "*" JsonAdaptedStudent
+JsonSerializableSourceControl --> "*" JsonAdaptedGroup
+JsonSerializableSourceControl --> "*" JsonAdaptedAssessment
+JsonAdaptedStudent --> "*" JsonAdaptedTag
 
 @enduml

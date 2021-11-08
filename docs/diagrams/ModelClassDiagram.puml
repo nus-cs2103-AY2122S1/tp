@@ -5,50 +5,64 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlySourceControl <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class SourceControl
+Class ReadOnlySourceControl
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UniqueStudentList
+Class Student {
+-  scores: Map<Assessment, Score>
+}
 Class Name
-Class Phone
+Class ID
 Class Tag
+Class GroupList
+Class Group
+Class AssessmentList
+Class Score
 
+Class Assessment {
+- scores: Map<ID, Score>
+}
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+SourceControl .up.|> ReadOnlySourceControl
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlySourceControl
+ModelManager -left-> "1" SourceControl
 ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+UserPrefs .up..|> ReadOnlyUserPrefs
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+SourceControl *--> "1" UniqueStudentList
+SourceControl *--> "1" GroupList
+SourceControl *--> "1" AssessmentList
 
-ModelManager -->"~* filtered" Person
+UniqueStudentList --> "    ~* all" Student
+Student *--> "1" Name
+Student *--> "1" ID
+Student *--> "~* " Tag
+
+GroupList --> "~* " Group
+Group --> "*" ID
+
+AssessmentList --> "~* " Assessment
+
+Name -[hidden]right-> ID
+Score -[hidden]right-> ID
+Score -[hidden]up-> Assessment
+
+ModelManager --> "filtered ~*\t" Student
 @enduml

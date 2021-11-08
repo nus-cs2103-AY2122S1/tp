@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
+participant ":AddAllocCommandParser" as AddAllocCommandParser LOGIC_COLOR
+participant "allocDescriptor\n:AllocDescriptor" as AllocDescriptor LOGIC_COLOR
+participant "addAllocCommand\n:AddAllocCommand" as AddAllocCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addalloc \n-g T01A -n Zhiying")
+activate LogicManager
+
+LogicManager -> SourceControlParser : parseCommand("addalloc \n-g T01A -n Zhiying")
+activate SourceControlParser
+
+create AddAllocCommandParser
+SourceControlParser -> AddAllocCommandParser
+activate AddAllocCommandParser
+
+AddAllocCommandParser --> SourceControlParser
+deactivate AddAllocCommandParser
+
+SourceControlParser -> AddAllocCommandParser : parse("-g T01A -n Zhiying")
+activate AddAllocCommandParser
+
+create AllocDescriptor
+AddAllocCommandParser -> AllocDescriptor
+activate AllocDescriptor
+
+AllocDescriptor --> AddAllocCommandParser : allocDescriptor
+deactivate AllocDescriptor
+
+create AddAllocCommand
+AddAllocCommandParser -> AddAllocCommand : AddAllocCommand(allocDescriptor)
+activate AddAllocCommand
+
+AddAllocCommand --> AddAllocCommandParser : addAllocCommand
+deactivate AddAllocCommand
+
+AddAllocCommandParser --> SourceControlParser : addAllocCommand
+deactivate AddAllocCommandParser
+
+destroy AllocDescriptor
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy AddAllocCommandParser
+
+SourceControlParser --> LogicManager : addAllocCommand
+deactivate SourceControlParser
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy SourceControlParser
+
+LogicManager -> AddAllocCommand : execute()
+activate AddAllocCommand
+
+ref over AddAllocCommand, Model: add allocation to model
+
+create CommandResult
+AddAllocCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAllocCommand
+deactivate CommandResult
+
+AddAllocCommand --> LogicManager
+deactivate AddAllocCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

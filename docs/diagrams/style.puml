@@ -33,7 +33,7 @@
 
 !define USER_COLOR #000000
 
-skinparam BackgroundColor #FFFFFFF
+skinparam BackgroundColor transparent
 
 skinparam Shadowing false
 
@@ -70,6 +70,24 @@ skinparam Shadowing false
 skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
+' this makes the visibility + - ~, etc. instead of using icons
+skinparam classAttributeIconSize 0
+' this makes the font color of fields white as well
+skinparam classAttributeFontColor #FFFFFF
+
 hide footbox
-hide members
+hide empty members
 hide circle
+
+' @@author ganhongyao-reused
+' Reused from https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol
+sprite $rake [16x16/8] {
+    0000000000000000
+    0000000jj0000000
+    0000000jj0000000
+    0005555jj5555000
+    000jjeejjeejj000
+    000jj00jj00jj000
+    000jj00jj00jj000
+    0000000000000000
+}

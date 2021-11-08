@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+
+start
+if() then ([student does not\n    already exist])
+  :Add student\nto database;
+else ([student already exists])
+  :Display an\nerror message;
+endif
+stop
+
+@enduml
