@@ -72,7 +72,7 @@ HelpWindow --|> UiPart
 
 UiManager ..> DetailLevel
 MinimalStudentCard ..> Model
-StudentCard ..> Model
+StudentCard ...> Model
 FullStudentCard ..> Model
 MinimalLessonCard ..> Model
 LessonCard ..> Model
