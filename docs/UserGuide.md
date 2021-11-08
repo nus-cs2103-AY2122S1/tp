@@ -205,7 +205,7 @@ Phone | Staff Phone Number
 Email | Staff Email Address
 Absent Period | Periods that a staff will be absent from work
 Roles | Staff Roles (Available Roles: `bartender`, `floor`, `kitchen`)
-Status | Staff Employment Status (Either `fulltime` or `parttime`)
+Status | Staff Employment Status (Either `fulltime`, `parttime` and `nostatus`)
 Salary | Staff Hourly Pay (in Dollars)
 Tags | Additional Staff Information that can be used to reference staff.
 
