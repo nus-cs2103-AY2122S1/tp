@@ -31,7 +31,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* [Opencsv](http://opencsv.sourceforge.net/) is used when creating the CSV file in `mailingList` command.
+* [Opencsv](http://opencsv.sourceforge.net/) is used when creating the CSV file in `mailingList` comman-d.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -374,6 +374,8 @@ tagged to **either** `friend` **or** `football` is made.
 Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
+
+<div style="page-break-before: always;"></div>
 
 The following sequence diagram shows how the FindAny operation works:
 
@@ -1380,6 +1382,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `mailingList`<br>
         Expected: Exporting a mailing list of 0 contacts is not allowed. Error details are shown in the status message.
+
+<div style="page-break-before: always;"></div>
 
 ### Saving data
 
