@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.commons.exceptions.DataConversionException;
+import seedu.programmer.commons.exceptions.IllegalValueException;
 
 /**
  * Converts a Java object instance to JSON and vice versa.
@@ -186,7 +187,7 @@ public class JsonUtil {
      * @param filePath Path of file to get JSON data from.
      * @return JSONArray of student's data.
      */
-    public static JSONArray getJsonData(String filePath) {
+    public static JSONArray getJsonData(String filePath) throws IllegalValueException {
         try {
             InputStream is = new FileInputStream(filePath);
             String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
@@ -194,7 +195,7 @@ public class JsonUtil {
             return json.getJSONArray("students");
         } catch (IOException | JSONException e) {
             logger.severe("Error with the file!");
-            return null;
+            throw new IllegalValueException("File not found");
         }
     }
 
