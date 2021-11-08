@@ -97,15 +97,12 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Member` and `Event` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member`, `Event` and `Task` object residing in the `Model`.
 
 #### Current Implementations of UI
 
-The GUI currently reflects the entered events and members recorded in Ailurus. Currently, there are two main windows 
-that reflect the `Event` and `Member` objects that are residing in the `Model`. Directly adding or removing `Event` 
-or `Member` would update the `EventListPanel` and `MemberListPanel` to show their respective `EventCard` 
-and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
-corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
+The GUI currently reflects the entered events, members and tasks recorded in Ailurus. Currently, there are three main columns that reflect the `Event`, `Member` and `Task` objects that are residing in the `Model`. Directly adding or removing `Event`, `Member` or `Task` would update the `EventListPanel`, `MemberListPanel` and `TaskListPanel` to show their respective `EventListCard`, `MemberListCard` and `TaskListCard` respectively. Each of the `EventListCard`, `MemberListCard` and `TaskListCard` would display the fields under the 
+corresponding `Event`, `Member` and `Task` objects as discussed under [Model Component](#model-component).
 
 ### Logic component
 
@@ -122,10 +119,10 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("mdel /m 1")` 
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for the `execute("mdel /m 1")` 
 API call.
 
-![Interactions Inside the Logic Component for the `mdel /m 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic and Model Components for the `mdel /m 1` Command](images/MdelSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -274,11 +271,27 @@ This command will display all the tasks of the first member of the member list.
 
 ### List members who attended event
 
-[comment]: <> (TODO: Leeroy)
+This feature allows Ailurus users to list all members who have attended a particular event, identified by the event's `EVENT_INDEX` displayed in the current event list shown.
+
+This feature can be accessed using `mlist` command with parameters `/e EVENT_INDEX` and `/att`. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("mlist /e 1 /att")` API call.
+
+<img src="images/MlistSequenceDiagram.png" width = "600" />
+
+After the `LogicManager` receives the new `MlistCommand` object, `MlistCommand` would call the appropriate commands from `Model` and `Event` to get the correct index of the event from the filtered event list, get the list of members who attended the specific event, and set the current event while updating the filtered member list, as shown below.
+
+<img src="images/MlistExecutionSequenceDiagram.png" width = "600" />
 
 ### Add member to an event
 
-[comment]: <> (TODO: Leeroy)
+This feature allows Ailurus users to add a list of members, identified by the members' `MEMBER_INDEX` displayed in the current member list shown, to a specific event, identified by the event's `EVENT_INDEX` displayed in the current event list shown.
+
+This feature can be accessed using `emadd` command with parameters `/e EVENT_INDEX` and multiple `/m MEMBER_INDEX` to add multiple members to an event. Once the user enters the command, the **Sequence Diagram** below illustrates the interactions within the `Logic` and `Model` components for the `execute("emadd /e 1 /m 1 /m 2")` API call.
+
+<img src="images/EmaddSequenceDiagram.png" width = "600" />
+
+After the `LogicManager` receives the new `EmaddCommand` object, `EmaddCommand` would call the appropriate commands from `Model` and `Event` to get the indices from the current filtered event and member list, and add the members to be added in the event as shown below.
+
+<img src="images/EmaddExecutionSequenceDiagram.png" width = "600" />
 
 ### Add event to Event List
 
@@ -719,6 +732,17 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a member
 
+1. Adding a member to the `Member List`. 
+
+   1. Test case: `madd /n James Tan /ph 91234567`<br>
+   Expected: New member with name and phone number is present, but email and address are `NIL`.
+
+   2. Test case: `madd /n Amy Lee2 /ph 98765432 /em amylee89@example.com /a Amos Street 52 Blk 22 #05-12 /p Finance Assistant /p Secretary`<br>
+   Expected: New member with all fields present, including 2 positions `Finance Assistant` and `Secretary`.
+
+   3. Test case: `madd /n Jamie Lee /ph 92345678 /p Vice-President`
+   Expected: Error message that positions should only contain alphanumeric characters and spaces, so `-` character is not allowed.
+
 #### Deleting a member
 
 1. Deleting a member while all members are being shown
@@ -736,7 +760,24 @@ testers are expected to do more *exploratory* testing.
 
 #### Listing members of an event
 
+1. Listing all members participating in an event in `EVENT LIST`
+
+   1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
+
+   2. Test case: `mlist /e 1`
+   Expected: List all participating members in the event in `MEMBER LIST` column
+
+   3. Test case: `mlist /e 0`
+   Expected: Error message that `MEMBER_INDEX` should be a non-zero unsigned integer.
+
 #### Finding all members with a task
+
+1. Listing all members with a task that contains specific word(s) (non-exact match)
+   1. Prerequisite: `MEMBER LIST` must have at least one member with a task with the word `form` in it
+   2. Test case: `mtfind form`
+   Expected: List only members with `form` word in the list of tasks.
+   3. Test case: `mtfind -`
+   Expected: 0 members listed, because `-` is not a valid name for task name.
 
 ### Event tests
 
@@ -992,6 +1033,27 @@ search for name.
 
 [comment]: <> (https://docs.google.com/document/d/10rPMnwmrThbKavWpjAlYiz8w-_u1WaiaiBqwbc30VcA/edit)
 
+Overall, the team felt that this project was moderately difficult, due to the lack of experience in [JavaFX](https://openjfx.io/) library and managing a codebase that was larger than expected. Most of the features added were `CRUD` (Create, Read, Update, Delete) related, with exceptions to find and filtering features in `tlist` and `mlist` commands, as well as marking commands.
+
 ### Challenges faced
 
+The difficulty lies in the increased complexity of the application as it grows. While the original `Addressbook-level-3 (AB3)` only handles one module, which is the `Person` module, we refactored it to `Member` and added 2 more layers of complexity to it: the `Task` and the `Event` modules, which all inherit from a generic `Module` class. As such, we had to deal with more interactions between the modules, such as in listing all members in an event, or listing all overdue tasks of a member, and so on. Also, we had to update the state of the JavaFX UI constantly with each change in state. Hence, there is a need to monitor the communications between the `Logic`, `Model` and `UI` APIs to allow smooth transitions and updating of `FilteredList<T>` passed to the UI, and it would not be easy to do so if we only display one screen at a time. As our JavaFX knowledge was limited, we decided to go with 3 columns showing `Event`, `Members` and `Tasks`. [This was our Mockup UI for illustration.](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/UImockup.png)
+
+We also faced difficulties in deciding our architecture for our `Model` component, as we had different iterations of possible UML class diagram of the proposed `Model` component ([overview idea](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modeloverview.png), [v1](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modelv1.png), [v2](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modelv2.png), [final version](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/ModelClassDiagram.png)). At first, there was the idea that events have multiple members, but members should also have many events, and therefore they could have a many-to-many relationship. However, we realised that this was not a trivial case, as our storage uses JSON objects, which in itself is limited as it is unlike relational databases like [SQL](https://en.wikipedia.org/wiki/SQL). Therefore, having no foreign keys in such a database requires a lot of duplication of data, which we felt was unnecessary considering the simplicity of our product, hence we decided not to go forth with the idea.
+
 ### Achievements in the project
+
+* To implement the 3 columns for `Event List`, `Member List` and `Task List`, we had to learn about [SplitPane](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/SplitPane.html) and made it such that the positions are approximately a third of the whole size and that the columns are resizable to a certain degree.
+
+* We also learnt about the property of `textwrap` to allow larger words and names to be stored and shown. The `textwrap` property also allows dynamic text wrapping with different width of the column, to ensure that the data is fully visible by the user.
+
+* The `CRUD` commands for `Event`, `Member` and `Task` were mostly referred from AB3’s `Person` commands and classes. However, some fields were created and tested by the team, such as the use of `LocalDateTime` and `LocalDate` from the Java library for `Event` and `Task` respectively, to capture the date and time parsed as string by user.
+
+* We increased user experience by color coding the tasks of members and members of events with red and green, red being undone tasks or absent members, while red being done tasks or present members who attended the event.
+
+* We enforced commands to require a space between the prefix and the parameter, to allow easier readability of parameter, and it is also more intuitive to use `/prefix` commands with `/` before the prefix, similar to chatbots and UNIX commands usually have the symbol before the flag or prefix.
+
+* We showed the number of members / tasks / events listed for most listing and finding command, except those commands which show the full list.
+
+* We customized our UI to produce blue highlighting of cards if you click on them for selecting of a specific card if the list gets very long.
+

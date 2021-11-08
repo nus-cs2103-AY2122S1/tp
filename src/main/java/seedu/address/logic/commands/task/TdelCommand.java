@@ -2,7 +2,6 @@ package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.List;
@@ -21,10 +20,9 @@ import seedu.address.model.module.task.Task;
 public class TdelCommand extends Command {
     public static final String COMMAND_WORD = "tdel";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from the task list of a person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from the task list of a person.\n"
             + "Parameters: "
-            + PREFIX_TASK_INDEX + "TASK_INDEX "
-            + PREFIX_MEMBER_INDEX_DEL + "MEMBER_INDEX\n"
+            + PREFIX_TASK_INDEX + "TASK_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_INDEX + "3 ";
 

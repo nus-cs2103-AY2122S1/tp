@@ -12,11 +12,13 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class MemberListPanel
-Class MemberCard
+Class MemberListCard
 Class StatusBarFooter
 Class CommandBox
 Class EventListPanel
-Class EventCard
+Class EventListCard
+Class TaskListPanel
+Class TaskListCard
 }
 
 package Model <<Rectangle>> {
@@ -39,6 +41,7 @@ UiManager -down-> "1" MainWindow
 MainWindow -right-|> UiPart
 MainWindow *-down-> "1" MemberListPanel
 MainWindow *-down-> "1" EventListPanel
+MainWindow *-down-> "1" TaskListPanel
 MainWindow *-right-> "1" StatusBarFooter
 MainWindow *-right->  "1" CommandBox
 MainWindow *-right-> "1" ResultDisplay
@@ -48,19 +51,24 @@ StatusBarFooter -[hidden]left- HelpWindow
 ResultDisplay -[hidden]left- StatusBarFooter
 CommandBox -[hidden]left- ResultDisplay
 EventListPanel -[hidden]left- MemberListPanel
+TaskListPanel -[hidden]left- MemberListPanel
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 MemberListPanel -up-|> UiPart
-MemberCard -up-|> UiPart
+MemberListCard -up-|> UiPart
 EventListPanel -up-|> UiPart
-EventCard -up-|> UiPart
+EventListCard -up-|> UiPart
+TaskListPanel -up-|> UiPart
+TaskListCard -up-|> UiPart
 
-MemberListPanel -down-> "*" MemberCard
-EventListPanel -down-> "*" EventCard
+MemberListPanel -down-> "*" MemberListCard
+EventListPanel -down-> "*" EventListCard
+TaskListPanel -down-> "*" TaskListCard
 
-EventCard -..> Model
-MemberCard -..> Model
+EventListCard -..> Model
+MemberListCard -..> Model
+TaskListCard -..> Model
 @enduml

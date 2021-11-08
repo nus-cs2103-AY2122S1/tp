@@ -27,15 +27,15 @@ public class TlistCommand extends Command {
 
     public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member with filters. \n"
             + "Only one of " + PREFIX_DONE + "or " + PREFIX_OVERDUE + "may be present\n"
             + "Parameters: "
             + PREFIX_MEMBER_INDEX + "MEMBER_INDEX "
             + "[" + PREFIX_DONE + " OPTION (must be \"y\" or \"n\")] "
-            + "[" + PREFIX_OVERDUE + "] \n"
+            + "[" + PREFIX_OVERDUE.toString().trim() + "] \n"
             + "Examples: " + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2\n"
-            + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2" + PREFIX_DONE + "y\n"
-            + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2" + PREFIX_OVERDUE + "\n";
+            + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2 " + PREFIX_DONE + "y\n"
+            + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "2 " + PREFIX_OVERDUE + "\n";
 
     public final Index targetMemberId;
 
@@ -75,7 +75,7 @@ public class TlistCommand extends Command {
                     + targetMember.getName());
         case "n":
             model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_DUE_TASKS);
-            return new CommandResult(MESSAGE_SUCCESS + " that are due for " + targetMember.getName());
+            return new CommandResult(MESSAGE_SUCCESS + " that are incomplete for " + targetMember.getName());
         case "overdue":
             model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_OVERDUE_TASKS);
             return new CommandResult(MESSAGE_SUCCESS + " that are overdue for " + targetMember.getName());

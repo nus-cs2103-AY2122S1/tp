@@ -5,11 +5,9 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+# Project team
 
-## Project team
-
-### Leeroy Liu
+## Leeroy Liu
 
 <img src="images/leeroy999.png" width="200px">
 
@@ -21,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * Responsible for overall project coordination.
     * Ensure deadlines are met
 
-### Phua Guan Wei
+## Phua Guan Wei
 
 <img src="images/gwphua.png" width="200px">
 
@@ -34,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * Code quality
     * GUI
 
-### Samuel Lau Yi Ren
+## Samuel Lau Yi Ren
 
 <img src="images/samuel-bit-prog.png" width="200px">
 
@@ -47,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * Git Expert
     * Program and component structure
 
-### Chi Xu
+## Chi Xu
 
 <img src="images/tsiyuk.png" width="200px">
 
@@ -58,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities:
     * Dev-ops & Continuous Integration
 
-### Liu Zhilan
+## Liu Zhilan
 
 <img src="images/liuzhi1an.png" width="200px">
 

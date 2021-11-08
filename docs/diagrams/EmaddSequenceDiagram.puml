@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EmaddCommandParser" as EmaddCommandParser LOGIC_COLOR
+participant ":EmaddCommand" as EmaddCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("emadd /e 1 /m 1 /m 2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("emadd /e 1 /m 1 /m 2")
+activate AddressBookParser
+
+create EmaddCommandParser
+AddressBookParser -> EmaddCommandParser
+activate EmaddCommandParser
+
+EmaddCommandParser --> AddressBookParser
+deactivate EmaddCommandParser
+
+AddressBookParser -> EmaddCommandParser : parse("/e 1 /m 1 /m 2")
+activate EmaddCommandParser
+
+create EmaddCommand
+EmaddCommandParser -> EmaddCommand
+activate EmaddCommand
+
+EmaddCommand --> EmaddCommandParser
+deactivate EmaddCommand
+
+EmaddCommandParser --> AddressBookParser
+deactivate EmaddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EmaddCommandParser -[hidden]-> AddressBookParser
+destroy EmaddCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+ref over LogicManager, Model : EmaddCommand Execution
+@enduml

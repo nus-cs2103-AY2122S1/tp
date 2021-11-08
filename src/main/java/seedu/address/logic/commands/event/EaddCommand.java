@@ -26,8 +26,8 @@ public class EaddCommand extends Command {
 
     public static final String COMMAND_WORD = "eadd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Ailurus. "
-            + "Parameters:"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Ailurus.\n"
+            + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE (format: " + EventDate.DATE_TIME_FORMAT + ") "
             + "[" + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)]...\n"
@@ -57,6 +57,7 @@ public class EaddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Member> lastShownList = model.getFilteredMemberList();
+
 
         // adds all members in indexSet to participant list in event
         for (Index targetIndex : indexSet) {

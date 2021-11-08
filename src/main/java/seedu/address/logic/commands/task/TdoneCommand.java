@@ -22,8 +22,9 @@ public class TdoneCommand extends Command {
     public static final String COMMAND_WORD = "tdone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks one or multiple task(s), identified by "
-            + "the corresponding index numbers, as done for a currently selected member.\n"
-            + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX... (must be a positive integer)\n"
+            + "the corresponding index numbers, as done for the currently selected member.\n"
+            + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX (must be a positive integer) ["
+            + PREFIX_TASK_INDEX + "MORE_TASK_INDEX]…\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_INDEX + "1 "
             + PREFIX_TASK_INDEX + "2";

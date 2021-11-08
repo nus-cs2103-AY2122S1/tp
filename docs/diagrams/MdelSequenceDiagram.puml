@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MdelCommandParser" as MdelCommandParser LOGIC_COLOR
+participant ":MdelCommand" as MdelCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mdel /m 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mdel /m 1")
+activate AddressBookParser
+
+create MdelCommandParser
+AddressBookParser -> MdelCommandParser
+activate MdelCommandParser
+
+MdelCommandParser --> AddressBookParser
+deactivate MdelCommandParser
+
+AddressBookParser -> MdelCommandParser : parse("1")
+activate MdelCommandParser
+
+create MdelCommand
+MdelCommandParser -> MdelCommand
+activate MdelCommand
+
+MdelCommand --> MdelCommandParser
+deactivate MdelCommand
+
+MdelCommandParser --> AddressBookParser
+deactivate MdelCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MdelCommandParser -[hidden]-> AddressBookParser
+destroy MdelCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> MdelCommand : execute()
+activate MdelCommand
+
+MdelCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model --> MdelCommand : filteredMemberList
+deactivate Model
+
+MdelCommand -> Model : deleteMember(memberToDelete)
+activate Model
+
+Model --> MdelCommand
+deactivate Model
+
+create CommandResult
+MdelCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MdelCommand
+deactivate CommandResult
+
+MdelCommand --> LogicManager : result
+deactivate MdelCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
