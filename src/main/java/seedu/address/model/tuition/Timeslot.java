@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Represents the time slot the tuition class takes
+ * Represents the time slot that the tuition class occupies in the Timetable.
  */
 public class Timeslot {
     public static final String TIME_FORMAT_INCORRECT = "The time format is not correct";
@@ -47,21 +47,37 @@ public class Timeslot {
         return (this.getTime().split(" "))[0];
     }
 
+    /**
+     * Returns the start time of the class in LocalTime format.
+     *
+     * @return LocalTime representation of starting time of the class.
+     */
     public LocalTime getStart() {
         return this.start;
     }
 
+    /**
+     * Returns the end time of the class in LocalTime format.
+     *
+     * @return LocalTime representation of ending time of the class.
+     */
     public LocalTime getEnd() {
         return this.end;
     }
 
+    /**
+     * Returns the day of the class in Date format.
+     *
+     * @return Date representation of the day of the class.
+     */
     public Date getDay() {
         return this.day;
     }
 
     /**
-     * compare two time slot to detect any conflict
-     * @return true if conflict exist, false if no conflict
+     * Compare two time slots to detect any overlaps or conflicts.
+     *
+     * @return Boolean true if conflict exists and false otherwise.
      */
     public boolean checkClassConflict(Timeslot otherSlot) {
         LocalTime otherStart = otherSlot.getStart();
@@ -89,8 +105,9 @@ public class Timeslot {
     }
 
     /**
-     * Returns String representation of timeslot.
+     * Returns String representation of this Timeslot in a specified format.
      *
+     * @return String that represents the timeslot.
      */
     public String getTime() {
         DateFormat dayFormat = new SimpleDateFormat("EEE");
@@ -164,10 +181,10 @@ public class Timeslot {
     }
 
     /**
-     * Checks if current list of classes have this timselot already.
+     * Returns true if any timeslot of existing classes clashes with this timeslot.
      *
-     * @param classList
-     * @return
+     * @param classList The list of existing tuition classes.
+     * @return Boolean true if there is a conflict and false otherwise.
      */
     public boolean checkTimetableConflicts(List<TuitionClass> classList) {
         for (TuitionClass tc: classList) {
@@ -179,9 +196,10 @@ public class Timeslot {
     }
 
     /**
-     * Compares two timeslots.
-     * @param timeslot the timeslot to be compared to.
-     * @return an integer indicating the relative size of two timeslots compared to each other.
+     * Returns a negative integer, zero, or a positive integer by comparing the two timeslots.
+     *
+     * @param timeslot The timeslot to be compared to.
+     * @return An integer indicating the relative size of two timeslots compared to each other.
      */
     public int compareTimeOrder(Timeslot timeslot) {
         int otherDay = timeslot.getDay().getDay();

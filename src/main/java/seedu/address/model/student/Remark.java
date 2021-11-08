@@ -12,7 +12,7 @@ public class Remark {
     /**
      * Constructor for Remark.
      *
-     * @param remark
+     * @param remark The remark to be added.
      */
     public Remark(String remark) {
         requireNonNull(remark);

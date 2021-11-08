@@ -7,13 +7,13 @@ import static java.util.Objects.requireNonNull;
  */
 public class ClassLimit {
     public static final String MESSAGE_CONSTRAINTS =
-            "The limit is invalid. It should be a positive integer and no more than 100.";
+            "The limit is invalid. It should be a positive integer and no more than 1000.";
     public final int limit;
 
     /**
      * Constructor for class limit.
      *
-     * @param limit
+     * @param limit The maximum student size of the class.
      */
     public ClassLimit(int limit) {
         requireNonNull(limit);

@@ -14,7 +14,7 @@ public class Classes {
     /**
      * Constructor for classes.
      *
-     * @param classes
+     * @param classes The list of all class ids.
      */
     public Classes(ArrayList<Integer> classes) {
         requireNonNull(classes);
@@ -56,17 +56,17 @@ public class Classes {
     }
 
     /**
-     * Returns boolean true if classes are equal.
+     * Returns true if classes are equal.
      *
-     * @param cmpClasses
-     * @return
+     * @param otherClasses List of classes to compare to.
+     * @return True if the classes are identical, false otherwise.
      */
-    public boolean equalClasses(ArrayList<Integer> cmpClasses) {
-        if (cmpClasses.size() != this.classes.size()) {
+    public boolean equalClasses(ArrayList<Integer> otherClasses) {
+        if (otherClasses.size() != this.classes.size()) {
             return false;
         }
         for (int i = 0; i < classes.size(); i++) {
-            if (!cmpClasses.get(i).equals(this.classes.get(i))) {
+            if (!otherClasses.get(i).equals(this.classes.get(i))) {
                 return false;
             }
         }
@@ -84,13 +84,16 @@ public class Classes {
     }
 
     /**
+     * Returns a copy of the classes after removing a particular tuition class.
      *
-     * @param tuitionClass
-     * @return
+     * @param tuitionClass The tuition class to be removed.
+     * @return Copy of classes.
      */
     public Classes removeClass(Integer tuitionClass) {
         this.classes.remove(tuitionClass);
-        return this;
+        ArrayList<Integer> copyOfClass = new ArrayList<>();
+        copyOfClass.addAll(classes);
+        Classes classesCopy = new Classes(copyOfClass);
+        return classesCopy;
     }
-
 }

@@ -26,54 +26,33 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
   
    2.2 [Try it yourself!](#22-try-it-yourself)
 
-3. [Features](#3-features)
+3. <details open><summary><a href="#3-features">Features</a></summary>
+   3.1 <a href="#31-add-studenttuition-class">Add student/class</a><br>
+   3.2 <a href="#32-view-studenttuition-class">View student/class</a><br>
+   3.3 <a href="#33-edit-studenttuition-class">Edit student/class</a><br>
+   3.4 <a href="#34-delete-studenttuition-class">Delete student/class</a><br>
+   3.5 <a href="#35-addremove-student-from-class">Move student</a><br>
+   3.6 <a href="36-add-remark-to-studenttuition-class">Add remark</a><br>
+   3.7 <a href="#37-find-studenttuition-class">Find students/classes</a><br>
+   3.8 <a href="#38-list-all-studentstuition-classes">List students/classes</a><br>
+   3.9 <a href="#39-sort-tuition-classes-sort--s">Sort classes</a><br>
+   3.10 <a href="#310-view-timetable-timetable--tt">View timetable</a><br>
+   3.11 <a href="#311-view-todays-classes-today--td">View today's classes</a><br>
+   3.12 <a href="#312-view-help-help--h">View help</a><br>
+   3.13 <a href="#313-navigate-input-history">Navigate Input History</a><br>
+   3.14 <a href="#314-clear-data-clear">Clear data</a><br>
+   3.15 <a href="#315-exit-the-app-exit">Exit the program</a><br>
+   3.16 <a href="#316-track-payment-coming-in-v20">Track payment `coming in v2.0`</a><br></details>
 
-   3.1 [Add student/class](#31-add-studenttuition-class)
+4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary>
+   4.1 <a href="#41-name">Name</a><br>
+   4.2 <a href="#42-phone-number">Phone Number</a><br>
+   4.3 <a href="#43-email">Email</a><br>
+   4.4 <a href="#44-timeslot">Timeslot</a><br>
+   4.5 <a href="#45-index">Index</a><br></details>
 
-   3.2 [View student/class](#32-view-studenttuition-class)
-
-   3.3 [Edit student/class](#33-edit-studenttuition-class)
-
-   3.4 [Delete student/class](#34-delete-studenttuition-class)
-
-   3.5 [Move student](#35-addremove-student-from-class)
-
-   3.6 [Add remark](#36-add-remark-to-studenttuition-class)
-
-   3.7 [Find students/classes](#37-find-studenttuition-class)
-
-   3.8 [List students/classes](#38-list-all-studentstuition-classes)
-
-   3.9 [Sort classes](#39-sort-tuition-classes-sort--s)
-
-   3.10 [View timetable](#310-view-timetable-timetable--tt)
-
-   3.11 [View today's classes](#311-view-todays-classes-today--td)
-
-   3.12 [View help](#312-view-help-help--h)
-
-   3.13 [Navigate Input History](#313-navigate-input-history)
- 
-   3.14 [Clear data](#314-clear-data-clear)
-
-   3.15 [Exit the program](#315-exit-the-app-exit)
-   
-   3.16 [Track payment `coming in v2.0`](#316-track-payment-coming-in-v20)
-
-5. [Additional Command Format Information](#4-additional-command-format-information)
-   
-   4.1 [Name](#41-name)
-   
-   4.2 [Phone Number](#42-phone-number)
-   
-   4.3 [Email](#43-email)
-  
-   4.4 [Timeslot](#44-timeslot)
-
-   4.5 [Index](#45-index)
-
-6. [FAQ](#5-faq)
-7. [Command Summary](#6-command-summary)
+5. [FAQ](#5-faq)
+6. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -110,6 +89,7 @@ regarding your students and lessons stress-free and efficiently. In the latest v
 * Keep student details up-to-date
 * Resolve conflicting tuition timeslots
 * Efficiently create notes for each class/student
+* View scheduled lessons in a timetable
 
 ### 1.3 How to use this guide?
 
@@ -166,8 +146,17 @@ Jump right in to the next section: [2 Get Started](#2-get-started) to get you st
    ```
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
-![Ui](images/ui_ug.png)
+![Ui](images/annotated_UI.png)
 <p align="center"><i>Figure 1: GUI of TutAssistor</i></p>
+
+Component | What it does
+-------|--------
+Help Window | Exits TutAssistor or views help.
+Command Box | Keys in command.
+Result Display Pane | Displays feedback of command to user.
+TuitionList Panel | Displays all tuition classes.
+StudentList Panel | Displays all students.
+Main Display Pane | Displays today's lessons, tuition class's or student's details, or a timetable.
 
 
 ### 2.2 Try it yourself!
@@ -234,9 +223,7 @@ a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-1
 ```
 
 <div markdown="span" class="alert alert-primary">
-  
 :information_source: Note: `James Yeoh` and  <code>james &nbsp; yeoh</code> are considered the same person, namely `Name` is case-insensitive and the differences in whitespaces would not be considered.
-
 </div>
 
 #### Adding a tuition class: `addclass` | `ac`
@@ -363,10 +350,15 @@ Moves a student to/from a class.
 
 Adds one or more existing students to an existing class.
 
-When adding multiple students at once, use:
-* commas(`,`) to separate names, with no spaces after each comma.
-
-* spaces to separate indices.
+<div markdown="block" class="alert alert-primary"> 
+  
+:information_source: Note: When adding multiple students at once:<br>
+  
+  * use commas(`,`) to separate names, with no spaces after each comma.
+  
+  * use spaces to separate indices.
+  
+</div>
 
 Format:
 
@@ -543,6 +535,14 @@ Format:
 ```
 timetable
 ```
+<div markdown="block" class="alert alert-primary"> 
+  
+:information_source: Note: <br>
+  
+  If a lesson is shorter than one hour, the timetable may not display its details properly, such as using smaller font size or omitting the details completely due to limited space in the time block.
+  
+  For example, in Figure 6 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
+</div>
 
 ![Timetable](images/time_table.png)
 <p align="center"><i>Figure 6: A timetable view of all tuition classes in a week</i></p>

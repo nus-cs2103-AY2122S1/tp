@@ -105,7 +105,7 @@ public interface Model {
     boolean hasTuition(TuitionClass tuitionClass);
 
     /**
-     * Deletes the given tuition class.
+     * Deletes the tuition class given by {@code target}.
      * The class must exist in the address book.
      */
     void deleteTuition(TuitionClass target);

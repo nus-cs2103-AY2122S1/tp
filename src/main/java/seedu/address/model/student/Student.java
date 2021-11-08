@@ -102,17 +102,20 @@ public class Student implements Nameable {
     }
 
     /**
-     * Removes all traces of a tuition class from the student.
+     * Removes a tuition class from the student enrolled in the class.
+     *
+     * @param tuitionClass The tuition class to be removed.
+     * @return Copy of student after removing the tuition class.
      */
     public Student removeClass(TuitionClass tuitionClass) {
         for (Integer id : classes.getClasses()) {
-            if ((tuitionClass.getId()) == id) {
+            if (tuitionClass.getId() == id) {
                 classes.removeClass(id);
                 removeTag(tuitionClass.getName(), tuitionClass.getTimeslot());
                 return new Student(name, phone, email, address, remark, tags, classes);
             }
         }
-        return new Student(name, phone, email, address, remark, tags, classes);
+        return null;
     }
 
     /**
@@ -125,20 +128,23 @@ public class Student implements Nameable {
 
     /**
      * Adds a new tag to the student.
-     * @param tag tag to be added
-     * @return the updated set of tag
+     *
+     * @param tag The tag to be added.
+     * @return Copy of the updated set of tags.
      */
     public Set<Tag> addTag(Tag tag) {
-        this.tags.add(tag);
-        return this.tags;
+        tags.add(tag);
+        Set<Tag> updatedTags = new HashSet<>();
+        updatedTags.addAll(tags);
+        return updatedTags;
     }
 
     /**
-     * Returns student's tags after removing a class tag.
+     * Returns the set of tags belonging to the student after removing a tuition class tag.
      *
-     * @param name
-     * @param slot
-     * @return
+     * @param name The name of the tuition class.
+     * @param slot The timeslot of the tuition class.
+     * @return Copy of the updated tags after removing a class tag.
      */
     public Set<Tag> removeTag(ClassName name, Timeslot slot) {
         Set<Tag> updatedTags = new HashSet<Tag>();
@@ -150,17 +156,20 @@ public class Student implements Nameable {
     /**
      * Updates the class tag with new name and timeslot.
      *
-     * @param name
-     * @param slot
-     * @param name1
-     * @param slot1
-     * @return
+     * @param name The name of the original tuition class.
+     * @param slot The timeslot of the original tuition class.
+     * @param name1  The name of the edited tuition class.
+     * @param slot1  The timeslot of the edited tuition class.
+     * @return Copy of the student after changing the tuition class tag.
      */
     public Student updateTag(ClassName name, Timeslot slot, ClassName name1, Timeslot slot1) {
+        Set<Tag> updatedTags = new HashSet<Tag>();
         Tag tag = new Tag(String.format("%s | %s", name.getName(), slot));
-        boolean b = this.tags.remove(tag);
-        this.tags.add(new Tag(String.format("%s | %s", name1.getName(), slot1)));
-        return this;
+        tags.remove(tag);
+        tags.add(new Tag(String.format("%s | %s", name1.getName(), slot1)));
+        //updatedTags.addAll(tags);
+
+        return this; //new Student(this.name, phone, email, address, remark, updatedTags, classes);
     }
     /**
      * Returns true if both students have the same name.
@@ -184,8 +193,7 @@ public class Student implements Nameable {
         if (otherStudent == this) {
             return this;
         }
-        boolean sameName = otherStudent != null
-                && otherStudent.getName().equals(getName());
+        boolean sameName = otherStudent != null && otherStudent.getName().fullName.equals(name.fullName);
         if (sameName) {
             return this;
         }

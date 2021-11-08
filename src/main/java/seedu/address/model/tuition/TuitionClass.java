@@ -8,7 +8,7 @@ import seedu.address.model.student.Remark;
 import seedu.address.model.student.Student;
 
 /**
- * Represents a tuition class in the book
+ * Represents a tuition class in TutAssistor.
  */
 public class TuitionClass implements Nameable {
     /** Most recently viewed tuition class */
@@ -174,15 +174,31 @@ public class TuitionClass implements Nameable {
         return this;
     }
 
+    /**
+     * Updates the name of a student in the tuition class.
+     *
+     * @param student The current student in the class.
+     * @param updatedStudent The updated student.
+     */
+    public void updateStudent(Student student, Student updatedStudent) {
+        this.studentList.changeStudentName(student.getNameString(), updatedStudent.getNameString());
+    }
+
+    /**
+     * Returns true if the student is enrolled in the tuition class and false otherwise.
+     *
+     * @param student The student to be checked.
+     * @return A boolean true if the student is in the class, false otherwise.
+     */
     public boolean containsStudent(Student student) {
         return this.studentList.getStudents().contains(student.getName().fullName);
     }
 
     /**
-     * Adds a new student to an existing class if the student is not already in the class.
+     * Returns a tuition class after adding a new student to this class, if the student is not already in the class.
      *
-     * @param student student to be added
-     * @return the tuition class after modification
+     * @param student Student to be added.
+     * @return The tuition class after adding the student.
      */
     public TuitionClass addStudent(Student student) {
         ArrayList<String> nowStudents = this.studentList.getStudents();
@@ -233,9 +249,10 @@ public class TuitionClass implements Nameable {
     }
 
     /**
+     * Returns true if the limit, timeslot and names of two classes are identical.
      *
-     * @param editedClass
-     * @return
+     * @param editedClass The class to compare to.
+     * @return boolean true if the limit, timeslot and names of two classes match, false otherwise.
      */
     public boolean sameClassDetails(TuitionClass editedClass) {
         return editedClass.getTimeslot().equals(timeslot)

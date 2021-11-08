@@ -5,12 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -25,7 +26,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
- * Edits the details of an existing student in the address book.
+ * Edits the details of an existing student in TutAssistor.
  */
 public class EditCommand extends Command {
 
@@ -33,7 +34,8 @@ public class EditCommand extends Command {
     public static final String SHORTCUT = "e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits details of the student identified by the index numbers used in the Students list.\n"
+            + ": Edits details of the student identified by the index number. "
+            + "At least one parameter must be specified.\n"
             + "Parameters: STUDENT_INDEX "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -46,13 +48,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n %1$s";
     public static final String MESSAGE_NO_STUDENT_CHANGES = "Student details are already up to date.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
-
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param index of the student in the filtered student list to edit
-     * @param editStudentDescriptor details to edit the student with
+     * Constructor for EditCommand using student index and EditStudentDescriptor student.
+     *
+     * @param index Student index that indicates the student to be edited.
+     * @param editStudentDescriptor Details of the student to be edited.
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
@@ -66,34 +70,30 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        //checks if name is not changed or name is changed to that of a student who exists in database
+        //checks if name is unchanged or name is changed to that of a student who exists in database
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
-        //stronger check for 4 fields: name address phone email
+        //stronger check for all fields - name address phone email
         if (studentToEdit.equals(editedStudent)) {
             throw new CommandException(MESSAGE_NO_STUDENT_CHANGES);
         }
-        //if name is changed, the classes the student is enrolled in has to be updated
+        //if the name is changed, the student list of all classes the student is enrolled in has to be updated
         if (!studentToEdit.isSameStudent(editedStudent)) {
-            List<TuitionClass> enrolled = editedStudent
+            List<TuitionClass> enrolledClasses = editedStudent
                     .getClasses().getClasses().stream().map(id -> model.getClassById(id)).collect(Collectors.toList());
-            for (TuitionClass c: enrolled) {
-                c.getStudentList().changeStudentName(studentToEdit.getName().fullName,
-                        editedStudent.getName().fullName);
+            for (TuitionClass tuitionClass: enrolledClasses) {
+                tuitionClass.updateStudent(studentToEdit, editedStudent);
             }
         }
+        logger.info(String.format("Edited student: Name changed from %s to %s", studentToEdit, editedStudent));
         model.setStudent(studentToEdit, editedStudent);
-
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
@@ -101,8 +101,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit,
-                                               EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
@@ -206,7 +205,7 @@ public class EditCommand extends Command {
         if (other == this) {
             return true;
         }
-        // instanceof handles nullsw
+        // instanceof handles nulls
         if (!(other instanceof EditCommand)) {
             return false;
         }

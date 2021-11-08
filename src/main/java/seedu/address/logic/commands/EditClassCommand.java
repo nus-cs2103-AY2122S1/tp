@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -26,7 +28,8 @@ public class EditClassCommand extends Command {
     public static final String SHORTCUT = "ec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits details of the class identified by the index numbers used in the Classes list.\n"
+            + ": Edits details of the class identified by the class index. "
+            + "At least one parameter must be specified.\n"
             + "Parameters: CLASS_INDEX "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TIMESLOT + "TIMESLOT] "
@@ -36,18 +39,19 @@ public class EditClassCommand extends Command {
             + PREFIX_TIMESLOT + "Mon 11:00-11:30 "
             + PREFIX_LIMIT + "20";
 
-    public static final String MESSAGE_EDIT_CLASS_SUCCESS = "Edited Class:\n %1$s";
+    public static final String MESSAGE_EDIT_CLASS_SUCCESS = "Edited Class: %1$s";
     public static final String MESSAGE_NO_CLASS_CHANGES = "Class details are already up to date.";
     public static final String MESSAGE_INVALID_CLASS_LIMIT = "Minimum limit of class is %1$s.";
     public static final String MESSAGE_INVALID_CLASS_SLOT = "This timeslot is already taken. Check timetable!";
-
+    private static final Logger logger = LogsCenter.getLogger(EditClassCommand.class);
     private final Index index;
     private final EditClassDescriptor editClassDescriptor;
 
     /**
+     * Constructor for EditClassCommand using class index and an EditClassDescriptor class.
      *
-     * @param index index of the class in the filtered classes list to edit.
-     * @param editClass details of the class to edit.
+     * @param index Class index that indicates the class to be edited.
+     * @param editClass Details of the class to be edited.
      */
     public EditClassCommand(Index index, EditClassDescriptor editClass) {
         requireNonNull(index);
@@ -72,19 +76,18 @@ public class EditClassCommand extends Command {
         if (editedClass.getLimit().getLimit() < classToEdit.getStudentCount()) {
             throw new CommandException(String.format(MESSAGE_INVALID_CLASS_LIMIT, classToEdit.getStudentCount()));
         }
+        logger.info(String.format("Starting to process timetable conflicts for this class: %s ", editedClass));
         //check if updated timeslot is taken
         List<TuitionClass> otherClasses = lastShownList
                 .stream().filter(x -> x.getId() != editedClass.getId()).collect(Collectors.toList());
-        if (!editedClass.getTimeslot().equals(classToEdit.getTimeslot())) {
-            if (editedClass.getTimeslot().checkTimetableConflicts(otherClasses)) {
-                throw new CommandException(MESSAGE_INVALID_CLASS_SLOT);
-            }
+        if (!editedClass.getTimeslot().equals(classToEdit.getTimeslot())
+                && editedClass.getTimeslot().checkTimetableConflicts(otherClasses)) {
+            throw new CommandException(MESSAGE_INVALID_CLASS_SLOT);
         }
         if (classToEdit.getStudentCount() > 0) {
-            List<String> currStudents = classToEdit.getStudentList().getStudents();
-            for (String name : currStudents) {
-                if (model.getSameNameStudent(new Student(new Name(name))) != null) {
-                    Student student = model.getSameNameStudent(new Student(new Name(name)));
+            for (String name : classToEdit.getStudentList().getStudents()) {
+                Student student = model.getSameNameStudent(new Student(new Name(name)));
+                if (student != null) {
                     Student updatedStudent = student.updateTag(classToEdit.getName(), classToEdit.getTimeslot(),
                             editedClass.getName(), editedClass.getTimeslot());
                     model.setStudent(student, updatedStudent);
@@ -92,9 +95,9 @@ public class EditClassCommand extends Command {
             }
         }
         model.setTuition(classToEdit, editedClass);
+        logger.info(String.format("Updated tuition class details from %s to %s", classToEdit, editedClass));
         return new CommandResult(String.format(MESSAGE_EDIT_CLASS_SUCCESS, editedClass));
     }
-
 
     private static TuitionClass createEditedClass(TuitionClass classToEdit, EditClassDescriptor editClassDescriptor) {
         assert classToEdit != null;
