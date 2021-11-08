@@ -6,7 +6,7 @@ mainframe **sd**  execute DeleteGameCommand
 
 box Logic GAME_DELETE_BOX_COLOR
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant "c:DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
+participant ":DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 

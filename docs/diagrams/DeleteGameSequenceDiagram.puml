@@ -1,5 +1,6 @@
 @startuml
 !include style.puml
+skinparam defaultFontSize 30
 
 box Logic GAME_DELETE_BOX_COLOR
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -9,7 +10,11 @@ participant ":DeleteGameCommandParser" as DeleteGameCommandParser DELETE_GAME_PA
 participant ":DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
 end box
 
-[-> MainParser : parse("game --delete DOTA")
+
+[-> LogicManager : parse("game --delete DOTA")
+activate LogicManager
+
+LogicManager -> MainParser : parseCommand("game --delete DOTA")
 activate MainParser
 
 create GameCommandParser
@@ -48,13 +53,17 @@ deactivate GameCommandParser
 GameCommandParser -[hidden]-> MainParser
 destroy GameCommandParser
 
-[<--MainParser : deleteGameCommand
+LogicManager <--MainParser : deleteGameCommand
 deactivate MainParser
 
-group ref [execute DeleteGameCommand]
+ref over LogicManager, DeleteGameCommand: Executing DeleteGameCommand
+
 LogicManager -[hidden]-> LogicManager
 DeleteGameCommand -[hidden]-> DeleteGameCommand
-end
+
+
+[<--LogicManager
+deactivate LogicManager
 
 [<-[hidden]- DeleteGameCommand
 destroy DeleteGameCommand
