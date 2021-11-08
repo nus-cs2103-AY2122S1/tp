@@ -1588,6 +1588,7 @@ Extensions
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 * **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays. 
+* **Regex**: Regular Expression
 
 --------------------------------------------------------------------------------------------------------------------
 
