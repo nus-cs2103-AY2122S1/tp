@@ -14,6 +14,7 @@ public class CommandParserTestUtil {
 
     public static final String VALID_INDICES = "1 2";
     public static final String DUPLICATE_INDICES = "1 2 1";
+    public static final String INDICES_ASCENDING_ORDER = "1 2 5 4";
     public static final String VALID_INDEX = "1";
     public static final String INVALID_INDEX = "-1";
     public static final String INVALID_INDEX_ZERO = "0";

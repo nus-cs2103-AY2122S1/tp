@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_SYMBOL;
 import static seedu.address.logic.parser.CommandParserTestUtil.DUPLICATE_INDICES;
+import static seedu.address.logic.parser.CommandParserTestUtil.INDICES_ASCENDING_ORDER;
 import static seedu.address.logic.parser.CommandParserTestUtil.INVALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.INVALID_INDEX_ZERO;
 import static seedu.address.logic.parser.CommandParserTestUtil.RANDOM_STRING_ARG;
@@ -13,7 +14,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.VALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_INDICES;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.util.ArrayList;
@@ -36,6 +39,7 @@ public class DeleteCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
     private DeleteCommandParser parser = new DeleteCommandParser();
+
 
     @Test
     public void parse_invalidArgs_failure() {
@@ -90,10 +94,20 @@ public class DeleteCommandParserTest {
         DeleteCommand deleteCommand = new DeleteCommand(indices);
         assertParseSuccess(parser, SPACE + VALID_INDICES, deleteCommand);
 
-        //repeated indices, duplicate should be removed in parsing
-        List<Index> repeatedIndices = new ArrayList<>();
-        repeatedIndices.add(0, INDEX_SECOND);
-        repeatedIndices.add(1, INDEX_FIRST);
-        assertParseSuccess(parser, SPACE + DUPLICATE_INDICES, new DeleteCommand(repeatedIndices));
+        //repeated indices, duplicate index should be removed in parsing
+        assertParseSuccess(parser, SPACE + DUPLICATE_INDICES, new DeleteCommand(indices));
+    }
+
+    @Test
+    public void parse_toSortedIndices_success() {
+        //parser should sort indices in descending order
+        List<Index> indices = new ArrayList<>();
+        indices.add(0, INDEX_FIFTH);
+        indices.add(1, INDEX_FOURTH);
+        indices.add(2, INDEX_SECOND);
+        indices.add(3, INDEX_FIRST);
+
+        DeleteCommand deleteCommand = new DeleteCommand(indices);
+        assertParseSuccess(parser, SPACE + INDICES_ASCENDING_ORDER, deleteCommand);
     }
 }

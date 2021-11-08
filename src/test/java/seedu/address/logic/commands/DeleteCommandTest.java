@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithoutException;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_STUDENTS_FAILURE;
@@ -34,6 +35,29 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getAddressBookWithTypicalStudents(), new UserPrefs());
 
     @Test
+    public void execute_outOfBoundIndex_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(outOfBoundIndex));
+
+        String expectedMessage = String.format(MESSAGE_DELETE_STUDENTS_FAILURE,
+                List.of(outOfBoundIndex.getOneBased()));
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_invalidIndex_failure() {
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        List<Index> outOfBoundIndex = List.<Index>of(INDEX_SECOND, INDEX_THIRD);
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        String expectedMessage = String.format(MESSAGE_DELETE_STUDENTS_FAILURE,
+                outOfBoundIndex.stream().map(x -> x.getOneBased()).collect(Collectors.toList()));
+
+        assertCommandFailure(deleteCommand, expectedModel, expectedMessage);
+    }
+
+    @Test
     public void execute_deleteOneStudent_success() {
         Student studentToDelete = model.getStudent(INDEX_FIRST);
         DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST));
@@ -47,39 +71,16 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_outOfBoundIndex_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(List.of(outOfBoundIndex));
-
-        String expectedMessage = String.format(MESSAGE_DELETE_STUDENTS_FAILURE,
-                List.of(outOfBoundIndex.getOneBased()));
-
-        assertCommandFailure(deleteCommand, model, expectedMessage);
-    }
-
-    @Test
-    public void execute_invalidIndex_success() {
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
-        List<Index> outOfBoundIndex = List.<Index>of(INDEX_SECOND, INDEX_THIRD);
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-        String expectedMessage = String.format(MESSAGE_DELETE_STUDENTS_FAILURE,
-                outOfBoundIndex.stream().map(x -> x.getOneBased()).collect(Collectors.toList()));
-
-        assertCommandFailure(deleteCommand, expectedModel, expectedMessage);
-    }
-
-    @Test
-    public void execute_deleteMultipleStudent_success() {
+    public void execute_deleteValidWithInvalidStudent_failure() {
         Student firstStudent = model.getStudent(INDEX_FIRST);
-        Student secondStudent = model.getStudent(INDEX_SECOND);
 
-        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_SECOND, INDEX_FIRST));
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_TENTH, INDEX_FIRST));
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENTS_SUCCESS,
-                List.of(secondStudent.getNameString(), firstStudent.getNameString()));
+                List.of(firstStudent.getNameString()))
+                + String.format(MESSAGE_DELETE_STUDENTS_FAILURE, List.of(INDEX_TENTH.getOneBased()));
 
         ModelManager expectedModel = new ModelManager(getAddressBookWithTypicalStudents(), new UserPrefs());
-        assertCommandSuccess(deleteCommand, expectedModel, expectedMessage);
+        assertCommandFailureWithoutException(deleteCommand, expectedModel, expectedMessage);
     }
 
     @Test
@@ -90,7 +91,7 @@ public class DeleteCommandTest {
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
-        // same values -> returns true
+        // same values and order -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(List.of(INDEX_THIRD, INDEX_FIRST));
 
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
@@ -104,19 +105,17 @@ public class DeleteCommandTest {
         // different students -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
 
-        //different order of student indices -> returns false
+        //same values and different order -> returns false
         DeleteCommand secondCommandCopy = new DeleteCommand(List.of(INDEX_FIRST, INDEX_THIRD));
 
         assertFalse(deleteSecondCommand.equals(secondCommandCopy));
-
     }
 
-
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered list to show no classes.
      */
-    private void showNoStudent(Model model) {
-        model.updateFilteredStudentList(p -> false);
-        assertTrue(model.getFilteredStudentList().isEmpty());
+    private void showNoClass(Model model) {
+        model.updateFilteredTuitionList(p -> false);
+        assertTrue(model.getFilteredTuitionList().isEmpty());
     }
 }

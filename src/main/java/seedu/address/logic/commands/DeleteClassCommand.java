@@ -78,8 +78,20 @@ public class DeleteClassCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof DeleteClassCommand
-                && this.classIndices.containsAll(((DeleteClassCommand) other).classIndices));
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof DeleteClassCommand)) {
+            return false;
+        }
+        DeleteClassCommand e = (DeleteClassCommand) other;
+        List<Index> otherIndex = e.classIndices;
+        if (classIndices.size() != otherIndex.size()) {
+            return false;
+        }
+        for(int i = 0; i < classIndices.size(); i++) {
+            return classIndices.get(i).equals(otherIndex.get(i));
+        }
+        return false;
     }
 }
