@@ -620,7 +620,7 @@ Prerequisites: List all groups using the `group /list` command. Multiple groups 
    Expected: Similar to previous.
 
 
-### Adding person to a group
+### Adding a person to a group
 
 Prerequisites: List all persons using the `person /list` command. Multiple persons in the list. Only the group Orbital is created.
 
@@ -648,7 +648,7 @@ Prerequisites: List all persons using the `person /list` command. Multiple perso
    (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
-### Adding subgroup to a group
+### Adding a subgroup to a group
 
 Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
 
