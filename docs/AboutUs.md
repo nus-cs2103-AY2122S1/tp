@@ -30,7 +30,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 <img src="images/choonyongchan.png" width="200px">
 
 [[github](https://github.com/choonyongchan)]
-[[portfolio](team/chanchoonyong.md)]
+[[portfolio](team/choonyongchan.md)]
 
 * Role: Developer, Tester, Manager
 * Responsibilities:
