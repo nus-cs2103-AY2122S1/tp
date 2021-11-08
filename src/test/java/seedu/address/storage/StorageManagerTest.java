@@ -110,7 +110,7 @@ public class StorageManagerTest {
 
     @Test
     public void saveUserProfile_invalidFile_success() {
-        Path profileFilePath = getFilePath("invalidUserProfile.json");
+        Path profileFilePath = TEST_DATA_FOLDER.resolve("invalidUserProfile.json");
         JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage(profileFilePath);
         Optional<JsonSerializableUserProfile> userProfile;
         try {
