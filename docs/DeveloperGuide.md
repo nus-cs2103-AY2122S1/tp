@@ -433,8 +433,7 @@ Given below is an example usage scenario and how the Mailing List mechanism beha
 Step 1. The user filters the contacts using other commands, eg. `find`.  
 Step 2. The `FilteredList` in `Model` is updated.  
 Step 3. The UI is updated to reflect this new state.  
-Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.  
-![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
+Step 4. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 Step 5. These `Prefix` arguments are stored in `Model`.  
 Step 6. The user is prompted to pick a name and the download location for their generated CSV file.  
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.   
@@ -442,6 +441,7 @@ Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelTo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MailingListCommandParser` and `MailingListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
 Step 8. The header row is created based on `Prefix` arguments stored in `Model`, based on a mapping in `CsvUtil`.  
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  

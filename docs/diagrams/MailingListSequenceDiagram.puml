@@ -68,27 +68,4 @@ deactivate LogicManager
 MailingListCommand -[hidden]-> LogicManager
 destroy MailingListCommand
 
-UI --> LogicManager : getFilteredPersonList()
-activate LogicManager
-LogicManager --> Model
-activate Model
-Model --> LogicManager : filteredPersonList
-deactivate Model
-LogicManager --> UI : filteredPersonList
-deactivate LogicManager
-
-UI --> LogicManager : getPrefixes()
-activate LogicManager
-LogicManager --> Model
-activate Model
-Model --> LogicManager : prefixes
-deactivate Model
-LogicManager --> UI : prefixes
-deactivate LogicManager
-
-
-UI --> CsvUtil : modelToCsv(filteredPersonList, path, prefixes)
-activate CsvUtil
-CsvUtil --> UI
-deactivate CsvUtil
 @enduml
