@@ -584,7 +584,7 @@ Examples:
 
 Format: `clear`
 
-This is to quickly clear all entries (Clients, Tasks, SalesOrder) from SalesNote. Useful for a new user who wants to
+This is to quickly clear all entries (Clients, Tasks, Order) from SalesNote. Useful for a new user who wants to
 remove all the example data.
 
 [return to top](#table-of-contents)
