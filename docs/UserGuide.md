@@ -273,26 +273,18 @@ Let’s say that residents Alex Yeoh and Bernice Yu just updated you that they a
 
 You can easily update these details in a single `edit` command.<br>
 
-1. Navigate to the Resident Tab by either clicking on it, or if you were previously on the Events Tab, by entering the `switch` command.
+1. Navigate to the list of residents. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. 
+   To update Alex and Bernice's vaccination statuses and last FET dates, simply enter `edit 1 2 v/T fd/05-11-2021`.
+   
    ![Step1](images/logic/commands/editcommand/person/step1.png)
 
-2. To view Alex Yeoh's current vaccination status and last FET date, you can either click on him, or use the `view INDEX` command. In this case, Alex's index is reflected as 1 in the current list of residents.
-   ![Step2](images/logic/commands/editcommand/person/step2.png)
-
-3. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. 
-   To update Alex and Bernice's details, simply enter `edit 1 2 v/T fd/05-11-2021`.
-   ![Step3](images/logic/commands/editcommand/person/step3.png)
-
-4. The result box will notify you of the edited residents.
-   ![Step4](images/logic/commands/editcommand/person/step4.png)
-
-5. To check whether Alex Yeoh's vaccination status and last FET date have been correctly updated, again, you can either click on him, or use the `view INDEX` command to view his additional details. 
+2. The result box will notify you of the edited residents. The resident list will be updated to contain the modified details.
    Note that in this case, Alex Yeoh and Bernice Yu no longer have outstanding FETs to submit, so the red flag around their name will be removed.
-   There will also be a syringe symbol beside their names that reflects their vaccination statuses without having to view their additional information.
-   ![Step5](images/logic/commands/editcommand/person/step5.png)
-
-6. Repeat Step 5 if you wish to do the check Bernice Yu's updated details as well.
-   ![Step6](images/logic/commands/editcommand/person/step6.png)
+   There will also be a syringe symbol beside their names to show that they are vaccinated.
+   
+   ![Step2](images/logic/commands/editcommand/person/step2.png)
+   
+   ![Step3](images/logic/commands/editcommand/person/step3.png)
    
 More Examples:
 *  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
@@ -313,18 +305,15 @@ Format: `delete INDEX…`
 * Delete multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
 Example:<br>
-Suppose Alex Yeoh and Bernice Yu have recently moved out of hall. To keep the addressbook updated, you want to remove them from the list of residents.
+Suppose Alex Yeoh and Bernice Yu have recently moved out of hall. To keep the addressbook updated, you might want to remove them from the list of residents.
 
 You can easily do this a single `delete` command.<br>
 
-1. Navigate to the Resident Tab by either clicking on it, or if you were previously on the Events Tab, by entering the `switch` command.
+1. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. To remove them from the list of residents, simply enter `delete 1 2`.
    ![Step1](images/logic/commands/deletecommand/person/step1.png)
 
-2. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. To remove them from the list of residents, enter `delete 1 2`.
+3. The result box will notify you of the deleted residents. Alex Yeoh and Bernice Yu will also be removed from the resident list.
    ![Step2](images/logic/commands/deletecommand/person/step2.png)
-
-3. The result box will notify you of the deleted residents, and Alex Yeoh and Bernice Yu will then be removed from the resident list.
-   ![Step3](images/logic/commands/deletecommand/person/step3.png)
 
 More Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
@@ -505,20 +494,11 @@ Let’s say that Powerlifting changed the date and time of their event from `25 
 
 You can easily update these details in a single `edit` command.<br>
 
-1. Navigate to the Event Tab by either clicking on it, or if you were previously on the Resident Tab, by entering the `switch` command.
+1. Note that Powerlifting's index is reflected as 1 in the current list of events. To update the date and time of the event, simply enter `edit 1 d/26-10-2021 t/0900`.
    ![Step1](images/logic/commands/editcommand/event/step1.png)
 
-2. To view Powerlifting's additional event details, you can either click on the event, or use the `view INDEX` command. In this case, Powerlifting's index is reflected as 1 in the current list of events.
+2. The result box will display the updated details of the event. The event list will also be updated to contain the modified event details.
    ![Step2](images/logic/commands/editcommand/event/step2.png)
-
-3. To update the date and time of the event, simply enter `edit 1 d/26-10-2021 t/0900`.
-   ![Step3](images/logic/commands/editcommand/event/step3.png)
-
-4. The result box will display the updated details of the event.
-   ![Step4](images/logic/commands/editcommand/event/step4.png)
-
-5. To check whether the details have been correctly updated, again, you can either click on Powerlifting, or use the `view INDEX` command to view the additional event details.
-   ![Step5](images/logic/commands/editcommand/event/step5.png)
 
 More Examples:
 *  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
