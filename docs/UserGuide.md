@@ -761,8 +761,8 @@ Command | Format | Examples
 
 ### Commons
 
-Command | Format | Examples
-|--------|-------|----------
+Command | Format
+|--------|-------
 **Help** | `help`
 **Switch** | `switch`
 **Clear** | `clear`
