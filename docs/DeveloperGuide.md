@@ -1135,7 +1135,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a group while on another directory
 
-    1. Prerequisites: List all students or groups using the `students` or `groups` command.
+    1. Prerequisites: List all tasks or students using the `tasks` or `students` command.
 
     1. Perform a successful `addGroup` command
        Expected: A group is added, and the group list is displayed.
