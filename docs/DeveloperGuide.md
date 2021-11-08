@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | intermediate user                          | search a person with the given tag            | view all the contacts with the given tag                                            |
 | `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
-| `* *`    | user in a supervising position             | export name and email to a file               | send specific emails to a select few contacts
+| `* *`    | user in a supervising position             | export email to a file                        | send specific emails to a select few contacts
 | `* *`    | curious user                               | view statistics about the contacts that I have added | derive more information about my contacts
 | `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
@@ -336,6 +336,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `ProfBook` and the **Actor** is the `user`, unless specified otherwise)
+
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. ProfBook checks if input is valid
+3. ProfBook adds the persons
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Arguments that should be there is not there
+    * 2a1. ProfBook rejects the command and shows an error message.
+
+      Use case ends.
+
+* 2b. Arguments that are added results in a person that already exists in the ProfBook.
+    * 2b1. ProfBook rejects the command and shows an error message.
+
+      Use case ends.
+
+**Use case: Edit a contact**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  ProfBook shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  ProfBook edits the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. ProfBook rejects the command and shows an error message.
+
+  Use case resumes at step 2.
+
+* 3b. The attribute to be edited does not exist.
+  * 3b1. ProfBook rejects the command and shows an error message.
+  Use case ends.
+
+* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
+  * 3c1. ProfBook rejects the command and shows an error message.
+
+  Use case ends.
+
+**Use case: Check statistics of current contact list**
+
+**MSS**
+
+1. User requests to get statistics of persons
+2. ProfBook checks if the input is valid.
+3. ProfBook shows the list of statistics for the current list.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  * 2a1. ProfBook rejects the command and shows an error message.
+
+  Use case ends.
+
+**Use case: Find a contact**
+
+**MSS**
+
+1. User requests to search persons
+2. ProfBook checks if the input is valid.
+3. ProfBook shows the list of persons that match the searched key and attribute.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given attribute type is invalid.
+
+    * 2a1. ProfBook rejects the command and shows an error message.
+
+    Use case ends.
+
+* 2b. The command format is invalid.
+    * 2b1. ProfBook rejects the command and shows an error message.
+
+  Use case ends
+
+* 2c. If the attribute edited is in the invalid format
+    * 2c1. ProfBook rejects the command and shows an error message.
+
+    Use case ends.
 
 **Use case: Delete a person**
 
@@ -356,159 +454,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. ProfBook shows an error message.
+    * 3a1. ProfBook rejects the command and shows an error message.
 
       Use case resumes at step 2.
 
-
-**Use case: Add a person**
-
-**MSS**
-
-1. User requests to add a person
-2. ProfBook checks if input is valid
-3. ProfBook adds the persons
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. Arguments that should be there is not there
-  * 2a1. ProfBook rejects the command and shows an error message.
-
-    Use case ends.
-
-* 2b. Arguments that are added results in a person that already exists in the ProfBook.
-    * 2b1. ProfBook rejects the command and shows an error message.
-
-      Use case ends.
-    
-**Use case: Edit a contact**
-
-**MSS**
-
-1.  User requests to list/search persons
-2.  ProfBook shows a list of persons
-3.  User requests to edit a specific person in the list
-4.  ProfBook edits the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-
-* 3a. The given index is invalid.
-  * 3a1. ProfBook shows an error message.
-
-  Use case resumes at step 2.
-
-* 3b. The attribute to be edited does not exist.
-  * 3b1. ProfBook shows an error message.
-  Use case ends
-
-* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
-  * 3c1. ProfBook shows an error message.
-
-      Use case ends
-
-**Use case: Find a contact**
-
-**MSS**
-
-1. User requests to search persons
-2. ProfBook checks if the input is valid.
-3. ProfBook shows the list of persons that match the searched key and attribute.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given attribute type is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-    Use case ends.
-
-* 3b. The command format is invalid.
-    * 3b1. AddressBook shows an error message.
-
-  Use case ends
-
-=======
-* 3d. If the attribute edited is in the invalid format
-    * 3d1. ProfBook shows an error message.
-
-      Use case ends
-
-**Use case: Export contacts**
-
-**MSS**
-
-1.  User requests to list/search persons
-2.  ProfBook shows a list of persons
-3.  User requests to export the list
-4.  ProfBook exports list to JSON file
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The file directory is invalid
-
-    * 3a1. ProfBook shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Export emails of contacts**
-
-**MSS**
-
-1.  User requests to list/search persons
-2.  ProfBook shows a list of persons
-3.  User requests to export the emails of the list
-4.  ProfBook exports list of emails to JSON file
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The file directory is invalid
-
-    * 3a1. ProfBook shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Import existing contacts**
-
-**MSS**
-
-1. User requests to import contacts from JSON file.
-2. ProfBook checks if file is valid format
-3. ProfBook merges the existing contacts with contacts from JSON file
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The file is in invalid format/does not exist
-
-    * 3a1. ProfBook shows an error message.
-
-      Use case ends.
 
 **Use case: Bulk Tag a person**
 
@@ -531,6 +480,79 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. ProfBook runs the command but it has no effect.
 
       Use case ends.
+
+**Use case: Sort contacts**
+
+**MSS**
+
+1. User requests to sort contacts
+2. ProfBook checks if input is valid
+3. ProfBook sorts the contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid arguments given
+    * 2a1. ProfBook rejects the command and shows an error message.
+
+    Use case ends
+
+**Use case: Import existing contacts**
+
+**MSS**
+
+1. User requests to import contacts from JSON file.
+2. ProfBook checks if file is valid format
+3. ProfBook merges the existing contacts with contacts from JSON file
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The file is in invalid format/does not exist
+
+    * 2a1. ProfBook rejects the command and shows an error message.
+
+      Use case ends.
+
+**Use case: Export contacts**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  ProfBook shows a list of persons
+3.  User requests to export the list
+4.  ProfBook exports list to JSON file
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The file directory is invalid
+
+    * 3a1. ProfBook rejects the command and shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Export emails of contacts**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  ProfBook shows a list of persons
+3.  User requests to export the emails of the list
+4.  ProfBook exports list of emails to JSON file
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The file directory is invalid
+
+    * 3a1. ProfBook rejects the command and shows an error message.
+
+      Use case resumes at step 2.
     
 ### Non-Functional Requirements
 
@@ -742,10 +764,13 @@ testers are expected to do more *exploratory* testing.
 ## Effort
 The difficulty level for our project is at a relatively moderate level. 
 We did not make large changes to the AB3 but instead chose to enhance the existing features. <br>
+
 Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. 
 For example, when implementing the sort feature, there were so many lists in AB3 and some of them were immutable. <br>
-So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
-In comparison to AB3, ProfBook was a harder project due to the large amounts of information attached to each contact. <br>
+
+We had to do a lot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
+In comparison to AB3, ProfBook was a harder project due to the large amounts of information attached to each contact.
 Managing all that information and making sure that each of our features work with the information in an intuitive way was one of the bigger achievements of ProfBook. <br>
+
 Another big achievement of the project was how we integrated import and export features to ProfBook so that the information in ProfBook is portable and can be transferred between users easily. 
 Since the output/input file is a JSON file, it can be used in conjunction with other apps as well.
