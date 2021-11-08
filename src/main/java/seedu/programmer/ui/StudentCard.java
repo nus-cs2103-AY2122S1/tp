@@ -12,7 +12,7 @@ import seedu.programmer.model.student.Student;
 
 
 /**
- * An UI component that displays information of a {@code student}.
+ * A UI component that displays information of a {@code student}.
  */
 public class StudentCard extends UiPart<Region> {
 
@@ -81,8 +81,8 @@ public class StudentCard extends UiPart<Region> {
     }
 
     /**
-     * Update the student particulars to be displayed.
-     * */
+     * Updates the student particulars to be displayed.
+     */
     public void updateStudentInformation(Student student) {
         name.setText(student.getNameValue());
         studentId.setText("Student ID: " + student.getStudentIdValue());

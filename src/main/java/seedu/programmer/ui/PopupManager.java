@@ -9,7 +9,9 @@ import javafx.stage.Stage;
  */
 public class PopupManager {
 
-    /** For customizing where to display the popup relative to the main window */
+    /**
+     * For customizing where to display the popup relative to the main window.
+     */
     private static final Double PADDING_FACTOR = 0.1;
 
     private final Popup popup;

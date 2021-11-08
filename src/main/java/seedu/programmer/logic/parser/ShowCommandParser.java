@@ -14,6 +14,8 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ShowCommand
      * and returns a ShowCommand object for execution.
+     *
+     * @param args The String arguments as given by the user.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ShowCommand parse(String args) throws ParseException {
