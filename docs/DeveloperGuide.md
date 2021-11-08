@@ -455,7 +455,7 @@ The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a
 
 The following activity diagram summarizes what happens when a user executes the `import` command:
 
-<img src="images/SplitActivityDiagram.png" width="250" />
+<img src="images/SplitActivityDiagram.png" width="350" />
 
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
