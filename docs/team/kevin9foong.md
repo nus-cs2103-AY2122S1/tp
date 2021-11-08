@@ -94,7 +94,7 @@ Given below are my contributions to the project.
     3. Highlighting of bugs related to Use Case Extension numbering.  
     4. Highlighting of UML diagram bugs in delete and schedule sequence diagrams (eg. found notation bugs for Reference frame etc.)
     5. Added documentation for Storage component (including UML class diagram for Storage). 
-    6. Added implementation documentation for Recommend command (including UML activity diagram and sequence diagrams for Recommend). 
+    6. Added implementation documentation for `recommend` command (including UML activity diagram and sequence diagrams for Recommend). 
   * README:
     1. Updated Github Actions build status badge to reflect status of gitGud team repository.
     2. Updated description and organised layout of README.
