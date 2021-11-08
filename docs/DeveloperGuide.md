@@ -486,7 +486,7 @@ is computed within the report. Implementation details regarding expenditure calc
 
 The report mechanism is facilitated by `Model`. Additionally, it implements the following operation:
 
-* `Model#getFilteredPersonList()` — Provides `person` list in address book based on the predicate provided
+* `Model#getFilteredPersonList()` — Provides list of `persons` in address book based on the predicate provided
 
 Given below is an example usage scenario and how the report behaves at each step.
 
