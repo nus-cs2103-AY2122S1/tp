@@ -21,10 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" clapss="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
@@ -186,7 +182,7 @@ The following sequence diagram shows how modifying the category field with `edit
 The following activity diagram shows what happens when a user executes the `edit` command with category specified
 ![EditCategoryActivityDiagram](images/EditCategoryActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Category is called by the user:**
 
@@ -227,7 +223,7 @@ Deleting a contact by name e.g. `delete n/VALID_NAME` results in the Parser retu
 
 The only difference between the 2 diagrams is the `DeleteCommand` (Name or Index) called and returned to the `Parser` and `LogicManager`.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Delete is implemented:**
 
@@ -280,7 +276,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Find functions:**
 
@@ -318,7 +314,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Functionality of Filter feature**
 
@@ -348,7 +344,7 @@ The following sequence diagram shows how the view operation works:
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Functionality of View feature**
 
@@ -395,7 +391,7 @@ The following activity diagram summarises what happens when a user executes a ne
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Sort is implemented:**
 
@@ -443,7 +439,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 ![img.png](images/RatingActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How user modifies rating field:**
 
@@ -518,9 +514,8 @@ Step 6. The user executes `clear`, which calls `Model#commit()`. Since `current`
 The following activity diagram summarizes what happens when a user executes a command that changes the data stored in the address book:
 
 ![img.png](images/CommitActivityDiagram.png)
-<img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -562,7 +557,7 @@ The following activity diagram shows how the review operation works:
 ![Activity Diagram for Review](images/ReviewActivityDiagram.png)
 
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Review is called by the user:**
 
@@ -585,19 +580,17 @@ obtain a read-only copy of `AddressBook` to summarise the data within. It implem
 * `setPercentageRatings()`  — Calculates and sets the percentage of contacts that have a rating (unrated not included).
 * `setNumberCategory()`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
 * `getNumberOfContactsGui()`  — Returns the total number of contacts to display on the GUI.
-* `getPercentageRatingsGui()`  — Returns the Pie Chart data for the proportions/percentage of `Rating`.
+* `getPercentageRatingsGui()`  — Returns the Pie Chart data for the proportions/percentage for `Rating`.
 * `getPercentageCategoryGui()`  — Returns the Pie Chart data for the proportions/percentage for `CatergoryCode`.
 
 
-Additionally, `Summary` will communicate with `UI`, specifically `MainWindow` to display the summarised results.
+Additionally, `Summary` will communicate with `Ui`, specifically `MainWindow` to display the summarised results.
 
 The following sequence diagram gives an overview of how `Summary` works when the app launches:
 
 ![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
 
-`Summary` updates when certain commands are executed:
-
-These commands include:
+`Summary` updates when certain commands are executed. These commands include:
 1. Add
 2. Clear
 3. Delete
@@ -616,7 +609,7 @@ The following sequence diagram shows how `Summary` updates when these commands a
 The above sequence diagrams describe how Summary pulls data from `AddressBook` to summarise data.
 `Summary` uses `JavaFx chart` to display data, on top of the text.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Summary summarises data from the internal AddressBook:**
 
@@ -659,7 +652,7 @@ The following activity diagram summarises what happens when a Tour Guide execute
 
 ![Activity Diagram for Export](images/ExportActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Export retrieves data from the internal AddressBook**
 
@@ -700,7 +693,7 @@ The following activity diagrams gives an overview of how `InputHistory` works wh
 ![Activity Diagram for Up_Arrow](images/InputHistoryUpArrowActivityDiagram.png)
 ![Activity Diagram for Down_Arrow](images/InputHistoryDownArrowActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How `InputHistory` is created and accessed.**
 
@@ -831,7 +824,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC03 - Delete a Contact**
 
-***Preconditions: User has <u>listed all contacts UC02 etc.</u>***
+***Preconditions: User has <u>listed all contacts UC04 etc.</u>***
 
 **MSS**
 
@@ -891,7 +884,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The keywords cannot be found. AddressBook displays no contacts.
+* 2a. The keywords cannot be found. WhereTourGo displays no contacts.
 
     Use case ends.
 
@@ -907,6 +900,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC06 - Filter for Contacts**
 
+**MSS**
+
+1. User requests to filter contacts.
+
+2. User enters the filter command with specific filter criteria.
+
+3. WhereTourGo displays a list of all contacts which fulfills the criteria.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The command format is wrong (e.g. `filter att`).
+
+  * 2a1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+* 3a. No contacts fulfill the filter criteria.
+
+  * 3a1. WhereTourGo will not display any contacts.
+
+    Use case ends.
+  
 
 **UC07 - Sort all Contacts**
 
@@ -958,6 +975,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC09 - View a Contact**
 
+***Preconditions: User has <u>listed all contacts UC04 etc.</u>***
+
+**MSS**
+
+1. User requests to view a specific contact in the list.
+
+2. WhereTourGo displays the contact details in the Display Pane.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+  * 1a1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+* 1b. The given name is invalid.
+
+  * 1b1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+* 1c. The command format is invalid.
+
+  * 1c1. WhereTourGo shows an error message, and instructions on how to use the command.
+
+    Use case ends.
+
+
 **UC10 - Navigate Input History**
 
 **MSS**
@@ -977,11 +1025,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC11 - Undo an Operation**
 
+**MSS**
+
+1. User requests to undo an operation.
+
+2. WhereTourGo restores the previous Address Book state.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no operations to undo.
+
+  * 2a1. WhereTourGo shows an error message.
+
+    Use case ends.
+  
 **UC12 - Redo an Operation**
+
+**MSS**
+
+1. User requests to redo an operation.
+
+2. WhereTourGo redoes the last undone operation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There are no operations to redo.
+
+  * 2a1. WhereTourGo shows an error message.
+
+    Use case ends.
 
 **UC13 - Export a Contact by Index**
 
-***Preconditions: User has <u>listed all contacts UC02</u>.***
+***Preconditions: User has <u>listed all contacts UC04</u>.***
 
 **MSS**
 
@@ -1109,13 +1189,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
@@ -1125,19 +1205,19 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 rv/Great place! t/view t/tourist ra/4` <br>
        Expected: "Singapore Flyers" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
 
-    1. Test case:  `add c/fnb n/Genki Sushi WestGate p/12345678 e/123@example.com a/3 Gateway Dr, #03-05, Singapore 608532` <br>
-       Expected: "Genki Sushi WestGate" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
+    2. Test case:  `add c/fnb n/Genki Sushi WestGate p/12345678 e/123@example.com a/3 Gateway Dr, #03-05, Singapore 608532` <br>
+        Expected: "Genki Sushi WestGate" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
 
-    1. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/4 c/acc e/123@example.com ` <br>
+    3. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/4 c/acc e/123@example.com ` <br>
        Expected: "HardRock Hotel" is added to the list. Details of the added contact shown in the status message. Summary is updated and displayed.
 
-    1. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/10 c/acc e/123@example.com ` <br>
+    4. Test case: `add a/8 Sentosa Gateway, 098269 n/HardRock Hotel p/98765432 ra/10 c/acc e/123@example.com ` <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
 
-    1. Test case: `add c/att n/Botanic Gardens p/23456789 e/123@example.com` <br>
+    5. Test case: `add c/att n/Botanic Gardens p/23456789 e/123@example.com` <br>
        Expected: No contact is added. Error details shown in the status message. Summary is displayed.
 
-    1. Other incorrect add commands to try: `add`, `add 0`, `add n/`, `123 add ALL_NECESSARY_PARAMETERS` (All necessary parameters include category, name, phone number, email and address)<br>
+    6. Other incorrect add commands to try: `add`, `add 0`, `add n/`, `123 add ALL_NECESSARY_PARAMETERS` (All necessary parameters include category, name, phone number, email and address)<br>
        Expected: Similar to previous.
 
 ### Editing a contact
@@ -1186,8 +1266,6 @@ testers are expected to do more *exploratory* testing.
     2. Other incorrect list commands to try: `list abc`, `list 2`, `...` <br>
         Expected: All contacts will not be listed in Contact Pane, remains in its previous state. Error details shown in the status message.
 
-### Locating contacts
-
 ### Finding contacts
 
 1. Finding contacts by keywords
@@ -1235,6 +1313,41 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering contacts
 
+1. Filtering contacts by one parameter (category code)
+
+* Prerequisites: WhereTourGo has at least 1 contact with category code `ATT` and no contacts with the category code `FNB`.<br><br>
+
+  1. Test case: `filter c/att`<br>
+     Expected: Only contacts with the category code `ATT` are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  2. Test case: `filter c/fnb`<br>
+     Expected: No contacts shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Test case: `filter c/att c/tpt`<br>
+     Expected: Only contacts with the category code `ATT` or `TPT` are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  4. Other incorrect sort commands to try: `filter`, `filter c`, `filter c/`, `filter c/att c/x`, `filter c/x` (where x is not a valid category code)<br>
+     Expected: No changes to Contacts Pane. Error details shown in Results Pane.
+
+2. Filtering contacts by multiple parameters
+
+* Prerequisites: WhereTourGo has multiple contacts with at least 1 contact with category code `ATT`, rating of 5 stars, and tagged as `fun`.<br><br>
+
+  1. Test case: `filter c/att ra/5 t/fun`<br>
+     Expected: All contacts with category code `ATT`, a rating of 5 stars, and a tag `fun` are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  2. Test case: `filter ra/5 t/fun t/outdoor`<br>
+     Expected: All contacts tagged `fun` and `outdoor` with a rating of 5 stars are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+
+  3. Test case: `filter c/att c/tpt c/com ra/4`<br>
+     Expected: All Attraction, Transport, and Commerce contacts with a rating of 4 stars are shown in Contacts Pane.
+     Success message is shown in Results Pane.
+  
 ### Sorting contacts
 
 1. Sorting contacts by name
@@ -1348,8 +1461,8 @@ testers are expected to do more *exploratory* testing.
 1. Undoing changes consecutively
 
 * Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ exists. Address book history set up by executing the following commands in order:<br>
-       1. `delete n/Marina Bay Sands`<br>
-       2. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
+       a. `delete n/Marina Bay Sands`<br>
+       b. `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`<br><br>
 
     1. Test case: `undo`<br>
        Expected: Previously added contact, `Singapore Flyers` is removed from address book. Undo success message shown in the status message.
@@ -1364,10 +1477,10 @@ testers are expected to do more *exploratory* testing.
 1. Redoing changes consecutively
 
 * Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order:<br>
-        1. `delete n/Marina Bay Sands`<br>
-        2. `edit 1 e/123@example.com`<br>
-        3. `undo`<br>
-        4. `undo`<br><br>
+        a. `delete n/Marina Bay Sands`<br>
+        b. `edit 1 e/123@example.com`<br>
+        c. `undo`<br>
+        d. `undo`<br><br>
 
   1. Test case: `redo`<br>
     Expected: Previously restored contact, `Marina Bay Sands` is deleted from address book. Redo success message shown in the status message.
@@ -1393,7 +1506,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect export commands to try: `export abc`, `export x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. Exporting all contacts in filtered list
+2. Exporting all contacts in filtered list
 
 * Prerequisites: List all contacts using the command such as `list`, `filter` etc. Multiple contacts in the list.<br><br>
 

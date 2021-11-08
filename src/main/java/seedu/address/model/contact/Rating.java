@@ -73,6 +73,11 @@ public class Rating implements Comparable<Rating> {
 
     @Override
     public int compareTo(Rating r) {
+        if (this.value == "unrated") {
+            return -1;
+        } else if (r.value == "unrated") {
+            return 1;
+        }
         return this.value.compareTo(r.value);
     }
 }
