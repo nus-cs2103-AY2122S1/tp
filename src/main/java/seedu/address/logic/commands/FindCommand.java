@@ -22,12 +22,16 @@ import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String FIND_COMMAND_ONLY_NAME_OR_INDEX = COMMAND_WORD + ": Index and name cannot "
+            + "be used as lookup together.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) along with fields or the index specified and "
+            + "the specified keywords (case-insensitive) along with other fields or the index specified and "
             + "displays them as a list with index numbers.\n\n"
             + "Parameters:\n"
-            + PREFIX_DASH_INDEX + " INDEX or "
-            + PREFIX_DASH_NAME + " KEYWORD [MORE_KEYWORDS]...\n\n"
+            + PREFIX_DASH_INDEX + " INDEX [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] [-r ROLE...] [-t TAG...] or"
+            + PREFIX_DASH_NAME + " KEYWORD [MORE_KEYWORDS]... [-p PHONE] [-e EMAIL] [-$ SALARY] [-s STATUS] "
+            + "[-r ROLE...] [-t TAG...]\n\n"
             + "Examples:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1\n"
             + COMMAND_WORD + " "

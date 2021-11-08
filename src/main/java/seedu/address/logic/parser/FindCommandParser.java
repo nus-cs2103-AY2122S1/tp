@@ -38,6 +38,12 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         PersonContainsFieldsPredicate predicate = testByAllFieldsExceptName(argMultimap);
 
+        if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.FIND_COMMAND_ONLY_NAME_OR_INDEX));
+        }
+
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
             if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
                 throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
