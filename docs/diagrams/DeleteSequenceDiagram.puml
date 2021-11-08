@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
 participant ":DeleteFriendCommandParser" as DeleteFriendCommandParser LOGIC_COLOR
-participant "deleteFriendCommand:DeleteFriendCommand" as DeleteFriendCommand LOGIC_COLOR
+participant "c:DeleteFriendCommand" as DeleteFriendCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("friend --delete draco")
+[-> LogicManager : execute("friend\n --delete draco")
 activate LogicManager
 
-LogicManager -> MainParser : parseCommand("friend --delete draco")
+LogicManager -> MainParser : parseCommand("friend\n --delete draco")
 activate MainParser
 
 create FriendCommandParser
@@ -45,22 +45,22 @@ create DeleteFriendCommand
 DeleteFriendCommandParser -> DeleteFriendCommand
 activate DeleteFriendCommand
 
-DeleteFriendCommand --> DeleteFriendCommandParser : deleteFriendCommand
+DeleteFriendCommand --> DeleteFriendCommandParser : c
 deactivate DeleteFriendCommand
 
-DeleteFriendCommandParser --> FriendCommandParser : deleteFriendCommand
+DeleteFriendCommandParser --> FriendCommandParser : c
 deactivate DeleteFriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteFriendCommandParser -[hidden]-> FriendCommandParser
 destroy DeleteFriendCommandParser
 
-FriendCommandParser --> MainParser : deleteFriendCommand
+FriendCommandParser --> MainParser : c
 deactivate FriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FriendCommandParser -[hidden]-> MainParser
 destroy FriendCommandParser
 
-MainParser --> LogicManager : deleteFriendCommand
+MainParser --> LogicManager : c
 deactivate MainParser
 
 LogicManager -> DeleteFriendCommand : execute()

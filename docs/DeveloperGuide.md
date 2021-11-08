@@ -146,32 +146,57 @@ How the parsing works:
 
 
 ### 3.4 Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+
+**Description** :
+
+The `Model` component is responsible for storing and managing data. It achieves this by maintaining a runtime model of
+the data using Java objects that represent real-world entities and associations that simulate relationships between these entities.
+
+**Functionality** :
+
+* The `UI` uses the data inside the `Model` to display to the user.
+* The `Storage`uses the data inside the `Model` to store it on the local hard-disk.
+* Does not depend on any of the other three components, as it represents data entities of the domain, which should make sense on their own without depending on other components
+
+**Component Structure** :
 
 <img src="images/ModelClassDiagram.png" width="800" />
 
-The `Model` component is made up of the following subpackages,
+The `Model` component consists of the following
 
-* [`friend`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/friend)
+* [`friend`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/friend) subpackage
   * a `Friend` comprises of a `FriendId`, `FriendName`, `Schedule` and a map of `GameFriendLink`s.
   * a `Schedule` is made of 7 `Day`s, each consisting of a `DayOfWeek`.
   * stores the friends' data i.e., all `Friend` objects in a `UniqueFriendsList` object.
 
-* [`game`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/game)
-  * a `Game` comprises of a `GameId` object. 
+* [`game`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/game) subpackage
+  * a `Game` comprises of a `GameId` object.
   * stores the games' data i.e., all `Game` objects in a `UniqueGamesList` object.
-  
-* [`gamefriendlink`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/gamefriendlink)
+
+* [`gamefriendlink`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/gamefriendlink) subpackage
   * stores the relationship between a `Friend` and a `Game` through their respective `FriendId` and `GameId`, as a `GameFriendLink` object.
   * a `GameFriendLink` comprises of a `UserName` and a `SkillValue`.
 
-The `Model` component also,
+* `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 
-* stores the currently 'selected' `Friend` objects (e.g., results of a `list` query) as a separate _filtered_ list which is not exposed to outsiders.
-* stores the currently 'selected' and 'sorted' `Friend` objects (e.g., results of a `recommend` query) as a separate _filteredAndSorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Friend>` that can be 'observed' <br>e.g. the UI's `Friends` Window is bound to this list so that the UI automatically updates when the data in the list changes.
-* stores the currently 'selected' `Game` objects (e.g., results of a 'list' query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Game>` that can be 'observed' <br>e.g. the UI's `Games` Window is bound to this list so that the UI automatically updates when the data in the list changes.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+The `Model` component manages the data in the following way:
+
+<img src="images/ModelClassDiagram2.png" width="600" />
+
+Friends: 
+* The Model manages a `FriendsList`, which is made up of a `UniqueFriendsList`, which contains an `ObservableList<Friend>`.
+* This `ObservableList<Friend>` is wrapped inside a `FilteredList<Friend>`. This is to enable easy filtering of the friends list for commands like `--list` and `recommend`.
+* This `FilteredList<Friend>` is wrapped inside a `SortedList<Friend>`. This is to enable easy sorting of the friends list for commands like `recommend`.
+* The `ObservableList<Friend>` is exposed to the `UI` component and is displayed under the 'Friends' section of the User interface.
+
+<img src="images/ModelClassDiagram3.png" width="600" />
+
+Games:
+* The Model manages a `GamesList`, which is made up of a `UniqueGamesList`, which contains an `ObservableList<Game>`.
+* This `ObservableList<Game>` is wrapped inside a `FilteredList<Games>`. This is to enable easy filtering of the games list for commands like `--list`.
+* The `ObservableList<Game>` is exposed to the `UI` component and is displayed under the 'Games' section of the user interface.
 
 ### 3.5 Storage component
 
@@ -447,12 +472,15 @@ such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
 
 ### 4.6 Get Feature
 
-#### 4.6.1 Implementation
+#### 4.6.1 Description
+
+The `--get` command is used to get/obtain the complete information about a Friend or Game.
+
+#### 4.6.2 Implementation
 
 When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
 
 <img src="images/GetCommandWorkflowActivityDiagram.png" width="1000">
-<br><center><ins>Image: Activity diagram showing the workflow of a '--get' command.</ins></center>
 
 The `--get` command is parsed using the following classes:
 * For friends:
@@ -480,11 +508,8 @@ After the `LogicManager#execute` receives a `GetFriendCommand` or `GetGameComman
 An example execution of a `GetFriendCommand` is shown in the sequence diagram below.
 
 <img src="images/GetSequenceDiagram.png" width="1000">
-<br><center><ins>Image: Sequence diagram showing the interaction between various entities<br>of 'Logic' and 'Model' component during the execution of a 'friend --get FRIEND_ID' command.</ins></center>
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
-
-#### 4.6.2 Design Considerations
 
 Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
 * `CommandResult` with a `Friend` object
@@ -536,19 +561,20 @@ for future multiplayer competitive gaming sessions.
 
 ### 6.2 User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (useful to have) - `* *`, Low (nice to have) - `*`
 
 | Priority | As a (describes user) | I want to be able to (functionality)                               | So that I can (rationale)                                 |
 |----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
-| ***      | user                  | easily add my friends personal info/data (name, id)     | store a list of friends who I can possibly play with      |
+| ***      | user                  | add my friends personal info/data (name, id)     | store a list of friends who I can possibly play with      |
 | ***      | user                  | link my friends to the games they play                  | associate my friends with a particular game and store their usernames for each game               |
 | ***      | user                  | view a list of my friends information                   | see who my friends are                                    |
 | ***      | user                  | delete a friend from the contact list                   | remove friends that were mistakenly added                 |
 | ***      | user                  | see full information of a friend from the contact list  | get any information I want about the friend               |
-| ***      | user                  | easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
+| ***      | user                  | add games that I want to play with my friends    | store the games that I plan to play with my friends       |
 | ***      | user                  | view a list of my game information                      | see which of my friends play certain games                |
 | ***      | user                  | delete a game from the games list                       | remove games that were mistakenly added or due to typos   |
 | ***      | user                  | see full information of a game from the games list      | see information about which friends play the game and their in-game usernames    |
+| **       | user                  | edit my friends name                                    | update my friends' name without having to recreate a friend                    |
 | **       | user                  | unlink a game from a friend                             | remove the association between a friend and a certain game                       |
 | **       | user                  | add my friends' availabilities to my friends' schedules | store what time they are free during the week             |
 | **       | user                  | view my friends' availabilities in their schedules      | see what time they are free during the week to play with me                      |
@@ -556,8 +582,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **       | user                  | add my friends' skill levels for each game              | store their relative skill levels for each game that they play                   |
 | **       | user                  | update my friends' skill levels for each game           | update their skill levels over time                                              |
 | **       | user                  | view a recommended list of friends for a game and at a certain time             | find friends to play a game with me at a certain timing  |
-| *       | user                   | store friends' skill levels for a category of game             | store friends' skill levels for categories of games  |
-| *       | user                   | view friends' skill levels for a category of game             | see which friends are good at certain categories of games  |
+| *       | user                   | track the match history of my friends                  | monitor my friends' progress  |
+| *       | user                   | store my friends' skill levels of different genres of games                  | know which genre of games to play with my friend  |
+
 
 ### 6.3 Use cases
 

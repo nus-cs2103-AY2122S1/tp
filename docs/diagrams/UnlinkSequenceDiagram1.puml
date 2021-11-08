@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
 participant ":UnlinkFriendCommandParser" as UnlinkFriendCommandParser LOGIC_COLOR
-participant "unlinkFriendCommand:UnlinkFriendCommand" as UnlinkFriendCommand LOGIC_COLOR
+participant "c:UnlinkFriendCommand" as UnlinkFriendCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -47,19 +47,19 @@ activate UnlinkFriendCommand
 UnlinkFriendCommand --> UnlinkFriendCommandParser
 deactivate UnlinkFriendCommand
 
-UnlinkFriendCommandParser --> FriendCommandParser : unlinkFriendCommand
+UnlinkFriendCommandParser --> FriendCommandParser : c
 deactivate UnlinkFriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 UnlinkFriendCommandParser -[hidden]-> FriendCommandParser
 destroy UnlinkFriendCommandParser
 
-FriendCommandParser --> MainParser : unlinkFriendCommand
+FriendCommandParser --> MainParser : c
 deactivate FriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FriendCommandParser -[hidden]-> MainParser
 destroy FriendCommandParser
 
-MainParser --> LogicManager : unlinkFriendCommand
+MainParser --> LogicManager : c
 deactivate MainParser
 
 ref over LogicManager, Model: Executing UnlinkFriendCommand
