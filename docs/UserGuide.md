@@ -114,19 +114,19 @@ is registered in LeadsForce have the following attributes that has the correspon
 The attribute prefix and value specified here constitute the parameter format to be used in the commands of several [features](#5-features).
 
 
-Attribute | Prefix | Value
------------------|-----------------|-----------------
-ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`.
-Name | n/ | `NAME`<br><br>• `NAME`: should only contain alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`.
-Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com` (Character limit: 100).
-Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`.
-Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`.
-Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`. <br>• If no value is given, default Disposable Income for a client will be set to `0.00`.
-Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute).
-Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.<br>• More information [below](#33-last-met-attribute).
-Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`.
-Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance.
-Tag | t/ | `TAG`<br><br>• `TAG`: should be alphanumeric `e.g. friends`.<br>• More information [below](#34-tag-attribute).
+Attribute | Prefix | Value | Multiplicity
+-----------------|-----------------|-----------------|-----------------
+ID | i/ | `CLIENT_ID`<br><br>• `CLIENT_ID`: A non-negative integer `e.g. 0, 1, 2, 3, …​`. | 1
+Name | n/ | `NAME`<br><br>• `NAME`: should only contain alphanumeric characters and spaces, and it should not be blank (Character limit: 30) `e.g. John Doe`. | 1
+Email | e/ | `EMAIL`<br><br>• `Email`: should be of the format `local-part@domain` `e.g. johnd@example.com` (Character limit: 100). | 1
+Address | a/ | `ADDRESS`<br><br>• `ADDRESS`: can take any value, and it can be blank (Character limit: 100) `e.g. John street, block 123, #01-01`. | 0 to 1
+Current financial plans | c/ | `CURRENT_PLAN`<br><br>• `CURRENT_PLAN`: can take any value, and it can be blank (Character limit: 100) `e.g. Prudential PRUwealth`. | 0 to 1
+Disposable Income | d/ | `INCOME`<br><br>• `INCOME`: A non-negative number (Character limit: 15) `e.g. 0.00, 1000.00, 3500.50, …​`. <br>• If no value is given, default Disposable Income for a client will be set to `0.00`. | 0 to 1
+Next Meeting | m/ | `DATE (START_TIME~END_TIME), LOCATION`<br><br>• `DATE`: is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME`: are in `hh:mm` (24 hour format). <br>• `LOCATION`: can take any value, but it cannot be blank.<br>• More information [below](#32-next-meeting-attribute). | 0 to 1
+Last met | l/ | `DATE`<br><br>• `DATE`: should be of the format `dd-MM-yyyy` `e.g. 24-10-2021`.<br>• More information [below](#33-last-met-attribute). | 0 to 1
+Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only contain numbers, and it should be at least 3 digits long `e.g. 8743 8807`. | 0 to 1
+Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance. | 0 to 1
+Tag | t/ | `TAG`<br><br>• `TAG`: should be alphanumeric `e.g. friends`.<br>• More information [below](#34-tag-attribute). | 0 or more
 
 ### 3.1 Duplicate Clients
 
@@ -148,7 +148,7 @@ LeadsForce has checks that prevent users from creating duplicated contacts.
 The `Next Meeting` attribute refers to the next meeting that the financial advisor using has with the client.
 Each `Next Meeting` consists of a `DATE`, `START_TIME`, `END_TIME` and a `LOCATION`.
 
-| Parameter Format | `[m/DATE (START_TIME~END_TIME), LOCATION]` |
+| Parameter Format | `m/DATE (START_TIME~END_TIME), LOCATION` |
 :---: | ---
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop` |
 | <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME` are in `hh:mm` (24 hour format). <br>• `LOCATION` can take any value, but it cannot be blank. <br>• `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
@@ -157,7 +157,7 @@ Each `Next Meeting` consists of a `DATE`, `START_TIME`, `END_TIME` and a `LOCATI
 
 The `Last Met` attribute refers to the last date the user have met the client.
 
-| Parameter Format | `[l/DATE]` |
+| Parameter Format | `l/DATE` |
 :---: | ---
 | Example | `l/25-10-2021`|
 | <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `Last Met` cannot take dates in the future, but any other past dates up to today's date is OK. |
@@ -166,9 +166,9 @@ The `Last Met` attribute refers to the last date the user have met the client.
 
 The `Tag` attribute refers to the tags associated with the client. A client can have multiple tags, including zero tags.
 
-| Parameter Format | `[t/TAG]...` |
+| Parameter Format | `t/TAG` |
 :---: | ---
-| Example | `t/family t/friends` |
+| Example | `t/family` |
 | <img src="images/info_icon.png" width="50"/> | • `TAG`: should be alphanumeric.<br>• For operation against multiple tags, you can specify the parameter multiple times in the command. e.g. to assign multiple tags to an existing client of ID `100`, you can do `edit 100 t/friends t/family`.<br>• To clear all the tags associated to a client, you can do `edit CLIENT_ID t/`.<br>• Note that all commands that modify the tags of a client in any ways, will overwrite all existing tags of the client. e.g. if a client previously had the tags: `family` and `friends`, doing the command `edit CLIENT_ID t/rejected` will wipe out all previous tags and the client now has only the `rejected` tag. |
 
 --------------------------------------------------------------------------------------------------------------------
@@ -253,7 +253,7 @@ used in the management of client information and client meetings.
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * `<attribute>` refers to an arbitrary attribute prefix. (i.e. any attribute prefix can be substituted unless otherwise stated). For a comprehensive list of client's attributes available, please refer to this [section](#3-client-information).
-* Items with `...` after them can be used multiple times, including zero times if it is also optional.
+* We use `...` to indicate multiplicity. Parameters with `...` after them can be used multiple times, including zero times if it is also optional.
 e.g. `KEYWORD...` can be used as `John`, `alex david` etc. Whereas, `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters with prefix `e.g. n/NAME` can be in any order.
 e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -263,6 +263,8 @@ e.g. if the command specifies `KEYWORD... p/PHONE_NUMBER`, then `p/PHONE_NUMBER 
 e.g. if you specify `p/12341234 p/56785678`, only` p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Some attributes are hidden due to space constraints, e.g. `[<attribute>/VALUE]...` means that you can optionally (indicated by `[]`) provide one or more (indicated by `...`) parameters of the format `<attribute>/VALUE`.
+* For multiplicity of hidden attributes, please refer to this [section](#3-client-information).
 
 </div>
 
@@ -623,3 +625,17 @@ Action | Format | Examples
 **Delete Address Book** | `ab delete ADDRESSBOOK_NAME` | ab delete book
 **Switch Address Book** | `ab switch ADDRESSBOOK_NAME` | ab switch another
 **List Address Book** | `ab list` | -
+
+## **11. Appendix**
+
+### 11.1 Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Command Line Interface (CLI)**: Text-based user interface that is used to view and manage device files
+* **Graphical User Interface (GUI)**: A visual way of interacting with a device using a variety of items
+* **Leads**: refers to contact with a potential customer, also known as a “prospect”
+* **Risk Appetite**: level of risk that a lead is prepared to accept in pursuit of his/her objectives, before action is deemed necessary to reduce the risk
+* **Disposable Income**: total clientele income minus clientele current taxes
+* **Client list**: the list of clients that is displayed in the GUI
+* **Address Book**: the list of clients where all clients inserted are kept
+* **Multiplicity**: the expected quantity of an item. e.g. `0 to 1` means that we expect there are zero to one such item present.
