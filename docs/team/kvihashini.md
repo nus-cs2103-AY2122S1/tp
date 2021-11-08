@@ -15,6 +15,7 @@ Given below are my contributions to the project.
 * Added skeleton model for Groups. [\#48](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/48)
 * Added 'view student' command and wrote tests for the command. [\#47](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/47)
 * Added 'delete group' command and wrote tests for the command. [\#89](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/89)
+* Added 'view group' command and wrote tests for the command. [\#123](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/123)  
 * UI
     * Designed UI mockup [\#2](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/2)
     * Modifed UI to include Tasks and Groups panel to view all tasks and groups a tutor has. [\#56](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/56). [\#88](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/88)
@@ -25,5 +26,6 @@ Given below are my contributions to the project.
   * Added documentation for the features `view group`, `delete task` and `assign task` [\#10](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/10)
 * Developer Guide:
     * Added non-functional requirements and glossary terms. [\#3](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/3), [\#4](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/4)
+    * Added implementation of feature `view student' [\#104](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/104)
 * README:
     * Updated README to match project. [\#25](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/25)
