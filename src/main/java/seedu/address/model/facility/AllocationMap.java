@@ -28,6 +28,12 @@ public class AllocationMap {
         return membersAllocatedMap;
     }
 
+    /**
+     * Gets the current capacity on the given day.
+     *
+     * @param day The day to get the current capacity.
+     * @return The current capacity on the given day.
+     */
     public int getCapacityOnDay(DayOfWeek day) {
         return membersAllocatedMap.get(day).size();
     }
@@ -36,14 +42,33 @@ public class AllocationMap {
         membersAllocatedMap.get(day).clear();
     }
 
+    /**
+     * Checks whether a given member is allocated on the given day.
+     *
+     * @param member Member to check.
+     * @param day Day to check.
+     * @return true if and only if the member is allocated on the given day.
+     */
     public boolean isMemberAllocatedOnDay(Member member, DayOfWeek day) {
         return membersAllocatedMap.get(day).contains(member);
     }
 
+    /**
+     * Adds a member to the allocation on the given day.
+     *
+     * @param member Member to add to allocation on the given day.
+     * @param day The day to add the member.
+     */
     public void addMemberOnDay(Member member, DayOfWeek day) {
         membersAllocatedMap.get(day).add(member);
     }
 
+    /**
+     * Removes a member from the allocation on the given day.
+     *
+     * @param member Member to be removed from allocations on the given day.
+     * @param day The day to remove the member.
+     */
     public void removeMemberOnDay(Member member, DayOfWeek day) {
         membersAllocatedMap.get(day).remove(member);
     }
@@ -69,6 +94,12 @@ public class AllocationMap {
         return memberList.stream().map(member -> member.getName().toString()).collect(Collectors.joining(", "));
     }
 
+    /**
+     * Gets the list of members allocated on the given day.
+     *
+     * @param day The day to get the list of members allocated.
+     * @return The list of members allocated on the given day.
+     */
     public List<Member> getMembersAllocatedOnDay(DayOfWeek day) {
         return membersAllocatedMap.get(day);
     }
