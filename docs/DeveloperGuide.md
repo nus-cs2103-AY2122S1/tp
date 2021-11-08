@@ -1371,7 +1371,7 @@ testers are expected to do more *exploratory* testing.
 [Table of contents](#table-of-contents)
 
 The effort required to evolve `AB3` to `RecruitIn` could be estimated to be approximately the effort required to create AB3.
-Our team have contributed roughly 13000 lines of functional code, automated unit and integration testing, and documentation.
+Our team have contributed roughly 11000 lines of functional code, automated unit and integration testing, and documentation.
 Listed below are some features and enhancements, and an explanation of the difficulty or effort required to implement them:
 
   1. ### **Addition of categories**
