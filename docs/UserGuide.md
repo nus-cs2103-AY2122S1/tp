@@ -594,7 +594,7 @@ Examples:
 * `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
 </details>
 
-#### Marking a task as done by group: `task -dog`  (Coming in v2.0)
+#### Marking a task as done by group: `task -dog`  (Coming soon)
 <details markdown="1">
 <summary>
 Marks that a group has done a task.
@@ -624,7 +624,7 @@ Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
 </details>
 
-#### Marking a task as not done by group: `task -undog`  (Coming in v2.0)
+#### Marking a task as not done by group: `task -undog`  (Coming soon)
 <details markdown="1">
 <summary>
 Marks that a group has not done a task.
@@ -678,7 +678,7 @@ Tutor Master data are saved as a JSON file `[JAR file location]/data/tutormaster
 If your changes to the data file makes its format invalid, Tutor Master will discard all data and start with an empty data file at the next run.
 </div>
 
-#### Archiving data files `[coming in v2.0]`
+#### Archiving data files (Coming Soon)
 
 _Details coming soon ..._
 
