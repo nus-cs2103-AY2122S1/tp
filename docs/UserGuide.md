@@ -18,7 +18,7 @@ In this section, you will learn how to use the *ComputingConnection* user guide 
 
 ### 2.1 Navigating this guide
 1. Chronological navigation by scrolling 
-- If this is your first time using ComputingConnection, we recommend this for a comprehensive walkthrough.
+- If this is your first time using *ComputingConnection*, we recommend this for a comprehensive walkthrough.
 <br><br/>
 2. Targeted search by jumping 
 - If you know what you're looking for and want to be efficient. 
@@ -58,7 +58,7 @@ Orange text     | Headings and subheadings of various size
 
 1. Download the latest `computingconnection.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ComputingConnection.
+1. Copy the file to the folder you want to use as the _home folder_ for your *ComputingConnection*.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -68,7 +68,7 @@ Orange text     | Headings and subheadings of various size
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/Dion Neo e/dion@example.com f/computing m/computer science` : Adds a contact named `Dion Neo` to the ComputingConnection, with the respective email, faculty and major fields.
+   * **`add`**`n/Dion Neo e/dion@example.com f/computing m/computer science` : Adds a contact named `Dion Neo` to the *ComputingConnection*, with the respective email, faculty and major fields.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -116,18 +116,18 @@ Miscellaneous data fields| 8. `t/` : Tag <br><br> 9. `r/` : Remark <br><br> 10. 
 * Items in *ComputingConnection* are sorted alphanumerically, from **upper case** to **lower case**.
 </div>
 
+<div markdown="block" class="alert alert-info">
+:information_source: Compulsory vs Optional data fields
+* Compulsory data fields cannot be left empty! 
+* Optional data fields can have 0 or more values.
+</div>
+
 ### 4.3 Structure of an Organisation
 Understanding the structure of a **organisation** in *ComputingConnection* is also important in enabling you to be more productive and keep contacts together in the one organisation. E.g. a group, CCA or company
 
 Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
 Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
-
-<div markdown="block" class="alert alert-info">
-:information_source: Compulsory vs Optional data fields
-* Compulsory data fields cannot be left empty! 
-* Optional data fields can have 0 or more values.
-</div>
 
 ### 4.4 ComputingConnection command formats
 <div markdown="block" class="alert alert-info">
@@ -182,7 +182,7 @@ Format: `list`
 Sorts all contacts permanently and shows the list in alphabetical order. <br/>
 
 Format: `sort`
-![result for 'sort'](images/sortscreenshot.png)
+![result for 'sort'](images/SortCommand.png)
 
 ##### Filtering contacts : `filter`
 Filters the contacts by data fields of the person including faculty, major, skill, framework, language and tag.
@@ -194,7 +194,6 @@ Examples:
 >  returns all users who have been assigned the f/computing tag.
 * `filter t/staff f/computing`
 >  returns all users who have been assigned the t/staff tag and f/computing tag.
-
   ![result for 'filter f/computing'](images/filterscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -265,12 +264,14 @@ Appends a new item to an optional data field of the existing contact at the spec
 Format: `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples:
+* `append 1 fr/reactJS`
+  > Appends 'reactJS' to the skill data field of the contact at index 1 in the displayed list.
 * `append 3 s/web devevelopment l/python t/classmate` 
-  > Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the Person at index 3 in the displayed list. In the example below, it is Charlotte Oliveiro.
+  > Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the contact at index 3 in the displayed list. In the example below, it is Charlotte Oliveiro.
 ![result for 'append'](images/AppendCommand.png) 
 
 <div markdown="block" class="alert alert-info">
-:bulb: Appending is cumulative! 
+:bulb: Appending is **cumulative**! 
 * Items in data fields are not numbered chronologically after an `append`, but alphanumerically - this should help you see contacts more consistently.
 * Sorting order follows **digit** first, then **upper case letter** and finally, **lower case letter**.
 </div>
@@ -305,7 +306,6 @@ Examples:
   
 * `interaction 2 int/We chat. on/1990-01-20` <br/>
 > Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the displayed list.
-
 ![result for 'interaction 2 int/We chat. on/1990-01-20'](images/interactionscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -326,7 +326,6 @@ Examples:
 > Displays the details of contact indexed at 1 in the currently displayed list.
 *  `view 2`
 > Displays the details of contact indexed at 2 in the currently displayed list.
-
 ![result for 'view 2'](images/viewscreenshot.PNG)
 
 <div markdown="block" class="alert alert-info">
@@ -350,7 +349,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
-  
+> Returns all contacts with 'alex' or 'david'
 ![result for 'find alex david'](images/findscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -386,11 +385,6 @@ Examples:
 ### 5.3 Organisation-specific commands
 Commands that are related to organisations.
 
-##### Showing the list of all organisations: `listorg`
-Shows the list of organisations in the organisation list.
-
-Format: `listorg`
-
 ##### Adding an organisation: `addorg`
 Adds an organisation to *ComputingConnection*.
 
@@ -399,7 +393,6 @@ Format: `addorg n/NAME e/EMAIL`
 Examples:
 * `addorg n/Shopee e/shopee.org@gmail.com`
 > Adds an organisation with the name 'Shopee' and email 'shopee.org@gmail.com'.
-
 ![result for 'addorg'](images/addorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -410,6 +403,11 @@ Examples:
 * Organisation names must be unique, emails can be repeated.
 </div>
 
+##### Showing the list of all organisations: `listorg`
+Shows the list of organisations in the organisation list.
+
+Format: `listorg`
+
 ##### Deleting an organisation: `deleteorg`
 Deletes an organisation at the specified `INDEX` of the organisation list.
 
@@ -419,7 +417,7 @@ Examples:
 * `deleteorg 1`
 > Deletes the 1st organisation from the organisation list.
 * `deleteorg 3`
-
+> Deletes the 3rd organisation from the organisation list.
 ![result for 'deleteorg'](images/deleteorgscreenshot.png)
 
 ##### Adding person to an organisation: `addtoorg`
@@ -430,7 +428,6 @@ Format: `addtoorg INDEX n/NAME`
 Examples:
 * `addtoorg 1 n/NUS`
 > Adds the 1st person in the displayed list to the NUS organisation.
-
 ![result for 'addtoorg'](images/addtoorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -447,7 +444,6 @@ Format: `deletefromorg INDEX NAME`
 Examples:
 * `deletefromorg 1 n/NUS`
 > Deletes the 1st person in the person list of the NUS organisation.
-
 ![result for 'deletefromorg'](images/deletefromorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
@@ -465,6 +461,9 @@ Data field | Future updates
 `f/` : Faculty | Case insensitive items, wider scope of NUS faculties
 `m/` : Major | Valid items to correspond with valid faculties
 
+##### Confirmation for deletion
+_Details coming soon ..._
+
 ##### Archiving data files
 _Details coming soon ..._
 
@@ -473,7 +472,7 @@ _Details coming soon ..._
 ## 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous *ComputingConnection* home folder.
 
 **Q**: What does the compatibility field represent?<br>
 **A**: Compatibility field as the name suggests records down how compatible you think you are with the contact of interest. This information can be used in a versatile way. A common use case is to filter by compatibility when one is looking for a suitable partner for a project.
