@@ -53,7 +53,7 @@ Given below are my contributions to the project.
     * Added documentation for feature `cache` in UG [\#108](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/108)
 
   * Developer Guide
-    * Added documentation for feature `cache` in DG [\115](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/115)
+    * Added documentation for feature `cache` in DG [\#115](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/115)
 
   * ReadmeMd
     * Created Ui Mockup [\#30](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/30)
