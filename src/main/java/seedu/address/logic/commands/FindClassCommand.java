@@ -34,7 +34,7 @@ public class FindClassCommand extends Command {
         model.updateFilteredTutorialClassList(predicate);
 
         // check if tutorial class exists in ClassMATE
-        if (model.getFilteredTutorialClassList().size() == 0 ) {
+        if (model.getFilteredTutorialClassList().size() == 0) {
             throw new CommandException(MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 

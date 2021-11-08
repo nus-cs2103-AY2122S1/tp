@@ -1,5 +1,6 @@
 package seedu.address.model.tutorialgroup;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G01;
@@ -80,5 +81,14 @@ class TutorialGroupTest {
         // different group type -> returns false
         editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupType(VALID_GROUPTYPE_OP2).build();
         assertFalse(TUT_01.equals(editedTut01));
+    }
+
+    @Test
+    public void toDisplayString() {
+        String tutorialGroupStringOne = "OP1 Grp: 1";
+        assertEquals(tutorialGroupStringOne, TUT_01.toDisplayString());
+
+        String tutorialGroupStringTwo = "OP2 Grp: 2";
+        assertEquals(tutorialGroupStringTwo, TUT_02.toDisplayString());
     }
 }

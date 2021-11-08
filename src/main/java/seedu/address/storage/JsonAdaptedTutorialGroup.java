@@ -46,7 +46,8 @@ public class JsonAdaptedTutorialGroup {
     public TutorialGroup toModelType() throws IllegalValueException {
 
         if (classCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ClassCode.class.getSimpleName()));
         }
         if (!ClassCode.isValidClassCode(classCode)) {
             throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
@@ -65,7 +66,8 @@ public class JsonAdaptedTutorialGroup {
         final GroupNumber modelGroupNumber = new GroupNumber(groupNumber);
 
         if (groupType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupType.class.getSimpleName()));
         }
         if (!GroupType.isValidGroupType(groupType)) {
             throw new IllegalValueException(GroupType.MESSAGE_CONSTRAINTS);
