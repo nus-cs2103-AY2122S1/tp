@@ -127,7 +127,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="800"/>
+<img src="images/LogicClassDiagram.png" width="600"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `SalesNoteParser` class to parse the user command.
@@ -287,7 +287,7 @@ Note that in the diagram above, the "else" clause for the `alt` boxes have been 
 an exception is thrown and an error is displayed back to the user. 
 
 Here is an activity diagram to more clearly illustrate the logic of the application:
-<img src="images/AddOrderActivityDiagram.png" width="300"/>
+<img src="images/AddOrderActivityDiagram.png" width="600"/>
 
 #### Result
 An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
