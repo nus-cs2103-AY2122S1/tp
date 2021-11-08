@@ -661,15 +661,27 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `stat`<br>
        Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
-
-
-### Saving data
+    
+### Loading/Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Remove a `{` from data/profBook.json
+      Expected: ProfBook will be empty on load.
+
+      1. Test case: `exit`
+         Expected: profBook.json will be overwritten and no longer corrupted.
+   
+   2. Delete data/profBook.json
+      Expected: ProfBook will be populated with dummy data on load.
+      
+      1. Test case: `exit`
+         Expected: profBook.json will be recreated in the data directory
    
 
 ## Effort
 The difficulty level for our project is at a relatively moderate level. 
-We did not make large changes to the AB3 but instead chose to enhance the existing features. Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. For example, when implementing the sort feature, there were so many different lists in AB3 and some of them were immutable. So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
+We did not make large changes to the AB3 but instead chose to enhance the existing features. Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. 
+For example, when implementing the sort feature, there were so many lists in AB3 and some of them were immutable. So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.
+In comparison to AB3, ProfBook was a harder project due to the large amounts of information attached to each contact. Managing all that information and making sure that each of our features work with the information in an intuitive way was one of the bigger achievements of ProfBook.
+Another big achievement of the project was how we integrated import and export features to ProfBook so that the information in ProfBook is portable and can be transferred between users easily. And since the output/input file is a JSON file, it could be used in conjunction with other apps as well.
