@@ -164,7 +164,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         return this.internalList.get(index);
     }
 
-    public int tuitionListSize() {
+    public int getTuitionListSize() {
         return this.internalList.size();
     }
 
@@ -191,12 +191,21 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         internalList.sort(new TuitionClassComparator(order));
     }
 
+    /**
+     * Comparator class for sorting the tuition list.
+     */
     class TuitionClassComparator implements Comparator<TuitionClass> {
         private SortCommandParser.Order order;
         public TuitionClassComparator(SortCommandParser.Order order) {
             this.order = order;
         }
 
+        /**
+         * Compares two tuition classes.
+         * @param o1 First tuition class to compare.
+         * @param o2 Second tuition class to compare.
+         * @return 0 if two classes are equal, 1 if o1 is larger and -1 if o2 is larger.
+         */
         @Override
         public int compare(TuitionClass o1, TuitionClass o2) {
             switch (order) {
@@ -220,6 +229,9 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         return mostRecentTuitionClasses;
     }
 
+    /**
+     * Sets mostRecentTuitionClasses to empty list.
+     */
     public static void setMostRecentTuitionClasses() {
         mostRecentTuitionClasses = FXCollections.observableArrayList();
     }

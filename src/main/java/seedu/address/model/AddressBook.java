@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public TuitionClass getTuition(Index index) {
         requireNonNull(index);
-        if (tuitions.tuitionListSize() < index.getOneBased()) {
+        if (tuitions.getTuitionListSize() < index.getOneBased()) {
             return null;
         }
         return tuitions.getTuitionClass(index.getOneBased() - 1);
