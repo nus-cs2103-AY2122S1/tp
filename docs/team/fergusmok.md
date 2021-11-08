@@ -49,7 +49,8 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 1. Updated User Guide for v1.3 
 
 ### Developer Guide
-1. ModuleSet diagrams
+1. ModuleSet implementation explanation
+2. Effort appendix
 
 ### Team-based tasks
 1. Set up the team's repo and RepoSense.
