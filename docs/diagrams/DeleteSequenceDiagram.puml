@@ -61,13 +61,12 @@ activate CommandResult
 CommandResult --> DeletePolicyCommand
 deactivate CommandResult
 CommandResult -[hidden]-> DeletePolicyCommand
-destroy CommandResult
 
-DeletePolicyCommand --> LogicManager : result
+DeletePolicyCommand --> LogicManager : command result
 deactivate DeletePolicyCommand
 DeletePolicyCommand -[hidden]-> LogicManager
 destroy DeletePolicyCommand
 
-[<--LogicManager
+[<--LogicManager : command result
 deactivate LogicManager
 @enduml
