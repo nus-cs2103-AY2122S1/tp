@@ -73,6 +73,7 @@ to quickly navigate to the command of your choice.
 6. Refer to the [Features](#features) below for details of each command.
 
 7. Refer to the [Flag Summary Table](#flag-summary) below for details on the flags used in the commands.
+
 ---
 
 ## Features
