@@ -1,5 +1,6 @@
 package seedu.insurancepal.storage;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.insurancepal.commons.core.Money;
 import seedu.insurancepal.commons.exceptions.IllegalValueException;
+import seedu.insurancepal.logic.parser.ParserUtil;
 import seedu.insurancepal.model.appointment.Appointment;
 import seedu.insurancepal.model.claim.Claim;
 import seedu.insurancepal.model.person.Address;
@@ -78,7 +80,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        revenue = String.valueOf(source.getRevenue().value.getInDollars());
+        revenue = String.valueOf(source.getRevenue().value.stringInputByUser());
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -140,9 +142,9 @@ class JsonAdaptedPerson {
 
         final Revenue modelRevenue;
         if (revenue == null) {
-            modelRevenue = new Revenue(new Money(0));
+            modelRevenue = new Revenue(new Money(BigDecimal.ZERO));
         } else {
-            modelRevenue = new Revenue(new Money(Float.parseFloat(revenue)));
+            modelRevenue = ParserUtil.parseRevenue(revenue);
         }
 
         if (address == null) {

@@ -6,8 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.insurancepal.commons.core.Money;
 import seedu.insurancepal.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.insurancepal.logic.parser.ParserUtil;
+import seedu.insurancepal.logic.parser.exceptions.ParseException;
 import seedu.insurancepal.model.person.Address;
 import seedu.insurancepal.model.person.Email;
 import seedu.insurancepal.model.person.Insurance;
@@ -15,7 +16,6 @@ import seedu.insurancepal.model.person.Name;
 import seedu.insurancepal.model.person.Note;
 import seedu.insurancepal.model.person.Person;
 import seedu.insurancepal.model.person.Phone;
-import seedu.insurancepal.model.person.Revenue;
 import seedu.insurancepal.model.tag.Tag;
 
 /**
@@ -76,8 +76,11 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Revenue} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withRevenue(String revenue) {
-        Money money = new Money(Float.valueOf(revenue));
-        descriptor.setRevenue(new Revenue(money));
+        try {
+            descriptor.setRevenue(ParserUtil.parseRevenue(revenue));
+        } catch (ParseException e) {
+            return this;
+        }
         return this;
     }
     /**

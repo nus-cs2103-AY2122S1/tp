@@ -1,74 +1,50 @@
 @startuml
 !include style.puml
 
-Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T2
+box Logic LOGIC_COLOR_T1
+Participant ":InsurancePalParser" as insurancePalParser LOGIC_COLOR
 Participant ":RevenueCommandParser" as revenueCommandParser LOGIC_COLOR
-Participant "argMultimap:ArgumentMultimap" as argumentMultimap LOGIC_COLOR_T1
-Participant "<<class>>\nParserUtil" as util LOGIC_COLOR_T3
+Participant "<<class>>\nParserUtil" as util LOGIC_COLOR
+Participant ":RevenueCommand" as command LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
 Participant "revenue:Revenue" as revenue MODEL_COLOR
-Participant ":Money" as money MODEL_COLOR
-Participant ":RevenueCommand" as command LOGIC_COLOR_T4
+end box
 
-
-addressBookParser -[LOGIC_COLOR_T2]> revenueCommandParser : parse("1 r/100.21")
-activate addressBookParser LOGIC_COLOR_T2
+insurancePalParser -[LOGIC_COLOR]> revenueCommandParser :"1 r/100.21"
+activate insurancePalParser LOGIC_COLOR
 activate revenueCommandParser LOGIC_COLOR
 
-create argumentMultimap
-revenueCommandParser -[LOGIC_COLOR]> argumentMultimap : ArgumentTokenizer.tokenize("1 r/100.21", PREFIX_REVENUE)
-activate argumentMultimap LOGIC_COLOR_T1
+revenueCommandParser -[LOGIC_COLOR]> util :parseIndex
+activate util LOGIC_COLOR
 
-argumentMultimap -[LOGIC_COLOR]-> revenueCommandParser
-deactivate argumentMultimap
-
-revenueCommandParser -[LOGIC_COLOR]> util :parseIndex(argMultimap.getPreamble())
-activate util LOGIC_COLOR_T3
-
-util -[LOGIC_COLOR]> argumentMultimap:getPreamble()
-activate argumentMultimap LOGIC_COLOR_T1
-
-argumentMultimap -[LOGIC_COLOR]-> util
-deactivate argumentMultimap
-
-util -[LOGIC_COLOR_T3]-> revenueCommandParser :index
+util -[LOGIC_COLOR]-> revenueCommandParser :index
 deactivate util
 
-revenueCommandParser -[LOGIC_COLOR]> util :parseRevenue(argMultimap.getValue(PREFIX_REVENUE).get())
-activate util LOGIC_COLOR_T3
-
-util -[LOGIC_COLOR]> argumentMultimap:getValue(PREFIX_REVENUE).get()
-activate argumentMultimap LOGIC_COLOR_T1
-
-argumentMultimap -[LOGIC_COLOR]-> util
-deactivate argumentMultimap
+revenueCommandParser -[LOGIC_COLOR]> util :parseRevenue
+activate util LOGIC_COLOR
 
 create revenue
-util -[LOGIC_COLOR_T3]-> revenue: Revenue(new Money(number))
+util -[LOGIC_COLOR]-> revenue: Revenue(new Money("100.21"))
 activate revenue MODEL_COLOR
 
-create money
-revenue -[LOGIC_COLOR_T3]> money: Money(number)
-activate money MODEL_COLOR
-
-money -[LOGIC_COLOR_T3]-> revenue
-deactivate money
-
-revenue -[MODEL_COLOR]-> util
+revenue -[MODEL_COLOR]-> util :revenue
 deactivate revenue
 
-util -[LOGIC_COLOR_T3]-> revenueCommandParser
+util -[LOGIC_COLOR]-> revenueCommandParser :revenue
 deactivate util
 
 create command
 revenueCommandParser -[LOGIC_COLOR]> command :RevenueCommand(index, revenue)
-activate command LOGIC_COLOR_T4
+activate command LOGIC_COLOR
 
-command -[LOGIC_COLOR_T4]-> revenueCommandParser : RevenueCommand
+command -[LOGIC_COLOR]-> revenueCommandParser : RevenueCommand
 deactivate command
 
-revenueCommandParser -[LOGIC_COLOR]-> addressBookParser: RevenueCommand
+revenueCommandParser -[LOGIC_COLOR]-> insurancePalParser : RevenueCommand
 deactivate revenueCommandParser
 
-deactivate addressBookParser
+deactivate insurancePalParser
 
 @enduml

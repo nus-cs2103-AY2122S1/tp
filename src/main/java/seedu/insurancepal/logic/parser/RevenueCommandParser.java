@@ -44,12 +44,8 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
         }
         String revenueString = argMultimap.getValue(PREFIX_REVENUE)
                 .orElseThrow(() -> new ParseException(INVALID_REVENUE_COMMAND_FORMAT));
-        try {
-            Revenue revenue = ParserUtil.parseRevenue(revenueString);
-            return new RevenueCommand(index, revenue);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(INVALID_REVENUE_COMMAND_FORMAT,
-                    COMMAND_WORD), ive);
-        }
+        Revenue revenue = ParserUtil.parseRevenue(revenueString);
+
+        return new RevenueCommand(index, revenue);
     }
 }

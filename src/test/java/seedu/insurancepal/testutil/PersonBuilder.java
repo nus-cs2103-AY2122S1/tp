@@ -1,11 +1,14 @@
 package seedu.insurancepal.testutil;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.insurancepal.commons.core.Money;
+import seedu.insurancepal.logic.parser.ParserUtil;
+import seedu.insurancepal.logic.parser.exceptions.ParseException;
 import seedu.insurancepal.model.appointment.Appointment;
 import seedu.insurancepal.model.claim.Claim;
 import seedu.insurancepal.model.person.Address;
@@ -27,7 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final Money DEFAULT_REVENUE = new Money(0);
+    public static final Money DEFAULT_REVENUE = new Money(BigDecimal.ZERO);
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_MEETING = "";
@@ -95,8 +98,11 @@ public class PersonBuilder {
      * Sets the {@code Revenue} of the {@code Person} that we are building.
      */
     public PersonBuilder withRevenue(String revenue) {
-        float revenueInFloat = Float.valueOf(revenue);
-        this.revenue = new Revenue(new Money(revenueInFloat));
+        try {
+            this.revenue = ParserUtil.parseRevenue(revenue);
+        } catch (ParseException e) {
+            return this;
+        }
         return this;
     }
 

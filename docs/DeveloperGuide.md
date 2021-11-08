@@ -154,6 +154,81 @@ Classes used by multiple components are in the `seedu.insurancepal.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add command
+
+A `Person` can be added to `InsurancePal` using the following method:
+1. Using the `AddCommand` to add a `Person` to `InsurancePal`
+
+The processing of an add command from the user can be split into 2 general steps:
+1. Parsing user input into an `AddCommand`
+2. Executing the `AddCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `AddCommandParser` which calls other
+helper classes to parse the text into various attributes `XYZ` of `Person`, which are: 
+* `Name`
+* `Phone`
+* `Email`
+* `Address`
+* `Tags` (optional)
+* `Insurances` (optional)
+* `Notes` (optional)
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
+`AddCommandParser` then creates an `AddCommand` based on created objects, 
+as well as an empty `Appointment` object and an empty `HashSet` of `Claims`.
+
+**Step 2**: Execution of `AddCommand`
+
+![AddCommandActivityDiagram](images/AddCommandActivityDiagram.png)
+
+There are 2 possible outcomes of an `AddCommand`:
+1. The addition is rejected since a `Person` with the same name already exists. 
+2. The person is added to `InsurancePal`.
+
+### Edit command
+
+A `Person` in `InsurancePal` can be edited using the following method:
+1. Using the `EditCommand` to edit a `Person` in `InsurancePal`
+
+The processing of an edit command from the user can be split into 2 general steps:
+1. Parsing user input into an `EditCommand`
+2. Executing the `EditCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `EditCommandParser` which calls other
+helper classes to parse the text into editable attributes `XYZ` of `Person`, which are: 
+* `Name`
+* `Phone`
+* `Email`
+* `Address`
+* `Tags`
+* `Insurances`
+* `Notes`
+
+All fields are optional, but at least one must be provided
+
+![EditCommandSequenceDiagram](images/EditCommandSequenceDiagram.png)
+
+`EditCommandParser` then creates an `EditCommand` with an `EditPersonDescriptor`
+with the attributes of `Person` to edit.
+
+
+**Step 2**: Execution of `EditCommand`
+
+![EditCommandActivityDiagram](images/EditCommandActivityDiagram.png)
+
+There are 2 possible outcomes of an `EditCommand`:
+1. The edit is rejected since a `Person` with the same name already exists. 
+2. The person is edited in `InsurancePal`.
+
 ###  Revenue feature
 
 #### Current Implementation
@@ -221,13 +296,6 @@ of 20,000,000.
   * Pros: `revenue` of the client can be much higher in the rare case that there is a client providing 
   very high revenue to the insurance agent.
   * Cons: More prone to bugs and precision errors as value of `revenue` approaches the limit for `BigDecimal`
-
-### Add command
-
-A user can use the add command to add a clients. A sequence diagram of this action is as shown:
-
-![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
-
 
 ###  Note feature
 
@@ -407,22 +475,27 @@ There are 4 possible outcomes from the execution of a ScheduleCommand.
     
 ### Insurance feature
 
-#### Implementation
+#### Current implementation
 {:.no_toc}
 
-`Insurance` is currently composed of two objects:
+The insurance policies a client has is represented by the `insurances` field under `Person`,
+which is represented by a `HashSet<Insurance>` object. 
 
-* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
-* `brand`, a `String` representing the brand of insurance.
-
-A `Person` can have any number of different `Insurances`, stored as a `HashSet`.
-
-`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command.
-
-A class diagram of `Insurance` is as shown:
+The `Insurance` object contains an `insuranceType`, which is an `InsuranceType` enumeration,
+and a `brand` representing the insurance policy's brand, represented as a `String`.
 
 ![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
+#### Design considerations
+
+*Aspect*: User interface of adding insurance policies
+
+* **Alternative 1**: One `Insurance` command adds and edits insurances
+  * Pros: Easier for user to remember all insurance-related commands with one command
+  * Cons: Overkill for a lightweight object
+* **Alternative 2 (chosen)**: Integrate `Insurance` with existing `add` and `edit` commands 
+  * Pros: Easy for user to remember as a lightweight property, similar to existing `Tag` 
+  * Cons: Harder to scale in the future if more properties are added to `Insurance`
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -477,7 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with many contacts in the address book                                     | search for contacts in my contacts list whose name matches my input         |  navigate to the person I am looking for quickly |
 | `* * *`  | user                                     | delete clients from my contact list         | remove a client from my contact list I no longer need to keep in contact with|
 | `* * *`  | user                                    | use programs on Windows and Mac         | use it on all my laptops |
-| `* * *`  | user                                    | exit the program safely        | free up resources on his computer |
+| `* * *`  | user                                    | exit the program safely        | free up resources on my computer |
 | `* * *`  | new user                                     |  install the application        | I can use it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
@@ -627,8 +700,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given revenue is of an invalid format
+* 3b. The given revenue is of an invalid format.
     * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The given revenue when added to the current revenue becomes negative.
+  * 3c1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3d. The given revenue when added to the current revenue becomes larger than 20,000,000.
+  * 3d1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
 
@@ -752,7 +835,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Notes**: A short paragraph that is written for a person to remind the user about details of that person
 * **Client**: A person the user is selling or trying to sell insurance to
-
+* **Appointment**: A meeting the user will be having with a client
+* **Revenue**: The total profit the user has made off a client
 
 --------------------------------------------------------------------------------------------------------------------
 
