@@ -86,7 +86,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
-    //@@author Chesterwongz
     /**
      * Returns true if {@code lesson} clashes with an existing lesson in the address book.
      *
@@ -121,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireAllNonNull(lessons);
         return entries.hasClashes(lessons);
     }
-    //@@author
+
     /**
      * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
      */
