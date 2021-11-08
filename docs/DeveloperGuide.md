@@ -92,9 +92,9 @@ the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diag
 
 ### <a name="Architecture"></a> **4.1 Architecture**
 
-<div style="align-content: center">
-    <img src="images/ArchitectureDiagram.png" width="280"/>
-</div>
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" width="280"/>
+</p>
 <div style="text-align: center">
     <em>Figure 4.1.1: Architecture diagram of PE</em>
 </div>
@@ -124,9 +124,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* in Figure 4.1.2 shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
-<div style="align-content: center">
+<p align="center">
     <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.1.2: Sequence diagram showing interactions between the components</em>
 </div>
@@ -142,9 +142,9 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in Figure 4.1.3 below.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/ComponentManagers.png" width="300" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.1.3: Partial class diagram showing interactions through interfaces</em>
 </div>
@@ -159,9 +159,9 @@ in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/
 At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.2.1).
 Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/ui/UiClassDiagramOverview.png" width="300" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.2.1: Overview of Ui components</em>
 </div>
@@ -180,9 +180,9 @@ Now taking a closer look at the `MainWindow` component, it consists of a number 
 , `StatusBarFooter` etc. (Figure 4.2.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI. The following is a summary of the parts of the `MainWindow`.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/ui/UiClassDiagramMainComponents.png" width="300" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.2.2: MainWindow Ui components</em>
 </div>
@@ -210,9 +210,9 @@ The `UI` component,
 
 Figure 4.3.1 shows a (partial) class diagram of the `Logic` component:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/LogicClassDiagram.png" width="300" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.3.1: Overview of Logic components</em>
 </div>
@@ -229,9 +229,9 @@ How the `Logic` component works:
 The Sequence Diagram in Figure 4.3.2 below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/DeleteCommand/DeleteCommandSequenceDiagram.png" width="300" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.3.2: Sequence diagram illustrating interactions within the Logic component</em>
 </div>
@@ -240,9 +240,9 @@ call.
 </div>
 Figure 4.3.3 illustrates the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/ParserClasses.png" width="300" />
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.3.3: Partial class diagram showing the structure of the  Parser classes</em>
 </div>
@@ -260,7 +260,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/ModelClassDiagram.png" width="300" />
 </div>
 <div style="text-align: center">
@@ -282,9 +282,9 @@ The `Model` components as seen in Figure 4.4.1,
 ### <a name="Storage component"></a> **4.5 Storage component**
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
-<div style="align-content: center">
+<p align="center">
     <img src="images/StorageClassDiagram.png" width="550"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 4.5.1: Overview of Storage components</em>
 </div>
@@ -343,18 +343,18 @@ The following (partial) sequence diagram in Figure 5.1.1 shows how the add comma
 - Note: toAdd in the sequence diagram represents the new `Student` object to be added.
 - Refer to [Logic component](#Logic component) for a review of the Logic Component.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/AddCommand/AddCommandAbstractSequenceDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.1.1: Sequence diagram illustrating the execution of add command</em>
 </div>
 <br>
 The following activity diagram in Figure 5.1.2 summarizes what happens when a CS2100 TA executes a new command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/AddCommand/AddCommandActivityDiagram.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.1.2: Activity diagram for executing add command</em>
 </div>
@@ -414,7 +414,7 @@ The following UML sequence diagrams shows how the filter command works:
 
 * Figure 5.2.1 focuses on modelling the interactions between components to first create the `FilterCommand` object.
    
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/FilterCommand/FilterSequenceDiagramParse.png"/>
 </div>
 <div style="text-align: center">
@@ -424,9 +424,9 @@ The following UML sequence diagrams shows how the filter command works:
 * In the next sequence diagram, Figure 5.2.2 focuses on the interactions between components when the `FilterCommand` is
 being executed.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/FilterCommand/FilterSequenceDiagramExecute.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.2.2: Partial sequence diagram showing the execution of FilterCommand object</em>
 </div>
@@ -439,9 +439,9 @@ the lifeline reaches the end of diagram.
 
 Figure 5.2.3 shows the UML activity diagram summarizing what happens when a CS2100 TA executes a new filter command.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/FilterCommand/FilterActivityDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.2.3: Activity diagram for executing filter command</em>
 </div>
@@ -526,9 +526,9 @@ user that the index is invalid. This is triggered by `CommandException`, which i
 
 The following sequence diagram in Figure 5.3.1 shows how the show command works:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/ShowCommand/ShowSequenceDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.3.1: Sequence diagram illustrating the execution of show command</em>
 </div>
@@ -536,9 +536,9 @@ The following sequence diagram in Figure 5.3.1 shows how the show command works:
 
 The following activity diagram in Figure 5.3.2 summarizes what happens when a CS2100 TA executes a new command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/ShowCommand/ShowActivityDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.3.2: Activity diagram for executing show command</em>
 </div>
@@ -598,18 +598,18 @@ The mechanism is as described below:
 
 The following sequence diagram in Figure 5.4.1 shows how the `editlab` command works:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/EditLabCommand/EditLabSequenceDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.4.1: Sequence diagram illustrating the execution of editlab command</em>
 </div>
 <br>
 The following activity diagram in Figure 5.4.2 summarizes what happens when a CS2100 TA executes a new command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/EditLabCommand/EditLabActivityDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.4.2: Activity diagram for executing editlab command</em>
 </div>
@@ -649,9 +649,9 @@ not require its own parser.
 
 This sequence diagram in Figure 5.5.1 shows how the `download` command works at a lower level:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/DownloadCommand/DownloadSequenceDiagram.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.5.1: Sequence diagram illustrating the execution of download command</em>
 </div>
@@ -659,9 +659,9 @@ This sequence diagram in Figure 5.5.1 shows how the `download` command works at 
 
 The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the download command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/DownloadCommand/DownloadActivityDiagram.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.5.2: Activity diagram for executing download command</em>
 </div>
@@ -718,18 +718,18 @@ The mechanism is as described below:
 
 The following sequence diagram in Figure 5.6.1 shows how the purge command works:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/PurgeCommand/PurgeSequenceDiagram.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.6.1: Sequence diagram illustrating the execution of purge command</em>
 </div>
 <br>
 The following activity diagram in Figure 5.6.2 summarizes what happens when a CS2100 TA executes a new command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/PurgeCommand/PurgeActivityDiagram.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.6.2: Activity diagram for executing purge command</em>
 </div>
@@ -770,9 +770,9 @@ Step 1. The user launches the application for the first time. The `VersionedProg
 initial ProgrammerError state, and the `currentStatePointer` pointing to that single ProgrammerError state as seen in
 Figure 5.7.1.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoRedoState0.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.1: Object diagram after Step 1</em>
 </div>
@@ -783,9 +783,9 @@ calls `Model#commitProgrammerError()`, causing the modified state of the Program
 to be saved in the `programmerErrorStateList`, and the `currentStatePointer` is shifted to the newly inserted ProgrammerError
 state as seen in Figure 5.7.2.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoRedoState1.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.2: Object diagram after Step 2</em>
 </div>
@@ -795,9 +795,9 @@ Step 3. The user executes `add -n David …​` to add a new student. The `add` 
 calls `Model#commitProgrammerError()`, causing another modified ProgrammerError state to be saved into
 the `programmerErrorStateList` as seen in Figure 5.7.3.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoRedoState2.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.3: Object diagram after Step 3</em>
 </div>
@@ -812,9 +812,9 @@ the `undo` command. The `undo` command will call `Model#undoProgrammerError()`, 
 once to the left, pointing it to the previous ProgrammerError state, and restores the ProgrammerError to that state as
 seen in Figure 5.7.4.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoRedoState3.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.4: Object diagram after Step 4</em>
 </div>
@@ -826,9 +826,9 @@ than attempting to perform the undo.
 
 The following sequence diagram in Figure 5.7.5 shows how the undo operation works:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoSequenceDiagram.png"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.5: Sequence diagram illustrating the execution of undo command</em>
 </div>
@@ -849,9 +849,9 @@ Step 5. The CS2100 TA then decides to execute the command `list`. Commands that 
 as `list`, will usually not call `Model#commitProgrammerError()`, `Model#undoProgrammerError()` or `Model#redoProgrammerError()`.
 Thus, the `programmerErrorStateList` remains unchanged as seen in Figure 5.7.6.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoRedoState4.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.6: Object diagram after Step 5</em>
 </div>
@@ -862,18 +862,18 @@ pointing at the end of the `programmerErrorStateList`, all ProgrammerError state
 purged as seen in Figure 5.7.7. Reason: It no longer makes sense to redo the `add -n David …​` command. This is the behavior that most modern
 desktop applications follow.
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/commands/UndoCommand/UndoRedoState5.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.7: Object diagram after Step 6</em>
 </div>
 <br>
 The following activity diagram in Figure 5.7.8 summarizes what happens when a CS2100 TA executes a new command:
 
-<div style="align-content: center">
+<p align="center">
     <img src="images/CommitActivityDiagram.png" width="300"/>
-</div>
+</p>
 <div style="text-align: center">
     <em>Figure 5.7.8: Activity diagram showing the saving of state after command execution</em>
 </div>

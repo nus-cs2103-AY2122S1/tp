@@ -45,7 +45,9 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 3. Copy the file to the folder you want to use as the _home folder_ for your ProgrammerError.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
-   ![Ui](images/Ui_v1.4.png)
+    <p align="center">
+        <img src="images/commands/UndoCommand/Ui_v1.4.png" width="300"/>
+    </p>
 5. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
    will open the help window.<br>
    Here are some example commands you can try:
@@ -111,7 +113,9 @@ Shows a message explaining how to access the help page.
 
 ### <a name="view-dashboard"></a>2.2 View Dashboard: `dashboard`
 
-![dashboard](images/commands/DashboardCommand/dashboard.png)
+<p align="center">
+<img src="images/commands/DashboardCommand/dashboard.png" width="300"/>
+</p>
 
 Displays a dashboard window showing the following data:
 
@@ -261,6 +265,9 @@ Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL
 
 Below shows an example when `filter -cid B01` is executed with 4 students from class B01 filtered out.
 ![filter](images/commands/FilterCommand/filter.png)
+<p align="center">
+<img src="images/commands/FilterCommand/filter.png" width="400"/>
+</p>
 
 
 <div markdown="block" class="alert alert-success">
