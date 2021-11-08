@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code ExpectedSalary} is within a range of 500 from any of the keywords given.
+ * Tests that a {@code Person}'s {@code ExpectedSalary} is within range of any of the keywords given.
  */
 public class ExpectedSalaryWithinRangePredicate implements Predicate<Person> {
 
@@ -14,11 +14,6 @@ public class ExpectedSalaryWithinRangePredicate implements Predicate<Person> {
 
     private final List<String> keywords;
 
-    /**
-     * Constructs an {@code ExpectedSalaryWithinRangePredicate}.
-     *
-     * @param keywords {@code List} of keywords to be tested against an {@code ExpectedSalary}.
-     */
     public ExpectedSalaryWithinRangePredicate(List<String> keywords) {
         this.keywords = keywords;
     }

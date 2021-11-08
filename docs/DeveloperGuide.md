@@ -18,6 +18,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### Table of Contents
+- [**About this guide**](#about-this-guide)
 - [**Acknowledgements**](#acknowledgements)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
@@ -57,11 +58,28 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Editing an applicant](#editing-an-applicant)
   * [Deleting an applicant](#deleting-an-applicant)
   * [Finding an applicant](#finding-an-applicant)
+  * [Showing an applicant](#showing-search-terms)
   * [Marking an applicant](#marking-an-applicant)
   * [Unmarking an applicant](#unmarking-an-applicant)
   * [Deleting marked applicants](#deleting-marked-applicants)
   * [Saving data](#saving-data)
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **About this guide**
+[Table of contents](#table-of-contents)
+
+This guide aims to help developers get familiar with how RecruitIn functions.
+* To understand the design of RecruitIn on a higher level, you may visit [Design](#design) for implementation
+details of each component of RecruitIn.
+* If you wish to go further to understand how certain features are implemented on a lower level, you may visit
+[Implementation](#implementation) for noteworthy implementation details of important features.
+* If you wish to conduct some manual testing of RecruitIn, you may visit [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+to find various test cases and expected results for some features of RecruitIn.
+* If you wish to make further developments to RecruitIn, 
+you may follow the guide at [Setting up, getting started](#setting-up-getting-started) 
+for a quick set up of your development environment.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -170,7 +188,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/dg-diagrams/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -236,7 +254,7 @@ The `add` command is facilitated by creating an `AddCommand` depending on the gi
 This command then updates the `model` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
-![images](images/AddCommandActivityDiagram.png)
+![images](images/dg-diagrams/AddCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -265,7 +283,7 @@ Step 6. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the add operation works.
-![images](images/AddCommandSequenceDiagram.png)
+![images](images/dg-diagrams/AddCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
@@ -276,7 +294,7 @@ The ```edit``` command is facilitated by creating an ```EditCommand``` depending
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
-![images](images/EditCommandActivityDiagram.png)
+![images](images/dg-diagrams/EditCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -307,7 +325,7 @@ Step 6. Once the list is updated, `CommandResult` is initialized with `String` c
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the edit operation works.
-![images](images/EditCommandSequenceDiagram.png)
+![images](images/dg-diagrams/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
@@ -318,7 +336,7 @@ The ```delete``` command is facilitated by creating a ```DeleteCommand``` depend
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```delete``` command:
-![images](images/DeleteActivityDiagram.png)
+![images](images/dg-diagrams/DeleteActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -341,7 +359,7 @@ Step 4. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the delete operation works.
-![images](images/DeleteSequenceDiagram.png)
+![images](images/dg-diagrams/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `DeleteCommandParser`
@@ -355,7 +373,7 @@ input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```find``` command:
 
-![images](images/FindCommandActivityDiagram.png)
+![images](images/dg-diagrams/FindCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -377,7 +395,7 @@ Step 4. Once the string of all applicant names is formed, `CommandResult` is ini
 and returned.
 
 The following sequence diagram shows how the find operation works.
-![images](images/FindCommandSequenceDiagram.png)
+![images](images/dg-diagrams/FindCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FindCommandParser`
@@ -412,7 +430,7 @@ The ```filter_interview``` command is facilitated by extending an abstract ```Fi
 subclass depending on the given input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
-![images](images/FilterInterviewCommandActivityDiagram.png)
+![images](images/dg-diagrams/FilterInterviewCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -441,7 +459,7 @@ Step 6. Once the list has been filtered, `CommandResult` is initialized with `St
 have interviews that have passed. This `CommandResult` is then returned.
 
 The following sequence diagram shows how the filter interview operation works.
-![images](images/FilterInterviewCommandSequenceDiagram.png)
+![images](images/dg-diagrams/FilterInterviewCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
@@ -471,7 +489,7 @@ The ```show``` command is facilitated by creating an ```ObservableList``` of ```
 the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
-![images](images/ShowCommandActivityDiagram.png)
+![images](images/dg-diagrams/ShowCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -494,7 +512,7 @@ Step 4. Once the string of all applicant names is formed, `CommandResult` is ini
 and returned.
 
 The following sequence diagram shows how the show operation works.
-![images](images/ShowCommandSequenceDiagram.png)
+![images](images/dg-diagrams/ShowCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
@@ -526,7 +544,7 @@ The ```mark``` command is facilitated by creating a ```MarkCommand```, which is 
 This command then updates the ```model``` accordingly, depending on the given input.
 
 The following activity diagram summarizes what happens when a user executes a ```mark``` command:
-![images](images/MarkCommandActivityDiagram.png)
+![images](images/dg-diagrams/MarkCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -549,7 +567,7 @@ Step 4. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the mark operation works.
-![images](images/MarkCommandSequenceDiagram.png)
+![images](images/dg-diagrams/MarkCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `MarkingCommandParser`
@@ -562,7 +580,7 @@ The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which
 ```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
 
 The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
-![images](images/UnmarkCommandActivityDiagram.png)
+![images](images/dg-diagrams/UnmarkCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -584,7 +602,7 @@ Step 4. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the unmark operation works.
-![images](images/UnmarkCommandSequenceDiagram.png)
+![images](images/dg-diagrams/UnmarkCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `MarkingCommandParser`
@@ -611,7 +629,7 @@ The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCom
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
-![images](images/DeleteMarkedCommandActivityDiagram.png)
+![images](images/dg-diagrams/DeleteMarkedCommandActivityDiagram.png)
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
 
@@ -629,7 +647,7 @@ Step 5. Once the string of all applicant names that are marked is formed, `Comma
 and returned.
 
 The following sequence diagram shows how the delete marked operation works.
-![images](images/DeleteMarkedCommandSequenceDiagram.png)
+![images](images/dg-diagrams/DeleteMarkedCommandSequenceDiagram.png)
 
 #### Design considerations for delete marked:
 [Table of contents](#table-of-contents)

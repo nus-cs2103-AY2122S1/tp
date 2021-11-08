@@ -55,6 +55,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      *
+     * @param args {@code String} of arguments to be parsed
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
@@ -79,11 +80,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(findDescriptor.getPredicates());
     }
 
+    /**
+     * Parses keywords for each prefix into a list of predicates to be used for filtering.
+     */
     public static class FindDescriptor {
         private ArrayList<Predicate<Person>> predicateList = new ArrayList<>();
 
         /**
          * Constructs a FindDescriptor.
+         * <p>
          * FindDescriptors extracts user input for each Prefix and converts them into a list of Predicates.
          */
         FindDescriptor(ArgumentMultimap argMultimap) throws ParseException {
@@ -377,8 +382,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             return null;
         }
-
-
 
         public ArrayList<Predicate<Person>> getPredicates() {
             return predicateList;

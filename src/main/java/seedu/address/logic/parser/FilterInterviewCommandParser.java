@@ -8,16 +8,11 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FilterInterviewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-/**
- * Parses input arguments and creates a new FilterInterviewCommand object.
- */
 public class FilterInterviewCommandParser implements Parser<FilterInterviewCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterInterviewCommand
      * and returns a FilterInterviewCommand object for execution.
-     *
-     * @param args {@code String} of arguments to be parsed
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterInterviewCommand parse(String args) throws ParseException {

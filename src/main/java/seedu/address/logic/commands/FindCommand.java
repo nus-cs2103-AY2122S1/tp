@@ -27,9 +27,10 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for FindCommand.
+     * <p>
      * predicates should not be null.
      *
-     * @param predicates A list of predicates to filter applicants by.
+     * @param predicates A list of {@code Predicate}s to filter {@code Person}s by.
      */
     public FindCommand(ArrayList<Predicate<Person>> predicates) {
         requireNonNull(predicates);
