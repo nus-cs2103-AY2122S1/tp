@@ -39,10 +39,11 @@ public class JsonAdaptedLastUpdated {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LastUpdatedDate.class.getSimpleName()));
         }
-        if (!LastUpdatedDate.isValidLastUpdatedDateTime(dateTime)) {
+        String strippedDateTime = dateTime.strip();
+        if (!LastUpdatedDate.isValidLastUpdatedDateTime(strippedDateTime)) {
             throw new IllegalValueException(LastUpdatedDate.MESSAGE_CONSTRAINTS);
         }
 
-        return new LastUpdatedDate(dateTime);
+        return new LastUpdatedDate(strippedDateTime);
     }
 }
