@@ -640,4 +640,4 @@ Action | Format | Examples
 * **Disposable Income**: total clientele income minus clientele current taxes
 * **Client list**: the list of clients that is displayed in the GUI
 * **Address Book**: the list of clients where all clients inserted are kept
-* **Multiplicity**: the expected quantity of an item. e.g. `0 to 1` means that we expect there are zero to one such item present.
+* **Multiplicity**: the expected quantity of an item. A `0 to 1` multiplicity means that we expect there are zero to one of such item present in a `Client`. <br> For example, a `Client` can have 0 or 1 `Contact number` and `Address` (optional values) but must have exactly 1 `Name` and `Email` (compulsory values).
