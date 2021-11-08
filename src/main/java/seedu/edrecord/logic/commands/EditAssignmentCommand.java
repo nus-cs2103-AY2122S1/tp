@@ -27,14 +27,14 @@ public class EditAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "edasg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the assignment using "
-            + "its index number as shown in the displayed assignment list. "
+            + "its ID number as shown in the displayed assignment list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_WEIGHTAGE + "WEIGHTAGE] "
             + "[" + PREFIX_SCORE + "MAX_SCORE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Side Quest 7 "
+            + PREFIX_NAME + "Midterm "
             + PREFIX_WEIGHTAGE + "2.5";
 
     public static final String MESSAGE_EDIT_ASSIGNMENT_SUCCESS = "Edited Assignment: %1$s";

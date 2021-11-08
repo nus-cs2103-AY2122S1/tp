@@ -18,8 +18,8 @@ public class DeleteAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "dlasg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes an assignment using its index number used in the displayed assignment list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes an assignment using its ID number used in the displayed assignment list.\n"
+            + "Parameters: ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted assignment: %1$s";
