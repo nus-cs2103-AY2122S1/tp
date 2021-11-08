@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-## Product overview
+## 1. Product overview
 
 *ComputingConnection* is for entrepreneurial students in NUS Computing who want to **keep track of other students’ skill sets so that they can easily look for suitable people to work with on future projects.** *ComputingConnection* is optimized for Command Line Interface (CLI) over a Graphical User Interface (GUI) for efficiency with a keyboard.
 
@@ -13,10 +13,10 @@ You can use *ComputingConnection* to efficiently record information such as facu
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## About (using this user guide)
+## 2. About (using this user guide)
 In this section, you will learn how to use the *ComputingConnection* user guide efficiently and effectively.
 
-### Navigating this guide
+### 2.1 Navigating this guide
 1. Chronological navigation by scrolling 
 - If this is your first time using ComputingConnection, we recommend this for a comprehensive walkthrough.
 <br><br/>
@@ -25,7 +25,7 @@ In this section, you will learn how to use the *ComputingConnection* user guide 
 - Skip to specific sections via the Table of Contents or navigable texts.
 - CTRL + F to find specific keywords. 
 
-### Text conventions
+### 2.2 Text conventions
 This user guide is formatted using the following conventions:
 
 Syntax          | Interpretation
@@ -37,7 +37,7 @@ Orange text     | Headings and subheadings of various size
 ------          | Dividers for section breaks
 
 
-### Meaning of icons and symbols
+### 2.3 Meaning of icons and symbols
 :information_source: : Additional information <br/>
 :bulb: : Tip <br/>
 :exclamation: : Important message <br/>
@@ -52,7 +52,7 @@ Orange text     | Headings and subheadings of various size
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 3. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -86,10 +86,10 @@ Orange text     | Headings and subheadings of various size
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Understanding the 'Features' section
+## 4. Understanding the 'Features' section
 In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#features) section. 
 
-### Terminologies used
+### 4.1 Terminologies used
 Unique terms specific to *ComputingConnection*
 
 Term            | Meaning
@@ -99,7 +99,7 @@ Organisation    | Represents an organisation in *ComputingConnection*
 Data field      | Categorised data that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields
 Item            | An element of a specific data field
 
-### Structure of a contact
+### 4.2 Structure of a contact
 Understanding the structure of a **contact** in *ComputingConnection* is important in enabling you to be more productive.
 
 Category        | Specific fields | Valid items | Requirement
@@ -116,7 +116,7 @@ Miscellaneous data fields| 8. `t/` : Tag <br><br> 9. `r/` : Remark <br><br> 10. 
 * Items in *ComputingConnection* are sorted alphanumerically, from **upper case** to **lower case**.
 </div>
 
-### Structure of an Organisation
+### 4.3 Structure of an Organisation
 Understanding the structure of a **organisation** in *ComputingConnection* is also important in enabling you to be more productive and keep contacts together in the one organisation. E.g. a group, CCA or company
 
 Category        | Specific fields | Valid items | Requirement
@@ -129,7 +129,7 @@ Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumer
 * Optional data fields can have 0 or more values.
 </div>
 
-### ComputingConnection command formats
+### 4.4 ComputingConnection command formats
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -158,22 +158,25 @@ Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumer
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 5. Features
 Features and commands are categorised based on 
 1. System commands
 2. Contact-specific commands
 3. Organisation-specific commands
 
-### System commands
+### 5.1 System commands
 Commands that are related to the whole ComputingConnection system or database. 
 
 ##### Viewing help : `help`
 Shows a message explaining how to access the help page. <br/>
 
 Format: `help`
+![result for 'help'](images/Help.png)
 
 ##### Listing all contacts : `list`
 Shows a list of all contacts in the address book. <br/>
+
+Format: `list`
 
 ##### Sorting contacts : `sort`
 Sorts all contacts permanently and shows the list in alphabetical order. <br/>
@@ -210,7 +213,7 @@ Format: `clear`
 * The confirmation for clearing data will be implemented in future releases. 
 </div>
 
-### Contact-specific commands
+### 5.2 Contact-specific commands
 Commands that are related to a specific contact.
 
 ##### Adding a contact : `add`
@@ -224,6 +227,7 @@ Examples:
   > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science compat/80 s/frontend l/javascript r/interest in web development`
   > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with a compatibility of 80/100, with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
+![result for 'add'](images/AddCommand.png)
 
 <div markdown="block" class="alert alert-info">
 :bulb: :information_source: Start with the essentials!
@@ -235,6 +239,11 @@ Examples:
 Edits an existing contact at the specified `INDEX`.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+
+Example:
+* `edit 1 m/information systems`
+> Edits the major of the 1st contact displayed to "information systems". In the example below, it is Alex Yeoh.
+![result for 'edit'](images/EditCommand.png)
 
 <div markdown="block" class="alert alert-info">
 :bulb: Easy editing!
@@ -257,7 +266,8 @@ Format: `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t
 
 Examples:
 * `append 3 s/web devevelopment l/python t/classmate` 
-  > Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the Person at index 3 in the displayed list.
+  > Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the Person at index 3 in the displayed list. In the example below, it is Charlotte Oliveiro.
+![result for 'append'](images/AppendCommand.png) 
 
 <div markdown="block" class="alert alert-info">
 :bulb: Appending is cumulative! 
@@ -274,9 +284,9 @@ Examples:
 * `rm 6 l/2` <br/>
 > Removes the **2nd item from the language** data field of the 6th contact displayed.
   
-* `rm 5 s/1 s/3 fr/3 r/1` <br/>
-> Removes the **1st and 3rd item from the skill** data field, the **3rd item from the framework** data field, and the **1st item from the remark** data field of the 5th contact displayed.
-
+* `rm 3 l/4 t/2` <br/>
+> Removes the **4th item from the language** data field, the **2nd item from the tag** data field of the 3th contact displayed. In the example below, it is Charlotte Oliveiro.
+![result for 'remove'](images/RemoveCommand.png)
 
 <div markdown="block" class="alert alert-info">
 :bulb: Remove items quickly!
@@ -358,17 +368,20 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2`<br/> 
-> Deletes the 2nd contact in the address book.
+> Deletes the 2nd contact in the displayed list.
 
-* `find Betsy` followed by `delete 1`<br/> 
+* `find Timothy` followed by `delete 1`<br/> 
 > Deletes the 1st contact in the results of the `find` command.
+![result for 'delete'](images/DeleteCommand1.png)
+> then
+> ![result for 'delete'](images/DeleteCommand2.png)
 
 <div markdown="block" class="alert alert-info">
 :exclamation: Be **careful!**
 * The confirmation for deleting a contact will be implemented in future releases.
 </div>
 
-### Organisation-specific commands
+### 5.3 Organisation-specific commands
 Commands that are related to organisations.
 
 ##### Showing the list of all organisations: `listorg`
@@ -430,7 +443,7 @@ Examples:
 :information_source: The person and organisation will not be deleted, just the relation.
 </div>
 
-### Future commands
+### 5.4 Future commands
 Commands to be implemented in future versions.
 
 ##### Updates to data fields
@@ -446,7 +459,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -456,26 +469,25 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 7. Command summary
 
 System Command | Format, Examples
 --------|------------------
 **Help** | `help`
 **List** | `list`
 **Sort** | `sort`
-**Filter** | `filter`
+**Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`<br><br> e.g., `filter f/computing`
 **Clear** | `clear`|
 
 Contact-specific Command | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
-**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science`
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATIBILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 1 m/information systems`
 **Append** | `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `append 3 s/web devevelopment l/python t/classmate`
-**Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
+**Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/INDEX]…​ [int/INDEX]…​` <br><br> e.g., `rm 3 l/4 t/2`
 **Interaction** | `interaction INDEX int/DESCRIPTION on/DATE`
 **View** | `view INDEX` <br><br> e.g. `view 2`
 **Find** | `find KEYWORD [MORE_KEYWORDS]…​`<br><br> e.g., `find James Jake`
-**Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`<br><br> e.g., `filter f/computing`
 **Delete** | `delete INDEX`<br><br> e.g., `delete 3`
 
 Organisation-specific Command | Format, Examples
