@@ -157,7 +157,7 @@ Creates a person.
 Format: `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`<br>
 Advanced user Format: `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
 
-* Creates a person with the `NAME`.
+* Creates a person with the `NAME`. This name cannot start with a number.
 * Optional arguments:
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
@@ -359,11 +359,12 @@ You can also create a group to organize people based on their common traits. In 
 of a group to organize people based on a more specific category. 
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-You can sort your contacts in Notor by the group that they are in, as well as taking general notes on the group. A few ideas on how you can use groups are:
+You can sort your contacts in Notor by the group that they are in, as well as taking general notes on the group. <br>
+A few ideas on how you can use groups are:<br>
 
-* Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts
-* Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest
-* Group mentees who you need to achieve certain checkpoints with. For example, if in your job as a mentor you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.
+* Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts<br>
+* Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest<br>
+* Group mentees who you need to achieve certain checkpoints with. For example, if in your job as a mentor you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.<br>
 
 </div>
 
@@ -378,7 +379,7 @@ Creating a group command works no matter what list is in the List Pane. **Howeve
 Format: `group (GROUP_NAME) /create`<br>
 Advanced user Format: `g (GROUP_NAME) /c`
 
-* Creates a new group with the name `GROUP_NAME`.
+* Creates a new group with the name `GROUP_NAME`. This name cannot start with a number, and may contain `-` or `.` characters
 * The new group must not have a same name with other existing groups.
 
 Examples:
@@ -411,10 +412,9 @@ Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
 Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
 å
 * Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
+* This name cannot start with a number, and may contain `-` or `.` characters
 * The new subgroup must not have the same name as other existing subgroups in the same group.
-* The new subgroup's name must not include any backslash (`/`) or underscore (`_`).
-
->>>>>>> master
+* The new subgroup's name must not include any backslash (`/`) or underscore (`_`). 
 
 Examples :
 
