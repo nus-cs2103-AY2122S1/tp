@@ -304,8 +304,21 @@ Shows a list of all tasks in the task list.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `list`
+- <code> `list` </code>
+
 </div>
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Example:**
+
+* `list` displays a list of all the task in the task list
+
+</div>
+
+After running the list command, the tasks in that given week are listed as shown below:
+
+![find_command_after](images/listCommand.png)
 
 ### 4.7 Showing Tasks: `show`
 
@@ -333,7 +346,7 @@ Show all tasks that have been added to the app in a specific week.
 
 <div markdown="block" class="alert alert-success">
 
-**:green_book: Examples:**
+**:green_book: Example:**
  
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 </div>
