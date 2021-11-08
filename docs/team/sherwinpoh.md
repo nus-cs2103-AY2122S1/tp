@@ -29,6 +29,9 @@ Given below are my contributions to the project.
         * What it does: Enables policies to be sorted by total commission and total payments instead of commission percentage and single payment amount.
         * Justification: Users are insurance agents that are profit-incentivised, hence being able to visualise the
           profitability (total commission) of their policies is important.
+    * **Add tags to policies** [PR #60](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/60)
+      * What it does: Enables users to have multiple tags on policies.
+      * Justification: Users can now classify, and distinguish visually different policies.
 * Contributions to the UG
     * Added common Policy details section. [PR #187](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/187)
     * Added the documentation for addpolicy, editpolicy commands. [PR #69](https://github.com/AY2122S1-CS2103-F10-4/tp/pull/69)
