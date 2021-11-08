@@ -812,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-**UC12: Viewing help**
+**UC12: View help**
 
 **MSS**
 1. User requests for help.
