@@ -380,7 +380,7 @@ The event list is the in the left-most column of the application, which lists al
 The event list and the events can be changed using the various commands listed below. Each command starts with `e` abbreviation of event. This is to indicate that the command is used for the manipulation of the event list or event data.
 
 <div markdown="span" class="alert alert-primary"> 
-:bulb: **Tip:** A event can have the same name <u>or</u> date as another task, but **not** the same name <u>and</u> same date. Events are unique, but it is still possible to have event with same name but of different date. This is to allow repetitive daily/weekly/monthly events to be created as well.
+:bulb: **Tip:** An event can have the same name <u>or</u> date as another task, but **not** the same name <u>and</u> same date. Events are unique, but it is still possible to have event with same name but of different date. This is to allow repetitive daily/weekly/monthly events to be created as well.
 </div>
 
 ### [Event Glossary](#table-of-contents)
