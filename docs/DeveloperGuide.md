@@ -959,7 +959,7 @@ testers are expected to do more *exploratory* testing.
 1. Test case: `view y/2 s/1`<br>
        Expected: Modules scheduled in year 2, semester 1 are shown.
 
-2. Test case: `view y/10 s/1`<br>
+2. Test case: `view y/10 s/2`<br>
         Expected: Error message is shown.
 
 ### Unscheduling all modules in a specific semester
