@@ -10,7 +10,6 @@ title: Developer Guide
 3. [Glossary](#Glossary)
 4. [Design](#Design)
 5. [Architecture](#Architecture)
-6. [Implementations](#Implementations)
 7. [Design](#Design)
    1. [Architecture](#Architecture)
    2. [UI Components](#UI component)
