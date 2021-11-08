@@ -248,7 +248,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Alias feature
-
+The alias feature creates a shortcut name for any command in SportsPA. The shortcut name must not be an existing command word in SportsPA.
 #### Implementation
 
 The *alias* mechanism is facilitated by `SportsPaParser`. Aliases are stored in `AliasMap`, which keeps the mappings
@@ -326,7 +326,7 @@ regularly used commands. Considering the target use of SportsPA and time constra
 likely to be repeated, we decided that it was sufficient to allow users to create shortcuts for commands only.
 
 ### Split members to facilities feature
-
+The split feature splits members into the facilities based on its capacity and members' availabilities. The `split` command only accepts **numbers 1-7** as a preamble e.g., `split 6` is valid and splits members on Saturday.
 #### Implementation
 
 The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
@@ -407,6 +407,8 @@ The lifelines should end at the destroy marker (X) but due to a limitation of Pl
   * Cons: Harder to implement and test. May require the use of supporting data structures which adds on to the complexity.
 
 ### Mark/unmark attendance feature
+The mark attendance feature marks the attendance of the members at the specified index/indices of the member list as present.<br>
+The unmark attendance feature unmarks the attendance of the members at the specific index/indices of the member list to be absent.<br>
 
 #### Implementation
 
@@ -470,7 +472,7 @@ to be unmarked via the `Member#setNotPresent()` and `ModelManager` references th
       attendance to mark.
 
 ### Find member feature
-
+The find member feature finds and displays all members that match the parameters specified. **At least one valid parameter** must be supplied.
 #### Implementation
 The find member mechanism is facilitated by `FindMemberCommandParser`.
 `FindMemberCommandParser` implements the following operations:<br>
