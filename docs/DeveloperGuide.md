@@ -489,12 +489,6 @@ Step 4. Since the value of `Email` (compulsory field) for the second contact is 
 
 Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will not display the second contact. The other fields and contacts will be displayed as per normal.  
 
-
-#### Design considerations:
-* Arguments for the command should follow the standard used in other parts of the software.
-* Balancing between simplicity of use when no arguments are provided, and customisability for users who might want additional information.
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-before: always;"></div>
