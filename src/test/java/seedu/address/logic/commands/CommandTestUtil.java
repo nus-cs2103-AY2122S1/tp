@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
+import seedu.address.testutil.EditClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -101,6 +102,17 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .build();
     }
+
+    public static final EditClassCommand.EditClassDescriptor DESC_CHEM;
+    public static final EditClassCommand.EditClassDescriptor DESC_PHY;
+
+    static {
+        DESC_CHEM = new EditClassDescriptorBuilder().withName(VALID_CLASS_CHEM).withTimeslot(VALID_CLASS_MON)
+                .withLimit(VALID_LIMIT_FIVE).build();
+        DESC_PHY = new EditClassDescriptorBuilder().withName(VALID_CLASS_PHY).withTimeslot(VALID_CLASS_TUE)
+                .withLimit(VALID_LIMIT_ONE).build();
+    }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>

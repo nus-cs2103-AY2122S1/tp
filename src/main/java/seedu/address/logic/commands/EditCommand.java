@@ -88,8 +88,10 @@ public class EditCommand extends Command {
             List<TuitionClass> enrolledClasses = editedStudent
                     .getClasses().getClasses().stream().map(model::getClassById).collect(Collectors.toList());
             for (TuitionClass tuitionClass: enrolledClasses) {
-                tuitionClass.updateStudent(studentToEdit, editedStudent);
-                logger.info(String.format("student name in class %s to %s", studentToEdit, editedStudent));
+                if (tuitionClass != null) {
+                    tuitionClass.updateStudent(studentToEdit, editedStudent);
+                    logger.info(String.format("student name in class %s to %s", studentToEdit, editedStudent));
+                }
             }
         }
         logger.info(String.format("Edited student: Details changed from %s to %s", studentToEdit, editedStudent));

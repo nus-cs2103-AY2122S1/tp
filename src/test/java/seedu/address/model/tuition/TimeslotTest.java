@@ -26,9 +26,9 @@ public class TimeslotTest {
     @Test
     public void parseString() {
         assertTrue(Timeslot.parseString("Mon 14:00-16:00") != null); //correct format
-        assertFalse(Timeslot.parseString("mon 14:00-16:00") == null); //M in "mon" is in lower case
+        assertTrue(Timeslot.parseString("mon 14:00-16:00") == null); //M in "mon" is in lower case
         assertFalse(Timeslot.parseString("Mon 2pm-4pm") != null); //use "pm" instead of hh:mm-hh:mm
-        assertFalse(Timeslot.parseString("Monday 14:00-16:00") == null); //week should be in shorten format
+        assertTrue(Timeslot.parseString("Monday 14:00-16:00") == null); //week should be in shorten format
         assertTrue(Timeslot.parseString("Monday 17:00-16:00") == null); //the sequence of time is incorrect
     }
 

@@ -83,7 +83,7 @@ public class DeleteCommand extends Command {
         if (classIndices.size() != otherIndex.size()) {
             return false;
         }
-        for(int i = 0; i < classIndices.size(); i++) {
+        for (int i = 0; i < classIndices.size(); i++) {
             return classIndices.get(i).equals(otherIndex.get(i));
         }
         return false;

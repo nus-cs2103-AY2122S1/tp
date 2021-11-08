@@ -2,26 +2,15 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.address.testutil.TypicalClasses.addTypicalClassesToAddressBook;
-import static seedu.address.testutil.TypicalClasses.getAddressBookWithTypicalClasses;
-import static seedu.address.testutil.TypicalClasses.getTypicalClasses;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalIndexes.INDEX_TENTH;
-import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.getAddressBookWithTypicalStudents;
 
 import org.junit.jupiter.api.Test;
@@ -32,35 +21,16 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Classes;
 import seedu.address.model.student.Student;
-import seedu.address.model.tuition.TuitionClass;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
-
-import java.util.ArrayList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
-            new UserPrefs());
-
-    @Test
-    public void execute_allFieldsEdited_success() {
-        Student student = model.getStudent(INDEX_FIRST);
-        EditCommand.EditStudentDescriptor editedDescriptor = new EditStudentDescriptorBuilder(AMY).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, editedDescriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, AMY);
-
-        Model expectedModel = new ModelManager(getAddressBookWithTypicalStudents(), new UserPrefs());
-        expectedModel.setStudent(student, AMY);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
+    private Model model = new ModelManager(getAddressBookWithTypicalStudents(), new UserPrefs());
 
     @Test
     public void execute_noFieldsEdited_failure() {

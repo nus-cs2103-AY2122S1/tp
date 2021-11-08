@@ -1,37 +1,28 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
-import seedu.address.model.tuition.TuitionClass;
-import seedu.address.testutil.EditClassDescriptorBuilder;
-import seedu.address.testutil.EditStudentDescriptorBuilder;
-import seedu.address.testutil.StudentBuilder;
-import seedu.address.testutil.TuitionClassBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_PHY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_SUN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClasses.SCI;
 import static seedu.address.testutil.TypicalClasses.addTypicalClassesToAddressBook;
-import static seedu.address.testutil.TypicalClasses.getAddressBookWithTypicalClasses;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalStudents.getAddressBookWithTypicalStudents;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.tuition.TuitionClass;
+import seedu.address.testutil.EditClassDescriptorBuilder;
+import seedu.address.testutil.TuitionClassBuilder;
 
 public class EditClassCommandTest {
 
@@ -42,8 +33,8 @@ public class EditClassCommandTest {
     public void execute_allFieldsEdited_success() {
         TuitionClass tuitionClass = model.getTuitionClass(INDEX_FIRST);
 
-        TuitionClass edited = new TuitionClassBuilder(tuitionClass)
-        .withName(VALID_CLASS_PHY).withClassLimit(10).withTimeslot(VALID_CLASS_SUN).build();
+        TuitionClass edited = new TuitionClassBuilder(tuitionClass).withName(VALID_CLASS_PHY)
+                .withClassLimit(10).withTimeslot(VALID_CLASS_SUN).build();
         EditClassCommand.EditClassDescriptor editDescriptor = new EditClassDescriptorBuilder(edited).build();
 
         EditClassCommand editCommand = new EditClassCommand(INDEX_FIRST, editDescriptor);

@@ -102,7 +102,7 @@ public class DeleteClassCommandParserTest {
     }
 
     @Test
-    public void parse_IndicesToDescendingOrder_success() {
+    public void parse_indicesToDescendingOrder_success() {
         //parser should sort indices in descending order
         List<Index> indices = new ArrayList<>();
         indices.add(0, INDEX_FIFTH);
