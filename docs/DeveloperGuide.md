@@ -307,7 +307,33 @@ The following activity diagram summarizes what happens when the user inputs a fi
     * Cons: Inconvenient for users if they have recurring task on different dates.
     
 
-### 3.5 Tag task feature
+### 3.5 Sort task feature
+
+The sort feature enables users to sort tasks by specifying whether to sort by time or priority as well as sort in ascending or descending order.
+
+#### 3.5.1 Implementation
+
+##### SortCommand class
+
+The `SortCommand` class extends the `Command` class. It manages the sorting of the task list as specified by the user based on time or priority. The user also specifies the order in which the tasks have to be sorted i.e. ascending or descending order. It contains a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, a `String` representing the successful sorting of task list, a functional interface `BiFunction` that accepts two Task class arguments and produces an Integer result.
+
+The `execute` method in `SortCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. A `CommandException` is thrown in case of `model` being `null`. In the happy path, the task list is sorted depending on the time or priority and the given ascending or descending order.
+
+##### SortCommandParser class
+
+The `SortCommandParser` class implements the `Parser<SortCommand>` interface. It manages the parsing of the arguments (sorting type and sorting order in the case of a sort command) in the user input. The `parse` method in `SortCommandParser` first checks if the sorting order has been given or not. It uses a BiFunction function that accepts two Long variables and produces an Integer result. This function decides the sorting order. If the sorting order is not specified, then ascending order is chosen to be the default option. If an invalid sorting order is entered by the user, a `ParseException` is thrown with the feedback message of Invalid Command Format and correct usage message for the sort command. The second if condition checks if the sorting type has been given or not. If the sorting type has not been specified, then time is chosen to be the default option. If an invalid sorting type is entered by the user, a `ParseException` is thrown with the feedback message of Invalid Command Format and correct usage message for the sort command. It then returns a `SortCommand` back to `UniFyParser`, applying the sort function to the given arguments.
+
+##### Usage Scenario
+
+The following demonstrates a usage scenario where the user wants to delete the first, second and third item in her/his task list.
+
+1. The method `execute("sort x/time o/asc")` inside LogicManager calls the `parseCommand`method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String “sort x/time o/asc” as its parameter and initializes a `SortCommandParser` object.
+3. It then calls the `parse` method in `SortCommandParser` to parse the string `”x/time o/asc”`.
+4. A `SortCommand` object will be initialized, taking in the sort type and sort order in the function, in this case the type being time and order being asc (ascending order).
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `SortCommand`.
+6. By using a functional interface called ‘BiFunction’, the `SotCommand` sorts the task list by calling a method ‘sortTasks’ under ‘Model’.
+7. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
 
 ### 3.6 \[Proposed\] Undo/redo feature
 
