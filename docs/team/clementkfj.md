@@ -53,9 +53,10 @@ Given below are my contributions to the project.
         * Updated new information for `Shift`, `Leaves`, `Salary` and `Loyalty Points` with new REGEX checker (Pull request [\#197](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/197))
         * Fix raised points about improvements in User guide during PE-D (Issues [\#159](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/159), [\#161](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/161), [\#165](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/165), [\#166](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/166), [\#168](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/168) and [\#172](https://github.com/AY2122S1-CS2103T-T17-1/tp/issues/172), Pull request [\#177](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/177))
     * Developer Guide:
-        * Added and made improvements to `AddEmployeeCommand` section for Developer's guide (Pull requests [\#208](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/208), [\#217](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/217), [\#220](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/220))
-        * Added NFRs (Pull requests [\#30](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/30), [\#39](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/39))
-        * Changed majority of the UML diagrams to better suit RHRH (Pull requests [\#208](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/208))
+        * Added and made improvements to `AddEmployeeCommand` section for Developer's guide (Pull request [\#208](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/208), [\#217](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/217), [\#220](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/220))
+        * Added NFRs (Pull request [\#30](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/30), [\#39](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/39))
+        * Changed majority of the UML diagrams to better suit RHRH (Pull request [\#208](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/208))
+        * Added `Add` and `Edit` commands use cases and `Add` Customer/Employee/Supplier manual testing (Pull request [\#242](https://github.com/AY2122S1-CS2103T-T17-1/tp/pull/242))
 
 * **Contributions beyond the team project**:
     * Found 6 bugs for PE-D for team [W14-2](https://github.com/clementkfj/ped/issues) 
