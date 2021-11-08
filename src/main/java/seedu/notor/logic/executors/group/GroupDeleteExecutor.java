@@ -11,7 +11,7 @@ import seedu.notor.ui.WarningWindow;
 
 public class GroupDeleteExecutor extends GroupExecutor {
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
-    public static final String MESSAGE_DELETE_GROUP_CANCEL = "Deleting of Group: %1$s has been cancelled.";
+    public static final String MESSAGE_DELETE_GROUP_CANCEL = "Cancelled deleting of Group: %1$s";
     public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with deleting of Group: %1$s?";
 
 

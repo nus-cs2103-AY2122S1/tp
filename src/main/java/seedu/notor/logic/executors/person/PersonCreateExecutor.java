@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.core.Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX;
 
-import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;

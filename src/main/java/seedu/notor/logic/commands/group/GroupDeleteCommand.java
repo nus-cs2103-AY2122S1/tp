@@ -19,7 +19,7 @@ public class GroupDeleteCommand extends GroupCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("delete", "d");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Deletes the group identified by the index number used in the displayed group list.\n";
+            ": Deletes the group specified by the group index.\n";
 
     public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION

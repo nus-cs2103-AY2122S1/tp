@@ -19,6 +19,8 @@ public class Tag implements Unique<Tag> {
 
     public final String tagName;
     // TODO: populate tagged with all the people who are tagged, w/ appropriate accessors
+    // Not implemented due to time constraints
+
     private final UniqueList<Person> tagged;
 
     /**

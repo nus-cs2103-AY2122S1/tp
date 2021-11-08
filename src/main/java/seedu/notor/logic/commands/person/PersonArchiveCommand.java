@@ -18,8 +18,7 @@ public class PersonArchiveCommand extends PersonCommand {
     public static final String COMMAND_WORD = "archive";
     public static final List<String> COMMAND_WORDS = Arrays.asList("archive", "ar");
 
-    private static final String COMMAND_DESCRIPTION =
-            ": Archives the person identified by the index number used in the displayed person list.\n";
+    private static final String COMMAND_DESCRIPTION = ": Archives the person specified by the index number.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION

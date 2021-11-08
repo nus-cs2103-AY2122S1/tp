@@ -57,8 +57,8 @@ public class UniqueList<T extends Unique<T>> implements Iterable<T> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent item from the list.
+     * The item must exist in the list.
      */
     public void remove(T toRemove) {
         requireNonNull(toRemove);
@@ -73,8 +73,7 @@ public class UniqueList<T extends Unique<T>> implements Iterable<T> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list another list of items that has no duplicates.
      */
     public void setItems(List<T> items) {
         requireAllNonNull(items);

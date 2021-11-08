@@ -15,7 +15,7 @@ public class PersonListCommand extends PersonCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("list", "l");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Lists all person\n";
+            ": Lists all persons\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION

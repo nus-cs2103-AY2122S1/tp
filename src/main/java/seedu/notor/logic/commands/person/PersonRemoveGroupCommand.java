@@ -25,10 +25,10 @@ public class PersonRemoveGroupCommand extends PersonCommand {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_GROUPNAME + "GROUP" + " [" + PREFIX_SUBGROUP + "SUBGROUP" + "]" + "\n"
-            + "Example: " + PersonCommand.COMMAND_WORD
+            + "Example 1: " + PersonCommand.COMMAND_WORD
             + " 1 /" + COMMAND_WORD + " "
             + PREFIX_GROUPNAME + "Team" + "\n"
-            + "Example: " + PersonCommand.COMMAND_WORD
+            + "Example 2: " + PersonCommand.COMMAND_WORD
             + " 1 /" + COMMAND_WORD + " "
             + PREFIX_GROUPNAME + "Team " + PREFIX_SUBGROUP + "A";
 

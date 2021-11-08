@@ -18,7 +18,7 @@ public class PersonClearTagsCommand extends PersonCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("cleartags", "ct");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Clears all tags from the person identified by the index number used in the displayed person list.\n";
+            ": Clears all tags from the person specified.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION

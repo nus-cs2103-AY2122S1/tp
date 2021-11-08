@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a name in the address book.
+ * Represents a name in Notor.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

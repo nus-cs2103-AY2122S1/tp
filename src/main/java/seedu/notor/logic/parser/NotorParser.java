@@ -107,23 +107,27 @@ public class NotorParser {
             final String commandWord = generalMatcher.group("commandWord");
             if (HelpCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new HelpCommand();
-            }
-            if (ExitCommand.COMMAND_WORDS.contains(commandWord)) {
+            } else if (ExitCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ExitCommand();
-            }
-            if (ClearCommand.COMMAND_WORDS.contains(commandWord)) {
+            } else if (ClearCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ClearCommand();
-            }
-            if (NoteCommand.COMMAND_WORDS.contains(commandWord)) {
+            } else if (NoteCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new NoteCommand();
-            }
-            if (ClearNoteCommand.COMMAND_WORDS.contains(commandWord)) {
+            } else if (ClearNoteCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ClearNoteCommand();
-            }
-            if (ExportCommand.COMMAND_WORDS.contains(commandWord)) {
+            } else if (ExportCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ExportCommand();
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            // throw more specific errors
+            if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        PersonCommand.MESSAGE_USAGE));
+            } else if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        GroupCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
         }
 
         if (targetedNameMatcher.matches()) {
@@ -141,7 +145,6 @@ public class NotorParser {
                     return new SuperGroupCreateCommandParser(name, arguments).parse();
                 }
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedIndexMatcher.matches()) {
@@ -193,10 +196,10 @@ public class NotorParser {
                 } else if (SubGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new SubGroupListCommandParser(index).parse();
                 } else {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            GroupCommand.MESSAGE_USAGE));
                 }
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedMatcher.matches()) {

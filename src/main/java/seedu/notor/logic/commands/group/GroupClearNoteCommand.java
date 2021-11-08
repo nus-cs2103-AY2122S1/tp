@@ -19,7 +19,7 @@ public class GroupClearNoteCommand extends GroupCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("clearnote", "cn");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Clears the notes of the group identified by the index number used in the current group listing.\n";
+            ": Clears the notes of the group specified by the group index.\n";
 
     public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
