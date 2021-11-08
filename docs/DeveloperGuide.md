@@ -486,6 +486,8 @@ Step 5. These `Prefix` arguments are stored in `Model`.
 
 Step 6. The user is prompted to pick a name and the download location for their generated CSV file.   
 
+<div style="page-break-before: always;"></div>
+
 Step 7. The `FilteredList`, `Prefixes` and `Path` are passed to `CsvUtil#modelToCsv`, which will serialize and write the CSV file.  
 
 ![MainWindowMailingListActivityDiagram.](images/MainWindowMailingListActivityDiagram.png)  
