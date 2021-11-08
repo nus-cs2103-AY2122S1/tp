@@ -27,7 +27,7 @@ Given below are my contributions to the project.
   * Assisted in Integration of CodeCov with Github
 
 * **Enhancements to existing features**:
-  * Improve the Show Command UX, especially in the domain of user prompts (Pull requests [\#318](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/71), [\#289](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/73)
+  * Improve the Show Command UX, especially in the domain of user prompts Pull requests [\#318](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/318), [\#289](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/73)
   
 * **Documentation**:
   * User Guide:
