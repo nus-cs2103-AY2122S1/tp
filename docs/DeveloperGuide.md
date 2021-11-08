@@ -123,6 +123,8 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
+<img src="images/ModuleSystemModelClassDiagram.png" width="450" />
+
 The `Model` component,
 
 - stores EdRecord data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
@@ -130,6 +132,8 @@ The `Model` component,
   - to achieve this, 2 separate predicates are used: one that filters for the selected module and one that filters for the results of the search query
   - the resulting filtered list is hence the logical conjunction of these two predicates
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- stores ModuleSystem data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
+    - all `Module` objects contain a GroupSystem which stores `Group` objects (i.e. classes) in a `UniqueGroupList`
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `EdRecord`, which `Person` references. This allows `EdRecord` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -146,8 +150,8 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both EdRecord data and user preference data in json format, and read them back into corresponding objects.
-- inherits from both `EdRecordStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save both EdRecord data, ModuleSystem data and user preference data in json format, and read them back into corresponding objects.
+- inherits from both `EdRecordStorage`, `ModuleSystemStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -189,6 +193,41 @@ Inside `Model`, `selected` is the Module that the user is currently in. `selecte
 
   - Pros: Easier to implement. Better experience for user, who can `cd` into the module and use one command `mkasg` to create an assignment. In contrast, if the assignments are under groups, the user has to `cd` into the module and choose a group, before he/she can work with the assignments. This also adds another layer to the `cd` command, which must possibly handle `cd`-ing into a group.
   - Cons: Not able to create assignments on the group level.
+
+## Creating and managing modules
+Created modules are stored in a `ModuleSystem` under the model. Each module has a module code, a `GroupSystem` to store classes under the module and a `UniqueAssignmentList` to store assignments under the module.
+Modules are differentiated using their module code -- the `UniqueModuleList` ensures that no two modules have the same module code.
+
+To create a module, the user has to provide a valid module code (unique from current existing modules). To delete a module, the user has to provide a valid module code (existing module with same module code).
+
+**Design considerations:**
+
+- **Alternative 1**: Each student stores a module code.
+
+    - Pros: Simpler implementation. More flexibility for user.
+    - Cons: Increases chance of errors when saving students. If large number of students, will be difficult to find missing students with wrong module code.
+
+- **Alternative 2 (current choice)**: Store assignments under Module.
+
+    - Pros: Creating valid modules to add students to prevents a student getting lost in the system.
+    - Cons: Less flexibility for user.
+
+### Create and manage classes
+Created classes are stored in a `GroupSystem` under a module. Each class has a class code.
+Classes are differentiated using their class code -- the `UniqueGroupList` ensures that no two classes have the same class code in the same `GroupSystem` (i.e. in the same module).
+
+To create a class, the user has to provide a valid class code (unique from current existing classes in the module). To delete a module, the user has to provide a valid class code (existing class with same class code in the module).
+
+**Design considerations:**
+
+- **Alternative 1**: A separate `GroupSystem` under model, together with `ModuleSystem`.
+
+    - Pros: Easy to implement.
+    - Cons: More complicated to save and load. Less OOP.
+
+- **Alternative 2 (current choice)**: A `GroupSystem` under a module.
+
+    - Pros: Simple to save and load. More OOP-oriented and instinctive to understand.
     
 
 ### \[Proposed\] Separate view for assignments 
@@ -272,15 +311,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                          | use a command to exit EdRecord                                                                             | do not need to use my mouse                                                                              |
 | `* *`    | user                                          | clear all students                                                                                         | restart my EdRecord at the end of each semester                                                          |
 | `* *`    | user                                          | delete module                                                                                              | remove completed or unused modules                                                                       |
+| `* *`    | user                                          | delete class within a module                                                                               | remove completed or unused classes                                                                       |
 | `* *`    | user                                          | mark students' attendance                                                                                  | keep track of their attendance                                                                           |
 | `* *`    | user                                          | track students' class participation                                                                        | calculate class participation grade at the end of the semester                                           |
-| `* *`    | user                                          | create a module-wide assignment with information such as assignment name, maximum marks and weightage       | keep track of assignment information                                                      |
+| `* *`    | user                                          | create a module-wide assignment with information such as assignment name, maximum marks and weightage      | keep track of assignment information                                                      |
 | `* *`    | user                                          | delete an assignment                                                                                       | remove assignments that are completed or irrelevant                                                      |
 | `* *`    | user                                          | update assignment status for each student                                                                  | track the completion status ("Not yet submitted", "Submitted", "Graded") and grade of individual student |
 | `* *`    | user                                          | create a module/class-wide assessment with details such as grade and follow-up actions                     | track the performance of individual students                                                             |
 | `*`      | user                                          | tag a student                                                                                              | categorise my students by tags                                                                |
 | `* *`    | user                                          | update assignment details                                                                                  | fix any mistakes made when creating the assignment                                                       |
-| `*`      | user                                          | batch add students' contacts                                                                               | add the entire class/module at once                                                                      |
+| `*`      | user                                          | batch assign students to classes                                                                           | add the entire class/module at once                                                                      |
 | `*`      | experienced user                              | modify the data file directly                                                                              | quickly update student information without having to go through the application commands                 |
 
 ### Use cases
@@ -601,7 +641,7 @@ Use case ends.
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 - **Module**: An NUS module. It consists of Module coordinators, TAs and students.
 - **TA**: Teaching Assistant. One TA can teach multiple modules in multiple semesters with multiple classes for each module.
-- **Class**: Collection of students taught by one TA. One class is associated with one module, and one venue and time.
+- **Class**: Collection of students taught by one TA. One class is associated with one module, and one venue and time. Implemented with Java class `Group` due to naming restrictions.
 
 ---
 

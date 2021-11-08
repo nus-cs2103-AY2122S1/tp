@@ -38,7 +38,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedGrade> VALID_GRADES = new ArrayList<>();
+    private static final List<JsonAdaptedIdGradePair> VALID_GRADES = new ArrayList<>();
 
     //TODO: Add assignments to a person's modules in json format, so that this tests can pass.
     /*

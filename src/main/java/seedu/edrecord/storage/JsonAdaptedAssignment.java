@@ -75,7 +75,7 @@ public class JsonAdaptedAssignment {
         }
         final Score modelScore = new Score(maxScore);
 
-        if (id == null) {
+        if (id == null || id <= 0) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, "ID"));
         }

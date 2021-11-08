@@ -30,6 +30,7 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
         }
 
         Index index;
+        Index id;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -38,7 +39,12 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
                     DeleteGradeCommand.MESSAGE_USAGE), pe);
         }
 
-        Index id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+        try {
+            id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteGradeCommand.MESSAGE_USAGE), pe);
+        }
 
         return new DeleteGradeCommand(index, id);
     }
