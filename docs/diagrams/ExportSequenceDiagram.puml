@@ -92,6 +92,9 @@ deactivate CommandResult
 
 ExportCommandAll -> LogicManager
 deactivate ExportCommandAll
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExportCommandAll -[hidden]-> LogicManager
+destroy ExportCommandAll
 
 [<--LogicManager
 deactivate LogicManager

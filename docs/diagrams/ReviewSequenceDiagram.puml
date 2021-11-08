@@ -40,7 +40,7 @@ AddressBookParser -> AddCommandParser : parse("... rv/review")
 activate AddCommandParser
 
 create ParserUtil
-AddCommandParser -> ParserUtil
+AddCommandParser -> ParserUtil : parseReview("review")
 activate ParserUtil
 
 ParserUtil --> AddCommandParser
@@ -62,6 +62,9 @@ deactivate AddCommand
 
 AddCommandParser --> AddressBookParser:a
 deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
 
 AddressBookParser --> LogicManager:a
 deactivate AddressBookParser
@@ -84,6 +87,9 @@ deactivate CommandResult
 
 AddCommand --> LogicManager : commandResult
 deactivate AddCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommand -[hidden]-> LogicManager
+destroy AddCommand
 
 [<--LogicManager
 deactivate LogicManager
