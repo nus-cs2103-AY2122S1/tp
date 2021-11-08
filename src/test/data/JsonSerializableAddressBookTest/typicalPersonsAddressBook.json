@@ -5,42 +5,85 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "birthday": "05021999",
+    "pin": "false"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "birthday": "16042000",
+    "pin": "false"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "birthday": "25011997",
+    "pin": "false"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "birthday": "08091990",
+    "pin": "false"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "birthday": "12101990",
+    "pin": "false"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "birthday": "07111990",
+    "pin": "false"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tagged" : [ ]
+    "tagged" : [ "football" ],
+    "birthday": "12041990",
+    "pin": "true"
+  }, {
+      "name": "Hannah Worst",
+      "phone": "1234567",
+      "email": "hhhhannah@example.com",
+      "address": "12th street",
+      "tagged" : [],
+      "birthday" : "31011990",
+      "pin": "true"
+  }, {
+      "name": "Hannah No Birthday Worst",
+      "phone": "12334567",
+      "email": "hhhhannah@example.com",
+      "address": "12th street",
+      "birthday" : null,
+      "pin": "false"
+  }, {
+    "name" : "Indigo Color",
+    "phone" : "24422984",
+    "email" : "color@rainbow.com",
+    "address" : "big tokyo",
+    "birthday" : "11101995",
+    "pin": "true"
+  }, {
+    "name" : "Indigo No Birthday Color",
+    "phone" : "17263722",
+    "email" : "color@rainbow.com",
+    "address" : "big tokyo",
+    "birthday" : null,
+    "pin": "true"
   } ]
 }

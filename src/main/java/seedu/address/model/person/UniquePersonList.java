@@ -46,6 +46,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -64,8 +65,8 @@ public class UniquePersonList implements Iterable<Person> {
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
-
         internalList.set(index, editedPerson);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -82,6 +83,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -95,6 +97,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        internalList.sort(Person::compareTo);
     }
 
     /**
@@ -109,6 +112,12 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.iterator();
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR
+skinparam minClassWidth 120
+participant "UI" as UI UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MailingListCommandParser" as MailingListCommandParser LOGIC_COLOR
+participant "d:MailingListCommnad" as MailingListCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+UI -> LogicManager : execute( "mailingList")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mailingList")
+activate AddressBookParser
+
+create MailingListCommandParser
+AddressBookParser -> MailingListCommandParser
+activate MailingListCommandParser
+
+MailingListCommandParser --> AddressBookParser
+deactivate MailingListCommandParser
+
+AddressBookParser -> MailingListCommandParser : parse("mailingList")
+activate MailingListCommandParser
+
+create MailingListCommand
+MailingListCommandParser -> MailingListCommand : MailingListCommand(DEFAULT_PREFIXES)
+activate MailingListCommand
+
+MailingListCommand --> Model : SetPrefixes
+activate Model
+Model --> MailingListCommand
+deactivate Model
+
+MailingListCommand --> MailingListCommandParser : d
+deactivate MailingListCommand
+
+MailingListCommandParser --> AddressBookParser  : d
+deactivate MailingListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MailingListCommandParser -[hidden]-> AddressBookParser
+destroy MailingListCommandParser
+
+AddressBookParser --> LogicManager  : d
+deactivate AddressBookParser
+
+LogicManager -> MailingListCommand : execute()
+activate MailingListCommand
+
+
+MailingListCommand --> LogicManager : CommandResult
+deactivate MailingListCommand
+
+UI <--LogicManager: CommandResult
+deactivate LogicManager
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MailingListCommand -[hidden]-> LogicManager
+destroy MailingListCommand
+
+@enduml

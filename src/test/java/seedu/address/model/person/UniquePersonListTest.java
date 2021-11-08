@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HANNAH;
+import static seedu.address.testutil.TypicalPersons.INDIGO;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +17,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.sun.javafx.collections.ImmutableObservableList;
+
+import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -56,6 +61,14 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void add_pinnedPersonPinnedPersonIsPutInFront_success() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(HANNAH);
+        ObservableList<Person> expectedPersonList = new ImmutableObservableList<>(HANNAH, ALICE);
+        assertEquals(uniquePersonList.asUnmodifiableObservableList(), expectedPersonList);
     }
 
     @Test
@@ -107,6 +120,26 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    }
+
+    @Test
+    public void setPerson_editedPeronIsPinned_success() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(ALICE);
+        Person pinnedAlice = new PersonBuilder(ALICE).withPin(true).build();
+        uniquePersonList.setPerson(ALICE, pinnedAlice);
+        ObservableList<Person> expectedPersonList = new ImmutableObservableList<>(pinnedAlice, BOB);
+        assertEquals(uniquePersonList.asUnmodifiableObservableList(), expectedPersonList);
+    }
+
+    @Test
+    public void setPerson_editedPeronIsUnpinned_success() {
+        uniquePersonList.add(HANNAH);
+        uniquePersonList.add(INDIGO);
+        Person unpinnedHannah = new PersonBuilder(HANNAH).withPin(false).build();
+        uniquePersonList.setPerson(HANNAH, unpinnedHannah);
+        ObservableList<Person> expectedPersonList = new ImmutableObservableList<>(INDIGO, unpinnedHannah);
+        assertEquals(uniquePersonList.asUnmodifiableObservableList(), expectedPersonList);
     }
 
     @Test

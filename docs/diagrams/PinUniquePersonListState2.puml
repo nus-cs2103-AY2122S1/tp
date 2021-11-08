@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show field
+hide empty field
+
+title UniquePersonList
+
+package People {
+    object "__person1:Person__" as person1
+    object "__person2:Person__" as person2
+    object "__person3:Person__" as person3
+}
+
+object "__pin1:Pin__" as pin1 {
+    boolean isPinned = true
+}
+
+object "__pin2:Pin__" as pin2 {
+    boolean isPinned = false
+}
+
+object "__pin3:Pin__" as pin3 {
+    boolean isPinned = true
+}
+
+person1 -->pin1
+person2 -->pin2
+person3 -->pin3
+
+person1 -[hidden]right-> person3
+person3 -[hidden]right-> person2
+
+@end

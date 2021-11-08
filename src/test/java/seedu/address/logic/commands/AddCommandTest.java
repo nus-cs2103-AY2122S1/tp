@@ -9,6 +9,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -145,6 +148,25 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPrefixes(Collection<Prefix> prefixes) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Prefix> getPrefixes() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public ObservableList<Person> getBirthdayReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearBirthdayReminderList() {
             throw new AssertionError("This method should not be called.");
         }
     }

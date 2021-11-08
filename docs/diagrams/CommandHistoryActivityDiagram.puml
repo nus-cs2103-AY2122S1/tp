@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:UI receives `UP` or `DOWN` keystroke;
+if () then ([keystroke `UP`])
+  :Attempts to retrieves previous command;
+  if () then ([has command history])
+    if () then ([has previous command])
+      :Displays previous command;
+    else ([no previous command])
+      :Displays last command in history;
+    endif
+  else ([no command history])
+    :Displays nothing;
+  endif
+else ([keystroke `DOWN`])
+  :Attempts to retrieves next command;
+  if () then ([has command history])
+    if () then ([has next command])
+      :Displays next command;
+    else ([no next command])
+      :Displays nothing;
+    endif
+  else ([no command history])
+    :Displays nothing;
+  endif
+endif
+
+stop
+
+@enduml

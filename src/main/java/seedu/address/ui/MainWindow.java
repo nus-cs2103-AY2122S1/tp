@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,13 +14,18 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -29,11 +39,16 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private FileChooser fileChooser;
 
     // Independent Ui parts residing in this Ui container
+    private BirthdayReminderListPanel birthdayReminderListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    @FXML
+    private StackPane birthdayReminderListPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +74,12 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        this.fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("csv", "*.csv");
+        fileChooser.getExtensionFilters().addAll(filter);
+        fileChooser.setInitialDirectory(new File("./"));
+        fileChooser.setSelectedExtensionFilter(filter);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -119,8 +140,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::executeSystemCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        birthdayReminderListPanel = new BirthdayReminderListPanel(logic.getBirthdayReminderList());
+        birthdayReminderListPanelPlaceholder.getChildren().add(birthdayReminderListPanel.getRoot());
     }
 
     /**
@@ -163,8 +187,30 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Handles the exporting of mailing list.
+     */
+    @FXML
+    private void handleMailingList() throws CommandException {
+        File file = fileChooser.showSaveDialog(primaryStage);
+
+        if (file == null) {
+            throw new CommandException("No save location was selected.");
+        }
+
+        String pathStr = file.getPath();
+        if (!pathStr.endsWith(".csv")) {
+            pathStr += ".csv";
+        }
+        Path path = Path.of(pathStr);
+
+        List<Person> personList = logic.getFilteredPersonList();
+        Set<Prefix> prefixSet = logic.getPrefixStore();
+        try {
+            CsvUtil.modelToCsv(personList, path, prefixSet);
+        } catch (IOException e) {
+            throw new CommandException("Writing csv failed: " + e.getMessage());
+        }
     }
 
     /**
@@ -175,6 +221,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -186,11 +233,23 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isChooseFile()) {
+                handleMailingList();
+            }
+
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+
+    }
+
+    private CommandResult executeSystemCommand(String commandText) {
+        CommandResult commandResult = logic.systemExecute(commandText);
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        return commandResult;
     }
 }

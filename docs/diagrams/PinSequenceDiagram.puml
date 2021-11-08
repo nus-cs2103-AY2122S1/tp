@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR
+participant "UI" as UI UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PinCommandParser" as PinCommandParser LOGIC_COLOR
+participant "d:PinCommand" as PinCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+UI -> LogicManager : execute("pin 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("pin 1")
+activate AddressBookParser
+
+create PinCommandParser
+AddressBookParser -> PinCommandParser
+activate PinCommandParser
+
+PinCommandParser --> AddressBookParser
+deactivate PinCommandParser
+
+AddressBookParser -> PinCommandParser : parse("1")
+activate PinCommandParser
+
+create PinCommand
+PinCommandParser -> PinCommand
+activate PinCommand
+
+PinCommand --> PinCommandParser : d
+deactivate PinCommand
+
+PinCommandParser --> AddressBookParser : d
+deactivate PinCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PinCommandParser -[hidden]-> AddressBookParser
+destroy PinCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> PinCommand : execute()
+activate PinCommand
+
+PinCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> PinCommand : filteredPersonList
+deactivate Model
+
+PinCommand -> PinCommand : createPinnedPerson(personToPin)
+activate PinCommand
+PinCommand --> PinCommand : pinnedPerson
+deactivate PinCommand
+
+create CommandResult
+PinCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PinCommand
+deactivate CommandResult
+
+PinCommand -> Model : setPerson(originalPerson, pinnedPerson)
+activate Model
+Model --> PinCommand
+deactivate Model
+
+PinCommand --> LogicManager : result
+deactivate PinCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PinCommand -[hidden]-> LogicManager
+destroy PinCommand
+
+UI <--LogicManager: result
+deactivate LogicManager
+@enduml

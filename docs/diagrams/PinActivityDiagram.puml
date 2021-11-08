@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters command: pin <index>;
+switch()
+case ([Contact at specified index exists])
+  :CONNECTIONS retrieves contact at specified index;
+  -CONNECTIONS checks if contact is already pinned
+  if () then ([Contact not yet pinned])
+    :CONNECTIONS pin contact to top of contact list;
+    -CONNECTIONS displays success message
+  else ([Contact already pinned])
+    :CONNECTIONS displays error message;
+  endif
+case ([No contact at specified index])
+  :CONNECTIONS displays error message;
+endswitch
+
+
+stop
+
+@enduml

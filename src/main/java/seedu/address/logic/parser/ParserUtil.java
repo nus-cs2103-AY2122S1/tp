@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,8 +9,10 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -20,8 +23,6 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -30,7 +31,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Index.MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -104,6 +105,9 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        if (!Tag.isWithinCharLimit(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_TAG_LENGTH_EXCEEDED);
+        }
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -120,5 +124,42 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String birthday} into a {@code Birthday}.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        if (birthday == null) {
+            return null;
+        }
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidFormat(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        if (!Birthday.isValidDate(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_INVALID_DATE);
+        }
+        if (Birthday.isFutureDate(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_BIRTHDAY_IN_FUTURE);
+        }
+        if (Birthday.isYear0000(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_INVALID_YEAR_0000);
+        }
+        return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses {@code String} of arguments to retrieve index of start of {@code String} of substring.
+     *
+     * @throws ParseException if the given {@code substring} is not found in {@code args}.
+     */
+    public static int getIndexOfSubstring(String args, String substring) throws ParseException {
+        requireAllNonNull(args, substring);
+        int indexOfStartOfSubstring = args.indexOf(substring);
+        if (indexOfStartOfSubstring == -1) {
+            throw new ParseException(DeleteMultipleCommand.MESSAGE_USAGE);
+        }
+        return indexOfStartOfSubstring;
     }
 }

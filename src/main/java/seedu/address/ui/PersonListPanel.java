@@ -40,10 +40,11 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
-            } else {
+            } else if (!person.isPinned()) {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+            } else {
+                setGraphic(new PinnedPersonCard(person, getIndex() + 1).getRoot());
             }
         }
     }
-
 }
