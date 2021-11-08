@@ -33,7 +33,7 @@ title: Developer Guide
       3. [Use Case: UC3 Upload student records](#Use Case3)
       4. [Use Case: UC4 View a student record](#Use Case4)
       5. [Use Case: UC5 Delete a student record](#Use Case5)
-      6. [Use Case: UC6 Update a student record](#Use Case6)
+      6. [Use Case: UC6 Edit a student record](#Use Case6)
       7. [Use Case: UC7 Download student records](#Use Case7)
       8. [Use Case: UC8 Create a lab record](#Use Case8)
       9. [Use Case: UC9 Edit a lab record](#Use Case9)
