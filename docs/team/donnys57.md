@@ -17,14 +17,32 @@ Given below are my contributions to the project.
     * What it does:
     * Justification:
     * Highlights:
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used 
+      in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+1. Added foundation for View Command
+   * **What it does:** <br>
+   View command allows the user to examine the client's details with greater attention. It allows the user to also 
+   make edits to the client's details and financial information when they need to do so.
+   
+   * **Justification:** <br>
+   View command is essential for DonnaFin to function as most of the new commands implemented revolve around the client,
+   and it is executed when the user is in the client window. 
+  
+  * Added foundation for Notes functionality
+  * Added foundation for Edit Command
+  * Added foundation for Append Command
+  * Added foundation for Remove Command
 
-* **Code contributed**: [RepoSense link]()
+  * **Code contributed**: [RepoSense link]()
 
-* **Project management**:
+  * **Project management**:
 
 
 * **Enhancements to existing features**:
+
+* Fixed issue regarding
+* Wrote tests for Append Command
+* 
 
 * **Documentation**:
     * User Guide:
@@ -35,6 +53,7 @@ Given below are my contributions to the project.
       * Added various Use Cases [#48](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/48)
       * Added various NFRs [#48](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/48)
       * Added Activity Diagram [#330](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/330)
+      * Added Manual Test Cases [#357](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/357)
 
 * **Community**:
 
