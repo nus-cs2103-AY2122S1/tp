@@ -97,18 +97,17 @@ Here is a table of commonly used terms in this document along with their meaning
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `unify.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
+2. Download the latest `unify.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Uni-Fy. 
+3. Copy the file to the folder you want to use as the _home folder_ for Uni-Fy. 
 
-1. Double-click the file to start the app. If double-click does not 
+4. Double-click the file to start the app. If double-click does not 
    get the app to start in your device, please refer to the FAQ section. 
    The GUI shown in the image below should appear in a few seconds.
    Note how the app contains some sample data.<br>
-   ![Ui](images/UIUpdated.png)
+   ![Ui](images/UI.png)
 
-1. Type the command in the command box and press Enter to execute it.
-   * Refer to the [**4. Features**](#4-features) below for details of each command.
+5. Type the command in the command box and press Enter to execute it.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,7 +132,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
    * Items with <code>t/</code> before them represent the time of the task
    * Items with <code>p/</code> before them represent the priority level of the task
      * The priority level can be `LOW`, `MEDIUM` or `HIGH` (**Note**: needs to be uppercase)
-   * Date is represented in YYYY-MM-DD format
+   * Date is represented in YYYY-MM-DD format, and year should be 2021 or 2022
    * Time is represented in HH:MM format
    * Tag must be alphanumeric and contain at most 15 characters
 </div>
