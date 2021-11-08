@@ -3,8 +3,7 @@ layout: page
 title: Tan Hua Kun's Project Portfolio Page
 ---
 
-My name is Tan Hua Kun and I am one of the developers of Tutor Master. My role is a full stack developer, and I am mostly in
-charge of lessons, exams and the viewing panel.
+My name is Tan Hua Kun and I am one of the developers of Tutor Master.
 
 #### Project Tutor Master
 
@@ -16,8 +15,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
 
 * ##### Features
     * Logic
-        * Created Parsers and Commands to deal with lessons and exams.
-        * Created Parser and Command for adding people to a group.
+        * Created Parsers and Commands to deal with lessons and exams, adding people to a group.
         * Created command to view schedule.
     * Model
         * Person
@@ -28,7 +26,6 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
         * Model
             * Added enum ViewingType for viewing particular information
             * Update [ModelManager.java](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java) to include methods for ViewingType and viewing contents.
-                * This includes `ObjectProperty<ViewingType>`, `ObservableList<LessonWithAttendees>` and `ObjectProperty<PersonWithDetails>` members in ModelManager.java.
         * Id.UniqueIdMapper
             * [Implemented this interface](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/id/UniqueIdMapper.java) and its method for retrieving HasUniqueId objects when given UniqueIds.
     * Storage
@@ -49,8 +46,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
         * [Quick start: Managing Students](https://ay2122s1-cs2103t-w16-4.github.io/tp/UserGuide.html#managing-students)
     * Developer Guide
         * Wrote some user stories
-        * Add implementation details for [Changing View Panel](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#changing-view-panel);
-        * Add implementation details for [Lessons](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#lessons)
+        * Add implementation details for [Changing View Panel](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#changing-view-panel) and [Lessons](https://ay2122s1-cs2103t-w16-4.github.io/tp/DeveloperGuide.html#lessons).
         * Add some instructions for manual testing and an adding lesson use case.
 * ##### Testing
     * [Tests for lesson](https://github.com/AY2122S1-CS2103T-W16-4/tp/tree/master/src/test/java/seedu/address/model/lesson)
