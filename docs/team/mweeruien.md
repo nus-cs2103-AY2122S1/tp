@@ -5,42 +5,38 @@ title: Megan's Project Portfolio Page
 
 ### Project: Staff'd
 
-Staff'd is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Staff'd is a desktop staff tracking application used managing F&B staff. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10k Lines of Code.
 
-Given below are my contributions to the project.
+Below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the `viewShift` Command which allows employees to search for staff working on a particular shift.
+  * What it does: Allows users to search for a specific shift by indicating the day of the week, and either a specific time or the shift number.
+  * Justification: This feature improves the product significantly because employers can now quickly and easily access the list of staff working at any particular shift.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* **Code contributed**: [RepoSense link]()
-
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* **New Feature**: Added the ability to set the role requirements for each shift. 
+  * What it does: Allows the users to set the requirements for each role every shift. The role requirements will be displayed when the command is called. Additionally, Staff'd will refer to these role requirements to check for staff shortages when the `viewShift` command is utilized.
+  * Justification: This feature allows managers to quickly ascertain whether they have sufficient staff of each role working at a particular shift. 
+  * Highlights: A data file will be created to store the role requirements information so that users only need to adjust the role requirements once.
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Enhanced `find` command to search by indexes. [\#72](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/72)
+  * Enhanced `clear` command to also reset the save file for role requirements
 
+* Conducted manual testing and fixed bugs and help messages for v1.4. [\#299](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/299)
+
+* **Code contributed**: [RepoSense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=mweeruien&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=mweeruien&tabRepo=AY2122S1-CS2103T-W11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+* **Project management**:
+  * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
+  * Managed milestone tracking
+  
 * **Documentation**:
-    * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Developer Guide:
-        * Added implementation details of the `delete` feature.
+  * User Guide:
+    * Organized User Guide and added new sections such as GUI Breakdown, User Guide Usage, and Glossary. Improved sections such as Flag Legend and Introduction. [\$330](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/330)
+    * Added documentation for the features: `find` [\#72](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/72), `viewShift`[\#102](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/102), `setRoleReq` [\#149](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/149/)
+  * Developer Guide:
+    * Added implementation details for the `find` and `viewShift` features
+    * Updated diagrams for the `find` and `viewShift` features [\#119](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/119)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#47](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/47/), [\#136](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/136). [\#241](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/241), [\#282](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/282)
