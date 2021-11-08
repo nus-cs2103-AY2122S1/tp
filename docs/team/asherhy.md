@@ -5,7 +5,9 @@ title: Wang Hong Yong's Project Portfolio Page
 
 ### Project: ThunderCat
 
-ThunderCat (TC) is a desktop app designed for Year 2 Computing Students. You can manage contacts, organise them into project groups and manage your tasks according to the groups. The application is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat (TC) is a desktop app designed for Year 2 Computing Students. The application acts as an address book for contacts with added support for group projects. You can manage contacts, organise them into project groups and manage your tasks according to those groups.
+
+ThunderCat also acts as a tool for Year 2 Computing Students to build up their confidence in using a Command Line Interface (CLI) to navigate applications and manipulating JSON files - a popular data file format widely used in Computing.
 
 Given below are my contributions to the project.
 
