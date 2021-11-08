@@ -408,6 +408,8 @@ To support the differentiated search functionality for different flags (e.g. nam
 multiple classes extending from `Predicate<Student>` can be created,
 each with different implementation of the `test(Student student)` function.
 
+<div style="page-break-after: always;"></div>
+
 * `NameContainsKeywordsPredicate`: checks if any word in the full name of student matches exactly any word in the
   given keywords. e.g. `Alex Yu` will match `Alex Yeoh` and `Bernice Yu`. Partial search is not supported
   e.g. `Han` will not match `Hans`.
