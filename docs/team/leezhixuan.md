@@ -24,9 +24,10 @@ Given below are my contributions to the project.
   * Justification:
     * Our target audience is people who love celebrating birthdays. It is natural for them to want to keep a
       record of the birthdays of their contacts. This way, they will never miss a birthday.
-      <br>
+      <br></br>
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=leezhixuan&tabRepo=AY2122S1-CS2103-F09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+<br></br>
 
 * **Project management**:
   * Set up Github Pages.
