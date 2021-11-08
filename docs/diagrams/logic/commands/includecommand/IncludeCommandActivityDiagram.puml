@@ -5,12 +5,12 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command addResidentsToEvent])
-    :Create new String of old and new Residents;
+if () then ([there are valid residents to add])
+    :Create display and storage Strings of current and toAdd Residents;
     :Create a new edited Event;
     :Save editedEvent to addressBook;
     :Update filteredEventList;
-else ([else])
+else ([no resident to add])
 endif
 stop
 @enduml

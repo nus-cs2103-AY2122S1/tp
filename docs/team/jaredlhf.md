@@ -13,11 +13,13 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because the hall admin can now view the residents or events in an organised manner. E.g. being able to sort events by date and time allows the admin to view the events chronologically.
   * Highlights: This feature required an understanding of ObservableList and SortedList. It was challenging to ensure that the original ordering was not modified and straightforward one-way sorting implementations had to be avoided. Individual fields also had to be comparable.
 
+
 * **New Feature**: Added the ability to export the list of email addresses into a csv file
   * What it does: allows the user to have easy access to the list of email addresses of the residents currently displayed in the application.
   * Justification: This feature improves the use case of the product as hall admins can easily contact the residents they wish. They can simply `find` to get a filtered list of residents and `export` to view these email addresses in a csv file. They can then copy and paste these addresses into an email client to send their desired email.
   * Highlights: This feature required the use of a file writer, which involved utilising the opencsv library previously used in the `export` command.
   * Credits: [opencsv](http://opencsv.sourceforge.net/), was used to aid the writing of csv files.
+
 
 * **New Feature**: Added the ability to view events
   * What it does: allows the user to view the original unfiltered list of events in the `Event` tab
@@ -45,8 +47,10 @@ Given below are my contributions to the project.
     * Reformat `Command Format` section: [\#254](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/254)
   * Developer Guide:
     * Added implementation details of the `add` feature [\#99](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/99)
-    * Added Use Cases of project [\#41](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/41)
+    * Added Use Cases of project [\#41](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/41), [\#260](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/260)
     * Update UML diagrams for `model` and `UI` components [\#107](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/107)
+    * Added manual testing instructions for `add`, `sort`, `export`, `view` [\#260](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/260)
+
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#45](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/45), [\#85](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/85), [\#128](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/128), [\#130](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/130)

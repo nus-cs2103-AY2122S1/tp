@@ -43,7 +43,7 @@ public class EditEventCommand extends Command {
             + CliSyntax.PREFIX_TIME + "1200 "
             + CliSyntax.PREFIX_CAPACITY + "50";
 
-    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Events: \n%1$s";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
     public static final String MESSAGE_EXCEED_CAPACITY = "New capacity of the event is less than the number of "
