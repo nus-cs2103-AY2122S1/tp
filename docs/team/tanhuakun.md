@@ -1,5 +1,3 @@
-### Tan Hua Kun's Project Portfolio Page
-
 My name is Tan Hua Kun and I am one of the developers of Tutor Master. My role is a full stack developer, and I am mostly in
 charge of lessons, exams and the viewing panel.
 
