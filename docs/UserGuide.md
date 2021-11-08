@@ -18,7 +18,7 @@ InsurancePal is a client management software specially designed to help manage t
 
 1. Copy the file to the folder you want to use as the _home folder_ for your InsurancePal.
 
-1. Run `java -jar InsurancePal.jar` in the command prompt to start the application. The GUI similar to the below should appear in a few seconds. ![Ui](images/Ui.png)
+1. Run `java -jar insurancePal.jar` in the command prompt to start the application. The GUI similar to the below should appear in a few seconds. ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it.
 
