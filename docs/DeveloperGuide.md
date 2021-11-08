@@ -982,7 +982,78 @@ Extensions
   * Steps 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
 
-**Use Case 3: Delete user**
+**Use Case 4: Edit profile**
+
+MSS
+
+1. User enters command to edit profile.
+2. CohortConnect shows a successfully edited message.
+3. CohortConnect updates user's profile with the new details.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+**Use Case 5: Add tags**
+
+MSS
+
+1. User enters command to add tags to a specific contact.
+2. CohortConnect shows a successfully added message.
+3. CohortConnect updates tags of specific contact to contain new tags.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+* 1b. User tries to add existing tag.
+   * 1b1. CohortConnect prompts that the tag already exists.
+   * 1b2. CohortConnect requests for correct format.
+   * 1b3. User enters new data.
+   * Steps 1b1-1b3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+**Use Case 6: Remove tags**
+
+MSS
+
+1. User enters command to remove tags from a specific contact.
+2. CohortConnect shows a successfully removed message.
+3. CohortConnect updates tags of specific contact.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+* 1b. User tries to remove non-existent tag.
+   * 1b1. CohortConnect prompts that the tag to be removed does not exist.
+   * 1b2. CohortConnect requests for correct format.
+   * 1b3. User enters new data.
+   * Steps 1b1-1b3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+**Use Case 7: Delete user**
 
 MSS
 
@@ -1001,7 +1072,7 @@ Extensions
   * Steps 1a1-1a3 are repeated until the data entered are valid.
   * Use case resumes from step 2.
   
-**Use Case 4: Find a contact using name**
+**Use Case 8: Find a contact by name**
 
 MSS
 
@@ -1012,30 +1083,94 @@ MSS
         
 Extensions
 
-* 1a. The given name is not present.
-  * 1a1. CohortConnect shows an error message.
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+* 1b. Contact with this name does not exist.
+  * 1b1. CohortConnect shows an error message.
   * Use case ends.
 
 * 2a. The list is empty.
   * Use case ends.
-    
-**Use Case 5: Find a contact using tag**
+
+**Use Case 9: Find a contact by GitHub username**
+
+MSS
+
+1. User enters command to find a contact by GitHub username.
+2. CohortConnect shows list of contacts with matching GitHub username.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+* 1b. Contact with this GitHub username does not exist.
+   * 1b1. CohortConnect shows an error message.
+   * Use case ends.
+
+* 2a. The list is empty.
+   * Use case ends.
+
+**Use Case 10: Find a contact by Telegram handle**
+
+MSS
+
+1. User enters command to find a contact by Telegram handle.
+2. CohortConnect shows list of contacts with matching Telegram handle.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+* 1b. Contact with this Telegram handle does not exist.
+   * 1b1. CohortConnect shows an error message.
+   * Use case ends.
+
+* 2a. The list is empty.
+   * Use case ends.
+
+**Use Case 11: Find a contact using tag**
 
 MSS
 
 1. User enters command to find a contact by tag.
 2. CohortConnect shows list of contacts labelled with matching tag.
-    
-    Use case ends.
+
+   Use case ends.
 
 Extensions
-    
-* 1a. The given tag doesn't exist.
-  * 1a1. CohortConnect shows an error message.
-  * Use case ends.
-        
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+* 1b. Contact with this tag does not exist.
+   * 1b1. CohortConnect shows an error message.
+   * Use case ends.
+
 * 2a. The list is empty.
-  * Use case ends.
+   * Use case ends.
 
 
 **Use Case 12: Show a person's details using Index**
