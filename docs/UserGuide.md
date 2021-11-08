@@ -78,7 +78,7 @@ Examples:
 
 Adds a student to the student list.
 
-Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO NAME] [t/TAG]...`
+Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO NAME] [t/TAG]…​`
 
 * `NAME` should only contain alphabets and spaces.
 * GitHub link will only be shown if both `GITHUB USERNAME` and `REPO NAME` are specified.
@@ -139,7 +139,7 @@ Examples:
 
 Marks the specified student(s) in the last displayed student list as present or absent.
 
-Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
+Format: `marka INDEX [MORE_INDEXES]…​ w/WEEK_NUMBER`
 
 * Marks the student(s) as present (or absent) in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the last displayed students list.
@@ -159,7 +159,7 @@ Examples:
 
 Marks the specified student(s) in the last displayed student list as participated or not participated.
 
-Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
+Format: `markp INDEX [MORE_INDEXES]…​ w/WEEK_NUMBER`
 
 * Marks the student(s) as participated in the specified `INDEX` for that week.
 * The index must refer to the index number shown in the last displayed students list.
@@ -216,7 +216,7 @@ Examples:
 
 Adds a group to the group list. No members will be initialized. 
 
-Format: `addGroup g/GROUP_NAME [r/REPO_NAME] [y/YEAR] [t/TAG]...`
+Format: `addGroup g/GROUP_NAME [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 
 * Similar to `addStudent`, GitHub link will only be shown if both `YEAR` and `REPO NAME` are specified, but either field will still be saved if specified alone.
 * `GROUP_NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit.
@@ -424,11 +424,11 @@ Examples:
 
 Mark the specified task(s) in the task list as completed or pending.
 
-Format: `doneTask INDEX [MORE_INDEXES]`
+Format: `doneTask INDEX [MORE_INDEXES]…​`
 
 * The index refers to the index number shown in the task list.
 * The user is able to mark multiple tasks by providing multiple indexes.
-* The indexes must be a positive integer 1, 2, 3, ...
+* The indexes must be a positive integer 1, 2, 3, …​
 * Duplicate indexes are not accepted.
 * If the task at the specified `INDEX` is marked as pending, using `doneTask INDEX` will mark it as complete.
 * If the task at the specified `INDEX` is marked as complete, using `doneTask INDEX` will mark it as pending.
