@@ -26,8 +26,7 @@ public class BulkTagCommand extends Command {
             + "Examples: " + COMMAND_WORD + " " + PREFIX_TAG + " CompletedIp, " + COMMAND_WORD + " " + PREFIX_TAG
             + " Passed";
 
-    public static final String MESSAGE_SUCCESS = "Added the Tags %s to the %d Persons";
-    public static final String MESSAGE_PERSONS_ALREADY_HAVE_THE_TAGS = "The Tags %s are present for all the Persons";
+    public static final String MESSAGE_SUCCESS = "Added the Tags %s to the Persons";
 
     private final Set<Tag> tagList;
 
@@ -42,18 +41,11 @@ public class BulkTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return tagAllPersons(model);
-    }
-
-    private CommandResult tagAllPersons(Model model) {
         List<Person> personsToTag = new ArrayList<>(model.getFilteredPersonList());
 
         for (Person person : personsToTag) {
             Set<Tag> newTagList = new HashSet<>(tagList);
-            for (Object o : person.getTags().toArray()) {
-                Tag tag = (Tag) o;
-                newTagList.add(tag);
-            }
+            newTagList.addAll(person.getTags());
             Person taggedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     person.getAddress(), newTagList, person.getGitHubId(),
                     person.getNusNetworkId(), person.getType(), person.getStudentId(), person.getTutorialId());
@@ -64,8 +56,6 @@ public class BulkTagCommand extends Command {
     }
 
     private CommandResult getCommandResult(Set<Tag> tagList, List<Person> personsToTag) {
-        int numberOfPersonsTagged = 0;
-
         StringBuilder tagsSb = new StringBuilder();
         for (Tag tag : tagList) {
             tagsSb.append(tag.toString() + " ");
@@ -73,11 +63,7 @@ public class BulkTagCommand extends Command {
 
         String stringTags = tagsSb.toString().trim().substring(0, tagsSb.toString().length() - 1);
 
-        if (numberOfPersonsTagged == 0) {
-            return new CommandResult(String.format(MESSAGE_PERSONS_ALREADY_HAVE_THE_TAGS, stringTags));
-        } else {
-            return new CommandResult(String.format(MESSAGE_SUCCESS, stringTags, numberOfPersonsTagged));
-        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, stringTags));
     }
 
     @Override

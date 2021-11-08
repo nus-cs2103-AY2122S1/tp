@@ -153,6 +153,21 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 ### Data Archiving Features
+#### Add feature
+
+The add feature is facilitated by `AddCommand`. It extends `Command` with a person as parameter where the person to be added is stored internally as a `toAdd`. The add mechanism relies on `ModelManager#addPerson()` to add the Person to be added to the `personList` in `ModelManager`.
+
+The following sequence diagram shows how the add operation works. For simplicity the command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11` is simplified to `add {person details}`
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+#### Edit feature
+
+The edit feature is facilitated by `EditCommand`. It extends `Command` with an Index and EditPersonDescriptor as parameter where the person to be edited is stored at index in the `personList` and EditPersonDescriptor stored the details of the edited fields. The edit mechanism relies on `ModelManager#setPerson()` to edit the Person in the `personList` in `ModelManager`.
+
+The following sequence diagram shows how the edit operation works.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
 #### Import feature
 
@@ -199,7 +214,7 @@ The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetDat
 
 #### Sort Feature
 
-The sort feature is facilitated by `SortCommand`. It extends `Command` with a `Prefix` which specifies the prefix the `AddressBook` is to be sorted by, as well as a boolean `reverse` which specifies the order of the sorted list. 
+The sort feature is facilitated by `SortCommand`. It extends `Command` with a `Prefix` which specifies the prefix the `AddressBook` is to be sorted by, as well as a boolean `reverse` which specifies the order of the sorted list.
 This method is exposed in the `Model` interface as `Model#sortAddressBook()` This is further facilitated by  `AddressBook`, `AddressBook#sortList()`, a `PersonComparator` and a `Person#compare(Person p, Prefix prefix)` method to allow for sorting of the list by the `Prefix` specified.
 
 ##### Design Considerations
@@ -207,7 +222,7 @@ This method is exposed in the `Model` interface as `Model#sortAddressBook()` Thi
 **Aspect: How sort executes:**
 
 * **Alternative 1 (current choice):** Sorts the list saved inside the `Model`'s `AddressBook`.
-    * Pros: Easy to implement. 
+    * Pros: Easy to implement.
     * Cons: Users might just want a temporary sorting of the list and not a permanent sorting.
 
 * **Alternative 2:** Sorts the `filteredPersons` list shown by the `Model`.
@@ -307,10 +322,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
 | `* *`    | user in a supervising position             | export name and email to a file               | send specific emails to a select few contacts
 | `* *`    | curious user                               | view statistics about the contacts that I have added | derive more information about my contacts
+| `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -377,15 +391,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+  * 3a1. AddressBook shows an error message.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+  Use case resumes at step 2.
 
 * 3b. The attribute to be edited does not exist.
   * 3b1. AddressBook shows an error message.
-  * Use case ends
-  *
+  Use case ends
+
+* 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
+  * 3c1. AddressBook shows an error message.
+
+      Use case ends
 
 
 **Use case: Export contacts**
@@ -459,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be usable by a novice who has never used any similar application.
 5. The project is expected to adhere to a schedule that delivers a new version every 2 weeks.
-*{More to be added}*
+
 
 ### Glossary
 
@@ -494,7 +511,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -511,12 +527,87 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Sort Test
+1. Test case: `sort`<br>
+   Expected: List is sorted by name.
+2. Test case: `sort -r`<br>
+   Expected: List is sorted by name in reverse.
+3. Test case: `sort \T`<br>
+   Expected: List is sorted by TutorialID
+4. Test case: `sort \a`<br>
+   Expected: No change to list. Error details shown in status message.
+
+### Import and Export
+
+1. Exporting then importing back original list of contacts
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `export currList.json`<br>
+       Expected: The current contact list is exported to the file currList.json
+    
+       1. Test case: `edit 0 n/Amanda`<br>
+       Expected: First contact name is updated to Amanda
+       
+       2. Test case: `import currList.json`<br>
+       Expected: The previous unedited old contact will be added into the current contact list
+       
+    3. Other incorrect delete commands to try: `import`, `export` <br>
+       Expected: Error details shown in the status message.
+
+2. Export last searched list of contacts
+
+   1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+   1. Test case: `export friends.json`<br>
+      Expected: Last searched contacts are exported to json file, friends.json
+
+### Export emails of last searched list of contacts
+
+
+1. Export emails of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `exportemail emails.txt`<br>
+       Expected: Emails of all contacts are exported to emails.txt
+
+    1. Other incorrect delete commands to try: `exportemail` <br>
+       Expected: Error details shown in the status message.
+
+1. Export emails of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `exportemail friends.txt`<br>
+       Expected: Emails of last searched contacts are exported to emails.txt
+
+
+
+### Get Statistics of last searched list of contacts
+
+1. Show statistics of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of all the contacts are shown in the display
+
+1. Show statistics of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   
 
-1. _{ more test cases …​ }_
+## Effort
+The difficulty level for our project is at a relatively moderate level. 
+We did not make large changes to the AB3 but instead chose to enhance the existing features. Most of the challenges faced were from figuring out what could be changed in the AB3 functions and what could not. For example, when implementing the sort feature, there were so many different lists in AB3 and some of them were immutable. So we had to do alot of testing to figure out which lists were mutable and the effects of mutating these lists on the app.

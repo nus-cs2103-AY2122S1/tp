@@ -5,7 +5,7 @@
 
 
 * This is **a team project by Software Engineering (SE) students currently taking CS2103**.<br>
-* It is named `ProfBook Level 3` (`PB3` for short) because it was based on the `AddressBook Level 3`
+* It is named `ProfBook`, and is based on the `AddressBook Level 3`
   application.
 * This is an application made for CS2103 Instructors to manage both students and TAs contacts within teams and tutorial
   groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number
