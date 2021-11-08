@@ -37,6 +37,7 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added implementation details of the `find` feature and related UML diagrams:
       [\#82](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/82), [\#92](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/92/files)
+        * Updated use cases and tests [\#200](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/200), [\#203](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/203)
     * Index.md:
         * Updated file to reflect changes to application, and a quick start guide: [\#96](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/96)
 
