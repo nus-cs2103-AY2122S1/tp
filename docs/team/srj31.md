@@ -38,19 +38,20 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Updated the GUI for the Help window
     [\#296](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/296)
-  * Created tests for new features `Done`, `Undone`, `Tag`, `CommandHistory`, `TaskContainsTagPredicate`
+  * Created tests for new features `Done`, `Undone`, `Tag`, `CommandHistory`, `TaskContainsTagPredicate`, `Show`
     [\#303](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/303)
     [\#304](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/304)
     [\#305](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/305)
     [\#315](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/315)
     [\#323](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/323)
     [\#346](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/346)
+    [\#367](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/367)
   * Created tests for parsers `TagCommandParser`, `UnifyParser`, `UndoneCommandParser`
     [\#324](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/324)
     [\#343](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/343)
-    
   * Created tests for models `Time`, `Task`, `Priority`, `State`
     [\#327](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/327)
+    [\#366](https://github.com/AY2122S1-CS2103T-W17-4/tp/pull/366)
     
 
 

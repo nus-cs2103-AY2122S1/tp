@@ -5,7 +5,7 @@
 
 ![logo](docs/images/Uni-Fy_Logo.png)
 
-![Ui](docs/images/UIUpdated.png)
+![Ui](docs/images/Ui.png)
 
 ## About Uni-Fy
 

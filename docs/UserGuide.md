@@ -15,7 +15,8 @@ title: User Guide
 Welcome to the Uni-Fy User Guide!
 
 Uni-Fy is a **desktop app for managing your university workload**, designed **by university students for university students**.
-This application is optimized for use via a **Command Line Interface** (CLI)
+This application allows you to track and get a great overview of your weekly tasks through the use of a weekly panel.
+Uni-Fy is optimized for use via a **Command Line Interface** (CLI)
 while still having the benefits of a **Graphical User Interface** (GUI).
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
 
@@ -97,18 +98,17 @@ Here is a table of commonly used terms in this document along with their meaning
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `unify.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
+2. Download the latest `unify.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Uni-Fy. 
+3. Copy the file to the folder you want to use as the _home folder_ for Uni-Fy. 
 
-1. Double-click the file to start the app. If double-click does not 
+4. Double-click the file to start the app. If double-click does not 
    get the app to start in your device, please refer to the FAQ section. 
    The GUI shown in the image below should appear in a few seconds.
    Note how the app contains some sample data.<br>
-   ![Ui](images/UIUpdated.png)
+   ![Ui](images/UI.png)
 
-1. Type the command in the command box and press Enter to execute it.
-   * Refer to the [**4. Features**](#4-features) below for details of each command.
+5. Type the command in the command box and press Enter to execute it.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
    * Items with <code>t/</code> before them represent the time of the task
    * Items with <code>p/</code> before them represent the priority level of the task
      * The priority level can be `LOW`, `MEDIUM` or `HIGH` (**Note**: needs to be uppercase)
-   * Date is represented in YYYY-MM-DD format
+   * Date is represented in YYYY-MM-DD format, and year should be 2021
    * Time is represented in HH:MM format
    * Tag must be alphanumeric and contain at most 15 characters
 </div>
@@ -150,12 +150,13 @@ Adds a task to the task list. The parameters for the command can be input in any
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 * Adds task with the name <code><i>n/task_name</i></code>
 * Adds task with the time <code><i>t/time</i></code>
   * The format should be as follows <code><i>t/hh:mm</i></code>
 * Adds task with the date <code><i>d/date</i></code>
   * The format should be as follows <code><i>d/yyyy-mm-dd</i></code>
+  * The date should `2021`
 * Add task with the tag <code><i>tg/tag</i></code>
 * Add task with the priority level <code><i>p/level</i></code>
 * The task is added for that date only at the given time
@@ -188,12 +189,11 @@ Adds tags to a task.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 * Adds <code><i>tg/tag</i></code> tag to the task having index <code><i>task_id</i></code>
 * Adds multiple tags if more than one <code><i>tg/tag</i></code> used
 * The tags entered will overwrite the pre-existing tags
 </div>
-
 
 
 <div markdown="block" class="alert alert-success">
@@ -222,18 +222,18 @@ Marks your task as DONE
 
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Explanation:**<br>
+* The <code><i>task_id</i></code> refers to the index of the task in the currently displayed task list
+</div>
+
 <div markdown="block" class="alert alert-success">
 
 **:green_book: Examples:**
 
-* `done 1` mark first task as done
+* `done 1` marks the first task as done
 </div>
-
-**Demonstration:**
-
-
-<div style="page-break-after: always;"></div>
-
 
 ![done_command](images/doneCommandBefore.png)
 
@@ -249,7 +249,7 @@ When all tasks for the week is done, the progress bar will be full:
 
 ### 4.4 Mark your tasks as TODO : `undone`
 
-Marks your task as TODO or pending
+Marks your task back as TODO
 
 <div markdown="block" class="alert alert-primary">
 
@@ -258,11 +258,30 @@ Marks your task as TODO or pending
 
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Explanation:**<br>
+* The <code><i>task_id</i></code> refers to the index of the task in the currently displayed task list
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
+
+* `undone 3` marks the third task as undone
+</div>
+
+![undone_command](images/undoneCommandBefore.png)
+
+
+After running the undone command, the task at that particular index gets mark as todo:
+
+![undone_command_after](images/undoneCommandAfter.png)
+
 
 ### 4.5 Locating a task by name: `find`
 
 Find tasks with matching keywords and show them in the task list.
-
 
 <div markdown="block" class="alert alert-primary">
 
@@ -272,7 +291,7 @@ Find tasks with matching keywords and show them in the task list.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 
 * The search is case-insensitive.
 * The order of the keywords does not matter.
@@ -304,21 +323,16 @@ Shows a list of all tasks in the task list.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- <code> `list` </code>
 
+- <code>list</code>
 </div>
 
-<div markdown="block" class="alert alert-success">
+![list_command](images/listCommandBefore.png)
 
-**:green_book: Example:**
+After running the list command, all tasks will be displayed in the task list.
 
-* `list` displays a list of all the task in the task list
+![list_command_after](images/listCommandAfter.png)
 
-</div>
-
-After running the list command, the tasks in that given week are listed as shown below:
-
-![list_comman](images/listCommand.png)
 
 ### 4.7 Showing Tasks: `show`
 
@@ -335,7 +349,7 @@ Show all tasks that have been added to the app in a specific week.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 * If <code><i>week_number</i></code> field is provided:
   * Searches for the task with the given date and show it on the GUI
   * Useful in cases where user wants to show all tasks in the given week
@@ -371,7 +385,7 @@ Sorts the tasks in the task list of Uni-Fy.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 * Sorts the tasks in the tasklist based on either `time` or `priority` in ascending or descending order as entered after the `o/` flag
 
 </div>
@@ -402,7 +416,7 @@ Edits the existing details of a task. The parameters for the command can be inpu
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 * The <code><i>task_id</i></code> refers to the index number shown in the displayed task list. 
 * Edits task with the name <code><i>n/task_name</i></code>
 * Edits task with the time <code><i>t/time</i></code>
@@ -436,7 +450,7 @@ Removes a specific task that has been added to your app.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
+**:information_source: Explanation:**<br>
 * Deletes the task corresponding to the <code><i>task_id</i></code>
 * Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
 * The index provided must be positive integer

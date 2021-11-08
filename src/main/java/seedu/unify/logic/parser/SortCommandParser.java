@@ -15,11 +15,9 @@ import seedu.unify.model.task.Task;
  */
 public class SortCommandParser implements Parser<SortCommand> {
     /**
-     * sfssa
-     *
-     * @param args sfsf
-     * @return sfsfsaf
-     * @throws ParseException safest
+     *Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
