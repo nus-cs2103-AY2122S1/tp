@@ -483,8 +483,6 @@ The following activity diagrams summarise what happens when a user executes the 
 </center>
 <center>
     <img src="images/ShowStudentActivityDiagram.png" />
-</center>
-<center>
     <img src="images/ShowStudentsActivityDiagram.png" />
 </center>
 <br>
@@ -493,6 +491,9 @@ The following sequence diagram summarises what happens when the user inputs an `
 
 <center>
     <img src="images/ShowSequenceDiagram.png" />
+</center>
+<br>
+<center>
     <img src="images/ShowStatsFromModelSequenceDiagram.png" />
 </center>
 
@@ -912,13 +913,14 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `addgroup -g T01A -n Hong Fai -i E0123456`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` has been specified more than once.
 
+<div style="page-break-after: always;"></div>
+
 5. Adding a group with non-existent students.
 
    1. Prerequisites: Database does not contain a student with name `Hong Fai`.
    
    2. Test case: `addgroup -g T01A -n Hong Fai`<br> Expected: The group will not be created. Error detail shown in the status message to inform user that the student `Hong Fai` cannot be found in the database.
-
-<div style="page-break-after: always;"></div>
+   
 
 ### Deleting a Student
 
