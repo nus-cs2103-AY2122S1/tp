@@ -44,10 +44,10 @@ title: Developer Guide
     5. [Dashboard](dashboard)
 18. [Appendix: Effort](#Appendix Effort)
     1. Challenges Faced and Achievements Made 
-       1. Rewriting the Command Syntax 
-       2. Designing New UI Components](Designing New UI components)
-       3. Working with Third-Party Libraries(#Working with Third-Party Libraries)
-       4. Implementing Dynamic Features(#Implementing Dynamic Features)
+       1. [Rewriting the Command Syntax](#Rewriting the Command Syntax)
+       2. [Designing New UI Components](Designing New UI components)
+       3. [Working with Third-Party Libraries](#Working with Third-Party Libraries)
+       4. [Implementing Dynamic Features](#Implementing Dynamic Features)
 
 --------------------------------------------------------------------------------------------------------------------
 
