@@ -86,7 +86,7 @@ The `UI` component,
 -   listens for changes to `Model` data so that the UI can be updated with the modified data.
 -   depends on some classes in the `Model` component, as it displays `Contact` and `Policy` object residing in the `Model`.
 -   keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
--   is referenced by the `Logic` component, because the `Warning` class in `Logic` relies on `MainWindow` for the user input in the dialog box. 
+-   is referenced by the `Logic` component, because the `Warning` class in `Logic` relies on `MainWindow` for the user input in the dialog box.
 
 ### Logic component
 
@@ -215,15 +215,15 @@ new `Policy` object would need to be created for each of them with the edited ne
 The sequence diagram below illustrates how the `EditContactCommand` is executed.
 ![](images/EditContactCommandExecuteSequenceDiagram.png)
 
-**Step 1**: `EditContactCommand#execute` is called which gets the `contactToEdit` from the `Model` using the `Index` provided, 
+**Step 1**: `EditContactCommand#execute` is called which gets the `contactToEdit` from the `Model` using the `Index` provided,
 similar to the process in `AddPolicyCommand`.
 
-**Step 2**: Using the `EditContactDescriptor` object and the `contactToEdit`, a new `editedContact` is created by calling 
+**Step 2**: Using the `EditContactDescriptor` object and the `contactToEdit`, a new `editedContact` is created by calling
 `EditContactCommand#createEditedContact`.
 
 **Step 3**: Policies belonging to the `contactToEdit` is obtained from the `Model`.
 
-**Step 4**: For each of the policies, a new `Policy` object is created with identical fields but with `editedContact` as the owner and 
+**Step 4**: For each of the policies, a new `Policy` object is created with identical fields but with `editedContact` as the owner and
 the `Model` is updated with these new policies.
 
 **Step 5** The `contactToEdit` is replaced by the `editedContact` by calling `Model#setContact`.
@@ -376,7 +376,7 @@ Our target audience is a student who,
 -   prefers typing to mouse interactions
 -   is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 Currently, there are no good contact applications on desktop that allow student financial advisors, that do not have time to use complex contact book applications, to easily keep track of their contacts and policies.
 
@@ -597,11 +597,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     1.  Should work on any OS with `32-bit` or `64-bit` architectures.
     1.  User data should be in human editable file and stored locally.
     1.  Should not require internet for any of its features.
-    
+
 *   Performance requirements:
     1.  Should be able to hold up to 1000 entries(contacts/policies) without a noticeable sluggishness in performance for typical usage.
     1.  The response to any commands should be less than 1 second.
-    
+
 *   Quality requirements:
     1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
     1.  The application should be easily picked up by a new user with no prior experience with a similar application.
@@ -648,9 +648,9 @@ testers are expected to do more *exploratory* testing.
         Expected: A contact with the details provided will be added into the contact list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
     1.  Test case: `addcontact n/!nvalidN@me p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` <br>
         Expected: No contact is added. Error details shown in the status message. Status bar remains the same.
-       
+
 1. Adding a contact while not all contacts are being shown
-   
+
     1.  Prerequisites: Filter the contact list using `findcontact KEYWORD` so that not all the contacts are shown.
     1.  Test case: `addcontact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`<br>
         Expected: A contact with the details provided will be added into the contact list. The complete contact list will be shown. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
@@ -684,7 +684,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a policy
 
 1.  Adding a policy while all policies are being shown
-    
+
     1.  Prerequisites: List all contacts using the `allpolicy` command. Multiple policies and contacts in the list.
     1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/2100-06-13 t/AIA`<br>
         Expected: A policy with the details provided will be added into the policy list. Details of the added policy shown in the status message. Timestamp in the status bar is updated.
@@ -694,7 +694,7 @@ testers are expected to do more *exploratory* testing.
         Expected: A warning will pop-up. Pressing `confirm` will create a policy. A policy with the details provided will be added into the policy list. Details of the added policy shown in the status message. Timestamp in the status bar is updated. Pressing `cancel` or closing will not create a policy. Error details shown in the status message. Status bar remains the same.
 
 1. Adding a policy while not all policies are being shown
-   
+
     1.  Prerequisites: Filter the policy list using `contactpolicy CONTACT_INDEX` so that not all the policies are shown. All contacts are still shown.
     1.  Test case: `addpolicy n/Life Policy p/1000 12 120 c/20 12 cl/1 e/2100-06-13 t/AIA`<br>
         Expected: A policy with the details provided will be added into the policy list. The complete policy list will be shown. Details of the added policy shown in the status message. Timestamp in the status bar is updated.
@@ -720,7 +720,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a policy
 
 1.  Deleting a policy while all policies are being shown
-    
+
     1.  Prerequisites: List all contacts using the `allpolicy` command. Multiple policies in the list.
     1.  Test case: `deletepolicy 1`<br>
         Expected: First policy is deleted from the list. Details of the deleted policy shown in the status message. Timestamp in the status bar is updated.
