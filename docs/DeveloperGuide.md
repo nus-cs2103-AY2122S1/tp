@@ -19,7 +19,7 @@ title: Developer Guide
     2. [`Add` Student Feature](#add student)
     3. [`Filter` Student List Feature](#filter student)
     4. [`Show` lab results Feature](#show lab)
-    5. [`Edit` Lab Feature](#edit lab)
+    5. [`EditLab` Feature](#edit lab)
     6. [`Download` Data Feature](#download data)
     7. [`Purge` Feature](#purge data)
 11. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
@@ -573,11 +573,11 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
       other operations such as add and delete can change the indexes easily.
 
 
-## <a name="edit lab"></a> **`Edit` Lab Feature**
+## <a name="edit lab"></a> **`EditLab` Feature**
 
 #### Implementation
 
-The edit lab details feature allows the CS2100 TA to edit the lab information for all students in the list. Its
+The edit lab feature allows the CS2100 TA to edit the lab information for all students in the list. Its
 implementation introduces the following classes:
 
 * `EditLabCommand`that extends `Command`
