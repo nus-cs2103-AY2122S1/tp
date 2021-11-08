@@ -8,7 +8,7 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Introduction 
+## Introduction
 
 TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
@@ -17,7 +17,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 1. Install Tutor Master by following the instructions in the [Installation Guide](#installation-guide).
 2. Get familiar with the various components of the app by referring to the [User Interface Guide](#user-interface-ui-of-tutor-master).
 3. If you are a new user, you can follow our guide in [Quick Start](#quick-start) to familiarise yourself with the app.
-4. If you are familiar with the app, you can refer to the [Features](#features) section to see details of all commands or 
+4. If you are familiar with the app, you can refer to the [Features](#features) section to see details of all commands or
     look at [Command Summary](#command-summary) to see all commands easily.
 5. Refer to our [FAQ](#faq) if you have any questions.
 
@@ -45,7 +45,7 @@ The UI consists of a:
 * Result Display - Displays result of executed command
 * Person Panel - Displays all added persons
 * Task Panel - Displays all added tasks
-* Group Panel - Displays all added groups 
+* Group Panel - Displays all added groups
 * Viewing Panel - Displays either the schedule, group or person to be viewed
 
 ## Quick Start
@@ -76,17 +76,18 @@ Let's try adding a student with the following details:
    * You will now be able to see __David__ at the entry in the Person Panel on the left,
    as shown in the image below.
    ![Add David](images/imagesInUG/student-addDavid.png)
-     
+   
 2. Now lets try editing his address. Note the index number beside his name in the Person Panel, in this case it is 4.<br>
    Type the following command `student -e 4 a/Kent Ridge` and hit `Enter`.
    * This updates the address of David, who is at index __4__ to __Kent Ridge__.
    * Note that the other details are unchanged, you can choose which fields you want to edit.
-
+<br><br>
 
 3. You can add a lesson to David. Let's assign a __Math__ lesson from __10:00__ to __12:00__ on __Friday__. <br>
    Type the following command `student -al 4 s/Math st/10:00 et/12:00 d/Fri` and hit `Enter`.
    * This adds a lesson to David with the given details.
    * You can view your schedule for the week by entering `schedule`, try it!
+<br><br>
 
 4. If you wish to view more details of a student, you can use the student view command.<br>
    Type `student -v 4` in the Command Panel and hit `Enter`.
@@ -121,7 +122,7 @@ Let us now add "David" to a group named "CS2103T".
     * __CS2103T__ is now added to the Group Panel. It has an `INDEX` of 3 in the Group Panel.
     * This group currently has __David__ inside
       ![Add David To Group](images/imagesInUG/group-addDavidInGroup.png)
-      
+
 2. Type `group -v 3` in the "Command Panel" and hit `Enter`.
     * This displays the details of the group at `INDEX` 3 in the Viewing Panel.
 
@@ -161,7 +162,8 @@ You can refer to the [Features](#features) below for details of each command.
 ### Students
 
 #### Adding a student: `student -a`
-<details markdown="1"><summary>Adds a student to the Person Panel.</summary>
+
+Adds a student to the Person Panel.
 
 Format: `student -a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -174,11 +176,11 @@ Examples:
   adds a student with the name John, phone number 12345678, email john@mail.com and address at 42 Wallaby Way, Sydney
 * `student -a n/Barbara p/12344321 e/barber@gmail.com a/123 Sesame Street t/graduate t/actress`<br>
   adds a student with the name Barbara, phone number 12344321, email barber@gmail.com, address at 123 Sesame Street, and tags graduate and actress
-</details>
+
 
 #### Viewing a student: `student -v`
-<details markdown="1">
-<summary>Views a particular student's details in the Person Panel.</summary>
+
+Views a particular student's details in the Person Panel.</summary>
 
 Format: `student -v INDEX`
 
@@ -190,13 +192,10 @@ Examples:
 
 ![studentview](images/imagesInUG/student-view.png)
 
-</details>
 
 #### Editing a student: `student -e`
-<details markdown="1">
-<summary>
+
 Edits the detail of a student in the Person Panel.
-</summary>
 
 Format: `student -e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -210,13 +209,11 @@ Example:
 * `student -e 3 p/88888888 e/johnny@mail.com` Edits the phone number and email
   address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
-</details>
+
 
 #### Deleting a student: `student -d`
-<details markdown="1">
-<summary>
+
 Deletes the specific student in the Person Panel.
-</summary>
 
 Format: `student -d INDEX`
 
@@ -227,22 +224,15 @@ Format: `student -d INDEX`
 Examples:
 
 * `student -d 3` deleted the third student in the persons list
-</details>
 
 #### Listing all students : `list`
-<details markdown="1">
-<summary>
 Shows a list of all students in the Person Panel.
-</summary>
 
 Format: `list`
-</details>
 
 #### Locating students by name: `student -f`
-<details markdown="1">
-<summary>
+
 Finds students whose names contain any of the given keywords.
-</summary>
 
 Format: `student -f KEYWORD…​`
 
@@ -256,14 +246,10 @@ Format: `student -f KEYWORD…​`
 Examples:
 * `student -f John` returns `john` and `John Doe`
 * `student -f alex david` returns `Alex Yeoh`, `David Li`<br>
-</details>
 
 #### Adding a lesson to a student: `student -al`
 
-<details markdown="1">
-<summary>
 Adds a lesson to the specific student
-</summary>
 
 Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
@@ -285,13 +271,11 @@ Example:
   starting at 8am and ending at 9am on Mondays.
 
 ![studentaddlesson](images/imagesInUG/student-addlesson.png)
-</details>
 
 #### Deleting a lesson from a student: `student -dl`
-<details markdown="1">
-<summary>
+
 Deletes a lesson from the specific student
-</summary>
+
 
 Format: `student -dl PERSON_INDEX LESSON_INDEX`
 
@@ -304,13 +288,12 @@ Format: `student -dl PERSON_INDEX LESSON_INDEX`
 
 Example:
 * `student -dl 1 1` deletes the first lesson from the first student.
-</details>
+
 
 #### Adding an exam to a student: `student -ae`
-<details markdown="1">
-<summary>
+
 Adds an exam to the specific student
-</summary>
+
 
 Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
 
@@ -322,13 +305,12 @@ Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
 Example:
 * `student -ae 1 s/Math d/2021-12-20 14:00` Adds an exam with the subject name Math
   on 20th December 2021, 2pm.
-</details>
+
 
 #### Deleting an exam from a student: `student -de`
-<details markdown="1">
-<summary>
+
 Deletes an exam from the specific student
-</summary>
+
 
 Format: `student -de PERSON_INDEX EXAM_INDEX`
 
@@ -340,17 +322,15 @@ deleting lessons.
 
 Example:
 * `student -de 1 1` deletes the first exam from the first student.
-</details>
+
 
 --------------------------------------------------------------------------------------------------------------------
 ### Groups
 
 #### Grouping students: `group -a`
 
-<details markdown="1">
-<summary>
 Groups students by their names together.
-</summary>
+
 
 Format: `group -a INDEX…​ n/GROUPNAME`
 
@@ -365,13 +345,10 @@ Examples:
 
 ![groupadd](images/imagesInUG/group-add.png)
 
-</details>
-
 #### Viewing a group: `group -v`
-<details markdown="1">
-<summary>
+
 Views a group of students.
-</summary>
+
 
 Format: `group -v INDEX`
 
@@ -382,13 +359,10 @@ Format: `group -v INDEX`
 
 Examples:
 * `group -v 5` views the group specified at the index 5.
-</details>
 
 #### Deleting a group: `group -d`
-<details markdown="1">
-<summary>
+
 Deletes a group of students.
-</summary>
 
 Format: `group -d INDEX`
 
@@ -399,14 +373,10 @@ Format: `group -d INDEX`
 
 Examples:
 * `group -d 5` deletes the group specified at the index 5.
-</details>
 
 #### Adding a lesson to a group: `group -al`
 
-<details markdown="1">
-<summary>
 Adds a lesson to the specified group.
-</summary>
 
 Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
@@ -427,13 +397,10 @@ Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
-</details>
 
 #### Deleting a lesson from a group: `group -dl`
-<details markdown="1">
-<summary>
+
 Deletes a lesson from the specified group
-</summary>
 
 Format: `group -dl GROUP_INDEX LESSON_INDEX`
 
@@ -444,16 +411,13 @@ Format: `group -dl GROUP_INDEX LESSON_INDEX`
 
 Example:
 * `group -dl 1 1` deletes the first lesson from the first group.
-</details>
 
 --------------------------------------------------------------------------------------------------------------------
 ### Tasks
 
 #### Adding a task: `task -a`
-<details markdown="1">
-<summary>
+
 Adds a task to the Task Panel.
-</summary>
 
 Format: `task -a n/NAME d/DEADLINE`
 
@@ -463,13 +427,10 @@ Format: `task -a n/NAME d/DEADLINE`
 
 Examples:
 * `task -a n/CS2100 Lab 1 d/2021-10-10` adds the task "CS2100 Lab 1"
-</details>
 
 #### Editing a task: `task -e`
-<details markdown="1">
-<summary>
+
 Edits a task in the Task Panel.
-</summary>
 
 Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
@@ -483,13 +444,9 @@ Examples:
 
 ![taskedit](images/imagesInUG/task-edit.png)
 
-</details>
-
 #### Deleting a task: `task -d`
-<details markdown="1">
-<summary>
+
 Deletes the specific task from the Task Panel.
-</summary>
 
 Format: `task -d INDEX`
 
@@ -500,22 +457,16 @@ Format: `task -d INDEX`
 Examples:
 
 * `task -d 1` deletes the task at index 1
-</details>
 
 #### Listing all tasks: `task -l`
-<details markdown="1">
-<summary>
+
 Shows a list of all the tasks in the Task Panel.
-</summary>
 
 Format: `task -l`
-</details>
 
 #### Finding a task by name: `task -f`
-<details markdown="1">
-<summary>
+
 Find tasks whose names contain any of the given keywords.
-</summary>
 
 Format: `task -f KEYWORD…​`
 
@@ -532,13 +483,9 @@ Examples:
 
 ![taskfind](images/imagesInUG/task-find.png)
 
-</details>
-
 #### Assigning tasks to students: `task -as`
-<details markdown="1">
-<summary>
+
 Assigns a specific task to students’ task list.
-</summary>
 
 Format: `task -as STUDENTINDEX TASKINDEX`
 
@@ -547,13 +494,10 @@ Format: `task -as STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
-</details>
 
 #### Assigning tasks to groups: `task -ag`
-<details markdown="1">
-<summary>
+
 Assigns a specific task to groups’ task list.
-</summary>
 
 Format: `task -ag GROUPINDEX TASKINDEX`
 
@@ -562,13 +506,10 @@ Format: `task -ag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -ag 2 4` adds the task at the index 4 to the group at the index 2
-</details>
 
 #### Unassigning tasks from students: `task -unas`
-<details markdown="1">
-<summary>
+
 Unassigns a specific task from students’ task list.
-</summary>
 
 Format: `task -unas STUDENTINDEX TASKINDEX`
 
@@ -577,13 +518,10 @@ Format: `task -unas STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -unas 2 4` removes the task at the index 4 from the student at the index 2
-</details>
 
 #### Unassigning tasks from groups: `task -unag`
-<details markdown="1">
-<summary>
+
 Unassigns a specific task from groups’ task list.
-</summary>
 
 Format: `task -unag GROUPINDEX TASKINDEX`
 
@@ -592,13 +530,10 @@ Format: `task -unag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
-</details>
 
 #### Marking a task as done by student: `task -do`
-<details markdown="1">
-<summary>
+
 Marks that a student has done a task.
-</summary>
 
 Format: `task -do STUDENTINDEX TASKINDEX`
 
@@ -607,15 +542,11 @@ Format: `task -do STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
-</details>
 
 
 #### Marking a task as done by group: `task -dog`  (Coming soon)
 
-<details markdown="1">
-<summary>
 Marks that a group has done a task.
-</summary>
 
 Format: `task -dog GROUPINDEX TASKINDEX`
 
@@ -624,14 +555,10 @@ Format: `task -dog GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -dog 2 4` marks the task at the index 4 as done by the group at the index 2
-</details>
 
 #### Marking a task as not done by student: `task -undo`
 
-<details markdown="1">
-<summary>
 Marks that a student has not done a task.
-</summary>
 
 Format: `task -undo STUDENTINDEX TASKINDEX`
 
@@ -640,14 +567,10 @@ Format: `task -undo STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
-</details>
 
 #### Marking a task as not done by group: `task -undog`  (Coming soon)
 
-<details markdown="1">
-<summary>
 Marks that a group has not done a task.
-</summary>
 
 Format: `task -undog GROUPINDEX TASKINDEX`
 
@@ -656,7 +579,6 @@ Format: `task -undog GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
-</details>
 
 --------------------------------------------------------------------------------------------------------------------
 ### Others
@@ -667,7 +589,7 @@ Views the current lesson schedule for the week.
 
 #### Viewing help : `help`
 
-Views a info page for a list of commands and examples
+Views an info page for a list of commands and examples
 
 Format: `help`
 
