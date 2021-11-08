@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-* The formatting and content of our User Guide and Developer Guide is referenced from [AY2021S2-CS2103T-T11-2/tp](https://ay2021s2-cs2103t-t11-2.github.io/tp/)
+* The formatting and content of our User Guide and Developer Guide are referenced from [AY2021S2-CS2103T-T11-2/tp](https://ay2021s2-cs2103t-t11-2.github.io/tp/)
 * The NUS Mod Tracker icon is created using [Adobe Photoshop](https://www.adobe.com/sg/products/photoshop.html).
 * Libraries used:
     - [JavaFX](https://openjfx.io/)
@@ -159,7 +159,7 @@ Classes used by multiple components are in the `seedu.tracker.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Edit Module feature
+### Edit a module feature
 
 #### Implementation
 
@@ -404,7 +404,7 @@ Below is a sequence diagram, and an explanation of how `ClearCommand` is execute
       - It will be expensive, if the user accidentally uses the clear command
 
 
-### Delete Module feature
+### Delete a module feature
 
 #### Implementation
 
@@ -812,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-**UC12: Viewing help**
+**UC12: View help**
 
 **MSS**
 1. User requests for help.
