@@ -25,6 +25,7 @@ import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
+import safeforhall.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -92,7 +93,11 @@ public class EditPersonCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
             updatePersonEventResidentLists(model, personToEdit, editedPerson);
-            model.setPerson(personToEdit, editedPerson);
+            try {
+                model.setPerson(personToEdit, editedPerson);
+            } catch (DuplicatePersonException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
             editedResidents.append(count + 1).append(".\t").append(personToEdit.getName()).append("\n");
             count++;
         }
