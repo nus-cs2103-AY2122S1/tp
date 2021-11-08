@@ -541,7 +541,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                    | exit the program safely        | free up resources on my computer |
 | `* * *`  | new user                                     |  install the application        | I can use it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
-| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
 | `* *`    | insurance agent                                      | keep track of the birthday of my clients   | maintain customer relations with them|
 | `* *`    | insurance agent that labels my clients    | delete labels that I have assigned  | correct mislabels and inaccurate labels
 | `* *`    | user                                       | import my contacts from a different source   | easily add multiple contacts at once
