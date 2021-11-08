@@ -576,8 +576,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | understand why my command fails| be guided towards using the App correctly                              |
 | `* * *`  | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
 | `* * *`  | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
+| `* * *`  | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
+| `* *`    | user in charge of tracking staff attendance| use Staff'd to mark absentees  | calculate working hours accurately    
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 
