@@ -459,15 +459,15 @@ The following sequence diagram shows how the sort operation works:
 
 LeadsForce allow the user to create and switch between multiple addressbook.
 
-### Description
+#### Description
 LeadsForce allow the user to create and switch between multiple addressbook.
 
-### Implementation
+#### Implementation
 Each individual addressbook is stored as its own JSON file in the data folder that the LeadsForce jar file is stored in.
 The following implementation will omit the details prior to the respective commands' parser.
 Also, details with regard to AddressBookList has been omitted for simplicity if it is not critical to the function of the command.
 
-### 4.6.1 Create new Address Book
+#### 4.6.1 Create new Address Book
 
 1. The `AbCreateCommandParser` parse the name of the address book that is to be created into a `Path` to that new address book.
 2. The `AbCreateCommandParser` will then create a new `AbCreateCommand` with the parsed `Path`.
@@ -483,7 +483,7 @@ The following sequence diagram shows how the ab create operation works:
 <img src="images/AbCreateCommandSequenceDiagram.png" />
 </p>
 
-### 4.6.2 Switch Address Book
+#### 4.6.2 Switch Address Book
 
 1. The `AbSwitchCommandParser` parse the name of the address book that is to be switched to into a `Path` to that address book.
 2. The `AbSwitchCommandParser` will then create a new `AbSwitchCommand` with the parsed `Path`.
@@ -500,7 +500,7 @@ The following sequence diagram shows how the sort operation works:
 <img src="images/AbSwitchCommandSequenceDiagram.png" />
 </p>
 
-### 4.6.3 Delete Address Book
+#### 4.6.3 Delete Address Book
 
 1. The `AbDeleteCommandParser` parse the name of the address book that is to be deleted to into a `Path` to that address book.
 2. The `AbDeleteCommandParser` will then create a new `AbDeleteCommand` with the parsed `Path`.
@@ -514,7 +514,7 @@ The following sequence diagram shows how the sort operation works:
 <img src="images/AbDeleteCommandSequenceDiagram.png" />
 </p>
 
-### 4.6.4 List Address Book
+#### 4.6.4 List Address Book
 
 1. The `AbListCommand` will call getAddressBookListString method of `ModelManager`.
 2. The `ModelManager` will then subsequently call toString method of `AddressBookList`
