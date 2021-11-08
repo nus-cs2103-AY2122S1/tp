@@ -49,6 +49,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/MainApp.java). It is responsible for,
@@ -79,6 +81,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <center>
@@ -87,6 +91,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <br>
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
