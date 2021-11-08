@@ -133,7 +133,7 @@ Quarterly | Every 90 days
 
 * If a parameter is expected but two consecutive flags are given (i.e. no spaces between two flags), only the first parameter will be taken.<br>
   e.g. if you specify `sort v/lv/`, only `v/` will be taken.
-* 
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
