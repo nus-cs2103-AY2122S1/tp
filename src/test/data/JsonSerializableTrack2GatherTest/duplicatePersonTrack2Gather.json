@@ -1,0 +1,17 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "caseNumber": "123",
+    "homeAddress": "123, Jurong West Ave 6, #08-111",
+    "callStatus": "0 false"
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "caseNumber": "123",
+    "homeAddress": "4th street",
+    "callStatus": "0 false"
+  } ]
+}

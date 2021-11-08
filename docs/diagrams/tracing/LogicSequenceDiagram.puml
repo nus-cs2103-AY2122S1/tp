@@ -2,20 +2,20 @@
 !include ../style.puml
 
 Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
+Participant ":Track2GatherParser" as t2gp LOGIC_COLOR
 Participant ":EditCommandParser" as ecp LOGIC_COLOR
 Participant "command:EditCommand" as ec LOGIC_COLOR
 
 [-> logic : execute
 activate logic
-logic -> abp ++: parseCommand(commandText)
+logic -> t2gp ++: parseCommand(commandText)
 create ecp
-abp -> ecp
-abp -> ecp ++: parse(arguments)
+t2gp -> ecp
+t2gp -> ecp ++: parse(arguments)
 create ec
 ecp -> ec ++: index, editPersonDescriptor
 ec --> ecp --
-ecp --> abp --: command
-abp --> logic --: command
+ecp --> t2gp --: command
+t2gp --> logic --: command
 
 @enduml

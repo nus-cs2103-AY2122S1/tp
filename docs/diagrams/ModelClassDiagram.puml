@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyTrack2Gather <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Track2Gather
+Class ReadOnlyTrack2Gather
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -18,37 +18,65 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
 Class Name
 Class Phone
-Class Tag
+Class Email
+Class CaseNumber
+Class Address
+Class WorkAddress
+Class QuarantineAddress
+Class ShnPeriod
+Class NextOfKinName
+Class NextOfKinPhone
+Class NextOfKinAddress
+Class CallStatus
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Track2Gather .up.|> ReadOnlyTrack2Gather
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyTrack2Gather
+ModelManager -left-> "1" Track2Gather
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+Track2Gather *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
+Person *--> CaseNumber
 Person *--> Address
-Person *--> "*" Tag
+Person *--> "0..1" WorkAddress
+Person *--> "0..1" QuarantineAddress
+Person *--> "0..1" ShnPeriod
+Person *--> "0..1" NextOfKinName
+Person *--> "0..1" NextOfKinPhone
+Person *--> "0..1" NextOfKinAddress
+Person *--> CallStatus
 
+Address -[hidden]right-> Name
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+
+WorkAddress -[hidden]right-> QuarantineAddress
+QuarantineAddress -[hidden]right-> NextOfKinAddress
+NextOfKinAddress -[hidden]right-> NextOfKinName
+NextOfKinName -[hidden]right-> NextOfKinPhone
+NextOfKinPhone -[hidden]right-> Email
+Email -[hidden]right-> CaseNumber
+CaseNumber -[hidden]right-> ShnPeriod
+ShnPeriod -[hidden]right-> CallStatus
+
+WorkAddress ..> Address
+QuarantineAddress ..> Address
+NextOfKinName ..> Name
+NextOfKinPhone ..> Phone
+NextOfKinAddress ..> Address
 
 ModelManager -->"~* filtered" Person
 @enduml

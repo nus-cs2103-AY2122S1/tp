@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,9 +37,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for:
+* At app launch: Initializing the components in the correct sequence, and connecting them up with each other.
+* At shut down: Shutting down the components and invoking cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -69,15 +70,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
@@ -86,14 +87,14 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `Track2GatherParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,134 +111,38 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `Track2GatherParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `Track2GatherParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+**Note:** Command objects which have simpler syntax, e.g. `ClearCommand`, may be created directly within the `Track2GatherParser` class without the use of a `XYZCommandParser` class.
+
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
+<img src="images/ModelClassDiagram.png" width="1000" />
 
-The `Model` component,
+The `Model` component:
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the contacts list data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _sorted_ and _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-W14-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+The `Storage` component:
+* can save both contacts list data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `Track2GatherStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+Classes used by multiple components are in the `seedu.Track2Gather.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,44 +160,71 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: contact tracing personnel at MOH who:
 
-* has a need to manage a significant number of contacts
+* have a need to maintain a lot of contact information
+* have a need to regularly contact a large set of persons and track their responsiveness over a period of time
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer CLI over GUI
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: The app will manage up to a few thousand contacts, providing basic features for contact tracing personnel to organise and search through them according to personal information (limited to English names and Singaporean contact numbers and addresses), case numbers and Stay-Home-Notice (SHN) periods.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​          | I want to …​                   | So that I can…​                                                         |
+| -------- | --------------------| --------------------------------- | ----------------------------------------------------------------------- |
+| `* * *`  | new user            | see usage instructions         | refer to instructions when I forget how to use the app                  |
+| `* * *`  | user                | save my contacts               | keep track of their details between sessions                            |
+| `* * *`  | user                | add a person’s personal information | contact the person regularly to enforce SHN |
+| `* * *`  | user                | add a person’s next-of-kin’s information | contact the person’s next-of-kin should an emergency arise |
+| `* * *`  | user                | add a person’s SHN period | track the person only within their SHN period |
+| `* * *`  | user                | delete multiple persons at once | more easily clean my contacts                                         |
+| `* * *`  | user                | update a person's personal information and SHN period without re-adding that person  | avoid re-entering existing data |
+| `* *`    | user                | update the SHN periods of all persons      | postpone or bring forward the SHN end dates according to government regulations    |
+| `* *`    | user                | remove persons whose SHN period has been completed | quickly and easily clear outdated contacts           |
+| `* *`    | user                | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate specific person(s) without having to go through the entire list  |
+| `* *`    | user                | sort contacts by name, case number, SHN start date or SHN end date | more easily browse through the contacts |
+| `* *`    | user                | see the number of search results | estimate how much additional filtering I would need to do          |
+| `* *`    | user                | view a dynamically filtered list of persons who have not been called in the current SHN enforcement session | know which persons need to be called next |
+| `* *`    | user                | mark a person as contacted in the current SHN enforcement session | track who I have tried to contact for the day        |
+| `* *`    | user                | mark a person as un-contactable in the current SHN enforcement session | track the person's non-compliance instances for further action       |
+| `* *`    | experienced user    | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
+| `*`      | user                | have Track2Gather dial my contacts for me       | increase efficiency when calling persons              |
+| `*`      | user                | be able to search persons with similar postal codes         | find groups of persons who stay within a close vicinity, and take fewer trips while enforcing SHN                |
+| `*`      | user                | be given a warning before making any delete operations      |  avoid accidentally losing data             |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Track2Gather` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: UC01 - Add a new person 
 
-**MSS**
+**MSS:**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User chooses to add a new person.
+2.  Track2Gather requests for details of the person.
+3.  User enters the requested details.
+4.  Track2Gather adds the person and shows the details of the new person.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The format of the given details is invalid.
+    * 3a1. Track2Gather shows the correct format for input.
+      
+      Use case resumes from step 2.
+    
+#### Use case: UC02 - Delete person(s)
+
+**MSS:**
+
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User identifies specific person(s) to delete from the list.
+4.  Track2Gather deletes the person(s) and shows the details of the deleted person(s).
 
     Use case ends.
 
@@ -301,27 +233,188 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+* 3a. One or more of the given index(s) is invalid.
+    * 3a1. Track2Gather shows an error message.
 
+      Use case resumes from step 2.
+* 3b. The format of the given details is invalid.
+    * 3b1. Track2Gather shows the correct format for input.
+
+      Use case resumes from step 2.
+
+#### Use case: UC03 - Edit details of an existing person
+
+**MSS:**
+
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to edit a person.
+4.  Track2Gather requests for details of the person to be edited.
+5.  User enters the requested details.
+6.  Track2Gather edits the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 * 3a. The given index is invalid.
+  * 3a1. Track2Gather shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case resumes from step 2.
+* 5a. The format of the given details is invalid.
+  * 5a1. Track2Gather shows the correct format for input.
 
-      Use case resumes at step 2.
+    Use case resumes from step 2.
 
-*{More to be added}*
+#### Use case: UC04 - Shift SHN end dates of all persons
+
+**MSS:**
+
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to shift the SHN end dates of all persons.
+4.  Track2Gather requests for the number of days to shift the SHN end dates.
+5.  User enters the number of days.
+6.  Track2Gather updates all persons' SHN end dates.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 5a. The format of the given details is invalid.
+    * 5a1. Track2Gather shows the correct format for input.
+
+      Use case resumes from step 2.
+
+#### Use case: UC05 - Clear persons with completed SHN periods
+
+**MSS:**
+
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to clear persons.
+4.  Track2Gather clears all persons with completed SHN periods.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 3a. There are no persons with completed SHN periods.
+
+  Use case ends.
+
+#### Use case: UC06 - Find person(s) by name, phone number, case number, SHN start date or SHN end date
+
+**MSS:**
+
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to find person(s).
+4.  Track2Gather requests for the search keyword(s).
+5.  User enters the search keyword(s).
+6.  Track2Gather shows the matched person(s) based on the search keyword(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 5a. The format of the given details is invalid.
+  * 5a1. Track2Gather shows the correct format for input.
+
+    Use case resumes from step 2.
+* 6a. No person found.
+  * 6a1. Track2Gather prompts the user that no person is found.
+
+    Use case ends.
+
+#### Use case: UC07 - Sort person(s) by name, case number, SHN start date and/or SHN end date
+
+**MSS:**
+
+1.  User chooses to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User chooses to sort person(s).
+4.  Track2Gather requests for the sorting fields.
+5.  User enters the fields to be sorted and their respective sort orders.
+6.  Track2Gather displays the list of sorted person(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 3a. The format of the given details is invalid.
+  * 3a1. Track2Gather shows the correct format for input.
+
+    Use case resumes from step 2.
+
+#### Use case: UC08 - Enforce a person's SHN
+
+**MSS:**
+
+1.  User chooses to start a new SHN enforcement session.
+2.  Track2Gather resets all persons to 'not called' in the new session, and updates the display to show all persons.
+3.  User requests to update call statuses for specified person(s).
+4.  Track2Gather updates the call statuses for these person(s), and updates the display to remove all called person(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 3a. The format of the given details is invalid.
+  * 3a1. Track2Gather shows the correct format for input.
+
+    Use case resumes from step 2.
+
+#### Use case: UC09 - Access help page
+
+**MSS:**
+
+1.  User requests for help.
+2.  Track2Gather shows a message with a link to the user guide.
+3.  User accesses the user guide.
+4.  User closes the message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User closes the message.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Graphical User Interface (GUI)**: Type of user interface through which users interact with electronic devices via visual indicator representations.
+* **Command Line Interface (CLI)**: Type of user interface through which users interact with a system or application by typing in text (commands).
+* **Stay-Home-Notice (SHN)**: The notice involves a stipulated period consisting of a start and end date, for which a person would have to remain in their place of residence or dedicated facility.
+* **SHN enforcement mode**: Refer to [User Guide](UserGuide.md#shn-enforcement-mode).
+* **Case number**: The unique identifier assigned to each person in Track2Gather.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -338,40 +431,306 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file.
+      
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.
+      
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a new person
+
+1. Adding a person
+
+   1. Test case: `add n/John Doe p/91234567 e/johndoe@gmail.com cn/7 ha/123 Waterloo`
+      
+      Expected: New person is added with the given details. Details of the added person shown in the status message.
+
+   2. Test case: `add n/Jane Doe p/98765432 e/janedoe@gmail.com cn/8 ha/123 Toronto wa/456 Toronto qa/789 Toronto sh/2000-01-01 2000-02-02 kn/Mary Jane kp/12345678 ka/555 Montreal`
+      
+      Expected: New person is added with the given details. Details of the added person shown in the status message.
+
+   3. Test case: `add n/John Doe cn/12`
+      
+      Expected: No person will be added as not all mandatory details are given. Error details shown in the status message. Status bar remains the same.
+
+   4. Test case: `add`
+      
+      Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
+
+   5. Test case: `add INVALID_PREFIX/EXAMPLE`
+      
+      Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
+
+   6. Test case: `add VALID_PREFIX/INVALID_INPUT`
+      
+      Expected: No person will be added. Error details shown in the status message. Status bar remains the same.
+
+### Editing a person
+
+1. Editing a person while all persons are being shown
+   
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `edit 1 n/John Doe`
+      
+      Expected: First person in the list has their name edited to `John Doe`. Details of the edited field(s) are shown in the status message.
+
+   3. Test case: `edit 1 n/John Doe cn/12`
+      
+      Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`. Details of the edited field(s) are shown in the status message.
+
+   4. Test case: `edit 1`
+      
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+
+   5. Test case: `edit 1 INVALID_PREFIX/EXAMPLE`
+      
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+
+   6. Test case: `edit 1 VALID_PREFIX/INVALID_INPUT`
+      
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+
+2. Editing a person while search results are being shown
+
+    Expected: Similar to previous, but person(s) are edited based on their index(s) in the search results instead of the list.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `delete 1`
+       
+       Expected: First person is deleted from the list. Details of the deleted person shown in the status message.
+
+    3. Test case: `delete 1 2`
+       
+       Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message.
+
+    4. Test case: `delete 3 1 2`
+       
+       Expected: First, second and third persons are deleted from the list. Details of the deleted persons shown in the status message.
+
+    5. Test case: `delete 1 1 1 2 2 2`
+       
+       Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message.
+
+    6. Test case: `delete 0`
+       
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    7. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)
+       
+       Expected: Similar to previous.
+
+2. Deleting a person while search results are being shown
+
+   Expected: Similar to previous, but person(s) are deleted based on their index(s) in the search results instead of the list.
+
+### Updating SHN end dates of all persons
+
+1. Batch-updating SHN periods while all persons are being shown
+   
+    1. Prerequisites: List all persons using the `list` command. Multiple persons with an SHN period.
+
+    2. Test case: `tshift 3` or `tshift +3`
+       
+       Expected: All persons' SHN end dates will be postponed by `3` days. Details of the batch-update will be displayed as the status message.
+
+    3. Test case: `tshift -3`
+       
+       Expected: All persons' SHN end dates will be brought forward by `3` days. Details of the batch-update will be displayed as the status message.
+
+    4. Test case: `tshift 91`
+       
+       Expected: Unable to shift beyond the limit of `90` days. No persons' SHN end dates will be shifted. Error details shown in the status message. Status bar remains the same.
+
+    5. Test case: `tshift 0`
+       
+       Expected: Unable to shift by `0` days. No persons' SHN end dates will be shifted. Error details shown in the status message. Status bar remains the same.
+
+### Clearing person(s) with completed SHN periods
+
+1. Clearing person(s) while all persons are being shown
+   
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `clear`
+      
+      Expected: All persons with completed SHN periods are deleted from the list. Success message is shown.
+    
+   3. Test case: `clear x` (where x is any character)
+      
+      Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Finding persons by field
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+1. Find person(s) while all persons are being shown
+   
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `find n/Alex`
+       
+       Expected: Only persons whose name contains `Alex` will be shown.
+    
+    3. Test case: `find n/Alex Alice`
+       
+       Expected: Only persons whose name contains `Alex` or `Alice` will be shown.
+
+    4. Test case: `find p/123`
+       
+       Expected: Only persons whose phone number starts with `123` will be shown.
+
+    5. Test case: `find p/123 234`
+       
+       Expected: Only persons whose phone number starts with `123` or `234` will be shown.
+
+    6. Test case: `find cn/1 2 3`
+       
+       Expected: Only persons with case number `1`, `2` or `3` will be shown.
+
+    7. Test case: `find sh/start:2021-01-01 2021-01-02`
+       
+       Expected: Only persons with SHN start date of `2021-01-01` or `2021-01-02` will be shown.
+    
+    8. Test case: `find sh/end:2021-01-01 2021-01-02`
+        
+       Expected: Only persons with SHN end date of `2021-01-01` or `2021-01-02` will be shown.
+
+    9. Test case: `find INVALID_PREFIX/EXAMPLE`
+       
+       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+
+    10. Test case: `find VALID_PREFIX/INVALID_INPUT`
+        
+        Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+    
+### Sorting persons
+
+1. Sorting persons while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `sort n/`
+      
+      Expected: The list of persons is sorted by name (in ascending order by default).
+
+   3. Test case: `sort sh/start:dsc`
+      
+      Expected: The list of persons is sorted by SHN start date in descending order.
+
+   4. Test case: `sort sh/end: cn/asc`
+      
+      Expected: The list of persons is sorted by SHN end date (in ascending order by default), then by case number in ascending order.
+
+   5. Test case: `sort`
+      
+      Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+
+   6. Test case: `sort INVALID_PREFIX/VALID_DIRECTION`
+      
+      Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same. 
+
+   7. Test case: `sort VALID_PREFIX/INVALID_DIRECTION`
+      
+      Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+
+2. Sorting persons while search results are being shown
+
+   Expected: Similar to previous, but only search results are displayed and sorted.
+
+### Enforcing SHN
+
+1. Starting a new SHN enforcement session
+
+   1. Test case: `session`
+      
+      Expected: All persons in the list are updated to be 'not called' status.
+       
+   2. Test case: `session x` (where x is any character)
+      
+      Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+
+2. Showing a dynamically filtered list of all persons who have not been called in the current SHN enforcement session
+
+   1. Test case: `schedule`
+      
+      Expected: The list is updated to display only persons who have not been called in the current SHN enforcement session.
+
+   2. Test case: `schedule x` (where x is any character)
+      
+      Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+
+3. Updating a person's call status to successful in the current SHN enforcement session
+   
+   1. Prerequisites: SHN enforcement mode is activated.
+
+   2. Test case: `scall 1`
+      
+      Expected: First person displayed in the list is updated as successfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+
+   3. Test case: `scall 3`
+      
+      Expected: Third person displayed in the list is updated as successfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+
+   4. Test case: `scall 0`
+      
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
+   5. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size)
+      
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+4. Updating a person's call status to successful in the current SHN enforcement session
+   
+   1. Prerequisites: SHN enforcement mode is not activated.
+      
+      Expected: Similar to previous, except the updated person does not disappear from the display.
+
+5. Updating that a failed call was made to a person in the current SHN enforcement session
+   
+   1. Prerequisites: SHN enforcement mode is activated.
+
+   2. Test case: `fcall 1`
+      
+      Expected: First person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+
+   3. Test case: `fcall 3`
+      
+      Expected: Third person displayed in the list is updated as unsuccessfully called. The name, case number, and number of failed call attempts of the updated person is shown in the status message. The person disappears from the display.
+
+   4. Test case: `fcall 0`
+      
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+    
+   5. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size)
+      
+      Expected: Similar to previous.
+
+6. Updating that a failed call was made to a person in the current SHN enforcement session
+   
+   1. Prerequisites: SHN enforcement mode is not activated.
+      
+      Expected: Similar to previous, except the updated person does not disappear from the display.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   
+    1. Test case: Missing JSON file.
+       
+       Expected: Sample Track2Gather persons list will be generated with sample persons' information.
+       
+    2. Test case: Corrupted JSON file.
+       
+       Expected: Empty Track2Gather persons list will be generated.
