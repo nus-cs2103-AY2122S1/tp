@@ -513,7 +513,7 @@ Use the `Up` or `Down` arrow keys to navigate through command history. This feat
 Example: `n/Zayden Tan Bee Hoon`
 
 ### `g/GENDER`
-`GENDER` should only be `M` for male, `F` for female or `O` for others.
+`GENDER` should only be `M` for male, `F` for female or `O` for others (case-insensitive).
 
 Examples: `g/M`, `g/f`
 
