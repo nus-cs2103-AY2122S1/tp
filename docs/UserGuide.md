@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 nav-text: User Guide
 ---
-![](images/sportsPA_logo.png)
+<img src = "images/sportsPA_logo.png" width="400"/> <br>
+
 <span style = "font-size: 32px; color: #e46c0a">
 Welcome to the SportsPA User Guide!
 </span>
@@ -129,7 +130,7 @@ The add member command also follows a similar format, but without the preamble:<
 
 For your easy reference, we have prepared a summary of prefixes and their required parameters below.
 
-Member-specific prefixes:
+Member-Specific prefixes:
 
 Prefix        | Parameter                    | Requirements
 ----------------- | ------------------|------------------
@@ -140,7 +141,7 @@ Prefix        | Parameter                    | Requirements
 `tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
 `by/` | `SORT_ORDER` | `name` or `tag` only
 
-Facility-specific prefixes:
+Facility-Specific prefixes:
 
 Prefix | Parameter | Requirements
 -------- | --------- | ----------------
@@ -407,7 +408,7 @@ During a training session, you can mark the attendance of members present (repre
 
 Format: `mark MEMBER_INDEX [MORE_INDICES]...`
 
-* Marks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the current displayed member list as present
+* Marks the member(s) at the specified `MEMBER_INDEX` and `MORE_INDICES` in the currently displayed member list as present
 * `MEMBER_INDEX` and `MORE_INDICES` refers to the index number of the member in the displayed members list
 * `MEMBER_INDEX` and `MORE_INDICES` **must be positive integers** 1, 2, 3 …​
 * `MORE_INDICES` **must be separated by a single space** e.g. `1 2 3`
@@ -508,6 +509,8 @@ All member data will be removed immediately after this command is executed. This
 </div>
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Facility-Specific Features
 
@@ -683,7 +686,9 @@ Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**
-Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
+* Members you choose to allocate must be available on the specified day and cannot be allocated to facilities which are at maximum capacity.
+* You may allocate the same member to multiple facilities on the same day but please ensure that the timings are reasonable 
+  as SportsPa currently does not perform this check!
 </div>
 
 Examples:

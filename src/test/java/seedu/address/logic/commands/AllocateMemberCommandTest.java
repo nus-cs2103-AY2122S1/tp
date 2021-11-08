@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -109,7 +109,7 @@ public class AllocateMemberCommandTest {
     @Test
     public void execute_invalidMemberIndex_failure() {
         Model model = new ModelManager(getTypicalSportsPa(), new UserPrefs());
-        showPersonAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list

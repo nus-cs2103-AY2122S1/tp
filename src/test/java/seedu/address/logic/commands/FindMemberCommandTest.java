@@ -57,7 +57,7 @@ public class FindMemberCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noMemberFound() {
         String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindMemberCommand command = new FindMemberCommand(predicate);
@@ -67,7 +67,7 @@ public class FindMemberCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleMembersFound() {
         String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = preparePredicate("alice");
         FindMemberCommand command = new FindMemberCommand(predicate);

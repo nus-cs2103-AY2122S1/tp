@@ -188,7 +188,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public MemberListPanel getPersonListPanel() {
+    public MemberListPanel getMemberListPanel() {
         return memberListPanel;
     }
 

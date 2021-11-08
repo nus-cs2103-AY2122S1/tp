@@ -31,7 +31,7 @@ public class SampleDataUtil {
     public static final List<DayOfWeek> SAMPLE_AVAILABILITY =
             Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
 
-    public static Member[] getSamplePersons() {
+    public static Member[] getSampleMembers() {
         return new Member[] {
             new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Availability(SAMPLE_AVAILABILITY),
                     getTagSet("exco")),
@@ -76,7 +76,7 @@ public class SampleDataUtil {
 
     public static ReadOnlySportsPa getSampleSportsPa() {
         SportsPa sampleAb = new SportsPa();
-        for (Member sampleMember : getSamplePersons()) {
+        for (Member sampleMember : getSampleMembers()) {
             sampleAb.addMember(sampleMember);
         }
 
