@@ -715,7 +715,7 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
     * 1a1. tApp displays an error message stating that the group name is invalid
 
-  Use case ends.
+      Use case ends.
 
 **Use case: UC11 - Edit a group**
 
