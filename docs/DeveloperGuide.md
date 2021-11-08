@@ -245,7 +245,7 @@ These fields satisfy the following conditions:
 Something alluded to in the fields above, is that there are implicit dependencies between the `Task`, `Order`, and `Person` classes.
 To add an `Order` to SalesNote, we decided it made the most sense for there to already be a `Person` in the application
 the `Order` was addressed to. So for instance, to add an order from a client named `Jamie Tan`, the user would need to ensure
-that a `Person` with **`Name`** `Jamie Tan` existed in the application first.
+that a `Person` with `Name` `Jamie Tan` existed in the application first.
 
 Another link we thought would make sense to allow for, was to make it possible to tie an `Order` object to related `Task` objects.
 `Task` objects were meant to help users manage their work, and so we felt there should be a way for a user to relate a `Task`
