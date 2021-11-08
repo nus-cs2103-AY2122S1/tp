@@ -119,7 +119,7 @@ public class LessonEditCommand extends UndoableCommand {
         personBeforeLessonEdit = CommandUtil.getPerson(lastShownList, index);
 
         // Get lessons as a list copy
-        List<Lesson> lessonList = new ArrayList<>(personBeforeLessonEdit.getLessons());
+        List<Lesson> lessonList = personBeforeLessonEdit.getLessons().stream().sorted().collect(Collectors.toList());
         Lesson lessonToEdit = CommandUtil.getLesson(lessonList, lessonIndex);
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
