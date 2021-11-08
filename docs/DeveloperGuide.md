@@ -261,7 +261,7 @@ The following sequence diagram summarizes what happens when the user inputs an `
 </center>
 <br>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. This is also applicable to other sequence diagrams in this guide.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddStudentCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. This is also applicable to other sequence diagrams in this guide.
 </div>
 
 <div style="page-break-after: always;"></div>
