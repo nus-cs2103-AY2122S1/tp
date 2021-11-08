@@ -137,6 +137,10 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+The Activity Diagram below accompanies the `DeleteCommand`.
+
+![Activity Diagram of Delete Command](images/DeleteActivityDiagram.png)
+
 <div style="page-break-before: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -320,6 +324,12 @@ Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonLis
 Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated filtered list in `PersonListPanel`. Only contacts whose name contains `David` **while also having** `friend` **and**
 `football` tagged to them will be displayed.
 
+The following sequence diagram shows how the Find operation works:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser`, `FindPredicate` and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 #### Design considerations:
 
 **Aspect: How Find executes:**
@@ -355,6 +365,12 @@ tagged to **either** `friend` **or** `football` is made.
 Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
+
+The following sequence diagram shows how the FindAny operation works:
+
+![FindAnySequenceDiagram](images/FindAnySequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindAnyCommandParser`, `FindAnyPredicate` and `FindAnyCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 

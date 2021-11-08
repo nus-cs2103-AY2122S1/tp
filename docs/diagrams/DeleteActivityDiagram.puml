@@ -1,0 +1,22 @@
+Justin, [8/11/21 20:36]
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters command: delete <index>;
+switch()
+case ([<index> is positive])
+  :Compares if <index> is greater than number of contacts displayed;
+  if () then ([<index> smaller than or equals to number of contacts displayed])
+    :Delete contact at <index>;
+  else ([<index> greater than the number of contacts displayed]])
+    :Displays error message: "The contact index provided is out of range!";
+  endif
+case ([<index> is non-positive])
+  :Displays error message: "Invalid command format";
+endswitch
+
+
+stop
+
+@enduml
