@@ -59,7 +59,7 @@ public class EditLabCommand extends Command {
         requireNonNull(original);
         this.original = original;
         this.total = total;
-        this.newLabNum = new LabNum(0);
+        this.newLabNum = null;
     }
 
     /**
@@ -82,12 +82,14 @@ public class EditLabCommand extends Command {
         if (studentList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENT);
         }
-        Lab newLab = new Lab(newLabNum);
 
-        if (studentList.get(0).getLabList().contains(newLab)) {
-            throw new CommandException(String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, newLab));
+        if (newLabNum != null ) {
+            Lab newLab = new Lab(newLabNum);
+
+            if (studentList.get(0).getLabList().contains(newLab)) {
+                throw new CommandException(String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, newLab));
+            }
         }
-
 
         Student selectedStudent;
         if (model.getSelectedInformation().isEmpty()) {

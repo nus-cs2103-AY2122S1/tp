@@ -143,19 +143,18 @@ public class Student implements DisplayableObject {
      * Updates a lab result for a student
      * @return true if lab info is successfully edited
      * */
-    public boolean editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
-        Lab newLab = new Lab(newLabNum);
-        int indexNewLab = this.labList.indexOf(newLab);
-        if (indexNewLab == -1) {
-            int index = this.labList.indexOf(lab);
-            Lab current = this.labList.get(index);
-            current.updateLabNum(newLabNum);
-            current.updateTotal(total);
-            labList.sort(new SortByLabNumber());
-            return true;
-        } else {
-            return false;
+    public void editLabInfo(Lab lab, LabNum newLabNum, LabTotal total) {
+        int index = this.labList.indexOf(lab);
+        Lab current = this.labList.get(index);
+        if (newLabNum != null) {
+            Lab newLab = new Lab(newLabNum);
+            int indexNewLab = this.labList.indexOf(newLab);
+            if (indexNewLab == -1) {
+                current.updateLabNum(newLabNum);
+            }
         }
+        current.updateTotal(total);
+        labList.sort(new SortByLabNumber());
     }
 
     public void setLabResultRecord(List<Lab> labResultRecord) {
