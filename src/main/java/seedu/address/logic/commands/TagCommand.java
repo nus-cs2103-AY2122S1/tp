@@ -117,6 +117,14 @@ public class TagCommand extends Command {
         return new CommandResult(getTagSuccessMessage(editedPerson, !toAdd.isEmpty(), !toRemove.isEmpty()));
     }
 
+    /**
+     * Method to compare two TagCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the TagCommand object that called this method.
+     * @return boolean representation of whether the TagCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

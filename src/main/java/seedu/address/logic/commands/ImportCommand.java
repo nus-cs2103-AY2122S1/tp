@@ -67,6 +67,13 @@ public class ImportCommand extends Command {
         this.fileName = fileName;
     }
 
+    /**
+     * This method attempts to import contacts.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Verify file extension. Should have been checked in ImportCommandParser.
@@ -137,6 +144,12 @@ public class ImportCommand extends Command {
         return fileData.getPersonList();
     }
 
+    /**
+     * This method attempts to add the list of Person object to the model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param personList to be added to Model.
+     */
     private void addPersonsToModel(Model model, List<Person> personList) {
         // Add Persons to Model
         for (Person p: personList) {
@@ -148,6 +161,11 @@ public class ImportCommand extends Command {
         }
     }
 
+    /**
+     * This method switches the tabs to contacts tab.
+     *
+     * @param model {@code Model} which the command should operate on.
+     */
     private void switchToContactsTab(Model model) {
         if (model.getPersonListControl() != null) {
             model.setTabIndex(0);
@@ -155,6 +173,14 @@ public class ImportCommand extends Command {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Method to compare two ImportCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the ImportCommand object that called this method.
+     * @return boolean representation of whether the ImportCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -127,6 +127,14 @@ public class ShowCommand extends Command {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
     }
 
+    /**
+     * Method to compare two ShowCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the ShowCommand object that called this method.
+     * @return boolean representation of whether the ShowCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

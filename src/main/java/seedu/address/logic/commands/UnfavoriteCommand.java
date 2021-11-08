@@ -25,10 +25,23 @@ public class UnfavoriteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates an Unfavorite Command containing the
+     * index of person to be unfavorited.
+     *
+     * @param targetIndex Index of target person.
+     */
     public UnfavoriteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * This method attempts to unfavorite an existing contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -54,6 +67,14 @@ public class UnfavoriteCommand extends Command {
         return new CommandResult(successMessage);
     }
 
+    /**
+     * Method to compare two UnfavoriteCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the UnfavoriteCommand object that called this method.
+     * @return boolean representation of whether the UnfavoriteCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

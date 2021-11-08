@@ -38,11 +38,18 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
+     *
+     * @param feedbackToUser is the feedback to give to the user.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false, false);
     }
 
+    /**
+     * Returns the feedback that is to be given to the user.
+     *
+     * @return feedbackToUser
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -63,6 +70,14 @@ public class CommandResult {
         return isGithub;
     }
 
+    /**
+     * Method to compare two CommandResult objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the CommandResult object that called this method.
+     * @return boolean representation of whether the CommandResult
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
