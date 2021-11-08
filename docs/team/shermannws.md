@@ -67,7 +67,8 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       [\#622](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/622)).
     * Various bugfixes (PRs [\#150](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/150),
       [\#362](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/362),
-      [\#375](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/375)).
+      [\#375](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/375),
+      [\#634](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/634)).
 
 3. **Documentation**:
     * User Guide:
@@ -81,7 +82,7 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
           [\#517](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/517)).
     * Developer Guide:
         * Added implementation details of the `filter` feature
-          (PRs [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162), [\#549](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/549), [\#576](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509)).
+          (PRs [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162), [\#549](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/549), [\#576](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/576)).
         * Added use case scenario for `filter` feature (PR [\#598](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/598)).
 
 4. **Community**:
