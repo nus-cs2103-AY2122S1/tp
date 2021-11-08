@@ -262,7 +262,7 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-## <a name="Common classes"></a> **10. Common classes**
+## <a name="Common-classes"></a> **10. Common classes**
 
 Classes used by multiple components are in the `seedu.programmer.commons` package.
 
