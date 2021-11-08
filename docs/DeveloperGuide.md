@@ -807,11 +807,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UCT08 - Redo previous command
+#### Use case: UCT09 - Redo previous command
 
 ##### MSS
 
-1. User requests to undo a previously <u>undone command (UCT07)</u>.
+1. User requests to undo a previously <u>undone command (UCT08)</u>.
 
 2. TaskMaster2103 redoes the previously undone command.
 
@@ -922,6 +922,21 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Deleting a task
+
+1. Deleting a task while all tasks are being shown
+
+   1. Prerequisites: List all persons using the `task list` command. Multiple tasks in the list.
+
+   1. Test case: `task delete 1`<br>
+      Expected: First task is deleted from the list. Details of the deleted task shown in the status message. 
+
+   1. Test case: `task delete 0`<br>
+      Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `task delete`, `task delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 

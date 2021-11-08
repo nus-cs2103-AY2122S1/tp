@@ -38,5 +38,5 @@ Given below are my contributions to the project.
 
 - **GUI**
   - Added GUI task list with checkboxes ([`#40`](https://github.com/AY2122S1-CS2103-F09-2/tp/pull/40), [`#51`](https://github.com/AY2122S1-CS2103-F09-2/tp/pull/51), [`#57`](https://github.com/AY2122S1-CS2103-F09-2/tp/pull/57)).
-- Community:
+- **Community**
   - PRs reviewed (with non-trivial comments): [`#44`](https://github.com/AY2122S1-CS2103-F09-2/tp/pull/44), [`#70`](https://github.com/AY2122S1-CS2103-F09-2/tp/pull/70), [`#89`](https://github.com/AY2122S1-CS2103-F09-2/tp/pull/89)
