@@ -265,7 +265,7 @@ friend
 Assigns the provided skill value to the friend with the given `FRIEND_ID` for the linked game with the given `GAME_ID`.
 This command allows you to record your personal gauge of a friend's skill at a particular game.
 
-Format: `friend --skill FRIEND_ID -g GAME_ID -v SKILL_VALUE`
+Format: `friend --skill FRIEND_ID -g GAME_ID -v NUMBER_VALUE`
 
 Command constraints: 
 * A friend with the given `FRIEND_ID` provided must exist in the friends list.
@@ -437,7 +437,7 @@ Command constraints:
 * The `GAME_ID` must exist in the games list to be deleted.
 
 Examples:
-* `game --delete Valorant` Deletes the game record `Valorant` from the game list if it exists.
+* `game --delete Valorant` Deletes the game `Valorant` from the game list if it exists.
 
 ![Ui](images/ui-screenshots/game-delete.png)
 <br><center><ins>Image: Command feedback box showing that the game `Valorant` has been deleted</ins></center>
@@ -477,7 +477,7 @@ Examples:
 * `game --list Valo` Lists all games stored in gitGud that have `Valo` in their `GAME_ID`.
 
 ![Ui](images/ui-screenshots/game-list.png)
-<br><center><ins>Image: gitGud after listing games with the keyword `Valo`.</ins></center>
+<br><center><ins>Image: gitGud after listing games with the keyword `Valo`</ins></center>
 
 ### 5.3 Other commands
 
@@ -490,7 +490,7 @@ Shows a message providing a link to the User Guide page.
 Format: `help`
 
 ![Ui](images/ui-screenshots/help.png)
-<br><center><ins>Image: gitGud's help popup window displaying link to gitGud's User Guide after `help` command is executed.</ins></center>
+<br><center><ins>Image: gitGud's help popup window displaying link to gitGud's User Guide after `help` command is executed</ins></center>
 
 #### 5.3.2 Clearing the friends and games lists : `clear`
 
@@ -568,7 +568,7 @@ Action | Format, Examples
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
 **Link game and friend** | `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`<br> e.g., `friend --link Draco -g Valorant -u taufiq007`
 **Unlink game and friend** | `friend --unlink FRIEND_ID -g GAME_ID` <br> e.g., `friend --unlink Draco -g DOTA`
-**Add skill value to linked game** | `friend --skill FRIEND_ID -g GAME_ID -v SKILL_VALUE` <br> e.g.,`friend --skill Draco -g Valorant -v 7`
+**Add skill value to linked game** | `friend --skill FRIEND_ID -g GAME_ID -v NUMBER_VALUE` <br> e.g.,`friend --skill Draco -g Valorant -v 7`
 **Schedule friend** | `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`<br> e.g., `friend --schedule Draco -p 18 22 2 -f 1`
 **Recommend friends** | `recommend -g GAME_ID -t HOUR DAY`<br> e.g., `recommend -g Valorant -t 10 6` 
 **Get friend** | `friend --get FRIEND_ID`<br> e.g., `friend --get Draco`

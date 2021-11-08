@@ -44,7 +44,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added target user profiles for gitGud.
     * Added user story `list` feature.
-    * Updated the logic component section of the Developer Guide to follow gitGud's implementation.
+    * Updated the logic component section of the Developer Guide.
     * Added implementation section of `friend --schedule` feature.
     * Added use cases for all newly implemented features.
   
