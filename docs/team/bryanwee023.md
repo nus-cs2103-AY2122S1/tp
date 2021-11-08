@@ -20,7 +20,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Delete and Remove Commands.
     * What it does: Allows the user to either remove an item from the inventory or delete the item data entirely.
-    * Justification: AB3 only supports deletion of an item. However, business owners might either want to remove an unsold item
+    * Justification: AB3 only supports deletion. However, business owners might want to remove an unsold item
       from the inventory (e.g. expired goods), or delete an incorrectly entered item. Spawning 2 distinct commands from AB3's
       original `DeleteCommand` enables this.
     * Links to PRs: [\#44](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/44), [\#63](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/63)
@@ -33,7 +33,7 @@ Given below are my contributions to the project.
     * Links to PRs: [\#165](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/165)
 
 * **Enhancement**: Implemented more robust responses by BogoBogo.
-    * What it does: BogoBogo will respond to the user more appropriately under more niche scenarios.
+    * What it does: BogoBogo will respond more appropriately under more niche scenarios.
     * Justification: This feature makes BogoBogo much more user-friendly. With robust responses, even a careless user will have a pleasant experience with BogoBogo.
     * Highlights: After my teammates have implemented the core components of a feature, I add on by refactoring. Along the way, I have added utility classes such as `ItemDescriptor` and refactored `ArgMultimap` to help me with this.
     * Links to PRs: [\#44](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/44), [\#53](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/53). [\#74](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/74), [\#192](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/192)
@@ -52,7 +52,7 @@ Given below are my contributions to the project.
     * Developer Guide:
       * Vetted high-level architectural diagrams
       * Wrote the implementation details of `DisplayList` [\#179](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/76)
-      * Wrote the proposal for a autocomplete feature [\#211](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/211)
+      * Wrote the proposal for an autocomplete feature [\#211](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/211)
       * Consolidated and formatted use cases. [\#183](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/183)
       * Formatted the Developer's Guide [\#211](https://github.com/AY2122S1-CS2103-F10-2/tp/pull/211)
 
