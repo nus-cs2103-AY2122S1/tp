@@ -442,16 +442,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System shows a list of residents.
 3. Actor requests to delete a specific resident in the list.
 4. System deletes the resident.
+
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+
   Use case ends.
 
 
 * 3a. The given index is invalid.
     * 3a1. System shows an error message.
+  
       Use case resumes at step 2.
 
 
@@ -462,16 +465,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Actor navigates to the `Event` tab of the application.
 2. Actor requests to view an event from the list of events.
 3. System shows the relevant information of the event and list of residents involved in the event.
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The given index is invalid.
     * 2a1. System shows an error message.
+  
       Use case resumes at step 2.
 
 
 * 3a. The list is empty.
+
     Use case ends.
 
 
@@ -483,6 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Hall admin views the event to include residents in.
 3. Hall admin enters the residents to be included in the selected event.
 4. SafeFor(H)all reflects the added residents in the side window.
+
     Use case ends.
 
 **Extensions**
@@ -503,6 +510,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Hall admin views the event to exclude residents from.
 3. Hall admin enters the residents to be excluded in the selected event.
 4. SafeFor(H)all reflects the remaining residents in the side window after removing the given residents.
+
     Use case ends.
 
 **Extensions**
@@ -513,6 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a3 are repeated until the residents entered are valid.
+  
       Use case resumes from step 4.
 
 **Use case: UC05 - List residents who missed their FET**
@@ -522,6 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Hall admin navigates to the `Resident` Tab.
 2. Hall admin filters residents whose FET were due before today.
 3. SafeFor(H)all displays the filtered residents.
+
     Use case ends.
 
 **Extensions**
@@ -532,6 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a3. Hall admin enters a new date.
 
       Steps 2a1-2a2 are repeated until the date entered are valid.
+  
       Use case resumes from step 3.
 
 **Use case: UC06 - List residents whose FET or Test Kit collection dates are due soon**
@@ -703,8 +714,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a resident and their information into the app
 
    1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
-      Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. 
-       Success message is shown.
+      Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. Success message is shown.
 
 2. Adding a duplicate resident with the same name or same room
 
@@ -827,7 +837,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `export testDuplicateExport`<br>
       Expected: Error message shown, `This filename already exists`
 
-
+<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 For all Event commands, ensure that you are on the Events tab before continuing.
 </div>
@@ -914,7 +924,6 @@ For all Event commands, ensure that you are on the Events tab before continuing.
     1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1. 
     2. Test case: `include 1 r/Alex Yeoh`<br>
        Expected: The given resident will be added to the event. Sidebar will reflect that the resident is in the event.
-
 
 2. Add a single valid resident by room to a valid Event
     1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1.
