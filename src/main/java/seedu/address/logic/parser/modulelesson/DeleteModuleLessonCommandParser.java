@@ -31,8 +31,9 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     public DeleteModuleLessonCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
+        String args = userInput.trim();
         if (!moduleCodes.isEmpty()) {
-            if (userInput.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 1) {
+            if (args.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 0) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleLessonCommand.MESSAGE_USAGE));
             }

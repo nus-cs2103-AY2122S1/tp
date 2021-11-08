@@ -30,9 +30,9 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     public DeletePersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
-
+        String userInput = args.trim();
         if (moduleCodes.size() >= 1) {
-            if (args.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 1) {
+            if (userInput.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 0) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
             }
