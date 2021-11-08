@@ -30,6 +30,7 @@ public class FilterCommand extends Command {
 
     /**
      * Initializes a a {@code FilterCommand} object with the {@code predicate} to test which students to be filtered.
+     *
      * @param predicate that filters the list of students to be displayed.
      */
     public FilterCommand(StudentDetailContainsQueryPredicate predicate) {

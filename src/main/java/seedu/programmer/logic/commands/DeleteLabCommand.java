@@ -28,6 +28,8 @@ public class DeleteLabCommand extends Command {
     private final Lab lab;
 
     /**
+     * Constructor for DeleteLabCommand.
+     *
      * @param lab to be added.
      */
     public DeleteLabCommand(Lab lab) {
