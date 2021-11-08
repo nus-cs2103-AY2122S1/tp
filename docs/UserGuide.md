@@ -26,32 +26,33 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
   
    2.2 [Try it yourself!](#22-try-it-yourself)
 
-3. <details open><summary><a href="#3-features">Features</a></summary>
-   3.1 <a href="#31-add-studenttuition-class">Add student/class</a><br>
-   3.2 <a href="#32-view-studenttuition-class">View student/class</a><br>
-   3.3 <a href="#33-edit-studenttuition-class">Edit student/class</a><br>
-   3.4 <a href="#34-delete-studenttuition-class">Delete student/class</a><br>
-   3.5 <a href="#35-addremove-student-from-class">Move student</a><br>
-   3.6 <a href="36-add-remark-to-studenttuition-class">Add remark</a><br>
-   3.7 <a href="#37-find-studenttuition-class">Find students/classes</a><br>
-   3.8 <a href="#38-list-all-studentstuition-classes">List students/classes</a><br>
-   3.9 <a href="#39-sort-tuition-classes-sort--s">Sort classes</a><br>
-   3.10 <a href="#310-view-timetable-timetable--tt">View timetable</a><br>
-   3.11 <a href="#311-view-todays-classes-today--td">View today's classes</a><br>
-   3.12 <a href="#312-view-help-help--h">View help</a><br>
-   3.13 <a href="#313-navigate-input-history">Navigate Input History</a><br>
-   3.14 <a href="#314-clear-data-clear">Clear data</a><br>
-   3.15 <a href="#315-exit-the-app-exit">Exit the program</a><br>
-   3.16 <a href="#316-track-payment-coming-in-v20">Track payment `coming in v2.0`</a><br></details>
+3. <details open><summary><a href="#3-features">Features</a></summary><br>
+   3.1 <a href="#31-add-studenttuition-class">Add student/class</a><br><br>
+   3.2 <a href="#32-view-studenttuition-class">View student/class</a><br><br>
+   3.3 <a href="#33-edit-studenttuition-class">Edit student/class</a><br><br>
+   3.4 <a href="#34-delete-studenttuition-class">Delete student/class</a><br><br>
+   3.5 <a href="#35-addremove-student-from-class">Move student</a><br><br>
+   3.6 <a href="36-add-remark-to-studenttuition-class">Add remark</a><br><br>
+   3.7 <a href="#37-find-studenttuition-class">Find students/classes</a><br><br>
+   3.8 <a href="#38-list-all-studentstuition-classes">List students/classes</a><br><br>
+   3.9 <a href="#39-sort-tuition-classes-sort--s">Sort classes</a><br><br>
+   3.10 <a href="#310-view-timetable-timetable--tt">View timetable</a><br><br>
+   3.11 <a href="#311-view-todays-classes-today--td">View today's classes</a><br><br>
+   3.12 <a href="#312-view-help-help--h">View help</a><br><br>
+   3.13 <a href="#313-navigate-input-history">Navigate Input History</a><br><br>
+   3.14 <a href="#314-clear-data-clear">Clear data</a><br><br>
+   3.15 <a href="#315-exit-the-app-exit">Exit the program</a><br><br>
+   3.16 <a href="#316-track-payment-coming-in-v20" markdown="1">Track payment `coming in v2.0`</a><br></details><br>
 
-4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary>
-   4.1 <a href="#41-name">Name</a><br>
-   4.2 <a href="#42-phone-number">Phone Number</a><br>
-   4.3 <a href="#43-email">Email</a><br>
-   4.4 <a href="#44-timeslot">Timeslot</a><br>
-   4.5 <a href="#45-index">Index</a><br></details>
+4. <details open><summary><a href="#4-additional-command-format-information">Additional Command Format Information</a></summary><br>
+   4.1 <a href="#41-name">Name</a><br><br>
+   4.2 <a href="#42-phone-number">Phone Number</a><br><br>
+   4.3 <a href="#43-email">Email</a><br><br>
+   4.4 <a href="#44-timeslot">Timeslot</a><br><br>
+   4.5 <a href="#45-index">Index</a><br></details><br>
 
 5. [FAQ](#5-faq)
+
 6. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -292,20 +293,31 @@ Examples:
 ```
 edit 1 n/Jason Tan a/221b Baker Street
 ```
+or
 ```
-e 2 p/62353535
+e 1 n/Jason Tan a/221b Baker Street
 ```
+
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: The edited name must be unique and should not be the same name of another existing student.
+</div>
+
 
 #### Editing a class: `editclass` | `ec`
 Format: `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]`
 
 Examples:
 ```
-editclass 2 l/10
+editclass 3 n/Trigonometry ts/Sun 10:00-11:00
 ```
+or
+
 ```
 ec 3 n/Trigonometry ts/Sun 10:00-11:00
 ```
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: The edited timeslot cannot conflict with an en existing timeslot of another class.
+</div>
 
 ### 3.4 Delete student/tuition class
 Deletes a student or a tuition class from TutAssistor.
@@ -326,9 +338,14 @@ Example:
 ```
 delete 1 2
 ```
+or
+
 ```
-del 1
+del 1 2
 ```
+An example output is shown below: <br>
+![DeleteCommand example](images/DeleteStudentUG.png)
+<p align="center"><i>Figure 4: Example of executing `delete 1 2` command</i></p>
 
 #### Deleting tuition classes: `deleteclass` | `delc`
 
@@ -338,8 +355,10 @@ Example:
 ```
 deleteclass 1 2
 ```
+or
+
 ```
-delc 4
+delc 1 2
 ```
 
 ### 3.5 Add/Remove student from class
@@ -404,7 +423,7 @@ Users can add, remove, or edit remarks through the editor window.
 </div>
 
 ![Remark editor](images/remark_editor_student.png)
-<p align="center"><i>Figure 4: Editing remarks with editor window</i></p>
+<p align="center"><i>Figure 5: Editing remarks with editor window</i></p>
 
 <div markdown="span" class="alert alert-primary">
 :warning: For MacOS users, the remarks editor may open as a new tab instead of a window, which can cause a UI bug where the buttons are not displayed correctly. To open as a new window instead, go to System preferences > General > Prefer tabs and choose never. 
@@ -485,7 +504,7 @@ TutAssistor will display a list of all classes with `physics` or `chemistry` in 
 
 The filtered list should look similar to the example shown below: <br>
 ![FindCommand example](images/find_screenshot.png)
-<p align="center"><i>Figure 5: Example of executing `find alice tan` command</i></p>
+<p align="center"><i>Figure 6: Example of executing `find alice tan` command</i></p>
 
 ### 3.8 List all students/tuition classes
 Shows the full list of students or classes.
@@ -541,11 +560,11 @@ timetable
   
   If a lesson is shorter than one hour, the timetable may not display its details properly, such as using smaller font size or omitting the details completely due to limited space in the time block.
   
-  For example, in Figure 6 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
+  For example, in Figure 7 below, the class on Monday, 15:00-15:15 is only 15 minutes and thus not displayed with details.
 </div>
 
 ![Timetable](images/time_table.png)
-<p align="center"><i>Figure 6: A timetable view of all tuition classes in a week</i></p>
+<p align="center"><i>Figure 7: A timetable view of all tuition classes in a week</i></p>
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today. <br>
@@ -553,7 +572,7 @@ Also, a reminder of classes happening today will be displayed
 when the TutAssistor is reopened.
 
 ![Today view](images/today_view.png)
-<p align="center"><i>Figure 7: List view of all the classes scheduled today</i></p>
+<p align="center"><i>Figure 8: List view of all the classes scheduled today</i></p>
 
 ### 3.12 View help: `help` | `h`
 
@@ -562,7 +581,7 @@ Shows a command summary, as well as a link to the user guide. <br>
 Format: `help`
 
 ![Help window](images/helpWindow.png)
-<p align="center"><i>Figure 8: The help window</i></p>
+<p align="center"><i>Figure 9: The help window</i></p>
 
 ### 3.13 Navigate input history
 

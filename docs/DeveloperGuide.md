@@ -10,13 +10,9 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This software is built upon [SE-EDU's AddressBook Level-3](https://se-education.org/addressbook-level3/) project.
-<<<<<<< HEAD
-* Implementation of CLI History Navigation feature referenced from [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T. 
+* The CLI History Navigation feature was inspired by [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T,
+  though its implementation in this project is new.
 * Implementation of opening User Guide in user's browser feature referenced from [samyipsh's tP](https://github.com/samyipsh/tp) for CS2103T.
-=======
-* Implementation of CLI History Navigation feature referenced from [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T.
-* Implementation of opening User Guide in user's browser feature referenced from [samyipsh's tP](https://github.com/samyipsh/tp) for CS2103T.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -190,7 +186,7 @@ It generates a timetable with the help of the `TimetableInfoPage` class using th
 * `TimetableInfoPage#addLesson(lesson, columnStartInsert, rowStartInsert, columnSpan, rowSpan)` - Inserts a lesson to the corresponding rows and columns of the timetable.
 
 <div markdown="span" class="alert alert-info">:information_source:**Note:** 
-The above operations in the `Timetable` class is responsible for processing data of `tuitionClassList` and determining the details of timetable.
+The above operations in the `Timetable` class is responsible for processing data of the `tuitionClassList` and determining the details of timetable.
 And operations in the `TimetableInfoPage` class interact with `UI` to construct the timetable according to details provided by the `Timetable` class.
 </div>
 
@@ -202,13 +198,13 @@ Step2: The `TimetableCommand` class checks whether the `mostRecentTuitionClasses
 
 Step2.1: If there is not any tuition class, a `CommandResult` will be returned to alert the user that no class has been found.
 
-Step2.2: Otherwise, the `mostRecentTuitionClasses` in `UniqueTuitionList` is passed to the `Timetable` class.
+Step2.2: Otherwise, the `mostRecentTuitionClasses` in `UniqueTuitionList` is passed to the `Timetable` class as a `tuitionClassList`.
 
-Step3: `Timetable` will proceed to parse the `TimeSlot` in each tuition class.
+Step3: `Timetable` will proceed to parse the `TimeSlot` in all tuition classes using `Timetable#parseTime()`.
 After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided.
-The intended size of timetable is then passed to the `TimetableInfoPage` class.
+The intended size of timetable is then passed to the `TimetableInfoPage` class by calling `TimetableInfoPage#setTableTime(start, end)`.
 
-Step4: Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by calling `TimetableInfoPage#addLesson`.
+Step4: After the construction of the timetable, each `TuitionClass` is inserted into the timetable by calling `TimetableInfoPage#addLesson`.
 
 The following *Sequence Diagram* illustrates how `Timetable` interacts with `TimetableInfoPage` as explained by `step 3` and `step 4`:
 
@@ -216,10 +212,10 @@ The following *Sequence Diagram* illustrates how `Timetable` interacts with `Tim
 
 Step5: The complete timetable is displayed to user through the `UI` component.
 
-The following activity diagram summarizes what happens when a user executes a "timetable" command:
+The following *Activity Diagram* summarizes what happens when a user executes a "timetable" command:<br>
 ![TimetableCommand Activity Diagram](images/TimetableCommandActivityDiagram.png)
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: Size of timetable:**
 
@@ -230,8 +226,7 @@ The following activity diagram summarizes what happens when a user executes a "t
 * **Alternative 2:** Fix the size of timetable.
     * Pros: Easy to implement.
     * Cons: User experience would be compromised as the timetable will include many empty slots.
-
-
+    
 ### [Developed] Adding Remarks With Editor
 Users can add, edit, or remove remarks for students or tuition classes, which is facilitated by `RemarkEditor`. The `UIManager` displays a dialog box with a text area for users to type in the description of the remark. Additionally, the `RemarkEditor` supports the following operations:
 
@@ -249,37 +244,239 @@ Step 2.1. The user clicks `Ok`  and the remark for the student is automatically 
 
 Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the remark will remain unchanged.
 
-### \[Developed\] CLI input history navigation
-Users are able to navigate through their previously entered String inputs from the Command Box in the UI, using the up and down arrow keys.
+### [Developed] CLI input history navigation
+Users are able to navigate through their previously entered inputs from the Command Box in the UI, 
+using the `↑`up and `↓`down arrow keys.
 This is facilitated by the `InputHistory` class.
+
+#### Current Implementation
+
+The `InputHistory` class consists of an `ArrayList<String>` and an `int` which serves as a pointer/position marker for navigation through the list.
+
+The `CommandBox` object in UI has an `InputHistory` object when initialized.
+
+When Users enter a non-empty String into the Command Box and press the `Enter` key, the text entered will be added to its `InputHistory`. 
+When interacting with the Command Box, Users can press the `↑`up or `↓`down keys on their keyboard.
+This event is detected and handled by `CommandBox` and previous inputs can be navigated. This is facilitated by the following methods:
+
+* `CommandBox#handleButtonPressed(KeyEvent)` - Handles events of Users pressing arrow keys.
+* `InputHistory#add(String)` - Adds a given String to a list if the String is not equal to the last String added to the list. 
+  Resets the navigation position to the end of the list.
+* `InputHistory#getPreviousInput()` - Returns the String stored just before the current pointer position in the list. 
+    * If list is empty, returns an empty String. 
+    * If the pointer is already at the start of the list, returns first String in the list.
+* `InputHistory#getNextInput()` - Returns the String stored just after the current pointer position in the list.
+    * If the pointer is already at the end of the list, returns an empty String.
+  
+The activity diagram below shows the work flow of how input history is navigated.
+
+![activity diagram](images/NavigateInputHistoryActivityDiagram.png)
+
+Given below is an example usage scenario of how CLI history may be used.
+
+#### Steps
+
+Step 1: When the User launches TutAssistor, `CommandBox` creates a new `InputHistory` with an empty list.
+
+Step 2: The User types `addclass n/Chemistry l/2 ts/Mon 12:00-13:00` into the Command Box and presses the `Enter` key.
+
+Step 3: As the input is not an empty String, `CommandBox` passes the given User input to `InputHistory` as a String via the `InputHistory#add(String)` method.
+
+Step 4: Since `InputHistory`'s `ArrayList<String>` is empty, the input is not equal to the last added String.
+`InputHistory#add(String)` adds the input to the `ArrayList<String>` and sets the pointer to the end of the list.
+
+Step 5: The User presses the `↑`up key on their keyboard.
+
+Step 6: The key press event is detected by `CommandBox#handleButtonPressed(KeyEvent)`. `InputHistory#getPreviousInput()` is called. 
+As the input history list is not empty, and the current pointer position is not at the start of the list, `"addclass n/Chemistry l/2 ts/Mon 12:00-13:00"` is returned.
+
+Step 7: The text in the Command Box UI is set to `addclass n/Chemistry l/2 ts/Mon 12:00-13:00`.
+
+#### Acknowledgement
+This feature was inspired by a similar feature in [YaleChen299's ip](https://github.com/yalechen299/ip) for CS2103T,
+though its implementation in this project is new.
+
+### [Developed] Editing a Student
+Users can edit a student by editing the following fields: `Name`, `Phone`, `Email` and `Address`.
+This is implemented using the `EditCommand`,  `EditStudentDescriptor` and `EditCommandParser` classes.
+
+#### Current Implementation
+The `EditCommand` receives an index that indicates the student to be edited and an
+editable `EditStudentDescriptor` class which consists of the updated fields of the student.
+The student is then updated with the help of the following methods:
+
+* `Student#sameStudent(Student)` - Checks if the name of the student has been changed.
+* `ModelManager#hasStudent(Student)` - Checks if the updated name already exists in the database.
+* `Student#equals(Student)` - Checks if any of the four fields have been changed.
+* `TuitionClass#updateStudent(Student)` - Updates the student's name in the class.
+* `ModelManager#setStudent(Student)` - Updates the student's details in database.
+
+<br>
+Given below is an example usage scenario of how an `edit` command is executed.
+
+#### Steps
+Step 1: The user enters `edit 1 n/Tom p/98989898` command.
+
+Step 2: The `EditCommandParser` parses the student index to ensure that it is valid. 
+
+Step 3: An `EditStudentDescriptor` object is constructed. 
+The `EditCommandParser` parses the arguments for the `n/` and `p/` prefixes to ensure that the arguments are valid.
+If the arguments are valid, the `EditStudentDescriptor` object is then updated with the relevant values - namely 
+the edited values for `Phone` and `Name` as well as the existing values for the `Email` and `Address` fields.
+
+Step 4: An `EditCommand` object is then constructed with the student index and the `EditStudentDescriptor` object.
+
+Step 5: The `EditCommand` object checks if any of the fields have been updated using `Student#equals(Student)`. If none of the four fields are updated a `CommandException` is thrown to alert the user that the details are up-to-date.
+
+Step 6: Otherwise, it proceeds to check if the student name has been changed using `Student#sameStudent(Student)`. If the name has been changed, it ensures that the name does not exist in the database using `ModelManager#hasStudent(Student)`.
+
+Step 7: If the updated name is valid, the name of the student is updated in all the tuition classes he/she is enrolled in using `TuitionClass#updateStudent(Student)`.
+
+Step 8: Finally, the student is updated in the database using `ModelManager#setStudent(Student)`.
 
 ### [Developed] Editing Tuition Classes
 Users can edit tuition classes by editing the following fields: limit, name and timeslot of a class. 
-This is implemented using the `EditClassCommand`, `EditClassDescriptor` classes.
+This is implemented using the `EditClassCommand`, `EditClassDescriptor` and `EditClassCommandParser` classes.
 
-The `EditClassCommand` receives an index that indicates the class to be edited and an 
-editable `EditClassDescriptor` class which consists of the updated fields of the class. 
-The tuition class is then updated with the help of the following operations: 
+#### Current Implementation 
+Similar to `EditCommand`, the `EditClassCommand` receives an index that indicates the class to be edited and an editable `EditClassDescriptor` class which contains the updated fields of the class.
+
+The tuition class is then updated with the help of the following methods: 
 
 * `TuitionClass#sameClassDetails()` - Checks if any field of the tuition class has been updated. 
-* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken by another class.
+* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken or overlaps with another class's timeslot.
+* `ModelManager#setTuition(TuitionClass, TuitionClass)` - Updates the tuition class.
 
-Given below is an example usage scenario and an `editclass` command is executed.
-
+Given below is an example usage scenario of how an `editclass` command is executed.
+#### Steps
 Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
 
-Step 1.1 The `EditClassCommand` class will first check if any field of the tuition class has been updated.
+Step 2: The `EditClassCommand` class will first check if any field of the tuition class has been updated.
 If there are no changes, a `CommandException` will be thrown to alert the user that the class details are up-to-date.
 Otherwise, it proceeds to verify that the updated `limit` is at least equal to the current number of students.
 
-Step 2: Upon ensuring that the limit is valid, it checks for potential conflicts by comparing the updated `timeslot`
+Step 3: Upon ensuring that the limit is valid, it checks for potential conflicts by comparing the updated `timeslot`
 against those of other classes using the `Timeslot#checkTimetableConflicts` method.
 If there are conflicts, a `CommandException` will be thrown to the user to alert the class that the slot has been taken.
 
-Step 3: It will proceed to update the class tag of the students enrolled in the class which shows the `ClassName` and 
-`Timeslot` of the updated class.
+Step 4: If there are no conflicts, the class tag of the students enrolled in the class which shows the `ClassName` and`Timeslot` of the updated class.
 
-Step 4: Finally, it replaces the existing class with the updated class in the database.
+Step 5: Finally, it replaces the existing class with the updated class in the database using `ModelManager#setTuition(TuitionClass, TuitionClass)`.
+
+### [Developed] Deleting Students
+This feature allows students to be deleted using the `deletestudent` or `del` command.
+This is facilitated by the `DeleteStudentCommand` and `DeleteStudentCommandParser` classes.
+
+#### Current Implementation
+The `DeleteStudentCommandParser` parses the input from user to ensure that the student indices are valid. Then,
+students are removed from the database with the help of the following methods:
+
+* `ModelManager#getStudent(Student)` - Retrieves the `Student` indicated by its index from `UniqueStudentList`.
+* `TuitionClass#removeStudent(Student)` - Removes the student's name from  the `StudentList` of the class.
+* `ModelManager#getStudent(Student)` - Deletes the `Student` indicated by its index from `UniqueStudentList`.
+
+Given below is an example usage of how a `DeleteStudentCommand` is executed.
+
+#### Steps
+Step 1: The user enters `deletestudent 1 2` command.
+
+Step 2: The `DeleteStudentCommandParser` will parse the student indices to ensure that they are valid.
+Additionally, the parser removes any duplicates among the student indices and sorts the indices in descending order.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+Removing duplicate indices ensures that only one student is deleted at a particular index. 
+Sorting ensures that the students at the indices are deleted in the correct order - which is important as the student list uses an internal
+`ObservableList` that tracks the changes to the list while students are being deleted.
+</div>
+
+A `DeleteStudentCommand` object with the student indices as arguments is constructed.
+
+Step 3: The `DeleteStudentCommand` is executed. Student indices - 1 and 2, are used to retrieve the students by calling the `ModelManager#getStudent(Index)` method.
+If the student exists, then the student is deleted by calling `ModelManager#getStudent(Student)`.
+
+Step 4:`CommandResult` is returned informing the user of the students that have been deleted successfully.
+
+### [Developed] Deleting Tuition Classes
+This feature allows tuition classes to be deleted using the `deleteclass` or `delc` command.
+This is facilitated by the `DeleteClassCommand` and `DeleteClassCommandParser` classes.
+
+#### Current Implementation
+The `DeleteClassCommandParser` parses the input from user to ensure that the class indices are valid. Then,
+classes are removed from the database with the help of the following methods:
+
+* `ModelManager#getTuitionClass(Index)` - Retrieves the `TuitionClass` indicated by its index from `UniqueTuitionList`.
+* `Student#removeClass(TuitionClass)` - Removes the class identified by an internal id and the class tag from the enrolled students.
+* `ModelManager#deleteTuition(TuitionClass)` - Removes the tuition class from `UniqueTuitionList`.
+
+Given below is an example usage of how a `DeleteClassCommand` is executed.
+
+#### Steps
+Step 1: The user enters `deleteclass 1` command.
+
+Step 2: The `DeleteClassCommandParser` will parse the class index to ensure that it is valid. A `DeleteClassCommand` object with the class index as arguments is constructed.
+
+Step 3: The `DeleteClassCommand` is executed. Class index - 1, is used to retrieve the class by calling the `ModelManager#getTuitionClass(Index)` method.
+
+Step 4: If the tuition class exists, `Student#removeClass(TuitionClass)` is called to remove the Tuition class using its id from the all the students. 
+It also removes the class tag for all the enrolled students by using the `ClassName` and unique `TimeSlot` of the tuition class.
+
+Step 5: `ModelManager#deleteTuition(TuitionClass)` to delete the tuition class and update the list of tuition classes accordingly.
+
+Step 6: `CommandResult` is returned informing the user of the classes that have been deleted successfully.
+
+#### Activity Diagram
+
+The user flow is shown in the *Activity Diagram* below.<br>
+<p align="center">
+  <img src="images/DeleteActivityDiagram.png">
+</p>
+
+### [Developed] Removing Students from Tuition Classes
+This feature allows students enrolled in existing classes to be removed using student indices and a class index using the `remove` command.
+This is facilitated by the `RemoveStudentCommand` and `RemoveStudentCommandParser` classes.
+
+#### Current Implementation
+The `RemoveStudentCommandParser` parses the input from user to ensure that the indices are valid. Then, 
+students are removed from the respective tuition class with the help of the following methods:
+
+* `TuitionClass#containsStudent(Student)` - Checks if the student is enrolled in the class.
+* `TuitionClass#removeStudent(Student)` - Removes an existing student from a class.
+* `RemoveStudentCommand#updateInvalidStudents(Student)` - Updates the list of invalid students who do not exist in the class.
+
+Given below is an example usage of how a `RemoveStudentCommand` is executed.
+
+#### Sequence Diagram
+
+The following sequence diagram shows the interactions between the components when the `RemoveStudentCommand` is executed.<br>
+![Ui](images/RmStudentSequenceDiagram.png)
+
+#### Steps
+Step 1: The user enters `remove si/1 4 tc/1` command.
+
+Step 2: The `RemoveStudentCommandParser` will parse the student indices and class index to ensure that they are valid. 
+Additionally, it removes any duplicates among the student indices. A `RemoveStudentCommand` object with the student indices and class index as arguments is constructed.
+
+Step 3: The `RemoveStudentCommand` is executed. Student indices - 1 and 2, are used to retrieve the unique student names using the `UniqueStudentList`.
+
+Step 4: `TuitionClass#containsStudent(Student)` is called to confirm that the student exists in the class. 
+
+Step 5: If the student exists, the student is removed from the class using TuitionClass#removeStudent(Student). The tuition class is also removed the particular student using
+`Student#removeClass(TuitionClass)`. Otherwise, the names of the invalid students are tracked using `RemoveStudentCommand#updateInvalidStudents(Student)`
+
+Step 6: `CommandResult` is returned informing the user of both the students that have been removed successfully and the students who could not be removed as they do not exist in the tuition class.
+
+
+#### Design considerations
+
+**Aspect: Whether to allow users to remove single or multiple students at once:**
+
+* **Alternative 1 (current choice):** Allows multiple students to be removed.
+    * Pros: More efficient for users to remove students from tuition classes.
+    * Cons: More bug-prone due to parsing errors or duplicate indices. This is later resolved by providing more specific instructions in user guide and detailed command feedback in TutAssistor.
+
+* **Alternative 2:** Allows only one student to be removed.
+    * Pros: Easy to implement and reduced possibility of parsing errors.
+    * Cons: Users who wish to mass-update class enrollment will find it inefficient.
 
 ### [Developed] Adding Students to Existing Tuition Classes
 
@@ -287,17 +484,17 @@ Users can add students to existing tuition classes using student index or name.
 This is facilitated by the `AddToClassCommand` and `AddToClassCommandParser` classes.
 
 The `AddToClassCommandParser` parses the input from user and decides whether student indices or student names are used.
-Students are added to the respective tuition class with the help of the following operations in `AddToClassCommand`:
+Students are then added to the respective tuition class with the help of the following operations in `AddToClassCommand`:
 
 * `AddToClassCommand#categorizeStudents()` - Categorizes students into four types, namely students that are added successfully, students with invalid names, students with valid names but not added due to class size limit, and students already enrolled in the class. 
 * `AddToClassCommand#updateModel()` - Updates the capacity of the corresponding tuition class and updates the class tag of students enrolled.
 
 Given below is an example usage scenario and how an `addtoclass` command is executed.
 
-The interactions between the components during the usage scenario is show in the *Sequence Diagram* below.<br>
+The interactions between the components during the usage scenario is shown in the *Sequence Diagram* below.<br>
 ![Ui](images/AddToClassSequenceDiagram.png)
 
-Step 1: The user enters `atc si/2 4 tc/1` command.
+Step 1: The user enters `atc si/2 4 tc/1` command to add the second and fourth students to the first tuition class.
 
 Step 2: The `AddToClassCommandParser` will check and confirm that student indices are used. An `AddToClassCommand` object with student indices as parameter is constructed.
 
@@ -308,10 +505,13 @@ Student indices that are not found in the `UniqueStudentList` would be regarded 
 Valid students who are not added due to tuition class size limit or who have been enrolled in the same class previously are identified using the `AddToClassCommand#categorizeStudents()` method.
 </div>
 
-Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled ito show the `ClassName` and
+Step 4: Newly enrolled students are added to the tuition class. `AddToClassCommand#updateModel()` is called to change the capacity of the class. It also updates the class tag of the students enrolled to show the `ClassName` and
 `Timeslot` of the class.
 
-#### Design considerations:
+The following *Activity Diagram* summarizes what happens when a user executes an `addtoclass` command:
+![Ui](images/AddToClassActivityDiagram.png)
+
+#### Design considerations
 
 **Aspect: Whether to allow users to add students using names:**
 
@@ -386,7 +586,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -475,7 +675,7 @@ Use case ends.
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-    * 1a1. TutAssitor reminds the tutor the right format.
+    * 1a1. TutAssistor reminds the tutor the right format.
     * 1a2. Tutor enters a new command.
 
       Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
@@ -486,15 +686,15 @@ Use case ends.
 
 **MSS**
 
-1. Tutor chooses to delete an existing Student/Tution Class.
-2. TutAssitor deletes the Student/Tuition Class and displays successful information.
+1. Tutor chooses to delete an existing Student/Tuition Class.
+2. TutAssistor deletes the Student/Tuition Class and displays successful information.
 
 Use case ends.
 
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-    * 1a1. TutAssitor reminds the tutor the right format.
+    * 1a1. TutAssistor reminds the tutor the right format.
     * 1a2. Tutor enters a new command.
 
      Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
@@ -538,7 +738,7 @@ Use case ends.
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-  * 1a1. TutAssitor reminds the tutor the right format.
+  * 1a1. TutAssistor reminds the tutor the right format.
   * 1a2. Tutor enters a new command.
 
       Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.

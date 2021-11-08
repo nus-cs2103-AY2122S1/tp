@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -40,9 +42,14 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_AMY = "Like skiing.";
     public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
-
     public static final String VALID_REMARK_CHEMISTRY = "H2O is water";
     public static final String VALID_REMARK_PHYSICS = "Force equals mass times acceleration.";
+    public static final String VALID_LIMIT_FIVE = "5";
+    public static final String VALID_LIMIT_ONE = "1";
+    public static final String VALID_CLASS_MON = "Mon 10:00-12:00";
+    public static final String VALID_CLASS_TUE = "Tue 23:00-23:30";
+    public static final String VALID_CLASS_PHY = "Physics";
+    public static final String VALID_CLASS_CHEM = "Chemistry";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,15 +63,31 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = PREFIX_REMARK + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String CLASSLIMIT_DESC_ONE = " " + PREFIX_LIMIT + VALID_LIMIT_ONE;
+    public static final String CLASSLIMIT_DESC_FIVE = " " + PREFIX_LIMIT + VALID_LIMIT_FIVE;
+    public static final String CLASSNAME_DESC_PHYSICS = " " + PREFIX_NAME + VALID_CLASS_PHY;
+    public static final String CLASSNAME_DESC_CHEM = " " + PREFIX_NAME + VALID_CLASS_CHEM;
+    public static final String TIMESLOT_DESC_MONDAY = " " + PREFIX_TIMESLOT + VALID_CLASS_MON;
+    public static final String TIMESLOT_DESC_TUESDAY = " " + PREFIX_TIMESLOT + VALID_CLASS_TUE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_LIMIT_POSITIVE = " " + PREFIX_LIMIT + "1001";
+    public static final String INVALID_LIMIT_NEGATIVE = " " + PREFIX_LIMIT + "-1";
+    public static final String INVALID_TIMESLOT_DAY = " " + PREFIX_TIMESLOT + "Thurs 11:00-12:00";
+    public static final String INVALID_TIMESLOT_START = " " + PREFIX_TIMESLOT + "Mon 14:02-14:00";
+    public static final String INVALID_TIMESLOT_EQUAL = " " + PREFIX_TIMESLOT + "Mon 14:00-14:00";
+    public static final String INVALID_TIMESLOT_END = " " + PREFIX_TIMESLOT + "Mon 23:58-24:00";
+    public static final String INVALID_TIMESLOT_HOUR = " " + PREFIX_TIMESLOT + "Mon 11:00-25:30";
+    public static final String INVALID_TIMESLOT_MINUTE = " " + PREFIX_TIMESLOT + "Mon 11:90-12:00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String PREAMBLE_NON_EMPTY = " NonEmptyPreamble ";
+    public static final String PREAMBLE_INTEGER = " 1 ";
+    public static final String PREAMBLE_SYMBOL = " $$ ";
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;

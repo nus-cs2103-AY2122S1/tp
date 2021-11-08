@@ -18,7 +18,6 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
     public static final String SHORTCUT = "del";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the students identified by the index numbers used in the Students list.\n"
             + "Parameters: STUDENT_INDEX [STUDENT INDEX]... (must be a positive integer)\n"
@@ -26,36 +25,32 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_STUDENTS_SUCCESS = "Deleted Students: %1$s.\n";
     public static final String MESSAGE_DELETE_STUDENTS_FAILURE = "Students at index: %1$s are not found.";
-
-    private List<Index> targetIndex = new ArrayList<>();
+    private List<Index> studentIndices = new ArrayList<>();
+    private List<String> removed = new ArrayList<>();
+    private List<Integer> invalidStudents = new ArrayList<>();
 
     /**
      * Constructor for DeleteCommand using a list of student indexes.
      *
-     * @param targetIndex List of student indexes.
+     * @param studentIndices List of student indexes.
      */
-    public DeleteCommand(List<Index> targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(List<Index> studentIndices) {
+        this.studentIndices = studentIndices;
+        this.removed = new ArrayList<>();
+        this.invalidStudents = new ArrayList<>();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        List<Student> lastShownList = model.getFilteredStudentList();
-        List<String> removed = new ArrayList<>();
-        List<Integer> invalidStudents = new ArrayList<>();
-        for (Index currIndex: targetIndex) {
-            if (currIndex.getZeroBased() >= lastShownList.size()) {
-                invalidStudents.add(currIndex.getOneBased());
-                continue;
-            }
-            Student studentToDelete = lastShownList.get(currIndex.getZeroBased());
+        for (Index studentIndex: studentIndices) {
+            Student studentToDelete = model.getStudent(studentIndex);
             if (studentToDelete == null) {
-                invalidStudents.add(currIndex.getOneBased());
+                invalidStudents.add(studentIndex.getOneBased());
                 continue;
             }
-            for (Integer tuitionClassId : studentToDelete.getClasses().getClasses()) {
+            for (Integer tuitionClassId : studentToDelete.getClassesArray()) {
                 TuitionClass tuitionClass = model.getClassById(tuitionClassId);
                 if (tuitionClass != null) {
                     TuitionClass updatedClass = tuitionClass.removeStudent(studentToDelete);
@@ -77,8 +72,24 @@ public class DeleteCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof DeleteCommand
-                && targetIndex.containsAll((((DeleteCommand) other).targetIndex)));
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof DeleteCommand)) {
+            return false;
+        }
+        DeleteCommand e = (DeleteCommand) other;
+        List<Index> otherIndex = e.studentIndices;
+        if (studentIndices.size() != otherIndex.size()) {
+            return false;
+        }
+        for (int i = 0; i < studentIndices.size(); i++) {
+            if (!studentIndices.get(i).equals(otherIndex.get(i))) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }

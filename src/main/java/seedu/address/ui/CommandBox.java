@@ -58,7 +58,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles the Up button pressed event.
+     * Handles arrow key button pressed events.
      */
     @FXML
     private void handleButtonPressed(KeyEvent key) {

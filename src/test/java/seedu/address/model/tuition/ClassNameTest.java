@@ -1,11 +1,8 @@
-package seedu.address.model.tuiton;
+package seedu.address.model.tuition;
 
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.tuition.ClassName;
-
 
 public class ClassNameTest {
     @Test

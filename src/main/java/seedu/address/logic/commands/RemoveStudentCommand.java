@@ -35,6 +35,8 @@ public class RemoveStudentCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(RemoveStudentCommand.class);
     private final List<Index> studentIndexes;
     private final Index classIndex;
+    private List<String> studentsNotInClass = new ArrayList<>();
+    private List<String> studentsRemoved = new ArrayList<>();
 
     /**
      * Constructor for RemoveStudent command using student index and class index.
@@ -45,6 +47,8 @@ public class RemoveStudentCommand extends Command {
     public RemoveStudentCommand(List<Index> studentIndexes, Index classIndex) {
         this.studentIndexes = studentIndexes;
         this.classIndex = classIndex;
+        this.studentsNotInClass = new ArrayList<>();
+        this.studentsRemoved = new ArrayList<>();
     }
 
     /**
@@ -57,21 +61,12 @@ public class RemoveStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<String> studentsNotInClass = new ArrayList<>();
-        List<String> studentsRemoved = new ArrayList<>();
-
-        if (classIndex.getZeroBased() >= model.getFilteredTuitionList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
-        }
-        TuitionClass tuitionClass = model.getFilteredTuitionList().get(classIndex.getZeroBased());
+        TuitionClass tuitionClass = model.getTuitionClass(classIndex);
         if (tuitionClass == null) {
             throw new CommandException(String.format(Messages.MESSAGE_CLASS_NOT_FOUND));
         }
         for (Index currIndex : studentIndexes) {
-            if (currIndex.getZeroBased() >= model.getFilteredStudentList().size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-            }
-            Student studentToRemove = model.getFilteredStudentList().get(currIndex.getZeroBased());
+            Student studentToRemove = model.getStudent(currIndex);
             if (studentToRemove == null) {
                 throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND));
             }
@@ -83,7 +78,7 @@ public class RemoveStudentCommand extends Command {
                 studentsRemoved.add(studentToRemove.getName().fullName);
                 logger.info(String.format("Students to be removed %s from class: %s", studentsRemoved, tuitionClass));
             } else {
-                studentsNotInClass.add(studentToRemove.getName().fullName);
+                updateInvalidStudents(studentToRemove);
             }
         }
         String feedback = (!studentsRemoved.isEmpty()
@@ -91,6 +86,10 @@ public class RemoveStudentCommand extends Command {
                 + (!studentsNotInClass.isEmpty()
                 ? String.format(MESSAGE_REMOVE_STUDENT_FAILURE, studentsNotInClass, tuitionClass.getName()) : "");
         return new CommandResult(feedback);
+    }
+
+    private boolean updateInvalidStudents(Student studentToRemove) {
+        return studentsNotInClass.add(studentToRemove.getName().fullName);
     }
 
     @Override

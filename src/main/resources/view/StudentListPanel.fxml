@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <Group>
       <children>
          <Label fx:id="title" style="-fx-text-fill: #FFFFFF; -fx-font-size: 18;" text="Label" translateX="27.0">

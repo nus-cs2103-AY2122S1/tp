@@ -25,7 +25,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/amzhy.png" width="200px">
 
 [[github](http://github.com/amzhy)]
-[[portfolio](team/ammar.md)]
+[[portfolio](team/amzhy.md)]
 
 * Role: Developer
 * Responsibilities: Ensures the testing of the project is done properly on time
@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/norayuuu.png" width="200px">
 
 [[github](https://github.com/NoraYUuu)]
-[[portfolio](team/huaiyu.md)]
+[[portfolio](team/norayuuu.md)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality and ensures adherence to coding standards.

@@ -26,7 +26,6 @@ import seedu.address.model.tuition.TuitionClass;
 public class EditClassCommand extends Command {
     public static final String COMMAND_WORD = "editclass";
     public static final String SHORTCUT = "ec";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits details of the class identified by the class index. "
             + "At least one parameter must be specified.\n"
@@ -63,40 +62,46 @@ public class EditClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<TuitionClass> lastShownList = model.getFilteredTuitionList();
-        if (index.getZeroBased() >= lastShownList.size()) {
+        model.updateFilteredTuitionList(Model.PREDICATE_SHOW_ALL_TUITIONS);
+        TuitionClass classToEdit = model.getTuitionClass(index);
+        if (classToEdit == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
         }
-        TuitionClass classToEdit = lastShownList.get(index.getZeroBased());
         TuitionClass editedClass = createEditedClass(classToEdit, editClassDescriptor);
         if (classToEdit.sameClassDetails(editedClass)) {
             throw new CommandException(MESSAGE_NO_CLASS_CHANGES);
         }
-        //check limit minimum limit of class = current number of students
+        //check minimum limit of class = current number of students
         if (editedClass.getLimit().getLimit() < classToEdit.getStudentCount()) {
             throw new CommandException(String.format(MESSAGE_INVALID_CLASS_LIMIT, classToEdit.getStudentCount()));
         }
         logger.info(String.format("Starting to process timetable conflicts for this class: %s ", editedClass));
+
         //check if updated timeslot is taken
-        List<TuitionClass> otherClasses = lastShownList
+        List<TuitionClass> otherClasses = model.getFilteredTuitionList()
                 .stream().filter(x -> x.getId() != editedClass.getId()).collect(Collectors.toList());
         if (!editedClass.getTimeslot().equals(classToEdit.getTimeslot())
                 && editedClass.getTimeslot().checkTimetableConflicts(otherClasses)) {
             throw new CommandException(MESSAGE_INVALID_CLASS_SLOT);
         }
-        if (classToEdit.getStudentCount() > 0) {
-            for (String name : classToEdit.getStudentList().getStudents()) {
-                Student student = model.getSameNameStudent(new Student(new Name(name)));
-                if (student != null) {
-                    Student updatedStudent = student.updateTag(classToEdit.getName(), classToEdit.getTimeslot(),
-                            editedClass.getName(), editedClass.getTimeslot());
-                    model.setStudent(student, updatedStudent);
-                }
-            }
+
+        if (!editedClass.getTimeslot().equals(classToEdit.getTimeslot())
+                || !editedClass.getName().equals(classToEdit.getName())) {
+            updateStudentsInClass(classToEdit, editedClass, model);
         }
         model.setTuition(classToEdit, editedClass);
         logger.info(String.format("Updated tuition class details from %s to %s", classToEdit, editedClass));
         return new CommandResult(String.format(MESSAGE_EDIT_CLASS_SUCCESS, editedClass));
+    }
+
+    private void updateStudentsInClass(TuitionClass classToEdit, TuitionClass editedClass, Model model) {
+        for (String name : classToEdit.getStudentList().getStudents()) {
+            Student student = model.getSameNameStudent(new Student(new Name(name)));
+            if (student != null) {
+                Student updatedStudent = student.updateTag(classToEdit, editedClass);
+                model.setStudent(student, updatedStudent);
+            }
+        }
     }
 
     private static TuitionClass createEditedClass(TuitionClass classToEdit, EditClassDescriptor editClassDescriptor) {
@@ -181,6 +186,22 @@ public class EditClassCommand extends Command {
                     && getLimit().equals(e.getLimit())
                     && getTimeslot().equals(e.getTimeslot());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof EditClassCommand)) {
+            return false;
+        }
+        // state check
+        EditClassCommand e = (EditClassCommand) other;
+        return index.equals(e.index)
+                && editClassDescriptor.equals(e.editClassDescriptor);
     }
 }
 
