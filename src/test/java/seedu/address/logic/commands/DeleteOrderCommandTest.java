@@ -33,8 +33,8 @@ public class DeleteOrderCommandTest {
 
         CommandResult commandResult = new DeleteOrderCommand(targetIndex).execute(modelStub);
 
-        assertEquals(String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, testOrder),
-                commandResult.getFeedbackToUser());
+        String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, testOrder);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(), modelStub.listWithOneOrder);
     }
 

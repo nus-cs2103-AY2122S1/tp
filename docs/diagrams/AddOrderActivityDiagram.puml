@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+
+start
+if () then ([order does not\n  already exist in SalesNote])
+  :Check if Person the order is
+  addressed to is in SalesNote <$rake> ;
+  if () then ([Person is in SalesNote])
+    :Add Order to SalesNote;
+  else ([Person is Not in SalesNote])
+    :Display an
+    error message;
+  endif
+else ([order already exists in SalesNote])
+  :Display an
+  error message;
+endif
+stop
+
+@enduml

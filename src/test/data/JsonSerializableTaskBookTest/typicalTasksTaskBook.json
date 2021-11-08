@@ -2,7 +2,7 @@
   "tasks" : [ {
     "label" : "Sew red buttons",
     "date" : "2021-09-18",
-    "taskTag" : "SO1",
+    "taskTag" : "SO10",
     "isDone" : "false"
   }, {
     "label" : "Buy green buttons",
@@ -12,7 +12,7 @@
   }, {
     "label" : "Make orange buttons",
     "date" : "2021-09-23",
-    "taskTag" : "SO3",
+    "taskTag" : "SO2",
     "isDone" : "true"
   }, {
     "label" : "Adjust blue buttons",

@@ -39,7 +39,6 @@ public class TaskUtil {
         descriptor.getLabel().ifPresent(label -> sb.append(PREFIX_LABEL).append(label.checkedLabel).append(" "));
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.dateString).append(" "));
         descriptor.getTaskTag().ifPresent(taskTag -> sb.append(PREFIX_TASK_TAG).append(taskTag.tagName).append(" "));
-        System.out.println(sb);
         return sb.toString();
     }
 }

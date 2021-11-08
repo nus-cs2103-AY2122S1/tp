@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,7 +9,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -206,7 +206,7 @@ public interface Model {
 
     boolean markOrder(Order order);
 
-    void sortOrderList(SortDescriptor sortDescriptor);
+    void sortOrderList(Comparator<Order> comparator);
 
     /** Resets the order list to its regular ordering based on id */
     void resetOrderView();

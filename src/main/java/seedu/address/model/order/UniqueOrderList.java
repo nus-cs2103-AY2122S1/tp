@@ -36,7 +36,6 @@ public class UniqueOrderList implements Iterable<Order> {
      * Returns true if an order in the UniqueOrderList have the id
      */
     public boolean hasOrder(long id) {
-        System.out.println(id);
         return internalList.stream().anyMatch(order -> order.getId() == id);
     }
 
@@ -141,7 +140,7 @@ public class UniqueOrderList implements Iterable<Order> {
     }
 
     /**
-     * Returns true if {@code orders} contains only unique tasks.
+     * Returns true if {@code orders} contains only unique orders.
      */
     private boolean ordersAreUnique(List<Order> orders) {
         for (int i = 0; i < orders.size() - 1; i++) {

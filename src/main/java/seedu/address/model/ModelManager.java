@@ -22,7 +22,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
-import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -271,7 +270,7 @@ public class ModelManager implements Model {
      */
     public void addOrder(Order toAdd) {
         orderBook.addOrder(toAdd);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+        resetOrderView();
     }
 
     /**
@@ -293,10 +292,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortOrderList(SortDescriptor sortDescriptor) {
-        Comparator<Order> comparator = sortDescriptor.generateComparator();
-        orderBook.sortOrders(comparator);
-        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+    public void sortOrderList(Comparator<Order> sortDescriptor) {
+        orderBook.sortOrders(sortDescriptor);
     }
 
     /**
@@ -358,6 +355,12 @@ public class ModelManager implements Model {
         Collections.reverse(clientTotalOrders);
     }
 
+    @Override
+    public void resetOrderView() {
+        Comparator<Order> defaultComparator = Order::compareTo;
+        orderBook.sortOrders(defaultComparator);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -399,13 +402,6 @@ public class ModelManager implements Model {
                 && filteredOrders.equals(other.filteredOrders);
     }
 
-    @Override
-    public void resetOrderView() {
-        Comparator<Order> defaultComparator = Order::compareTo;
-        orderBook.sortOrders(defaultComparator);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
-    }
-
     //=========== AddressBook & OrderBook Relation Check =======================================================
 
     /**
@@ -430,8 +426,8 @@ public class ModelManager implements Model {
     public void checkTaskAndOrderRelation() throws DataConversionException {
         ObservableList<Task> tasks = this.taskBook.getTaskList();
         for (Task eachTask : tasks) {
-            Long id = eachTask.getTaskTag().getTagId();
-            if (!this.orderBook.hasOrder(id)) {
+            long tagId = eachTask.getTagId();
+            if (tagId != -1 && !this.orderBook.hasOrder(tagId)) {
                 throw new DataConversionException(
                         new IllegalValueException("Given Sales ID does not exist in the Order Book"));
             }

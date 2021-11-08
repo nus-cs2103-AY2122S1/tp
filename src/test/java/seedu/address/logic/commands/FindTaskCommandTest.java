@@ -75,7 +75,7 @@ class FindTaskCommandTest {
     @Test
     public void execute_multipleKeywords_multipleOrdersFound() {
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 3);
-        TaskContainsKeywordsPredicate predicate = preparePredicate("red 19 SO3");
+        TaskContainsKeywordsPredicate predicate = preparePredicate("green 23 SO10");
         FindTaskCommand command = new FindTaskCommand(predicate);
         expectedModel.updateFilteredTaskList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

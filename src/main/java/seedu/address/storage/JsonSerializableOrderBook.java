@@ -52,11 +52,10 @@ class JsonSerializableOrderBook {
 
         for (JsonAdaptedOrder jsonAdaptedOrder : orders) {
             Order order = jsonAdaptedOrder.toModelType();
-            orderBook.addOrder(order);
+
             if (localCount < order.getId()) {
                 localCount = order.getId();
             }
-
             if (orderBook.hasOrder(order)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ORDER);
             }
@@ -64,6 +63,7 @@ class JsonSerializableOrderBook {
             if (orderBook.hasOrder(order.getId())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ORDER_ID);
             }
+            orderBook.addOrder(order);
         }
 
         Order.setCount(localCount + 1);
