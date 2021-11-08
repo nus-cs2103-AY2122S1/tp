@@ -1,6 +1,6 @@
 @startuml
 !include style.puml
-skinparam defaultFontSize 30
+skinparam defaultFontSize 20
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
@@ -9,11 +9,11 @@ participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
 participant "friendToEdit:Friend" as Friend MODEL_COLOR
 end box
 
--> ModelManager : unlinkFriend(friendToUnlink, game)
+-> ModelManager : linkFriend(friendToLink, gameFriendLink)
 activate ModelManager
-ModelManager -> FriendsList : unlinkFriend(friendToUnlink, game)
+ModelManager -> FriendsList : linkFriend(friendToLink, gameFriendLink)
 activate FriendsList
-FriendsList -> UniqueFriendsList : link(friendToUnlink, game)
+FriendsList -> UniqueFriendsList : link(friendToLink, gameFriendLink)
 activate UniqueFriendsList
 create Friend
 UniqueFriendsList -> Friend
@@ -24,7 +24,7 @@ UniqueFriendsList -> Friend : link(gameFriendLink)
 activate Friend
 Friend --> UniqueFriendsList
 deactivate Friend
-UniqueFriendsList -> UniqueFriendsList : setFriend(friendToUnlink, friendToEdit)
+UniqueFriendsList -> UniqueFriendsList : setFriend(friendToLink, friendToEdit)
 activate UniqueFriendsList
 UniqueFriendsList --> UniqueFriendsList
 deactivate UniqueFriendsList

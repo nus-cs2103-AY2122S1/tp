@@ -243,7 +243,7 @@ The parsing of a link command is handled by the following classes:
 - `LinkFriendCommand` - Represents link friend command that is executed by gitGud.
     - It calls `Model#linkFriend()` with a `Friend` object argument and a `GameFriendLink` object argument.
 
-The sequence diagram of the parsing is similar to that of the other friend commands.
+![Implementation of parsing for link command](images/LinkSequenceDiagram1.png)
 
 The implementation of `Model#linkFriend()` is as follows:
 
@@ -252,7 +252,7 @@ The implementation of `Model#linkFriend()` is as follows:
   `Friend#link()` is then called, which modifies `friendToEdit` so that it now contains the new `GameFriendLink`.
 - `UniqueFriendsList#setFriend()` then replaces `friendToLink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
-![Implementation of link command in model](images/LinkSequenceDiagram.png)
+![Implementation of link command in model](images/LinkSequenceDiagram2.png)
 
 #### Special considerations:
 
@@ -273,7 +273,7 @@ The parsing of the unlink command is handled by the following classes:
 - `UnlinkFriendCommand` - Represents unlink friend command that is executed by gitGud.
     - It calls `Model#unlinkFriend()` with a `Friend` object and a `Game` object.
 
-The sequence diagram of the parsing is similar to that of the other friend commands.
+![Implementation of the parsing of unlink command](images/UnlinkSequenceDiagram1.png)
 
 The implementation of `Model#unlinkFriend()` is as follows:
 
@@ -282,7 +282,10 @@ The implementation of `Model#unlinkFriend()` is as follows:
   `Friend#unlink()` is then called, which modifies `friendToEdit` so that it no longer contains a link to the game.
 - `UniqueFriendsList#setFriend()` then replaces `friendToUnlink` with the edited `friendToEdit`, so that the `Friend` in the model is updated.
 
-![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
+#### Design considerations:
+ - As mentioned previously in the implementation for [link](#link-feature), the use of a separate `GameFriendLink` class to which only the `Friend` class has a reference to greatly simplifies the unlinking command as only the `Friend` objects (and not the `Game` objects) have to be changed.
+
+![Implementation of unlink command in model](images/UnlinkSequenceDiagram2.png)
 
 ### Schedule Feature
 
