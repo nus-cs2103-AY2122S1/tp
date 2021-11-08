@@ -4,6 +4,9 @@ title: Developer Guide
 ---
 
 ## Table of Contents
+* [Introduction](#introduction)
+* [Acknowledgements](#acknowledgements)
+* [Setting up, Getting Started](#setting-up-getting-started) 
 * [Design](#design)
 * [Implementation](#implementation)
 * [Appendix: Requirements](#appendix-requirements)
@@ -25,7 +28,7 @@ With the advent of technology and related jobs, MTR uses Command-Line Interface 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
