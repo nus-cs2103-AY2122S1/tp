@@ -335,6 +335,8 @@ Step 4. This`FindPredicate` is passed into `ModelManager#updateFilteredPersonLis
 Step 5. CONNECTIONS' `UI` observes the filtered list and displays the updated filtered list in `PersonListPanel`. Only contacts whose name contains `David` **while also having** `friend` **and**
 `football` tagged to them will be displayed.
 
+<div style="page-break-before: always;"></div>
+
 The following sequence diagram shows how the Find operation works:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
@@ -352,8 +354,6 @@ The following sequence diagram shows how the Find operation works:
 * **Option 2 (current choice):** Create a `FindPredicate` to store Name and Tag(s)
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
-
-<div style="page-break-before: always;"></div>
 
 ### FindAny feature
 
@@ -376,8 +376,6 @@ tagged to **either** `friend` **or** `football` is made.
 Step 4. This`FindAnyPredicate` is passed into `ModelManager#updateFilteredPersonList`, updating the filtered list.
 
 Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed the updated filtered list in `PersonListPanel`.
-
-<div style="page-break-before: always;"></div>
 
 The following sequence diagram shows how the FindAny operation works:
 
@@ -461,7 +459,9 @@ Step 5. CONNECTIONS `UI` will observe for changes in the `ObservableList<Person>
 * **Option 2:** Insert the contact into the list. 
     * Pros: Faster than the alternative.
     * Cons: Harder to implement and maintain.
-    
+
+<div style="page-break-before: always;"></div>
+
 ### Mailing List feature
 Allows users to download a CSV file mailing list of the current view.  
 Users can use arguments to specify which fields to include in their download.
@@ -493,6 +493,8 @@ Step 8. The header row is created based on `Prefix` arguments stored in `Model`,
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
+
+<div style="page-break-before: always;"></div>
 
 #### Front end design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
@@ -529,6 +531,8 @@ Step 4. `CommandBox#handleKeyStroke` reads the `UP` keystroke and calls `Command
 Step 5. `CommandHistory` retrieves the previous command and returns it.
 
 Step 6. `CommandBox` displays the previous command in the Command Box.
+
+<div style="page-break-before: always;"></div>
 
 The following activity diagram shows possible user interactions with the command history feature.
 
@@ -577,6 +581,8 @@ Step 5. CONNECTIONS will display a help message in `ResultDisplay`.
 * **Option 2 (current choice):** Create a new type of command called `SystemCommand` that does not extend from `Command`.
     * Pros: Prevents potential issues such as users using an additional command which they are not supposed to use.
     * Cons: Requires additional code to interface with `Logic`, 'MainWindow` and `CommandBox`.
+
+<div style="page-break-before: always;"></div>
 
 ### [Proposed] Partial data recovery feature
 Allows the user to recover partial data if the data file becomes corrupted. 
