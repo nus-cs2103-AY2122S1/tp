@@ -19,17 +19,16 @@ import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to Notor.
  */
 public class PersonCreateCommand extends PersonCommand {
     public static final String COMMAND_WORD = "create";
     public static final List<String> COMMAND_WORDS = Arrays.asList("create", "c");
-
-    private static final String COMMAND_DESCRIPTION = ": Creates a person in the address book.\n";
+    private static final String COMMAND_DESCRIPTION = ": Creates a person in Notor.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " NAME /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
-            + "Parameters: "
+            + "Optional Parameters: "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_TAG + "TAGS... "
@@ -38,7 +37,7 @@ public class PersonCreateCommand extends PersonCommand {
             + " John Doe /" + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TAG + "student,year1"
+            + PREFIX_TAG + "student, year1"
             + PREFIX_GROUPINDEX + 1;
 
     private final PersonExecutor executor;

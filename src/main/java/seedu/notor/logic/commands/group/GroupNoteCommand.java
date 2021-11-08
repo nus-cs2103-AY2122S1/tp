@@ -19,7 +19,7 @@ public class GroupNoteCommand extends GroupCommand {
     public static final List<String> COMMAND_WORDS = Arrays.asList("note", "n");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Edits the notes of the group identified by the index number used in the current group listing.\n";
+            ": Edits the notes of the group specified by the index.\n";
 
     public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION

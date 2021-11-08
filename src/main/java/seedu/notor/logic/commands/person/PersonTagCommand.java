@@ -21,20 +21,20 @@ public class PersonTagCommand extends PersonCommand {
 
     public static final String COMMAND_WORD = "tag";
     public static final List<String> COMMAND_WORDS = Arrays.asList("tag", "t");
-    public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
-    public static final String MESSAGE_TAG_REQUIREMENTS = "Tags are required to be alphanumeric";
+    public static final String MESSAGE_NO_TAGS =
+            "At least one tag must be provided. Make sure you used the prefix " + PREFIX_TAG;
 
     private static final String COMMAND_DESCRIPTION =
-            ": Adds tags to the person identified by theindex number used in the displayed person list, if they do "
-                    + "not already have them. You may list multiple tags separated by commas.\n";
+            ": Adds tags to the person specified by the index number, if they do not already have them.\n"
+                    + "You may list multiple tags separated by commas.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]  \n"
+            + "Parameters: "
+            + "[" + PREFIX_TAG + "TAG]\n"
             + "Example: " + PersonCommand.COMMAND_WORD
             + " 1 /" + COMMAND_WORD + " "
-            + PREFIX_TAG + "important, needsSupport";
+            + PREFIX_TAG + "important, needs Support";
 
     private final PersonExecutor executor;
 
