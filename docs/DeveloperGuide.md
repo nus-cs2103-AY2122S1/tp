@@ -1026,7 +1026,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Find a participant with name "David"
 
-   1. Prerequisite: List all participants using the `list` command. Multiple participants in the participant list.
+   1. Prerequisite: All participants listed using the `list` command. At least one participant in the participant list.
 
    2. Test case: `find David`<br>
       Expected: Participant list is filtered to show only participants with "David" in their names. The list may be empty if
@@ -1109,7 +1109,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Find events by event name
 
-   1. Prerequisite: List all events using the `listEvents` command. Multiple events in the event list.
+   1. Prerequisite: All events listed using the `listEvents` command. At least one event in the event list.
 
    2. Test case: `findEvent Monthly`<br>
       Expected: Event list is filtered to show only events with "Monthly" in their names. The list may be empty if
