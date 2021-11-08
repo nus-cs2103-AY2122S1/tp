@@ -39,7 +39,7 @@ Given below are my contributions to the project.
     * Worked on target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
     * Architecture notes for Model components
     * Implementation of card-like UI elements and related UML diagrams
-* Community:
+* **Community**:
   * PRs reviewed with non-trivial review comments (some examples: [1](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/125#pullrequestreview-788810284), [2](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/90#discussion_r730196584), [3](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/121#discussion_r737666344), [4](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/60#discussion_r724660187)).
   * Contributed to forum discussions (some examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/191), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/148))
   * Answered some queries from peers (some examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/159#issuecomment-913186432), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/192#issuecomment-914275836))
