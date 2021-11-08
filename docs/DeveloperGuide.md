@@ -1010,13 +1010,74 @@ testers are expected to do more *exploratory* testing.
       correct format will be shown in the result display.
    
    4. Other incorrect remove commands to try: `remove`, `remove a`, `remove @`, `remove X`, `...` (where x is larger
-      than the number of assets/liabilities/policies listed).
+      than the number of assets/liabilities/policies listed). <br>
       Expected: Similar to previous.
+
+### 7.6 Clearing client list
+
+1. Clearing all clients in the home window.
+    1. Prerequisites: User is currently in the home window and there is at least 1 client.
+    2. Test case: `clear` <br>
+       Expected: All the clients listed in the client list panel will be removed, and the client list panel will be cleared. A
+       message confirming that will appear in the result display.
+    3. Test case: `clear 2` <br>
+       Expected: Clients will not be cleared from the client list panel. An error message showing the
+       correct format will be shown in the result display.
+
+3. Clearing all clients in the client window.
+   1. Prerequisites: User is currently in the client window in any tab.
+   2. Test case `clear` <br>
+      Expected: Clients will not be cleared from the client list panel. An error message letting the user know that the
+      command is not supported in this view will be shown in the result display.
+
+### 7.7 Switching tab in Client Window
+
+1. Switching to Contact Tab
+   1. Prerequisites: User is currently in the client window.
+   2. Test case: `tab c`, `tab contact`, `tab contacts` <br>
+   Expected: The tab will be changed to contact tab of the client in focus and the 'Switched tab' message will appear on the result display.
+   3. Test case: `tab contact us` <br>
+   Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
+      be shown in the result display.
+
+2. Switching to Policies Tab
+    1. Prerequisites: User is currently in the client window.
+    2. Test case: `tab p`, `tab policy`, `tab policies` <br>
+   Expected: The tab will be changed to policies tab of the client in focus and the 'Switched tab' message will appear on the result display.
+   3. Test case: `tab polici` <br>
+      Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
+      be shown in the result display.
+
+3. Switching to Assets Tab
+    1. Prerequisites: User is currently in the client window.
+    2. Test case: `tab a`, `tab asset`, `tab assets` <br>
+   Expected: The tab will be changed to assets tab of the client in focus and the 'Switched tab' message will appear on the result display.
+    3. Test case: `tab assetes` <br>
+       Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
+       be shown in the result display.
+
+4. Switching to Liabilities Tab
+    1. Prerequisites: User is currently in the client window.
+    2. Test case: `tab l`, `tab liability`, `tab liabilities` <br>
+   Expected: The tab will be changed to liabilities tab of the client in focus and the 'Switched tab' message will appear on the result display.
+    3. Test case: `tab liabileeties` <br>
+    Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
+       be shown in the result display.
+
+5. Switching to Notes Tab
+    1. Prerequisites: User is currently in the client window.
+    2. Test case: `tab n`, `tab note`, `tab notes` <br>
+   Expected: The tab will be changed to notes tab of the client in focus and the 'Switched tab' message will appear on the result display.
+    3. Test case: `tab noties` <br>
+       Expected: The tab will not be changed and the client view will remain at the existing tab. An error message will
+       be shown in the result display.
 
 ### 7.6 Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: DonnaFin is closed and there is access to the `[JAR file location]/data/donnafin.json` file.
+      1. Test case: Replace the name, phone, email or address attribute to `null` in the `[JAR file location]/data/donnafin.json` file.
+      2. Expected: When DonnaFin is opened, the client list panel will be empty. Entering any valid command after this state will wipe the
+         `[JAR file location]/data/donnafin.json` file completely, and your command will be executed.
 
-1. _{ more test cases …​ }_
