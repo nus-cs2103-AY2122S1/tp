@@ -11,6 +11,9 @@ By: `Team Fridgy`
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## 1. Introduction
 
 Fridgy is a **food and recipe management system**, for users to manage their ingredients and recipes easily.
@@ -131,6 +134,8 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### 4.2 Command Overview
 
 #### 4.2.1 Command Flags
@@ -146,6 +151,8 @@ Displays the output of `View` command, which expands each ingredient or recipe c
 `-t` | `-t <tag>...` | Tag for the ingredient | No | Can contain alphanumeric characters or spaces. There can be at most 1 space between alphanumeric characters.
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2 Command Summary
 
@@ -169,6 +176,8 @@ Action | Format
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### 4.3 General Commands
 
 #### 4.3.1 Help
@@ -185,6 +194,8 @@ Pops out a window that leads the user to [User Guide](https://ay2122s1-cs2103t-w
 Closes the window and exits the program. All your information will be saved.
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Ingredients
 This section covers commands related to Inventory management. Any command primarily interacting with ingredients will 
@@ -224,6 +235,8 @@ Add an ingredient to the Inventory.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.2 Delete Ingredient
 
 Delete ingredient(s) from the Inventory.
@@ -245,6 +258,8 @@ Delete ingredient(s) from the Inventory.
 - If multiple index numbers are specified, Fridgy will delete the ingredients at all specified index numbers.
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.3 Edit Ingredient
 
@@ -275,6 +290,8 @@ Edit an ingredient from the Inventory.
     
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.4 Clear Ingredient
 
 Clear all the ingredients from the Inventory. Add `expired` keyword to only clear expired ingredients.
@@ -288,7 +305,8 @@ Command: `clear ingredient`
 <br />Expected Output:<br />
 <img src="images/ingredientCommands/clearCommand.png" style="width:85%">
    <br /> <br />
-2. Clear expired ingredients:<br /> 
+<div style="page-break-after: always;"></div>
+<p>2. Clear expired ingredients:<br /></p> 
 Command: `clear ingredient expired`
 <br />Before:<br />
 <img src="images/ingredientCommands/clearExpired1.png" style="width:85%">
@@ -297,6 +315,8 @@ Command: `clear ingredient expired`
 <img src="images/ingredientCommands/clearExpired2.png" style="width:85%">   
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.5 Find Ingredient
 
@@ -339,6 +359,8 @@ Switch to Ingredient [tab](#31-tabs) and list all ingredients.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.7 View Ingredient
 
 Open an ingredient in the [Main Window](#36-mainwindow).
@@ -356,7 +378,9 @@ Open an ingredient in the [Main Window](#36-mainwindow).
   [Side Bar](#32-side-bar).
 
 [\[Back to Table of Contents\]](#table-of-contents)
-  
+
+<div style="page-break-after: always;"></div>
+
 ### 4.5 Recipes
 This sections covers commands related to Recipe Book management. Any command primarily interacting with recipes will
 be here.
@@ -374,7 +398,8 @@ Command: `add recipe -n pasta -i tomato 2 -i linguine 50g`
 <br />Expected Output:<br />
 <img src="images/recipeCommands/addRecipe1.png" style="width:85%" class="ug-image">
 <br /> <br />
-2. All command flags used:<br />
+<div style="page-break-after: always;"></div>
+<p>2. All command flags used:<br /></p>
 Command:`add recipe -n Grilled Lamb Chop with Mint Puree -i Mint 5g -i Lamb Chops 1kg -i Butter 20g -i Garlic 20g -s Season
 the lamb chops with salt and pepper. -s Grill the lamb chops over medium high heat until cooked with butter.
 -s Blend the mint with garlic to make a puree. -s Leave the lamb chops to rest for 5min. -s Serve with mint puree.
@@ -390,6 +415,8 @@ the lamb chops with salt and pepper. -s Grill the lamb chops over medium high he
 - Recipe ingredients will be highlighted <span style="color:GhostWhite;background-color:Crimson">red</span> if they are missing or expired.  
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.2 Delete Recipe
 
@@ -412,7 +439,9 @@ Delete recipe(s) from the Recipe Book.
 - If multiple index numbers are specified, Fridgy will delete the recipes at all specified index numbers.
 
 [\[Back to Table of Contents\]](#table-of-contents)
- 
+
+<div style="page-break-after: always;"></div>
+
 #### 4.5.3 Edit Recipe
 
 Edit a recipe from the Recipe Book.
@@ -441,6 +470,8 @@ Edit a recipe from the Recipe Book.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.4 Clear Recipe
 
 Clear all recipes from the Recipe Book.
@@ -454,6 +485,8 @@ Clear all recipes from the Recipe Book.
 <img src="images/recipeCommands/clearRecipe.png" style="width:85%" class="ug-image">
 
 [\[Back to Table of Contents\]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.5 Find Recipe
 
@@ -496,6 +529,8 @@ Switch to Recipe [tab](#31-tabs) and list all recipes.
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.7 View Recipe
 
 Open a detailed view of a recipe in the [Main Window](#36-mainwindow).
@@ -514,6 +549,8 @@ Open a detailed view of a recipe in the [Main Window](#36-mainwindow).
 
 [\[Back to Table of Contents\]](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.8 Cook Recipe
 
 Cook a recipe and deduct the ingredients required by the chosen recipe from the Inventory.
@@ -526,10 +563,11 @@ Cook a recipe and deduct the ingredients required by the chosen recipe from the 
 <br />Before:<br />
 <img src="images/recipeCommands/cookRecipe1.png" style="width:85%" class="ug-image">
    <br />
+<div style="page-break-after: always;"></div>
 <br />After:<br />
 <img src="images/recipeCommands/cookRecipe2.png" style="width:85%" class="ug-image">
-   <br />
-<br />Changes in Ingredients:<br />
+
+Changes in Ingredients:
 <img src="images/recipeCommands/cookRecipe3.png" style="width:85%" class="ug-image">
 
 <br />**Additional Information:**<br />
