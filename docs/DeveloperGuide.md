@@ -529,6 +529,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 | User                          | Can modify contact details            | Update my contacts' details
 | Experienced user      | Retrieve previously run commands          | Avoid typing the commands I use frequently again and again
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 **Use case: Add a contact**
@@ -576,6 +578,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -620,7 +624,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
     Use case ends.
 
-**Extensions**
+<div style="page-break-after: always;"></div>
 
 **Use case: Find a contact**
 
@@ -670,9 +674,11 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case ends.
 
-* 2a. No existing contacts match the tag provided.
+<div style="page-break-after: always;"></div>
 
-    * 2a1. CONNECTIONS display a message to indicate no matching contacts.
+* 2b. No existing contacts match the tag provided.
+
+    * 2b1. CONNECTIONS display a message to indicate no matching contacts.
 
       Use case resumes at step 2.
 
@@ -766,6 +772,8 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
     * 3b1. CONNECTIONS displays an error message.
     
       Use case resumes at step 2.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Untag a contact**
 
