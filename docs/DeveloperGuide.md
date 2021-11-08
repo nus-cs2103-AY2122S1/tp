@@ -153,6 +153,46 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 3.1 Add task feature
 
+The add feature enables users to add tasks by specifying the mandatory parameters which are task name and date as well as other parameters such as time, tags and priority level.
+
+#### 3.1.1 Implementation
+
+##### AddCommand class
+
+The `AddCommand` class extends the `Command` class. It manages the addition of tasks specified by the user based on the task name, date, time, tags and priority provided. It contains a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, a `String` representing the successful addition of a task, 
+a `String` representing the duplicate message if the task added is a duplicate and a `Task` which is the task to be added to the list.
+
+The `execute` method in `AddCommand` overrides that in `Command`. 
+In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. It then checks if the task provided by the user is a duplicate for the current list shown, and continues only if the task is unique. A `CommandException` is thrown in cases of addition of a duplicate task. In the happy path, the task is added at the end of the list with the index being the new size of the list.
+
+##### AddCommandParser class
+
+The `AddCommandParser` class implements the `Parser<AddCommand>` interface. 
+It manages the parsing of the arguments in the user input.
+The `parse` method in `AddCommandParser` first converts the argument into `Name`, `Date`, `Time`, `Priority` and `Set<Tags>` respectively and creates a `Task` with the converted arguments. 
+It then returns a `AddCommand` back to `UniFyParser`, initialized with the `Task`.
+
+##### Usage Scenario
+
+The following demonstrates a usage scenario where the user wants to add a task with name CS2103, date 2021-10-10, time 23:59, priority level LOW and tag Important
+
+1. The method `execute("add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String `"add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW"` as its parameter and initializes a `AddCommandParser` object.
+3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW"`.
+4. An `AddCommand` object will be initialized, taking in the `Task` with a `Name`, `Date`, `Time`, `Priority` and `Set<Tag>`, in this case containing `Name`: `CS2103`, `Date`: `2021-10-10`, `Time`: `23:59`, `Priority`: `LOW` and one tag in `Set<Tag>`: `Important`.
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `AddCommand`.
+6. By using the `hasTask` method of the `Model` , the `AddCommand` checks for a duplicate task in its `execute` method.
+7. If no errors are found, the `addTask` method under `Model` is called.
+8. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
+
+The sequence diagram below illustrates the interactions within `LogicManager` for the usage scenario.
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+
 ### 3.2 Delete task feature
 
 The delete feature enables users to delete tasks by specifying the task index or task name.
