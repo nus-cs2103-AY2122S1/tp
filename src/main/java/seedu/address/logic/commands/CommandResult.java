@@ -34,7 +34,7 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
-     * 
+     *
      * @param feedbackToUser Message that is shown to user.
      * @param showHelp boolean indicating if user indicated for help.
      * @param exit boolean indicating if user indicated an exit.

@@ -62,7 +62,7 @@ public class DeleteMultipleCommand extends Command {
     }
 
     /**
-     * Executes the {@code DeleteMultipleCommand} which deletes the contacts from {@code startIndex} to {@code endIndex}.
+     * Executes {@code DeleteMultipleCommand} which deletes the contacts from {@code startIndex} to {@code endIndex}.
      *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} regarding the status of the {@code DeleteMultipleCommand}.
