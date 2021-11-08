@@ -1568,6 +1568,13 @@ MSS
 
 Extensions
 
+* 1a. User types in command with wrong format.
+    * 1a1. CohortConnect shows an error message.
+    * 1a2. CohortConnect requests for correct format.
+    * 1a3. User enters new data.
+    * Steps 1a1-1a3 are repeated until the data entered are valid.
+    * Use case resumes from step 2.
+
 * *a. At any time, the User chooses to close the app.
    * *a1. CohortConnect closes.
 
