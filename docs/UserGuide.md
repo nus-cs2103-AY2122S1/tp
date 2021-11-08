@@ -420,11 +420,11 @@ Clears all entries from the Uni-Fy app.
 
 </div>
 
-![clear_command_before](images/clearCommandBefore.jpeg)
+![clear_command_before](images/clearCommandBefore.png)
 
 When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
 
-![clear_command_after](images/clearCommandAfter.jpeg)
+![clear_command_after](images/clearCommandAfter.png)
 
 
 ### 4.12 Retrieving past commands
