@@ -14,7 +14,7 @@ You can reach us at the email `timothywongej@nus.edu.sg`
 <img src="images/timothywongej.png" width="200px">
 
 [[github](https://github.com/timothywongej)]
-[[portfolio](team/timothywong.md)]
+[[portfolio](team/timothywongej.md)]
 
 * Role: Team Lead
 * Responsibilities: Documentation 
@@ -24,7 +24,7 @@ You can reach us at the email `timothywongej@nus.edu.sg`
 <img src="images/kdeasymoneysniper.png" width="200px">
 
 [[github](http://github.com/kdeasymoneysniper)]
-[[portfolio](team/jasonang.md)]
+[[portfolio](team/kdeasymoneysniper.md)]
 
 * Role: Developer
 * Responsibilities: UI and Integration
@@ -33,7 +33,7 @@ You can reach us at the email `timothywongej@nus.edu.sg`
 
 <img src="images/noobmaster19.png" width="200px">
 
-[[github](http://github.com/noobmaster19)] [[portfolio](team/dion.md)]
+[[github](http://github.com/noobmaster19)] [[portfolio](team/noobmaster19.md)]
 
 * Role: Developer
 * Responsibilities: Code quality
@@ -43,7 +43,7 @@ You can reach us at the email `timothywongej@nus.edu.sg`
 <img src="images/djiangel.png" width="200px">
 
 [[github](http://github.com/djiangel)]
-[[portfolio](team/angyangcheng.md)]
+[[portfolio](team/djiangel.md)]
 
 * Role: Developer
 * Responsibilities: Testing
