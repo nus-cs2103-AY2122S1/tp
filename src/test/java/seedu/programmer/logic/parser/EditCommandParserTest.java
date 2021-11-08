@@ -3,24 +3,7 @@ package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_TEMPLATE;
-import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_CLASS_ID_DESC;
-import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
-import static seedu.programmer.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.*;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.programmer.logic.parser.ParserUtil.MESSAGE_EMPTY_INDEX;
@@ -160,6 +143,12 @@ public class EditCommandParserTest {
         // class ID
         userInput = targetIndex.getOneBased() + CLASS_ID_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withClassId(VALID_CLASS_ID_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // labNum and labResult
+        userInput = targetIndex.getOneBased() + LAB_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withLab(VALID_LAB_NO, VALID_ACTUAL_SCORE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

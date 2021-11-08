@@ -1,11 +1,7 @@
 package seedu.programmer.testutil;
 
 import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Email;
-import seedu.programmer.model.student.Name;
-import seedu.programmer.model.student.Student;
-import seedu.programmer.model.student.StudentId;
+import seedu.programmer.model.student.*;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.
@@ -63,6 +59,15 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withemail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code lab} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withLab(Integer labNum, Integer labResult) {
+
+        descriptor.setLab(new Lab(new LabNum(labNum)), new LabResult(labResult));
         return this;
     }
 
