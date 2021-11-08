@@ -251,6 +251,18 @@ The find feature enables users to find tasks by specifying part of the task name
 
 #### 3.4.1 Implementation
 
+##### FindCommand class
+
+The `FindCommand` class extends the `Command` class. It manages the filtering of tasks specified by the user based on the parameters provided. 
+It contains a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, and a `Predicate<Task>`, `predicate`, which is the predicate used to filter the task list.
+
+The `execute` method in `FindCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. It then updates the filtered task list with the predicate.
+
+##### FindCommandParser class
+
+The `FindCommandParser` class implements the `Parser<FindCommand>` interface. It manages the parsing of the arguments (keywords, date and tag in the case of a find command) in the user input.
+The `parse` method in `FindCommandParser` first converts the argument provided into a `Predicate<Task>`. It then returns a `FindCommand` back to `UniFyParser`, initialized with the `Predicate<Task>`.
+
 The following are the changes made to achieve this feature:
 
 * A `TaskContainsDatePredicate` class is added under the `model/task` package.
@@ -258,19 +270,19 @@ The following are the changes made to achieve this feature:
 * `FindCommand` class is modified to accept multiple predicate object.
 * `FindCommandParser` class is modified to parser both task name and date.
 
-Given below is a usage scenario of this feature using both name and date as inputs.
+Given below is a usage scenario of this feature using name, date and tag as inputs.
 
-Step 1. The user executes `add n/Math Quiz 5 d/2021-10-10 t/18:00 tg/Important` to add a task named Math Quiz 5 and with a deadline of 6pm, 10 October 2021.
+1. The user executes `add n/Quiz d/2021-01-08 t/23:59 tg/GEQ1000` to add a task named Quiz with a deadline of 11:59pm, 8 January 2021 and a tag of GEQ1000.
 
-Step 2. The user executes `add n/Math Assignment 2 d/2021-10-12 t/18:00 tg/Important` to add a task named Math Assignment 2 and with a deadline of 6pm, 12 October 2021.
+2. The user executes `add n/Tutorial d/2021-01-05 t/12:00 tg/CS2103T` to add a task named Tutorial with a deadline of 12:00pm, 5 January 2021.
 
-Step 3. The user executes `find Quiz` command to find all task with the name "Quiz".
+3. The user executes `find Quiz` command to find all task with the name "Quiz".
 
-Step 4. The user executes `find Math d/2021-10-10` command to find all Math task with a dateline of 10 October 2021.
+4. The user executes `find Tutorial d/2021-01-05 tg/CS2103T` command to find all Tutorial on 5 January 2021 with the tag of CS2103T.
 
-Step 5. The user executes `list` command to view the full list of tasks.
+5. The user executes `list` command to view the full list of tasks.
 
-The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Math d/2021-10-10` command as in Step 4.
+The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Quiz` command as in Step 3.
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
