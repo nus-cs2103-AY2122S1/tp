@@ -13,7 +13,6 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
 
 ### Summary of Contributions
 
-
 #### Code Contributed
 * [Reposense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2103T-W08-3%2Ftp&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=lwlshawn&tabRepo=AY2122S1-CS2103T-W08-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
@@ -27,6 +26,8 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
     * The functionality that links orders and tasks was also handled by me. This concerns the application logic that ensures
     orders can only be added if the appropriate client is already in SalesNote, that related orders are edited when a client
       is edited, and that related orders and tasks are deleted when a client is deleted.
+
+<div style="page-break-after: always;"></div>
 
 #### Contributions to the UG
 * I was responsible for overall re-writing of the document, to meet the requirements of CS2101. In this process, I took care
@@ -75,7 +76,32 @@ all types of objects to be unique for instance, I changed our TaskList and Order
   [\#32](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/32), 
   [\#26](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/26), 
   [\#22](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/22)
-  
+
+<div style="page-break-after: always;"></div>
+
+## Contributions to the UG
+The following is a short example of the work I've done for the UG.
+
+## Using commands in combinations
+
+One of the most common use patterns we expect you to go through, is using our `findClient`/`findOrder`/`findTask`
+to first filter the list to items of interest, before then using other commands. We provide an example here. Suppose you
+started with this list of tasks:
+
+![commandcombination1](../images/commandcombination1.png)
+
+Now, perhaps you've just finished a task in August not on the current display, and want to locate it and mark it as complete.
+You can first quickly input `findtask Aug` to get a list of tasks with deadline in August:
+
+![commandcombination2](../images/commandcombination2.png)
+
+Now you can easily use `marktask 2` to mark the second task, that was previously not on the viewable list as complete. Finally,
+to go back to viewing all tasks and "remove" the filtered view, simply type `listtasks` to get the original list of tasks:
+
+![commandcombination3](../images/commandcombination3.png)
+
+<div style="page-break-after: always;"></div>
+
 
 ## Contributions to the DG
 
@@ -163,6 +189,8 @@ Focusing on after `AddOrderCommand:execute` is called,
 
 Here is an activity diagram to more clearly illustrate the logic of the application:
 ![AddOrderActivityDiagram](../images/AddOrderActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Result
 An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`

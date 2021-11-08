@@ -10,7 +10,7 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
 * Sales orders and accounts
 
 This is a user guide aimed at helping all users of SalesNote; both new and experienced. The table of contents 
-below lists all the available commands, and the link will bring you to a quick overview for more information on the
+below lists all the available commands, and each link will bring you to a quick overview for more information on the
 given command. Newer users hoping to quickly get started can refer to the "quick start", in the first section of the
 user guide below.
 
@@ -25,15 +25,6 @@ user guide below.
         - [Editing a client : `editclient`](#editing-a-client--editclient)
         - [Locating clients by name : `findclient`](#locating-clients-by-name--findclient)
         - [Listing all clients : `listclients`](#listing-all-clients--listclients)
-    - [Task Commands](#task-commands)
-        - [Adding a task : `addtask`](#adding-a-task--addtask)
-        - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
-        - [Editing a task : `edittask`](#editing-a-task--edittask)
-        - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
-        - [Listing all tasks : `listtasks`](#listing-all-tasks--listtasks)
-        - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
-        - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
-        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
     - [Order Commands](#order-commands)
         - [Adding an order : `addorder`](#adding-an-order--addorder)
         - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
@@ -44,11 +35,21 @@ user guide below.
         - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
         - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
         - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
+    - [Task Commands](#task-commands)
+        - [Adding a task : `addtask`](#adding-a-task--addtask)
+        - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
+        - [Editing a task : `edittask`](#editing-a-task--edittask)
+        - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+        - [Listing all tasks : `listtasks`](#listing-all-tasks--listtasks)
+        - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
+        - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
+        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
     - [Clearing all entries : `clear`](#clearing-all-entries--clear)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
+- [Using commands in combinations](#using-commands-in-combinations)
 - [Command Summary](#command-summary)
             
             
@@ -73,6 +74,8 @@ Some example commands you can try:
    * **`clear`**: Deletes all existing data.
    * **`exit`**: Exits the app.
 6. Refer to the [Features](#features) below to learn more about the commands.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,13 +164,13 @@ Allows you to add a client to SalesNote.
 
 Note that the application maintains a list of unique individuals! In this case two individuals are **considered equal if
 they have the same name**. Two individuals having the exact same name is quite the rare occurrence, and so we felt
-this was more likely to be a user mistake we wanted to help prevent. If you do happen to have two clients with the
+this was more likely to be a mistake we wanted to help prevent. If you do happen to have two clients with the
 exact same name, our recommendation is to add a number, to make clear that this was intentional (e.g. adding Jane Lim
 and Jane Lim1).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you get the required format for a field wrong e.g. you key in an invalid EMAIL, SalesNote will give you a 
-warning, and a reminder of the requirements:
+If you get the required format for a field wrong e.g. you key in an invalid EMAIL, the command will fail and SalesNote will 
+give you a warning, and a reminder of the requirements:
 </div>
 
 ![add client tip](images/uiupdate/addclienttip.png)
@@ -268,7 +271,7 @@ with a label describing them, a client, an amount, and a date. The following are
   **regardless of capitalisation!** So if you have a client named `James`, your order can be addressed to `james`, `JAMES`, `James` and so on.
 * Editing a client, will also edit all the orders tied to the client. For instance, if a client's name is changed from
   "Alice" to "Alice Lin", all orders addressed to "Alice" will now be addressed to "Alice Lin". 
-* The date field should follow one of the following formats:
+* The date field should follow one of the following formats. Note that the field is case-insensitive (e.g. 08 NOV 2021 would also work):
 
   Format | Example
       --------|------------------
@@ -280,13 +283,19 @@ with a label describing them, a client, an amount, and a date. The following are
   **dd/mm/yyyy** | `08/11/2021`
 </div>
 
+[return to top](#table-of-contents)
 
-### Adding an order : `addorder` [!back]
+### Adding an order : `addorder` 
 
 Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
 
 Allows you to add an order to SalesNote. Note that SalesNote maintains a unique list of orders. Orders are considered the same if
-they have the same **label and customer**. So `addorder l/blue blouse c/Alice a/21.00 d/20 August 2021` followed by `addorder l/blue blouse c/alice a/100 d/21 August 2021`
+they have the same **label and customer**. So:
+
+* `addorder l/blue blouse c/Alice a/21.00 d/20 August 2021` followed by
+  
+* `addorder l/blue blouse c/alice a/100 d/21 August 2021`
+
 will not be allowed. This is to help guard against user error. If you are sure this is what you want, our suggestion is to add a number at the end of the order label
 e.g. `addorder l/blue blouse1 c/alice a/100 d/21 August 2021` instead.
 
@@ -330,10 +339,10 @@ Examples:
 * `findorder blue` returns `blue blazer` and `blue shirt`
 * `findorder SO1` returns order with id of `SO1`
 
+[return to top](#table-of-contents)
+
 As the purpose of the order commands in SalesNote are to help you manage accounts better, we offer a more comprehensive
 set of commands for viewing and sorting orders, shown here below.
-
-[return to top](#table-of-contents)
 
 ### Listing all orders : `listorders`
 
@@ -395,12 +404,34 @@ Allows you to sort all orders based on a chosen field and arrangement.
 **:information_source: Note:** <br>
 
 * Your orders are normally arranged in the sequence they were added.
-* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker.
-* Adding / Deleting an order reverts the list to the normal arrangement.
+
+* When two or more orders have an identical value for the `FIELD` chosen, the normal arrangement is used as a tiebreaker. 
+  
+* The [`addorder`](#adding-an-order--addorder) and [`listorders`](#listing-all-orders--listorders) commands revert the list to the normal arrangement.
 
 </div>
 
 Examples:
+
+Suppose you had the following order list with four orders:
+
+![sortorders1](images/sortorders1.png)
+
+<figcaption align = "center">In the figure above, SalesNote displays the Orders in the sequence they were added. So
+Order 1 was added first, and Order 4 was added last.</figcaption>
+
+<br>
+
+Executing `sortorders f/amount o/asc` sorts the list in ascending order, by their amounts, giving:
+
+![sortorders2](images/sortorders2.png)
+
+<figcaption align = "center">Notice that Order 2 and Order 3 are tied with the same amount. Thus Order 2 is displayed
+first, since it was added earlier then Order 3.</figcaption>
+
+<br>
+
+The possible combinations give the following outcomes:
 * `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
 * `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
 * `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
@@ -425,11 +456,14 @@ Press the ESCAPE key to close the total orders window
 * After adding/deleting orders, you might want to run this command again to refresh the window.
 </div>
 
-![TotalOrdersWindow](images/TotalOrdersWindow.png)
+![TotalOrdersWindow](images/TotalOrdersWindow2.png)
 <figcaption align = "center">e.g. In the figure above, the application has three clients Ng Chin Gan, Alice Seah,
-and Jacob Tan, but Jacob Tan is not shown as there are no orders from him in SalesNote yet</figcaption>
+and Jacob Tan, but Jacob Tan is not shown in the TotalOrders window as there are no orders from him in SalesNote yet</figcaption>
+
 
 [return to top](#table-of-contents)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Task Commands
@@ -451,7 +485,7 @@ as completed, but also provides you with an ability to tag tasks to orders.
   relevant tasks `SO4` and later type `findtask SO4` to find all these related tasks. As a reminder, if the order
   should be deleted, SalesNote will automatically remove the tasks tagged to that order for you.
 * The number after the 'SO' prefix **must correspond to the id of an existing order**. 
-* The date that accompanies tasks should be keyed in one of the following formats:
+* The date field should follow one of the following formats. Note that the field is case-insensitive (e.g. 08 NOV 2021 would also work):
   
   Format | Example
     --------|------------------
@@ -584,7 +618,7 @@ Examples:
 
 Format: `clear`
 
-This is to quickly clear all entries (Clients, Tasks, SalesOrder) from SalesNote. Useful for a new user who wants to
+This is to quickly clear all entries (Clients, Tasks, Order) from SalesNote. Useful for a new user who wants to
 remove all the example data.
 
 [return to top](#table-of-contents)
@@ -629,6 +663,31 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SalesNote home folder.
+
+[return to top](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Using commands in combinations
+
+One of the most common use patterns we expect you to go through, is using our `findClient`/`findOrder`/`findTask`
+to first filter the list to items of interest, before then using other commands. We provide an example here. Suppose you 
+started with this list of tasks:
+
+![commandcombination1](images/commandcombination1.png)
+
+Now, perhaps you've just finished a task in August not on the current display, and want to locate it and mark it as complete. 
+You can first quickly input `findtask Aug` to get a list of tasks with deadline in August:
+
+![commandcombination2](images/commandcombination2.png)
+
+Now you can easily use `marktask 2` to mark the second task, that was previously not on the viewable list as complete. Finally,
+to go back to viewing all tasks and "remove" the filtered view, simply type `listtasks` to get the original list of tasks:
+
+![commandcombination3](images/commandcombination3.png)
+
+[return to top](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
