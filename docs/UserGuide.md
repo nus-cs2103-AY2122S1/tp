@@ -356,6 +356,7 @@ Format: `visualize`
 
 * Visualize assessment grades of the class with Box & Whisker plot
 * Any grade of any student that is not yet entered will not be included in the graph.
+* If there are no students found (let say after clear command), an empty plot will be shown with the feedback `No students found to visualize`.
 
 ![visualizecommand](images/ug/visualizeCommand.PNG)
 
