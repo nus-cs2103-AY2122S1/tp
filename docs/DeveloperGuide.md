@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user  | input the details of my group mates in a simple command |save time when I input the information|
 | `* * *`  | user  | delete a contact which will remove them from all groups within my address book in case there is a change of groupings | - |
 | `* * *`  | user  | directly change details in the address book from the JSON file | gain confidence in using JSON files |
-| `* * *`  | user  | only have a few basic commands to use my address book. | - |
+| `* * *`  | user  | only have a few basic commands to use my address book | - |
 | `* * *`  | user  | use a CLI to control the application | gain confidence in using commands to navigate an application |
 | `* * *`  | user  | delete contacts out of my address book | remove them when there is a change in group members |
 | `* * *`  | user  | create groups | locate the bulk of people in groups easily |
