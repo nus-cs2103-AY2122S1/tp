@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+
+Participant ":InsurancePalParser" as InsurancePalParser LOGIC_COLOR
+Participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+Participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+Participant "epd:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+Participant "eCom:EditCommand" as EditCommand LOGIC_COLOR
+
+ -> InsurancePalParser : parseCommand("add ...")
+activate InsurancePalParser LOGIC_COLOR
+create EditCommandParser
+InsurancePalParser -> EditCommandParser
+activate EditCommandParser LOGIC_COLOR
+return
+InsurancePalParser -> EditCommandParser : parse("add ...")
+activate EditCommandParser LOGIC_COLOR
+EditCommandParser -> ParserUtil : parseIndex(...)
+activate ParserUtil LOGIC_COLOR
+return index
+create EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor
+activate EditPersonDescriptor LOGIC_COLOR
+return
+opt XYZ is present
+    EditCommandParser -> ParserUtil : parseXYZ(...)
+    activate ParserUtil LOGIC_COLOR
+    return newXYZ
+    EditCommandParser -> EditPersonDescriptor : editXYZ(newXYZ)
+    activate EditPersonDescriptor LOGIC_COLOR
+    return
+end alt
+note left
+XYZ = Name, Phone,
+Email, etc.
+end note
+create EditCommand
+EditCommandParser -> EditCommand : EditCommand(epd)
+activate EditCommand LOGIC_COLOR
+return eCom
+return eCom
+deactivate EditCommandParser
+<- InsurancePalParser : eCom
+deactivate InsurancePalParser
+
+@enduml

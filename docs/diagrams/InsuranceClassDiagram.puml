@@ -1,16 +1,23 @@
 @startuml
 !include style.puml
+show members
+hide empty members
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
+skinparam classAttributeFontColor white
 
-package Insurance {
 Class Insurance
 Class InsuranceType
+Class Brand
 
-Insurance -- InsuranceType
-Insurance -- Brand
-}
+Insurance --> "1" InsuranceType
+Insurance --> "1" Brand
 
+Enum "<<enumeration>>\nInsuranceType" as EnumInsuranceType
+
+EnumInsuranceType : LIFE_INSURANCE
+EnumInsuranceType : HEALTH_INSURANCE
+EnumInsuranceType : GENERAL_INSURANCE
 
 @enduml
