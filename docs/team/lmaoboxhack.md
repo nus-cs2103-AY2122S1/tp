@@ -2,8 +2,7 @@
 layout: page
 title: Lin Fangyuan's Project Portfolio Page
 ---
-
-## Project: MrTechRecruiter
+### Project: MrTechRecruiter
 
 ### **Overview**
 MrTechRecruiter (MTR) is a desktop applicant management application designed for tech companies to keep track of job applicants.
@@ -11,7 +10,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 ### **Summary of Contributions**
 
-#### **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=LMAOboxhack&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=LMAOboxhack&tabRepo=AY2122S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+#### ***Code contributed***: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=LMAOboxhack&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=LMAOboxhack&tabRepo=AY2122S1-CS2103-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 #### **Enhancements implemented**
 * Added the feature to filter applicants [PR: [\#83](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/83)]
@@ -22,10 +21,10 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Parsing a variable number of filtering criteria from the user into a single, unified condition.
 
 * Added the feature to visualize job positions with a pie chart [PR: [\#106](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/106)]
-  * **What it does**: Allows the user to view the statuses of the applicants to a job position, as a pie chart.
+  * **What it does**: Allows the user to a position & its applicants' statuses as a pie chart.
   * **Justification**: Gives the user a quick, visual overview of a position, which is crucial when dealing with large volumes of applicants/positions, as it is hard to get an overall sense from the detailed list view alone.
   * **Highlights**:
-    * Learning the JavaFX PieChart API & processing MTR data into the format required by the PieChart API.
+    * Processing MTR data into the format required by the PieChart API.
     * Created a lightweight component used to display a pie chart on the UI, written with *reusability* (extensible to future iterations of the feature, e.g. pie chart of all applicants) and *maintainability* (minimal dependencies, no separate FXML file) in mind.
 
 * Added the feature to update applicant's application statuses [PR: [\#108](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/108)]
@@ -33,10 +32,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * **Justification**: As users are likely to frequently update applicant statuses, providing a dedicated command for this (separate from the 'edit' command) helps streamline user workflow.
   * **Highlight**: Multiple levels of input validation (e.g. specified applicant exists, specified status is valid, specified status is different from current status)
 
-* Added initial code skeleton for the application [PRs: [\#40](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/40), [\#41](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/41)]
-  * **Highlight**: Coming up with base application structure to give the team a better picture of the overall application structure & improve team cohesion.
-
-* Added `Application` class to model the relationship between positions and applicants [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92)]
+* Added `Application` class to model the position-applicant relationship [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92)]
   * **Highlights**: 
     * Modeling the complex relationship between applicants and positions & preserving immutability of all classes involved.
     * Added the `ApplicationStatus` enum to reflect an applicant's status & associated methods for serialization & deserialization.
@@ -77,6 +73,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 <img src="../images/MarkApplicantActivityDiagram.png" width="750" />
 <img src="../images/VisualizeActivityDiagram.png" width="600" />
 <img src="../images/VisualizeSequenceDiagram.png" width="500" />
+
+<div style="page-break-after: always;"></div>
 
 ### **Contributions to the User Guide (Extracts)**:
 

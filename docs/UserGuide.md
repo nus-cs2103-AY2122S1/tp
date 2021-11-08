@@ -313,13 +313,13 @@ Action | Format, Examples
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Applicants** | `list-applicant`
-**Update Applicant status** | `mark NAME status/STATUS` <br> e.g.,  `mark john doe status/accepted`
+**Update Applicant Status** | `mark NAME status/STATUS` <br> e.g.,  `mark john doe status/accepted`
 **Add Position** | `add-position tit/TITLE des/DESCRIPTION` <br> e.g., `add-position tit/software engineer des/work in a team that builds a facial recognition application`
 **Delete Position** | `delete-position INDEX`<br> e.g., `delete-position 1`
 **Edit Position** | `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`<br> e.g., `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
 **List Position** | `list-position`
 **Visualize Positions** | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`
 **Rate** | `rate pos/POSITION` <br> e.g. `rate pos/software engineer`
-**Undo command** | `undo`
+**Undo Command** | `undo`
 **Help** | `help`
 **Exit** | `exit`
