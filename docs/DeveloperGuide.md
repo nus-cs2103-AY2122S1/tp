@@ -147,19 +147,20 @@ The different types of lists include:
 
 Common commands for the task model:
 
-* `add` - Creates a new task item
-* `edit` - Modifies an existing task
-* `delete` - Removes an existing task from the list of tasks
-* `list` - Shows all tasks in the list
-* `clear` - Removes all the tasks in the list
+* `addTask` - Creates a new task item
+* `editTask` - Modifies an existing task
+* `deleteTask` - Removes an existing task from the list of tasks
+* `markTask` - Updates the status of a task item
+* `tasks` - Shows all tasks in the list
+* `clearTasks` - Removes all the tasks in the list
 
-#### Rationale
+##### Rationale
 
 The tApp is supposed to cater to TA, who are very busy. They have their own modules to prepare for and as well as prepare for weekly tutorial sessions. Hence, they have lots of things to keep track and a task manager feature is necessary. And there are primarily 3 types of tasks - todos, deadlines and events. tApp has supports all of these features to assist TAs in performing their tasks more efficiently and accurately.
 
-#### Current Implementation
+##### Current Implementation
 
-To adhere to Object-Oriented Programming principles, we have decided to make the `Task` class as an abstract parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
+To adhere to Object-Oriented Programming principles, we have decided to make the `Task` class as an abstract parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class.
 
 The `Task` class, and all its subclasses,
 
@@ -171,7 +172,7 @@ The `Task` class, and all its subclasses,
 In addition to the components above, the `EventTask` and `DeadlineTask` classes store a compulsory reference to a `TaskDate` object.
 
 
-#### Student and Group component
+#### Student and Group Component
 
 ![Structure of the Student and Group Class](images/StudentGroupClassDiagram.png)
 
@@ -248,7 +249,9 @@ The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
-ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 
 #### Design Considerations
 
@@ -278,7 +281,7 @@ In this example, we explore the `marka` command.
 
 1. When the user executes the `marka` command, the user input is parsed to separate the command and its arguments.
 1. The format of the command is first checked, followed by the checking and separation of the individual arguments (student index(es) and week). This is done in the `MarkStudentAttCommandParser#parse(String args)` method.
-1. The student's attendance status for the particular week is retrieved and toggled. This operation is exposed in the `Model` interface as `Model#markStudenAttendance(Student student, int week)`.
+1. The student's attendance status for the particular week is retrieved and toggled. This operation is exposed in the `Model` interface as `Model#markStudentAttendance(Student student, int week)`.
 1. If the student is originally marked as absent, the method toggles his attendance to present.
 1. If the student is originally marked as present, the method toggles his attendance to absent.
 1. If the student belongs to a group, the group's student list will be updated with the updated student.
@@ -393,7 +396,7 @@ The following steps describe the execution of the `EditGroupCommand`.
 
 <div style="page-break-after: always;"></div>
 
-## Edit Task Command
+### Edit Task Command
 
 #### Implementation
 ![Sequence Diagram of EditTaskCommand](images/EditTaskCommandSequenceDiagram.png)
@@ -417,11 +420,12 @@ The following steps describe the execution of the `EditTaskCommand`.
 3. Finally, `Model` calls the `setTask` function of the `AddressBook` to update the `Task` data.
 
 
-#### Adding Todo Task
+### Adding Todo Task
 
-Given below is an example usage scenario and how the adding a todo task mechanism behaves at each step.
+Given below is an example usage scenario of adding a todo task 
+and how the adding a todo task mechanism behaves at each step.
 
-1. The user executes the `todo n/Complete tp p/H t/CS2103 t/Work` do add a Todo Task named 'Complete tp' with the tags
+1. The user executes the `todo n/Complete tp p/H t/CS2103 t/Work` to add a Todo Task named 'Complete tp' with the tags
    'CS2103' and 'Work' to the list of tasks and marks this task as High Priority.
 2. The command is handled by `LogicManager#execute(String)`, which then calls and passes this command to the `AddressBookParser#parseCommand(String)` method.
 3. The `AddressBookParser` detects the command word `todo` in the string and extracts the argument string `n/Complete tp p/H t/CS2103 t/Work`.
@@ -436,11 +440,16 @@ Given below is an example usage scenario and how the adding a todo task mechanis
 The above process is shown in the following sequence diagram:
 
 ![Reference Sequence Diagram of AddTodoTaskCommand](images/AddTodoTaskSequenceDiagram.png)
+
 **Sequence diagram showcasing the add todo task process**
+
+<div markdown="span" class="alert alert-info">:information_source: ℹ️ **Note:** The lifeline for `AddTodoTaskCommandParser` should end at the Destroy Marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 The following activity diagram summarizes what happens when a user executes a new command to find the members by keywords:
 
 ![Reference Activity Diagram of AddTodoTaskCommand](images/AddTodoTaskCommandActivityDiagram.png)
+
 **Activity diagram showcasing the  add todo task execution flow**
 
 <div style="page-break-after: always;"></div>
@@ -543,7 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User is already in the student directory.
 
-  Use case resumes at step 3.
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -574,8 +583,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to view students (UC2)
 2.  tApp displays the list of students
-3.  User requests to delete a specific student in the list
-4.  tApp deletes the student
+3.  User requests to edit a specific student in the list by specifying the details to edit
+4.  tApp edits the student details
 
     Use case ends.
 
@@ -751,7 +760,7 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
 Similar to UC11 (Edit a group), except the group is deleted instead of edited.
 
-**Use case: UC13 - Add student to group**
+**Use case: UC13 - Add a student to group**
 
 **MSS**
 
@@ -776,13 +785,13 @@ Similar to UC11 (Edit a group), except the group is deleted instead of edited.
 
       Use case ends.
 
-* 3c. The group name is valid but the group does not exist.
+* 3c. The group name is valid, but the group does not exist.
 
     * 3c1. tApp displays an error message stating that the group does not exist
 
       Use case ends.
 
-* 3d. The student index is valid but the student does not exist.
+* 3d. The student index is valid, but the student does not exist.
 
     * 3d1. tApp displays an error message stating that the student already has a group
 
@@ -813,9 +822,7 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
 * 2a. The task list is empty.
 
-    * 2a1. tApp displays message that there are no tasks
-
-      Use case ends.
+    Use case ends.
 
 **Use case: UC17 - Add a todo task**
 
@@ -1030,10 +1037,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
-    1. Test case: `marka 1 w/1`<br>
-       Expected: First student is marked as present in the list. Status message shows details of his week 1 attendance.
+    1. Test case: `marka 1 w/4`<br>
+       Expected: First student is marked as present in the list. Status message shows details of his week 4 attendance.
 
-    1. Test case: `marka 0 w/1`<br>
+    1. Test case: `marka 0 w/4`<br>
        Expected: No student is marked. Error details shown in the status message.
 
     1. Other incorrect mark attendance commands to try: `marka`, `marka x`, `...` (where x is larger than the list size)<br>
@@ -1041,21 +1048,21 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking a student while on another directory
 
-    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+    1. Prerequisites: Perform a `findStudent` command: e.g. `findStudent David`.
 
-    1. Test case: `marka 1 w/1`<br>
+    1. Test case: `marka 1 w/5`<br>
        Expected: First student in the last filtered students list (David) is marked as present. Status message shows details of student's week 1 attendance. Updated students list is shown.
 
-    1. Test case: `marka 1 w/1`<br>
+    1. Test case: `marka 1 w/5`<br>
        Expected: First student in student list (Alex) is marked as present/absent depending on his last attendance status. Status message shows details of student's week 1 attendance. Updated students list is shown.
 
 1. Marking multiple students
 
-    1. Test case: `marka 1 2 3 w/1`<br>
-       Expected: Students 1, 2 and 3 are marked as present in the list. Status message shows details of their week 1 attendance.
+    1. Test case: `marka 1 2 3 w/4`<br>
+       Expected: Students 1, 2 and 3 are marked as present in the list. Status message shows details of their week 4 attendance.
 
-    1. Test case: `marka 1 2 3 w/1`<br>
-       Expected: Students 1, 2 and 3 are marked as absent in the list. Status message shows details of their week 1 attendance.
+    1. Test case: `marka 1 2 3 w/4`<br>
+       Expected: Students 1, 2 and 3 are marked as absent in the list. Status message shows details of their week 4 attendance.
 
 ### Marking a student's participation
 
@@ -1063,10 +1070,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
-    1. Test case: `markp 1 w/1`<br>
-       Expected: First student is marked as participated in the list. Status message shows details of his week 1 participation.
+    1. Test case: `markp 1 w/3`<br>
+       Expected: First student is marked as participated in the list. Status message shows details of his week 3 participation.
 
-    1. Test case: `markp 0 w/1`<br>
+    1. Test case: `markp 0 w/3`<br>
        Expected: No student is marked. Error details shown in the status message.
 
     1. Other incorrect mark participation commands to try: `markp`, `markp x`, `...` (where x is larger than the list size)<br>
@@ -1074,21 +1081,21 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking a student while on another directory
 
-    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+    1. Prerequisites: Perform a `findStudent` command: e.g. `findStudent David`.
 
-    1. Test case: `markp 1 w/1`<br>
-       Expected: First student in the last filtered students list (David) is marked as participated. Status message shows details of student's week 1 participation. Updated students list is shown.
+    1. Test case: `markp 1 w/3`<br>
+       Expected: First student in the last filtered students list (David) is marked as participated. Status message shows details of student's week 3 participation. Updated students list is shown.
 
-    1. Test case: `markp 1 w/1`<br>
-       Expected: First student in student list (Alex) is marked as participated/not participated depending on his last participation status. Status message shows details of student's week 1 participation. Updated students list is shown.
+    1. Test case: `markp 1 w/3`<br>
+       Expected: First student in student list (Alex) is marked as participated/not participated depending on his last participation status. Status message shows details of student's week 3 participation. Updated students list is shown.
 
 1. Marking multiple students
 
-    1. Test case: `markp 1 2 3 w/1`<br>
-       Expected: Students 1, 2 and 3 are marked as participated in the list. Status message shows details of their week 1 participation.
+    1. Test case: `markp 1 2 3 w/3`<br>
+       Expected: Students 1, 2 and 3 are marked as participated in the list. Status message shows details of their week 3 participation.
 
-    1. Test case: `markp 1 2 3 w/1`<br>
-       Expected: Students 1, 2 and 3 are marked as not participated in the list. Status message shows details of their week 1 participation.
+    1. Test case: `markp 1 2 3 w/3`<br>
+       Expected: Students 1, 2 and 3 are marked as not participated in the list. Status message shows details of their week 3 participation.
 
 ### Finding a student
 
@@ -1162,10 +1169,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a group while all groups are being shown
 
-    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+    1. Prerequisites: List all groups using the groups command. Multiple groups in the list. 
+       Student to be added to the group does not belong to any group.
 
     1. Test case: `editGroup 1 r/ip`<br>
-       Expected: The first group in the list has details changed to the ones specified above. Details of the group is shown in the status message.
+       Expected: The first group in the list has details changed to the ones specified above. 
+       Details of the group is shown in the status message.
 
     1. Test case: `editGroup 1 g/w14-4` changing group name a value conflicting another group in the list<br>
        Expected: No group is edited. Error message of duplicate group shown in status message.
@@ -1176,10 +1185,10 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `editGroup 1` with no prefixes <br>
        Expected: No group is edited. Error message of missing edit fields shown.
 
-    1. Test case: `editStudent 0 g/z11-1`, where the index is 0 or smaller <br>
-       Expected: No student is edited. Error message of invalid command format shown.
+    1. Test case: `editGroup 0 g/z11-1`, where the index is 0 or smaller <br>
+       Expected: No group is edited. Error message of invalid command format shown.
 
-2. Editing a student while on another directory
+2. Editing a group while on another directory
 
     1. Prerequisites: List all tasks or students using the `tasks` or `students` command.
 
@@ -1202,7 +1211,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No member is added. Error message of invalid group name shown in the status message. 
 
     1. Test case: `addMember 0 g/w14-4`<br>
-       Expected: No group is deleted. Error message of invalid command format shown in the status message.
+       Expected: No group is added. Error message of invalid command format shown in the status message.
 
     1. Other incorrect delete commands to try: `addMember`, `addMember x g/w14-4`, `...` (where x is smaller than 0)<br>
        Expected: Similar to previous.
@@ -1352,7 +1361,7 @@ testers are expected to do more *exploratory* testing.
    3. Test Case: `editTask 1 on/2021-12-12`, where the index is the index of the deadline task <br>
        Expected: No task is edited. Error message of invalid prefix is shown.
 
-   4. Test Case: `editTask 1 by/2021-20-12`, where the index is the index of the deadline task, and the date provided is invalid. <br>
+   4. Test Case: `editTask 1 by/2021-20-12`, where the date provided is invalid. <br>
       Expected: No task is edited. Error message of invalid date shown.
 
 4. Editing an event task
@@ -1365,7 +1374,7 @@ testers are expected to do more *exploratory* testing.
     3. Test Case: `editTask 1 by/2021-12-12`, where the index is the index of the event task <br>
        Expected: No task is edited. Error message of invalid prefix is shown.
 
-    4. Test Case: `editTask 1 on/2021-20-12`, where the index is the index of the event task, and the date provided is invalid. <br>
+    4. Test Case: `editTask 1 on/2021-20-12`, where the date provided is invalid. <br>
         Expected: No task is edited. Error message of invalid date shown.
 
 5. Editing a todo task
@@ -1400,26 +1409,26 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all tasks using the `tasks` command. Multiple tasks in the list.
 
-    1. Test case: `taskDone 1`<br>
+    1. Test case: `doneTask 1`<br>
        Expected: First task is marked as completed. Status message shows details of the task.
 
-    1. Test case: `taskDone 0`<br>
+    1. Test case: `doneTask 0`<br>
        Expected: No student is marked. Error details shown in the status message.
 
-    1. Other incorrect mark participation commands to try: `taskDone`, `taskDone x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect mark participation commands to try: `doneTask`, `doneTask x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. Marking a task as done while on another directory
 
     1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
 
-    1. Test case: `taskDone`<br>
+    1. Test case: `doneTask`<br>
        Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks.
        Updated task list is shown.
 
 1. Marking multiple tasks
 
-    1. Test case: `taskDone 1 2 3`<br>
+    1. Test case: `doneTask 1 2 3`<br>
        Expected: Tasks 1, 2 and 3 are marked as completed in the list. Status message shows details of tasks.
 
 ### Clearing task list
@@ -1472,4 +1481,6 @@ Our team has put in a significant amount of effort into making our application c
 Implementing this required a deep understanding of how AB3 was structured and implemented, in order to expand on its functionality.
 Moreover, classes such as `Student` and `Group` interact in order to provide more utility to the user, adding another layer of difficulty to the implementation.
 
-In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. This required significant time and effort, as well as a good understanding of the `Logic` component of AB3.
+In addition, our group has added many commands in addition to the ones implemented by AB3. While AB3 had a total of 8 available commands, tApp has a total of 27 in order to accommodate for all the different entity types and features. 
+This required significant time and effort, as well as a good understanding of the `Logic` component of AB3. We also made significant changes to the UI, making it more appropriate
+for this app, such as the introduction of the different colours for the different tags. 

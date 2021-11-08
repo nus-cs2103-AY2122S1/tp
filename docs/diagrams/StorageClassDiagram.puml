@@ -18,7 +18,9 @@ package "AddressBook Storage" #F4F6F6{
 Interface AddressBookStorage <<Interface>>
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+Class JsonAdaptedStudent
+Class JsonAdaptedTask
+Class JsonAdaptedGroup
 Class JsonAdaptedTag
 }
 
@@ -37,7 +39,12 @@ Storage -right-|> AddressBookStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonSerializableAddressBook ---> "*" JsonAdaptedStudent
+JsonSerializableAddressBook ---> "*" JsonAdaptedTask
+JsonSerializableAddressBook --left-> "*" JsonAdaptedGroup
+JsonAdaptedStudent --> "*" JsonAdaptedTag
+JsonAdaptedTask -> "*" JsonAdaptedTag
+JsonAdaptedGroup -> "*" JsonAdaptedTag
+JsonAdaptedGroup -> "*" JsonAdaptedStudent
 
 @enduml
