@@ -38,11 +38,11 @@ public class LessonIsOfSpecifiedGradeTest {
 
     @Test
     public void test_gradeMatches_returnsTrue() {
-        // Secondary prefix
+        // Grade with secondary prefix
         LessonIsOfSpecifiedGrade predicate = new LessonIsOfSpecifiedGrade(new Grade("S3"));
         assertTrue(predicate.test(new LessonBuilder().withGrade("S3").build()));
 
-        // Primary prefix
+        // Grade with primary prefix
         predicate = new LessonIsOfSpecifiedGrade(new Grade("P1"));
         assertTrue(predicate.test(new LessonBuilder().withGrade("P1").build()));
     }
