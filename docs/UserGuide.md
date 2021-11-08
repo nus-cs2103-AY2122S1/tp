@@ -353,7 +353,7 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 
 * If you were to add and remove remarks in the same command, **TuitiONE** will remove specified remarks before adding the new ones.
 
-* **Note that if you change a student's grade, **TuitiONE** will unenroll the student from all the classes he or she was previously taking in the previous grade**.
+* **Note** that if you change a student's grade, **TuitiONE** will unenroll the student from all the classes he or she was previously taking in the previous grade.
 
 Example(s):
 
