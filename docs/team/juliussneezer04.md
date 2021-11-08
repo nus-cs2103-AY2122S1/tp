@@ -29,6 +29,7 @@ Given below are my contributions to the project.
     * Modifying Quick Start in UG [\#139]([Improving User Guide by juliussneezer04 · Pull Request #139 · AY2122S1-CS2103T-W15-1/tp (github.com)](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/139))
     * Adding screenshots and explanations of icons to UG [\#144](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/144)
     * Added documentation for student marks commands in UG [\#153](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/153)
+    * UG Bug Fixes [#253](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/253), [#254](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/254)
   * Developer Guide:
     * Documentation regarding Student Marks functionality implementation. [\#127](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/127), [\#146](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/146)
     * Adding Diagrams for Student Marks functionality. [\#127](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/127), [\#133](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/133) (Sequence Diagram Shown in Appendix A)
@@ -39,12 +40,12 @@ Given below are my contributions to the project.
     * Created Developers' organisation for team.
   * Managing scheduling & tracking for upcoming releases `v1.1` - `v1.4` (4 releases) on GitHub
   * Assigning Issues and Tasks to team members in Repo's Projects
-  * Released v1.2 and v1.3 JAR releases.
+  * Released v1.2, v1.3 and v1.4 JAR releases.
   * Set up all Repo Projects for each iteration.
   * Set up and tracked Milestones 1.1, 1.2, 1.3, 1.4
   * Recorded Demo Videos for ClassMATE Demos.
 * **Review Contributions**:
-  * PRs reviewed (with non-trivial reviews) [\#155]([Update User Guide by GabrielWLM · Pull Request #155 · AY2122S1-CS2103T-W15-1/tp (github.com)](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/155)),
+  * PRs reviewed (with non-trivial reviews) [\#155]([Update User Guide by GabrielWLM · Pull Request #155 · AY2122S1-CS2103T-W15-1/tp (github.com)](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/155)), [#245](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/245), [#249](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/249)
 
 <div style="page-break-after: always;"></div>
 
