@@ -999,7 +999,7 @@ Pre-conditions: The students have been added to TutorAid and the lessons have be
 
 1. Tutor requests the list of students and lessons.
 2. TutorAid displays the list of all students and lessons.
-3. Tutor identifies the student indexes of the specific students and the lesson indices of the specific lessons to which they wish to add these students to. The Tutor then requests to add these students to these lessons by providing the indices.   
+3. Tutor identifies the student indexes of the specific students and the lesson indexes of the specific lessons to which they wish to add these students to. The Tutor then requests to add these students to these lessons by providing these indexes.   
 4. TutorAid adds the students to the lessons and displays a success message for each successful addition.
    
 Use case ends.
@@ -1018,7 +1018,7 @@ Use case resumes from Step 2.
 
 Use case ends.
 
-* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices)
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indexes)
     * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 3a2. Tutor re-enters the command, along with the necessary arguments.
 
@@ -1040,7 +1040,7 @@ Pre-conditions: The students have been added to TutorAid and the lessons have be
 
 1. Tutor requests the list of students and lessons.
 2. TutorAid displays the list of all students and lessons.
-3. Tutor identifies the student indexes of the specific students, and the lesson indices of the specific lessons from which they wish to delete the students. The Tutor then requests to delete these students from these lessons by providing the indices.
+3. Tutor identifies the student indexes of the specific students, and the lesson indexes of the specific lessons from which they wish to delete the students. The Tutor then requests to delete these students from these lessons by providing these indexes.
 4. TutorAid delete these students from these lessons and displays a success message for each successful deletion.
 
 Use case ends.
@@ -1059,7 +1059,7 @@ Use case resumes from Step 2.
   
 Use case ends.
   
-* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indices)
+* 3a. TutorAid detects that the command keyed in is incorrect. (e.g. wrong format, missing arguments, invalid indexes)
     * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 3a2. Tutor re-enters the command, along with the necessary arguments.
 
