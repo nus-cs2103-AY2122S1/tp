@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.windows;
 
 import java.util.HashSet;
 import java.util.TreeMap;
@@ -125,7 +125,7 @@ public class DashboardWindow extends PopupWindow {
 
         // Start building message
         StringBuilder dataToDisplay = new StringBuilder("\nNo. of labs left to mark:\n");
-        for (ClassId cid: labMap.keySet()) {
+        for (ClassId cid : labMap.keySet()) {
             String key = cid.toString();
             String value = labMap.get(cid).toString();
             dataToDisplay.append(key).append(": ").append(value).append("\n\n");

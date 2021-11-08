@@ -4,8 +4,7 @@ import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
-
-import java.util.stream.Stream;
+import static seedu.programmer.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.programmer.logic.commands.AddLabCommand;
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
@@ -16,15 +15,16 @@ import seedu.programmer.model.student.LabTotal;
 
 
 /**
- * Parses input arguments and creates a new AddLabCommandParser object.
+ * Parses input arguments and creates a new AddLabCommand object.
  */
 public class AddLabCommandParser implements Parser<AddLabCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddLabCommand
+     * and returns an AddLabCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The String arguments as given by the user.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddLabCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap;
@@ -47,13 +47,4 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
         Lab labResult = new Lab(labNum, total);
         return new AddLabCommand(labResult);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values
-     * in the given {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

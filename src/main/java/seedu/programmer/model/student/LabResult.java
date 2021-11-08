@@ -4,14 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a labs result in the ProgrammerError.
+ * Represents a lab result in the ProgrammerError.
  */
 public class LabResult {
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
     private final Integer labResult;
 
     /**
-     * Constructs a {@code LabResult}.
+     * Class constructor for {@code LabResult}.
      *
      * @param labResult The lab score obtained by a student.
      */
@@ -26,7 +26,10 @@ public class LabResult {
     }
 
     /**
-     * Returns true if a given string is a valid labResult.
+     * Returns true if a given string is a valid lab result.
+     *
+     * @param test The Integer to be tested against.
+     * @return true if the lab result is valid.
      */
     public static boolean isValidLabResult (Integer test) {
         return test.compareTo(-1) >= 0;

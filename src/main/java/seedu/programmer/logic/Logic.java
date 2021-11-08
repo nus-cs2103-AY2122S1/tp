@@ -22,6 +22,7 @@ import seedu.programmer.storage.Storage;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -36,13 +37,19 @@ public interface Logic {
      */
     ReadOnlyProgrammerError getProgrammerError();
 
-    /** Returns an unmodifiable view of the filtered list of students */
+    /**
+     * Returns an unmodifiable view of the filtered list of students.
+     */
     ObservableList<Student> getFilteredStudentList();
 
-    /** Returns tan unmodifiable view of all students  */
+    /**
+     * Returns an unmodifiable view of all students.
+     */
     ObservableList<Student> getAllStudents();
 
-    /** Returns the selected labs. */
+    /**
+     * Returns the selected labs.
+     */
     ObservableList<DisplayableObject> getSelectedInformation();
 
     /**
@@ -56,7 +63,7 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
-     * Set the user prefs' GUI settings.
+     * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
@@ -71,22 +78,22 @@ public interface Logic {
     Storage getStorage();
 
     /**
-     * Update ProgrammerError to the specified one.
+     * Updates ProgrammerError to the specified one.
      */
     void updateProgrammerError(ProgrammerError pe);
 
     /**
-     * Update FilteredStudents to the specified one.
+     * Updates FilteredStudents to the specified one.
      */
     void updateFilteredStudents(Predicate<Student> predicate);
 
     /**
-     * Save ProgrammerError to the storage.
+     * Saves ProgrammerError to the storage.
      */
     void saveProgrammerError(ProgrammerError pe);
 
     /**
-     * Replace the existing student list with a new one.
+     * Replaces the existing student list with a new one.
      */
     void replaceExistingStudents(List<Student> stuList);
 }

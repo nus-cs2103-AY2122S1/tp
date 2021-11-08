@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.windows;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +16,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * Controller for a help window
+ * Controller for a help window.
  */
 public class HelpWindow extends PopupWindow {
 

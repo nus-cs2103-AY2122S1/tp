@@ -28,17 +28,15 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Lab Added: %1$s";
 
-
-
     public static final String NO_STUDENT_CONSTRAINTS = "There are no students to add the lab to.";
 
     private final Lab result;
 
     /**
-     * Constructor for AddLabCommand.
+     * Class constructor with a {@code Lab} object.
      *
      * @param result the lab result to be added.
-     * */
+     */
     public AddLabCommand(Lab result) {
         requireNonNull(result);
         this.result = result;

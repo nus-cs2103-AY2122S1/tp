@@ -1,7 +1,6 @@
 package seedu.programmer.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
@@ -9,14 +8,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 
+import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.testutil.SerializableTestClass;
 import seedu.programmer.testutil.TestUtil;
 
 /**
- * Tests JSON Read and Write
+ * Tests JSON read and write to files.
  */
 public class JsonUtilTest {
 
@@ -49,20 +48,19 @@ public class JsonUtilTest {
     }
 
     @Test
-    public void getJsonData_validJson_returnsCorrectNumberOfElements() {
+    public void getJsonData_validJson_returnsCorrectNumberOfElements() throws IllegalValueException {
         JSONArray result = JsonUtil.getJsonData(VALID_JSON);
         assert result != null;
         assertEquals(result.length(), DEFAULT_NUM_OF_STUDENTS);
     }
 
     @Test
-    public void getJsonData_invalidJson_returnsNull() {
-        JSONArray result = JsonUtil.getJsonData(INVALID_JSON);
-        assertNull(result);
+    public void getJsonData_invalidJson_throwsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> JsonUtil.getJsonData(INVALID_JSON));
     }
 
     @Test
-    public void writeJsonToCsv_invalidJsonData_throwsException() throws JSONException {
+    public void writeJsonToCsv_invalidJsonData_throwsNullPointerException() {
         File testCsvFile = new File("writeJsonTest.csv");
         assertThrows(NullPointerException.class, () -> JsonUtil.writeJsonToCsv(null, testCsvFile));
     }

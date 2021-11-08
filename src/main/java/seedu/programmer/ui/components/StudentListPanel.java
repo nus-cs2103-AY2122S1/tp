@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 import java.util.logging.Logger;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.ui.UiPart;
 
 /**
  * Panel containing the list of students.

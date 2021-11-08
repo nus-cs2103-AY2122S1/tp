@@ -13,8 +13,8 @@ import seedu.programmer.model.student.UniqueStudentList;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 
 /**
- * Wraps all data at the programmer-book level
- * Duplicates are not allowed (by .isSameStudent comparison)
+ * Wraps all data at the programmer-book level.
+ * Duplicates are not allowed (by .isSameStudent comparison).
  */
 public class ProgrammerError implements ReadOnlyProgrammerError {
     private final UniqueStudentList students;
@@ -34,7 +34,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     public ProgrammerError() {}
 
     /**
-     * Creates a ProgrammerError using the Persons in the {@code toBeCopied}
+     * Creates a ProgrammerError using the Persons in the {@code toBeCopied}.
      */
     public ProgrammerError(ReadOnlyProgrammerError toBeCopied) {
         this();
@@ -45,11 +45,11 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         return students.hasLab(lab);
     }
 
-    //// list overwrite operations
-
     /**
      * Replaces the contents of the student list with {@code students}.
      * {@code students} must not contain duplicate students.
+     *
+     * @param students The list of students to be replaced into.
      * @throws DuplicateStudentException if {@code students} contains duplicate students.
      */
     public void setStudents(List<Student> students) throws DuplicateStudentException {

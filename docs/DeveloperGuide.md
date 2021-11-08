@@ -1244,7 +1244,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
           Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
 
 ### <a name="Del student"></a>**8.2 Deleting a Student**
 

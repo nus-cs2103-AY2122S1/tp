@@ -17,8 +17,8 @@ public class DashboardCommand extends Command {
     /**
      * Returns a DashboardCommandResult with a message to indicate that the command was executed.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return a DashboardCommandResult with a message
+     * @param model {@code Model} which the command should operate on.
+     * @return a {@code DashboardCommandResult} with a message.
      */
     @Override
     public DashboardCommandResult execute(Model model) {

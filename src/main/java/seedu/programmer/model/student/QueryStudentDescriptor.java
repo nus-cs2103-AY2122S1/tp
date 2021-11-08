@@ -16,7 +16,8 @@ public class QueryStudentDescriptor {
     private String email;
 
     /**
-     * Constructor with the query parameters.
+     * Class constructor with the query parameters.
+     *
      * @param name the name to be queried.
      * @param sid the student ID to be queried.
      * @param cid the class ID to be queried.
@@ -54,7 +55,8 @@ public class QueryStudentDescriptor {
 
     /**
      * Returns true if {@code student} fields matches that given in {@code QueryStudentDescriptor}.
-     * @param student to be tested to ascertain if the fields matches..
+     *
+     * @param student to be tested to ascertain if the fields matches.
      * @return true if all the non-null fields matches that of the {@code student} and false otherwise.
      */
     public boolean doesStudentMatchDescriptor(Student student) {
@@ -75,6 +77,7 @@ public class QueryStudentDescriptor {
     }
     /**
      * Checks if {@code str} character sequence matches any of the content of the {@code optional}.
+     *
      * @param optional to check against with.
      * @param str the char sequence to be checked if contained in the {@code optional}.
      * @return true if {@code str} is contained within {@code optional} and false otherwise.

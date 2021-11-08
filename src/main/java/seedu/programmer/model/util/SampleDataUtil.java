@@ -137,7 +137,8 @@ public class SampleDataUtil {
 
     /**
      * Same method as getSampleProgrammerError but with ProgrammerError object as its return type.
-     * @return ProgrammerError filled with sample data
+     *
+     * @return ProgrammerError filled with sample data.
      */
     public static ProgrammerError fillSampleProgrammerError() {
         ProgrammerError samplePE = new ProgrammerError();

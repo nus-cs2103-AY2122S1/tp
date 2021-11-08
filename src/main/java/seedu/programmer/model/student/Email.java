@@ -5,7 +5,7 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a student's Email in the ProgrammerError.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}.
  */
 public class Email {
 
@@ -16,7 +16,7 @@ public class Email {
     private final String email;
 
     /**
-     * Constructs a {@code Email}.
+     * Class constructor for {@code Email}.
      *
      * @param email A valid Email.
      */
@@ -28,8 +28,11 @@ public class Email {
 
     /**
      * Returns true if a given string is a valid email.
+     *
+     * @param test The String to be checked tested against.
+     * @return true if the String is a valid email.
      */
-    public static boolean isValidEmail (String test) {
+    public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

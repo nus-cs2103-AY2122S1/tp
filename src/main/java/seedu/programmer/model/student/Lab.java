@@ -23,7 +23,7 @@ public class Lab implements DisplayableObject {
     private LabTotal totalScore;
 
     /**
-     * Constructs a marked Lab Object.
+     * Class constructor for a marked Lab Object.
      *
      * @param labNum The labNum of the lab.
      * @param actualScore The score obtained by the student.
@@ -37,7 +37,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Constructs an unmarked Lab Object.
+     * Class constructor for an unmarked Lab Object.
      *
      * @param labNum The labNum of the lab.
      * @param totalScore The total score.
@@ -50,10 +50,9 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Constructor for Lab with a specific lab number.
+     * Class constructor for Lab with a specific lab number.
      *
      * @param labNum The labNum of the lab.
-     *
      */
     public Lab(LabNum labNum) {
         this.labNum = labNum;
@@ -92,7 +91,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Get the lab number.
+     * Gets the lab number.
      *
      * @return The lab number.
      */
@@ -101,7 +100,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Get the lab result integer value.
+     * Gets the lab result integer value.
      *
      * @return The lab result integer value.
      */
@@ -110,7 +109,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Get the total score of the lab.
+     * Gets the total score of the lab.
      *
      * @return The total score of the lab.
      */
@@ -128,7 +127,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Updates the labNum of the lab
+     * Updates the labNum of the lab.
      *
      * @param newLabNum The new lab number.
      */
