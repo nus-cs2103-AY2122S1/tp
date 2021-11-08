@@ -382,7 +382,7 @@ Upon clicking the Add Task Dialog button, the following popup window should appe
 
 ![result for pressing +new button](images/guiAddTaskDialog.png)
 
-Enter relevant text into the text fields. 
+Enter relevant text into the text fields.
 
 To add tags or contacts, type the tag into the text field and press the `Enter` key. The tag should be displayed as seen below.
 
