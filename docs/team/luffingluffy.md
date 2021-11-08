@@ -19,7 +19,7 @@ Given below are my contributions to the project.
     * Justification: additional address information is always useful when it comes to tracking the location of a person in the case of emergency. It is optional since not everyone has multiple addresses.
 
 
-* **New Feature**: Implemented tests for `addCommand` and `editCommand` for attributes added in v1.2 (`workAddress`, `quarantineAddress`, `shnPeriod`, `nextOfKinName`, `nextOfKinPhone` and `nextofKinAddress`) [\#84](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/84) [\#106](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/106)
+* **New Feature**: Implemented tests for `addCommand` and `editCommand` for attributes added in v1.2 (`workAddress`, `quarantineAddress`, `shnPeriod`, `nextOfKinName`, `nextOfKinPhone` and `nextofKinAddress`) [\#84](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/84), [\#106](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/106)
     * What it does: increase code coverage and allows detection of potential bugs.
     * Justification: as these attributes are new, tests were written to detect possible bugs.
 
@@ -40,10 +40,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Fixed typo/formatting issues in the UG. [\#268](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/268) [\#271](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/271)
+        * Fixed typo/formatting issues in the UG. [\#268](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/268), [\#271](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/271)
     * Developer Guide:
         * Updated the UML for `ModelClassDiagram` for `v1.4` milestone. [\#271](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/271)
-        * Fixed typo/formatting issues in the DG. [\#115](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/115) [\#268](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/268) [\#271](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/271)
+        * Fixed typo/formatting issues in the DG. [\#115](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/115), [\#268](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/268), [\#271](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/271)
         * Modified the Javadocs of the Commands to be consistent with the UG/DG. [\#285](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/285)
 
 
