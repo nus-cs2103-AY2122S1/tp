@@ -27,7 +27,7 @@ public class DeletePersonCommand extends Command {
     public static final String MESSAGE_USAGE = "delete: "
             + "Deletes the person identified by the index number used in the displayed person list "
             + "or by module code.\n"
-            + "Parameters: INDEX (positive integer and exists in contHACKS)\n"
+            + "Parameters: INDEX (must be a positive integer that exists in contHACKS)\n"
             + "START_INDEX, END_INDEX (START_INDEX more than or equal to END_INDEX)\n"
             + "m/MODULE_CODE\n"
             + "Example: delete 1 , delete 1-3 , delete "
