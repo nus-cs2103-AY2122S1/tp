@@ -1479,6 +1479,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Redoing operations
 1. Redoing changes consecutively 
+   
   1. Prerequisites: Multiple contacts in the list, contact with name ‘Marina Bay Sands’ and 'Singapore Flyer' exists, `Singapore Flyer` is the first contact in the list. Address book history set up by executing the following commands in order:<br>
         a. `delete n/Marina Bay Sands`<br>
         b. `edit 1 e/123@example.com`<br>
