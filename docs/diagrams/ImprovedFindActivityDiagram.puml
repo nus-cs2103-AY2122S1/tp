@@ -1,0 +1,19 @@
+@startuml
+start
+:User wants to find a specific person
+with **name** "alice" and **tag** "lab10";
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([no one is named **alice**
+and has a **tag** of lab10])
+    : Display no one;
+
+else ([else])
+    : Display the person with name "alice" and tag "lab10"
+                           which matches both criteria;
+endif
+stop
+@enduml
+

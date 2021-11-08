@@ -8,47 +8,66 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
+Class VersionedAddressBook
 Class ReadOnlyAddressBook
+Class AddressBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
 Class UniquePersonList
+Class UniqueAssignmentList
 Class Person
-Class Address
 Class Email
 Class Name
-Class Phone
 Class Tag
+Class Assignment
+Class Description
+Class Status
+Class DueDate
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+AddressBook .up.--|> ReadOnlyAddressBook
+VersionedAddressBook -left-|> AddressBook
+VersionedAddressBook -left----> "1..~*" ReadOnlyAddressBook: manages state >
 
-ModelManager .up.|> Model
+ModelManager .up.-|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" VersionedAddressBook
 ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+UserPrefs .up.-|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+AddressBook *----> "    1" UniqueAssignmentList
+AddressBook *---> "1" UniquePersonList
+AddressBook -> "active 0..1" Person
+AddressBook -> "1" Person: stores filtered list predicate about >
+
+Person *--> " 1" UniqueAssignmentList
+Person *--> "1" Name
+Person *--> "1 " Email
 Person *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+UniquePersonList -down-> "all~*" Person
 
-ModelManager -->"~* filtered" Person
+UniqueAssignmentList ---> "~*" Assignment: contains >
+Assignment *-down-> "1" Description
+Assignment *-down-> "1" Status
+Assignment *-down-> "1" DueDate
+Assignment .down.|> Comparable
+Status .down.|> Comparable
+DueDate .down.|> Comparable
+
+ModelManager ---->"~* filtered" Person
+ModelManager --->"~* observed" Assignment: observes >
+
+UserPrefs -[hidden]down-|>Person
+
+UniqueAssignmentList -[hidden]right-|> Name
+AddressBook -[hidden]left-|>ReadOnlyAddressBook
 @enduml

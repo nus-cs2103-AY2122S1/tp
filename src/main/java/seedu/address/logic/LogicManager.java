@@ -7,13 +7,13 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -43,7 +43,15 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+
         commandResult = command.execute(model);
+
+        boolean canBeUndone = !(command instanceof UndoCommand || command instanceof RedoCommand
+                || command instanceof HelpCommand);
+
+        if (canBeUndone) {
+            model.commitAddressBook();
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -78,4 +86,10 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    @Override
+    public ObservableList<Assignment> getAssignmentList() {
+        return model.getAssignmentList();
+    }
+
 }

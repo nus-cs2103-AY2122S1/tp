@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -9,18 +11,28 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final Integer MAX_LENGTH_OF_EMAIL = 320;
+    public static final Integer MAX_LENGTH_OF_DOMAIN_PART = 255;
+    public static final Integer MAX_LENGTH_OF_LOCAL_PART = 64;
+
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
+    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain, "
+            + "must have a maximum of 320 characters "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
-            + "characters.\n"
+            + "the parentheses, (" + SPECIAL_CHARACTERS + ").\n"
+            + "The local-part must:\n"
+            + "    - have a maximum of 64 characters\n"
+            + "    - not start or end with any special characters\n"
+            + "    - not 2 consecutive special characters\n"
             + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
             + "separated by periods.\n"
             + "The domain name must:\n"
+            + "    - have a maximum of 255 characters\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
             + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
@@ -45,10 +57,10 @@ public class Email {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns true if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && Email.isValidLength(test);
     }
 
     @Override
@@ -60,7 +72,8 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && value.equals(((Email) other).value)); // state check
+                && value.toLowerCase(Locale.ROOT)
+                .equals(((Email) other).value.toLowerCase(Locale.ROOT))); // state check
     }
 
     @Override
@@ -68,4 +81,16 @@ public class Email {
         return value.hashCode();
     }
 
+    /**
+     * Returns true if the given email is of correct length
+     */
+    public static boolean isValidLength(String test) {
+        String[] emailParts = test.split("@");
+        String localPart = emailParts[0];
+        String domainPart = emailParts[1];
+        boolean isValidLocalPartLength = localPart.length() <= MAX_LENGTH_OF_LOCAL_PART;
+        boolean isValidDomainPartLength = domainPart.length() <= MAX_LENGTH_OF_DOMAIN_PART;
+        boolean isValidEmailLength = test.length() <= MAX_LENGTH_OF_EMAIL;
+        return isValidEmailLength && isValidLocalPartLength && isValidDomainPartLength;
+    }
 }

@@ -1,0 +1,39 @@
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "email" : "E1234567@u.nus.edu",
+    "module" : "CS2100",
+    "assignments" : [ "Assignment 2|20 Oct 2021, 01:00 PM|PENDING", "Lab 3|22 Oct 2021, 01:00 PM|PENDING", "Assignment 1|15 Sep 2021, 01:00 PM|COMPLETED", "Lab 1|08 Oct 2021, 01:00 PM|COMPLETED", "Lab 2|15 Oct 2021, 01:00 PM|COMPLETED" ],
+    "tagged" : [ "T17", "L13" ]
+  }, {
+    "name" : "Bernice Yu",
+    "email" : "E9876543@u.nus.edu",
+    "module" : "CS2100",
+    "assignments" : [ "Assignment 1|15 Sep 2021, 01:00 PM|COMPLETED", "Assignment 2|20 Oct 2021, 01:00 PM|COMPLETED" ],
+    "tagged" : [ "T17" ]
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "email" : "E2468135@u.nus.edu",
+    "module" : "CS1231",
+    "assignments" : [ "Assignment 2|19 Oct 2021, 11:59 PM|PENDING", "Assignment 1|13 Sep 2021, 11:59 PM|COMPLETED" ],
+    "tagged" : [ "T5" ]
+  }, {
+    "name" : "David Li",
+    "email" : "E9753124u@u.nus.edu",
+    "module" : "CS1231",
+    "assignments" : [ "Assignment 1|13 Sep 2021, 11:59 PM|COMPLETED", "Assignment 2|19 Oct 2021, 11:59 PM|COMPLETED" ],
+    "tagged" : [ "T5" ]
+  }, {
+    "name" : "Irfan Ibrahim",
+    "email" : "E3698521@u.nus.edu",
+    "module" : "CS2100",
+    "assignments" : [ "Assignment 1|15 Sep 2021, 01:00 PM|COMPLETED", "Assignment 2|20 Oct 2021, 01:00 PM|COMPLETED" ],
+    "tagged" : [ "T8" ]
+  }, {
+    "name" : "Roy Balakrishnan",
+    "email" : "E7539518@u.nus.edu",
+    "module" : "CS2100",
+    "assignments" : [ "Lab 3|22 Oct 2021, 01:00 PM|PENDING", "Lab 1|08 Oct 2021, 01:00 PM|COMPLETED", "Lab 2|15 Oct 2021, 01:00 PM|COMPLETED" ],
+    "tagged" : [ "L13" ]
+  } ]
+}

@@ -15,6 +15,8 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class AssignmentListPanel
+Class AssignmentCard
 }
 
 package Model <<Rectangle>> {
@@ -34,20 +36,26 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" AssignmentListPanel
 MainWindow --> "0..1" HelpWindow
+AssignmentListPanel --|> UiPart
+AssignmentCard -|> UiPart
 
-PersonListPanel -down-> "*" PersonCard
+
+PersonListPanel -down--> "*" PersonCard
+AssignmentListPanel ---down> "*" AssignmentCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
+PersonListPanel ---|> UiPart
 PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+StatusBarFooter -|> UiPart
+HelpWindow ---|> UiPart
 
 PersonCard ..> Model
+AssignmentCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
@@ -55,6 +63,9 @@ PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+PersonListPanel -[hidden]right- AssignmentListPanel
 
-MainWindow -[hidden]-|> UiPart
+
+MainWindow -[hidden]down-|> UiPart
+CommandBox -[hidden]down-|> UiPart
 @enduml

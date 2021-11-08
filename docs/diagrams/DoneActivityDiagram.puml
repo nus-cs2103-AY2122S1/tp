@@ -1,0 +1,17 @@
+@startuml
+start
+:User executes done command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+
+if () then ([assignment at specified index exists])
+      :Mark specified assignment as completed in
+      currently displayed assignment list;
+      :Sort assignment based on completed status;
+else ([else])
+      :Show assignment not exist error message;
+endif
+stop
+@enduml

@@ -4,12 +4,14 @@ start
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
-
+if () then ([else])
 if () then ([command commits AddressBook])
     :Purge redundant states;
     :Save AddressBook to
     addressBookStateList;
 else ([else])
+endif
+else ([command is not desirable to be committed])
 endif
 stop
 @enduml

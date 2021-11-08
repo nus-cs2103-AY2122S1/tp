@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "r:AddAssignmentToAllCommand" as AddAssignmentToAllCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute(giveall 1 m/... d/... by/mon)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(giveall 1 m/... d/... by/mon)
+activate AddressBookParser
+
+create AddAssignmentToAllCommand
+AddressBookParser -> AddAssignmentToAllCommand
+activate AddAssignmentToAllCommand
+
+AddAssignmentToAllCommand --> AddressBookParser
+deactivate AddAssignmentToAllCommand
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> AddAssignmentToAllCommand : execute()
+activate AddAssignmentToAllCommand
+
+AddAssignmentToAllCommand -> Model : getAddressBook()
+activate Model
+
+Model -> AddressBook : getPersonList()
+activate AddressBook
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> AddAssignmentToAllCommand : personList
+deactivate Model
+
+AddAssignmentToAllCommand -> AddAssignmentToAllCommand : getAssignmentIfExists(personListWithAssignment)
+activate AddAssignmentToAllCommand
+
+AddAssignmentToAllCommand --> AddAssignmentToAllCommand
+deactivate AddAssignmentToAllCommand
+
+
+AddAssignmentToAllCommand -> Model : addAllAssignment(personListWithoutAssignment, assignment)
+activate Model
+
+Model --> AddAssignmentToAllCommand
+deactivate Model
+
+
+AddAssignmentToAllCommand --> LogicManager : result
+deactivate AddAssignmentToAllCommand
+AddAssignmentToAllCommand -[hidden]-> LogicManager : result
+destroy AddAssignmentToAllCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

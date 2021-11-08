@@ -1,7 +1,8 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,25 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("abcdefghijklmnopqrstuvwxyz" //26 characters
+                + "abcdefghijklmnopqrstuvwxyz" // 26 characters
+                + "abcdefghijklm" // 13 characters
+                + "@example.com")); // invalid local part length of 65 characters
+        assertFalse(Email.isValidEmail("peterjack@"
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqr.com" //22 characters
+                )); // invalid domain part length of 256 characters
+        assertFalse(Email.isValidEmail("abcdefghijklmnopqrstuvwxyz" //26 characters
+                + "abcdefghijklmnopqrstuvwxyz" // 26 characters
+                + "abcdefghijkl" // 12 characters
+                + "@"
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqr.com" //22 characters
+                )); // invalid email length of 321 characters
 
         // valid email
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
@@ -64,5 +84,32 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail("abcdefghijklmnopqrstuvwxyz" //26 characters
+                + "abcdefghijklmnopqrstuvwxyz" // 26 characters
+                + "abcdefghijkl" // 12 characters
+                + "@example.com")); // valid local part length of 64 characters
+        assertTrue(Email.isValidEmail("peterjack@"
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopq.com" //21 characters
+        )); // valid domain part length of 255 characters
+        assertTrue(Email.isValidEmail("abcdefghijklmnopqrstuvwxyz" //26 characters
+                + "abcdefghijklmnopqrstuvwxyz" // 26 characters
+                + "abcdefghijkl" // 12 characters
+                + "@"
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
+                + "abcdefghijklmnopq.com" //21 characters
+        )); // valid email length of 320 characters
+    }
+
+    @Test
+    public void isSameEmail() {
+        // Case sensitivity does not matter
+        Email firstEmail = new Email("alice@gmail.com");
+        Email secondEmail = new Email("AlIcE@gmail.com");
+        assertEquals(firstEmail, secondEmail);
     }
 }

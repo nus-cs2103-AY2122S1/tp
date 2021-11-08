@@ -1,0 +1,17 @@
+@startuml
+start
+:User executes remove command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+
+if () then ([assignment at specified index exists])
+     :Delete assignment from the currently
+      displayed assignment list;
+else ([else])
+     :Show assignment not exist error message;
+endif
+
+stop
+@enduml

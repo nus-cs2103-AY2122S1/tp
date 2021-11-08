@@ -1,0 +1,22 @@
+@startuml
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+start
+:User executes delete command;
+
+if () then ([command format is valid])
+    :Deletes the person;
+    if () then ([person deleted is active person])
+    : Active person is now absent;
+    : Assignments will be emptied from the assignment list;
+    else ([else])
+        :Active person will stay the same;
+        :Assignments of active person will remain in assignment list;
+    endif
+else ([else])
+    :Show error message;
+endif
+stop
+@enduml

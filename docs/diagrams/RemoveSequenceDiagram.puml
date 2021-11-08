@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteAssignmentCommandParser" as DeleteAssignmentCommandParser LOGIC_COLOR
+participant "d:DeleteAssignmentCommand" as DeleteAssignmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("remove 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("remove 1")
+activate AddressBookParser
+
+create DeleteAssignmentCommandParser
+AddressBookParser -> DeleteAssignmentCommandParser
+activate DeleteAssignmentCommandParser
+
+DeleteAssignmentCommandParser --> AddressBookParser
+deactivate DeleteAssignmentCommandParser
+
+AddressBookParser -> DeleteAssignmentCommandParser : parse("1")
+activate DeleteAssignmentCommandParser
+
+create DeleteAssignmentCommand
+DeleteAssignmentCommandParser -> DeleteAssignmentCommand
+activate DeleteAssignmentCommand
+
+DeleteAssignmentCommand --> DeleteAssignmentCommandParser : r
+deactivate DeleteAssignmentCommand
+
+DeleteAssignmentCommandParser --> AddressBookParser : r
+deactivate DeleteAssignmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteAssignmentCommandParser -[hidden]-> AddressBookParser
+destroy DeleteAssignmentCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> DeleteAssignmentCommand : execute()
+activate DeleteAssignmentCommand
+
+DeleteAssignmentCommand -> Model : deleteAssignment(...)
+activate Model
+
+Model --> DeleteAssignmentCommand
+deactivate Model
+
+create CommandResult
+DeleteAssignmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteAssignmentCommand
+deactivate CommandResult
+
+DeleteAssignmentCommand --> LogicManager : result
+deactivate DeleteAssignmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

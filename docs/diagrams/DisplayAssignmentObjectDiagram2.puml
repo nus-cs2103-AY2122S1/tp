@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+
+
+title After "show 2"
+
+object "__:ModelManger__" as ModelManager MODEL_COLOR_T1
+object "__:AddressBook__" as AddressBook MODEL_COLOR_T1
+object "__assignments:UniqueAssignmentList__" as Assignments MODEL_COLOR_T1
+object "__persons:UniquePersonList__" as Persons MODEL_COLOR_T1
+object "__person2:Person__" as Person2 MODEL_COLOR_T1
+object "__person1:Person__" as Person1 MODEL_COLOR_T1
+object "__list1:UniqueAssignmentList__" as List1 MODEL_COLOR_T1
+object "__list2:UniqueAssignmentList__" as List2 MODEL_COLOR_T1
+object "__a1:Assignment__" as Assignment1 MODEL_COLOR_T1
+object "__a2:Assignment__" as Assignment2 MODEL_COLOR_T1
+object "__a3:Assignment__" as Assignment3 MODEL_COLOR_T1
+object "__a4:Assignment__" as Assignment4 MODEL_COLOR_T1
+
+
+ModelManager --> AddressBook
+AddressBook --> Persons
+AddressBook --> Assignments
+Persons --> Person1
+Persons --> Person2
+Person1 --> List1
+Person2 --> List2
+List1 --> Assignment1
+List1 --> Assignment2
+List2 --> Assignment3
+List2 --> Assignment4
+Assignments --> Assignment3
+Assignments --> Assignment4
+
+@enduml

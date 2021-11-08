@@ -23,7 +23,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.isNonZeroUnsignedInteger("a"));
         assertFalse(StringUtil.isNonZeroUnsignedInteger("aaa"));
 
-        // EP: zero
+        // EP: zero (boundary value)
         assertFalse(StringUtil.isNonZeroUnsignedInteger("0"));
 
         // EP: zero as prefix
@@ -37,7 +37,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.isNonZeroUnsignedInteger(" 10 ")); // Leading/trailing spaces
         assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
 
-        // EP: number larger than Integer.MAX_VALUE
+        // EP: number larger than Integer.MAX_VALUE (boundary value)
         assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
 
         // EP: valid numbers, should return true
@@ -45,6 +45,86 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    //---------------- Tests for isIntegerUpperBounded --------------------------------------
+
+    @Test
+    public void isIntegerUpperBounded() {
+        final int validLimit = 1000;
+
+        // EP: empty strings
+        assertFalse(StringUtil.isIntegerUpperBounded("", validLimit)); // Boundary value
+        assertFalse(StringUtil.isIntegerUpperBounded("  ", validLimit));
+
+        // EP: not a number
+        assertFalse(StringUtil.isIntegerUpperBounded("a", validLimit));
+        assertFalse(StringUtil.isIntegerUpperBounded("aaa", validLimit));
+
+        // EP: zero
+        assertTrue(StringUtil.isIntegerUpperBounded("0", validLimit));
+
+        // EP: negative number
+        assertTrue(StringUtil.isIntegerUpperBounded("-1", validLimit));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isIntegerUpperBounded("01", validLimit));
+
+        // EP: positive number smaller than limit
+        assertTrue(StringUtil.isIntegerUpperBounded(Integer.toString(validLimit - 1), validLimit));
+
+        // EP: number equal to limit
+        assertTrue(StringUtil.isIntegerUpperBounded(Integer.toString(validLimit), validLimit));
+
+        // EP: number above limit
+        assertFalse(StringUtil.isIntegerUpperBounded(Integer.toString(validLimit + 1), validLimit));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isIntegerUpperBounded(" 10 ", validLimit)); // Leading/trailing spaces
+        assertFalse(StringUtil.isIntegerUpperBounded("1 0", validLimit)); // Spaces in the middle
+
+        // EP: numbers larger than Integer.MAX_VALUE or smaller than Integer.MIN_VALUE -> overflow (boundary values)
+        assertTrue(StringUtil.isIntegerUpperBounded(Long.toString(Integer.MAX_VALUE + 1), validLimit));
+        assertFalse(StringUtil.isIntegerUpperBounded(Long.toString(Integer.MIN_VALUE - 1), validLimit));
+    }
+
+    //---------------- Tests for isNonZeroUnsignedIntegerBelowLimit --------------------------------------
+
+    @Test
+    public void isNonZeroUnsignedIntegerBelowLimit() {
+        final int validLimit = 10000;
+
+        // EP: empty strings
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("", validLimit)); // Boundary value
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("  ", validLimit));
+
+        // EP: not a number
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("a", validLimit));
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("aaa", validLimit));
+
+        // EP: zero (boundary value)
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("0", validLimit));
+
+        // EP: negative number
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("-1", validLimit));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isNonZeroUnsignedIntegerBelowLimit("01", validLimit));
+
+        // EP: positive number smaller than limit
+        assertTrue(StringUtil.isNonZeroUnsignedIntegerBelowLimit(Integer.toString(validLimit - 1), validLimit));
+
+        // EP: number equal to limit
+        assertTrue(StringUtil.isNonZeroUnsignedIntegerBelowLimit(Integer.toString(validLimit), validLimit));
+
+        // EP: number above limit
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit(Integer.toString(validLimit + 1), validLimit));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit(" 10 ", validLimit)); // Leading/trailing spaces
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit("1 0", validLimit)); // Spaces in the middle
+
+        // EP: number larger than Integer.MAX_VALUE (boundary value)
+        assertFalse(StringUtil.isNonZeroUnsignedIntegerBelowLimit(Long.toString(Integer.MAX_VALUE + 1), validLimit));
+    }
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 

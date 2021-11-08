@@ -3,8 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +33,21 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same email to be added.
+     *
+     * @param toCheck Person to be added.
+     * @return true if list contains the same email, false otherwise.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(n -> checkEmailPredicate(n, toCheck));
+    }
+
+    private boolean checkEmailPredicate(Person person, Person toCheck) {
+        return person.getEmail().equals(toCheck.getEmail());
     }
 
     /**
@@ -133,5 +147,17 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the copy of unique person list.
+     * @return The unique person list.
+     */
+    public UniquePersonList copyUniquePersonList() {
+        UniquePersonList uniquePersonListCopy = new UniquePersonList();
+        for (Person person: this.internalList) {
+            uniquePersonListCopy.add(person.copyPerson());
+        }
+        return uniquePersonListCopy;
     }
 }

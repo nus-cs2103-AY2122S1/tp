@@ -1,0 +1,16 @@
+@startuml
+start
+:User executes clean command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+:Get all persons
+stored in the model;
+:Get assignment lists
+of all persons;
+:Delete assignment
+if completed;
+
+
+stop
+@enduml

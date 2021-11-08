@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Find Logic" {
+Interface Predicate <<Interface>>
+Class PersonContainsAllKeywordPredicate
+Class PersonContainsAnyKeywordPredicate
+Class FindPersonCommand
+Class FindSpecificPersonCommand
+Class FindAllPersonCommand
+Class FindPersonCommandParser
+Class PersonContainsKeywordPredicate
+}
+
+FindPersonCommandParser -- "0..1" PersonContainsKeywordPredicate : Creates
+FindAllPersonCommand --|> FindPersonCommand
+FindSpecificPersonCommand --|> FindPersonCommand
+FindPersonCommand *-- PersonContainsKeywordPredicate
+FindPersonCommandParser -- "0..1" FindPersonCommand : Instantiates
+PersonContainsAllKeywordPredicate --|> PersonContainsKeywordPredicate
+PersonContainsAnyKeywordPredicate --|> PersonContainsKeywordPredicate
+PersonContainsKeywordPredicate ..|> Predicate
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueAssignmentList
+Person *--> "1" UniqueAssignmentList
+
+UniqueAssignmentList -> "*" Assignment
+
+Assignment *--> "1" Description
+Assignment *--> "1" DueDate
+Assignment *--> "1" Status
+@enduml

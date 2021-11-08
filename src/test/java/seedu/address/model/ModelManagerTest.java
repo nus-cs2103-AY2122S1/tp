@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -91,6 +92,22 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredAssignmentList_validPerson_personAssignmentListDisplayed() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateAssignmentList(ALICE);
+        assertEquals(modelManager.getAssignmentList(), ALICE.getAssignments().asUnmodifiableObservableList());
+    }
+
+    @Test
+    public void updateFilteredAssignmentList_invalidPerson_emptyAssignmentListDisplayed() {
+        modelManager.addPerson(ALICE);
+
+        // BOB is not a person in modelManager
+        modelManager.updateAssignmentList(BOB);
+        assertTrue(modelManager.getAssignmentList().isEmpty());
     }
 
     @Test

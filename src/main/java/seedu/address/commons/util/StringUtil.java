@@ -65,4 +65,40 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents an integer less than a given limit.
+     *
+     * @param s the String input
+     * @param limit the maximum value the integer value of s, if it exists.
+     * @return true if s is less than or greater than limit, otherwise false.
+     */
+    public static boolean isIntegerUpperBounded(String s, int limit) {
+        requireNonNull(s);
+
+        try {
+            int value = Integer.parseInt(s);
+
+            return value <= limit;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if {@code s} represents a non-zero unsigned integer below a given limit.
+     * e.g. 1, 2, 3, ..., {@code limit} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNonZeroUnsignedIntegerBelowLimit(String s, int limit) {
+        requireNonNull(s);
+
+        try {
+            return isNonZeroUnsignedInteger(s) && isIntegerUpperBounded(s, limit);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

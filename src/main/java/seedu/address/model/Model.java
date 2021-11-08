@@ -1,10 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
 /**
@@ -58,6 +62,14 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same email exists in the address book.
+     *
+     * @param person person to compare to.
+     * @return true if email exists, false otherwise.
+     */
+    boolean hasExistingEmail(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -79,9 +91,45 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the assignment list displayed in Ui. */
+    ObservableList<Assignment> getAssignmentList();
+
+    /** Returns an unmodifiable view of the assignment list of the Person */
+    List<Assignment> getPersonAssignmentList(Person person);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    boolean hasActivePerson();
+
+    Person getActivePerson();
+
+    boolean hasAssignment(Person person, Assignment toAdd);
+
+    void addAssignment(Person person, Assignment toAdd);
+
+    void addAllAssignments(List<Person> personList, Assignment toAdd);
+
+    void deleteAssignment(Person person, Assignment toDelete);
+
+    void markAssignment(Person person, Assignment toMark);
+
+    void cleanAssignments();
+
+    void updateAssignmentList(Person person);
+
+    void clearAssignmentList();
+
+    void undoAddressBook() throws CommandException;
+
+    void redoAddressBook() throws CommandException;
+
+    void commitAddressBook();
+
+    boolean isAssignmentCompleted(Assignment assignment);
+
+    Assignment getAssignmentInList(Index targetAssignmentIndex) throws CommandException;
 }

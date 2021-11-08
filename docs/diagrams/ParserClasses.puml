@@ -29,10 +29,10 @@ XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
 ArgumentTokenizer .left.> ArgumentMultimap
+ArgumentMultimap ..> Prefix
 XYZCommandParser ..> CliSyntax
-CliSyntax ..> Prefix
+CliSyntax --> Prefix
 XYZCommandParser ..> ParserUtil
-ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
 @enduml
