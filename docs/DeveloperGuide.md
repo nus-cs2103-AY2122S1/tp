@@ -382,7 +382,7 @@ The lifelines should end at the destroy marker (X) but due to a limitation of Pl
 
 The following activity diagram summarizes what happens when a user executes the `split` command:
 
-<img src="images/SplitActivityDiagram.png" width="350" />
+<img src="images/SplitActivityDiagram.png" width="400" />
 
 #### Design considerations:
 
