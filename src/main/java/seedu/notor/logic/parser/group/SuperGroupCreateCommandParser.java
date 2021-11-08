@@ -52,13 +52,7 @@ public class SuperGroupCreateCommandParser extends GroupCommandParser {
         }
 
         Name name = new Name(uncheckedName);
-
-        Set<Tag> tagList = new HashSet<>();
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
-        }
-
-        SuperGroup superGroup = new SuperGroup(name, tagList);
+        SuperGroup superGroup = new SuperGroup(name);
 
         return new SuperGroupCreateCommand(index, superGroup);
     }

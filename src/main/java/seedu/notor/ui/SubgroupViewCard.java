@@ -1,7 +1,5 @@
 package seedu.notor.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -14,6 +12,7 @@ import seedu.notor.model.group.SubGroup;
 
 /**
  * An UI component that displays information of a {@code SubGroup}.
+ * Not implemented due to time constraints
  */
 public class SubgroupViewCard extends UiPart<Region> {
 
@@ -63,9 +62,6 @@ public class SubgroupViewCard extends UiPart<Region> {
         }
         parentGroup.setText("Parent Group: " + subgroup.getParent());
         numberOfPersons.setText("Number of Persons: " + subgroup.getPeople().size());
-        subgroup.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

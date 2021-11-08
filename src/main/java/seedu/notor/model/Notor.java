@@ -27,6 +27,7 @@ public class Notor implements ReadOnlyNotor {
             + "Some things this application can do are: \n"
             + "person /list : Lists all contacts.\n"
             + "person 3 /delete : Deletes the 3rd contact listed.\n"
+            + "person 2 /note: Edit the notes of the 2nd contact.\n"
             + "note: Edit this note here to whatever you wish!"
             + "\n\n\n ...and much more!";
 
