@@ -163,9 +163,9 @@ The `DeleteCommand` class extends the `Command` class. It manages the deletion o
 
 The `execute` method in `DeleteCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. It then checks if the indexes provided by the user are valid for the current list shown, and continues only if they are all valid (between 1 and the total number of items in the task list). A `CommandException` is thrown in cases of invalid indexes. In the happy path, the tasks are deleted iteratively starting from the last index provided to the first, to prevent future deletions from operating on wrong indexes due to the task list updating itself in each iteration.
 
-##### DeleteCommandParaser class
+##### DeleteCommandParser class
 
-The `DeleteCommandParser` class implements the `Parser<DeleteCommand` interface. It manages the parsing of the arguments (index(es) in the case of a delete command) in the user input.
+The `DeleteCommandParser` class implements the `Parser<DeleteCommand>` interface. It manages the parsing of the arguments (index(es) in the case of a delete command) in the user input.
 The `parse` method in `DeleteCommandParser` first converts the argument provided into a `List<Index>`. It then returns a `DeleteCommand` back to `UniFyParser`, initialized with the `List<Index>`.
 
 ##### Usage Scenario
@@ -607,10 +607,13 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `delete 1`<br>
       Expected: First task is deleted from the list. Details of the deleted task shown in the status message.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `delete 1 2`<br>
+      Expected: First and second tasks are deleted from the list. Details of the deleted tasks shown in the status message.
+
+   4. Test case: `delete 0`<br>
       Expected: No task is deleted. Error details for invalid command shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting a task after a search
