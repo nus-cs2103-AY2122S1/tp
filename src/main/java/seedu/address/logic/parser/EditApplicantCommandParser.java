@@ -61,7 +61,7 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
             editApplicantDescriptor.setTitle(positionTitle);
         }
         if (argMultimap.getValue(PREFIX_GITHUB_PROFILE).isPresent()) {
-            ProfileUrl githubProfile = new ProfileUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get());
+            ProfileUrl githubProfile = ParserUtil.parseUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get());
             editApplicantDescriptor.setGitHubProfile(githubProfile);
         }
 

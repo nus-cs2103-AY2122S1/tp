@@ -22,7 +22,7 @@ public class FilterApplicantCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_POSITION + "POSITION] "
             + "[" + PREFIX_STATUS + "STATUS] " + "\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_POSITION + "software engineer "
             + PREFIX_STATUS + "pending";
 
