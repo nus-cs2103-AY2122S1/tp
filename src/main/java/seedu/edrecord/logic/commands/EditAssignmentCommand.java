@@ -45,18 +45,18 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_TOTAL_WEIGHTAGE_EXCEEDS_100 =
             "The edited assignment brings the total module weightage above 100%";
 
-    private final Index index;
+    private final Index id;
     private final EditAssignmentDescriptor editDescriptor;
 
     /**
-     * @param index The index of the assignment in the assignment list to edit
+     * @param id The index of the assignment in the assignment list to edit
      * @param editDescriptor Details to edit the assignment with
      */
-    public EditAssignmentCommand(Index index, EditAssignmentDescriptor editDescriptor) {
-        requireNonNull(index);
+    public EditAssignmentCommand(Index id, EditAssignmentDescriptor editDescriptor) {
+        requireNonNull(id);
         requireNonNull(editDescriptor);
 
-        this.index = index;
+        this.id = id;
         this.editDescriptor = new EditAssignmentDescriptor(editDescriptor);
     }
 
@@ -66,20 +66,18 @@ public class EditAssignmentCommand extends Command {
         if (!model.hasSelectedModule()) {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
-        List<Assignment> assignmentList = model.getSelectedModule().getValue().getAssignmentList();
 
-        if (index.getOneBased() >= model.getAssignmentCounter()) {
+        if (id.getOneBased() >= model.getAssignmentCounter()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment asgToEdit = assignmentList.stream()
-                .filter(asg -> asg.getId() == index.getOneBased())
-                .findFirst()
+        Assignment asgToEdit = model.getAssignment(id.getOneBased())
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX));
 
         Assignment editedAsg = createEditedAssignment(asgToEdit, editDescriptor);
 
-        if (model.hasSameNameInCurrentModule(editedAsg)) {
+        // if name edited, check if other assignments have the same name
+        if (!(asgToEdit.getName().equals(editedAsg.getName())) && model.hasSameNameInCurrentModule(editedAsg)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
@@ -138,7 +136,7 @@ public class EditAssignmentCommand extends Command {
 
         // state check
         EditAssignmentCommand e = (EditAssignmentCommand) other;
-        return index.equals(e.index)
+        return id.equals(e.id)
                 && editDescriptor.equals(e.editDescriptor);
     }
 
