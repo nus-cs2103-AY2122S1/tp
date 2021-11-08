@@ -238,7 +238,7 @@ Format: `get [p/] [e/] [te/] [n/NAME]`
 * At least one of the supported prefix i.e. `p/`, `e/` or `te/` must be passed in.
 * If `NAME` is provided, only personal detail of the student/s whose name contain the given `NAME` will be shown.
 The behavior here is similar to the [filter command](#filtering-academy-directory-by-name-or-tag-filter)
-* If `NAME` is not provided, the personal detail of all students in AcademyDirectory will be shown
+* If `NAME` is not provided, the personal detail of all students in Academy Directory will be shown
 * Multiple prefixes can be supplied at the same time, and personal detail corresponding to all the given prefixes will be shown
 * The order in which personal details will be shown is as follows, regardless of the order of the
 prefixes passed to `get` command:
@@ -564,8 +564,8 @@ Example:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AcademyDirectory home folder. Overwrite the version control folder it creates with the version
-control folder of your previous AcademyDirectory to retain commit history.
+the data of your previous Academy Directory home folder. Overwrite the version control folder it creates with the version
+control folder of your previous Academy Directory to retain commit history.
 
 **Q**: How do I save my data?<br>
 **A**: Academy Directory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.

@@ -267,15 +267,15 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.academydirectory.commons` package.
 
 ### VersionControl Component
-The internal version control system in AcademyDirectory is inspired by Git. As such, `VersionControl` 
-keeps track of AcademyDirectory data state by using `VcObject` which corresponds to Git objects.
+The internal version control system in Academy Directory is inspired by Git. As such, `VersionControl` 
+keeps track of Academy Directory data state by using `VcObject` which corresponds to Git objects.
 
 **Design Considerations:**
 
 **Aspect: How to save state changes**
 - **Alternative 1 (current choice):** Saves state changes to disk ala Git
   - Pros:
-    - future-proof; even when AcademyDirectory supports adding and tracking many files e.g. 
+    - future-proof; even when Academy Directory supports adding and tracking many files e.g. 
     profile pictures of students, code screenshots etc. 
     - provides backbone for additional features e.g. regeneration of data even when data becomes 
     corrupted, etc.
@@ -295,13 +295,13 @@ Shown below is the corresponding class diagram:
 
 **Explanation of the objects shown above:**
 - `Tree`: 
-  - represents a snapshot of `data` directory of AcademyDirectory.  It maintains a mapping between version-controlled
+  - represents a snapshot of `data` directory of Academy Directory.  It maintains a mapping between version-controlled
 filenames and actual filename of tracked blobs.
   - Version controlled name is by default `SHA-1` hash of the blob. However, it is possible 
   to change this to `SHA-256` or even `MD5`. 
   - Supported hash functions are present in `HashMethod`
 - `Commit`:
-  - saves information regarding the changes to AcademyDirectory data:
+  - saves information regarding the changes to Academy Directory data:
     - who makes the change
     - when was the change made
     - what change was made exactly. 
@@ -673,7 +673,7 @@ being created and thus shown by `HistoryCommand`. Commands which can be undone a
 for details on what this means).
 
 This command is meant for:
-* reminding users what changes were made to the underlying AcademyDirectory Data
+* reminding users what changes were made to the underlying `AcademyDirectory` Data
 * revealing (five character) hash of commits that can be used with `RevertCommand`.
 
 #### Implementation
@@ -728,7 +728,7 @@ to be reverted to.
 `RevertCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
 serve the aforementioned purpose.
 
-`RevertCommand` reverts state of AcademyDirectory data by doing the following:
+`RevertCommand` reverts state of `AcademyDirectory` data by doing the following:
 - fetch commit identified by the given hash
 - shift `VersionedModel`'s `HEAD` pointer to the commit
 - restores the academy directory data according to the tree that the fetched commit points to
@@ -1221,7 +1221,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7. Should not require internet connection for any of its feature.
 8. All user and app data should be stored locally, not through an online database solution.
 9. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
-10. Logs and previous commits should be recoverable even when `AcademyDirectory` itself is deleted.
+10. Logs and previous commits should be recoverable even when Academy Directory itself is deleted.
 11. Logs and previous commits should be transferable and functional after transfer onto other computers.
 12. Users should be able to undo up to at least _100_ commands.
 13. Software default file size should not exceed _50_ Megabytes.
