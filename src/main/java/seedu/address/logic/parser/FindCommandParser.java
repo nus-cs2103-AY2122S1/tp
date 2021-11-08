@@ -118,11 +118,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_NATIONALITY).isPresent()
             && !argMultimap.getValue(PREFIX_NATIONALITY).get().trim().isEmpty()) {
             List<String> nationalityKeywords = argMultimap.getAllValues(PREFIX_NATIONALITY);
-            /*
-            for (String nationality : nationalityKeywords) {
-                ParserUtil.parseNationality(nationality);
-            }
-             */
+
             int numOfEmptyValue = (int) nationalityKeywords.stream()
                     .filter(String::isEmpty).count();
 
@@ -136,17 +132,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()
             && !argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get().trim().isEmpty()) {
             List<String> tutorialGroupKeywords = argMultimap.getAllValues(PREFIX_TUTORIAL_GROUP);
-            /*
-            for (String tutorialGroup : tutorialGroupKeywords) {
-                ParserUtil.parseTutorialGroup(tutorialGroup);
-            }
-             */
+
             int numOfEmptyValue = (int) tutorialGroupKeywords.stream()
                     .filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial Group",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial group",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TutorialGroupContainsKeywordsPredicate(tutorialGroupKeywords));
@@ -212,4 +204,3 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 }
-
