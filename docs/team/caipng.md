@@ -8,14 +8,6 @@ EdRecord is a **desktop student management app, for teaching assistants to manag
 
 ---
 
-- [Project: EdRecord](#project-edrecord)
-    - [Code Contributed](#code-contributed)
-    - [Enhancements Implemented](#enhancements-implemented)
-    - [User Guide](#user-guide)
-    - [Developer Guide](#developer-guide)
-    - [Team-based tasks](#team-based-tasks)
-    - [Reviewing/Mentoring](#reviewingmentoring)
-
 ### Code Contributed
 
 [RepoSense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=w14-3&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=caipng&tabRepo=AY2122S1-CS2103-W14-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
@@ -58,8 +50,6 @@ EdRecord is a **desktop student management app, for teaching assistants to manag
 
 1. Updated existing UML diagrams: [#221](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/221)
 2. Added all instructions for manual testing
-3. Added implementation details of `cd` command
-4. Added implementation details of assignment view
 
 ### Team-based tasks
 
