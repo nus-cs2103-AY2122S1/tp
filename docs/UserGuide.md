@@ -425,9 +425,8 @@ This can be used if the client's information has changed, or if you entered an i
 
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-
-* At least one of the optional fields must be provided.
-* When editing tags, all existing tags of the client will be replaced with the new tags.
+At least one of the optional fields must be provided. <br> 
+When editing tags, all existing tags of the client will be replaced with the new tags.
 </div>
 
 **Parameters**:
@@ -502,7 +501,7 @@ which should mostly be one or two words.<br>
 * [`REMARK`](#remark)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To delete a remark, leave the remark parameter `[r/[REMARK](#remark)]` empty.
+To delete a remark, leave the remark parameter empty.
 </div>
 
 **Examples**:
