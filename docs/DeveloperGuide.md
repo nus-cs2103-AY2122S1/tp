@@ -186,9 +186,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 * [Delete Feature](#delete-feature)
-* [Link feature](#link-feature)
-* [Unlink feature](#unlink-feature)
+* [Link Feature](#link-feature)
+* [Unlink Feature](#unlink-feature)
 * [Schedule Feature](#schedule-feature)
+* [Recommend Feature](#recommend-feature)
+
+--- 
 
 ### Delete Feature
 
@@ -225,12 +228,12 @@ illustrates the description for deleting **games**:
 
 <img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
-#### Special considerations:
+#### Design considerations:
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, before deleting the game from the list of games.
 
-### Link
+### Link Feature
 
 #### Implementation
 
@@ -254,13 +257,13 @@ The implementation of `Model#linkFriend()` is as follows:
 
 ![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
-#### Special considerations:
+#### Design considerations:
 
 - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
   have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
-### Unlink
+### Unlink Feature
 
 #### Implementation
 
@@ -287,6 +290,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 ### Schedule Feature
 
 #### Implementation
+
 * To enable storing the schedule of a friend, two new fields had to be added: `Schedule` and `Day`
     * `Schedule` contains a list of 7 `Day`s.
     * `Day` contains:
@@ -311,6 +315,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 <img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
 #### Design considerations:
+
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
   would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
   * Among other reasons, this also allows us to create custom methods, such as:
@@ -322,7 +327,74 @@ The implementation of `Model#unlinkFriend()` is as follows:
   accurate to the minute.
 * A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
   busy than free, so it would be easier for the user to just set when their friend is free.
-  
+
+### Recommend feature:
+
+#### Description: 
+
+The recommend feature provides the user a with a command (Format: `recommend -g GAME_ID -t HOUR DAY`) to enter into 
+the gitGud text box which causes gitGud to display a list of friends who are: 
+* available during the specified time (hour and day) based on schedule
+* are linked to the specified game 
+* and are ordered by the highest skill value
+
+This command allows the user to easily find the highest-skilled available friends who play the specified game to coordinate 
+gaming sessions with from the recommendations friends list displayed after the command is executed. 
+
+#### Implementation: 
+
+To help you understand how the recommendation functionality is implemented, the activity diagram below summarises the actions 
+gitGud undergoes to display the recommendations friends list to the user: 
+
+<img src="images/RecommendCommandActivityDiagram.png" width="1000" />
+
+<ins>Step 1: Parsing and triggering recommend command execution</ins><br>
+
+Similar to [delete](#delete-feature) and [link](#link-feature) features above, the parse and execute actions shown in the activity 
+diagram are implemented via invoking`RecommendCommandParser#parse(String)`, which extracts a specified game and timing from the 
+user input and constructs a `RecommendCommand` instance with the extracted data. 
+
+Then, the `RecommendCommand#execute(model)` method is invoked by an instance of the `LogicManager` class which uses the extracted
+data to produce a list of friend recommendations to the user.
+
+<ins>Step 2: Filtering and sorting the friends list to get recommendations friends list</ins><br> 
+
+The sequence diagram below illustrates what happens during the `RecommendCommand#execute(model)` method to produce the desired list of friend recommendations:
+
+<img src="images/RecommendCommandSequenceDiagram1.png" width="1000" /><br> 
+
+As shown, the recommend feature constructs an instance of `FriendRecommendFilterPredicate` which returns true
+if the friend plays the specified game and whose schedule is available during the specified timing based on the extracted data. 
+It also constructs an instance of `Comparator` which is used to sort friends in order of the highest skill value for the specified game.
+
+Next, the continued sequence diagram below shows the `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
+setting the predicate of `FilteredList` and comparator of `SortedList` instances managed by the `ModelManager` with 
+the new `FriendRecommendFilterPredicate` and `Comparator` instances, which causes filtering and sorting of the list and 
+produces the list of friend recommendations. 
+
+<img src="images/RecommendCommandSequenceDiagram2.png" width="1000" />
+
+<ins>Step 3: Displaying the recommended friends</ins> 
+
+Due to the use of JavaFX's `FilteredList` and `SortedList`, which listens for and tracks for changes whenever the
+`FilteredList#setPredicate(Predicate)` or `SortedList#setComparator(Comparator)` methods are invoked, the user interface is
+notified and updated to display the filtered and sorted friends list based on the produced list of friend recommendations in step 2. 
+
+Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
+recommend feature.  
+
+#### Design considerations:
+
+* The recommend command allows users to filter by hour and day instead of filtering by minute and day.
+  * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
+  the [schedule](#schedule-feature) feature and as we find that accuracy to the exact minute is not necessary as our 
+  target users (students) usually have weekly schedules based on hourly blocks.
+
+* Usage of predicates and comparators for filtering and ordering the filtered and sorted friends list.
+  * We decided to implement predicates and comparators for the implementation of Recommend command which reduces the coupling 
+  between the `RecommendCommand` and the `Model` component. Hence, we have implemented general methods 
+  such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
+  on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
 
 --------------------------------------------------------------------------------------------------------------------
 
