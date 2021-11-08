@@ -137,23 +137,23 @@ Examples:
 
 Examples:
 
-| Payment Type                                       | Payment Amt (cents) | Payments per year | No. of Payments | Context                                     |
+| Payment Type                                       | PMT_</br>AMOUNT_</br>CENTS | PMTS_</br>PER_</br>YR | NUM_</br>OF_</br>PMT | Context                                     |
 |----------------------------------------------------|------------------|-------------|------------|---------------------------------------------|
 | Single lump sum                                    |       1000       |      -      |      -     | Single payment of $10                      |
 | X payments per year, indefinite number of payments |       1000       |      12     |      -     | Annual payments of $10, indefinitely       |
 | X payments per year, definite number of payments   |       1000       |      12     |     120    | Annual payments of $10, 120 total payments |
 
 **Commission structure of the policy**:
-* `COMMISSION_%`: Percentage of each payment that goes to commission
+* `COMM_%`: Percentage of each payment that goes to commission
 * `NUM_OF_COMM`: The number of payments that the agent will receive commission for.
-* Receives a percentage commission `COMMISSION_%` from the payment amount `PMT_AMOUNT_CENTS` for the first number of payments `NUM_OF_COMM` in the payment structure.
+* Receives a percentage commission `COMM_%` from the payment amount `PMT_AMOUNT_CENTS` for the first number of payments `NUM_OF_COMM` in the payment structure.
 
 Calculating Commission with Payment Structure:
 
-| Payment Structure                            | Commission Percentage | No. of Commissions | Commission per payment | Context                                                 |
+| Payment Structure                            | COMM_% | NUM_</br>OF_</br>COMM | Commission per payment | Context                                                 |
 |----------------------------------------------|--------------|-------------|------------------------|---------------------------------------------------------|
-| Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from the first 100 payments |
-| Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from first 5 payments        |
+| Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from each of the first 100 payments |
+| Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from each of the first 5 payments        |
 
 **Associated Contact**:
 * `CONTACT_INDEX`: Index of that contact in the displayed contact list.
@@ -169,7 +169,7 @@ Calculating Commission with Payment Structure:
 
 Adds a policy to the policy list.
 
-Format: `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM
+Format: `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMM_% NUM_OF_COMM
 cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
@@ -193,7 +193,7 @@ belonging to the contact with index 2.
 
 Edits an existing policy in the application.
 
-Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM]
+Format: `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMM_% NUM_OF_COMM]
 [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-warning">
@@ -204,8 +204,8 @@ Careful changing the number of commissions or payments. A policy should not have
 * Same parameters as addpolicy
 * Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
+* Existing values will be updated by the provided input values.
+* When editing tags, the existing tags of the policy will be replaced by the input tags i.e adding of tags is not cumulative.
 * You can remove all the policy’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -340,9 +340,9 @@ Action | Format, Examples
 **Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editcontact 2 n/James Lee e/jameslee@example.com`
 **List Contacts** | `allcontact`
 **Find Contacts** | `findcontact KEYWORD`
-**Add Policy** | `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMMISSION_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
+**Add Policy** | `addpolicy n/POLICY_NAME p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTS] c/COMM_% NUM_OF_COMM cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **Delete Policy** | `deletepolicy INDEX`
-**Edit Policy** | `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMMISSION_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
+**Edit Policy** | `editpolicy INDEX [n/POLICY_NAME] [p/PMT_AMOUNT_CENTS [PMTS_PER_YR] [NUM_OF_PMTs]] [c/COMM_% NUM_OF_COMM] [cl/CONTACT_INDEX] [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **List Policies** | `allpolicy`
 **List Contact's Policies** | `contactpolicy CONTACT_INDEX`
 **Clear Contact's Policies** | `clearpolicy CONTACT_INDEX`
