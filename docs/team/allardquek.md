@@ -68,7 +68,8 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
 3. **Documentation:**
     - User Guide: Added documentation for table of contents, command syntax information, `upload`, `download`
       , `dashboard`
-    - Developer Guide: Added implementation details for the `upload`, `download`, `dashboard` commands
+    - Developer Guide: Added implementation details for the `download` command, diagrams to explain the Ui component structure,
+      and effort section detailing the team's challenges and achievements
 4. **Review and Mentoring Contributions:**
     - PRs reviewed (with non-trivial review comments): [#68](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/68)
       , [#113](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/113)
