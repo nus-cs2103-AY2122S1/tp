@@ -1,0 +1,11 @@
+@startuml
+start
+:User executes purge command;
+
+if () then ([Existing data])
+    : Purge the data from ProgrammerError;
+else ([No existing data])])
+    : Display error message in resultDisplay;
+endif
+stop
+@enduml
