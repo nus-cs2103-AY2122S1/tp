@@ -22,10 +22,8 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to initialise enforcement sessions (session) and switch to pre-existing enforcement 
   session view (schedule) [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
     * What it does: Shows the user who has not been called for the current enforcement session.
-    * Justification: This eliminates the need for the user to utilise a separate means of tracking which persons need to
-      be called for the current enforcement session.
-    * Highlights: This attribute was the first to implement a new list-filtering predicate, in the process defining the
-      procedure by which person list should be updated.
+    * Justification: This provides a convenient view of only who needs to be called.
+    * Highlights: Procedure for writing list filter-updating feature was defined in the course of writing this function.
 
 * **New Feature**: Added the ability to store whether a person has been called for the day. [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
     * What it does: Allows the user to record whether a call has been attempted on a person for the current enforcement
@@ -44,8 +42,8 @@ Given below are my contributions to the project.
       enforcement view, in addition to whether the person has been non-compliant to be recorded by the prior feature.
     * Justification: This allows the user to remove called persons from the schedule without unnecessary modification to
       underlying person, facilitating linear workflow of enforcement mode.
-    * Highlight: This attribute was the first to implement modification of person attribute without the use of EditCommand
-      in order to restrict unnecessary modification access to accommodate its frequent use.
+    * Highlight: This attribute implements modification of person attribute without the use of EditCommand in order to 
+      restrict unnecessary write access.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=over-fitted&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&tabAuthor=over-fitted&tabRepo=AY2122S1-CS2103-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zA=over-fitted&zR=AY2122S1-CS2103-W14-2%2Ftp%5Bmaster%5D&zACS=222.8&zS=2021-09-17&zFS=over-fitted&zU=2021-11-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
