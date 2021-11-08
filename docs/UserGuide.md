@@ -258,7 +258,7 @@ used in the management of client information and client meetings.
 e.g. `KEYWORD...` can be used as `John`, `alex david` etc. Whereas, `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters with prefix `e.g. n/NAME` can be in any order.
 e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Prefixless parameters must occur before parameters with prefix.
+* Prefix-less parameters must occur before parameters with prefix.
 e.g. if the command specifies `KEYWORD... p/PHONE_NUMBER`, then `p/PHONE_NUMBER KEYWORD...` is not acceptable.
 * If a parameter is expected only once in the command (i.e. not appended with `...`), but you specified it multiple times, only the last occurrence of the parameter will be taken.
 e.g. if you specify `p/12341234 p/56785678`, only` p/56785678` will be taken.

@@ -639,7 +639,7 @@ The following activity diagram summarizes what happens when a user executes an e
 </p>
 
 ##### 4.9.1.1 Delete a client
-The following activity diagram summarizes what happens when a user executes an delete command:
+The following activity diagram summarizes what happens when a user executes a delete command:
 
 <p align="center">
 <img src="images/DeleteUserTagActivityDiagram.png" width="300" />
