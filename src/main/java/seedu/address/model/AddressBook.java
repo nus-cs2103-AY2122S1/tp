@@ -202,8 +202,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
     }
 
+    /**
+     * Sets the lastUpdatedDate field of {@code AddressBook} to the specified last updated date.
+     *
+     * @param lastUpdatedDate The specified last updated date to set addressbook to.
+     */
     public void setLastUpdatedDate(LastUpdatedDate lastUpdatedDate) {
-        this.lastUpdatedDate = new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
+        this.lastUpdatedDate = new LastUpdatedDate(lastUpdatedDate.toString());
     }
 
     /**

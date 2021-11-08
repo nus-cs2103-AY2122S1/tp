@@ -118,8 +118,13 @@ public class Date implements Comparable<Date> {
         return prevDate;
     }
 
+    //@@author angkoonhwee
     /**
      * Returns true if the date is between the start and end date, inclusive.
+     *
+     * @param start The inclusive start date.
+     * @param end The inclusive end date.
+     * @return True if the date is between the start and end dates, inclusive.
      */
     public boolean isDateBetween(LocalDate start, LocalDate end) {
         boolean isAfterOrEqualsStart = getLocalDate().isAfter(start) || getLocalDate().isEqual(start);
@@ -127,6 +132,7 @@ public class Date implements Comparable<Date> {
         return isAfterOrEqualsStart && isBeforeOrEqualsEnd;
     }
 
+    //@@author
     /**
      * Checks if the date has passed.
      *

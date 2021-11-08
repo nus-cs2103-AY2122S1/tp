@@ -125,6 +125,15 @@ public class FeesCalculator implements Calculator {
         }
     }
 
+    /**
+     * Updates the Outstanding Fees field to most recent value for makeup lessons.
+     *
+     * @param original Outstanding Fees of current amount.
+     * @param date Day of the lesson.
+     * @param timeRange Duration per lesson.
+     * @param lessonRates Cost per hour for the lesson.
+     * @return Updated Outstanding Fees object.
+     */
     public OutstandingFees getUpdatedOutstandingFeesMakeup(OutstandingFees original, Date date, TimeRange timeRange,
                                                            LessonRates lessonRates) {
         BigDecimal costPerLesson = getCostPerLesson(timeRange, lessonRates);
@@ -142,7 +151,7 @@ public class FeesCalculator implements Calculator {
     }
 
     /**
-     * Updates the Outstanding Fees field to most recent value and modify the lastAdded date.
+     * Updates the Outstanding Fees field to most recent value for recurring lessons.
      *
      * @param original Outstanding Fees of current amount.
      * @param updateDay Day of the lesson.
