@@ -247,6 +247,7 @@ destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the
 </div>
 
 ### Editing a game entry
+
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
 is valid if
 * The list of games currently displayed is not empty, and the chosen index is a valid index.
@@ -280,6 +281,7 @@ destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the
 </div>
 
 ### Deleting a game entry
+
 Deleting a game entry requires user input from the CLI. The format of input should
 be `delete [INDEX]`.
 The user should obtain the index of the game entry to be deleted
