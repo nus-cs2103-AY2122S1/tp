@@ -434,7 +434,7 @@ implementation introduces the following classes:
 * `ShowCommandParser` that implements `Parser<ShowCommand>`
 * `ShowCommandResult` that extends `CommandResult`
 
-The syntax of this command is `show <INDEX_IN_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab
+The syntax of this command is `show <INDEX_IN_LIST>`. For instance, `show 1` asks ProgrammerError to display the lab
 results of student at index 1 of the current list.
 
 Given below is a possible usage scenario:
@@ -453,14 +453,11 @@ The mechanism is as described below:
 
 * `ShowCommandParser` parses the index and creates a `ShowCommand`, which finds the student to be shown according to the
   index and creates a `ShowCommandResult` with the student identified.
-
-
-* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identified student.
-
+  
 Step 2. The CS2100 TA keys in `show 2`: The side panel is updated with the information and lab results of the student at
 index 2
 
-Step 3. The CS2100 TA key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the
+Step 3. The CS2100 TA keys in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the
 user that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
 
 The following sequence diagram shows how the show command works:
