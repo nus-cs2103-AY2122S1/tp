@@ -117,6 +117,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W08-2/tp/tree/master/src/main/java/seedu/sourcecontrol/logic/Logic.java)
@@ -133,6 +135,8 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+<div style="page-break-after: always;"></div>
 
 The Activity Diagram below illustrates how user input is parsed by the `Logic` component.
 
@@ -212,6 +216,8 @@ The `Storage` component,
 * inherits from both `SourceControlStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.sourcecontrol.commons` package.
@@ -257,6 +263,8 @@ The following sequence diagram summarises what happens when the user inputs an `
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Creating a new group
 
 The `addgroup` feature allows users to create new groups, as well as specify students to be added to the group to be created.
@@ -290,6 +298,8 @@ The following sequence diagram summarises what happens when the user inputs an `
 <center>
     <img src="images/AddGroupToModelSequenceDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student into a group
 
@@ -325,7 +335,7 @@ The following sequence diagram summarises what happens when the user inputs an `
   <img src="images/AddAllocToModelSequenceDiagram.png" />
 </center>
 
-
+<div style="page-break-after: always;"></div>
 
 ### Adding a score
 
@@ -343,6 +353,8 @@ The `addscore` feature allows users to add score for an assessment of a student.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarises what happens when a user executes the `addscore` command to add score for an assessment of a student. In the case where the score is not added/updated, an error message will be displayed with the reason.
 
 <center>
@@ -359,6 +371,8 @@ The following sequence diagram summarises what happens when the user inputs an `
 <center>
     <img src="images/AddScoreToModelSequenceDiagram.png" />
 </center>
+
+<div style="page-break-after: always;"></div>
 
 ### Searching for students
 
@@ -413,6 +427,8 @@ if the command input is valid. The command is invalid if the user input is empty
     * Pros: More straightforward and convenient for users.
     * Cons: We need to identify the type of input given.
 
+<div style="page-break-after: always;"></div>
+
 ### Importing data
 
 The `import` feature allows users to load data as specified in the provided CSV file.
@@ -425,6 +441,8 @@ The following activity diagram summarises what happens when a user executes the 
     <img src="images/ImportActivityDiagram.png" />
 </center>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 There are several important details left out of the activity diagram for the sake of clarity:
 
@@ -454,6 +472,8 @@ The `show` feature allows users to show the performance analysis of a student, a
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where the performance analysis of a student is requested by identity and there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her NUSNET ID.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagrams summarise what happens when a user executes the `show` command to show the performance analysis of a student, a group or the cohort in an assessment. In the case where the display is not presented successfully, an error message will be displayed with the reason.
 
