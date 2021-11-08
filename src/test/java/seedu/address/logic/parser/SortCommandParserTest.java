@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
 
+/**
+ * Test class for SortCommand
+ */
 class SortCommandParserTest {
     private static SortCommandParser parser = new SortCommandParser();
     private static final String TIME_KEYWORD = "time";

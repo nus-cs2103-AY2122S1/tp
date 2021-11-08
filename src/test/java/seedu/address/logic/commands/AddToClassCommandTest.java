@@ -30,6 +30,9 @@ import seedu.address.model.tuition.TuitionClass;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TuitionClassBuilder;
 
+/**
+ * Test class for AddToClassCommand.
+ */
 public class AddToClassCommandTest {
     private static final String INVALID_NAME = "Nora";
     private static final List<Index> STUDENT_INDEXES = getIndexes();
@@ -245,6 +248,12 @@ public class AddToClassCommandTest {
         return model;
     }
 
+    /**
+     * Adds a student to a tuition class.
+     * @param student student to be added.
+     * @param tuitionClass tuition class to be added to.
+     * @param expectedModel the model contains the student and tuition class.
+     */
     private void addStudentToClass(Student student, TuitionClass tuitionClass, Model expectedModel) {
         StudentBuilder studentInList = new StudentBuilder(student);
         Student newStudent = studentInList.build();
@@ -255,6 +264,12 @@ public class AddToClassCommandTest {
                 tuitionClass.getTimeslot())));
     }
 
+    /**
+     * Resets a single tuition class in the expected model.
+     * @param tuitionClass the tuition class to be updated.
+     * @param expectedModel the model which contains the reset tuition class.
+     * @return the new tuition class after reset.
+     */
     private TuitionClass setNewTuitionClass(TuitionClass tuitionClass, Model expectedModel) {
         TuitionClassBuilder tuitionClassInList = new TuitionClassBuilder(tuitionClass);
         TuitionClass newTuitionClass = tuitionClassInList.build();

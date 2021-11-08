@@ -14,7 +14,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 
-
+/**
+ * Test class for SortCommand.
+ */
 class SortCommandTest {
     private static Model model = new ModelManager(addTypicalClassesToAddressBook(getAddressBookWithTypicalStudents()),
             new UserPrefs());

@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.TimetableCommand;
 
 
-
+/**
+ * Test class for TimetableParser.
+ */
 class TimetableParserTest {
     private static final TimetableParser parser = new TimetableParser();
 
