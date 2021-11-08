@@ -46,7 +46,7 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
     <p align="center">
-        <img src="images/commands/UndoCommand/Ui_v1.4.png" width="300"/>
+        <img src="images/commands/UndoCommand/Ui_v1.4.png" width="500"/>
     </p>
 5. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
    will open the help window.<br>
@@ -114,7 +114,7 @@ Shows a message explaining how to access the help page.
 ### <a name="view-dashboard"></a>2.2 View Dashboard: `dashboard`
 
 <p align="center">
-<img src="images/commands/DashboardCommand/dashboard.png" width="300"/>
+<img src="images/commands/DashboardCommand/dashboard.png" width="500"/>
 </p>
 
 Displays a dashboard window showing the following data:
