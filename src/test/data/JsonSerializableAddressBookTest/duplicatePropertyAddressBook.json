@@ -1,0 +1,23 @@
+{
+  "properties": [ {
+    "name" : "Alice Pauline",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "seller" : {
+      "name" : "Valid Seller",
+      "phone" : "94351253",
+      "email" : "alice@example.com"
+    },
+    "price" : "10000",
+    "tagged": [ "friends" ]
+  }, {
+    "name" : "Madeline Chan",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "seller" : {
+      "name" : "Valid Seller",
+      "phone" : "94351253",
+      "email" : "pauline@example.com"
+    },
+    "price" : "10000"
+  } ],
+  "buyers": []
+}

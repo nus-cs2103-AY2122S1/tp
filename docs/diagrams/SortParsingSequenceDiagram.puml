@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "spc:SortPropertyCommand" as SortPropertyCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("sort properties price asc")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseSimpleCommand("sort properties price asc")
+activate AddressBookParser
+
+create SortCommandParser
+AddressBookParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> AddressBookParser
+deactivate SortCommandParser
+
+AddressBookParser -> SortCommandParser : parse("properties price asc")
+activate SortCommandParser
+
+SortCommandParser -> ParserUtil : parseActor(str, 0)
+activate ParserUtil
+
+ParserUtil --> SortCommandParser
+deactivate ParserUtil
+
+SortCommandParser -> ParserUtil : parseSortType(str, 1)
+activate ParserUtil
+
+ParserUtil --> SortCommandParser
+deactivate ParserUtil
+
+SortCommandParser -> ParserUtil : parseSortDirection(str, 2)
+activate ParserUtil
+
+ParserUtil --> SortCommandParser
+deactivate ParserUtil
+
+create SortPropertyCommand
+SortCommandParser -> SortPropertyCommand
+activate SortPropertyCommand
+
+SortPropertyCommand --> SortCommandParser : spc
+deactivate SortPropertyCommand
+
+SortCommandParser --> AddressBookParser : spc
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> AddressBookParser
+destroy SortCommandParser
+
+AddressBookParser --> LogicManager : spc
+deactivate AddressBookParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

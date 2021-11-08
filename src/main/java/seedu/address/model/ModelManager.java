@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +13,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.field.SortDirection;
+import seedu.address.model.field.SortType;
+import seedu.address.model.property.Buyer;
+import seedu.address.model.property.Match;
+import seedu.address.model.property.Property;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +27,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Property> filteredProperties;
+    private final FilteredList<Buyer> filteredBuyers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +41,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredProperties = new FilteredList<>(this.addressBook.getCurrPropertyList());
+        filteredBuyers = new FilteredList<>(this.addressBook.getCurrBuyerList());
     }
 
     public ModelManager() {
@@ -89,44 +97,137 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasProperty(Property property) {
+        requireNonNull(property);
+        return addressBook.hasProperty(property);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteProperty(Property target) {
+        addressBook.removeProperty(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addProperty(Property property) {
+        addressBook.addProperty(property);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addNewProperty(Property property) {
+        addressBook.addNewProperty(property);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setProperty(Property target, Property editedProperty) {
+        requireAllNonNull(target, editedProperty);
+
+        addressBook.addProperty(target, editedProperty);
+    }
+
+    @Override
+    public boolean hasBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.hasBuyer(buyer);
+    }
+
+    @Override
+    public void deleteBuyer(Buyer target) {
+        addressBook.removeBuyer(target);
+    }
+
+    @Override
+    public void addBuyer(Buyer buyer) {
+        addressBook.addBuyer(buyer);
+    }
+
+    @Override
+    public void addNewBuyer(Buyer buyer) {
+        addressBook.addNewBuyer(buyer);
+    }
+
+    @Override
+    public void setBuyer(Buyer target, Buyer editedBuyer) {
+        requireAllNonNull(target, editedBuyer);
+
+        addressBook.addBuyer(target, editedBuyer);
+    }
+
+    @Override
+    public void sortProperties(SortType sortType, SortDirection sortDirection) {
+        addressBook.sortProperties(sortType, sortDirection);
+    }
+
+    @Override
+    public void sortBuyers(SortType sortType, SortDirection sortDirection) {
+        addressBook.sortBuyers(sortType, sortDirection);
+    }
+
+    @Override
+    public ObservableList<Match> getMatchList() {
+        return addressBook.getMatchList();
+    }
+
+    @Override
+    public void setMatchList(List<Match> matches) {
+        addressBook.setMatches(matches);
+    }
+
+    //=========== Filtered Property List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Property} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Property> getFilteredPropertyList() {
+        return filteredProperties;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void showAllProperties() {
+        addressBook.resetProperties();
+    }
+
+    @Override
+    public void updateFilteredPropertyList(Predicate<Property> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        addressBook.filterProperties(predicate);
+    }
+
+    @Override
+    public void updateFilteredAndSortedPropertyList(Predicate<Property> predicate, Comparator<Property> comparator) {
+        requireAllNonNull(predicate, comparator);
+        updateFilteredPropertyList(predicate);
+        addressBook.sortProperties(comparator);
+    }
+
+    //=========== Filtered Buyer List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Buyer> getFilteredBuyerList() {
+        return filteredBuyers;
+    }
+
+    @Override
+    public void showAllBuyers() {
+        addressBook.resetBuyers();
+    }
+
+    @Override
+    public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
+        requireNonNull(predicate);
+        addressBook.filterBuyers(predicate);
+    }
+
+    @Override
+    public void updateFilteredAndSortedBuyerList(Predicate<Buyer> predicate, Comparator<Buyer> comparator) {
+        requireAllNonNull(predicate, comparator);
+        updateFilteredBuyerList(predicate);
+        addressBook.sortBuyers(comparator);
     }
 
     @Override
@@ -143,9 +244,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredProperties.equals(other.filteredProperties);
     }
-
 }

@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProperties.P_ALICE;
+import static seedu.address.testutil.TypicalProperties.P_BOB;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +19,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.property.Buyer;
+import seedu.address.model.property.Match;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.exceptions.DuplicatePropertyException;
+import seedu.address.testutil.PropertyBuilder;
 
 public class AddressBookTest {
 
@@ -28,7 +31,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getPropertyList());
     }
 
     @Test
@@ -44,58 +47,82 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateProperties_throwsDuplicatePropertyException() {
+        // Two properties with the same identity fields
+        Property editedAlice = new PropertyBuilder(P_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Property> newProperties = Arrays.asList(P_BOB, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newProperties);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePropertyException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasProperty_nullProperty_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasProperty(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasProperty_propertyNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasProperty(P_ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasProperty_propertyInAddressBook_returnsTrue() {
+        addressBook.addProperty(P_ALICE);
+        assertTrue(addressBook.hasProperty(P_ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasProperty_propertyWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addProperty(P_BOB);
+        Property editedAlice = new PropertyBuilder(P_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasProperty(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getPropertyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPropertyList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose properties list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Property> properties = FXCollections.observableArrayList();
+        private final ObservableList<Property> currProperties = FXCollections.observableArrayList();
+        private final ObservableList<Buyer> buyers = FXCollections.observableArrayList();
+        private final ObservableList<Buyer> currBuyers = FXCollections.observableArrayList();
+        private final ObservableList<Match> matches = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Property> properties) {
+            this.properties.setAll(properties);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Property> getPropertyList() {
+            return properties;
+        }
+
+        @Override
+        public ObservableList<Buyer> getBuyerList() {
+            return buyers;
+        }
+
+        @Override
+        public ObservableList<Property> getCurrPropertyList() {
+            return currProperties;
+        }
+
+        @Override
+        public ObservableList<Buyer> getCurrBuyerList() {
+            return currBuyers;
+        }
+
+        @Override
+        public ObservableList<Match> getMatchList() {
+            return matches;
         }
     }
 

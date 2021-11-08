@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.property.Buyer;
+import seedu.address.model.property.Property;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +22,22 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "Property list contains duplicate property(s).";
+    public static final String MESSAGE_DUPLICATE_BUYER = "Buyer list contains duplicate buyer(s).";
+    public static final String MESSAGE_DUPLICATE_MATCH = "Match list contains duplicate match(es).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+
+    private final List<JsonAdaptedProperty> properties = new ArrayList<>();
+    private final List<JsonAdaptedBuyer> buyers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given properties.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("properties") List<JsonAdaptedProperty> properties,
+                                       @JsonProperty("buyers") List<JsonAdaptedBuyer> buyers) {
+        this.properties.addAll(properties);
+        this.buyers.addAll(buyers);
     }
 
     /**
@@ -37,7 +46,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        properties.addAll(source.getPropertyList().stream().map(JsonAdaptedProperty::new).collect(Collectors.toList()));
+        buyers.addAll(source.getBuyerList().stream().map(JsonAdaptedBuyer::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,13 +57,26 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        Map<String, Property> propertyNameToPropertyMap = new HashMap<>();
+        Map<String, Buyer> buyerNameToBuyerMap = new HashMap<>();
+        for (JsonAdaptedProperty jsonAdaptedProperty : properties) {
+            Property property = jsonAdaptedProperty.toModelType();
+            propertyNameToPropertyMap.put(property.getName().toString(), property);
+            if (addressBook.hasProperty(property)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PROPERTY);
             }
-            addressBook.addPerson(person);
+            addressBook.addProperty(property);
         }
+
+        for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {
+            Buyer buyer = jsonAdaptedBuyer.toModelType();
+            buyerNameToBuyerMap.put(buyer.getName().toString(), buyer);
+            if (addressBook.hasBuyer(buyer)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_BUYER);
+            }
+            addressBook.addBuyer(buyer);
+        }
+
         return addressBook;
     }
 

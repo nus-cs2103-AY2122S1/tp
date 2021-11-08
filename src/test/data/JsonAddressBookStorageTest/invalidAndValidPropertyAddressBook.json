@@ -1,0 +1,18 @@
+{
+  "properties": [ {
+    "name": "Valid Property",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "price": "10000",
+    "seller": "Valid Seller"
+  }, {
+    "name": "Property With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "email": "hans@example.com",
+    "address": "4th street",
+    "price": "10000",
+    "seller": "Valid Seller"
+  } ],
+  "buyers": []
+}

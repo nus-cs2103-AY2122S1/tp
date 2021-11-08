@@ -1,187 +1,145 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
+import javafx.util.Pair;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.property.Taggable;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing entity (property or buyer) in the address book.
  */
-public class EditCommand extends Command {
-
+public abstract class EditCommand extends SimpleCommand {
     public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Overwrites the details of the property or buyer "
+            + "identified by the index (must be a positive integer) used in the displayed property/buyer list.\n"
+            + "Only tags with modifiers ta/ or td/ are added/deleted and not overwritten.\n"
+            + "Parameters (property): property INDEX "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_PRICE + "PRICE] "
+            + "[" + PREFIX_SELLER + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[ "
+                + "( "
+                    + "[" + PREFIX_TAG + "TAG]..." + " | "
+                    + "[" + PREFIX_ADD_TAG + "TAG_TO_ADD]... "
+                    + "[" + PREFIX_DELETE_TAG + "TAG_TO_DELETE]..."
+                + " )"
+            + " ]"
+            + "\n"
+            + "Parameters (buyer): buyer INDEX "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_PRICE + "BUDGET] "
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "\n"
+            + "Example: " + COMMAND_WORD + " property 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PROPERTY_SUCCESS = "Edited Property: %1$s\n";
+
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_RESET_TAG_TOGETHER_WITH_MODIFY_TAG = "Tags can either be reset or modified.\n"
+            + "You cannot do both at the same time.\n"
+            + "An edit command can either have [t/TAG]... or [ta/TAG_TO_ADD]... [td/TAG_TO_DELETE]...";
+    public static final String MESSAGE_DUPLICATE_ADD_AND_DELETE_TAG = "A tag cannot be both added and deleted.";
+    public static final String EXPECTED_PREAMBLE = "(property | buyer) INDEX";
 
-    private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
 
-    /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
-     */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+    protected Pair<Set<Tag>, String> getTags(Taggable taggableToEdit,
+                                             EditCommand.EditTaggableDescriptor editTaggableDescriptor) {
+        String messageEditTaggableTags = "";
+        Set<Tag> originalTags = editTaggableDescriptor.getTags().orElse(taggableToEdit.getTags());
+        Set<Tag> tagsToAdd = editTaggableDescriptor.getTagsToAdd().orElse(Collections.emptySet());
+        Set<Tag> tagsToDelete = editTaggableDescriptor.getTagsToDelete().orElse(Collections.emptySet());
 
-        this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Set<Tag> tagsAlreadyPresent = new HashSet<>(tagsToAdd);
+        tagsAlreadyPresent.retainAll(originalTags);
+        if (!tagsAlreadyPresent.isEmpty()) {
+            messageEditTaggableTags += "These tags were already present:\n";
+            for (Tag t : tagsAlreadyPresent) {
+                messageEditTaggableTags += t + " ";
+            }
+            messageEditTaggableTags += "\n";
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        Set<Tag> tagsAlreadyAbsent = new HashSet<>(tagsToDelete);
+        tagsAlreadyAbsent.removeAll(originalTags);
+        if (!tagsAlreadyAbsent.isEmpty()) {
+            messageEditTaggableTags += "These tags were not present:\n";
+            for (Tag t : tagsAlreadyAbsent) {
+                messageEditTaggableTags += t + " ";
+            }
+            messageEditTaggableTags += "\n";
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        Set<Tag> mergedSet = new HashSet<>(originalTags);
+        mergedSet.removeAll(tagsToDelete);
+        mergedSet.addAll(tagsToAdd);
+
+        Set<Tag> editedTags = Collections.unmodifiableSet(mergedSet);
+        return new Pair<>(editedTags, messageEditTaggableTags);
     }
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
-        }
-
-        // state check
-        EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
-    }
-
-    /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
-     */
-    public static class EditPersonDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+    public static class EditTaggableDescriptor {
         private Set<Tag> tags;
+        private Set<Tag> tagsToAdd;
+        private Set<Tag> tagsToDelete;
 
-        public EditPersonDescriptor() {}
+        public EditTaggableDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defense copy of {@code tags}, {@tagsToAdd} and {@tagsToSDelete} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+        public EditTaggableDescriptor(EditTaggableDescriptor toCopy) {
             setTags(toCopy.tags);
+            setTagsToAdd(toCopy.tagsToAdd);
+            setTagsToDelete(toCopy.tagsToDelete);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(tags, tagsToAdd, tagsToDelete);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        /**
+         * Returns true if tags are reset and tags are modified by addition or deletion.
+         */
+        public boolean isTagsBothResetAndModified() {
+            return tags != null && (CollectionUtil.isAnyNonNull(tagsToAdd, tagsToDelete));
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        /**
+         * Returns true if the same tag is both to be added and deleted.
+         */
+        public boolean isAddAndDeleteTagsOverlapping() {
+            if (tagsToAdd == null || tagsToDelete == null) {
+                return false;
+            }
+            Set<Tag> intersection = new HashSet<>(tagsToAdd);
+            intersection.retainAll(tagsToDelete);
+            return !intersection.isEmpty();
         }
 
         /**
@@ -193,12 +151,46 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code tags} to this object's {@code tagsToAppend}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTagsToAdd(Set<Tag> tags) {
+            this.tagsToAdd = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tagsToDelete}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTagsToDelete(Set<Tag> tags) {
+            this.tagsToDelete = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tagsToAdd} is null.
+         */
+        public Optional<Set<Tag>> getTagsToAdd() {
+            return (tagsToAdd != null) ? Optional.of(Collections.unmodifiableSet(tagsToAdd)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tagsToDelete} is null.
+         */
+        public Optional<Set<Tag>> getTagsToDelete() {
+            return (tagsToDelete != null) ? Optional.of(Collections.unmodifiableSet(tagsToDelete)) : Optional.empty();
         }
 
         @Override
@@ -209,18 +201,16 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditCommand.EditTaggableDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditCommand.EditTaggableDescriptor e = (EditCommand.EditTaggableDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+            return getTags().equals(e.getTags())
+                    && getTagsToAdd().equals(e.getTagsToAdd())
+                    && getTagsToDelete().equals(e.getTagsToDelete());
         }
     }
 }
