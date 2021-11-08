@@ -345,7 +345,7 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 **Adds** a staff to the system.
 
-* Upon the addition of a staff, the system provides an `index` for them in the [Staff List](#glossary), which can be use in other commands, to refer to them.
+* Upon the addition of a staff, the system provides an `index` for them in the [Staff List](#glossary):mag:, which can be use in other commands, to refer to them.
 
 **Format:**
 `add n/NAME p/PHONE_NUMBER e/EMAIL $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
@@ -573,7 +573,7 @@ Adds a [shift](#flag-legend):triangular_flag_on_post: to a specified staff's sch
 Swaps a shift between two staff.
 
 * The two staff are only identified using their [names](#flag-legend). The name provided has to exactly match the name of the staff to swapped.
-* Takes [0, 1 or 2 date inputs](#flag-legend):triangular_flag: representing the period to swap.
+* Takes [0, 1 or 2 date inputs](#flag-legend):triangular_flag_on_post: representing the period to swap.
 * The staff identified using the first name provided, is associated with the first shift. The staff identified using the second name provided, is associated with the second shift.
 * This command resets any changes in shift timing done using the [setShiftTime](#updating-the-start-time-and-end-time-for-a-shift--setshifttime) command.
 
