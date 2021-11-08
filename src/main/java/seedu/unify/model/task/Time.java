@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's time in the address book.
+ * Represents a Task's time in the UniFy.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class Time {
