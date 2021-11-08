@@ -376,7 +376,12 @@ Examples :
 * `g 1 /d`
 
 #### _Creating a subgroup_
-Creates a new subgroup. **This command only works when group are listed and not when subgroups are listed.**
+
+Creates a new subgroup.
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+This command only works when group are listed and not when subgroups are listed.
+</div>
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
 Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
@@ -450,7 +455,6 @@ Advanced user Format: `g /l`
 
 Lists all persons in that group or subgroup.<br>
 
-
 Format: `person (INDEX) /list`<br>
 Advanced user Format:`p (INDEX) /l`
 
@@ -470,6 +474,7 @@ Lists all the subgroups within a group.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
 </div>
+
 * Only works if you have listed out all groups or subgroups in Notor.
 * Do not confuse this with the list all persons command, whose first command word is `person`
 
@@ -557,7 +562,7 @@ Users can also use the Down arrow key to navigate back to the more recent comman
 ### Keyboard Shortcuts
 Notor has keyboard shortcuts to give you added convenience and allow you to control Notor using your keyboard alone. Here are the shortcuts we have available.
 
-**In Note Pop-Up Windows**
+**Note Pop-Up Windows**
 
 Navigate the buttons using the arrow keys. On Windows and Linux, select the button by pressing enter; on MacOS, press space.
 
