@@ -18,6 +18,7 @@ guide provides an in-depth documentation on all the commands available. If this 
 we also provide a [quick start guide](#quick-start) that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
+
 <a name="table-of-contents"></a>
 <span style = "font-size: 32px; color: #e46c0a">
 Table of Contents
