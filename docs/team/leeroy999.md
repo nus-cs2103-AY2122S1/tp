@@ -12,7 +12,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 Given below are my contributions to the project.
 
 #### New Features
-* Added CRUD operations for events using appropriate commands, and finding of event by name
+* Added CRUD for events using appropriate commands, and find event by name
     * What it does: allows users to add, delete, edit and list events that are registered in Ailurus, and search for a specific event name.
     * Justification: This features allows users to group members in events with date included, to keep track of who are supposed to attend specific events and subsequently mark their attendance if necessary. This is useful for small and large scale events and possibly meetings and conferences as well in a work setting, and allow easier organisation.
 * Added marking and unmarking of attendance for members in an event.
