@@ -1,6 +1,7 @@
 package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.ui.DetailLevel.HIGH;
 
 import tutoraid.commons.core.Messages;
 import tutoraid.model.Model;
@@ -31,6 +32,7 @@ public class FindLessonCommand extends FindCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.viewList(HIGH);
         model.updateFilteredLessonList(predicate);
 
         return new CommandResult(

@@ -1,13 +1,14 @@
 package tutoraid.storage;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.student.InitialStudent;
-import tutoraid.model.student.Lessons;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
@@ -21,7 +22,7 @@ import tutoraid.model.student.StudentName;
  */
 class JsonAdaptedStudent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "One or more fields of Student is missing!";
 
     private final String studentName;
     private final String studentPhone;
@@ -66,9 +67,11 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public InitialStudent toModelType() throws IllegalValueException {
-        if (studentName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (Stream.of(studentName, studentPhone, parentName, parentPhone, progressList, lessonNames)
+                .anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
+
         if (!Name.isValidName(studentName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -89,18 +92,10 @@ class JsonAdaptedStudent {
         }
         final Phone modelParentPhone = new Phone(parentPhone);
 
-        if (progressList == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ProgressList.class.getSimpleName()));
-        }
         if (!ProgressList.isValidProgressList(progressList)) {
             throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
         }
         final ProgressList modelProgress = new ProgressList(progressList);
-        if (lessonNames == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Lessons.class.getSimpleName()));
-        }
 
         return new InitialStudent(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
                 modelProgress, lessonNames);

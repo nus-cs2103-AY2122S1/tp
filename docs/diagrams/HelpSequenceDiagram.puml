@@ -4,7 +4,7 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
-participant "h:HelpCommand" as HelpCommand LOGIC_COLOR
+participant ":HelpCommand" as HelpCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -18,13 +18,13 @@ create HelpCommand
 TutorAidParser -> HelpCommand
 activate HelpCommand
 
-HelpCommand --> TutorAidParser: h
+HelpCommand --> TutorAidParser
 deactivate HelpCommand
 
-TutorAidParser --> LogicManager: h
+TutorAidParser --> LogicManager
 deactivate TutorAidParser
 
-LogicManager -> HelpCommand: execute()
+LogicManager -> HelpCommand: execute(model)
 activate HelpCommand
 
 create CommandResult

@@ -50,4 +50,8 @@ deactivate AddCommandParser
 TutorAidParser --> LogicManager
 deactivate TutorAidParser
 
+destroy AddCommandParser
+
+destroy AddLessonCommandParser
+
 @enduml

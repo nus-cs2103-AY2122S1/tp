@@ -28,21 +28,23 @@ Given below are my contributions to the project.
       
 * **Contributions to UG**:
   * Added the documentation for the features `add -s`, `del -s`, `find -s`, `find -l` and `help`.
-  * Added the documentation on creating a new progress note for a student in the _Beginner's Tutorial_ section.
+  * Added the documentation on adding a student into a lesson and creating a new progress entry for a student in the _Beginner's Tutorial_ section.
   * Added a _Glossary_ section to define some key terms, such as _Progress_, that users may be unsure about.
   
 * **Contributions to DG**:
   * Added on to the target user profile, value proposition, user stories, use cases, non-functional requirements and glossary.
-  * Added the documentation for the 'Add a student' feature, which includes a summary of the feature's implementation, 
-    sequence diagrams and design considerations.
-  
+  * Added the documentation for the 'Add a student' feature, which includes a summary of the feature's implementation, sequence diagrams and design considerations.
+  * Added the documentation for `Logic` component. 
+  * Added an _Introduction_ section.
+
 * **Contributions to team-based tasks**:
   * Delivered the product demos for v1.2 and v1.3.
-  * Handled the release of TutorAid v1.3.  
-  
+  * Handled the release of TutorAid v1.3.
+  * Formatted the whole UG and DG: Ensured that the there is consistency and smooth transitions within every section and between the different sections in each document.
+
 * **Review/mentoring contributions**:
   * PRs reviewed with suggestions on test cases: [#119](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/119) and [#106](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/106)
   * PRs reviewed with suggestions on improving code quality and coding standards: [#118](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/118) and [#105](https://github.com/AY2122S1-CS2103T-W16-3/tp/pull/105)
   
 * **Contributions beyond the project team**:
-  * Reported [bugs and suggestions](https://github.com/Preshita01/ped/issues) for Team CS2103T-F11-2 during the Practical Exam - Dry Run.
+  * Reported [11 bugs and suggestions](https://github.com/Preshita01/ped/issues) for Team CS2103T-F11-2 during the Practical Exam - Dry Run.

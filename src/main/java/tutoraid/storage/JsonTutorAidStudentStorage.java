@@ -14,7 +14,6 @@ import tutoraid.commons.util.FileUtil;
 import tutoraid.commons.util.JsonUtil;
 import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
-import tutoraid.model.util.SampleDataUtil;
 
 /**
  * A class to access StudentBook data stored as a json file on the hard disk.
@@ -29,7 +28,7 @@ public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
     /**
      * Constructor for the student storage object.
      *
-     * @param filePath Path to the JSON file
+     * @param filePath   Path to the JSON file
      * @param lessonBook Lesson book to create the Lesson-Student dependency
      */
     public JsonTutorAidStudentStorage(Path filePath, ReadOnlyLessonBook lessonBook) {
@@ -59,13 +58,7 @@ public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
         Optional<JsonSerializableStudentBook> jsonStudentBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableStudentBook.class);
         if (jsonStudentBook.isEmpty()) {
-            try {
-                return Optional.of(new JsonSerializableStudentBook(SampleDataUtil.getSampleStudentBook(lessonBook))
-                        .toModelType(lessonBook));
-            } catch (IllegalValueException ive) {
-                logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-                throw new DataConversionException(ive);
-            }
+            return Optional.empty();
         }
 
         try {
