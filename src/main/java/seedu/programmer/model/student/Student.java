@@ -273,7 +273,8 @@ public class Student implements DisplayableObject {
 
     /**
      * Create a new Student Object with the same fields.
-     * @return a copy of the Student
+     *
+     * @return A copy of the Student.
      * */
     public Student copy() {
         Student studentCopy = new Student(name, studentId, classId, email);

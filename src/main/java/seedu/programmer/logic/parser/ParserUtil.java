@@ -40,8 +40,8 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param name the input name
-     * @throws ParseException if the given {@code name} is invalid.
+     * @param name The input name.
+     * @throws ParseException If the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
@@ -56,8 +56,8 @@ public class ParserUtil {
      * Parses a {@code String studentId} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param studentId the input studentId
-     * @throws ParseException if the given {@code name} is invalid.
+     * @param studentId The input studentId.
+     * @throws ParseException If the given {@code name} is invalid.
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
@@ -72,8 +72,8 @@ public class ParserUtil {
      * Parses a {@code String classId} into an {@code ClassId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param classId the input classId
-     * @throws ParseException if the given {@code classId} is invalid.
+     * @param classId The input classId.
+     * @throws ParseException If the given {@code classId} is invalid.
      */
     public static ClassId parseClassId(String classId) throws ParseException {
         requireNonNull(classId);
@@ -103,7 +103,7 @@ public class ParserUtil {
     /**
      * Parses the title of the lab assignment.
      *
-     *  @param labNum the lab number
+     * @param labNum the lab number
      * */
     public static int parseLabNum(String labNum) throws ParseException {
         requireNonNull(labNum);

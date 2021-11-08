@@ -34,6 +34,7 @@ public class DashboardWindow extends PopupWindow {
      * Creates a new DashboardWindow.
      *
      * @param root Stage to use as the root of the DashboardWindow.
+     * @param logic Logic object for accessing student data.
      */
     public DashboardWindow(Stage root, Logic logic) {
         super(FXML, root);
@@ -64,8 +65,8 @@ public class DashboardWindow extends PopupWindow {
     /**
      * Fills number of students, classes and labs.
      *
-     * @param classes the set of classes
-     * @param stuList the list of students
+     * @param classes Set of classes.
+     * @param stuList List of students.
      */
     private void fillOverallStats(HashSet<ClassId> classes, ObservableList<Student> stuList) {
         String dataToDisplay = formatDataToDisplay(stuList, classes);
@@ -75,8 +76,8 @@ public class DashboardWindow extends PopupWindow {
     /**
      * Fills the number of unmarked labs per class.
      *
-     * @param classes the classes to be displayed
-     * @param stuList the list of students
+     * @param classes Classes to be displayed.
+     * @param stuList List of students.
      */
     private void fillLabsMarked(HashSet<ClassId> classes, ObservableList<Student> stuList) {
         TreeMap<ClassId, Integer> labsUnmarkedMap = populateLabsUnmarkedMap(classes, stuList);

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
  */
 public class PopupManager {
 
+    /** For customizing where to display the popup relative to the main window */
     private static final Double PADDING_FACTOR = 0.1;
 
     private final Popup popup;
@@ -17,7 +18,7 @@ public class PopupManager {
     /**
      * Creates a popup manager for the given primaryStage.
      *
-     * @param primaryStage stage to display popups on
+     * @param primaryStage Stage to display popups on.
      */
     public PopupManager(Stage primaryStage) {
         this.popup = new Popup();
@@ -27,7 +28,7 @@ public class PopupManager {
     /**
      * Displays a popup message at the top-center with respect to the primaryStage.
      *
-     * @param message to be displayed in the popup object on the primaryStage
+     * @param Message to be displayed in the popup object on the primaryStage.
      */
     void displayPopup(String message) {
         // We should not display an empty popup
@@ -39,7 +40,7 @@ public class PopupManager {
     /**
      * Creates a Popup object with a message.
      *
-     * @param message The text to display to the user
+     * @param message The text to display to the user.
      */
     private void configurePopup(String message) {
         popup.setAutoFix(false); // Prevent unwanted corrections in edge cases
@@ -58,8 +59,8 @@ public class PopupManager {
     /**
      * Creates a Label object with a message and styling.
      *
-     * @param message to be displayed in the label
-     * @return a Label object with the message and styling
+     * @param Message to be displayed in the label.
+     * @return A Label object with the message and styling.
      */
     private Label createLabelForPopup(String message) {
         Label label = new Label(message);

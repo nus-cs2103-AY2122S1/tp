@@ -8,8 +8,8 @@ public class UploadCommandResult extends CommandResult {
     /**
      * Creates an UploadCommandResult.
      *
-     * @param feedbackToUser message to show user
-     * @param model current model
+     * @param feedbackToUser Message to show user.
+     * @param model Current model.
      */
     public UploadCommandResult(String feedbackToUser) {
         super(feedbackToUser);

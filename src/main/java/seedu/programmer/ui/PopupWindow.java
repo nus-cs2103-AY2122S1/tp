@@ -18,7 +18,8 @@ public abstract class PopupWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
-     * @throws IllegalStateException
+     *
+     * @throws IllegalStateException if the state of the help window is not valid.
      * <ul>
      *     <li>
      *         if this method is called on a thread other than the JavaFX Application Thread.

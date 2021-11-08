@@ -16,8 +16,8 @@ public class DownloadCommand extends Command {
     /**
      * Returns a DownloadCommandResult with a message to indicate that the command was executed.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return DownloadCommandResult with a message
+     * @param model {@code Model} which the command should operate on.
+     * @return DownloadCommandResult with a message.
      */
     @Override
     public DownloadCommandResult execute(Model model) {

@@ -8,8 +8,8 @@ public class DownloadCommandResult extends CommandResult {
     /**
      * Creates a DownloadCommandResult.
      *
-     * @param feedbackToUser message to show user
-     * @param model current model
+     * @param feedbackToUser Message to show user.
+     * @param model Current model.
      */
     public DownloadCommandResult(String feedbackToUser) {
         super(feedbackToUser);

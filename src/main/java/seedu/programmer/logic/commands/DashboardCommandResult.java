@@ -8,7 +8,7 @@ public class DashboardCommandResult extends CommandResult {
     /**
      * Creates a DashboardCommandResult with a message.
      *
-     * @param feedbackToUser message to be displayed to the user
+     * @param feedbackToUser Message to be displayed to the user.
      */
     public DashboardCommandResult(String feedbackToUser) {
         super(feedbackToUser);

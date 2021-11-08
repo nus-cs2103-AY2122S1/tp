@@ -38,9 +38,9 @@ public class ProgrammerErrorParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput Full user input string
+     * @return The command based on the user input
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(format(userInput));
@@ -52,55 +52,38 @@ public class ProgrammerErrorParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord.toLowerCase()) {
-
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
         case PurgeCommand.COMMAND_WORD:
             return new PurgeCommand();
-
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
         case FillCommand.COMMAND_WORD:
             return new FillCommand();
-
         case AddLabCommand.COMMAND_WORD:
             return new AddLabCommandParser().parse(arguments);
-
         case DeleteLabCommand.COMMAND_WORD:
             return new DeleteLabCommandParser().parse(arguments);
-
         case EditLabCommand.COMMAND_WORD:
             return new EditLabCommandParser().parse(arguments);
-
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
-
         case DownloadCommand.COMMAND_WORD:
             return new DownloadCommand();
-
         case UploadCommand.COMMAND_WORD:
             return new UploadCommand();
-
         case DashboardCommand.COMMAND_WORD:
             return new DashboardCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

@@ -129,7 +129,8 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a button.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(KeyCombination keyCombination, Runnable runnable) {
         primaryScene.getAccelerators().put(keyCombination, runnable);
@@ -281,8 +282,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Retrieves the list of students from the CSV file for upload command.
      *
-     * @param chosenFile the CSV file to read from
-     * @return the list of Students
+     * @param chosenFile The CSV file to read from.
+     * @return List of Students.
      */
     private List<Student> getStudentListFromCsv(File chosenFile) {
         List<Student> stuList;
