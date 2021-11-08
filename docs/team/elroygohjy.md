@@ -12,14 +12,14 @@ written in Java, and has about 13 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature**:
-  * [Advanced Note Command](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/76)
+  * [Advanced Note Command](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/90)
     * What it does: Allows mentor to type notes for Persons and general Note in Notor via Note Window.
       Allows multiple instances of Note Window to be opened at once.
     * Justification: We wanted mentors to have more control over typing of notes, as it is an important aspect
       of mentoring.
     * Credits: No code reused.
 
-  * [Warning Window and Confirmation Window](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/76)
+  * [Warning Window and Confirmation Window](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/115)
       * What it does: Prompts Warning Window when mentor runs any clear commands. Prompts Confirmation Window when
         mentor attempts to close Note Window without saving. Prompts Warning window when mentor attempts to exit Notor
         with unsaved Note Windows opened.
@@ -27,7 +27,7 @@ Given below are my contributions to the project.
         commands.
       * Credits: No code reused.
 
-  * [Clear Note Command](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/115)
+  * [Clear Note Command](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/132)
       * What it does: Prompts Warning Window and clears note upon confirmation.
       * Justification: Mentor should be able to clear note if they choose to do so.
       * Credits: No code reused.
@@ -38,7 +38,7 @@ Given below are my contributions to the project.
         fast pace.
       * Credits: No code reused but inspired by CLI Terminal.
 
-  * [Note Window Shortcut keys](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/77)
+  * [Note Window Shortcut keys](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/90)
       * What it does: Allows mentors to save and quit Note Window using shortcut keys.
       * Justification: We wanted mentors fully immersive, hand-free experience.
       * Credits: No code reused.
