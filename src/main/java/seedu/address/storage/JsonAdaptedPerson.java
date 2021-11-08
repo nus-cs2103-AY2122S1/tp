@@ -10,11 +10,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.SocialHandle;
+import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,22 +31,38 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String nationality;
+    private final String tutorialGroup;
+    private final String gender;
+    private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedSocialHandle> socialHandles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("nationality") String nationality,
+                             @JsonProperty("tutorialGroup") String tutorialGroup,
+                             @JsonProperty("gender") String gender,
+                             @JsonProperty("remark") String remark,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("socialHandles") List<JsonAdaptedSocialHandle> socialHandles) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.nationality = nationality;
+        this.tutorialGroup = tutorialGroup;
+        this.gender = gender;
+        this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (socialHandles != null) {
+            this.socialHandles.addAll(socialHandles);
         }
     }
 
@@ -53,9 +73,15 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        nationality = source.getNationality().value;
+        tutorialGroup = source.getTutorialGroup().value;
+        gender = source.getGender().gender;
+        remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        socialHandles.addAll(source.getSocialHandles().stream()
+                .map(JsonAdaptedSocialHandle::new)
                 .collect(Collectors.toList()));
     }
 
@@ -94,16 +120,52 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (nationality == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Nationality.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Nationality.isValidNationality(nationality)) {
+            throw new IllegalValueException(Nationality.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Nationality modelNationality = new Nationality(nationality);
+
+        if (tutorialGroup == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TutorialGroup.class.getSimpleName()));
+        }
+        if (!TutorialGroup.isValidTutorialGroup(tutorialGroup)) {
+            throw new IllegalValueException(TutorialGroup.MESSAGE_CONSTRAINTS);
+        }
+        final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
+
+        if (gender == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
+
+        if (remark == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(remark)) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final List<SocialHandle> personSocialHandles = new ArrayList<>();
+        for (JsonAdaptedSocialHandle socialHandle : socialHandles) {
+            personSocialHandles.add(socialHandle.toModelType());
+        }
+        final Set<SocialHandle> modelSocialHandles = new HashSet<>(personSocialHandles);
+
+        return new Person(modelName, modelPhone, modelEmail, modelNationality,
+                modelTutorialGroup, modelGender, modelRemark, modelTags, modelSocialHandles);
     }
 
 }

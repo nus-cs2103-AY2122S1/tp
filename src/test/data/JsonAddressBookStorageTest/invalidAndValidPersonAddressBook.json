@@ -1,13 +1,24 @@
 {
   "persons": [ {
     "name": "Valid Person",
+    "gender": "M",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "nationality": "Singaporean ",
+    "tutorialGroup": "T09",
+    "remark": "likes coding",
+    "tagged" : [ "friends", "classmate" ],
+    "socialHandles" : [ {
+      "platform" : "ig",
+      "value" : "hans3470"
+    } ]
   }, {
     "name": "Person With Invalid Phone Field",
+    "gender": "M",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "nationality": "Singaporean ",
+    "tutorialGroup": "T28",
+    "remark": "likes coding"
   } ]
 }

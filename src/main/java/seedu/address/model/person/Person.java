@@ -17,23 +17,33 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Phone phone;
+    private final Email email;
+    private final Nationality nationality;
+    private final TutorialGroup tutorialGroup;
+    private final Gender gender;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<SocialHandle> socialHandles = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person}
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Nationality nationality,
+                  TutorialGroup tutorialGroup, Gender gender,
+                  Remark remark, Set<Tag> tags, Set<SocialHandle> socialHandles) {
+        requireAllNonNull(name, phone, email, nationality, tutorialGroup, gender, remark, tags, socialHandles);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.nationality = nationality;
+        this.tutorialGroup = tutorialGroup;
+        this.gender = gender;
+        this.remark = remark;
         this.tags.addAll(tags);
+        this.socialHandles.addAll(socialHandles);
     }
 
     public Name getName() {
@@ -48,8 +58,20 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Nationality getNationality() {
+        return nationality;
+    }
+
+    public TutorialGroup getTutorialGroup() {
+        return tutorialGroup;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -58,6 +80,17 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Tag getFirstTag() {
+        if (!tags.isEmpty()) {
+            return tags.iterator().next();
+        }
+        return null;
+    }
+
+    public Set<SocialHandle> getSocialHandles() {
+        return Collections.unmodifiableSet(socialHandles);
     }
 
     /**
@@ -69,8 +102,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return equals(otherPerson);
     }
 
     /**
@@ -91,33 +123,55 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getNationality().equals(getNationality())
+                && otherPerson.getTutorialGroup().equals(getTutorialGroup())
+                && otherPerson.getGender().equals(getGender())
+                && otherPerson.getRemark().equals(getRemark())
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSocialHandles().equals(getSocialHandles());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, nationality, tutorialGroup,
+                gender, remark, tags, socialHandles);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+        builder.append("\nName: ").append(getName());
+        if (!getGender().toString().isEmpty()) {
+            builder.append("; \nGender: ").append(getGender());
+        }
+        if (!getPhone().toString().isEmpty()) {
+            builder.append("; \nPhone: ").append(getPhone());
+        }
+        if (!getEmail().toString().isEmpty()) {
+            builder.append("; \nEmail: ").append(getEmail());
+        }
+        if (!getNationality().toString().isEmpty()) {
+            builder.append("; \nNationality: ").append(getNationality());
+        }
+        if (!getTutorialGroup().toString().isEmpty()) {
+            builder.append("; \nTutorial Group: ").append(getTutorialGroup());
+        }
+        if (!getRemark().toString().isEmpty()) {
+            builder.append("; \nRemark: ").append(getRemark());
+        }
 
+        Set<SocialHandle> socialHandles = getSocialHandles();
+        if (!socialHandles.isEmpty()) {
+            builder.append("; \nSocial Handles: ");
+            socialHandles.forEach(builder::append);
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; \nTags: ");
             tags.forEach(builder::append);
         }
+
         return builder.toString();
     }
-
 }

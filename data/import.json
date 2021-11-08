@@ -1,0 +1,32 @@
+{
+  "persons" : [ {
+    "name" : "Test Import",
+    "phone" : "87438805",
+    "email" : "test1@example.com",
+    "nationality" : "Singaporean",
+    "tutorialGroup" : "T09",
+    "socialHandle" : "@asdas",
+    "gender" : "M",
+    "remark" : "$remark is gone!",
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    } ]
+  }, {
+    "name" : "Test Import Two",
+    "phone" : "99272738",
+    "email" : "test2@example.com",
+    "nationality" : "Malaysian",
+    "tutorialGroup" : "T09",
+    "socialHandle" : "@asdas",
+    "gender" : "M",
+    "remark" : "",
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    }, {
+      "tagName" : "colleague",
+      "tagColour" : "#3e7b91"
+    } ]
+  } ]
+}

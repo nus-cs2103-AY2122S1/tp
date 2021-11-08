@@ -1,10 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -14,14 +26,32 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Finds all persons whose details contain every "
+            + "specified keywords and displays them as a list with index numbers.\n\n"
+            + "Parameters: PREFIX/KEYWORD [PREFIX/KEYWORD]...\n"
+            + "PREFIX/KEYWORD can be any of the following:\n"
+            + PREFIX_NAME + "NAME\n"
+            + PREFIX_GENDER + "GENDER\n"
+            + PREFIX_PHONE + "PHONE_NUMBER\n"
+            + PREFIX_EMAIL + "EMAIL\n"
+            + PREFIX_NATIONALITY + "NATIONALITY\n"
+            + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP\n"
+            + PREFIX_REMARK + "REMARK\n"
+            + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE\n"
+            + PREFIX_TAG + "TAG\n\n"
+            + "Note:\n"
+            + " - Keywords are case-insensitive\n."
+            + " - For SOCIAL_HANDLE, stating platform is required (e.g. tg:alex).\n\n"
+            + "Example: " + COMMAND_WORD + " n/alice g/f p/91234567 tg/19";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A empty %s was entered. \n%1$s");
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_PREDICATE = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "No valid keyword entered. \n%1$s");
 
-    private final NameContainsKeywordsPredicate predicate;
+    private Predicate<Person> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
     }
 

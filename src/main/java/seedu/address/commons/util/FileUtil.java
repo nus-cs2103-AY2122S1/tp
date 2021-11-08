@@ -1,15 +1,23 @@
 package seedu.address.commons.util;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import seedu.address.Main;
+
 /**
  * Writes and reads files
  */
 public class FileUtil {
+
+    /**
+     * Prevents file names with special characters
+     */
+    public static final String VALIDATION_REGEX = "^[\\w,\\s-]+\\.[A-Za-z]{4}$";
 
     private static final String CHARSET = "UTF-8";
 
@@ -79,5 +87,20 @@ public class FileUtil {
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
     }
+
+    public static String getCurrentPath() throws URISyntaxException {
+        return String.valueOf(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+    }
+
+    /**
+     * Returns true if a given string is a valid file name.
+     */
+    public static boolean isValidJsonFileName(String test) {
+        if (test.isEmpty()) {
+            return false;
+        }
+        return test.matches(VALIDATION_REGEX);
+    }
+
 
 }

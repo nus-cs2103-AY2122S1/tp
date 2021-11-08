@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+group Parse Alias Command
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AliasCommandParser" as AliasCommandParser LOGIC_COLOR
+participant "r:AliasCommand" as AliasCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("alias a/Singaporeans c/find nat/Singaporean")
+activate AddressBookParser
+
+create AliasCommandParser
+AddressBookParser -> AliasCommandParser
+activate AliasCommandParser
+
+AliasCommandParser -> AddressBookParser
+deactivate AliasCommandParser
+
+AddressBookParser -> AliasCommandParser : parse("a/Singaporeans c/find nat/Singaporean")
+activate AliasCommandParser
+
+create AliasCommand
+AliasCommandParser -> AliasCommand
+activate AliasCommand
+
+AliasCommand --> AliasCommandParser : r
+deactivate AliasCommand
+
+AliasCommandParser -> AddressBookParser : r
+deactivate AliasCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AliasCommandParser -[hidden]-> AddressBookParser
+destroy AliasCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+end
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+group Parse Remark Command
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RemarkCommandParser" as RemarkCommandParser LOGIC_COLOR
+participant "r:RemarkCommand" as RemarkCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("remark 1 r/She likes coding")
+activate AddressBookParser
+
+create RemarkCommandParser
+AddressBookParser -> RemarkCommandParser
+activate RemarkCommandParser
+
+RemarkCommandParser -> AddressBookParser
+deactivate RemarkCommandParser
+
+AddressBookParser -> RemarkCommandParser : parse("1 r/She likes coding")
+activate RemarkCommandParser
+
+create RemarkCommand
+RemarkCommandParser -> RemarkCommand
+activate RemarkCommand
+
+RemarkCommand --> RemarkCommandParser : r
+deactivate RemarkCommand
+
+RemarkCommandParser -> AddressBookParser : r
+deactivate RemarkCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RemarkCommandParser -[hidden]-> AddressBookParser
+destroy RemarkCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+end
+@enduml

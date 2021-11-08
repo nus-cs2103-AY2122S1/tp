@@ -50,6 +50,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    //Colour scheme of MainWindow and its contents adapted from https://github.com/AY2122S1-CS2103T-F12-3/tp
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -62,6 +64,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        setTitleBar("Socius");
 
         setAccelerators();
 
@@ -78,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -114,6 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
+        resultDisplay.getWelcomeMessage();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -133,6 +139,13 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Sets the name on title bar.
+     */
+    private void setTitleBar(String title) {
+        primaryStage.setTitle(title);
     }
 
     /**
@@ -173,10 +186,18 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        resultDisplay.clearDisplay();
+
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowFeedback()) {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            } else if (commandResult.isShowPieChart()) {
+                resultDisplay.setChartToUser(commandResult.getPieChartDatas(), commandResult.getPieChartTitles());
+            }
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

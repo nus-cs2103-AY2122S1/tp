@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.List;
 
@@ -17,12 +18,16 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Deletes the person identified by the index number used in the displayed person list.\n\n"
+            + "Parameters: INDEX\n\n"
+            + "Note:\n"
+            + " - INDEX must be a positive integer.\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_INVALID_INDEX = String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, "A valid index was not entered. \n%1$s");
 
     private final Index targetIndex;
 

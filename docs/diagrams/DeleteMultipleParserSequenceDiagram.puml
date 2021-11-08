@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+group Parse Delete Multiple Command
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteMultipleCommandParser" as DeleteMultipleCommandParser LOGIC_COLOR
+participant "d:DeleteMultipleCommand" as DeleteMultipleCommand LOGIC_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deletem t/friends g/m")
+activate AddressBookParser
+
+create DeleteMultipleCommandParser
+AddressBookParser -> DeleteMultipleCommandParser
+activate DeleteMultipleCommandParser
+
+DeleteMultipleCommandParser -> AddressBookParser
+deactivate DeleteMultipleCommandParser
+
+AddressBookParser -> DeleteMultipleCommandParser : parse("t/friends g/m")
+activate DeleteMultipleCommandParser
+
+create DeleteMultipleCommand
+DeleteMultipleCommandParser -> DeleteMultipleCommand
+activate DeleteMultipleCommand
+
+DeleteMultipleCommand --> DeleteMultipleCommandParser : d
+deactivate DeleteMultipleCommand
+
+DeleteMultipleCommandParser -> AddressBookParser : d
+deactivate DeleteMultipleCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteMultipleCommandParser -[hidden]-> AddressBookParser
+destroy DeleteMultipleCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+end
+@enduml

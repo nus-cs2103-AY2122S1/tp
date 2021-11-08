@@ -1,0 +1,21 @@
+@startuml
+scale max 500 height
+
+start
+:User executes remark command;
+:Model returns the previously filtered list;
+:Search for person matching the index given;
+
+if () then ([given person index is valid])
+    :Create a new person from
+    combining User-specified person
+    and User-given remark;
+    :Replace User-specified person with new person;
+    :Pass edited person to UI through feedback;
+else ([else])
+    :Throw CommandException;
+    :UI catches CommandException;
+endif
+    :UI displays results to User;
+stop
+@enduml
