@@ -530,7 +530,8 @@ Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the us
 
 * **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a private field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
   - Pros:
-    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
+    - Quicker update and retrieval of data using a `HashMap` for `tagCounter`.
+    - Easier implementation.
   - Cons:
     - Each `Person` object has its own set of `Tag` objects which may be repetitive and memory-consuming if there were multiple duplicate tags with the same tag name.
     - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
