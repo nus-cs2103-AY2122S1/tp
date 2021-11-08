@@ -212,7 +212,7 @@ are all sample data! Here are some commands you can try to see what they do:
 
 * If a command expects a specific set of parameters, and you entered *extra* parameter into the command (with unrecognised),
 prefix, then FAST will assume it to be part of the previous parameter input, which may or may not be valid for certain commands. <br>
-    * e.g. if a command expects this parameter `ea v/New York` but you enter `ea v/New York p/87657654`, 
+    * e.g. if a command expects this parameter `ea 2 v/New York` but you enter `ea 2 v/New York p/87657654`, 
   FAST will assume your input to `v/` to be `New York p/87657654`.
 </div>
 
