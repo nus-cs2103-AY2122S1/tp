@@ -313,7 +313,7 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 ### Add Student 
 #### Implementation 
 
-The add student feature allows the CS2100 to add a new student into the student list. Its implementation 
+The add student feature allows the CS2100 Lab TAs to add a new student into the student list. Its implementation 
 introduces the following classes: 
 
 - `AddCommand` that extends `Command`
@@ -369,16 +369,25 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
 
 #### Implementation
 
-The filter mechanism is facilitated by the `QueryStudentDescriptor` and the
-`StudentDetailContainsQueryPredicate`. The `StudentDetailContainsQueryPredicate` extends `Predicate<Student>` and
-contains a private field of type
-`QueryStudentDescriptor` that will be used to test if a given student to the predicate matches all the query fields in
-the `QueryStudentDescriptor`.
+The filter feature allows the CS2100 Lab TAs to filter the student list in ProgrammerError based on any combinations (but at least one) of
+the following 4 optional parameters: `Name`, `StudentId`, `ClassId` and/or `Email`. Its implementation introduces the following classes:
+* `FilterCommand` that extends `Command`
+* `FilterCommandParser` that implements `Parser<FilterCommand>`
+* `QueryStudentDescriptor` that contains the user input of the corresponding student information to be queried with.
+* `StudentDetailContainsQueryPredicate` that implements `Predicate<Student>` to test if a student matches the fields as specified in `QueryStudentDescriptor`.
 
+The syntax of this command is `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`.
+For instance, `filter -cid B01` will filter and show all the students in the list whose class ID contains the character sequence "B01".
+This is designed for the target users who are fast typists to efficiently filter the list as desired.
+
+The implementation of the filter mechanism is facilitated by the `StudentDetailContainsQueryPredicate` that contains a private field of type `QueryStudentDescriptor` that will be
+used to test if a given student to the predicate matches all the query fields in the `QueryStudentDescriptor`.
+
+The following methods are further explained in greater detail for ease of understanding:
 * `StudentDetailContainsQueryPredicate#test(Student)` — Evaluates the predicate on the given `Student` argument.
 * `QueryStudentDescriptor#doesStudentMatchDescriptor(Student)` — Evaluates if the `QueryStudentDescriptor` fields
   matches with the corresponding fields of the `Student` argument. It is a match as long as the corresponding fields of
-  the `Student` argument **contains the character sequence** as specified in the `QueryStudentDescriptor`.
+  the `Student` argument **contains the character sequence** as specified in the `QueryStudentDescriptor`. 
 
 These operations are exposed in the `Model` interface as `Model#updateFilteredStudentList(Predicate<Student>)`.
 
@@ -390,7 +399,7 @@ Step 2. The CS2100 TA executes `filter -cid B01` to display all the students who
 
 The following UML sequence diagrams shows how the filter command works:
 
-1. In the following sequence diagram, the focus is on modelling the interactions between components to create the `FilterCommand` object.
+1. In the following sequence diagram, the focus is on modelling the interactions between components to first create the `FilterCommand` object.
    
 ![FilterSequenceDiagramParse](images/commands/FilterCommand/FilterSequenceDiagramParse.png)
 
