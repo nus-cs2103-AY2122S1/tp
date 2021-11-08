@@ -4,7 +4,7 @@
 ## Overview
 **TutorAid is a desktop application for private tutors to manage the details of their students and lessons.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-Want to download and start using TutorAid? Head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#3-quick-start) to start your TutorAid experience!
+Want to download and start using TutorAid? Head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103t-w16-3.github.io/tp/UserGuide.html#3-quick-start) to start your TutorAid experience!
 
 ![Ui](docs/images/Ui.png)
 
