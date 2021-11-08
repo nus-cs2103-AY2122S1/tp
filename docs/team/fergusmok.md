@@ -61,9 +61,3 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 1. Contributed to forum discussion (example: [#60](https://github.com/nus-cs2103-AY2122S1/forum/issues/60))
 2. Reported major bugs for other teams which I was the sole reporter. (examples: [#214](https://github.com/AY2122S1-CS2103T-F11-1/tp/issues/214), [#198](https://github.com/AY2122S1-CS2103T-F11-1/tp/issues/198))
 3. Reviewed and gave suggestions for teammates PRs (examples: [#55](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/55), [#92](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/92) (which was followed up in [#102](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/102)))
-
-
-
-
-
-
