@@ -466,6 +466,8 @@ Examples:
 
 ![taskedit](images/imagesInUG/task-edit.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a task: `task -d`
 
 Deletes the specific task from the Task Panel.
@@ -517,6 +519,8 @@ Format: `task -as STUDENTINDEX TASKINDEX`
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
 
+<div style="page-break-after: always;"></div>
+
 #### Assigning tasks to groups: `task -ag`
 
 Assigns a specific task to groups’ task list.
@@ -552,6 +556,8 @@ Format: `task -unag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
+
+<div style="page-break-after: always;"></div>
 
 #### Marking a task as done by student: `task -do`
 
