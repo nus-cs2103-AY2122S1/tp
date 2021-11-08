@@ -396,7 +396,7 @@ The following demonstrates a usage scenario where the user wants to delete the f
 3. It then calls the `parse` method in `SortCommandParser` to parse the string `”x/time o/asc”`.
 4. A `SortCommand` object will be initialized, taking in the sort type and sort order in the function, in this case the type being time and order being asc (ascending order).
 5. The method call then returns to `LogicManager`, which calls the `execute` method of `SortCommand`.
-6. By using a functional interface called ‘BiFunction’, the `SotCommand` sorts the task list by calling a method ‘sortTasks’ under ‘Model’.
+6. By using a functional interface called `BiFunction`, the `SortCommand` sorts the task list by calling a method `sortTasks` under `Model`.
 7. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
 
 The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `sort x/time o/asc` command as in Step 3.
@@ -527,8 +527,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | edit tasks                     | more easily change specifics of a task without deleting and re-adding  |
 | `* *`    | user                                       | show tasks                     | show the tasks that I have for the week                                |
 | `* *`    | user                                       | tag tasks                      | add a category for the task                                            |
-| `* *`    | user with many tasks in the address book   | search for tasks               | locate a task easily                                                   |
-| `* *`    | user with many tasks in the address book   | sort tasks                     | organise my tasks in a better way                                      |
+| `* *`    | user with many tasks in the task list   | search for tasks               | locate a task easily                                                   |
+| `* *`    | user with many tasks in the task list   | sort tasks                     | organise my tasks in a better way                                      |
 | `*`      | unmotivated student                        | track my weekly progress       | get a sense of achievement on completion of tasks                      |
 
 
@@ -699,6 +699,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Uni-Fy shows an error message.
 
   Use case resumes at step 2.
+
+**Use case: UC09 - Sort a task**
+
+**MSS**
+
+1.  User requests for all their tasks to be sorted by time in ascending order.
+2.  Uni-Fy sorts user's list of tasks by time in ascending order.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user requests for tasks to be sorted by priority in descending order.
+    
+    * 1a1. Uni-Fy sorts user's list of tasks by priority in descending order.
+    
+  Use case ends.
+
+* 1b. The given sort_type is invalid.
+
+    * 1b1. Uni-Fy shows an error message.
+
+  Use case ends.
     
 
 ## Appendix D: Non-Functional Requirements
