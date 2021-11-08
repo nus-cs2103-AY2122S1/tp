@@ -15,7 +15,7 @@ Below are my contributions to the project.
 
 * **New Feature**: Added the ability to set the role requirements for each shift. 
   * What it does: Allows the users to set the requirements for each role every shift. The role requirements will be displayed when the command is called. Additionally, Staff'd will refer to these role requirements to check for staff shortages when the `viewShift` command is utilized.
-  * Justification: This feature allows managers to quickly ascertain whether they have sufficient staff of each role working at a particular shift. 
+  * Justification: This feature allows managers to quickly ascertain whether they have sufficient staff of each role working for a particular shift. 
   * Highlights: A data file will be created to store the role requirements information so that users only need to adjust the role requirements once.
 
 * **Enhancements to existing features**:
@@ -25,6 +25,8 @@ Below are my contributions to the project.
 * Conducted manual testing and fixed bugs and help messages for v1.4. [\#299](https://github.com/AY2122S1-CS2103T-W11-2/tp/pull/299)
 
 * **Code contributed**: [RepoSense Link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=mweeruien&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=mweeruien&tabRepo=AY2122S1-CS2103T-W11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+* Designed and created the **Staff'd Icon**
 
 * **Project management**:
   * Managed releases `v1.2` - `v1.4` (4 releases) on GitHub
