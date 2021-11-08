@@ -11,7 +11,7 @@ Users can manage contacts, organise them into project groups and manage their ta
 
 
 This guide contains detailed information on the architecture, implementation and design decisions for ThunderCat. This guide has been designed 
-for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat, or those who seek alter and extend the app for their own use.
+for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat, or those who seek to alter and extend the app for their own use.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W17-3/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -51,7 +51,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -73,7 +73,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its *[API](#api)* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -298,10 +298,7 @@ An example of an `UndoableCommand` is `AddCommand`, which adds a person to the r
     * Execution is different for each command so specific execution can be fine-tuned for each individual command.
   * Cons:
     * We must ensure that the implementation of each individual command are correct.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+    
 
 ### Add Panel to the UI
 
@@ -327,11 +324,11 @@ Application Scence Builder makes it easier to imagine and implement the feature 
 
 The Rounded-corners UI mechanism is facilitated by [`DarkTheme.css`](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/resources/view/DarkTheme.css). By making the rounded-corners UI, the user's experience with the application can be enhanced significantly.
 
-Overall, `.css` files specialized for theme of the application. All the components like background color, font size and shape can be manipulated by this file. By refer to this [online instruction](https://www.w3schools.com/css/css3_borders.asp) and implement in the needed UI components in the theme file, those components' corners can be make as rounded as prefer.
+Overall, the `.css` files are specialized for the theme of the application. All the components including background color, font size and shape can be manipulated with this file. By referring to this [online instruction](https://www.w3schools.com/css/css3_borders.asp) and implementing it in the UI components in the theme file, those components' corners can be altered to rounded as prefered.
 
 ### Edit Group Command
 
-The edit group mechanism is facilitated by `EditGroupCommand`, `EditGroupCommandParser` and `EditGroupDescriptor`. This command allows users edit data of the selected group.
+The edit group mechanism is facilitated by `EditGroupCommand`, `EditGroupCommandParser` and `EditGroupDescriptor`. This command allows users to edit data of the selected group.
 
 #### Implementation
 
@@ -659,6 +656,8 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+<a name="api"></a>
+* **API**: Application programming interfaces, or APIs, simplify software development and innovation by enabling applications to exchange data and functionality easily and securely.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -779,5 +778,3 @@ testers are expected to do more *exploratory* testing.
     
     2. Test case: `joinG p/1 g/1`
         Expected: Similar to previous test case result ( Test case 1(iii) ).
-      
-       
