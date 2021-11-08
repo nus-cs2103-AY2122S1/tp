@@ -9,7 +9,7 @@ package Logic {
 Class AddressBookParser
 Class XYZCommand
 Class CommandResult
-Class "{abstract}\nCommand" as Command
+abstract Class "{abstract}\nCommand" as Command
 
 
 Interface Logic <<Interface>>
