@@ -8,7 +8,7 @@ title: Uni-Fy
 
 ![logo](images/Uni-Fy_Logo.png)
 
-![Ui](images/UIUpdated.png)
+![Ui](images/UI.png)
 
 **Uni-Fy is a desktop application for managing your academic tasks.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
