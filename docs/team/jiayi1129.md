@@ -20,9 +20,6 @@ Given below are my contributions to the project
 * **New Feature**: 
   * What it does: Allows the user to execute commands pertaining to appointments and receive feedback in the appointment list.
   * Justification: This feature is crucial to the product as clinic receptionists as the `Model` and `Logic` class is essential for the logical flow of the application. 
-    The `Model` class is in charge of holding the appointment list and filtering it to display to the clinic receptionists.
-    The `Logic` class is responsible for execution of the commands and saving the data after an execution has occurred.
-    Without these two key components, the application would be incomplete as any standalone commands like `AddAppointmentCommand` is unable to be executed an affect any change.
   * Highlights: This feature requires the creation of a new `UniqueAppointmentList` to be used in the `Model` class to manage an appointment list. 
     The `Appointment` class now implements the `Comparable` interface to have natural ordering, and the UI then displays a sorted appointment list that uses this natural comparator.
     
@@ -49,10 +46,8 @@ Given below are my contributions to the project
     * Formatted the document and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
   * Developer Guide:
     * Updated the Storage Class Diagram [#113](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/113)
-    * Added the implementation for storing an appointment [#198](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/198)
-    * Added a sequence diagram to illustrate how an appointment is stored [#198](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/198)
-    * Added the Find Patients/Doctors manual testing [#237](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/237)
-    * Added Saving data manual testing [#237](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/237)
+    * Added the implementation and sequence diagram for storing an appointment [#198](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/198)
+    * Added Find Patients/Doctors and Saving data manual testing [#237](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/237)
     * Formatted the document and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
 
 * **Community**:
@@ -65,7 +60,6 @@ Given below are my contributions to the project
   * Updated the README file to match current project [#10](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/10)
   * Updated Site Wide Settings in `Documentation.md`, `_config.yml`, `_base.scss` and `index.md` files to match current project [#11](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/11)
   * Refactored and renamed the codebase from AddressBook to PlannerMd [#34](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/34)
-  * Reviewed, raised and fixed issues in the user/developer guide
   * Added "skeleton" code to have less merge conflicts [#53](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/53) [#60](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/60)
   * Added test builders before features are implemented so that features can be implemented concurrent with their tests [#54](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/54)
   * Refactored packages to make codebase more organised [#199](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/199)
