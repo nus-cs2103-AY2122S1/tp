@@ -1385,4 +1385,30 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
    3. Rename <kbd>sportspa.txt</kbd> back to <kbd>sportspa.json</kbd>.
    4. Run SportsPA. 
    5. SportsPA will start up without any data being present.
-   
+
+## **Appendix: Effort**
+
+Our team has put in significant effort in evolving AB3 (Address Book Level 3) into SportsPA. In the following subsections, we list some notable contributions to the project as well as challenges that we faced during the course.
+
+### Contributions
+
+1. **Handling two entities, Members and Facilities**
+<br>AB3 handles only one entity type, Person, whereas we introduced another entity type, Facility. This introduced the complexity of handling the connection and interaction between the two entities. Since Facility objects kept references to Member objects, certain measures had to be implemented to maintain consistency. For example, Facility objects have to respond to changes to Member objects they have reference to, otherwise there may be a conflict in the data presented to the user.
+<br><br>
+2. **Enhancing User Experience for our Target Users**
+<br>Our team also put a lot of thought into designing and implementing features that would specifically enhance our target users’ user experience. Such features include the import and export command. Since this project is restricted to only one end user, we included this feature to help facilitate the communication between our target users, sports CCA leaders, and their members. Another feature is the alias command, which is a fairly staple feature for users who are familiar with CLI applications, giving our users the flexibility to personalise the commands.
+   <br><br>
+3. **Improving Documentation**
+   <br>The team significantly improved AB3’s documentation, especially the User Guide. We completely revamped the User Guide to become more reader-friendly and reader-focused, taking on a more welcoming tone and including more useful tips, notes and warnings for some of the features. We also added instructions on how to navigate and understand the documentation. Additionally, the Developer Guide was adapted to include diagrams, implementation details, design considerations, user stories and use cases to become more relevant to our project.
+
+### Challenges Faced
+1. **Handling Duplicates**
+<br>One of the more noteworthy challenges we faced was to decide whether we should allow duplicate members in SportsPA. Initially, SportsPA did not allow duplicate names, but allowed duplicate phone numbers. This problem surfaced from the PED when a reviewer mentioned that users may need to add members with the same name. By then, many of our commands were finalised and just a little tweak to the method could break many method chains as multiple commands were using the same mechanism. Our team had to perform an in-depth analysis on the dependencies of that method to avoid such complications.
+<br>Our team ultimately decided that SportsPA will not support duplicate members, that is, if they have the same name and/or phone number. We weighed the pros and cons of both alternatives and discovered that preserving the no-duplicates characteristic inherited from AB3 would require significantly less changes to our existing commands. Even though we eventually settled with disallowing duplicates, an additional duplicate phone number check was implemented and the import function had to be amended to support these changes.
+<br><br>
+2. **Coupling of Features**
+<br>Another challenge was that some features were dependent on the implementation of other features, so it was difficult to ensure that these implementations would complement each other and work as expected when different members worked on these different features. For example, one member implemented the split feature, while another worked on the setm features which sets the availability of the members. However, the split feature depends on setm in order to function properly. Hence, when merging these features together, it resulted in the split feature not working as expected, and thus needed more modifications and effort to integrate the features.
+
+### Final Thoughts
+Overall, the difficulty of the project was high due to the complexity of some of our features. However, with the combined efforts of every team member, we were able to release the final version of the product that we can be proud of.
+
