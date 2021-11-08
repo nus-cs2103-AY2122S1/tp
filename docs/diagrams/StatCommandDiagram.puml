@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "command:StatCommand" as StatCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("stat")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("stat", model)
+activate AddressBookParser
+
+create StatCommand
+AddressBookParser -> StatCommand
+activate StatCommand
+
+StatCommand -> AddressBookParser : command
+deactivate StatCommand
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> StatCommand : execute(model)
+activate StatCommand
+
+StatCommand -> Model : getFilteredClientList()
+activate Model
+
+Model --> StatCommand
+deactivate Model
+
+create CommandResult
+StatCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> StatCommand : result
+deactivate CommandResult
+
+StatCommand --> LogicManager : CommandResult
+deactivate StatCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

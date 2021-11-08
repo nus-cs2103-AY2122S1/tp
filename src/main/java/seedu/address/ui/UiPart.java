@@ -13,7 +13,6 @@ import seedu.address.MainApp;
  * It contains a scene graph with a root node of type {@code T}.
  */
 public abstract class UiPart<T> {
-
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
 
@@ -29,6 +28,7 @@ public abstract class UiPart<T> {
 
     /**
      * Constructs a UiPart using the specified FXML file within {@link #FXML_FILE_FOLDER}.
+     *
      * @see #UiPart(URL)
      */
     public UiPart(String fxmlFileName) {
@@ -45,6 +45,7 @@ public abstract class UiPart<T> {
 
     /**
      * Constructs a UiPart with the specified FXML file within {@link #FXML_FILE_FOLDER} and root object.
+     *
      * @see #UiPart(URL, T)
      */
     public UiPart(String fxmlFileName, T root) {
@@ -60,14 +61,17 @@ public abstract class UiPart<T> {
 
     /**
      * Loads the object hierarchy from a FXML document.
+     *
      * @param location Location of the FXML document.
      * @param root Specifies the root of the object hierarchy.
      */
     private void loadFxmlFile(URL location, T root) {
         requireNonNull(location);
+
         fxmlLoader.setLocation(location);
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(root);
+
         try {
             fxmlLoader.load();
         } catch (IOException e) {
@@ -80,9 +84,9 @@ public abstract class UiPart<T> {
      */
     private static URL getFxmlFileUrl(String fxmlFileName) {
         requireNonNull(fxmlFileName);
+
         String fxmlFileNameWithFolder = FXML_FILE_FOLDER + fxmlFileName;
         URL fxmlFileUrl = MainApp.class.getResource(fxmlFileNameWithFolder);
         return requireNonNull(fxmlFileUrl);
     }
-
 }

@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lin Xingchen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linxcathyyy.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Linxcathyyy)]
+[[portfolio](team/linxcathyyy.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Benjamin Lui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/benluiwj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/benluiwj)]
+[[portfolio](team/benluiwj.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Zhang Shi Chen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/skyblaise99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/SkyBlaise99)]
+[[portfolio](team/skyblaise99.md)]
+
+* Role: Developer
+* Responsibilities: Integration
+
+### Naoki Shum
+
+<img src="images/naokishum.png" width="200px">
+
+[[github](http://github.com/NaokiShum)]
+[[portfolio](team/naokishum.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Hongshu Wang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hongshuw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/HongshuW)]
+[[portfolio](team/hongshuw.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing

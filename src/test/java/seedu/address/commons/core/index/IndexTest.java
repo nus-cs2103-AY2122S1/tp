@@ -8,7 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class IndexTest {
-
     @Test
     public void createOneBasedIndex() {
         // invalid index
@@ -39,22 +38,40 @@ public class IndexTest {
 
     @Test
     public void equals() {
-        final Index fifthPersonIndex = Index.fromOneBased(5);
+        final Index fifthIndex = Index.fromOneBased(5);
 
         // same values -> returns true
-        assertTrue(fifthPersonIndex.equals(Index.fromOneBased(5)));
-        assertTrue(fifthPersonIndex.equals(Index.fromZeroBased(4)));
+        assertTrue(fifthIndex.equals(Index.fromOneBased(5)));
+        assertTrue(fifthIndex.equals(Index.fromZeroBased(4)));
 
         // same object -> returns true
-        assertTrue(fifthPersonIndex.equals(fifthPersonIndex));
+        assertTrue(fifthIndex.equals(fifthIndex));
 
         // null -> returns false
-        assertFalse(fifthPersonIndex.equals(null));
+        assertFalse(fifthIndex.equals(null));
 
         // different types -> returns false
-        assertFalse(fifthPersonIndex.equals(5.0f));
+        assertFalse(fifthIndex.equals(5.0f));
 
         // different index -> returns false
-        assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
+        assertFalse(fifthIndex.equals(Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void increaseByOne() {
+        Index index = Index.fromZeroBased(1);
+        index.increaseByOne();
+
+        assertEquals(3, index.getOneBased());
+        assertEquals(2, index.getZeroBased());
+    }
+
+    @Test
+    public void decreaseByOne() {
+        Index index = Index.fromZeroBased(1);
+        index.decreaseByOne();
+
+        assertEquals(1, index.getOneBased());
+        assertEquals(0, index.getZeroBased());
     }
 }

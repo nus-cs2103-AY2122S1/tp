@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindProductCommandParser" as FindClientCommandParser LOGIC_COLOR
+participant "command:FindProducttCommand" as FindClientCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("find -p phone")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find -p phone", model)
+activate AddressBookParser
+
+create FindClientCommandParser
+AddressBookParser -> FindClientCommandParser
+activate FindClientCommandParser
+
+FindClientCommandParser --> AddressBookParser
+deactivate FindClientCommandParser
+
+AddressBookParser -> FindClientCommandParser : parse("phone")
+activate FindClientCommandParser
+
+create FindClientCommand
+FindClientCommandParser -> FindClientCommand
+activate FindClientCommand
+
+"FindClientCommand" --> "FindClientCommandParser" : command
+deactivate FindClientCommand
+
+"FindClientCommandParser" --> AddressBookParser : command
+deactivate FindClientCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindClientCommandParser -[hidden]-> AddressBookParser
+destroy FindClientCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> FindClientCommand : execute()
+activate FindClientCommand
+
+create CommandResult
+FindClientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindClientCommand
+deactivate CommandResult
+
+FindClientCommand --> LogicManager : result
+deactivate FindClientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

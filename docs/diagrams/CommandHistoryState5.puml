@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After first "↓"
+
+package ArrayList {
+    class State1 as "delete 5"
+    class State2 as "add -c Sora ..."
+    class State3 as "add -c Sky ..."
+}
+
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+
+hide State3
+
+class Pointer as "Index" #FFFFFF
+Pointer -up-> State2
+
+@end
