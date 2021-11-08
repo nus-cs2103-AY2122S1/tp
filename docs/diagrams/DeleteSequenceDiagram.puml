@@ -3,7 +3,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SiasaParser" as SiasaParser LOGIC_COLOR
 participant ":DeletePolicyCommandParser" as DeletePolicyCommandParser LOGIC_COLOR
 participant "d:DeletePolicyCommand" as DeletePolicyCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -16,17 +16,17 @@ end box
 [-> LogicManager : execute("deletepolicy 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("deletepolicy 1")
-activate AddressBookParser
+LogicManager -> SiasaParser : parseCommand("deletepolicy 1")
+activate SiasaParser
 
 create DeletePolicyCommandParser
-AddressBookParser -> DeletePolicyCommandParser
+SiasaParser -> DeletePolicyCommandParser
 activate DeletePolicyCommandParser
 
-DeletePolicyCommandParser --> AddressBookParser
+DeletePolicyCommandParser --> SiasaParser
 deactivate DeletePolicyCommandParser
 
-AddressBookParser -> DeletePolicyCommandParser : parse("1")
+SiasaParser -> DeletePolicyCommandParser : parse("1")
 activate DeletePolicyCommandParser
 
 create DeletePolicyCommand
@@ -36,14 +36,14 @@ activate DeletePolicyCommand
 DeletePolicyCommand --> DeletePolicyCommandParser : d
 deactivate DeletePolicyCommand
 
-DeletePolicyCommandParser --> AddressBookParser : d
+DeletePolicyCommandParser --> SiasaParser : d
 deactivate DeletePolicyCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeletePolicyCommandParser -[hidden]-> AddressBookParser
+DeletePolicyCommandParser -[hidden]-> SiasaParser
 destroy DeletePolicyCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+SiasaParser --> LogicManager : d
+deactivate SiasaParser
 
 LogicManager -> DeletePolicyCommand : execute()
 activate DeletePolicyCommand
@@ -60,9 +60,13 @@ activate CommandResult
 
 CommandResult --> DeletePolicyCommand
 deactivate CommandResult
+CommandResult -[hidden]-> DeletePolicyCommand
+destroy CommandResult
 
 DeletePolicyCommand --> LogicManager : result
 deactivate DeletePolicyCommand
+DeletePolicyCommand -[hidden]-> LogicManager
+destroy DeletePolicyCommand
 
 [<--LogicManager
 deactivate LogicManager
