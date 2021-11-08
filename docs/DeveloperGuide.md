@@ -208,6 +208,7 @@ helper classes to parse the text into editable attributes `XYZ` of `Person`, whi
 * `name`
 * `phone`
 * `email`
+* `revenue`
 * `address`
 * `tags`
 * `insurances`
