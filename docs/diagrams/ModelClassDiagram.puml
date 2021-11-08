@@ -24,12 +24,15 @@ Class Name
 Class Phone
 Class Tag
 Class AssignmentGradeMap
+Class Grade
 
 Package "ModuleSystem Model" {
 Interface ReadOnlyModuleSystem <<Interface>>
 Class ModuleSystem
 Class UniqueModuleList
 Class Module
+Class UniqueAssignmentList
+Class Assignment
 
 Class ModuleSet
 }
@@ -61,6 +64,8 @@ Person *--> "*" Tag
 Person *--> AssignmentGradeMap
 Person *--> ModuleSet
 
+AssignmentGradeMap --> "*" Grade
+
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Info
 Info -[hidden]right-> Email
@@ -68,6 +73,9 @@ Info -[hidden]right-> Email
 ModuleSystem *--> "1" UniqueModuleList
 UniqueModuleList --> "*" Module
 ModuleSet *--> "*" Module
+Module *--> "1" UniqueAssignmentList
+UniqueAssignmentList --> "*" Assignment
 
 ModelManager -->"~*filtered" Person
+AssignmentGradeMap --> "*" Assignment
 @enduml
