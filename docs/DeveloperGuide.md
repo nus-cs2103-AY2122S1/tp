@@ -104,7 +104,7 @@ LeadsForce's GUI is primarily adapted from `AddressBook3`, with the addition of 
 
 Our `SideBar` has a `ClientViewPanel`, which like the `ClientCard`, has a dependency on the `Model` class to fully display the information of the `Client` of interest to the user.
 
-The `SideBar` also has a `MeetingListPanel`, which holds a list of `NextMeetingCard`. `NextMeetingCard` has a dependency on the `Model` class to fully display all scheduled meetings of the user.
+In addition, the `SideBar` also has a `MeetingListPanel`, which holds a list of `NextMeetingCard`. `NextMeetingCard` has a dependency on the `Model` class to fully display all scheduled meetings of the user.
 
 --------------------------------------------------------------------------------------------------------------------
 ### 3.3 Logic component
