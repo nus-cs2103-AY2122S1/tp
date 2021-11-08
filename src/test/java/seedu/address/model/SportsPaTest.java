@@ -2,10 +2,18 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.FIELD;
 import static seedu.address.testutil.TypicalMembers.ALICE;
+import static seedu.address.testutil.TypicalMembers.ALICE_DIFFERENT_NAME;
+import static seedu.address.testutil.TypicalMembers.ALICE_DIFFERENT_PHONE;
+import static seedu.address.testutil.TypicalMembers.AMY;
+import static seedu.address.testutil.TypicalMembers.BOB;
+import static seedu.address.testutil.TypicalMembers.CARL;
 import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
 import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPaEmptyFacilityList;
 
@@ -111,6 +119,44 @@ public class SportsPaTest {
         expected.addFacility(withAllocatedMembers);
 
         assertEquals(expected, newData);
+    }
+
+    @Test
+    public void getSameMember_memberWithSameNameInSportsPa_returnsMemberWithSameName() {
+        sportsPa.addMember(ALICE);
+        assertEquals(sportsPa.getSameMember(ALICE_DIFFERENT_PHONE), ALICE);
+    }
+
+    @Test
+    public void getSameMember_memberWithSamePhoneInSportsPa_returnsMemberWithSameName() {
+        sportsPa.addMember(ALICE);
+        assertEquals(sportsPa.getSameMember(ALICE_DIFFERENT_NAME), ALICE);
+    }
+
+    @Test
+    public void getSameMember_memberWithSameNameNotInSportsPa_returnsNull() {
+        assertNull(sportsPa.getSameMember(BOB));
+    }
+
+    @Test
+    public void isValidImport_invalidImport_returnsFalse() {
+        sportsPa.addMember(AMY);
+        sportsPa.addMember(BOB);
+        Member toTest = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(sportsPa.isValidImport(toTest));
+    }
+
+    @Test
+    public void isValidImport_validImport_returnsTrue() {
+        sportsPa.addMember(BOB);
+        sportsPa.addMember(CARL);
+        Member firstToTest = new MemberBuilder().withName(VALID_NAME_AMY).build();
+        Member secondToTest = new MemberBuilder().withPhone(VALID_PHONE_BOB).build();
+        Member thirdToTest = new MemberBuilder().build();
+
+        assertTrue(sportsPa.isValidImport(firstToTest));
+        assertTrue(sportsPa.isValidImport(secondToTest));
+        assertTrue(sportsPa.isValidImport(thirdToTest));
     }
 
     /**

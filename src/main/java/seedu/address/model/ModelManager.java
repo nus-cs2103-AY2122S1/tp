@@ -235,21 +235,13 @@ public class ModelManager implements Model {
     @Override
     public Member getSameMember(Member toFind) {
         requireNonNull(toFind);
-        return sportsPa.getMemberList()
-                .stream()
-                .filter(member -> member.isSameMember(toFind))
-                .findAny()
-                .orElse(null);
+        return sportsPa.getSameMember(toFind);
     }
 
     @Override
     public boolean isValidImport(Member toCheck) {
         requireNonNull(toCheck);
-        long count = sportsPa.getMemberList()
-                .stream()
-                .filter(member -> member.isSameMember(toCheck))
-                .count();
-        return count <= 1;
+        return sportsPa.isValidImport(toCheck);
     }
 
     @Override
