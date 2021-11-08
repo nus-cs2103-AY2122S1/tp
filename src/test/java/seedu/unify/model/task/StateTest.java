@@ -1,12 +1,11 @@
 package seedu.unify.model.task;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.unify.testutil.TypicalTasks.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.testutil.TypicalTasks.CS2101_DEMO_DONE;
 import static seedu.unify.testutil.TypicalTasks.MATH_ASSIGNMENT;
+
+import org.junit.jupiter.api.Test;
 
 public class StateTest {
 
