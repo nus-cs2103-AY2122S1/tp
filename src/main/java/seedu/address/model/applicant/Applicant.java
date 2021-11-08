@@ -52,9 +52,11 @@ public class Applicant {
         this(name, phone, email, address, new Application(position), gitHubUrl);
     }
 
-
     /**
      * Constructor for an applicant given the applicant's particulars.
+     *
+     * @param applicantParticulars The applicant's particulars.
+     * @param position The position the applicant is applying to.
      */
     public Applicant(ApplicantParticulars applicantParticulars, Position position) {
         this(
@@ -83,6 +85,9 @@ public class Applicant {
 
     /**
      * Marks the application with the specified application status.
+     *
+     * @param applicationStatus The updated status for the application.
+     * @return The applicant with the updated status.
      */
     public Applicant markAs(ApplicationStatus applicationStatus) {
         return new Applicant(name, phone, email, address, application.markAs(applicationStatus), gitHubUrl);

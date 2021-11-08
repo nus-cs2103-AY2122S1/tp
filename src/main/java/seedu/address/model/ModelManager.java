@@ -76,9 +76,8 @@ public class ModelManager implements Model {
         this.history = changeHistory;
     }
 
-
     /**
-     * Old constructor - left temporarily to pass unit tests
+     * Old constructor - left temporarily to pass unit tests.
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyUserPrefs userPrefs) {
@@ -97,7 +96,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Left temporarily to pass unit tests
+     * Left temporarily to pass unit tests.
      * Initializes a ModelManager with the given positionBook and userPrefs.
      */
     public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
@@ -114,7 +113,6 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
         history = new History();
     }
-
 
     /**
      * Old constructor - left temporarily to pass unit tests.
@@ -135,7 +133,9 @@ public class ModelManager implements Model {
         history = new History();
     }
 
-
+    /**
+     * Constructor for completely new Applicant and Position books.
+     */
     public ModelManager() {
         this(new ApplicantBook(), new PositionBook(), new UserPrefs());
     }
@@ -163,8 +163,6 @@ public class ModelManager implements Model {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
     }
-
-
 
     //=========== Position and PositionBook =========================================================================
 
@@ -315,7 +313,6 @@ public class ModelManager implements Model {
     }
 
     //========== Rejection rates =======================================
-
     /**
      * Initialise rejection rate of a new position.
      *
@@ -338,7 +335,6 @@ public class ModelManager implements Model {
         return Calculator.calculateRejectionRate(total, count);
     }
 
-
     @Override
     public Model getCopiedModel() {
         return new ModelManager(applicantBook.getCopiedApplicantBook(),
@@ -349,7 +345,6 @@ public class ModelManager implements Model {
     public void addToHistory(Command command) {
         history.add(command);
     }
-
 
     @Override
     public boolean hasHistory() {
@@ -391,5 +386,4 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(other.filteredApplicants)
                 && userPrefs.equals(other.userPrefs);
     }
-
 }

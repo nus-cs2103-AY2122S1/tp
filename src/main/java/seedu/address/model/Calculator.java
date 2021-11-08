@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 /**
- * This singleton class deals with calculating the rejection rate of a specified position only.
+ * This class deals with calculating the rejection rate of a specified position only.
  */
 public class Calculator {
     public static final int INVALID_REJECTION_RATE = -1;
@@ -12,6 +12,7 @@ public class Calculator {
 
     /**
      * Calculates the rejection rate.
+     *
      * @param totalApplied Total number of applicants for a position.
      * @param totalRejected Total number of rejected applicants for a position.
      * @return A floating point number representing the rejection rate.

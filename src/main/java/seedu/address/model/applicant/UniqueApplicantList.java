@@ -26,7 +26,7 @@ import seedu.address.model.position.Position;
  *
  * Supports a minimal set of list operations.
  *
- * @see Applicant#isSameApplicant(Applicant)
+ * @see Applicant#isSameApplicant(Applicant).
  */
 public class UniqueApplicantList implements Iterable<Applicant> {
 
@@ -60,7 +60,8 @@ public class UniqueApplicantList implements Iterable<Applicant> {
 
     /**
      * Returns the applicant in the list with the specified name, if any.
-     * @throws ApplicantNotFoundException if not found.
+     *
+     * @throws ApplicantNotFoundException If not found.
      */
     public Applicant getApplicantWithName(Name name) {
         requireNonNull(name);
@@ -122,7 +123,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
-     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}
+     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}.
      */
     public void updateApplicantsWithPosition(Position positionToEdit,
                                              Position editedPosition) {
@@ -212,5 +213,4 @@ public class UniqueApplicantList implements Iterable<Applicant> {
 
         return copiedApplicants;
     }
-
 }

@@ -11,7 +11,7 @@ import seedu.address.logic.descriptors.FilterApplicantDescriptor;
 
 /**
  * Tests that a {@code Applicant}'s {@code Name} matches the filters specified
- * in the given {@code filterApplicantDescriptor.}.
+ * in the given {@code filterApplicantDescriptor}.
  */
 public class ApplicantMatchesFiltersPredicate implements Predicate<Applicant> {
 
@@ -19,6 +19,8 @@ public class ApplicantMatchesFiltersPredicate implements Predicate<Applicant> {
 
     /**
      * Constructor for a ApplicantMatchesFiltersPredicate object.
+     *
+     * @param descriptor The description of the FilterApplicantDescriptor or filters.
      */
     public ApplicantMatchesFiltersPredicate(FilterApplicantDescriptor descriptor) {
         requireNonNull(descriptor);

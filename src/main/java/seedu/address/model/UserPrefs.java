@@ -40,7 +40,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setApplicantBookFilePath(newUserPrefs.getApplicantBookFilePath());
     }
 
-
     @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
@@ -51,7 +50,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-
     @Override
     public Path getPositionBookFilePath() {
         return positionBookFilePath;
@@ -61,7 +59,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public Path getApplicantBookFilePath() {
         return applicantBookFilePath;
     }
-
 
     public void setPositionBookFilePath(Path positionBookFilePath) {
         requireNonNull(positionBookFilePath);
@@ -102,5 +99,4 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("\nLocal data file location : " + applicantBookFilePath);
         return sb.toString();
     }
-
 }
