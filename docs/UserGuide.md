@@ -334,7 +334,7 @@ Show all tasks that have been added to the app in a specific week.
 <div markdown="block" class="alert alert-success">
 
 **:green_book: Examples:**
-Examples:
+ 
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 </div>
 
