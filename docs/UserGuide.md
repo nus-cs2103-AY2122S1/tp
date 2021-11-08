@@ -34,7 +34,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [5.8 Locating clients by keywords: search](#58-locating-clients-by-keywords--search)
     * [5.9 Filter current list: filter](#59-filter-current-list-by-keywords--filter)
     * [5.10 Clearing all entries: clear](#510-clearing-all-entries--clear)
-    * [5.11 Getting help](#511-getting-help--help)
+    * [5.11 Getting help: help](#511-getting-help--help)
     * [5.12 Exiting the program: exit](#512-exiting-the-program--exit)
     * [5.13 Saving data](#513-saving-the-data)
     * [5.14 Edit data file](#514-edit-data-file)
@@ -640,4 +640,4 @@ Action | Format | Examples
 * **Disposable Income**: total clientele income minus clientele current taxes
 * **Client list**: the list of clients that is displayed in the GUI
 * **Address Book**: the list of clients where all clients inserted are kept
-* **Multiplicity**: the expected quantity of an item. A `0 to 1` multiplicity means that we expect there are zero to one of such item present in a `Client`. <br> For example, a `Client` can have 0 or 1 `Contact number` and `Address` (optional values) but must have exactly 1 `Name` and `Email` (compulsory values).
+* **Multiplicity**: the expected quantity of an item. A `0 to 1` multiplicity means that we expect there are zero to one of such items present. <br> For example, a `Client` can have 0 or 1 `Contact number` and `Address` (optional values) but must have exactly 1 `Name` and `Email` (compulsory values).
