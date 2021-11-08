@@ -32,19 +32,16 @@ public class AddTagCommand extends Command {
 
     public static final String COMMAND_WORD = "addt";
 
-    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD + ": Add tags to people.\n\n"
-            + "Formats: \n"
-            + " - 'addt all t/TAG' adds tags for everyone.\n"
-            + " - 'addt INDEX t/TAG' adds tags for the person identified by the index number used in the displayed "
-            + "person list.\n\n"
-            + "Parameters: "
-            + "INDEX (must be a positive integer or the word 'all') "
-            + PREFIX_TAG + "TAG...\n\n"
+    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
+            + ": Adds tags to people.\n\n"
+            + "Parameters: INDEX " + PREFIX_TAG + "TAG...\n\n"
             + "Note:\n"
-            + " - Tags must be alphanumeric.\n\n"
-            + "Example: "
-            + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "CS2103Teammate";
+            + " - Tags must be alphanumeric.\n"
+            + " - INDEX must be a positive integer or the word 'all'.\n"
+            + " - 'addt all " + PREFIX_TAG + "TAG' adds tags to everyone in the displayed person list.\n"
+            + " - 'addt INDEX " + PREFIX_TAG + "TAG' adds tags to the person identified by the index number "
+            + "used in the displayed person list.\n\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "CS2103Teammate";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag: %1$s";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";

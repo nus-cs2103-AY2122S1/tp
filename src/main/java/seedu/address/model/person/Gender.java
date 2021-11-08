@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 
 /**
  * Represents a Person's gender in the address book.
@@ -9,9 +10,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Gender should only be 'M' for male, 'F' for female and 'O' for others.\n"
-                    + "Leaving it blank will remove the Gender field.";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should only be "
+            + "'M' for male, 'F' for female and 'O' for others (case-insensitive).\n\n"
+            + "Note:\n"
+            + "In edit command, gender can be removed from a person by leaving the gender value blank "
+            + "(i.e. " + PREFIX_GENDER + " ).";
 
     /*
      * The gender must be one of the following character: F, M or O.

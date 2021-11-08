@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,8 +18,10 @@ import seedu.address.MainApp;
 public class Nationality {
 
     public static final List<String> VALID_NATIONALITIES = readValidNationalities();
-    public static final String MESSAGE_CONSTRAINTS = "Nationality can be any valid nationality spelled in full.\n"
-            + "Leaving it blank will remove the Nationality field.";
+    public static final String MESSAGE_CONSTRAINTS = "Nationality can be any valid nationality spelled in full.\n\n"
+            + "Note:\n"
+            + "In edit command, nationality can be removed from a person by leaving the nationality blank "
+            + "(i.e. " + PREFIX_NATIONALITY + " ).";
     public static final String MESSAGE_NOT_FOUND = "The nationality entered is not valid. Please try again";
 
     /*

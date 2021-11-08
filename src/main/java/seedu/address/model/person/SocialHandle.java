@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,8 +29,13 @@ public class SocialHandle {
             + "Github (gh), "
             + "Discord (dc)"
             + "\n"
-            + "(e.g. tg:tanjj3298)\n"
-            + "Leaving it blank will remove all the Social Handles.";
+            + "(e.g. tg:tanjj3298)\n\n"
+            + "Note:\n"
+            + "In edit command, social handles can be removed from a person by leaving "
+            + "the social handle value blank (i.e. " + PREFIX_SOCIAL_HANDLE + " ). "
+            + "To remove a specific social handle from a person, the platform of the social handle "
+            + "will need to be stated while leaving the userid value empty "
+            + "(e.g. " + PREFIX_SOCIAL_HANDLE + "tg: to remove Telegram social handle from the person)";
 
     public static final String PLATFORM_CONSTRAINTS = "Only the following platforms are supported: "
             + "Instagram (ig), "
