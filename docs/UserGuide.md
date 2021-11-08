@@ -122,7 +122,7 @@ Parameter | Constraints
 **EMAIL** |  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br> The domain name must: <br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 **VACCINATION_STATUS** | `T` or `F` (case insensitive)
 **FACULTY** | Single alphabetical word
-**LAST_FET_DATE** <br> **LAST_COLLECTION_DATE** | `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+**LAST_FET_DATE** <br> **LAST_COLLECTION_DATE** | Should be of `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
 
 <div markdown="block" class="alert alert-info">
 
@@ -273,8 +273,8 @@ Format: `trace r/RESIDENT [d/DEPTH] [t/DURATION]`
 
 * A resident can be identified either by full name or room
 * Depth refers to the maximum links to reach the resident in question
-* Depth should be an integer >= 1 and will default to 1
-* Duration is in days and will default to 7
+* Depth should be an integer, 1 <= depth <= 5, and will default to 1
+* Duration is in days, 1 <= duration <= 31, and will default to 7
 
 Examples:
 * `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
@@ -351,15 +351,30 @@ Adds a new event to the address book.
 
 Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]`
 
-* The combination of the 5 required parameters should be unique
-* `CAPACITY` is the maximum number of residents allowed in this event  
-* `DATE` is the date on which the event is held
-* `TIME` is the time at which the event is held
-* `RESIDENTS` can be included as all full names or all rooms
-* The number of residents cannot exceed to provided capacity
-* Residents can be given in the form of name or room, but all has to be all rooms or all names  
-* When adding multiple residents, each resident's name/room is separated by a comma
-* The resident's name/room is case-insensitive
+Prefix | Field | Details
+-------- | ------ | ------
+`n` | Name | Should only contain alphanumeric characters and spaces, and it should not be blank
+`v` | Venue | Should only contain alphanumeric characters and spaces, and it should not be blank
+`c` | Capacity | Represents the maximum number of residents allowed in this event and is an integer, 1 <= capacity <= 2147483647
+`d` | Date | Should be of `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+`t` | Time | Should be of `HHmm` format
+`r` | Residents | Can be identified with either all names or all rooms <br> The number of residents cannot exceed the provided capacity <br> Provided names and rooms are case-insensitive and should be comma-separated
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* The combination of `Name` (case-insensitive), `Venue` (case-insensitive), `Date` and `Time` should be unique
+
+</div>
+
+Here's a step by step guide:<br>
+1. Type the `add` command and the rest of the parameters with help from the command suggestion.
+   ![Step1](images/logic/commands/addeventcommand/step1.png)
+
+
+2. After execution, the event list will now show the new event.
+   ![Step2](images/logic/commands/addeventcommand/step2.png)
 
 Examples:
 * `add n/Swim v/Swimming Pool c/10 d/28-10-2021 t/1500`
