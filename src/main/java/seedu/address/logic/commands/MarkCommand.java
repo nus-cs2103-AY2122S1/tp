@@ -30,7 +30,7 @@ public class MarkCommand extends MarkingCommand {
     private final Index[] targetIndexes;
 
     /**
-     * Constructor for MarkCommand.
+     * Creates a MarkCommand to mark the specified {@code Person}.
      *
      * @param targetIndexes Array of indexes corresponding to the applicants to mark.
      */

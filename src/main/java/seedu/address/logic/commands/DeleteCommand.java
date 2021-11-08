@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
     private final Index[] targetIndexes;
 
     /**
-     * Creates an DeleteCommand to delete the specified {@code Person}
+     * Creates an DeleteCommand to delete the specified {@code Person}.
      *
      * @param targetIndexes The indexes of {@code Person} to delete.
      */

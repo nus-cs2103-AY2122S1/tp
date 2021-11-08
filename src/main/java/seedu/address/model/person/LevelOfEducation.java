@@ -26,7 +26,7 @@ public class LevelOfEducation {
         private final String educationLevel;
 
         /**
-         * Constructor for the Education Enumeration.
+         * Constructs a {@code Education}.
          *
          * @param educationLevel The level of education of a Person.
          */
@@ -120,7 +120,7 @@ public class LevelOfEducation {
     }
 
     /**
-     * Method to convert the given input to match the same capitalisation as the Education enums.
+     * Converts the given input to match the same capitalisation as the {@code Education} enums.
      *
      * @param levelOfEducation Given input to initialise a LevelOfEducation.
      * @return The same input string except it is capitalised as in the Education enums.

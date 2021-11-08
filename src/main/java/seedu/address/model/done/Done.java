@@ -3,8 +3,8 @@ package seedu.address.model.done;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents an Applicant's status in RecruitIn; if an Applicant is considered Done, it means that
- * the recruiter has finished helping an Applicant out and will no longer need to contact the Applicant.
+ * Represents a {@code Person} status in RecruitIn; if an {@code Person} is considered Done, it means that
+ * the user has finished helping a {@code Person} out and will no longer need to contact the {@code Person}.
  */
 public class Done {
 
@@ -18,14 +18,17 @@ public class Done {
     private String doneStatus;
 
     /**
-     * Constructor for Done; every Applicant will initially be marked as Not Done.
+     * Constructs a {@code Done}.
+     * Every {@code Person} will initially be unmarked to Not Done.
      */
     public Done() {
         this.doneStatus = STATUS_UNDONE;
     }
 
     /**
-     * Secondary constructor for Done.
+     * Constructors a {@codeDone}.
+     *
+     * @param doneStatus {@code String} that is either "Done" or "Not Done".
      */
     public Done(String doneStatus) {
         requireNonNull(doneStatus);

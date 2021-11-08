@@ -30,7 +30,7 @@ public class UnmarkCommand extends MarkingCommand {
     private final Index[] targetIndexes;
 
     /**
-     * Constructor for UnmarkCommand.
+     * Creates a UnmarkCommand to unmark the specified {@code Person}.
      *
      * @param targetIndexes Array of indexes corresponding to the applicants to unmark.
      */
