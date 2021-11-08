@@ -295,7 +295,7 @@ The following sequence diagram shows how the add remark mechanism works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
 </div>
 
-#### Design considerations:
+#### Design Considerations
 
 * **Alternative 1 (current choice):** Create a new person with the remark field replaced and the other fields same as the old person.
     * Pros: Maintains immutability.
@@ -388,7 +388,7 @@ The following sequence diagram shows how the deleting multiple person mechanism 
 
 ![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
-#### Design considerations:
+#### Design Considerations
 
 * **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
     * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
@@ -406,7 +406,7 @@ The following activity diagram summarizes what happens when a user executes a so
 
 ![SortActivityDiagram](images/SortActivityDiagram.png)
 
-The Sort mechanism sorts persons based on the specified field in ascending order.
+The sort mechanism sorts persons based on the specified field in ascending order.
 The command will result in the creation of a Comparator<Person>.
 
 #### Usage
@@ -431,11 +431,11 @@ Step 6. The GUI will then proceed to get the full list of persons.
 
 Step 7. After execution, `CommandResult` will contain a message indicating that it has sorted all persons based on the specified field.
 
-The following sequence diagram shows how the Sort mechanism works:
+The following sequence diagram shows how the sort mechanism works:
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
-#### Design considerations:
+#### Design Considerations
 
 * **Alternative 1 (current choice):** Sort all persons based on single field.
     * Pros: Easy to implement.
@@ -562,7 +562,7 @@ The following sequence diagram shows how the EditCommand function works for soci
 	* Cons: There will be many duplicated code as each social handles are similar.
 * **Alternative 2 (Current):** Store a person's social handles as a set.
     * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
-    * Cons: Will have many duplicated code as each social handles are similar.
+    * Cons: It may be more complicated to test.
 
 ### Export JSON file
 

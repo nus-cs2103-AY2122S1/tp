@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.util.FileUtil.isValidJsonFileName;
+
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -16,7 +18,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     public ImportCommand parse(String args) throws ParseException {
         String fileName = args.trim();
 
-        if (!fileName.endsWith(".json") || fileName.equals(".json")) {
+        if (!fileName.endsWith(".json") || fileName.equals(".json") || !isValidJsonFileName(fileName)) {
             throw new ParseException(String.format("%s.\n%s", ImportCommand.MESSAGE_WRONG_FORMAT,
                     ImportCommand.MESSAGE_USAGE));
 
