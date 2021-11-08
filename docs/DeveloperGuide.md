@@ -185,75 +185,107 @@ How the Storage component works:
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
-## **Implementation - Shawn **
-
-(this division and header is temporary; and is just to demarcate my part of the DG update for this week's requirement)
-
-###`task` and `order` package
-This section describes the implementation of the `task` and `order` packages in the application. These two packages are 
-similar in functionality to the `person` package, now allowing the user to track tasks and orders. Below is a diagram
-showing the partial implementation of these packages in the application:
-
-![`Updated Model Diagram`](images/UpdatedModelClassDiagram.png)
-
-`OrderList` and `TaskList` manage `Order` and `Task` objects, in the same way a `UniquePersonList` manages `Person`
-objects, and there are a few significant points about this implementation.
-
-The first is the distinction between the `Person` class, and the `Customer` class. Since every order is made by 
-a customer, and the `Person` class is used to track customers, we initially considered linking the two classes, and tying
-every `Order` to a `Person`. However, the issue with this is that we did not want deleting of a `Person` to affect 
-sales records, which should continue to show all completed orders. We thus decided instead to create the `Customer` 
-class which essentially serves as a field for the `Order` class, implementing validity checks for the input, similar to 
-how the `Name` field works for the `Person` class.
-
-The next note is that a `UniquePersonList` has a `AddressBook` wrapper that contains other functionalities needed in
-the application (e.g. storage related functions). Our Implementation intends to mirror this with a `TaskBook` and 
-`OrderBook` wrapper around `TaskList` and `OrderList` respectively, but this was not handled by me, and hence these 
-were omitted from the diagram above.
-
-Finally, as mentioned partially above, the `Amount` `Customer` `Date` and `Label` classes are what handle checking the 
-validity of fields, similar to the implementation in the associated classes for Person, and also respect a whole-part 
-relationship. The validity checking in all cases was implemented using regular expressions, and they respect the
-following guarantees:
-
-`Amount` Begins with 1 or more numbers, followed optionally by a block that consists of a '.' followed by 1 or 2 numbers.
-
-`Customer` Blocks of 1 or more alphanumeric characters, separated by at most one space.
-
-`Date` `Label` Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
-length for both fields, and would guarantee the UI display worked the way we intended.'
-
-### Addressing feature flaws
-
-A small and related task I addressed was input validation for customers, and adjusting the way we treated equality 
-between person objects. The original AB3 treated two people as equal only if their names were spelt exactly the same, 
-with this being case-sensitive. When we discussed this as a group, we decided that multiple clients having the exact same name was rare
-enough that this notion of equality made sense. However, we felt it should apply regardless of case, i.e. john doe 
-should be recognised as the same person as JOHN DOE. I updated the implementation to take care of this, and also changed
-the input validation for `Name` to allow at most one space between blocks of characters.
-
-### Implementing commands
-
-Lastly, I implemented several commands related to the `Task` and `Order` classes. These are fairly self-explanatory, 
-and their implementation closely mirrors that of similar commands for the `Person` class. The exception is the marktask
-and markorder commands, which allow the user to mark tasks and orders as completed. The list of implemented commands
-is below:
-
-* addtask
-* deletetask
-* listtasks
-* marktask
-* markorder
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Task and Order Package
+
+#### Implementation
+The implementation of both of these packages is largely similar to the `person` package. In the original AB3, there is a
+`person` class, stored in a `UniquePersonList` that handles list operations, further stored in a `AddressBook` that handled
+other utility functions like data management.
+
+Following this structure and outline, we had a `task` class, stored in a `UniqueTaskList` stored in a `TaskBook`, and a
+`order` class, stored in a `UniqueOrderList` stored in a `OrderBook`. Below is an updated model diagram reflecting these
+changes:
+
+![`Updated Model Diagram`](images/ModelClassDiagram.png)
+
+Similar to the `Person` class, the `Task` and `Order` classes have fields, as seen here:
+
+![`Order Class Diagram`](images/OrderClassDiagram.png)
+
+![`Task Class Diagram`](images/TaskClassDiagram.png))
+
+These fields satisfy the following conditions:
+* Both:
+    * `Date`, `Label`: Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
+      length for both fields, and would guarantee the UI display worked the way we intended.
+* Task:
+    * `TaskTag`: This is a tag that is either `General`, or `SO{ID}` where `ID` is the `Id` field of some `Order` object.
+    * `isDone`: Boolean flag to indicate whether or not the task is done.
+
+* Order:
+    * `Amount` Accepts any string that can be parsed by Double.parseDouble(), that results in a non-negative real number.
+      Represents the amount the user charges for a given `Order`
+    * `Customer` Blocks of 1 or more alphanumeric characters, separated by at most one space. Represents the `Person` the order
+      is addressed to.
+    * `id` Long used to uniquely identify `Order` objects. In this case, we did not deal with potential overflow given that
+      the range of a Long in Java is up to 2^63 (which is > 10^18!). We judged that this should be more than sufficient for
+      any realistic use of the application.
+    * `isComplete`: Boolean flag to indicate when the `Order` is complete, and payment has been received.
+
+Something alluded to in the fields above, is that there are implicit dependencies between the `Task`, `Order`, and `Person` classes.
+To add an `Order` to SalesNote, we decided it made the most sense for there to already be a `Person` in the application
+the `Order` was addressed to. So for instance, to add an order from a client named `Jamie Tan`, the user would need to ensure
+that a `Person` with `Name` `Jamie Tan` existed in the application first.
+
+Another link we thought would make sense to allow for, was to make it possible to tie a `Order` object to related `Task` objects.
+`Task` objects were meant to help users manage their work, and so we felt there should be a way for a user to relate a `Task`
+to a specific `Order` if they wanted to.
+
+In both of these cases, we did not link the classes directly, hence there is no arrow between the `Order` and `Person` class
+and no arrow between the `Order` and `Task` class in the diagram above. Instead we simply made use of the fact that SalesNote
+maintains both a `UniquePersonList` and a `UniqueOrderList`. To relate a `Order` to a `Person`, it is enough to remember the
+`Name` field (in `UniquePersonList`, two `Person` objects with the same `Name` are considered equal). To relate a `Task` to
+a `Order`, we can make use of the fact that `Order` objects have unique `id` fields.
+
+##### Design choices
+A very reasonable alternative one might consider is linking the classes directly. For instance, allowing a `Person`, to
+have a list of `Order` objects related to the `Person`, and a `Order`, to have a list of `Task` objects related to the `Order`.
+This was an alternative method we considered, that would come with a cost in complexity by relating the `Person`,
+`Task` and `Order` objects. We felt that the method we chose that made use of the `UniqueXList` properties and kept the
+classes more distinct better adhered to the Separation of concerns and Law of Demeter principle.
+
+#### Updating related fields in Person class
+In implementing the fields for the `Task` and `Order` object and considering possible feature flaws, we decided to update
+the fields for the `Person` class as well. The original AB3 treated two people as equal only if their names were spelt exactly
+the same, with this being case-sensitive. We decided that multiple clients having the exact same name was rare
+enough that this notion of equality made sense, however, we felt it should apply regardless of case, i.e. a `Person` with `Name` `john doe`
+should be recognised as the same a `Person` with `Name` `JOHN DOE`.
+
+We updated the equality check to account for this, and also updated the input validation for `Name` to allow at most one
+space between blocks of characters (previously `John   Doe` would be different from `John Doe`. We felt this likely to be
+a mistake and should be avoided).
+
+### Add Order feature
+As mentioned above, to add an `Order`, the `Person` the `Order` is addressed to should already be in `SalesNote`. The
+following is a sequence diagram showing the execution of the command:
+
+![AddOrderSequenceDiagram](images/AddOrderSequenceDiagram.png)
+Focusing on after `AddOrderCommand:execute` is called,
+
+1. First the application calls `model:hasOrder(toAdd)` to check if `toAdd` is already in the model.
+2. Next, the application calls `model:hasPersonWithName(toAdd.getCustomer.getName())` to check if the `Person` the `Order`
+   is addressed to is already in the application
+4. If both checks pass, the application finally calls `model:addOrder(toAdd)` to add the `Order`.
+
+Note that in the diagram above, the "else" clause for the `alt` boxes have been omitted for brevity. If either check fails, 
+an exception is thrown and an error is displayed back to the user. 
+
+Here is an activity diagram to more clearly illustrate the logic of the application:
+![AddOrderActivityDiagram](images/AddOrderActivityDiagram.png)
+
+#### Result
+An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
+is unique and does not duplicate an existing `Order` object in SalesNote.
+
 ### Update Person Changes in Order List and Task List
 
-SalesNote's clients are directly referenced in orders. Any changes in the clients through user commands should be propagated to the Order list.
+Other commands where the relationships between the `Order`, `Person` and `Task` classes comes up is in
+editing and deletion of clients. We wanted to achieve the following:
 
 * When a client is deleted, their orders and the tasks linked to the orders will be deleted as well.
 * When a client name is modified, this change will be updated in their existing orders.
@@ -276,6 +308,15 @@ The sequence diagram below shows the interaction within the Logic component for 
 
 #### Result
 The changes in person objects are updated in their order and task objects.
+
+### Other related commands
+Note that similar considerations are addressed in the following commands:
+* `DeleteOrderCommand` where `Task` objects related to the deleted `Order` is also deleted.
+  
+* `AddTaskCommand` `EditTaskCommand` where if the user attempts to tag a `Task` to a `Order`, SalesNote first checks if the
+`Order` already exists. 
+  
+We have omitted these as their implementation concerns are largely similar to the two above that we have already presented.
 
 ### Sort Order Feature
 
@@ -363,8 +404,6 @@ The sequence diagram below shows the interaction within the `Logic` component wh
 `SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
 
 ![Interactions Inside the Logic Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
-
-
 
 
 --------------------------------------------------------------------------------------------------------------------
