@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 import java.util.logging.Logger;
 
@@ -12,6 +12,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
+import seedu.programmer.ui.UiPart;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

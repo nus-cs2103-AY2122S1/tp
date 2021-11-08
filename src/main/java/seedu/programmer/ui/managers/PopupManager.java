@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.managers;
 
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
@@ -32,7 +32,7 @@ public class PopupManager {
      *
      * @param Message to be displayed in the popup object on the primaryStage.
      */
-    void displayPopup(String message) {
+    public void displayPopup(String message) {
         // We should not display an empty popup
         assert (message != null);
         configurePopup(message);

@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import seedu.programmer.ui.UiPart;
 
 /**
  * A UI for the status bar that is displayed at the footer of the application.

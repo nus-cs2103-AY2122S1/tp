@@ -1,6 +1,7 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.windows;
 
 import javafx.stage.Stage;
+import seedu.programmer.ui.UiPart;
 
 /**
  * Controller for a popup page.
