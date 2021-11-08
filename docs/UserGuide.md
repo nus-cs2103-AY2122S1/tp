@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Uni-Fy User Guide
+title: User Guide
 ---
 ![logo](images/Uni-Fy_Logo.png)
 
