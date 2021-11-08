@@ -369,7 +369,7 @@ Show all tasks that have been added to the app in a specific week.
 
 After running the show command, the tasks in that given week are shown in the display window as shown below:
 
-![show_command_after](images/showCommandAfterNew.png)
+![show_command_after](images/showCommandAfter.png)
 
 
 ### 4.8 Sorting the tasks : `sort`
