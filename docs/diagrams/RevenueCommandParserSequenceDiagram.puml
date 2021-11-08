@@ -10,7 +10,6 @@ end box
 
 box Model MODEL_COLOR_T1
 Participant "revenue:Revenue" as revenue MODEL_COLOR
-Participant ":Money" as money MODEL_COLOR
 end box
 
 insurancePalParser -[LOGIC_COLOR]> revenueCommandParser :"1 r/100.21"
@@ -29,13 +28,6 @@ activate util LOGIC_COLOR
 create revenue
 util -[LOGIC_COLOR]-> revenue: Revenue(new Money("100.21"))
 activate revenue MODEL_COLOR
-
-create money
-revenue -[LOGIC_COLOR]> money:
-activate money MODEL_COLOR
-
-money -[LOGIC_COLOR]-> revenue :
-deactivate money
 
 revenue -[MODEL_COLOR]-> util :revenue
 deactivate revenue
