@@ -401,21 +401,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 3a. The given index is invalid.
-  * 3a1. ProfBook shows an error message.
+  * 3a1. ProfBook rejects the command and shows an error message.
 
   Use case resumes at step 2.
 
 * 3b. The attribute to be edited does not exist.
-  * 3b1. ProfBook shows an error message.
+  * 3b1. ProfBook rejects the command and shows an error message.
   Use case ends
 
 * 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
-  * 3c1. ProfBook shows an error message.
+  * 3c1. ProfBook rejects the command and shows an error message.
 
       Use case ends
 
 * 3d. If the attribute edited is in the invalid format
-    * 3d1. ProfBook shows an error message.
+    * 3d1. ProfBook rejects the command and shows an error message.
 
       Use case ends
 
@@ -477,7 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The file is in invalid format/does not exist
 
-    * 3a1. ProfBook shows an error message.
+    * 3a1. ProfBook rejects the command and shows an error message.
 
       Use case ends.
 
@@ -499,7 +499,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 2b. The filtered list is empty
-    * 2b1. ProfBook runs the command but it has no effect.
+    * 2b1. ProfBook rejects the command and shows an error message.
 
       Use case ends.
     
@@ -576,7 +576,7 @@ testers are expected to do more *exploratory* testing.
 <br> Expected: Adds the person to the ProfBook. 
 <br> Now progressively remove or edit each attribute in the add command and view the outputs
 2. Test case: Calling the same command `add n/John Doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
-<br> Expected: This person already exists in the address book.
+<br> Expected: This person already exists in the  ProfBook.
 3. Test case: On changing name to lower case we can add the person `add n/john doe p/98765432 a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
 <br> Expected: Adds the person to the ProfBook.
 4. Test case: `add n/John Doe a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney g/john-doe N/e0123456 r/student s/A0123456X T/11 `
@@ -586,7 +586,7 @@ testers are expected to do more *exploratory* testing.
 1. Test case: `edit 1 n/John Doe`
 <br>Expected: Edits the person at index 1 and changes name to John Doe.
 2. Test case: On changing index to 2 and running the command `edit 2 n/John Doe`
-<br> Expected: This person already exists in the address book.
+<br> Expected: This person already exists in the ProfBook.
 <br>Now progressively replace or add more attribute in the edit command and view the outputs
 3. Test case: `edit 1 N/e0000000`
 <br> Expected: Edits the person at index 1 and changes NUSNET_ID to E0000000 and Email to e0000000@u.nus.edu.
