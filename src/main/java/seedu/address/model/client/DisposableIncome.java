@@ -10,7 +10,7 @@ public class DisposableIncome extends NumberComparable<DisposableIncome>
     implements OptionalStringBasedField, ShorterFieldLength {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Disposable Income numbers should be a positive number only. (Character limit: 15)";
+            "Disposable Income numbers should be a non-negative number only. (Character limit: 15)";
     public static final String DEFAULT_VALUE = "0.00";
 
     public final String value;

@@ -158,7 +158,7 @@ public class Client {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Client ID: ")
+        builder.append(": ")
             .append(getClientId())
             .append("; Name: ")
             .append(getName())

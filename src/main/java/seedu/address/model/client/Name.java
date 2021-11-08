@@ -30,9 +30,6 @@ public class Name extends StringComparable<Name> implements RequiredField, Stand
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        if (name.isEmpty()) {
-            name = DEFAULT_VALUE;
-        }
         fullName = name;
     }
 

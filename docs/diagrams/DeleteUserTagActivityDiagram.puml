@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1
+skinparam arrowColor USER_COLOR
+skinparam classBackgroundColor USER_COLOR
+skinparam classBorderColor USER_COLOR
+
+skinparam activity {
+BorderColor #gold
+DiamondBorderColor #gold
+}
+
+start
+:User executes delete command;
+:Remove Client from UniqueClientList;
+:"Delete" Client;
+:UniqueClientList fires an update event;
+:AddressBook Listener purges unreferenced tags;
+:UniqueTagList fires an update event;
+:UI Listener updates TagPanel;
+stop
+@enduml

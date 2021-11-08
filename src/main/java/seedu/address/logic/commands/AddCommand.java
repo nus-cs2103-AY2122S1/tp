@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -26,13 +27,14 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_RISKAPPETITE + "RISK APPETITE "
-            + PREFIX_DISPOSABLEINCOME + "DISPOSABLE INCOME "
-            + PREFIX_CURRENTPLAN + "CURRENT PLAN "
-            + PREFIX_LASTMET + "LAST MET "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_RISKAPPETITE + "RISK_APPETITE] "
+            + "[" + PREFIX_DISPOSABLEINCOME + "DISPOSABLE_INCOME] "
+            + "[" + PREFIX_CURRENTPLAN + "CURRENT_PLAN] "
+            + "[" + PREFIX_LASTMET + "LAST_MET] "
+            + "[" + PREFIX_NEXTMEETING + "NEXT_MEETING] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -43,6 +45,7 @@ public class AddCommand extends Command {
             + PREFIX_DISPOSABLEINCOME + "4000 "
             + PREFIX_CURRENTPLAN + "Prudential Proshield "
             + PREFIX_LASTMET + "21-03-2020 "
+            + PREFIX_NEXTMEETING + "10-03-2022 (12:00~13:00), Zoom "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

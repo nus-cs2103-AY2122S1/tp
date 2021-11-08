@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.ClearCommand.MESSAGE_CONFIRMATION_FAI
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.StringUtil;
@@ -18,6 +19,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.LastMet;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.OptionalNonStringBasedField;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
 import seedu.address.model.client.SortDirection;
@@ -139,7 +141,6 @@ public class ParserUtil {
 
     /**
      * Parses a given String {@code String nextMeeting} to return a {@code NextMeeting}
-     * Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code nextMeeting} is invalid.
@@ -179,6 +180,51 @@ public class ParserUtil {
         }
 
         return new NextMeeting(date, startTime, endTime, location, "");
+    }
+
+    /**
+     * Parses a given String {@code String nextMeeting} to return a {@code Optional} containing the either a last met
+     * or next meeting
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nextMeeting} is invalid.
+     */
+    public static Optional<OptionalNonStringBasedField> parseMeeting(String nextMeeting) throws ParseException {
+        requireNonNull(nextMeeting);
+        String trimmedNextMeeting = nextMeeting.trim();
+        if (trimmedNextMeeting.equalsIgnoreCase(NextMeeting.NO_NEXT_MEETING) || trimmedNextMeeting.isEmpty()) {
+            return Optional.of(NextMeeting.NULL_MEETING);
+        }
+
+        if (!NextMeeting.isValidNextMeeting(trimmedNextMeeting)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_MEETING_STRING);
+        }
+
+        String date = trimmedNextMeeting.split(" ", 2)[0];
+        String startTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("(") + 1,
+                trimmedNextMeeting.indexOf("~"));
+        String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
+                trimmedNextMeeting.indexOf(")"));
+        String location = trimmedNextMeeting.split(",", 2)[1].trim();
+
+        if (!NextMeeting.isValidNextMeetingDate(date)) {
+            throw new ParseException(NextMeeting.DATE_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isValidNextMeetingTime(startTime)) {
+            throw new ParseException(NextMeeting.START_TIME_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isValidNextMeetingTime(endTime)) {
+            throw new ParseException(NextMeeting.END_TIME_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isDurationValid(startTime, endTime)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_TIME_DURATION);
+        }
+        if (NextMeeting.isNotPastMeeting(date, endTime)) {
+            return Optional.of(new NextMeeting(date, startTime, endTime, location, ""));
+        } else {
+            return Optional.of(new LastMet(date));
+        }
+
     }
 
     /**

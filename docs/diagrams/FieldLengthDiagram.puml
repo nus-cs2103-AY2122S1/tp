@@ -17,7 +17,6 @@ Address .up.|> LongerFieldLength
 Phone .up.|> StandardFieldLength
 CurrentPlan .up.|> LongerFieldLength
 DisposableIncome .up.|> ShorterFieldLength
-LastMet .up.|> StandardFieldLength
 NextMeeting .up.|> LongerFieldLength
 
 @enduml

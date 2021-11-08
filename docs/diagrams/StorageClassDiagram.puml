@@ -24,7 +24,7 @@ Class JsonAdaptedTag
 
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside<<Hidden>> #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage

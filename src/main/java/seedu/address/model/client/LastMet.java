@@ -2,14 +2,13 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.StringUtil.isWithinLengthLimit;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import seedu.address.commons.util.StringUtil;
 
-public class LastMet implements OptionalNonStringBasedField, StandardFieldLength, IgnoreNullComparable<LastMet> {
+public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparable<LastMet> {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
             + "where Day, Month and Year should be valid numerical values.";
     public static final String MESSAGE_FUTURE_DATE = "LastMet should not be a future date.";
@@ -26,10 +25,7 @@ public class LastMet implements OptionalNonStringBasedField, StandardFieldLength
         if (!IS_NULL_VALUE_ALLOWED) {
             requireNonNull(lastMetDate);
         }
-        if (lastMetDate == null) {
-            lastMetDate = "";
-        }
-        if (lastMetDate.isEmpty()) {
+        if (lastMetDate == null || lastMetDate.isEmpty()) {
             lastMetDate = DEFAULT_VALUE;
         }
 
@@ -46,11 +42,18 @@ public class LastMet implements OptionalNonStringBasedField, StandardFieldLength
     }
 
     /**
+     * Returns true if last met does not hold any dates.
+     */
+    public boolean isEmpty() {
+        return this.value == null;
+    }
+
+    /**
      * Returns if a given string is a valid LastMet string representation.
      */
     public static boolean isValidLastMet(String test) {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
-            || (StringUtil.isValidDate(test) && isWithinLengthLimit(test, MAX_LENGTH));
+            || StringUtil.isValidDate(test);
     }
 
     /**
