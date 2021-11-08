@@ -58,8 +58,8 @@ My code contributed can be found at [RepoSense link](https://nus-cs2103-ay2122s1
   * Handled most of the UI changes and the new UI design.
 
 ## **Documentation**:
-    * Developer Guide: NFRs and Glossary, and FXML handling
-    * User Guide: Feature list & Command Summary (with [Elton](eltongohjh.md))
+  * Developer Guide: NFRs and Glossary, and FXML handling
+  * User Guide: Feature list & Command Summary (with [Elton](eltongohjh.md))
                   Revised the whole UG to adhere to the current commands,
                   Fixes :
                   - Filled out missing commands
