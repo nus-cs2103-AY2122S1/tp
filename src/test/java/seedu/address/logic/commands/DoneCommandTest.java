@@ -50,6 +50,8 @@ public class DoneCommandTest {
     public void execute_invalidTaskIndex_failure() {
         // One task index, invalid value
         Index validIndex = Index.fromOneBased(1);
+        Person personToDisplay = model.getViewAllTaskListPersons().get(validIndex.getZeroBased());
+        model.displayPersonTaskList(personToDisplay);
         Index invalidTaskIndex = Index.fromOneBased(8);
         ArrayList<Index> invalidTaskIndexes = new ArrayList<>();
         invalidTaskIndexes.add(invalidTaskIndex);
@@ -70,6 +72,8 @@ public class DoneCommandTest {
     public void execute_validIndex_success() {
         // Set up valid DoneCommand marking 2 tasks as done
         Index validIndex = Index.fromOneBased(8); // GEORGE
+        Person personToDisplay = model.getViewAllTaskListPersons().get(validIndex.getZeroBased());
+        model.displayPersonTaskList(personToDisplay);
         Index validTaskIndex = Index.fromOneBased(1);
         Index validTaskIndex2 = Index.fromOneBased(2);
         ArrayList<Index> validTaskIndexes = new ArrayList<>();
@@ -79,6 +83,7 @@ public class DoneCommandTest {
 
         // Set up expected model by marking task of GEORGE as done
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.displayPersonTaskList(personToDisplay);
         Person expectedPerson = new PersonBuilder(GEORGE).build();
         markPersonTaskAsDone(expectedPerson, validTaskIndexes);
         String expectedMessage = String.format(MESSAGE_SUCCESS, 0, "task", expectedPerson.getName())

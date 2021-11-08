@@ -55,6 +55,8 @@ public class ReminderCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_DAY_VALUE);
             }
             Task.setDaysPriorToTaskDate(daysPriorToTaskDate);
+            model.getTaskListManager().updateAllTaskStatus();
+            model.getTaskListManager().updateStatistics();
             model.updateFilteredPersonList();
             return new CommandResult(String.format(MESSAGE_SET_REMINDER_SUCCESS, daysPriorToTaskDate));
         } else {
