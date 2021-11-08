@@ -58,12 +58,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             for (String name : nameKeywords) {
                 ParserUtil.parseName(name);
             }
-            int numOfEmptyValue = (int) nameKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) nameKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "name", DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "name",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new NameContainsKeywordsPredicate(nameKeywords));
         }
@@ -74,12 +73,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             for (String phone : phoneKeywords) {
                 ParserUtil.parsePhone(phone);
             }
-            int numOfEmptyValue = (int) phoneKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) phoneKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "phone", DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "phone",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new PhoneContainsKeywordsPredicate(phoneKeywords));
         }
@@ -90,12 +88,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             for (String email : emailKeywords) {
                 ParserUtil.parseEmail(email);
             }
-            int numOfEmptyValue = (int) emailKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) emailKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "email", DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "email",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new EmailContainsKeywordsPredicate(emailKeywords));
         }
@@ -106,12 +103,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             for (String gender : genderKeywords) {
                 ParserUtil.parseGender(gender);
             }
-            int numOfEmptyValue = (int) genderKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) genderKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "gender", DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "gender",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new GenderContainsKeywordsPredicate(genderKeywords));
         }
@@ -119,13 +115,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                 && !argMultimap.getValue(PREFIX_NATIONALITY).get().trim().isEmpty()) {
             List<String> nationalityKeywords = argMultimap.getAllValues(PREFIX_NATIONALITY);
 
-            int numOfEmptyValue = (int) nationalityKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) nationalityKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "nationality",
-                                DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "nationality",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new NationalityContainsKeywordsPredicate(nationalityKeywords));
         }
@@ -133,13 +127,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
                 && !argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get().trim().isEmpty()) {
             List<String> tutorialGroupKeywords = argMultimap.getAllValues(PREFIX_TUTORIAL_GROUP);
 
-            int numOfEmptyValue = (int) tutorialGroupKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) tutorialGroupKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial Group",
-                                DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial group",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TutorialGroupContainsKeywordsPredicate(tutorialGroupKeywords));
         }
@@ -149,13 +141,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
 
             ParserUtil.parseSocialHandles(socialHandleKeywords);
 
-            int numOfEmptyValue = (int) socialHandleKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) socialHandleKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "social handle",
-                                DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "social handle",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new SocialHandleContainsKeywordsPredicate(socialHandleKeywords));
         }
@@ -166,13 +156,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             for (String remark : remarkKeywords) {
                 ParserUtil.parseRemark(remark);
             }
-            int numOfEmptyValue = (int) remarkKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) remarkKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "remark",
-                                DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "remark",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new RemarkContainsKeywordsPredicate(remarkKeywords));
         }
@@ -181,13 +169,11 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
             List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
 
             ParserUtil.parseTags(tagKeywords);
-            int numOfEmptyValue = (int) tagKeywords.stream()
-                    .filter(String::isEmpty).count();
+            int numOfEmptyValue = (int) tagKeywords.stream().filter(String::isEmpty).count();
 
             if (numOfEmptyValue != 0) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tag",
-                                DeleteMultipleCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tag",
+                        DeleteMultipleCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TagContainsKeywordsPredicate(tagKeywords));
         }
@@ -204,4 +190,3 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
         }
     }
 }
-

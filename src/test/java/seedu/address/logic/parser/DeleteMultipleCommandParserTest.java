@@ -47,8 +47,7 @@ public class DeleteMultipleCommandParserTest {
         )));
 
         // no leading and trailing whitespaces
-        DeleteMultipleCommand expectedDeleteMultipleCommand =
-                new DeleteMultipleCommand(predicate);
+        DeleteMultipleCommand expectedDeleteMultipleCommand = new DeleteMultipleCommand(predicate);
         assertParseSuccess(parser, " n/Alice p/91234456 nat/MY tg/19", expectedDeleteMultipleCommand);
 
         // multiple whitespaces between keywords

@@ -138,7 +138,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (numOfEmptyValue != 0) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial Group",
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT_EMPTY_VALUE, "tutorial group",
                                 FindCommand.MESSAGE_USAGE));
             }
             predicateList.add(new TutorialGroupContainsKeywordsPredicate(tutorialGroupKeywords));
@@ -204,4 +204,3 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 }
-
