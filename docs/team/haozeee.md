@@ -29,6 +29,8 @@ Given below are my contributions to the project.
     * Added tag patient and tag doctor documentation ([#116](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/116))
     * Reviewed, raised and fixed issues throughout the UG
   
+<div style="page-break-after: always;"></div>
+
 * **Contributions to the DG**:
     * Updated UI component and UI class diagram ([#111](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/111), [#192](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/192))
     * Added implementation for filtering appointments ([#192](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/192))
@@ -48,7 +50,7 @@ Given below are my contributions to the project.
     * Fixed bugs found in the PED ([#190](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/190), [#205](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/205))
   
 * **Review/mentoring contributions**:
-    * Reviewed team member's PR and provided some non-trival comments and suggestions ([#36](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/36), [#38](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/38), [#39](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/39), [#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58), [#95](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/95), [#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122))
+    * Reviewed team member's PR and provided some non-trival comments and suggestions ([#36](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/36), [#38](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/38), [#39](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/39), [#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58), [#95](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/95), [#122](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/122), [#250](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/250))
   
 * **Contributions beyond the project team**:
     * Reviewed and reported bug in other team's product ([link](https://github.com/Haozeee/ped/issues))

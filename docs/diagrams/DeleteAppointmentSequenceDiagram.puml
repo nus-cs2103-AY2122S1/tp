@@ -72,6 +72,9 @@ LogicManager -> DeleteAppointmentCommand : execute()
 activate DeleteAppointmentCommand
 
 DeleteAppointmentCommand -> Model : deleteAppointment(appointmentToDelete)
+activate Model
+Model --> DeleteAppointmentCommand
+deactivate Model
 
 create CommandResult
 DeleteAppointmentCommand -> CommandResult : message
