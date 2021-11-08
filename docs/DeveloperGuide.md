@@ -156,6 +156,8 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
+Here are class diagrams for the important components in the `Model` package. This first image shows the relations between the important classes in the package:
+
 <img src="images/ModelClassDiagram.png" width="800" />
 
 Class Diagram of the `Person`'s entity:
