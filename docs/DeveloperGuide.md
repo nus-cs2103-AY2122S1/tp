@@ -103,7 +103,6 @@ etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` c
 
 ### 3.3 Logic component
 
-### Description :
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 **Description** :
@@ -337,7 +336,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram2.png)
 
-#### Design considerations:
+#### 4.3.2 Design Considerations
  - As mentioned previously in the implementation for [link](#42-link-feature), the use of a separate `GameFriendLink` class to which only the `Friend` class has a reference to greatly simplifies the unlinking command as only the `Friend` objects (and not the `Game` objects) have to be changed.
 
 ### 4.4 Schedule Feature
@@ -546,13 +545,13 @@ online competitive multiplayer games together.
 
 
 **Value proposition**:
-#### 6.1.1 Problem:
+#### 6.1.1 Problem
 For busy university student gamers who love playing multiplayer competitive games with their friends, it can
 often be challenging scheduling times to play games with friends out of a packed schedule.
 Additionally, it can be challenging to make the most out of the limited time available by choosing
 the right friends to play with - those you have the most fun playing with or have great performance at the game.
 
-#### 6.1.2 How gitGud solves the problem and make users' lives easier:
+#### 6.1.2 How gitGud solves the problem and make users' lives easier
 gitGud allows users to store your friends' available timeslots and find matching times to play multiplayer
 competitive games together - allowing users to identify and coordinate gaming sessions with friends.
 It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
