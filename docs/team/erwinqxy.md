@@ -20,7 +20,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
     * Highlights: This enhancement provides the user with a more convenient and accessible experience in finding his /
       her students.
 2. **Improved Feature**: Added Student ID, Class ID, and Email
-    * What it does: it provides important information to identify the student by.
+    * What it does: it provides more information pertaining to a student.
     * Justification: This feature improves the product by providing important information to identify the student by.
     * Highlights: This feature will be used in other commands such as add, edit, and filter. This feature was tedious as
       it required an overhaul of the existing AB3 features and test cases. This feature also overlaps with the sample
@@ -31,7 +31,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       and learn the various features provided by the product.
 4. **New Feature**: Implemented a feature to help generate random lab scores.
     * What it does: add randomized lab scores to the students in the sample data.
-    * Justification This feature improves the testability of the product, providing, randomized lab scores to the user.
+    * Justification This feature improves the testability of the product, providing randomized lab scores to the user.
     * Highlight: This feature requires getting the total lab score of a particular lab as an upper bound for the
       randomization to work to avoid generating an invalid score.
 5. **Improved Feature**: Implement unique email.
