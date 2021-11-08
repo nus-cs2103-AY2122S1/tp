@@ -40,7 +40,7 @@ Given below are my contributions to the project.
         fast pace.
       * Credits: No code reused but inspired by CLI Terminal.
     
-<div style="page-break-after: always;"></div>
+    <div style="page-break-after: always;"></div>
 
   * [Note Window Shortcut keys](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/90)
       * What it does: Allows mentors to save and quit Note Window using shortcut keys.
@@ -54,7 +54,7 @@ Given below are my contributions to the project.
       to CI failure.
     * Credits: No code reused but followed closely to [TestFX](https://github.com/TestFX/TestFX) to setup.
     
-**Review contributions:**: Reviewed [8 PRs](https://github.com/AY2122S1-CS2103T-W08-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
+**Review contributions:**: Reviewed [10 PRs](https://github.com/AY2122S1-CS2103T-W08-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
 
 * **Contributions to team-based tasks**:
     * Updating user/developer docs that are not specific to a feature.
