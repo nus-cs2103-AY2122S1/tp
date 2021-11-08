@@ -53,7 +53,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `rm 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -100,9 +100,9 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("rm 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `rm 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -414,7 +414,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `rm 5` command to delete the 5th person in the address book. The `rm` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `rm 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -470,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `rm`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -804,7 +804,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `ls` command. Multiple persons in the list.
 
     1. Test case: `rm 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -814,6 +814,46 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Deleting tasks
+1. Deleting tasks of a person while the task list of that person is currently shown.
+
+    1. Prerequisites:
+        * List all persons using the `ls`command. Multiple persons in the list.
+        * Show the task list of the target person using the `cat` command.
+        * Index of target person must be shown on the person list.
+        * Index of target task must be shown on the person List.
+        * Arguments are valid and compulsory parameters are provided.
+
+    1. Test case: `rm 1 -ti2`<br>
+       Expected: 2nd task will be deleted from the list. Details of the deleted task shown in the status message.
+
+1. Deleting tasks of a person while the task list of another person is currently shown.
+
+    1. Prerequisites:
+       * List all persons using the `ls`command. Multiple persons in the list.
+       * The index of the target person must be shown on the person list.
+       * The task list shown must be different from the target person.
+       * Arguments are valid and compulsory parameters are provided.
+
+    1. Test case: `rm 1 -ti2`<br>
+       Expected: No task will be deleted. Error details shown in the status message.
+
+1. Deleting a non-existent task of a person while the task list of that person is currently shown.
+
+    1. Prerequisites:
+        * List all persons using the `ls`command. Multiple persons in the list.
+        * The index of the target person must be shown on the person list.
+        * The target task index must not be within the task list shown.
+        * Arguments are valid and compulsory parameters are provided.
+
+    1. Test case: `rm 1 -ti100`
+       Expected: No task will be deleted. Error details shown in the status message.
+ 
+    1. Test case: `rm 2 -ti0`
+       Expected: No task will be deleted. Error details shown in the status message.
 
 ### Saving data
 
