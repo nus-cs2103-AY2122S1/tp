@@ -553,7 +553,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                    | exit the program safely        | free up resources on my computer |
 | `* * *`  | new user                                     |  install the application        | I can use it |
 | `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
-| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
 | `* *`    | insurance agent                                      | keep track of the birthday of my clients   | maintain customer relations with them|
 | `* *`    | insurance agent that labels my clients    | delete labels that I have assigned  | correct mislabels and inaccurate labels
 | `* *`    | user                                       | import my contacts from a different source   | easily add multiple contacts at once
@@ -598,6 +597,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1b. A client with the same name already exists in InsurancePal
+
+    * 1b1. InsurancePal shows an error message
+
+      Use case ends.
+
 **Use case: List all clients**
 
 **MSS**
@@ -635,7 +640,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
+* 3b. The given details are of an invalid format
 
+    * 3b1. InsurancePal shows an error message
+
+      Use case resumes at step 2.
+
+* 3c. A client with the same name already exists in InsurancePal
+
+    * 3c1. InsurancePal shows an error message
+
+      Use case resumes at step 2.
 **Use case: Finding a client**
 
 **MSS**
