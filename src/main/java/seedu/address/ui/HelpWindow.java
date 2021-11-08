@@ -185,7 +185,7 @@ public class HelpWindow extends AnchorPane {
     }
 
     // @@author kflim-reused
-    // Reused from https://github.com/greyguy21/ip/
+    // Reused from the 01/10/2021 version of https://github.com/greyguy21/ip/
     // with minor modifications
     private void setupColumns() {
         command.setCellValueFactory(
