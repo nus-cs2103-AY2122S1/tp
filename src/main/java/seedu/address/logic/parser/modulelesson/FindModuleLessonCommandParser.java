@@ -98,7 +98,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         for (String day : lessonDayKeywordsList) {
             try {
                 int dayValue = Integer.parseInt(day);
-                if (dayValue < 0 || dayValue > 7) {
+                if (dayValue < 1 || dayValue > 7) {
                     throw new ParseException(MESSAGE_INVALID_DAY);
                 }
             } catch (NumberFormatException e) {
