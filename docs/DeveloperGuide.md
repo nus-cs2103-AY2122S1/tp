@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+<span id="toc"/>
 * Table of Contents
 {:toc}
 
@@ -12,7 +13,7 @@ title: Developer Guide
 This guide is intended for any developers looking to contribute to TAB.
 It aims to contain all the information required to help you quickly get started. 
 
-In the [Table of Contents](#), each item listed is a link which you can click on to go directly to that section in the guide.
+In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide.
 
 **Conventions Used**
 
@@ -34,7 +35,7 @@ List of sources of all reused/adapted ideas, code, documentation, and third-part
 * UndoRedoStack implementation referenced: [SE-EDU AddressBook 4](https://github.com/nus-cs2103-AY1718S2/addressbook-level4/blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
 * The [`SchedulePanel#createTimeThread()`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L114) method was reused with minimal changes from the CalendarFX [developer manual](http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
-* Initialising the `CalendarView` in the `[SchedulePanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32)` was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
+* Initialising the `CalendarView` in the [`SchedulePanel`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/SchedulePanel.java#L32) was done with reference to the CalendarFX [_API_](https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html).
 * The [CenterPanel](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/CenterPanel.java#L138) JavaFX solution was inspired by [this StackOverflow post](https://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx#:~:text=Replace%20just%20a%20specific%20pane,of%20the%20stack's%20child%20list.).
 * UG and DG Table cells with copy and paste and wrap-text functions reference: [Roland09](https://gist.github.com/Roland09/6fb31781a64d9cb62179#file-tableutils-java), [James_D](https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping).
 * Detection of overlapping dates: [Ole V.V.](https://stackoverflow.com/questions/60785426/).
