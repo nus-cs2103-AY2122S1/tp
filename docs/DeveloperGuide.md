@@ -314,7 +314,7 @@ Therefore, the key point to implement the extension is using `HBox` (Horizontal 
 
 ![UndoRedoState5](images/AddPanelToolkit_SenceBuilder.png)
 
-Scene Builder is written as a JavaFX application, supported on Windows, Mac OS X and Linux. It is the perfect example of a full-fledge JavaFX desktop application. Scene Builder is packaged as a self-contained application, which means it comes bundled with its own private copy of the JRE.
+[Scene Builder](https://gluonhq.com/products/scene-builder/) is written as a JavaFX application, supported on Windows, Mac OS X and Linux. It is the perfect example of a full-fledge JavaFX desktop application. Scene Builder is packaged as a self-contained application, which means it comes bundled with its own private copy of the JRE.
 
 Application Scence Builder makes it easier to imagine and implement the feature by the running time visualization and list of possible components.
 
