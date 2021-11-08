@@ -47,7 +47,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `help` and `view`.
+    * Added documentation for the features `help` and `view`
     * Added the Preview Section of UI and some Q&A parts.
     * Assist with writing introduction and quick start for usage instruction.
   * Developer Guide:

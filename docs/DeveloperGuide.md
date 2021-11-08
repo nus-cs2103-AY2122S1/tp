@@ -160,10 +160,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 The UI consists of a `MainWindow` that is made up of parts smaller UI-part components, including `CommandBox`, `ResultDisplay`, 
 `VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract 
 `UiPart` class which captures the commonalities between classes that represent smaller parts of the visible GUI. Of these, all components are always presented,
-except for the Help Window which can be shown or hide depending on the results of user command.
-
-Some classes of the UI, notably `CommandBox` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
-executes a Command from the Logic `component`.
+except for the Help Window which can be shown or hidden depending on the results of user command.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in their respective matching `.fxml` files stored in the `src/main/resources/view` folder. For example, the layout of the 
 [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is 
@@ -176,12 +173,17 @@ The `UI` component,
 * keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * keeps a reference of some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
   the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
-  
-![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
 
-One important component of the UI is the specialized Creator class which extends the abstract class UiPart - for the purpose of reusing the Visualizer Display
+Some classes of the UI, notably `CommandBox`, `StudentCard` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
+executes a Command from the Logic `component`. The `CommandExecutor` functional interface serves as a link between the UI and the Logic component, reducing dependency of UI on the Logic part
+
+![Structure of the UI Component](images/dg/architecture/ui/ExecutorClassDiagram.png)
+
+One important component of the UI is the specialized `Creator` class which extends the abstract class `UiPart` - for the purpose of reusing the `VisualizerDisplay`
 to show users the result of a command execution. After information is sent from Main Window to the Visualizer Display, the Visualizer Display then send the Additional
 Info Object to the Creator classes, which will be used to convert it for user view in the Visualizer Display itself.
+  
+![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
 
 **Design Considerations**
 
@@ -389,7 +391,8 @@ the benefits of smaller disk space utilisation in our opinion. Hence, we go for 
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on all features are implemented. Note that the section only discusses the implementation details
+of the Command classes, and not the Parser classes, for brevity purposes. Details of Parser classes check are included within the explanation below, in combination with the Command classes.
 
 ### Managing Students' Personal Details
 ### AddCommand
@@ -541,23 +544,24 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 
 ### ViewCommand
 
-This command serves to display the summarised details of a single `Student` in the `AcademyDirectory`.
+This command serves to display the summarised details of a single `Student` in the `AcademyDirectory` based on the index
+number of the student. If the index is invalid (not a positive integer or exceeds the list size), then an error message will be shown instead
+and `ViewCommand` will not be created.
 
 ![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
 
 #### Implementation
 
 `ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
-Once the index and the student associated with the index is retrieved, it is set on the Additional View Model - with its associated type and info,
-to send to the UI for display.
-
 It extends the abstract class `Command` and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+Once the index and the student associated with the index is retrieved, it is set on the Additional View Model - with its associated type and info,
+to send to the UI for display. A success message containing the name of the student is later returned.
 
 ![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
 
-#### Implementation
-
-`ViewCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+A noteworthy detail in implementation of ViewCommand (not related to logic) is that student grades and participation score are wrapped inside a drop-down menu on the UI, and
+users will need to click on the menu to see the details of the students.
 
 ### ShowCommand
 
@@ -590,6 +594,8 @@ The information will be displayed in the AdditionalView. The success message is 
 The following sequence diagram describes what happens when `VisualizeCommand` is executed:
 
 ![VisualizeCommandSequenceDiagram](images/dg/logic/commands/visualizecommand/VisualizeCommandSequenceDiagram.png)
+
+Note that this is a singular command - meaning that no other argument should follow `visualize`.
 
 ### FilterCommand
 
@@ -627,8 +633,8 @@ The reference frame for GetComparator can be found below. It details the selecti
 
 ### ExitCommand
 
-This command allows user to exit the application after saving all operations and data
-It extends the `Command` class and will consequently `@Override` the `Command#execute()` method to serve this purpose.
+This command allows user to exit the application after saving all operations and data. It extends the `Command` class and will consequently `@Override` the `Command#execute()` method to serve this purpose.
+Note that this is a singular command - meaning that no argument should follow after `exit`.
 
 #### Implementation
 
@@ -642,6 +648,7 @@ This command shows all students on the class, ordered by when the student is add
 
 `ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 `ListCommand` retrieves the student list and display it on the student list panel on the left side. All students will be displayed.
+Note that this is a singular command - meaning that no argument should follow after `list`.
 
 ![ListCommandSequenceDiagram](images/dg/logic/commands/listcommand/ListCommandSequenceDiagram.png)
 
@@ -653,6 +660,8 @@ This command clears all `Student` entries from `AcademyDirectory`.
 
 `ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose 
 and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
+Note that this is a singular command - meaning that no argument should follow after `clear`.
+
 The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
 
 ![ClearCommandSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
@@ -692,6 +701,7 @@ The following sequence diagram shows the above implementation:
 ![HistoryCommandSequenceDiagram](images/dg/logic/commands/historycommand/HistoryCommandSequenceDiagram.png)
 
 Note that the above diagram is omits several details but should be sufficient to grasp how `HistoryCommand` works.
+In addition, this is a singular command - meaning that no argument should follow after `history`.
 
 #### Limitation
 The current implementation can only show two commit branches: `MAIN` and `OLD`. While this is
@@ -749,6 +759,7 @@ as _version controlled commands_ (read [here](#glossary) for details on what thi
 `UndoCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
 serve the aforementioned purpose. Internally, the `UndoCommand` makes use of the `RevertCommand`. 
 Hence `UndoCommand` serves as _syntactic sugar_ for the `RevertCommand`.
+Note this is a singular command - meaning that no argument should follow after `undo`.
 
 ### RedoCommand
 This command redoes a change done to the underlying `AcademyDirectory` data. Note that this is
@@ -760,11 +771,12 @@ as _version controlled commands_ (read [here](#glossary) for details on what thi
 `RedoCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
 serve the aforementioned purpose. Internally, the `RedoCommand` makes use of the `RevertCommand`.
 Hence `RedoCommand` serves as _syntactic sugar_ for the `RevertCommand`.
+Note that this is a singular command - meaning that no argument should follow `redo`
 
 ### HelpCommand
 
 This command serves to guide new users on using the application, which syntax to use and when to use them. Users can view a summary of all commands' syntax,
-or a specific guide on how to use a particular command.
+or a specific guide on how to use a particular command. Note that if the command in queried are not exact, or if the command does not exist, then HelpMessage will not be created.
 
 #### Design considerations
 
@@ -772,7 +784,7 @@ In implementing the Help Command, two alternative options were proposed in takin
 1. To parse the help message directly from the User Guide
    * Pros: This is a more logical way to get the help message, relying on a parser that identifies the common starting section of each command on the User Guide
    * Cons: Unfortunately, in doing so, there was a bug exception FileNotFoundException, of which HelpCommand cannot take the help message directly from the User Guide
-   because it cannot find the file. Keeping the help message on the /resources folder was a solution, but the risk of file cannot be read is still there. In addition,
+   because it cannot find the file. Keeping the help message on the /resources folder was a solution, but the risk of file cannot be read is still there depending on the Operating System that Academy Directory is working on. In addition,
    this creates the risk of the parser working incorrectly if the header section of the User Guide changes.
 2. To store a HELP_MESSAGE field in each command class
    * Pros: Does not rely on external file, and is not prone to FileNotFoundException. Also, it encapsulates the object better, with each command having an associated
@@ -783,20 +795,24 @@ In implementing the Help Command, two alternative options were proposed in takin
 Ultimately, Solution 2 was adopted to reduce the risk of bugs on Help Command being vulnerable to FileNotFoundException error, and to better encapsulate the Command
 classes. In addition, Academy Directory will always require maintenance from the developers, and it is not a bad thing to keep the HELP_MESSAGE updated to the User Guide changes continuously.
 
+Hence, one of the limitations to HelpCommand is the longer and harder-to-read content of String message, which can make it difficult for reviewers to look on. In addition,
+`help` can only work when the command in queried is exact, meaning that it does not work for partial instructions in case of user's typo, like `addd` or `partcpation`. This
+is a valid use-case for Academy Directory in a sense that users who mistype command often need better instruction than a general help summary. A future extension could be to
+allow auto-suggestion and auto-assistance for `help`, for a more comprehensive assistance system.
+
 #### Implementation
 
 `HelpCommand` will extend the `Command` class, and consequently `@Override` the `Command#execute()` method to serve its initial purposes.
 
-The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). This help command will
-be displayed to the user on a separate window later on.
+The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). 
+This help message will be displayed to the user on a separate window of the UI.
 
 ![HelpCommandSequenceDiagram](images/dg/logic/commands/helpcommand/HelpCommandSequenceDiagram.png)
 
-As seen from the diagram, the `HelpCommand` involves the use of conditional branches. If the optional condition is met, a `CommandException` is thrown to let
-users know that the input is invalid.
+Help Command will check whether the queried help is a general help (meaning that a summary table of all command formats should be shown to users), or is a
+specific help (meaning that the instruction and remarks of a particular targeted command should be used).
 
-Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
-will be created. If it is a specific help, then a specific help command associated with a command will be created.
+Additionally, the help message itself is sent to VersionedModel as an `AdditionalInfo` object, which will be used to convert to `HelpWindow` view later on.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1221,8 +1237,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio |
 | Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class. |
 | Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function. | |
-| Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something. | |
-| Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something. | |
+| Command Line Interface (CLI) | A text-based user interface, where users instruct the computer to do something by line-of-text commands | |
+| Graphical User Interface (GUI) | A graphics-based user interface, where users instruct the computer to do something by interacting with graphical elements | |
 | Java | A program that allows running other programs written in Java programming language. | |
 | `Command` | An interface representing an instruction typed by a user to Academy Directory. | |
 | Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands) |
@@ -1230,6 +1246,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix |
 | Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields |
 | Prefix | An abbreviation of a field. | Always ends with a backslash ('/') |
+| Singular Commands | A command that consists of only one word and no other arguments | If there are any other character/words following a singular command, an error message will be shown
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1279,6 +1296,7 @@ Our team has put in a significant amount of effort to get Academy Directory to t
    We have put in a significant amount of effort morphing the existing code base, AB3 to support the need of our application, which is designed for CS1101S avenger to be more effective and efficient.
 
    Firstly, we had to create new classes for components related to our application, such as <TO BE ADDED>. Each of these classes has different input format requirements and is related to different command.
+   Many commands and features we have implemented are not 
 
    Secondly, we had to remove all the irrelevant classes and update the existing test cases to fit our need.
 
