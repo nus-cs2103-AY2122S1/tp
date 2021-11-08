@@ -32,7 +32,6 @@ public class RemoveStudentCommand extends Command {
 
     public static final String MESSAGE_REMOVE_STUDENT_SUCCESS = "Removed students: %1$s from class: %2$s";
     public static final String MESSAGE_REMOVE_STUDENT_FAILURE = "Students: %1$s are not found in class: %2$s";
-    public static final String MESSAGE_EMPTY_CLASS = "This class is empty. No students are removed.";
     private static final Logger logger = LogsCenter.getLogger(RemoveStudentCommand.class);
     private final List<Index> studentIndexes;
     private final Index classIndex;
@@ -72,12 +71,7 @@ public class RemoveStudentCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
             }
             if (tuitionClass.containsStudent(studentToRemove)) {
-                TuitionClass updatedClass = tuitionClass.removeStudent(studentToRemove);
-                Student updatedStudent = studentToRemove.removeClass(tuitionClass);
-                model.setTuition(tuitionClass, updatedClass);
-                model.setStudent(studentToRemove, updatedStudent);
-                studentsRemoved.add(studentToRemove.getName().fullName);
-                logger.info(String.format("Students to be removed %s from class: %s", studentsRemoved, tuitionClass));
+                updateStudentInClass(model, studentToRemove, tuitionClass);
             } else {
                 updateInvalidStudents(studentToRemove);
             }
@@ -87,6 +81,18 @@ public class RemoveStudentCommand extends Command {
                 + (!studentsNotInClass.isEmpty()
                 ? String.format(MESSAGE_REMOVE_STUDENT_FAILURE, studentsNotInClass, tuitionClass.getName()) : "");
         return new CommandResult(feedback);
+    }
+
+    private void updateStudentInClass(Model model, Student studentToRemove, TuitionClass tuitionClass) {
+        TuitionClass updatedClass = tuitionClass.removeStudent(studentToRemove);
+        Student updatedStudent = studentToRemove.removeClass(tuitionClass);
+        if (updatedClass != null && updatedStudent != null) {
+            model.setTuition(tuitionClass, updatedClass);
+            model.setStudent(studentToRemove, updatedStudent);
+            studentsRemoved.add(studentToRemove.getName().fullName);
+        }
+        logger.info(String.format("Students to be removed %s from class: %s", studentsRemoved, tuitionClass));
+
     }
 
     private boolean updateInvalidStudents(Student studentToRemove) {

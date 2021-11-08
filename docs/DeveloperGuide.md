@@ -25,8 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-
-<img src="images/ArchitectureDiagram.png" width="280" />
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" width="280" />
+</p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -52,8 +53,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
+<p align="center" >
+  <img src="images/ArchitectureSequenceDiagram.png" width="574" />
+</p>
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -61,15 +63,18 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
-
+<p align="center" >
+  <img src="images/ComponentManagers.png" width="300" />
+</p>
 The sections below give more details of each component.
 
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<p align="center">
+  <img src="images/UiClassDiagram.png" />
+</p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -88,7 +93,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<p align="center">
+  <img src="images/LogicClassDiagram.png" width="550"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -105,7 +112,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<p align="center">
+  <img src="images/ParserClasses.png" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -115,8 +124,9 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<p align="center" >
+  <img src="images/ModelClassDiagram.png" width="450" />
+</p>
 
 The `Model` component,
 
@@ -125,18 +135,16 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.
+<img src="images/BetterModelClassDiagram.png" width="450" align="center" />
 </div>
 
 ##### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
-
-<img src="images/StorageClassDiagram.png" width="550" />
-
+<p align="center">
+  <img src="images/StorageClassDiagram.png" width="550" />
+</p>
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
@@ -208,12 +216,17 @@ Step4: After the construction of the timetable, each `TuitionClass` is inserted 
 
 The following *Sequence Diagram* illustrates how `Timetable` interacts with `TimetableInfoPage` as explained by `step 3` and `step 4`:
 
-![Interactions between Timetable and TimetableInfoPage](images/TimetableCommandSequenceDiagram.png)
+<p align="center">
+  <img src="images/TimetableCommandSequenceDiagram.png" />
+</p>
 
 Step5: The complete timetable is displayed to user through the `UI` component.
 
 The following *Activity Diagram* summarizes what happens when a user executes a "timetable" command:<br>
-![TimetableCommand Activity Diagram](images/TimetableCommandActivityDiagram.png)
+
+<p align="center">
+  <img src="images/TimetableCommandActivityDiagram.png" />
+</p>
 
 #### Design considerations
 
@@ -351,7 +364,7 @@ Given below is an example usage scenario of how an `editclass` command is execut
 #### Steps
 Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
 
-Step 2: The `EditClassCommand` class will first check if any field of the tuition class has been updated.
+Step 2: The `EditClassCommand` class will first check if any field of the tuition class has been updated using `TuitionClass#sameClassDetails()`.
 If there are no changes, a `CommandException` will be thrown to alert the user that the class details are up-to-date.
 Otherwise, it proceeds to verify that the updated `limit` is at least equal to the current number of students.
 
@@ -362,6 +375,13 @@ If there are conflicts, a `CommandException` will be thrown to the user to alert
 Step 4: If there are no conflicts, the class tag of the students enrolled in the class which shows the `ClassName` and`Timeslot` of the updated class.
 
 Step 5: Finally, it replaces the existing class with the updated class in the database using `ModelManager#setTuition(TuitionClass, TuitionClass)`.
+
+#### Activity Diagram
+
+The user flow is shown in the *Activity Diagram* below.<br>
+<p align="center">
+  <img src="images/EditClassActivityDiagram.png">
+</p>
 
 ### [Developed] Deleting Students
 This feature allows students to be deleted using the `deletestudent` or `del` command.
@@ -492,7 +512,10 @@ Students are then added to the respective tuition class with the help of the fol
 Given below is an example usage scenario and how an `addtoclass` command is executed.
 
 The interactions between the components during the usage scenario is shown in the *Sequence Diagram* below.<br>
-![Ui](images/AddToClassSequenceDiagram.png)
+
+<p align="center" >
+  <img src="images/AddToClassSequenceDiagram.png" />
+</p>
 
 Step 1: The user enters `atc si/2 4 tc/1` command to add the second and fourth students to the first tuition class.
 
@@ -509,7 +532,10 @@ Step 4: Newly enrolled students are added to the tuition class. `AddToClassComma
 `Timeslot` of the class.
 
 The following *Activity Diagram* summarizes what happens when a user executes an `addtoclass` command:
-![Ui](images/AddToClassActivityDiagram.png)
+
+<p align="center" >
+  <img src="images/AddToClassActivityDiagram.png" />
+</p>
 
 #### Design considerations
 
@@ -536,16 +562,20 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
+<p align="center" >
+  <img src="images/UndoRedoState0.png" />
+</p>
 Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<p align="center">
+  <img src="images/UndoRedoState1.png" />
+</p>
 
 Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<p align="center">
+  <img src="images/UndoRedoState2.png" />
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
@@ -553,7 +583,9 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<p align="center">
+<img src="images/UndoRedoState3.png" />
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -562,7 +594,9 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<p align="center">
+<img src="images/UndoSequenceDiagram.png" />
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -576,15 +610,21 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<p align="center">
+  <img src="images/UndoRedoState4.png" />
+</p>
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<p align="center">
+<img src="images/UndoRedoState5.png" />
+</p>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+<p align="center">
 <img src="images/CommitActivityDiagram.png" width="250" />
+</p>
 
 #### Design considerations
 
