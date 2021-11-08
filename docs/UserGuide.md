@@ -205,7 +205,7 @@ Phone | Staff Phone Number
 Email | Staff Email Address
 Absent Period | Periods that a staff will be absent from work
 Roles | Staff Roles (Available Roles: `bartender`, `floor`, `kitchen`)
-Status | Staff Employment Status (Either `fulltime` or `parttime`)
+Status | Staff Employment Status (Either `fulltime`, `parttime` and `nostatus`)
 Salary | Staff Hourly Pay (in Dollars)
 Tags | Additional Staff Information that can be used to reference staff.
 
@@ -765,7 +765,7 @@ p/|-p|Phone Number|{::nomarkdown}<ul><li>Represents the <b>phone number</b> of t
 e/|-e|Email|{::nomarkdown}<ul><li>Represents the <b>email</b> of a staff. <li><b>Compulsory</b> field. <li>Must be of format <code>local-part@domain</code>. <li>The <code>local-part</code> must only contain alphanumeric characters, excluding and the special characters "<code>+ _ . -</code>", but cannot start or end with any special character. <li>The <code>domain</code> is made up of <code>domain labels</code>  separated by periods. It must end with a <code>domain label</code> which is at least 2 characters long. <li>The <code>domain labels</code> must consist of alphanumeric characters, separated only by hyphens, if any, and they must start and end with alphanumeric characters.{:/}
 r/|-r|Role|{::nomarkdown}<ul><li>Represents the <b>responsibilities</b> that a staff member has in the store.<li>The accepted roles are: <code>floor</code>, <code>kitchen</code>, or <code>bartender</code>. <li>The absence of a role would be denoted as "norole".{:/}
 t/|-t|Tags|{::nomarkdown}<ul><li>Tags are used to <b>store additional information</b> about staff, and can be used to <b>reference staff</b>.<li>Tags are sorted in alphabetical order.{:/}
-s/|-s|Status|{::nomarkdown}<ul><li>Represents the <b>employment status</b> of a staff.<li>The accepted statuses are: <code>fulltime</code>, or <code>partime</code>.{:/}
+s/|-s|Status|{::nomarkdown}<ul><li>Represents the <b>employment status</b> of a staff.<li>The accepted statuses are: <code>fulltime</code>, <code>partime</code> or <code>nostatus</code>.{:/}
 $/|-$|Salary (per hour)|{::nomarkdown}<ul><li>Represents the <b>salary</b> of a staff.<li><b>Compulsory</b> field. <li>Must be a non-negative number representing the <b>staff's pay in dollars</b>. <li>Cents can be added, by adding a period, followed by the cents, which then also has to be a positive number of either 1 or 2 digits. <li>The maximum salary that can be set is $9999.99.{:/}
 d/|-d|Shift (for shift related commands)|{::nomarkdown}<ul><li>Represents a <b>shift</b> of a staff.<li>Represented as a <code>DAYOFWEEK-SLOT_NUMBER</code>. <li><code>DAYOFWEEK</code> refers to the <b>day of the week</b>, such as _monday_ or _saturday_. The <code>DAYOFWEEK</code> is case insensitive.<li><code>SLOT_NUMBER</code> refers to either the first or second shift. The first shift (morning) is represented with <code>0</code>, and the second shift (afternoon) is represented with <code>1</code>.<li>Example: <code>TUESDAY-0</code> and <code>wednesday-1</code> are valid shifts.{:/}
 rr/|NA|Role Requirements|{::nomarkdown}<ul><li>Represents the <b>requirements of each role</b>. <li>When  used as an input, it is represented as <code>ROLE-REQUIRED_NUMBER</code>. <li> The required number refers to the number of staff of that role required per shift.{:/}
