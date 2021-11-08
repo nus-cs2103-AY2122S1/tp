@@ -11,9 +11,6 @@ Socius is a contact management desktop application used for CS2103T module taker
 find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
 JavaFX. Socius is written in Java, and has about 12 kLoC.
 
-A screenshot of Socius is shown below:
-![Ui](../images/Quickstart.png)
-
 ### 2 Code contributed
 
 Click on the following link to view the code that I have contributed to the project:
@@ -24,51 +21,57 @@ Click on the following link to view the code that I have contributed to the proj
 
 The following describes the enhancements and new features that I have added to the project.
 
-#### 3.1 Add Tags to people (Feature)
-* What it does: This feature allows the user to add meaningful tags to people to better categorise and manage their contact list.
-* Justification: Socius allows users to import many people into their contact list. This feature allows users to tag people according to their relationship (e.g. CS2103T Group Mate, CAPT Neighbour, etc.). This helps users to classify and manage their contacts list, especially if the user has many friends.
-* Highlights:
+#### 3.1 Add and Delete Tags to people (Feature) [#168](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/168), [#169](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/169)
+* What it does: This feature allows the user to add and delete meaningful tags to people to better categorise and manage their contact list.
+* Justification: Socius enables users to include many people into their contact list. 
+This feature allows users to tag people according to their relationship (e.g. CS2103T Group Mate, CAPT Neighbour, etc.). 
+This greatly helps users to classify and manage their contact list, especially if there are many people in their contact list.
+* Highlights: This enhancement affects existing commands and commands to be implemented. The implementation was challenging as it changes the Person model which is depended on by many other classes, including the GUI. 
+Many lines of test cases and test data were written to rigorously test this feature.
 
+#### 3.2 Find contacts (Feature) [#60](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/60), [#194](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/194)
+* What it does: This feature allows the user to search through their contacts using any keyword. 
+This enables user to efficiently manage their contact list and improve ease-of-use of Socius.
+* Justification: Socius enable users to include many people into their contact list. 
+This feature allows users to find people in their contact list by any personal parameters that Socius supports.
+This helps users to navigate and manage through their contact list with great ease by filtering their displayed contacts 
+down to what they expect to see.
+* Highlights: This enhancement is particularly tedious to implement. To enable the finding of contacts through each parameter, 
+new Predicate classes were written for each parameter to support this feature while adhering to the Object-Oriented Principles applied
+throughout this program. Many lines of test cases and test data were written to rigorously test every new class and this feature.
+
+#### 3.3 Test Classes and Test Data [#287](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/287)
+* What it does: New test classes and test data were written to rigorously test the correctness of Socius. There is at least one test class
+for each class in the main program. 
+* Justification: As my team builds on the existing Address Book 3 code, many classes are modified and added quickly. The functionality of
+the program also differs greatly with these modifications. New test classes and test data have to be written to maintain the integrity of 
+our programme and to prevent regression errors.
+* Highlights: As the team's gatekeeper for program testing, each test class was inspected and new test cases were added to the test classes
+wherever test coverage can be increased for Socius. Edge cases like emojis and non-Latin characters are also tested against Socius. Many lines
+of test cases and test data were written to rigorously test the different aspects of Socius and to minimise program abuse.
 
 ### 4 Contributions to Documentations
 
-#### 4.1 User Guide
+#### 4.1 About Us
+* Set up the hyperlinks for profile picture, Github profile and Project Portfolio Page for each team member. [#12](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/23), [#29](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/29)
 
+#### 4.2 User Guide
+* Standardised the format of the content in the User Guide. [#328](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/328)
+* Added the 'Add Tag' and 'Delete Tag' section to the User Guide. [#206](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/206/files)
+* Added a 'Table of Contents' to the User Guide. [#58](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/58/files)
+* Corrected numerous discrepancies in the User Guide.
+* Frequently updated the User Guide to reflect the latest changes to Socius.
 
-Given below are my contributions to the project.
+#### 4.3 Developer Guide
+* Added the 'Find Command' section in the Developer Guide. [#205](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/205)
+* Updated the 'Non-functional Requirements' section in the Developer Guide. [#26](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/26/files)
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+### 5 Contributions to team-based tasks
+* Set up the team's Github Repository.
+* Set up the team's Google Drive folder.
+* Set up the team's initial project manager on Notion.
+* In charge of reviewing and approving the team's Github pull requests.
+* Managed the milestones `v1.2` - `v1.3b` on Github.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* **Code contributed**: [RepoSense link]()
-
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
-
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
-
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+### 6 Other contributions
+* PRs reviewed (with non-trivial review comments): [#91](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/91), [#94](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/94)
