@@ -654,9 +654,9 @@ testers are expected to do more *exploratory* testing.
 ### Bulk Tag Test
 1. Test case: `bulk_tag t/friends`
    <br>Expected: Added the Tags [friends] to the Persons
-2. Test case: 'bulk_tag t/friends'
+2. Test case: `bulk_tag t/friends`
    <br> Expected: Added the Tags [friends] to the Persons. No change since all persons have the tag `friends`
-2. Test case: 'bulk_tag t/friends t/passed'
+2. Test case: `bulk_tag t/friends t/passed`
    <br> Expected: Added the Tags [passed] [friends] to the Persons. Now tag `passed` is added to all the person and `friends` already existed for all the persons
    
 ### Saving data
