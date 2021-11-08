@@ -4,7 +4,7 @@
 
 ### Preview
 - - -
-![Ui](docs/images/ug-features/Ui.png)
+![Ui](docs/images/Ui.png)
 
 ### About
 - - -

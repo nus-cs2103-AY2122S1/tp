@@ -16,7 +16,7 @@ It is optimized for quick text-based inputs via a Command Line Interface (CLI) w
 
 This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 
-![Ui](images/ug-features/Ui.png)
+![Ui](images/Ui.png)
 
 ### Table of Contents
 * [About RecruitIn](#about-recruitin)
