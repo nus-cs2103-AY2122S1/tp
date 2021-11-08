@@ -172,7 +172,7 @@ Here is an image of a module in our [database](#database)<br>
 ![Module Explanation](images/ModuleExplanation.png)
 
 A module is made up of 6 **components**:
-1. An index in the database
+1. An [index](#index) in the database
 1. A module [code](#code) number
 1. A [title](#title) 
 1. A [description](#description) of the module
