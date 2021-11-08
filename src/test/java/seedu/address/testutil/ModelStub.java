@@ -22,6 +22,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.task.Task;
 
+// @@author {tanhuakun}-reused
+// Refactored from an inner class in AB3 code. Should not be counted as mine.
+
 /**
  * A default model stub that have all the methods failing.
  */
