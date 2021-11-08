@@ -568,12 +568,12 @@ The following activity diagram summarizes what happens when a user executes a de
 </p>
 
 ###### Remove vs "Delete"
-You might notice that there is an interchanging of the words Remove and Delete which seem to suggest the same thing. However, they do have some slight difference in connotation.<br>
+You might notice that there is an interchanging of the words Remove and Delete which seem to suggest the same thing. However, they do have some slight difference in connotations.<br>
 * Remove: removal of `Client` from `UniqueClientList`.
 * Delete: removal of all lingering references that this `Client` has.
 
 The "Delete" operation should be invoked everytime you remove a `Client` from the `UniqueClientList` to ensure the correctness of the "reference state" of `Tag`. 
-This is because removal of a `Client` from the `UniqueClientList` connotes a complete deletion of the `Client`, hence it is important to ensure that any lingering references including association with previously associated `Tag` objects are cut since the client are no longer "present".
+This is because removal of a `Client` from the `UniqueClientList` connotes that the `Client` is no longer present, hence it is important to ensure that any lingering references including association with any previously associated `Tag` objects are cut.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -629,7 +629,7 @@ If you want to add more themes on top of our existing themes, here's what you sh
 5. Save the file and cd to `tp/src/main/java/seedu/address/storage/ThemeList.java`.
 6. Add `RainbowTheme.css` to the static variable `THEMES` like so:<br>
 ````
-List.of("BookTheme", "TwilightTheme", "DarkTheme", "SpaceTheme", "RainbowTheme");
+List.of(..., "RainbowTheme");
 ````
 7. Now boot up LeadsForce and you should see that your newly added theme is available in the menu bar. Hooray!
 <p align="center">
