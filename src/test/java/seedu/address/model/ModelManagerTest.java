@@ -93,7 +93,7 @@ public class ModelManagerTest {
 
         assertEquals(modelManager.getTag("hi"), tagA);
     }
-    
+
     @Test
     public void getThemeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getThemeList().remove(0));
