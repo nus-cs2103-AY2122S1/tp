@@ -1,11 +1,16 @@
 # SOCIUS
 
-Socius is an application which serves as a platform for CS2103T students to better orientate themselves to the module.
+Socius is a simple desktop app for managing CS2103T tutorial classmates’ contacts for
+CS2103T module-takers, optimized for use via a Command Line Interface (CLI) while still having the benefits of a
+Graphical User Interface (GUI). 
+
+If you can type fast, Socius can get your contact management tasks done faster than
+traditional GUI apps.
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W08-4/tp/branch/master/graph/badge.svg?token=29JROHA29V)](https://codecov.io/gh/AY2122S1-CS2103T-W08-4/tp)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/Quickstart.png)
 
 * Example usages:
     * Keep track of details of classmates who are also taking CS2103T
