@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/shivlock221b.png" width="200px">
 
 [[github](https://github.com/Shivlock221b)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/shivlock221b.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines, scheduling and tracking
