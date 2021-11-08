@@ -744,7 +744,7 @@ testers are expected to do more *exploratory* testing.
        
 2. Deleting an interview with an invalid index
     1. Prerequisites: Current displayed list of interviews is not empty
-    3. Test case: `delete_i 0`
+    2. Test case: `delete_i 0`
     <br>Expected: No interview deleted, error message and sample input shown in feedback box.
 
 #### Edit An Interview
