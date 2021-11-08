@@ -25,7 +25,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
   * **Justification**: Gives the user a quick, visual overview of a position, which is crucial when dealing with large volumes of applicants/positions.
   * **Highlights**:
     * Processing MTR data into the format required by the PieChart API.
-    * Created a lightweight component used to display a pie chart on the UI, written with *reusability* (extensible to future iterations of the feature, e.g. pie chart of all applicants) and *maintainability* (minimal dependencies, no separate FXML file) in mind.
+    * Created a lightweight component used to display a pie chart, written with *reusability* (extensible to future iterations of the feature, e.g. pie chart of all applicants) and *maintainability* (minimal dependencies, no separate FXML file) in mind.
 
 * Added the feature to update applicant's application statuses [PR: [\#108](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/108)]
   * **What it does**: Allows the user to easily update applicants' statuses.
@@ -36,7 +36,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
     * Modeled the complex relationship between applicants and positions while preserving immutability of all classes involved.
     * Added the `ApplicationStatus` enum to reflect an applicant's status & associated methods for serialization & deserialization.
 
-* Added logic to the model for interactions between applicants and positions [PRs: [\#53](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/53), [\#67](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/67), [\#194](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/194)]
+* Added logic to the model for model-position interactions [PRs: [\#53](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/53), [\#67](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/67), [\#194](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/194)]
   * Captured the interactions that arise from having two interdependent entities in the model (e.g. when a position is deleted, additional steps need to be taken to delete the applicants to that position, to avoid applicants to an already-deleted position).
 
 * Wrote tests for existing features to increase coverage [PRs: [\#81](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/81), [\#92](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/92), [\#194](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/194)]
