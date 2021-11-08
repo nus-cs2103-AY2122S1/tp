@@ -13,7 +13,7 @@ participant "s:ShowCommand" as ShowCommand LOGIC_COLOR
 participant ":ShowCommandResult" as ShowCommandResult LOGIC_COLOR
 end box
 
-[--> CommandBox : "show 1"
+[-> CommandBox : "show 1"
 activate CommandBox
 
 CommandBox -> LogicManager:execute("show 1")
