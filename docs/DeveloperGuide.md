@@ -497,7 +497,7 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
 
 #### Back end design considerations:
-* **Option 1 (current choice):** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
+* **Option 1:** Store serialized CSV data in CommandResult and pass it directly to CsvUtil
     * Pros: Straightforward.
     * Cons: Requires large changes to the attributes and purpose of CommandResult. 
 
