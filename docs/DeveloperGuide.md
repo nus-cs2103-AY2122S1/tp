@@ -451,7 +451,7 @@ and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by ca
 
 The following sequence diagram shows how the mark attendance operation works.
 
-<img src="images/MarkSequenceDiagram.png" width="300" />
+![MarkSequenceDiagram](images/MarkSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -462,7 +462,8 @@ calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `t
 to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
 
 The following activity diagram shows what happens when a user executes the `mark` command.
-![MarkActivityDiagram](images/MarkActivityDiagram.png)
+
+<img src="images/MarkActivityDiagram.png" width="250"/>
 
 #### Design considerations:
 
@@ -514,7 +515,7 @@ Step 11. Lastly, a new `CommandResult` is returned to the `LogicManager`.
 
 The following sequence diagram shows how the find member operation works:
 
-<img src="images/FindMemberSequenceDiagram.png" width="1000"/>
+<img src="images/FindMemberSequenceDiagram.png" width="1500"/>
 
 The following activity diagram summarizes what happens when a user enters and executes a find member command:
 
