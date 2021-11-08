@@ -163,10 +163,11 @@ class FeesCalculatorTest {
                 feesCalculator.updateLessonOutstandingFeesField(lessonBetweenLastUpdateAndToday));
     }
 
+    // @@author eeliana - Code reused from lingshanng.
     @Test
     public void startBeforeUpdate_endAfterToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-06T12:00"),
-            LocalDateTime.parse("2021-10-28T12:00"));
+                LocalDateTime.parse("2021-10-28T12:00"));
 
         Lesson lesson = new LessonBuilder()
                 .withDate("28 SEP 2021")
@@ -176,307 +177,307 @@ class FeesCalculatorTest {
 
         // 12, 19, 26 Oct
         assertEquals(3, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void startAfterUpdate_endAfterToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-01T12:00"),
-            LocalDateTime.parse("2021-10-21T12:00"));
+                LocalDateTime.parse("2021-10-21T12:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("8 OCT 2021")
-            .withEndDate("30 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("8 OCT 2021")
+                .withEndDate("30 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         // 8, 15 Oct
         assertEquals(2, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void startBeforeUpdate_endBeforeToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-06T12:00"),
-            LocalDateTime.parse("2021-10-28T12:00"));
+                LocalDateTime.parse("2021-10-28T12:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("28 SEP 2021")
-            .withEndDate("24 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("28 SEP 2021")
+                .withEndDate("24 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         // 12, 19 Oct
         assertEquals(2, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void startAfterUpdate_endBeforeToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-09-27T12:00"),
-            LocalDateTime.parse("2021-10-30T12:00"));
+                LocalDateTime.parse("2021-10-30T12:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("8 OCT 2021")
-            .withEndDate("22 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("8 OCT 2021")
+                .withEndDate("22 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         // 8, 15, 22 Oct
         assertEquals(3, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void startEqualsEndDate() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-10T13:00"),
-            LocalDateTime.parse("2021-10-28T13:00"));
+                LocalDateTime.parse("2021-10-28T13:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("13 OCT 2021")
-            .withEndDate("13 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("13 OCT 2021")
+                .withEndDate("13 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         // 13 Oct
         assertEquals(1, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void lastUpdateBeforeEndTime_todayAfterEndTime() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-26T11:00"),
-            LocalDateTime.parse("2021-10-26T13:00"));
+                LocalDateTime.parse("2021-10-26T13:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("26 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("26 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         // 26 Oct
         assertEquals(1, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void lastUpdateAfterEndTime_todayAfterEndTime() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-26T13:00"),
-            LocalDateTime.parse("2021-10-26T14:00"));
+                LocalDateTime.parse("2021-10-26T14:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("26 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("26 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void lastUpdateBeforeEndTime_todayBeforeEndTime() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-26T10:00"),
-            LocalDateTime.parse("2021-10-26T11:00"));
+                LocalDateTime.parse("2021-10-26T11:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("26 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("26 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void lastUpdateAfterEndTime_todayAfterEndTime_multiple() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-13T13:00"),
-            LocalDateTime.parse("2021-10-27T13:00"));
+                LocalDateTime.parse("2021-10-27T13:00"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("13 OCT 2021")
-            .withTimeRange("1100-1200")
-            .buildRecurring();
+                .withDate("13 OCT 2021")
+                .withTimeRange("1100-1200")
+                .buildRecurring();
 
         // 20, 27 Oct
         assertEquals(2, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), new HashSet<>()));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), new HashSet<>()));
     }
 
     @Test
     public void cancelledLesson_betweenStartEnd() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-04T10:00"),
-            LocalDateTime.parse("2021-10-28T11:00"));
+                LocalDateTime.parse("2021-10-28T11:00"));
 
         Set<Date> cancelledDates = Set.of(new Date("12 oct 2021"), new Date("19 oct 2021"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("5 OCT 2021")
-            .withEndDate("26 OCT 2021")
-            .withTimeRange("1100-1200")
-            .withCancelledDatesSet("12 OCT 2021", "19 OCT 2021")
-            .buildRecurring();
+                .withDate("5 OCT 2021")
+                .withEndDate("26 OCT 2021")
+                .withTimeRange("1100-1200")
+                .withCancelledDatesSet("12 OCT 2021", "19 OCT 2021")
+                .buildRecurring();
 
         // 5, 26 Oct
         assertEquals(2, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), cancelledDates));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), cancelledDates));
     }
 
     @Test
     public void cancelledLesson_start() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-04T10:00"),
-            LocalDateTime.parse("2021-10-11T11:00"));
+                LocalDateTime.parse("2021-10-11T11:00"));
 
         Set<Date> cancelledDates = Set.of(new Date("5 oct 2021"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("5 OCT 2021")
-            .withEndDate("26 OCT 2021")
-            .withTimeRange("1100-1200")
-            .withCancelledDatesSet("5 OCT 2021")
-            .buildRecurring();
+                .withDate("5 OCT 2021")
+                .withEndDate("26 OCT 2021")
+                .withTimeRange("1100-1200")
+                .withCancelledDatesSet("5 OCT 2021")
+                .buildRecurring();
 
         // only start date passed and is cancelled
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), cancelledDates));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), cancelledDates));
     }
 
     @Test
     public void cancelledLesson_end() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-20T10:00"),
-            LocalDateTime.parse("2021-10-27T13:00"));
+                LocalDateTime.parse("2021-10-27T13:00"));
 
         Set<Date> cancelledDates = Set.of(new Date("26 oct 2021"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("19 OCT 2021")
-            .withEndDate("26 OCT 2021")
-            .withTimeRange("1100-1200")
-            .withCancelledDatesSet("26 OCT 2021")
-            .buildRecurring();
+                .withDate("19 OCT 2021")
+                .withEndDate("26 OCT 2021")
+                .withTimeRange("1100-1200")
+                .withCancelledDatesSet("26 OCT 2021")
+                .buildRecurring();
 
         // only end date passed and is cancelled
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), cancelledDates));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), cancelledDates));
     }
 
     @Test
     public void cancelledLesson_startEqualsEndCancelled() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-10T10:00"),
-            LocalDateTime.parse("2021-10-27T13:00"));
+                LocalDateTime.parse("2021-10-27T13:00"));
 
         Set<Date> cancelledDates = Set.of(new Date("12 oct 2021"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("12 OCT 2021")
-            .withEndDate("12 OCT 2021")
-            .withTimeRange("1100-1200")
-            .withCancelledDatesSet("12 OCT 2021")
-            .buildRecurring();
+                .withDate("12 OCT 2021")
+                .withEndDate("12 OCT 2021")
+                .withTimeRange("1100-1200")
+                .withCancelledDatesSet("12 OCT 2021")
+                .buildRecurring();
 
         // start = end and is cancelled
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), cancelledDates));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), cancelledDates));
     }
 
 
     @Test
     public void cancelledLessonAll_startBeforeUpdate_endAfterToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-11T10:00"),
-            LocalDateTime.parse("2021-10-11T11:00"));
+                LocalDateTime.parse("2021-10-11T11:00"));
 
         Set<Date> cancelledDates = Set.of(new Date("12 oct 2021"), new Date("19 oct 2021"), new Date("26 oct 2021"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("5 OCT 2021")
-            .withTimeRange("1100-1200")
-            .withCancelledDatesSet("12 OCT 2021", "19 oct 2021", "26 oct 2021")
-            .buildRecurring();
+                .withDate("5 OCT 2021")
+                .withTimeRange("1100-1200")
+                .withCancelledDatesSet("12 OCT 2021", "19 oct 2021", "26 oct 2021")
+                .buildRecurring();
 
         // lessons that have passed after update all cancelled
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), cancelledDates));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), cancelledDates));
     }
 
     @Test
     public void cancelledLessonAll_startAfterUpdate_endBeforeToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-01T10:00"),
-            LocalDateTime.parse("2021-10-28T11:00"));
+                LocalDateTime.parse("2021-10-28T11:00"));
 
         Set<Date> cancelledDates = Set.of(new Date("12 oct 2021"), new Date("19 oct 2021"));
 
         Lesson lesson = new LessonBuilder()
-            .withDate("12 OCT 2021")
-            .withEndDate("20 OCT 2021")
-            .withTimeRange("1100-1200")
-            .withCancelledDatesSet("12 OCT 2021", "19 oct 2021")
-            .buildRecurring();
+                .withDate("12 OCT 2021")
+                .withEndDate("20 OCT 2021")
+                .withTimeRange("1100-1200")
+                .withCancelledDatesSet("12 OCT 2021", "19 oct 2021")
+                .buildRecurring();
 
         // lessons that have passed after update all cancelled
         assertEquals(0, feesCalculator.getNumOfLessonsSinceLastUpdate(
-            lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
-            lesson.getTimeRange().getEnd(), cancelledDates));
+                lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
+                lesson.getTimeRange().getEnd(), cancelledDates));
     }
 
     @Test
     public void lastUpdatedAfterEndDate_noUpdate() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-28T17:00"),
-            LocalDateTime.parse("2021-10-28T19:00"));
+                LocalDateTime.parse("2021-10-28T19:00"));
 
         Lesson withEndDateBeforeLastUpdated = new LessonBuilder()
-            .withDate("21 OCT 2021")
-            .withEndDate("28 OCT 2021")
-            .buildRecurring();
+                .withDate("21 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .buildRecurring();
 
         assertEquals(withEndDateBeforeLastUpdated,
-            feesCalculator.updateLessonOutstandingFeesField(withEndDateBeforeLastUpdated));
+                feesCalculator.updateLessonOutstandingFeesField(withEndDateBeforeLastUpdated));
     }
 
     @Test
     public void lastUpdatedBeforeEndTimeEndDate_noUpdate() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-28T11:00"),
-            LocalDateTime.parse("2021-10-28T19:00"));
+                LocalDateTime.parse("2021-10-28T19:00"));
 
         Lesson withEndDateSameAsEndTimeBeforeLastUpdated = new LessonBuilder()
-            .withDate("21 OCT 2021")
-            .withEndDate("28 OCT 2021")
-            .buildRecurring();
+                .withDate("21 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .buildRecurring();
 
         Lesson expected = new LessonBuilder()
-            .withDate("21 OCT 2021")
-            .withEndDate("28 OCT 2021")
-            .withOutstandingFees("150")
-            .buildRecurring();
+                .withDate("21 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .withOutstandingFees("150")
+                .buildRecurring();
 
         assertEquals(expected,
-            feesCalculator.updateLessonOutstandingFeesField(withEndDateSameAsEndTimeBeforeLastUpdated));
+                feesCalculator.updateLessonOutstandingFeesField(withEndDateSameAsEndTimeBeforeLastUpdated));
     }
 
     @Test
     public void startAndEndSameAndIsCancelled_noUpdate() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-20T14:30"),
-            LocalDateTime.parse("2021-10-21T14:45"));
+                LocalDateTime.parse("2021-10-21T14:45"));
 
         Lesson withSameStartAndEndAndCancelled = new LessonBuilder()
-            .withDate("21 OCT 2021")
-            .withEndDate("21 OCT 2021")
-            .withCancelledDatesSet("21 OCT 2021")
-            .buildRecurring();
+                .withDate("21 OCT 2021")
+                .withEndDate("21 OCT 2021")
+                .withCancelledDatesSet("21 OCT 2021")
+                .buildRecurring();
 
         assertEquals(withSameStartAndEndAndCancelled,
-            feesCalculator.updateLessonOutstandingFeesField(withSameStartAndEndAndCancelled));
+                feesCalculator.updateLessonOutstandingFeesField(withSameStartAndEndAndCancelled));
     }
 
     /**
@@ -486,58 +487,58 @@ class FeesCalculatorTest {
     public void cancelledDatesTests() {
         // starts before last updated and end after current
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T14:30"),
-            LocalDateTime.parse("2021-10-21T14:45"));
+                LocalDateTime.parse("2021-10-21T14:45"));
 
         Lesson startsBeforeLastUpdatedEndsAfterCurrent = new LessonBuilder()
-            .withDate("7 OCT 2021")
-            .withEndDate("28 OCT 2021")
-            .withCancelledDatesSet("21 OCT 2021")
-            .buildRecurring();
+                .withDate("7 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .withCancelledDatesSet("21 OCT 2021")
+                .buildRecurring();
 
         // no update
         assertEquals(startsBeforeLastUpdatedEndsAfterCurrent,
-            feesCalculator.updateLessonOutstandingFeesField(startsBeforeLastUpdatedEndsAfterCurrent));
+                feesCalculator.updateLessonOutstandingFeesField(startsBeforeLastUpdatedEndsAfterCurrent));
 
         // starts before last updated and end before current
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T14:30"),
-            LocalDateTime.parse("2021-10-21T15:45"));
+                LocalDateTime.parse("2021-10-21T15:45"));
 
         Lesson startsBeforeLastUpdatedEndsBeforeCurrent = new LessonBuilder()
-            .withDate("7 OCT 2021")
-            .withEndDate("28 OCT 2021")
-            .withCancelledDatesSet("21 OCT 2021")
-            .buildRecurring();
+                .withDate("7 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .withCancelledDatesSet("21 OCT 2021")
+                .buildRecurring();
 
         // no update since cancelled
         assertEquals(startsBeforeLastUpdatedEndsBeforeCurrent,
-            feesCalculator.updateLessonOutstandingFeesField(startsBeforeLastUpdatedEndsBeforeCurrent));
+                feesCalculator.updateLessonOutstandingFeesField(startsBeforeLastUpdatedEndsBeforeCurrent));
 
         // starts after last updated and ends after current
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T13:30"),
-            LocalDateTime.parse("2021-10-21T14:45"));
+                LocalDateTime.parse("2021-10-21T14:45"));
 
         Lesson startsAfterLastUpdatedEndsAfterCurrent = new LessonBuilder()
-            .withDate("7 OCT 2021")
-            .withEndDate("28 OCT 2021")
-            .withCancelledDatesSet("21 OCT 2021")
-            .buildRecurring();
+                .withDate("7 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .withCancelledDatesSet("21 OCT 2021")
+                .buildRecurring();
 
         // no update
         assertEquals(startsAfterLastUpdatedEndsAfterCurrent,
-            feesCalculator.updateLessonOutstandingFeesField(startsAfterLastUpdatedEndsAfterCurrent));
+                feesCalculator.updateLessonOutstandingFeesField(startsAfterLastUpdatedEndsAfterCurrent));
 
         // updated on current day and is cancelled
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T15:30"),
-            LocalDateTime.parse("2021-10-21T16:45"));
+                LocalDateTime.parse("2021-10-21T16:45"));
 
         Lesson todayIsCancelled = new LessonBuilder()
-            .withDate("21 OCT 2021")
-            .withCancelledDatesSet("21 OCT 2021")
-            .buildRecurring();
+                .withDate("21 OCT 2021")
+                .withCancelledDatesSet("21 OCT 2021")
+                .buildRecurring();
 
         // no update since cancelled
         assertEquals(todayIsCancelled,
-            feesCalculator.updateLessonOutstandingFeesField(todayIsCancelled));
+                feesCalculator.updateLessonOutstandingFeesField(todayIsCancelled));
     }
 
 }
