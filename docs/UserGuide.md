@@ -594,6 +594,21 @@ Examples:
 * `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
 </details>
 
+#### Marking a task as done by group: `task -dog`  (Coming in v2.0)
+<details markdown="1">
+<summary>
+Marks that a group has done a task.
+</summary>
+
+Format: `task -dog GROUPINDEX TASKINDEX`
+
+* Marks the task specified at index `TASKINDEX` as done by the Group object specified at index `GROUPINDEX`.
+* `-dog` refers to the "mark as done by group" command.
+
+Examples:
+* `task -dog 2 4` marks the task at the index 4 as done by the group at the index 2
+</details>
+
 #### Marking a task as not done by student: `task -undo`
 <details markdown="1">
 <summary>
@@ -607,6 +622,21 @@ Format: `task -undo STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
+</details>
+
+#### Marking a task as not done by group: `task -undog`  (Coming in v2.0)
+<details markdown="1">
+<summary>
+Marks that a group has not done a task.
+</summary>
+
+Format: `task -undog GROUPINDEX TASKINDEX`
+
+* Marks the task specified at index `TASKINDEX` as not done by the Group object specified at index `GROUPINDEX`.
+* `-undog` refers to the "mark as undone for group" command.
+
+Examples:
+* `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -691,7 +721,9 @@ Action | Format, Examples
 **Unassign a task from a student** | `task -unas STUDENTINDEX TASKINDEX` <br> e.g., `task -unas 2 4`
 **Unassign a task from a group** | `task -unag GROUPINDEX TASKINDEX` <br> e.g., `task -unag 2 4`
 **Mark task as done by student** | `task -do STUDENTINDEX TASKINDEX` <br> e.g., `task -do 2 4`
+**Mark task as done by group (coming soon)** | `task -dog GROUPINDEX TASKINDEX` <br> e.g., `task -dog 2 4`
 **Mark task as not done by student** | `task -undo STUDENTINDEX TASKINDEX` <br> e.g., `task -undo 2 4`
+**Mark task as not done by group (coming soon)** | `task -undo GROUPINDEX TASKINDEX` <br> e.g., `task -undog 2 4`
 **Schedule** | `schedule`
 **Help** | `help`
 **Clear all entries** | `clear`
