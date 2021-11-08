@@ -19,18 +19,18 @@ Given below are my contributions to the project:
    incomplete tasks and pending orders. [\#96](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/96), [\#95](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/95)
 
 * **Enhancements to existing features**:
-  * Added date parsing and validation to support a range of different date formats. [\#157](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/157)
+  * Added date parsing and validation to support a range of different date formats. [\#159](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/159/files)
   * Implemented the edit task command. [\#44](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/44)
 
 * **Documentation**:
   * User Guide:
-      * Added documentation for `sortorders`, `edittask` commands.
-      * Added documentation for `incompleteorders`, `completedorders`, `incompletetask`, `completedtasks` commands.
-      * Added documentation for supported date formats.
-      * Maintained the Command Summary Table in the User Guide.
+      * Added documentation for `sortorders`, `edittask` commands. [\#249](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/249), [\#43](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/43)
+      * Added documentation for `incompleteorders`, `completedorders`, `incompletetask`, `completedtasks` commands. [\#95](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/95), [\#96](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/96)
+      * Added documentation for supported date formats. [\#157](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/157)
+      * Maintained the Command Summary Table in the User Guide. [\#142](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/142)
   * Developer Guide:
-      * Added implementation details for the `sortorders` feature. 
-      * Maintained the Use Cases and the Glossary section of the Developer Guide. 
+      * Added implementation details for the `sortorders` feature. [\#291](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/291)
+      * Maintained the Use Cases and the Glossary section of the Developer Guide. [\#291](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/291), [\#142](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/142/files)
 
 * **Contributions to team-based tasks**:
   * Adapted the existing AB3 person command formats to fit SalesNote's client commands. [\#250](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/250)
