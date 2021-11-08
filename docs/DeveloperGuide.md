@@ -232,9 +232,11 @@ How it works:
 3. When the `ViewCommand` is executed without index parameters, the main panel will show all residents or events, and the sidebar will be cleared.
 4. If the command is run in the `ResidentTab`, the details of the resident with the corresponding index being displayed in the sidebar. Vice versa for `EventTab`.
 
-The following sequence diagram demonstrates what happens when the `ViewCommand` is executed:
+The following sequence diagram demonstrates what happens when the `ViewPersonCommand` is executed:
 
-![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
+![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewPersonCommandSequenceDiagram.png)
+
+`ViewEventCommand` follows a similar sequence of interactions.
 
 #### Design considerations:
 
@@ -706,7 +708,7 @@ testers are expected to do more *exploratory* testing.
 1. Edit multiple residents' details while all residents are being shown
    
     1. Prerequisites: View all residents using the `view` command. Multiple residents in the list. 
-       Edited resident does not already exist in the address book. Edited details are not the same as the original details.
+       Edited resident does not already exist in the address book.
 
     1. Test case: `edit 1 2 v/T`<br>
        Expected: First and second residents' vaccination statuses are updated to vaccinated. First and second residents' names shown in the status message.
@@ -753,7 +755,7 @@ testers are expected to do more *exploratory* testing.
 1. Edit an event's details while all events are being shown
 
     1. Prerequisites: View all events using the `view` command. Multiple events in the list.
-       Edited event does not already exist in the address book. Edited details are not the same as the original details.
+       Edited event does not already exist in the address book.
 
     1. Test case: `edit 1 c/5`<br>
        Expected: First event capacity is updated to 5. Updated event details shown in the status message.
