@@ -17,6 +17,20 @@
     -fx-opacity: 1;
 }
 
+.attribute-table-title {
+    -fx-font-size: 24pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.attribute-table-agg-text {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Open Sans Light";
@@ -65,7 +79,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 18;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -155,6 +169,11 @@
 
 .result-display .label {
     -fx-text-fill: black !important;
+}
+
+.attribute-panel {
+    -fx-border-color: #a9a9a9;
+    -fx-border-width: 0 0 2 0;
 }
 
 .status-bar .label {

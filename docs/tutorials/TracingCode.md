@@ -35,11 +35,11 @@ Before we proceed, ensure that you have done the following:
 
 As you know, the first step of debugging is to put in a breakpoint where you want the debugger to pause the execution. For example, if you are trying to understand how the App starts up, you would put a breakpoint in the first statement of the `main` method.
 
-In our case, we would want to begin the tracing at the very point where the App start processing user input (i.e., somewhere in the UI component), and then trace through how the execution proceeds through the UI component. However, the execution path through a GUI is often somewhat obscure due to various *event-driven mechanisms* used by GUI frameworks, which happens to be the case here too. Therefore, let us put the breakpoint where the `UI` transfers control to the `Logic` component.
+In our case, we would want to begin the tracing at the very point where the App start processing user input (i.e., somewhere in the UI component), and then trace through how the execution proceeds through the UI component. However, the execution path through a GUI is often somewhat obscure due to various *event-driven mechanisms* used by GUI frameworks, which happens to be the case here too. Therefore, let us put the breakpoint where the `Ui` transfers control to the `Logic` component.
 
 <img src="../images/ArchitectureSequenceDiagram.png" width="550" />
 
-According to the sequence diagram you saw earlier (and repeated above for reference), the `UI` component yields control to the `Logic` component through a method named `execute`. Searching through the code base for an `execute()` method that belongs to the `Logic` component yields a promising candidate in `seedu.address.logic.Logic`.
+According to the sequence diagram you saw earlier (and repeated above for reference), the `Ui` component yields control to the `Logic` component through a method named `execute`. Searching through the code base for an `execute()` method that belongs to the `Logic` component yields a promising candidate in `donnafin.logic.Logic`.
 
 <img src="../images/tracing/searchResultsForExecuteMethod.png" />
 
@@ -48,7 +48,7 @@ According to the sequence diagram you saw earlier (and repeated above for refere
 :bulb: **Intellij Tip:** The ['**Search Everywhere**' feature](https://www.jetbrains.com/help/idea/searching-everywhere.html) can be used here. In particular, the '**Find Symbol**' ('Symbol' here refers to methods, variables, classes etc.) variant of that feature is quite useful here as we are looking for a _method_ named `execute`, not simply the text `execute`.
 </div>
 
-A quick look at the `seedu.address.logic.Logic` (an extract given below) confirms that this indeed might be what we’re looking for.
+A quick look at the `donnafin.logic.Logic` (an extract given below) confirms that this indeed might be what we’re looking for.
 
 ```java
 public interface Logic {
@@ -69,7 +69,7 @@ That should be fine because the [Architecture section of the Developer Guide](..
 
 <img src="../images/ComponentManagers.png" width="300" />
 
-Next, let's find out which statement(s) in the `UI` code is calling this method, thus transferring control from the `UI` to the `Logic`.
+Next, let's find out which statement(s) in the `Ui` code is calling this method, thus transferring control from the `Ui` to the `Logic`.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -259,7 +259,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
     ```
 
 1. Finally, you can step through until you reach the end of`MainWindow#executeCommand()`.<br>
-   :bulb: This may be a good time to read through the [`UI` component section of the DG](../DeveloperGuide.html#ui-component)
+   :bulb: This may be a good time to read through the [`Ui` component section of the DG](../DeveloperGuide.html#ui-component)
 
 
 ## Conclusion
@@ -282,8 +282,6 @@ Here are some quick questions you can try to answer based on your execution path
     4.  `edit 1`
 
     5.  `edit 1 n/アリス ユー`
-
-    6.  `edit 1 t/one t/two t/three t/one`
 
 2.  What components will you have to modify to perform the following
     enhancements to the application?

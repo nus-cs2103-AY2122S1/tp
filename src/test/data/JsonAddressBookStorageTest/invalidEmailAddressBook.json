@@ -1,0 +1,34 @@
+{
+  "persons": [ {
+    "name": "Person with invalid email",
+    "phone": "948242432",
+    "email": "hans@example",
+    "address": "4th street",
+    "policies": [
+      {
+        "name": "XYZ Policy Name",
+        "insurer" : "Insurer A",
+        "totalValueInsured" : "$3",
+        "yearlyPremiums" : "$1",
+        "commission" : "$0.50"
+      }
+    ],
+    "liabilities": [
+      {
+        "name": "Home Mortgage",
+        "type" : "Bank B",
+        "value" : "$30",
+        "remarks" : "booboo"
+      }
+    ],
+    "assets": [
+      {
+        "name": "XYZ Asset Name",
+        "type" : "Crypto",
+        "value" : "$3000",
+        "remarks" : "HODL"
+      }
+    ]
+  } ]
+}
+

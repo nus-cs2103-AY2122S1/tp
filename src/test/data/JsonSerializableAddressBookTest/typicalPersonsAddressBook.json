@@ -5,42 +5,217 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "notes" : "Loves chicken rice",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "notes" : "",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tagged" : [ ]
+    "notes" : "Loves CS2103T",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "notes" : "Tells lame jokes",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "notes" : "Vim god",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "notes" : "Moustachio",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tagged" : [ ]
+    "notes" : "Curious",
+      "policies": [
+        {
+          "name": "XYZ Policy Name",
+          "insurer": "Insurer A",
+          "totalValueInsured": "$3",
+          "yearlyPremiums": "$1",
+          "commission": "$0.50"
+        }
+      ],
+      "liabilities": [
+        {
+          "name": "Home Mortgage",
+          "type": "Bank B",
+          "value": "$30",
+          "remarks": "5% per annum"
+        }
+      ],
+      "assets": [
+        {
+          "name": "XYZ Asset Name",
+          "type": "Crypto",
+          "value": "$3000",
+          "remarks": "HODL"
+        }
+      ]
   } ]
 }
