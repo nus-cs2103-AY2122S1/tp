@@ -1075,13 +1075,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Delete an event while all events are shown
 
-   1. Prerequisites: All events listed using the `listEvents` command. Multiple events in the event list.
+   1. Prerequisites: All events listed using the `listEvents` command. At least one event in the event list.
 
    2. Test case: `deleteEvent 1`<br>
-      Expected: First event is deleted from the event list. Details of the deleted event shown in the status message.
+      Expected: The first event in the event list is deleted. Details of the deleted event are shown in the status message.
 
    3. Test case: `deleteEvent 0`<br>
-      Expected: No event is deleted. Error details shown in the status message.
+      Expected: No event is deleted. Error details are shown in the status message.
 
    4. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x`, `...` (where x is larger than the 
       list size)<br>
