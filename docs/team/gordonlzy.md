@@ -24,7 +24,7 @@ Given below are my contributions to the project.
   * Justification: This feature complements the include feature to allow the user to remove the users from an event if they added them by mistake or the residents themselves decide to not participate in an evnet
   * Highlights: This enhancement builds on top of include feature, with an existing design, this enhancement is easier than the last.
 
-* **New Feature**: Added a command suggestion feature that suggests a command's parameters.
+* **New Feature**: Added a command suggestion that suggests a command's parameters.
   * What it does: allows the user to look at the parameters as they type without having to refer to user guide. The parameters that are correctly typed are removed from the suggestion bar as the user types.
   * Justification: This feature improves the user experience by making reminding users the parameters of a command and flattens the learning curve of the application.
   * Highlights: This enhancement is used by all commands implemented. It required an in-depth analysis of event handling. The implementation was challenging as the feature had to handle many cases of user input and there are changes to the UI part.
@@ -32,17 +32,15 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=gordonlzy&tabRepo=AY2122S1-CS2103T-T15-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Enhancements to existing features**:
-  * Refactoring `list` to `deadline` to better suit its function name [PR #122](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/122)
+  * Refactored `list` to `deadline` to better suit its function name [PR #122](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/122)
+  * Implemented storage of multiple residents in a string and extract them [PR #128](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/128)
   * Contributions to testing:
     * Added ~1.4 kLoC in total for testing
     * Created new test utils, `TypicalEvents` and `EventBuilder`, for `Event` class
-    * Updated `PersonBuilder` to build person with new `LastDate`
   * Contributions to the UI:
-    * Show the number of days a resident is late for FET [PR #59](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/59)
-    * Coming up with a Figma mockup for the UI design [Figma](https://www.figma.com/file/Xt0MjUdFjvB438sHOwurRm/safeforhall?node-id=0%3A1)
+    * Showed the number of days a resident is late for FET [PR #59](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/59)
+    * Came up with a Figma mockup for the UI design [Figma](https://www.figma.com/file/Xt0MjUdFjvB438sHOwurRm/safeforhall?node-id=0%3A1)
     * Revamped original GUI color scheme to better fit the UI mockup [PR #149](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/149)
-  * Contributions to Storage:
-    * Added a way to store multiple residents in a string and a way to extract them [PR #128](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/128)
 
 * **Documentation**:
   * User Guide:
