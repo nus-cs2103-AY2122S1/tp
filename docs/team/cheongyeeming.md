@@ -17,55 +17,51 @@ Given below are my contributions to the project.
 * **Telegram Class**:
     * Pull requests [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54)
     * What it does: Allows user to store the Telegram handles of people in their contacts.
-    * Justification: This feature allows for greater convenience when looking to connect
-    with any of the existing contacts.
+    * Justification: Provides convenience when looking to connect with any of the
+     existing contacts.
     * Highlights: The implementation was rather challenging as it required simultaneous
-    changes to occur before the address book could function again.
+    changes to occur in the Model and Logic component.
     
 * **Github Class**:
     * Pull requests [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88)
     * What it does: Allows user to store the Github usernames of people in their contacts.
-    * Justification: This feature allows for greater convenience before looking to connect
-    with any of the existing contacts.
+    * Justification: Provides convenience before looking to connect with any of the
+     existing contacts.
     * Highlights: The implementation was rather challenging as it required simultaneous
-    changes to occur before the address book could function again.
+    changes to occur in the Model and Logic component.
     
 * **Optional Fields**:
     * Pull requests [\#56](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/56)
     * What it does: Allows user to store the Github usernames of people in their contacts.
     * Justification: This feature allows for greater convenience since people might not be
-    comfortable giving away their phone number, email or address.
-    * Highlights: This enhancement makes adding new contacts so much easier.
+    comfortable giving away their phone number, email or address. This enhancement also
+    makes adding new contacts so much easier.
+    * Highlights: This enhancement was simple to implement by tweaking existing code.
     
 * **Favorite Command**:
     * Pull requests [\#127](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/127)
     * What it does: Allows user to favorite an existing contact.
     * Justification: This feature allows for users to sort out contacts that might be
-    of greater importance to them, such as their family and friends.
+    of importance to them, such as their family and friends.
     * Highlights: The implementation was rather challenging as it required simultaneous
-    changes to occur before the address book could function again.
+    changes to occur in the Model and Logic component.
     
 * **Unfavorite Command**:
     * Pull requests [\#131](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/131)
     * What it does: Allows user to unfavorite an existing contact.
-    * Justification: This feature allows for users to sort out contacts that might be
-    of lesser importance to them, such as mere acquaintances.
+    * Justification: This feature allows for users to sort out contacts that might no
+     longer be of importance to them.
     * Highlights: The implementation was rather challenging as it required simultaneous
-    changes to occur before the address book could function again.
+    changes to occur in the Model and Logic component.
     
 ### Test Cases Written
 Wrote test cases for the following classes
 * LogicManagerTest (Pull requests
 [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88))
-* CommandTestUtil (Pull requests
+[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88)),
+CommandTestUtil (Pull requests
 [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
 [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#232](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/232))
-* AddCommandParserTest (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#228](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/228),
 [\#232](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/232))
 * PersonTest (Pull requests
 [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
@@ -75,51 +71,33 @@ Wrote test cases for the following classes
 [\#262](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/262),
 [\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
 * TelegramTest (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54))
+[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54)),
+GithubTest (Pull requests
+[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88))
 * JsonAdaptedPersonTest (Pull requests
 [\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
 [\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
 [\#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/125))
-* EditPersonDescriptorBuilder (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#227](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/227),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* PersonBuilder (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* PersonUtil (Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88))
-* TypicalPersons(Pull requests
-[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* GithubTest (Pull requests
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88))
-* EditCommandParserTest (Pull requests
-[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
-[\#232](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/232),
-[\#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/296))
 * AddCommandTest (Pull requests
 [\#127](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/127),
 [\#131](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/131),
 [\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* FavoriteCommandTest (Pull requests
+* AddCommandParserTest (Pull requests
+[\#54](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/54),
+[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
+[\#228](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/228),
+[\#232](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/232))
+* EditCommandParserTest (Pull requests
+[\#88](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/88),
+[\#232](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/232),
+[\#125](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/296))
+* FavoriteCommandTest,
+UnfavoriteCommandTest (Pull requests
 [\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
 [\#259](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/259),
 [\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* UnfavoriteCommandTest (Pull requests
-[\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
-[\#259](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/259),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* FavoriteCommandParserTest (Pull requests
-[\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
-[\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
-* UnfavoriteCommandParserTest (Pull requests
+* FavoriteCommandParserTest,
+UnfavoriteCommandParserTest (Pull requests
 [\#135](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/135),
 [\#279](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/279))
 * IsFavouritePredicateTest (Pull requests
@@ -139,8 +117,8 @@ ShowCommandParserTest (Pull requests
 [\#232](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/232),
 [\#262](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/262))
 * CommandResultTest (Pull requests
-[\#259](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/259))
-* UserPrefsTest (Pull requests
+[\#259](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/259)),
+UserPrefsTest (Pull requests
 [\#262](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/262))
 * UniquePersonListTest (Pull requests
 [\#262](https://github.com/AY2122S1-CS2103T-T10-1/tp/pull/262),
