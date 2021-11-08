@@ -60,6 +60,8 @@ Given below is a quick overview of the main components and how they interact wit
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
+<div style="page-break-before: always;"></div>
+
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
