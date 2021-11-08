@@ -49,7 +49,7 @@ public class FindModuleLessonCommandParserTest {
     @Test
     public void parse_emptyDay_throwsParseException() {
         assertParseFailure(parser, "find " + PREFIX_LESSON_DAY,
-                String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class FindModuleLessonCommandParserTest {
     @Test
     public void parse_emptyTime_throwsParseException() {
         assertParseFailure(parser, "find " + PREFIX_LESSON_TIME,
-                String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
