@@ -79,7 +79,7 @@ This guide aims to help developers get familiar with how RecruitIn functions.
 details of each component of RecruitIn.
 * If you wish to go further to understand how certain features are implemented on a lower level, you may visit
 [Implementation](#implementation) for noteworthy implementation details of important features.
-* If you wish to conduct some manual testing of RecruitIn, you may visit [Appendix: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
+* If you wish to conduct some manual testing of RecruitIn, you may visit [Appendix B: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
 to find various test cases and expected results for some features of RecruitIn.
 * If you wish to make further developments to RecruitIn, 
 you may follow the guide at [Setting up, getting started](#setting-up-getting-started) 
