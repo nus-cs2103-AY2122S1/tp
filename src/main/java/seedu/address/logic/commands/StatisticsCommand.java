@@ -25,6 +25,7 @@ public class StatisticsCommand extends Command {
 
     public static final String MESSAGE_STATISTICS = "Statistics: \n%s";
     public static final String MESSAGE_TUTORIAL_GROUP_NOT_FOUND = "Tutorial group not found";
+    public static final String MESSAGE_EMPTY_TUTORIAL_GROUP = "Please enter a tutorial group";
     public static final String MESSAGE_TG_FIELD_MISSING = "Unable to compute statistics. "
             + "%s info for the contacts in the specified tutorial group are missing.";
 

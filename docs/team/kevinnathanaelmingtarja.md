@@ -31,7 +31,7 @@ Given below are my contributions to the project.
   * Highlights: Implemented using a dynamic programming algorithm called `Wagner-Fischer algorithm`, which computes the `Levenshtein distance` of any two words.
   The dynamic programming algorithm used is significantly faster (quadratic time) than the more straightforward but slower recursive algorithm which takes exponential time.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=kevinmingtarja)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevinmingtarja&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=hsiaotingluv&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
   * Set up the GitHub team organization
