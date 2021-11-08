@@ -194,14 +194,15 @@ This section describes some noteworthy details on how certain features are imple
 
 The features mentioned are:
 1. [Modifying Contacts]((#adding-a-person-add))
-   1. [Adding a person](#adding-a-person-add) [done]
-   2. [Adding tags to people](#adding-tags-to-people-addt) [diag]
-   3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark) [done]
-   4. [Editing a person](#editing-a-person-edit) [diag]
-   5. [Deleting a person](#deleting-a-person-delete) [diag]
-   6. [Deleting multiple person](#delete-multiple-persons-deletem) [done]
-   7. [Deleting tags from people](#deleting-tags-from-people-deletet) [diag]
-   8. [Clearing all contacts](#clearing-all-contacts-clear) [diag]
+   1. [Adding a person](#adding-a-person-add)
+   2. [Adding tags to people](#adding-tags-to-people-addt)
+   3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark)
+   4. [Editing a person](#editing-a-person-edit)
+      1. [Support for multiple social handles](#support-for-multiple-social-handles)
+   5. [Deleting a person](#deleting-a-person-delete)
+   6. [Deleting multiple person](#delete-multiple-persons-deletem)
+   7. [Deleting tags from people](#deleting-tags-from-people-deletet)
+   8. [Clearing all contacts](#clearing-all-contacts-clear)
 2. Viewing contacts
    1. [Listing all contacts](#listing-all-contacts-list)
    2. [Finding people](#finding-persons)
@@ -349,6 +350,55 @@ The following sequence diagram shows how the EditCommand mechanism works:
     * Pros: It uses less memory and thus may run faster.
     * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
+### Support for multiple social handles
+
+#### Implementation
+A social handle can store a social platform and a user ID tied to that platform.
+
+As a person may have multiple social handles for different social platforms, there is a need to support multiple social handles tied to a person.
+
+The approach to implementing multiple social handles is similar to the original AB3's approach to implementing multiple tags. A Java HashSet is used to store all the social handle objects of a person.
+
+The current implementation allows for each person to have only 1 social handle for each platform. Therefore, when parsing social handles, new user ID will overwrite old user ID of the same social platform. This is done by using a Java Hashtable to store all the original social platforms in a platform name to social handle object pair, then check if the social platform of new social handle is present in the hashtable, and then update accordingly. After all the updates, the values of the hashtable are converted into a set to be store under an attribute of a person.
+
+#### Usage
+Social handles can be introduced to a person via the 'add' or 'edit' command.
+
+Given a user wants to change the following entry:
+![SocialHandleBeforeAfterEdit](images/dg/SocialHandleBeforeAfter.png)
+
+Given below demonstrates how the social handle mechanism would behave at each step.
+
+Step 1: The user enters the command `edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00`
+
+Step 2: `AddressBookParser#parseCommand` will be called to do the first round of parsing to find the type of command being used.
+
+Step 3: After finding the command used is Edit, `EditCommandParser#parse` will be called to further parse the command.
+
+Step 4: `EditCommandParser#parse` will call `ArgumentTokenizer#tokenize` to get an `ArgumentMultimap` object, which contains parsed values of all the prefixes.
+
+Step 5: `ArgumentMultimap#GetAllValues` is then called to get a list of values with social handle prefix `s/`.
+
+Step 6: `ParserUtil#parseSocialHandles` is then used to parse the string value of social handles into a set of `SocialHandle` objects.
+
+Step 7: `EditCommand` object is then created and updated with all the change needed to a person.
+
+Step 8: `LogicManager` will then execute the `EditCommand`
+
+Step 9: This will update the relevant person with the new data
+
+The following sequence diagram shows how the EditCommand function works for social handles:
+![EditCommandSeqDiagramForSocialHandle](images/dg/EditCommandDiagramForSocialHandle.png)
+
+#### Design considerations:
+**Aspect: How to store social handle**
+* **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
+    * Pros: The logic will be easier to test.
+    * Cons: There will be many duplicated code as each social handles are similar.
+* **Alternative 2 (Current):** Store a person's social handles as a set.
+    * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
+    * Cons: It may be more complicated to test.
+    
 ### Deleting a person `delete`
 
 #### Implementation
@@ -539,7 +589,31 @@ The following sequence diagram shows how the clearing all contacts mechanism wor
 
 ![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
-### Finding Persons
+### Listing all contacts `list`
+
+#### Implementation
+
+The listing all contacts mechanism will list all contacts in Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ListCommand` to list all contacts:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the listing all contacts mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `list` command to list all contacts.
+
+Step 3. `ListCommand#execute` will update the model to show everyone in the contact list.
+
+The following sequence diagram shows how the listing all contacts mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+### Finding people `find`
 
 #### Implementation
 
@@ -568,24 +642,21 @@ The following sequence diagram shows how the FindCommand function works:
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![UpdatedAddCommand](images/UpdatedFindCommand.png)#
+![UpdatedAddCommand](images/UpdatedFindCommand.png)
 
 #### Design Considerations
 
 **Aspect: How contacts are saved with multiple arguments:**
-
 
 * **Alternative 1 (current choice):** Only include people who contain all the specified contact details
     * Pros: Intuitive feature. Similar to a Filter function in popular apps today.
     * Cons: Requires you to be familiar of the people in your contact list.
 
 * **Alternative 2:** Include people who contain at least one of the specified contact details.
-    * Pros: Good for users who want to broadly search for eligible friends
-    * Cons: Not very intuitive
-
-
-
-### Sorting persons
+    * Pros: Good for users who want to broadly search for eligible friends.
+    * Cons: Not very intuitive.
+    
+### Sorting people `sort`
 
 #### Implementation
 
@@ -632,7 +703,7 @@ The following sequence diagram shows how the sort mechanism works:
     * Pros: Convenient if the contact list is very huge and users would like to sort based on multiple fields.
     * Cons: Difficult to implement.
     
-### Viewing Statistics
+### Viewing statistics `stat`
 
 #### Implementation
 
@@ -664,7 +735,7 @@ The following sequence diagram shows how the Statistic mechanism works:
 
 ![StatisticSequenceDiagram](images/StatisticSequenceDiagram.png)
 
-### Import JSON file
+### Importing contacts `import`
 
 #### Implementation
 
@@ -702,56 +773,7 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
     * Pros: Gives user the flexibility to put the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
-### Support for multiple social handles
-
-#### Implementation
-A social handle can store a social platform and a user ID tied to that platform.
-
-As a person may have multiple social handles for different social platforms, there is a need to support multiple social handles tied to a person.
-
-The approach to implementing multiple social handles is similar to the original AB3's approach to implementing multiple tags. A Java HashSet is used to store all the social handle objects of a person. 
-
-The current implementation allows for each person to have only 1 social handle for each platform. Therefore, when parsing social handles, new user ID will overwrite old user ID of the same social platform. This is done by using a Java Hashtable to store all the original social platforms in a platform name to social handle object pair, then check if the social platform of new social handle is present in the hashtable, and then update accordingly. After all the updates, the values of the hashtable are converted into a set to be store under an attribute of a person.
-
-#### Usage
-Social handles can be introduced to a person via the 'add' or 'edit' command.
-
-Given a user wants to change the following entry:
-![SocialHandleBeforeAfterEdit](images/dg/SocialHandleBeforeAfter.png)
-
-Given below demonstrates how the social handle mechanism would behave at each step.
-
-Step 1: The user enters the command `edit 1 s/tg:alex777 s/ig:a_lex_123 s/tw:alexxx00`
-
-Step 2: `AddressBookParser#parseCommand` will be called to do the first round of parsing to find the type of command being used.
-
-Step 3: After finding the command used is Edit, `EditCommandParser#parse` will be called to further parse the command.
-
-Step 4: `EditCommandParser#parse` will call `ArgumentTokenizer#tokenize` to get an `ArgumentMultimap` object, which contains parsed values of all the prefixes.
-
-Step 5: `ArgumentMultimap#GetAllValues` is then called to get a list of values with social handle prefix `s/`.
-
-Step 6: `ParserUtil#parseSocialHandles` is then used to parse the string value of social handles into a set of `SocialHandle` objects.
-
-Step 7: `EditCommand` object is then created and updated with all the change needed to a person.
-
-Step 8: `LogicManager` will then execute the `EditCommand`
-
-Step 9: This will update the relevant person with the new data
-
-The following sequence diagram shows how the EditCommand function works for social handles:
-![EditCommandSeqDiagramForSocialHandle](images/dg/EditCommandDiagramForSocialHandle.png)
-
-#### Design considerations:
-**Aspect: How to store social handle**
-* **Alternative 1:** Store each social handle for each platform as an individual attribute of a person
-    * Pros: The logic will be easier to test.
-	* Cons: There will be many duplicated code as each social handles are similar.
-* **Alternative 2 (Current):** Store a person's social handles as a set.
-    * Pros: It will be neater and less time-consuming to implement. Supporting additional platforms will only requires little code change.
-    * Cons: It may be more complicated to test.
-
-### Export JSON file
+### Exporting contacts `export`
 
 #### Implementation
 
@@ -790,7 +812,7 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
     * Pros: Gives user the flexibility to place the file wherever they want.
     * Cons: Different OSes have different file paths convention.
 
-### Aliasing Commands
+### Aliasing commands `alias`
 
 #### Implementation
 
@@ -973,10 +995,31 @@ display the suggestions to the user.
     * Pros: Very straightforward to implement as it follows directly from its mathematical formula.
     * Cons: Very inefficient as there are three recursive calls at each step, resulting in exponential time complexity.
 
-
 _{more aspects and alternatives to be added}_
 
+### Exiting Socius `exit`
 
+#### Implementation
+
+The exiting Socius mechanism will exit Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ExitCommand` to exit Socius:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the exiting Socius mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `exit` command to exit from Socius.
+
+Step 3. `ExitCommand#execute` returns a CommandResult with the `exit` boolean set to True.
+
+The following sequence diagram shows how the exiting from Socius mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
