@@ -150,23 +150,23 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyRhrh getSampleRhrh() {
-        Rhrh sampleAb = new Rhrh();
+        Rhrh sampleRhrh = new Rhrh();
         for (Customer sampleCustomer : getSampleCustomers()) {
-            sampleAb.addCustomer(sampleCustomer);
+            sampleRhrh.addCustomer(sampleCustomer);
         }
         for (Employee sampleEmployee : getSampleEmployees()) {
-            sampleAb.addEmployee(sampleEmployee);
+            sampleRhrh.addEmployee(sampleEmployee);
         }
         for (Supplier sampleSupplier : getSampleSuppliers()) {
-            sampleAb.addSupplier(sampleSupplier);
+            sampleRhrh.addSupplier(sampleSupplier);
         }
         for (Reservation sampleReservation : getSampleReservations()) {
-            sampleAb.addReservation(sampleReservation);
+            sampleRhrh.addReservation(sampleReservation);
         }
         for (Table sampleTable : getSampleTables()) {
-            sampleAb.addTable(sampleTable);
+            sampleRhrh.addTable(sampleTable);
         }
-        return sampleAb;
+        return sampleRhrh;
     }
 
     /**
