@@ -11,23 +11,22 @@ Given below are my contributions to the project.
 
 #### Major Contribution:
 
-* **New Feature**: Add the ability to view general and specific help relating to each command
+* **New Feature**: Add the ability to view general and specific help related to each command
   * What it does: Allows user to view a general or specific help page relating to each command.
   * Justification: To allow new users and existing users a shortcut way of viewing usage instruction for better insights into using Academy Directory.
   * Highlights: This features allow users to view a table (in Markdown) that summarizes command format and usage for quick referencing, or view general help of each command.
   * Credits: I have used MDFX, a library that parses and renders Markdown input to JavaFX GUI.
 
-* **New Feature**: Add the ability to view details of each students
+* **New Feature**: Add the ability to view details of each student
   * What it does: This features allow users to see all related details to one student - contact information, grades, participation, tags, and others...
   * Justification: This feature is necessary to reorganize UI into a more compact view, while allowing Avengers to see all academic details of a student in one place.
-  * Highlights: View command wraps student grades and participation in a drop-down menu that Avengers can click on to see student data
+  * Highlights: View command wrap student grades and participation in a drop-down menu that Avengers can click on to see student data
 
 * **New Feature**: Graphics User Interface
-  * What it does: Refactor and implement most of Academy Directory GUI, with central theme of science fiction and space.
-  * Justification: Refactoring Academy Direcotry is necessary to restructure how data are shown to users, how command results are displayed either as a log message or as a result shown. In addition, it separates Academy Directory from Address Book 3 completely.
+  * What it does: Refactor and implement most of the Academy Directory GUI, with central theme of science fiction and space.
+  * Justification: Refactoring Academy Directory is necessary to restructure how data are shown to users, how command results are displayed either as a log message or as a result shown. In addition, it separates Academy Directory from Address Book 3 completely.
   * Highlights: The major points of GUI refactoring includes:
-    * Changing the background color, image, and logo of Academy Directory, and restructure front-end components for better usage.
-    * Refactor style, opacity, border color, size, stretch, and other appearance-related attributes of the various components in Academy Directory to improve user experience.
+    * Changing the background color and logo of Academy Directory. Restructure front-end and style for better usage
     * Changing how list and student cards look like, how View Command will be shown, and how Help Window should look.
     * Implemented a new layout called Creator that visualizes data separately from the result display logger, using information from VersionedModel.
     * Changing how message usage, error message, and help message appear on the status message display, and what the content should be.
@@ -42,13 +41,13 @@ Given below are my contributions to the project.
 * **Team-based tasks**:
   * Created CS2103T-G15-T3 team organization on behalf of the team.
   * Manage [releases `v1.3`](https://github.com/AY2122S1-CS2103T-T15-3/tp/releases/tag/v1.3.complete) to GitHub on behalf of the team.
-  * Help with maintaining issue trackers for v1.2 and v1.3 task board, tracking UI bugs, and write meeting notes.
+  * Help with maintaining issue trackers for v1.2 to v1.4 task board and write meeting notes.
   * Create and added application logo and icon for the team.
 
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `help` and `view`
-    * Added the Preview Section of UI and some Q&A parts.
+    * Added the Preview Section of UI and write some Q&A parts.
     * Assist with writing introduction and quick start for usage instruction.
   * Developer Guide:
     * Added implementation details, design considerations, use case, and user stories, and manual testings for `view`, `help`, `clear`, `exit`, and `list`
