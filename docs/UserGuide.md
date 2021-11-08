@@ -306,7 +306,7 @@ All commands in this section are subjected to the restriction in this table exce
 `add_c name=Bryan Seah email=bsah@gmail.com phone=12345678 address=311, Clementi Ave 2, #02-25 position=Project Manager status=Scheduled`
 
 * Subjected to all constraints per the Table of Inputs for Candidate Management
-* `STATUS` will default to `Applied` if field is left empty
+* `STATUS` will default to `APPLIED` if field is left empty
     <br>
     <br>
 
@@ -368,7 +368,7 @@ All commands in this section are subjected to the restriction in this table exce
 `edit_c 3 name=Ryan Koh`
 
 * Edit the name of the 3rd candidate in the list to Ryan Koh.
-* If a candidate has an [interview](#feature-interview-management), editing a status that is not `Applied` back to `Applied` is not allowed, and will be automatically changed to `Scheduled`. You can choose to change to other status such as `None`.
+* If a candidate has an [interview](#feature-interview-management), editing a status to `APPLIED` is not allowed and an error message will be shown. You can choose to change to other status such as `NONE`.
 
 
 #### <u>Find a Candidate:</u> `find_c`
