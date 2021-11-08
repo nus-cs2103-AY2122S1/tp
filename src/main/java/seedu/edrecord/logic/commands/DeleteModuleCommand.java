@@ -7,6 +7,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleSet;
+import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 
 /**
@@ -52,6 +53,10 @@ public class DeleteModuleCommand extends Command {
         }
 
         model.deleteModule(savedMod);
+        Module selectedMod = model.getSelectedModule().getValue();
+        if (selectedMod != null && selectedMod.isSameModule(savedMod)) {
+            model.setModuleFilter(PartOfModulePredicate.PREDICATE_SHOW_ALL_MODULES);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, savedMod));
     }
 

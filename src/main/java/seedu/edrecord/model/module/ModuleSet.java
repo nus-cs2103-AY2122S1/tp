@@ -68,8 +68,11 @@ public class ModuleSet {
      */
     public void removeGroup(Module mod, Group grp) {
         for (Module module : this.getModules()) {
-            if (module.isSameModule(mod) && module.hasGroup(grp)) {
+            if (module.getCode().equals(mod.getCode()) && module.hasGroup(grp)) {
                 module.deleteGroup(grp);
+                if (module.getGroupSystem().isEmpty()) {
+                    removeMod(module);
+                }
                 return;
             }
         }
@@ -150,6 +153,10 @@ public class ModuleSet {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        if (modules.isEmpty()) {
+            return "";
+        }
+
         for (Module module : this.getModules()) {
             sb.append(module.getCode())
                     .append(":")

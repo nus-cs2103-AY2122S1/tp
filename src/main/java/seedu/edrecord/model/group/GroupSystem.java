@@ -105,6 +105,10 @@ public class GroupSystem implements ReadOnlyGroupSystem {
 
     //// util methods
 
+    public boolean isEmpty() {
+        return groups.asUnmodifiableObservableList().isEmpty();
+    }
+
     @Override
     public String toString() {
         return groups.toString();

@@ -2,7 +2,6 @@ package seedu.edrecord.model.module;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
@@ -200,12 +199,12 @@ public class Module {
         }
         Module otherModule = (Module) other;
         return code.equalsIgnoreCase(otherModule.code)
-                && groupSystem.equals(((Module) other).groupSystem)
+                && groupSystem.equals(otherModule.groupSystem)
                 && assignmentList.equals(otherModule.assignmentList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, groupSystem);
+        return code.hashCode();
     }
 }
