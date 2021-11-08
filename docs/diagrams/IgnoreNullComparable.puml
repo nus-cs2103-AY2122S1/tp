@@ -16,7 +16,7 @@ StringComparable -up-|> IgnoreNullComparable
 NumberComparable -up-|> IgnoreNullComparable
 
 LastMet .up.|> IgnoreNullComparable
-NextMeeeting .up.|> IgnoreNullComparable
+NextMeeting .up.|> IgnoreNullComparable
 
 Name .up.|> StringComparable
 Email .up.|> StringComparable
