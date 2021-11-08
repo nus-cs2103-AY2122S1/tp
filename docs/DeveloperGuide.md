@@ -379,7 +379,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Professor                                  | bulk tag contacts                             | I can quickly tag TAs and Students according to their groups
 
 
-*{More to be added}*
 
 ### Use cases
 
@@ -565,8 +564,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   
 
 ### Deleting a person
 
@@ -583,8 +581,73 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
+### Import and Export
+
+1. Exporting then importing back original list of contacts
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `export currList.json`<br>
+       Expected: The current contact list is exported to the file currList.json
+    
+       1. Test case: `edit 0 n/Amanda`<br>
+       Expected: First contact name is updated to Amanda
+       
+       2. Test case: `import currList.json`<br>
+       Expected: The previous unedited old contact will be added into the current contact list
+       
+    3. Other incorrect delete commands to try: `import`, `export` <br>
+       Expected: Error details shown in the status message.
+
+2. Export last searched list of contacts
+
+   1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+   1. Test case: `export friends.json`<br>
+      Expected: Last searched contacts are exported to json file, friends.json
+
+### Export emails of last searched list of contacts
+
+
+1. Export emails of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `exportemail emails.txt`<br>
+       Expected: Emails of all contacts are exported to emails.txt
+
+    1. Other incorrect delete commands to try: `exportemail` <br>
+       Expected: Error details shown in the status message.
+
+1. Export emails of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `exportemail friends.txt`<br>
+       Expected: Emails of last searched contacts are exported to emails.txt
+
+
+
+### Get Statistics of last searched list of contacts
+
+1. Show statistics of all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of all the contacts are shown in the display
+
+1. Show statistics of last searched list of contacts
+
+    1. Prerequisites: Search a group of contacts using the find command such as `find t/friends` command. Multiple persons in the list.
+
+    1. Test case: `stat`<br>
+       Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
+
+
+
+       
 ### Saving data
 
 1. Dealing with missing/corrupted data files
