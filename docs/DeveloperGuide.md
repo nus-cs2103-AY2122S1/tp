@@ -897,7 +897,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Report is generated in a pop up window. A command result indicating that the report window has been opened is provided.
 
     1. Test case: `report now`<br>
-       Expected: As long as the first word in the command starts with, "report", additional words and spaces after the command are ignored.
+       Expected: As long as the first word in the command is, "report", additional words and spaces after the command are ignored.
        The report is generated in a pop up window. A command result indicating that the report window has been opened is provided.
 
     1. Incorrect report command to try: `1 report`,`reports` <br>
