@@ -237,6 +237,7 @@ block 123, #01-01 pos/software engineer github/https://github.com/johndoe`. The 
 `applicantParticulars` object, and return the `AddApplicantCommand` instance.
 
 The following sequence diagram shows the method invocation in this step:
+
 ![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
 
 Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
@@ -316,6 +317,7 @@ Step 2. LogicManager executes this `EditApplicantCommand` instance, invoking the
 Step 3. The model then replace the existing applicant with the new one in the `applicantBook` via `Model#setApplicant()` and reflect the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditApplicantCommand:
+
 ![EditApplicantActivityDiagram](images/EditApplicantActivityDiagram.png)
 
 
@@ -620,6 +622,7 @@ Step 2. LogicManager executes this `EditPositionCommand` instance, invoking the 
 Step 3. The model then replaces the existing position with the new one in the `positionBook` via `Model#setPosition()` and reflects the updated list in the UI.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the EditPositionCommand:
+
 ![EditPositionActivityDiagram](images/EditPositionActivityDiagram.png)
 
 
@@ -705,6 +708,7 @@ Step 5. Any command the user executes next simply refreshes the current state to
       which could result in many inter-linked implementations for the dictionary, rendering it slow. May be difficult to show change in UI as well with many layers affected.
 
 The following activity diagram summarizes the actions taken when LogicManager executes the RejectionRateCommand:
+
 ![ActivityDiagram](images/rejection-rates/ActivityDiagram.png)
 
 
