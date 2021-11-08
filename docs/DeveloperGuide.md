@@ -230,7 +230,7 @@ component in `MainWindow`.
 
 <div style="page-break-after: always;"></div>
 
-### Add contacts to folder: `echo index1 ... indexN >> Folder`
+### Add contacts to folder: `echo INDEX_1 ... INDEX_N >> Folder`
 
 #### Implementation
 Contacts are added by updating the `ObservableList` in `UniqueFolderList`.
