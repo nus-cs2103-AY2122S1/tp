@@ -5,6 +5,13 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+## Table of Contents
+* [Architecture](#architecture)
+* [Implementation](#implementation)
+* [Appendix: Requirements](#appendix-requirements)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [Appendix: Effort](#appendix-effort)
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 MrTechRecruiter (MTR) is a standalone desktop app aimed in helping technology-related company recruiters overlook and administer job positions and applicants applying for various jobs in their companies.
