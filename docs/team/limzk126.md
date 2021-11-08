@@ -9,8 +9,6 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management
 tasks done faster than traditional GUI apps.
 
-Given below are my contributions to the project.
-
 ## **Code contributed**:
 
 The code I contributed can be found [here](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=limzk&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
@@ -49,13 +47,13 @@ Relevant PRs include: [#104](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
 * **Justification**: This feature aids the user experience as it is allows users to view
    useful up to date information regarding their tasks completion.
 * **Challenges**: The PieChart was hard to implement by itself and even harder to make it dynamic.
-   I.e., Updates instantly whenever a task's completion status is modified. I also Had to link the taskStatusChecker to work
+   I.e., Updates instantly whenever a task's completion status is modified. I also had to link the taskStatusChecker to work
    with task viewing functionalities such that tasks updated automatically are reflected on the GUI correctly.
 
 Relevant PRs include: [#95](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/95)
 
 ### **Implemented functionality to set when to remind users of tasks that are due soon**
-* **What it does**: sets when tasks are reminded to users that it is due soon. The input is the number of days
+* **What it does**: Sets when tasks are reminded to users that it is due soon. The input is the number of days
    prior to a task's happening/due date.
 * **Justification**: Essential functionality as it allows the users to have the flexibility of when they are reminded that their tasks
    are due soon.
@@ -65,18 +63,15 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
 ## **UI/UX contributions**
 * Designed and implemented the task list panel and statistics panel, both of which are core
    portions of the GUI.
-* Implemented split sliding panel to fit the result box and statistics panel.
-* Implemented split sliding panel to fit the person list panel and task list panel.
+* Implemented split sliding panels to allow greater resize flexibility for users.
 
 ## **Team tasks/contributions:**
 * Managed Releases: `v1.2.1(trial release for v1.3)`, `v1.3`, `v1.3.1(Revision of v1.3)`.
 * Created and Changed product icon, name for the GUI.
-* Maintained issue tracker: Created and managed issues in most milestones. Wrapped up milestones v1.3 and v1.3.1.
-* Refactored  `EditCommand`, `DeleteTaskCommand`, `DoneCommand`, `UndoCommand`.
-   * Relevant PRs: [#209](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/209),
+* Maintained issue tracker: Created and managed issues in most milestones. Wrapped up milestones `v1.3` and `v1.3.1`.
+* Refactored  `EditCommand`, `DeleteTaskCommand`, `DoneCommand`, `UndoCommand`. [#209](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/209),
   [#220](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/220)
 * Reviewed team members' PRs regularly to ensure it upholds coding standards.
-* Did some task designation to team members and contributed to ideas that were used for actual implementation.
 
 ## **Documentation**:
 
@@ -84,7 +79,7 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
 * Added documentation for the features `cat`, `cat -A`. [#20](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/20),
   [#87](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/87)
 * Added documentation for the feature `reminder`. [#111](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/111)
-* Added Table of contents, Introduction, Guide on using the UG and product Icon.[#87](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/87/files),
+* Added Table of contents, Introduction, Guide on using the UG and product Icon. [#87](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/87/files),
   [#116](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/116/files)
 
 ### **Developer Guide**:
@@ -93,5 +88,5 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
 * Added Implementation for view tasks functionality. [#73](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/73)
 
 ## **Testing**
-* Added more Junit tests for LogicManager and ModelManager [#54](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/54)
-* Added more Junit tests for DeleteTaskCommand and DeleteTaskCommandParser [#56](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/56)
+* Added more Junit tests for LogicManager and ModelManager. [#54](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/54)
+* Added more Junit tests for DeleteTaskCommand and DeleteTaskCommandParser. [#56](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/56)
