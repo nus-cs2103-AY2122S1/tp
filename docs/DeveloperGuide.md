@@ -193,29 +193,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-1. Getting help
-2. [Modifying Contacts]((#adding-a-person-add))
+1. [Modifying Contacts]((#adding-a-person-add))
    1. [Adding a person](#adding-a-person-add) [done]
    2. [Adding tags to people](#adding-tags-to-people-addt) [diag]
    3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark) [done]
    4. [Editing a person](#editing-a-person-edit) [diag]
    5. [Deleting a person](#deleting-a-person-delete) [diag]
-   6. [Deleting multiple person](#delete-multiple-persons) 
-   7. Deleting tags from people
-   8. Clearing all contacts
-3. Viewing contacts
-   1. Listing all contacts
+   6. [Deleting multiple person](#delete-multiple-persons-deletem) [done]
+   7. [Deleting tags from people](#deleting-tags-from-people-deletet) [diag]
+   8. [Clearing all contacts](#clearing-all-contacts-clear) [diag]
+2. Viewing contacts
+   1. [Listing all contacts](#listing-all-contacts-list)
    2. [Finding people](#finding-persons)
    3. [Sorting people](#sorting-persons)
    4. [Viewing statistics](#viewing-statistics)
-4. Sharing contacts
+3. Sharing contacts
    1. [Importing contacts](#import-json-file)
    2. [Exporting contacts](#export-json-file)
-5. [Aliasing commands `alias`](#aliasing-commands-alias)
-6. [Exiting Socius `exit`](#exiting-socius-exit)
-7. [Saving contacts](#saving-the-data)
-8. [Accessing command history](#command-history)
-9. [Input Suggestion](#input-suggestion)
+4. [Aliasing commands `alias`](#aliasing-commands-alias)
+5. [Exiting Socius `exit`](#exiting-socius-exit)
+6. [Saving contacts](#saving-the-data)
+7. [Accessing command history](#command-history)
+8. [Input Suggestion](#input-suggestion)
 
 ### Adding a person `add`
 
@@ -313,7 +312,7 @@ The following activity diagram summarizes what happens when a user executes a ed
 
 ![EditActivityDiagram](images/RemarkActivityDiagram.png)
 
-The edit mechanism will edit any contact details of the person specified by a given index. If the edited person already exists, the edit command will throw an error.
+The edit mechanism will edit any contact details of the person specified by a given index. If the edited person already exists, the edit command will throw an exception.
 
 During `EditCommand#execute`, a new `Person` object will be created. The values will remain the same for all of a person contact details (e.g. `Name`) except for those which are specified for change.
 
@@ -425,6 +424,121 @@ The following sequence diagram shows how the RemarkCommand mechanism works:
     * Pros: It uses less memory and thus may run faster.
     * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
+### Delete multiple people `deletem`
+
+#### Implementation
+
+The delete multiple people mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
+
+It works by filtering for the contacts in the `model` and deleting them one by one.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `DeleteMultipleCommand` to delete contacts by keywords:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the deleting multiple person mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `deletem t/friends g/m` command to delete all contacts with the tag `friends` and gender `M`.
+
+Step 3. This will call `DeleteMultipleCommandParser#parse` which will then parse the arguments provided.
+Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
+
+Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.
+The following sequence diagram briefly shows how the parser operation works (`MultiplePredicates` not shown):
+
+![DeleteMultipleParserSequenceDiagram](images/DeleteMultipleParserSequenceDiagram.png)
+
+Step 5. `DeleteMultipleCommand#execute` will filter the model with the provided list of predicates and get back the filtered list.
+
+Step 6. It will then iterate through the list and call `deletePerson` to remove contact with matching keywords one by one.
+
+Step 7. After deleting contacts, it will call `updateFilteredPersonList` on model to list all the remaining contacts.
+
+The following sequence diagram shows how the deleting multiple person mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
+    * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
+    * Cons: Challenging to implement as it requires parsing and checking multiple dynamic parameters. It also may have performance issues in terms of memory usage.
+
+* **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
+    * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
+    * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
+
+### Delete tags from people `deletet`
+
+#### Implementation
+
+The delete tag mechanism is facilitated by DeleteTagCommand and DeleteTagCommandParser. It allows users to delete tags from a person
+in their contact list by specifying the person's index number and the tags to add.
+
+#### Usage
+
+Given below is an example usage scenario and how the delete tag mechanism behaves at each step.
+
+Step 1. The user executes `deletet 1 t/friend` command to delete the 'friend' tag from the first person in the displayed contact list.
+If the person does not has the 'friend' tag, the DeleteTagCommand throws an exception.
+
+Step 1.1. Alternatively, the user may execute `deletet all t/friend` command to delete the 'friend' tag from everyone in the displayed
+contact list. If no one has the 'friend' tag, the DeleteTagCommand throws an exception.
+
+Step 2. `DeleteTagCommandParser#parse` will then parse the arguments provided. A new `DeleteTagCommand` object will be created after parsing.
+
+The following sequence diagram briefly shows how the DeleteTagCommandParser operation works:
+
+![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
+
+Step 3. The command communicates with the `Model` to delete the person from the existing AddressBook.
+
+Step 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+The following sequence diagram shows how the DeleteTagCommand mechanism works:
+
+![UpdatedAddTagCommandSeqDiagram](images/AddCommandDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to support adding tags for one person and for everyone within AddTagCommand:**
+
+* **Alternative 1 (current choice):** The `deletet all` command should fail only if no one has the specified tag to delete.
+    * Pros: Intuitive.
+    * Cons: May result in unintentional deletion of tags for the careless user.
+
+* **Alternative 2:** The `deletet all` command should pass only if everyone has the specified tag to delete.
+    * Pros: Minimise unintentional deletion of tags.
+    * Cons: Less user-friendly, since the user have to make sure all users that are considered must carry that tag to delete.
+
+### Clearing all contacts `clear`
+
+#### Implementation
+
+The clearing all contacts mechanism will delete all contacts from Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ClearCommand` to clear all contacts:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the clear all contacts mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `clear` command to clear all contacts.
+
+Step 3. `ClearCommand#execute` will replace the model with a blank contact list.
+
+The following sequence diagram shows how the clearing all contacts mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
 ### Finding Persons
 
 #### Implementation
@@ -469,53 +583,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Good for users who want to broadly search for eligible friends
     * Cons: Not very intuitive
 
-### Delete multiple persons
 
-#### Implementation
-
-The deleting multiple person mechanism will delete contacts specified by a given set of keywords. Any contacts containing **all** the specified keywords will be deleted.
-
-It works by filtering for the contacts in the `model` and deleting them one by one.
-
-#### Usage
-
-The following activity diagram briefly summarizes what happens when a user executes the `DeleteMultipleCommand` to delete contacts by keywords:
-
-![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
-
-Given below is an exmaple usage scenario and how the deleting multiple person mechanism behaves at each step.
-
-Step 1. The user launches the application.
-
-Step 2. The user executes `deletem t/friends g/m` command to delete all contacts with the tag `friends` and gender `M`.
-
-Step 3. This will call `DeleteMultipleCommandParser#parse` which will then parse the arguments provided.
-Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
-
-Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.
-The following sequence diagram briefly shows how the parser operation works (`MultiplePredicates` not shown):
-
-![DeleteMultipleParserSequenceDiagram](images/DeleteMultipleParserSequenceDiagram.png)
-
-Step 5. `DeleteMultipleCommand#execute` will filter the model with the provided list of predicates and get back the filtered list.
-
-Step 6. It will then iterate through the list and call `deletePerson` to remove contact with matching keywords one by one.
-
-Step 7. After deleting contacts, it will call `updateFilteredPersonList` on model to list all the remaining contacts.
-
-The following sequence diagram shows how the deleting multiple person mechanism works:
-
-![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
-
-#### Design Considerations
-
-* **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
-    * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
-    * Cons: Challenging to implement as it requires parsing and checking multiple dynamic parameters. It also may have performance issues in terms of memory usage.
-
-* **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
-    * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
-    * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
 
 ### Sorting persons
 
