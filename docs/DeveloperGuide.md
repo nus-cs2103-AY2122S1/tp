@@ -941,6 +941,9 @@ search for name.
 
     3. Test case: `tadd /n submit report /d 11/11/2021 23:59 /m 2 /m 3`<br>
     Expected: A new task will be added to the second and third members' task lists. Details of the added task shown in the status message.
+
+    4. Test case: `tadd /n interview /d 12/12/2021 14:00 /m 0`<br>
+    Expected: No new task is added. Error message shown in the status message.
     
 #### Deleting a task
 
@@ -950,6 +953,10 @@ search for name.
 
    2. Test case: `tdel /t 1`<br>
    Expected: First task is deleted from the currently shown task list. Success message will be shown in the status message.
+
+   3. Test case: `tdel /t 0`<br>
+   Expected: No task is deleted. Error message shown in the status message.
+   
 
 #### Marking one or more task(s) as completed
 
@@ -963,6 +970,9 @@ search for name.
     3. Test case: `tdone /t 2 /t 3`<br>
        Expected: Second and third tasks are marked as completed. Success message will be shown in the status message.
 
+    4. Test case: `tdone /t 1 /t 0`<br>
+        Expected: No task is marked as completed. Error message shown in the status message.
+
 #### Marking one or more task(s) as incomplete
 
 1. Marking one or more task(s) as incomplete while the currently selected member's task list is being shown
@@ -974,6 +984,9 @@ search for name.
 
     3. Test case: `tundone /t 2 /t 3`<br>
        Expected: Second and third tasks are marked as incomplete. Success message will be shown in the status message.
+
+    4. Test case: `tundone /t 1 /t 0`<br>
+        Expected: No task is marked as incomplete. Error message shown in the status message.
 
 #### Editing a task
 
