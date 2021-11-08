@@ -683,7 +683,7 @@ Step 3. If the position exists, it will access the ApplicantBook via `Model#calc
 
 Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate()`. This resulting floating point number is then the rejection rate of the position.
 
-The following sequence diagram shows the method invocation in this step.
+The following sequence diagram shows the method invocation in this step. <br>
 ![SeqDiagram](images/rejection-rates/SeqDiagram.png)
 
 Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
