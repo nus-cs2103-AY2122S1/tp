@@ -28,16 +28,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Confirms the id when the application is sure the order is valid.
-     */
-    public void confirmId() {
-        this.id = count;
-        count++;
-    }
-
-    /**
-     * Overloaded constructor creates an Order related to the customer, due on the given date, with the given amount and id.
-     * isComplete flag is set to False initially, and the id is automatically assigned.
+     * Overloaded constructor for an {@code Order} that also sets initializes its {@code id}.
      */
     public Order(Label label, Customer customer, Date date, Amount amount, int id) {
         this.customer = customer;
@@ -48,6 +39,13 @@ public class Order implements Comparable<Order> {
         this.isComplete = false;
     }
 
+    /**
+     * Confirms the id when the application is sure the order is valid.
+     */
+    public void confirmId() {
+        this.id = count;
+        count++;
+    }
 
     public boolean getIsComplete() {
         return this.isComplete;
