@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="5" right="10" bottom="5" left="10"/>
+    </padding>
+    <TabPane fx:id="tabMenu" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="tab1" text="Contacts">
+            <GridPane fx:id="contactsContainerBox" VBox.vgrow="ALWAYS">
+                <children>
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text=" Contacts " styleClass="tabMenu-header-selected"/>
+                        <Label text=" Tasks " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Help " styleClass="tabMenu-header-unselected"/>
+                    </HBox>
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>
+                    <RowConstraints vgrow="ALWAYS" fillHeight="true"/>
+                </rowConstraints>
+            </GridPane>
+
+        </Tab>
+        <Tab fx:id="tab2" text="Tasks">
+            <GridPane fx:id="tasksContainerBox" VBox.vgrow="ALWAYS" hgap="20">
+                <children>
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text=" Contacts " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Tasks " styleClass="tabMenu-header-selected"/>
+                        <Label text=" Help " styleClass="tabMenu-header-unselected"/>
+                    </HBox>
+                    <HBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label text=" Assignees " styleClass="tabMenu-header-selected"/>
+                    </HBox>
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="75"/>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="25"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>
+                    <RowConstraints vgrow="ALWAYS" fillHeight="true"/>
+                </rowConstraints>
+            </GridPane>
+        </Tab>
+        <Tab fx:id="tab3" text="Help">
+            <GridPane fx:id="helpContainerBox" VBox.vgrow="ALWAYS">
+                <children>
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text=" Contacts " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Tasks " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Help " styleClass="tabMenu-header-selected"/>
+                    </HBox>
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="100" fillWidth="true"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>
+                    <RowConstraints vgrow="ALWAYS" percentHeight="100" fillHeight="true"/>
+                </rowConstraints>
+            </GridPane>
+        </Tab>
+    </TabPane>
+</VBox>

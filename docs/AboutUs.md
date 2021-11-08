@@ -9,51 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Zen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zenlzb.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+[[github](https://github.com/Zenlzb)][[portfolio](team/zenlzb.md)]
 
-### Jane Doe
+* Role: Team Lead, Integration
+* Responsibilities: Logic
 
-<img src="images/johndoe.png" width="200px">
+### Hanif
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/hanif-kamal.png" width="200px">
 
-* Role: Team Lead
+[[github](http://github.com/hanif-kamal)][[portfolio](team/hanif-kamal.md)]
+
+* Role: Documentation, Code Quality
+* Responsibilities: Model
+
+### Joshua
+
+<img src="images/jyrw.png" width="200px">
+
+[[github](http://github.com/jyrw)][[portfolio](team/jyrw.md)]
+
+* Role: Documentation, Code Quality
+* Responsibilities: Storage
+
+### Aaron
+
+<img src="images/e0543860.png" width="200px">
+
+[[github](http://github.com/e0543860)][[portfolio](team/aaronloh.md)]
+
+* Role: Deliverables and deadlines, Scheduling and tracking
 * Responsibilities: UI
 
-### Johnny Doe
+### Myat
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nusmhk.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/NUSmhk)][[portfolio](team/nusmhk.md)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Testing

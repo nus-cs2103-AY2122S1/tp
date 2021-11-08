@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="help-menu" fx:id="container" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      minWidth="400" >
+    <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS" fitToWidth="true">
+        <VBox styleClass="help-menu">
+        <GridPane fx:id="commandContainer" VBox.vgrow="SOMETIMES" hgap="10" >
+                <padding>
+                    <Insets top="5" right="25" bottom="5" left="25"/>
+                </padding>
+                <children>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text=""></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text=" General " styleClass="helpHeader"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text=" "></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="4" text=" Contacts " styleClass="helpHeader"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="6" text=" "></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="7" text=" Tasks " styleClass="helpHeader"></Label>
+
+
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="9" fx:id="helpContent" styleClass="label-bright"></Label>
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="10">
+                        <Button fx:id="copyUserGuideButton" mnemonicParsing="false" onAction="#copyUserGuideUrl" text="Copy User Guide URL">
+                            <VBox.margin>
+                                <Insets left="5.0"/>
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="copyDevGuideButton" mnemonicParsing="false" onAction="#copyDevGuideUrl" text="Copy Developer Guide URL">
+                            <VBox.margin>
+                                <Insets left="5.0"/>
+                            </VBox.margin>
+                        </Button>
+                    </HBox>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="11" text=" "></Label>
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
+                </columnConstraints>
+            </GridPane>
+        </VBox>
+    </ScrollPane>
+</VBox>
+
+

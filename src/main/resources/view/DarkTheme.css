@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#DDDDDD, 100%);
+    background-color: #DDDDDD; /* Used in the default.html file */
 }
 
 .label {
@@ -13,6 +13,13 @@
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-code {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Consolas Bold";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
@@ -56,11 +63,7 @@
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -95,20 +98,20 @@
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
+    -fx-graphic-text-gap: 0;
     -fx-padding: 0 0 0 0;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #6a6a6a;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #444444;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #AAAAAA;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -133,14 +136,40 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: #f27e24;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
+
+.pane-with-border-2 {
+    -fx-background-color: #DDDDDD;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+}
+
+.help-menu{
+    -fx-background-color: derive(#1d1d1d, 30%);
+}
+
+.tabMenu-header-selected {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-text-fill: white;
+}
+
+.tabMenu-header-unselected {
+    -fx-background-color: #1d1d1d;
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+}
+
 
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
@@ -207,6 +236,12 @@
     -fx-background-color: black;
 }
 
+.help-menu-text {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+}
+
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
@@ -229,8 +264,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -344,9 +379,57 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #eba84b;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#assignees {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#assignees .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3fd1c2;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1, 0, 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #FF6347;
+}
+
+.tab-pane {
+    -fx-tab-max-height: 0;
+}
+
+.tab-pane .tab-header-area {
+    visibility: hidden;
+}
+
+.helpHeader {
+    -fx-background-color: #665d44;
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-text-fill: white;
+    -fx-font-size: 15pt;
+}
+
+.helpList {
+    -fx-background-color: #665d44;
+}
+

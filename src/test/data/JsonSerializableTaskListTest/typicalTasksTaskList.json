@@ -1,0 +1,24 @@
+{
+  "_comment": "TaskList save file which contains the same Task values as in TypicalTasks#getTypicalTaskList()",
+  "tasks": [ {
+    "description" : "Submit CS2100 Assignment",
+    "isComplete" : "false",
+    "taskDate" : "",
+    "tagged" : [ "homework" ]
+  }, {
+    "description" : "Catch up with ST2334 lectures",
+    "isComplete" : "false",
+    "taskDate" : "",
+    "tagged" : [ ]
+  }, {
+    "description" : "Do PR review",
+    "isComplete" : "false",
+    "taskDate" : "",
+    "tagged" : [ "groupwork" ]
+  }, {
+    "description" : "ST2334 quiz before Friday",
+    "isComplete" : "false",
+    "taskDate" : "",
+    "tagged" : [ "quiz" ]
+  } ]
+}
