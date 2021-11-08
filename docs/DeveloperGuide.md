@@ -18,6 +18,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### Table of Contents
+- [**About this guide**](#about-this-guide)
 - [**Acknowledgements**](#acknowledgements)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
@@ -66,7 +67,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **About this guide
+## **About this guide**
 [Table of contents](#table-of-contents)
 
 This guide aims to help developers get familiar with how RecruitIn functions.
@@ -80,6 +81,7 @@ to find various test cases and expected results for some features of RecruitIn.
 you may follow the guide at [Setting up, getting started](#setting-up-getting-started) 
 for a quick set up of your development environment.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 [Table of contents](#table-of-contents)
