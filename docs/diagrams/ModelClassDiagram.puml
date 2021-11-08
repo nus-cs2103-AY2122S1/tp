@@ -5,35 +5,56 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyApplicantBook <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class ApplicantBook
-Class ReadOnlyApplicantBook
 Class Model
 Class ModelManager
+
+package "User Prefs Model" #FFFFFF {
+Interface ReadOnlyUserPrefs <<Interface>>
 Class UserPrefs
 Class ReadOnlyUserPrefs
+}
 
-
+package "Applicant Model" #FFFFFF {
+Interface ReadOnlyApplicantBook <<Interface>>
+Class ApplicantBook
+Class ReadOnlyApplicantBook
 Class UniqueApplicantList
 Class Applicant
+}
+
+package "Position Model" #FFFFFF {
+Interface ReadOnlyPositionBook <<Interface>>
+Class PositionBook
+Class ReadOnlyPositionBook
+Class UniquePositionList
+Class Position
+}
 
 }
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 ApplicantBook .up.|> ReadOnlyApplicantBook
+PositionBook .up.|> ReadOnlyPositionBook
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyApplicantBook
-ModelManager -left-> "1" ApplicantBook
-ModelManager -right-> "1" UserPrefs
+
+Model ..> ReadOnlyUserPrefs
+Model ..> ReadOnlyApplicantBook
+Model ..> ReadOnlyPositionBook
+
+ModelManager --> "1" ApplicantBook
+ModelManager --> "1" PositionBook
+ModelManager --> "1" UserPrefs
 
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ApplicantBook *--> "1" UniqueApplicantList
-UniqueApplicantList --> "~* all" Applicant
+UniqueApplicantList -right-> "~* all" Applicant
+
+PositionBook *--> "1" UniquePositionList
+UniquePositionList --> "~* all" Position
 
 ModelManager -->"~* filtered" Applicant
+ModelManager -->"~* filtered" Position
 @enduml
