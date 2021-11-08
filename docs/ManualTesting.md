@@ -275,7 +275,7 @@ Below are a few test cases which checks for the above. The test cases are by no 
 
 
 7. Retrieving personal detail of a student by keyword. No student whose name matches the given keyword is present in AcademyDirectory.
-    1. Prerequisites:F
+    1. Prerequisites:
         - No student has a name which matches `alex`. By match, we mean a case-insensitive keyword match i.e. both "Alex"
           and "aLeX" will match to `alex`. See this matching behavior in [`FilterCommand`](DeveloperGuide.md) for more details.
         - Run each test case twice, the first time by having all students listed using the `list` command,
