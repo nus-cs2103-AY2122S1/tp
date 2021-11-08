@@ -19,7 +19,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**
   * Added indicators of overdue and soon to be due tasks to PersonCard.
 
-* **New Features** 
+* **New Features**
   * Added date, time, and address attributes to `Task`.
   * Added functionality of identifying overdue and soon to be due tasks.
   * Added commands to mark tasks as done or not done.
@@ -35,3 +35,4 @@ Given below are my contributions to the project.
 * **Community**:
 
 * **Tools**:
+
