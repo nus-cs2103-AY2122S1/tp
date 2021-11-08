@@ -662,11 +662,21 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `stat`<br>
        Expected: Tag, Type and Tutorial count of the last searched list of contacts are shown in the display
     
-### Saving data
+### Loading/Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Remove a `{` from data/profBook.json
+      Expected: ProfBook will be empty on load.
+
+      1. Test case: `exit`
+         Expected: profBook.json will be overwritten and no longer corrupted.
+   
+   2. Delete data/profBook.json
+      Expected: ProfBook will be populated with dummy data on load.
+      
+      1. Test case: `exit`
+         Expected: profBook.json will be recreated in the data directory
    
 
 ## Effort
