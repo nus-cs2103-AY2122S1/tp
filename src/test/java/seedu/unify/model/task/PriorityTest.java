@@ -31,7 +31,7 @@ public class PriorityTest {
         Priority priorityHigh = new Priority("HIGH");
 
         // same values -> returns true
-        Priority priorityCopy = new Priority();
+        Priority priorityCopy = new Priority(); // Default priority is LOW
         assertTrue(priorityLow.equals(priorityCopy));
 
         // same object -> returns true
