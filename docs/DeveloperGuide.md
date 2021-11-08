@@ -88,8 +88,8 @@ the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diag
 </div>
 
 ## <a name="Architecture"></a> **5. Architecture**
+<img align="center" src="images/ArchitectureDiagram.png" width="280"/>
 
-<img src="images/ArchitectureDiagram.png" width="280"/>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -105,7 +105,7 @@ is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) : represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
@@ -119,7 +119,7 @@ The rest of the App consists of four components.
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img align="center" src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -132,7 +132,7 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img align="center" src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
