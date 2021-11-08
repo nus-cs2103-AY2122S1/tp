@@ -325,10 +325,23 @@ Traces a resident's close contacts based on the events they're involved in. This
 
 Format: `trace r/RESIDENT [d/DEPTH] [t/DURATION]`
 
-* A resident can be identified either by full name or room
-* Depth refers to the maximum links to reach the resident in question
-* Depth should be an integer, 1 <= depth <= 5, and will default to 1
-* Duration is in days, 1 <= duration <= 31, and will default to 7
+Prefix | Field | Details
+-------- | ------ | ------
+`r` | Resident | The resident to trace can be identified either by full name or room (case-insensitive)
+`d` | Depth | Refers to the maximum allowed links to reach the resident in question <br> It is an integer, 1 <= depth <= 5, and will default to 1 if not specified
+`t` | Duration | Represents the time in days to trace back to. <br> It is an integer, 1 <= duration <= 31, and will default to 7 if not specified
+
+1. Using sample data, running `trace r/Alex Yeoh d/1` will trace down residents Charlotte and David since they all were in the Volleyball event.
+   ![depth1](images/logic/commands/tracecommand/depth1.png)
+
+2. Using sample data, running the above command but with depth 2, `trace r/Alex Yeoh d/2`,will trace down resident Irfan in addition, since David in turn was in contact with Irfan during Powerlifting event.
+   ![depth2](images/logic/commands/tracecommand/depth2.png)
+
+<div markdown="span" class="alert alert-danger">
+
+:warning: **Note:** The above commands will, given time, not result in any close contacts since this is a time-dependent problem. The examples are used to merely explain the concepth of depth.
+
+</div>
 
 Examples:
 * `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
@@ -376,27 +389,26 @@ Format: `import CSV_NAME`
 * The file format (`.csv`) is not to be included in `CSV_NAME`
 </div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+You can save to `csv` format from an excel file by  Save as` -> `.csv`
+</div>
 
-**:exclamation: Caution:**<br>
+<div markdown="span" class="alert alert-danger">
 
-Resident lists of all events will be cleared
+:warning: **Warning:** Resident lists of all events will be cleared!
 
 </div>
 
 Here's a step by step guide:<br>
 
 1. Create your csv file in the correct format (shown below).
-
-![CSV](images/logic/commands/importcommand/csvFormat.png)
+    ![CSV](images/logic/commands/importcommand/csvFormat.png)
 
 2. Place your csv file in the `data/` folder.
-
-![FileStructure](images/logic/commands/importcommand/filefolder.png)
+    ![FileStructure](images/logic/commands/importcommand/filefolder.png)
 
 3. Run `import CSV_NAME`.
-
-![NewResidents](images/logic/commands/importcommand/newresidents.png)
+    ![NewResidents](images/logic/commands/importcommand/newresidents.png)
 
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
@@ -717,7 +729,7 @@ Command | Format | Examples
 |--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
-**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
+**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` or<br>`deadline k/LATE_KEYWORD d1/DATE1` | `deadline k/f d1/15-08-2021 d2/20-08-2021` or<br>`deadline k/lf d1/15-08-2021`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/john alex v/false f/fass` <br>
 **Edit** | `edit INDEX… [FLAG/UPDATED_PARTICULARS]…` | `edit 1 2 3 v/true fd/20-10-2021` <br>
 **Delete** | `delete INDEX…` | `delete 1 2 3`
@@ -730,7 +742,7 @@ Command | Format | Examples
 
 Command | Format | Examples
 |--------|-------|----------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**Add** |  `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]` | `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201`
 **View** | `view [INDEX]`| `view 30`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
 **Edit** | `edit INDEX [FLAG/UPDATED_PARTICULARS]…` | `edit 1 n/Football Training l/Field`
@@ -741,8 +753,8 @@ Command | Format | Examples
 
 ### Commons
 
-Command | Format | Examples
-|--------|-------|----------
+Command | Format
+|--------|-------
 **Help** | `help`
 **Switch** | `switch`
 **Clear** | `clear`
