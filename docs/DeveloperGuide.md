@@ -278,17 +278,17 @@ In this example, we explore the `marka` command.
 
 1. When the user executes the `marka` command, the user input is parsed to separate the command and its arguments.
 1. The format of the command is first checked, followed by the checking and separation of the individual arguments (student index(es) and week). This is done in the `MarkStudentAttCommandParser#parse(String args)` method.
-1. The student's attendance status for the particular week is retrieved and toggled. This operation is exposed in the `Model` interface as `Model#markStudenAttendance(Student student, int week)`.
+1. The student's attendance status for the particular week is retrieved and toggled. This operation is exposed in the `Model` interface as `Model#markStudentAttendance(Student student, int week)`.
 1. If the student is originally marked as absent, the method toggles his attendance to present.
 1. If the student is originally marked as present, the method toggles his attendance to absent.
 1. If the student belongs to a group, the group's student list will be updated with the updated student.
-1. Steps 3 to 6 are repeated for the next student, until all the specified students' attendance are marked as either present or absent.
+1. Steps 3 to 6 are repeated for the next student, until all the specified students' attendance are toggled.
 1. A new `CommandResult` is returned, switching the current display to the updated student list. 
 1. Note: An error message will be thrown if: student index out of bounds, duplicate student index in the command, invalid week, invalid command format, invalid type of argument.
 
 During the execution of `MarkStudentAttCommand`, the student list will be updated according to the arguments supplied.
 
-The following diagram shows the summarised workflow of a typical MarkStudentAtt command.
+The following diagram shows the summarised workflow of a typical `marka` command.
 
 ![Activity Diagram of Mark Student Attendance Command](images/MarkStudentAttActivityDiagram.png)
 
