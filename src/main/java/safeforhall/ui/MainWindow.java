@@ -114,30 +114,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleTabCreation() {
-        // Label texts are padded with whitespace for alignment.
-        // This is not possible via style due to graphic rotation.
-        residentsTab.setGraphic(createTab("  Residents", "resident"));
-        residentsTab.setTooltip(new Tooltip("Residents"));
-
-        eventsTab.setGraphic(createTab("    Events     ", "event"));
-        eventsTab.setTooltip(new Tooltip("Events"));
-
-        helpTab.setGraphic(createTab("    Help     ", "help"));
-        helpTab.setTooltip(new Tooltip("Help"));
-        helpTab.setOnSelectionChanged(e -> {
-            if (helpTab.isSelected()) {
-                handleHelp();
-            }
-            e.consume();
-        });
-
-        exitTab.setGraphic(createTab("    Exit     ", "exit"));
-        exitTab.setTooltip(new Tooltip("Exit"));
-        exitTab.setOnSelectionChanged(e -> {
-            if (exitTab.isSelected()) {
-                handleExit();
-            }
-        });
+        createResidentsTab();
+        createEventsTab();
+        createHelpTab();
+        createExitTab();
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
             boolean success = !newTab.equals(helpTab);
@@ -149,10 +129,39 @@ public class MainWindow extends UiPart<Stage> {
         tabPane.setRotateGraphic(false);
     }
 
-    private HBox createTab(String text, String imageName) {
-        HBox content = new HBox();
+    private void createResidentsTab() {
+        residentsTab.setGraphic(createTab("resident"));
+        residentsTab.setTooltip(new Tooltip("Residents"));
+    }
 
-        Label label = new Label(text);
+    private void createEventsTab() {
+        eventsTab.setGraphic(createTab("event"));
+        eventsTab.setTooltip(new Tooltip("Events"));
+    }
+
+    private void createHelpTab() {
+        helpTab.setGraphic(createTab("help"));
+        helpTab.setTooltip(new Tooltip("Help"));
+        helpTab.setOnSelectionChanged(e -> {
+            if (helpTab.isSelected()) {
+                handleHelp();
+            }
+            e.consume();
+        });
+    }
+
+    private void createExitTab() {
+        exitTab.setGraphic(createTab("exit"));
+        exitTab.setTooltip(new Tooltip("Exit"));
+        exitTab.setOnSelectionChanged(e -> {
+            if (exitTab.isSelected()) {
+                handleExit();
+            }
+        });
+    }
+
+    private HBox createTab(String imageName) {
+        HBox content = new HBox();
         ImageView icon = new ImageView("/images/" + imageName + ".png");
         icon.setFitHeight(38);
         icon.setFitWidth(38);

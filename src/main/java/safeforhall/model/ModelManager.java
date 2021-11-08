@@ -34,8 +34,8 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
     private final SortedList<Event> sortedEvents;
-    private FilteredList<Person> singlePerson;
-    private FilteredList<Event> singleEvent;
+    private final FilteredList<Person> singlePerson;
+    private final FilteredList<Event> singleEvent;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -164,6 +164,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasExactPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasExactPerson(person);
     }
 
     /**

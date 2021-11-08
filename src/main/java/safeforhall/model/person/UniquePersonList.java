@@ -28,12 +28,22 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains an exactly equivalent person as the given argument.
+     */
+    public boolean containsExact(Person toCheck) {
+        requireNonNull(toCheck);
+        return (internalList.stream().anyMatch(toCheck::isSameNamePerson)
+                && internalList.stream().anyMatch(toCheck::isSameRoomPerson));
     }
 
     /**

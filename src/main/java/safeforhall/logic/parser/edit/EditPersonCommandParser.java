@@ -21,6 +21,7 @@ import safeforhall.logic.parser.exceptions.ParseException;
 public class EditPersonCommandParser implements Parser<EditPersonCommand> {
 
     public static final String MESSAGE_DUPLICATE_NAME = "Name should not be changed for more than one person.";
+    public static final String MESSAGE_DUPLICATE_ROOM = "Room should not be changed for more than one person.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditPersonCommand
@@ -38,9 +39,13 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         try {
             indexArray = ParserUtil.parseIndexes(argMultimap.getPreamble().split(" "));
             boolean isNameChanged = argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent();
+            boolean isRoomChanged = argMultimap.getValue(CliSyntax.PREFIX_ROOM).isPresent();
             boolean isMoreThanOnePerson = indexArray.size() > 1;
             if (isMoreThanOnePerson && isNameChanged) {
                 throw new ParseException(MESSAGE_DUPLICATE_NAME);
+            }
+            if (isMoreThanOnePerson && isRoomChanged) {
+                throw new ParseException(MESSAGE_DUPLICATE_ROOM);
             }
         } catch (ParseException pe) {
             String message = pe.getMessage() + "\n" + EditPersonCommand.MESSAGE_USAGE;
