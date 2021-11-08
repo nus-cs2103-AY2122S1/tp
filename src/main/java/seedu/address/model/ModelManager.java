@@ -355,6 +355,12 @@ public class ModelManager implements Model {
         Collections.reverse(clientTotalOrders);
     }
 
+    @Override
+    public void resetOrderView() {
+        Comparator<Order> defaultComparator = Order::compareTo;
+        orderBook.sortOrders(defaultComparator);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -394,13 +400,6 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredTasks.equals(other.filteredTasks)
                 && filteredOrders.equals(other.filteredOrders);
-    }
-
-    @Override
-    public void resetOrderView() {
-        Comparator<Order> defaultComparator = Order::compareTo;
-        orderBook.sortOrders(defaultComparator);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     //=========== AddressBook & OrderBook Relation Check =======================================================
