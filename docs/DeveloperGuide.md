@@ -7,7 +7,7 @@ title: Developer Guide
 
 ## Table of Contents
 * [Architecture](#architecture)
-* [Implementation](#implementation)
+* [Design](#design)
 * [Appendix: Requirements](#appendix-requirements)
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 * [Appendix: Effort](#appendix-effort)
