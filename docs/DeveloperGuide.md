@@ -135,33 +135,57 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### 3.4 Model component
+
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+
+**Description** :
+
+The `Model` component is responsible for storing and managing data. It achieves this by maintaining a runtime model of
+the data using Java objects that represent real-world entities and associations that simulate relationships between these entities.
+
+**Functionality** :
+
+* The `UI` uses the data inside the `Model` to display to the user.
+* The `Storage`uses the data inside the `Model` to store it on the local hard-disk.
+* Does not depend on any of the other three components, as it represents data entities of the domain, which should make sense on their own without depending on other components
+
+**Component Structure** :
 
 <img src="images/ModelClassDiagram.png" width="800" />
 
+The `Model` component consists of the following
 
-The `Model` component is made up of the following subpackages,
-
-* [`friend`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/friend)
+* [`friend`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/friend) subpackage
   * a `Friend` comprises of a `FriendId`, `FriendName`, `Schedule` and a map of `GameFriendLink`s.
   * a `Schedule` is made of 7 `Day`s, each consisting of a `DayOfWeek`.
   * stores the friends' data i.e., all `Friend` objects in a `UniqueFriendsList` object.
 
-* [`game`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/game)
-  * a `Game` comprises of a `GameId` object. 
+* [`game`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/game) subpackage
+  * a `Game` comprises of a `GameId` object.
   * stores the games' data i.e., all `Game` objects in a `UniqueGamesList` object.
-  
-* [`gamefriendlink`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/gamefriendlink)
+
+* [`gamefriendlink`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/gamefriendlink) subpackage
   * stores the relationship between a `Friend` and a `Game` through their respective `FriendId` and `GameId`, as a `GameFriendLink` object.
   * a `GameFriendLink` comprises of a `UserName` and a `SkillValue`.
 
-The `Model` component also,
+* `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 
-* stores the currently 'selected' `Friend` objects (e.g., results of a `list` query) as a separate _filtered_ list which is not exposed to outsiders.
-* stores the currently 'selected' and 'sorted' `Friend` objects (e.g., results of a `recommend` query) as a separate _filteredAndSorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Friend>` that can be 'observed' <br>e.g. the UI's `Friends` Window is bound to this list so that the UI automatically updates when the data in the list changes.
-* stores the currently 'selected' `Game` objects (e.g., results of a 'list' query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Game>` that can be 'observed' <br>e.g. the UI's `Games` Window is bound to this list so that the UI automatically updates when the data in the list changes.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+The `Model` component manages the data in the following way:
+
+<img src="images/ModelClassDiagram2.png" width="600" />
+
+Friends: 
+* The Model manages a `FriendsList`, which is made up of a `UniqueFriendsList`, which contains an `ObservableList<Friend>`.
+* This `ObservableList<Friend>` is wrapped inside a `FilteredList<Friend>`. This is to enable easy filtering of the friends list for commands like `--list` and `recommend`.
+* This `FilteredList<Friend>` is wrapped inside a `SortedList<Friend>`. This is to enable easy sorting of the friends list for commands like `recommend`.
+* The `ObservableList<Friend>` is exposed to the `UI` component and is displayed under the 'Friends' section of the User interface.
+
+<img src="images/ModelClassDiagram3.png" width="600" />
+
+Games:
+* The Model manages a `GamesList`, which is made up of a `UniqueGamesList`, which contains an `ObservableList<Game>`.
+* This `ObservableList<Game>` is wrapped inside a `FilteredList<Games>`. This is to enable easy filtering of the games list for commands like `--list`.
+* The `ObservableList<Game>` is exposed to the `UI` component and is displayed under the 'Games' section of the user interface.
 
 ### 3.5 Storage component
 
@@ -437,12 +461,15 @@ such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)`
 
 ### 4.6 Get Feature
 
-#### 4.6.1 Implementation
+#### 4.6.1 Description
+
+The `--get` command is used to get/obtain the complete information about a Friend or Game.
+
+#### 4.6.2 Implementation
 
 When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
 
 <img src="images/GetCommandWorkflowActivityDiagram.png" width="1000">
-<br><center><ins>Image: Activity diagram showing the workflow of a '--get' command.</ins></center>
 
 The `--get` command is parsed using the following classes:
 * For friends:
@@ -470,11 +497,8 @@ After the `LogicManager#execute` receives a `GetFriendCommand` or `GetGameComman
 An example execution of a `GetFriendCommand` is shown in the sequence diagram below.
 
 <img src="images/GetSequenceDiagram.png" width="1000">
-<br><center><ins>Image: Sequence diagram showing the interaction between various entities<br>of 'Logic' and 'Model' component during the execution of a 'friend --get FRIEND_ID' command.</ins></center>
 
 `GetGameCommand` is executed similarly, but it deals with games and game lists.
-
-#### 4.6.2 Design Considerations
 
 Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
 * `CommandResult` with a `Friend` object

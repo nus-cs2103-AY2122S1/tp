@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam UiBackgroundColor UI_COLOR
+skinparam genericDisplay old
+skinparam defaultFontSize 20
+
+Package Model {
+Class ObservableList<Game> <<Interface>> MODEL_COLOR
+Class GamesList MODEL_COLOR
+
+Package game {
+Class UniqueGamesList MODEL_COLOR
+}
+
+Class FilteredList<Game> MODEL_COLOR
+}
+
+Package UI {
+Class GameListPanel UI_COLOR
+}
+
+GamesList *-down-> "1" UniqueGamesList
+UniqueGamesList -[hidden]right-- FilteredList
+UniqueGamesList *-down-> "1" ObservableList
+FilteredList *-down-> "1" ObservableList
+
+GameListPanel .-left-> ObservableList UI_COLOR
+
+@enduml
