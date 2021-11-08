@@ -1,19 +1,19 @@
 @startuml
 !include style.puml
-skinparam defaultFontSize 30
+skinparam defaultFontSize 20
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
 participant ":ScheduleFriendCommandParser" as ScheduleFriendCommandParser LOGIC_COLOR
-participant "scheduleFriendCommand:ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
+participant "c:ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("friend --schedule draco -p 2 4 1 -f 1")
+[-> LogicManager : execute("friend --schedule \n draco -p 2 4 1 -f 1")
 activate LogicManager
 
-LogicManager -> MainParser : parseCommand("friend --schedule draco -p 2 4 1 -f 1")
+LogicManager -> MainParser : parseCommand("friend --schedule \n draco -p 2 4 1 -f 1")
 activate MainParser
 
 create FriendCommandParser
@@ -23,7 +23,7 @@ activate FriendCommandParser
 FriendCommandParser --> MainParser
 deactivate FriendCommandParser
 
-MainParser -> FriendCommandParser : parse(" --schedule draco -p 2 4 1 -f 1")
+MainParser -> FriendCommandParser : parse(" --schedule \n draco -p 2 4 1 -f 1")
 activate FriendCommandParser
 
 create ScheduleFriendCommandParser
@@ -33,29 +33,29 @@ activate ScheduleFriendCommandParser
 ScheduleFriendCommandParser --> FriendCommandParser
 deactivate ScheduleFriendCommandParser
 
-FriendCommandParser -> ScheduleFriendCommandParser : parse("--schedule draco -p 2 4 1 -f 1")
+FriendCommandParser -> ScheduleFriendCommandParser : parse("--schedule \n draco -p 2 4 1 -f 1")
 activate ScheduleFriendCommandParser
 
 create ScheduleFriendCommand
 ScheduleFriendCommandParser -> ScheduleFriendCommand
 activate ScheduleFriendCommand
 
-ScheduleFriendCommand --> ScheduleFriendCommandParser : scheduleFriendCommand
+ScheduleFriendCommand --> ScheduleFriendCommandParser : c
 deactivate ScheduleFriendCommand
 
-ScheduleFriendCommandParser --> FriendCommandParser : scheduleFriendCommand
+ScheduleFriendCommandParser --> FriendCommandParser : c
 deactivate ScheduleFriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 ScheduleFriendCommandParser -[hidden]-> FriendCommandParser
 destroy ScheduleFriendCommandParser
 
-FriendCommandParser --> MainParser : scheduleFriendCommand
+FriendCommandParser --> MainParser : c
 deactivate FriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FriendCommandParser -[hidden]-> MainParser
 destroy FriendCommandParser
 
-MainParser --> LogicManager : scheduleFriendCommand
+MainParser --> LogicManager : c
 deactivate MainParser
 
 ref over LogicManager, ScheduleFriendCommand: Executing ScheduleFriendCommand
