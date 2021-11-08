@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Cca <<Rectangle>>{
+Class Cca
+Class Reminder
+Class Person
+Class CcaName
+Class Tag
+}
+
+Cca *--> "1" CcaName
+Cca *--> "*" Person
+Cca *--> "*" Reminder
+Cca *--> "*" Tag
+
+@enduml
