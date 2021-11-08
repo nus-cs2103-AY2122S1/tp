@@ -356,6 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
 | `* * *`  | beginner user                              | exit the program when I am done               | I don't have to keep it running all the time                                        |
 | `* * *`  | intermediate user                          | search a person with any specific detail      | locate details of persons without having to go through the entire list              |
+| `* * *`  | intermediate user                          | search a person with any specific partial detail | locate details of persons even if I do not remember their full details           |
 | `* * *`  | intermediate user                          | search a person with the given tag            | view all the contacts with the given tag                                            |
 | `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
@@ -440,6 +441,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b1. AddressBook shows an error message.
   * Use case ends
   *
+
+**Use case: Find a contact**
+
+**MSS**
+
+1. User requests to search persons
+2. ProfBook checks if the input is valid.
+3. ProfBook shows the list of persons that match the searched key and attribute.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given attribute type is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+    Use case ends.
+
+* 3b. The command format is invalid.
+    * 3b1. AddressBook shows an error message.
+
+  Use case ends
 
 
 **Use case: Export contacts**
@@ -565,7 +593,27 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Finding a person
+
+1. Finding a person
+
+    1. Prerequisites: Multiple persons in the list.
+
+    2. Test case: `find n/alex`<br>
+       Expected: List shows contacts with name matching or partially matching 'alex'.
+
+    3. Test case: `find n/ alex`<br>
+       Expected: Invalid command format!
+   
+    4. Test case: `find n/`<br>
+       Expected: Invalid command format!
+   
+    5. Test case: `find l/`<br>
+       Expected: Invalid command format!
+
+    6. Other incorrect find commands to try: `find`, `find a`, `...` (where attribute type does not exist)<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
