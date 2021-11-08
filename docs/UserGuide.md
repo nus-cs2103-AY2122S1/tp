@@ -168,6 +168,8 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 :information_source: Do not specify duplicate flags!
 * If you specify duplicate flags, the program will take the last one out of the duplicates.
