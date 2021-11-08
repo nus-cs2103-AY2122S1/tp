@@ -191,6 +191,7 @@ When there are no more nodes in the linked list except the initial state, the `u
 ### AddApp feature
 
 #### Implementation
+
 The feature allows users to create an appointment with any number of clients (`Person`), 
 along with a location (`Address`), a time period (`timePeriod`) and a description (`String`).
 The addApp mechanism is facilitated by `Schedule`.
@@ -227,6 +228,7 @@ The following sequence diagram shows how the addAppCommand operation works:
 ![AddAppSequenceDiagram](images/AddAppSequenceDiagram.png)
 
 #### Design considerations
+
 * **Alternative 1 (current choice):** User selects `Person` in `Appointment` through indexes of the displayed list.
     * Pros: Easy to implement, every `Person` in the displayed list will have a unique index.
     * Cons: As the user filters the displayed list, the indexes may change and be re-ordered, causing some confusion to the user.
@@ -239,12 +241,14 @@ The following sequence diagram shows how the addAppCommand operation works:
 #### Implementation
 
 ##### Filtering
+
 The feature allows users to filter using `findApp` . The input of the command will be passed down through the parser into 
 the findAppCommand as a `DescriptionContainsKeywordsPredicate`, where on execution, this predicate is passed
 into the initialized `ModelManager` filters the list of Appointments by setting this predicate in a 
 FilteredList of Appointments, updating it to be displayed by the UI.
 
 ##### Sorting
+
 The feature allows sort using one of two metrics, time of appointment or description, and return to the original list.
 Using `listApp Time` or `listApp Description` will sort the list, and `listApp` will return the list of appointments to
 its original display. This is also done through the `ModelManager`. The parser will first determine what type of `listApp`
@@ -257,9 +261,8 @@ functions to sort the list according to input and update the displayed list to b
 
 The delete feature deletes a person from the storage by specifying an index shown on the display list.
 
-
-
 #### Design considerations
+
 * This will likely be break the current data relations as those appointments that refer to this person will
 no longer be able to query information about this person.
 * Thus, we either:  
@@ -313,7 +316,38 @@ Upon finding such `Appointment` objects, PlaceBook will add the missing `Person`
 * **Alternative 2** Delete appointments with missing persons
     * Pros: This will ensure that the persons the user deleted from the JSON will remain deleted.
     * Cons: The user might not have noticed that those appointments have been deleted.
-    
+
+### Command History Navigation feature
+
+The Command History Navigation feature allows the users to navigate through the previous or next input command. This is useful
+for repetitive tasks such as adding or deleting multiple appointments/clients.
+
+#### Implementation
+
+Successful user inputs are saved into the `CommandHistory` class, which keeps a List of `String` and a pointer. 
+When the user presses `UP/DOWN` keys in the command box, the Keyboard event is triggered, which will call the 
+`:commandHistory::getLastInput` and `:commandHistory::getNextInput` respectively. Then it will set the commandBox to the 
+correct user input.
+
+The implementation of `getLastInput` is such that when the user reaches the first input, and press `UP`, it will still show the first input.
+The implementation of `getNextInput` is such that when the user reaches the last input, and press `DOWN`, it will show empty string `""`.
+
+### Theme Change feature
+
+The Theme Change feature allows users to change the theme of the GUI from light to dark. 
+
+#### Implementation
+
+Stores the style information in separate `.css` files, such as `darkTheme.css` and `lightTheme.css`.
+Specifically, The use of global variables in the newly added `lightTheme.css`, improves maintainability and consistency of the style.
+
+The App is loaded with a default theme, in `v1.4`, the lightTheme. Then the `UiManager` keeps a `ThemeManager` object, in which the theme information
+like the path to the stylesheet and the button image is stored. When the theme change button is pressed, the click event will call the `changeTheme` method 
+in the `themeManager`, which will remove the previous stylesheet from the `MainWindow` and add the new stylesheet.
+
+Moreover, other windows such as the `deleteConfirmationWindow`, can also get the current stylesheet by `getCurrentStylesheet` method
+
+
 
 ### \[Proposed\] Data archiving
 
@@ -369,11 +403,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | marketeer                                  | delete appointments            | remove cancelled/finished appointments                                 |
 | `* * *`  | new user                                   | view some example contacts     | have an idea of what contact info will look like                       |
 | `*`      | user with many persons in the contacts     | sort persons by name           | locate a person easily                                                 |
-| `* *`   | marketeer		                            | list appointments with clients  | view and plan my week and meet clients in a timely manner             |
-| `* *`   | user		                                | view my list of contacts	      | see who is already inside and contact clients that are forgotten      |
-| `* *`   | user		                                | sort appointments by Description | locate an appointment easily                                         |
-| `* *`   | user		                                | find an appointment by name | locate details of an appointment without having to go through the list    |
-
+| `*`      | user with many appointments                | sort appointments by Description | locate an appointment easily                                         |
+| `*  `    | user		                                | use the app in night mode      | work late at night                         |
+| `* *`    | marketeer		                            | list appointments with clients  | view and plan my week and meet clients in a timely manner             |
+| `* *`    | user		                                | view my list of contacts	      | see who is already inside and contact clients that are forgotten      |
+| `* *`    | user		                                | find an appointment by name | locate details of an appointment without having to go through the list    |
+| `* *`    | user		                                | undo my commands               | correct my mistakes quickly and easily                                 |
+| `* *`    | user		                                | edit a person                  | easily make changes to people in my contacts                           |
+| `* *`    | user		                                | edit an appointment            | easily make changes to appointments in my contacts                     |
 
 ### Use cases
 
