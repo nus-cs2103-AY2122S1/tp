@@ -79,6 +79,30 @@ all types of objects to be unique for instance, I changed our TaskList and Order
 
 <div style="page-break-after: always;"></div>
 
+## Contributions to the UG
+The following is a short example of the work I've done for the UG.
+
+## Using commands in combinations
+
+One of the most common use patterns we expect you to go through, is using our `findClient`/`findOrder`/`findTask`
+to first filter the list to items of interest, before then using other commands. We provide an example here. Suppose you
+started with this list of tasks:
+
+![commandcombination1](../images/commandcombination1.png)
+
+Now, perhaps you've just finished a task in August not on the current display, and want to locate it and mark it as complete.
+You can first quickly input `findtask Aug` to get a list of tasks with deadline in August:
+
+![commandcombination2](../images/commandcombination2.png)
+
+Now you can easily use `marktask 2` to mark the second task, that was previously not on the viewable list as complete. Finally,
+to go back to viewing all tasks and "remove" the filtered view, simply type `listtasks` to get the original list of tasks:
+
+![commandcombination3](../images/commandcombination3.png)
+
+<div style="page-break-after: always;"></div>
+
+
 ## Contributions to the DG
 
 ### Task and Order Package
