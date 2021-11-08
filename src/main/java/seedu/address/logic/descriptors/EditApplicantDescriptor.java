@@ -173,6 +173,7 @@ public class EditApplicantDescriptor {
                 && getPhone().equals(e.getPhone())
                 && getEmail().equals(e.getEmail())
                 && getAddress().equals(e.getAddress())
-                && getApplication().equals(e.getApplication());
+                && getApplication().equals(e.getApplication())
+                && getGitHubUrl().equals(e.getGitHubUrl());
     }
 }

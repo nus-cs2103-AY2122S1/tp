@@ -75,8 +75,8 @@ public class FilterApplicantDescriptor {
     @Override
     public String toString() {
         return String.join(", ",
-                getPositionTitle().map(title -> "Position: " + title).orElse("")
-                + getApplicationStatus().map(status -> "Status: " + status).orElse(""));
+                getPositionTitle().map(title -> " Position: " + title).orElse("")
+                + getApplicationStatus().map(status -> " Status: " + status).orElse(""));
     }
 
 }
