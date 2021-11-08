@@ -55,6 +55,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
     private static final String UPLOAD_FAIL_NO_STUDENTS_MESSAGE = String.format(UPLOAD_FAIL_MESSAGE,
                                                                                 "No students found in your file!");
+    private static final String DEFAULT_STORAGE_LOCATION = "data/programmerError.json";
     private static final String FILE_NOT_FOUND_MESSAGE = "Sorry, we could not find or access your data file!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -273,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDownload() {
         JSONArray jsonData = new JSONArray();
         try {
-            jsonData = JsonUtil.getJsonData("data/programmerError.json");
+            jsonData = JsonUtil.getJsonData(DEFAULT_STORAGE_LOCATION);
         } catch (IllegalValueException e) {
             popupManager.displayPopup(FILE_NOT_FOUND_MESSAGE);
             return;
