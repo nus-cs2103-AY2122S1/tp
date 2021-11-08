@@ -526,21 +526,23 @@ Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the us
 *Figure I.3.2: View tags UI sequence diagram*
 
 #### Design considerations
-**Aspect: Data Structures to support lesson operations**
+**Aspect: Data structure for storing tags**
 
-* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
+* **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a private field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
   - Pros:
-    - Quicker retrieval and update of data using a `HashMap` for `tagCounter`.
+    - Quicker update and retrieval of data using a `HashMap` for `tagCounter`.
+    - Easier implementation.
   - Cons:
-    - Each `Person` object has its own set of `Tags` which may be repetitive and memory-consuming if there is a large number of same tags.
+    - Each `Person` object has its own set of `Tag` objects which may be repetitive and memory-consuming if there were multiple tags with the same tag name.
     - Retrieval of all tags and calculation of the number of persons labelled under each tag during the initialization of the application requires iterating through all persons in TAB.
 
-* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag.
+* **Alternative 2:** Each tag stores a list of persons or number of persons labelled with that tag _(referenced from [Billboard - Tagging](https://ay1920s1-cs2103t-f12-4.github.io/main/DeveloperGuide.html#aspect-data-structure-to-support-tag-commands) with modifications)_.
   - Pros:
-    - Faster retrieval of the number of persons under each tag.
+    - Does not require additional data structure for storing the number of persons labelled with a certain tag.
+    - Direct retrieval of the number of persons under each tag.
   - Cons:
     - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
-    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Since TAB objects are immutable, this means that new copies of `Person` and `Tag` have to be created after every command that modifies the data. This could slow down the application when there is a large amount of data stored.
+    - Editing the tags labelled for a `Person` requires modification of the data fields of the `Person`. Due to the immutability of TAB objects, new copies of `Person` and `Tag` have to be created after every command that modifies the `Person` data. This could slow down the application when there is a large amount of data stored.
     
 ### Switching between students, calendar, and tags
 
