@@ -70,7 +70,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'ta2.jar'
+    archiveName = '[CS2103T-T13-2][ta2].jar'
 }
 
 defaultTasks 'clean', 'test'
