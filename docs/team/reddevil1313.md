@@ -10,7 +10,7 @@ their students’ lab results in a simple and efficient manner, allowing them to
 processes and more time teaching students.
 
 The following is a summary of my contributions to the
-project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=reddevil1313)
+project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=reddevil1313))
 
 ### Features
 
@@ -63,10 +63,15 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
   , [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417)
   , [#419](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/419)
   , [#447](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/447)
+  , [#579](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/579)
+  , [#583](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/583)
 - Bug fixes: e.g. [#417](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/417)
   , [#425](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/425)
   , [#432](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/432)
   , [#447](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/447)
+  , [#500](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/500)
+  , [#561](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/561)
+  , [#591](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/591)
 
 4. **Review and Mentoring Contributions:**
 
@@ -75,6 +80,10 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
   , [#232](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/232)
   , [#244](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/244)
   , [#324](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/324)
+- Reported bugs and suggestions for other teams in the class: [#1](https://github.com/SamaySagar/ped/issues/1)
+  , [#2](https://github.com/SamaySagar/ped/issues/2), [#3](https://github.com/SamaySagar/ped/issues/3)
+  , [#4](https://github.com/SamaySagar/ped/issues/4), [#5](https://github.com/SamaySagar/ped/issues/5)
+  , [#9](https://github.com/SamaySagar/ped/issues/9), [#12](https://github.com/SamaySagar/ped/issues/12)
 
 5. **Documentation**:
     * User Guide:
@@ -84,4 +93,8 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
           [#236](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/236)
     * Developer Guide:
         * Added high priority user stories [#43](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/43)
+        * Sequence and Activity Diagram for EditLabCommand [#519](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/519)
+        * Added feature description for purge and editlab commands 
+          [#571](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/571)
+          , [#574](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/574)
 
