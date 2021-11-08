@@ -98,6 +98,8 @@ Let's try adding a student with the following details:
    Type `student -v 4` in the Command Panel and hit `Enter`.
     * This displays the student at `INDEX` 4 in the Viewing Panel.
 
+<div style="page-break-after: always;"></div>
+
 ### Managing Tasks
 
 Next, let us add a task with description __Lab Report__ and deadline __12 November 2021__. 
@@ -111,8 +113,9 @@ Next, let us add a task with description __Lab Report__ and deadline __12 Novemb
    which is 3 in this case. Type `task -e 3 n/Science Report` in the "Command Panel" and hit `Enter`.
     * This updates the description of the task at index __3__ to __Science Report__.
     * The description remains unchanged.
-<br><br>
-   
+
+    <div style="page-break-after: always;"></div>
+
 3. You can also assign this task, __Science Report__ to __David__.
     * Take note of the index of the task you would like to
       assign and the index of the student to whom the task should be assigned. In this case, the index of
@@ -136,8 +139,6 @@ Let us now add "David" to a group named "CS2103T".
 You can refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -187,8 +188,7 @@ Examples:
   adds a student with the name John, phone number 12345678, email john@mail.com and address at 42 Wallaby Way, Sydney
 * `student -a n/Barbara p/12344321 e/barber@gmail.com a/123 Sesame Street t/graduate t/actress`<br>
   adds a student with the name Barbara, phone number 12344321, email barber@gmail.com, address at 123 Sesame Street, and tags graduate and actress
-
-<div style="page-break-after: always;"></div>
+  
 #### Viewing a student: `student -v`
 
 Views a particular student's details in the Person Panel.
@@ -242,6 +242,8 @@ Shows a list of all students in the Person Panel.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 #### Locating students by name: `student -f`
 
 Finds students whose names contain any of the given keywords.
@@ -289,11 +291,11 @@ Example:
 Deletes a lesson from the specific student
 
 
-Format: `student -dl PERSON_INDEX LESSON_INDEX`
+Format: `student -dl STUDENT_INDEX LESSON_INDEX`
 
-* Specifies the student at `PERSON_INDEX`.
+* Specifies the student at `STUDENT_INDEX`.
 * Deletes the specified lesson at `LESSON_INDEX` of the student specified.
-* Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
+* Both `STUDENT_INDEX` and `LESSON_INDEX` must be a positive number.
 * The `LESSON_INDEX` can be found by using the [student viewing command](#viewing-a-student-student--v) as shown below.
 
 ![studentLessonIndex](images/imagesInUG/student-findLesson.png)
@@ -337,7 +339,6 @@ Example:
 
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Groups
 
@@ -373,6 +374,8 @@ Format: `group -v INDEX`
 
 Examples:
 * `group -v 5` views the group specified at the index 5.
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting a group: `group -d`
 
@@ -412,6 +415,8 @@ Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
 
+<div style="page-break-after: always;"></div>
+
 #### Deleting a lesson from a group: `group -dl`
 
 Deletes a lesson from the specified group
@@ -427,7 +432,6 @@ Example:
 * `group -dl 1 1` deletes the first lesson from the first group.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Tasks
 
@@ -444,6 +448,8 @@ Format: `task -a n/NAME d/DEADLINE`
 Examples:
 * `task -a n/CS2100 Lab 1 d/2021-10-10` adds the task "CS2100 Lab 1"
 
+<div style="page-break-after: always;"></div>
+
 #### Editing a task: `task -e`
 
 Edits a task in the Task Panel.
@@ -459,6 +465,8 @@ Examples:
 * `task -e 4 d/2021-12-31` edits the deadline of the fourth task to 31 December 2021
 
 ![taskedit](images/imagesInUG/task-edit.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting a task: `task -d`
 
@@ -511,6 +519,8 @@ Format: `task -as STUDENTINDEX TASKINDEX`
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
 
+<div style="page-break-after: always;"></div>
+
 #### Assigning tasks to groups: `task -ag`
 
 Assigns a specific task to groups’ task list.
@@ -546,6 +556,8 @@ Format: `task -unag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
+
+<div style="page-break-after: always;"></div>
 
 #### Marking a task as done by student: `task -do`
 
@@ -584,6 +596,8 @@ Format: `task -undo STUDENTINDEX TASKINDEX`
 Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
 
+<div style="page-break-after: always;"></div>
+
 #### Marking a task as not done by group: `task -undog`  (Coming soon)
 
 Marks that a group has not done a task.
@@ -597,7 +611,6 @@ Examples:
 * `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Others
 
@@ -643,7 +656,6 @@ If your changes to the data file makes its format invalid, Tutor Master will dis
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
