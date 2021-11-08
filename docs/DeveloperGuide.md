@@ -13,7 +13,7 @@ title: Developer Guide
    2. [UI Components](#UI component)
    3. [Logic Component](#Logic component)
    4. [Model Component](#Model component)
-   5. [Storage component](#Storage component)
+   5. [Storage Component](#Storage component)
    6. [Common Classes](#common-classes)
 5. [Implementations](#Implementations)
    1. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
@@ -79,7 +79,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 - **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
 - **TA**: A CS2100 teaching assistant
 - **PE**: ProgrammerError
-
+- **CSV**: Comma-Separated Values
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -108,8 +108,6 @@ is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
@@ -261,9 +259,9 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-## <a name="Common-classes"></a> **10. Common classes**
+## <a name="common-classes"></a> **10. Common classes**
 
-Classes used by multiple components are in the `seedu.programmer.commons` package.
+Classes used by multiple components are in the `seedu.programmer.commons` package. [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 --------------------------------------------------------------------------------------------------------------------
 
