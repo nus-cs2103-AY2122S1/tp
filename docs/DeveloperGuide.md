@@ -4,23 +4,8 @@ title: Developer Guide
 ---
 
 ## **Table of Contents**
+{:toc}
 
-1. [Acknowledgements](#Acknowledgements)
-2. [Setting up, getting started](#Setting up)
-3. [Design](#Design)
-4. [Architecture](#Architecture)
-5. [UI components](#UI component)
-6. [Logic component](#Logic component)
-7. [Storage component](#Storage component)
-8. [Implementations](#Implementations)
-9. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-10. [Appendix: Requirements](#Appendix Requirements)
-11. [Common classes](#Common classes)
-12. [User Stories](#User Stories)
-13. [Use cases](#Use Cases)
-14. [Non-Functional Requirements](#Non-Functional Requirements)
-15. [Glossary](#Glossary)
-16. [Appendix: Instructions for manual testing](#Appendix)
 
 --------------------------------------------------------------------------------------------------------------------
 
