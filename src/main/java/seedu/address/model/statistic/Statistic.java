@@ -83,10 +83,8 @@ public class Statistic {
     public Map<String, Map<String, Integer>> getRawData() throws CommandException {
         Map<String, Map<String, Integer>> rawData = new HashMap<>();
         Map<String, Integer> nationalitiesCount = nationalityStatistic.getNationalitiesCount();;
-        Map<String, Integer> gendersCount = genderStatistic.getGenderCount();;
 
         rawData.put("Nationality Statistics", nationalitiesCount);
-        rawData.put("Gender Statistics", gendersCount);
 
         return rawData;
     }
