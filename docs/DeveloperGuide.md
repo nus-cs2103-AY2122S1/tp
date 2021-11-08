@@ -31,11 +31,15 @@ are:
 This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
+<div style="page-break-after: always;"></div>
+
+### Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -62,6 +66,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -185,6 +191,7 @@ The `Storage` component,
 * `Archive` allows users to temporarily remove `Person`s from Notor
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -231,11 +238,10 @@ Each Person would have one LastContactDate and NextContactDate. These two can ha
 * It may be useful to set a new LastContactDate or NextContactDate for whole groups at once
 * With regards to UI, these dates might be observed by person card using the Observation design pattern. This would allow the UI to update these dates with colours depending on how soon the NextContactDate is or how far away the LastContactDay is.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -246,6 +252,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -261,6 +269,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * has groups of contacts that have different needs
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -296,6 +306,8 @@ Priorities:
 |general user, mentor professor, module professor, on the go user                            |archive students that are not as relevant in my current contacts                                              |keep my mentee list short and easy to read                 |Low         |           |Iteration 1.3b|
 |experienced user, module professor                                                          |set my own command aliases                                                                                    |use my own commands when I am used to them                 |Low         |           |Delay         |
 |experienced user, mentor professor, module professor                                        |use shorter commands                                                                                          |save time                                                  |Medium      |           |Delay         |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -517,6 +529,8 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 11. While the software should be accessible for colour-blind or vision impaired mentors, this goal is out of scope for Notor 1.4 due to time constraints.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -798,10 +812,12 @@ Prerequisites: Have persons in the list panel.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Find the file `notor.json`, which should be located in data directory near Notor. Corrupt the file<br>
+      Expected: Corrupted file cannot be read, and Notor will begin again empty
+   2. Delete the file `notor.json`<br>
+   Expected: A new blank notor will be created
 
-1. _{ more test cases ... }_
-
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
