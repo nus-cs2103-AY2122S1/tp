@@ -32,6 +32,10 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
 
         if (moduleCodes.size() >= 1) {
+            if (args.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 1) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+            }
             try {
                 return deleteByModuleCode(moduleCodes);
             } catch (ParseException pe) {

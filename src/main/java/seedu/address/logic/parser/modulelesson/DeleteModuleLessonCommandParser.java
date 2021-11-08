@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.modulelesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.Collections;
@@ -30,12 +31,16 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     public DeleteModuleLessonCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
-        try {
-            if (!moduleCodes.isEmpty()) {
-                return parseDeleteByModuleCode(moduleCodes);
+        if (!moduleCodes.isEmpty()) {
+            if (userInput.indexOf(String.valueOf(PREFIX_MODULE_CODE)) != 1) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleLessonCommand.MESSAGE_USAGE));
             }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()), pe);
+            try {
+                return parseDeleteByModuleCode(moduleCodes);
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()), pe);
+            }
         }
         try {
             if (userInput.contains("-")) {

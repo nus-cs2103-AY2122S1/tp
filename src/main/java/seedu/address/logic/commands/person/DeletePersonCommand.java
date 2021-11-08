@@ -27,11 +27,12 @@ public class DeletePersonCommand extends Command {
     public static final String MESSAGE_USAGE = "delete: "
             + "Deletes the person identified by the index number used in the displayed person list "
             + "or by module code.\n"
-            + "Ensure that INDEX is a positive integer and exists in contHACKS.\n"
+            + "Parameters: INDEX (must be a positive integer that exists in contHACKS)\n"
+            + "START_INDEX, END_INDEX (START_INDEX more than or equal to END_INDEX)\n"
+            + "m/MODULE_CODE\n"
             + "Example: delete 1 , delete 1-3 , delete "
             + PREFIX_MODULE_CODE + "CS2040S, "
-            + "delete " + PREFIX_MODULE_CODE + "CS2040S T09\n"
-            + "Click on the Help button at the top for more detailed information";
+            + "delete " + PREFIX_MODULE_CODE + "CS2040S T09\n";
 
     public static final String MESSAGE_DELETE_BY_MODULE_USAGE = "delete: "
             + "Delete only accepts one batch delete by Module Code at a time\n"
