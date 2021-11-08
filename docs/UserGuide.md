@@ -49,8 +49,7 @@ You might have to give your device permission to open BogoBogo.
 
 6. Let's try adding a new item! Enter the command in the command box.<br>
 
-    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price $1.3, and sales price $2.4,
-      into the inventory.
+**`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, cost price $1.3, and sales price $2.4, into the inventory.
 
 7. Congrats on setting up BogoBogo! Read our [features](#managing-inventory) to learn about the different commands you can
    do with the application.
@@ -90,7 +89,7 @@ Ready to jump right into recording your inventory? Use <code>clear</code> to cle
     </li>
     <li>
       <p>Prefixed parameters can be in any order.<br>
-      e.g. <code>id/{id number} cp/{cost price}</code> and <code>cp/{cost price} id/{id number}</code> are interpretted as the same thing.</p>
+      e.g. <code>id/{id number} cp/{cost price}</code> and <code>cp/{cost price} id/{id number}</code> are interpreted as the same thing.</p>
     </li>
     <li>
       <p>If a parameter is expected only once in the command is specified multiple times, only the last occurrence of
@@ -132,8 +131,8 @@ Prefix  |  Argument     | Description                   | Remarks               
 &nbsp;  | name          | Name of the item to add.      | Only alphanumeric characters (and spaces) are allowed.   |
 `id/`   | id number     | Id number of item to add.     | Must be an integer with no more than 6 digits.                               |
 `c/`    | count         | Quantity of the item to add.  | Must be an integer, default value is 1.                  |
-`cp/`   | cost price    | Cost price of the item to add.| Must be a positive number.                               |
-`sp/`   | sell price    | Sell price of the item to add.| Must be a positive number.                               |
+`cp/`   | cost price    | Cost price of the item to add.| Must be non-negative.                                    |
+`sp/`   | sell price    | Sell price of the item to add.| Must be non-negative.                                    |
 `t/`    | tag(s)        | Tags of the item to add.      | Only alphanumeric characters are allowed.                |
 
 <div class="code-example bg-grey-lt-000">
@@ -239,7 +238,7 @@ Format:
 
 <div class="code-example bg-grey-lt-000">
 :question:  <b>Where can I find the transaction id?</b><br>
-The transaction id can be found to the right of the transaction timestamp when you <code>`list txns</code>.
+The transaction id can be found to the right of the transaction timestamp when you <code>list txns</code>.
 </div>
 
 ![list](images/screenshots/list_items.png)
@@ -380,7 +379,7 @@ goods), and `iorder` to account for sold items.
 
 **Q**: My business is really growing lately, why does my BogoBogo calculation of revenue, profit, and cost seem wrong?<br>
 **A**: BogoBogo was built for small businesses in mind. On that note, it doesn't calculate revenue and cost beyond $999,999,999. 
-Consider hiring an accountant Mr Billionaire!
+Consider hiring an accountant, you billionaire!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
