@@ -86,35 +86,35 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasMember_nullMember_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasMember(null));
     }
 
     @Test
-    public void hasPerson_personNotInSportsPa_returnsFalse() {
+    public void hasMember_memberNotInSportsPa_returnsFalse() {
         assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSportsPa_returnsTrue() {
+    public void hasMember_memberInSportsPa_returnsTrue() {
         modelManager.addMember(ALICE);
         assertTrue(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void getSamePerson_personWithSameNameInSportsPa_returnsPersonWithSameName() {
+    public void getSameMember_memberWithSameNameInSportsPa_returnsMemberWithSameName() {
         modelManager.addMember(ALICE);
         assertEquals(modelManager.getSameMember(ALICE_DIFFERENT_PHONE), ALICE);
     }
 
     @Test
-    public void getSamePerson_personWithSamePhoneInSportsPa_returnsPersonWithSameName() {
+    public void getSameMember_memberWithSamePhoneInSportsPa_returnsMemberWithSameName() {
         modelManager.addMember(ALICE);
         assertEquals(modelManager.getSameMember(ALICE_DIFFERENT_NAME), ALICE);
     }
 
     @Test
-    public void getSamePerson_personWithSameNameNotInSportsPa_returnsNull() {
+    public void getSameMember_memberWithSameNameNotInSportsPa_returnsNull() {
         assertNull(modelManager.getSameMember(BOB));
     }
 
@@ -140,7 +140,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredMemberList().remove(0));
     }
 

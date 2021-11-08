@@ -46,6 +46,7 @@ Syntax | Description
 **bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
 *italics* | Terms to be defined in the [glossary](#glossary)  
 `Codeblock`          | Represents distinct classes, and their methods
+<kbd>keyboard</kbd> | Represents keyboard actions by the user
 [link](#table-of-contents) | Represents links that can be clicked on to navigate to a relevant section of the User Guide or a different website
 **:information_source: Notes:** | Represents important information to note
 **:bulb: Tip:**| Represents useful tips that we would like to share
@@ -77,7 +78,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
+the [diagrams](https://github.com/AY2122S1-CS2103T-W12-1/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
 </div>
@@ -125,7 +126,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `deletem 1`.
+the command <kbd>deletem 1</kbd>.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -239,7 +240,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -248,7 +249,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Alias feature
-
+The alias feature creates a shortcut name for any command in SportsPA. The shortcut name must not be an existing command word in SportsPA.
 #### Implementation
 
 The *alias* mechanism is facilitated by `SportsPaParser`. Aliases are stored in `AliasMap`, which keeps the mappings
@@ -274,18 +275,18 @@ empty mappings.
 
 ![AliasState0](images/AliasState0.png)
 
-Step 2. The user executes the `alias s/l cw/listf` command to create a shortcut `l` for the `listf` command. The `alias`
-command calls `Model#addAlias(Alias)`, causing a mapping between `l` and `listf` to be stored in `AliasMap`.
+Step 2. The user executes the <kbd>alias s/l cw/listf</kbd> command to create a shortcut <kbd>l</kbd> for the <kbd>listf</kbd> command. The <kbd>alias</kbd>
+command calls `Model#addAlias(Alias)`, causing a mapping between <kbd>l</kbd> and <kbd>listf</kbd> to be stored in `AliasMap`.
 
 ![AliasState1](images/AliasState1.png)
 
-Step 3. The user now wants to use the shortcut `l` for a different command, `listm`, instead. The user
-executes `alias s/l cw/listm`. `Model#addAlias(Alias)` is called again and the mapping from `l` to `listf` is replaced
-with `l` to `listm` in `AliasMap`.
+Step 3. The user now wants to use the shortcut <kbd>l</kbd> for a different command, <kbd>listm</kbd>, instead. The user
+executes <kbd>alias s/l cw/listm</kbd>. `Model#addAlias(Alias)` is called again and the mapping from <kbd>l</kbd> to <kbd>listf</kbd> is replaced
+with <kbd>l</kbd> to <kbd>listm</kbd> in `AliasMap`.
 
 ![AliasState2](images/AliasState2.png)
 
-Step 4. The user enters `l`, which the system understands as `listm` and executes the `listm` command, displaying all
+Step 4. The user enters <kbd>l</kbd>, which the system understands as <kbd>listm</kbd> and executes the <kbd>listm</kbd> command, displaying all
 members in the member list.
 
 The following sequence diagram shows how the system understands aliases:
@@ -296,13 +297,13 @@ The following sequence diagram shows how the system understands aliases:
 
 </div>
 
-Step 5. The user then realises that the shortcut `l` was not to their liking and deletes the alias by
-executing `unalias l`. The `unalias` command calls `Model#removeAlias(Shortcut)` and removes the mapping from `AliasMap`
+Step 5. The user then realises that the shortcut <kbd>l</kbd> was not to their liking and deletes the alias by
+executing <kbd>unalias l</kbd>. The <kbd>unalias</kbd> command calls `Model#removeAlias(Shortcut)` and removes the mapping from `AliasMap`
 .
 
 ![AliasState3](images/AliasState3.png)
 
-Step 6. The user finally decides to use the shortcut `lm` for `listm` and executes `alias s/lm cw/lsitm`. The user
+Step 6. The user finally decides to use the shortcut <kbd>lm</kbd> for <kbd>listm</kbd> and executes <kbd>alias s/lm cw/listm</kbd>. The user
 closes the application and the alias defined are saved into `UserPrefStorage`, available for use at the next launch.
 
 The following activity diagram summarizes what happens when a user enters and executes a command:
@@ -326,7 +327,7 @@ regularly used commands. Considering the target use of SportsPA and time constra
 likely to be repeated, we decided that it was sufficient to allow users to create shortcuts for commands only.
 
 ### Split members to facilities feature
-
+The split feature splits members into the facilities based on its capacity and members' availabilities. The <kbd>split</kbd> command only accepts **numbers 1-7** as a preamble e.g., <kbd>split 6</kbd> is valid and splits members on Saturday.
 #### Implementation
 
 The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br><br>`ModelManager` stores a list of
@@ -360,13 +361,13 @@ and allocates the members in the given filtered member list to facilities greedi
 Given below is an example usage scenario and how the split feature behaves at each step.
 
 Step 1. The user launches the application for the first time. The user then adds 5 members into an empty SportsPA
-by executing the `addm` command 5 times with the parameter `d/1` (all required parameters are provided as well but not specified here).
+by executing the <kbd>addm</kbd> command 5 times with the parameter <kbd>d/1</kbd> (all required parameters are provided as well but not specified here).
 Each `Member` in the `filteredMembers` list will have an availability of Monday.
-The user then adds 1 facility into SportsPA by executing the `addf` command with the parameter `c/5`
+The user then adds 1 facility into SportsPA by executing the <kbd>addf</kbd> command with the parameter <kbd>c/5</kbd>
 (all required parameters are provided as well but not specified here). The `Facility` in the `facilities` list will 
 have a capacity of 5 and an `AllocationMap` with all the values initialized as an empty `ArrayList`.
 
-Step2. The user executes `split 1` command to split the 5 members in the filtered list to facilities on Monday. The `split` command
+Step2. The user executes <kbd>split 1</kbd> command to split the 5 members in the filtered list to facilities on Monday. The <kbd>split</kbd> command
 creates a `MemberAvailableOnDayPredicate` with the given day and passes it and the given day to `ModelManager#split(Predicate<Member>, int)`.
 `ModelManager` then creates a filtered list of members who are available on Monday. It then calls `SportsPa#split(FilteredList<Member>, int)`, passing to it
 the filtered list and the given day. `SportsPA` then iterates through the 5 members in the filtered member list and the 1 facility in its `UniqueFacilityList`, calling
@@ -379,6 +380,10 @@ The following sequence diagram shows how the split mechanism works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 The lifelines should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+The following activity diagram summarizes what happens when a user executes the `split` command:
+
+<img src="images/SplitActivityDiagram.png" width="450" />
 
 #### Design considerations:
 
@@ -407,6 +412,8 @@ The lifelines should end at the destroy marker (X) but due to a limitation of Pl
   * Cons: Harder to implement and test. May require the use of supporting data structures which adds on to the complexity.
 
 ### Mark/unmark attendance feature
+The mark attendance feature marks the attendance of the members at the specified index/indices of the member list as present.<br>
+The unmark attendance feature unmarks the attendance of the members at the specific index/indices of the member list to be absent.<br>
 
 #### Implementation
 
@@ -420,6 +427,7 @@ which will be updated accordingly when the attendance of that `Member` is marked
 as absent.
 * `ModelManager#markOneMemberAttendance(Member)` — Marks attendance of specified member.
 * `ModelManager#unmarkMembersAttendance(Member)` — Unmarks attendance of specified member.
+* `ModelManager#isWithinListIndex(List<Index>)` — Checks if given indices are valid.
   
 Additionally, `Member` implements the following operations:
 * `Member#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
@@ -434,10 +442,10 @@ by executing the `addm` command. Each `Member` in the `filteredMembers` list wil
 ![MarkObjectDiagram](images/MarkObjectDiagram_InitialState.png)
 
 
-Step 2. The user executes `mark 1 2` command to mark the members at index 1 and 2 in the filtered list as present. The `mark` command
-calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
-and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The newly edited 
-newly edited`Member`s with the updated attendance are now referenced by `ModelManager`.
+Step 2. The user executes <kbd>mark 1 2</kbd> command to mark the members at index 1 and 2 in the filtered list as present. The <kbd>mark</kbd> command 
+first checks if the given indices 1 and 2 are within the displayed list of members via the `ModelManager#isWithinListIndex(List<Index>)`. Then
+if all indices are valid,`ModelManager#markMembersAttendance(List<Index>)` is then called. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
+and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The newly edited`Member`s with the updated attendance are now referenced by `ModelManager`.
 
 ![MarkObjectDiagramModified](images/MarkObjectDiagramModified_FinalState.png)
 
@@ -449,15 +457,13 @@ The following sequence diagram shows how the mark attendance operation works.
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-The following activity diagram summarizes what happens when a user executes the `import` command:
-
-<img src="images/SplitActivityDiagram.png" width="250" />
-
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
 to be unmarked via the `Member#setNotPresent()` and `ModelManager` references the newly modified `Member`s.
 
+The following activity diagram shows what happens when a user executes the `mark` command.
 
+<img src="images/MarkActivityDiagram.png" width="250"/>
 
 #### Design considerations:
 
@@ -474,7 +480,7 @@ to be unmarked via the `Member#setNotPresent()` and `ModelManager` references th
       attendance to mark.
 
 ### Find member feature
-
+The find member feature finds and displays all members that match the parameters specified. **At least one valid parameter** must be supplied.
 #### Implementation
 The find member mechanism is facilitated by `FindMemberCommandParser`.
 `FindMemberCommandParser` implements the following operations:<br>
@@ -495,11 +501,11 @@ Lastly, the filtered member list is displayed through `Model#updateFilteredMembe
 
 Given below is an example usage scenario and how the find member mechanism behaves.
 
-Step 1. The user executes the `findm t/exco` command to find all members with the tag `exco`<br>
+Step 1. The user executes the <kbd>findm t/exco</kbd> command to find all members with the tag <kbd>exco</kbd><br>
 Step 2. `LogicManager` calls `SportsPaParser#parseCommand` and creates a new `FindMemberCommandParser`. <br>
-Step 3. `FindMemberCommandParser#parse` is called to parse the argument `t/exco`.<br>
-Step 4. Since `t/exco` is a valid argument,`FindMemberCommandParser#generatePredicate` is called.<br>
-Step 5. The system recognises the `t/` prefix and calls on the `FindMemberCommandParser#generateTagPredicate` to generate a unique tag predicate from `exco`.<br>
+Step 3. `FindMemberCommandParser#parse` is called to parse the argument <kbd>t/exco</kbd>.<br>
+Step 4. Since <kbd>t/exco</kbd> is a valid argument,`FindMemberCommandParser#generatePredicate` is called.<br>
+Step 5. The system recognises the <kbd>t/</kbd> prefix and calls on the `FindMemberCommandParser#generateTagPredicate` to generate a unique tag predicate from <kbd>exco</kbd>.<br>
 Step 6. The unique tag predicate is returned in the `FindMemberCommandParser#generatePredicate` method and then chained together via the `Predicate#and` method.<br>
 Step 7. A new `MemberMatchesKeywordPredicate` object is created to store the final predicate.<br>
 Step 8. The `MemberMatchesKeywordPredicate` object is passed to `FindMemberCommand`.<br>
@@ -509,11 +515,11 @@ Step 11. Lastly, a new `CommandResult` is returned to the `LogicManager`.
 
 The following sequence diagram shows how the find member operation works:
 
-![FindMemberSequenceDiagram](images/FindMemberSequenceDiagram.png)
+<img src="images/FindMemberSequenceDiagram.png" width="1500"/>
 
 The following activity diagram summarizes what happens when a user enters and executes a find member command:
 
-<img src="images/FindMemberActivityDiagram.png" width="250" />
+<img src="images/FindMemberActivityDiagram.png" width="300" />
 
 #### Design considerations
 **Aspect: Implementation of the find member command**
@@ -885,7 +891,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes from step 2.
 
-**Use case: UC10 - Mark attendance of members**
+**Use case: UC10 - Unmark attendance of members**
 
 This use case is similar to that of <span style="text-decoration: underline">mark attendance (UC09)</span>.
 
@@ -978,8 +984,6 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 2. SportsPA shows the list of facilities whose locations match the request
 
    Use case ends.
-
-**Extensions**
 
 **Extensions**
 
@@ -1191,7 +1195,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed
+1. Should work on any *mainstream OS* as long as it has Java 11 or above installed
 2. Should be able to hold up to 1000 entries (members and facilities) without a noticeable sluggishness in performance
    for typical usage
 3. Should be able to process and execute user commands within 3 seconds
@@ -1204,11 +1208,11 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * **Graphical User Interface (GUI)**: A user interface that includes graphical representation like buttons and icons for
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
-* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format.
+* **JSON** : JSON, or JavaScript Object Notation, is a minimal, readable format for structuring data.
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
 * **Fast typists**: Types faster than 40wpm (words per minute)
 * **Alias**: A shortcut name for any command in SportsPA
-* **CCA**: In Singapore, a co-curricular activity (CCA), is a non-academic activity that all students must undertake as part of their education
+* **CCA**: In Singapore, a co-curricular activity (CCA), is a non-academic activity that students take part in.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1227,7 +1231,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+    1. Double-click the jar file 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
 2. Saving window preferences
@@ -1245,22 +1250,22 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: The list of members does not already contain members with the same names and/or phone numbers as those in the test
    cases below. 
    
-   2. Test case: `addm n/Bob p/12345678`<br>
+   2. Test case: <kbd>addm n/Bob p/12345678</kbd><br>
         Expected: New member with the same name and phone number is added to the bottom of the list
         of members. The details of the member are shown in the status message.
    
-   3. Test case: `addm n/Ch@rlie p/45678`<br>
+   3. Test case: <kbd>addm n/Ch@rlie p/45678</kbd><br>
         Expected: No new member added. Error details are shown in the status message.
    
-   4. Test case: `addm n/Adam p/0b234`<br>
+   4. Test case: <kbd>addm n/Adam p/0b234</kbd><br>
         Expected: Similar to previous.
    
-   5. Test case: `addm n/Sam p/87654321` followed by `addm n/Sam p/23456789`<br>
+   5. Test case: <kbd>addm n/Sam p/87654321</kbd> followed by <kbd>addm n/Sam p/23456789</kbd><br>
         Expected: After the first command, a new member called Sam with the phone number 87654321
         is added to the list of members. After the second command, no member is added and error details
         are shown in the status message.
       
-    6. Test case: `addm n/John p/98765432` followed by `addm n/Jane p/98765432`<br>
+    6. Test case: <kbd>addm n/John p/98765432</kbd> followed by <kbd>addm n/Jane p/98765432</kbd><br>
         Expected: After the first command, a new member called John with the phone number 98765432 is added to the list of members.
         After the second command, no member is added and error details are shown in the status message.
    
@@ -1270,15 +1275,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a member while all members are being shown.
 
-    1. Prerequisites: List all members using the `listm` command. One or more members are in the list.
+    1. Prerequisites: List all members using the <kbd>listm</kbd> command. One or more members are in the list.
 
-    2. Test case: `deletem 1`<br>
+    2. Test case: <kbd>deletem 1</kbd><br>
          Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
 
-    3. Test case: `deletem 0`<br>
+    3. Test case: <kbd>deletem 0</kbd><br>
        Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: <kbd>deletem</kbd>, <kbd>deletem x</kbd>, <kbd>...</kbd> (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 
@@ -1286,16 +1291,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Edit the details of a member that is being shown in the list.
 
-    1. Prerequisites: List all members using the `listm` command. One or more members are in the list and the list does
+    1. Prerequisites: List all members using the <kbd>listm</kbd> command. One or more members are in the list and the list does
         not contain any members with the same names and/or phone number as those in the test cases below.
    
-    2. Test case: `editm 1 n/Adam`<br>
+    2. Test case: <kbd>editm 1 n/Adam</kbd><br>
         Expected: First member's name is changed to Adam. Details of the edited member is shown in the status message.
    
-    3. Test case: `editm 1 n/@dam`<br>
+    3. Test case: <kbd>editm 1 n/@dam</kbd><br>
         Expected: No member details are changed. Error details are shown in the status message.
    
-    4. Other incorrect delete commands to try: `editm`, `editm x n/Bob p/45678`, `...` 
+    4. Other incorrect delete commands to try: <kbd>editm</kbd>, <kbd>editm x n/Bob p/45678</kbd>, <kbd>...</kbd> 
        (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -1303,14 +1308,14 @@ testers are expected to do more *exploratory* testing.
 ### Setting member availability
 1. Set the availability of one or more members 
     
-    1. Prerequisites: List all members using the `listf` command. One or more members are in the list.
+    1. Prerequisites: List all members using the <kbd>listf</kbd> command. One or more members are in the list.
    
-    2. Test case: `setm 1 2 3 d/1 2`<br>
+    2. Test case: <kbd>setm 1 2 3 d/1 2</kbd><br>
         Expected: The availability of the first 3 members are changed to Monday and Tuesday. The names of members
         that had their availability changed are shown in the status message.
-    3. Test case: `setm 1 2 3`<br>
+    3. Test case: <kbd>setm 1 2 3</kbd><br>
         Expected: No change in the members' availability. Error details are shown in the status message.
-    4. Other incorrect delete commands to try: `setm`, `setm x d/1`, `...`
+    4. Other incorrect delete commands to try: <kbd>setm</kbd>, <kbd>setm x d/1</kbd>, <kbd>...</kbd>
        (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -1322,17 +1327,17 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The list of facilities does not already contain facilities with the same names and locations
        as those in the test cases below.
 
-    2. Test case: `addf n/Court 1 l/Sports Hall t/1500 c/5`<br>
+    2. Test case: <kbd>addf n/Court 1 l/Sports Hall t/1500 c/5</kbd><br>
        Expected: New facility called Court 1 at Sports Hall at 3pm with a capacity of 5 is added to the bottom of the list
        of facilities.
 
-    3. Test case: `addf n/Court #1 l/Sports Hall t/1800 c/5`<br>
+    3. Test case: <kbd>addf n/Court #1 l/Sports Hall t/1800 c/5</kbd><br>
        Expected: No new facility added. Error details are shown in the status message.
 
-    4. Test case: `addf n/Court 1 p/Sports H@ll t/1100 c/5`<br>
+    4. Test case: <kbd>addf n/Court 1 p/Sports H@ll t/1100 c/5</kbd><br>
        Expected: Similar to previous.
 
-    5. Test case: `addf addf n/Court 2 l/Sports Hall t/1200 c/5` followed by `addf n/Court 2 l/Sports Hall t/1600 c/5`<br>
+    5. Test case: <kbd>addf addf n/Court 2 l/Sports Hall t/1200 c/5</kbd> followed by <kbd>addf n/Court 2 l/Sports Hall t/1600 c/5</kbd><br>
        Expected: After the first command, a new facility called Court 2 at Sports Hall at 12pm with capacity of 5 
        is added to the list of facilities. After the second command, no facility is added and error details
        are shown in the status message.
@@ -1345,17 +1350,17 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 1. Edit the details of a facility that is being shown in the list.
 
-    1. Prerequisites: List all members using the `listf` command. One or more members are in the list and the list does
+    1. Prerequisites: List all members using the <kbd>listf</kbd> command. One or more members are in the list and the list does
        not contain any members with the same names as those in the test cases below.
 
-    2. Test case: `editf 1 n/Court 3 t/1800`<br>
+    2. Test case: <kbd>editf 1 n/Court 3 t/1800`</kbd><br>
        Expected: First facility's name is changed to Adam and time is changed to 6pm. 
        Details of the edited facility is shown in the status message.
 
-    3. Test case: `editf 1 t/9999`<br>
+    3. Test case: <kbd>editf 1 t/9999</kbd><br>
        Expected: No member details are changed. Error details are shown in the status message.
 
-    4. Other incorrect delete commands to try: `editf`, `editf x n/Court 1 l/Sports Hall t/1800 c/5`, `...`
+    4. Other incorrect delete commands to try: <kbd>editf</kbd>, <kbd>editf x n/Court 1 l/Sports Hall t/1800 c/5</kbd>, <kbd>...</kbd>
        (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -1363,11 +1368,11 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 1. Allocating all the members into the allocation maps of the facilities on a given day.
 
-    1. Test case: `split 1`<br>
+    1. Test case: <kbd>split 1</kbd><br>
        Expected: All members that have Monday as one of their available days will be allocated to a facility if 
        there is sufficient capacity. Their names will be shown in the facilities' allocation maps under Monday.
    
-    2. Test case: `split`<br>
+    2. Test case: <kbd>split</kbd><br>
        Expected: No members are allocated to any facility. Error details are shown in the status message.
     
 
@@ -1375,14 +1380,14 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
 
 1. Dealing with missing data files
 
-    1. Navigate to `[JAR File location]/data` and move the file `sportspa.json` into another folder.
+    1. Navigate to <kbd>[JAR File location]/data</kbd> and move the file <kbd>sportspa.json</kbd> into another folder.
     2. Run SportsPA.
     3. SportsPA will start up with sample members and facilities being present.
 
 2. Dealing with corrupted data files
-   1. Navigate to `[JAR File location]/data` and rename `sportspa.json` to `sportspa.txt`.
-   2. Open `sportspa.txt` and delete the first `{` in the file and close the file.
-   3. Rename `sportspa.txt` back to `sportspa.json`.
+   1. Navigate to <kbd>[JAR File location]/data</kbd> and rename <kbd>sportspa.json</kbd> to <kbd>sportspa.txt</kbd>.
+   2. Open <kbd>sportspa.txt</kbd> and delete the first <kbd>{</kbd> in the file and close the file.
+   3. Rename <kbd>sportspa.txt</kbd> back to <kbd>sportspa.json</kbd>.
    4. Run SportsPA. 
    5. SportsPA will start up without any data being present.
    

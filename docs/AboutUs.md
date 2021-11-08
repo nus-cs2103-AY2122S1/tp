@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Shruthi
+### Senthamaraiselvan Shruthi
 
 <img src="images/shruthi0310.png" width="200px">
 
@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Felix Ong
+### Felix Ong Wei Cong
 
 <img src="images/felix-ong.png" width="200px">
 
@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Xing Wei
+### Ong Xing Wei
 
 <img src="images/moley456.png" width="200px">
 

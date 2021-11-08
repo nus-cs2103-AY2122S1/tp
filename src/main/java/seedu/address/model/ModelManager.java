@@ -188,7 +188,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteMember(Member target) {
-        sportsPa.removePerson(target);
+        sportsPa.removeMember(target);
     }
 
     @Override

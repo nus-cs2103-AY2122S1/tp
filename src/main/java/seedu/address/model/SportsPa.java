@@ -227,9 +227,9 @@ public class SportsPa implements ReadOnlySportsPa {
      * Removes {@code key} from this {@code SportsPa}.
      * {@code key} must exist in SportsPA.
      */
-    public void removePerson(Member key) {
+    public void removeMember(Member key) {
         members.remove(key);
-        facilities.removePersonFromAllocations(key);
+        facilities.removeMemberFromAllocations(key);
     }
 
     /**
@@ -237,7 +237,7 @@ public class SportsPa implements ReadOnlySportsPa {
      * {@code key} must exist in SportsPA.
      */
     public void removeMemberFromAllocations(Member key) {
-        facilities.removePersonFromAllocations(key);
+        facilities.removeMemberFromAllocations(key);
     }
 
     /**
