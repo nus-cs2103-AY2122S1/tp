@@ -10,7 +10,7 @@ their students’ lab results in a simple and efficient manner, allowing them to
 processes and more time teaching students.
 
 The following is a summary of my contributions to the
-project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=reddevil1313))
+project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&tabAuthor=reddevil1313&tabRepo=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&zA=reddevil1313&zR=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&zACS=213.68089453967534&zS=2021-09-17&zFS=&zU=2021-11-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false))
 
 ### Features
 
@@ -33,7 +33,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
       lot of unwanted bugs came about. Changes made to the storing of the data in the json file to accomodate for the new
       labs encountered a lot of bugs as well.
 
-3. **Added the ability to store individual grades for each student**
+3. Added the ability to store individual grades for each student
 
     * What it does: Allows the TA to edit individual grades for each student in the program.
     * Justification: So that the TA can keep track of how many labs he/she has marked and how many of them are 
