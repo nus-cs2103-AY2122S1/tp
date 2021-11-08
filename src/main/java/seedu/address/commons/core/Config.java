@@ -16,22 +16,52 @@ public class Config {
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
 
+    /**
+     * Returns the log level of the configuration file.
+     *
+     * @return logLevel of the configuration file.
+     */
     public Level getLogLevel() {
         return logLevel;
     }
 
+    /**
+     * Sets the log level of the configuration file.
+     *
+     * @param logLevel is used to set the log level of the
+     *                 current configuration file.
+     */
     public void setLogLevel(Level logLevel) {
         this.logLevel = logLevel;
     }
 
+    /**
+     * Returns the Path of the user preferences file.
+     *
+     * @return Path of the user preferences file.
+     */
     public Path getUserPrefsFilePath() {
         return userPrefsFilePath;
     }
 
+    /**
+     * Sets the path of the user preference file.
+     *
+     * @param userPrefsFilePath is used to set the Path of user preferences
+     *                          file in the current configuration file.
+     */
     public void setUserPrefsFilePath(Path userPrefsFilePath) {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
+    /**
+     * Method to compare two Config objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the Config object that called this method.
+     * @return boolean representation of whether the Config
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

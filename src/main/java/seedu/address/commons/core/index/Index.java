@@ -14,6 +14,8 @@ public class Index {
     /**
      * Index can only be created by calling {@link Index#fromZeroBased(int)} or
      * {@link Index#fromOneBased(int)}.
+     *
+     * @param zeroBasedIndex Initial sequence of interger starting with zero.
      */
     private Index(int zeroBasedIndex) {
         if (zeroBasedIndex < 0) {
@@ -23,16 +25,29 @@ public class Index {
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
+    /**
+     * This method returns a zero based index.
+     *
+     * @return int representation of the zeroBasedIndex.
+     */
     public int getZeroBased() {
         return zeroBasedIndex;
     }
 
+    /**
+     * This method returns a one based index.
+     *
+     * @return int representation of the oneBasedIndex.
+     */
     public int getOneBased() {
         return zeroBasedIndex + 1;
     }
 
     /**
      * Creates a new {@code Index} using a zero-based index.
+     *
+     * @param zeroBasedIndex Initial sequence of interger starting with zero.
+     * @return Index containing the zeroBasedIndex.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {
         return new Index(zeroBasedIndex);
@@ -40,6 +55,9 @@ public class Index {
 
     /**
      * Creates a new {@code Index} using a one-based index.
+     *
+     * @param oneBasedIndex Initial sequence of interger starting with one.
+     * @return Index containing the oneBasedIndex.
      */
     public static Index fromOneBased(int oneBasedIndex) {
         return new Index(oneBasedIndex - 1);
