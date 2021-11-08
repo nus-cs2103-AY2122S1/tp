@@ -76,6 +76,9 @@ deactivate Model
 
 PinCommand --> LogicManager : result
 deactivate PinCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PinCommand -[hidden]-> LogicManager
+destroy PinCommand
 
 UI <--LogicManager: result
 deactivate LogicManager

@@ -27,12 +27,12 @@ import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing contact in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String COMMAND_DESCRIPTION = "Edits the details of the person identified "
+    public static final String COMMAND_DESCRIPTION = "Edits the details of the contact identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
@@ -40,24 +40,29 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] \n"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_CHANGES = "Provided data is same as existing data,"
+            + " no changes to the contact were made.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the address book.\n"
+            + "Reason: duplicate phone number.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * Creates an {@code EditCommand}.
+     *
+     * @param index of the contact in the filtered person list to edit.
+     * @param editPersonDescriptor details to edit the person with.
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -75,6 +80,14 @@ public class EditCommand extends Command {
         return editPersonDescriptor;
     }
 
+    /**
+     * Executes the {@code EditCommand} which edits the contact at the {@code index}.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code EditCommand}.
+     * @throws CommandException If invalid indexes are provided,
+     *  if there are duplicate contacts or if there are no changes.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -89,6 +102,10 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (personToEdit.equals(editedPerson)) {
+            throw new CommandException(MESSAGE_NO_CHANGES);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -115,6 +132,12 @@ public class EditCommand extends Command {
                 updatedTags, updatedBirthday, updatedPin);
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

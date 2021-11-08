@@ -19,7 +19,42 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterName_throwsParseException() {
+        assertParseFailure(parser, "find n/John c/", FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterTag_throwsParseException() {
+        assertParseFailure(parser, "find t/Friends c/", FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterNameBeforeTag_throwsParseException() {
+        assertParseFailure(parser, "find n/John c/ t/Friends",
+                FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterTagBeforeName_throwsParseException() {
+        assertParseFailure(parser, "find t/Friends c/ n/John",
+                FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterNameAndTag_throwsParseException() {
+        assertParseFailure(parser, "find n/John t/Friends c/",
+                FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterTagAndName_throwsParseException() {
+        assertParseFailure(parser, "find t/Friends n/Friends c/",
+                FindCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
     }
 
     @Test
@@ -142,5 +177,4 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " c/\n n/Alice \n \t n/Bob  \t t/FRiends t/colleagues", expectedFindCommand);
     }
-
 }

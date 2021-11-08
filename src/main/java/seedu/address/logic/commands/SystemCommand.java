@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
+/** Displays help message when user is typing. */
 public class SystemCommand {
 
     /**
-     * Executes help message when user is typing
+     * Executes help message when user is typing.
      *
-     * @param userInput
-     * @return feedback message of the operation result for display
+     * @param userInput input of user.
+     * @return feedback message of the operation result for display.
      */
     public static CommandResult execute(String userInput) {
         String[] parsedInput = userInput.split(" ");
@@ -32,6 +33,16 @@ public class SystemCommand {
             return new CommandResult(UnpinCommand.COMMAND_EXAMPLE, false, false);
         case (UntagCommand.COMMAND_WORD):
             return new CommandResult(UntagCommand.COMMAND_EXAMPLE, false, false);
+        case (ListCommand.COMMAND_WORD):
+            return new CommandResult(ListCommand.COMMAND_EXAMPLE, false, false);
+        case (MailingListCommand.COMMAND_WORD):
+            return new CommandResult(MailingListCommand.COMMAND_EXAMPLE, false, false);
+        case (ClearCommand.COMMAND_WORD):
+            return new CommandResult(ClearCommand.COMMAND_EXAMPLE, false, false);
+        case (HelpCommand.COMMAND_WORD):
+            return new CommandResult(HelpCommand.HELP_MESSAGE, false, false);
+        case (ExitCommand.COMMAND_WORD):
+            return new CommandResult(ExitCommand.COMMAND_EXAMPLE, false, false);
         default:
             return new CommandResult("", false, false);
         }

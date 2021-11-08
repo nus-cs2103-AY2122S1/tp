@@ -25,6 +25,42 @@ public class FindAnyCommandParserTest {
     }
 
     @Test
+    public void parse_caseSensitiveFlagAfterName_throwsParseException() {
+        assertParseFailure(parser, "findAny n/John c/",
+                FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterTag_throwsParseException() {
+        assertParseFailure(parser, "findAny t/Friends c/",
+                FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterNameBeforeTag_throwsParseException() {
+        assertParseFailure(parser, "findAny n/John c/ t/Friends",
+                FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterTagBeforeName_throwsParseException() {
+        assertParseFailure(parser, "findAny t/Friends c/ n/John",
+                FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterNameAndTag_throwsParseException() {
+        assertParseFailure(parser, "find n/John t/Friends c/",
+                FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
+    public void parse_caseSensitiveFlagAfterTagAndName_throwsParseException() {
+        assertParseFailure(parser, "find t/Friends n/Friends c/",
+                FindAnyCommand.CASE_SENSITIVE_FLAG_FORMAT_MESSAGE);
+    }
+
+    @Test
     public void parse_oneNameCase_returnsFindAnyCommand() {
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of();

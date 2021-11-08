@@ -62,8 +62,10 @@ public class CommandBox extends UiPart<Region> {
     private void handleKeyStroke(KeyEvent event) {
         if (event.getCode().equals(KeyCode.UP)) {
             commandTextField.setText(CommandHistory.getPreviousCommand());
+            commandTextField.end();
         } else if (event.getCode().equals(KeyCode.DOWN)) {
             commandTextField.setText(CommandHistory.getNextCommand());
+            commandTextField.end();
         } else if (event.getCode().equals(KeyCode.ENTER)) {
             event.consume();
             return;

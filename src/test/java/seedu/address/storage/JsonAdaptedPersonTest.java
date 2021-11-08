@@ -65,10 +65,10 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidPinStatus_returns() throws Exception {
+    public void toModelType_invalidPinStatus_returns() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        null, INVALID_PIN);
+                        VALID_BIRTHDAY, INVALID_PIN);
         String expectedMessage = Pin.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -156,26 +156,25 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidBirthdayFormat_throwsIllegalException() {
+    public void toModelType_invalidBirthdayFormat_returnsPerson() {
         JsonAdaptedPerson personWrongBirthdayFormat =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        INVALID_BIRTHDAY_FORMAT, VALID_PIN);
-        String expectedMessageWrongBirthdayFormat = Birthday.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessageWrongBirthdayFormat,
-                personWrongBirthdayFormat::toModelType);
+                        INVALID_BIRTHDAY_FORMAT, VALID_NOT_PIN);
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, personWrongBirthdayFormat::toModelType);
     }
 
     @Test
-    public void toModelType_invalidBirthdayDate_throwsIllegalException() {
-        String expectedMessageInvalidDate = Birthday.MESSAGE_INVALID_DATE;
+    public void toModelType_invalidBirthdayDate_returnsPerson() {
         JsonAdaptedPerson personInvalidDate =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        INVALID_DATE, VALID_PIN);
-        assertThrows(IllegalValueException.class, expectedMessageInvalidDate, personInvalidDate::toModelType);
+                        INVALID_DATE, VALID_NOT_PIN);
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, personInvalidDate::toModelType);
     }
 
     @Test
-    public void toModelType_nullPin_throwsIllegalValueException() {
+    public void toModelType_nullPin_returnsPerson() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         VALID_BIRTHDAY, null);

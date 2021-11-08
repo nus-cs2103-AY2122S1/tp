@@ -67,6 +67,36 @@ public class SystemCommandTest {
     }
 
     @Test
+    public void execute_listCommand_success() {
+        CommandResult expectedCommandResult = new CommandResult(ListCommand.COMMAND_EXAMPLE, false, false);
+        assertSystemCommandSuccess(ListCommand.COMMAND_WORD, expectedCommandResult);
+    }
+
+    @Test
+    public void execute_mailingListCommand_success() {
+        CommandResult expectedCommandResult = new CommandResult(MailingListCommand.COMMAND_EXAMPLE, false, false);
+        assertSystemCommandSuccess(MailingListCommand.COMMAND_WORD, expectedCommandResult);
+    }
+
+    @Test
+    public void execute_clearCommand_success() {
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.COMMAND_EXAMPLE, false, false);
+        assertSystemCommandSuccess(ClearCommand.COMMAND_WORD, expectedCommandResult);
+    }
+
+    @Test
+    public void execute_helpCommand_success() {
+        CommandResult expectedCommandResult = new CommandResult(HelpCommand.HELP_MESSAGE, false, false);
+        assertSystemCommandSuccess(HelpCommand.COMMAND_WORD, expectedCommandResult);
+    }
+
+    @Test
+    public void execute_exitCommand_success() {
+        CommandResult expectedCommandResult = new CommandResult(ExitCommand.COMMAND_EXAMPLE, false, false);
+        assertSystemCommandSuccess(ExitCommand.COMMAND_WORD, expectedCommandResult);
+    }
+
+    @Test
     public void execute_invalidCommand() {
         CommandResult expectedCommandResult = new CommandResult("", false, false);
         assertSystemCommandSuccess("", expectedCommandResult);

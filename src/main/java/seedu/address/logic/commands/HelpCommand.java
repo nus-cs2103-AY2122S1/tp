@@ -10,6 +10,14 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
+    public static final String MORE = "more";
+    public static final String EMPTY = "";
+    public static final String COMMAND_DESCRIPTION = "Shows program usage instructions.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: "
+            + "[COMMAND] \n"
+            + "Example: " + COMMAND_WORD + "; "
+            + COMMAND_WORD + " " + AddCommand.COMMAND_WORD + "; "
+            + COMMAND_WORD + " " + MORE;
 
     public static final String SPACE = "            ";
 
@@ -25,27 +33,34 @@ public class HelpCommand extends Command {
             + FindAnyCommand.COMMAND_WORD + SPACE + FindAnyCommand.COMMAND_DESCRIPTION
             + PinCommand.COMMAND_WORD + SPACE + PinCommand.COMMAND_DESCRIPTION
             + UnpinCommand.COMMAND_WORD + SPACE + UnpinCommand.COMMAND_DESCRIPTION
+            + MailingListCommand.COMMAND_WORD + SPACE + MailingListCommand.COMMAND_DESCRIPTION
             + DeleteCommand.COMMAND_WORD + SPACE + DeleteCommand.COMMAND_DESCRIPTION
             + DeleteMultipleCommand.COMMAND_WORD + SPACE + DeleteMultipleCommand.COMMAND_DESCRIPTION
             + ClearCommand.COMMAND_WORD + SPACE + ClearCommand.COMMAND_DESCRIPTION
             + ExitCommand.COMMAND_WORD + SPACE + ExitCommand.COMMAND_DESCRIPTION
             + "For more information, enter <help more>.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
-    public static final String MORE = "more";
-
-    public static final String EMPTY = "";
-
     private final String commandWord;
 
+    /**
+     * Creates a {@code HelpCommand} which returns help for the command provided.
+     *
+     * @param commandWord the command for which help is requested.
+     */
     public HelpCommand(String commandWord) {
         this.commandWord = commandWord;
     }
 
+    /**
+     * Executes the {@code HelpCommand} which provides help messages to user.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code HelpCommand}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
@@ -99,12 +114,21 @@ public class HelpCommand extends Command {
         case UnpinCommand.COMMAND_WORD:
             return new CommandResult(UnpinCommand.MESSAGE_USAGE, false, false);
 
+        case MailingListCommand.COMMAND_WORD:
+            return new CommandResult(MailingListCommand.MESSAGE_USAGE, false, false);
+
         default:
             String message = MESSAGE_UNKNOWN_COMMAND + ": " + commandWord + "\n" + HELP_MESSAGE;
             throw new CommandException(message);
         }
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

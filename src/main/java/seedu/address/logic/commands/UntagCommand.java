@@ -31,8 +31,8 @@ import seedu.address.model.tag.Tag;
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-    public static final String COMMAND_DESCRIPTION = "Removes a tag from the details of the person "
-            + "identified by the index number used in the displayed person list.\n";
+    public static final String COMMAND_DESCRIPTION = "Removes a tag from the details of the contact "
+            + "identified by the index number used in the displayed contact list.\n";
     public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -42,7 +42,7 @@ public class UntagCommand extends Command {
 
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) from %1$s: %2$s";
     public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
 
     private static final Logger logger = LogsCenter.getLogger(UntagCommand.class);
@@ -51,6 +51,8 @@ public class UntagCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Creates an {@code UntagCommand} which untags the contact at the index.
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -62,6 +64,12 @@ public class UntagCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Executes the {@code UntagCommand} which untags the contact at the index.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} regarding the status of the {@code UntagCommand}.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -145,6 +153,12 @@ public class UntagCommand extends Command {
                 .map(tag -> tag.tagName).collect(Collectors.joining(", "));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

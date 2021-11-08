@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Chan Yu Cheng
@@ -14,9 +12,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/yucheng11122017.png" width="200px">
 
 [[github](https://github.com/yucheng11122017)]
-[[portfolio](team/chanyucheng.md)]
+[[portfolio](team/yucheng11122017.md)]
 
-* Role: In charge of Model
+* Role: Developer
+* Responsibilities: Model
 
 ### Lee Zhi Xuan
 
@@ -25,14 +24,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/leezhixuan)]
 [[portfolio](team/leezhixuan.md)]
 
-* Role: In charge of Logic
+* Role: Developer
+* Responsibilities: Logic
+
 
 ### Justin Hoe
 
 <img src="images/justinhoejj.png" width="200px">
 
 [[github](http://github.com/justinhoejj)]
-[[portfolio](team/justinhoe.md)]
+[[portfolio](team/justinhoejj.md)]
 
 * Role: Developer
 * Responsibilities: UI + Repo config
@@ -42,7 +43,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/cookiedan42.png" width="200px">
 
 [[github](http://github.com/cookiedan42)]
-[[portfolio](team/daniel.md)]
+[[portfolio](team/cookiedan42.md)]
 
 * Role: Developer
 * Responsibilities: tests and documentation

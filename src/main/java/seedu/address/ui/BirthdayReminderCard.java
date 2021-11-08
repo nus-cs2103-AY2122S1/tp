@@ -82,7 +82,12 @@ public class BirthdayReminderCard extends UiPart<Region> {
             cardPane.setStyle(STYLE_CARD_BIRTHDAY_THIS_WEEK);
             return String.format(BIRTHDAY_MESSAGE_THIS_WEEK, age, daysToBirthday, birthMonthDayAsString);
         }
-        return String.format(BIRTHDAY_MESSAGE_DEFAULT, age, birthMonthDayAsString);
+        if (daysToBirthday < 0) {
+            // birthday has passed increment age for displaying next year's age
+            return String.format(BIRTHDAY_MESSAGE_DEFAULT, age + 1, birthMonthDayAsString);
+        } else {
+            return String.format(BIRTHDAY_MESSAGE_DEFAULT, age, birthMonthDayAsString);
+        }
     }
 
     private MonthDay accountForLeapDay(MonthDay birthMonthDay) {
