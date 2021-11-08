@@ -1096,7 +1096,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `editEvent 1 n/CS2100 finals d/2021-11-20`<br>
       Expected: The name and date of the event are edited, but time is unchanged. Details of the new event are shown in the status message.
 
-### Marking event as done
+### Marking an event as done
 
 1. Mark an event as done
 
