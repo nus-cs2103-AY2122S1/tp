@@ -23,7 +23,7 @@ The purpose of the Developer Guide is to guide you through our application's arc
     - [Storage component](#storage-component)
     - [Common classes](#common-classes)
 - [Implementation](#implementation)
-    - [Task and order packages](#task-and-order-package)
+    - [Task and order package](#task-and-order-package)
     - [Adding order feature](#adding-order-feature)
     - [Updating person changes in order list and task list](#updating-person-changes-in-order-list-and-task-list)
     - [Sorting orders feature](#sorting-orders-feature)
