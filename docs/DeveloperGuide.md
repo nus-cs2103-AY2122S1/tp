@@ -172,7 +172,7 @@ The `UI` component,
 * executes user commands using the `Logic` component, through the MainWindow object.
 * listens for changes in `VersionedModel` data so that the UI can be updated with the modified data.
 * keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* keeps a reference of some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
+* depends some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
   the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
 
 Some classes of the UI, notably `CommandBox`, `StudentCard` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
@@ -1226,6 +1226,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. Logs and previous commits should be transferable and functional after transfer onto other computers.
 12. Users should be able to undo up to at least _100_ commands.
 13. Software default file size should not exceed _50_ Megabytes.
+14. Most commands should take preferrably 1 second to be executed, and at most 3-4 seconds.
 
 ### Glossary
 
@@ -1255,7 +1256,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 Manual testing was conducted internally by the team as of the time of writing.
-
 
 The details of the testing procedure can be found here: [Manual Testing](ManualTesting.md)
 
@@ -1317,10 +1317,10 @@ students' studio attendance, studio participation, and grades. These tools are t
 they complement the Avengers in tracking their students' progress.
 
 To improve user experience, we implemented several new features that will aid Avengers in their weekly tutoring work,
-such as Show, Sort, Visualize, and a set of version control tools (Undo, Redo, History, Revert).
+such as Show, Sort, Visualize, a set of version control tools (Undo, Redo, History, Revert), and a more comprehensive help command.
 The data visualization tools allow Avengers to perform better analysis, and customize their teaching to maximize their students'
 learning experience. With the version control tools, Academy Directory is much more forgiving and this allows
-Avengers to feel more confident and at ease while using our product.
-
+Avengers to feel more confident and at ease while using our product. The new Help command makes new users more comfortable to learn Academy Directory.
+ 
 The implementation details and design considerations for these features could be found in [Implementation](#implementation) section
 and the [Design](#design) section respectively.
