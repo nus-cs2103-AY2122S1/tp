@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #FFFFFF
+skinparam ClassBorderColor #FFFFFF
+
+
+package UI {
+    class CommandBox as "CommandBox" UI_COLOR_T3
+}
+
+
+class Pointer as "CommandHistory" #FDD400
+CommandBox -down-> "1" Pointer
+@end

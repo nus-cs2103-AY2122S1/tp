@@ -64,5 +64,9 @@ Given below are my contributions to the project.
         * Person commands
         * Table for Keyboard shortcut for Note
         * Command History
-    * Developer Guide - Sequence Diagram for Person Note Command, helped use cases
-      for adding note and manual testcases.
+        * Quality Assurance fixes throughout User Guide
+    * Developer Guide 
+      * Sequence Diagram and description for Person Note Command
+      * Use case for add Note and Exit
+      * Manual Testing for Delete Person, Person Note and General Note.
+      * CommandHistory
