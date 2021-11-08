@@ -514,6 +514,63 @@ The following activity diagram summarizes what happens when a CS2100 TA executes
       (ie `Student` instance at index 1 of student list has its lab results at index 1 of lab results list), given that
       other operations such as add and delete can change the indexes easily.
 
+### Edit Lab Details Feature
+
+#### Implementation
+
+The edit lab details feature allows the CS2100 TA to edit the lab information for all students in the list. Its
+implementation introduces the following classes:
+
+* `EditLabCommand`that extends `Command`
+* `EditLabCommandParser` that implements `Parser<EditLabCommand>`
+
+The syntax of this command is `editlab -ln <LAB_NUM> [-nln <NEW_LAB_NUM>] [-ts <NEW_LAB_SCORE>]`.
+For instance,`editlab -ln 1 -nln 2 -ts 20` asks ProgrammerError to edit the lab with lab number 1 to a new
+lab number 2 with a new total score of 20.
+
+Given below is a possible usage scenario:
+
+[Pre-Condition] There are 10 students in ProgrammerError, and the CS2100 TA has created lab 1 for all of them.
+
+Step 1. The CS2100 TA keys in the command `editlab -ln 1 -nln 2 -ts 20`: The lab information for lab 1
+for all students will change.
+
+The mechanism is as described below:
+
+* Upon detecting 'editlab' as the command word. `ProgrammerErrorParser` will create a `EditLabCommandParser` with the input
+  lab number, new lab number and total score.
+
+
+* `ShowCommandParser` parses the lab number, new lab number and total score and creates a `Lab` Object.
+  It will then create a `EditLabCommand` with the existing Lab Object, the new Lab Object and the total score.
+* `EditLabCommand` receives the existing Lab Object, new Lab Object and total score. It then 
+  checks if the original lab exists, if the new lab does not exist and the total score is a valid number.
+* If the original lab exists, new lab does not exist and total score is a valid number, the lab will be
+ edited for all the students in the list.
+* ProgrammerError will then show a success message for editing the lab. For example, `Updated Lab 1!` in the
+`resultDisplay`, informing the user that the editlab operation is valid.
+
+The following sequence diagram shows how the editlab command works:
+
+![EditLabSequenceDiagram](images/commands/EditLabCommand/EditLabSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+
+![EditLabActivityDiagram](images/commands/EditLabCommand/EditLabActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Edit Lab Results executes:**
+
+* **Alternative 1 (current choice):** The lab is edited individually for each Student.
+    * Pros: Easier to implement; Easier to keep track of lab classes and have separate instances to lower dependency.
+    * Cons: Inefficient; Need to loop through each individual student.
+
+* **Alternative 2:** An ObservableList of all lab templates without actual score in ProgrammerError itself.
+    * Pros: Potential improvement in performance by only needing to change one list for all students.
+    * Cons: Hard to implement, as we have to ensure that students refer to latest ObservableList of lab templates 
+      for their own scores and will still need to create a copy of the template for their own reference.
+      
 ### Download Data Feature
 
 The download data feature allows the CS2100 TA to download student data as a CSV file in a directory location of their
