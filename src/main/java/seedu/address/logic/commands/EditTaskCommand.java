@@ -127,7 +127,7 @@ public class EditTaskCommand extends Command {
         return new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
-                personToEdit.isImportant()
+                personToEdit.getImportance()
         );
     }
 
