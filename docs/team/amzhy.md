@@ -16,21 +16,21 @@ Access my [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
 
 #### Enhancements implemented
 * **Create edit features**: Designed and created `EditCommand`, `EditClassCommand` and their related `Parser` classes. (Pull request [\#125](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/125))
-  * What it does: Allows user to edit details of a particular student or tuition class in **TutAssistor**
+  * What it does: Allows user to edit details of a particular student or tuition class in **TutAssistor**.
   * Justification:  This improves the user experience as users do not have to delete and recreate entire students or classes, in order to change a few details.
   * Highlights:
     * Changing the `Timeslot` of a class has to be considered carefully, as it cannot overlap with any timeslot of existing classes.
 
 * **Create delete features**: Designed and created `DeleteCommand`, `DeleteClassCommand` and their corresponding `Parser` classes. (Pull requests [\#46](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/46))
-  * What it does: Allows user to delete a student or tuition classes in **TutAssistor**
+  * What it does: Allows user to delete a student or tuition classes in **TutAssistor**.
   * Justification:  This enables the user to remove entire records pertaining to multiple students or tuition classes.
   * Highlights:
-    * Duplicate indexes in user inputs have to be removed to ensure that only one student/class is deleted at a particular index.
+    * Duplicate indices in user inputs have to be removed to ensure that only one student/class is deleted at a particular index.
     * The order of deletion has to be considered carefully by sorting the indices before deletion, as the 
 list of students/classes adapts while students/classes are being deleted respectively.
   
 * **Implement `RemoveStudent` feature**: Implemented `RemoveStudentCommand` and `RemoveStudentCommandParser`. (Pull request [\#58](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/58))
-  * What it does: Allows user to remove existing students from a tuition class in **TutAssistor**
+  * What it does: Allows user to remove existing students from a tuition class in **TutAssistor**.
   * Justification:  This allows the user to update class enrollment promptly whenever students drop out of a tuition class.
   * Highlights: 
     * Efforts are taken to ensure that students who are not enrolled in the class are not removed and this is conveyed to users.
@@ -42,7 +42,7 @@ using the existing Java API.
   * Highlights:
     * This is a major refactor as the `Timeslot` is crucial for the logic of `Timetable` and general management of all the tuition classes. 
 
-* **Refactor some commands to use multiple indexes**: Refactor `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` to use multiple student or class indexes as arguments. (Pull request [\#65](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/65))
+* **Refactor some commands to use multiple indices**: Refactor `DeleteCommand`, `DeleteClassCommand` and `RemoveStudentCommand` to use multiple student or class indices as arguments. (Pull request [\#65](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/65))
   * What it does: Allows user to delete multiple students or tuition classes, as well as remove multiple students from a class.
   * Justification: Improve efficiency so that the user is able to delete multiple students or classes at once instead of 
 repeating similar commands multiple times.
