@@ -6,7 +6,7 @@ import seedu.address.model.Label;
 public class Order implements Comparable<Order> {
 
     public static final String ID_PREFIX = "SO";
-    private static long count = 1;
+    private static long count = 3;
 
     private final Customer customer;
     private long id;
@@ -24,6 +24,18 @@ public class Order implements Comparable<Order> {
         this.date = date;
         this.amount = amount;
         this.label = label;
+        this.isComplete = false;
+    }
+
+    /**
+     * Overloaded constructor for an {@code Order} that also initializes its {@code id}.
+     */
+    public Order(Label label, Customer customer, Date date, Amount amount, int id) {
+        this.customer = customer;
+        this.date = date;
+        this.amount = amount;
+        this.label = label;
+        this.id = id;
         this.isComplete = false;
     }
 

@@ -388,12 +388,12 @@ After the `OrderBook` has been sorted by the amount field in ascending order,
       * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
     * Cons: Commands that mutate the list might disrupt the ordering of the sorted list. 
       * For instance, adding an `Order` to an `OrderBook` simply appends it
-        at the end of the `OrderList`. Thus, the `OrderBook` needs be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
+        at the end of the `OrderList`. Thus, the `OrderBook` needs to be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
       * Note that this is not a concern for the `markorder` and `deleteorder` commands since they do not disrupt the ordering of the list.
 * **Alternative 2:** Wrapping the `FilteredList` around the `SortedList`. 
     * Pros: 
       * Maintains the immutability of the order list. 
-      * Ensures that the sorting arrangement is always preserved, even another command e.g. `addorder` mutates the underlying list.
+      * Ensures that the sorting arrangement is always preserved, even when another command e.g. `addorder` mutates the underlying list.
     * Cons: More difficult to implement since it entails more coupling with the `FilteredList` of orders.
     
 ### Displaying clients' total orders feature
@@ -540,7 +540,7 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 **Additional Extensions**
 
-* 2b. The customer specified for the task does not correspond to an existing client.
+* 2b. The customer specified for the order does not correspond to an existing client.
 
     * 2b1. SalesNote shows an error message.
 
@@ -742,7 +742,7 @@ Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-
 
 1. User requests to list orders.
 2. SalesNote shows a list of orders.
-3. User requests to sort the orders by either the date or amount field in ascending or descending order.  
+3. User requests to sort the orders by a specified field in either ascending or descending order.  
 4. SalesNote displays the sorted list of orders.
 
    Use case ends.
@@ -774,6 +774,7 @@ Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-
 * **Client**: A customer in the database, identified by their name. 
 * **Order**: A sales order from a customer scheduled for a target date.
 * **Task**: A task for the user that has a due date and a completion status.
+* **Tag**: A short string descriptor attached to a `Person` or `Task` object.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>

@@ -30,7 +30,6 @@ public class OrderUtil {
         sb.append(PREFIX_DATE + order.getDate().dateString + " ");
         sb.append(PREFIX_AMOUNT + order.getAmount().amount + " ");
         sb.append(PREFIX_CUSTOMER + order.getCustomer().getName() + " ");
-        System.out.println(sb);
         return sb.toString();
     }
 

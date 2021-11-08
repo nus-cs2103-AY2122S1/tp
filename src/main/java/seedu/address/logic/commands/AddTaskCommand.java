@@ -19,9 +19,9 @@ public class AddTaskCommand extends Command {
             + PREFIX_DATE + "DATE "
             + "[" + PREFIX_TASK_TAG + "TASKTAG]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_LABEL + "Sew buttons onto black blazer "
+            + PREFIX_LABEL + "Sew black buttons onto blazer "
             + PREFIX_DATE + "20 August 2021 "
-            + PREFIX_TASK_TAG + "SO2103";
+            + PREFIX_TASK_TAG + "SO1";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given id cannot be found.";
