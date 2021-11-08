@@ -36,7 +36,6 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to track the total number of failed calls on a person. [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
     * What it does: Allows the user to track the total number of failed calls on a person across enforcement sessions.
-    * Justification: This allows the user to track persons who consistently fail to comply with SHN requirements.
     * Highlight: Failed call tracking can also be done across save states by copying JSON data over manually
     * Credits: Naming convention and design refinements by [Lauren](https://github.com/lrnshk) and [Wei En](https://github.com/wei2912)
 
