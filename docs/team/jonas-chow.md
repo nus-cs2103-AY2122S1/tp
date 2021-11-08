@@ -40,7 +40,6 @@ Given below are my contributions to the project.
     * Adapted tests from Address Book 3 to pass for the newly adapted Source Control code (Pull requests [\#103](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/103), [\#104](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/104), [\#107](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/107))
     * Enable the export graph function for the `show` command (Pull request [\#183](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/183))
     * Wrote additional tests for existing features (Pull request [\#257](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/257))
-    * Edited the PlantUML style from Address Book 3 to show class fields and methods by default (Pull request [\#144](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/144))
 
 * **Documentation**:
     * User Guide:
@@ -48,13 +47,8 @@ Given below are my contributions to the project.
         * Added documentation for the features `import`, `export`, and `alias` (Pull requests [\#33](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/33), [\#181](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/181))
     * Developer Guide:
         * Updated glossary section (Pull request [\#50](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/50))
-        * Added implementation details of the `import` feature (Pull request [\#144](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/144))
+        * Added implementation details of the `import` and `alias` feature (Pull requests [\#144](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/144), [\#280](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/280))
     
 * **Community**:
     * PRs reviewed (with non-trivial review comments): (Pull requests [\#170](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/170), [\#244](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/244), [\#267](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/267))
-    * Reported bugs and suggestions for other teams in the class (examples: [\#177](https://github.com/AY2122S1-CS2103T-T09-2/tp/issues/177), [\#187](https://github.com/AY2122S1-CS2103T-T09-2/tp/issues/187), [\#1](https://github.com/jonas-chow/ped/issues/1))
-
-* **Tools**:
-    * Integrated JavaFX Charts to the project ([\#158](https://github.com/AY2122S1-CS2103T-W08-2/tp/pull/158))
-
-
+    * Reported bugs and suggestions for other teams in the class (Examples: [\#177](https://github.com/AY2122S1-CS2103T-T09-2/tp/issues/177), [\#187](https://github.com/AY2122S1-CS2103T-T09-2/tp/issues/187), [\#1](https://github.com/jonas-chow/ped/issues/1))

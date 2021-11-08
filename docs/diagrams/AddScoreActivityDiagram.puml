@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+start
+if () then ([assessment found in database])
+  if () then ([student(s) found in database])
+    :Find matched student(s);
+    if () then ([one matched\nstudent found])
+      if () then ([assessment is\nalready graded])
+        :Update score\nof assessment;
+      else ([else])
+        :Add score\nof assessment;
+      endif
+    else ([multiple matched\n students found])
+      :Update student list\nwith matched students;
+      :Display an\nerror message;
+    endif
+  else ([else])
+    :Display an\nerror message;
+  endif
+else ([else])
+  :Display an\nerror message;
+endif
+
+stop
+
+@enduml

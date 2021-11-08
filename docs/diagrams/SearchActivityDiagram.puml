@@ -1,17 +1,17 @@
 @startuml
+!include style.puml
 
 start
 
 :User executes command;
+:Identify type of input;
 
-if () then ([command is valid])
-    :Identify type of input;
-    :Process input argument into list of words;
-	:Create corresponding Predicate<Student> object;
-	:Update filtered student list;
-	:Update UI;
+if () then ([input is valid])
+  :Process input argument\ninto list of words;
+	:Create corresponding predicates;
+	:Update student list\nwith matched students;
 else ([else])
-	:Throw a ParseException;
+	:Display an\nerror message;
 endif
 
 stop

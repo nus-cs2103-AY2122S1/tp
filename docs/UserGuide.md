@@ -13,21 +13,25 @@ Source Control can also give you both a quick overview and a closer look of how 
 This application **provides in-depth data analysis** of the performance of your students in each assessment,
 giving you timely feedback on the pace and difficulty level of the module.
 
-Source Control is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Source Control is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps!
 
 This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you
 all the basic knowledge to [get started](#quick-start) with Source Control. If you are an experienced user,
 feel free to skip to the [command summary](#command-summary) and experiment with our more [advanced features](#setting-customised-aliases-for-commands--alias)!
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
+<div style="page-break-after: always;"></div>
 
-* [Overview](#)
-* [Table of Contents](#table-of-contents)
-* [Quick Start](#quick-start)
-* Features
+## **Table of Contents**
+
+* [**Overview**](#)
+* [**Table of Contents**](#table-of-contents)
+* [**Quick Start**](#quick-start)
+* [**Features**](#features)
   * [Notes on Command Format](#features)
   * Adding Data
     * [Adding a student : `addstudent`](#adding-a-student--addstudent)
@@ -52,18 +56,19 @@ feel free to skip to the [command summary](#command-summary) and experiment with
     * [Viewing help : `help`](#viewing-help--help)
     * [Accessing command history](#accessing-command-history)
   * Advanced Features
-    * [Setting customised aliases for commands: `alias`](#setting-customised-aliases-for-commands--alias)
+    * [Setting customized aliases for commands: `alias`](#setting-customized-aliases-for-commands--alias)
     * [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Glossary](#glossary)
-* [Command Summary](#command-summary)
-* [Example Visual Aids](#example-visual-aids)
+* [**FAQ**](#faq)
+* [**Glossary**](#glossary)
+* [**Command Summary**](#command-summary)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+<div style="page-break-after: always;"></div>
+
+## **Quick Start**
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -95,7 +100,9 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+<div style="page-break-after: always;"></div>
+
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -130,6 +137,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a student : `addstudent`
 
@@ -146,9 +154,9 @@ Examples:
 * `addstudent -n Jonas Chow -i E0123456`
   * adds the student Jonas Chow with the given NUSNET ID.
 * `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A`
-  * adds the student Jonas Chow and allocates him into groups `T01A` and `R01A`. [\[view example\]](#addstudent-example-2)
+  * adds the student Jonas Chow and allocates him into groups `T01A` and `R01A`.
 * `addstudent -n Jonas Chow -i E0123456 -t beginner`
-  * adds the student Jonas Chow and tags him with `beginner`. [\[view example\]](#addstudent-example-3)
+  * adds the student Jonas Chow and tags him with `beginner`.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -176,9 +184,9 @@ Examples:
 * `addgroup -g T01A`
   * creates group `T01A`.
 * `addgroup -g T01A -n Hong Yao -n Hong Fai`
-  * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group. [\[view example\]](#addgroup-example-2)
+  * creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group.
 * `addgroup -g T01A -n Hong Yao -i E0123456`
-  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group. [\[view example\]](#addgroup-example-3)
+  * creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -195,7 +203,7 @@ Format: `addalloc -g <group_name> (-n <student_name> | -i <student_id>)`
 
 Examples:
 * `addalloc -g T01A -n Zhiying`
-  * adds `Zhiying` into the tutorial group `T01A`. [\[view example\]](#addalloc-example-1)
+  * adds `Zhiying` into the tutorial group `T01A`.
 * `addalloc -g T02A -i E0123456`
   * adds student with NUSNET ID `E0123456` into the tutorial group `T02A`.
 
@@ -210,11 +218,13 @@ Format: `addassessment -a <assessment_name>`
 * The assessment should not already exist in database.
 * Assessment name can be any number of alphanumeric words.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `addassessment -a P01`
   * creates a new assessment `P01`.
 * `addassessment -a Midterm Assessment`
-  * creates a new assessment `Midterm Assessment`. [\[view example\]](#addassessment-example-2)
+  * creates a new assessment `Midterm Assessment`.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -233,9 +243,9 @@ Format: `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s 
 
 Examples:
 * `addscore -a Midterm -n Van Nhi -s 95`
-  * records score for `Van Nhi` in `Midterm` to be `95.00` percent. [\[view example\]](#addscore-example-1)
+  * records score for `Van Nhi` in `Midterm` to be `95.00` percent.
 * `addscore -a P01 -i E0123456 -s 75.25`
-  * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent. [\[view example\]](#addscore-example-2)
+  * records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -246,10 +256,10 @@ Displays a list of all students in the student list.
 
 Format: `list`
 <br>
-[\[view example\]](#list-example)
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Searching for students : `search`
 
@@ -270,18 +280,19 @@ Only one flag should be used for each search (e.g. having `-n` and `-g` argument
 
 Examples:
 * `search -n Jonas Chow`
-  * returns a list of students with part of names that matches `Jonas` and `Chow`. [\[view example\]](#search-example-1)
+  * returns a list of students with part of names that matches `Jonas` and `Chow`.
 * `search -i E0123456`
   * returns the student with NUSNET ID `E0123456`, if found in database.
 * `search -g T02B R03C`
-  * returns a list of students in the groups `T02B` and `R03C`. [\[view example\]](#search-example-3)
+  * returns a list of students in the groups `T02B` and `R03C`.
 * `search -g T02`
-  * returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`. [\[view example\]](#search-example-4)
+  * returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
 * `search -t beginner`
-  * returns a list of students tagged as `beginner`. [\[view example\]](#search-example-5)
+  * returns a list of students tagged as `beginner`.
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Showing assessment result analysis : `show`
 
@@ -300,18 +311,28 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 * Keywords are case-sensitive and only allows exact match. E.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
 * Entering `-f` exports the graph produced from the command to a `.png` file in the same directory as your JAR file.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `show -n Hong Fai`
-  * displays line chart of `Hong Fai`'s performance in all his assessments. [\[view example\]](#show-example-1)
-* `show 2 -f`
-  * displays and exports the line chart produced of the 2nd student from the displayed list. [\[view example\]](#show-example-2)
+  * displays the following line chart of `Hong Fai`'s performance in all his assessments. <br>
+    ![showStudentExample](images/UGExamples/showstu.png)
+  
+* `show -n Hong Fai -f`
+  * exports the following line chart of `Hong Fai`'s performance in all his assessments. <br>
+    ![showExportExample](images/UGExamples/showexport.png)
+  
 * `show -g T02A`
-  * displays line chart of group `T02A`'s performance in their assessments. [\[view example\]](#show-example-3)
+  * displays line chart of group `T02A`'s performance in their assessments. <br>
+    ![showGroupExample](images/UGExamples/showgrp.png)
+
 * `show -a Midterm Examination`
-  * displays histogram of the distribution of scores in the `Midterm Examination` assessment. [\[view example\]](#show-example-4)
+  * displays histogram of the distribution of scores in the `Midterm Examination` assessment.<br>
+    ![showAssessmentExample](images/UGExamples/showasses.png)
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing a student : `edit`
 
@@ -328,7 +349,7 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 
 Examples:
 * `edit 1 -n Hong Yao -i E1234567`
-  * edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`. [\[view example\]](#edit-example-1)
+  * edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`.
 * `edit 3 -g T01C -g R01A`
   * edits the group of the 3rd student on the displayed list to `T01C` and `R01A`.
 * `search -n Hong Yao` followed by `edit 1 -t`
@@ -346,9 +367,11 @@ Format: `delete <index>`
 * Deletes the student at the specified `<index>`.
 * The `<index>` refers to the index number shown in the displayed student list. The `<index>` **must be a positive integer** 1, 2, 3, …
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list` followed by `delete 2`
-  * deletes the 2nd student in the student list. [\[view example\]](#delete-example-1)
+  * deletes the 2nd student in the student list.
 * `search -n Van Nhi` followed by `delete 1`
   * deletes the 1st student in the results of the `search` command.
 
@@ -365,15 +388,14 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 * The first row of the CSV file needs to be headers for the respective columns.
 * The header for the assessment columns should the name of the assessment. For example, `Rune Trials`. The header for every other column does not matter.
 * Every row apart from the first represents a student.
-* The first two columns refer to the student’s name and NUSNET ID.
-* The next `<number_of_group_columns>` columns, refer to the student’s groups.
-* The next `<number_of_assessment_columns>` columns, refer to the student’s grade in the respective assessments.
-* The next `<number_of_tag_columns>` columns, refer to the student's tags.
+* The first two columns should contain the student’s name and NUSNET ID.
+* The next `<number_of_group_columns>` columns, should contain the student’s groups.
+* The next `<number_of_assessment_columns>` columns, should contain the student’s grade in the respective assessments.
+* The next `<number_of_tag_columns>` columns, should contain the student's tags.
 * The number of group columns, assessment columns, and tag columns are assumed to be 0 if they are not specified.
 
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **Tips:**<br>
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
 
 * `<number_of_group_columns>` refers to the number of **columns** the groups occupy in the CSV file, not the number of **types** of groups.
 The similar applies for `<number_of_tag_columns>`.
@@ -384,12 +406,20 @@ The similar applies for `<number_of_tag_columns>`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The import command overwrites the current data with the newly imported data. Make sure you don't need the existing data before importing new data. 
+
+You can use the [`export`](#exporting-data--export) command (explained in the next section) to get a backup of the current data before importing new data.
+</div>
+
 An example of how the CSV should be formatted is shown below:
 
 ![CsvFormatExample](images/UGExamples/importeg.png)
 
 The command to import this file would be `import -f student_data.csv -g 2 -a 2 -t 2`.
-(There are 2 group columns, 2 assessments columns, and 2 tag columns.) [\[view example\]](#import-example)
+(There are 2 group columns, 2 assessments columns, and 2 tag columns.)
 
 Examples:
 * `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
@@ -399,10 +429,11 @@ Examples:
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Exporting data : `export`
 
-Exports data into a CSV file. Can be used to backup the data, or to send the data to colleagues for them to load into their copy of Source Control.
+Exports data into a CSV file. Can be used to back up the data, or to share the data to others for them to load into their copy of Source Control.
 
 Format: `export`
 
@@ -413,7 +444,7 @@ Format: `export`
 
 :bulb: **Tips:**<br>
 
-* The exported CSV file can be imported again to restore the state of the application when the data was exported
+* The exported CSV file can be imported again to restore the state of the application when the data was exported.
 
 </div>
 
@@ -425,7 +456,9 @@ Format: `export`
 Clears all existing data.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+
+You can't undo this command! You can use the [`export`](#exporting-data--export) command to get a backup of the data before clearing.
+
 </div>
 
 Format: `clear`
@@ -441,6 +474,7 @@ Format: `exit`
 
 [Return to Table of Contents](#table-of-contents)
 
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -450,6 +484,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 [Return to Table of Contents](#table-of-contents)
+
 
 ### Accessing command history
 
@@ -462,8 +497,9 @@ Retrieves past command lines input.
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
-### Setting customised aliases for commands : `alias`
+### Setting customized aliases for commands : `alias`
 
 Sets up an alias that can be used instead of a command.
 
@@ -475,11 +511,19 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing aliases can still be used after new alias is added. E.g. after `alias -c addstudent -as student`, both `student` and `addstudent` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+
 * The aliases created will persist between Source Control sessions, as long as the application is in the same directory as it was previously.
+* Default commands cannot be overwritten to perform different functionalities, and cannot be deleted.
+
+</div>
+
 
 Examples:
 * `alias -c addstudent -as example`
-  * adds a new alias to `addstudent` command. [\[view example\]](#alias-example-1)
+  * adds a new alias to `addstudent` command.
   * `example -n Zhiying -i E1234567` will add student `Zhiying` to the database.
 * `alias -c addgroup -as example`
   * replaces the mapping of the alias `example` to the `addgroup` command, i.e. `example` no longer function as `addstudent`.
@@ -487,14 +531,17 @@ Examples:
 * `alias -c example -as example2`
   * adds the alias `example2` to the command that `example` currently maps to, i.e. `example2` functions as `addgroup`.
 * `alias -c example -as example`
-  * removes the alias `example`. `example` will no longer be recognised as a command. [\[view example\]](#alias-example-4)
+  * removes the alias `example`. `example` will no longer be recognized as a command.
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
 Source Control data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
+
+If you are adding groups or assessments to a student, make sure you also add the groups to the group list, and the assessments to the assessment list. Otherwise, the changes you made could be lost!
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Source Control will discard all data and start with an empty data file at the next run.
@@ -506,7 +553,9 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+<div style="page-break-after: always;"></div>
+
+## **FAQ**
 
 ### Double-clicking isn't opening the app! What can I do?
 Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
@@ -521,7 +570,7 @@ On an OS based off of Linux, it might be necessary to run `chmod +x sourceContro
 ### How can I back up my data?
 Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the CSV file created.
+If you wish to back up the data, you can use the `export` command to retrieve a CSV file containing the data. The `import` command can then load the data back into Source Control.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -539,7 +588,9 @@ as well as you alias preferences.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+<div style="page-break-after: always;"></div>
+
+## **Glossary**
 
 Below is a table of the argument flags used in our document.
 
@@ -566,6 +617,7 @@ Import command description.
 [Return to Table of Contents](#table-of-contents)
 
 <br>
+<div style="page-break-after: always;"></div>
 
 Below is a table of the restrictions of data fields used in our application.
 
@@ -577,6 +629,7 @@ Group | Group name can be any alphanumeric words. | `Tutorial Group 2`
 Assessment | Assessment name can be any alphanumeric words. | `Practical Assessment 2`
 Score | Score is in percentage, recorded up to 2 decimal places. | `67.75`
 Tag | Tag can be a single alphanumeric word. | `Beginner1`
+Alias | Command alias can be a single alphanumeric word. | `addstu1`
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -586,7 +639,7 @@ Below is a table explaining some terms used in this document.
 
 Word | Meaning
 -------|--------
-Alphanumeric | A character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
+Alphanumeric | A character that is either an alphabet (capitalized and non-capitalized) or a numerical number.
 Command | Instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 Graphic User Interface (GUI) | A system of interactive visual components for computer software, which allows users to interact via many visual components.
@@ -597,15 +650,15 @@ JSON | JavaScript Object Notation (JSON) is an open standard file format and dat
 Directory | It is where files in the computer are stored, or commonly known as folder.
 Path | A string of characters to uniquely identify the location in the computer. Absolute path starts from the root directory and relative path starts from the current working directory.
 
-
-
 [Return to Table of Contents](#table-of-contents)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+<div style="page-break-after: always;"></div>
+
+## **Command Summary**
 
 Action | Format | Examples
 --------|--------|----------
@@ -616,7 +669,7 @@ Action | Format | Examples
 **Add Score** | `addscore -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | `addscore -a Midterm -n Van Nhi -s 75`, `addscore -a Finals -i E0123456 -s 87.65`
 **List** | `list` |
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | `search -n Zhiying`, `search -g T02B R04D`
-**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | `show -n Jonas Chow`, `show -a Midterm Examination`
+**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | `show -n Jonas Chow`, `show -a Midterm Examination -f`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | `edit 1 -n Hong Fai -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | `import -f student_data.csv -g 2 -a 10 -t 1`
@@ -625,124 +678,5 @@ Action | Format | Examples
 **Exit App** | `exit` |
 **Help** | `help` |
 **Set Alias** | `alias -c <existing_command> -as <new_alias>` | `alias -c addstudent -as addstu`
-
-[Return to Table of Contents](#table-of-contents)
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## Example Visual Aids
-
-### Addstudent Example 2
-Command: `addstudent -n Jonas Chow -i E0123456 -g T01A -g R01A` <br>
-![Addstudent Example 2](images/UGExamples/addstu2.png)<br>
-[Return to Addstudent](#adding-a-student--addstudent)
-
-### Addstudent Example 3
-Command: `addstudent -n Jonas Chow -i E0123456 -t beginner` <br>
-![Addstudent Example 3](images/UGExamples/addstu3.png)<br>
-[Return to Addstudent](#adding-a-student--addstudent)
-
-### Addgroup Example 2
-Command: `addgroup -g T01A -n Hong Yao -n Hong Fai` <br>
-![Addgroup Example 2](images/UGExamples/addgroup2.png)<br>
-[Return to Addgroup](#creating-a-new-group--addgroup)
-
-### Addgroup Example 3
-Command: `addgroup -g T01A -n Hong Yao -i E0123456` <br>
-![Addgroup Example 3](images/UGExamples/addgroup3.png)<br>
-[Return to Addgroup](#creating-a-new-group--addgroup)
-
-### Addalloc Example 1
-Command: `addalloc -g T01A -n Zhiying` <br>
-![Addalloc Example 1](images/UGExamples/addalloc1.png)<br>
-[Return to Addalloc](#adding-a-student-into-a-group--addalloc)
-
-### Addassessment Example 2
-Command: `addassessment -a Midterm Assessment` <br>
-![Addassessment Example 2](images/UGExamples/addass2.png)<br>
-[Return to Addassessment](#creating-a-new-assessment--addassessment)
-
-### Addscore Example 1
-Command: `addscore -a Midterm -n Van Nhi -s 95` <br>
-![Addscore Example 1](images/UGExamples/addscore1.png)<br>
-[Return to Addscore](#adding-a-score--addscore)
-
-### Addscore Example 2
-Command: `addscore -a P01 -i E0123456 -s 75.25` <br>
-![Addscore Example 2](images/UGExamples/addscore2.png)<br>
-[Return to Addscore](#adding-a-score--addscore)
-
-### List Example
-Command: `list` <br>
-![](images/UGExamples/list.png)<br>
-[Return to List](#listing-all-students--list)
-
-### Search Example 1
-Command: `search -n Jonas Chow` <br>
-![Search Example 1](images/UGExamples/search1.png)<br>
-[Return to Search](#searching-for-students--search)
-
-### Search Example 3
-Command: `search -g T02B R03C` <br>
-![Search Example 3](images/UGExamples/search3.png)<br>
-[Return to Search](#searching-for-students--search)
-
-### Search Example 4
-Command: `search -g T02` <br>
-![Search Example 4](images/UGExamples/search4.png)<br>
-[Return to Search](#searching-for-students--search)
-
-### Search Example 5
-Command: `search -t beginner` <br>
-![Search Example 5](images/UGExamples/search5.png)<br>
-[Return to Search](#searching-for-students--search)
-
-### Show Example 1
-Command: `show -n Hong Fai` <br>
-![Show Example 1](images/UGExamples/show1.png)<br>
-[Return to Show](#showing-assessment-result-analysis--show)
-
-### Show Example 2
-Command: `show 2 -f chartImage` exports the following picture as a file `chartImage.png`. <br>
-![Show Example 2](images/UGExamples/show2.png)<br>
-[Return to Show](#showing-assessment-result-analysis--show)
-
-### Show Example 3
-Command: `show -g T02A` <br>
-![Show Example 3](images/UGExamples/show3.png)<br>
-[Return to Show](#showing-assessment-result-analysis--show)
-
-### Show Example 4
-Command: `show -a Midterm Examination` <br>
-![Show Example 4](images/UGExamples/show4.png)<br>
-[Return to Show](#showing-assessment-result-analysis--show)
-
-### Edit Example 1
-Command: `edit 1 -n Hong Yao -i E1234567` <br>
-![Edit Example 1](images/UGExamples/edit1.png)<br>
-[Return to Edit](#editing-a-student--edit)
-
-### Delete Example 1
-Command: `delete 2` <br>
-![Delete Example 1](images/UGExamples/delete1.png)<br>
-[Return to Delete](#deleting-a-student--delete)
-
-### Import Example
-Command: `import -f student_data.csv -g 2 -a 2 -t 2` <br>
-![Import Example](images/UGExamples/import0.png)<br>
-[Return to Import](#importing-data--import)
-
-### Alias Example 1
-Command: `alias -c addstudent -as example` <br>
-![Alias Example 1](images/UGExamples/alias1.png)<br>
-[Return to Alias](#setting-customised-aliases-for-commands--alias)
-
-### Alias Example 4
-Command: `alias -c example -as example` <br>
-![Alias Example 4](images/UGExamples/alias4.png)<br>
-[Return to Alias](#setting-customised-aliases-for-commands--alias)
-
-<br>
 
 [Return to Table of Contents](#table-of-contents)

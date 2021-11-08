@@ -15,7 +15,7 @@ Given below are my contributions to the project.
 
 * **New Feature** `addscore`: Added the ability to add assessment score (PR [\#118](https://git.io/JPAw5), [\#243](https://git.io/JPAKh))
     * This feature is necessary for the target user to add and modify scores apart from bulk import.
-    * This enhancement is the first feature that dealt with the modification of assessment data. The implementation was challenging due to the two-referral between assessments and students.
+    * This enhancement is the first feature that dealt with the modification of assessment data. The implementation was challenging due to the two-referral between assessments and students. Although the feature is quite similar to `addalloc` feature, a considerable amount of time was required for writing the code and tests.
 
 * **New Feature** `show`: Added the ability to show summary information (PR [\#168](https://git.io/JPA6Y), [\#176](https://git.io/JPA6c), [\#177](https://git.io/JPA6l), [\#267](https://git.io/JPA6B))
     * This feature is necessary for the target user to view the summary information together with the distribution graph. 
@@ -36,7 +36,8 @@ Given below are my contributions to the project.
         * Added documentation for the features `addalloc` and `addscore` (PR [\#58](https://git.io/JPAgY))
         * Made cosmetic enhancements jointly via PR reviews (PR [\#203](https://git.io/JPAgO))
     * Developer Guide:
-        * Added implementation details of the `addalloc` and `addscore` features.
+        * Added implementation details of the `addalloc`, `addscore` and `show` features (PR [\#278](https://git.io/JXRf6))
+        * Maintain the consistency between activity diagrams used in the guide (PR [\#283](https://git.io/JXRfk))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments) (PR [\#203](https://git.io/JPAgO), [\#174](https://git.io/JPAg2))

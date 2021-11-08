@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
+participant ":ShowCommandParser" as ShowCommandParser LOGIC_COLOR
+participant "showCommand\n:ShowCommand" as ShowCommand LOGIC_COLOR
+participant "info\n:Info" as Info LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "studentStatistics\n:StudentStatistics" as StudentStatistics MODEL_COLOR
+end box
+
+[-> LogicManager : execute("show \n-n Hong Fai")
+activate LogicManager
+
+LogicManager -> SourceControlParser : parseCommand(\n"show -n Hong Fai")
+activate SourceControlParser
+
+create ShowCommandParser
+SourceControlParser -> ShowCommandParser
+activate ShowCommandParser
+
+ShowCommandParser --> SourceControlParser
+deactivate ShowCommandParser
+
+SourceControlParser -> ShowCommandParser : parse("-n Hong Fai")
+activate ShowCommandParser
+
+ShowCommandParser -> ShowCommandParser : parseByPrefixes()
+activate ShowCommandParser
+
+create ShowCommand
+ShowCommandParser -> ShowCommand : ShowCommand(scoreDescriptor)
+activate ShowCommand
+
+ShowCommand --> ShowCommandParser : showCommand
+deactivate ShowCommand
+
+ShowCommandParser --> ShowCommandParser : showCommand
+deactivate ShowCommandParser
+
+ShowCommandParser --> SourceControlParser : showCommand
+deactivate ShowCommandParser
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy ShowCommandParser
+
+SourceControlParser --> LogicManager : showCommand
+deactivate SourceControlParser
+
+'hidden arrow to position destroy marker
+Model -[hidden]->
+destroy SourceControlParser
+
+LogicManager -> ShowCommand : execute()
+activate ShowCommand
+
+ref over ShowCommand, Model : show statistics from model
+
+create CommandResult
+ShowCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ShowCommand
+deactivate CommandResult
+
+ShowCommand --> LogicManager
+deactivate ShowCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

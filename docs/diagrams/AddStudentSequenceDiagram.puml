@@ -3,74 +3,74 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
-participant "John Doe:Student" as Student LOGIC_COLOR
-participant "addCommand\n:AddCommand" as AddCommand LOGIC_COLOR
+participant ":SourceControlParser" as SourceControlParser LOGIC_COLOR
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant "addStudentCommand\n:AddStudentCommand" as AddStudentCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "Jonas:Student" as Student MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add student \n-n John Doe \n-i E0123456")
+[-> LogicManager : execute("addstudent \n-n Jonas \n-i E0123456")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(\n"add student -n John Doe \n-i E0123456")
-activate AddressBookParser
+LogicManager -> SourceControlParser : parseCommand(\n"addstudent -n Jonas \n-i E0123456")
+activate SourceControlParser
 
-create AddCommandParser
-AddressBookParser -> AddCommandParser
-activate AddCommandParser
+create AddStudentCommandParser
+SourceControlParser -> AddStudentCommandParser
+activate AddStudentCommandParser
 
-AddCommandParser --> AddressBookParser
-deactivate AddCommandParser
+AddStudentCommandParser --> SourceControlParser
+deactivate AddStudentCommandParser
 
-AddressBookParser -> AddCommandParser : parse(" -n John Doe\n -i E0123456")
-activate AddCommandParser
+SourceControlParser -> AddStudentCommandParser : parse(" -n Jonas\n -i E0123456")
+activate AddStudentCommandParser
 
 create Student
-AddCommandParser -> Student
+AddStudentCommandParser -> Student
 activate Student
 
-Student --> AddCommandParser : John Doe
+Student --> AddStudentCommandParser : Jonas
 deactivate Student
 
-create AddCommand
-AddCommandParser -> AddCommand : AddCommand(John Doe)
-activate AddCommand
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand : AddStudentCommand(Jonas)
+activate AddStudentCommand
 
-AddCommand --> AddCommandParser : addCommand
-deactivate AddCommand
+AddStudentCommand --> AddStudentCommandParser : addStudentCommand
+deactivate AddStudentCommand
 
-AddCommandParser --> AddressBookParser : addCommand
-deactivate AddCommandParser
+AddStudentCommandParser --> SourceControlParser : addStudentCommand
+deactivate AddStudentCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddCommandParser -[hidden]-> AddressBookParser
-destroy AddCommandParser
+AddStudentCommandParser -[hidden]-> SourceControlParser
+destroy AddStudentCommandParser
 
-AddressBookParser --> LogicManager : addCommand
-deactivate AddressBookParser
+SourceControlParser --> LogicManager : addStudentCommand
+deactivate SourceControlParser
 
-LogicManager -> AddCommand : execute()
-activate AddCommand
+LogicManager -> AddStudentCommand : execute()
+activate AddStudentCommand
 
-AddCommand -> Model : addStudent(John Doe)
+AddStudentCommand -> Model : addStudent(Jonas)
 activate Model
 
-Model --> AddCommand
+Model --> AddStudentCommand
 deactivate Model
 
 create CommandResult
-AddCommand -> CommandResult
+AddStudentCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddCommand
+CommandResult --> AddStudentCommand
 deactivate CommandResult
 
-AddCommand --> LogicManager : result
-deactivate AddCommand
+AddStudentCommand --> LogicManager : result
+deactivate AddStudentCommand
 
 [<--LogicManager
 deactivate LogicManager

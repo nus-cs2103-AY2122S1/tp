@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+
+title: Show performance analysis\nof a student
+
+start
+if () then ([student(s) found in database])
+	:Update student list
+	with matched student(s);
+	if () then ([one matched\nstudent found])
+    :Show summary\ninfo of student;
+    :Show performance\ngraph of student;
+	else ([multiple matched\n students found])
+		:Display an\nerror message;
+	endif
+else ([else])
+	:Display an\nerror message;
+endif
+
+stop
+
+@enduml
