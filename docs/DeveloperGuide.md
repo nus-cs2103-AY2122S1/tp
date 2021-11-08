@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `SelectedPersonCard`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The `Summary` class displays data on `UI` using the `JavaFX chart` framework.  The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The `Summary` class displays data on `UI` using the `JavaFX chart` framework.  The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 In particular, interactions on `ContactCard` may load data on  `SelectedContactCard` through `model`.
 
@@ -88,7 +88,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -137,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -161,17 +161,17 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 The category feature adds to the attributes of the `Contact` object. Similar to the other fields of the `Contact` object,
-it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix.
+it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix. It is represented by the `CategoryCode` object.
 
 Additionally, it implements the following operations:
-* `isValidCategory()`  —  Determines if the input is a valid category
-* `stringToCategory()`  —  Converts the input into a constant
+* `isValidCategory()`  —  Determines if the input is a valid category.
+* `stringToCategory()`  —  Converts the input into a constant.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The category field is compulsory and requires
 one of the available category codes (att, fnb, com, acc, tpt, oth). In the absence or invalidity of the category code,
 the contact will not be saved and the user will be prompted to give a valid one.</div>
 
-Given below is an example usage scenario and how category mechanism behaves at each step
+Given below is an example usage scenario and how category mechanism behaves at each step:
 
 Step 1. The user executes the command `filter c/oth` to filter all "others" category contacts in the address book. And
 gets a list of all contacts with the category "others".
@@ -191,12 +191,12 @@ The following activity diagram shows what happens when a user executes the `edit
 **Aspect: How Category is called by the user:**
 
 * **Alternative 1 (current choice):** Category field is added through `add` or `edit` commands.
-  * Pros: Easy to implement
-  * Cons: May cause `add` command to be too long
+  * Pros: Easy to implement.
+  * Cons: May cause `add` command to be too long.
 
 * **Alternative 2:** Exclusive command to add Category field
-  * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
-  * Cons: Reduces usability due to the need to remember another command
+  * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands.
+  * Cons: Reduces usability due to the need to remember another command.
 
 ### Delete Feature
 
@@ -232,11 +232,11 @@ The only difference between the 2 diagrams is the `DeleteCommand` (Name or Index
 **Aspect: How Delete is implemented:**
 
 * **Alternative 1 (current choice):** Delete deletes directly from the AddressBook
-    * Pros: Easier to implement
-    * Cons: Causes other features, such as undo and redo, to be more memory intensive
+    * Pros: Easier to implement.
+    * Cons: Causes other features, such as undo and redo, to be more memory intensive.
 
-* **Alternative 2:** Delete Stashes away the contact (for undoing purposes)
-    * Pros: More memory friendly, instead of storing a copy of the entire AddressBook
+* **Alternative 2:** Delete stashes away the contact (for undoing purposes)
+    * Pros: More memory friendly, instead of storing a copy of the entire AddressBook.
     * Cons: More complex to implement. Storage of contacts might result in duplicates etc.
 
 
@@ -342,7 +342,7 @@ Step 1. The user launched the application for the first time. The `filteredConta
 
 Step 2. The user executes `view n/Marina Bay Sands` command to display the contact details of Marina Bay Sands. The `Parser` parses user input and creates a `ViewCommandName`.
 
-Step 3. The view command calls the `Model#getFilteredContactList()` and iterates through the list to check for a matching contact Name. If the contact is successfully retrieved, the Display Pane updates with details of Marina Bay Sands.
+Step 3. The view command calls the `Model#getFilteredContactList()` and iterates through the list to check for a matching contact Name. If the contact is successfully retrieved, the Display Pane updates with details of "Marina Bay Sands".
 
 The following sequence diagram shows how the view operation works:
 
@@ -367,8 +367,8 @@ The following sequence diagram shows how the view operation works:
 The Sort feature modifies the internal contact list stored in the addressbook according to the preference of sorting.
 It is implemented with the following operations:
 
-* `SortCommandName#execute()`  —  Sorts the contacts in the list based on name in lexicographical order, or
-* `SortCommandRating#execute()`  —  Sorts the contacts in the list based on rating in descending order
+* `SortCommandName#execute()`  —  Sorts the contacts in the list based on name in lexicographical order.
+* `SortCommandRating#execute()`  —  Sorts the contacts in the list based on rating in descending order.
 
 These operations make use of the operation `Model#sortList(String sortBy)`, which calls `AddressBook#sortList(String sortBy)`
 to change the order of the contacts in the contact list. In this way, the user's sorting preference is saved.
@@ -695,7 +695,7 @@ The navigating input history feature works by storing an arraylist within the cl
 
 `InputHistory` class will communicate with the class `CommandBox` to display the requested commands.
 
-The following activity diagrams gives an overview of how `InputHistory` works when the User presses the up and down arrow keys to navigate through their input history:
+The following activity diagrams gives an overview of how `InputHistory` works when the user presses the up and down arrow keys to navigate through their input history:
 
 ![Activity Diagram for Up_Arrow](images/InputHistoryUpArrowActivityDiagram.png)
 ![Activity Diagram for Down_Arrow](images/InputHistoryDownArrowActivityDiagram.png)
@@ -749,14 +749,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-|`***`|Tour Guide|Add contacts to my list|build a list of all my contacts|
-|`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
-|`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
-|`***`|Tour Guide|View all the contacts in my list |find contacts whose names I have forgotten|
+|`***`|Tour Guide|Add contacts to my list|Build a list of all my contacts|
+|`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|Store the relevant information of a contact in one place.|
+|`***`|Tour Guide|Delete contacts from my list|Remove irrelevant or unwanted details|
+|`***`|Tour Guide|View all the contacts in my list |Find contacts whose names I have forgotten|
 |`***`|Organized|Label contacts with category|Access information more efficiently|
 |`***`|Visual|View my contacts on a GUI|Have a more user-friendly experience|
 |`***`|Forgetful|Scroll through my list manually|Find contacts that I may have forgotten the names of|
-|`**`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
+|`**`|Tour Guide|Edit contact details|Ensure that my contacts are up to date|
 |`**`|Busy |Find a specific contact by keyword|Easily sieve through a large database of contacts|
 |`**`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
 |`**`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
@@ -765,7 +765,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`*`|Busy|See the overview of my current data upon start up|Quick summary of my data at a glance|
 |`*`|Experienced|Add reviews to contacts|Recommend services based on reviews|
 |`*`|Tour Guide|Sort my contacts by name or by rating|Organise a long list of contacts|
-|`*`|Seasoned tour guide|Be alerted of duplicate contacts |prevent repetition and disorganised information|
+|`*`|Seasoned tour guide|Be alerted of duplicate contacts |Prevent repetition and disorganised information|
 |`*`|Confused|Have sample data shown to me|Have a rough idea of what the app has to offer|
 |`*`|Helpful|Share my data with other parties (through a .txt file)|Utilise WhereTourGo on the go|
 |`*`|Tech-savvy|Transfer my contact information conveniently|Facilitate change of devices|
@@ -786,7 +786,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. WhereTourGo informs the user that the contact was added.
 
 4. WhereTourGo displays updated list of contacts and summary page.
-Use case ends.
+
+   Use case ends.
 
 **Extensions**
 * 2a. The format is wrong.
@@ -812,6 +813,7 @@ Use case ends.
 3. WhereTourGo informs the user that the contact was edited.
 
 4. WhereTourGo displays updated list of contacts and summary page.
+
    Use case ends.
 
 **Extensions**
@@ -1084,7 +1086,6 @@ Use case ends.
 6.  The product will be offered as a free service to all.
 7.  The source code should be open source.
 
-*{More to be added}*
 
 ### Glossary
 
