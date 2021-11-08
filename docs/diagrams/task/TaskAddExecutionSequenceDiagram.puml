@@ -12,7 +12,7 @@ box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
 
-LogicManager -> TaddCommand : execute(:Model)
+LogicManager -> TaddCommand : execute(model)
 activate TaddCommand
 
 TaddCommand -> Model : getFilteredMemberList()

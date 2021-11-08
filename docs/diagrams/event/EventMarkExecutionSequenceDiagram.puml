@@ -1,0 +1,51 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EmarkCommand" as EmarkCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "selectedEvent:Event" as Event MODEL_COLOR
+end box
+
+LogicManager -> EmarkCommand : execute(model)
+activate EmarkCommand
+
+EmarkCommand -> Model : getFilteredEventList()
+activate Model
+
+Model --> EmarkCommand : filteredEventList
+deactivate Model
+
+EmarkCommand -> Model : getFilteredMemberList()
+activate Model
+
+Model --> EmarkCommand : filteredMemberList
+deactivate Model
+
+EmarkCommand -> Event : markAttendance(members)
+activate Event
+
+Event --> EmarkCommand
+deactivate Event
+
+create CommandResult
+EmarkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EmarkCommand
+deactivate CommandResult
+
+EmarkCommand --> LogicManager : result
+deactivate EmarkCommand
+
+EmarkCommand -[hidden]-> LogicManager
+destroy EmarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
