@@ -522,6 +522,11 @@ to make marking absent by time.
 Currently, Staff'd supports calculating a staff's current month salary. In future iterations, we can expand the
 functionality to let it track the changes on a staff's salary, store the salary history of a staff.
 
+### Storing both hourly and monthly salary
+
+Currently, Staff'd supports use of hourly salary only. In future iterations, we can expand this functionality
+to let it track both hourly and monthly salary. Can be done with the tracking of salary changes.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
