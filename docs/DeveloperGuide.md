@@ -229,9 +229,6 @@ To create a class, the user has to provide a valid class code (unique from curre
 
     - Pros: Simple to save and load. More OOP-oriented and instinctive to understand.
 
-  - Pros: Easier to implement. Better experience for user, who can `cd` into the module and use one command `lsasg` to view all assignments. In contrast, if the assignments are under groups, the user has to `cd` into the module and choose a group to view assignments, before he/she can view all assignments.
-  - Cons: Not able to create assignments on the group level.
-
 ### \[Proposed\] Assign students grades for assignments
 
 #### Proposed Implementation
@@ -1045,6 +1042,8 @@ testers are expected to do more *exploratory* testing.
   2. Test case: Corrupted JSON file.
 
       Expected: An empty instance of EdRecord will be started, with more detailed error message logged.
+
+---
 
 ## Effort 
 In general, our team has managed to implement the essential features of the applications to allow EdRecord to become a usable application. Our team closely adhered towards the given deadlines, making sure that each of the important features were done by a specific milestone. The enhancements made on top of AddressBook-3 is equal or slightly more than our individual projects.
