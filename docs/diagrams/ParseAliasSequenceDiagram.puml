@@ -25,11 +25,11 @@ deactivate CommandWord
 ConthacksParser -> EditModuleLessonCommandParser : parse(" 1 m/CS2100 T19")
 activate EditModuleLessonCommandParser
 
-EditModuleLessonCommandParser -> ParserUtil : parseModuleCodes()
+EditModuleLessonCommandParser -> ParserUtil : parseModuleCode()
 activate ParserUtil
-ParserUtil -> EditModuleLessonCommandParser : moduleCodes
+ParserUtil -> EditModuleLessonCommandParser : moduleCode
 deactivate ParserUtil
-note right of EditModuleLessonCommandParser : modulecode = [CS2100 T19]
+note right of EditModuleLessonCommandParser : moduleCode = [CS2100 T19]
 
 
 create EditModuleLessonCommand
