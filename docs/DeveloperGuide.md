@@ -558,7 +558,7 @@ The following activity diagram summarizes what happens when a user executes an e
 
 ###### How unreferenced tags are "garbage collected"?
 The garbage collection of unreferenced tags takes place whenever the `AddressBook` listener detects an update event in the `UniqueClientList`. 
-The garbage collector will iterate through the `UniqueTagList` and remove all `Tag` objects that are not referenced by any clients. The design choice of doubly linking the tag and client further help facilitate this process since the reference state of the `Tag` has become easily available as a result.
+The garbage collector will iterate through the `UniqueTagList` and remove all `Tag` objects that are not referenced by any clients. The design choice of doubly linking the tag and client further help facilitate this process since the "reference state" of the `Tag` has become easily available as a result.
 
 ##### 4.7.1.3 Delete a client
 The following activity diagram summarizes what happens when a user executes a delete command:
