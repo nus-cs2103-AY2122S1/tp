@@ -10,7 +10,7 @@ typists. SalesNote aims to help tailors simplify their administrative tasks, wit
 * Sales orders and accounts
 
 This is a user guide aimed at helping all users of SalesNote; both new and experienced. The table of contents 
-below lists all the available commands, and the link will bring you to a quick overview for more information on the
+below lists all the available commands, and each link will bring you to a quick overview for more information on the
 given command. Newer users hoping to quickly get started can refer to the "quick start", in the first section of the
 user guide below.
 
@@ -25,15 +25,6 @@ user guide below.
         - [Editing a client : `editclient`](#editing-a-client--editclient)
         - [Locating clients by name : `findclient`](#locating-clients-by-name--findclient)
         - [Listing all clients : `listclients`](#listing-all-clients--listclients)
-    - [Task Commands](#task-commands)
-        - [Adding a task : `addtask`](#adding-a-task--addtask)
-        - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
-        - [Editing a task : `edittask`](#editing-a-task--edittask)
-        - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
-        - [Listing all tasks : `listtasks`](#listing-all-tasks--listtasks)
-        - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
-        - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
-        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
     - [Order Commands](#order-commands)
         - [Adding an order : `addorder`](#adding-an-order--addorder)
         - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
@@ -44,6 +35,15 @@ user guide below.
         - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
         - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
         - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
+    - [Task Commands](#task-commands)
+        - [Adding a task : `addtask`](#adding-a-task--addtask)
+        - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
+        - [Editing a task : `edittask`](#editing-a-task--edittask)
+        - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+        - [Listing all tasks : `listtasks`](#listing-all-tasks--listtasks)
+        - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
+        - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
+        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
     - [Clearing all entries : `clear`](#clearing-all-entries--clear)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
@@ -280,13 +280,19 @@ with a label describing them, a client, an amount, and a date. The following are
   **dd/mm/yyyy** | `08/11/2021`
 </div>
 
+[return to top](#table-of-contents)
 
-### Adding an order : `addorder` [!back]
+### Adding an order : `addorder` 
 
 Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
 
 Allows you to add an order to SalesNote. Note that SalesNote maintains a unique list of orders. Orders are considered the same if
-they have the same **label and customer**. So `addorder l/blue blouse c/Alice a/21.00 d/20 August 2021` followed by `addorder l/blue blouse c/alice a/100 d/21 August 2021`
+they have the same **label and customer**. So:
+
+* `addorder l/blue blouse c/Alice a/21.00 d/20 August 2021` followed by
+  
+* `addorder l/blue blouse c/alice a/100 d/21 August 2021`
+
 will not be allowed. This is to help guard against user error. If you are sure this is what you want, our suggestion is to add a number at the end of the order label
 e.g. `addorder l/blue blouse1 c/alice a/100 d/21 August 2021` instead.
 
@@ -330,10 +336,10 @@ Examples:
 * `findorder blue` returns `blue blazer` and `blue shirt`
 * `findorder SO1` returns order with id of `SO1`
 
+[return to top](#table-of-contents)
+
 As the purpose of the order commands in SalesNote are to help you manage accounts better, we offer a more comprehensive
 set of commands for viewing and sorting orders, shown here below.
-
-[return to top](#table-of-contents)
 
 ### Listing all orders : `listorders`
 
@@ -425,11 +431,14 @@ Press the ESCAPE key to close the total orders window
 * After adding/deleting orders, you might want to run this command again to refresh the window.
 </div>
 
-![TotalOrdersWindow](images/TotalOrdersWindow.png)
+![TotalOrdersWindow](images/TotalOrdersWindow2.png)
 <figcaption align = "center">e.g. In the figure above, the application has three clients Ng Chin Gan, Alice Seah,
 and Jacob Tan, but Jacob Tan is not shown as there are no orders from him in SalesNote yet</figcaption>
 
+
 [return to top](#table-of-contents)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Task Commands
@@ -629,6 +638,8 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SalesNote home folder.
+
+[return to top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
