@@ -18,7 +18,7 @@ package "SIASA Storage" #F4F6F6{
 Interface SiasaStorage <<Interface>>
 Class JsonSiasaStorage
 Class JsonSerializableSiasa
-Class JsonAdaptedPerson
+Class JsonAdaptedContact
 Class JsonAdaptedPolicy
 Class JsonAdaptedTag
 Class JsonAdaptedCommission
@@ -40,14 +40,14 @@ Storage -right-|> SiasaStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonSiasaStorage .up.|> SiasaStorage
 JsonSiasaStorage ..> JsonSerializableSiasa
-JsonSerializableSiasa --> "*" JsonAdaptedPerson
+JsonSerializableSiasa --> "*" JsonAdaptedContact
 JsonSerializableSiasa --> "*" JsonAdaptedPolicy
-JsonAdaptedPolicy -right-> "1" JsonAdaptedPerson
+JsonAdaptedPolicy -right-> "1" JsonAdaptedContact
 JsonAdaptedPolicy --> "1" JsonAdaptedCommission
 JsonAdaptedPolicy --> "1" JsonAdaptedPaymentStructure
 JsonAdaptedTag -[hidden]down-> JsonAdaptedPaymentStructure
 
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedContact --> "*" JsonAdaptedTag
 JsonAdaptedPolicy --> "*" JsonAdaptedTag
 
 

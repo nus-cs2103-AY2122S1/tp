@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+
+
+participant "c:AddPolicyCommand" as AddPolicyCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "l:List<Contact>" as List MODEL_COLOR
+participant "owner:Contact" as Contact MODEL_COLOR
+participant "toAdd:Policy" as Policy MODEL_COLOR
+
+end box
+
+[-> AddPolicyCommand : execute()
+
+activate AddPolicyCommand
+
+AddPolicyCommand -> Model : getFilteredContactList()
+activate Model
+
+create List
+Model -> List
+activate List
+List --> Model : l
+deactivate List
+
+Model --> AddPolicyCommand : l
+deactivate Model
+
+AddPolicyCommand -> List : get(Index)
+activate List
+
+List -> Contact
+activate Contact
+
+Contact --> List : owner
+deactivate Contact
+
+List -> AddPolicyCommand : owner
+deactivate List
+
+[<-[hidden]- List
+
+destroy List
+create Policy
+AddPolicyCommand -> Policy
+activate Policy
+Policy --> AddPolicyCommand : toAdd
+deactivate Policy
+
+
+AddPolicyCommand -> Model : addPolicy(toAdd)
+
+activate Model
+Model --> AddPolicyCommand
+deactivate Model
+
+[<-- AddPolicyCommand
+deactivate AddPolicyCommand
+[<-[hidden]- AddPolicyCommand
+destroy AddPolicyCommand
+@enduml

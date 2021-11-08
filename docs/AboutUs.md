@@ -30,13 +30,13 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/zhuoyang125.png" width="200px">
 
 [[github](http://github.com/zhuoyang125)]
-![img.png](img.png)
+
 * Role: Developer
 * Responsibilities: UI IC
 
 ### Sherwin Poh Kai Xun
 
-<img src="images/sherrpass.png" width="200px">
+<img src="images/sherwinprofile.png" width="200px">
 
 [[github](https://github.com/sherrpass)]
 

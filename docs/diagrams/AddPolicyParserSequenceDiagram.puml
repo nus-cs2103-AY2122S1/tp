@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LM LOGIC_COLOR
+participant ":SiasaParser" as SP LOGIC_COLOR
+participant "p:AddPolicyCommandParser" as APP LOGIC_COLOR
+participant "c:AddPolicyCommand" as APC LOGIC_COLOR
+end box
+
+[-> LM : execute("addpolicy ...")
+
+activate LM
+
+LM -> SP : parseCommand("addpolicy")
+
+activate SP
+
+
+create APP
+SP -> APP
+
+activate APP
+APP --> SP : p
+
+deactivate APP
+
+SP -> APP : parse(arguments)
+activate APP
+
+create APC
+APP -> APC
+activate APC
+APC --> APP : c
+deactivate APC
+APP --> SP : c
+deactivate APP
+
+[-[hidden]-> APP : execute("addpolicy ...")
+destroy APP
+
+SP --> LM : c
+deactivate SP
+LM -> APC : execute()
+activate APC
+APC --> LM : commandResult
+deactivate APC
+[-[hidden]-> APC : execute("addpolicy ...")
+destroy APC
+
+[<-- LM
+@enduml
+

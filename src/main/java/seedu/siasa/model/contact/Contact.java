@@ -129,4 +129,20 @@ public class Contact {
         return builder.toString();
     }
 
+    /**
+     * Returns a String representation of a contact in CSV format. Does not
+     * include tags for consistency reasons.
+     */
+    public String toCsvFormat() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\"" + getName() + "\"")
+                .append(",")
+                .append("\"" + getPhone() + "\"")
+                .append(",")
+                .append("\"" + getEmail() + "\"")
+                .append(",")
+                .append("\"" + getAddress() + "\"");
+        return builder.toString();
+    }
+
 }

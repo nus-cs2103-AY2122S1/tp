@@ -90,7 +90,7 @@ public class EditContactCommand extends Command {
         List<Policy> contactPolicies = model.getPoliciesBelongingTo(contactToEdit);
 
         for (Policy p : contactPolicies) {
-            policiesToBeUpdated.add(new Pair(p, newPolicyWithNewOwner(p, editedContact)));
+            policiesToBeUpdated.add(new Pair<>(p, newPolicyWithNewOwner(p, editedContact)));
         }
 
         for (Pair<Policy, Policy> pair : policiesToBeUpdated) {
