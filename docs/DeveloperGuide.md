@@ -1074,8 +1074,86 @@ Use case resumes from step 2.
 Steps 1c1 - 1c2 are repeated until the supplier to delete exists in RHRH. <br>
 Use case resumes from step 2.
 
+**Use case (UC12): Find Customers in RHRH**
 
-**Use case (UC12): Set the tables of the restaurant inside the app**
+**MSS**
+
+1. User enters the command to find the customers in RHRH based on a sequence of keywords.
+2. The customer list is filtered in RHRH based on matching of keywords.
+3. System confirms that the customer list has been filtered and displays number of filtered customers.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects empty or invalid keywords.
+    * 1b1. System displays error corresponding to the empty or invalid keywords and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+**Use case (UC13): Find Employees in RHRH**
+
+**MSS**
+
+1. User enters the command to find the employees in RHRH based on a sequence of keywords.
+2. The employee list is filtered in RHRH based on matching of keywords.
+3. System confirms that the employee list has been filtered and displays number of filtered employees.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects empty or invalid keywords.
+    * 1b1. System displays error corresponding to the empty or invalid keywords and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+**Use case (UC14): Find Suppliers in RHRH**
+
+1. User enters the command to find the suppliers in RHRH based on a sequence of keywords.
+2. The supplier list is filtered in RHRH based on matching of keywords.
+3. System confirms that the supplier list has been filtered and displays number of filtered suppliers.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects invalid command format.
+    * 1a1. System displays an error, showing unknown command.
+    * 1a2. User enters command again.
+
+Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
+Use case resumes from step 2.
+
+* 1b. System detects empty or invalid keywords.
+    * 1b1. System displays error corresponding to the empty or invalid keywords and provides an example on the accepted format
+      and arguments.
+    * 1b2. User enters command arguments again.
+
+Steps 1b1 - 1b2 are repeated until all command arguments are valid. <br>
+Use case resumes from step 2.
+
+**Use case (UC15): Set the tables of the restaurant inside the app**
 
 **MSS**
 
@@ -1094,7 +1172,7 @@ Steps 1a1 - 1a2 are repeated until the command is correctly formatted. <br>
 Use case resumes from step 2.
 
 
-**Use case (UC13): Sort Customers in RHRH*
+**Use case (UC16): Sort Customers in RHRH*
 
 **MSS**
 
@@ -1126,7 +1204,7 @@ Use case resumes from step 2.
     
     Use case ends.
 
-**Use case (UC14): Sort Employees in RHRH**
+**Use case (UC17): Sort Employees in RHRH**
 
 **MSS**
 
@@ -1158,7 +1236,7 @@ Use case resumes from step 2.
 
   Use case ends.
 
-**Use case (UC15): Sort Suppliers in RHRH**
+**Use case (UC18): Sort Suppliers in RHRH**
 
 **MSS**
 
@@ -1191,7 +1269,7 @@ Use case resumes from step 2.
   Use case ends.
 
 
-**Use case (UC16): Check for reservations made for a date and time**
+**Use case (UC19): Check for reservations made for a date and time**
 
 **MSS**
 
@@ -1215,7 +1293,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC17): Check for reservations made for a date**
+**Use case (UC20): Check for reservations made for a date**
 
 **MSS**
 
@@ -1239,7 +1317,7 @@ Use case resumes from step 2.
 
       Use case ends
 
-**Use case (UC18): Check for reservations made for a time on the current date**
+**Use case (UC21): Check for reservations made for a time on the current date**
 
 **MSS**
 
@@ -1427,7 +1505,138 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Filter display list by using the `findC KEYWORD`/`findE KEYWORD`/`findS KEYWORD`/`check DATE` command,
       where `KEYWORD` must exist in at least 1 of the customers/employees/suppliers and there must be at least 1 reservation on `DATE`.
    2. Repeat the same test cases as 1.2 to 1.4.
-      
+
+### Editing a customer
+
+1. Editing a customer while all customers are being shown.
+    1. Prerequisites: List all customers using the `listC` command.
+    2. Test case: `editC 1 n/Chetwin lp/5000` <br>
+       Expected: First customer in the list will be updated to have "Chetwin" and "5000" as his `name` and `loyalty points` respectively. Details of the edited
+       customer shown in the results display.
+    3. Test case: `editC -1 e/chetwinlow@gmail.com` <br>
+       Expected: Nobody is edited. Error details shown in the results display with a result message `Invalid comamnd
+       format...`
+    4. Test case: `editC 1` <br>
+       Expected: Nobody is edited. Error details shown in the results display with a result message `At least one field to edit must be provided.`
+    5. Other incorrect edit commands to try: `editC ` / `editC f/invalid prefix` / `edit 1` / `editC x n/john`(where x is larger than the customer
+       list size) <br>
+       Expected: Nobody is edited. Error details shown in the results display. Entering the first 2 commands will
+       produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
+       `Unknown command` and the last one resulting in error message `The customer index provided is invalid`
+
+2. Editing a customer while customer list is filtered.
+
+    1. Prerequisites: Filter display list by using the `findC KEYWORD` command,
+       where `KEYWORD` must exist in at least 1 of the customers.
+    2. Repeat the same test cases as 1.2 to 1.4.
+
+### Editing a supplier
+
+1. Editing a supplier while all suppliers are being shown.
+    1. Prerequisites: List all suppliers using the `listS` command.
+    2. Test case: `editS 1 n/Chetwin st/chicken` <br>
+       Expected: First customer in the list will be updated to have "Chetwin" and "chicken" as his `name` and `supply type` respectively. Details of the edited
+       supplier shown in the results display.
+    3. Test case: `editS -1 e/chetwinlow@gmail.com` <br>
+       Expected: Nobody is edited. Error details shown in the results display with a result message `Invalid comamnd
+       format...`
+    4. Test case: `editS 1` <br>
+       Expected: Nobody is edited. Error details shown in the results display with a result message `At least one field to edit must be provided.`
+    5. Other incorrect edit commands to try: `editS ` / `editS f/invalid prefix` / `edit 1` / `editS x n/john`(where x is larger than the supplier
+       list size) <br>
+       Expected: Nobody is edited. Error details shown in the results display. Entering the first 2 commands will
+       produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
+       `Unknown command` and the last one resulting in error message `The supplier index provided is invalid`
+
+2. Editing a supplier while supplier list is filtered.
+
+    1. Prerequisites: Filter display list by using the `findS KEYWORD` command,
+       where `KEYWORD` must exist in at least 1 of the suppliers.
+    2. Repeat the same test cases as 1.2 to 1.4.
+
+### Editing an employee
+
+1. Editing an employee while all employees are being shown.
+    1. Prerequisites: List all employees using the `listE` command.
+    2. Test case: `editE 1 n/Chetwin s/5000` <br>
+       Expected: First employee in the list will be updated to have "Chetwin" and "5000" as his `name` and `salary` respectively. Details of the edited
+       employee shown in the results display.
+    3. Test case: `editE -1 e/chetwinlow@gmail.com` <br>
+       Expected: Nobody is edited. Error details shown in the results display with a result message `Invalid comamnd
+       format...`
+    4. Test case: `editE 1` <br>
+       Expected: Nobody is edited. Error details shown in the results display with a result message `At least one field to edit must be provided.`
+    5. Other incorrect edit commands to try: `editE ` / `editE f/invalid prefix` / `edit 1` / `editE x n/john`(where x is larger than the employee
+       list size) <br>
+       Expected: Nobody is edited. Error details shown in the results display. Entering the first 2 commands will
+       produce the same error message as test case 1.3 while entering `edit 1` will produce the error message
+       `Unknown command` and the last one resulting in error message `The employee index provided is invalid`
+
+2. Editing an employee while employee list is filtered.
+
+    1. Prerequisites: Filter display list by using the `findE KEYWORD` command,
+       where `KEYWORD` must exist in at least 1 of the employees.
+    2. Repeat the same test cases as 1.2 to 1.4.
+
+### Finding customers
+
+1. Finding the customers
+
+    1. Test case: `findC Chetwin` <br>
+       Expected: The customer list is filtered to only show customers that match "Chetwin"(case-insensitive) in any of its fields. Success message shown in results display.
+    2. Test case: `findC Chetwin 15` <br>
+       Expected: The customer list is filtered to only show customers that match "Chetwin"(case-insensitive) and "15" in any of its fields cumulatively. Success message shown in results display.
+    3. Test case: `findC Chetwin 15 913045` <br>
+       Expected: The customer list is filtered to only show customers that match "Chetwin"(case-insensitive) and "15" and "913045" in any of its fields cumulatively. Success message shown in results display.
+    4. Test case: `findC ` <br>
+       Expected: Customer list is not filtered. Error details shown in the result display, with a result message `Invalid command format`
+
+### Finding suppliers
+
+1. Finding the suppliers
+
+    1. Test case: `findS Chetwin` <br>
+       Expected: The supplier list is filtered to only show customers that match "Chetwin"(case-insensitive) in any of its fields. Success message shown in results display.
+    2. Test case: `findS Chetwin 15` <br>
+       Expected: The  list is filtered to only show suppliers that match "Chetwin"(case-insensitive) and "15" in any of its fields cumulatively. Success message shown in results display.
+    3. Test case: `findS Chetwin 15 913045` <br>
+       Expected: The supplier list is filtered to only show customers that match "Chetwin"(case-insensitive) and "15" and "913045" in any of its fields cumulatively. Success message shown in results display.
+    4. Test case: `findS ` <br>
+       Expected: Supplier list is not filtered. Error details shown in the result display, with a result message `Invalid command format`
+
+### Finding employees
+
+1. Finding the employees
+
+    1. Test case: `findE Chetwin` <br>
+       Expected: The employee list is filtered to only show customers that match "Chetwin"(case-insensitive) in any of its fields. Success message shown in results display.
+    2. Test case: `findE Chetwin 15` <br>
+       Expected: The employee list is filtered to only show suppliers that match "Chetwin 15"(case-insensitive) in any of its fields. Success message shown in results display.
+    3. Test case: `findE Chetwin 15 913045` <br>
+       Expected: The employee list is filtered to only show customers that match "Chetwin 15 913045" in any of its fields. Success message shown in results display.
+    4. Test case: `findE ` <br>
+       Expected: Supplier list is not filtered. Error details shown in the result display, with a result message `Invalid command format`
+
+
+### Get the corresponding customer of a reservation
+
+1. Getting the corresponding customer of a reservation while all reservations are shown
+
+    1. Prerequisites: List all reservations using `listR`
+    2. Test case: `getC 1`<br>
+       Expected: The customer who made the first reservation is displayed.
+    3. Test case: `getC 0`<br>
+       Expected: No customer is shown. Error details are shown in the status message. Status bar remains the same.
+    4. Other incorrect commands to try: `getC`, `getC -1`, `getC x` (where x is larger than the customer list size), `...` <br>
+       Expected: Similar to previous.
+
+1. Getting the corresponding customer of a reservation while reservation list is filtered.
+
+    1. Prerequisites: Filter display reservation list using `check DATE`, where there must be at least 1 reservation
+       on `DATE`.
+    2. Repeat the same test cases as 1.2 to 1.4.
+
+
 ### Get the corresponding customer of a reservation
 
 1. Getting the corresponding customer of a reservation while all reservations are shown
@@ -1494,6 +1703,8 @@ testers are expected to do more *exploratory* testing.
     
 7. Other incorrect commands to try: `check 2500`, `check abc`, `check`
    Expected: Error details shown in the result display, with a result message `Invalid Command Format! ...`
+
+
 
 ### Sorting the customer list
 
