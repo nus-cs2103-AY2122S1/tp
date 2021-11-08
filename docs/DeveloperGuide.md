@@ -792,7 +792,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `  | busy CS2100 TA                              | view students' statistics formatted in a standard form                                            | avoid sorting the information on my own.
 | `* * `  | CS2100 TA                                   | use the app to track students' performance                                                       | identify those who need more help.
 | `* * `  | CS2100 TA                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
-| `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
+| `* *`   | CS2100 TA who is an undergraduate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.
 | `* *`   | CS2100 TA                                   | upload the students' lab results to LumiNUS conveniently                                         |
 | `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/email from the database.
@@ -1153,7 +1153,7 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
   
 ## <a name="Appendix Effort"></a> **9. Appendix: Effort**
-  * The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
+The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
 
 ### <a name="Rewriting the Command Syntax"></a>9.1 Rewriting the Command Syntax
   * This was challenging as it required a nuanced understanding of how CLI syntax is constructed and following standard conventions. 
