@@ -33,7 +33,8 @@ You can reach us at the email `AniList@nus.edu.sg`
 
 <img src="images/nekrozqliphort.png" width="200px">
 
-[[github](https://github.com/NekrozQliphort)] [[portfolio](team/NekrozQliphort.md)]
+[[github](https://github.com/NekrozQliphort)]
+[[portfolio](team/nekrozqliphort.md)]
 
 * Role: Documentation
 * Responsibilities: Ensuring quality of various project documents
