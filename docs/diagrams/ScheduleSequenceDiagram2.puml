@@ -4,7 +4,7 @@ skinparam defaultFontSize 20
 
 box Logic LOGIC_COLOR_T1
 
-group ref [execute ScheduleFriendCommand]
+group sd execute ScheduleFriendCommand
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant "c:ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
