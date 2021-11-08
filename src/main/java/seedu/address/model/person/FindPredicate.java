@@ -29,6 +29,12 @@ public class FindPredicate implements Predicate<Person> {
         this.isCaseSensitive = isCaseSensitive;
     }
 
+    /**
+     * Tests if {@code person} fulfills the criteria.
+     *
+     * @param person person that is to be test.
+     * @return if person fulfills the criteria.
+     */
     @Override
     public boolean test(Person person) {
         Tag[] arrayTags = new Tag[person.getTags().toArray().length];
@@ -39,6 +45,12 @@ public class FindPredicate implements Predicate<Person> {
                         .anyMatch(personTag-> personTag.compareTag(tag, isCaseSensitive)));
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

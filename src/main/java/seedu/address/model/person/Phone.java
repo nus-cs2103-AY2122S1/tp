@@ -27,7 +27,10 @@ public class Phone {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Checks if given string is in valid phone.
+     *
+     * @param test input that is to be checked if it is a valid phone.
+     * @return if a given string is a valid phone.
      */
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -38,6 +41,12 @@ public class Phone {
         return value;
     }
 
+    /**
+     * Checks if {@code other} is equal to {@code this}.
+     *
+     * @param other the object to check if it is equal to {@code this}.
+     * @return {@code boolean} indicating if it is equal.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
