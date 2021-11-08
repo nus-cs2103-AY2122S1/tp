@@ -147,6 +147,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteItem(Item item) {
         inventory.deleteItem(item);
+        addCostBookKeeping(-item.getCostPrice(), item.getCount());
     }
 
     @Override

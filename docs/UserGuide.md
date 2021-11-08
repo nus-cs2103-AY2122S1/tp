@@ -372,6 +372,15 @@ of money gained from successfully receiving orders and selling items. Profit = R
 **A**: When you use the app for the first time, it comes with sample inventory, and the bookkeeping will reflect the costs
 of the items inside this sample inventory. If you would like to start afresh, please use the `clear` command.
 
+**Q**: What's the difference between remove and delete?<br>
+**A**: `delete` is meant for items wrongly added into the inventory. BogoBogo retracts an item cost when an item 
+is deleted. `remove`, on the other hand, is for items added but not sold (e.g. expired goods). Because the item is 
+correctly added, cost is still incurred.
+
+<div class="code-example bg-grey-lt-000">
+:exclamation: BogoBogo only retracts the costs of unsold items. If items are sold, cost will forever be incurred!
+</div>
+
 **Q**: I have edited the cost price of my item. Why isn't the change reflected in my total cost?<br>
 **A**: BogoBogo adds the cost of an item to the total cost only upon the addition of the item into the inventory. Any
 changes to cost price is assumed to be for future restocking of the item.<br>
@@ -380,6 +389,10 @@ changes to cost price is assumed to be for future restocking of the item.<br>
 **A**: Due to the calculation of total cost and revenue, BogoBogo needs to know the reason for the change in count.
 Use `add` for stocking items, `delete` to delete accidentally added items, `remove` to remove unsold items (e.g. expired
 goods), and `iorder` to account for sold items.
+
+**Q**: Why does `find t/baked t/popular` still show items that only have `t/baked` as a tag (not both)?<br>
+**A**: `find t/baked t/popular` means "please find items that have either baked OR popular as a tag", not "please find
+items that have both baked AND popular as tags"
 
 **Q**: Why can't I see my cost prices in my past transactions?<br>
 **A**: Past transactions only store important transaction related details. Storing cost price can be misleading since costs can change over time!
@@ -391,12 +404,14 @@ Consider hiring an accountant, you billionaire!
 
 ## Command summary
 
+- **Viewing Help**: `help ({command})`
 - **Add Item**: `add [{name} | id/{id number}] (c/{count}) (cp/{cost price}) (sp/{sell price}) (t/{tag})...`
 - **Delete Item**: `delete [{name} | id/{id number}]`
 - **Remove Item**: `remove [ {name} | id/{id number} ] c/{count}`
 - **List**: `list [ order | txns | txns {id} ]`
 - **Sort Items**: `sort n/` or `sort c/`
 - **Find Items**: `find [ n/{name}... | id/{id}... | t/{tag}... ]`
+- **Clearing Items and All Data**: `clear`
 - **Start an order**: `sorder`
 - **Add item to order**: `iorder [ {name} | id/{id} ] (c/{count})`
 - **Remove item from order**: `corder [ {name} | id/{id} ] (c/count)`
