@@ -106,7 +106,7 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.getYearPage().getMonthSheetView().setShowWeekNumber(false); // This doesn't seem to work
     }
 
-
+    //@@author Chesterwongz-reused
     /**
      * Adapted from CalendarFX developer manual.
      * http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start
@@ -135,6 +135,7 @@ public class SchedulePanel extends UiPart<Region> {
         updateTimeThread.start();
     }
 
+    //@@author Chesterwongz
     public void goNext() {
         calendarView.getSelectedPage().goForward();
     }
