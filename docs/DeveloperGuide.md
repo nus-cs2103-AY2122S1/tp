@@ -657,7 +657,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * plans a wedding for himself/herself
-* is required to manage a significant number of contacts such as those who will be involved/in-charge of the wedding
+* is required to manage many contacts such as those who are involved/in-charge of the wedding
 * prefers desktop applications over other types
 * can type fast on keyboards
 * prefers typing to mouse interactions
