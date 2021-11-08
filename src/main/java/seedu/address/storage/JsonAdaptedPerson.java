@@ -79,6 +79,8 @@ class JsonAdaptedPerson {
             personTags.add(currentTag);
         }
 
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -111,34 +113,35 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Pin modelPin;
-
         if (pin == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
-        } else if (!Pin.isValidPinStatus(pin)) {
-            throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
-        } else {
-            modelPin = new Pin(pin);
         }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (!Pin.isValidPinStatus(pin)) {
+            throw new IllegalValueException(String.format(Pin.MESSAGE_CONSTRAINTS));
+        }
+
+        final Pin modelPin = new Pin(pin);
+
 
         if (birthday == null) {
             return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null, modelPin);
         }
 
-        final Birthday modelBirthday;
         if (!Birthday.isValidFormat(birthday)) {
             throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
-        } else if (!Birthday.isValidDate(birthday)) {
-            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
-        } else if (Birthday.isFutureDate(birthday)) {
-            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
-        } else if (Birthday.isYear0000(birthday)) {
-            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
-        } else {
-            modelBirthday = new Birthday(birthday);
         }
+        if (!Birthday.isValidDate(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        }
+        if (Birthday.isFutureDate(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        }
+        if (Birthday.isYear0000(birthday)) {
+            throw new IllegalValueException(String.format(Birthday.MESSAGE_CONSTRAINTS));
+        }
+
+        final Birthday modelBirthday = new Birthday(birthday);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelPin);
     }
