@@ -32,7 +32,7 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#b
     - What it does: Shows the total number of students, labs, classes, and the number of labs left to marked for each class
     - Justification: So that the TA can track their progress in marking their students' labs conveniently, especially
       when they have many students
-    - Highlights: This feature required using a TreeMap by to store and retrieve students' lab data efficiently so that the dashboard can be 
+    - Highlights: This feature required using a TreeMap to store and retrieve students' lab data efficiently so that the dashboard can be 
       updated dynamically with minimal delay without using a database. 
       Additionally, this feature required learning more about javafx components 
       and CSS properties to make the dashboard interface more user-friendly.
