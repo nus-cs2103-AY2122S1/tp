@@ -328,7 +328,7 @@ ec 1 n/Math ts/Wed 10:00-12:00
 An example output of using the `editclass` command is shown below:
 
 <p align="center">
-    <img src="images/EditUserGuide.png" alt="Edit class" width="650" height="420"><br>
+    <img src="images/EditUserGuide.png" alt="Edit class" width="690" height="420"><br>
     <i>Figure 4: Example of executing `editclass 1 n/Math ts/Wed 10:00-12:00` command</i>
 </p>
 

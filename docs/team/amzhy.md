@@ -55,13 +55,14 @@ repeating similar commands multiple times.
 * Fix some documentation bugs from PE-D. (Pull Request [\#187](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/187))
 * Added screenshots for the `DeleteCommand` and `EditClassCommand`. (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217), [\#233](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/233))
 
+<br>
+
 #### Contributions to the Developer Guide
 * Added the implementation details of `EditClassCommand`. (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
 * Added UML diagrams for `RemoveStudent` and`DeleteClassCommand`. features (Pull Request [\#209](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/209))
 * Added implementation details of `EditCommand` and `DeleteCommand`. (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
 * Added use cases for TutAssistor.
 
-<div style="page-break-after: always;"></div>
 
 #### Contributions to the team-based tasks
 * Proposed the idea for TutAssistor.
