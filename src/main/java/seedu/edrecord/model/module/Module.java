@@ -199,7 +199,7 @@ public class Module {
         }
         Module otherModule = (Module) other;
         return code.equalsIgnoreCase(otherModule.code)
-                && groupSystem.equals(((Module) other).groupSystem)
+                && groupSystem.equals(otherModule.groupSystem)
                 && assignmentList.equals(otherModule.assignmentList);
     }
 

@@ -116,7 +116,7 @@ class JsonAdaptedPerson {
         }
 
         ModuleSet moduleSet = new ModuleSet();
-        if (!mods.equals("")) {
+        if (!mods.strip().isEmpty()) {
             String[] modGroupPairs = mods.split(" ");
             for (String modGroupPair : modGroupPairs) {
                 String[] modGroupArray = modGroupPair.split(":");
