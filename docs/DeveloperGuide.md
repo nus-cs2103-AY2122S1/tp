@@ -21,7 +21,7 @@ We hope that this Developer Guide will help any developers who wish to contribut
 ## **Acknowledgements**
 
 * Adds the counts to the labels of the PieChart.
-    * Adapted from: https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart
+    * Adapted from: [https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart](https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart)
     * Credit: jewelsea
 
 --------------------------------------------------------------------------------------------------------------------
