@@ -24,10 +24,9 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
         * Lesson
             * Created the entire [lesson package](https://github.com/AY2122S1-CS2103T-W16-4/tp/tree/master/src/main/java/seedu/address/model/lesson).
         * Model
-            * Added enum ViewingType for viewing particular information
             * Update [ModelManager.java](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/ModelManager.java) to include methods for ViewingType and viewing contents.
         * Id.UniqueIdMapper
-            * [Implemented this interface](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/id/UniqueIdMapper.java) and its method for retrieving HasUniqueId objects when given UniqueIds.
+            * [Implemented this interface](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/model/id/UniqueIdMapper.java) for retrieving HasUniqueId objects when given UniqueIds.
     * Storage
         * Enabled storage for Lessons and Exams. Basically [JsonAdaptedLesson](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedLesson.java),
           [JsonAdaptedExam](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/storage/JsonAdaptedExam.java)
@@ -35,7 +34,7 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
     * UI
         * Viewing Panel
             * Created [ViewingPanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/ViewingPanel.java) and the logic behind it to view different things.
-            * Created [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java) to support viewing a single person. __Note__: Task completion was not done by me.
+            * Created [PersonViewCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/PersonViewCard.java) to support viewing a single person.
             * Created [LessonScheduleCard](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonScheduleCard.java)
               and [LessonSchedulePanel](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/main/java/seedu/address/ui/LessonSchedulePanel.java) for viewing schedule.
             * Modified other UI components, css and FXML files to enable the viewing panel.
