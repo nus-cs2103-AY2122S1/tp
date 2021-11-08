@@ -386,7 +386,7 @@ Step 3. CONNECTIONS displays a list of available commands in `ResultDisplay`.
 
 Step 4. The user decides to view the usage of `add` to learn to add a contact, and executes `help add`.
 
-Step 5. CONNECTIONS will displays a detailed help message on the usage of the `add` command in `ResultDisplay`.
+Step 5. CONNECTIONS will display a detailed help message on the usage of the `add` command in `ResultDisplay`.
 
 
 ### Birthday Reminder feature
@@ -455,7 +455,7 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 Allows the user to recover partial data if the data file becomes corrupted. 
 
 #### Proposed Implementation
-Currently if the data file is corrupted, CONNECTIONS will use an empty data file upon start up. 
+Currently, if the data file is corrupted, CONNECTIONS will use an empty data file upon start up. 
 The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonAddressBookStorage`. Upon getting an invalid data format for compulsory fields, `JsonAdaptedPerson` can return `null` and 
 not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
 
@@ -1205,13 +1205,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `tag 2 t/party t/friends`<br>
         Expected: New tag is added to the contact. Warning details are shown in the status message.
 
-<<<<<<< HEAD
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag 1 t/<tag name longer than 60 characters>`, `...`.<br>
-       Expected: No changes to contacts. Error details in status message.
-=======
-    1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
        Expected: No changes to contacts. Error details are shown in the status message.
->>>>>>> 6e2c614ac8ae81b9023570e64dc53d7ca80d2655
 
 ### Untagging a contact
 1. Untagging a contact
