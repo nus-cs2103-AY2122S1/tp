@@ -18,12 +18,6 @@ Class ReadOnlyUserPrefs
 
 Class UniqueApplicantList
 Class Applicant
-Class Email
-Class Name
-Class Phone
-Class Address
-Class Application
-Class ProfileUrl
 
 }
 Class HiddenOutside #FFFFFF
@@ -40,16 +34,6 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 ApplicantBook *--> "1" UniqueApplicantList
 UniqueApplicantList --> "~* all" Applicant
-Applicant *--> Name
-Applicant *--> Phone
-Applicant *--> Email
-Applicant *--> Address
-Applicant *--> Application
-Applicant *--> ProfileUrl
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Applicant
 @enduml
