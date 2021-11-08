@@ -85,6 +85,14 @@ public class EditLabCommand extends Command {
             throw new CommandException(String.format(Lab.MESSAGE_LAB_ALREADY_EXISTS, newLab));
         }
 
+
+        Student selectedStudent;
+        if (model.getSelectedInformation().isEmpty()) {
+            selectedStudent = null;
+        } else {
+            selectedStudent = model.getSelectedStudent().copy();
+        }
+
         for (Student std : studentList) {
             Student editedStd = std;
             if (total != null && total.getLabTotalScore() < 0) {
@@ -93,11 +101,13 @@ public class EditLabCommand extends Command {
                 throw new CommandException(String.format(Lab.MESSAGE_LAB_NOT_EXISTS, original));
             } else {
                 editedStd.editLabInfo(original, newLabNum, total);
+                if (selectedStudent != null && editedStd.isSameStudent(selectedStudent)) {
+                    selectedStudent = editedStd.copy();
+                }
                 model.setStudent(std, editedStd);
             }
         }
         if (!model.getSelectedInformation().isEmpty()) {
-            Student selectedStudent = model.getSelectedStudent().copy();
             model.setSelectedStudent(selectedStudent);
             model.setSelectedLabs(selectedStudent.getLabList());
         }
