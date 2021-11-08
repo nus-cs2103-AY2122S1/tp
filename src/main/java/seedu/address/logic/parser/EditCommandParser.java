@@ -33,21 +33,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_CLASSCODE, PREFIX_TAG);
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX + MESSAGE_INVALID_COMMAND_FORMAT,
-                            EditCommand.MESSAGE_USAGE),
-                    pe);
-        }
-
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                        PREFIX_PHONE, PREFIX_EMAIL,PREFIX_ADDRESS, PREFIX_CLASSCODE, PREFIX_TAG);
+        Index index = findIndex(argMultimap);
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editStudentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -65,12 +53,29 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStudentDescriptor.setClassCode(ParserUtil.parseClassCode(argMultimap.getValue(PREFIX_CLASSCODE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editStudentDescriptor::setTags);
-
         if (!editStudentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editStudentDescriptor);
+    }
+
+    /**
+     * Gets index in the Command.
+     *
+     * @param argMultimap Map of Arguments.
+     * @return Input Index.
+     * @throws ParseException if Index is invalid.
+     */
+    private Index findIndex(ArgumentMultimap argMultimap) throws ParseException {
+        try {
+            return ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX + MESSAGE_INVALID_COMMAND_FORMAT,
+                            EditCommand.MESSAGE_USAGE),
+                    pe);
+        }
     }
 
     /**

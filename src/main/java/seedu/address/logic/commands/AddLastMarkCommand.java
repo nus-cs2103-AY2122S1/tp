@@ -33,8 +33,8 @@ public class AddLastMarkCommand extends Command {
     private final StudentMark mark;
 
     /**
-     * @param index of the student in the filtered student list to edit
-     * @param studentMark marks to add to Student
+     * @param index of the student in the filtered student list to add last mark.
+     * @param studentMark marks to add to Student.
      */
     public AddLastMarkCommand(Index index, StudentMark studentMark) {
         requireNonNull(index);

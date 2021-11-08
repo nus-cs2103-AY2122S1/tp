@@ -176,7 +176,6 @@ public class Classmate implements ReadOnlyClassmate {
     @Override
     public String toString() {
         return students.asUnmodifiableObservableList().size() + " students";
-        // TODO: refine later
     }
 
 

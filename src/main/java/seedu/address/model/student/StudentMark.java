@@ -13,7 +13,6 @@ public enum StudentMark {
 
     private final int mark;
 
-
     StudentMark(int mark) {
         this.mark = mark;
     }

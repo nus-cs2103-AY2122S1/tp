@@ -16,7 +16,6 @@ import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
-//TODO: Implement this skeleton class properly.
 /**
  * Jackson-friendly version of {@link TutorialClass}.
  */
@@ -73,19 +72,50 @@ class JsonAdaptedTutorialClass {
             modelTutorialGroups.add(tutorialGroup.toModelType());
         }
 
-        final List<Tag> tutorialClassTags = new ArrayList<>();
+        final List<Tag> tutorialClassTags = addTags();
+        final ClassCode modelClassCode = addClassCode();
+        final Schedule modelSchedule = addSchedule();
+        final Set<Tag> modelTags = new HashSet<>(tutorialClassTags);
+        return new TutorialClass(modelClassCode, modelSchedule, modelTutorialGroups, modelTags);
+    }
+
+    /**
+     * Abstracted method to create List of tags.
+     *
+     * @return List of tags.
+     * @throws IllegalValueException
+     */
+    private List<Tag> addTags() throws IllegalValueException {
+        List<Tag> tutorialClassTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             tutorialClassTags.add(tag.toModelType());
         }
+        return tutorialClassTags;
+    }
 
+    /**
+     * Abstracted method to get ClassCode.
+     *
+     * @return Valid ClassCode.
+     * @throws IllegalValueException
+     */
+    private ClassCode addClassCode() throws IllegalValueException {
         if (classCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
         if (!ClassCode.isValidClassCode(classCode)) {
             throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
         }
-        final ClassCode modelClassCode = new ClassCode(classCode);
+        return new ClassCode(classCode);
+    }
 
+    /**
+     * Abstracted method to add Schedule.
+     *
+     * @return valid Schedule.
+     * @throws IllegalValueException
+     */
+    private Schedule addSchedule() throws IllegalValueException {
         if (schedule == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName())
@@ -94,10 +124,6 @@ class JsonAdaptedTutorialClass {
         if (!Schedule.isValidSchedule(schedule)) {
             throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
         }
-        final Schedule modelSchedule = new Schedule(schedule);
-
-        final Set<Tag> modelTags = new HashSet<>(tutorialClassTags);
-        return new TutorialClass(modelClassCode, modelSchedule, modelTutorialGroups, modelTags);
+        return new Schedule(schedule);
     }
-
 }

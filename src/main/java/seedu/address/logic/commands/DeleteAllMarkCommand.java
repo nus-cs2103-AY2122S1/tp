@@ -30,7 +30,7 @@ public class DeleteAllMarkCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the student in the filtered student list to edit
+     * @param index of the student in the filtered student list to delete marks of.
      */
     public DeleteAllMarkCommand(Index index) {
         requireNonNull(index);
@@ -41,6 +41,7 @@ public class DeleteAllMarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

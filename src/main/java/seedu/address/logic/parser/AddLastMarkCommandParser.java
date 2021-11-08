@@ -22,7 +22,7 @@ public class AddLastMarkCommandParser implements Parser<AddLastMarkCommand> {
      */
     public AddLastMarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        Index index;
+        Index index = null;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MARK);
 

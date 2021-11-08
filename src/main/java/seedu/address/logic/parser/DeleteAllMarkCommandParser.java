@@ -20,7 +20,7 @@ public class DeleteAllMarkCommandParser implements Parser<DeleteAllMarkCommand> 
      */
     public DeleteAllMarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        Index index;
+        Index index = null;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args);
 
