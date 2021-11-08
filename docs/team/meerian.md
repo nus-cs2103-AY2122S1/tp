@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Myron's Porfolio Page
+title: Myron's Portfolio Page
 ---
 
 ## Project: SIASA
