@@ -238,8 +238,8 @@ Format: **`remark`** `INDEX r/REMARK`
 Examples:
 
 * **`remark`** `1 r/She likes coding` adds the remark 'She likes coding' to first person in the displayed contact list.
-![result for 'remark 2'](images/RemoveRemark.png)
-*After execution of Remark Command: **`remark`** `2`*
+![result for 'remark 1 r/She likes coding'](images/AddRemark.png)
+*After execution of Remark Command: **`remark`** `1 r/She likes coding`*
 
 ### Editing a person: `edit`
 
