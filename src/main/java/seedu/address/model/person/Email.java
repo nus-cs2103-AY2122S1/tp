@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 /**
  * Represents a Person's email in the address book.
@@ -20,8 +21,10 @@ public class Email {
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n"
-            + "Leaving it blank will remove the Email field.";
+            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.\n\n"
+            + "Note:\n"
+            + "In edit command, email can be removed from a person by leaving the email value blank "
+            + "(i.e. " + PREFIX_EMAIL + " ).";
 
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
