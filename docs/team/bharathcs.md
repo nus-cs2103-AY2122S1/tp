@@ -17,6 +17,8 @@ Given below are my contributions to the project.
   * Our application's front end is getting steadily more complex and our commands need to be able to execute actual functions on `Ui`. However, other solutions would require global variables or drilling down a reference to `Ui` into `Command`. A simpler and cleaner workaround was to use functions as a first class object to instruct `Ui` on the appropriate actions (show help / exit / show client view, etc)
   * Created when it was necessary to implement the `ClientView` mode in UI (Showing a single client's information in a dedicated view for the user to edit and interact with). [#67](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/67)
 
+<br>
+
 * Allow user to edit information directly in the Client View
   * The user must be able to cycle through the different attributes (presented in a row format), and edit as necessary.
     * Heavily refactor `ClientPanel` to support actual interactions with the `AttributePanel`s [#90](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/90)
@@ -25,9 +27,13 @@ Given below are my contributions to the project.
   * As this is a critical part of our functionality, we need this to be intuitive and easy to use.
   * Using `EventHandler`s to great effect within text fields to support highlighting outer parent elements.
 
+<br>
+
 * Add `SwitchTabCommand` that allows for CLI navigation through the different tabs. [#148](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/148)
   * User must easily be able to cycle through contact information, policy table, asset table etc
   * Needs to be a simple and easy to use command in the command bar.
+
+<br>
 
 * Create a generic class to create tables for Client View tabs on Polices, Assets, Liabilities to support future extension. [#125](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/125), [#154](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/154), [#156](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/156), [#195](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/195), [#250](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/250), [#268](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/268), [#361](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/361), [#190](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/190)
   * Create a JavaFX component that can create a fully functional and rich table for any data class.
@@ -37,9 +43,13 @@ Given below are my contributions to the project.
     * Encapsulate and support creation of configuration data class in a manner similar to many open source modules (e.g. JavaScript modules like axios);
   * Add a bare bones automated GUI testing with TestFX to ensure the class can be loaded, with a proper `Attribute` stub that can be used to populate values
 
+<br>
+
 * Re-organise application architecture by separating `Storage` and `Logic` [#18](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/18), [#17](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/17)
   * Improves overall architecture by decoupling `Storage` and `Logic` ensuring all `Storage` calls go through `Model` layer to follow the layered architecture style. (See:  [_O' Reilly_ Chapter 1. Layered Architecture](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html))
   * The layered architecture design pattern was chosen over the current Model-View-Controller architecture in a previous team meeting to reduce complexity, simplify working on components and improve testability.
+
+<br>
 
 * Support `Policy`, `Asset`, and `Liability` with monetary values with a `Money` class. [#182](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/182), [#141](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/141)
   * Create a class that keeps track of monetary values, support arithmetic and can be converted to a valid '$' formatted string.
@@ -47,13 +57,19 @@ Given below are my contributions to the project.
   * Highlights
     * Integration Tests: Ensure that an attribute created with the invalid monetary formats should throw correctly: [#193](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/193), [#311](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/311)
 
+<br>
+
 * Add automated GUI tests for DonnaFin
   * Automated checks can be run on Gradle builds Github CI/CD to confirm validity of `.fxml` files and GUI logic.
   * Prevents unusable GUI changes from being added to the codebase.
   * Required spending a significant amount of time learning and understanding Java GUI testing with TestFx, adapting boilerplate and common functions from SE-EDU AB4. At all steps, this needed to support the new file structure and dependencies. [#132](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/132), [#134](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/134), [#352](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/352), [#353](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/353)
   * Adapted from the SE-EDU: Address Book 4 codebase
+
+<br>
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=bharathcs&tabRepo=AY2122S1-CS2103T-W16-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+<br>
 
 * **Project management**:
   * Manage CI / CD to consistently check and ensure repo code quality and automated testing success
@@ -63,6 +79,8 @@ Given below are my contributions to the project.
       * Have Gradle automatically wipe the `./data/` folder to ensure clean starts [#135](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/135), [#299](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/299)
     * Conduct the minimal repo-wide checks for non-code changes (EOF, EOL, illegal characters) [#37](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/37)
     * Update Github CI / CD to support feature / branch workflow [#35](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/35)
+
+<br>
 
 * **Enhancements to existing features**:
 
@@ -82,7 +100,9 @@ Given below are my contributions to the project.
     * Add static configurations for `AttributeTable` to be easily called for `Asset`, `Liability` and `Policy` [#146](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/146)
     * Work on cohesion [#321](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/321), [#322](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/322)
   
-  * Squash numerous bugs [#250](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/250), [#293](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/293)
+  * Squash numerous bugs (e.g [#250](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/250), [#293](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/293))
+
+<br>
 
 * **Documentation**:
     * User Guide:
@@ -98,6 +118,8 @@ Given below are my contributions to the project.
       * Explain `commons` package and uses for such classes (wrt to good SE practices) [#360](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/360),
       * Update matters of CI & Testing [#351](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/351)
 
+<br>
+
 * **Community**:
   * Explaining why I think Java's Stream implementation makes using multiple Scanners very bug-prone ([#78](https://github.com/nus-cs2103-AY2122S1/forum/issues/78#issuecomment-908386678))
   * Clarifying the difference between `Platform.exit()` and `System.exit` in JavaFX ([#174](https://github.com/nus-cs2103-AY2122S1/forum/issues/174#issuecomment-912537867))
@@ -109,6 +131,8 @@ Given below are my contributions to the project.
     * Minor changes for CheckStyle & CI [#63](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/63)
     * Constructive feedback on code quality [#179](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/179)
     * Pair programming & support for difficult tasks [#155](https://github.com/AY2122S1-CS2103T-W16-1/tp/pull/155), 
+
+<br>
 
 * **Tools**:
   * Used Figma to wireframe the user pathway to 'single client view'.
