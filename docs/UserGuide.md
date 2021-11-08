@@ -14,41 +14,8 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
 
 ## Table of Contents
 
-* [**1. Introduction**](#1-introduction)
-    * [1.1 Reading this User Guide](#11-reading-this-user-guide)
-* [**2. Quick Start**](#2-quick-start)
-* [**3. Client Information**](#3-client-information)
-    * [3.1 Duplicate Clients](#31-duplicate-clients)
-    * [3.2 Next Meeting Attribute](#32-next-meeting-attribute)
-    * [3.3 Last Met Attribute](#33-last-met-attribute)
-    * [3.4 Tag Attribute](#34-tag-attribute)
-* [**4. Navigating LeadsForce**](#4-navigating-leadsforce)
-* [**5. Features**](#5-features)
-    * [5.1 Create new contact: add](#51-create-new-contact--add)
-    * [5.2 Retrieve particular contact: view](#52-retrieve-particular-contact--view)
-    * [5.3 Update existing contact: edit](#53-update-existing-contact--edit)
-    * [5.4 Delete particular contact: delete](#54-delete-particular-contact--delete)
-    * [5.5 List all contacts: list](#55-list-all-contacts--list)
-    * [5.6 Sort Contacts: sort](#56-sort-contacts--sort)
-    * [5.7 Find meeting schedule: schedule](#57-find-meeting-schedule--schedule)
-    * [5.8 Locating clients by keywords: search](#58-locating-clients-by-keywords--search)
-    * [5.9 Filter current list: filter](#59-filter-current-list-by-keywords--filter)
-    * [5.10 Clearing all entries: clear](#510-clearing-all-entries--clear)
-    * [5.11 Getting help](#511-getting-help--help)
-    * [5.12 Exiting the program: exit](#512-exiting-the-program--exit)
-    * [5.13 Saving data](#513-saving-the-data)
-    * [5.14 Edit data file](#514-edit-data-file)
-* [**6. Multiple Address Books Features**](#6-multiple-address-books-feature)
-    * [6.1 Create new address book: ab create](#61-create-new-address-book--ab-create)
-    * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book-ab-delete--ab-delete)
-    * [6.3 Switch to different address book: ab switch](#63-switch-to-different-address-book--ab-switch)
-    * [6.4 List all address book: ab list](#64-list-all-address-book--ab-list)
-* [**7. FAQ**](#7-faq)
-* [**8. Troubleshooting**](#8-troubleshooting)
-* [**9. Bugs Reporting**](#9-bugs-reporting)
-* [**10. Command Summary**](#10-command-summary)
-    * [10.1 Client Management Commands](#101-client-management-commands)
-    * [10.2 Multiple Address Book Commands](#102-multiple-address-book-commands)
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
