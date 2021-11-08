@@ -97,8 +97,10 @@ public class SortCommand extends Command {
 
     /**
      * Creates a SortCommand to sort by the specified fields in {@code args}
+     *
+     * Takes in sorted unique lists {@code prefixes}, {@code directions}
      */
-    public SortCommand(List<Prefix> prefixes, List <Direction> directions) {
+    public SortCommand(List<Prefix> prefixes, List<Direction> directions) {
         requireAllNonNull(prefixes);
         requireAllNonNull(directions);
         assert prefixes.size() > 0; // prefixes is non-empty

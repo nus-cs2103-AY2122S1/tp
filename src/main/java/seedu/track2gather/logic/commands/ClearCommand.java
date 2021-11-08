@@ -40,14 +40,12 @@ public class ClearCommand extends Command {
 
         // A dummy SHN period for contacts that do not have SHN periods
         // These contacts will be ignored as the endDate is always set to the future
-        LocalDate startDate = LocalDate.of(2000, 1, 1);
-        LocalDate futureDate = LocalDate.now().plusDays(1);
-        assert (futureDate.isAfter(startDate));
-        Period dummyIncompleteShnPeriod = new Period(startDate, futureDate);
+        Period dummyIncompleteShnPeriod = new Period(LocalDate.MIN, LocalDate.MAX);
 
         for (int i = 0; i < lastShownListCopy.size(); i++) {
             Person person = lastShownListCopy.get(i);
-            if (person.getShnPeriod().value.orElse(dummyIncompleteShnPeriod).isCompletedBy(LocalDate.now(clock))) {
+            Period period = person.getShnPeriod().value.orElse(dummyIncompleteShnPeriod);
+            if (period.isCompletedBy(LocalDate.now(clock))) {
                 model.deletePerson(person);
             }
         }

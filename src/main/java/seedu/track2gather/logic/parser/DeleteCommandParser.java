@@ -3,7 +3,6 @@ package seedu.track2gather.logic.parser;
 import static seedu.track2gather.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import seedu.track2gather.commons.core.index.Index;
 import seedu.track2gather.logic.commands.DeleteCommand;
@@ -22,7 +21,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             ArrayList<Index> indices = ParserUtil.parseIndices(args);
-            return new DeleteCommand(indices.stream().distinct().collect(Collectors.toList()));
+            return new DeleteCommand(indices);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
