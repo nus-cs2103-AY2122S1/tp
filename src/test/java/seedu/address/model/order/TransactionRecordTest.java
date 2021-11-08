@@ -26,10 +26,10 @@ public class TransactionRecordTest {
     @Test
     public void constructor() {
         TransactionRecord t1 = new TransactionRecord(new Order(List.of(APPLE_PIE)));
-        assertEquals(List.of(APPLE_PIE), t1.getOrderItems());
+        assertEquals(List.of(APPLE_PIE.justTransactedDetails()), t1.getOrderItems());
 
         t1 = new TransactionRecord(List.of(APPLE_PIE), id1, timestamp1);
-        assertEquals(List.of(APPLE_PIE), t1.getOrderItems());
+        assertEquals(List.of(APPLE_PIE.justTransactedDetails()), t1.getOrderItems());
         assertEquals(id1, t1.getId());
         assertEquals(timestamp1, t1.getTimestamp());
     }

@@ -37,12 +37,7 @@ public class ListTransactionCommandTest {
 
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
 
-        String cost = String.format("%.2f", model.getBookKeeping().getCost());
-        String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
-        String profit = String.format("%.2f", model.getBookKeeping().getProfit());
-
-        addMessage = "Total costs: " + cost + ", Total revenue: "
-                + revenue + ", Total profit: " + profit;
+        addMessage = new BookKeeping().toString();
     }
 
     @Test
