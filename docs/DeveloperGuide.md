@@ -4,25 +4,65 @@ title: Developer Guide
 ---
 # Welcome to Socius Developer Guide!
 
-Welcome to Socius User Guide! Choose a section from the table of contents below to find the details on how Socius works!
+Welcome to Socius Developer Guide! Choose a section from the table of contents below to find the details on how Socius works!
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
 
-1. [Acknowledgements](#acknowledgements)
-2. [Setting up, getting started](#setting-up--getting-started)
-3. [Design](#design)
+1. [Introduction to Socius](#introduction-to-socius)
+2. [Using this guide](#using-this-guide)
+3. [Acknowledgements](#acknowledgements)
+4. [Setting up, getting started](#setting-up--getting-started)
+5. [Design](#design)
    1. [Architecture](#architecture)
    2. [UI component](#ui-component)
    3. [Logic component](#logic-component)
    4. [Model component](#model-component)
    5. [Storage component](#storage-component)
    6. [Common classes](#common-classes)
-   7. [Implementation](#implementation)
+   7. [Implementation](#implementation-of-features)
    8. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
    9. [Appendix: Requirements](#appendix-requirements)
    10. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Introduction to Socius
+
+Socius is a desktop application that helps CS2103T Software Engineering students, to
+* manage classmates’ contacts,
+* make friends, and
+* find teammates!
+
+The Socius Developer Guide gets you learn how Socius works.
+This Developer Guide familarises you with the commands and functionality of Socius, enabling you to build on Socius.
+
+We hope that you will have a great time learning about Socius! :)
+
+Socius provides these main features:
+* Access details of students taking CS2103T.
+* Find any student with their name, tutorial group, nationality, tags, and more.
+* Pin suitable tags to categorize students.
+* View statistics on nationality.
+
+<div markdown="block" class="alert alert-info">
+Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
+type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Using this guide
+
+Before exploring the features of Socius, you should be familiar with these symbols used in this user guide.
+
+| Symbol | Meaning |
+| :----: | ------- |
+| :information_source: | Important information |
+| :exclamation: | Warning or caution |
+| :bulb: | Additional information such as tips |
+| :wrench: | Help with common technical issues |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,7 +228,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation of Features**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -851,6 +891,49 @@ The following sequence diagram shows how the alias command mechanism works:
     * Pros: More commonly used in general and thus easier to understand.
     * Cons: A normal class can be instantiated multiple times, which does not suit the context of this implementation.
 
+### Exiting Socius `exit`
+
+#### Implementation
+
+The exiting Socius mechanism will exit Socius.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `ExitCommand` to exit Socius:
+
+![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
+
+Given below is an example usage scenario and how the exiting Socius mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes the `exit` command to exit from Socius.
+
+Step 3. `ExitCommand#execute` returns a CommandResult with the `exit` boolean set to True.
+
+The following sequence diagram shows how the exiting from Socius mechanism works:
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+### Saving data
+
+#### Implementation
+
+After each command, the latest data is saved in a JSON file. This helps users who
+wish to seamlessly continue using Socius after exiting from Socius previously.
+
+#### Design considerations:
+
+**Aspect: How to safely save data from contact list to a JSON file:**
+
+* **Alternative 1 (current choice):** Data is saved after every command.
+    * Pros: Easy to implement.
+    * Cons: More prone to errors since the save file is accessed very frequently and sometimese unnecessarily.
+
+* **Alternative 2:** Data is saved after every command that modifies the contact list.
+    * Pros: Less prone to errors since the save file is accessed only when necessary.
+    * Cons: Tricky to implement.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -997,29 +1080,6 @@ display the suggestions to the user.
 
 _{more aspects and alternatives to be added}_
 
-### Exiting Socius `exit`
-
-#### Implementation
-
-The exiting Socius mechanism will exit Socius.
-
-#### Usage
-
-The following activity diagram briefly summarizes what happens when a user executes the `ExitCommand` to exit Socius:
-
-![DeleteMultipleActivityDiagram](images/DeleteMultipleActivityDiagram.png)
-
-Given below is an example usage scenario and how the exiting Socius mechanism behaves at each step.
-
-Step 1. The user launches the application.
-
-Step 2. The user executes the `exit` command to exit from Socius.
-
-Step 3. `ExitCommand#execute` returns a CommandResult with the `exit` boolean set to True.
-
-The following sequence diagram shows how the exiting from Socius mechanism works:
-
-![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
