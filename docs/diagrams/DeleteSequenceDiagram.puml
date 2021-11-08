@@ -2,9 +2,6 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -13,39 +10,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deleteclient 1")
-activate LogicManager
-
-LogicManager -> SalesNoteParser : parseCommand("deleteclient 1")
-activate SalesNoteParser
-
-create DeleteCommandParser
-SalesNoteParser -> DeleteCommandParser
-activate DeleteCommandParser
-
-DeleteCommandParser --> SalesNoteParser
-deactivate DeleteCommandParser
-
-SalesNoteParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
-
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
-
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
-
-DeleteCommandParser --> SalesNoteParser : d
-deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> SalesNoteParser
-destroy DeleteCommandParser
-
-SalesNoteParser --> LogicManager : d
-deactivate SalesNoteParser
-
-LogicManager -> DeleteCommand : execute()
+[-> DeleteCommand : execute()
 activate DeleteCommand
 
 DeleteCommand -> Model : deletePerson(p)
@@ -81,9 +46,6 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
+[<--DeleteCommand : result
 deactivate DeleteCommand
-
-[<--LogicManager
-deactivate LogicManager
 @enduml
