@@ -41,18 +41,22 @@ activate AddOrderCommand
 
 AddOrderCommand -> Model : hasOrder(toAdd)
 activate Model
-Model --> AddOrderCommand
+Model --> AddOrderCommand : notDuplicate
 deactivate Model
 
-AddOrderCommand -> Model : hasPersonWithName(...)
-activate Model
-Model --> AddOrderCommand
-deactivate Model
+alt notDuplicate
+    AddOrderCommand -> Model : hasPersonWithName(...)
+    activate Model
+    Model --> AddOrderCommand : personExists
+    deactivate Model
 
-AddOrderCommand -> Model : addOrder(toAdd)
-activate Model
-Model --> AddOrderCommand
-deactivate Model
+    alt personExists
+        AddOrderCommand -> Model : addOrder(toAdd)
+        activate Model
+        Model --> AddOrderCommand
+        deactivate Model
+    end
+end
 
 create CommandResult
 AddOrderCommand -> CommandResult
