@@ -31,6 +31,15 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
+import seedu.programmer.ui.components.CommandBox;
+import seedu.programmer.ui.components.LabResultListPanel;
+import seedu.programmer.ui.components.ResultDisplay;
+import seedu.programmer.ui.components.StatusBarFooter;
+import seedu.programmer.ui.components.StudentListPanel;
+import seedu.programmer.ui.managers.FileManager;
+import seedu.programmer.ui.managers.PopupManager;
+import seedu.programmer.ui.windows.DashboardWindow;
+import seedu.programmer.ui.windows.HelpWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -46,6 +55,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String DOWNLOAD_SUCCESS_MESSAGE = "Your data has been downloaded to %s !";
     private static final String UPLOAD_FAIL_NO_STUDENTS_MESSAGE = String.format(UPLOAD_FAIL_MESSAGE,
                                                                                 "No students found in your file!");
+    private static final String DEFAULT_STORAGE_LOCATION = "data/programmerError.json";
     private static final String FILE_NOT_FOUND_MESSAGE = "Sorry, we could not find or access your data file!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -264,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDownload() {
         JSONArray jsonData = new JSONArray();
         try {
-            jsonData = JsonUtil.getJsonData("data/programmerError.json");
+            jsonData = JsonUtil.getJsonData(DEFAULT_STORAGE_LOCATION);
         } catch (IllegalValueException e) {
             popupManager.displayPopup(FILE_NOT_FOUND_MESSAGE);
             return;

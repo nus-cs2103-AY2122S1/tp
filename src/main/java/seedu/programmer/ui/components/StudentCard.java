@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 
 import javafx.collections.ObservableList;
@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.ui.UiPart;
 
 
 /**

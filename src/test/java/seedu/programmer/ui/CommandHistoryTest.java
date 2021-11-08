@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.programmer.ui.components.CommandHistory;
+
 public class CommandHistoryTest {
 
     private CommandHistory commandHistory;

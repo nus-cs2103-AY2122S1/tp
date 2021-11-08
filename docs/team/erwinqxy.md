@@ -9,7 +9,7 @@ their students’ lab results in a simple and efficient manner, allowing them to
 processes and more time teaching students.
 
 The following is a summary of my contributions to the
-project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17))
+project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&zA=erwinqxy&zR=AY2122S1-CS2103-F09-3%2Ftp%5Bmaster%5D&zACS=215.4376936697654&zS=2021-09-17&zFS=&zU=2021-11-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false))
 
 ### Features
 

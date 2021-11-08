@@ -1,4 +1,4 @@
-package seedu.programmer.ui;
+package seedu.programmer.ui.components;
 
 import java.util.logging.Logger;
 
@@ -11,6 +11,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.model.student.DisplayableObject;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.ui.UiPart;
 
 /**
  * Panel containing the list of lab results.

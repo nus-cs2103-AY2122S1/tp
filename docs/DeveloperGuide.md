@@ -6,11 +6,11 @@ title: Developer Guide
 ## **Table of Contents**
 
 1. [**Acknowledgements**](#Acknowledgements)
-2. [**Setting up, getting started**](#Setting up)
+2. [**Getting started**](#Setting up)
 3. [**Glossary**](#Glossary)
 4. [**Design**](#Design)
    1. [Architecture](#Architecture)
-   2. [UI Components](#UI component)
+   2. [UI Component](#UI component)
    3. [Logic Component](#Logic component)
    4. [Model Component](#Model component)
    5. [Storage Component](#Storage component)
@@ -18,7 +18,7 @@ title: Developer Guide
 5. [**Implementations**](#Implementations)
    1. [`Add` Student Feature](#add student)
    2. [`Filter` Student List Feature](#filter student)
-   3. [`Show` lab results Feature](#show lab)
+   3. [`Show` lab results Feature](#show command)
    4. [`EditLab` Feature](#edit lab)
    5. [`Download` Data Feature](#download data)
    6. [`Purge` Feature](#purge data)
@@ -115,10 +115,10 @@ is responsible for,
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): ProgrammerError's UI.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of ProgrammerError in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#UI component): ProgrammerError's UI.
+* [**`Logic`**](#Logic component): The command executor.
+* [**`Model`**](#Model component): Holds the data of ProgrammerError in memory.
+* [**`Storage`**](#Storage component): Reads data from, and writes data to, the hard disk.
 
 **How the architecture components interact with each other**
 
@@ -157,24 +157,25 @@ The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
 
 At a high level, the `MainWindow` component interacts with 3 other main components: `Logic`, `PopupManager` and `FileManager` (Figure 4.2.1).
-Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in the next diagram.
+Note that the components under `MainWindow` have been omitted for simplicity and will be shown in greater detail in Figure 4.2.2.
+
+1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
+2. Secondly, `MainWindow` conducts file operations on the UI through a `FileManager`.
+   For instance, the `FileManager` handles situations where the user is required to select files or directories.
+3. Thirdly, to manage the display of popup windows to the user, `MainWindow` interacts with a `PopupManager` which handles
+   the configuration, creation and showing of popups on the UI.
+
+In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
+from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
+to be displayed to the user.
 
 <p align="center">
     <img src="images/ui/UiClassDiagramOverview.png" width="700" />
 </p>
 <div style="text-align: center">
-    <em>Figure 4.2.1: Overview of Ui components</em>
+    <em>Figure 4.2.1: Overview of UI components</em>
 </div>
 <br>
-1. Firstly, `MainWindow` interacts with the `Logic` component to determine which data to display to the user.
-2. Secondly, `MainWindow` conducts file operations on the Ui through a `FileManager`.
-   For instance, the `FileManager` handles situations where the user is required to select files or directories.
-3. Thirdly, to manage the display of popup windows to the user, `MainWindow` interacts with a `PopupManager` which handles
-   the configuration, creation and showing of popups on the Ui.
-
-In addition, there are two additional windows that the UI can display: `HelpWindow` and `DashboardWindow`. They inherit
-from the abstract class `PopupWindow`, which captures the commonalities between classes that represent popup information
-to be displayed to the user.
 
 Now taking a closer look at the `MainWindow` component, it consists of a number of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`
 , `StatusBarFooter` etc. (Figure 4.2.2). These components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
@@ -184,16 +185,16 @@ the commonalities between classes that represent parts of the visible GUI. The f
     <img src="images/ui/UiClassDiagramMainComponents.png" width="600" />
 </p>
 <div style="text-align: center">
-    <em>Figure 4.2.2: MainWindow Ui components</em>
+    <em>Figure 4.2.2: MainWindow UI components</em>
 </div>
 <br>
 Note that the `UI` component uses the JavaFx UI framework.
 
 - The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
   For example, the layout of
-  the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+  the [`MainWindow`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/MainWindow.java)
   is specified
-  in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+  in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 - The styling of the UI components are defined in the `src/main/resources/view/css` folder.
 
@@ -206,7 +207,7 @@ The `UI` component,
 
 ### <a name="Logic component"></a> **4.3 Logic component**
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/logic/Logic.java)
 
 Figure 4.3.1 shows a (partial) class diagram of the `Logic` component:
 
@@ -416,7 +417,7 @@ The following UML sequence diagrams shows how the filter command works:
    
 <p align="center">
     <img src="images/commands/FilterCommand/FilterSequenceDiagramParse.png"/>
-</p>p>
+</p>
 <div style="text-align: center">
     <em>Figure 5.2.1: Partial sequence diagram showing the creation of FilterCommand object</em>
 </div>
@@ -643,11 +644,17 @@ related to the UI. In addition, the following classes are utilized:
 - `MainWindow.fxml`: for the addition of a 'Download' button on the MainWindow
 - `Popup.css`: for the customisation of styles for pop-up messages
 
-In the `Logic` components, the `download` command works in a similar fashion to the `show` command, except that it does
+The `download` command works in a similar fashion to the [`show` command](#show-command) in the `Logic` components, except that it does
 not require its own parser.
 
 
-This sequence diagram in Figure 5.5.1 shows how the `download` command works at a lower level:
+The following sequence diagram in Figure 5.5.1 shows how the `download` command works in greater detail.
+
+1. After receiving a `DownloadCommandResult` from the `Logic` component, the `MainWindow` handles the download by first
+   calling `JsonUtil.getJsonData(filePath)` to get the JSON student data from the default storage location `programmerError.json`.
+2. The `MainWindow` then prompts the user to select a directory to save the CSV file to be created to.
+3. Finally, the `MainWindow` calls the `JsonUtil.writeCSV(jsonData, file)` method to write the CSV file to the
+   selected directory.
 
 <p align="center">
     <img src="images/commands/DownloadCommand/DownloadSequenceDiagram.png" width="600"/>
@@ -657,7 +664,12 @@ This sequence diagram in Figure 5.5.1 shows how the `download` command works at 
 </div>
 <br>
 
-The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the download command:
+The following activity diagram in Figure 5.5.2 summarizes what happens when a CS2100 TA executes the `download` command.
+The main two possible scenarios are:
+
+1. There is student data present to download. If so, the user proceeds to select a destination folder and the data will
+    be stored in a file named `programmerError.csv` in the selected directory.
+2. There is no student data present to download. In this case, the user is simply notified that there is no data to download.
 
 <p align="center">
     <img src="images/commands/DownloadCommand/DownloadActivityDiagram.png" width="600"/>
@@ -670,14 +682,13 @@ The following activity diagram in Figure 5.5.2 summarizes what happens when a CS
 #### Design Considerations
 
 One of the main considerations was to deal with reading and writing files only when necessary. This meant checking if
-there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a folder
-destination.
+there is any data to begin with. Only if there exists any data will the CS2100 TA be prompted to select a directory location.
 
-Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
-indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
-only know if the data was successfully downloaded after the textual response is shown to the user. Using a pop-up
-message right at the end of this operation means we can customize the message depending on whether the download was a
-success.
+Additionally, a pop-up message was chosen to be displayed for two reasons. 
+
+1. First, it provides the user a clear visual indicator of the result of their command, as compared to the typical textual output they would see. 
+2. Second, using a pop-up message right at the end of this operation means we can customize the message depending on whether the download was a
+success. This is because we would only know whether the data was successfully downloaded or not after the textual response is shown to the user.
 
 #### Alternatives
 
@@ -685,11 +696,10 @@ success.
    write the corresponding values to a CSV file which ProgrammerError would create. We chose not to go down this route
    as it is much more tedious with little reward in terms of code management and code quality.
 
-
 2. Another alternative with respect to the CS2100 TA experience could be to disallow the user from selecting a folder to save
    their data to. Instead, a default location could be chosen so as to save the CS2100 TA some time in getting their data
-   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, we opted to include the
-   functionality of allowing the CS2100 TA to select a folder destination.
+   downloaded quickly. However, since we wanted to make ProgrammerError more flexible and adaptable to different users, 
+   we opted to include the functionality of allowing the CS2100 TA to select a folder destination.
 
 ### <a name="purge data"></a> **5.6 `Purge` Feature**
 
@@ -1115,7 +1125,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **Extensions:**
 
-* 1a. CS2100 TA chooses to cancel the upload. 
+* 1a. CS2100 TA chooses to cancel the download. 
 
   Use case ends.
 
