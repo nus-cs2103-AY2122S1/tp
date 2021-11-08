@@ -31,7 +31,7 @@ public class RoomValidCheckPredicate implements Predicate<Person> {
                 Integer.parseInt(input);
                 return input.equals(level);
             } catch (NumberFormatException e) {
-                return input.equals(block);
+                return input.equalsIgnoreCase(block);
             }
         } else if (input.length() == 2) {
             return input.equalsIgnoreCase(block + level);

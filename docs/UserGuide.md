@@ -229,26 +229,23 @@ Examples:
 
 #### Searching by resident information: `find`
 
-Shows a list of residents that match the provided keywords for different available parameters.
+Shows a list of residents that match the provided keywords for different available parameters. Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`.
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
+Prefix | Field | Restrictions
+-------- | ------ | ------
+`n` | Name | - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true` <br> <br> - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans` <br> <br> - Only full words will be matched. e.g `Han` will not match `Hans` <br> <br> - Residents matching at least one keyword for the name will be returned (i.e. `OR` search). e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+`r` | Room |  - It is case-insensitive <br> - A block can be used as a search. e.g `r/A` <br> - A level can be used as a search. e.g `r/2` <br> - A block-level can be used as a search. e.g `r/A2` <br> - A full valid room can be used as a search. e.g `r/A210`
+`e`, `p`, `f`, `v` | Email, Phone, <br> Faculty, VaccStatus | Subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)   
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 * Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [Deadline Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
-* Searching by name:
-    - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
-    - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
-    - Only full words will be matched. e.g `Han` will not match `Hans`
-    - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
-  e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Searching by room:
-    - It is case-sensitive. Block letters must be capitalised.
-    - A block can be used as a search. e.g `r/A`
-    - A level can be used as a search. e.g `r/2`
-    - A block-level can be used as a search. e.g `r/A2`
-    - A full valid room can be used as a search. e.g `r/A210`
 * Any provided preamble to the prefixes will be ignored
-* All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
+</div>
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -339,7 +336,7 @@ Prefix | Field | Details
 
 <div markdown="span" class="alert alert-danger">
 
-:warning: **Note:** The above commands will, given time, not result in any close contacts since this is a time-dependent problem. The examples are used to merely explain the concepth of depth.
+:warning: **Note:** The above commands will, given time, not result in any close contacts since this is a time-dependent problem. The examples are used to merely explain the concept of depth.
 
 </div>
 
@@ -389,7 +386,7 @@ Format: `import CSV_NAME`
 * The file format (`.csv`) is not to be included in `CSV_NAME`
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can save to `csv` format from an excel file by  Save as` -> `.csv`
 </div>
 
