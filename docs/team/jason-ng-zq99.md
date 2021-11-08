@@ -54,4 +54,9 @@ Given below are my contributions to the project.
   [#131](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/131),
   [#135](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/135),
   [#136](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/136),
-  [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137)
+  [#137](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/137),
+  [#215](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/215),
+  [#233](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/233),
+  [#238](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/238),
+  [#246](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/246),
+  [#247](https://github.com/AY2122S1-CS2103T-T09-2/tp/pull/247)
