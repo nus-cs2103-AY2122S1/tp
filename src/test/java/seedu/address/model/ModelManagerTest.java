@@ -14,16 +14,26 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
+import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.StorageManager;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.ui.ThemeType;
 
 public class ModelManagerTest {
+
+    @TempDir
+    public Path temporaryFolder;
 
     private ModelManager modelManager = new ModelManager();
 
@@ -78,8 +88,34 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getTag_nullTagName_throwsNullPoinnterException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getTag(null));
+    }
+
+    @Test
+    public void getTag_validTag_returnsCorrectTag() {
+        Tag tagA = new Tag("hi");
+        AddressBook addressBook = new AddressBook();
+        addressBook.addTag(tagA);
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        assertEquals(modelManager.getTag("hi"), tagA);
+    }
+
+    @Test
+    public void getThemeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getThemeList().remove(0));
+    }
+
+    @Test
     public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
     }
 
     @Test
@@ -114,6 +150,28 @@ public class ModelManagerTest {
         modelManager = new ModelManager(addressBook, userPrefs);
         modelManager.updateClientToView(new ClientHasId(CARL.getClientId()));
         assertFalse(modelManager.isClientExistToView(CARL.getClientId()));
+    }
+
+    @Test
+    public void getTheme_success() {
+        JsonAddressBookStorage addressBookStorage =
+            new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LogicManager expectedLogic = new LogicManager(modelManager, storage);
+        assertEquals(modelManager.getTheme(), expectedLogic.getTheme());
+    }
+
+    @Test
+    public void setTheme_success() {
+        ThemeType theme = ThemeType.of("BookTheme").get();
+        modelManager.setTheme(theme);
+        JsonAddressBookStorage addressBookStorage =
+            new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        LogicManager expectedLogic = new LogicManager(modelManager, storage);
+        assertEquals(modelManager.getTheme(), expectedLogic.getTheme());
     }
 
     @Test

@@ -44,9 +44,6 @@ public class Email extends StringComparable<Email> implements RequiredField, Lon
     public Email(String email) {
         requireNonNull(email);
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        if (email.isEmpty()) {
-            email = DEFAULT_VALUE;
-        }
         value = email;
     }
 

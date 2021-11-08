@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -34,5 +35,26 @@ public class RiskAppetiteTest {
         // valid phone numbers
         assertTrue(RiskAppetite.isValidRiskAppetite("2")); // Integer between 1 and 5
         assertTrue(RiskAppetite.isValidRiskAppetite("5")); // Integer between 1 and 5
+    }
+
+    @Test
+    public void equals() {
+        RiskAppetite john = new RiskAppetite("5");
+        RiskAppetite otherJohn = new RiskAppetite("5");
+        RiskAppetite jane = new RiskAppetite("3");
+
+        // same object
+        assertTrue(john.equals(john));
+
+        // different object same RiskAppetite
+        assertTrue(john.equals(otherJohn));
+        assertEquals(john.hashCode(), otherJohn.hashCode());
+
+        // different object different RiskAppetite
+        assertFalse(john.equals(jane));
+
+        // different type
+        assertFalse(john.equals("5"));
+
     }
 }

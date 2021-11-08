@@ -7,10 +7,10 @@ title: Dominic's Project Portfolio Page
 
 LeadsForce - LeadsForce is a client management software that was created to help student financial advisors to keep track of client information and client meetings. Optimised with a command-line interface (CLI), the application seeks to streamline the way financial advisors have been managing clients.
 
-Given below are my contributions to the project.
+Mentioned below are my contributions to the project.
 
 * **Added several client attributes (Pull Request: [#45](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/45))**:
-  * The attributes I have added to LeadsForce includes `current financial plans` and `Last Met`. 
+  * The attributes I have added to LeadsForce includes `current plans` and `Last Met`. 
   * Current financial plans allows financial advisors to keep track of current financial plans, so that they can have a more comprehensive idea of the financial state of their clients
   * Client ID is used in order to make it easier for commands to run, and is used extensive throughout LeadsForce. 
   * Amended the `edit`, `add` commands to allow the app to take in these attributes
@@ -36,12 +36,14 @@ Given below are my contributions to the project.
   * User Guide (Pull Request: [#205](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/205)):
     * Overhauled the User Guide to using icons and tables to increase readability
     * Removed bugs and misunderstandings from user guide
-    * Wrote the `edit` and `view` commands in the user guide, the QnA portion, troubleshooting portion, client information portion, bugs reporting portion and the introduction.
-    * Added the expected outcomes of commands and
-    * Organisation and dividing of the user guide
+    * Wrote the `edit` and `view` commands in the user guide ([#24](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/24))
+    * Introduced the QnA portion, troubleshooting portion, client information portion, bugs reporting portion and the introduction into the user guide.
+    * Added the expected outcomes of commands and screenshots into the user guide.
+    * Organisation and dividing of the user guide into clear portions and
+
   * Developer Guide (Pull Request: [#205](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/205)):
-    * Added implementation details of the `edit` and `view` command ([#24](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/24))
+    * Added implementation details of the `edit` command 
     * Wrote the introduction, expanded on use cases, manual testing portion, product scope and the different components.
     * Color coded the different components of the application.
-    * standardising the diagrams to make it easier to read, and changing the colours of the diagrams as well.
+    * standardising the diagrams to make it easier to read, and changing the colours of the diagrams to increase readability. 
 
