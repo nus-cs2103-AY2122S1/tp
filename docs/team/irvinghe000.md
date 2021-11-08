@@ -1,5 +1,6 @@
 ---
-layout: page title: Outong's Project Portfolio Page
+layout: page 
+title: Outong's Project Portfolio Page
 ---
 
 ### Project: Staff'd
