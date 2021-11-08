@@ -292,7 +292,7 @@ Command syntax takes these three possible forms:
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* To make things easier to remember for the user, we have also chosen prefixes that closely resemble the field to be 
+* To make things easier to remember for the user, we have also chosen prefixes that closely resemble the field to be
   added to (e.g. `n/` for name and `pr/` for premium).
 
 * Items in square brackets are optional.<br>
@@ -449,7 +449,7 @@ Examples:
 You may refer to our [Client Window Commands](#43-client-window) to learn more about what you can do after executing our `view` command.
 </div>
 
-Allows you to open the [client window](#33-application-client-window-breakdown) to access all data on your specific chosen client. Once in this window, you can see 
+Allows you to open the [client window](#33-application-client-window-breakdown) to access all data on your specific chosen client. Once in this window, you can see
 each client field in detail and edit existing information.
 
 <div markdown="span" class="alert alert-primary">
@@ -468,7 +468,7 @@ Examples:
 
 #### 4.2.6 Clearing all client data : `clear`
 
-Clears all data from the DonnaFin. 
+Clears all data from the DonnaFin.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: This is a destructive command that cannot be recovered from, please take care when
@@ -823,12 +823,12 @@ This marks the end of the Features section. Click
        the data of your previous DonnaFin home folder.
 
 **Q**: I have multiple clients with the same name, but your application won't let me add them! What do I do?<br>
-**A**: We realize some names are common, but we decided to prioritize your ability to instantly recognize a client 
+**A**: We realize some names are common, but we decided to prioritize your ability to instantly recognize a client
        over letting you keep the accuracy of the name. For that reason, we suggest adding other identifying nicknames
        or words in the name e.g. "John Walker (Bartender)" and "John Walker (Johnny)".
 
 **Q**: My clients have assets and policies valued in USD / RMB / AUD / other currency. How can I show this in the table?<br>
-**A**: We plan to have multi-currency support in future developments. However, currently, we only accept dollar ('$') 
+**A**: We plan to have multi-currency support in future developments. However, currently, we only accept dollar ('$')
        currencies and formats compatible with the Singapore Dollar. For now, please use only a single currency
        and convert as appropriate.
 

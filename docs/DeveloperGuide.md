@@ -277,7 +277,7 @@ in this codebase.
 
 There are two classes that can be found under`donnafin.commons.core.types`:
 * `Index`: Abstracts away the difference between one-based index (display / user input) and zero-based index (native
-  Java indexing of data structures). Serves to minimise programming errors, particularly those of the 'off-by-one' 
+  Java indexing of data structures). Serves to minimise programming errors, particularly those of the 'off-by-one'
   category that can happen when dealing with these incompatible numbering styles.
 * `Money`: Provides a numerically sound structure that can be used to represent monetary values with precision and
   support arithmetic operations without foregoing easy in built conversion to a human-readable format with the currency
@@ -286,12 +286,12 @@ There are two classes that can be found under`donnafin.commons.core.types`:
 **Utility classes**
 There are multiple classes in `donnafin.commons.core.util` that serve a variety of purpose. In general, they can be seen
 as a common library of pure functions that can be used throughout the application to fulfil certain purposes. It reduces
-on code duplication and improves the cohesion of our code. For example, we often do defensive programming checks to 
-ensure that multiple objects are not null, and the `CollectionUtil` package has useful static functions that can be 
+on code duplication and improves the cohesion of our code. For example, we often do defensive programming checks to
+ensure that multiple objects are not null, and the `CollectionUtil` package has useful static functions that can be
 called on to do this.
 
 **Exception classes**
-There are custom-built exceptions `donnafin.commons.exception`, that are used throughout the code base. Some custom 
+There are custom-built exceptions `donnafin.commons.exception`, that are used throughout the code base. Some custom
 exceptions (like `ParseException`) are only used in certain packages, and are therefore can be found in those packages.
 In this package, we currently have `DataConversionException` and `IllegalValueException`, both of which handle a very
 common issue throughout the application of handling and reporting bad formats (syntax) or bad inputs (semantics).
@@ -444,7 +444,7 @@ View specific actions.
 
 On every call to changing tab or refreshing, the `ClientPanel` takes the following steps:
 
-1. The `VBox` container in `ClientPanel` will clear all its children 
+1. The `VBox` container in `ClientPanel` will clear all its children
 1. `ClientPanel` will create a list of `AttributePanel`s (a handy class for constructing a display for any single valued attribute)
 1. The `VBox` container will add the list of `AttributePanel`s as its child.
 
@@ -492,8 +492,8 @@ changes to any other component only happen when the command is executed. Hence, 
 different process.
 
 This is a planned deviation in user workflow, and done so as notes are more infrequently used, and there is an expectation
-that users would write at length in a multi-line field. As such, we deemed the gains from force fitting editing notes 
-into a command line style  edit and accommodating a switch from the single line Command Bar was deemed unnecessarily 
+that users would write at length in a multi-line field. As such, we deemed the gains from force fitting editing notes
+into a command line style  edit and accommodating a switch from the single line Command Bar was deemed unnecessarily
 complicated and unintuitive.
 
 ![Notes Tab Screenshot](./images/NotesTabDevGuideScreenshot.png)
@@ -615,13 +615,13 @@ State: Home Window
 
 1. User requests to delete a client from DonnaFin using the right syntax.
 2. DonnaFin announces that the client has been successfully deleted.\
-   
+
    Use case ends.
 
 **Extensions**
 
 * 1a. The given index is invalid.
-    * 1a1. DonnaFin shows an error message. 
+    * 1a1. DonnaFin shows an error message.
            Use case resumes from step 1.
 
 **UC03: Finding a client by name** \
@@ -891,24 +891,24 @@ testers are expected to do more *exploratory* testing.
 1. Adding a client in the home window.
 
    1. Test case: `add n/Steve Rogers p/91820392 e/thefirstavenger@test.com a/33 Apple Road, 928103`
-      Expected: New client with the details are added to the end of the list. Details of the added client are shown in 
+      Expected: New client with the details are added to the end of the list. Details of the added client are shown in
       the result display.
-   
+
    2. Test case: `add e/thefirstavenger@test.com add n/Steve Rogers a/33 Apple Road, 928103 p/91820392`
-      Expected: Similar to previous as the input order of the parameters does not matter as long as the command word 
+      Expected: Similar to previous as the input order of the parameters does not matter as long as the command word
       (`add` in this case) is the first word.
-   
+
    3. Test case: `add n/@$%^&&* p/91820392 e/thefirstavenger@test.com a/33 Apple Road, 928103`
       Expected: Client is not added. Error details shown in the result display.
-   
+
    4. Other incorrect add commands to try: `add n/@$%^&&* p/abcde e/thefirstavenger@test.com a/33 Apple Road, 928103`,
       `add n/@$%^&&* p/92810283 e/thefirstavenger a/33 Apple Road, 928103`, `...`.
       Expected: Similar to previous.
-   
+
 3. Adding a client in the client window.
 
    1. Test case: `add n/Steve Rogers p/91820392 e/thefirstavenger@test.com a/33 Apple Road, 928103`
-      Expected: Client is not added as add is a home window command that cannot be executed in the client window. Error 
+      Expected: Client is not added as add is a home window command that cannot be executed in the client window. Error
       details shown in the result display.
 
 ### 7.3 Deleting a client
@@ -925,13 +925,13 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-   
+
 2. Deleting a client while being in the client window.
 
    1. Test case: `delete 1` <br>
-      Expected: Client is not deleted as delete is a home window command that cannot be executed in the client window. 
+      Expected: Client is not deleted as delete is a home window command that cannot be executed in the client window.
       Error details shown in the result display.
-   
+
 ### 7.4 Viewing and editing a client's contact details
 
 1. Entering a client window
@@ -943,7 +943,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `view -4`<br>
        Expected: As it is not a valid index, you will remain in the home window with an error command output.
-   
+
     4. Other incorrect view commands to try: `view`, `view a`, `view X`, `...` (where x is larger than the list size)
        <br>
        Expected: Similar to previous.
@@ -951,38 +951,38 @@ testers are expected to do more *exploratory* testing.
 2. Editing a client's details.
 
    1. Prerequisites: Currently in the client window and in the contact tab.
-   
+
    2. Test case: `edit n/John` <br>
-      Expected: The name of the client will be changed to John. Details of the newly edited client will be shown in the 
+      Expected: The name of the client will be changed to John. Details of the newly edited client will be shown in the
       result display.
-   
+
    3. Test case: `edit n/Jane p/82893109` <br>
-      Expected: Details of the client will change according to the input as multi-field editing is supported. Details 
+      Expected: Details of the client will change according to the input as multi-field editing is supported. Details
       of the newly edited client will be shown in the result display.
-   
+
    4. Test case: `edit n/&$^@*@!` <br>
-      Expected: Details of the client will not change as an invalid format has been used. Error details shown in the 
+      Expected: Details of the client will not change as an invalid format has been used. Error details shown in the
       result display.
 
    5. Other incorrect edit commands to try: `edit p/test`, `...` <br>
       Expected: Similar to previous.
-   
+
 ### 7.5 Appending and removing a client's asset/policy/liability list
 
 1. Appending an asset/liability to a client.
 
    1. Prerequisites: Currently in the client window and in the assets/liabilities tab (according to what financial
       information you want to append).
-   
+
    2. Test case: `append n/Good Class Bungalow ty/Property v/$10000000 r/newly bought with bank loan` <br>
       Expected: An asset/liability with the input details will be added to the client's financial information. The list
       of assets/liabilities will be sorted (including the newly added asset/liability). A message confirming that the
       asset/liability has been appended will appear in the result display.
-   
+
    3. Test case: `append n/Good Class Bungalow v/$10000000 r/newly bought with bank loan` <br>
-      Expected: Asset/Liability will be not  added as an invalid format has been used. An error message showing the 
+      Expected: Asset/Liability will be not  added as an invalid format has been used. An error message showing the
       correct format will be shown in the result display.
-   
+
 2. Appending a policy to a client.
 
    1. Prerequisites: Currently in the client window and in the policies tab.
@@ -991,24 +991,24 @@ testers are expected to do more *exploratory* testing.
       Expected: A policy with the input details will be added to the client's financial information. The list of
       policies will be sorted (including the newly added policy). A message confirming that the policy has been appended
       will appear in the result display.
-   
+
    3. Test case: `append n/Diamond Policy iv/$10000 pr/$200 c/$1000` <br>
       Expected: Policy will not be added as an invalid format has been used. An error message showing the
       correct format will be shown in the result display.
-   
+
 3. Removing an asset/liability/policy from a client.
 
-   1. Prerequisites: Currently in the client window and in the assets/liabilities/policies tab (according to which 
+   1. Prerequisites: Currently in the client window and in the assets/liabilities/policies tab (according to which
       financial information to remove). Additionally, there are assets/liabilities/policies to be removed.
-   
+
    2. Test case: `remove 1` <br>
-      Expected: The first asset/liability/policy is removed from the list. A message to notify that the 
+      Expected: The first asset/liability/policy is removed from the list. A message to notify that the
       asset/liability/policy has been removed will be shown in the result display.
-   
+
    3. Test case: `remove 0` <br>
       Expected: Asset/Liability/Policy will not be removed from the list. An error message showing the
       correct format will be shown in the result display.
-   
+
    4. Other incorrect remove commands to try: `remove`, `remove a`, `remove @`, `remove X`, `...` (where x is larger
       than the number of assets/liabilities/policies listed). <br>
       Expected: Similar to previous.
