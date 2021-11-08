@@ -127,26 +127,20 @@ public class Inventory implements ReadOnlyInventory {
 
     /**
      * Makes transaction of the item and update inventory accordingly.
-     *
-     * @return Number of items actually consumed in the transaction.
+     * Item to transact cannot be more than item in inventory.
      */
-    private int transactItem(Item toTransact) {
+    private void transactItem(Item toTransact) {
         requireNonNull(toTransact);
 
-        int transactedQuantity = 0;
         for (Item item : items.asUnmodifiableObservableList()) {
-            if (item.isSameItem(toTransact) && toTransact.getCount() > 0) {
-                transactedQuantity = Math.min(item.getCount(), toTransact.getCount());
-                if (transactedQuantity == item.getCount()) {
-                    items.remove(item);
-                } else {
-                    items.setItem(item, item.updateCount(item.getCount() - transactedQuantity));
-                }
+            if (item.isSameItem(toTransact)) {
+                assert toTransact.getCount() <= item.getCount();
+                items.setItem(item, item.updateCount(item.getCount() - toTransact.getCount()));
                 break;
             }
         }
 
-        return transactedQuantity;
+        return;
     }
 
     /**

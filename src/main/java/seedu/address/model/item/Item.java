@@ -96,6 +96,13 @@ public class Item implements Displayable {
     }
 
     /**
+     * Returns an item with only transaction related details (i.e. no cost price nor tags)
+     */
+    public Item justTransactedDetails() {
+        return new Item(name, id, count, new HashSet<>(), -1.0, salesPrice);
+    }
+
+    /**
      * Returns true if both items have the same name or id.
      * This defines a weaker notion of equality between two items.
      */

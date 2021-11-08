@@ -341,14 +341,16 @@ public class ModelManager implements Model {
 
     @Override
     public void transactAndCloseOrder() {
-        transactAndClearOrder();
+        transactOrder();
+        closeOrder();
     }
 
     /**
-     * Helper TransactAndClearOrder with given path (for testing purposes)
+     * Transacts the current open order by removing sold items from the inventory
+     * and updating revenue.
      * Model must have an unclosed order. The order must have at least 1 item.
      */
-    public void transactAndClearOrder() {
+    public void transactOrder() {
         assert hasUnclosedOrder();
         assert !optionalOrder.get().isEmpty();
 
@@ -357,8 +359,6 @@ public class ModelManager implements Model {
         transactions.add(transaction);
         transaction.getOrderItems().stream()
                 .forEach(item -> addRevenueBookKeeping(item.getSalesPrice(), item.getCount()));
-
-        closeOrder();
 
         logger.fine(TRANSACTION_LOGGING_MSG + transaction);
     }

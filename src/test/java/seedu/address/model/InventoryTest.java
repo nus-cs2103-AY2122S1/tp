@@ -221,41 +221,6 @@ public class InventoryTest {
     }
 
     @Test
-    public void transactOrder_typicalOrder_itemsAllRemoved() {
-        // count of items in order matches that in inventory
-        Inventory typicalInventory = TypicalItems.getTypicalInventory();
-        Order typicalOrder = TypicalOrders.getTypicalOrder();
-        typicalInventory.transactOrder(typicalOrder);
-
-        assertEquals(typicalInventory.getItemList(), new Inventory().getItemList());
-    }
-
-    @Test
-    public void transactOrder_orderWithItemWithLargeCount_itemRemoved() {
-        // count of items in order matches that in inventory
-        Inventory typicalInventory = TypicalItems.getTypicalInventory();
-        Order abnormalOrder = TypicalOrders.getOrderWithItemWithLargeCount();
-        typicalInventory.transactOrder(abnormalOrder);
-
-        Inventory expectedInventory = TypicalItems.getTypicalInventory();
-        expectedInventory.deleteItem(APPLE_PIE);
-
-        // assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
-    }
-
-    @Test
-    public void transactOrder_orderWithItemWithNegativeCount_inventoryUnchanged() {
-        // count of items in order matches that in inventory
-        Inventory typicalInventory = TypicalItems.getTypicalInventory();
-        Order abnormalOrder = TypicalOrders.getOrderWithItemWithNegativeCount();
-        typicalInventory.transactOrder(abnormalOrder);
-
-        Inventory expectedInventory = TypicalItems.getTypicalInventory();
-
-        assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
-    }
-
-    @Test
     public void transactOrder_orderWithUnexistingItem_inventoryUnchanged() {
         // count of items in order matches that in inventory
         Inventory typicalInventory = TypicalItems.getTypicalInventory();

@@ -15,6 +15,8 @@ import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import static seedu.address.testutil.TypicalItems.DONUT;
+import static seedu.address.testutil.TypicalItems.getTypicalInventory;
+import static seedu.address.testutil.TypicalOrders.getTypicalOrder;
 import static seedu.address.testutil.TypicalTransactions.getTypicalTransactionList;
 
 import java.nio.file.Path;
@@ -192,20 +194,24 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void transactAndClearOrder_noOrderIsSetYet_throwAssertionError() {
+    public void transactAndCloseOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
         assertThrows(AssertionError.class, model::transactAndCloseOrder);
     }
 
     @Test
-    public void transactAndClearOrder_typicalOrder_inventoryIsClear() {
+    public void transactAndClearOrder_typicalOrder_inventoryIsUpdated() {
         ModelManager model = new ModelManager();
-        model.setInventory(TypicalItems.getTypicalInventory());
-        model.setOrder(TypicalOrders.getTypicalOrder());
-        model.transactAndClearOrder();
+        model.setInventory(getTypicalInventory());
+        model.setOrder(getTypicalOrder());
+        model.transactOrder();
 
-        assertFalse(model.hasUnclosedOrder());
-        assertEquals(model.getInventory(), new Inventory());
+        Inventory expectedInventory = getTypicalInventory();
+        for (Item item: expectedInventory.getItemList()) {
+            expectedInventory.setItem(item, item.updateCount(0));
+        }
+
+        assertEquals(model.getInventory(), expectedInventory);
     }
 
     @Test

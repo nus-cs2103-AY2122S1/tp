@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -31,20 +32,30 @@ public class TransactionRecord extends Order implements Displayable {
      * Instantiates a transaction record based off the given order.
      */
     public TransactionRecord(Order order) {
-        super(order.getOrderItems());
+        super(justTransactedDetails(order.getOrderItems()));
 
-        id = StringUtil.generateRandomString();
         timestamp = Instant.now();
+        // id is a randomly generated string with timestamp as the seed (for testability)
+        long seed = timestamp.getEpochSecond() / 5;
+        id = StringUtil.generateRandomString(seed);
     }
 
     /**
      * Instantiates a transaction record with the given list of items, id, and timestamp.
      */
     public TransactionRecord(List<Item> items, String id, Instant timestamp) {
-        super(items);
+        super(justTransactedDetails(items));
 
         this.id = id;
         this.timestamp = timestamp;
+    }
+
+    private static List<Item> justTransactedDetails(List<Item> toCopy) {
+        List<Item> newList = new ArrayList<>();
+        for (Item item: toCopy) {
+            newList.add(item.justTransactedDetails());
+        }
+        return newList;
     }
 
     /**
