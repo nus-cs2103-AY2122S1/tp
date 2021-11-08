@@ -1053,7 +1053,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a Next-of-Kin of a participant
 
 1. Delete a NOK from a participant
-a
+
    1. Prerequisite: At least 1 participant and this participant has at least 1 NOK.
 
    2. Test case: `deleteNok 1 1`<br>
