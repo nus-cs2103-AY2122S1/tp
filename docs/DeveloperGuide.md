@@ -591,8 +591,7 @@ Given below is a possible usage scenario:
 
 [Pre-Condition] There are 10 students in ProgrammerError, and the CS2100 TA has created lab 1 for all of them.
 
-Step 1. The CS2100 TA keys in the command `editlab -ln 1 -nln 2 -ts 20`: The lab information for lab 1
-for all students will change.
+The CS2100 TA keys in the command `editlab -ln 1 -nln 2 -ts 20`.
 
 The mechanism is as described below:
 
@@ -600,7 +599,7 @@ The mechanism is as described below:
   lab number, new lab number and total score.
 
 
-* `ShowCommandParser` parses the lab number, new lab number and total score and creates a `Lab` Object.
+* `EditLabCommandParser` parses the lab number, new lab number and total score and creates a `Lab` Object.
   It will then create a `EditLabCommand` with the existing Lab Object, the new Lab Object and the total score.
 * `EditLabCommand` receives the existing Lab Object, new Lab Object and total score. It then 
   checks if the original lab exists, if the new lab does not exist and the total score is a valid number.
@@ -683,10 +682,50 @@ success.
 
 ## <a name="purge data"></a> **`Purge` Feature**
 
+#### Implementation
 
-This sequence diagram shows how the `purge` command works:
-![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeCommandSequenceDiagram.png)
+The purge feature allows the CS2100 TA to purge all existing sample or user data from ProgrammerError. Its
+implementation introduces the following classes:
 
+* `PurgeCommand`that extends `Command`
+
+The syntax of this command is `purge`.
+For instance,`purge` asks ProgrammerError to purge all data from it.
+
+Given below is a possible usage scenario:
+
+The CS2100 TA keys in the command `purge`.
+
+The mechanism is as described below:
+
+* Upon detecting 'purge' as the command word. `ProgrammerErrorParser` will create a `PurgeCommand`.
+* `PurgeCommand` then checks if the model has students or not.
+* If there is some data in the model, all data will be purged.
+* ProgrammerError will then show a success message for purging the data. For example, 
+  `ProgrammerError has been purged of data!` in the
+  `resultDisplay`, informing the user that the purge operation is valid.
+
+The following sequence diagram shows how the purge command works:
+
+![PurgeSequenceDiagram](images/commands/PurgeCommand/PurgeSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a CS2100 TA executes a new command:
+
+![PurgeActivityDiagram](images/commands/PurgeCommand/PurgeActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: When the command should purge data:**
+
+* **Alternative 1 (current choice):** Command purges both sample and existing data
+    * Pros: Easier to implement; don't need to check for sample data.
+    * Cons: User might accidentally purge his/her own data.
+
+* **Alternative 2:** Additionally Ask yes or no for purge data as a safety check.
+    * Pros: Prevents user from accidentally deleting his/her own data
+    * Cons: Hard to implement, as we have to distinguish between sample data and user data.
+    Need to implement a new prompt from scratch.
+      
 
 --------------------------------------------------------------------------------------------------------------------
 

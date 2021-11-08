@@ -2,8 +2,6 @@
 !include ../style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":ProgrammerErrorParser" as ProgrammerErrorParser LOGIC_COLOR
 participant "p:PurgeCommand" as PurgeCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -12,27 +10,14 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : 'purge'
-activate LogicManager
-
-LogicManager -> ProgrammerErrorParser : parseCommand('purge')
-activate ProgrammerErrorParser
-
-create PurgeCommand
-ProgrammerErrorParser -> PurgeCommand : parse(CommandText)
+[-> PurgeCommand : execute()
 activate PurgeCommand
 
-PurgeCommand --> ProgrammerErrorParser : p
-deactivate PurgeCommand
-
-ProgrammerErrorParser --> LogicManager : p
-deactivate ProgrammerErrorParser
-
-LogicManager -> PurgeCommand : execute()
-activate PurgeCommand
+PurgeCommand -> Model : getAllStudents()
+activate Model
+Model --> PurgeCommand
 
 PurgeCommand -> Model : setProgrammerError
-activate Model
 Model --> PurgeCommand
 
 PurgeCommand -> Model : updateFilteredStudentList
@@ -53,9 +38,6 @@ activate CommandResult
 CommandResult --> PurgeCommand
 deactivate CommandResult
 
-PurgeCommand --> LogicManager : result
+[<--PurgeCommand : result
 deactivate PurgeCommand
-
-[<--LogicManager
-deactivate LogicManager
 @enduml

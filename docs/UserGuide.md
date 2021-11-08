@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
+ProgrammerError (PE) is a desktop app for managing students' information, optimized for use via a Command Line
 Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab Teaching
 Assistants (TAs), this application is optimized to track personal particulars, emails and lab results of your students across different
 classes. If you are familiar with Unix commands, this is definitely for you!
@@ -34,6 +34,7 @@ classes. If you are familiar with Unix commands, this is definitely for you!
       2. [Edit Lab: `editlab`](#edit-lab)
       3. [Delete Lab: `dellab`](#delete-lab)
 - [Command Summary](#command-summary)
+- [Glossary](#glossary)
 
 ## <a name="quick-start"></a>Quick Start
 
@@ -130,19 +131,20 @@ As this is a mass operation, it might take a couple of seconds to complete.
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
 
-Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
+Clears all data in PE. This can be used to delete pre-existing sample data or existing student data.
 Otherwise, throws an error if no pre-existing data.
 
 ### <a name="download-data"></a>2.3 Download Data: `download` or F3 on keyboard
 
-All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the
-file to.
+Downloads the student data to a CSV file in the chosen directory. The file will be automatically named `programmerError.csv`.
 
 ### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
 
-Uploads student data via a CSV file with **only** the following fields: student ID, class ID, name, email
+Uploads student data via a CSV file with the following header: `studentId,classId,name,email`. Note that the data
+should contain **only** the student ID, class ID, name and email field respectively and spaces directly before or after 
+commas should be avoided.
 
-Here is an [example CSV file](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/sample_upload/validDataForUpload.csv).
+Here is an [example CSV file](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/sample_upload/validDataForUpload.csv) on GitHub.
 You may download files from GitHub following the instructions [here](https://stackoverflow.com/questions/4604663/download-single-files-from-github).
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Note:**
@@ -152,14 +154,11 @@ the CSV should *not* contain students' lab results since this functionality is o
 - Furthermore, if there are already existing students, the upload will **overwrite** the existing data rather than
   append to it. This is because in a typical use case, the TA would not want to have the existing data kept if they
   would like to use student data from their own CSV file.
-
 </div>
 
 In summary:
-
-1. Select a valid CSV file from the file chooser to upload the student data from.
-2. A valid CSV file must contain the following column header: `studentId,classId,name,email`
-3. Note that this command is not meant for uploading lab results. Rather, it is only for automating the adding of
+1. Select a valid CSV file (with header: `studentId,classId,name,email`) from the file chooser.
+2. Note that this command is **not** meant for uploading lab results. Rather, it is only for automating the adding of
    students to PE.
 
 ## <a name="student-features"></a>3. Student Features
@@ -344,3 +343,7 @@ Command | Format & Examples
 **Purge** | `purge`
 **Show** | `show <INDEX_IN_LIST>`
 **Upload** | `upload`
+
+## <a name="glossary"></a>Glossary
+- PE: ProgrammerError
+- TA: Teaching Assistant (for CS2100 Lab)

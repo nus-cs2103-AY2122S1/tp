@@ -1,5 +1,5 @@
-studentId, classId, name, email
-A0212421H,B01,Allard Quek,e0518431@u.nus.edu
+studentId,classId,name,email
+A0212421H,  B01,Allard Quek ,e0518431@u.nus.edu
 A0214264D,B09,Ammamaria McJarrow,e0518239@u.nus.edu
 A0214272E,B07,Andra Caville,e0518247@u.nus.edu
 A0214265E,B10,Ansley Silverlock,e0518240@u.nus.edu
@@ -8,8 +8,6 @@ A0214269B,B04,Berny Murie,e0518244@u.nus.edu
 A0224129E,B03,Cole Jacques,e0518253@u.nus.edu
 A0214260E,B05,Darn Siddons,e0518235@u.nus.edu
 A0212424H,B04,David Li,e0518641@u.nus.edu
-A0214257B,B02,Dennie Povey,e0518232@u.nus.edu
-A0214262B,B07,Ernst Sproston,e0518237@u.nus.edu
 A0212423H,B03,Erwin Quek,e0538441@u.nus.edu
 A0224130T,B04,Ferdinand Westrey,e0518254@u.nus.edu
 A0214267G,B02,Gavrielle Staner,e0518242@u.nus.edu
@@ -31,7 +29,3 @@ A0212422H,B02,Samay Sagar,e0513441@u.nus.edu
 A0224131G,B05,Sonja Hake,e0518255@u.nus.edu
 A0214270C,B05,Teirtza Fish,e0518245@u.nus.edu
 A0224128A,B02,Thorndike Conor,e0518252@u.nus.edu
-A0267423H,B07,Tom Jerry,e0535541@u.nus.edu
-A0214263C,B08,Trude Antwis,e0518238@u.nus.edu
-A0224125G,B09,Walker Hartzenberg,e0518249@u.nus.edu
-A0224127F,B01,Warde Mularkey,e0518251@u.nus.edu
