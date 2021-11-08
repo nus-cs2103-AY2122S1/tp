@@ -3,7 +3,7 @@ layout: page
 title: Chua Kai Jun's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: ProfBook
 
 ProfBook is an AddressBook Application targeted at CS2103 instructors to manage both students and TAs contacts within teams and tutorial groups. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
