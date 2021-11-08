@@ -18,7 +18,7 @@ If you are interested in using TutorAid, refer to the [**User Guide**](https://a
 
 ## Developer Guide
 
-If you are interested about developing TutorAid, the [**Developer Guide**](https://ay2122s1-cs2103t-w16-3.github.io/tp/DeveloperGuide.html) is a good place to start.
+If you are interested in developing TutorAid, the [**Developer Guide**](https://ay2122s1-cs2103t-w16-3.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 ## Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
