@@ -34,7 +34,7 @@ Managera is OS-independent, meaning it will work on any operating system (Window
         * [Listing all events: `listEvents`](#listing-all-events-listevents)
         * [Showing an event's details: `showDetails`](#showing-an-events-details-showdetails)
         * [Adding a participant to an event: `enroll`](#adding-a-participant-to-an-event-enroll)
-        * [Remove a participant from an event: `expel`](#removing-a-participant-from-an-event-expel)
+        * [Removing a participant from an event: `expel`](#removing-a-participant-from-an-event-expel)
         * [Showing an event's participants: `showParticipants`](#showing-an-events-participants-showparticipants)
     * [Miscellaneous](#miscellaneous)
         * [Viewing help: `help`](#viewing-help--help)
