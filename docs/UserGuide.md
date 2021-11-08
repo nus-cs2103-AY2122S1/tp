@@ -71,8 +71,11 @@ This table describes the main symbols used in the user guide and their respectiv
 
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+   * For MacOS users, you may encounter an error because it is from an unidentified developer. No worries, just go to System Preferences -> Security & Privacy -> General and click on Open Anyway.
+   * Alternatively, just open Terminal and enter `java -jar gitGud.jar` into the command line to start the app.
    ![Ui](images/ui-screenshots/startup.png)
 <br><center><ins>Image: gitGud upon startup.</ins></center>
+   
 
 5. Choose and type in a command into the command input box and press `Enter` to execute it. 
 e.g. typing `help` and pressing `Enter` will open the help window.<br>
