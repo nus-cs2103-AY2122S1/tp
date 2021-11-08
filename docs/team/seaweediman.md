@@ -23,7 +23,7 @@ Given below are my contributions to the project.
   * This feature allows users to delete interviews from HR Manager, enabling them delete unwanted interviews from HR Manager to reduce clutter.
 
 * **New Feature**: Added the ability to 'unassign' candidates from a specific interview. `unassign`
-  * Since `edit_i` can't be used to remove candidates from an interview, this feature was added such that users can remove candidates from a specific scheduled interview using candidate indexes.
+  * Since `edit_i` can't be used to remove candidates from an interview, this feature was added such that users can remove candidates from a scheduled interview.
   
 * **Enhancements: Updated commands to allow multiple candidate indexes after a single `c=` prefix input**
   * Before, to add candidate indexes to add_i command, you had to do `c=1 c=2`. Now, you can put it under a single prefix input, 
