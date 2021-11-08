@@ -47,7 +47,8 @@ public class SuperGroupCreateCommandParser extends GroupCommandParser {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TAG);
 
         if (!Name.isValidName(uncheckedName)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonCreateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Name.MESSAGE_CONSTRAINTS, PersonCreateCommand.MESSAGE_USAGE));
         }
 
         Name name = new Name(uncheckedName);

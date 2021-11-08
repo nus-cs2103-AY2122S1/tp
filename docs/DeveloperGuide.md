@@ -125,7 +125,7 @@ The following sequence diagram shows the detail when `PersonNoteCommand` is exec
 
 ### UI Changes
 
-*(placeholder API for now, will update to our own link later when implemented.)*
+**Reference the UI Manager** : [`UiManager.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/ui/UiManager.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -136,10 +136,7 @@ Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or Subg
 
 ### Model Changes
 
-*(placeholder API for now, will update to our own link later when implemented.)*
-
-**
-API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/notor/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 

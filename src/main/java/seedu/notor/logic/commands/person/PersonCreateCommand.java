@@ -38,7 +38,7 @@ public class PersonCreateCommand extends PersonCommand {
             + " John Doe /" + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TAG + "student,year1"
+            + PREFIX_TAG + "student, year1"
             + PREFIX_GROUPINDEX + 1;
 
     private final PersonExecutor executor;

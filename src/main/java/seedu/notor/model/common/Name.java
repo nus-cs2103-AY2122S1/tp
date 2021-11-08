@@ -10,7 +10,8 @@ import static seedu.notor.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names must be more than one character, should only contain alphanumeric characters and spaces, and "
+                    + "cannot start with a number\n";
 
     /*
      * The first character of the address must not be a whitespace,

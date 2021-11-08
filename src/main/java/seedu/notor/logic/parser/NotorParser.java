@@ -177,7 +177,8 @@ public class NotorParser {
                 } else if (PersonGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonGroupListCommandParser(index).parse();
                 } else {
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            PersonCommand.MESSAGE_USAGE));
                 }
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
@@ -192,7 +193,7 @@ public class NotorParser {
                 } else if (SubGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new SubGroupListCommandParser(index).parse();
                 } else {
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
                 }
             }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -202,7 +203,6 @@ public class NotorParser {
             final String commandWord = targetedMatcher.group("commandWord");
             final String subCommandWord = targetedMatcher.group("subCommandWord");
             final String arguments = targetedMatcher.group("arguments");
-            // TODO: List command conversion/find command conversion
             if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (PersonListCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonListCommandParser(arguments).parse();
@@ -212,6 +212,9 @@ public class NotorParser {
                     return new PersonArchiveAllCommandParser().parse();
                 } else if (PersonArchiveShowCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonArchiveShowCommandParser().parse();
+                } else {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            PersonCommand.MESSAGE_USAGE));
                 }
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
@@ -219,6 +222,8 @@ public class NotorParser {
                     return new SuperGroupListCommandParser(arguments).parse();
                 } else if (GroupFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new GroupFindCommandParser(arguments).parse();
+                } else {
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
                 }
             }
         }

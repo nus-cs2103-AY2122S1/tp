@@ -24,7 +24,7 @@ public class PersonFindCommand extends PersonCommand {
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION
-            + "Parameters: n:NAME_QUERY t:TAG_1, TAG_2 \n"
+            + "Parameters: n:NAME_QUERY and/or t:TAG_1, TAG_2 \n"
             + "Example: "
             + PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " n:Alex t:graduated, engineering";
 
