@@ -1,10 +1,10 @@
 {
   "guiSettings" : {
-    "windowWidth" : 1518.6666259765625,
-    "windowHeight" : 977.3333129882812,
+    "windowWidth" : 1936.0,
+    "windowHeight" : 1056.0,
     "windowCoordinates" : {
-      "x" : -6,
-      "y" : -6
+      "x" : -8,
+      "y" : -8
     }
   },
   "addressBookFilePath" : "data\\ContactSh.json"
