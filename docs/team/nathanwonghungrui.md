@@ -4,24 +4,45 @@ layout: page title: Nathan Wong Hung Rui's Project Portfolio Page
 
 ### Project: Socius
 
+### 1 About the project
+
 Socius is a contact management desktop application used for CS2103T module takers. Socius is a platform to help students
 find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
 JavaFX. Socius is written in Java, and has about 12 kLoC.
 
-Given below are my contributions to the project.
+A screenshot of Socius is shown below:
+![Ui](../images/Quickstart.png)
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed
-      by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and
-      the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth
-      analysis of design alternatives. The implementation too was challenging as it required changes to existing
-      commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in
-      the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+### 2 Code contributed
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+Click on the following link to view the code that I have contributed to the project:
+
+* [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=e0543978&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+
+### 3 New features and enhancements added
+
+The following describes the enhancements and new features that I have contributed to the project.
+
+#### 3.1 Make Tag Colours Customisable
+
+* **New Feature**: Added the ability to customise the colour of a tag by preference.
+    * What it does: Allows the user to input their preferred tag colour either by colour code or colour name.
+    * Justification: This feature improves the aesthetic appeal, and more importantly, the flexibility and customisability, which is what we pride our application in.
+    * Highlights: This enhancement affects existing commands and commands to be added in future. The implementation was somewhat challenging as it required some significant changes to how data would be stored in the JSON file to accomodate the tag colours now that it was customisable. Test cases and test data also have to be updated accordingly.
+
+#### 3.2 Change GUI
+
+* **New Feature**: Made changes to the GUI to better suit our application.
+    * What it does: Changed the colour scheme and layout of the GUI of our application.
+    * Justification: This feature allows users a better user experience.
+    * Highlights: The implementation of this feature was challenging as it required knowledge of how the GUI works, which meant knowledge of how JavaFX and CSS was integrated into the program. 
+
+#### 3.3 Make Person's Fields Customisable
+
+* **New Feature**: Added the ability to customise the colour of a tag by preference.
+    * What it does: allows the user to input their preferred tag colour either by colour code or colour name.
+    * Justification: This feature improves the aesthetic appeal, and more importantly, the flexibility and customisability, which is what we pride our application in.
+    * Highlights: This enhancement affects existing commands and commands to be added in future. The implementation too was somewhat challenging as it required some significant changes to how data would be stored in the JSON file to accomodate the tag colours now that it was customisable. Test cases and test data also have to be updated accordingly.
 
 * **Code contributed**: [RepoSense link]()
 
