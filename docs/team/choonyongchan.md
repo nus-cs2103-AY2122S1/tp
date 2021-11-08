@@ -4,13 +4,13 @@ title: Chan Choon Yong's Project Portfolio Page
 ---
 ### Project: Socius
 
-**About the project**
+**1 About the project**
 
 Socius is a contact management desktop application used for CS2103T module takers. Socius is a platform to help students
 find potential project group mates for CS2103T. The user interacts with it using a CLI, and it has a GUI created with
 JavaFX. Socius is written in Java, and has about 12 kLoC.
 
-**Code contributed**
+**2 Code contributed**
 
 Click on the following link to view the code that I have contributed to the project: [RepoSense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=w08&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=choonyongchan&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&zFR=false)
 
