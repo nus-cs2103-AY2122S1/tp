@@ -62,9 +62,9 @@ Socius is a desktop application that helps you, as a CS2103T Software Engineerin
 
 Socius provides these main features:
 * Access details of students taking CS2103T.
-* Find any student with their name, tutorial group, nationality, tags, and more.
-* Pin suitable tags to categorize students.
-* View statistics on nationality.
+* Find any student with name, tutorial group, nationality, tags, and more.
+* Add suitable tags to categorize students.
+* View nationality statistics of a tutorial class.
 
 <div markdown="block" class="alert alert-info">
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
@@ -75,7 +75,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 ## Using this guide
 
-This User Guide familarises you with all the latest features of Socius, enabling you to get the most out of Socius!
+This user guide familarises you with all the latest features of Socius, enabling you to get the most out of Socius!
 
 If you are a **new user**, this guide provides you with all the basic knowledge to [get started](#quick-start) with Socius.
 
