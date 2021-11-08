@@ -28,6 +28,8 @@ title: User Guide
 - [FAQ](#faq)
 - [Command summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -59,6 +61,8 @@ title: User Guide
 
 7. Refer to the [Features](#features) below for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
@@ -89,6 +93,8 @@ Biweekly | Every 14 days
 Monthly | Every 30 days
 Quarterly | Every 90 days
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 * Add elderly with contact details
@@ -104,7 +110,7 @@ Quarterly | Every 90 days
 * Download data
 * Clear all entries
 
-## Notes about command format:
+### Notes about command format:
 
 <div markdown="block" class="alert alert-info">
 
@@ -400,6 +406,8 @@ If your changes to the data file make its format invalid, SeniorLove will discar
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SeniorLove home folder.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
