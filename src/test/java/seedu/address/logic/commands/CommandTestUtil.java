@@ -105,8 +105,8 @@ public class CommandTestUtil {
     public static final String INVALID_MARK = " " + PREFIX_MARK + "BAD"; //BAD is not a valid mark
 
 
-    //Verification not yet implemented
-    public static final String INVALID_CLASSCODE_DESC = " " + PREFIX_TAG + "T03"; // Classcode must start with G
+    // Class code must start with G followed by two digits
+    public static final String INVALID_CLASSCODE_DESC = " " + PREFIX_CLASSCODE + "T03";
 
     // only numbers are allowed for group name
     public static final String INVALID_GROUPNUMBER_DESC = " " + PREFIX_GROUPNUMBER + "a";

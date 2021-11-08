@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GROUPNUMBER_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.GROUPNUMBER_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.GROUPTYPE_DESC_OP1;
 import static seedu.address.logic.commands.CommandTestUtil.GROUPTYPE_DESC_OP2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CLASSCODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUPNUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUPTYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -21,6 +22,7 @@ import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -73,8 +75,8 @@ class DeleteGroupCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid class code
-        // assertParseFailure(parser, GROUPNAME_DESC_1 + INVALID_CLASSCODE_DESC + GROUPTYPE_DESC_OP1,
-        //        ClassCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, GROUPNUMBER_DESC_1 + INVALID_CLASSCODE_DESC + GROUPTYPE_DESC_OP1,
+                ClassCode.MESSAGE_CONSTRAINTS);
 
         // invalid group number
         assertParseFailure(parser, INVALID_GROUPNUMBER_DESC + CLASSCODE_DESC_G01 + GROUPTYPE_DESC_OP1,
