@@ -103,10 +103,10 @@ public class AddStudentToLessonCommand extends AddCommand {
         int maxLessonIndex = lessonIndexes.stream().max(
                 Comparator.comparingInt(Index::getZeroBased)).get().getZeroBased();
         if (maxStudentIndex >= lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENTS_DISPLAYED_INDEX);
         }
         if (maxLessonIndex >= lastShownLessonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSONS_DISPLAYED_INDEX);
         }
     }
 
