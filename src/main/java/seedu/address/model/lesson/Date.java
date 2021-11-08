@@ -132,7 +132,7 @@ public class Date implements Comparable<Date> {
         return isAfterOrEqualsStart && isBeforeOrEqualsEnd;
     }
 
-    //@@author eeliana
+    //@@author
     /**
      * Checks if the date has passed.
      *

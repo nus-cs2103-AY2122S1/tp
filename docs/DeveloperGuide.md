@@ -564,6 +564,8 @@ How `PersonGridPanel`, `SchedulePanel`, and `TagListPanel` work is described in 
 
 ### Undo/redo
 
+The following explanation was referenced from [ContactSails - Undo/redo](https://cs2103jan2018-w13-b1.github.io/main/DeveloperGuide.html#undo-redo-feature).
+
 The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `LogicManager`. It supports the undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
 
 `UndoRedoStack` only deals with `UndoableCommand`. Commands that cannot be undone will inherit from `Command` instead.
