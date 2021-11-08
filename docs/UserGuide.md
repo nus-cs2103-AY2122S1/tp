@@ -132,6 +132,8 @@ This section provides information on commonly used terms throughout SeniorLove.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:exclamation: Extra input in a command? Take note!**<br>
