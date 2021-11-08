@@ -916,14 +916,14 @@ The app is initially populated with some sample data, based on real life animes.
     3. Test case 2: `rename 0 n/Black Clover`<br>
        Expected: No anime is renamed. Error details shown in the Command Result Panel
 
-    4. Other incorrect delete commands to try: `rename`, `rename x n/Black Clover` (where x is larger than the list size), `rename 1 e/Black Clover`<br>
+    4. Other incorrect delete commands to try: `rename`, `rename x n/Black Clover` (where x is larger than the displayed list size), `rename 1 e/Black Clover`<br>
        Expected: Similar to previous
 
 2. Rename an anime while not all animes are being shown
 
     1. Use `list s/watching` to list out only the animes with a `watching` status
 
-    2. Use `rename 1 n/Black Clover` to delete the first anime<br>
+    2. Use `rename 1 n/Black Clover` to rename the first anime<br>
        Expected: The name of the first anime is now Black Clover. Details of the updated anime shown in the Command Result Panel
 
     3. Use `list` to list out all animes, make sure that the anime is correctly renamed
@@ -940,17 +940,41 @@ The app is initially populated with some sample data, based on real life animes.
     3. Test case 2: `update 0 e/100`<br>
        Expected: The episode of the anime is not updated. Error details shown in the Command Result Panel
 
-    4. Other incorrect delete commands to try: `update`, `update x e/1` (where x is larger than the list size), `update 1 n/attack on titan`<br>
+    4. Other incorrect delete commands to try: `update`, `update x e/1` (where x is larger than the list displayed size), `update 1 n/attack on titan`<br>
        Expected: Similar to previous
 
 2. Updating the episode of an anime while not all animes are being shown
 
     1. Use `list s/watching` to list out only the animes with a `watching` status
 
-    2. Use `update 1 e/100` to delete the first anime<br>
+    2. Use `update 1 e/100` to update the first anime<br>
        Expected: The episode of the first anime is updated to 100. Details of the updated anime shown in the Command Result Panel
 
     3. Use `list` to list out all animes, make sure that the episode of the anime is correctly updated
+
+### Updating the status of an anime
+
+1. Updating the status of an anime while all animes are being shown
+
+    1. List all animes using the `list` command. Multiple animes in the list
+
+    2. Test case 1: `status 1 s/finished`<br>
+       Expected: The status of the first anime is updated to watching. Details of the updated anime shown in the Command Result Panel
+
+    3. Test case 2: `status 0 s/finished`<br>
+       Expected: The status of the anime is not updated. Error details shown in the Command Result Panel
+
+    4. Other incorrect delete commands to try: `status`, `status x s/t` (where x is larger than the displayed list size), `status 1 n/attack on titan`<br>
+       Expected: Similar to previous
+
+2. Updating the status of an anime while not all animes are being shown
+
+    1. Use `list s/watching` to list out only the animes with a `watching` status
+
+    2. Use `status 1 s/finished` to update the first anime<br>
+       Expected: The status of the first anime is updated to finished. Details of the updated anime shown in the Command Result Panel
+
+    3. Use `list` to list out all animes, make sure that the status of the anime is correctly updated
 
 ### Genres
 
@@ -976,22 +1000,7 @@ The app is initially populated with some sample data, based on real life animes.
       Expected: The `action` genre will be deleted from the anime
 
    4. After the previous command, use command `genre 1 c/delete g/action g/fantasy`
-      Expected: The `fantasy` genre will be deleted to the test anime, while a message tells the user that the `action` genre is not present
-
-### Status
-
-1. Updating Status
-
-    1. List all animes using the `list` command. Multiple animes in the list
-
-    2. Test case 1: `status 1 s/finished`<br>
-       Expected: First anime status will be set to `FINISHED`
-
-    3. Test case 2: `status 1 s/t`<br>
-       Expected: First anime status will be set to `TOWATCH`
-
-    4. Other incorrect delete commands to try: `status`, `status x` (where x is larger than the displayed list size), `status n/attack on titan`<br>
-       Expected: No anime is updated. Error details shown in the status message
+      Expected: The `fantasy` genre will be deleted from the test anime, while a message tells the user that the `action` genre is not present
       
 ### Saving data
 
@@ -1050,6 +1059,14 @@ The app is initially populated with some sample data, based on real life animes.
 
    4. Test case: `list s/tw` <br/>
       Expected: Error message stating that an invalid status was provided
+
+### Checking Stats
+
+1. Check statistics of animes in AniList
+
+    1. Test case: `stats` <br/>
+       Expected: A stats window will open up showing the anime statistics
+
 
 ### Finding anime
 
