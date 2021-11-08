@@ -123,7 +123,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private void checkForOverflowRevenue(EditPersonDescriptor editPersonDescriptor, Revenue revenue)
         throws ParseException {
-        if (!revenue.isMaxRevenue()) {
+        if (!revenue.isMoreThanMaxRevenue()) {
             editPersonDescriptor.setRevenue(revenue);
         } else {
             throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);

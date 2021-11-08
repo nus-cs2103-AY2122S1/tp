@@ -25,7 +25,7 @@ public class RevenueCommandParserTest {
     public void parse_validArgs_returnsRevenueCommand() {
         // no leading and trailing whitespaces
         RevenueCommand expectedRevenueCommand =
-                new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(new Money(100.21f)));
+                new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(new Money(100, 21,false)));
         assertParseSuccess(parser, "1 r/100.21", expectedRevenueCommand);
     }
 

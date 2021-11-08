@@ -23,7 +23,7 @@ public class RevenueCommand extends Command {
     public static final String MESSAGE_ADD_REVENUE_FAIL_NEGATIVE = "Failed to add revenue to Person: %1$s. "
             + "\nResulting revenue is negative!";
     public static final String MESSAGE_ADD_REVENUE_FAIL_OVERFLOW = "Failed to add revenue to Person: %1$s, "
-            + "\nResulting revenue is too large, ensure that total revenue is not more than 19,999,998!";
+            + "\nResulting revenue is too large, ensure that total revenue is not more than 20,000,000!";
 
 
     private final Index index;
@@ -56,7 +56,7 @@ public class RevenueCommand extends Command {
                     personToEdit.getInsurances(), personToEdit.getNote(),
                     personToEdit.getAppointment(), personToEdit.getClaims());
 
-        if (editedPerson.getRevenue().isMaxRevenue()) {
+        if (editedPerson.getRevenue().isMoreThanMaxRevenue()) {
             throw new CommandException(String.format(MESSAGE_ADD_REVENUE_FAIL_OVERFLOW, personToEdit.getName()));
         }
 

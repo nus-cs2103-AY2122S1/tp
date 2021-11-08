@@ -10,6 +10,8 @@ import seedu.insurancepal.commons.core.Money;
  */
 public class Revenue {
 
+    public static final String CENTS_VALIDATION_REGEX = "\\d{2}";
+
     public static final String MESSAGE_CONSTRAINTS = "Revenue can be any positive number with up to 2 decimal places "
             + "that is not more than 19,999,998";
 
@@ -26,17 +28,23 @@ public class Revenue {
     }
 
     /**
-     * Returns true if the resulting Revenue value is a valid.
+     * Returns true if the resulting Revenue value is valid.
      */
     public boolean isValidResultingRevenue() {
-        return this.value.getInDollars() >= 0;
+        return !this.value.isNegative();
     }
 
     /**
-     * Returns true if the resulting Revenue value is Integer.MAX_VALUE.
+     * Returns true if the resulting Revenue value is more than 20,000,000.
      */
-    public boolean isMaxRevenue() {
-        return this.value.getInDollars() >= 20000000;
+    public boolean isMoreThanMaxRevenue() {
+        if (this.value.getDollars() > 20000000) {
+            return true;
+        } else if (this.value.getDollars() == 20000000) {
+            return this.value.getCents() > 0;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -44,8 +52,10 @@ public class Revenue {
      */
     public static boolean isValidRevenue(String test) {
         try {
-            float number = Float.valueOf(test);
-            return true;
+            String[] dollarsAndCents = test.split(".", 2);
+            int dollars = Integer.valueOf(dollarsAndCents[0]);
+            int cents = Integer.valueOf(dollarsAndCents[1]);
+            return dollarsAndCents[1].matches(CENTS_VALIDATION_REGEX);
         } catch (NumberFormatException e) {
             return false;
         }
@@ -74,10 +84,45 @@ public class Revenue {
      * @return A new revenue object with its value the result of the 2 added revenues.
      */
     public Revenue addRevenue(Revenue revenueToBeAdded) {
-        long updatedValue = this.value.getCents() + revenueToBeAdded.value.getCents();
-        float updatedValueInDollars = updatedValue / 100f;
-        Revenue revenue = new Revenue(new Money(updatedValueInDollars));
-        return revenue;
+        if (revenueToBeAdded.value.isNegative()) {
+            return subtractMoney(revenueToBeAdded.value.getDollars(), revenueToBeAdded.value.getCents());
+        } else {
+            return addMoney(revenueToBeAdded.value.getDollars(), revenueToBeAdded.value.getCents());
+        }
+    }
+
+    private Revenue subtractMoney(int dollars, int cents) {
+        int updatedCents = this.value.getCents() - cents;
+        int updatedDollars = this.value.getDollars() - dollars;
+        if (updatedDollars < 0) {
+            return new Revenue(new Money(0, 0, true));
+        } else if (updatedDollars == 0) {
+            if (updatedCents < 0) {
+                return new Revenue(new Money(0, 0, true));
+            } else {
+                return new Revenue(new Money(updatedDollars, updatedCents, false));
+            }
+        } else {
+            if (updatedCents < 0) {
+                int displayCents = 100 + updatedCents;
+                int displayDollars = updatedDollars - 1;
+                return new Revenue(new Money(displayDollars, displayCents, false));
+            } else {
+                return new Revenue(new Money(updatedDollars, updatedCents, false));
+            }
+        }
+    }
+
+    private Revenue addMoney(int dollars, int cents) {
+        int updatedCents = this.value.getCents() + cents;
+        int updatedDollars = this.value.getDollars() + dollars;
+        if (updatedCents >= 100) {
+            int displayCents = updatedCents - 100;
+            int displayDollars = updatedDollars + 1;
+            return new Revenue(new Money(displayDollars, displayCents, false));
+        } else {
+            return new Revenue(new Money(updatedDollars, updatedCents, false));
+        }
     }
 
     @Override

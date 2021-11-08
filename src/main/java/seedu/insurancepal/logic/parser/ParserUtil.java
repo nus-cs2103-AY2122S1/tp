@@ -119,9 +119,20 @@ public class ParserUtil {
             throw new ParseException(String.format(INVALID_REVENUE_COMMAND_FORMAT,
                     RevenueCommand.COMMAND_WORD));
         }
-        float number = Float.valueOf(trimmedRevenue);
+        boolean isNegative;
+        if (trimmedRevenue.contains("-")) {
+            isNegative = true;
+        } else {
+            isNegative = false;
+        }
+        String[] dollarsAndCents = trimmedRevenue.split(".", 2);
+        int dollars = Integer.valueOf(dollarsAndCents[0]);
+        int cents = Integer.valueOf(dollarsAndCents[1]);
+        if (isNegative) {
+            dollars = dollars * -1;
+        }
 
-        return new Revenue(new Money(number));
+        return new Revenue(new Money(dollars, cents, isNegative));
     }
 
     /**

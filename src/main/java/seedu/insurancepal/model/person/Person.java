@@ -41,7 +41,7 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.revenue = new Revenue(new Money(0));
+        this.revenue = new Revenue(new Money(0, 0, false));
         this.address = address;
         this.tags.addAll(tags);
         this.insurances.addAll(insurances);
