@@ -18,7 +18,7 @@ Given below are my contributions to the project:
   * Added the ability to filter tasks and orders based on their completion status.
 
 * **Enhancements to existing features**:
-  * Adding date parsing and validation to support a range of different date formats.
+  * Added date parsing and validation to support a range of different date formats.
   * Implemented the edit task functionality.
   * Wrote additional tests for existing features (around 1400 lines of test code).
 
