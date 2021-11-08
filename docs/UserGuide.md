@@ -126,45 +126,6 @@ Examples:
 
 ### Policy Management
 
-#### Policy Details
-**Name**:
-* `POLICY_NAME`: Should be unique
-
-**Payment structure**:
-* `PMT_AMOUNT_CENTS`: Payment amount in cents for each payment
-* `PMTS_PER_YR`: Payment frequency in a year
-* `NUM_OF_PMT`: Total number of payments in payment structure
-
-Examples:
-
-| Payment Type                                       | PMT AMOUNT CENTS | PMTS PER YR | NUM OF PMT | Context                                     |
-|----------------------------------------------------|------------------|-------------|------------|---------------------------------------------|
-| Single lump sum                                    |       1000       |      -      |      -     | Single payment of $10                      |
-| X payments per year, indefinite number of payments |       1000       |      12     |      -     | Annual payments of $10, indefinitely       |
-| X payments per year, definite number of payments   |       1000       |      12     |     120    | Annual payments of $10, 120 total payments |
-
-**Commission structure of the policy**:
-* `COMM_%`: Percentage of each payment that goes to commission
-* `NUM_OF_COMM`: The number of payments that the agent will receive commission for.
-* Receives a percentage commission `COMM_%` from the payment amount `PMT_AMOUNT_CENTS` for the first number of payments `NUM_OF_COMM` in the payment structure.
-
-Calculating Commission with Payment Structure:
-
-| Payment Structure                            | COMM % | NUM OF COMM | Commission per payment | Context                                                 |
-|----------------------------------------------|--------------|-------------|------------------------|---------------------------------------------------------|
-| Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from each of the first 100 payments |
-| Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from each of the first 5 payments        |
-
-**Associated Contact**:
-* `CONTACT_INDEX`: Index of that contact in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-**Coverage expiry**:
-* `COVERAGE_EXPIRY_DATE`: Date that the coverage expires in YYYY-MM-DD format, optional.
-
-**Tags**:
-* `TAG`: can have more than one tag
-
 #### Creating A Policy : `addpolicy`
 
 Adds a policy to the policy list.
@@ -176,10 +137,40 @@ cl/CONTACT_INDEX [e/COVERAGE_EXPIRY_DATE] [t/TAG]…​`
 **:grey_exclamation:**
 A policy should not have less number of payments than the number of commissions, since every commission is tied to one payment!
 </div>
+**Name**:
+* `POLICY_NAME`: Should be unique
 
-| Parameters | n/          | p/                | c/         | cl/                            | e/ (optional)                 | t/ (optional)    |
-|------------|-------------|-------------------|------------|--------------------------------|----------------------|------|
-| **Represents** | Policy Name | Payment Structure | Commission Structure | Associated Contact | Coverage Expiry Date | Tags |
+**Payment structure** `p/`:
+* `PMT_AMOUNT_CENTS`: Payment amount in cents for each payment
+* `PMTS_PER_YR`: Payment frequency in a year
+* `NUM_OF_PMT`: Total number of payments in payment structure
+
+
+| Payment Type                                       | PMT AMOUNT CENTS | PMTS PER YR | NUM OF PMT | Context                                     |
+|----------------------------------------------------|------------------|-------------|------------|---------------------------------------------|
+| Single lump sum                                    |       1000       |      -      |      -     | Single payment of $10                      |
+| X payments per year, indefinite number of payments |       1000       |      12     |      -     | Annual payments of $10, indefinitely       |
+| X payments per year, definite number of payments   |       1000       |      12     |     120    | Annual payments of $10, 120 total payments |
+
+**Commission structure of the policy** `c/`:
+* `COMM_%`: Percentage of each payment that goes to commission
+* `NUM_OF_COMM`: The number of payments that the agent will receive commission for.
+* Receives a percentage commission `COMM_%` from the payment amount `PMT_AMOUNT_CENTS` for the first number of payments `NUM_OF_COMM` in the payment structure.
+
+Calculating Commission with Payment Structure:
+
+| Payment Structure                            | COMM % | NUM OF COMM | Commission per payment | Context                                                 |
+|----------------------------------------------|--------------|-------------|------------------------|---------------------------------------------------------|
+| Annual payments of $1000, indefinitely       | 10           | 100         | 10% * $1000 = $100     | Receives commission of $100 from each of the first 100 payments |
+| Annual payments of $1000, 120 total payments | 5            | 5           | 5% * $1000 = $50       | Receives commission of $50 from each of the first 5 payments        |
+
+**Associated Contact** `cl/`:
+* `CONTACT_INDEX`: Index of that contact in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Coverage expiry**: `e/ COVERAGE_EXPIRY_DATE` Date that the coverage expires in YYYY-MM-DD format, optional.
+
+**Tags**: `t/ TAG` can have more than one tag
 
 Examples:
 * `addpolicy n/Aviva full life plan B p/10050 c/10 1 cl/1 e/2021-12-12 t/Life Insurance` Adds a policy named Aviva full life plan B,
