@@ -19,10 +19,10 @@ It also informs developers of the requirements and instructions for manual testi
 
 ## **Acknowledgements**
 
-* This project is an extension of [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
-* Our document formatting and content is referenced from [AY2122S1-CS2103T-T15-1](https://ay2122s1-cs2103t-t15-1.github.io/tp)
-* Our project uses Scene Builder for UI components
-* Libraries included: [JavaFX 8](https://docs.oracle.com/javase/8/javafx), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is an extension of [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/).
+* Our document formatting and content is referenced from [AY2122S1-CS2103T-T15-1](https://ay2122s1-cs2103t-t15-1.github.io/tp).
+* Our project uses Scene Builder for UI components.
+* Libraries included: [JavaFX 8](https://docs.oracle.com/javase/8/javafx), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for:
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -72,7 +72,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -82,18 +82,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java).
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, 
-`EventListPanel`, `TasKListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` 
-class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `EventListPanel`, `TaskListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
-that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.
-com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in 
-[`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -102,8 +97,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Member`, `Event` and `Task` object residing in the `Model`.
 
-The GUI reflects the entered events, members and tasks recorded in Ailurus. There are three main columns that reflect the `Event`, `Member` and `Task` objects that are residing in the `Model`. Directly adding or removing `Event`, `Member` or `Task` would update the `EventListPanel`, `MemberListPanel` and `TaskListPanel` to show their respective `EventListCard`, `MemberListCard` and `TaskListCard` respectively. Each of the `EventListCard`, `MemberListCard` and `TaskListCard` would display the fields under the 
-corresponding `Event`, `Member` and `Task` objects as discussed under [Model Component](#model-component).
+The GUI reflects the entered events, members and tasks recorded in Ailurus. There are three main columns that reflect the `Event`, `Member` and `Task` objects that are residing in the `Model`. Directly adding or removing `Event`, `Member` or `Task` would update the `EventListPanel`, `MemberListPanel` and `TaskListPanel` to show their respective `EventListCard`, `MemberListCard` and `TaskListCard` respectively. Each of the `EventListCard`, `MemberListCard` and `TaskListCard` would display the fields under the corresponding `Event`, `Member` and `Task` objects as discussed under [Model Component](#model-component).
 
 ### Logic component
 
@@ -115,12 +109,11 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `MaddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `MaddCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to add a member).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for the `execute("mdel /m 1")` 
-API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for the `execute ("mdel /m 1")` API call.
 
 ![Interactions Inside the Logic and Model Components for the `mdel /m 1` Command](images/member/MdelSequenceDiagram.png)
 
@@ -143,11 +136,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), all `Event` objects (which are contained in a `UniqueEventList` object).
-* stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a `tlist` command)
+* stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), and all `Event` objects (which are contained in a `UniqueEventList` object).
+* stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a `tlist` command).
 * stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 Within the `Model` component,
 * `Module` is the superclass of `Member`, `Event` and `Task`. `Module` has a `name` field as the common attribute of its subclasses.
@@ -161,14 +154,13 @@ An alternative (arguably, a more OOP) model design is given below,
 
 * `AddressBook` also stores all `Task` objects (which are contained in a `UniqueTaskList` object).
 * Each `Member` object references `Task` object in the `UniqueTaskList`, instead of needing its own list of tasks.
-
 However, this design has some issues in storage,
 * Since Ailurus uses JSON files to store user data, JSON format members should at least store the unique identifier of each task the member had.
 In our implementation, the unique identifier is `Name` and `TaskDeadline`, which are actually the main part of a `Task`.
 * At the same time, JSON format member need to store the completion status of each referencing task.
 * In all, implementing the storage of this member-task relation by using JSON file is likely to incur redundancy and error-prone, so we decided to use an easier implementation, which is the current one.
 
-A better implementation of the alternative design may involve using Database Management System (DBMS) like PostgreSQL, a proposed entity relationship model diagram for the member-task relation is given here: [ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png)
+A better implementation of the alternative design may involve using Database Management System (DBMS) like PostgreSQL, a proposed entity relationship model diagram for the member-task relation is given here: [ER_diagram](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/images/ER.png).
 
 
 ### Storage component
@@ -239,13 +231,11 @@ This feature allows the user to add an event with a name, date and the participa
 included have their `MEMBER_INDEX` displayed in the currently shown member list.
 
 This feature can be accessed by using `eadd` command with parameters of
-* `/n NAME`: the name of the event to add
-* `/d DATE`: the date of the event to add
-* zero to multiple uses of `/m MEMBER_INDEX`: target member identified by the index displayed in the currently shown member list
+* `/n NAME`: the name of the event to add.
+* `/d DATE`: the date of the event to add.
+* zero to multiple uses of `/m MEMBER_INDEX`: target member identified by the index displayed in the currently shown member list.
 
-Given below is the sequence diagram when a user provides a valid `eadd` command: `eadd /n Chess Competition /d 11/12/2022 /m 1 /m 2`
-to add a new event with its name, date and the first and second member displayed in the currently shown member list as 
-the members for this event.
+Given below is the sequence diagram when a user provides a valid `eadd` command: `eadd /n Chess Competition /d 11/12/2022 /m 1 /m 2` to add a new event with its name, date and the first and second member displayed in the currently shown member list as the members for this event.
 
 ![EventAddSequenceDiagram](images/event/EventAddSequenceDiagram.png)
 
@@ -268,24 +258,18 @@ As seen in the diagram above,
 * <u>Design Decision</u>: Instead of only allowing adding of events and not adding participants, eadd command allows creation of complete events with multiple participants to minimise commands required to add them individually. The format is similar to `mdel` and `mlist` commands for familiarity with similar commands for other modules.
 
 ### Mark event members as attended
-This feature allows the user to mark members of the event as attended. Include which members to mark based on
-`MEMBER_INDEX` displayed in the currently shown member list. Only valid members belonging to the event will be able to be marked,
-with an error being thrown if there is an invalid member. It is recommended to filter the member list to those of the
-event involved in the command through the `mlist \e EVENT_INDEX` command.
+This feature allows the user to mark members of the event as attended. Include which members to mark based on `MEMBER_INDEX` displayed in the currently shown member list. Only valid members belonging to the event will be able to be marked, with an error being thrown if there is an invalid member. It is recommended to filter the member list to those of the event involved in the command through the `mlist /e EVENT_INDEX` command.
 
 This feature can be accessed by using `emark` command with parameters of
-* `/e EVENT_INDEX`: target event identified by the index displayed in the currently shown event list
-* multiple uses of `/m MEMBER_INDEX`: target member identified by the index displayed in the currently shown member list
+* `/e EVENT_INDEX`: target event identified by the index displayed in the currently shown event list.
+* multiple uses of `/m MEMBER_INDEX`: target member identified by the index displayed in the currently shown member list.
 
-Given below is the sequence diagram when a user provides a valid `emark` command: `emark /e 1 /m 2 /m 4`
-to mark the two members provided as having attended the event. It is shown in the GUI with their member labels in the
-designated event card shown as green.
+Given below is the sequence diagram when a user provides a valid `emark` command: `emark /e 1 /m 2 /m 4` to mark the two members provided as having attended the event. It is shown in the GUI with their member labels in the designated event card shown as green.
 
 ![EventMarkSequenceDiagram](images/event/EventMarkSequenceDiagram.png)
 
 As seen in the diagram above, once the user entered the `emark` command,
-the `Logic` component will parse the parameters, creating an `EmarkCommandParser`. This parser will proceed to
-create an `EmarkCommand` object afterwards.
+the `Logic` component will parse the parameters, creating an `EmarkCommandParser`. This parser will proceed to create an `EmarkCommand` object afterwards.
 
 The diagram below shows the execution of `EmarkCommand` after `LogicManager` receives the `EmarkCommand` object.
 
@@ -303,12 +287,11 @@ As seen in the diagram above,
 This feature allows Ailurus users to add a new task for multiple members identified by their `MEMBER_INDEX` displayed in the currently shown member list.
 
 This feature can be accessed by using `tadd` command with parameters of
-* `/n NAME`: the name of the task to add
-* `/d DATE_TIME`: the deadline of the task to add
-* multiple `/m MEMBER_INDEX`: multiple target members identified by the index displayed in the currently shown member list
+* `/n NAME`: the name of the task to add.
+* `/d DATE_TIME`: the deadline of the task to add.
+* multiple `/m MEMBER_INDEX`: multiple target members identified by the index displayed in the currently shown member list.
 
-Given below is the sequence diagram when a user provides a valid `tadd` command: `tadd /n meeting /d 11/11/2021 20:00 /m 1 /m 2`
-to add a new task with its name and deadline to the first and second member displayed in the currently shown member list.
+Given below is the sequence diagram when a user provides a valid `tadd` command: `tadd /n meeting /d 11/11/2021 20:00 /m 1 /m 2` to add a new task with its name and deadline to the first and second member displayed in the currently shown member list.
 
 ![TaskAddSequenceDiagram](images/task/TaskAddSequenceDiagram.png)
 
@@ -330,8 +313,7 @@ This feature allows Ailurus users to mark multiple tasks as done. These tasks ar
 This feature can be accessed by using `tdone` command with multiple `/t TASK_INDEX` parameters.
 
 Given below is the sequence diagram when a user provides a valid `tdone` command: `tdone /t 1 /t 2` to mark the first and second tasks in the task list as done.
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The diagram below does not include the details of the construction of `TdoneCommand` object,
-because its implementation is similar to the construction of `TaddCommand` shown in the previous example.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The diagram below does not include the details of the construction of `TdoneCommand` object, because its implementation is similar to the construction of `TaddCommand` shown in the previous example.
 
 </div>
 
@@ -438,24 +420,24 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-* prefer desktop apps over other types
-* has trouble managing the multitude of details related to the members of his club
-* want to assign tasks for members
-* has a need to organize and plan events for members
-* likes typing and comfortable with CLI
-* prefers typing to mouse interactions
+* prefer desktop apps over other types.
+* has trouble managing the multitude of details related to the members of his club.
+* want to assign tasks for members.
+* has a need to organize and plan events for members.
+* likes typing and comfortable with CLI.
+* prefers typing to mouse interactions.
 
 **Value proposition**: 
 
-* manage contacts faster than a typical mouse/GUI driven app
-* manage club events and tasks/activities for large amount of members
-* contact and personal information of members collated in an easily accessible location
-* able to update details relating to members
-* categorise members into groups for smoother planning
+* manage contacts faster than a typical mouse/GUI driven app.
+* manage club events and tasks/activities for large amount of members.
+* contact and personal information of members collated in an easily accessible location.
+* able to update details relating to members.
+* categorise members into groups for smoother planning.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`.
 
 #### Member-related Functions
 
@@ -504,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Ailurus` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Ailurus` and the **Actor** is the `user`, unless specified otherwise).
 
 **Use case: UC1 - Add a member**
 
@@ -517,7 +499,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Invalid format or incomplete details provided by user
+* 1a. Invalid format or incomplete details provided by user.
 
     * 1a1. Ailurus shows an error message about missing or invalid input.
 
@@ -527,10 +509,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list members
-2.  Ailurus shows a list of members
-3.  User requests to delete a specific member in the list
-4.  Ailurus deletes the member
+1.  User requests to list members.
+2.  Ailurus shows a list of members.
+3.  User requests to delete a specific member in the list.
+4.  Ailurus deletes the member.
 
     Use case ends.
 
@@ -557,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Invalid format or incomplete details provided by user
+* 1a. Invalid format or incomplete details provided by user.
 
     * 1a1. Ailurus shows an error message about missing or invalid input.
 
@@ -573,16 +555,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list tasks of a specific member
-2.  Ailurus shows a list of tasks
-3.  User requests to delete a specific task in the list
-4.  Ailurus deletes the task
+1.  User requests to list tasks of a specific member.
+2.  Ailurus shows a list of tasks.
+3.  User requests to delete a specific task in the list.
+4.  Ailurus deletes the task.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index of member is invalid
+* 1a. The given index of member is invalid.
 
     * 1a1. Ailurus shows an error message.
 
@@ -602,16 +584,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list tasks of a specific member
-2.  Ailurus shows a list of tasks
-3.  User requests to mark a specific task as done
-4.  Ailurus marks task as done
+1.  User requests to list tasks of a specific member.
+2.  Ailurus shows a list of tasks.
+3.  User requests to mark a specific task as done.
+4.  Ailurus marks task as done.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index of member is invalid
+* 1a. The given index of member is invalid.
 
     * 1a1. Ailurus shows an error message.
 
@@ -638,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Invalid format or incomplete details provided by user
+* 1a. Invalid format or incomplete details provided by user.
 
     * 1a1. Ailurus shows an error message about missing or invalid input.
 
@@ -648,16 +630,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list events
-2.  Ailurus shows a list of events
-3.  User requests to delete a specific event in the list
-4.  Ailurus deletes the event
+1.  User requests to list events.
+2.  Ailurus shows a list of events.
+3.  User requests to delete a specific event in the list.
+4.  Ailurus deletes the event.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Invalid format or incomplete details provided by user
+* 1a. Invalid format or incomplete details provided by user.
 
     * 1a1. Ailurus shows an error message about missing or invalid input.
 
@@ -677,17 +659,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9.  Should be able to hold up to 1000 event managers and participants without a noticeable delay (less than 2 seconds) in performance for typical usage.
 10. The product should be for a single user i.e. (not a multi-user product), and should not depend on a remote server and does not require an installer. 
 11. The software should work on the Windows, Linux, and OS-X platforms.
-12. The GUI should work well with standard screen resolutions 1920x1080 and higher, and
-    for screen scales 100% and 125%. It should be usable for resolutions 1280x720 and higher, and
-    for screen scales 150%.
+12. The GUI should work well with standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%. It should be usable for resolutions 1280x720 and higher, and for screen scales 150%.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **GUI**: [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface) that the user sees and interacts directly with on the application window. Also called UI (User Interface)
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **GUI**: [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface) that the user sees and interacts directly with on the application window. Also called UI (User Interface).
 * **DBMS**: [Database Management System](https://en.wikipedia.org/wiki/Database) such as MySQL, PostgreSQL and MongoDB.
 * **JAR**: [Java ARchive](https://en.wikipedia.org/wiki/JAR_(file_format)) file that packages many Java class files and associated metadata and resources.
-* **Prefix**: A flag or tag that precedes a parameter to be passed in, starting with a backslash (`/`)
+* **Prefix**: A flag or tag that precedes a parameter to be passed in, starting with a backslash (`/`).
 * **Parameter**: What is being passed into the command as data to be used. Similar to arguments.
 * **Parse**: Analysing the text and extracting important data from the text given for use in storage and manipulation of data.
 
@@ -705,13 +685,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file. If unable to double click, running `java -jar ailurus.jar` may be required, at the directory where `ailurus.jar` is in. Expected: Shows the GUI with a set of sample events and members. The window size may not be optimum.
+   2. Double-click the jar file. If unable to double-click, running `java -jar ailurus.jar` may be required, at the directory where `ailurus.jar` is in. Expected: Shows the GUI with a set of sample events and members. The window size may not be optimum.
 
-2. Saving window preferences
+2. Saving window preferences.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -735,7 +715,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Deleting a member
 
-1. Deleting a member while all members are being shown
+1. Deleting a member while all members are being shown.
 
    1. Prerequisites: List all members using the `mlist` command. Multiple members in the list.
 
@@ -750,40 +730,40 @@ testers are expected to do more *exploratory* testing.
 
 #### Listing members of an event
 
-1. Listing all members participating in an event in `EVENT LIST`
+1. Listing all members participating in an event in `EVENT LIST`.
 
    1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
 
    2. Test case: `mlist /e 1`
-   Expected: List all participating members in the event in `MEMBER LIST` column
+   Expected: List all participating members in the event in `MEMBER LIST` column.
 
    3. Test case: `mlist /e 0`
    Expected: Error message that `MEMBER_INDEX` should be a non-zero unsigned integer.
 
-2. Listing all members attended an event in `EVENT LIST`
+2. Listing all members attended an event in `EVENT LIST`.
 
     1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
 
     2. Test case: `mlist /e 1 /att`
-       Expected: List all members who attended the event in `MEMBER LIST` column
+       Expected: List all members who attended the event in `MEMBER LIST` column.
 
     3. Test case: `mlist /e 1 /att /abs`
        Expected: Error message that the format is wrong, only `/att` or `/abs` prefix can be present in the command.
 
-3. Listing all members absent in an event in `EVENT LIST`
+3. Listing all members absent in an event in `EVENT LIST`.
 
     1. Prerequisite: `EVENT LIST` must have at least one event, and the event should have at least one member participating.
 
     2. Test case: `mlist /e 1 /abs`
-       Expected: List all members who did not attend the event in `MEMBER LIST` column
+       Expected: List all members who did not attend the event in `MEMBER LIST` column.
 
     3. Test case: `mlist /e 1 /abs /att`
        Expected: Error message that the format is wrong, only `/att` or `/abs` prefix can be present in the command.
 
 #### Finding all members with a task
 
-1. Listing all members with a task that contains specific word(s) (non-exact match)
-   1. Prerequisite: `MEMBER LIST` must have at least one member with a task with the word `form` in it
+1. Listing all members with a task that contains specific word(s) (non-exact match).
+   1. Prerequisite: `MEMBER LIST` must have at least one member with a task with the word `form` in it.
    2. Test case: `mtfind form`
    Expected: List only members with `form` word in the list of tasks.
    3. Test case: `mtfind -`
@@ -793,14 +773,14 @@ testers are expected to do more *exploratory* testing.
 
 #### Listing an event
 
-1. List all events
+1. List all events.
 
     1. Test case: `elist`<br>
        Expected: All events are shown in the event list. Success message shown.
        
 #### Adding an event
 
-1. Adding an event with zero or more members while all members are being shown
+1. Adding an event with zero or more members while all members are being shown.
 
     1. Prerequisites: List all members using the `mlist` command. At least 3 members in the list.
 
@@ -816,7 +796,7 @@ testers are expected to do more *exploratory* testing.
        
 #### Deleting event
 
-1. Deleting an event while all events are being shown
+1. Deleting an event while all events are being shown.
 
     1. Prerequisites: List all events using the `elist` command. Multiple events in the list.
 
@@ -831,7 +811,7 @@ testers are expected to do more *exploratory* testing.
        
 #### Editing an event
 
-1. Editing an existing event while all members and events are being shown
+1. Editing an existing event while all members and events are being shown.
 
     1. Prerequisites: List all members using the `mlist` command.
        List all events using the `elist` command. Multiple members and events in member and event list respectively.
@@ -849,7 +829,7 @@ testers are expected to do more *exploratory* testing.
        
 #### Adding a member to an event
 
-1. Adds existing members to an existing event while all members and events are being shown
+1. Adds existing members to an existing event while all members and events are being shown.
 
     1. Prerequisites: List all members using the `mlist` command.
        List all events using the `elist` command. Multiple members and events in member and event list respectively.
@@ -866,7 +846,7 @@ testers are expected to do more *exploratory* testing.
        
 #### Deleting a member from an event
 
-1. Deletes existing members from an existing event while all members and events are being shown
+1. Deletes existing members from an existing event while all members and events are being shown.
 
     1. Prerequisites: List all members using the `mlist` command.
        List all events using the `elist` command. Multiple members and events in member and event list respectively.
@@ -889,8 +869,7 @@ testers are expected to do more *exploratory* testing.
        At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
 
     2. Test case: `emarkall /e 1`<br>
-       Expected: First event has all its members marked as attended. The member labels on its card are all green
-       and no red. 
+       Expected: First event has all its members marked as attended. The member labels on its card are all green and no red. 
        
 #### Mark specific members of event as attended
 
@@ -900,8 +879,7 @@ testers are expected to do more *exploratory* testing.
        At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
 
     2. Test case: `emark /e 1 /m 1`<br>
-       Expected: First event has the first member marked as attended. The member label on its card for the first
-       member is green.
+       Expected: First event has the first member marked as attended. The member label on its card for the first member is green.
        
     2. Test case: `emark /e 1 /m 1 /m 2`<br>
        Expected: First event has the first member and second member marked as attended.
@@ -910,14 +888,13 @@ testers are expected to do more *exploratory* testing.
        
 #### Unmark specific members of event
 
-1. Unmarks members of an event.
+1. Unmark members of an event.
 
     1. Prerequisites: List all members attending the first event using `mlist /e 1`.
        At least one event in the list with at least two members. If not use `eadd` and/or `emadd` to obtain this event.
 
     2. Test case: `eunmark /e 1 /m 1`<br>
-       Expected: First event has the first member marked as absent. The member label on its card for the first
-       member is red.
+       Expected: First event has the first member marked as absent. The member label on its card for the first member is red.
 
     2. Test case: `emark /e 1 /m 1 /m 2`<br>
        Expected: First event has the first member and second member marked as absent.
@@ -925,24 +902,21 @@ testers are expected to do more *exploratory* testing.
 
 #### Finding an event
 
-1. Finds and list all events with names containing any of the given keywords. Matching is not strict. Case-insensitive
-search for name.
+1. Finds and list all events with names containing any of the given keywords. Matching is not strict. Case-insensitive search for name.
 
     1. Prerequisites: Have an event with the name cat, and an event with the name DOG.
 
     2. Test case: `efind ca`<br>
-       Expected: Event list has the event with the name cat in it. All other events with 'ca' as part of its name is
-       in the event list. 
+       Expected: Event list has the event with the name cat in it. All other events with 'ca' as part of its name is in the event list. 
 
     3. Test case: `efind c dog`<br>
-       Expected: Event list has both the events with the name cat and dog in it. All other events with 'c' 
-       and/or 'dog 'as part of its name is in the event list.
+       Expected: Event list has both the events with the name cat and dog in it. All other events with 'c' and/or 'dog 'as part of its name is in the event list.
       
 ### Task tests
 
 #### Adding a task
 
-1. Adding a task to one or more members while all members are being shown
+1. Adding a task to one or more members while all members are being shown.
 
     1. Prerequisites: List all members using the `mlist` command. At least 3 members in the list.
 
@@ -957,7 +931,7 @@ search for name.
     
 #### Deleting a task
 
-1. Deleting a task from the currently selected member's task list while the task list is being shown
+1. Deleting a task from the currently selected member's task list while the task list is being shown.
 
    1. Prerequisites: List all tasks of the first member using the `tlist /m 1` command. Multiple tasks in the list.
 
@@ -970,7 +944,7 @@ search for name.
 
 #### Marking one or more task(s) as completed
 
-1. Marking one or more task(s) as completed while the currently selected member's task list is being shown
+1. Marking one or more task(s) as completed while the currently selected member's task list is being shown.
 
     1. Prerequisites: List all tasks of the first member using the `tlist /m 1` command. At least 3 tasks in the list.
 
@@ -985,7 +959,7 @@ search for name.
 
 #### Marking one or more task(s) as incomplete
 
-1. Marking one or more task(s) as incomplete while the currently selected member's task list is being shown
+1. Marking one or more task(s) as incomplete while the currently selected member's task list is being shown.
 
     1. Prerequisites: List all tasks of the first member using the `tlist /m 1` command. At least 3 tasks in the list.
 
@@ -1000,7 +974,7 @@ search for name.
 
 #### Editing a task
 
-1. Editing an existing task while the currently selected member's task list is being shown
+1. Editing an existing task while the currently selected member's task list is being shown.
 
     1. Prerequisites: List all tasks of the first member using the `tlist /m 1` command. Multiple tasks in the list.
 
@@ -1015,28 +989,28 @@ search for name.
 
 #### Listing of tasks
 
-1. Listing all tasks of a member
+1. Listing all tasks of a member.
 
     1. Prerequisites: List all members using the `mlist` command. Multiple members in the list.
 
     2. Test case: `tlist /m 1`<br>
        Expected: All tasks of the first member displayed in the currently shown member list will be displayed. Success message will be shown in the status message.
 
-2. Listing all incomplete tasks of a member
+2. Listing all incomplete tasks of a member.
 
    1. Prerequisites: List all members using the `mlist` command. Multiple members in the list.
 
    2. Test case: `tlist /m 1 /dn n`<br>
       Expected: All incomplete tasks of the first member displayed in the currently shown member list will be displayed. Success message will be shown in the status message.
 
-3. Listing all completed tasks of a member
+3. Listing all completed tasks of a member.
 
     1. Prerequisites: List all members using the `mlist` command. Multiple members in the list.
 
     2. Test case: `tlist /m 1 /dn y`<br>
        Expected: All completed tasks of the first member displayed in the currently shown member list will be displayed. Success message will be shown in the status message.
 
-4. Listing all overdue tasks of a member
+4. Listing all overdue tasks of a member.
 
     1. Prerequisites: List all members using the `mlist` command. Multiple members in the list.
 
@@ -1046,7 +1020,7 @@ search for name.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files.
 
    1. Test case: Add invalid characters such as `@` to the file, such as after any `{` character.
    Expected: Ailurus launches with no data.
@@ -1058,7 +1032,7 @@ Overall, the team felt that this project was moderately difficult, due to the la
 
 ### Challenges faced
 
-The difficulty lies in the increased complexity of the application as it grows. While the original `Addressbook-level-3 (AB3)` only handles one module, which is the `Person` module, we refactored it to `Member` and added 2 more layers of complexity to it: the `Task` and the `Event` modules, which all inherit from a generic `Module` class. As such, we had to deal with more interactions between the modules, such as in listing all members in an event, or listing all overdue tasks of a member, and so on. Also, we had to update the state of the JavaFX UI constantly with each change in state. Hence, there is a need to monitor the communications between the `Logic`, `Model` and `UI` APIs to allow smooth transitions and updating of `FilteredList<T>` passed to the UI, and it would not be easy to do so if we only display one screen at a time. As our JavaFX knowledge was limited, we decided to go with 3 columns showing `Event`, `Members` and `Tasks`. [This was our Mockup UI for illustration.](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/UImockup.png)
+The difficulty lies in the increased complexity of the application as it grows. While the original `Addressbook-level-3 (AB3)` only handles one module, which is the `Person` module, we refactored it to `Member` and added 2 more layers of complexity to it: the `Task` and the `Event` modules, which all inherit from a generic `Module` class. As such, we had to deal with more interactions between the modules, such as in listing all members in an event, or listing all overdue tasks of a member, and so on. Also, we had to update the state of the JavaFX UI constantly with each change in state. Hence, there is a need to monitor the communications between the `Logic`, `Model` and `UI` APIs to allow smooth transitions and updating of `FilteredList<T>` passed to the UI, and it would not be easy to do so if we only display one screen at a time. As our JavaFX knowledge was limited, we decided to go with 3 columns showing `Event`, `Members` and `Tasks`. [This was our Mockup UI for illustration](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/UImockup.png).
 
 We also faced difficulties in deciding our architecture for our `Model` component, as we had different iterations of possible UML class diagram of the proposed `Model` component ([overview idea](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modeloverview.png), [v1](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modelv1.png), [v2](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/modelv2.png), [final version](https://ay2122s1-cs2103t-t15-2.github.io/tp/images/ModelClassDiagram.png)). At first, there was the idea that events have multiple members, but members should also have many events, and therefore they could have a many-to-many relationship. However, we realised that this was not a trivial case, as our storage uses JSON objects, which in itself is limited as it is unlike relational databases like [SQL](https://en.wikipedia.org/wiki/SQL). Therefore, having no foreign keys in such a database requires a lot of duplication of data, which we felt was unnecessary considering the simplicity of our product, hence we decided not to go forth with the idea.
 
@@ -1074,9 +1048,8 @@ We also faced difficulties in deciding our architecture for our `Model` componen
 
 * We realised the power of using streams to handle sets of data. The use of streams is especially useful in the case of deciding how the labels (e.g. `Member` in `Event List`, `Task` in `Member List`) will appear in `FlowPane`.
 
-* We enforced commands to require a space between the prefix and the parameter, to allow easier readability of parameter, and it is also more intuitive to use `/prefix` commands with `/` before the prefix, similar to chatbots and UNIX commands usually have the symbol before the flag or prefix.
+* We enforced commands to require a space between the prefix and the parameter, to allow easier readability of parameter, and it is also more intuitive to use `/prefix` commands with `/` before the prefix, similar to chat-bots and UNIX commands usually have the symbol before the flag or prefix.
 
 * We showed the number of members / tasks / events listed for most listing and finding command, except those commands which show the full list.
 
 * We customized our UI to produce blue highlighting of cards if you click on them for selecting of a specific card if the list gets very long.
-
