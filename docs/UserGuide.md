@@ -83,7 +83,11 @@ Below are some formats used used to convey different kinds of information:
 **Format:** `command_word Prefix/PARAMETER`
 
 * `command_word` is a word at the start of the command to specify the action to be done. <br> e.g. in `add n/NAME`, `add` is the command word.
+
+
 * `PARAMETER` are word(s) in `UPPER_CASE` to be supplied by the user.<br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+
+
 * `Prefix` are letter(s) before `PARAMETER` to denote the information supplied as parameter. <br>e.g. in `add n/NAME`, `n/` is a prefix to indicate that NAME is being supplied.
 
 
@@ -126,7 +130,7 @@ Parameter | Constraints
 |--------|-------
 **NAME** | Unique, only containing alphabetical characters and spaces
 **PHONE** | At least 6 digits long
-**ROOM** | Made up of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
+**ROOM** | Unique, made up of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
 **EMAIL** |  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br> The domain name must: <br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 **VACCINATION_STATUS** | `T` or `F` (case insensitive)
 **FACULTY** | Single alphabetical word
@@ -144,9 +148,19 @@ Parameter | Constraints
 `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are optional parameters.
 </div>
 
+Here's a step by step guide:<br>
+1. Type the `add` command and the rest of the parameters with help from the command suggestion.
+   ![Step1](images/logic/commands/addpersoncommand/step1.png)
+
+
+2. After execution, the person list will now show the new person.
+   ![Step2](images/logic/commands/addpersoncommand/step2.png)
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+
+
 
 #### Viewing residents information : `view`
 
@@ -422,6 +436,15 @@ Format: `export FILE_NAME`
 
 </div>
 
+1. Run `export FILE_NAME`.
+   ![Export](images/logic/commands/exportcommand/command.png)
+
+2. Find your csv file in the `data/exports` folder.
+   ![FileStructure](images/logic/commands/exportcommand/filefolder.png)
+
+3. Your exported csv file should look like this.
+   ![Csv](images/logic/commands/exportcommand/csvFormat.png)
+
 Examples:
 * `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the residents currently displayed on the application.
 
@@ -518,20 +541,15 @@ More Examples:
 
 #### Searching by event information: `find`
 
-Shows a list of events that match the provided keywords for different available parameters.
+Shows a list of events that match the provided keywords for different available parameters. Allowed flags include; `n/`, `d/`, `v/`, `c/`
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `d/`, `v/`, `c/`
-* Searching by name:
-    - It is case-insensitive. e.g `dance` will match `Dance`
-    - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training`
-    - Events matching at least one keyword for the event name will be returned (i.e. `OR` search).
-      e.g `Football Basketball` will return `Football Training`, `Basketball Training`
-* Searching by venue:
-    - It is case-insensitive. e.g `nus field` will match `NUS Field`
-    - Only full event names will be matched. e.g `Field` will not match `NUS Field`
-* The date and capacity fields are subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
+Prefix | Field | Restrictions
+-------- | ------ | ------
+`n` | Name | - It is case-insensitive. e.g `dance` will match `Dance` <br> <br> - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training` <br> <br> - Events matching at least one keyword for the event name will be returned (i.e. `OR` search). e.g `Football Basketball` will return `Football Training`, `Basketball Training`
+`v` | Venue | - It is case-insensitive. e.g `nus field` will match `NUS Field` <br> <br> - Only full event names will be matched. e.g `Field` will not match `NUS Field`
+`d, c` | Date, Capacity | - Subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
 
 Examples:
 * `find n/Football` returns `Football Match` and `Football Training`
@@ -552,7 +570,18 @@ Format: `delete INDEX…`
 * The indexes **must be positive integers** 1, 2, 3, …​
 * Delete multiple events in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Suppose Football Training is cancelled due to a tightening of COVID-19 measures. To keep the addressbook updated, you might want to remove the event from the list of events.
+
+You can easily do this a single `delete` command.<br>
+
+1. Note that the event "Football Training" has an index of 2 in the current event list. To remove it from the list of events, simply enter `delete 2`.
+   ![Step1](images/logic/commands/deletecommand/event/step1.png)
+
+2. The result box will notify you of the deleted event. The event will also be removed from the event list.
+   ![Step2](images/logic/commands/deletecommand/event/step2.png)
+   
+More Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 events in the address book.
 * `find n/Football Training` followed by `delete 1` deletes the 1st event named Football Training in the results of the `find` command.
 
