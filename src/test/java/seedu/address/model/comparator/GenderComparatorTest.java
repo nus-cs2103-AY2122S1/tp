@@ -42,8 +42,8 @@ public class GenderComparatorTest {
         Person p6 = new PersonBuilder().withGender("").build();
 
         // If either person has null Gender
-        assertTrue(comparator.compare(p1, p6) > 0);
-        assertTrue(comparator.compare(p6, p1) < 0);
+        assertTrue(comparator.compare(p1, p6) < 0);
+        assertTrue(comparator.compare(p6, p1) > 0);
 
         // If both have Gender, sorted alphabetically
         assertTrue(comparator.compare(p1, p3) < 0);

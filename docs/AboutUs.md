@@ -15,7 +15,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 
 [[github](https://github.com/hsiaotingluv)]
-[[portfolio](team/chenhsiaoting.md)]
+[[portfolio](team/hsiaotingluv.md)]
 
 * Role: Team lead
 * Responsibilities:

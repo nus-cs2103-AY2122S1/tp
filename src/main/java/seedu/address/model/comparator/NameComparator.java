@@ -9,16 +9,16 @@ public class NameComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        if (p1.getName() == null) {
-            if (p2.getName() == null) {
+        if (p1.getName().toString().isEmpty()) {
+            if (p2.getName().toString().isEmpty()) {
                 return 0;
             }
             return 1;
         }
-        if (p2.getName() == null) {
+        if (p2.getName().toString().isEmpty()) {
             return -1;
         }
-        return p1.getName().toString().compareTo(p2.getName().toString());
+        return p1.getName().toString().toLowerCase().compareTo(p2.getName().toString().toLowerCase());
     }
 
     @Override
