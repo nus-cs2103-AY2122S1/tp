@@ -429,13 +429,13 @@ Step 1. The user launches the application for the first time. The `AddressBook` 
 
 Step 2. The user executes `delete t/friends` command to delete contacts consisting of the friends tag. The `delete` command first calls 
 `Model#getFilteredPersonList()` and then iterates through the given list to filter out `person` objects that have the friends tag. While doing so, relevant
-`person` objects are placed into a separate list known as `deletedlist`. Assuming that Alex Yeoh and Bernice Yu are the only contacts with the friends tag, 
-the deletedlist is updated as follows.
+`person` objects are placed into a separate list known as `deletedList`. Assuming that Alex Yeoh and Bernice Yu are the only contacts with the friends tag, 
+the deletedList is updated as follows.
 
 ![DeleteByTagState1](images/DeletedList.png)
 
-Step 3. The `delete` command then fully iterates through `deletedlist`, and calls `Model#deletePerson()` at each iteration to remove 
-every person identified as part of the `deletedlist` from the `AddressBook`.
+Step 3. The `delete` command then fully iterates through `deletedList`, and calls `Model#deletePerson()` at each iteration to remove 
+every person identified as part of the `deletedList` from the `AddressBook`.
 
 ![DeleteByTagState2](images/DeleteByTagAfter.png)
 
@@ -486,7 +486,7 @@ is computed within the report. Implementation details regarding expenditure calc
 
 The report mechanism is facilitated by `Model`. Additionally, it implements the following operation:
 
-* `Model#getFilteredPersonList()` — Provides`person` list in address book based on the predicate provided
+* `Model#getFilteredPersonList()` — Provides `person` list in address book based on the predicate provided
 
 Given below is an example usage scenario and how the report behaves at each step.
 
@@ -895,11 +895,11 @@ testers are expected to do more *exploratory* testing.
        Expected: Report is generated in a pop up window. A success command message indicating report window is opened is provided.
 
     1. Test case: `report now`<br>
-       Expected: As long as the first word in the command starts with,"report", additional words and spaces after the command are ignored.
+       Expected: As long as the first word in the command starts with, "report", additional words and spaces after the command are ignored.
        The report is generated in a pop up window. A success command message indicating report window is opened is provided.
 
     1. Incorrect report command to try: `1 report`,`reports` <br>
-       Expected: Since both the above commands are invalid, an error message stating unknown message is shown in the command box.
+       Expected: Since both the above commands are invalid, an error message stating that an unknown command has been used is shown in the command box.
 
 ### Undoing information
 
