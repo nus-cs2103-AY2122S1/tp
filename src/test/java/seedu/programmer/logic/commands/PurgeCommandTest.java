@@ -10,6 +10,10 @@ import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Model) for
+ * {@code PurgeCommand}.
+ */
 public class PurgeCommandTest {
 
     @Test

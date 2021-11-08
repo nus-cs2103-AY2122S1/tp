@@ -18,6 +18,10 @@ import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.testutil.LabBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code AddLabCommand}.
+ */
 public class AddLabCommandTest {
     private static Lab validLab;
     private static Lab sampleLabA;

@@ -13,7 +13,7 @@ import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
- * Panel containing the list of lab results
+ * Panel containing the list of lab results.
  */
 public class LabResultListPanel extends UiPart<Region> {
     private static final String FXML = "LabResultListPanel.fxml";

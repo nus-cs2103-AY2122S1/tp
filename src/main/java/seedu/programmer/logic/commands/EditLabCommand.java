@@ -14,7 +14,6 @@ import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.LabTotal;
 import seedu.programmer.model.student.Student;
 
-
 /**
  * Edits a lab with new lab number and total score for all students.
  */
@@ -44,12 +43,12 @@ public class EditLabCommand extends Command {
     private final Lab original;
 
     /**
-     * Class constructor with new lab number and new total score.
+     * Class constructor with the original lab, the new lab number and the new total score.
      *
      * @param original the lab to be edited.
      * @param newLabNum the new lab number.
      * @param total the total score to be added.
-     * */
+     */
     public EditLabCommand(Lab original, LabNum newLabNum, LabTotal total) {
         requireNonNull(original);
         this.original = original;
@@ -57,11 +56,11 @@ public class EditLabCommand extends Command {
         this.total = total;
     }
     /**
-     * Class constructor with new total score.
+     * Class constructor with the original lab and the new total score.
      *
      * @param original the lab to be edited.
      * @param total the total score to be added.
-     * */
+     */
     public EditLabCommand(Lab original, LabTotal total) {
         requireNonNull(original);
         this.original = original;
@@ -70,11 +69,11 @@ public class EditLabCommand extends Command {
     }
 
     /**
-     * Class constructor with new lab number.
+     * Class constructor with the original lab and the new lab number.
      *
      * @param original the lab to be edited.
      * @param newLabNum the new lab number
-     * */
+     */
     public EditLabCommand(Lab original, LabNum newLabNum) {
         requireNonNull(original);
         this.original = original;

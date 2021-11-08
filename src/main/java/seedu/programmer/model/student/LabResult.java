@@ -10,11 +10,10 @@ public class LabResult {
     private static final Integer UNMARKED_ACTUAL_SCORE_PLACEHOLDER = -1;
     private final Integer labResult;
 
-
     /**
      * Class constructor for {@code LabResult}.
      *
-     * @param labResult A valid lab result.
+     * @param labResult The lab score obtained by a student.
      */
     public LabResult(Integer labResult) {
         requireNonNull(labResult);
@@ -27,7 +26,7 @@ public class LabResult {
     }
 
     /**
-     * Returns true if a given string is a valid labNum.
+     * Returns true if a given string is a valid lab result.
      *
      * @param test The Integer to be tested against.
      * @return true if the lab result is valid.

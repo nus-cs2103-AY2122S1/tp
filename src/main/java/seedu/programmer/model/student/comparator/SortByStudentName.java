@@ -5,7 +5,7 @@ import java.util.Comparator;
 import seedu.programmer.model.student.Student;
 
 /**
- * A class to help sort Students in ascending order.
+ * Sorts Students by their name in ascending order.
  */
 public class SortByStudentName implements Comparator<Student> {
 

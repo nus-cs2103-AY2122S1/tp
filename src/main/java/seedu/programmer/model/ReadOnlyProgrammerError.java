@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.programmer.model.student.Student;
 
 /**
- * Unmodifiable view of a ProgrammerError
+ * Unmodifiable view of a ProgrammerError.
  */
 public interface ReadOnlyProgrammerError {
 

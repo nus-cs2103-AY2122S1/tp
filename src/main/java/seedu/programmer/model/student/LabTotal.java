@@ -10,9 +10,9 @@ public class LabTotal {
     private final Integer labTotalScore;
 
     /**
-     * Constructs a {@code LabTotal}.
+     * Class constructor for {@code LabTotal}.
      *
-     * @param labTotalScore A valid lab total score.
+     * @param labTotalScore The total score of a lab.
      */
     public LabTotal(Integer labTotalScore) {
         requireNonNull(labTotalScore);
@@ -25,7 +25,7 @@ public class LabTotal {
     }
 
     /**
-     * Returns true if a given string is a valid labNum.
+     * Returns true if a given string is a valid lab total score.
      *
      * @param test The Integer to be tested against.
      * @return true if the lab total score is valid.

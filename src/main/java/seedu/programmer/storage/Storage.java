@@ -10,7 +10,7 @@ import seedu.programmer.model.ReadOnlyUserPrefs;
 import seedu.programmer.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * API of the Storage component.
  */
 public interface Storage extends ProgrammerErrorStorage, UserPrefsStorage {
 

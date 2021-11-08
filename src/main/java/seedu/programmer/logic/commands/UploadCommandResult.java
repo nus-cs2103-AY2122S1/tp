@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
 /**
- * A CommandResult that requires handling in the UI.
+ * Represents a CommandResult that requires handling in the UI to upload a csv file to ProgrammerError.
  */
 public class UploadCommandResult extends CommandResult {
 

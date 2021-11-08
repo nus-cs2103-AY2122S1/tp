@@ -28,9 +28,15 @@ public class DeleteLabCommand extends Command {
     private final Lab lab;
 
     /**
+<<<<<<< HEAD
      * Class constructor for {@code DeleteLabCommand}.
      *
      * @param lab The lab to be deleted.
+=======
+     * Constructor for DeleteLabCommand.
+     *
+     * @param lab to be added.
+>>>>>>> master
      */
     public DeleteLabCommand(Lab lab) {
         this.lab = lab;

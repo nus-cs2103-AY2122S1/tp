@@ -25,6 +25,10 @@ import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.LabNum;
 import seedu.programmer.model.student.LabTotal;
 
+/**
+ * Contains integration tests (interaction with the Model) for
+ * {@code EditLabCommand}.
+ */
 public class EditLabCommandTest {
     private static LabNum newLabNum = new LabNum(VALID_EDIT_LAB_NO);
     private static LabNum newLabNum2 = new LabNum(VALID_EDIT_LAB_NO2);

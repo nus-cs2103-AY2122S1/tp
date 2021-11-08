@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import seedu.programmer.model.Model;
 
 /**
- * Downloads the information in ProgrammerError into a CSV file.
+ * Downloads a csv file of students' data from ProgrammerError's storage.
  */
 public class DownloadCommand extends Command {
 

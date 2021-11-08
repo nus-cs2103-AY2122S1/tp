@@ -287,6 +287,5 @@ public class EditCommand extends Command {
                     && getClassId().equals(e.getClassId())
                     && getEmail().equals(e.getEmail());
         }
-
     }
 }

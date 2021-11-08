@@ -45,7 +45,9 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 3. Copy the file to the folder you want to use as the _home folder_ for your ProgrammerError.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
-   ![Ui](images/Ui_v1.4.png)
+    <p align="center">
+        <img src="images/commands/UndoCommand/Ui_v1.4.png" width="600"/>
+    </p>
 5. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
    will open the help window.<br>
    Here are some example commands you can try:
@@ -79,6 +81,7 @@ classes. If you are familiar with Unix commands, this is definitely for you!
 
 </div>
 
+
 ## <a name="parameter-summary"></a>1. Parameter Summary
 <div markdown="span" class="alert alert-warning">
 
@@ -99,6 +102,7 @@ Parameter | What it means | Constraints
 **-ts** | Lab Total Score | A positive integer between 1 and 100 (inclusive)
 **-s** | Lab Score of Student | A non-negative integer, not greater than the corresponding lab total score
 
+
 ## <a name="general-features"></a>2. General Features
 
 ### <a name="view-help"></a>2.1 View Help: `help` or F2 on keyboard
@@ -107,7 +111,9 @@ Shows a message explaining how to access the help page.
 
 ### <a name="view-dashboard"></a>2.2 View Dashboard: `dashboard`
 
-![dashboard](images/commands/DashboardCommand/dashboard.png)
+<p align="center">
+<img src="images/commands/DashboardCommand/dashboard.png" width="600"/>
+</p>
 
 Displays a dashboard window showing the following data:
 
@@ -119,6 +125,7 @@ Displays a dashboard window showing the following data:
 ### <a name="exit"></a>2.3 Exit: `exit` or F1 on keyboard
 
 Exits ProgrammerError and closes the GUI.
+
 
 ## <a name="data-features"></a>3. Data Features
 
@@ -184,6 +191,7 @@ Here are some examples of corrupted data that is not accepted by ProgrammerError
       "actualScoreValue" : 15,
       "totalScoreValue" : 20
       }
+
 
 ## <a name="student-features"></a>4. Student Features
 
@@ -252,7 +260,9 @@ sequence of characters provided in the argument string.
 Format: `filter [-n <NAME>] [-sid <STUDENT_ID>] [-cid <CLASS_ID>] [-email <EMAIL>]`
 
 Below shows an example when `filter -cid B01` is executed with 4 students from class B01 filtered out.
-![filter](images/commands/FilterCommand/filter.png)
+<p align="center">
+<img src="images/commands/FilterCommand/filter.png" width="600"/>
+</p>
 
 
 <div markdown="block" class="alert alert-success">
@@ -276,7 +286,9 @@ The student particular and lab results will be updated if other commands modify 
 
 Format: `show <INDEX_IN_LIST>`
 
-![show](images/commands/ShowCommand/show.png)
+<p align="center">
+<img src="images/commands/ShowCommand/show.png" width="600"/>
+</p>
 
 <div markdown="block" class="alert alert-success">
 
@@ -289,6 +301,9 @@ Format: `show <INDEX_IN_LIST>`
 ### <a name="list-students"></a>4.6 List All Students: `list`
 
 Displays a list of all students in the left panel. This list is ordered first by class ID followed by student name.
+
+
+
 
 ## <a name="lab-features"></a>5. Lab Features
 
@@ -343,6 +358,7 @@ Format: `dellab -ln <LAB_NUM>`
 - `dellab -ln 1`: Deletes lab 1 for all students if it exists.
 
 </div>
+
 
 ## <a name="command-summary"></a>Command Summary
 

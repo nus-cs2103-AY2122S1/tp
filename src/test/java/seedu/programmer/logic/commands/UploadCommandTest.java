@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 
+/**
+ * Contains integration tests (interaction with the Model) for
+ * {@code UploadCommand}.
+ */
 public class UploadCommandTest {
     private Model model = new ModelManager();
 

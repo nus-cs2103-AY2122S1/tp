@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.programmer.model.student.Lab;
 
+/**
+ * Jackson-friendly version of {@link Lab}.
+ */
 public class JsonAdaptedLab {
     public static final String NON_NULL_ADAPTED_LAB = "The adaptedLab cannot be null.";
 

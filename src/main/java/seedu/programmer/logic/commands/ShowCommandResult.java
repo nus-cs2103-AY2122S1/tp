@@ -4,14 +4,16 @@ import java.util.Objects;
 
 import seedu.programmer.model.student.Student;
 
-
+/**
+ * Represents a CommandResult that requires handling in the UI to show a student's lab results.
+ */
 public class ShowCommandResult extends CommandResult {
 
     /** The application should show student's result. */
     private final Student target;
 
     /**
-     * Class constructor for a {@code CommandResult} when there is a result to show.
+     * Class constructor for a {@code ShowCommandResult} when there is a student to show.
      */
     public ShowCommandResult(String feedbackToUser, Student target) {
         super(feedbackToUser);
