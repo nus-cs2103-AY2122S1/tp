@@ -48,7 +48,7 @@ Given below are my contributions to the project.
         * Added an introduction on the app interface [\#261](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/261)
     * Developer Guide:
         * Added implementation details of the `view` and `delete` event features [\#106](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/106), [\#131](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/131)
-        * Formatting[\#131](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/131)
+        * Formatting [\#131](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/131)
         * Update the glossary [\#43](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/43), [\#44](https://github.com/AY2122S1-CS2103T-T15-4/tp/pull/44)
 
 * **Community**:
