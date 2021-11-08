@@ -163,6 +163,9 @@ class FeesCalculatorTest {
                 feesCalculator.updateLessonOutstandingFeesField(lessonBetweenLastUpdateAndToday));
     }
 
+    /**
+     * @@author lingshanng, refactored by eeliana.
+     */
     @Test
     public void startBeforeUpdate_endAfterToday() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-06T12:00"),
