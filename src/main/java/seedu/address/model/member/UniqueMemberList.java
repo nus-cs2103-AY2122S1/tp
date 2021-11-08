@@ -89,6 +89,36 @@ public class UniqueMemberList implements Iterable<Member> {
     }
 
     /**
+     * Returns a member from SportsPA that has the same name or phone as the given {@code member}.
+     *
+     * @param toFind the given member to look for.
+     * @return a member that has the same name.
+     */
+    public Member getSameMember(Member toFind) {
+        requireNonNull(toFind);
+        return internalList.stream()
+                .filter(member -> member.isSameMember(toFind))
+                .findAny()
+                .orElse(null);
+    }
+
+    /**
+     * Checks if the member being imported has the same name as an existing member
+     * and same phone number as another existing member at the same time.
+     * If the such a situation occurs, the member being imported is deemed invalid.
+     *
+     * @param toCheck the member being imported
+     * @return true if only one or no other members with the same name or phone is found, false otherwise.
+     */
+    public boolean isValidImport(Member toCheck) {
+        requireNonNull(toCheck);
+        long count = internalList.stream()
+                .filter(member -> member.isSameMember(toCheck))
+                .count();
+        return count <= 1;
+    }
+
+    /**
      * Removes the equivalent member from the list.
      * The member must exist in the list.
      */

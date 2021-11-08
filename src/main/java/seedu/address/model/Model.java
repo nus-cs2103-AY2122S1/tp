@@ -203,12 +203,12 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
-     * Returns a member from SportsPA that has the same name as the given {@code member}.
+     * Returns a member from SportsPA that has the same name or phone as the given {@code member}.
      *
-     * @param member the given member
+     * @param toFind the given member to look for.
      * @return a member that has the same name.
      */
-    Member getSameMember(Member member);
+    Member getSameMember(Member toFind);
 
     /**
      * Checks if the member being imported has the same name as an existing member
@@ -219,6 +219,7 @@ public interface Model {
      * @return true if only one or no other members with the same name or phone is found, false otherwise.
      */
     boolean isValidImport(Member toCheck);
+
     /**
      * Sorts the member list in the specified order.
      */
