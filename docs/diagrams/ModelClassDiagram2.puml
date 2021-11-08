@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Interface HasUniqueId <<Interface>>
+Class UniqueId
+Class NoOverlapLessonList
+
+Package Person <<Rectangle>>{
+
+Class Person
+Class Name
+Class Phone
+Class Email
+Class Address
+Class Tag
+Class Exam
+
+}
+
+Package Task <<Rectangle>>{
+
+Class Task
+Class Description
+Class Deadline
+
+}
+
+Package Group <<Rectangle>>{
+
+Class Group
+Class GroupName
+
+}
+
+Person *--> Name
+Person *--> Phone
+Person *--> Email
+Person *--> Address
+Person *--> "*" Tag
+Person *--> NoOverlapLessonList
+Person *--> "*" Exam
+Person *-up-> "id" UniqueId
+Person .up.|> HasUniqueId
+Task *--> Description
+Task *--> Deadline
+Task *--> "id" UniqueId
+Task ..|> HasUniqueId
+Group *--> GroupName
+Group *--> NoOverlapLessonList
+Group *--> "id" UniqueId
+Group ..|> HasUniqueId
+
+@enduml
