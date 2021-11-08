@@ -55,6 +55,15 @@ deactivate Model
 
 DeletePositionCommand -> Model : deletePosition(positionToDelete)
 activate Model
+Model -> Model : removePosition(positionToDelete)
+activate Model
+Model --> Model
+deactivate Model
+
+Model -> Model : removeApplicantsUnderPosition(positionToDelete)
+activate Model
+Model --> Model
+deactivate Model
 
 Model --> DeletePositionCommand
 deactivate Model
