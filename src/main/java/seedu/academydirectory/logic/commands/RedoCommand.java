@@ -20,7 +20,7 @@ public class RedoCommand extends Command {
             + " Directory as requested!";
 
     public static final String REDO_REQUEST_REJECTED = "Unable to redo Academy Directory data change. Is there "
-            +"anything to redo? Read/write permission granted to folder?";
+            + "anything to redo? Read/write permission granted to folder?";
 
     public static final String CORRUPTED_FILES = "Unable to undo Academy Directory data change. Corrupted files?";
 
