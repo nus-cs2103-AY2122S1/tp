@@ -33,7 +33,7 @@ Manual Testing was focused mainly on Testing Features and the Graphical User Int
     * [Revert Commit](#revert-commit-history)
     * [Undo/Redo Change](#undoredo-changes)
     * [Help](#help)
-    * [Saving Data](#saving-data)
+    * [Saving Data](#saving-data-coming-soon)
 * [GUI Testing](#graphical-user-interface-gui-testing)
   * [Visual Design](#visual-design)
   * [User Interface Functionality](#user-interface-functionality)
@@ -856,14 +856,10 @@ list of version controlled commands is in [here](DeveloperGuide.md).
           Expected: The User Guide web-version of Academy Directory can be accessed, meaning that the link is indeed copied.
 
 
-#### Saving data
+#### Saving data _[Coming Soon]_
 
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-
-2. _{ more test cases to come …​ }_
+1. Dealing with missing/corrupted data files 
+   1. Since data is stored locally, it has the potential to be corrupted or missing between uses.
 
 
 ***
