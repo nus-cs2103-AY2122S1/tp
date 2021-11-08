@@ -206,7 +206,7 @@ The features mentioned are:
    1. Listing all persons
    2. [Finding persons](#finding-persons)
    3. [Sorting persons](#sorting-persons)
-   4. Viewing statistics
+   4. [Viewing statistics](#viewing-statistics)
 4. Share
    1. [Importing contacts](#import-json-file)
    2. [Exporting contacts](#export-json-file)
@@ -444,6 +444,38 @@ The following sequence diagram shows how the Sort mechanism works:
 * **Alternative 2:** Sort all persons based on multiple fields.
     * Pros: Convenient if the contact list is very huge and users would like to sort based on multiple fields.
     * Cons: Difficult to implement.
+    
+### Viewing Statistics
+
+#### Implementation
+
+The Statistics command displays the nationality statistics of a given tutorial group.
+
+#### Usage
+
+Given below is an example usage scenario and how the Statistics mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `stat T09` command to compute the nationality statistics of tutorial group `T09`.
+
+Step 3. This will call StatisticsCommandParser#parse which will then parse the arguments provided.
+
+Step 4. A new `TutorialGroup` and `StatisticsCommand` object will then be created. It will be used to compute the statistics of the particular `TutorialGroup`. This `TutorialGroup` is then passed to the `StatisticsCommand`.
+
+The following sequence diagram shows how the parser operation works (`NameComparator` not shown):
+
+![StatisticParserSequenceDiagram](images/StatisticParserSequenceDiagram.png)
+
+Step 5. `StatisticsCommand#execute` will set the `AddressBook` model's filtered person list with the filter criteria being the tutorial group. It will then be extracted into a `List` and then the `AddressBook` model's list will be reset.
+
+Step 6. A `Statistic` object will then be created and its raw data will be passed to the returned `CommandResult`.
+
+Step 7. The GUI will then proceed to parse the raw data and display it as a pie chart to the user.
+
+The following sequence diagram shows how the Statistic mechanism works:
+
+![StatisticSequenceDiagram](images/StatisticSequenceDiagram.png)
 
 ### Import JSON file
 
@@ -454,10 +486,6 @@ The import JSON file will import an external addressbook and add all the entries
 It works by utilizing the same mechanism that is used by Socius when first initializing the addressbook with existing JSON data.
 
 #### Usage
-
-The following activity diagram briefly summarizes what happens when a user executes the `Import` to import a JSON addressbook file:
-
-[insert diagram]
 
 Given below is an example usage scenario and how the Import mechanism behaves at each step.
 
