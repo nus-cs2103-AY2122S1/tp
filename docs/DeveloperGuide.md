@@ -194,10 +194,10 @@ This section describes some noteworthy details on how certain features are imple
 
 The features mentioned are:
 1. Getting help
-2. Modifying Contacts
-   1. [Adding a person](#adding-a-person) [done]
-   2. Adding tags to people
-   3. [Adding a remark to a person](#adding-a-remark)
+2. [Modifying Contacts]((#adding-a-person-add))
+   1. [Adding a person](#adding-a-person-add) [done]
+   2. [Adding tags to people](#adding-tags-to-people-addt)
+   3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark) [done]
    4. Editing a person
    5. Deleting a person
    6. [Deleting multiple person](#delete-multiple-persons)
@@ -217,7 +217,7 @@ The features mentioned are:
 8. [Accessing command history](#command-history)
 9. [Input Suggestion](#input-suggestion)
 
-### Adding a person
+### Adding a person `add`
 
 #### Implementation
 
@@ -260,27 +260,30 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
     * Cons: Harder to implement.
 
-### Adding a remark
+### Adding a remark to people `remark`
 
 #### Implementation
 
-The following activity diagram summarizes what happens when a user executes an add remark command on a specified person:
+The remark mechanism is facilitated by RemarkCommand and RemarkCommandParser. It allows users to add a remark to a person
+in their contact list by the index number shown in their displayed contact list.
+
+The following activity diagram summarizes what happens when a user executes a remark command on a specified person:
 
 ![RemarkActivityDiagram](images/RemarkActivityDiagram.png)
 
-The add remark mechanism will add remark to a contact specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
+The remark mechanism will add a remark to a person specified by a given index. If a remark already exists, the new remark will overwrite the old remark.
 
-During `RemarkCommand#execute`, a new `Person` object will be created. For all of its properties (e.g. `Name`) except for `Remark`, the values will remain the same as the original person's properties.
+During `RemarkCommand#execute`, a new `Person` object will be created. The values will remain the same for all of a person contact details (e.g. `Name`) except for `Remark`.
 
 #### Usage
 
-Given below is an example usage scenario and how the add remark mechanism behaves at each step.
+Given below is an example usage scenario and how the remark mechanism behaves at each step.
 
-Step 1. The user executes `remark 1 r/She likes coding` command to add the remark field to the first person.
+Step 1. The user executes `remark 1 r/She likes coding` command to add a remark to the first person in the displayed contact list.
 
-Step 2. `RemarkCommandParser#parse` will then parse the arguments provided. In this example, a new `RemarkCommand` object will be created after parsing.
+Step 2. `RemarkCommandParser#parse` will then parse the arguments provided. A new `RemarkCommand` object will be created after parsing.
 
-The following sequence diagram briefly shows how the parser operation works:
+The following sequence diagram briefly shows how the RemarkCommandParser operation works:
 
 ![RemarkParserSequenceDiagram](images/RemarkParserSequenceDiagram.png)
 
@@ -288,20 +291,20 @@ Step 3. The `RemarkCommand` will then create a new `Person` using information fr
 
 Step 4. `RemarkCommand#execute` will then replace the old `Person` in the `model` with the new `Person`.
 
-The following sequence diagram shows how the add remark mechanism works:
+The following sequence diagram shows how the RemarkCommand mechanism works:
 
 ![RemarkSequenceDiagram](images/RemarkSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in the AddressBook, so the person inside the AddressBook will not be updated.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be saved in Socius, so the person's contact details in Socius will not be updated.
 </div>
 
 #### Design Considerations
 
-* **Alternative 1 (current choice):** Create a new person with the remark field replaced and the other fields same as the old person.
+* **Alternative 1 (current choice):** Create a new `Person` with their remark replaced and the other contact details same as the original `Person`.
     * Pros: Maintains immutability.
     * Cons: It may have performance issues in terms of memory usage as a new `Person` object is created.
 
-* **Alternative 2:** Edit the old person directly.
+* **Alternative 2:** Edit the original `Person` directly.
     * Pros: It uses less memory and thus may run faster.
     * Cons: If the execution is stopped halfway, then the newly updated person will contain wrong information. It will also be difficult to debug.
 
