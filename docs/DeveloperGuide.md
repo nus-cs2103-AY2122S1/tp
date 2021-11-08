@@ -173,8 +173,8 @@ helper classes to parse the text into various attributes `XYZ` of `Person`, whic
 * `Phone`
 * `Email`
 * `Address`
-* `Tags`
-* `Insurances`
+* `Tags` (optional)
+* `Insurances` (optional)
 * `Notes` (optional)
 
 ![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
