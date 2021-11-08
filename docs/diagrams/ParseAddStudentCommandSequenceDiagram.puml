@@ -9,22 +9,27 @@ participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
 participant ":AddStudentCommand" as AddStudentCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("add -s sn/John...")
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
+[-> LogicManager : execute()
 activate LogicManager
 
-LogicManager -> TutorAidParser : parseCommand("-s sn/John...")
+LogicManager -> TutorAidParser : parseCommand()
 activate TutorAidParser
 
 create AddCommandParser
-TutorAidParser -> AddCommandParser : parse("-s sn/John...")
+TutorAidParser -> AddCommandParser : parse()
 activate AddCommandParser
 
 create AddStudentCommandParser
-AddCommandParser -> AddStudentCommandParser : parse("sn/John...")
+AddCommandParser -> AddStudentCommandParser : parse()
 activate AddStudentCommandParser
 
 create AddStudentCommand
-AddStudentCommandParser -> AddStudentCommand : AddStudentCommand(student)
+AddStudentCommandParser -> AddStudentCommand : AddStudentCommand()
 activate AddStudentCommand
 
 AddStudentCommand --> AddStudentCommandParser
@@ -39,6 +44,8 @@ deactivate AddCommandParser
 TutorAidParser --> LogicManager
 deactivate TutorAidParser
 
-deactivate LogicManager
+destroy AddStudentCommandParser
+
+destroy AddCommandParser
 
 @enduml

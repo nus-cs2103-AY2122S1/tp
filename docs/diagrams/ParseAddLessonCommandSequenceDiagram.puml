@@ -1,6 +1,11 @@
 @startuml
 !include style.puml
 
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
@@ -13,29 +18,29 @@ box Model MODEL_COLOR_T1
 participant "lesson:Lesson" as Lesson MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add -l n/Maths 1 c/15")
+[-> LogicManager : execute()
 activate LogicManager
 
-LogicManager -> TutorAidParser : parseCommand("add -l n/Maths 1 c/15")
+LogicManager -> TutorAidParser : parseCommand()
 activate TutorAidParser
 
 create AddCommandParser
-TutorAidParser -> AddCommandParser : parse("-l n/Maths 1 c/15")
+TutorAidParser -> AddCommandParser : parse()
 activate AddCommandParser
 
 create AddLessonCommandParser
-AddCommandParser -> AddLessonCommandParser : parse("n/Maths 1 c/15")
+AddCommandParser -> AddLessonCommandParser : parse()
 activate AddLessonCommandParser
 
 create Lesson
-AddLessonCommandParser -> Lesson : Lesson(lessonName, capacity, price, students, timing)
+AddLessonCommandParser -> Lesson : Lesson()
 activate Lesson
 
 Lesson --> AddLessonCommandParser
 deactivate Lesson
 
 create AddLessonCommand
-AddLessonCommandParser -> AddLessonCommand : AddLessonCommand(lesson)
+AddLessonCommandParser -> AddLessonCommand : AddLessonCommand()
 activate AddLessonCommand
 
 AddLessonCommand --> AddLessonCommandParser

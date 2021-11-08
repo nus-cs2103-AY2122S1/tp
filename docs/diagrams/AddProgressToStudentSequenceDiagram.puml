@@ -1,6 +1,11 @@
 @startuml
 !include style.puml
 
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
 mainframe **sd**  get commandResult
 
 box Logic LOGIC_COLOR_T1

@@ -261,7 +261,7 @@ Below is the sequence diagram that depicts the parsing of the `add -s` command:
 ![ParseAddStudentCommand](images/ParseAddStudentCommandSequenceDiagram.png)
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`and `AddProgressCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`and `AddStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 {:start="5"}
@@ -395,7 +395,7 @@ At this point, if `AddLessonCommandParser#parse()` detects that no lesson name h
 
 Below is the sequence diagram that depicts the parsing of the command `add -l n/Maths 1 c/15`, and the instantiation of the `AddLessonCommand` object.
 
-<img src="images/ParseAddLessonCommandSequenceDiagram.png" height="250"/>
+<img src="images/ParseAddLessonCommandSequenceDiagram.png"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`and `AddLessonCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
