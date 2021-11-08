@@ -421,22 +421,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 1.
 
 
-**Use case: UC02 - Tag a task**
+**Use case: UC02 - List all tasks**
 
 **MSS**
 
-1.  User requests to tag tasks that contains some keywords
-2.  Uni-Fy sets priority for that particular task(s) with the matching keywords
+1.  User requests to list every task in Uni-Fy.
+2.  Uni-Fy displays all of user's tasks.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User requests to tag tasks that contains some keywords with a due date.
-    * 1a1. Uni-Fy sets priority for the particular task(s) with matching keywords with that due date.
-      Use case ends.
+* 1a. The list is empty.
+  
+  Use case ends.
 
-**Use case: UC03 - Mark a task as done**
+
+**Use case: UC03 - Tag a task**
+
+**MSS**
+
+1.  User requests to tag a task using a keyword.
+2.  Uni-Fy sets tag for that particular task with the matching keyword.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to tag task using multiple keywords.
+    * 1a1. Uni-Fy sets multiple tags for the particular task with corresponding keywords.
+      
+  Use case ends.
+
+
+**Use case: UC04 - Mark a task as done**
 
 **MSS**
 
@@ -450,13 +468,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
     * 1a1. Uni-Fy shows an error message.
-      Use case reverts to step 3.
+      
+  Use case reverts to step 3.
 
-**Use case: UC04 - Mark a task as undone**
+**Use case: UC05 - Mark a task as undone**
 
 **MSS**
 
-1.  User requests to mark a task as undone base on its index
+1.  User requests to mark a task as undone based on its index.
 2.  Uni-Fy sets the state for that particular task(s) to TODO.
 3.  Uni-Fy shows the updated weekly progress.
 
@@ -466,27 +485,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
     * 1a1. Uni-Fy shows an error message.
-      Use case reverts to step 3.
+      
+  Use case reverts to step 3.
 
 
-**Use case: UC05 - Show tasks**
+**Use case: UC06 - Show tasks**
 
 **MSS**
 
-1.  User requests to show tasks based on a given date or week number
-2.  Uni-Fy displays the list of tasks occurring in that week or on the given date.
+1.  User requests to show tasks based on week number.
+2.  Uni-Fy displays the list of tasks occurring in that week.
 
 **Extensions**
 
 * 1a. The list is empty.
+  
   Use case ends.
 
 * 2a. The given index is invalid.
-    * 3a1. Uni-Fy shows an error message.
-      Use case reverts to step 1.
+    * 2a1. Uni-Fy shows an error message.
+      
+  Use case reverts to step 1.
 
       
-**Use case: UC06 - Find a task**
+**Use case: UC07 - Find a task**
 
 **MSS**
 
@@ -498,22 +520,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The list is empty.
+  
   Use case ends.
 
 * 1b. The keyword is invalid.
     * 1b1. Uni-Fy shows an error message.
+    
   Use case ends.
   
 
-
-**Use case: UC07 - Delete a task**
+**Use case: UC08 - Delete a task**
 
 **MSS**
 
-1.  User requests for all their tasks to be listed
-2.  Uni-Fy displays user's list of tasks
-3.  User requests to delete a specific task based on its index
-4.  Uni-Fy deletes the specified task
+1.  User <ins>requests for all their tasks to be listed (UC02)</ins>.
+2.  Uni-Fy displays user's list of tasks.
+3.  User requests to delete a specific task based on its index.
+4.  Uni-Fy deletes the specified task.
 
     Use case ends.
 
@@ -527,10 +550,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. Uni-Fy shows an error message.
 
-      Use case resumes at step 2.
-
-  Use case ends.
-
+  Use case resumes at step 2.
+    
 
 ## Appendix D: Non-Functional Requirements
 
