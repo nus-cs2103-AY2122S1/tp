@@ -2,7 +2,7 @@
 !include style.puml
 
 box Model MODEL_COLOR_T1
-participant "**tutorialClasses:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
+participant "**:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
 participant "<<class>>\n**TutorialClass**" as StaticTutorialClass MODEL_COLOR
 participant ":**TutorialClass**" as TutorialClass MODEL_COLOR
 end box

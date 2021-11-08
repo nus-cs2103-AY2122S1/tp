@@ -30,20 +30,16 @@ public class GroupTypeTest {
 
     @Test
     public void isValidGroupType() {
-        // null group name
+        // null group type
         assertThrows(NullPointerException.class, () -> GroupType.isValidGroupType(null));
 
-        // invalid group name
+        // invalid group type
         assertFalse(GroupType.isValidGroupType("")); // empty string
         assertFalse(GroupType.isValidGroupType(" ")); // spaces only
-        assertFalse(GroupType.isValidGroupType("^")); // only non-alphanumeric characters
-        assertFalse(GroupType.isValidGroupType("peter*")); // contains non-alphanumeric characters
-        assertFalse(GroupType.isValidGroupType("peter")); // contains alphabets
-        assertFalse(GroupType.isValidGroupType("12")); // contains more than one digit
         assertFalse(GroupType.isValidGroupType("OP3")); // invalid group type
 
-        // valid group name
-        assertTrue(GroupType.isValidGroupType("OP1")); // alphabets only
-        assertTrue(GroupType.isValidGroupType("OP2")); // numbers only
+        // valid group type
+        assertTrue(GroupType.isValidGroupType("OP1")); // OP1 group
+        assertTrue(GroupType.isValidGroupType("OP2")); // OP2 group
     }
 }

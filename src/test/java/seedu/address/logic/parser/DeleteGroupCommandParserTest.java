@@ -42,7 +42,7 @@ class DeleteGroupCommandParserTest {
         assertParseSuccess(parser, GROUPNUMBER_DESC_1 + CLASSCODE_DESC_G02 + CLASSCODE_DESC_G01
                 + GROUPTYPE_DESC_OP1, new DeleteGroupCommand(expectedTutorialGroup));
 
-        // multiple group names - last group name accepted
+        // multiple group numbers - last group number accepted
         assertParseSuccess(parser, GROUPNUMBER_DESC_2 + GROUPNUMBER_DESC_1 + CLASSCODE_DESC_G01
                 + GROUPTYPE_DESC_OP1, new DeleteGroupCommand(expectedTutorialGroup));
 
@@ -59,7 +59,7 @@ class DeleteGroupCommandParserTest {
         // missing ClassCode Prefix
         assertParseFailure(parser, VALID_CLASSCODE_G01 + GROUPNUMBER_DESC_1 + GROUPTYPE_DESC_OP1, expectedMessage);
 
-        // missing group name prefix
+        // missing group number prefix
         assertParseFailure(parser, CLASSCODE_DESC_G01 + VALID_GROUPNUMBER_1 + GROUPNUMBER_DESC_1, expectedMessage);
 
         // missing group type prefix
@@ -76,7 +76,7 @@ class DeleteGroupCommandParserTest {
         // assertParseFailure(parser, GROUPNAME_DESC_1 + INVALID_CLASSCODE_DESC + GROUPTYPE_DESC_OP1,
         //        ClassCode.MESSAGE_CONSTRAINTS);
 
-        // invalid group name
+        // invalid group number
         assertParseFailure(parser, INVALID_GROUPNUMBER_DESC + CLASSCODE_DESC_G01 + GROUPTYPE_DESC_OP1,
                 GroupNumber.MESSAGE_CONSTRAINTS);
 
