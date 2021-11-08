@@ -137,6 +137,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -151,7 +152,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
-
+<div style="page-break-after: always;"></div>
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -169,6 +170,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -197,6 +199,7 @@ Step 6. The user decides to remove the tag `student` from a contact at index 3, 
 
 Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
+<div style="page-break-after: always;"></div>
 #### Design considerations:
 
 * **Option 1 (Current choice): Tags are saved within a `Set<Tag>` within `Person`**
@@ -223,6 +226,8 @@ Given below is an example usage scenario and how the pin mechanism behaves at ea
 Step 1. The user launches the application. Current `UniquePersonList` will contain previously added contacts `person1` and `person2`.
 
 ![PinUniquePersonListState0](images/PinUniquePersonListState0.png)
+
+<div style="page-break-after: always;"></div>
 
 Step 2. The user executes `add n/person3 …​` to add a new contact. This contact is initially unpinned and will be added to the `UniquePersonList`. It will be added to the end of the `UniquePersonList`.
 
@@ -252,6 +257,8 @@ The following sequence diagram shows how the pin operation works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PinCommandParser` and `PinCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How pin executes:**
@@ -274,6 +281,7 @@ The following sequence diagram shows how the pin operation works:
     * Pros: Harder to implement.
     * Cons: Less code duplication.
 
+<div style="page-break-after: always;"></div>
 ### Find feature
 
 #### Implementation
@@ -307,6 +315,8 @@ Step 5. CONNECTIONS' `UI` observes the filtered list is updated and displayed th
 * **Option 2 (current choice):** Create a `FindPredicate` to store Name(s) and Tag(s)
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of `FindCommand`.
     * Cons: More code.
+
+<div style="page-break-after: always;"></div>
 
 ### FindAny feature
 
@@ -418,9 +428,6 @@ Step 8. The header row is created based on `Prefix` arguments stored in `Model`,
 Step 9. Individual rows are generated based on the `Prefix` arguments stored in `Model` and the `FilteredPerson` in `ModelManager`, based on a mapping in `CsvUtil`.  
 Step 10. The headers and rows are written to the CSV file that is specified by the user.  
 
-
-
-
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.
 * Balancing between simplicity of use when no arguments are provided, and flexibility for users who might want additional information.
@@ -453,6 +460,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -486,7 +494,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 * keep track of upcoming birthdays
 * easy to use
 
-
+<div style="page-break-after: always;"></div>
 ### User stories
 
 
@@ -887,6 +895,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -902,6 +911,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -928,6 +938,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
 ### Adding a contact
 
 1. Adding a contact with all fields
@@ -955,8 +966,9 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add n/James! <other valid params>`, `add <one invalid param amongst other valid params>`, `...`.<br>
        Expected: No contact is added. Error details are shown in the status message.
 
-### Find a contact
-1. Find a contact by name
+<div style="page-break-after: always;"></div>
+### Finding a contact
+1. Finding a contact by name
 
     1. Prerequisites: Multiple contacts in the list with at least one contact named Roy.
 
@@ -968,7 +980,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect untag commands to try: `find`, `find n/<non existent name>`, `...`.<br>
        Expected: No changes made. Error details are shown in the status message.
 
-1. Find a contact by tag
+1. Finding a contact by tag
     1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues.
 
     1. Test case: `find t/Colleagues`<br>
@@ -981,6 +993,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect untag commands to try: `find`, `find t/<non existent tag>`, `find t/<non existent tag> c/`, `...`.<br>
        Expected: No changes made. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -1008,6 +1021,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
       Expected: No contact is deleted. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
 ### Deleting multiple contacts
 
 1. Deleting multiple contacts while all contacts are being shown
@@ -1034,9 +1048,10 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deletem`, `deletem -2 - -1 `, `deletem x - y`, `...` (where x is not less than y, either of x or y is not a positive integer within the list size currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
 ### Pinning a contact
 
-1. Pin a contact
+1. Pinning a contact
 
     1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
 
@@ -1049,8 +1064,9 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect pin commands to try: `pin`, `pin -1`, `pin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
 ### Unpinning a contact
-1. Unpin a contact
+1. Unpinning a contact
 
     1. Prerequisites: Contact at index 1 pinned and index 2 not pinned.
 
@@ -1063,9 +1079,10 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect unpin commands to try: `unpin`, `unpin -1`, `unpin x`, `...` (where x is larger than the size of the contacts that are currently being viewed).<br>
        Expected: No changes made. Error details are shown in the status message.
 
-### Tag a contact
+<div style="page-break-after: always;"></div>
+### Tagging a contact
 
-1. Tag a contact with multiple tags
+1. Tagging a contact with multiple tags
 
     1. Prerequisites: Contact at index 1 has no tags and contact at index 2 has no tags.
 
@@ -1079,10 +1096,10 @@ testers are expected to do more *exploratory* testing.
         Expected: New tag is added to the contact. Warning details are shown in the status message.
 
     1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
-       Expected: No changes to contacts. Error details in status message.
+       Expected: No changes to contacts. Error details are shown in the status message.
 
-### Untag a contact
-1. Untag a contact
+### Untagging a contact
+1. Untagging a contact
 
     1. Prerequisites: Contact at index 1 has tags johnBirthday and party and contact at index 2 has no tags.
 
@@ -1095,6 +1112,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
        Expected: No changes made. Error details are shown in the status message.
 
+<div style="page-break-after: always;"></div>
 ### Export Mailing List Command
 1.  Export contact list 
     1. Prerequisites: List all contacts using the `list` command.
