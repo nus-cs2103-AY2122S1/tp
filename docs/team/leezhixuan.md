@@ -24,16 +24,14 @@ Given below are my contributions to the project.
   * Justification:
     * Our target audience is people who love celebrating birthdays. It is natural for them to want to keep a
       record of the birthdays of their contacts. This way, they will never miss a birthday.
-      <br></br>
+      <br>
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=leezhixuan&tabRepo=AY2122S1-CS2103-F09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
-<br></br>
 
 * **Project management**:
   * Set up Github Pages.
   * Created and assigned issues for milestone `v1.3`.
-  <br></br>
-
+  <br>
 * **Enhancements to existing features**:
   * Redefine equality amongst contacts.
     * Previously, equality between two contacts hinged on the fact that they had the same name. Since people
@@ -49,7 +47,7 @@ Given below are my contributions to the project.
     * Increase coverage from 73.69% to 74.31% (+0.62%). (Pull request [\#86](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/86))
     * Increase coverage from 74.31% to 74.52% (+0.20%). (Pull request [\#101](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/101))
     * Increase coverage from 70.83% to 71.15% (+0.32%). (Pull request [\#201](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/201))
-      <br></br>
+      <br>
 
 * **Documentation**:
   * User Guide:
@@ -60,7 +58,7 @@ Given below are my contributions to the project.
     * Added sequence diagrams for `find` and `findAny`. (Pull request [\#223](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/223))
     * Added activity diagram for `delete`. (Pull request [\#223](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/223))
   * Polished User & Developer Guide. (Pull request [\#205](https://github.com/AY2122S1-CS2103-F09-4/tp/pull/205))
-  <br></br>
+  <br>
 
 * **Community**:
   * Reported 37 bugs and suggestions for other teams in class.
