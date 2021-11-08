@@ -94,12 +94,12 @@ public class JsonProgrammerErrorStorageTest {
     }
 
     /**
-     * Saves {@code ProgrammerError} at the specified {@code filePath}.
+     * Saves {@code programmerError} at the specified {@code filePath}.
      */
-    private void saveProgrammerError(ReadOnlyProgrammerError ProgrammerError, String filePath) {
+    private void saveProgrammerError(ReadOnlyProgrammerError programmerError, String filePath) {
         try {
             new JsonProgrammerErrorStorage(Paths.get(filePath))
-                    .saveProgrammerError(ProgrammerError, addToTestDataPathIfNotNull(filePath));
+                    .saveProgrammerError(programmerError, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
