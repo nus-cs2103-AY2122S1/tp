@@ -126,7 +126,8 @@ public class SampleDataUtil {
                 new Experience("8"),
                 getTagSet("Experienced"),
                 Optional.of(new Interview("2022-04-01, 09:40")),
-                Optional.of(new Notes("He does not have amazing qualifications, but has been in the industry for a long time."))),
+                Optional.of(new Notes("He does not have amazing qualifications, "
+                        + "but has been in the industry for a long time."))),
             new Person(new Name("Kingsley Lee Wei Qiang"), new Phone("96234235"),
                 new Email("QS_Sakura@protonmail.com"),
                 new Role("Social Media Marketer"),
@@ -186,7 +187,8 @@ public class SampleDataUtil {
                 new Experience("2"),
                 getTagSet(),
                 Optional.of(new Interview("2021-07-30, 17:20")),
-                Optional.of(new Notes("She is extremely qualified but just lacks the experience. She could be an asset to the company with under the right guidance."))),
+                Optional.of(new Notes("She is extremely qualified but just lacks the experience."
+                        + "She could be an asset to the company with under the right guidance."))),
             new Person(new Name("Raze Balakrishnan"), new Phone("82452617"),
                 new Email("raze_b00m_b00m@botmail.com"),
                 new Role("Demolition Expert"),
