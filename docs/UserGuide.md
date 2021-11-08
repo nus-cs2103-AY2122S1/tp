@@ -126,6 +126,8 @@ on any operating system including Windows, macOS or Linux
 1. When you first start up, FAST will contain some sample data for you to explore the different features.
 1. You are now ready to start managing your clients!
 
+<div style="page-break-after: always"></div>
+
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
@@ -136,6 +138,9 @@ in your command, FAST will inform you here! <br><br>
 Following that, we have the _Client information_ cards. Each client is represented by a card, which contains
 all the information of that client. <br><br>
 Lastly, the _Command box_ is where you can type in all your commands!
+
+<div style="page-break-after: always"></div>
+
 
 ### Try it out!
 
@@ -216,7 +221,6 @@ Parameters refer to the details that are to be included as an input to a command
 Prefix refers to the word symbol used before the parameter. 
 </div>
 
-<br>
 
 ### **Command Parameters**
 In this subsection, you can see all the parameters used in FAST at one place. These parameters are used for 
@@ -224,7 +228,7 @@ all our features usage.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 To achieve the best possible experience, avoid adding excessively long input to FAST.
-</div><br>
+</div>
 
 #### `ADDRESS` 
 * The address of your client
@@ -353,7 +357,10 @@ the earliest time to the latest time.
 #### `VENUE`
 * The location of an appointment with your client
 * Should not be longer than **20** characters long
-<br> <br>
+<br> 
+
+<div style="page-break-after: always"></div>
+
 
 ### **Managing a client**
 
@@ -737,6 +744,9 @@ You can add or delete the tags of a specified client.
 
 
 <br>
+
+<div style="page-break-after: always"></div>
+
 
 ### **Managing your client base**
 
