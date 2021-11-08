@@ -7,7 +7,7 @@ import static seedu.track2gather.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.track2gather.model.Model;
 
 /**
- * Lists all persons in the contacts list to the user.
+ * Shows a list of all persons.
  */
 public class ListCommand extends Command {
 

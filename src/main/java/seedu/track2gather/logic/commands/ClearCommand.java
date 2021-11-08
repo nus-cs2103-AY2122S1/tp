@@ -13,7 +13,7 @@ import seedu.track2gather.model.person.Person;
 import seedu.track2gather.model.person.attributes.Period;
 
 /**
- * Clears the contacts list.
+ * Deletes all persons with SHN periods that are completed at the time of command call.
  */
 public class ClearCommand extends Command {
 

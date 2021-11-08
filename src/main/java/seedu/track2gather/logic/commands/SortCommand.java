@@ -22,13 +22,14 @@ import seedu.track2gather.model.person.Person;
 import seedu.track2gather.model.person.attributes.Period;
 
 /**
- * Sorts all persons in the contacts list based on specified fields.
+ * Sorts the persons list based on the field(s) specified by the user.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in the contact list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the persons list based on the field(s) "
+            + "specified by the user. "
             + "At least one field prefix must be provided. Specifying the sort direction is optional. "
             + "Default sort direction is ascending.\n"
             + "Direction \"" + Direction.ASCENDING + "\" indicates ascending order and \""

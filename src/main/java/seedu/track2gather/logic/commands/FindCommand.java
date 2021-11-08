@@ -14,20 +14,18 @@ import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
 
 /**
- * Finds and lists all persons in contacts list who fulfills the criteria specified by the
- * user. Only one parameter can be specified at a time, but multiple arguments can be specified.
- * Keyword matching is case-insensitive.
+ * Finds person(s) based on the field specified by the user.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons who fulfills the "
-            + "criteria specified by the user.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds person(s) based on the field "
+            + "specified by the user.\n"
             + "Parameters (indicate only 1): "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_CASE_NUMBER + "CASE NUMBER] "
+            + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
+            + "[" + PREFIX_CASE_NUMBER + "CASE_NUMBER] "
             + "[" + PREFIX_SHN_PERIOD_START + "SHN_START_DATE] "
             + "[" + PREFIX_SHN_PERIOD_END + "SHN_END_DATE]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "91";

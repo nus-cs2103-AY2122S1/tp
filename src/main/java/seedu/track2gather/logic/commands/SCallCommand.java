@@ -11,14 +11,14 @@ import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
 
 /**
- * Indicates a person identified using its displayed index from the contacts list as called for the session.
+ * Updates a person as successfully called in the current SHN enforcement session.
  */
 public class SCallCommand extends Command {
 
     public static final String COMMAND_WORD = "scall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Indicates that the person has been successfully called\n"
+            + ": Updates a person as successfully called in the current SHN enforcement session.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

@@ -14,14 +14,15 @@ import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
 
 /**
- * Deletes a person identified using its displayed index from the contacts list.
+ * Deletes the person(s) identified by the specified index number(s) used in the displayed persons list.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person(s) identified by the index number(s) used in the displayed person list.\n"
+            + ": Deletes the person(s) identified by the specified index number(s) "
+            + "used in the displayed persons list.\n"
             + "Parameters: INDEX [MORE_INDICES] (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 

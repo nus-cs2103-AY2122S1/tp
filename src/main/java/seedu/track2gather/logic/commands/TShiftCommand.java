@@ -11,12 +11,15 @@ import seedu.track2gather.model.person.Person;
 import seedu.track2gather.model.person.attributes.Period;
 import seedu.track2gather.model.person.attributes.ShnPeriod;
 
+/**
+ * Shifts all persons’ SHN end dates by the specified number of days.
+ */
 public class TShiftCommand extends Command {
 
     public static final String COMMAND_WORD = "tshift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shifts all persons' SHN end date "
-            + "by the specified number of DAYS.\n"
+            + "by the specified number of days.\n"
             + "Parameters: [PLUS_MINUS_SIGN]DAYS\n"
             + "Example: " + COMMAND_WORD + " 3";
 

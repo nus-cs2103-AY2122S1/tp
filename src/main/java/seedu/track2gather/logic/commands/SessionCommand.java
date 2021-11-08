@@ -6,7 +6,7 @@ import static seedu.track2gather.commons.core.Messages.MESSAGE_PREDICATE_SHOW_NO
 import seedu.track2gather.model.Model;
 
 /**
- * Starts a new call session with all persons set to non-called.
+ * Starts a new SHN enforcement session by resetting the call status indicators of all persons to ‘not called’.
  */
 public class SessionCommand extends Command {
     public static final String COMMAND_WORD = "session";

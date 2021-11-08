@@ -11,15 +11,14 @@ import seedu.track2gather.model.Model;
 import seedu.track2gather.model.person.Person;
 
 /**
- * Indicates that a failed call was made to a person. This records that person has been called and increases recorded
- * number of failed attempts.
+ * Updates that a failed call was made to a person in the current SHN enforcement session.
  */
 public class FCallCommand extends Command {
 
     public static final String COMMAND_WORD = "fcall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Indicates that a person was non-responsive when an attempt to contact failed\n"
+        + ": Updates that a failed call was made to a person in the current SHN enforcement session.\n"
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 

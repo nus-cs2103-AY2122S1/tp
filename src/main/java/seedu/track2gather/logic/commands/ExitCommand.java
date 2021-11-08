@@ -3,7 +3,7 @@ package seedu.track2gather.logic.commands;
 import seedu.track2gather.model.Model;
 
 /**
- * Terminates the program.
+ * Exits the program.
  */
 public class ExitCommand extends Command {
 
