@@ -1,6 +1,9 @@
 ---
 title: User Guide
 ---
+
+![app logo](images/ui/logo_size.jpg)
+
 ## Table of Contents
 * [Overview](#overview)
 * [Information About this User Guide](#information-about-this-user-guide)
@@ -56,7 +59,9 @@ Well, we have good news. Academy Directory is just the application for you!
 Academy Directory (AD) is a **desktop application for CS1101S tutors to manage their students.** Its main features are as follows: 
 - [Manage students’ personal details](#managing-students-personal-details)
 - [Track students' grades, Studio attendance, and participation](#tracking-students-grades-studio-attendance-and-participation)
-- [Visualize data in Academy Directory](#visualization-tools) 
+- [Visualize data in Academy Directory](#visualization-tools)
+
+![app logo](images/ui/app_logo.png)
 
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
@@ -104,8 +109,7 @@ A GUI similar to the below image should appear in a few seconds. Note how the ap
 
    * **`exit`** : Exits the app.
 
-5. You may refer to the [Features](#features) below for the set of features supported by Academy Directory and the details for each command.
-
+5. You may refer to the [Features](#features) below for the set of features supported by Academy Directory and the details for each command. Alternatively, use `help` to get start and learn how to use our various commands.
 Notes:
 - While it is possible to open `academydirectory.jar` by double-clicking it, this may cause Academy Directory
 related files to be saved to an indeterminate location on the computer. As such, this method is _not recommended_, especially
@@ -335,7 +339,7 @@ Examples:
 ![View Command (after)](images/ug/View%20Command%20(after).PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Includes an interactive GUI version where Avengers can click on the list to view student information as well.
+Avengers can also click on the student card to execute `view` command instead
 </div>
 
 #### Displaying the grades for an assessment:  `show`
@@ -349,6 +353,10 @@ as the average score.
 Examples:
 * `show RA1`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Avengers can also browse the first menu on the top left (with the paper and pencil symbol) to execute `show` command instead
+</div>
+
 #### Visualizing assessments' grades of the entire class: `visualize`
 Plots the grades and the average score of all the students for all assessments.
 
@@ -361,7 +369,7 @@ Format: `visualize`
 ![visualizecommand](images/ug/visualizeCommand.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Includes an interactive GUI version where Avengers can click on the list to view statistics as well.
+Avengers can also browse the second menu on the top left (with the chart symbol) to execute `visualize` command instead
 </div>
 
 #### Filtering Academy Directory by name or tag: `filter`
@@ -439,7 +447,7 @@ Example:
 ![undoCommandAfter](images/ug/undoCommandAfter.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Includes an interactive GUI version where Avengers can click on the menu to undo the most recent changes as well.
+Avengers can also browse the third menu on the top left (with the clock symbol) to execute `undo` command instead
 </div>
 
 #### Redo changes to Academy Directory: `redo`
@@ -461,7 +469,7 @@ Example:
 ![redoCommand](images/ug/redoCommand.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Includes an interactive GUI version where Avengers can click on the menu to redo the most recent changes as well.
+Avengers can also browse the third menu on the top left (with the clock symbol) to execute `redo` command instead
 </div>
 
 #### Seeking help : `help`
@@ -492,7 +500,7 @@ Examples:
   or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Includes an interactive GUI version where Avengers can click on the menu to view help. Only available for general help.
+Avengers can also browse the fourth menu on the top left (with the question symbol) to execute a general `help` command instead
 </div>
 
 #### Exiting the program : `exit`
@@ -528,7 +536,7 @@ to indicate current state.
 ![historyCommand1](images/ug/historyCommand1.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Includes an interactive GUI version where Avengers can click on the menu to see usage history as well.
+Avengers can also browse the third menu on the top left (with the clock symbol) to execute `history` command instead
 </div>
 
 #### [For Advanced Users] Reverting Commit: `revert`
@@ -590,28 +598,28 @@ This section provides a summary of commands and prefixes in Academy Directory
 ### Command Summary
 This subsection provides a summary for all the commands used in Academy Directory
 
-Action | Format | Examples
---------|--------|----------
-[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER] [t/TAG]` | `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
-[**Delete Student**](#deleting-a-student-delete) | `delete INDEX` | `delete 3`
-[**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` | `tag 1 t/mission t/streams`
-[**Get Personal Detail**](#getting-personal-detail-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
-[**Edit Personal Detail**](#editing-a-students-detail--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [te/TELE_HANDLE]` | `edit 2 n/James Lee e/jameslee@example.com`
-[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade INDEX as/RA1 g/15`
-[**Edit Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` | `attendance 1, 2 ses/1 att/1`
-[**Edit Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD` | `participation 1 ses/12 att/0`
-[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` | `show RA1`
-[**Visualize all grades**](#visualizing-assessments-grades-of-the-entire-class-visualize) | `visualize` | `visualize`
-[**Filter Academy Directory**](#filtering-academy-directory-by-name-or-tag-filter) | `filter KEYWORD [MORE_KEYWORDS]` | `filter James Jake`
-[**Sort Student List**](#sorting-student-list--sort) | `sort attr/ATTRIBUTE ord/ORDER` | `sort attr/average ord/asc`
-[**List All Students**](#listing-all-students--list) | `list` | `list`
-[**Clear Student List**](#clearing-all-students--clear) | `clear` | `clear`
-[**Undo**](#undo-changes-to-academy-directory-undo) | `undo` | `undo`
-[**Redo**](#redo-changes-to-academy-directory-redo) | `redo` | `redo`
-[**Help**](#seeking-help--help) | `help [COMMAND_NAME]` | `help add`
-[**Exit**](#exiting-the-program--exit) | `exit` | `exit`
-[**View Commit History**](#for-advanced-users-viewing-commit-history-history) | `history` | `history`
-[**Revert Commit**](#for-advanced-users-reverting-commit-revert) | `revert HASH` | `revert df7x3`
+| Action | Format | Examples
+|--------|--------|----------
+|[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER] [t/TAG]` | `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
+|[**Delete Student**](#deleting-a-student-delete) | `delete INDEX` | `delete 3`
+|[**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` | `tag 1 t/mission t/streams`
+|[**Get Personal Detail**](#getting-personal-detail-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
+|[**Edit Personal Detail**](#editing-a-students-detail--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [te/TELE_HANDLE]` | `edit 2 n/James Lee e/jameslee@example.com`
+|[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade INDEX as/RA1 g/15`
+|[**Edit Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` | `attendance 1, 2 ses/1 att/1`
+|[**Edit Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD` | `participation 1 ses/12 att/0`
+|[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` | `show RA1`
+|[**Visualize all grades**](#visualizing-assessments-grades-of-the-entire-class-visualize) | `visualize` | `visualize`
+|[**Filter Academy Directory**](#filtering-academy-directory-by-name-or-tag-filter) | `filter KEYWORD [MORE_KEYWORDS]` | `filter James Jake`
+|[**Sort Student List**](#sorting-student-list--sort) | `sort attr/ATTRIBUTE ord/ORDER` | `sort attr/average ord/asc`
+|[**List All Students**](#listing-all-students--list) | `list` | `list`
+|[**Clear Student List**](#clearing-all-students--clear) | `clear` | `clear`
+|[**Undo**](#undo-changes-to-academy-directory-undo) | `undo` | `undo`
+|[**Redo**](#redo-changes-to-academy-directory-redo) | `redo` | `redo`
+|[**Help**](#seeking-help--help) | `help [COMMAND_NAME]` | `help add`
+|[**Exit**](#exiting-the-program--exit) | `exit` | `exit`
+|[**View Commit History**](#for-advanced-users-viewing-commit-history-history) | `history` | `history`
+|[**Revert Commit**](#for-advanced-users-reverting-commit-revert) | `revert HASH` | `revert df7x3`
 
 ### Prefix Summary
 This subsection provides a summary for all the fields and their prefixes 
@@ -621,6 +629,7 @@ will have `N.A.` be written in their `Prefix` column
 Field | Prefix
 ------|-------
 INDEX | **N.A.**
+COMMAND_NAME | **N.A.**
 NAME | **n/**
 EMAIL | **e/**
 TELE_HANDLE | **te/**
@@ -653,6 +662,7 @@ Field | Additional information that can be provided to a command for correct com
 Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
 Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
 Lexicographically |  Refers to the generalization of the alphabetical order of the dictionaries to sequences of ordered symbols or, more generally, of elements of a totally ordered set. More information can be found [here](https://en.wikipedia.org/wiki/Lexicographic_order). |
+Singular command | Refers to commands with only one keyword | If there are any other arguments after the command, then an error message will be shown
 
 ## Appendix
 ### Appendix A: Version Controlled Commands
