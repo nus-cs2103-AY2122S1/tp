@@ -12,7 +12,7 @@ title: User Guide
 
 Welcome to the User Guide of **TuitiONE**!
 
-**TuitiONE** is a Command Line Interface (CLI) based application that aims to **simplify the work of Customer Servicing Officers (CSO) in a tuition centre**.
+**TuitiONE** is a Command Line Interface (CLI) based application that aims to **simplify the work of Customer Service Officers (CSO) in a tuition centre**.
 The application also incorporates the benefits of a Graphical User Interface (GUI).
 **TuitiONE** allows CSOs to input the details of students and parents through simple and intuitive commands. With our application, a CSO's work would be reduced and efficient.
 
@@ -32,7 +32,7 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
 2. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TuitiONE.
+3. Copy the file to the folder you want to use as the _home folder_ for your **TuitiONE**.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
   _Note how the app contains some sample data_.<br>
@@ -84,7 +84,7 @@ The table below are the interpretations of a few technical terms that you may en
 | ------------- | ------------- |
 | CLI | The Command Line Interface (CLI) is the interface that accepts text input to execute the functions of **TuitiONE**. |
 | GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. Graphics, icons, windows, menus, cursor and buttons are all components of a GUI. |
-| Parameter  | Parameter refers to the user input required after the user is prompted by the TuitiONE GUI  |
+| Parameter  | Parameter refers to the user input required after the user is prompted by the **TuitiONE** GUI  |
 
 #### General Symbols and Syntax
 
@@ -176,7 +176,7 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 #### Viewing help: `help`
 
-TuitiONE will display the help panel which shows you a summary of the command syntax that is usable to the current version of TuitiONE.
+**TuitiONE** will display the help panel which shows you a summary of the command syntax that is usable to the current version of **TuitiONE**.
 
 Command Format: `help`
 
@@ -238,7 +238,7 @@ Example(s):
 
 #### Adding a student: `add`
 
-Adds a student to the TuitiONE.
+Adds a student to the **TuitiONE**.
 
 Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
@@ -255,7 +255,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * `GRADE` refers to the educational level of the student. It can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
-* `REMARK` can have a maximum of 25 characters, single worded without spacings in between them. A student can have any number of remarks, capped at 5. (including 0). (e.g `smart` is valid, while `needs help` is invalid)
+* `REMARK` can have a maximum of 25 characters, single worded without spacings in between them (e.g `smart` is valid, while `needs help` is invalid). A student can have any number of remarks, capped at 5 including 0.
 
 * Each student must have a unique name.
 
@@ -302,7 +302,7 @@ Example(s):
 
 #### Deleting a student : `delete`
 
-Deletes a student from the TuitiONE.
+Deletes a student from the **TuitiONE**.
 
 Command Format: `delete INDEX`
 
@@ -310,15 +310,13 @@ Command Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
 
-* The index refers to the index number shown in the displayed student list.
-
 * Deleting a student also unenrolls (see [`unenroll`](#unenrolling-a-student-from-lesson-unenroll)) themselves from their lessons.
 
-* The index **must be a positive integer** `1`, `2`, `3`, …
+* The index **must be a positive integer** `1`, `2`, `3`, … The index must also refer to an index number shown in the displayed student list.
 
 Example(s):
 
-* `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
+* `list` followed by `delete 2` deletes the student indexed `2` in the **TuitiONE**.
 
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
@@ -339,23 +337,23 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 
 * You can edit any number of fields.
 
-* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** `1`, `2`, `3`, … The index must also refer to an index number shown in the displayed student list.
 
-* The index **must be a positive integer** `1`, `2`, `3`, …
-
-* You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.
+* You can edit a student to have any number of remarks, capped at 5 including 0. The number of characters each remark can have is capped at 25.
 
 * Remarks are unique, and you cannot tag more than one of the same remark to the same student. For example, `edit 2 r/overdueFees r/overdueFees` will only tag a single `overdueFees` remark to the student at index `2`.
 
-* See [`add` command](#adding-a-student-add) for other constraints on defining a student.
+* You may refer to the [`add`](#adding-a-student-add) command for other constraints when you wish to edit a student.
 
-* If you enter `edit r/[REMARK_TO_ADD]`, TuitiONE will add on the given `REMARK` to the existing set of remarks.
+* Editing a Student's details to its current values is valid (e.g renaming Student with `NAME` "David" to "David"), and a success message will still be displayed.
 
-* If you enter `edit dr/[REMARK_TO_DELETE]`, TuitiONE will delete the `REMARK` from the existing set of remarks, if it is present in the set.
+* If you enter `edit r/[REMARK_TO_ADD]`, **TuitiONE** will add on the given `REMARK` to the existing set of remarks.
 
-* If you were to add and remove remarks in the same command, TuitiONE will remove specified remarks before adding the new ones.
+* If you enter `edit dr/[REMARK_TO_DELETE]`, **TuitiONE** will delete the `REMARK` from the existing set of remarks, if it is present in the set.
 
-* **Note that if you change a student's grade, TuitiONE will unenroll the student from all the classes he or she was previously taking in the previous grade**.
+* If you were to add and remove remarks in the same command, **TuitiONE** will remove specified remarks before adding the new ones.
+
+* **Note that if you change a student's grade, **TuitiONE** will unenroll the student from all the classes he or she was previously taking in the previous grade**.
 
 Example(s):
 
@@ -367,14 +365,14 @@ Example(s):
 
 * `edit 2 r/discounted dr/unpaid` removes the `unpaid` remark from the second student's set of remarks, before adding the `discounted` remark.
 
-![Outcome of `edit 2 r/discounted`](images/UserGuideImage/edit.PNG)
+![Outcome of `edit` command](images/UserGuideImage/edit.PNG)
 
 <center><i>Image: Expected output of <code>edit</code> command.</i></center><br>
 <br>
 
 #### Enrolling a student from lesson: `enroll`
 
-Enroll a specified student to a given TuitiONE lesson.
+Enroll a specified student to a given **TuitiONE** lesson.
 
 Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
@@ -383,7 +381,7 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * Enroll the student identified by `STUDENT_INDEX` in the displayed student list to the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 
 * Enrolling a student is only possible if the student:
-  1. has the same `grade` as the lesson,
+  1. has the same `GRADE` as the lesson,
 
   2. is not enrolled to the lesson and,
 
@@ -401,16 +399,16 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
 Example(s):
 
-* `enroll 1 l/2` will enroll the student indexed at `2` in the displayed student list to the lesson indexed at `2` in the displayed lesson list.
+* `enroll 2 l/2` will enroll the student indexed at `2` in the displayed student list to the lesson indexed at `2` in the displayed lesson list.
 
-![Outcome of `enroll 1 l/2`](images/UserGuideImage/enroll.PNG)
+![Outcome of `enroll 2 l/2`](images/UserGuideImage/enroll.PNG)
 
-<center><i>Image: Expected output of <code>enroll 1 l/2</code> command.</i></center><br>
+<center><i>Image: Expected output of <code>enroll 2 l/2</code> command.</i></center><br>
 <br>
 
 #### Unenrolling a student from lesson: `unenroll`
 
-Unenroll a student from a given TuitiONE lesson.
+Unenroll a student from a given **TuitiONE** lesson.
 
 Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 
@@ -426,18 +424,18 @@ Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 
 Example(s):
 
-* `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
+* `unenroll 2 l/2` will unenroll the student indexed `2` in the displayed student list from the lesson indexed at `2` in the displayed lesson list.
 
-![Outcome of `unenroll 1 l/1`](images/UserGuideImage/unenroll.PNG)
+![Outcome of `unenroll 2 l/2`](images/UserGuideImage/unenroll.PNG)
 
-<center><i>Image: Expected output of <code>unenroll 1 l/1</code> command.</i></center><br>
+<center><i>Image: Expected output of <code>unenroll 2 l/2</code> command.</i></center><br>
 <br>
 
 ### Managing Lessons
 
 #### Adding a lesson: `add-l`
 
-Adds a lesson to the TuitiONE with the specified prefixes.
+Adds a lesson to the **TuitiONE** with the specified prefixes.
 
 Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
@@ -449,13 +447,13 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * `DAY_OF_WEEK` can only be these form: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun` (the first letter need not be capitalized, i.e. `mon` is allowed but not `MON`).
 
-* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.
-
 * Lessons are fixed at **two** hour periods. In upcoming features, we will give you the power to define your lesson timing ranges.
+
+* `START_TIME` is in **24** hours format and can only be between `0900` and `1900` (as lessons can only be conducted between `0900 to 2100`). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.
 
 * Lessons with the same `SUBJECT` and `GRADE` cannot have the same `DAY_OF_WEEK` and `START_TIME`.
 
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive. The cost will be displayed in the lesson list rounded off to two decimal places.
+* The `COST` must be a non-negative number (e.g `0.0`, `2.0`, `3.3`, …). The currency used here is in Singapore dollar, SGD. The maximum `COST` for a lesson is capped at SGD $ 200.00 inclusive. The `COST` will be rounded off to two decimal places.
 
 Example(s):
 
@@ -473,7 +471,7 @@ Example(s):
 
 #### Deleting a lesson: `delete-l`
 
-Deletes a lesson from the TuitiONE.
+Deletes a lesson from the **TuitiONE**.
 
 Command Format: `delete-l INDEX`
 
@@ -481,9 +479,7 @@ Command Format: `delete-l INDEX`
 
 * Deletes the lesson of the specified `INDEX`.
 
-* The index refers to the index number shown in the displayed lesson list.
-
-* The index **must be a positive integer** `1`, `2`, `3`, …
+* The index **must be a positive integer** `1`, `2`, `3`, …. The index refers to the index number shown in the displayed lesson list.
 
 Example(s):
 
@@ -504,23 +500,21 @@ Command Format: `roster LESSON_INDEX`
 
 * Displays the student roster of the lesson of the specified `LESSON_INDEX`.
 
-* The index refers to the index number shown in the displayed lesson list.
-
-* The index **must be a positive integer** `1`, `2`, `3`, …
+* The index **must be a positive integer** `1`, `2`, `3`, …. The index refers to the index number shown in the displayed lesson list.
 
 Examples:
-* `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
+* `roster 2` will display the students currently enrolled in the lesson indexed at `2` in the student panel.
 
-![Outcome of `roster 1`](images/UserGuideImage/roster.PNG)
+![Outcome of `roster 2`](images/UserGuideImage/roster.PNG)
 
-<center><i>Image: Expected output of <code>roster 1</code> command.</i></center><br>
+<center><i>Image: Expected output of <code>roster 2</code> command.</i></center><br>
 <br>
 
 ### Others
 
 #### Clearing all entries : `clear`
 
-Clears all students and lessons data stored in TuitiONE.
+Clears all students and lessons data stored in **TuitiONE**.
 
 Command Format: `clear`
 
@@ -565,24 +559,24 @@ You can expect these features in upcoming versions of **TuitiONE**.
 
 #### Editing lessons
 
-With this feature, you will have the flexibility in managing the lessons in your tuition center. You will be able to change the day and time of the lesson, its subject, its grade, and its price.
+With this feature, you will have the flexibility in managing the lessons in your tuition center. You will be able to change the `DAY` and `TIME` of the lesson, its `SUBJECT`, its `GRADE`, and its `COST`.
 
 #### Customised sorting
 
-With this feature, you will have the flexibility to order the student and lesson lists to your preference. For students, you can expect to be able to sort the student list by address, number of lessons and even by their fees. For lessons, you can expect to sort the lesson list by day and time, and number of students enrolled.
+With this feature, you will have the flexibility to order the student and lesson lists to your preference. For students, you can expect to be able to sort the student list by `ADDRESS`, number of lessons and even by their fees. For lessons, you can expect to sort the lesson list by `DAY` and `TIME`, and number of students enrolled.
 
 #### Verification of student particulars
 
-With this feature, **TuitiONE** will help you check whether given student particulars are legitimate. This includes verifying the email and address of newly added students.
+With this feature, **TuitiONE** will help you check whether given student particulars are legitimate. This includes verifying the `EMAIL` and `ADDRESS` of newly added students.
 
 #### Tutor management
 
-With this feature, you will be able to store information about tutors into **TuitiONE**. The information can include the lessons they are teaching, their qualifications and their schedule.
+With this feature, you will be able to store information about tutors into **TuitiONE**. The information can include the lessons they are teaching, their __qualifications__ and their __schedules__.
 
 #### Importing/exporting files
 
-With this feature, you will be able to import existing files, such as csv and excel files, into **TuitiONE**, and **TuitiONE** will automatically format them for you in its GUI.
-You can also export current data in **TuitiONE** as other file types for compatibility with other applications.
+With this feature, you will be able to import existing files, such as csv and Excel files, into **TuitiONE**, and **TuitiONE** will automatically format them for you in its **GUI**.
+You will also be able to export current data in **TuitiONE** as other file types for compatibility with other applications.
 
 #### Data Analytics
 
@@ -613,11 +607,11 @@ Action | Format | Examples
 
 ## **Glossary**
 
-* **Java**: A widely used programming language
+* **Java**: A widely used programming language.
 
-* **JAR**: An executable java file for you to open the app
+* **JAR**: An executable java file for you to open the app.
 
-* **GUI**: Graphical User Interface
+* **GUI**: Graphical User Interface.
 
 * **Json**: Javascript object notation file. This is used to store your preferences and data.
 
@@ -633,46 +627,46 @@ Action | Format | Examples
 
     > You can type `help` or you can click on the 'Help' tab on the top left of the app window. (see [Help](#viewing-help-help) for more)
 
-1. Why are some usual email address inputed valid, such as 'jd@gmail.com.this.that.this'?
+1. Why are some unusual email address inputs valid, such as 'jd@gmail.com.this.that.this'?
 
     > There are many possible email addresses and domains such as school email address and personal domains, hence **TuitiONE** will not provide a thorough checking in this current version. If there is any scenario where you have inputted the wrong email address and would like to change it, refer to the the `edit` command [here](#editing-a-student--edit).
 
 1. Why am I unable to add a student with the same name as another student?
 
-    > Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of name and phone number which will counter this problem.
+    > Currently our system identifies uniqueness of students by their name, hence you are unable to add students with the same name. We are working on an update to identify uniqueness through the combination of the name and phone number, allowing for multiple students of the same name to be in our **TuitiONE**
 
 1. How do I edit a lesson?
 
-    > Unfortunately, in the current version of TuitiONE, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming update, there will be an `edit-l` command that will allow for the editing of lessons.
+    > In the current version of **TuitiONE**, you will need to use `delete-l` and `add-l` to make your edits, then re-enroll the students. In the upcoming updates, there will be an `edit-l` command that will allow for the editing of lessons.
 
-1. How do I edit a remark?
+1. How do I edit a remark of a Student?
 
-    > To edit a remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes to remarks. (see [Editing a student](#editing-a-student--edit) for more).
+    > To edit a student's remark, you will need to use the `dr/` and `r/` prefixes in the `edit` command to make any changes (see [Editing a student](#editing-a-student--edit) for more).
 
-1. Am I able to add or edit `Remarks` to have spacings within them?
+1. Am I able to add or edit remarks to have spacings within them?
 
-    > No. The number of characters each `Remark` can have is capped at 25, and must be single words. (see [Adding a student](#adding-a-student-add) for more)
+    > No. The number of characters each remark can have is capped at **25**, and must be single words (see [Adding a student](#adding-a-student-add) for more).
 
 1. Am I able to use "4PM" instead of "1600" for my timings when creating a new lesson?
 
-    > No. **TuitiONE** only accepts timings that follow the `2400` hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1415` are valid inputs, while `1415` is an invalid input. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
+    > No. **TuitiONE** only accepts timings that follow the **24** hours format. Additionally, timings must also be in intervals of 30 minutes For instance, `1400` and `1430` are valid inputs, while `1415` is an invalid input (see [Adding a lesson](#adding-a-lesson-add-l) for more).
 
-1. How long can my name be for adding a new `Student`?
+1. How long can a name be when I add/edit a student?
 
-    > We have imposed a `150` character limit for the respective names of `Students`. `Students` with names longer than 150 characters should use initials to represent their full name instead. (see [Adding a student](#adding-a-student-add) for more)
+    > We have imposed a **150** character limit for the respective names of students. Students with names longer than **150** characters should be represented with their initials instead (see [Adding a student](#adding-a-student-add) for more).
 
-1. Can `Lessons` of the same `Subject` and `Grade` start at the same time?
+1. Can lessons of the same subject and grade start at the same time?
 
-    > No. **TuitiONE** would consider a `Lesson` of the same `Subject` and `Grade` that start at the same time on the same day as a conflict. (see [Adding a lesson](#adding-a-lesson-add-l) for more)
+    > No. **TuitiONE** would consider a lesson of the same `SUBJECT` and `GRADE` that start at the same time on the same day as a conflict (see [Adding a lesson](#adding-a-lesson-add-l) for more).
 
-1. How many `Lessons` can a `Student` be enrolled in?
+1. How many lessons can a student be enrolled in?
 
-    > A `Student` can be enrolled in a maximum of 10 `Lessons` at any time. **TuitiONE** will not allow a `Student` to be enrolled in more than **10** `Lessons` (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
+    > A student can be enrolled in a maximum of **10** lessons at any time. **TuitiONE** will not allow a student to be enrolled in more than **10** lessons (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
 
-1. How many `Students` can a `Lesson` contain?
+1. How many students can a lesson contain?
 
-    > A `Lesson` can have up to 15 `Students` enrolled in at any time. **TuitiONE** will not allow a `Lesson` to have more than **15** `Students` enrolled in at one time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more)
+    > A lesson can have up to **15** students enrolled in at any time. **TuitiONE** will not allow a lesson to have more than **15** students enrolled at any time (see [Enrolling a student from lesson](#enrolling-a-student-from-lesson-enroll) for more).
 
 1. Why are there some unusual files present in my folder after I run **TuitiONE**?
 
-    > **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as this may cause **TuitiONE** to reset the next time you run it, potentially losing all your data. You may wish to edit these files directly, but we do not recommend such as well (see [Managing data](#managing-data) for more).
+    > **TuitiONE** currently is a local desktop application, and hence the application would need to store the data you have inputted into these files. These files contain your personal preferences as well as the student and lesson data your tuition center holds. As such do not delete these files as you may potentially lose all your data.
