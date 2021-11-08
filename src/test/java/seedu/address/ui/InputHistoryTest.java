@@ -1,10 +1,8 @@
-package seedu.address.model;
+package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.ui.InputHistory;
 
 public class InputHistoryTest {
 
