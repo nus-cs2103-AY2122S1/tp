@@ -33,8 +33,7 @@ Given below are my contributions to the project.
     * Allows Student to be removed from a Tutorial Group within their Tutorial Class
     * Referenced the implementation of `Tags` when adding `Tutorial Group` as parameter of a Student. One difference in implementation
       was that `Tutorial Groups` can be deleted selectively. 
-  
-
+      
 * **Documentation**:
   * User Guide:
     * Added documentations for the features `addsg`,`deleteg` and `viewg` [\#66](https://github.com/AY2122S1-CS2103T-W15-1/tp/pull/66)
