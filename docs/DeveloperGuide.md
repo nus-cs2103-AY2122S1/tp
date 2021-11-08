@@ -5,7 +5,7 @@ title: Developer Guide
 
 SalesNote is a **desktop app for tailors, optimized for use via a Command Line Interface** (CLI), suitable for fast
 typists. SalesNote aims to help tailors simplify their administrative tasks, with the main features split between helping to manage:
-* Client Information (e.g. contact details, measurements, notes)
+* Client information (e.g. contact details, measurements, notes)
 * Tasks to be done
 * Sales orders and accounts
 
@@ -73,7 +73,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/SalesNote-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -89,13 +89,13 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletetask 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its *API* in an `interface` with the same name as the component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
@@ -112,14 +112,14 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/SalesNote-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W08-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person`, `Task` and `Order` objects residing in the `Model`.
 
 ### Logic component
 
@@ -174,10 +174,9 @@ The `Model` component,
   * Address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
   * Task book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
   * Order book data i.e., all `Order` objects (which are contained in a `UniqueOrderList` object).
-
-* stores the currently 'selected' `Person`, `Tasks`, and `Orders` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<Task>` and `ObservableList<Order>` respectively  that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
+* stores the currently 'selected' `Person`, `Task`, and `Order` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<Task>` and `ObservableList<Order>` respectively  that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -186,16 +185,11 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="600" />
 
 How the Storage component works:
-* Saves address book data, task book data, sales order book data
-  and user preference data in json format, and read them back into corresponding objects.
-* The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
-  and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* Each Book Storage component (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of converting the model's data into correct json file and retrieving the data from 
-  the json file to convert it to a model data.
-* Each `JsonSerializable` class implements its own `JsonAdapted` class which specifies methods to convert model Object
-  (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
-* The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the 
-  case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`
+* Saves address book, task book, sales order book and user preference data in json format, and read them back into corresponding objects.
+* The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`, and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* Each book storage (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of converting the model's data into correct json file and retrieving the data from the json file to convert it to a model data.
+* Each `JsonSerializable` class implements its own `JsonAdapted` class which specifies methods to convert model object (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
+* The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`.
 
 ### Common classes
 
@@ -203,43 +197,41 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Task and order package
 
-#### Implementation
-The implementation of both of these packages is largely similar to the `person` package. In the original AB3, there is a
-`person` class, stored in a `UniquePersonList` that handles list operations, further stored in a `AddressBook` that handled
+The implementation of both of these packages is largely similar to the `Person` package. In the original AB3, there is a
+`Person` class, stored in a `UniquePersonList` that handles list operations, further stored in a `AddressBook` that handled
 other utility functions like data management.
 
-Following this structure and outline, we had a `task` class, stored in a `UniqueTaskList` stored in a `TaskBook`, and a
-`order` class, stored in a `UniqueOrderList` stored in a `OrderBook`. Below is an updated model diagram reflecting these
-changes:
-
-![`Updated Model Diagram`](images/ModelClassDiagram.png)
+Following this structure and outline, we had a `Task` class, stored in a `UniqueTaskList` stored in a `TaskBook`, and an
+`Order` class, stored in a `UniqueOrderList` stored in an `OrderBook`. The updated model diagram reflecting these
+changes can be seen in the [`Model component`](#model-component).
 
 Similar to the `Person` class, the `Task` and `Order` classes have fields, as seen here:
 
 ![`Order Class Diagram`](images/OrderClassDiagram.png)
 
-![`Task Class Diagram`](images/TaskClassDiagram.png))
+![`Task Class Diagram`](images/TaskClassDiagram.png)
 
 These fields satisfy the following conditions:
 * Both:
-    * `Date`, `Label`: Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
-      length for both fields, and would guarantee the UI display worked the way we intended.
+    * `Date`, `Label` : Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
+      length for both fields, and would guarantee the UI display works the way we intended.
+
 * Task:
-    * `TaskTag`: This is a tag that is either `General`, or `SO{ID}` where `ID` is the `Id` field of some `Order` object.
-    * `isDone`: Boolean flag to indicate whether or not the task is done.
+    * `TaskTag` : This is a tag that is either `General`, or `SO{ID}` where `ID` is the `Id` field of some `Order` object.
+    * `isDone` : Boolean flag to indicate whether or not the task is done.
 
 * Order:
-    * `Amount` Accepts any string that can be parsed by Double.parseDouble(), that results in a non-negative real number.
+    * `Amount` : Accepts any string that can be parsed by Double.parseDouble(), that results in a non-negative real number.
       Represents the amount the user charges for a given `Order`
-    * `Customer` Blocks of 1 or more alphanumeric characters, separated by at most one space. Represents the `Person` the order
+    * `Customer` : Blocks of 1 or more alphanumeric characters, separated by at most one space. Represents the `Person` the order
       is addressed to.
-    * `id` Long used to uniquely identify `Order` objects. In this case, we did not deal with potential overflow given that
+    * `id` : Long used to uniquely identify `Order` objects. In this case, we did not deal with potential overflow given that
       the range of a Long in Java is up to 2^63 (which is > 10^18!). We judged that this should be more than sufficient for
       any realistic use of the application.
     * `isComplete`: Boolean flag to indicate when the `Order` is complete, and payment has been received.
@@ -247,37 +239,38 @@ These fields satisfy the following conditions:
 Something alluded to in the fields above, is that there are implicit dependencies between the `Task`, `Order`, and `Person` classes.
 To add an `Order` to SalesNote, we decided it made the most sense for there to already be a `Person` in the application
 the `Order` was addressed to. So for instance, to add an order from a client named `Jamie Tan`, the user would need to ensure
-that a `Person` with `Name` `Jamie Tan` existed in the application first.
+that a `Person` with **`Name`** `Jamie Tan` existed in the application first.
 
-Another link we thought would make sense to allow for, was to make it possible to tie a `Order` object to related `Task` objects.
+Another link we thought would make sense to allow for, was to make it possible to tie an `Order` object to related `Task` objects.
 `Task` objects were meant to help users manage their work, and so we felt there should be a way for a user to relate a `Task`
 to a specific `Order` if they wanted to.
 
 In both of these cases, we did not link the classes directly, hence there is no arrow between the `Order` and `Person` class
-and no arrow between the `Order` and `Task` class in the diagram above. Instead we simply made use of the fact that SalesNote
-maintains both a `UniquePersonList` and a `UniqueOrderList`. To relate a `Order` to a `Person`, it is enough to remember the
+and no arrow between the `Order` and `Task` class in the diagram above. Instead, we simply made use of the fact that SalesNote
+maintains both a `UniquePersonList` and a `UniqueOrderList`. To relate an `Order` to a `Person`, it is enough to remember the
 `Name` field (in `UniquePersonList`, two `Person` objects with the same `Name` are considered equal). To relate a `Task` to
-a `Order`, we can make use of the fact that `Order` objects have unique `id` fields.
+an `Order`, we can make use of the fact that `Order` objects have unique `id` fields.
 
 ##### Design choices
 A very reasonable alternative one might consider is linking the classes directly. For instance, allowing a `Person`, to
-have a list of `Order` objects related to the `Person`, and a `Order`, to have a list of `Task` objects related to the `Order`.
+have a list of `Order` objects related to the `Person`, and an `Order`, to have a list of `Task` objects related to the `Order`.
 This was an alternative method we considered, that would come with a cost in complexity by relating the `Person`,
 `Task` and `Order` objects. We felt that the method we chose that made use of the `UniqueXList` properties and kept the
-classes more distinct better adhered to the Separation of concerns and Law of Demeter principle.
+classes more distinct better adhered to the Separation of Concerns Principle.
 
 #### Updating related fields in Person class
 In implementing the fields for the `Task` and `Order` object and considering possible feature flaws, we decided to update
 the fields for the `Person` class as well. The original AB3 treated two people as equal only if their names were spelt exactly
 the same, with this being case-sensitive. We decided that multiple clients having the exact same name was rare
 enough that this notion of equality made sense, however, we felt it should apply regardless of case, i.e. a `Person` with `Name` `john doe`
-should be recognised as the same a `Person` with `Name` `JOHN DOE`.
+should be recognised as the same a `Person` with **`Name`** `JOHN DOE`.
 
 We updated the equality check to account for this, and also updated the input validation for `Name` to allow at most one
 space between blocks of characters (previously `John   Doe` would be different from `John Doe`. We felt this likely to be
 a mistake and should be avoided).
     
 ### Adding order feature
+
 As mentioned above, to add an `Order`, the `Person` the `Order` is addressed to should already be in `SalesNote`. The
 following is a sequence diagram showing the execution of the command:
 
@@ -309,13 +302,15 @@ editing and deletion of clients. We wanted to achieve the following:
 
 #### Execution
 
-The sequence diagram below shows the interaction within the Logic component for a delete command is executed.
+The sequence diagram below shows the interaction between the `Logic` and `Model` components when a `DeleteCommand` is executed.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 1. `DeleteCommand::execute` is called and deletes the client from the list.
 2. Related orders are obtained by matching the client's name and the customer of the existing orders.
 3. Tasks linked to the orders and the orders themselves are deleted.
+
+The sequence diagram below shows the interaction between the `Logic` and `Model` components when a `EditCommand` is executed.
 
 ![Interactions Inside the Logic Component for the `edit 1 n/[new name]` command ](images/EditSequenceDiagram.png)
 
@@ -331,14 +326,12 @@ The changes in person objects are updated in their order and task objects.
 Note that similar considerations are addressed in the following commands:
 * `DeleteOrderCommand` where `Task` objects related to the deleted `Order` is also deleted.
   
-* `AddTaskCommand` `EditTaskCommand` where if the user attempts to tag a `Task` to a `Order`, SalesNote first checks if the
+* `AddTaskCommand` and `EditTaskCommand` where if the user attempts to tag a `Task` to a `Order`, SalesNote first checks if the
 `Order` already exists. 
   
 We have omitted these as their implementation concerns are largely similar to the two above that we have already presented.
 
 ### Sorting orders feature
-
-#### Implementation
 
 By default, orders are sorted in ascending order of their `id`. 
 This arrangement is also followed when SalesNote starts up or the `listorders` command is executed.
@@ -448,7 +441,8 @@ The sequence diagram below shows the interaction within the `Logic` component wh
 * needs help managing tasks
 * needs help keeping financial record of sales
 
-**Value proposition**: lightweight application that helps manage contacts faster than a typical mouse/GUI driven app, 
+**Value proposition**: <br>
+Lightweight application that helps manage contacts faster than a typical mouse/GUI driven app, 
 and provides simple but helpful features to assist with managing a business.
 
 

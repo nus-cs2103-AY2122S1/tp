@@ -18,20 +18,29 @@ activate LogicManager
 
 LogicManager -> SalesNoteParser : parseCommand("addorder ...")
 activate SalesNoteParser
+
 create AddOrderCommandParser
 SalesNoteParser -> AddOrderCommandParser
 activate AddOrderCommandParser
 
-
-create AddOrderCommand
-AddOrderCommandParser -> AddOrderCommand : parse("addorder ...")
+AddOrderCommandParser --> SalesNoteParser
 deactivate AddOrderCommandParser
 
+SalesNoteParser -> AddOrderCommandParser : parse("...")
+activate AddOrderCommandParser
+
+create AddOrderCommand
+AddOrderCommandParser -> AddOrderCommand
 activate AddOrderCommand
 
-
-AddOrderCommand --> SalesNoteParser
+AddOrderCommand --> AddOrderCommandParser : d
 deactivate AddOrderCommand
+
+AddOrderCommandParser --> SalesNoteParser : d
+deactivate AddOrderCommandParser
+
+AddOrderCommandParser -[hidden]-> SalesNoteParser
+destroy AddOrderCommandParser
 
 SalesNoteParser --> LogicManager
 deactivate SalesNoteParser
