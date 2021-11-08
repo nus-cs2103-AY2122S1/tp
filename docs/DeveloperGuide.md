@@ -137,7 +137,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/insurancepal/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="600" />
 
 The `Storage` component,
 * can save both clients' data and user preference data in json format, and read them back into corresponding objects.
@@ -320,7 +320,8 @@ The processing of a note command from the user can be split into 2 general steps
 
 1. Parsing the user input into a `NoteCommand`
 2. Executing the `NoteCommand`
-   Each step will be described in the sections below.
+
+Each step will be described in the sections below.
 
 **Step 1:** Parsing of user input
 
@@ -368,6 +369,7 @@ There are 2 possible outcomes from the execution of a `NoteCommand`.
 The processing of a claim command from the user can be split into 2 general steps:
 1. Parsing the user input into a `ClaimCommand`
 2. Executing the `ClaimCommand`
+
 Each step will be described in the sections below.
 
 **Step 1:** Parsing of user input
@@ -651,6 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. InsurancePal shows an error message
 
       Use case resumes at step 2.
+
 **Use case: Finding a client**
 
 **MSS**
