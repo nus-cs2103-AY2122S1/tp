@@ -10,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalMembers.ALICE;
+import static seedu.address.testutil.TypicalMembers.ALICE_DIFFERENT_NAME;
 import static seedu.address.testutil.TypicalMembers.ALICE_DIFFERENT_PHONE;
 import static seedu.address.testutil.TypicalMembers.AMY;
 import static seedu.address.testutil.TypicalMembers.BENSON;
@@ -107,6 +108,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getSamePerson_personWithSamePhoneInSportsPa_returnsPersonWithSameName() {
+        modelManager.addMember(ALICE);
+        assertEquals(modelManager.getSameMember(ALICE_DIFFERENT_NAME), ALICE);
+    }
+
+    @Test
     public void getSamePerson_personWithSameNameNotInSportsPa_returnsNull() {
         assertNull(modelManager.getSameMember(BOB));
     }
@@ -143,7 +150,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void isWithinListIndex_validIndicies_returnsFalse() {
+    public void isWithinListIndex_validIndices_returnsFalse() {
         Member toAdd = ALICE;
         modelManager.addMember(toAdd);
         List<Index> indices = Arrays.asList(INDEX_FIRST);

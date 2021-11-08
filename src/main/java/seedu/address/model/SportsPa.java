@@ -200,6 +200,30 @@ public class SportsPa implements ReadOnlySportsPa {
     }
 
     /**
+     * Returns a member from SportsPA that has the same name or phone as the given {@code member}.
+     *
+     * @param toFind the given member to look for.
+     * @return a member that has the same name.
+     */
+    public Member getSameMember(Member toFind) {
+        requireNonNull(toFind);
+        return members.getSameMember(toFind);
+    }
+
+    /**
+     * Checks if the member being imported has the same name as an existing member
+     * and same phone number as another existing member at the same time.
+     * If the such a situation occurs, the member being imported is deemed invalid.
+     *
+     * @param toCheck the member being imported
+     * @return true if only one or no other members with the same name or phone is found, false otherwise.
+     */
+    public boolean isValidImport(Member toCheck) {
+        requireNonNull(toCheck);
+        return members.isValidImport(toCheck);
+    }
+
+    /**
      * Removes {@code key} from this {@code SportsPa}.
      * {@code key} must exist in SportsPA.
      */
