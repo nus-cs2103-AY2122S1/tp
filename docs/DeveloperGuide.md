@@ -815,6 +815,46 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+1. _{ more test cases …​ }_
+
+### Deleting tasks
+1. Deleting tasks of a person while the task list of that person is currently shown.
+
+    1. Prerequisites:
+        * List all persons using the `ls`command. Multiple persons in the list.
+        * Show the task list of the target person using the `cat` command.
+        * Index of target person must be shown on the person list.
+        * Index of target task must be shown on the person List.
+        * Arguments are valid and compulsory parameters are provided.
+
+    1. Test case: `rm 1 -ti2`<br>
+       Expected: 2nd task will be deleted from the list. Details of the deleted task shown in the status message.
+
+1. Deleting tasks of a person while the task list of another person is currently shown.
+
+    1. Prerequisites:
+       * List all persons using the `ls`command. Multiple persons in the list.
+       * The index of the target person must be shown on the person list.
+       * The task list shown must be different from the target person.
+       * Arguments are valid and compulsory parameters are provided.
+
+    1. Test case: `rm 1 -ti2`<br>
+       Expected: No task will be deleted. Error details shown in the status message.
+
+1. Deleting a non-existent task of a person while the task list of that person is currently shown.
+
+    1. Prerequisites:
+        * List all persons using the `ls`command. Multiple persons in the list.
+        * The index of the target person must be shown on the person list.
+        * The target task index must not be within the task list shown.
+        * Arguments are valid and compulsory parameters are provided.
+
+    1. Test case: `rm 1 -ti100`<br>
+       Expected: No task will be deleted. Error details shown in the status message.
+ 
+    1. Test case: `rm 2 -ti0`<br>
+       Expected: No task will be deleted. Error details shown in the status message.
+
 ### Saving data
 
 1. Dealing with missing data files
