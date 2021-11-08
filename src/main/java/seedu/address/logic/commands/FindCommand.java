@@ -23,7 +23,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) along with fields or the index specified and "
+            + "the specified keywords (case-insensitive) along with other fields or the index specified and "
             + "displays them as a list with index numbers.\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
