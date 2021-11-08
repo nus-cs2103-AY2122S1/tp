@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Developer Guide
-​---
 ---
 
 * Table of Contents
@@ -33,7 +32,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-![image](images\ArchitectureDiagram.png)
+![image](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -60,7 +59,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deletestu 1`.
 
-![image](images\ArchitectureSequenceDiagram.png)
+![image](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -77,7 +76,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images\UiClassDiagram.png)
+![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `ClassListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -96,7 +95,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-![image](images\LogicClassDiagram.png)
+![image](images/LogicClassDiagram.png)
 
 How the `Logic` component works:
 
@@ -107,7 +106,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletestu 1")` API call.
 
-![Interactions Inside the Logic Component for the `deletestu 1` Command](images\DeleteStudentSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deletestu 1` Command](images/DeleteStudentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -115,7 +114,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-![image](images\ParserClasses.png)
+![image](images/ParserClasses.png)
 
 How the parsing works:
 
@@ -126,7 +125,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-![image](images\ModelClassDiagram.png)
+![image](images/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -138,7 +137,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `ClassMATE`, which `Student` references. This allows `ClassMATE` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
-![image](images\BetterModelClassDiagram.png)
+![image](images/BetterModelClassDiagram.png)
 
 </div>
 
@@ -147,7 +146,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-![image](images\StorageClassDiagram.png)
+![image](images/StorageClassDiagram.png)
 
 The `Storage` component,
 
@@ -224,7 +223,7 @@ The command is then executed, adding the new class to ClassMATE
 
 The *Sequence Diagram* below summarises the aforementioned steps in the execution of the command.
 
-![AddClassSequenceDiagram](images\AddClassSequenceDiagram.png)<br>
+![AddClassSequenceDiagram](images/AddClassSequenceDiagram.png)<br>
 Execution of the `AddClassCommand`
 
 #### Design Considerations
@@ -304,7 +303,7 @@ to the parsed predicate, updating the list that is displayed.
 
 The *Sequence Diagram* below summarises the aforementioned steps in the execution of the command.
 
-![FindStudentSequenceDiagram](images\FindStudentSequenceDiagram.png)<br>
+![FindStudentSequenceDiagram](images/FindStudentSequenceDiagram.png)<br>
 Execution of the `FindStudentCommand`
 
 #### Design Considerations
@@ -372,11 +371,11 @@ Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls t
 
 ​																						**Before `deletelm` command**
 
-![StudentMarkState1](images\StudentMarksState1.png)
+![StudentMarkState1](images/StudentMarksState1.png)
 
 ​																						**After `deletelm` command**
 
-![StudentMarkState2](images\StudentMarksState2.png)
+![StudentMarkState2](images/StudentMarksState2.png)
 
 Step 4. The user executes a `deleteam 1` command. The `deleteam` command calls `DeleteAllMarkCommand#deleteAllStudentMark()`, then subsequently `Model#setStudent()`and `Model#updateFilteredStudentList()`, modifying and saving the state of ClassMATE by deleting all marks for the 1st student at the given index in the `UniqueStudentList`. This updated list will be displayed to the user.
 
@@ -386,7 +385,7 @@ During the parsing, a new `Student` instance is created. This `Student` instance
 
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
-![AddMarkSequenceDiagram](images\AddMarkSequenceDiagram.png)
+![AddMarkSequenceDiagram](images/AddMarkSequenceDiagram.png)
 
 Execution of the `AddMarkCommand`
 
@@ -501,12 +500,12 @@ During the parsing, a new `TutorialGroup` instance is created. This `TutorialGro
 
 The *Sequence Diagram* below summarizes how tutorial groups are added to a tutorial class.
 
-![AddGroupSequenceDiagram](images\AddGroupSequenceDiagram.png)
+![AddGroupSequenceDiagram](images/AddGroupSequenceDiagram.png)
 
 The *Sequence Diagram* below shows how `UniqueTutorialClassList` retrieves the
 `UniqueTutorialGroupList` from the specified TutorialClass for checking or adding of a given tutorial group.
 
-![GetTutorialGroupsDiagram](images\GetTutorialGroupsDiagram.png)
+![GetTutorialGroupsDiagram](images/GetTutorialGroupsDiagram.png)
 
 
 #### Design Considerations
@@ -598,7 +597,7 @@ Step 2. The user executes a `viewg c/G01 type/OP1 gn/1` command. After parsing t
 The *Activity Diagram* below provides an example of how users should set up their tutorial classes, tutorial groups and students
 in ClassMATE.
 
-![SetUpActivityDiagram](images\SetUpActivityDiagram.png)
+![SetUpActivityDiagram](images/SetUpActivityDiagram.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
