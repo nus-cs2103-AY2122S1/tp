@@ -31,7 +31,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
