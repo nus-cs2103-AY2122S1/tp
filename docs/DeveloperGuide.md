@@ -542,7 +542,7 @@ Figure I.3.1 shows a sequence diagram of how the tag list is displayed to the us
     - Direct retrieval of the number of persons under each tag.
   - Cons:
     - This could result in circular dependency since a `Person` keeps reference of a set of `Tags` and a `Tag` has to keep a reference to a list of `Persons` simultaneously.
-    - Updating the tags labelled for a `Person` requires modification of the data fields of the `Person`. Due to the immutability of TAB objects, new copies of `Person` and `Tag` have to be created after every command that modifies the `Person` data. This could slow down the application when there is a large amount of data stored.
+    - Editing the tags labelled for a `Person` requires modification of the data fields of the `Person`. Due to the immutability of TAB objects, new copies of `Person` and `Tag` have to be created after every command that modifies the `Person` data. This could slow down the application when there is a large amount of data stored.
     
 ### Switching between students, calendar, and tags
 
