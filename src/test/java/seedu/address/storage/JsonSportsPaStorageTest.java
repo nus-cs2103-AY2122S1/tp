@@ -86,7 +86,7 @@ public class JsonSportsPaStorageTest {
         // Modify data, overwrite exiting file, and read back
         original.addMember(HOON);
         original.addFacility(UNIVERSITY_TOWN_SPORTS_HALL_1_COURT_1);
-        original.removePerson(ALICE);
+        original.removeMember(ALICE);
         jsonSportsPaStorage.saveSportsPa(original, filePath);
         readBack = jsonSportsPaStorage.readSportsPa(filePath).get();
         assertEquals(original, new SportsPa(readBack));

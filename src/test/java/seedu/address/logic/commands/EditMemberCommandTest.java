@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalSportsPa.getTypicalSportsPa;
@@ -126,7 +126,7 @@ public class EditMemberCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(model, INDEX_FIRST);
 
         Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
         Member editedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_BOB).build();
@@ -168,7 +168,7 @@ public class EditMemberCommandTest {
 
     @Test
     public void execute_duplicateNameUnFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(model, INDEX_FIRST);
 
         Member memberInList = model.getSportsPa().getMemberList().get(INDEX_SECOND.getZeroBased());
         EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST,
@@ -179,7 +179,7 @@ public class EditMemberCommandTest {
 
     @Test
     public void execute_duplicatePhoneUnFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(model, INDEX_FIRST);
 
         Member memberInList = model.getSportsPa().getMemberList().get(INDEX_SECOND.getZeroBased());
         EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST,
@@ -189,7 +189,7 @@ public class EditMemberCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidMemberIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMemberList().size() + 1);
         EditMemberCommand.EditMemberDescriptor descriptor =
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build();
@@ -203,8 +203,8 @@ public class EditMemberCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+    public void execute_invalidMemberIndexFilteredList_failure() {
+        showMemberAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSportsPa().getMemberList().size());

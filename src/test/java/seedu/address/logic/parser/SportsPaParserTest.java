@@ -119,7 +119,7 @@ public class SportsPaParserTest {
         Member member = new MemberBuilder().build();
         EditMemberCommand.EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + MemberUtil.getEditPersonDescriptorDetails(descriptor), aliases);
+                + INDEX_FIRST.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor), aliases);
         assertEquals(new EditMemberCommand(INDEX_FIRST, descriptor), command);
     }
 

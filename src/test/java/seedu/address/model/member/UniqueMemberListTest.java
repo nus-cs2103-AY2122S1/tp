@@ -92,7 +92,7 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void setPerson_editedMemberHasDifferentIdentity_success() {
+    public void setMember_editedMemberHasDifferentIdentity_success() {
         uniqueMemberList.add(ALICE);
         uniqueMemberList.setMember(ALICE, BOB);
         UniqueMemberList expectedUniqueMemberList = new UniqueMemberList();
@@ -101,7 +101,7 @@ public class UniqueMemberListTest {
     }
 
     @Test
-    public void setPerson_editedMemberHasNonUniqueIdentity_throwsDuplicateMemberException() {
+    public void setMember_editedMemberHasNonUniqueIdentity_throwsDuplicateMemberException() {
         uniqueMemberList.add(ALICE);
         uniqueMemberList.add(BOB);
         assertThrows(DuplicateMemberException.class, () -> uniqueMemberList.setMember(ALICE, BOB));

@@ -40,7 +40,7 @@ public class AddMemberCommandTest {
 
     @Test
     public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
         Member validMember = new MemberBuilder().build();
 
         CommandResult commandResult = new AddMemberCommand(validMember).execute(modelStub);
@@ -54,7 +54,7 @@ public class AddMemberCommandTest {
         Member validMember = new MemberBuilder().build();
         Member validMemberSameName = new MemberBuilder().withPhone("93852042").build();
         AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
-        ModelStub modelStub = new ModelStubWithPerson(validMemberSameName);
+        ModelStub modelStub = new ModelStubWithMember(validMemberSameName);
 
         assertThrows(CommandException.class,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> addMemberCommand.execute(modelStub));
@@ -65,7 +65,7 @@ public class AddMemberCommandTest {
         Member validMember = new MemberBuilder().build();
         Member validMemberSamePhone = new MemberBuilder().withName("Sally").build();
         AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
-        ModelStub modelStub = new ModelStubWithPerson(validMemberSamePhone);
+        ModelStub modelStub = new ModelStubWithMember(validMemberSamePhone);
 
         assertThrows(CommandException.class,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> addMemberCommand.execute(modelStub));
@@ -303,10 +303,10 @@ public class AddMemberCommandTest {
     /**
      * A Model stub that contains a single member.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithMember extends ModelStub {
         private final Member member;
 
-        ModelStubWithPerson(Member member) {
+        ModelStubWithMember(Member member) {
             requireNonNull(member);
             this.member = member;
         }
@@ -321,7 +321,7 @@ public class AddMemberCommandTest {
     /**
      * A Model stub that always accept the member being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingMemberAdded extends ModelStub {
         final ArrayList<Member> membersAdded = new ArrayList<>();
 
         @Override

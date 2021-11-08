@@ -42,7 +42,7 @@ public class FacilityTest {
     }
 
     @Test
-    public void clearAllocationMapOnDay_emptiesPersonListOnDay() {
+    public void clearAllocationMapOnDay_emptiesMemberListOnDay() {
         Member member = new MemberBuilder().build();
         Member secondMember = new MemberBuilder().withName("Matt").build();
         Facility facility = new FacilityBuilder().build();
