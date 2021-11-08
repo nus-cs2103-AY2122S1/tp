@@ -80,10 +80,10 @@ project. ([View Reposense](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
   , [#232](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/232)
   , [#244](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/244)
   , [#324](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/324)
-*   Reported bugs and suggestions for other teams in the class: [#1](https://github.com/SamaySagar/ped/issues/1)
-  , [#2](https://github.com/SamaySagar/ped/issues/2), [#3](https://github.com/SamaySagar/ped/issues/3)
-  , [#4](https://github.com/SamaySagar/ped/issues/4), [#5](https://github.com/SamaySagar/ped/issues/5)
-  , [#9](https://github.com/SamaySagar/ped/issues/9), [#12](https://github.com/SamaySagar/ped/issues/12)
+*   Reported bugs and suggestions for other teams in the class: [#1](https://github.com/reddevil1313/ped/issues/1)
+  , [#2](https://github.com/reddevil1313/ped/issues/2), [#3](https://github.com/reddevil1313/ped/issues/3)
+  , [#4](https://github.com/reddevil1313/ped/issues/4), [#5](https://github.com/reddevil1313/ped/issues/5)
+  , [#9](https://github.com/reddevil1313/ped/issues/9), [#12](https://github.com/reddevil1313/ped/issues/12)
 
 #### **Documentation**:
 
