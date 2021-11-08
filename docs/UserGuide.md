@@ -116,7 +116,7 @@ Exits the program and saves your data.
 
 Format: `exit`
 
-<a name = "exporting-data"></a> 
+<a name = "exporting-data"></a>
 #### _Exporting data_
 
 Exports all the data of Notor into a CSV file. The exported CSV will be located in the same directory as Notor.
@@ -423,7 +423,7 @@ Sometimes, you will want to view all people, groups, subgroups to understand wha
 
 ### List
 
-List can show all persons, groups, subgroups which you have added to Notor. 
+List can show all persons, groups, subgroups which you have added to Notor.
 It can also list archived persons: see [Archiving People](#archiving-people).
 
 #### _Listing all persons_
@@ -541,7 +541,7 @@ If your changes to the data file makes its format invalid, Notor will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-<a name = "tips-on-using-notor"></a> 
+<a name = "tips-on-using-notor"></a>
 ## Tips on Using Notor
 ### Keeping Track of Successfully Executed Command History
 Notor keeps tracks of successfully executed commands in the current instance,  allowing you to navigate through with Up arrow key starting from the most recent command.
@@ -566,7 +566,7 @@ Shortcut Key            | Linux/Window                                   | MacOS
 - Example: `Fri., Oct. 22 2021 00:07`
 </div>
 
-<a name = "command-summary"></a> 
+<a name = "command-summary"></a>
 ## Command Summary
 <div markdown="block" class="alert alert-info">
 Round brackets `()` refer to COMPULSORY arguments.
@@ -634,7 +634,7 @@ Before using the group actions, remember to use <code>g /list</code> or <code>g 
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-for the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, depending on what is in the list display. 
+for the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, depending on what is in the list display.
 Change the <code>person /list</code> or <code>group /list</code>.
 </div>
 
