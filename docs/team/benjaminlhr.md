@@ -44,13 +44,13 @@ Given below are my contributions to the project.
     * Added several screenshots to illustrate the usage of the app (Pull request [\#212](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/212))
   * Developers' Guide:
     * Updated product scope, NFR and glossary (Pull requests [\#29](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/29), [\#34](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/34))
-    * Added description of implementation details for adding a game entry. (Pull requests [\#145](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/145), [\#226](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/226))
+    * Added description of implementation details for adding a game entry (Pull requests [\#145](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/145), [\#226](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/226))
     * Refactored UiClassDiagram from AB3 (Pull requests [\#145](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/145), [\#221](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/221))
-    * Made miscellaneous modifications to other UML diagrams and explanations. (Pull request [\#244](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/244)
+    * Made miscellaneous modifications to other UML diagrams and explanations. (Pull request [\#244](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/244))
 * **Project management**:
   * Managed release `v1.3(final)` and `v1.4` on GitHub.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#113](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/113), [\#114](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/114), [\#136](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/136)
-  * Reported 18 bugs and suggestions for another team during [PE-D](https://github.com/BenjaminLHR/ped/issues).
+  * Reported 18 bugs and suggestions for another team during [PE-D](https://github.com/BenjaminLHR/ped/issues)
   * Conducted [testing](https://github.com/AY2122S1-CS2103-F10-4/tp/issues?q=is%3Aissue+is%3Aclosed+author%3ABenjaminLHR) for another team
