@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-# **Introduction**
+## **Introduction**
 
 ![Ui](images/ailurusLogo.png)
 
@@ -11,7 +11,7 @@ Ailurus is a **desktop application** designed to aid Organising Committees from 
 The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecture and the different components, as well as their implementations in various commands.
 It also informs developers of the requirements and instructions for manual testing for Ailurus.
 
-# **Table of Contents**
+## **Table of Contents**
 
 * Table of Contents
 {:toc}
