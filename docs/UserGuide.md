@@ -7,7 +7,6 @@ ProfBook is a desktop app for managing contacts, optimized for use via a Command
 (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ProfBook can get your
 contact management tasks done faster than traditional GUI apps. ProfBook helps CS2103 Instructors manage both students
 and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
-
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
@@ -320,6 +319,7 @@ Action | Format, Examples
 **[Find](#locating-persons-by-name-find)** | <code> find {n/ &#124; s/ &#124; N/ &#124; g/ &#124; T/ &#124; r/ &#124; p/ &#124; a/ &#124; t/full/ &#124; t/partial/} KEYWORD [MORE_KEYWORDS]</code> e.g., `find n/Alex`
 **[List](#listing-all-persons--list)** | `list`
 **[Bulk Tag](#bulk-tag-persons--bulk_tag)** | `bulk_tag t/TAGNAME [t/TAGNAME…​]`<br> e.g., `bulk_tag t/friends`
+**[Sort](#sort-contacts-by-attribute-sort)** | `sort [ATTRIBUTE] [-r]` <br> e.g., `sort T/ -r`
 **[Import](#import-existing-contacts-from-json-import)** | `import FILENAME` <br> e.g., `import tutors.json`
 **[Export](#export-filtered-contacts-to-json-export)** | `export FILENAME` <br> e.g., `export t01students.json`
 **[Export Email](#export-emails-of-filtered-contacts-to-txt-exportemail)** | `exportemail FILENAME` <br> e.g., `exportemail t01studentsEmail.txt`
