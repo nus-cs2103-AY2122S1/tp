@@ -252,7 +252,7 @@ will not be created.
 
 </div>
 
-The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
+The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand: <br>
 ![AddApplicantActivityDiagram1](images/add-applicant/AddApplicantActivityDiagram1.png)
 
 #### Design considerations:
