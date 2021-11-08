@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -39,5 +40,26 @@ public class DisposableIncomeTest {
         assertTrue(DisposableIncome.isValidDisposableIncome("2432"));
         assertTrue(DisposableIncome.isValidDisposableIncome("369.69")); // with decimal
         assertTrue(DisposableIncome.isValidDisposableIncome("50,0000.963")); // with comma
+    }
+
+    @Test
+    public void equals() {
+        DisposableIncome john = new DisposableIncome("5000.00");
+        DisposableIncome otherJohn = new DisposableIncome("5000.00");
+        DisposableIncome jane = new DisposableIncome("10000.00");
+
+        // same object
+        assertTrue(john.equals(john));
+
+        // different object same DisposableIncome
+        assertTrue(john.equals(otherJohn));
+        assertEquals(john.hashCode(), otherJohn.hashCode());
+
+        // different object different DisposableIncome
+        assertFalse(john.equals(jane));
+
+        // different type
+        assertFalse(john.equals("5000.00"));
+
     }
 }

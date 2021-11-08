@@ -45,7 +45,8 @@ public class NextMeetingTest {
     @Test
     public void isDurationValid() {
         // empty string
-        assertTrue(NextMeeting.isDurationValid("", ""));
+        assertTrue(NextMeeting.isDurationValid("00:00", ""));
+        assertTrue(NextMeeting.isDurationValid("", "00:00"));
 
         // invalid time string
         assertFalse(NextMeeting.isDurationValid("00:61", "02:00"));
@@ -64,7 +65,8 @@ public class NextMeetingTest {
         String validEndTime = "13:00";
 
         // empty string
-        assertTrue(NextMeeting.isNotPastMeeting("", ""));
+        assertTrue(NextMeeting.isNotPastMeeting("24-10-2050", ""));
+        assertTrue(NextMeeting.isNotPastMeeting("", "00:00"));
 
         // invalid strings
         assertFalse(NextMeeting.isNotPastMeeting("24-20-2050", "02:00"));
@@ -86,7 +88,7 @@ public class NextMeetingTest {
         assertThrows(NullPointerException.class, () -> NextMeeting.isValidNextMeeting(null));
 
         // blank
-        assertFalse(NextMeeting.isValidNextMeeting(" ")); // empty string
+        assertFalse(NextMeeting.isValidNextMeeting(" ")); // white space
 
         // missing parts
         assertFalse(NextMeeting.isValidNextMeeting("20-30")); // missing local part
@@ -97,6 +99,7 @@ public class NextMeetingTest {
                 + "very very very long very very very long very very very long")); // exceed char limit (100)
 
         // valid next meeting
+        assertTrue(NextMeeting.isValidNextMeeting(""));
         assertTrue(NextMeeting.isValidNextMeeting("24-12-2050 (10:00~12:00), Starbucks @ UTown"));
         assertTrue(NextMeeting.isValidNextMeeting("25-12-2050 (14:00~17:00), null"));
     }
@@ -120,6 +123,12 @@ public class NextMeetingTest {
         assertTrue(new NextMeeting(date2, startTime1, endTime1, location, name).isMeetingOver(checkDate, checkTime));
         assertFalse(new NextMeeting(date2, startTime2, endTime2, location, name).isMeetingOver(checkDate, checkTime));
         assertFalse(new NextMeeting(date3, startTime1, endTime1, location, name).isMeetingOver(checkDate, checkTime));
+
+        // null values for date and endtime
+        assertFalse(new NextMeeting(null, startTime1, endTime1, location, name)
+            .isMeetingOver(checkDate, checkTime));
+        assertFalse(new NextMeeting(date1, startTime1, null, location, name)
+            .isMeetingOver(checkDate, checkTime));
     }
 
     @Test
@@ -136,6 +145,17 @@ public class NextMeetingTest {
         NextMeeting nextMeeting = new NextMeeting(date, startTime, endTime, location, name);
 
         assertEquals(expectedLastMet, nextMeeting.convertToLastMet());
+    }
+
+    @Test
+    public void getClientName() {
+        String date1 = "09-10-2022";
+        String startTime1 = "11:00";
+        String endTime1 = "11:30";
+        String location = "Zoom";
+        String name = "ben";
+
+        assertEquals(name, new NextMeeting(date1, startTime1, endTime1, location, name).getClientName());
     }
 
     @Test
@@ -161,6 +181,11 @@ public class NextMeetingTest {
         String location2 = "NUS";
         String name1 = "ben";
         String name2 = "dom";
+
+        NextMeeting exampleMeeting = new NextMeeting(date1, startTime1, endTime1, location1, name1);
+
+        // same object
+        assertTrue(exampleMeeting.equals(exampleMeeting));
 
         // same value
         assertTrue(new NextMeeting(date1, startTime1, endTime1, location1, name1).equals(

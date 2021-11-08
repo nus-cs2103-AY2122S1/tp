@@ -41,8 +41,10 @@ public class ClientIdTest {
         ClientId clientB = new ClientId(input2);
         ClientId clientC = new ClientId(input1);
 
-        // same value
+        // same object
         assertTrue(clientA.equals(clientA));
+
+        // same value
         assertTrue(clientA.equals(clientC));
 
         // different value
