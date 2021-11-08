@@ -54,6 +54,9 @@ public class JsonAdaptedSuperGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public SuperGroup toModelType() throws IllegalValueException {
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
         if (note == null) {
             throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }

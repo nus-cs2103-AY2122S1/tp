@@ -206,6 +206,16 @@ public class Person implements Unique<Person>, Notable {
     }
 
     /**
+     * Tests if it is a valid display subgroup.
+     * @param test The string to test.
+     * @return The result of the test.
+     */
+    public static boolean isValidDisplaySubGroup(String test) {
+        String validationRegex = "[a-zA-Z][\\p{Alnum}-._ ]*";
+        return test.matches(validationRegex);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

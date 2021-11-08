@@ -87,6 +87,11 @@ class JsonSerializableNotor {
 
         for (JsonAdaptedSuperGroup jsonAdaptedSuperGroup : superGroups) {
             SuperGroup superGroup = jsonAdaptedSuperGroup.toModelType();
+            boolean isAllValid = superGroup.getSubGroups().asUnmodifiableObservableList().stream()
+                .allMatch(x -> x.getParent().equals(superGroup.getName()));
+            if (!isAllValid) {
+                throw new IllegalValueException("Invalid subgroup!");
+            }
             if (!notor.hasSuperGroup(superGroup)) {
                 notor.addSuperGroup(superGroup);
             }
@@ -98,11 +103,22 @@ class JsonSerializableNotor {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             for (String superGroup : person.getDisplaySuperGroups()) {
-                notor.findSuperGroup(superGroup).addPerson(person);
+                SuperGroup temp = notor.findSuperGroup(superGroup);
+                if (temp == null) {
+                    throw new IllegalValueException("Group not found!");
+                }
+                temp.addPerson(person);
             }
             for (String subGroup : person.getDisplaySubGroups()) {
                 String[] split = subGroup.split("_");
-                notor.findSuperGroup(split[0]).addPersonToSubGroup(split[1], person);
+                SuperGroup temp = notor.findSuperGroup(split[0]);
+                if (temp == null) {
+                    throw new IllegalValueException("Group not found!");
+                }
+                if (temp.findSubGroup(split[1]) == null) {
+                    throw new IllegalValueException("Group not found!");
+                }
+                temp.addPersonToSubGroup(split[1], person);
             }
 
             notor.addPerson(person);

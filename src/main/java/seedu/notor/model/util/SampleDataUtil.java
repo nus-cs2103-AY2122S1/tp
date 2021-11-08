@@ -1,6 +1,7 @@
 package seedu.notor.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -53,10 +54,10 @@ public class SampleDataUtil {
             for (Person samplePerson : getSamplePersons()) {
                 sampleNotor.addPerson(samplePerson);
             }
-            SuperGroup orbital = new SuperGroup(new Name("Orbital"));
-            SuperGroup finalYearProject = new SuperGroup(new Name("FYP"));
-            SubGroup artemis = new SubGroup(new Name("Artemis"), null, "Orbital");
-            SubGroup apollo = new SubGroup(new Name("Apollo"), null, "Orbital");
+            SuperGroup orbital = new SuperGroup(new Name("Orbital"), new HashSet<>());
+            SuperGroup finalYearProject = new SuperGroup(new Name("FYP"), new HashSet<>());
+            SubGroup artemis = new SubGroup(new Name("Artemis"), new HashSet<>(), "Orbital");
+            SubGroup apollo = new SubGroup(new Name("Apollo"), new HashSet<>(), "Orbital");
             orbital.addSubGroup(artemis);
             orbital.addSubGroup(apollo);
             sampleNotor.addSuperGroup(orbital);

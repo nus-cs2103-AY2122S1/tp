@@ -177,8 +177,6 @@ public class NotorParser {
                     return new PersonArchiveCommandParser(index).parse();
                 } else if (PersonUnarchiveCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonUnarchiveCommandParser(index).parse();
-                } else if (PersonGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
-                    return new PersonGroupListCommandParser(index).parse();
                 } else {
                     throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             PersonCommand.MESSAGE_USAGE));

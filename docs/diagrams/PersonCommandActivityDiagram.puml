@@ -1,0 +1,23 @@
+@startuml
+start
+:User executes person command;
+
+if () then ([Persons are currently listed])
+    if () then ([Command targets a person\n based on index])
+        if () then ([Index is valid and\n Parameters inputted are valid])
+            :Perform the action on \nthe person with that index;
+        else ([else])
+            :Display an error message;
+        endif
+    else ([else])
+        if () then ([Parameters inputted are valid])
+            :Perform the action successfully;
+        else ([else])
+            :Display an error message;
+        endif
+    endif
+else ([else])
+    :Display error message informing the user \nthat persons are not listed;
+endif
+stop
+@enduml

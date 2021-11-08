@@ -123,14 +123,6 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
         findSubGroup(subGroupName).addPerson(p);
     }
 
-    /**
-     * Returns true if a given string is a valid group name.
-     */
-    public static boolean isValidGroupName(String test) {
-        // TODO: Check if this is the only condition.
-        return !test.matches(".*[:/_].*") && !test.isEmpty();
-    }
-
     @Override
     public String toString() {
         return name.toString();

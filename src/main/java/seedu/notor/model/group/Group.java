@@ -102,8 +102,8 @@ public abstract class Group implements Notable {
 
     public UniqueList<Person> getPersons() {
         UniqueList<Person> persons = new UniqueList<>();
-        for (int i = 0; i < people.size(); i++) {
-            persons.add(people.get(i));
+        for (Person p : people.values()) {
+            persons.add(p);
         }
         return persons;
     }
@@ -112,8 +112,7 @@ public abstract class Group implements Notable {
      * Returns true if a given string is a valid group name.
      */
     public static boolean isValidGroupName(String test) {
-        // TODO: Check if this is the only condition.
-        return !test.matches(".*[:/].*") && !test.isEmpty();
+        return Name.isValidName(test);
     }
 
     public void addPerson(Person p) {

@@ -79,6 +79,7 @@ public class SubGroup extends Group implements Unique<SubGroup> {
         this.parent = parent.getName();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
