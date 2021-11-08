@@ -12,7 +12,7 @@ end box
 [-> LogicManager : execute("add -p 2 Did Homework")
 activate LogicManager
 
-LogicManager -> TutorAidParser : parseCommand("-p 2 Did Homework")
+LogicManager -> TutorAidParser : parseCommand("add -p 2 Did Homework")
 activate TutorAidParser
 
 TutorAidParser -> AddCommandParser : parse("-p 2 Did Homework")
@@ -35,4 +35,8 @@ deactivate AddCommandParser
 
 LogicManager <-- TutorAidParser : a
 deactivate TutorAidParser
+
+ref over LogicManager, AddProgressCommand : get commandResult
+<-- LogicManager : commandResult
+deactivate LogicManager
 @enduml

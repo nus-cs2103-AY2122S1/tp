@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddStudentToLessonCommandParser" as AddStudentToLessonCommandParser LOGIC_COLOR
+participant "a:AddStudentToLessonCommand" as AddStudentToLessonCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("add -sl s/1 2 3 l/3 2 1")
+activate LogicManager
+
+LogicManager -> TutorAidParser : parseCommand("add -sl s/1 2 3 l/3 2 1")
+activate TutorAidParser
+
+TutorAidParser -> AddCommandParser : parse("-sl s/1 2 3 l/3 2 1")
+activate AddCommandParser
+
+AddCommandParser -> AddStudentToLessonCommandParser : parse("s/1 2 3 l/3 2 1")
+activate AddStudentToLessonCommandParser
+
+create AddStudentToLessonCommand
+AddStudentToLessonCommandParser -> AddStudentToLessonCommand : AddStudentToLessonCommand(studentIndexes, lessonIndexes)
+activate AddStudentToLessonCommand
+AddStudentToLessonCommandParser <-- AddStudentToLessonCommand : a
+deactivate AddStudentToLessonCommand
+
+AddCommandParser <-- AddStudentToLessonCommandParser : a
+deactivate AddStudentToLessonCommandParser
+
+TutorAidParser <-- AddCommandParser : a
+deactivate AddCommandParser
+
+LogicManager <-- TutorAidParser : a
+deactivate TutorAidParser
+
+ref over LogicManager, AddStudentToLessonCommand : get commandResult
+<-- LogicManager : commandResult
+deactivate LogicManager
+@enduml
