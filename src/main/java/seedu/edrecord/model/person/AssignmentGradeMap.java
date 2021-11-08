@@ -10,15 +10,7 @@ import seedu.edrecord.model.assignment.Grade;
  */
 public class AssignmentGradeMap {
 
-    public static final String MESSAGE_CONSTRAINTS = "Assignment and Grade map must be separated by a colon.";
-
     private final HashMap<Assignment, Grade> grades = new HashMap<>();
-
-    /**
-     * Creates a new HashMap containing the student's respective grades for assignments.
-     */
-    public AssignmentGradeMap() {
-    }
 
     public void add(Assignment assignment, Grade grade) {
         grades.put(assignment, grade);

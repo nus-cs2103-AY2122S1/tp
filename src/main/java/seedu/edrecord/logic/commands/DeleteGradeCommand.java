@@ -44,8 +44,8 @@ public class DeleteGradeCommand extends Command {
     private final Index assignmentId;
 
     /**
-     * @param studentIndex Index of the student to grade.
-     * @param assignmentId    ID of the assignment to grade.
+     * @param studentIndex Index of the student to delete.
+     * @param assignmentId ID of the assignment to delete.
      */
     public DeleteGradeCommand(Index studentIndex, Index assignmentId) {
         requireNonNull(studentIndex);

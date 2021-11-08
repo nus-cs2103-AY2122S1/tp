@@ -4,8 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.edrecord.testutil.Assert.assertThrows;
 import static seedu.edrecord.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.edrecord.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.edrecord.testutil.TypicalModules.setTypicalModuleSystem;
 
 import java.util.Arrays;
@@ -17,10 +21,12 @@ import org.junit.jupiter.api.Test;
 import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.commands.ClearCommand;
 import seedu.edrecord.logic.commands.DeleteCommand;
+import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.logic.commands.EditCommand;
 import seedu.edrecord.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.edrecord.logic.commands.ExitCommand;
 import seedu.edrecord.logic.commands.FindCommand;
+import seedu.edrecord.logic.commands.GradeCommand;
 import seedu.edrecord.logic.commands.HelpCommand;
 import seedu.edrecord.logic.commands.ListCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
@@ -90,6 +96,23 @@ public class EdRecordParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_grade() throws Exception {
+        assertTrue(parser.parseCommand(GradeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_STATUS + "submitted")
+                instanceof GradeCommand);
+        assertTrue(parser.parseCommand(GradeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased() + " " + PREFIX_SCORE + "50" + " " + PREFIX_STATUS
+                + "graded") instanceof GradeCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteGrade() throws Exception {
+        assertTrue(parser.parseCommand(DeleteGradeCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ID + INDEX_SECOND_PERSON.getOneBased())
+                instanceof DeleteGradeCommand);
     }
 
     @Test
