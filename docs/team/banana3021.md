@@ -68,7 +68,6 @@ Given below are my contributions to the project.
 * **Contributions to Team-Based Tasks**:
      * Updating user/developer docs that are not specific to a feature, i.e writing the user stories, glossary
        and editing diagrams and content in the developer guide.
-     * Helped come up with the type, priority and severity labels for issues and PRs.
      * Maintaining the issue tracker
      * Setting up milestone
 
