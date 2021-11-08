@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MainParser" as MainParser LOGIC_COLOR
 participant ":GameCommandParser" as GameCommandParser LOGIC_COLOR
 participant ":DeleteGameCommandParser" as DeleteGameCommandParser LOGIC_COLOR
-participant "deleteGameCommand:DeleteGameCommand" as DeleteGameCommand LOGIC_COLOR
+participant "c:DeleteGameCommand" as DeleteGameCommand LOGIC_COLOR
 end box
 
 
@@ -18,13 +18,13 @@ LogicManager -> MainParser : parseCommand("game \n--delete DOTA")
 activate MainParser
 
 create GameCommandParser
-MainParser -> GameCommandParser : new GameCommandParser()
+MainParser -> GameCommandParser : new \n GameCommandParser()
 activate GameCommandParser
 
 GameCommandParser --> MainParser
 deactivate GameCommandParser
 
-MainParser -> GameCommandParser : parse(" --delete DOTA")
+MainParser -> GameCommandParser : parse(" --delete \n DOTA")
 activate GameCommandParser
 
 create DeleteGameCommandParser
@@ -37,23 +37,24 @@ GameCommandParser -> DeleteGameCommandParser : parse("--delete  \n DOTA")
 activate DeleteGameCommandParser
 
 create DeleteGameCommand
-DeleteGameCommandParser -> DeleteGameCommand : new DeleteGameCommand(gameId)
+DeleteGameCommandParser -> DeleteGameCommand : new \n DeleteGameCommand(gameId)
 activate DeleteGameCommand
-DeleteGameCommand --> DeleteGameCommandParser : deleteGameCommand
+DeleteGameCommand --> DeleteGameCommandParser : c
 deactivate DeleteGameCommand
 
 
-DeleteGameCommandParser --> GameCommandParser : deleteGameCommand
+DeleteGameCommandParser --> GameCommandParser : c
 deactivate DeleteGameCommandParser
 DeleteGameCommandParser -[hidden]-> GameCommandParser
 destroy DeleteGameCommandParser
 
-GameCommandParser --> MainParser : deleteGameCommand
+GameCommandParser --> MainParser : c
 deactivate GameCommandParser
+GameCommandParser -[hidden]-> MainParser
 GameCommandParser -[hidden]-> MainParser
 destroy GameCommandParser
 
-LogicManager <--MainParser : deleteGameCommand
+LogicManager <--MainParser : c
 deactivate MainParser
 
 ref over LogicManager, DeleteGameCommand: Executing DeleteGameCommand

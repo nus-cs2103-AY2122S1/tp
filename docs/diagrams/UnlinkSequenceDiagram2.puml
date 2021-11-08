@@ -23,11 +23,11 @@ activate LogicManager
 LogicManager -> UnlinkFriendCommand : execute(model)
 activate UnlinkFriendCommand
 
-UnlinkFriendCommand -> Model : unlinkFriend(friendToUnlink, game)
+UnlinkFriendCommand -> Model : unlinkFriend(friendToUnlink,\n game)
 activate Model
-Model -> FriendsList : unlinkFriend(friendToUnlink, game)
+Model -> FriendsList : unlinkFriend(friendToUnlink,\n game)
 activate FriendsList
-FriendsList -> UniqueFriendsList : link(friendToUnlink, game)
+FriendsList -> UniqueFriendsList : link(friendToUnlink,\n game)
 activate UniqueFriendsList
 create Friend
 UniqueFriendsList -> Friend
@@ -38,7 +38,7 @@ UniqueFriendsList -> Friend : link(gameFriendLink)
 activate Friend
 Friend --> UniqueFriendsList
 deactivate Friend
-UniqueFriendsList -> UniqueFriendsList : setFriend(friendToUnlink, friendToEdit)
+UniqueFriendsList -> UniqueFriendsList : setFriend(friendToUnlink,\n friendToEdit)
 activate UniqueFriendsList
 UniqueFriendsList --> UniqueFriendsList
 deactivate UniqueFriendsList
