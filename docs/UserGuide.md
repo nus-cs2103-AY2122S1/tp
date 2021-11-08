@@ -362,10 +362,10 @@ Show all tasks that have been added to the app in a specific week.
 
 **:green_book: Example:**
  
-* `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
+* `show d/2021-01-13` displays the tasks in the week of `2021-01-13`
 </div>
 
-![show_command](images/showCommand.png)
+![show_command](images/showCommandNew.png)
 
 After running the show command, the tasks in that given week are shown in the display window as shown below:
 
