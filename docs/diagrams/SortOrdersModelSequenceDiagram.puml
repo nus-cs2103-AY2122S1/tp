@@ -10,9 +10,6 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":OrderBook" as OrderBook MODEL_COLOR
-participant ":OrderList" as OrderList MODEL_COLOR
-participant ":OrderList" as OrderList MODEL_COLOR
-participant ":ObservableList<Order>" as ObservableList MODEL_COLOR
 end box
 
 
@@ -24,23 +21,6 @@ activate Model
 
 Model -> OrderBook : sortOrders(sortDescriptor)
 activate OrderBook
-
-OrderBook -> OrderList : sort(sortDescriptor)
-
-activate OrderList
-
-OrderList -> ObservableList : sort(sortDescriptor)
-
-activate ObservableList
-
-ObservableList --> OrderList
-
-deactivate ObservableList
-
-OrderList --> OrderBook
-
-deactivate OrderList
-
 
 OrderBook --> Model
 
@@ -64,7 +44,3 @@ deactivate CommandResult
 [<--SortOrdersCommand : result
 deactivate SortOrdersCommand
 @enduml
-
-
-
-
