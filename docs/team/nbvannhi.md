@@ -1,7 +1,6 @@
 ---
 layout: page
-title: Nguyen Ba Van Nhi's
-Project Portfolio Page
+title: Nguyen Ba Van Nhi's Project Portfolio Page
 ---
 
 ### Project: Source Control
