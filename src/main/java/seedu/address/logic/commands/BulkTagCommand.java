@@ -27,6 +27,7 @@ public class BulkTagCommand extends Command {
             + " Passed";
 
     public static final String MESSAGE_SUCCESS = "Added the Tags %s to the Persons";
+    public static final String EMPTY_FILTERED_LIST_ERROR = "The Filtered Person List is Empty";
 
     private final Set<Tag> tagList;
 
@@ -42,7 +43,9 @@ public class BulkTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> personsToTag = new ArrayList<>(model.getFilteredPersonList());
-
+        if (personsToTag.size() == 0) {
+            throw new CommandException(EMPTY_FILTERED_LIST_ERROR);
+        }
         for (Person person : personsToTag) {
             Set<Tag> newTagList = new HashSet<>(tagList);
             newTagList.addAll(person.getTags());
@@ -52,10 +55,10 @@ public class BulkTagCommand extends Command {
             model.setPerson(person, taggedPerson, false);
         }
 
-        return getCommandResult(tagList, personsToTag);
+        return getCommandResult(tagList);
     }
 
-    private CommandResult getCommandResult(Set<Tag> tagList, List<Person> personsToTag) {
+    private CommandResult getCommandResult(Set<Tag> tagList) {
         StringBuilder tagsSb = new StringBuilder();
         for (Tag tag : tagList) {
             tagsSb.append(tag.toString() + " ");

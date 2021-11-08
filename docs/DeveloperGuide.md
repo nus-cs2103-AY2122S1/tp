@@ -384,6 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The attribute to be edited does not exist.
   * 3b1. ProfBook rejects the command and shows an error message.
+  
   Use case ends.
 
 * 3c. If the attribute edited is the name and results in a similar person i.e. same name as another person
@@ -398,6 +399,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to get statistics of persons
 2. ProfBook checks if the input is valid.
 3. ProfBook shows the list of statistics for the current list.
+  Use case ends
+
 
 **Extensions**
 
@@ -429,11 +432,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. ProfBook rejects the command and shows an error message.
 
   Use case ends
-
-* 2c. If the attribute edited is in the invalid format
-    * 2c1. ProfBook rejects the command and shows an error message.
-
-    Use case ends.
 
 **Use case: Delete a person**
 
@@ -511,8 +509,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The file is in invalid format/does not exist
-
     * 2a1. ProfBook rejects the command and shows an error message.
+
+  Use case ends.
 
       Use case ends.
 
@@ -532,7 +531,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The file directory is invalid
 
     * 3a1. ProfBook rejects the command and shows an error message.
-
+      Use case resumes at step 2.
+      
+* 3b. The filtered list is empty
+    * 3b1. ProfBook rejects the command and shows an error message.
       Use case resumes at step 2.
 
 **Use case: Export emails of contacts**
@@ -662,7 +664,6 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Delete test
-
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.

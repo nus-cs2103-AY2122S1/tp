@@ -9,7 +9,7 @@ contact management tasks done faster than traditional GUI apps. ProfBook helps C
 and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
-  {:toc}
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
