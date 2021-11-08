@@ -18,8 +18,6 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tutorialgroup.GroupNumber;
-import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
