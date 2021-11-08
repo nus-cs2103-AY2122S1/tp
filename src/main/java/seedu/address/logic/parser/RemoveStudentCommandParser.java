@@ -19,7 +19,7 @@ public class RemoveStudentCommandParser implements Parser<RemoveStudentCommand> 
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param args
+     * @param args The user input
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
@@ -32,7 +32,7 @@ public class RemoveStudentCommandParser implements Parser<RemoveStudentCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemoveStudentCommand.MESSAGE_USAGE));
         }
-        List<Index> students = ParserUtil.parseStudentIndexes(argMultimap.getAllValues(PREFIX_STUDENT_INDEX));
+        List<Index> students = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_STUDENT_INDEX));
         Index classIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUITION_CLASS).get());
         return new RemoveStudentCommand(students, classIndex);
     }

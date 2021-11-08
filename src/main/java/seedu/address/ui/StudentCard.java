@@ -7,12 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.student.Student;
 
 /**
  * An UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
+
+    private static final double MAX_TAG_WIDTH = 250;
 
     private static final String FXML = "StudentListCard.fxml";
 
@@ -45,7 +48,17 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(makeTag(tag.tagName)));
+    }
+
+    private StackPane makeTag(String text) {
+        Label label = new Label(text);
+        label.setMaxWidth(MAX_TAG_WIDTH);
+        label.setWrapText(true);
+        StackPane stackPane = new StackPane();
+        stackPane.setMaxWidth(MAX_TAG_WIDTH);
+        stackPane.getChildren().add(label);
+        return stackPane;
     }
 
     @Override

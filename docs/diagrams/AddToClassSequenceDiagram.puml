@@ -67,17 +67,16 @@ activate AddToClassCommand LOGIC_COLOR_T3
 AddToClassCommand -[LOGIC_COLOR_T4]-> AddToClassCommand
 deactivate AddToClassCommand
 
-loop for valid students
-AddToClassCommand -[LOGIC_COLOR_T2]> Model : addClass(student)
+loop for each valid student
+AddToClassCommand -[LOGIC_COLOR_T2]> Model : addClass(tuition class)
 activate Model MODEL_COLOR
 Model --> AddToClassCommand
 deactivate Model
-end
-
 AddToClassCommand -[LOGIC_COLOR_T2]> Model : updateModel()
 activate Model MODEL_COLOR
 Model --> AddToClassCommand
 deactivate Model
+end
 
 create CommandResult
 AddToClassCommand -[LOGIC_COLOR_T2]> CommandResult

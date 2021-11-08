@@ -257,7 +257,7 @@ public class TuitionClass implements Nameable {
     public boolean sameClassDetails(TuitionClass editedClass) {
         return editedClass.getTimeslot().equals(timeslot)
                 && editedClass.getName().equals(name)
-                && editedClass.getLimit().equals(this.getLimit());
+                && editedClass.getLimit().equals(limit);
     }
 }
 
