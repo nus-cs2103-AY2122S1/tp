@@ -42,8 +42,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `tag`, `edit` ,`sort`, `/prev` and `/next`. [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `tag`, `edit` ,`sort`, `/prev` and `/next`.
   * Developer Guide:
     * Added implementation details of the `sort` feature.
     * Added a fair share of user stories.
