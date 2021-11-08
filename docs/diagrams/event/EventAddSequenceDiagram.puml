@@ -1,0 +1,60 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EaddCommandParser" as EaddCommandParser LOGIC_COLOR
+participant ":EaddCommand" as EaddCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "event: Event" as Event MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("eadd ...")
+note right
+    the ... implies the parameters being supplied:
+    /n Chess Competition /d 11/12/2022 /m 1 /m 2
+end note
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("eadd ...")
+activate AddressBookParser
+
+create EaddCommandParser
+AddressBookParser -> EaddCommandParser
+activate EaddCommandParser
+
+EaddCommandParser --> AddressBookParser
+deactivate EaddCommandParser
+
+AddressBookParser -> EaddCommandParser : parse("...")
+activate EaddCommandParser
+
+create Event
+EaddCommandParser -> Event
+activate Event
+
+Event --> EaddCommandParser : event
+deactivate Event
+
+create EaddCommand
+EaddCommandParser -> EaddCommand
+activate EaddCommand
+
+EaddCommand --> EaddCommandParser
+deactivate EaddCommand
+
+EaddCommandParser --> AddressBookParser
+deactivate EaddCommandParser
+
+EaddCommandParser -[hidden]-> AddressBookParser
+destroy EaddCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+ref over LogicManager, Model : EaddCommand Execution
+@enduml
