@@ -348,3 +348,4 @@ Command | Format & Examples
 ## <a name="glossary"></a>Glossary
 - PE: ProgrammerError
 - TA: Teaching Assistant (for CS2100 Lab)
+- CSV: Comma-Separated Values
