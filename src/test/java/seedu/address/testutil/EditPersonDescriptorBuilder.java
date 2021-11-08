@@ -66,14 +66,6 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
@@ -104,6 +96,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withNusNetworkId(String nusNetworkId) {
         descriptor.setNusNetworkId(new NusNetworkId(nusNetworkId));
+        descriptor.setEmail(new Email(nusNetworkId + "@u.nus.edu"));
         return this;
     }
 
