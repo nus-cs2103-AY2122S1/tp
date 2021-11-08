@@ -18,7 +18,7 @@ title: Developer Guide
 5. [**Implementations**](#Implementations)
    1. [`Add` Student Feature](#add student)
    2. [`Filter` Student List Feature](#filter student)
-   3. [`Show` lab results Feature](#show command)
+   3. [`Show` lab results Feature](#show lab)
    4. [`EditLab` Feature](#edit lab)
    5. [`Download` Data Feature](#download data)
    6. [`Purge` Feature](#purge data)
