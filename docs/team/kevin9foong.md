@@ -14,39 +14,32 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 Given below are my contributions to the project.
 
 * **New Features**
-  1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. <br>
-     What it involves:
-       * Refactoring of Persons and Tags to Friends and Games classes for team usage.
-       * Updating of relevant test cases
-     <br>
-    Justification: Refactoring the codebase for gitGud's structure provides a base for our team to extend
-         and develop gitGud specific features on top of. 
-     
-  2. Add Friend functionality <br>
+  1. Add Friend functionality <br>
      What it does: Allows users to add friends to the gitGud friends list. 
      <br>
      Justification: Core functionality for users to store list of friends.  
      
-  3. Edit Friend functionality <br>
+  2. Edit Friend functionality <br>
      What it does: Allows users to edit friend's name.  
      <br>
      Justification: A friend can store a lot of information linked to it - e.g. linked games, skill values, schedule etc. 
      Hence, it is important to be able to update information tied to a friend without having to delete and add again which 
      requires user to have to re-provide the previous information of the deleted friend when adding again.
      
-  4. Add Game functionality <br>
+  3. Add Game functionality <br>
      What it does: Allows users to add games to the gitGud games list.<br>
      Justification: Core functionality for users to store list of games. 
      
-  5. Implemented Storage support for Friends and Games <br>
+  4. Implemented Storage support for Friends and Games <br>
      What it does: Allows friends and games data to be persisted across multiple application runs by storing in json files. This 
      allows our application to fulfill its main objective of being able to record friends' gaming information.
      Justification: Without support for persistent storage, users would have to re-enter the same information with each run of 
      our application to use other functionality, making the use of our application cumbersome and unproductive.
      
-  6. Friend recommendation functionality<br>
+  5. Add friend skill functionality<br>
+     What it does: Allows user to store and update friends' skill at different games. 
      Justification: A core feature which allows our application of fulfilling its main objective of being able to record friends' 
-     gaming information and availability to find a suitable time to play competitive games with stored friends.
+     skill values at specific games, so they can keep track of and find the most-highly skilled friends to play with.
      
   6. Friend recommendation functionality <br>
      What it does: Recommends friends for user to play with for a given game and given time based on highest skill value of friend.<br>
@@ -55,27 +48,42 @@ Given below are my contributions to the project.
      with a single command.
 
 * **Testing**
-  1. Wrote unit/integration tests for storage, add friend and add game commands.
-  2. Wrote unit/integration tests(with Model) for Edit Friend functionality
-  3. Wrote unit/integration tests for recommend functionality - ensuring it works with e.g. list command in succession.
+  1. Wrote unit/integration tests for Storage component.
+  2. Wrote unit/integration tests for Add Friend and Add Game commands.
+  3. Wrote unit/integration tests(with Model) for Edit Friend functionality.
+  4. Wrote unit tests for Add Friend skill functionality.
+  5. Wrote unit/integration tests for Recommend functionality - ensuring it works with e.g. list command in succession.
+  6. Manual testing and highlighting of bugs observed in application, UG and DG. 
+
+* **Contribution to team based tasks**
+    1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. <br>
+       What it involves:
+        * Refactoring of Persons and Tags to Friends and Games classes for team usage.
+        * Updating of relevant test cases
+          <br>
+          Justification: Refactoring the codebase for gitGud's structure provides a base for our team to extend
+          and develop gitGud specific features on top of.
+    
+    2. Setting up of tools 
+       * Integrated the Github plugin (codecov) to the team repo.
+    
+    3. Set up initial project website.
+    4. Initial set up for team repo & organization.
 
 * **Code contributed**: 
   [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevin9foong&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
-  
-* **Project management**:
-
-* **Enhancements to existing features**:
 
 * **Documentation**:
   * User Guide:
     1. Added the initial documentation for the features `add friend`, `add game`, `delete game` and 
        `link game and friend`.
     2. Maintenance of `add friend` and `add game` features in the UG.  
-    3. Added the documentation for the features `assign skill`, `edit friend` and `recommend friend to play with`.
-    4. Made changes to formatting and optimizing words used. 
-    5. Added symbols, constraints and warnings to each user command for user's reference. 
-    6. Added the application UI overview and FAQ sections. 
-    7. Added glossary section including terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
+    3. Added documentation for `add friend skill` and `recommend` features. 
+    4. Added the documentation for the features `assign skill`, `edit friend` and `recommend friend to play with`.
+    5. Made changes to formatting and optimization of words used to make user guide more conversational and directed to target user. 
+    6. Added symbols, constraints and warnings to each user command for user's reference. 
+    7. Added the application UI overview and FAQ sections. 
+    8. Added glossary section including terminologies used in our project such as `FRIEND_ID` for users to know what it means. 
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
@@ -93,10 +101,4 @@ Given below are my contributions to the project.
       The hidden bug is for corrupted data files not containing schedule fields in the json format data, the 
       schedule commands fail.
     * [Highlighting of important DG bugs in UML diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
-  
-* **Tools**:
-  1. Integrated the Github plugin (codecov) to the team repo.
 
-* **Miscellaneous**
-  1. Set up initial project website.
-  2. Initial set up for team repo & organization.
