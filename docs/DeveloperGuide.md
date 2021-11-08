@@ -258,20 +258,19 @@ The `execute` method in `ShowCommand` overrides that in `Command`. In this imple
 ##### ShowCommandParser class
 
 The `ShowCommandParser` class implements the `Parser<DeleteCommand>` interface. It manages the parsing of the arguments in the user input.
-The `parse` method in `ShowCommandParser` first checks for the presence of the `Date` in the argument. If the `Date` is present, it returns a `ShowCommand` back to `UniFyParser`, initialized with a `Date`. Otherwise, it checks if the provided argument is a parsable `Integer` and continues only if the argument can be parsed as an `Integer` (Note that the `Integer` class is used here and not the `int` data type). A `ParseException` is thrown if the provided argument cannot be parsed as an `Integer`. In the happy path, it returns a `ShowCommand` back to `UniFyParser`, initialized with an `Integer` which represents the `weekNumber`.
+The `parse` method in `ShowCommandParser` first checks for the presence of the `Date` in the argument. If the `Date` is present, it returns a `ShowCommand` back to `UniFyParser`, initialized with a `Date` and an `int` 2, which represents the message selector. Otherwise, it checks if the provided argument is a parsable `Integer` and continues only if the argument can be parsed as an `Integer` (Note that the `Integer` class is used here and not the `int` data type). A `ParseException` is thrown if the provided argument cannot be parsed as an `Integer`. In the happy path, it returns a `ShowCommand` back to `UniFyParser`, initialized with an `Integer` which represents the `weekNumber` and an `int` 1, which represents the message selector.
 
 ##### Usage Scenario
 
-The following demonstrates a usage scenario where the user wants to delete the first, second and third item in her/his task list.
+The following demonstrates a usage scenario where the user wants to show the 48th week.
 
-1. The method `execute("delete 1 2 3")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
-2. `parseCommand` in `UniFyParser` takes in the String "delete 1 2 3" as its parameter and initializes a `DeleteCommandParser` object.
-3. It then calls the `parse` method in `DeleteCommandParser` to parse the string `"1 2 3"`.
-4. A `DeleteCommand` object will be initialized, taking in the list of parsed indexes `List<Index>`, in this case containing three `Index` `1`, `2` and `3`.
-5. The method call then returns to `LogicManager`, which calls the `execute` method of `DeleteCommand`.
-6. By using a `Set`, the `DeleteCommand` checks for duplicate indexes in its `execute` method.
-7. If no errors are found, the `deleteTask` method under `Model` is called three times, one for each index.
-    * Note that the tasks are deleted from the last `Index` to prevent future deletes operating on wrong tasks.
+1. The method `execute("show 48")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String "show 48" as its parameter and initializes a `ShowCommandParser` object.
+3. It then calls the `parse` method in `ShowCommandParser` to parse the string `"48"` into an `Integer` type `48`.
+4. A `ShowCommand` object will be initialized, with `48` initialised as the `weekNumber`.
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `ShowCommand`.
+6. The `ShowCommand` then checks for a valid week number provided to the `execute` method and whether the week is already being shown.
+7. If no errors are found, the `updateWeeklyTaskList` method under `Model` is called to update the `WeeklyTaskList` in the Model to refelct the tasks of the provided week, `48` in this case.
 8. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
 
 
