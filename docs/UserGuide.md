@@ -326,7 +326,8 @@ Format: `clearGroups`
 
 Displays all the tasks currently in the task list.
 All tasks are sorted with completed tasks at the bottom of the list.
-Pending tasks are sorted by their associated dates, and their priority.
+Pending tasks are then sorted by their associated dates, with those with the earliest date at the top of the list. `TodoTask`s, which do not have a date, are placed at the bottom of the list.
+Tasks that have the same associated date are then sorted by their priority level, with the highest priority level at the top.
 
 Format: `tasks`
 
@@ -446,11 +447,11 @@ Format: `clearTasks`
 
 ---
 
-## Clearing all entries from tApp: `clear`
+## Clearing all entries from tApp: `clearAll`
 
 Clears all entries from tApp.
 
-Format: `clear`
+Format: `clearAll`
 
 ## Viewing help : `help`
 
