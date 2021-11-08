@@ -8,7 +8,7 @@ benefits of a Graphical User Interface (GUI). This guide is designed for develop
 on this app. It contains detailed information that will allow developers to maintain the app or
 alter and extend the app for their own use.
 
-- Table of Contents 
+- Table of Contents
 {:toc}
 
 ---
@@ -874,7 +874,8 @@ testers are expected to do more *exploratory* testing.
 
   1.  Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-  2.  Re-launch the app by double-clicking the jar file.<br>
+  2.  Re-launch the app by double-clicking the jar file.
+
       Expected: The most recent window size and location is retained.
 
 ### Encrypt data file
@@ -882,7 +883,9 @@ testers are expected to do more *exploratory* testing.
 - Encrypting the data file
 
   1.  Prerequisites: CsBook must contain data (at least 1 student and 1 group)
-  2.  Test case: `encrypt`\&nbsp;
+
+  2.  Test case: `encrypt`
+
       Expected: Open `data/csbook` with any text editor. The file contents should be encrypted.
 
 ### Decrypt data file
@@ -891,7 +894,8 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: CsBook must contain data (at least 1 student and 1 group)
 
-  2. Test case: `decrypt`\&nbsp;
+  2. Test case: `decrypt`
+
      Expected: Open `data/csbook` with any text editor. The file contents should be decrypted.
 
 ### Adding a student
@@ -900,10 +904,12 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: a student with the name `Brian` does not exist, and there is a group named `CS2101`.
 
-  2. Test case: `add n/Brian t/@brian99 e/briancheong99@u.nus.edu g/CS2101`\&nbsp;
+  2. Test case: `add n/Brian t/@brian99 e/briancheong99@u.nus.edu g/CS2101`
+
      Expected: `Brian` is added to the list of students and is in the group `CS2101`.
 
-  3. Test case: `add n/Brian t/@brian99 e/briancheong99@u.nus.edu`\&nbsp;
+  3. Test case: `add n/Brian t/@brian99 e/briancheong99@u.nus.edu`
+
      Expected: No student is added. Error details shown in the pop-up message.
 
 ### Editing a student
@@ -912,10 +918,12 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: List all students and groups using the `list` command. Multiple students in the list. No student named `Brian` exists.
 
-  2. Test case: `edit 1 n/Brian`\&nbsp;
+  2. Test case: `edit 1 n/Brian`
+
      Expected: The name of the first student is changed to `Brian`.
 
-  3. Test case: `edit 0 n/Brian`\&nbsp;
+  3. Test case: `edit 0 n/Brian`
+
      Expected: No student is edited. Error details shown in the pop-up message.
 
 ### Viewing detailed information about student
@@ -924,12 +932,14 @@ testers are expected to do more *exploratory* testing.
 
   1.  Prerequisites: There exists a student in CsBook with the name `David Li`and no student with the name `Bryan Cheong`.
 
-  2.  Test case: `viewstudent David Li`\&nbsp;
+  2.  Test case: `viewstudent David Li`
+
       Expected: A pop-up is shown saying that the student has been successfully displayed. A detailed view of the student is displayed. The student's name, group, telegram handle and email is displayed on the top left corner of the display.
       Notes about the student is displayed on the bottom left corner of the display. A list of the student's assessments
       is displayed on the right.
 
-  3.  Test case: `viewstudent Bryan Cheong`\&nbsp;
+  3.  Test case: `viewstudent Bryan Cheong`
+
       Expected: A pop-up is shown saying that the student `Bryan Cheong` does not exist.
 
 ### Adding an assessment to a student
@@ -938,10 +948,12 @@ testers are expected to do more *exploratory* testing.
 
   1.  Prerequisites: List all students and groups using the `list` command. Multiple students in the list. The first student should not have an assessment named `Finals`.
 
-  2.  Test case: `addassessment 1 a/Finals s/13/30`\&nbsp;
+  2.  Test case: `addassessment 1 a/Finals s/13/30`
+
       Expected: A new assessment named `Finals` with score `13/20` has been added to the first student.
 
-  3.  Test case: `addassessment 1 a/Finals s/13/12`\&nbsp;
+  3.  Test case: `addassessment 1 a/Finals s/13/12`
+
       Expected: No new assessment is added to the first student. Error details shown in the pop-up message.
 
 ### Deleting an assessment from a student
@@ -950,10 +962,12 @@ testers are expected to do more *exploratory* testing.
 
   1.  Prerequisites: List all students and groups using the `list` command. Multiple students in the list. The assessment `Finals` must exist in the first student's assessment list. The assessment `Midterms` does not exist in the first student's assessment list.
 
-  2.  Test case: `deleteassessment 1 a/Finals`\&nbsp;
+  2.  Test case: `deleteassessment 1 a/Finals`
+
       Expected: The assessment named `Finals` has been removed from the first student.
 
-  3.  Test case: `deleteassessment 1 a/Midterms`\&nbsp;
+  3.  Test case: `deleteassessment 1 a/Midterms`
+
       Expected: No assessments has been deleted from the first student. Error details shown in the pop-up message.
 
 ### Adding a note to a student
@@ -962,10 +976,12 @@ testers are expected to do more *exploratory* testing.
 
   1.  Prerequisites: a student with the name `Brian` exists. A student with the name `Jun Wei` does not exist.
 
-  2.  Test case: `note n/Brian no/Not good at UML Diagrams`\&nbsp;
+  2.  Test case: `note n/Brian no/Not good at UML Diagrams`
+
       Expected: A new note `Not good at UML Diagrams` has been added to the student named `Brian`.
 
-  3.  Test case: `note n/Jun Wei no/Not good at UML Diagrams`\&nbsp;
+  3.  Test case: `note n/Jun Wei no/Not good at UML Diagrams`
+
       Expected: No new note is added to any student. Error details shown in the pop-up message.
 
 ### Deleting a student
@@ -974,13 +990,16 @@ testers are expected to do more *exploratory* testing.
 
   1.  Prerequisites: List all students and groups using the `list` command. There should be at least one student.
 
-  2.  Test case: `delete 1`\&nbsp;
+  2.  Test case: `delete 1`
+
       Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
-  3.  Test case: `delete 0`\&nbsp;
+  3.  Test case: `delete 0`
+
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-  4.  Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)\&nbsp;
+  4.  Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
+
       Expected: Similar to previous.
 
 ### Adding a group
@@ -989,10 +1008,12 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: a group with the name `CS1101S` does not exist. A group with the name `CS2103T` exists.
 
-  2. Test case: `addgroup g/CS1101S d/Tutorial Group 2`\&nbsp;
+  2. Test case: `addgroup g/CS1101S d/Tutorial Group 2`
+
      Expected: a new group has been added with the name `CS1101S` and description `Tutorial Group 2`.
 
-  3. Test case: `addgroup g/CS2103T d/Software Engineering`\&nbsp;
+  3. Test case: `addgroup g/CS2103T d/Software Engineering`
+
      Expected: no new group has been added. Error details shown in the pop-up message.
 
 ### Viewing a group
@@ -1001,10 +1022,12 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: A group with the name `CS2103T` exists. A group with the name `CS1101S` does not exist. There is at least one student who is in the `CS2103T` group.
 
-  2. Test case: `viewgroup g/CS2103T`\&nbsp;
+  2. Test case: `viewgroup g/CS2103T`
+
      Expected: the students in the group `CS2103T` are shown in the list of students.
 
-  3. Test case: `viewgroup g/CS1101S`\&nbsp;
+  3. Test case: `viewgroup g/CS1101S`
+
      Expected: no group has been viewed. Error details shown in the pop-up message.
 
 ### Changing a student's group
@@ -1013,10 +1036,12 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: A student with the name `Brian` exists and is in a group `CS2101`. A group with the name `CS2103T` exists. A group with the name `CS1101S` does not exist.
 
-  2. Test case: `changegroup n/Brian g/CS2103T`\&nbsp;
+  2. Test case: `changegroup n/Brian g/CS2103T`
+
      Expected: the student named `Brian` is now in the group `CS2103T`.
 
-  3. Test case: `changegroup n/Brian g/CS1101S`\&nbsp;
+  3. Test case: `changegroup n/Brian g/CS1101S`
+
      Expected: no student has had their group changed. Error details shown in the pop-up message.
 
 ### Deleting a group
@@ -1025,8 +1050,10 @@ testers are expected to do more *exploratory* testing.
 
   1. Prerequisites: List all students and groups using the `list` command. A group with the name `CS2103T` exists, and there are students in the group. A group with the name `CS1101S` does not exist.
 
-  2. Test case: `deletegroup g/CS2103T`\&nbsp;
+  2. Test case: `deletegroup g/CS2103T`
+
      Expected: the group named `CS2103T` is deleted. All students who are in the group are deleted as well.
 
-  3. Test case: `deletegroup g/CS1101S`\&nbsp;
+  3. Test case: `deletegroup g/CS1101S`
+
      Expected: No group is deleted. Error details shown in the pop-up message.
