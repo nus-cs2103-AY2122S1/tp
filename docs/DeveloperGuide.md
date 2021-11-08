@@ -520,13 +520,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
 | `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
 | `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
-| `* *`      | user                | assign priority levels for tasks                     | what tasks require my earliest attention                               |
+| `* *`    | user                | assign priority levels for tasks                     | know what tasks require my earliest attention                          |
 | `* *`    | user                | create events as a type of task                      | keep track of tasks that occur at a specified time                     |
 | `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
-| `*`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
-| `*`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
-| `*`    | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
-| `*`    | user                | set automated reminders upon startup                 | not forget any task                                                    |
+| `*`      | user                | tag students to specific tasks                       | keep track of students related to a task                               |
+| `*`      | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
+| `*`      | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
+| `*`      | user                | set automated reminders upon startup                 | not forget any task                                                    |
 | `*`      | expert user         | create command line shortcuts to access tasks        | easily access data and save time                                       |
 | `*`      | user                | set recurring tasks                                  | not create tasks that I have to complete regularly                     |
 | `*`      | user                | customise the order of the menu                      | easily access the features I use most                                  |
@@ -1144,8 +1144,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a group while all groups are being shown
 
-    1. Prerequisites: List all groups using the groups command. Multiple groups in the list.
-       Student to be added to the group does not belong to any group.
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
 
     1. Test case: `editGroup 1 r/ip`<br>
        Expected: The first group in the list has details changed to the ones specified above.
@@ -1163,7 +1162,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `editGroup 0 g/z11-1`, where the index is 0 or smaller <br>
        Expected: No group is edited. Error message of invalid command format shown.
 
-2. Editing a group while on another directory
+4. Editing a group while on another directory
 
     1. Prerequisites: List all tasks or students using the `tasks` or `students` command.
 
@@ -1174,7 +1173,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a group member while all groups are being shown
 
-    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+    1. Prerequisites: List all groups using the groups command. Multiple groups in the list.
+       Student to be added to the group does not belong to any group.
 
     1. Test case: `addMember 1 g/w14-4` where a group with the name of W14-4 exists<br>
        Expected: First student in the student list is added to group W14-4 as a member. Success message shown in the status message. Student in student list is tagged to the group.
