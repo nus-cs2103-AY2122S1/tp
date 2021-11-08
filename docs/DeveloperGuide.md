@@ -271,7 +271,7 @@ the new revenue and client's original revenue is negative
 #### Design considerations
 {:.no_toc}
 
-*Aspect*: User interface of adding and editing revenue.
+*Aspect 1*: User interface of adding and editing revenue.
 
 * **Alternative 1 (Current Choice):** `revenue` command adds to existing `revenue`
 of client. `edit` command sets the `revenue` of client.
@@ -282,7 +282,21 @@ of client. `edit` command sets the `revenue` of client.
   * Pros: Fewer commands for the user to remember
   * Cons: It will be difficult to give proper error messages since we are not sure
   of the user's intentions
-  
+
+*Aspect 2*: Limit set for `revenue` of clients.
+
+* **Alternative 1 (Current Choice):** `revenue` field for each client is set to have a limit 
+of 20,000,000.
+  * Pros: Ensures that there will be no precision errors within the possible range of `revenue`
+  field
+  * Cons: `revenue` of the client can never be higher than 20,000,000. However, this may not be 
+  very significant as S$20,000,000 earned from a client as an insurance agent is a high and unrealistic
+  amount.
+* **Alternative 2:** `revenue` field for each client is set to have no limit.
+  * Pros: `revenue` of the client can be much higher in the rare case that there is a client providing 
+  very high revenue to the insurance agent.
+  * Cons: More prone to bugs and precision errors as value of `revenue` approaches the limit for `BigDecimal`
+
 ###  Note feature
 
 #### Current Implementation
