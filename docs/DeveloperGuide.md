@@ -315,11 +315,9 @@ When the `SortOrderCommand` is executed, the following interactions take place i
 
 After the `ObservableList<Order>` has been sorted, 
 
-Step 1.  the `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`. 
-
-Step 2.  a `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
-
-Step 3.  the UI proceeds to display the sorted list of orders.
+1.  the `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`.
+2.  a `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
+3.  the UI proceeds to display the sorted list of orders.
 
 #### Design choices
 
@@ -466,9 +464,9 @@ For the use cases that are very similar, only the differences between them have 
 
 Analogous to the use case for [adding a client](#use-case-add-a-client).
 
-**Extensions**
+**Additional Extensions**
 
-* 2b. The specified tag for the task does not correspond to an existing sales order.
+* 2b. The tag specified for the task does not correspond to an existing sales order.
 
   * 2b1. SalesNote shows an error message.
 
@@ -478,9 +476,9 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 Analogous to the use case for [adding a client](#use-case-add-a-client).
 
-**Extensions**
+**Additional Extensions**
 
-* 2b. The specified customer for the task does not correspond to an existing client.
+* 2b. The customer specified for the task does not correspond to an existing client.
 
     * 2b1. SalesNote shows an error message.
 
@@ -610,7 +608,7 @@ Analogous to the use case for [adding a client](#use-case-add-a-client).
 
 Analogous to the use case for [editing a task](#use-case-edit-a-task).
 
-**Extensions**
+**Additional Extensions**
 
 * 4c. The user edits the name of the client.
 
