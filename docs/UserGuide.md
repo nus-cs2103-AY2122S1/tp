@@ -226,7 +226,7 @@ Format: `add INDEX -tnTASK_NAME [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
 
 * Adds a task to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
-* `TASK_TIME` should follow the format of `HH:MM`.
+* `TASK_TIME` should follow the format of `HH:mm`.
 
 Examples:
 * `add 1 -tncall for meeting -td2021-12-03 -tt14:30` Adds the task `call for meeting` with date `2021-12-03` and time `14:30` to the task list of the 1st person listed.
@@ -236,20 +236,19 @@ Examples:
 
 Edits an existing task in ContactSH.
 
-Format: `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]…​`
+Format: `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]`
 
 * Edits a task attached to the person at the specified `INDEX`. `INDEX` refers to the index number shown in the persons list displayed. `INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
 * The tasks edited  is specified by the `TASK_INDEX`. `TASK_INDEX` refers to the index number shown in the task list displayed. `TASK_INDEX` **must be a positive integer less than or equal to 2147483647:** 1, 2, 3, …​, 2147483647
-* Multiple tasks of one person can be edited in one command. All fields provided after a `TASK_INDEX` are taken to be edited fields for the task at the `TASK_INDEX`.
 * Existing values will be updated to the input value.
-* For each `TASK_INDEX` provided, at least one of the optional fields must be provided.
+*At least one of the optional fields must be provided.
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
-* `TASK_TIME` should follow the format of `HH:MM`.
+* `TASK_TIME` should follow the format of `HH:mm`.
 
 Examples:
 
 * `edit 3 -ti2 -tnGroup Project Meeting` Changes the name of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
-* `edit 2 -ti3 -tnPresentation Meeting -taZoom -ti5 -td2021-12-20` Changes the 3rd and 5th task of the 2nd person in the list. Name and address of the 3rd task is changed to`Presentation Meeting` and `Zoom` respectively. Date of the 5th task is changed to `2021-12-20`.
+* `edit 2 -ti3 -tnPresentation Meeting -taZoom` Changes the 3rd task of the 2nd person in the list. Name and address of the 3rd task is changed to`Presentation Meeting` and `Zoom` respectively.
 
 ### Deleting a task: `rm`
 
@@ -427,7 +426,7 @@ Action | Format, Examples
 **Help** | `man`
 **Add Task** | `add INDEX -tnTASKNAME` <br> e.g., `add 2 -tnCelebrate $1 million revenue -tnContact Professor to get help`
 **Delete Task** | `rm INDEX -tiTASK_INDEX` <br> e.g., `rm 2 -ti2 -ti3`
-**Edit Task** | `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]…​` <br> e.g., `edit 1 -ti2 -tnInternship Interview -tt15:45 -ti4 -td2022-09-20`
+**Edit Task** | `edit INDEX -tiTASK_INDEX [-tnTASK_NAME] [-tdTASK_DATE] [-ttTASK_TIME] [-taTASK_ADDRESS]` <br> e.g., `edit 1 -ti2 -tnInternship Interview -tt15:45`
 **Mark Task Done** | `donetask INDEX -tiTASK_INDEX…​` <br> e.g., `donetask 3 -ti2 -ti5`
 **Undo Mark Task Done** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti2 -ti5`
 **View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
@@ -448,7 +447,7 @@ Denotes if a Person is important | `-impt` | Input should be `true` or `false`, 
 Task Index of the Task | `-ti` | Task Index should be a positive integer less than or equal to 2147483647: 1, 2, 3, …​, 2147483647.<br>
 Name of the Task | `-tn` | Task name should contain at least one non-whitespace character.
 Date of the Task | `-td` | Task date should follow the format: `YYYY-MM-DD`.
-Time of the Task | `-tt` | Task time should follow the format: `HH:MM`.
+Time of the Task | `-tt` | Task time should follow the format: `HH:mm`.
 Address of the Task | `-ta` | Task address should contain at least one non-whitespace character.
 Reverse flag for `sort` command | `-r` | `-r` flag does not take in any input and should be used as a standalone flag.
 All flag for `cat` command | `-A` | `-A` flag does not take in any input and should be used as a standalone flag.
