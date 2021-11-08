@@ -1,6 +1,7 @@
 package tutoraid.storage;
 
 import static tutoraid.commons.core.Messages.MESSAGE_INVALID_JSON_CAPACITY;
+import static tutoraid.commons.core.Messages.MESSAGE_JSON_INTEGRITY_ERROR;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.StudentBook;
 import tutoraid.model.lesson.Lesson;
+import tutoraid.model.lesson.exceptions.DuplicateStudentInLessonException;
 import tutoraid.model.student.InitialStudent;
 import tutoraid.model.student.Student;
 
@@ -80,6 +82,8 @@ class JsonSerializableStudentBook {
             sb.addStudent(student);
         } catch (IOException e) {
             throw new IllegalValueException(MESSAGE_INVALID_JSON_CAPACITY);
+        } catch (DuplicateStudentInLessonException e) {
+            throw new IllegalValueException(MESSAGE_JSON_INTEGRITY_ERROR);
         }
     }
 

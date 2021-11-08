@@ -32,9 +32,7 @@ public class Messages {
             + " entries to delete from.";
     public static final String MESSAGE_CAPACITY_LESS_THAN_STUDENTS = "The given capacity is lower "
             + "than the number of students currently enrolled in the lesson!";
-    public static final String MESSAGE_JSON_INTEGRITY_LESSON_ERROR = "The lesson save data is corrupted and will be "
-            + "discarded.";
-    public static final String MESSAGE_JSON_INTEGRITY_STUDENT_ERROR = "The student save data is corrupted and will be "
+    public static final String MESSAGE_JSON_INTEGRITY_ERROR = "The save data is corrupted and will be "
             + "discarded.";
     public static final String MESSAGE_NO_STUDENT_DATA = "No student data found. Starting with sample students.";
     public static final String MESSAGE_NO_LESSON_DATA = "No lesson data found. Starting with sample lessons.";
