@@ -9,8 +9,8 @@ title: Developer Guide
 ---
 
 ## **Acknowledgements**
-
-This project is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
 
 ---
 
@@ -228,23 +228,6 @@ To create a class, the user has to provide a valid class code (unique from curre
 - **Alternative 2 (current choice)**: A `GroupSystem` under a module.
 
     - Pros: Simple to save and load. More OOP-oriented and instinctive to understand.
-
-
-### \[Proposed\] Separate view for assignments 
-
-#### Proposed Implementation
-
-A new command will be added: `view [asg/info]`. This command toggles the view between assignments and the default contact list.
-
-#### Assignment View
-
-This view will be optimized for verifying and grading assignments. 
-
-### Contact List View
-
-This is the current view of the app. This is optimized to display contact details.
-
----
 
 ### \[Proposed\] Assign students grades for assignments
 
@@ -743,52 +726,325 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file
+   
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.
+   
+    Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a module
 
+1. Test case: `mkmod`
+
+    Expected: The console displays an error, with an example of how to correctly use the command.
+
+2. Test case: `mkmod CS2100`
+  
+    Expected: A new module with the code `CS2100` is created.
+
+3. Test case: `mkmod SpecialChar!`
+
+    Expected: The console displays an error, reminding the user that module code must be alphanumeric.
+
+4. Test case: `mkmod With A Space`
+
+    Expected: Same as previous. 
+
+### Selecting a module
+
+1. Test case: `cd`
+
+    Expected: The console displays an error, with an example of how to correctly use the command.
+
+2. Test case: `cd CS2100`
+
+    Expected: The currently selected module switches to `CS2100`, as shown in the status bar. Only contacts from that module are listed.
+
+3. Test case: `cd nonExistentModule`
+   
+    Expected: The console displays an error, reminding the user that such a module does not exist.
+
+4. Test case: `cd *`
+
+    Expected: The status bar switches from the currently selected module to "No module selected", and students from all modules are displayed.
+
+### Listing modules
+
+1. Test case: `lsmod`
+
+    Expected: A list of modules is displayed.
+
+2. Test case: `lsmod arg`
+
+    Expected: The argument is ignored, and a list of modules is displayed.
+
+### Adding a class
+
+1. Test case: `mkclass`
+
+    Expected: The console displays an error, with an example of how to correctly use the command.
+
+2. Test case: `mkclass m/CS2100 c/T15`
+  
+    Expected: A new class `T15` belonging to the module `CS2100` is created.
+
+3. Test case: `mkclass m/CS2100 c/Wtih a space`
+
+    Expected: The console displays an error, reminding the user that class code must be alphanumeric.
+
+4. Test case: `mkclass m/test c/test`
+
+    Expected: The console displays an error, reminding the user that the module `test` has yet to be created.
+
+### Listing classes
+
+1. Test case: When selected a module, `lsclass`
+
+    Expected: A list of classes in the current module is displayed.
+
+2. Test case: When selected a module, `lsclass arg`
+
+    Expected: The argument is ignored, and a list of classes in the current module is displayed.
+
+3. Test case: When no module selected, `lsclass`
+  
+    Expected: The console displays an error, reminding the user to select a module first.
 ### Adding a person
 
-1. Adding a person while on the main page
-   1. Test case: `add n/Bob p/1234567 e/bob@example.com m/CS2103 c/W-14-3 i/telegram @bob t/strong`<br>
-      Expected: Bob is added to bottom of the list of people, and the console shows the relevant information.
-2. Test case without optional fields: `add n/Bob p/1234567 e/bob@example.com m/CS2103 c/W-14-3 t/strong`<br>
-   Expected: Bob is added to the bottom of the list, but the optional `Info` field is omitted. The console also omits the `Info` field.
+1. Test case: `add n/Bob p/12345678 e/bob@example.com m/CS2100 c/T15 i/telegram @bob t/strong`
+   
+    Expected: Bob is added to the end of the list of contacts, and the console shows the relevant information.
+
+2. Test case: After executing the previous command, `add n/Bob p/12345678 e/bob@example.com m/CS2100 c/T15 i/telegram @bob t/strong`
+   
+    Expected: The console displays an error, reminding the user that such a person already exists in the EdRecord.
+
+3. Test case: `add n/Alice p/12345678 e/alice@example.com m/CS2100 c/T15`
+
+    Expected: Alice is added to the end of the list, but the optional `Info` and `Tags` field is omitted. 
+
+4. Test case: `add n/Charlie p/12345678 e/bob@example.com`
+
+    Expected: Since module and class fields are not optional, the console displays an error, reminding the user of the correct format of the command. 
+
+5. Test case: `add n/Charlie p/999 e/charlie@example.com m/CS2100 c/T15`
+
+    Expected: The console displays an error, reminding the user to input a valid phone number.
+
+6. Test case: Other invalid values for fields such as email, module, etc.
+
+    Expected: The console displays an error, with relevant information on the issue.
+
+### Editing a person
+
+1. Test case: With the person to edit in index 1, `edit 1 p/91234567 e/johndoe@example.com`
+  
+    Expected: The person at index 1 is edited to have the email `johndoe@example.com` and phone number `91234567`
+
+2. Test case: With less than 100 contacts in the list, `edit 100 p/91234567`
+   
+    Expected: The console displays an error, reminding the user that the index is invalid.
+
+3. Test case: Other invalid values for index, such as floating point numbers, negative integers, etc.
+
+    Expected: The console displays an error, reminding the user of the right format of the command.
+
+4. Test case: With the person to edit in index 1, `edit 1 p/999`
+
+    Expected: The console displays an error, reminding the user to input a valid phone number.
+
+5. Test case: Other invalid values for the edited field
+
+    Expected: The console displays an error, with relevant information on the issue.
+
+### Moving a person to another module and class
+
+1. Test case: With the person to move in index 1 and an existing module/class, `mv 1 m/CS2103 c/T03`
+
+    Expected: The person at index 1 is added to the specified module/class.
+    
+2. Test case: With less than 100 contacts in the list, `mv 100 m/CS2103 c/T03`
+   
+    Expected: The console displays an error, reminding the user that the index is invalid.
+
+3. Test case: With the module/class yet to be created, `mv 1 m/test c/test`
+
+    Expected: The console displays an error, reminding the user that the module/class has yet to be created.
+
+4. Test case: Other invalid/missing values
+
+    Expected: The console displays an error, with relevant information on the issue.
+
+### Remove a person from a module and class
+
+1. Test case: With the person to remove in index 1, who is part of the specified module/class, `rm 1 m/cs2100 c/t15`
+   
+    Expected: The person at index 1 is removed from the specified module/class, and the list is updated to reflect that.
+
+3. Test case: With the person to remove in index 1, but is not part of the specified module/class, `rm 1 m/cs2103 c/t03`
+
+    Expected: The console displays an error, reminding the user that the person is not part of the module/class.
+
+4. Test case: Other invalid indexes, modules or classes
+
+    Expected: The console displays an error, with relevant information on the issue.
+
+### Finding a person
+
+1. Test case: With a person named Bob in the selected module, `find bob`
+
+    Expected: The person named Bob is displayed in a filtered list, along with any other persons with name matching Bob. The console displays how many results were found.
+
+2. Test case: With people named Bob and Alice in the selected module, `find bob alice`
+
+    Expected: Both Bob and Alice is displayed in a filtered list, along with any other persons with name matching Bob/Alice.
+
+3. Test case: With no person named `x` in the selected module, `find x`
+
+    Expected: An empty list is displayed.
+
+### Listing all people
+
+1. Test case: `list`
+
+    Expected: All persons in the select module is listed.
+
+### Changing to assignment view
+
+1. Test case: `view asg`
+
+    Expected: The UI changes to the assignment view, with each person card having a table. If no modules are selected, only the submissions of the students will be displayed. If there is a module selected, unsubmitted module assignments are displayed in addition to the students' submissions. 
+
+2. Test case: `view contacts`
+
+    Expected: The UI changes to the default contacts view, where each person card has information such as email and phone number.
+
+3. Test case: `view test`
+
+    Expected: The console displays an error, indicating that no such view exists.
+
+### Making an assignment
+
+1. Test case: With a module selected, `mkasg n/Assignment 3 w/10 s/30`
+
+    Expected: A module named `Assignment 3` with weighage 10 and score 30 is added to the selected module. Relevant information is displayed in the console. If in assignment view, the new assignment is reflected for all students.
+
+2. Test case: With no module selected, `mkasg n/Assignment 3 w/10 s/30`
+
+    Expected: The console displays an error, reminding the user to select a module first.
+
+3. Test case: With a module selected, `mkasg n/Assignment 3`
+
+    Expected: The console displays an error, reminding the user of the correct command format.
+
+4. Test case: With a module selected, which already has assignments totalling 90% weighage, `mkasg n/Assignment Last w/20 s/30`
+
+    Expected: The console displays an error, reminding the user that the total weighage of assignments in a module cannot exceed 100%.
+
+### Editing an assignment
+
+1. Test case: With a module selected, with the assignment to edit having an ID of 1, `edasg 1 n/Midterm w/2.5`
+
+    Expected: The assignment with ID 1 is edited to have name Midterm with weighage 2.5
+
+2. Test case: With a module selected, with no assignment of ID 10, `edasg 10 n/test`
+
+    Expected: The console displays an error, reminding the user that there is no such assignment
+
+3. Test case: With a module selected, with all assignment weighage summing to 90% and an existing assignment of ID 1,  `edasg 1 w/20`
+
+    Expected: The console displays an error, reminding the user that the total weighage of assignments in a module cannot exceed 100%.
+
+### Adding a grade
+
+1. Test case: With a module selected, with the assignment to grade having ID 1 and max score 100, and the student to grade having index 1, `grade 1 id/1 st/Graded s/90`
+
+    Expected: The grade of the student is updated, with status Graded and score 90.
+
+2. Test case: Same as 1, but with assignment has max score 10
+   
+    Expected: The console displays an error, reminding the user that the grade exceeds the maximum score of the assignment
+
+3. Test case: Same as 1, but with an invalid status such as `st/Late`
+   
+    Expected: The console displays an error, reminding the user of the valid statuses. 
+
+### Deleting a grade
+
+1. Test case: With a module selected, with the graded assignment having ID 2 and the student having index 1, `dlgrade 1 id/2`
+
+    Expected: The grade of the student is removed.
+
+3. Test case: Same as 1, but with an invalid assignment ID or person index
+
+    Expected: The console displays an error, reminding the user of the valid format.
+
+### Deleting an assignment
+
+1. Test case: With a module selected, and an assignment to delete of ID 1, `dlasg 1`
+
+    Expected: The assignment is deleted.
+
+### Deleting a class
+
+1. Test case: With the module `CS2103` selected, and an existing class of `T03`, `dlclass m/cs2103 c/t03`
+
+    Expected: The class is deleted.
+
+2. Test case: Same as 1, but with an nonexistent module/class
+
+    Expected: The console displays an error, with relevant information.
+
+### Deleting a module
+
+1. Test case: With the module to delete having a code of `CS2103`, `dlmod CS2103`
+
+    Expected: The module is deleted.
+
+2. Test case: Same as 1, but with an nonexistent module
+
+    Expected: The console displays an error, with relevant information.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Test case: With the person to delete in index 1, `delete 1`
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    Expected: The person in index 1 will be deleted, with details of the deleted contact in the console. The list is updated to reflect the deleted person.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+2. Test case: `delete 0`
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    Expected: The console displays an error, reminding the user of a valid index.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+3. Test case: `delete 100`
 
-1. _{ more test cases …​ }_
+    Expected: The console displays an error, reminding the user that the provided index is invalid.
+
+### Clearing all data
+
+1. Test case: `clear`
+
+    Expected: EdRecord is cleared of all data. You can verify this with the respective list commands.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+  1. Test case: Missing JSON file.
+  
+      Expected: Sample data will be populated on startup.
 
-1. _{ more test cases …​ }_
+  2. Test case: Corrupted JSON file.
 
+      Expected: An empty instance of EdRecord will be started, with more detailed error message logged.
 
 ---
+
 ## Effort 
 In general, our team has managed to implement the essential features of the applications to allow EdRecord to become a usable application. Our team closely adhered towards the given deadlines, making sure that each of the important features were done by a specific milestone. The enhancements made on top of AddressBook-3 is equal or slightly more than our individual projects.
 
@@ -802,4 +1058,3 @@ In general, our team has managed to implement the essential features of the appl
 ### **Achievements Accomplished:**
 1. Different selection and views
     - EdRecord implemented the ability to change views between contacts and assignments, and also having the ability to select modules. This was a big change from AddressBook-3, needing new UI, and also having the ability to quickly swap from view to view. 
-
