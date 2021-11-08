@@ -41,8 +41,4 @@ deactivate TutorAidParser
 
 deactivate LogicManager
 
-destroy AddStudentCommandParser
-
-destroy AddCommandParser
-
 @enduml

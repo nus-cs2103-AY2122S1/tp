@@ -23,7 +23,6 @@ HiddenOutside ..> TutorAidParser
 
 TutorAidParser .down.> XYCommandParser: creates >
 
-XYCommandParser ..> XYZCommand : creates >
 TutorAidParser ..> Command : returns >
 XYCommandParser .up.|> Parser
 XYCommandParser ..> ArgumentMultimap
@@ -35,4 +34,5 @@ XYCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+
 @enduml

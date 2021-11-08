@@ -35,4 +35,9 @@ deactivate AddCommandParser
 
 LogicManager <-- TutorAidParser : AddProgressCommand
 deactivate TutorAidParser
+
+destroy AddProgressCommandParser
+
+destroy AddCommandParser
+
 @enduml
