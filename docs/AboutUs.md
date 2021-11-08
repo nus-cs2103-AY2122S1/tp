@@ -16,8 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/kanjitp)]
 [[portfolio](team/kanjitp.md)]
 
-* Role: Project Advisor
-* Responsibilities: Full Stack
+* Role: Developer
+* Responsibilities: UI/UX
 
 ### Low Kang Ngee
 
@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/ntwbruce.md)]
 
 - Role: Developer
-- Responsibilities: Dev Ops + Threading
+- Responsibilities: Logic + Testing
 
 ### Dave Low
 
