@@ -924,7 +924,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a task
 
-1. Deleting a task while all task are being shown
+1. Deleting a task while all tasks are being shown
 
    1. Prerequisites: List all persons using the `task list` command. Multiple tasks in the list.
 
