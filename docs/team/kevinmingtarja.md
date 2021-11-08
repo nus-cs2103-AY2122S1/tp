@@ -35,7 +35,7 @@ Given below are my contributions to the project.
   * Added `TutorialGroup` attribute to the `Person` model. (Pull request [#54](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/54))
   * Wrote additional tests for new and existing features. (Pull request [#54](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/54), [\#311](https://github.com/AY2122S1-CS2103T-W08-4/tp/pull/311))
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=kevinmingtarja)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevinmingtarja&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=hsiaotingluv&tabRepo=AY2122S1-CS2103T-W08-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
   * Set up the GitHub team organization
