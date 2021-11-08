@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -24,8 +25,8 @@ public class CountdownCommand extends Command {
 
     public static final String MESSAGE_FUTURE_SUCCESS = "Wedding date has been set on %s.\n"
             + "%d day(s) left from now.";
-    public static final String MESSAGE_PAST_SUCCESS = "Sorry, WedFast does not allow setting a passing day as wedding "
-            + "date, please choose a future date instead.";
+    public static final String MESSAGE_PAST_FAILURE = "Sorry, WedFast does not allow setting the past as your wedding "
+            + "day, choose a future date instead. \uD83D\uDE00";
     public static final String MESSAGE_TODAY_SUCCESS = "You have set your wedding to be on today.\n"
             + "Hope it is not too late to organize your wedding now and WedFast wish you all the best! \uD83D\uDE00";
 
@@ -67,12 +68,12 @@ public class CountdownCommand extends Command {
     }
 
     /** Set the wedding day then shows the day count before the day. */
-    private CommandResult executeSetWeddingDate(Model model) {
+    private CommandResult executeSetWeddingDate(Model model) throws CommandException {
         assert dateSetByUser != null : "The wedding set by user should not be null.";
         int numDays = (int) LocalDate.now().until(dateSetByUser, ChronoUnit.DAYS);
 
         if (numDays < 0) {
-            return new CommandResult(MESSAGE_PAST_SUCCESS);
+            throw new CommandException(MESSAGE_PAST_FAILURE);
         }
 
         model.setDate(dateSetByUser);
@@ -84,7 +85,7 @@ public class CountdownCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (dateSetByUser == null) {
             return executeShowCountDown(model);

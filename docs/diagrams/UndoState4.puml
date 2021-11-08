@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+show members
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam DefaultFontSize 13
+
+title Address Book Person List
+
+package "Existing Person List" {
+    object "__Jackson Stewart:Person__" as Person2
+    object "__Georgina Shipp:Person__" as Person3
+    object "__Max Martha:Person__" as Person4
+}
+
+Person2 : tag = "Caterer"
+Person2 : price = 2000.00
+Person2 : status = "Pending"
+
+Person3 : tag = "Dress Supplier"
+Person3 : price = 1010.00
+Person3 : status = "Pending"
+
+Person4 : tag = "Colleague"
+Person4 : price = 0.00
+Person4 : status = "Declined"
+
+Person2 -[hidden]right-> Person3
+Person3 -[hidden]right-> Person4
+
+@enduml

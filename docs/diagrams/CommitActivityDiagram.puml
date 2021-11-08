@@ -1,15 +1,28 @@
 @startuml
 start
-:User executes command;
+:User executes first (previous) command;
+
+:User executes undo command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command commits AddressBook])
-    :Purge redundant states;
-    :Save AddressBook to
-    addressBookStateList;
+if () then ([can undo previous command])
+    :undoes previous command;
+    :executes next command;
 else ([else])
+    if () then ([invalid command])
+          :output that the
+          command is invalid;
+    else ([else])
+          if () then ([cannot undo])
+                :output that this type
+                of command cannot be undone;
+          else ([not implemented])
+                :output that undoing this
+                command is yet to be implemented;
+          endif
+    endif
 endif
 stop
 @enduml

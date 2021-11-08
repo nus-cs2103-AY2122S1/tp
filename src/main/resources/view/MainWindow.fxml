@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="WedFast" minWidth="1100" minHeight="715" maxWidth="1100" onCloseRequest="#handleExit">
+         title="WedFast" minWidth="1100" minHeight="715" maxHeight="715" maxWidth="1100" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/wedfast_icon.png" />
   </icons>

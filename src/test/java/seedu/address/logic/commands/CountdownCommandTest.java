@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDate.getTypicalCountdown;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -57,16 +58,11 @@ public class CountdownCommandTest {
     }
 
     @Test
-    public void execute_invalidPastDate_success() {
+    public void execute_invalidPastDate_throwsCommandException() {
         LocalDate pastDate = LocalDate.of(2000, Month.APRIL, 29);
         CountdownCommand countdownCommand = new CountdownCommand(pastDate);
 
-        String expectedMessage = CountdownCommand.MESSAGE_PAST_SUCCESS;
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getCountdown(),
-                new UserPrefs(), new Shortcut());
-
-        assertCommandSuccess(countdownCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(countdownCommand, model, CountdownCommand.MESSAGE_PAST_FAILURE);
     }
 
     @Test
