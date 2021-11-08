@@ -287,7 +287,7 @@ Note that in the diagram above, the "else" clause for the `alt` boxes have been 
 an exception is thrown and an error is displayed back to the user. 
 
 Here is an activity diagram to more clearly illustrate the logic of the application:
-<img src="images/AddOrderActivityDiagram.png" width="600"/>
+<img src="images/AddOrderActivityDiagram.png" width="450"/>
 
 #### Result
 An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
