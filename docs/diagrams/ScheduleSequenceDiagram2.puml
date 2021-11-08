@@ -40,7 +40,7 @@ Model --> ScheduleFriendCommand
 deactivate Model
 
 create CommandResult
-ScheduleFriendCommand -> CommandResult : CommandResult(messageToDisplay, CommandType.FRIEND_SCHEDULE)
+ScheduleFriendCommand -> CommandResult : CommandResult(messageToDisplay,\n CommandType.FRIEND_SCHEDULE)
 activate CommandResult
 
 CommandResult --> ScheduleFriendCommand

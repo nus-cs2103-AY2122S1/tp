@@ -4,16 +4,10 @@ title: Taufiq's Project Portfolio Page
 ---
 
 ### Project: gitGud
-![gitGud logo](../images/gitgud.png)
-
 
 gitGud is a **desktop application for storing and managing your friends' gaming information and schedules**.
 It is dedicated to gamers like you and provides a gamer-themed experience with a focus on increasing your efficiency through
 its typing-based interface.
-
-Previously, keeping track of all of yours friends' gaming information and schedules can be difficult and time-consuming.
-However, with gitGud, there is no need to get tilted (frustrated) by this anymore as gitGud provides you with a convenient
-platform to manage essential gaming information of your fellow gamer friends.
 
 Given below are my contributions to the project.
 
@@ -25,23 +19,19 @@ Given below are my contributions to the project.
             optionally, `FRIEND_NAME`. `Refactor - Enhancement`
      - Justification: This feature improves the product significantly, as it is a core feature, which allows the
             user to add the friend to gitGud to start planning their gaming schedule with that friend.
-  2. Added the ability to delete friends in [PR#48](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/48).
+  2. Added the ability to delete friends and games.
      - What it does: allows the user to delete a friend from gitGud using the friend's unique `FRIEND_ID`. `Refactor - Enhancement`
-     - Justification: This feature improves the product significantly because a user can now delete a friend from
-              gitGud in the event that they made a mistake in the details or simply wishes to remove a friend.
-  3. Added the ability to delete games in [PR#68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/68).
-     - What it does: allows the user to delete a game from gitGud using the game's unique `GAME_ID`. `New Feature` 
-     - Justification: This feature improves the product significantly because a user can easily delete a game from
-         gitGud in the event that they made a mistake in the details or simply wishes to remove a game because the 
-       user no longer plays the game.
-  4. Restructured and styled the UI for v1.2, v1.3 and v1.4 to be in its current state with 2 lists, the friend list 
-     and the game list, as well as a main card in the middle to display the requested information by the user in 
-  [PR#145](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/145).
-     - What it does:  allows the user to see details about a friend or a game when the user runs the `friend --get` 
-       or `game --get` command.`New Feature`
-     - Justification: This feature improves the product significantly, as one of the purposes of gitGud is to be 
-       able to store and view your friends' data easily, such as their in-game usernames as well as their skill levels, 
-       as well as the friend's availabilities, to make it easy for the user to choose who to play what game at what time.
+     - Justification: This feature improves the product significantly because a user can now delete a friend and games 
+       from
+              gitGud in the event that they made a mistake in the details or simply wishes to remove a friend or game.
+  3. Restructured and styled the UI for v1.2, v1.3 and v1.4 to be in its current state with 2 lists, the friend list 
+       and the game list, as well as a main card in the middle to display the requested information by the user in 
+    [PR#145](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/145).
+       - What it does:  allows the user to see details about a friend or a game when the user runs the `friend --get` 
+         or `game --get` command.`New Feature`
+       - Justification: This feature improves the product significantly, as one of the purposes of gitGud is to be 
+         able to store and view your friends' data easily, such as their in-game usernames as well as their skill levels, 
+         as well as the friend's availabilities, to make it easy for the user to choose who to play what game at what time.
          
 * **Testing**
   1. Adapted the previous tests for our implementation of AddFriendCommand and DeleteFriendCommand in 
@@ -63,8 +53,8 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added user stories for gitGud in [PR#38](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/38) and 
       [PR#255](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/255)
-        * Added use cases for `friend --add`, `friend --list` and `game --list` feature in [PR#38](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/38)
-        * Added extensive implementation details for `friend --delete` and `game --delete` feature including 
+        * Added use cases for features in [PR#38](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/38)
+        * Added extensive implementation details for delete features including 
           sequence diagrams in
       [PR#184](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/184).
         * Added instructions for manual testing in Appendix in 

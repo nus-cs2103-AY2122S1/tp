@@ -5,7 +5,7 @@ title: Lim Yu Zher's Project Portfolio Page
 
 ### Project: gitGud
 
-gitGud is a desktop application for managing friends' gaming information. gitGud uses a simple Graphical User Interface (GUI) combined with an optimized Command Line Interface (CLI) to give you a smooth and efficient experience. If you can type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
+gitGud is a desktop application for storing and managing your friends' gaming information and schedules. It is dedicated to gamers like you and provides a gamer-themed experience with a focus on increasing your efficiency through its typing-based interface.
 
 Given below are my contributions to the project.
 
