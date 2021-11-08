@@ -43,55 +43,51 @@ following [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?s
       & [v1.3.1](https://github.com/AY2122S1-CS2103-F09-3/tp/releases/tag/v1.3.1) (2 releases) on GitHub
 
 4. **Enhancements to existing features**:
-    * Enhanced the `edit` feature to accommodate the changing requirements of PE (
-      PRs [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121)
-      , [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387)
-      , [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403)
-      , [\#488](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/488))
-    * Modified generic utility classes for the integration of the new PE requirements (
-      PRs [\#274](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/274))
-    * Increased user feedback by putting in place better exceptions throwing mechanism and more detailed description (
-      PRs [\#272](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/272)
-      , [\#287](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/287)
-      , [\#373](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/373)
-      , [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387)
-      , [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403)
-      , [\#416](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/416))
-    * Increased code quality (PRs [\#206](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/206)
-      , [\#495](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/495)
-      , [\#509](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509))
-    * Various bugfixes (PRs [\#150](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/150)
-      , [\#362](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/362)
-      , [\#375](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/375))
+    * Enhanced the `edit` feature to accommodate the changing requirements of PE (PRs [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121),
+      [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387),
+      [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403),
+      [\#488](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/488))
+    * Modified generic utility classes for the integration of the new PE requirements (PRs [\#274](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/274))
+    * Increased user feedback by putting in place better exceptions throwing mechanism and more detailed description (PRs [\#272](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/272),
+      [\#287](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/287),
+      [\#373](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/373),
+      [\#387](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/387),
+      [\#403](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/403),
+      [\#416](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/416))
+    * Increased code quality (PRs [\#206](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/206),
+      [\#495](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/495),
+      [\#509](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509))
+    * Various bugfixes (PRs [\#150](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/150),
+      [\#362](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/362),
+      [\#375](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/375))
 
 5. **Documentation**:
     * User Guide:
         * Added documentation for the command history navigation feature and for features `filter`
-          and `edit` [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35)
-          , [\#148](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/148)
-          , [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160)
-          , [\#210](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/210)
-          , [\#385](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/385)
+          and `edit` [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35),
+          [\#148](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/148),
+          [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160),
+          [\#210](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/210),
+          [\#385](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/385)
         * Created and maintained the command summary at the bottom of the User Guide
           [\#35](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/35), 
           [\517](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/517)
     * Developer Guide:
         * Added implementation details of the `filter`
-          feature. [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162)
-                 , [\#549](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/549)
-                 , [\#576](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509)
+          feature. [\#162](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/162), [\#549](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/549), [\#576](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/509)
     * Solved bug that prevented User Guide and Developer Guide from being linked as one of the header page in
           our `index.md` page [\#276](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/276)
 
 6. **Community**:
-    * PRs with non-trivial comments: [\#113](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/113)
-      , [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121)
-      , [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160)
-      , [\#211](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/211)
-      , [\#389](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/389)
-      , [\#500](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/500)
-    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/348)
-      , [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/324))
+    * PRs with non-trivial comments: [\#113](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/113),
+   [\#121](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/121),
+   [\#160](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/160),
+   [\#211](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/211),
+   [\#389](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/389),
+   [\#500](https://github.com/AY2122S1-CS2103-F09-3/tp/pull/500)
+    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/348),
+   [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/324))
     * Reported bugs and suggestions for other teams in the class (
-      examples: [1](https://github.com/shermannws/ped/issues/7), [2](https://github.com/shermannws/ped/issues/17)
-      , [3](https://github.com/shermannws/ped/issues/5))
+      examples: [1](https://github.com/shermannws/ped/issues/7),
+   [2](https://github.com/shermannws/ped/issues/17),
+   [3](https://github.com/shermannws/ped/issues/5))
