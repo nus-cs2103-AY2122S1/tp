@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam defaultFontSize 18
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyFriendsList <<Interface>>
@@ -24,6 +25,9 @@ Class UniqueFriendsList
 Class Friend
 Class FriendId
 Class FriendName
+Class Schedule
+Class Day
+Class DayOfWeek
 }
 
 Package game <<Rectangle>> {
@@ -35,11 +39,10 @@ Class GameId
 Package gamefriendlink {
 Class GameFriendLink
 Class UserName
-Friend "*" - "*" Game
-(Friend, Game) . GameFriendLink
+Class SkillValue
+FriendId "*" - "*" GameId
+(FriendId, GameId) . GameFriendLink
 }
-
-
 }
 
 Class HiddenOutside #FFFFFF
@@ -62,15 +65,23 @@ FriendsList *--> "1" UniqueFriendsList
 UniqueFriendsList ---> "*" Friend : all
 Friend *--> "1" FriendName
 Friend *--> "1" FriendId
-Friend *--> "*" GameFriendLink
+Friend *--> "1" Schedule
+Friend *-> "*" GameFriendLink
+
+Schedule *--> "7" Day
+Day *--> "1" DayOfWeek
+FriendName -[hidden]right-> FriendId
+Schedule -[hidden]right-> FriendName
 
 GamesList *--> "1" UniqueGamesList
 UniqueGamesList ---> "*" Game : all
 Game *--> "1" GameId
 
 GameFriendLink *--> "1" UserName
+GameFriendLink *--> "1" SkillValue
 
 ModelManager ---> "*" Friend : filtered
+ModelManager ---> "*" Friend : filteredAndSorted
 ModelManager ---> "*" Game : filtered
 
 @enduml

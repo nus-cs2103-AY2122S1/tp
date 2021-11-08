@@ -51,7 +51,7 @@ destroy GameCommandParser
 [<--MainParser : command
 deactivate MainParser
 
-group ref [execute DeleteGameCommand]
+group ref execute DeleteGameCommand
 LogicManager -[hidden]-> LogicManager
 DeleteGameCommand -[hidden]-> DeleteGameCommand
 end

@@ -7,26 +7,26 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **1. Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **2. Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **3. Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### 3.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -40,14 +40,14 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#36-common-classes) represents a collection of classes used by multiple other components.
 
 The rest of gitGud consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the gitGud.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds application data for gitGud in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#32-ui-component): The UI of the gitGud.
+* [**`Logic`**](#33-logic-component): The command executor.
+* [**`Model`**](#34-model-component): Holds application data for gitGud in memory.
+* [**`Storage`**](#35-storage-component): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
@@ -68,7 +68,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2 UI component
 
 **API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -94,7 +94,7 @@ The `UI` component,
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-### Logic component
+### 3.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -124,34 +124,36 @@ How the parsing works:
     * Note: For user commands with `friend` or `game` as the first arguments will go through an additional `FriendCommandParser` or `GameCommandParser` respectively for parsing, which will then create the respective `XYZFriendCommandParser` or `XYZGameCommandParser`
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 3.4 Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="800" />
 
 
 The `Model` component is made up of the following subpackages,
 
 * [`friend`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/friend)
-  * a `Friend` comprises of a `FriendId`, `FriendName` and a set of `GameFriendLink`s.
-  * stores the friends' data i.e., all `Friend` objects (which are contained in a `UniqueFriendsList` object).
+  * a `Friend` comprises of a `FriendId`, `FriendName`, `Schedule` and a map of `GameFriendLink`s.
+  * a `Schedule` is made of 7 `Day`s, each consisting of a `DayOfWeek`.
+  * stores the friends' data i.e., all `Friend` objects in a `UniqueFriendsList` object.
 
 * [`game`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/game)
   * a `Game` comprises of a `GameId` object. 
-  * stores the games' data i.e., all `Game` objects (which are contained in a `UniqueGamesList` object).
+  * stores the games' data i.e., all `Game` objects in a `UniqueGamesList` object.
   
 * [`gamefriendlink`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/model/gamefriendlink)
-  * stores the relationship between a `Friend` and a `Game` as a `GameFriendLink` object.
-  * a `GameFriendLink` object comprises of a `UserName` object.
+  * stores the relationship between a `Friend` and a `Game` through their respective `FriendId` and `GameId`, as a `GameFriendLink` object.
+  * a `GameFriendLink` comprises of a `UserName` and a `SkillValue`.
 
 The `Model` component also,
 
-* stores the currently 'selected' `Friend` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Friend>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the currently 'selected' `Game` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Game>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Friend` objects (e.g., results of a `list` query) as a separate _filtered_ list which is not exposed to outsiders.
+* stores the currently 'selected' and 'sorted' `Friend` objects (e.g., results of a `recommend` query) as a separate _filteredAndSorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Friend>` that can be 'observed' <br>e.g. the UI's `Friends` Window is bound to this list so that the UI automatically updates when the data in the list changes.
+* stores the currently 'selected' `Game` objects (e.g., results of a 'list' query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Game>` that can be 'observed' <br>e.g. the UI's `Games` Window is bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage component
+### 3.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
              
@@ -177,27 +179,26 @@ and `UserPrefs`, each stored in separate json files.
 The Storage component inherits from `FriendsListStorage`, `GamesListStorage` and 
 `UserPrefStorage`, which means it can be treated as any one of the three.
 
-### Common classes
+### 3.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **4. Implementation**
 
-* [Delete Feature](#delete-feature)
-* [Link Feature](#link-feature)
-* [Unlink Feature](#unlink-feature)
-* [Schedule Feature](#schedule-feature)
-* [Recommend Feature](#recommend-feature)
+* [4.1 Delete Feature](#41-delete-feature)
+* [4.2 Link feature](#42-link-feature)
+* [4.3 Unlink feature](#43-unlink-feature)
+* [4.4 Schedule Feature](#44-schedule-feature)
+* [4.5 Recommend Feature](#45-recommend-feature)
+* [4.6 Get Feature](#46-get-feature)
 
---- 
+### 4.1 Delete Feature
 
-### Delete Feature
-
-#### Implementation
+#### 4.1.1 Implementation
 The `MainWindow#executeCommand()` calls `LogicManager#execute()` method, which proceeds 
-to call `MainParser#parseCommand()` method, which them calls either `FriendCommandParser#parse()` or 
+to call `MainParser#parseCommand()` method, which then calls either `FriendCommandParser#parse()` or 
 `GameCommandParser#parse()`, and returns a `Command` object.
 
 The delete command is parsed using the following classes:
@@ -228,7 +229,7 @@ illustrates the description for deleting **games**:
 
 <img src="images/DeleteGameSequenceDiagram.png" width="1000" />
 
-#### Design considerations:
+#### 4.1.2 Design considerations:
 
 The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
 friend has to a game has to be removed, by calling `Model#removeLinkAllFriends()`, before deleting the game by 
@@ -237,9 +238,9 @@ sequence diagram below:
 
 <img src="images/DeleteGameSequenceDiagram2.png" width="1000" />
 
-### Link Feature
+### 4.2 Link Feature
 
-#### Implementation
+#### 4.2.1 Implementation
 
 The parsing of a link command is handled by the following classes:
 
@@ -261,15 +262,15 @@ The implementation of `Model#linkFriend()` is as follows:
 
 ![Implementation of link command in model](images/LinkSequenceDiagram.png)
 
-#### Design considerations:
+#### 4.2.2 Design considerations:
 
 - A separate `GameFriendLink` class was created to represent the association between a friend and a game.
 - Each `Friend` object has a `Map<GameId, GameFriendLink>`, which represents the links to the games it is associated with. However, each `Game` object does not
   have a corresponding data structure to the friends it is linked to. This reduces coupling between the two components such the implementation of the link feature does not require modification whenever the `Game` class is changed.
 
-### Unlink Feature
+### 4.3 Unlink Feature
 
-#### Implementation
+#### 4.3.1 Implementation
 
 The parsing of the unlink command is handled by the following classes:
 
@@ -291,9 +292,9 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram.png)
 
-### Schedule Feature
+### 4.4 Schedule Feature
 
-#### Implementation
+#### 4.4.1 Implementation
 
 * To enable storing the schedule of a friend, two new fields had to be added: `Schedule` and `Day`
     * `Schedule` contains a list of 7 `Day`s.
@@ -303,7 +304,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
         * the `DayOfWeek`, which day of the week the `Day` is.
 
 * Schedule has the command format of `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`, and as in
-  [Logic component](#logic-component), it will follow a similar flow of other commands, with `LogicManager#execute()` 
+  [Logic component](#33-logic-component), it will follow a similar flow of other commands, with `LogicManager#execute()` 
   calling `MainParser#parseCommand()`, who in turn calls `FriendCommandParser#parse()` as it is a `friend` command, 
   which returns a `ScheduleFriendCommand` after determining the `commandType` is `ScheduleFriendCommand.COMMAND_WORD`.
 
@@ -318,7 +319,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 <img src="images/ScheduleSequenceDiagram2.png" width="1000" />
 
-#### Design considerations:
+#### 4.4.2 Design considerations:
 
 * `Schedule` and `Day` were their own classes instead of storing them directly as an `ArrayList` or `boolean[]` as this
   would set a layer of abstraction, allowing us to change the data structure utilised to store the `Schedule` or `Day`.
@@ -332,9 +333,9 @@ The implementation of `Model#unlinkFriend()` is as follows:
 * A `Friend` is initialised with all busy timeslots in `Day` as our targer user profile is busy and would more often be 
   busy than free, so it would be easier for the user to just set when their friend is free.
 
-### Recommend feature:
+### 4.5 Recommend Feature:
 
-#### Description: 
+#### 4.5.1 Description: 
 
 The recommend feature provides the user a with a command (Format: `recommend -g GAME_ID -t HOUR DAY`) to enter into 
 the gitGud text box which causes gitGud to display a list of friends who are: 
@@ -345,7 +346,7 @@ the gitGud text box which causes gitGud to display a list of friends who are:
 This command allows the user to easily find the highest-skilled available friends who play the specified game to coordinate 
 gaming sessions with from the recommendations friends list displayed after the command is executed. 
 
-#### Implementation: 
+#### 4.5.2 Implementation: 
 
 To help you understand how the recommendation functionality is implemented, the activity diagram below summarises the actions 
 gitGud undergoes to display the recommendations friends list to the user: 
@@ -389,7 +390,7 @@ interface is notified and updated to display the filtered and sorted friends lis
 Hence, the user sees the displayed list of friend recommendations and this completes the implementation of the 
 recommend feature.  
 
-#### Design considerations:
+#### 4.5.3 Design considerations:
 
 * The recommend command allows users to filter by hour and day instead of filtering by minute and day.
   * We decided to limit the filtering to a **chosen hour of a chosen day** in order to both be consistent with 
@@ -402,9 +403,57 @@ recommend feature.
   such as `ModelManager#updateFilteredAndSortedFriendsList(Predicate, Comparator)` which are not dependent 
   on the expected behaviour of Recommend, allowing us to change the Recommend feature without affecting the `Model` component.
 
+### 4.6 Get Feature
+
+#### 4.6.1 Implementation
+
+When called by the `MainWindow#executeCommand`, the `LogicManager#execute` method proceeds to call the `MainParser#parseCommand` method, which returns a `Command` object based on the workflow shown in the activity diagram below.
+
+<img src="images/GetCommandWorkflowActivityDiagram.png" width="1000">
+<br><center><ins>Image: Activity diagram showing the workflow of a '--get' command.</ins></center>
+
+The `--get` command is parsed using the following classes:
+* For friends:
+    * `FriendCommandParser` - Checks that the command contains the `GetFriendCommand.COMMAND_WORD` i.e., '--get '.
+    * Calls the `parse()` method of a newly created instance of `GetFriendCommandParser`.
+        * `GetFriendCommandParser` - Parses the command to isolate the string representing the friendId and creates a `FriendId` object with that string.
+        * A new `GetFriendCommand` object is created with the aforementioned `FriendId` object.
+            * `GetFriendCommand` - Represents `friend --get` command that is to be executed by gitGud.
+            * Takes in a `FriendId` object, used to find the friend from the Model.
+            * Due to the unique nature of the `FriendId` objects, where no two friends have the same `FriendId`, it is
+              sufficient to search for the friend using the `FriendId`.
+
+* For games:
+    * `GameCommandParser` - Checks that the command contains the `GetGameCommand.COMMAND_WORD` i.e., '--get '.
+    * Calls the `parse()` method of a newly created instance of `GetGameCommandParser`.
+        * `GetGameCommandParser` - Parses the command to isolate the string representing the gameId and creates a `GameId` object with that string.
+        * A new `GetGameCommand` object is created with the aforementioned `GameId` object.
+            * `GetGameCommand` - Represents `game --get` command that is to be executed by gitGud.
+            * Takes in a `GameId` object, used to find the game from the Model.
+            * Due to the unique nature of the `GameId` objects, where no two games have the same `GameId`, it is
+              sufficient to search for the game using the `GameId`.
+
+After the `LogicManager#execute` receives a `GetFriendCommand` or `GetGameCommand` based on the user input, it executes the command object using the `GetXXXCommand#execute` method.
+
+An example execution of a `GetFriendCommand` is shown in the sequence diagram below.
+
+<img src="images/GetSequenceDiagram.png" width="1000">
+<br><center><ins>Image: Sequence diagram showing the interaction between various entities<br>of 'Logic' and 'Model' component during the execution of a 'friend --get FRIEND_ID' command.</ins></center>
+
+`GetGameCommand` is executed similarly, but it deals with games and game lists.
+
+#### 4.6.2 Design Consideration:
+
+Once a `CommandResult` is created with the correct `Friend` or `Game`, its passed on to the `Ui`, which then in turn takes care of filtering and displaying the right information of the object in focus.
+* `CommandResult` with a `Friend` object
+    * `Ui` creates a `FriendMainCard` that displays all the information of a friend like the `FriendId`, `Name`, `Schedule` and all the `GameFriendLink`s held in the `Friend` object.
+* `CommandResult` with a `Game` object
+    * `Ui` creates a `GameMainCard` that displays all the information of a game like the `GameId` and a list of `Friend`s that play the `Game` in focus, along with their gaming information.
+    * To achieve the above list of `Friend`s, the `Ui` has to check all the friends if they contain a `GameFriendLink` made from the `GameId` of the `Game` in focus, and then use it to display the gaming information like `UserName` and `SkillValue`.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **5. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -414,9 +463,9 @@ recommend feature.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **6. Appendix: Requirements**
 
-### Product scope
+### 6.1 Product scope
 
 **Target user profile**:
 * Gamer who plays competitive games
@@ -430,20 +479,20 @@ online competitive multiplayer games together.
 
 
 **Value proposition**:
-#### Problem:
+#### 6.1.1 Problem:
 For busy university student gamers who love playing multiplayer competitive games with their friends, it can
 often be challenging scheduling times to play games with friends out of a packed schedule.
 Additionally, it can be challenging to make the most out of the limited time available by choosing
 the right friends to play with - those you have the most fun playing with or have great performance at the game.
 
-#### How gitGud solves the problem and make users' lives easier:
+#### 6.1.2 How gitGud solves the problem and make users' lives easier:
 gitGud allows users to store your friends' available timeslots and find matching times to play multiplayer
 competitive games together - allowing users to identify and coordinate gaming sessions with friends.
 It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
 after each gaming session. These factors are used for gitGud to recommend and help users to decide which friends to play with
 for future multiplayer competitive gaming sessions.
 
-### User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -470,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is the `gitGud` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -584,12 +633,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given `FRIEND_ID` is invalid.
-    * 3a1. gitGud shows an error message.
+* 2a. The given `FRIEND_ID` is invalid.
+    * 2a1. gitGud shows an error message.
 
       Use case resumes at step 1.
 
-### Non-Functional Requirements
+**Use case: UC07 - Get a game's complete information**
+
+**MSS**
+
+1. User <u>list games (UC04)</u> and chooses a `GAME_ID`.
+2. User requests for complete information about `GAME_ID`.
+3. gitGud displays the complete information related to  `GAME_ID`.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given `GAME_ID` is invalid.
+    * 2a1. gitGud shows an error message.
+
+      Use case resumes at step 1.
+
+### 6.4 Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 100 friends or games without a noticeable sluggishness in performance for typical usage.
@@ -597,7 +663,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Does not require internet connection.
 5. The code should be open source.
 
-### Glossary
+### 6.5 Glossary
 
 * **Competitive Game/s**: Multiplayer games with a ranking system
 * **Busy**: Maximum of 7hrs/week to play games
@@ -605,7 +671,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **7. Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -618,7 +684,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### 7.1 Launch and shutdown
 
 * Launching:
    1. Download the jar file and copy into an empty folder.
@@ -626,8 +692,8 @@ testers are expected to do more *exploratory* testing.
   
 * Shutdown:
   1. Run the `exit` command in gitGud. The application should exit and shut down. 
-
-### Adding a friend
+  
+### 7.2 Adding a friend
 
 * Prerequisites: There should not be a friend with `FRIEND_ID` 'Draco' or a friend with `FRIEND_ID` 'MrFeely' already 
 stored in gitGud. 
@@ -641,7 +707,8 @@ stored in gitGud.
 * Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`
    Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
 
-### Adding a game
+
+### 7.3 Adding a game
 
 * Prerequisites: List all games using the `game --list` command. There should not be a game with `GAME_ID` 
    'Valorant' already stored in gitGud.
@@ -652,7 +719,8 @@ stored in gitGud.
 * Test case: `game --add`<br>
    Expected: No game is added. Error details shown in the status message. Status bar remains the same.
 
-### Linking a friend to a game
+
+### 7.4 Linking a friend to a game
 
 * Prerequisites: There exists a friend with `FRIEND_ID` 'Draco', and there exists a game with `GAME_ID` 'Valorant'.
 
@@ -670,7 +738,7 @@ stored in gitGud.
    Draconian`, `link --friend`
        Expected: Similar to previous.
 
-### Deleting a friend
+### 7.5 Deleting a friend
 
 * Prerequisites: Only one friend with `FRIEND_ID` 'Draco' exists in gitGud. 
 
@@ -683,7 +751,7 @@ stored in gitGud.
 * Other incorrect delete commands to try: `friend --delete`
    Expected: Similar to previous.
 
-### Deleting a game
+### 7.6 Deleting a game
 
 * Prerequisites: Only one game with `GAME_ID` 'Valorant' exists. 
 
@@ -696,11 +764,10 @@ stored in gitGud.
 * Other incorrect delete commands to try: `game --delete`
    Expected: Similar to previous.
 
-### List all friends / Filtering friends in friends' list using a keyword
-* Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` 'Draco'.
 
-* Test case: `friend --list`<br>
-       Expected: All friends are listed.
+### 7.7 Listing all friends / Filtering friends in friends' list using a keyword
+
+* Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` Draco.
 
 * Test case: `friend --list Draco`<br>
        Expected: The friend 'Draco' is listed, as his `FRIEND_ID` contains the keyword `Draco`. Other friends with 
@@ -714,7 +781,7 @@ stored in gitGud.
        Expected: The friend 'Draco' is listed, as his `FRIEND_ID` contains the keyword `co`. Other friends with the 
        keyword `co` inside their `FRIEND_ID` are also listed.
 
-### List all games / Filtering games in games' list using a keyword
+### 7.8 Listing all games / Filtering games in games' list using a keyword
 
 * Prerequisites: There exists more than one game in gitGud, one of which has the `GAME_ID` 'Valorant'. 
 
@@ -733,7 +800,7 @@ stored in gitGud.
    Expected: The game 'Valorant' is listed, as its `GAME_ID` contains the keyword `ant`. Other games with the
    keyword `ant` inside their `GAME_ID` are also listed.
 
-### Viewing a friend's full data
+### 7.9 Viewing a friend's full data
 
 * Prerequisites: A friend with `FRIEND_ID` 'Draco' exists in gitGud. There is no friend with `FRIEND_ID` 
    'Dra' or `FRIEND_ID` 'co'.
@@ -754,7 +821,7 @@ stored in gitGud.
 * Other incorrect get commands to try: `friend --get`
    Expected: Similar to previous.
    
-### Viewing a game's full data
+### 7.10 Viewing a game's full data
 
 * Prerequisites: A game with `GAME_ID` 'Valorant' exists in gitGud. There is no game with `GAME_ID`
    'Valo' or `GAME_ID` 'rant'.

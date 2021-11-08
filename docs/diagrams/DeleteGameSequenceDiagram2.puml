@@ -4,7 +4,7 @@ skinparam defaultFontSize 20
 
 box Logic GAME_DELETE_BOX_COLOR
 
-group sd [execute DeleteGameCommand]
+group sd execute DeleteGameCommand
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant "c:DeleteGameCommand" as DeleteGameCommand DELETE_GAME_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
