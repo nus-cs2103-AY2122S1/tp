@@ -232,31 +232,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-The features mentioned are:
-1. [Modifying Contacts]((#adding-a-person-add))
-   1. [Adding a person](#adding-a-person-add)
-   2. [Adding tags to people](#adding-tags-to-people-addt)
-   3. [Adding a remark to a person](#adding-a-remark-to-a-person-remark)
-   4. [Editing a person](#editing-a-person-edit)
-      1. [Support for multiple social handles](#support-for-multiple-social-handles)
-   5. [Deleting a person](#deleting-a-person-delete)
-   6. [Deleting multiple person](#delete-multiple-persons-deletem)
-   7. [Deleting tags from people](#deleting-tags-from-people-deletet)
-   8. [Clearing all contacts](#clearing-all-contacts-clear)
-2. Viewing contacts
-   1. [Listing all contacts](#listing-all-contacts-list)
-   2. [Finding people](#finding-persons)
-   3. [Sorting people](#sorting-persons)
-   4. [Viewing statistics](#viewing-statistics)
-3. Sharing contacts
-   1. [Importing contacts](#import-json-file)
-   2. [Exporting contacts](#export-json-file)
-4. [Aliasing commands `alias`](#aliasing-commands-alias)
-5. [Exiting Socius `exit`](#exiting-socius-exit)
-6. [Saving contacts](#saving-the-data)
-7. [Accessing command history](#command-history)
-8. [Input Suggestion](#input-suggestion)
-
 ### Adding a person `add`
 
 #### Implementation
@@ -1252,7 +1227,8 @@ Use case ends.
 
 * 2a. The list is empty.
 
-      Use case ends.
+  Use case ends.
+
 
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
@@ -1281,7 +1257,9 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. Use case ends.
+* 2a. The list is empty.
+
+  Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. Socius shows an error message.
