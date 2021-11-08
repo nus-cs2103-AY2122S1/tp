@@ -59,7 +59,7 @@ Given below are my contributions to the project.
 
 * **Community**:
 * Reviewed and gave useful comments on PRs and performed manual testing on branches to find bugs
-* Contributed to forum discussions (examples: [#320](https://github.com/nus-cs2103-AY2122S1/forum/issues/320), [#266](https://github.com/nus-cs2103-AY2122S1/forum/issues/266), [#259](https://github.com/nus-cs2103-AY2122S1/forum/issues/259)
+* Contributed to forum discussions (examples: [#320](https://github.com/nus-cs2103-AY2122S1/forum/issues/320), [#266](https://github.com/nus-cs2103-AY2122S1/forum/issues/266), [#259](https://github.com/nus-cs2103-AY2122S1/forum/issues/259))
 
 * **Tools**:
 

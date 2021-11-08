@@ -51,7 +51,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/donnys57.png" width="200px">
 
 [[github](http://github.com/DonnyS57)]
-[[portfolio](team/donny.md)]
+[[portfolio](team/donnys57.md)]
 
 * Role: Developer
 * Responsibilities: Logic Layer
