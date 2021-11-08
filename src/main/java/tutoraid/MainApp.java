@@ -70,7 +70,7 @@ public class MainApp extends Application {
             tutorAidLessonStorage.readLessonBook(userPrefs.getLessonBookFilePath());
             tutorAidStudentStorage =
                     new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath(),
-                         tutorAidLessonStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
+                            tutorAidLessonStorage.readLessonBook().orElseGet(SampleDataUtil::getSampleLessonBook));
         } catch (DataConversionException e) {
             tutorAidStudentStorage = new JsonTutorAidStudentStorage(
                     userPrefs.getStudentBookFilePath(),
@@ -100,6 +100,7 @@ public class MainApp extends Application {
         ReadOnlyStudentBook studentsInitialData;
         Optional<ReadOnlyLessonBook> lessonBookOptional;
         ReadOnlyLessonBook lessonsInitialData;
+        boolean hasError = false;
         try {
             lessonBookOptional = storage.readLessonBook();
             if (lessonBookOptional.isEmpty()) {
@@ -108,38 +109,41 @@ public class MainApp extends Application {
             }
             lessonsInitialData = lessonBookOptional.orElseGet(SampleDataUtil::getSampleLessonBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty LessonBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty database.");
             lessonsInitialData = new LessonBook();
-            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_LESSON_ERROR);
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_ERROR);
+            hasError = true;
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty LessonBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty database.");
             lessonsInitialData = new LessonBook();
-            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_LESSON_ERROR);
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_ERROR);
+            hasError = true;
         }
 
         try {
-            studentBookOptional = storage.readStudentBook(lessonsInitialData);
-            if (studentBookOptional.isEmpty()) {
-                logger.info("Data file not found. Will be starting with a sample StudentBook");
-                message += String.format("\n%s", Messages.MESSAGE_NO_STUDENT_DATA);
+            if (hasError) {
+                studentsInitialData = new StudentBook();
+            } else {
+                studentBookOptional = storage.readStudentBook(lessonsInitialData);
+                if (studentBookOptional.isEmpty()) {
+                    logger.info("Data file not found. Will be starting with a sample StudentBook");
+                    message += String.format("\n%s", Messages.MESSAGE_NO_STUDENT_DATA);
+                }
+                ReadOnlyLessonBook finalLessonsInitialData = lessonsInitialData;
+                studentsInitialData = studentBookOptional.orElseGet(() -> SampleDataUtil.getSampleStudentBook(
+                        finalLessonsInitialData));
             }
-            ReadOnlyLessonBook finalLessonsInitialData = lessonsInitialData;
-            studentsInitialData = studentBookOptional.orElseGet(() -> SampleDataUtil.getSampleStudentBook(
-                    finalLessonsInitialData));
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
-            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_STUDENT_ERROR);
+            logger.warning("Data file not in the correct format. Will be starting with an empty database.");
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_ERROR);
             studentsInitialData = new StudentBook();
+            lessonsInitialData = new LessonBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
-            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_STUDENT_ERROR);
+            logger.warning("Problem while reading from the file. Will be starting with an empty database.");
+            message += String.format("\n%s", Messages.MESSAGE_JSON_INTEGRITY_ERROR);
             studentsInitialData = new StudentBook();
+            lessonsInitialData = new LessonBook();
         }
-
-
-
-
-
         return new ModelManager(studentsInitialData, lessonsInitialData, userPrefs);
     }
 

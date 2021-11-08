@@ -47,7 +47,7 @@ public class JsonTutorAidLessonStorage implements TutorAidLessonStorage {
 
         Optional<JsonSerializableLessonBook> jsonLessonBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableLessonBook.class);
-        if (!jsonLessonBook.isPresent()) {
+        if (jsonLessonBook.isEmpty()) {
             return Optional.empty();
         }
 
