@@ -129,7 +129,7 @@ The base functionality of Notor is to allow you to maintain notes on people who 
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 This command only works when persons are listed in Notor.
-</div> <br>.
+</div> <br>
 
 #### _Creating a person_
 

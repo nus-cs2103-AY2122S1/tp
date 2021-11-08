@@ -91,7 +91,6 @@ deactivate MainWindow
 
 
 Mentor -> NoteWindow :Type note and save
-activate Mentor
 activate NoteWindow
 NoteWindow -> LogicManager: executeSaveNote()
 

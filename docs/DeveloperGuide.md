@@ -343,7 +343,7 @@ Precondition: User passes the wrong parameters, command, or data
 * 1b. User enters the <u> wrong parameters for their request to add person, resulting in </u> (UC-CommandError).
   * Resume usecase at 2.
 
-##### Use case: Edit Person, Tag Person, or Add/remove person to a group
+##### Use case: Edit Person, Tag Person, or Add/Remove person to a group
 
 **MSS**
 
@@ -382,8 +382,7 @@ Precondition: User passes the wrong parameters, command, or data
     * 6b2.1 : User cancels the request to close the note. Use case resumes at step 5 or 6.
     * 6b2.2 : User accepts to close the note without saving. Notor closes the note window. Not shown that note is saved.
 
-
-
+    
 ##### Use Case: Clear tags or notes
 
 **MSS**
@@ -418,7 +417,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 1. Similar to Add a note to a person except Notor shows a list of subgroups in step 1.
 
-##### Use Case : Create Group
+##### Use case : Create Group
 
 **MSS**
 
@@ -434,7 +433,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 * 1b. Group name is invalid.
   * 1b1. Resume use case from step 1.
 
-##### Use Case : Create Subgroup
+##### Use case : Create Subgroup
 
 **MSS**
 
@@ -451,7 +450,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
   * 1b1. Resume use case from step 1.
 
 
-#### Use case: User exits from Notor
+#### Use ase: User exits from Notor
 
 **MSS**
 
@@ -463,18 +462,10 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 **Extensions**
 
 * 1a. User has unsaved Note Window opened.
-    * 1a1. Notor displays a confirmation window.
-    * 1a2. User confirms exit without saving Note.
+    * 1a1.1 Notor displays a confirmation window.
+        * 1a2.1 User confirms exit without saving Note. Use case resumes from step 2.
+        * 1a2.2 User cancels exit via confirmation window. Use case ends.
     
-    Use case resumes from step 2.
-
-
-* 1a1.1 User cancels exit via confirmation window.
-  
-  Use case ends.
-  
-
-
 #### Proposed Extended Use Cases ( Not Implemented )
 
 ##### Use case: User types a command
