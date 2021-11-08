@@ -165,7 +165,7 @@ The `Model` component:
 - stores a `TransactionList` object that encapsulates the history of past transactions.
 - stores a `UserPref` object that encapsulates the user’s preferences.
 - does not depend on any of the other three components (as the Model represents data entities of the domain, they should
-  make sense on their own without depending on other components)
+  make sense on their own without depending on other components).
 
 
 ![Model Low Level class diagram](images/ModelLowLevelClassDiagram.png)
@@ -179,7 +179,7 @@ Lower level details of `Model` component:
 ### Storage component
 
 The **API** of this component is specified
-in [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+in [`Storage.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java).
 
 ![Storage class diagram](images/StorageClassDiagram.png)
 
@@ -268,7 +268,7 @@ between Remove and Delete command.
 ### Controlling the Display Panel in UI
 
 The main panel of displayed items in the UI is managed by `DisplayListPanel` in the UI component. 
-This panel is dependent on changes made by command logic and should be able to be toggled to display different lists. 
+This panel is dependent on changes made by command logic and should be able to be toggled to display different lists 
 (e.g. inventory items, items in current order, list of transactions, etc.).
 
 To minimise coupling between the logic and UI component, `DisplayListPanel` adopts an **observer pattern**.
@@ -276,7 +276,7 @@ To minimise coupling between the logic and UI component, `DisplayListPanel` adop
 ![DisplayList1](images/ObserverPattern.png)
 
 `DisplayListPanel` observes an `ObservableList<Displayable>` which is controlled by a `DisplayList` in the model component.
-This way, any changes to model can be propagated to the ui without having to explicitly have knowledge about the ui component.
+This way, any changes to model can be propagated to the Ui without having to explicitly have knowledge about the Ui component.
 
 `DisplayList` is composed of 3 lists.
 1. `DisplayList#filtered` —  A filtered list that is observed by `DisplayListPanel`.
@@ -293,7 +293,7 @@ Set a predicate on the filtered list. This is done when items to be displayed al
 2 . **Mutate the displayed list**. 
 
 When the source is edited outside `DisplayList`, it will notify `DisplayList#displayed`, which will then copy and reflect all changes.
-This, resultantly updates the `DisplayList#filtered` and the display panel.
+This resultantly updates the `DisplayList#filtered` and the display panel.
 
 3 . **Update the source**. `DisplayList#setItems()`
 
@@ -324,7 +324,6 @@ This is definitely inefficient since updates usually involve appending or removi
 This inefficiency does not create observable latency given the envisioned scale of BogoBogo (1000 items).
 However, if BogoBogo is to be scaled up in the future, there might be a need for a more advanced implementation.
 
-Proposed upgrade:
 <div class="code-example bg-grey-lt-000">:bulb: <b>Proposed Upgrade:</b>
 Instead of relying on JavaFX's `ObservableList`, we can create a customised observable list that can reference multiple sources.
 From there, we should be able to toggle which source we want to be displaying on the `filteredlist`. This way, copying is no longer required.
@@ -486,7 +485,6 @@ Extensions:
   </summary>
   {: .text-delta }
 
-### Deleting Item
 ```
 MSS:
 1. User requests to delete an item from the inventory.
@@ -1042,7 +1040,7 @@ testers should do more exploratory testing.
     2. How to implement order system so that it is de-coupled with other classes and interact 
        smoothly with them.
 
-       Effort on this: enumerate possible design choices that could work and acheive the goal. 
+       Effort on this: Enumerate possible design choices that could work and acheive the goal. 
        Discuss the pros and cons of the choices and implement the design.
 
     3. How to change Ui component and display our new class objects to Ui.
@@ -1071,18 +1069,18 @@ testers should do more exploratory testing.
 ### Achievements
 
     1. The inventory management and order system works smoothly together which enables user 
-       not only item logging funtionalities but also order and transaction tracking and bookkeepings.
+       not only item logging funtionalities, but also order and transaction tracking and bookkeepings.
     
     2. The Ui is prettier and new class's Ui merge perfectly with the ones previous developed.
 
     3. The code base is extensible and implementation notes are available in code comments as 
-       well as developer guides.
+       well as developer guide.
 
     4. The app can save and load more extensive and complex data files than AB3.
 
-    5. There are much more funtional commands users can use to acheive there purpose with BogoBogo.
+    5. There are much more funtional commands that users can use to acheive their purpose with BogoBogo.
 
     6. Users can use the commands to navigate and switch between multiple Ui panels.
 
-    7. The commands are fully optimized and is more user friendly.
+    7. The commands are fully optimized and are more user friendly.
 
