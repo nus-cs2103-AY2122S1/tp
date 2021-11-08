@@ -60,7 +60,7 @@ public class ListTransactionCommand extends ListCommand {
             );
         }
 
-        String addMessage = transactionId.get() + ", total cost: " + String.format("%.2f", totalCost);
+        String addMessage = transactionId.get() + ", total cost: " + String.format("$%.2f", totalCost);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, addMessage));
     }

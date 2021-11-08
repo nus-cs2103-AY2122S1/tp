@@ -40,6 +40,9 @@ public class DisplayList {
      * Set {@code toDisplay} as the new source.
      */
     public void setItems(ObservableList<? extends Displayable> toDisplay) {
+
+        filtered.setPredicate(x -> true);
+
         // Remove listener from old source
         source.removeListener(listener);
 

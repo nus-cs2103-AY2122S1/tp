@@ -71,7 +71,7 @@ public class ListTransactionCommandTest {
 
         Double totalCost = model.openTransaction(id);
 
-        String addMessage = ", total cost: " + String.format("%.2f", totalCost);
+        String addMessage = ", total cost: " + String.format("$%.2f", totalCost);
 
         expectedModel.openTransaction(id);
 
