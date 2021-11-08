@@ -43,12 +43,11 @@ Given below are my contributions to the project
   * User Guide:
     * Added the Delete Appointment Command section [#147](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/147)
     * Reviewed, raised and fixed issues throughout the UG [#226](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/226) [#277](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/277)
-    * Formatted the document and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
   * Developer Guide:
     * Updated the Storage Class Diagram [#113](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/113)
     * Added the implementation and sequence diagram for storing an appointment [#198](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/198)
     * Added Find Patients/Doctors and Saving data manual testing [#237](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/237)
-    * Formatted the document and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
+  * Formatted the UG and DG documents and optimize for PDF conversion [#278](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/278)
 
 * **Community**:
   * Addressed a teammate's PR regarding implementation issues and gave tips and advices and how to resolve the mentioned issues [#58](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/58#issuecomment-937614694)
