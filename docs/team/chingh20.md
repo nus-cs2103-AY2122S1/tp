@@ -31,11 +31,11 @@ Given below are my contributions to the project.
 
     * Clear:
       * Created a confirmation window that allow user to confirm if he/she wants to clear data before actually clearing data. 
-        * Modified the clear command so that it could be used to prompt the confirmation window or to actually clear data when executed.
+        * Modified the clear command so that it could prompt the confirmation window or clear data when executed.
       * Take away:
         * In depth understanding of how the logic component works with the UI.
       * Improvement in the future:
-        * To improve code quality and preventing user from intentionally breaking the clear command I should probably create two separate
+        * To improve code quality and preventing user from intentionally breaking the clear command, I should probably create two separate
         classes in the future instead of using one clear command class and allowing two execution behaviors.
     * Major PRs: [Parser](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/36) [Help](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/99)
     [Clear](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/105) 
@@ -46,10 +46,6 @@ Given below are my contributions to the project.
     * Difficulty encountered: 
       * Thinking of ways for profit to be parsed and stored in a game entry given the structure of a game entry object, 
       and making sure that it works well with other cash values, such as INITIAL_CASH and FINIAL_CASH. 
-    * Take away:
-      * Should bring up questions early on. I think it would have been better if I brought up the questions of whether 
-      we should add profit as an attribute in GameEntry, or how we should handle it with the existing attributes INITIAL_CASH and FINAL_CASH early on. 
-      Perhaps by doing so, we would have time to create new classes or think of better ways to handle profit.
     * Major PR: [Profit](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/106)
  
  
