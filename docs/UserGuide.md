@@ -264,7 +264,7 @@ vs 2
 ```
 
 <p align="center">
-    <img src="/tp/images/student_view.png" alt="view student" width="650" height="180"><br>
+    <img src="images/student_view.png" alt="view student" width="650" height="180"><br>
     <i>Figure 2: Displaying a student's details in the information page</i>
 </p>
 
@@ -280,7 +280,7 @@ or
 vc 3
 ```
 <p align="center">
-    <img src="/tp/images/class_view.png" alt="view class" width="650" height="180"><br>
+    <img src="images/class_view.png" alt="view class" width="650" height="180">
     <i>Figure 3: Displaying details of a class in the information page</i>
 </p>
 
@@ -348,9 +348,12 @@ or
 ```
 del 1 2
 ```
-An example output is shown below: <br>
-![DeleteCommand example](images/DeleteStudentUG.png)
-<p align="center"><i>Figure 4: Example of executing `delete 1 2` command</i></p>
+An example output is shown below:
+
+<p align="center">
+    <img src="images/DeleteStudentUG.png" alt="Delete student" width="650" height="420"><br>
+    <i>Figure 4: Example of executing `delete 1 2` command</i>
+</p>
 
 #### Deleting tuition classes: `deleteclass` | `delc`
 
@@ -428,7 +431,7 @@ Users can add, remove, or edit remarks through the editor window.
 </div>
 
 <p align="center">
-    <img src="/tp/images/remark_editor_student.png" width=520 height=250 alt="Remark editor"><br>
+    <img src="images/remark_editor_student.png" width="520" height="250" alt="Remark editor"><br>
     <i>Figure 5: Editing remarks with editor window</i>
 </p>
 
