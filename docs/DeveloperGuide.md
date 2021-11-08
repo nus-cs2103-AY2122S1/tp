@@ -76,7 +76,8 @@ The sections below give more details of each component.
 
 The `UI` component is responsible for managing the user interface of the application so that it responds correctly to any command to user inputs.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 **Functionality** :
 
@@ -85,14 +86,20 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Friend` and `Game` objects residing in the `Model`.
 
 **Component Structure**
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 ![Inheritance from UiPart](images/UiClassDiagramUiPart.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `FriendListPanel`, 
+`GameListPanel`. These parts are always being shown in `MainWindow`.
+
+Depending on the state of the application, certain parts of the UI are shown and hidden in the `MainWindow`, e.g. 
+`FriendMainCardTable`,`FriendSchedulePanel`, `GameMainCardTable`.
+
+etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 ### 3.3 Logic component
 
@@ -105,7 +112,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `MainParser` class to parse the user command.  
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `HelpCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+3. The command can communicate with the `Model` when it is executed (e.g. to add a friend).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("friend --delete draco")` API call.
@@ -159,12 +166,13 @@ The `Model` component also,
              
 **Description** :                                                                                    
 
-The `Storage` component is responsible for persisting application data to be stored in json file format and reading stored data
+The `Storage` component is responsible for persisting application data to be stored in JSON file format and reading 
+stored data
 back into the application. 
 
 **Functionality** :
 
-The storage component saves the following application data in json format and reads them back into corresponding objects:
+The storage component saves the following application data in JSON format and reads them back into corresponding objects:
 * friends list
 * games list
 * user preferences
@@ -173,8 +181,8 @@ The storage component saves the following application data in json format and re
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-There are 3 main model objects stored by the Storage component in json format, namely `Friend`, `Game`,
-and `UserPrefs`, each stored in separate json files.
+There are 3 main model objects stored by the Storage component in JSON format, namely `Friend`, `Game`,
+and `UserPrefs`, each stored in separate JSON files.
 
 The Storage component inherits from `FriendsListStorage`, `GamesListStorage` and 
 `UserPrefStorage`, which means it can be treated as any one of the three.
@@ -516,8 +524,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | **       | user                  | view a recommended list of friends for a game and at a certain time             | find friends to play a game with me at a certain timing  |
 | *       | user                   | store friends' skill levels for a category of game             | store friends' skill levels for categories of games  |
 | *       | user                   | view friends' skill levels for a category of game             | see which friends are good at certain categories of games  |
-
-*{More to be added}*
 
 ### 6.3 Use cases
 
