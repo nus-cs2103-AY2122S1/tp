@@ -25,8 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-
-<img src="images/ArchitectureDiagram.png" width="280" />
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" width="280" />
+</p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -69,7 +70,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
+<p align="center">
 ![Structure of the UI Component](images/UiClassDiagram.png)
+</p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -88,7 +91,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
+<p align="center">
 <img src="images/LogicClassDiagram.png" width="550"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -105,7 +110,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
+<p align="center">
 <img src="images/ParserClasses.png" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -127,16 +134,18 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
+<p align="center">
 <img src="images/BetterModelClassDiagram.png" width="450" />
+</p>
 
 </div>
 
 ##### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
-
+<p align="center">
 <img src="images/StorageClassDiagram.png" width="550" />
-
+</p>
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
@@ -208,12 +217,17 @@ Step4: After the construction of the timetable, each `TuitionClass` is inserted 
 
 The following *Sequence Diagram* illustrates how `Timetable` interacts with `TimetableInfoPage` as explained by `step 3` and `step 4`:
 
-![Interactions between Timetable and TimetableInfoPage](images/TimetableCommandSequenceDiagram.png)
+<p align="center">
+  img="images/TimetableCommandSequenceDiagram.png" />
+</p>
 
 Step5: The complete timetable is displayed to user through the `UI` component.
 
 The following *Activity Diagram* summarizes what happens when a user executes a "timetable" command:<br>
-![TimetableCommand Activity Diagram](images/TimetableCommandActivityDiagram.png)
+
+<p align="center">
+  img="images/TimetableCommandActivityDiagram.png" />
+</p>
 
 #### Design considerations
 
@@ -492,7 +506,10 @@ Students are then added to the respective tuition class with the help of the fol
 Given below is an example usage scenario and how an `addtoclass` command is executed.
 
 The interactions between the components during the usage scenario is shown in the *Sequence Diagram* below.<br>
-![Ui](images/AddToClassSequenceDiagram.png)
+
+<p align="center" >
+  img="images/AddToClassSequenceDiagram.png" />
+</p>
 
 Step 1: The user enters `atc si/2 4 tc/1` command to add the second and fourth students to the first tuition class.
 
@@ -509,7 +526,10 @@ Step 4: Newly enrolled students are added to the tuition class. `AddToClassComma
 `Timeslot` of the class.
 
 The following *Activity Diagram* summarizes what happens when a user executes an `addtoclass` command:
-![Ui](images/AddToClassActivityDiagram.png)
+
+<p align="center" >
+  img="images/AddToClassActivityDiagram.png" />
+</p>
 
 #### Design considerations
 
