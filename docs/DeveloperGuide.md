@@ -262,7 +262,7 @@ This command allows searching for residents subjected to 1 or more filters for t
 
 The workflow of the Find Person command can be illustrated with an activity diagram as follows:
 
-![FindActivityDiagram](images/logic/commands/findcommand/FindActivityDiagram.png)
+<img src="images/logic/commands/findcommand/FindActivityDiagram.png" width="900" />
 
 How the parsing works:
 1. When `Logic` is called upon to execute the command, it uses the `AddressBookParser` class to parse the user command.
@@ -279,7 +279,7 @@ Note:
 
 The following sequence diagram demonstrates what happens when the `FindCommand` is executed:
 
-![FindCommandSequenceDiagram](images/logic/commands/findcommand/FindCommandSequenceDiagram.png)
+<img src="images/logic/commands/findcommand/FindCommandSequenceDiagram.png" width="900" />
 
 The command extends the `Command` class and implements `FindCommand#execute()` to execute the command.
 
