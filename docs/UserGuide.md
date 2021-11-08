@@ -408,6 +408,12 @@ The similar applies for `<number_of_tag_columns>`.
 
 <div style="page-break-after: always;"></div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The import command overwrites the current data with the newly imported data. Make sure you don't need the existing data before importing new data. 
+
+You can use the [`export`](#exporting-data--export) command (explained in the next section) to get a backup of the current data before importing new data.
+</div>
+
 An example of how the CSV should be formatted is shown below:
 
 ![CsvFormatExample](images/UGExamples/importeg.png)
@@ -423,6 +429,7 @@ Examples:
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Exporting data : `export`
 
@@ -449,7 +456,9 @@ Format: `export`
 Clears all existing data.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+
+You can't undo this command! You can use the [`export`](#exporting-data--export) command to get a backup of the data before clearing.
+
 </div>
 
 Format: `clear`
@@ -488,6 +497,7 @@ Retrieves past command lines input.
 
 [Return to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Setting customized aliases for commands : `alias`
 
@@ -531,7 +541,7 @@ Examples:
 
 Source Control data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
 
-If you are adding groups or assessments to a student, make sure you also add the groups to the groupList, and the assessments to the assessmentList. Otherwise, the changes you made could be lost!
+If you are adding groups or assessments to a student, make sure you also add the groups to the group list, and the assessments to the assessment list. Otherwise, the changes you made could be lost!
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Source Control will discard all data and start with an empty data file at the next run.
