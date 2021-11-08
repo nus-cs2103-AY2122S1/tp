@@ -142,7 +142,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and creates an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-before: always;"></div>
@@ -285,7 +285,7 @@ The following sequence diagram shows how the pin operation works:
 
 **Aspect: How each pinned contact is displayed:**
 
-* **Option 1 (current choice):** Have two separate cards, `PersonCard` and `PinnedPersonCard`, for a pinned contact and unpinned contact respectively.
+* **Option 1 (current choice):** Have two separate cards, `PersonCard` and `PinnedPersonCard`, for a unpinned contact and pinned contact respectively.
     * Pros: Easier to implement.
     * Cons: More code duplication.
 
@@ -306,7 +306,7 @@ It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the Find mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. All contacts are displayed at default.
+Step 1. The user launches the application for the first time. All contacts are displayed by default.
 
 Step 2. The user executes `find n/David t/friend t/football` to search for a matching contact.
 
@@ -343,7 +343,7 @@ It will be displayed in `PersonListPanel`.
 
 Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. All contacts are displayed at default. 
+Step 1. The user launches the application for the first time. All contacts are displayed by default. 
 
 Step 2. The user executes `findAny n/David n/Henry t/friend t/football` to search for a matching contact.
 
@@ -455,7 +455,7 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
 Allows the user to recover partial data if the data file becomes corrupted. 
 
 #### Proposed Implementation
-If the data file is corrupted, CONNECTIONS will use an empty data file upon start up. 
+Currently, if the data file is corrupted, CONNECTIONS will use an empty data file upon start up. 
 The proposed implementation can be facilitated by `JsonAdaptedPerson` and `JsonAddressBookStorage`. Upon getting an invalid data format for compulsory fields, `JsonAdaptedPerson` can return `null` and 
 not be added to `JsonAddressBookStorage`. If optional fields are corrupt, default values can be used. This allows other contacts and the other fields of the corrupt contact to be recovered. 
 
@@ -551,7 +551,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 1.  User chooses to add a contact.
 2.  User provides the contact's details.
-3.  CONNECTIONS create a contact entry for that contact's details
+3.  CONNECTIONS creates a contact entry for that contact's details
 
     Use case ends.
 
@@ -559,11 +559,11 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 2a. User provides incomplete details.
     
-    * 2a1. CONNECTIONS show an error message.
+    * 2a1. CONNECTIONS shows an error message.
       
       Use case resumes at step 2.
     
-* 2b. User provides details identical to an existing contact in CONNECTIONS
+* 2b. User provides details identical to an existing contact in CONNECTIONS.
 
     * 2b1. CONNECTIONS informs user that this is a duplicate.
     
@@ -574,7 +574,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User request to clear all contacts.
+1.  User requests to clear all contacts.
 2.  CONNECTIONS deletes all contacts.
 
     Use case ends.
@@ -609,9 +609,9 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **MSS**
 
 1.  User requests to list contacts.
-2.  CONNECTIONS show a list of contacts.
+2.  CONNECTIONS shows a list of contacts.
 3.  User provides his/her index of the contact that is to be edited in the list, along with the replacement information.
-4.  CONNECTIONS reflect the edits that were made.
+4.  CONNECTIONS reflects the edits that were made.
 
     Use case ends.
 
@@ -623,7 +623,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 3a. The given index is invalid.
     
-    * 3a1. CONNECTIONS show an error message.
+    * 3a1. CONNECTIONS shows an error message.
       
       Use case resumes at step 2.
 
@@ -631,7 +631,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User request to exit
+1.  User requests to exit
 2.  CONNECTIONS exit
 
     Use case ends.
@@ -652,19 +652,19 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 2a. CONNECTIONS is empty.
 
-    * 2a1. CONNECTIONS display a message to indicate no contacts.
+    * 2a1. CONNECTIONS displays a message to indicate no contacts.
     
       Use case ends.
 
 * 2b. No existing contact match the search term provided.
     
-    * 2b1. CONNECTIONS display a message to indicate no matching contacts.
+    * 2b1. CONNECTIONS displays a message to indicate no matching contacts.
     
       Use case resumes at step 2.
     
 * 2c. User requests for `or` search (at least one search term is matches).
     
-    * 2c1. CONNECTIONS return all contacts that match any of the search terms provided.
+    * 2c1. CONNECTIONS returns all contacts that match any of the search terms provided.
     
       Use case ends.
 
@@ -672,9 +672,9 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 **MSS**
 
-1.  User choose to look for a contact.
+1.  User chooses to look for a contact.
 2.  User provides the tag.
-3.  CONNECTIONS return all contacts that match the tag.
+3.  CONNECTIONS returns all contacts that match the tag.
 
     Use case ends.
 
@@ -682,15 +682,15 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 2a. CONNECTIONS is empty.
 
-    * 2a1. CONNECTIONS display a message to indicate no contacts.
+    * 2a1. CONNECTIONS displays a message to indicate no contacts.
 
       Use case ends.
 
 <div style="page-break-before: always;"></div>
 
 * 2b. No existing contacts match the tag provided.
-
-    * 2b1. CONNECTIONS display a message to indicate no matching contacts.
+  
+    * 2b1. CONNECTIONS displays a message to indicate no matching contacts.
 
       Use case resumes at step 2.
 
@@ -707,13 +707,13 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 1a. Index provided is invalid.
 
-    * 1a1. CONNECTIONS display a message to indicate the index is invalid.
+    * 1a1. CONNECTIONS displays a message to indicate the index is invalid.
 
       Use case ends.
 
 * 1b. Contact at index is already pinned.
 
-    * 1b1. CONNECTIONS display a message to indicate contact is already pinned.
+    * 1b1. CONNECTIONS displays a message to indicate contact is already pinned.
 
       Use case ends.
 
@@ -730,13 +730,13 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 1a. Index provided is invalid.
 
-    * 1a1. CONNECTIONS display a message to indicate that the index is invalid.
+    * 1a1. CONNECTIONS displays a message to indicate that the index is invalid.
 
       Use case ends.
 
 * 1b. Contact at index is not pinned.
 
-    * 1b1. CONNECTIONS display a message to indicate contact is not pinned.
+    * 1b1. CONNECTIONS displays a message to indicate contact is not pinned.
 
       Use case ends.
     
@@ -746,7 +746,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **MSS**
 
 1.  User requests to list all contacts.
-2.  CONNECTIONS display all contacts.
+2.  CONNECTIONS displays all contacts.
     
     Use case ends.
 
@@ -763,7 +763,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 1.  User requests to list contacts.
 2.  CONNECTIONS shows a list of contacts.
 3.  User provides his index in the list along with the tags to be added.
-4.  CONNECTIONS add those tags to that contact.
+4.  CONNECTIONS adds those tags to that contact.
 
     Use case ends.
 
@@ -792,7 +792,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **MSS**
 
 1.  User requests to list contacts.
-2.  CONNECTIONS show a list of contacts.
+2.  CONNECTIONS shows a list of contacts.
 3.  User provides his index in the list along with the tags to be removed.
 4.  CONNECTIONS remove those tags from that contact.
 
@@ -806,13 +806,13 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 
 * 3a. Index provided is out of range.
 
-    * 3a1. CONNECTIONS display an error message.
+    * 3a1. CONNECTIONS displays an error message.
 
       Use case resumes at step 2.
 
 * 3b. Target contact do not have the tag specified.
 
-    * 3b1. CONNECTIONS display an error message.
+    * 3b1. CONNECTIONS displays an error message.
 
       Use case resumes at step 2.
 
@@ -821,7 +821,7 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **MSS**
 
 1.  User requests to show help for a command.
-2.  CONNECTIONS show the guide on how to use the command.
+2.  CONNECTIONS shows the guide on how to use the command.
 
     Use case ends.
 
@@ -878,17 +878,17 @@ Step 3. CONNECTIONS will not display the first contact's invalid `Tag` and will 
 **Extensions**
 
 * 1a. User inputs indexes that are out of range.
-    * 1a1. CONNECTIONS display an error message.
+    * 1a1. CONNECTIONS displays an error message.
 
       Use case ends.
 
 * 1b. User inputs negative numbers.
-    * 1b1. CONNECTIONS display an error message.
+    * 1b1. CONNECTIONS displays an error message.
 
       Use case ends.
     
 * 1c. User inputs start index that is bigger then end index.
-    * 1c1. CONNECTIONS display an error message.
+    * 1c1. CONNECTIONS displays an error message.
 
       Use case ends.
 
@@ -1007,7 +1007,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Multiple contacts in the list with at least one contact named Roy. No contact has the name George (case-insensitive).
 
     1. Test case: `find n/Roy`<br>
-       Expected: Display contacts with name Roy. Number of contacts found shown in the status message.
+       Expected: Displays contacts with name Roy. Number of contacts found shown in the status message.
         
     1. Test case: `find n/George`<br>
        Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
@@ -1023,10 +1023,10 @@ testers are expected to do more *exploratory* testing.
 
 
     1. Test case: `find t/Colleagues`<br>
-       Expected: Display contacts with tag colleagues. Number of contacts found shown in the status message.
+       Expected: Displays contacts with tag colleagues. Number of contacts found shown in the status message.
        
     1. Test case: `find c/ t/Colleagues`<br>
-       Expected: Display contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
+       Expected: Displays contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
        
     1. Test case: `find t/owesMoney`<br>
        Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
@@ -1041,10 +1041,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Multiple contacts in the list with one contact with name Roy having tag name colleagues and one with name Adam having tag name Colleagues.
 
     1. Test case: `find n/Roy t/Colleagues`<br>
-       Expected: Display contacts with tag colleagues and whose name contains Roy. Number of contacts found shown in the status message. Roy is within the list but Adam is not.
+       Expected: Displays contacts with tag colleagues and whose name contains Roy. Number of contacts found shown in the status message. Roy is within the list but Adam is not.
        
     1. Test case: `find c/ n/Roy t/Colleagues`<br>
-       Expected: Display contacts with tag Colleagues (case-sensitive) and whose name contains Roy. Number of contacts found shown in the status message. Neither Roy nor Adam is within the list.
+       Expected: Displays contacts with tag Colleagues (case-sensitive) and whose name contains Roy. Number of contacts found shown in the status message. Neither Roy nor Adam is within the list.
        
     1. Test case: `find n/Roy t/123!`<br>
        Expected: No changes made. Error details are shown in the status message.
@@ -1058,7 +1058,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Multiple contacts in the list with at least one contact named Roy. None of the contacts has the name George (case-insensitive).
 
     1. Test case: `findAny n/Roy`<br>
-       Expected: Display contacts with name Roy. Number of contacts found shown in the status message.
+       Expected: Displays contacts with name Roy. Number of contacts found shown in the status message.
 
     1. Test case: `findAny n/George`<br>
        Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
@@ -1073,10 +1073,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Multiple contacts in the list with one contact having tag name colleagues and one with tag name Colleagues. None of the contacts has the tag owesMoney (case-insensitive).
 
     1. Test case: `findAny t/Colleagues`<br>
-       Expected: Display contacts with tag colleagues. Number of contacts found shown in the status message.
+       Expected: Displays contacts with tag colleagues. Number of contacts found shown in the status message.
        
     1. Test case: `findAny c/ t/Colleagues`<br>
-       Expected: Display contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
+       Expected: Displays contacts with tag Colleagues (case-sensitive). Number of contacts found shown in the status message.
         
     1. Test case: `findAny t/owesMoney`<br>
        Expected: 0 contacts displayed. Status message indicates 0 contacts are found.
@@ -1091,9 +1091,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Multiple contacts in the list with one contact with name Roy having tag name colleagues and one with name Adam having tag name Colleagues.
 
     1. Test case: `findAny n/Roy t/Colleagues`<br>
-       Expected: Display contacts with tag colleagues (case-insensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
+       Expected: Displays contacts with tag colleagues (case-insensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
     1. Test case: `findAny c/ n/Roy t/Colleagues`<br>
-       Expected: Display contacts with tag Colleagues (case-sensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
+       Expected: Displays contacts with tag Colleagues (case-sensitive) or whose name contains Roy. Number of contacts found shown in the status message. Both Adam and Roy are within the list.
     1. Test case: `findAny n/Roy t/123!`<br>
        Expected: No changes made. Error details are shown in the status message.
 
@@ -1194,18 +1194,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Tagging a contact with multiple tags
 
-    1. Prerequisites: Contact at index 1 has no tags and contact at index 2 has no tags.
+    1. Prerequisites: Contact at index 1 has no tags and contact at index 2 has tag of friends.
 
     1. Test case: `tag 1 t/johnBirthday t/party`<br>
        Expected: Tags added to contact at index 1. Details of the tags added to contact are shown in the status message.
 
-    1. Test case: `tag 2 t/<existing tag in contact at index 2>`<br>
+    1. Test case: `tag 2 t/friends`<br>
        Expected: No changes to the contact. Warning details are shown in the status message.
        
-    1. Test case: `tag 2 t/<tag not in contact at index 2 > t/<existing tag in contact at index 2>`<br>
+    1. Test case: `tag 2 t/party t/friends`<br>
         Expected: New tag is added to the contact. Warning details are shown in the status message.
 
-    1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag <tag name longer than 60 characters>`, `...`.<br>
+    1. Other incorrect tag commands to try: `tag`, `tag -1 t/<valid tag name>`, `tag 1 t/<tag name longer than 60 characters>`, `...`.<br>
        Expected: No changes to contacts. Error details are shown in the status message.
 
 ### Untagging a contact
@@ -1214,9 +1214,9 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Contact at index 1 has tags johnBirthday and party and contact at index 2 has no tags.
 
     1. Test case: `untag 1 t/johnBirthday t/party`<br>
-       Expected: Remove specified tags from contact at index 1. Details of the removed tags are shown in the status message.
+       Expected: Removes specified tags from contact at index 1. Details of the removed tags are shown in the status message.
 
-    1. Test case: `untag 2 t/<non-existent tag in contact at index 2>`<br>
+    1. Test case: `untag 2 t/party`<br>
        Expected: No changes made. Error details are shown in the status message.
        
     1. Other incorrect untag commands to try: `untag`, `untag -1 t/<valid tag name>`, `...`.<br>
