@@ -9,7 +9,6 @@ public class DownloadCommandResult extends CommandResult {
      * Creates a DownloadCommandResult.
      *
      * @param feedbackToUser Message to show user.
-     * @param model Current model.
      */
     public DownloadCommandResult(String feedbackToUser) {
         super(feedbackToUser);
