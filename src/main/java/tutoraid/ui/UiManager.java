@@ -97,4 +97,15 @@ public class UiManager implements Ui {
             mainWindow.fillStudentCard(detailLevel);
         }
     }
+
+    /**
+     * Sends a message to mainWindow for printing to its console.
+     *
+     * @param message The message to be printed
+     */
+    public static void printMessage(String message) {
+        if (mainWindow != null) {
+            mainWindow.printMessage(message);
+        }
+    }
 }
