@@ -340,8 +340,8 @@ Below are the activity and sequence diagrams for the find command
 
 ![Sequence Diagram for find command](images/FindSequenceDiagram(Logic).png)
 
-Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
-details about how classes in UI and Logic interact to execute a find command.
+Please refer to the sequence diagrams in [UI Component](#ui-component) for
+details about how classes in UI interact to execute a find command.
 
 
 ### Graphical analysis of game entries
