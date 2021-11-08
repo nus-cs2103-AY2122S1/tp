@@ -2,38 +2,39 @@
 layout: page
 title: Developer Guide
 ---
+# Welcome to Socius Developer Guide!
 
-* Table of Contents
-{:toc}
+Welcome to Socius User Guide! Choose a section from the table of contents below to find the details on how Socius works!
 
-<!---
-* Acknowledgements
-* Setting up, getting started
-* Design
-  * Architecture
-  * UI component
-  * Logic component
-  * Model component
-  * Storage component
-  * Common classes
-* Implementation
-* Documentation, logging, testing, configuration, dev-ops
-* Appendix: Requirements
-* Appendix: Instructions for manual testing
---->
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
+
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up--getting-started)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI component](#ui-component)
+   3. [Logic component](#logic-component)
+   4. [Model component](#model-component)
+   5. [Storage component](#storage-component)
+   6. [Common classes](#common-classes)
+   7. [Implementation](#implementation)
+   8. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+   9. [Appendix: Requirements](#appendix-requirements)
+   10. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-<!--- * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well} --->
+Socius is adapted from Address Book 3, authored by NUS CS2103T Teaching Team. [Address Book 3 Source Code](https://github.com/nus-cs2103-AY2122S1/tp)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up & Getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up & Getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +52,7 @@ diagrams.
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of Socius.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -62,16 +63,16 @@ called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/mai
 and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It
 is responsible for,
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At Socius launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of Socius.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of Socius in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 **How the architecture components interact with each other**
@@ -192,43 +193,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-1. Viewing help
-2. Modify
-   1. Adding a person
-   2. Adding tags to persons
-   3. [Adding a remark](#adding-a-remark)
+1. Getting help
+2. Modifying Contacts
+   1. [Adding a person](#adding-a-person) [done]
+   2. Adding tags to people
+   3. [Adding a remark to a person](#adding-a-remark)
    4. Editing a person
    5. Deleting a person
    6. [Deleting multiple person](#delete-multiple-persons)
-   7. Deleting tags from persons
-   8. Clearing all persons
-3. View
-   1. Listing all persons
-   2. [Finding persons](#finding-persons)
-   3. [Sorting persons](#sorting-persons)
+   7. Deleting tags from people
+   8. Clearing all contacts
+3. Viewing contacts
+   1. Listing all contacts
+   2. [Finding people](#finding-persons)
+   3. [Sorting people](#sorting-persons)
    4. [Viewing statistics](#viewing-statistics)
-4. Share
+4. Sharing contacts
    1. [Importing contacts](#import-json-file)
    2. [Exporting contacts](#export-json-file)
-5. Advance
-   1. [Aliasing commands](#aliasing-commands)
-6. Utility
-   1. [Input Suggestion](#input-suggestion)
-7. Exiting the program
-8. Saving the data
+5. [Aliasing commands `alias`](#aliasing-commands-alias)
+6. [Exiting Socius `exit`](#exiting-socius-exit)
+7. [Saving contacts](#saving-the-data)
+8. [Accessing command history](#command-history)
+9. [Input Suggestion](#input-suggestion)
 
-### Add contacts with optional arguments
+### Adding a person
 
 #### Implementation
 
 The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone,
-without the need to include contact details.
+without the need to include other contact details.
 
 #### Usage
 
-Given below is an example usage scenario of how the addCommand mechanism behaves at each step.
+Given below is an example usage scenario of how the AddCommand mechanism behaves at each step.
 
-1. The user first launches Socius and adds a new contact by name, without any contact details.
+1. The user first launches Socius and adds a new contact by name, without any other contact details.
 
 2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
 
