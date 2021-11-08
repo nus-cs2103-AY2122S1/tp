@@ -131,11 +131,13 @@ Examples:
 * `POLICY_NAME`: Should be unique
 
 **Payment structure**:
-* `PMT_AMOUNT_CENTS`: Size of each payment in cents
+* `PMT_AMOUNT_CENTS`: Payment amount in cents for each payment
 * `PMTS_PER_YR`: Payment frequency in a year
 * `NUM_OF_PMT`: Total number of payments in payment structure
 
-| Payment Type                                       | Payment Amount (cents) | Payments/Year | No. of Payments | Context                                     |
+Examples:
+
+| Payment Type                                       | Payment Amt (cents) | Payments per year | No. of Payments | Context                                     |
 |----------------------------------------------------|------------------|-------------|------------|---------------------------------------------|
 | Single lump sum                                    |       1000       |      -      |      -     | Single payment of $10                      |
 | X payments per year, indefinite number of payments |       1000       |      12     |      -     | Annual payments of $10, indefinitely       |
@@ -145,6 +147,8 @@ Examples:
 * `COMMISSION_%`: Percentage of each payment that goes to commission
 * `NUM_OF_COMM`: The number of payments that the agent will receive commission for.
 * Receives a percentage commission `COMMISSION_%` from the payment amount `PMT_AMOUNT_CENTS` for the first number of payments `NUM_OF_COMM` in the payment structure.
+
+Calculating Commission with Payment Structure:
 
 | Payment Structure                            | Commission Percentage | No. of Commissions | Commission per payment | Context                                                 |
 |----------------------------------------------|--------------|-------------|------------------------|---------------------------------------------------------|
