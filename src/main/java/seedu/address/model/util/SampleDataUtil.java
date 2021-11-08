@@ -67,7 +67,7 @@ public class SampleDataUtil {
         return new Task[] {
             new Task(new Label("Perform alterations on blazer"), new Date("2020-11-10"), new TaskTag("SO1")),
             new Task(new Label("Remind customer about payment"), new Date("2017-11-02"), new TaskTag("SO2")),
-            new Task(new Label("Cut and measure fabric"), new Date("2017-10-02"), new TaskTag("SO1")),
+            new Task(new Label("Cut and measure fabric"), new Date("2017-10-02"), new TaskTag("General")),
         };
     }
 
