@@ -322,7 +322,7 @@ likely to be repeated, we decided that it was sufficient to allow users to creat
 
 #### Implementation
 
-The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br>`ModelManager` stores a list of
+The split mechanism is facilitated by `ModelManager` and `SportsPa`. <br><br>`ModelManager` stores a list of
 filtered members as `filteredMembers`. Each `Member` in the list has an `Availability`, which is implemented internally as a `List<DayOfWeek>`.
 <br>
 `SportsPa` stores a list of all facilities in `UniqueFacilityList` as `facilities`. Each `Facility` in the list has an `AllocationMap`, which is implemented internally as an `EnumMap<DayOfWeek, List<Member>>`. This `EnumMap` is initialized
@@ -441,6 +441,10 @@ The following sequence diagram shows how the mark attendance operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 The lifeline for `MarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+The following activity diagram summarizes what happens when a user executes the `import` command:
+
+<img src="images/SplitActivityDiagram.png" width="250" />
 
 The unmark command does the opposite — it calls the `ModelManager#unmarkMembersAttendance(List<Index>)`, which then
 calls the `ModelManager#unmarkMembersAttendance(Member)` which decrements the `totalAttendance` and `todayAttendance` of the `Member` 
