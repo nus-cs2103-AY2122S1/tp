@@ -485,10 +485,10 @@ The following activity diagrams summarize what happens when a user executes the 
 <center>
     <img src="images/ShowActivityDiagram.png" />
 </center>
-<center>
-    <img src="images/ShowStudentActivityDiagram.png" />
-    <img src="images/ShowStudentsActivityDiagram.png" />
-</center>
+
+![ShowStudentActivityDiagram](images/ShowStudentActivityDiagram.png)
+![ShowStudentsActivityDiagram](images/ShowStudentsActivityDiagram.png)
+
 <br>
 
 <div style="page-break-after: always;"></div>
