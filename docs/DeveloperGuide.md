@@ -18,6 +18,7 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 
 ### Table of Contents
+- [**About this guide**](#about-this-guide)
 - [**Acknowledgements**](#acknowledgements)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
@@ -57,6 +58,7 @@ This product will make recruiters’ lives easier through categorisation and fil
   * [Editing an applicant](#editing-an-applicant)
   * [Deleting an applicant](#deleting-an-applicant)
   * [Finding an applicant](#finding-an-applicant)
+  * [Showing an applicant](#showing-search-terms)
   * [Marking an applicant](#marking-an-applicant)
   * [Unmarking an applicant](#unmarking-an-applicant)
   * [Deleting marked applicants](#deleting-marked-applicants)
@@ -65,10 +67,32 @@ This product will make recruiters’ lives easier through categorisation and fil
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **About this guide**
+[Table of contents](#table-of-contents)
+
+This guide aims to help developers get familiar with how RecruitIn functions.
+* To understand the design of RecruitIn on a higher level, you may visit [Design](#design) for implementation
+details of each component of RecruitIn.
+* If you wish to go further to understand how certain features are implemented on a lower level, you may visit
+[Implementation](#implementation) for noteworthy implementation details of important features.
+* If you wish to conduct some manual testing of RecruitIn, you may visit [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+to find various test cases and expected results for some features of RecruitIn.
+* If you wish to make further developments to RecruitIn, 
+you may follow the guide at [Setting up, getting started](#setting-up-getting-started) 
+for a quick set up of your development environment.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Acknowledgements**
 [Table of contents](#table-of-contents)
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [JavaFX](https://openjfx.io/)
+* [Jackson](https://github.com/FasterXML/jackson)
+* [JUnit5](https://github.com/junit-team/junit5)
+* [Gradle](https://github.com/gradle/gradle)
+* [Gradle Shadow](https://github.com/johnrengelman/shadow)
+* [CheckStyle](https://github.com/checkstyle/checkstyle)
+* [CodeCov](https://github.com/codecov)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -84,7 +108,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-F11-2/tp/tree/master/docs/diagrams/) folder.
 </div>
 
 ### Architecture
@@ -98,7 +122,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -132,13 +156,13 @@ The sections below give more details of each component.
 ### UI component
 [Table of contents](#table-of-contents)
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -150,7 +174,7 @@ The `UI` component,
 ### Logic component
 [Table of contents](#table-of-contents)
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -164,7 +188,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/dg-diagrams/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -180,7 +204,7 @@ How the parsing works:
 ### Model component
 [Table of contents](#table-of-contents)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -202,7 +226,7 @@ The `Model` component,
 ### Storage component
 [Table of contents](#table-of-contents)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -230,7 +254,7 @@ The `add` command is facilitated by creating an `AddCommand` depending on the gi
 This command then updates the `model` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```add``` command:
-![images](images/AddCommandActivityDiagram.png)
+![images](images/dg-diagrams/AddCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -259,7 +283,7 @@ Step 6. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the add operation works.
-![images](images/AddCommandSequenceDiagram.png)
+![images](images/dg-diagrams/AddCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
@@ -270,7 +294,7 @@ The ```edit``` command is facilitated by creating an ```EditCommand``` depending
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```edit``` command:
-![images](images/EditCommandActivityDiagram.png)
+![images](images/dg-diagrams/EditCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -301,7 +325,7 @@ Step 6. Once the list is updated, `CommandResult` is initialized with `String` c
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the edit operation works.
-![images](images/EditCommandSequenceDiagram.png)
+![images](images/dg-diagrams/EditCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
@@ -312,7 +336,7 @@ The ```delete``` command is facilitated by creating a ```DeleteCommand``` depend
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes an ```delete``` command:
-![images](images/DeleteActivityDiagram.png)
+![images](images/dg-diagrams/DeleteActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -335,7 +359,7 @@ Step 4. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the delete operation works.
-![images](images/DeleteSequenceDiagram.png)
+![images](images/dg-diagrams/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `DeleteCommandParser`
@@ -349,7 +373,7 @@ input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```find``` command:
 
-![images](images/FindCommandActivityDiagram.png)
+![images](images/dg-diagrams/FindCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -371,7 +395,7 @@ Step 4. Once the string of all applicant names is formed, `CommandResult` is ini
 and returned.
 
 The following sequence diagram shows how the find operation works.
-![images](images/FindCommandSequenceDiagram.png)
+![images](images/dg-diagrams/FindCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FindCommandParser`
@@ -406,7 +430,7 @@ The ```filter_interview``` command is facilitated by extending an abstract ```Fi
 subclass depending on the given input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
-![images](images/FilterInterviewCommandActivityDiagram.png)
+![images](images/dg-diagrams/FilterInterviewCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -435,7 +459,7 @@ Step 6. Once the list has been filtered, `CommandResult` is initialized with `St
 have interviews that have passed. This `CommandResult` is then returned.
 
 The following sequence diagram shows how the filter interview operation works.
-![images](images/FilterInterviewCommandSequenceDiagram.png)
+![images](images/dg-diagrams/FilterInterviewCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
@@ -465,7 +489,7 @@ The ```show``` command is facilitated by creating an ```ObservableList``` of ```
 the prefix provided by the user.
 
 The following activity diagram summarizes what happens when a user executes a ```show``` command:
-![images](images/ShowCommandActivityDiagram.png)
+![images](images/dg-diagrams/ShowCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -488,7 +512,7 @@ Step 4. Once the string of all applicant names is formed, `CommandResult` is ini
 and returned.
 
 The following sequence diagram shows how the show operation works.
-![images](images/ShowCommandSequenceDiagram.png)
+![images](images/dg-diagrams/ShowCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
@@ -520,7 +544,7 @@ The ```mark``` command is facilitated by creating a ```MarkCommand```, which is 
 This command then updates the ```model``` accordingly, depending on the given input.
 
 The following activity diagram summarizes what happens when a user executes a ```mark``` command:
-![images](images/MarkCommandActivityDiagram.png)
+![images](images/dg-diagrams/MarkCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -543,7 +567,7 @@ Step 4. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the mark operation works.
-![images](images/MarkCommandSequenceDiagram.png)
+![images](images/dg-diagrams/MarkCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `MarkingCommandParser`
@@ -556,7 +580,7 @@ The ```unmark``` command is facilitated by creating a ```UnmarkCommand```, which
 ```MarkingCommand```. This command then updates the ```model``` accordingly, depending on the given input.
 
 The following activity diagram summarizes what happens when a user executes a ```unmark``` command:
-![images](images/UnmarkCommandActivityDiagram.png)
+![images](images/dg-diagrams/UnmarkCommandActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** There should only be one arrowhead at the end of every line 
@@ -578,7 +602,7 @@ Step 4. `CommandResult` is initialized with `String` containing the details of t
 This `CommandResult` is then returned.
 
 The following sequence diagram shows how the unmark operation works.
-![images](images/UnmarkCommandSequenceDiagram.png)
+![images](images/dg-diagrams/UnmarkCommandSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `MarkingCommandParser`
@@ -605,7 +629,7 @@ The ```delete_marked``` command is facilitated by creating an ```DeleteMarkedCom
 This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```delete_marked``` command:
-![images](images/DeleteMarkedCommandActivityDiagram.png)
+![images](images/dg-diagrams/DeleteMarkedCommandActivityDiagram.png)
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```delete_marked``` command.
 
@@ -623,7 +647,7 @@ Step 5. Once the string of all applicant names that are marked is formed, `Comma
 and returned.
 
 The following sequence diagram shows how the delete marked operation works.
-![images](images/DeleteMarkedCommandSequenceDiagram.png)
+![images](images/dg-diagrams/DeleteMarkedCommandSequenceDiagram.png)
 
 #### Design considerations for delete marked:
 [Table of contents](#table-of-contents)

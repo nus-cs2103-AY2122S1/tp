@@ -58,7 +58,7 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Updated product scope, value proposition and user stories:
         [\#45](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/45)
-        * Updated user stories for `edit, `show` and `find` features and glossary for `show` feature:
+        * Updated user stories for `edit`, `show` and `find` features and glossary for `show` feature:
         [\#185](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/185)
         * Added user story for notes for `find` feature:
         [\#210](https://github.com/AY2122S1-CS2103T-F11-2/tp/pull/212)

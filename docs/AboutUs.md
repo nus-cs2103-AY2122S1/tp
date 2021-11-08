@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Ajjagottu Kaushik Kumar Reddy
 
-<img src="images/kaushikkrdy.png" width="200px">
+<img src="images/members/kaushikkrdy.png" width="200px">
 
 [[github](https://github.com/kaushikkrdy)]
 
@@ -21,7 +21,7 @@ Email: kaushikumar99@gmail.com
 
 ### Bryann Yeap Kok Keong
 
-<img src="images/bryannyeap.png" width="200px">
+<img src="images/members/bryannyeap.png" width="200px">
 
 [[github](https://github.com/BryannYeap)]
 
@@ -33,7 +33,7 @@ Email: bryannyeapkk@gmail.com
 
 ### Liu Chen En
 
-<img src="images/twothicc.png" width="200px">
+<img src="images/members/twothicc.png" width="200px">
 
 [[github](https://github.com/twothicc)]
 
@@ -45,7 +45,7 @@ Email: chenenliuu@gmail.com
 
 ### Toh Wei Jie
 
-<img src="images/tohweijie01.png" width="200px">
+<img src="images/members/tohweijie01.png" width="200px">
 
 [[github](https://github.com/TohWeiJie01)]
 
@@ -57,7 +57,7 @@ Email: tohweijie01@gmail.com
 
 ### Yao Yi
 
-<img src="images/pulpy-y.png" width="200px">
+<img src="images/members/pulpy-y.png" width="200px">
 
 [[github](https://github.com/Pulpy-y)]
 
