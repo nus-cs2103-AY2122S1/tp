@@ -17,16 +17,16 @@ The code I contributed can be found [here](https://nus-cs2103-ay2122s1.github.io
 
 ### **Implemented functionality to view tasks of a specified person**
 * **What it does**: Allow users to view task list of specified person using either a mouse-click, or a CLI command.
-* **Justification**: One of the core functionalities of ContactSh
+* **Justification**: One of the core functionalities of ContactSh.
 * **Challenges**: I had to link and modify different functionalities such as editing, removing and editing
    of tasks so that the GUI reflects the correct information.
-   
+
 Relevant PRs include:
 [#49](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/49),
 [#67](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/67)
 
 ### **Implemented functionality to view all person's tasks**
-* **What it does**: Allow users to view all person's tasks in a single list
+* **What it does**: Allow users to view all person's tasks in a single list.
 * **Justification**: Implemented using TreeView JavaFx control as it was the best choice, however implementation
    was hard as I had to design my own algorithm to ensure the TreeView structure is modified correctly whenever
    commands which modified tasks were made.
@@ -42,16 +42,16 @@ Relevant PRs include: [#85](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/85
 Relevant PRs include: [#104](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/104)
 
 ### **Implemented functionality to view overall tasks statistics**
-* **What it does**: 
-   * View tasks completion statistics using a pieChart. 
+* **What it does**:
+   * View tasks completion statistics using a PieChart.
    * taskStatusChecker: A class which uses a thread to automatically check and update all task's status (once every 5 seconds), such
    that users would not view outdated tasks completion information.
 * **Justification**: This feature aids the user experience as it is allows users to view
    useful up to date information regarding their tasks completion.
 * **Challenges**: The PieChart was hard to implement by itself and even harder to make it dynamic.
-   I.e., Updates instantly whenever a task's completion status is modified. Had to link the taskStatusChecker to work
+   I.e., Updates instantly whenever a task's completion status is modified. I also Had to link the taskStatusChecker to work
    with task viewing functionalities such that tasks updated automatically are reflected on the GUI correctly.
-   
+
 Relevant PRs include: [#95](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/95)
 
 ### **Implemented functionality to set when to remind users of tasks that are due soon**
@@ -64,7 +64,10 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
 
 ## **UI/UX contributions**
 * Designed and implemented the task list panel and statistics panel, both of which are core
-   portions of the GUI
+   portions of the GUI.
+* Implemented split sliding panel to fit the result box and statistics panel.
+* Implemented split sliding panel to fit the person list panel and task list panel.
+
 ## **Team tasks/contributions:**
 * Managed Releases: `v1.2.1(trial release for v1.3)`, `v1.3`, `v1.3.1(Revision of v1.3)`.
 * Created and Changed product icon, name for the GUI.
@@ -78,8 +81,9 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
 ## **Documentation**:
 
 ### **User Guide**:
-* Added documentation for the feature `cat`, `cat -A`. [#20](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/20)
-* Added documentation for the feature `reminder`.
+* Added documentation for the features `cat`, `cat -A`. [#20](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/20),
+  [#87](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/87)
+* Added documentation for the feature `reminder`. [#111](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/111)
 * Added Table of contents, Introduction, Guide on using the UG and product Icon.[#87](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/87/files),
   [#116](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/116/files)
 
