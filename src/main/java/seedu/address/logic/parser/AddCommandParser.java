@@ -32,7 +32,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args Arguments passed into the function.
+     * @return AddCommand object for execution.
+     * @throws ParseException if there is any invalid input.
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -111,6 +113,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap used to get value of prefixes.
+     * @param prefixes Prefixes that are passed into the function.
+     * @return boolean representation of whether all the prefixes passed into
+     * this method is present in the ArgumentMultimap.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

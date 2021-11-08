@@ -32,6 +32,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Parses the list of Github username(s) to be searched for in the context of the FindCommand
      * and returns a FindCommand object for execution.
      *
+     * @param trimmedArgs to be parsed.
      * @return FindCommand object for execution.
      * @throws ParseException if user has not entered at least 1 tag to search for
      */

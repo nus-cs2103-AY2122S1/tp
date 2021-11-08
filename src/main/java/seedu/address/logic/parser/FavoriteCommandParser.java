@@ -12,7 +12,9 @@ public class FavoriteCommandParser implements Parser<FavoriteCommand> {
      * Parses the given {@code String} of arguments in the context of the FavoriteCommand
      * and returns a FavoriteCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args to be parsed.
+     * @return FavoriteCommand containing the target index to be favorited.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FavoriteCommand parse(String args) throws ParseException {
         try {
