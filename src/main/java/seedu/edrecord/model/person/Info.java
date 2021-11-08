@@ -34,6 +34,10 @@ public class Info {
         return test != null;
     }
 
+    public boolean isEmpty() {
+        return this.value.isBlank();
+    }
+
     @Override
     public String toString() {
         return value;

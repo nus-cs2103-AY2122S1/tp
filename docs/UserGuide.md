@@ -41,7 +41,7 @@ Some symbols used in this guide:
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts. This command can be used to clear the sample data.
+   * **`clear`** : Deletes all contacts and modules/groups. This command can be used to clear the sample data.
 
    * **`exit`** : Exits the app.
 
@@ -219,19 +219,27 @@ Examples:
 
 #### Moving students into an existing class and module : `mv`
 
-Move a particular student into a particular module and class.
+Moves a particular student into a particular module and class.
 
 Format: `mv INDEX [INDEX]... m/MODULE c/CLASS`
 
 * Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+  
+Example:
+
+- `mv 2 m/CS2103 c/T10`
 
 #### Removing students from an existing class and module : `rm`
 
-Remove a particular student from a particular module and class.
+Removes a particular student from a particular module and class.
 
 Format: `rm INDEX m/MODULE c/CLASS`
 
 * Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+  
+Examples:
+
+- `rm 3 m/CS2103 c/T10`
 
 
 ### Managing classes in a module
@@ -271,12 +279,15 @@ As a teaching assistant, you are very likely to be responsible for keeping track
 
 #### Toggling the view: `view`
 
-Toggles the view between showing student details and showing the module's assignments.
+Toggles the view between showing student details and showing the module's assignments. This command works on the filtered list, toggling the view for students currently listed.
 
 Format: `view (contacts/asg)`
 
 * The default view when the application launches is the student details view.
 * The only valid parameters are `contacts` or `asg`.
+
+Examples:
+
 * `view contacts` toggles the view to display the student's contact details for each student listed.
 * `view asg` toggles the view to display the assignment completion status and/or grade for each student.
 

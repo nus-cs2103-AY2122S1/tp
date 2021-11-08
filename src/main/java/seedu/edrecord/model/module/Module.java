@@ -69,6 +69,10 @@ public class Module {
         return groupSystem;
     }
 
+    public boolean hasAnyGroup() {
+        return groupSystem.hasAnyGroup();
+    }
+
     /**
      * Returns a view of this module's assignment list as an unmodifiable {@code ObservableList}.
      */
