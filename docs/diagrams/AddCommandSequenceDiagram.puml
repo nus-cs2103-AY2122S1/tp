@@ -2,7 +2,7 @@
 !include style.puml
 
 Participant ":InsurancePalParser" as InsurancePalParser LOGIC_COLOR
-Participant AddCommandParser LOGIC_COLOR
+Participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
 Participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 Participant "aCom:AddCommand" as AddCommand LOGIC_COLOR
 Participant "person:Person" as Person MODEL_COLOR
@@ -18,11 +18,11 @@ activate AddCommandParser LOGIC_COLOR
 AddCommandParser -> ParserUtil : parseXYZ(...)
 activate ParserUtil LOGIC_COLOR
 return XYZ
-alt note is present
+opt note is present
     AddCommandParser -> ParserUtil : parseNote(...)
     activate ParserUtil LOGIC_COLOR
     return note
-end alt
+end opt
 create Person
 AddCommandParser -> Person : Person(args)
 activate Person MODEL_COLOR
@@ -30,10 +30,10 @@ return person
 create AddCommand
 AddCommandParser -> AddCommand : AddCommand(person)
 activate AddCommand LOGIC_COLOR
-return addCommand
-return addCommand
+return aCom
+return aCom
 deactivate AddCommandParser
-<- InsurancePalParser : addCommand
+<- InsurancePalParser : aCom
 deactivate InsurancePalParser
 
 @enduml
