@@ -40,9 +40,7 @@ public class ClearCommand extends Command {
 
         // A dummy SHN period for contacts that do not have SHN periods
         // These contacts will be ignored as the endDate is always set to the future
-        LocalDate startDate = LocalDate.MIN;
-        LocalDate futureDate = LocalDate.MAX;
-        Period dummyIncompleteShnPeriod = new Period(startDate, futureDate);
+        Period dummyIncompleteShnPeriod = new Period(LocalDate.MIN, LocalDate.MAX);
 
         for (int i = 0; i < lastShownListCopy.size(); i++) {
             Person person = lastShownListCopy.get(i);
