@@ -1,0 +1,24 @@
+@startuml
+!include ../../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Interface CommandExecutor <<Interface>>
+Class AppMenu
+Class MainWindow
+Class StudentListPanel
+Class StudentCard
+Class CommandBox
+}
+
+StudentListPanel -down--> "*" StudentCard
+
+MainWindow ..up> CommandExecutor
+StudentCard -up> "1" CommandExecutor
+StudentListPanel --up> "1" CommandExecutor
+CommandBox --up> "1" CommandExecutor
+AppMenu --up> "1" CommandExecutor
+
+@enduml
