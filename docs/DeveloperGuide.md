@@ -1069,7 +1069,7 @@ testers are expected to do more *exploratory* testing.
 2. Add an event with time
 
    1. Test case: `addEvent n/Graduation d/2024-05-25 t/1200`<br>
-      Expected: Event is added to the event list. Details of the event shown in the status message.
+      Expected: The event is added to the event list. Details of the event are shown in the status message.
 
 ###  Deleting an event
 
