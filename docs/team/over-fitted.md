@@ -19,7 +19,8 @@ Given below are my contributions to the project.
     * Highlight: Through implementing tests for case number, the testing methodology implemented in AB3 for person 
       attributes was charted in sanityCheck.md for future reference [\80](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/80).
 
-* **New Feature**: Added the ability to switch to enforcement mode view (schedule) [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
+* **New Feature**: Added the ability to initialise enforcement sessions (session) and switch to pre-existing enforcement 
+  session view (schedule) [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
     * What it does: Shows the user who has not been called for the current enforcement session.
     * Justification: This eliminates the need for the user to utilise a separate means of tracking which persons need to
       be called for the current enforcement session.
@@ -46,17 +47,6 @@ Given below are my contributions to the project.
       underlying person, facilitating linear workflow of enforcement mode.
     * Highlight: This attribute was the first to implement modification of person attribute without the use of EditCommand
       in order to restrict unnecessary modification access to accommodate its frequent use.
-
-* **New Feature**: Added the ability to create a new session for the current work day under enforcement mode
-    * What it does: Automatically resets the call status of all persons under SHN while not modifying failed call count.
-    * Justification: At the beginning of the enforcement session, this function saves the user the hassle of manually
-      setting all persons to not called through a batch update.
-
-* **New Feature**: Added the ability to switch back to enforcement mode from other views.
-    * What it does: Adds a command that allows users to retrieve the ongoing session by recreating the schedule based on
-      who has yet to be called
-    * Justification: Users may require other views such as find in the midst of an enforcement session, but wish to return
-      to their ongoing enforcement session after without losing track of the progress made for the session.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=over-fitted&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&tabAuthor=over-fitted&tabRepo=AY2122S1-CS2103-W14-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zA=over-fitted&zR=AY2122S1-CS2103-W14-2%2Ftp%5Bmaster%5D&zACS=222.8&zS=2021-09-17&zFS=over-fitted&zU=2021-11-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
