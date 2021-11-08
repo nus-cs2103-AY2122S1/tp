@@ -59,7 +59,7 @@ Given below are my contributions to the project.
 
 <br>
 
-#### Enchancement to Existing Features
+#### Enhancement to Existing Features
 
 * `PriorityTags` and `InvestmentPlanTags` feature
   * **What it does**:<br>
@@ -78,8 +78,8 @@ Given below are my contributions to the project.
 
   * **Highlights**: <br>
     These fixed tags are essentially tags and can be added or deleted similar to normal tags with the `add`, `edit` and
-    `tag` command. In addition to the restraints placed on normal tags (including the fact that each user have only
-    have one instance of each unique tag), each user can only have one priority tag. For example, a user may not have
+    `tag` command. In addition to the restraints placed on normal tags (including the fact that each user has only
+    one instance of each unique tag), each user can only have one priority tag. For example, a user may not have
     both the `Low Priority` and `High Priority` tag concurrently.
 
   <br>
@@ -118,7 +118,6 @@ Given below are my contributions to the project.
 
 #### Community
   * Updated SampleDataUtils [\#98](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/98)
-  * Fixed bugs highlighted in PED [/#200](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/200)
   * Performed release of JAR file [v1.2](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases/tag/v1.2)
   * Performed a demo of the application in Week 9
   * Helped to check the formatting of the UG [/#148](https://github.com/AY2122S1-CS2103T-T09-4/tp/pull/148)  
