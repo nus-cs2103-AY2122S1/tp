@@ -254,11 +254,11 @@ Find tasks with matching keywords and show them in the task list.
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
 </div>
 
-![find_command](images/findCommand.jpeg)
+![find_command](images/findCommand.png)
 
 After running the find command, the tasks having the mentioned keyword are displayed as shown below:
 
-![find_command_after](images/findCommandAfter.jpeg)
+![find_command_after](images/findCommandAfter.png)
 
 
 ### 4.6 Listing all tasks : `list`
