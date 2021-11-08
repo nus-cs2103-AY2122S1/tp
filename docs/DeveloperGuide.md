@@ -473,6 +473,7 @@ and a `brand` representing the insurance policy's brand, represented as a `Strin
 ![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
 #### Design considerations
+{:.no_toc}
 
 *Aspect*: User interface of adding insurance policies
 
