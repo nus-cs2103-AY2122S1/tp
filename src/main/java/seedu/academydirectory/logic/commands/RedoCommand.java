@@ -19,7 +19,10 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully redo changes to Academy"
             + " Directory as requested!";
 
-    public static final String REDO_REQUEST_REJECTED = "Unable to redo Academy Directory as requested ...";
+    public static final String REDO_REQUEST_REJECTED = "Unable to redo Academy Directory data change. Is there "
+            + "anything to redo? Read/write permission granted to folder?";
+
+    public static final String CORRUPTED_FILES = "Unable to undo Academy Directory data change. Corrupted files?";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo changes to Academy Directory "
             + "Example: " + COMMAND_WORD;
@@ -35,8 +38,10 @@ public class RedoCommand extends Command {
     public CommandResult execute(VersionedModel model) throws CommandException {
         Commit currLatest = model.fetchCommitByLabel(CURRENT_LABEL_STRING);
         Commit nextCommit = currLatest.getHighestAncestor(model.getHeadCommit());
-        if (nextCommit.equals(Commit.emptyCommit())) {
-            throw new CommandException(REDO_REQUEST_REJECTED + " Is there anything to redo?");
+        if (nextCommit.isEmpty()) {
+            throw new CommandException(REDO_REQUEST_REJECTED);
+        } else if (nextCommit.getTreeSupplier().get().isEmpty()) {
+            throw new CommandException(CORRUPTED_FILES);
         }
 
         new RevertCommand(nextCommit.getHash()).execute(model);

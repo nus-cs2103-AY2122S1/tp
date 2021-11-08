@@ -95,16 +95,17 @@ public class MainApp extends Application {
             storage.saveAcademyDirectory(initialData);
         } catch (IOException e) {
             logger.warning("Unable to save data to disk. Changes done may not be saved");
+            initialData = new AcademyDirectory();
         }
 
         VersionedModel model = new VersionedModelManager(initialData, userPrefs);
-
         try {
             if (!model.getStageArea().isEmpty()) {
                 storage.saveStageArea(model.getStageArea());
             }
         } catch (IOException e) {
             logger.warning("Unable to save to disk. Will not be able to revert properly..");
+            model.setAcademyDirectory(new AcademyDirectory());
         }
 
         return model;
