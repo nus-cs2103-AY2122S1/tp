@@ -267,13 +267,10 @@ Notes:
 **Sample Usage:**
 * `find n/John`
   * returns `john` and `John Doe`.
-    ![result for `find n/john`](images/findjohnResult.png)
 * `find n/alex t/football t/classmate`
   * returns `Alex Yeoh`, who has both `football` and `classmates` tag.<br>
-    ![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
 * `find c/ t/FRIENDS`
   * returns `Shin`, who is tagged with `FRIENDS`.
-    ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
 
 <div style="page-break-after: always;"></div>
 ### Locating contacts by name(s) or tag(s): `findAny`
@@ -299,13 +296,10 @@ Notes:
 **Sample Usage:**
 * `findAny n/John`
   * returns `john` and `John Doe`.
-    ![result for `findAny n/john`](images/findAnyjohnResult.png)
 * `findAny n/alex n/irfan t/chef`
   * returns `Alex Yeoh`, `Irfan Ibrahim`, `Carol` who is tagged with `chef`.<br>
-    ![result for `findAny alex david`](images/findAnyalexirfanchefResult.png)
 * `findAny c/ n/Shin t/FRIENDS t/chef`
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`.
-    ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
 
 <div style="page-break-after: always;"></div>
 ### Pinning a contact : `pin`
