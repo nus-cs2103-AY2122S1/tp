@@ -246,7 +246,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setGroup(Group target, Group editedGroup) {
         requireNonNull(editedGroup);
-
         groups.setGroup(target, editedGroup);
     }
 

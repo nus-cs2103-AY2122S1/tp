@@ -198,8 +198,10 @@ public class ModelManager implements Model {
     public void addMember(Student student, Group group) {
         requireAllNonNull(student, group);
         Student updatedStudent = new Student(student, group.getName());
-        group.addMember(updatedStudent);
+        Group newGroup = group.clone();
+        newGroup.addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
+        addressBook.setGroup(group, newGroup);
     }
 
     @Override

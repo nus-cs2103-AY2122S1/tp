@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,6 +36,7 @@ public abstract class Task implements Comparable<Task> {
      * @param priority A valid priority for the Task.
      */
     public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description, Priority priority) {
+        requireAllNonNull(name, priority);
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = isDone;
@@ -50,11 +53,7 @@ public abstract class Task implements Comparable<Task> {
      * @param priority A valid Priority.
      */
     public Task(TaskName name, Set<Tag> tags, Description description, Priority priority) {
-        this.name = name;
-        this.tags.addAll(tags);
-        this.isDone = false;
-        this.description = description;
-        this.priority = priority;
+        this(name, tags, false, description, priority);
     }
 
     public TaskName getName() {

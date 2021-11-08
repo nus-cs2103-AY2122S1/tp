@@ -36,24 +36,8 @@ public class Student {
      */
     public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
                    Set<Tag> tags) {
-        requireAllNonNull(name, email, studentNumber, tags);
-        this.name = name;
-        this.email = email;
-        this.studentNumber = studentNumber;
-        this.tags.addAll(tags);
-        this.attendance = new Attendance();
-        this.participation = new Participation();
-        if (userName != null) {
-            this.userName = userName;
-        } else {
-            this.userName = new UserName();
-        }
-        if (repoName != null) {
-            this.repoName = repoName;
-        } else {
-            this.repoName = new RepoName();
-        }
-        this.groupName = new GroupName();
+        this(name, email, studentNumber, userName, repoName, tags,
+                new Attendance(), new Participation(), new GroupName());
     }
 
     /**
@@ -62,23 +46,15 @@ public class Student {
 
     public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
                    Set<Tag> tags, Attendance attendance, Participation participation, GroupName groupName) {
-        requireAllNonNull(name, email, studentNumber, tags, attendance);
+        requireAllNonNull(name, email, studentNumber, tags, attendance, participation);
         this.name = name;
         this.email = email;
         this.studentNumber = studentNumber;
         this.tags.addAll(tags);
         this.attendance = attendance;
         this.participation = participation;
-        if (userName != null) {
-            this.userName = userName;
-        } else {
-            this.userName = new UserName();
-        }
-        if (repoName != null) {
-            this.repoName = repoName;
-        } else {
-            this.repoName = new RepoName();
-        }
+        this.userName = Objects.requireNonNullElseGet(userName, UserName::new);
+        this.repoName = Objects.requireNonNullElseGet(repoName, RepoName::new);
         this.groupName = groupName;
     }
 
@@ -87,16 +63,8 @@ public class Student {
      */
 
     public Student(Student student, GroupName groupName) {
-        requireAllNonNull(student, groupName);
-        this.name = student.getName();
-        this.email = student.getEmail();
-        this.studentNumber = student.getStudentNumber();
-        this.userName = student.getUserName();
-        this.repoName = student.getRepoName();
-        this.tags.addAll(student.getTags());
-        this.attendance = student.getAttendance();
-        this.participation = student.getParticipation();
-        this.groupName = groupName;
+        this(student.name, student.email, student.studentNumber, student.userName, student.repoName, student.tags,
+                student.getAttendance(), student.getParticipation(), groupName);
     }
 
     public Name getName() {
@@ -187,9 +155,7 @@ public class Student {
      * @return a cloned Student with the exact same data fields as the original.
      */
     public Student clone() {
-        Student clone = new Student(name, email, studentNumber, userName, repoName, tags, attendance,
-                participation, groupName);
-        return clone;
+        return new Student(name, email, studentNumber, userName, repoName, tags, attendance, participation, groupName);
     }
 
     /**
@@ -243,7 +209,7 @@ public class Student {
     }
 
     /**
-     * Represents a Student's github ip link in tApp.
+     * Represents a Student's GitHub ip link in tApp.
      * Guarantees: immutable;
      */
     public static class GithubLink {
