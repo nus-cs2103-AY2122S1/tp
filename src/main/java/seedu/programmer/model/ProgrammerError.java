@@ -19,7 +19,7 @@ import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 public class ProgrammerError implements ReadOnlyProgrammerError {
     private final UniqueStudentList students;
 
-    /**
+    /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *

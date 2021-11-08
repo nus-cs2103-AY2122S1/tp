@@ -2,6 +2,8 @@ package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.StringUtil;
 import seedu.programmer.logic.parser.exceptions.ParseException;
@@ -10,8 +12,6 @@ import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
-
-import java.util.stream.Stream;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

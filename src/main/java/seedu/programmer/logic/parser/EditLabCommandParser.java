@@ -11,8 +11,6 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 import static seedu.programmer.logic.parser.ParserUtil.arePrefixesPresent;
 
-import java.util.stream.Stream;
-
 import seedu.programmer.logic.commands.EditLabCommand;
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
