@@ -338,8 +338,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findscreenshot.png)
+* `find alex david` returns `Alex Yeoh`, `David Li`
+  
+![result for 'find alex david'](images/findscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: How to 'find'
@@ -385,6 +386,8 @@ Examples:
 * `addorg n/Shopee e/shopee.org@gmail.com`
 > Adds an organisation with the name 'Shopee' and email 'shopee.org@gmail.com'.
 
+![result for 'addorg'](images/addorgscreenshot.png)
+
 <div markdown="block" class="alert alert-info">
 :bulb: Persons and organisations
 * Use organisations to help you link contact together!
@@ -401,6 +404,9 @@ Format: `deleteorg INDEX`
 Examples:
 * `deleteorg 1`
 > Deletes the 1st organisation from the organisation list.
+* `deleteorg 3`
+
+![result for 'deleteorg'](images/deleteorgscreenshot.png)
 
 ##### Adding person to an organisation: `addtoorg`
 Adds the person at the specified index in the displayed list to an organisation with the specified name.
@@ -408,8 +414,10 @@ Adds the person at the specified index in the displayed list to an organisation 
 Format: `addtoorg INDEX n/NAME`
 
 Examples:
-* `addtoorg 1 n/Facebook`
-> Adds the 1st person in the displayed list to the Facebook organisation.
+* `addtoorg 1 n/NUS`
+> Adds the 1st person in the displayed list to the NUS organisation.
+
+![result for 'addtoorg'](images/addtoorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: Add a person to an organisation one at a time! 
@@ -423,8 +431,10 @@ Deletes the person at the specified index in the person list of an organisation 
 Format: `deletefromorg INDEX NAME`
 
 Examples:
-* `deletefromorg 1 n/Facebook`
-> Deletes the 1st person in the person list of the Facebook organisation.
+* `deletefromorg 1 n/NUS`
+> Deletes the 1st person in the person list of the NUS organisation.
+
+![result for 'deletefromorg'](images/deletefromorgscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :information_source: The person and organisation will not be deleted, just the relation.
