@@ -1,13 +1,13 @@
 package seedu.unify.logic.parser;
 
+import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.logic.commands.CommandTestUtil.TAG_DESC_CCA;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_CCA;
-import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.unify.logic.commands.TagCommand;
 
 public class TagCommandParserTest {
