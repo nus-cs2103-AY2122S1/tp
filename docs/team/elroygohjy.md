@@ -55,6 +55,12 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=zoom&tabAuthor=elroygohjy&tabRepo=AY2122S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zA=elroygohjy&zR=AY2122S1-CS2103T-W08-1%2Ftp%5Bmaster%5D&zACS=213.98121387283237&zS=2021-09-17&zFS=&zU=2021-11-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 **Review contributions:**: Reviewed [8 PRs](https://github.com/AY2122S1-CS2103T-W08-1/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
+
+* **Contributions to team-based tasks**:
+    * Updating user/developer docs that are not specific to a feature
+    * Provide advice on testcases bugs.
+
+
 * **Enhancements to existing features**:
     * [Dummy data](https://github.com/AY2122S1-CS2103T-W08-1/tp/pull/241)
         * What it does: Add dummy data is relevant to our target user mentor.
