@@ -33,7 +33,7 @@ You can reach us at the email `timothywongej@nus.edu.sg`
 
 <img src="images/noobmaster19.png" width="200px">
 
-[[github](http://github.com/noobmaster19)] [[portfolio](team/noobmaster.md)]
+[[github](http://github.com/noobmaster19)] [[portfolio](team/dion.md)]
 
 * Role: Developer
 * Responsibilities: Code quality
