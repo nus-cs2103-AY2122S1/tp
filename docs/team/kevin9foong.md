@@ -91,8 +91,8 @@ Given below are my contributions to the project.
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
-    3. Highlighting of bugs related to Use Case Extension numbering.  
-    4. Highlighting of UML diagram bugs in delete and schedule sequence diagrams (eg. found notation bugs for Reference frame etc.)
+    3. Highlighting of bugs related to Use Case Extension numbering. [Issue #243](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues/243)  
+    4. Highlighting of UML diagram bugs in delete and schedule sequence diagrams (eg. found notation bugs for Reference frame etc.) [Issue #251](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues/251)
     5. Added documentation for Storage component (including UML class diagram for Storage). 
     6. Added implementation documentation for `recommend` command (including UML activity diagram and sequence diagrams for Recommend). 
   * README:
