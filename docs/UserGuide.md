@@ -249,7 +249,7 @@ Switches between the tabs: **staff view** and **schedule**.
 
 ### Listing all staffs : `list`
 
-This **resets the displayed staff list** in both the staff view and schedule view to shows all of the current staffs. Also resets the schedule view to show the schedule for all the staffs to the period set by the [`Change`](#viewing-schedule-for-the-week--change) Command.
+This **resets the displayed staff list** in both the staff view and schedule view to shows all of the current staffs. Also resets the schedule view to show the schedule for all the staffs to the period set by the [`Change`](#viewing-schedule-for-the-week-change) Command.
 
 **Format:** `list`
 
