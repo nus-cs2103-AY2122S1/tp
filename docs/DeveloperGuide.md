@@ -415,7 +415,7 @@ The following steps describes the execution of the `joinG` command:
 
 **Target user profile**:
 
-* Year 2 Computer Science Student
+* Year 2 Computing Student
 * Taking the modules CS2103T, CS2101 and ES2660
 * Has a need to manage and organise a significant number of contacts of group mates
 * Has a need to manage different tasks related to different groups
@@ -638,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work if Java `11` or above is installed.
-2. Should be platform-independent, minimally working on any _mainstream OS_.
+2. Should be platform-independent, minimally working on any [_mainstream OS_](#mainstream-os-anchor).
 3. Should be able to hold up to 1000 records (persons, groups, etc.) without a noticeable sluggishness in performance
 for typical usage.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
@@ -658,6 +658,7 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
+<a name="mainstream-os-anchor"></a>
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 --------------------------------------------------------------------------------------------------------------------
