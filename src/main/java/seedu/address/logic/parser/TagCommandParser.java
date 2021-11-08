@@ -58,6 +58,14 @@ public class TagCommandParser implements Parser<TagCommand> {
         checkInputFormat(args, argMultimap);
 
         try {
+            if (!argMultimap.getValue(PREFIX_ADD_TAG).stream().allMatch(Tag::isValidTagName)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
+            if (!argMultimap.getValue(PREFIX_REMOVE_TAG).stream().allMatch(Tag::isValidTagName)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
             ArrayList<Tag> tagsToAdd = argMultimap.getAllValues(PREFIX_ADD_TAG)
                     .parallelStream()
                     .map(Tag::new)
