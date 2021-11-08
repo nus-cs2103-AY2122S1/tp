@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **1. Acknowledgements**
 *ComputingConnection* makes use of the following third-party libraries:
-Libraries used: [JavaFX](https://openjfx.io/), [JSON in Java](https://mvnrepository.com/artifact/org.json/json)
+Libraries used: [JavaFX](https://openjfx.io/), [JSON in Java](https://mvnrepository.com/artifact/org.json/json), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -217,11 +217,11 @@ Finally, defensive coding techniques were used by making a copy of the `AppendPe
 #### 4.1.3 Alternatives
 **Aspect: How the new data fields are implemented:**
 * **Alternative 1 (current choice):** Each `Person` object references their own data field objects. I.e. multiple `Language` objects named "python" may exist, with each object related to a specific `Person`.
-* **Alternative 2 (future implementation):** An alternative implementation (arguably, more object oriented) would be to have a unique data field list for each **optional and mulitple data field**, i.e. skill, programming language, framework, tag, and remark, that `Person` references. This allows us to only require one data field object per unique element, instead of each `Person` needing their own data field objects. See [Model component alternative](#model-component) for more information. 
+* **Alternative 2 (future implementation):** An alternative implementation (arguably, more object oriented) would be to have a unique data field list for each **optional and mulitple data field**, i.e. skill, programming language, framework, tag, and remark, that `Person` references. This allows us to only require one data field object per unique element, instead of each `Person` needing their own data field objects. See [Model component alternative](#34-model-component) for more information. 
 
 **Aspect: How the append command executes:**
 * **Alternative 1 (current choice):** HashSets are currently used for the appending of unique data field objects. The first HashSet is used to store the new data fields to append (provided by input). The second HashSet stores the existing data fields of the specified contact. The third HashSet is used to combine the first and second, and is then set to the target contact's data field HashSet. 
-* **Alternative 2 (future implementation):** An alternative implementation, which uses one data field object per unique element (e.g.  [Model component alternative](#model-component)), would be to append new pointers to a list of existing pointers a `Person` has to various data field elements.
+* **Alternative 2 (future implementation):** An alternative implementation, which uses one data field object per unique element (e.g.  [Model component alternative](#34-model-component)), would be to append new pointers to a list of existing pointers a `Person` has to various data field elements.
 
 **Aspect: How the remove command executes:**
 * **Alternative 1 (current choice):** Similar to the `append` command, the `rm` command also uses HashSets to store indexes and existing data fields. Additionally, the ArrayList data structure was used to implement Java generics for better code quality.
@@ -250,7 +250,7 @@ The following sequence diagram visually describes the steps above:
 
 ![InteractionSequenceDiagram](images/InteractionSequenceDiagram.png)
 
-  #### 4.2.2 Design considerations
+#### 4.2.2 Design considerations
   **Aspect: How interactions is stored:**
   
   * **Alternative 1 (current choice):** As a list of interactions in the Person object.
@@ -472,15 +472,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
+User stories are listed based on the chronological use of a user.
+
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `*`      | potential user exploring the app           | see the app populated with sample data | easily see how the app will look when in use                   |
 | `*`      | user ready to start using the app          | view a list of basic commands  | refer to instructions when I forget how to use the App                 |
 | `*`      | user ready to start using the app          | purge all current data         | get rid of sample/experiment data I used for exploring the App         |
-| `*`      | user ready to start using the app          | confirm to purge the existing data         | not accidentally executing a ‘clear’ command               |
-| `*`      | new user                                   | view valid faculty and major data fields to assign to a Person            | begin adding new Persons in a valid manner                  |
-| `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
-| `*`  | new user                                   | view valid skills and misc data fields to assign to a Person              | begin adding new Persons in a valid manner                  |
+| `*`      | user ready to start using the app          | confirm to purge the existing data         | not accidentally execute a ‘clear’ command               |
+| `*`      | new user                                   | view valid faculty and major data fields to assign to a contact            | begin adding new contacts in a valid manner                  |
+| `* * *`  | new user                                   | add a new contact              | record basic contact information of a contact                  |
+| `*`  | new user                                   | view valid skills and misc data fields to assign to a contact              | begin adding new contacts in a valid manner                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
 | `* * *`  | beginner user                              | append data fields to a contact | add on new data fields to existing ones                          |
@@ -490,10 +492,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
 | `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | delete an organisation                | remove any organisations that are irrelevant or errors                                   |
-| `* * *`  | slightly familiar user                 | add a person to an organisation                | record a person's link to an organsiation                                   |
-| `* * *`  | slightly familiar user                 | delete a person from an organisation                | remove a person's link to an organisation or errors                                   |
+| `* * *`  | slightly familiar user                 | add a contact to an organisation                | record a contact's link to an organsiation                                   |
+| `* * *`  | slightly familiar user                 | delete a contact from an organisation                | remove a contact's link to an organisation or errors                                   |
 | `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
-| `* * *`  | slightly familiar user                 | view a Person in detail                | view the miscellaneous data fields such as remarks and interactions                            |
+| `* * *`  | slightly familiar user                 | view a contact in detail                | view the miscellaneous data fields such as remarks and interactions                            |
 | `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
 | `* * `  | slightly familiar user                 | list all my interactions               | have an overview of my interactions with a particular contact                                  |
 | `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
@@ -502,11 +504,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
 | `*`      | user with many persons in the address book | sort contacts by name           | locate a contact easily                                                 |
 | `*`      | expert user                                | sort contacts by faculty           | consult them should i need help for a project                       |
-| `*`      | expert user                                | mass delete information that is not required anymore          | i get rid of redundant info                      |
+| `*`      | expert user                                | mass delete information that is not required anymore          | get rid of redundant info                      |
 | `* * *`  | expert user                 | filter my list of contacts                | view a list of contacts based on a list of tags attached to them                                   |
 | `*`  | expert user                 | filter my organisation list                | view a list of organisations based on the specific tag attached to them                                  |
-
-*{More to be added}*
 
 ### 6.3 Use cases
 
@@ -597,7 +597,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. ComputingConnection shows an error message to prompt user of the correct format.
     * 2b2. User enters valid data fields <br>
       
-      Steps 3a1-3a2 are repeated until the data entered is correct. <br>
+      Steps 2a1-2a2 are repeated until the data entered is correct. <br>
       Use case resumes from step 3.
 
 
@@ -617,7 +617,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC06 Delete a specific contact
+#### Use case: UC06 Filter contact list based on a tag.
+
+**MSS**
+
+1. Student requests for filtering the contact list by the mentioned tag.
+2. ComputingConnection shows a filtered contact list based on the mentioned tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Filter tag is invalid.
+    * 2a1. ComputingConnection shows an error message.
+
+      Use case ends.
+
+#### Use case: UC07 Delete a specific contact
 
 **MSS**
 
@@ -636,7 +652,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-#### Use case: UC07 Add interactions to a specific contact
+#### Use case: UC08 Add interactions to a specific contact
 
 **MSS**
 
@@ -652,7 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC08 View a specific contact
+#### Use case: UC09 View a specific contact
 
 **MSS**
 
@@ -669,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC09 Add an organisation
+#### Use case: UC10 Add an organisation
 
 **MSS**
 
@@ -685,7 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC10 Delete an organisation
+#### Use case: UC11 Delete an organisation
 
 **MSS**
 
@@ -701,7 +717,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### Use case: UC11 Add a person to an organisation
+#### Use case: UC12 Add a person to an organisation
 
 **MSS**
 
@@ -721,7 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
   Use case ends.
 
-#### Use case: UC12 Removing a person from an organisation
+#### Use case: UC13 Removing a person from an organisation
 
 **MSS**
 
