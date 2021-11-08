@@ -49,6 +49,3 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#51](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/51), [\#67](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/67), [\#64](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/64)
-  
-* **Tools**:
-    * Integrated a third party library (fontawesomefx) to the project (Pull requests [\#133](https://github.com/AY2122S1-CS2103T-T17-3/tp/pull/133))
