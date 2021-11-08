@@ -45,25 +45,35 @@ public class VisualizeCommand extends Command {
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         List<Student> studentList = model.getFilteredStudentList();
 
+        LinkedHashMap<String, List<Integer>> orderedAssessmentResults = getOrderedAssessmentResults(studentList);
+
+        model.setAdditionalViewType(AdditionalViewType.VISUALIZE);
+        model.setAdditionalInfo(AdditionalInfo.of(orderedAssessmentResults));
+
+        return new CommandResult(MESSAGE_VISUALIZE_SUCCESS);
+    }
+
+    /**
+     * Function to make a hashmap containing a list of grades per assessment
+     * @param studentList List of students in the classd
+     * @return linked hashmap to maintain the order of printing
+     */
+    public LinkedHashMap<String, List<Integer>> getOrderedAssessmentResults(List<Student> studentList) {
         Map<String, List<Integer>> classAssessmentResults = studentList
-                                .stream()
-                                .map(Student::getAssessment)
-                                .map(Assessment::getAssessmentHashMap)
-                                .flatMap(hashMap -> hashMap.entrySet().stream())
-                                .collect(Collectors.groupingBy(
-                                        Map.Entry::getKey,
-                                        Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+                .stream()
+                .map(Student::getAssessment)
+                .map(Assessment::getAssessmentHashMap)
+                .flatMap(hashMap -> hashMap.entrySet().stream())
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getKey,
+                        Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
 
         LinkedHashMap<String, List<Integer>> orderedAssessmentResults = new LinkedHashMap<>();
 
         for (String assessment: Assessment.ASSESSMENT_LIST) {
             orderedAssessmentResults.put(assessment, classAssessmentResults.get(assessment));
         }
-
-        model.setAdditionalViewType(AdditionalViewType.VISUALIZE);
-        model.setAdditionalInfo(AdditionalInfo.of(orderedAssessmentResults));
-
-        return new CommandResult(MESSAGE_VISUALIZE_SUCCESS);
+        return orderedAssessmentResults;
     }
 
     @Override
