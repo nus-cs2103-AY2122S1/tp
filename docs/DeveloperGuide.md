@@ -145,7 +145,8 @@ Gui buttons in `PersonNoteWindow`.
 * `MainWindow` does not contain PersonListPanel anymore.
 Now it contains `ListPanel` which can be a `PersonListPanel`, `GroupListPanel` or `SubgroupListPanel`.
 * `MainWindow` contains `GeneralNote` which displays the general note.
-* `MainWindow` has dependency with  `PersonNoteWindow`, `GroupNoteWindow` and GeneralNoteWindow.
+* `MainWindow` has dependency with  `PersonNoteWindow`, `GroupNoteWindow` and `GeneralNoteWindow`,
+each of which implements `NoteWindow` interface.
 
 
 ### Model Changes
@@ -238,6 +239,56 @@ Each Person would have one LastContactDate and NextContactDate. These two can ha
 * It may be useful to set a new LastContactDate or NextContactDate for whole groups at once
 * With regards to UI, these dates might be observed by person card using the Observation design pattern. This would allow the UI to update these dates with colours depending on how soon the NextContactDate is or how far away the LastContactDay is.
 
+
+### \[Proposed\] View Pane
+
+* Future implementations would include `ViewPane`, a pane to view data of a specific `Person`,
+`Group`, and `Subgroup` in detail, as well as to view the general note. In addition, a `View` command
+would be implemented for `Person`, `Group`, `Subgroup`, and `Note` to change the view of the `ViewPane` accordingly. 
+* Changes on the implementation would include replacing the current `GeneralNote` class
+with `ViewPane` class, which can contain a `PersonViewCard`, `GroupViewCard`, `SubgroupViewCard`, or `GeneralNote`, all of which
+  implements `ViewCard` interface.
+* The proposed class diagram for the `ViewPane` UI is as follows.
+![ViewPaneClassDiagram](images/ViewPaneClassDiagram.png)
+  
+The following diagram only illustrates the UI of the `ViewPane`. Further details on the `View`
+  
+##### Breakdown of ViewPane
+
+Here are the breakdowns of the proposed implementations for `PersonViewCard`, `GroupViewCard`, and `SubgroupViewCard`:
+* `PersonViewCard` would contain the following:
+  * Name, phone, and Email of the `Person`,
+  * Tags of the `Person`, and
+  * Note of the `Person`,
+  * The groups and subgroups that the `Person` is currently in.
+* `GroupViewCard` would contain the following:
+    * `SuperGroup` name,
+    * A truncated list of people inside the `SuperGroup`,
+    * A truncated list of subgroups inside the `SuperGroup`, 
+    * The number of people and the number of subgroup inside the `SuperGroup`, and
+    * Note of the `SuperGroup`.
+    
+* `SubgroupViewCard` would contain the following:
+    * `SubGroup` name,
+    * A truncated list of people inside the `SubGroup`,
+    * The parent group of the `SubGroup`,
+    * The number of people inside the `SubGroup`,
+    * Note of the `SubGroup`, and
+    * Note of the parent group of the `SubGroup`.
+
+##### Breakdown of View Command
+
+The intended functionalities of `ViewCommand` is as follows:
+* `ViewCommand` would be implemented by `PersonViewCommand`, `GroupViewCommand`, `SubgroupViewCommand`
+    , and `GeneralNote`.
+* `PersonViewCommand` would modify the `ViewPane` to contain `PersonViewCard` of a `Person`.
+* `GroupViewCommand` would modify the `ViewPane` to contain `GroupViewCard` of a `SuperGroup`.
+* `SubgroupViewCommand` would modify the `ViewPane` to contain `SubgroupViewCard` of a `SubGroup`.
+* `GeneralNote` would modify the `ViewPane` to show the general notes.
+
+##### Example of View Command Workflow, using the Person View Command
+To illustrate how the `View` command works, the activity diagram for `PersonViewCommand` is as follows.
+![PersonViewCommandActivityDiagram](images/PersonViewCommandActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
