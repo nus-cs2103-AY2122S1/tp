@@ -45,8 +45,7 @@ Users can interact with Tutor Master using a CLI (command-line interface), while
 
 ### Contributions to the developer guide
 
-- Add implementation detail of the `UniqueId` interface, including the related UML diagram
-- Update the logic section to let the UML diagrams meet our implementation.
+- Add implementation detail of the `UniqueId` interface, including the related UML diagram.
 
 ### Contributions to team-based tasks
 
