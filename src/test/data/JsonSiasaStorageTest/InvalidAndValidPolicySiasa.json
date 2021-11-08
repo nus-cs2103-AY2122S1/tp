@@ -1,0 +1,36 @@
+{
+  "contacts": [ {
+    "name": "Valid Person",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street"
+  }, {
+    "name": "Valid Person 2",
+    "phone": "9482425",
+    "email": "hand@example.com",
+    "address": "5th street"
+  } ],
+  "policies" : [ {
+    "title" : "Life Policy",
+    "price" : "1000",
+    "expiryDate" : "2022-06-13",
+    "commission" : "20",
+    "owner" : {
+      "name": "Valid Person",
+      "phone": "9482424",
+      "email": "hans@example.com",
+      "address": "4th street"
+    }
+  }, {
+    "title" : "Policy with invalid title field: Ha!ns Mu@ster",
+    "price" : "20",
+    "expiryDate" : "2024-06-13",
+    "commission" : "10",
+    "owner" : {
+      "name": "Valid Person",
+      "phone": "9482424",
+      "email": "hans@example.com",
+      "address": "4th street"
+    }
+  } ]
+}

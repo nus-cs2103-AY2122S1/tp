@@ -1,0 +1,48 @@
+{
+  "contacts": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tagged": [ "friends" ]
+  } ],
+  "policies" : [ {
+    "title" : "Full Life Plan",
+    "paymentStructure" : {
+      "paymentAmount" : "100",
+      "paymentFrequency" : "12",
+      "numberOfPayments" : "12"
+    },
+    "coverageExpiryDate" : "2021-12-12",
+    "commission" : {
+      "commissionPercentage" : "10",
+      "numberOfPayments" : "12"
+    },
+    "owner" : {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "tagged" : [ "friends" ]
+    }
+  }, {
+    "title" : "Full Life Plan",
+    "paymentStructure" : {
+      "paymentAmount" : "100",
+      "paymentFrequency" : "12",
+      "numberOfPayments" : "12"
+    },
+    "coverageExpiryDate" : "2021-12-12",
+    "commission" : {
+      "commissionPercentage" : "10",
+      "numberOfPayments" : "12"
+    },
+    "owner" : {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "tagged" : [ "friends" ]
+    }
+  } ]
+}

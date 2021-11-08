@@ -5,50 +5,88 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlySiasa <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Siasa
+Class ReadOnlySiasa
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
+Package Contact <<Rectangle>> {
+    Class UniqueContactList
+    Class Contact
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
+}
+
 Class Tag
+
+
+Package Policy <<Rectangle>> {
+Class UniquePolicyList
+Class Policy
+Class PaymentStructure
+Class Commission
+Class Title
+Class CoverageExpiryDate
+
+Class HiddenInside #FFFFFF
+}
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Siasa .up.|> ReadOnlySiasa
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlySiasa
+ModelManager -left-> "1" Siasa
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Siasa *--> "1" UniqueContactList
+UniqueContactList --> "~* all" Contact
+Contact *--> Name
+Contact *--> Phone
+Contact *--> Email
+Contact *--> Address
+Contact *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Siasa *--> "1" UniquePolicyList
+UniquePolicyList --> "~* all" Policy
+Policy : equals()
+Policy *--> PaymentStructure
+Policy *--> Commission
+Policy *--> Title
+Policy *--> "*" Tag
+Policy *--> CoverageExpiryDate
+Policy -right->"owner" Contact
 
-ModelManager -->"~* filtered" Person
+Name -[hidden]down-> Phone
+Name -[hidden]down-> Address
+Name -[hidden]down-> Email
+
+
+PaymentStructure -[hidden]down-> Title
+PaymentStructure -[hidden]down-> CoverageExpiryDate
+PaymentStructure -[hidden]down-> Commission
+
+
+
+
+
+
+
+ModelManager -->"~* filtered" Contact
+ModelManager -->"~* filtered" Policy
+
 @enduml

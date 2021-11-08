@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SiasaParser" as SiasaParser LOGIC_COLOR
+participant "d:DownloadCommand" as DownloadCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("download")
+
+
+LogicManager -> SiasaParser : parseCommand("download")
+
+
+create DownloadCommand
+SiasaParser -> DownloadCommand
+activate DownloadCommand
+
+DownloadCommand --> SiasaParser : d
+deactivate DownloadCommand
+
+SiasaParser --> LogicManager : d
+
+
+LogicManager -> DownloadCommand : execute()
+
+
+DownloadCommand -> Model : getNumberPoliciesPerContact()
+
+
+DownloadCommand -> Model : getCommissionPerContact()
+
+DownloadCommand -> DownloadCommand : build string list for commission per contact
+
+DownloadCommand -> DownloadCommand : build string list for number \n of policies per contact
+
+DownloadCommand -> DownloadCommand : write commission per contact to CSV
+
+DownloadCommand -> DownloadCommand : write number of policies per contact to CSV
+
+create CommandResult
+DownloadCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DownloadCommand
+deactivate CommandResult
+
+DownloadCommand --> LogicManager : command result
+
+
+[<--LogicManager : command result
+destroy DownloadCommand
+@enduml

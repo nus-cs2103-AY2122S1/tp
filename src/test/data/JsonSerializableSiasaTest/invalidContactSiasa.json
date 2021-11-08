@@ -1,0 +1,11 @@
+{
+  "contacts" : [ {
+    "name" : "Alice Paul!!!ne",
+    "phone" : "9431125@@!",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ]
+  } ],
+  "policies" : [ {
+  } ]
+}
