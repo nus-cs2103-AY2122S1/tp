@@ -25,7 +25,7 @@ public class PersonTagCommand extends PersonCommand {
             "At least one tag must be provided. Make sure you used the prefix " + PREFIX_TAG;
 
     private static final String COMMAND_DESCRIPTION =
-            ": Adds tags to the person specified by the index number, if they do not already have them.\n" 
+            ": Adds tags to the person specified by the index number, if they do not already have them.\n"
                     + "You may list multiple tags separated by commas.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD

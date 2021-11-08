@@ -6,7 +6,6 @@ import java.util.List;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
-import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.group.GroupExecutor;
 import seedu.notor.logic.executors.group.SubGroupCreateExecutor;

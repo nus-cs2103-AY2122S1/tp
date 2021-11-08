@@ -1,8 +1,6 @@
 package seedu.notor.logic.commands.person;
 
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPNAME;
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_SUBGROUP;
 
 import java.util.Arrays;
 import java.util.List;

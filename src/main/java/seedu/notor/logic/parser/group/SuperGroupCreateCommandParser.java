@@ -4,19 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.notor.logic.commands.group.GroupCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.parser.ArgumentMultimap;
 import seedu.notor.logic.parser.ArgumentTokenizer;
-import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.group.SuperGroup;
-import seedu.notor.model.tag.Tag;
 
 /**
  * Parses input arguments to create a group command.
