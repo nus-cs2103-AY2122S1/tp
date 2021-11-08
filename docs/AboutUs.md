@@ -27,7 +27,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/marcustxk.md)]
 
 * Role: Integration, Code Quality
-* Responsibilities: In charge of `list` feature and schedule feature.
+* Responsibilities: In charge of `list` feature, `schedule` feature and Logic component.
 
 ### Taufiq Bin Abdul Rahman
 
@@ -57,4 +57,4 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yeluriketan.md)]
 
 * Role: Testing
-* Responsibilities: In charge of the `get` feature.
+* Responsibilities: In charge of the `get` feature and the Model component.
