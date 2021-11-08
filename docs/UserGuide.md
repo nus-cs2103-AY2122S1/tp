@@ -36,37 +36,45 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 1. Refer to the [Features](#features) below for details of each command.
 
 -------------------------------------------------------------------------------------------------------------
-## Let's take a tour
+## App Interface
 
-### The left bar
+Refer to the diagram below to understand how our app, SafeFor(H)All looks like.
 
-The top-most 2 icons represent the main tabs: Residents and Events. <br> 
- - You can view the relevant data when either is selected.
+![Ui](images/interface.png)
 
-The third will open the help window and the last will exit the application.
+Section | Explanation
+|--------|-------
+**Residents Tab** | When selected, it allows you to view the list of residents and their associated information
+**Events Tab** | When selected, it allows you to view the list of events and their associated information
+**Help Window** | When clicked, a pop-up will appear containing a list of commands and how to use them
+**Exit app** | Closes the app
+**Input Box** | Input your command here. The command suggestion box will suggest parameters upon typing
+**Result Box** | The result of the inputted command will be displayed here
+**List of Residents** | Displays the list of residents in the app. You can view details about a specific resident by clicking on it, or by using the `view` command
+**Individual resident information** | In the example shown, the resident has a late FET test which is 21 days overdue.
 
-![Ui](images/leftBar.png)
+### Formats
 
-### Viewing data
+Below are some formats used used to convey different kinds of information:
 
-Resident and Event information is organized in this panel. <br>
-You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#viewing-residents-information--view))
-> Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
-> 
-> Vaccinated residents include the syringe icon towards the right-side of the card
-> 
-> Past Events are highlighted grey.
+**Information boxes**
 
-![Ui](images/data.png)
+<div markdown="span" class="alert alert-info"> :information_source: **Info:** These contain additional information about SafeFor(H)All.
+</div>
 
-### Interacting
+**Tips**
 
-This is where you can enter commands to interact with the data. <br>
-The [Command Suggestion](#command-suggestion) box will suggest parameters on typing. <br>
-The result of executing the input command will be displayed the lower-most box.
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** These contain our tips that can help improve your experience using SafeFor(H)All.
+</div>
 
-![Ui](images/commandBox.png)
+**Warnings**
 
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** These contain warnings that can result in unintended consequences of a feature.
+</div>
+
+**Highlights**
+
+`These are used to highlight parameters, field values, commands, file names or any user inputs.`
 
 ## Features
 
@@ -75,7 +83,11 @@ The result of executing the input command will be displayed the lower-most box.
 **Format:** `command_word Prefix/PARAMETER`
 
 * `command_word` is a word at the start of the command to specify the action to be done. <br> e.g. in `add n/NAME`, `add` is the command word.
+
+
 * `PARAMETER` are word(s) in `UPPER_CASE` to be supplied by the user.<br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+
+
 * `Prefix` are letter(s) before `PARAMETER` to denote the information supplied as parameter. <br>e.g. in `add n/NAME`, `n/` is a prefix to indicate that NAME is being supplied.
 
 
@@ -117,11 +129,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY
 Parameter | Constraints
 |--------|-------
 **NAME** | Unique, only containing alphabetical characters and spaces
-**PHONE** | At least 3 digits long
-**ROOM** | consists of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
+**PHONE** | At least 6 digits long
+**ROOM** | Unique, made up of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
+**EMAIL** |  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br> The domain name must: <br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 **VACCINATION_STATUS** | `T` or `F` (case insensitive)
 **FACULTY** | Single alphabetical word
-**LAST_FET_DATE** <br> **LAST_COLLECTION_DATE** | `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+**LAST_FET_DATE** <br> **LAST_COLLECTION_DATE** | Should be of `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
 
 <div markdown="block" class="alert alert-info">
 
@@ -135,9 +148,19 @@ Parameter | Constraints
 `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are optional parameters.
 </div>
 
+Here's a step by step guide:<br>
+1. Type the `add` command and the rest of the parameters with help from the command suggestion.
+   ![Step1](images/logic/commands/addpersoncommand/step1.png)
+
+
+2. After execution, the person list will now show the new person.
+   ![Step2](images/logic/commands/addpersoncommand/step2.png)
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+
+
 
 #### Viewing residents information : `view`
 
@@ -160,21 +183,43 @@ Lists residents whose ART collection or FET tests are either:
 * due before a given date, `d1`, by using the `late keywords` or 
 * due within the range of two given dates, `d1` and `d2`, by using the `normal keywords`.
 
-There is a one week deadline for the test kit collection and fet test, therefore due date refers to one week after the last recorded date
+<div markdown="block" class="alert alert-info">
 
-Format: `deadline k/KEYWORD d1/DATE1 d2/DATE2` or `deadline k/LATE_KEYWORD d1/DATE1`
+**:information_source: Note:**<br>
 
-* A resident's fet or collection is due one week after their last fet date or last collection date. 
-  * For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021`
-* The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive. 
-  * For example, if a resident's last fet date is `15-10-2021`, then the fet deadline will be `22-10-2021`, if the current date is `25-10-2021`, then the number of days the resident is late for fet is `3 days`.
-* Normal keywords are `f` for fet and `c` for collection
-* Late keywords are `lf` for late fet and `lc` for late collection
-* When a normal keyword is given, both `DATE1` and `DATE2` have to be inputted
-* The given `DATE2` must be a date later than the given `DATE1`
-* `DATE1` is the start date and `DATE2` is the last date inclusive
-* When a late keyword is given, only date1 should be given
-* Anyone whose fet and collection is due before but not on `DATE1` is outputted
+* There is a one week deadline for the test kit collection and fet test, therefore due date refers to one week after the last recorded date
+
+</div>
+
+| Differences | Normal Keyword | Late Keyword |
+|-------------|--------|------|
+| Format | `deadline k/KEYWORD d1/DATE1 d2/DATE2` | `deadline k/LATE_KEYWORD d1/DATE1`|
+| Keyword | `f` or `c` | `lf` or `lc` |
+| Input Date | Both `DATE1` and `DATE2` have to be inputted | Only `DATE1` should be inputted |
+| Command Example | `deadline k/f d1/10-10-2021 d2/12-10-2021` | `deadline k/lf d1/11-10-2021` |
+| Usage | List residents whose deadline lie within the range of two given dates, inclusive | List residents whose deadline is due before a given date
+| Usage Example | A resident's fet or collection is due one week after their `last fet date` or `last collection date`. <br> For example, if a resident's last fet date is on a friday, `15-10-2021`, then the resident's fet deadline is on the following friday which is `22-10-2021` | The number of days a resident is considered late is calculated from `a day after` their deadline to the `current date`, both inclusive.<br> For example, if a resident's last fet date is `15-10-2021`, then the fet deadline will be `22-10-2021`, if the current date is `25-10-2021`, then the number of days the resident is late for fet is `3 days`.
+| Note | The given `DATE2` must be a date later than the given `DATE1`<br>`DATE1` is the start date and `DATE2` is the last date inclusive | Anyone whose fet and collection is due before but not on `DATE1` is outputted
+
+Here's a step-by-step guide for `Normal Keyword`:<br>
+1. Type the `deadline` command with the `normal keyword`, `f` for fet or `c` for collection, `d1`, the start date and
+   `d2`, the end date.
+   ![Step1](images/logic/commands/deadlinecommand/step1a.png)
+
+
+2. The event list will now show the filtered list of residents.
+   ![Step2](images/logic/commands/deadlinecommand/step2a.png)
+
+
+Here's a step-by-step guide for `Late Keyword`:<br>
+1. Type the `deadline` command with the `late keyword`, `lf` for late fet or `lc` for late collection, `d1`, the 
+   end date
+   ![Step1](images/logic/commands/deadlinecommand/step1b.png)
+
+
+2. The event list will now show the filtered list of residents.
+   ![Step2](images/logic/commands/deadlinecommand/step2b.png)
+   
 
 Examples:
 * `deadline k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
@@ -184,26 +229,23 @@ Examples:
 
 #### Searching by resident information: `find`
 
-Shows a list of residents that match the provided keywords for different available parameters.
+Shows a list of residents that match the provided keywords for different available parameters. Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`.
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `r/`, `e/`, `p/`, `f/` and `v/`
+Prefix | Field | Restrictions
+-------- | ------ | ------
+`n` | Name | - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true` <br> <br> - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans` <br> <br> - Only full words will be matched. e.g `Han` will not match `Hans` <br> <br> - Residents matching at least one keyword for the name will be returned (i.e. `OR` search). e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+`r` | Room |  - It is case-insensitive <br> - A block can be used as a search. e.g `r/A` <br> - A level can be used as a search. e.g `r/2` <br> - A block-level can be used as a search. e.g `r/A2` <br> - A full valid room can be used as a search. e.g `r/A210`
+`e`, `p`, `f`, `v` | Email, Phone, <br> Faculty, VaccStatus | Subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)   
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 * Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [Deadline Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
-* Searching by name:
-    - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
-    - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
-    - Only full words will be matched. e.g `Han` will not match `Hans`
-    - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
-  e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Searching by room:
-    - It is case-sensitive. Block letters must be capitalised.
-    - A block can be used as a search. e.g `r/A`
-    - A level can be used as a search. e.g `r/2`
-    - A block-level can be used as a search. e.g `r/A2`
-    - A full valid room can be used as a search. e.g `r/A210`
 * Any provided preamble to the prefixes will be ignored
-* All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
+</div>
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -223,11 +265,32 @@ Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STAT
 * Existing values will be updated to the input values.
 * Edit multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Let’s say that residents Alex Yeoh and Bernice Yu just updated you that they are now fully vaccinated, and have submitted their overdue FET on 5th Nov 2021.
+
+You can easily update these details in a single `edit` command.<br>
+
+1. Navigate to the list of residents. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. 
+   To update Alex and Bernice's vaccination statuses and last FET dates, simply enter `edit 1 2 v/T fd/05-11-2021`.
+   
+   ![Step1](images/logic/commands/editcommand/person/step1.png)
+
+2. The result box will notify you of the edited residents. The resident list will be updated to contain the modified details.
+   Note that in this case, Alex Yeoh and Bernice Yu no longer have outstanding FETs to submit, so the red flag around their name will be removed.
+   There will also be a syringe symbol beside their names to show that they are vaccinated.
+   
+   ![Step2](images/logic/commands/editcommand/person/step2.png)
+   
+   ![Step3](images/logic/commands/editcommand/person/step3.png)
+   
+More Examples:
 *  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
 *  `edit 1 2 3 v/t fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
 #### Deleting a resident : `delete`
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `delete` command cannot be undone! Do make sure that you have entered the command correctly before running it.
+</div>
 
 Deletes specified residents from the address book.
 
@@ -238,7 +301,18 @@ Format: `delete INDEX…`
 * The indexes **must be positive integers** 1, 2, 3, …​
 * Delete multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Suppose Alex Yeoh and Bernice Yu have recently moved out of hall. To keep the addressbook updated, you might want to remove them from the list of residents.
+
+You can easily do this a single `delete` command.<br>
+
+1. Note that Alex Yeoh and Bernice Yu have indexes of 1 and 2 respectively in the current resident list. To remove them from the list of residents, simply enter `delete 1 2`.
+   ![Step1](images/logic/commands/deletecommand/person/step1.png)
+
+3. The result box will notify you of the deleted residents. Alex Yeoh and Bernice Yu will also be removed from the resident list.
+   ![Step2](images/logic/commands/deletecommand/person/step2.png)
+
+More Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
 * `find n/Anne` followed by `delete 1` deletes the 1st resident named Anne in the results of the `find` command.
 
@@ -248,16 +322,32 @@ Traces a resident's close contacts based on the events they're involved in. This
 
 Format: `trace r/RESIDENT [d/DEPTH] [t/DURATION]`
 
-* A resident can be identified either by full name or room
-* Depth refers to the maximum links to reach the resident in question
-* Depth should be an integer >= 1 and will default to 1
-* Duration is in days and will default to 7
+Prefix | Field | Details
+-------- | ------ | ------
+`r` | Resident | The resident to trace can be identified either by full name or room (case-insensitive)
+`d` | Depth | Refers to the maximum allowed links to reach the resident in question <br> It is an integer, 1 <= depth <= 5, and will default to 1 if not specified
+`t` | Duration | Represents the time in days to trace back to. <br> It is an integer, 1 <= duration <= 31, and will default to 7 if not specified
+
+1. Using sample data, running `trace r/Alex Yeoh d/1` will trace down residents Charlotte and David since they all were in the Volleyball event.
+   ![depth1](images/logic/commands/tracecommand/depth1.png)
+
+2. Using sample data, running the above command but with depth 2, `trace r/Alex Yeoh d/2`,will trace down resident Irfan in addition, since David in turn was in contact with Irfan during Powerlifting event.
+   ![depth2](images/logic/commands/tracecommand/depth2.png)
+
+<div markdown="span" class="alert alert-danger">
+
+:warning: **Note:** The above commands will, given time, not result in any close contacts since this is a time-dependent problem. The examples are used to merely explain the concept of depth.
+
+</div>
 
 Examples:
 * `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
 * `trace r/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
 
 #### Sorting residents : `sort`
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** To undo the `sort` command, simply run `view`.
+</div>
 
 Sorts the residents according to specified fields in ascending or descending order
 
@@ -285,19 +375,41 @@ Imports resident information from the specified csv file which is to be located 
 
 Format: `import CSV_NAME`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 * 8 comma separated values for each row with values in order; <br>
-      `name`, `room`, `phone`, `email`, `vaccStatus`, `faculty`, `lastFetDate`, `lastCollectionDate`
+  `name`, `room`, `phone`, `email`, `vaccStatus`, `faculty`, `lastFetDate`, `lastCollectionDate`
 * The first row will be discarded as column headings
 * `lastFetDate`, `lastCollectionDate` are optional (can be left as empty space)
-* The file format (`.csv`) is not to be included in the `CSV_NAME`
-* Resident lists of all events will be wiped
+* The file format (`.csv`) is not to be included in `CSV_NAME`
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can save to `csv` format from an excel file by  Save as` -> `.csv`
+</div>
+
+<div markdown="span" class="alert alert-danger">
+
+:warning: **Warning:** Resident lists of all events will be cleared!
+
+</div>
+
+Here's a step by step guide:<br>
+
+1. Create your csv file in the correct format (shown below).
+    ![CSV](images/logic/commands/importcommand/csvFormat.png)
+
+2. Place your csv file in the `data/` folder.
+    ![FileStructure](images/logic/commands/importcommand/filefolder.png)
+
+3. Run `import CSV_NAME`.
+    ![NewResidents](images/logic/commands/importcommand/newresidents.png)
 
 Examples:
 * `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
 
-Example csv:
-
-![CSV](images/csvFormat.png)
 
 #### Exporting residents' emails : `export`
 
@@ -314,6 +426,15 @@ Format: `export FILE_NAME`
 
 </div>
 
+1. Run `export FILE_NAME`.
+   ![Export](images/logic/commands/exportcommand/command.png)
+
+2. Find your csv file in the `data/exports` folder.
+   ![FileStructure](images/logic/commands/exportcommand/filefolder.png)
+
+3. Your exported csv file should look like this.
+   ![Csv](images/logic/commands/exportcommand/csvFormat.png)
+
 Examples:
 * `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the residents currently displayed on the application.
 
@@ -328,15 +449,30 @@ Adds a new event to the address book.
 
 Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]`
 
-* The combination of the 5 required parameters should be unique
-* `CAPACITY` is the maximum number of residents allowed in this event  
-* `DATE` is the date on which the event is held
-* `TIME` is the time at which the event is held
-* `RESIDENTS` can be included as all full names or all rooms
-* The number of residents cannot exceed to provided capacity
-* Residents can be given in the form of name or room, but all has to be all rooms or all names  
-* When adding multiple residents, each resident's name/room is separated by a comma
-* The resident's name/room is case-insensitive
+Prefix | Field | Details
+-------- | ------ | ------
+`n` | Name | Should only contain alphanumeric characters and spaces, and it should not be blank
+`v` | Venue | Should only contain alphanumeric characters and spaces, and it should not be blank
+`c` | Capacity | Represents the maximum number of residents allowed in this event and is an integer, 1 <= capacity <= 2147483647
+`d` | Date | Should be of `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy` format
+`t` | Time | Should be of `HHmm` format
+`r` | Residents | Can be identified with either all names or all rooms <br> The number of residents cannot exceed the provided capacity <br> Provided names and rooms are case-insensitive and should be comma-separated
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* The combination of `Name` (case-insensitive), `Venue` (case-insensitive), `Date` and `Time` should be unique
+
+</div>
+
+Here's a step by step guide:<br>
+1. Type the `add` command and the rest of the parameters with help from the command suggestion.
+   ![Step1](images/logic/commands/addeventcommand/step1.png)
+
+
+2. After execution, the event list will now show the new event.
+   ![Step2](images/logic/commands/addeventcommand/step2.png)
 
 Examples:
 * `add n/Swim v/Swimming Pool c/10 d/28-10-2021 t/1500`
@@ -371,25 +507,31 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME] [v/VENUE] [c/CA
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
+Example:<br>
+Let’s say that Powerlifting changed the date and time of their event from `25 Oct 2021 8:00AM` to `26 Oct 2021 9:00AM`.
+
+You can easily update these details in a single `edit` command.<br>
+
+1. Note that Powerlifting's index is reflected as 1 in the current list of events. To update the date and time of the event, simply enter `edit 1 d/26-10-2021 t/0900`.
+   ![Step1](images/logic/commands/editcommand/event/step1.png)
+
+2. The result box will display the updated details of the event. The event list will also be updated to contain the modified event details.
+   ![Step2](images/logic/commands/editcommand/event/step2.png)
+
+More Examples:
 *  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
 #### Searching by event information: `find`
 
-Shows a list of events that match the provided keywords for different available parameters.
+Shows a list of events that match the provided keywords for different available parameters. Allowed flags include; `n/`, `d/`, `v/`, `c/`
 
 Format: `find [PREFIX/KEYWORD]...`
 
-* Allowed flags include; `n/`, `d/`, `v/`, `c/`
-* Searching by name:
-    - It is case-insensitive. e.g `dance` will match `Dance`
-    - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training`
-    - Events matching at least one keyword for the event name will be returned (i.e. `OR` search).
-      e.g `Football Basketball` will return `Football Training`, `Basketball Training`
-* Searching by venue:
-    - It is case-insensitive. e.g `nus field` will match `NUS Field`
-    - Only full event names will be matched. e.g `Field` will not match `NUS Field`
-* The date and capacity fields are subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
+Prefix | Field | Restrictions
+-------- | ------ | ------
+`n` | Name | - It is case-insensitive. e.g `dance` will match `Dance` <br> <br> - Keywords will be matched without the need to enter the full event name. e.g `Band` will match `Band training` <br> <br> - Events matching at least one keyword for the event name will be returned (i.e. `OR` search). e.g `Football Basketball` will return `Football Training`, `Basketball Training`
+`v` | Venue | - It is case-insensitive. e.g `nus field` will match `NUS Field` <br> <br> - Only full event names will be matched. e.g `Field` will not match `NUS Field`
+`d, c` | Date, Capacity | - Subject to the same validity conditions as in the [Add Event Command](#adding-an-event--add)
 
 Examples:
 * `find n/Football` returns `Football Match` and `Football Training`
@@ -397,6 +539,9 @@ Examples:
 * `find d/03-01-2021` returns all the events which occur on the date `03-01-2021` <br>
 
 #### Deleting an event : `delete`
+
+<div markdown="span" class="alert alert-danger"> :warning: **Warning:** The `delete` command cannot be undone! Do make sure that you have entered the command correctly before running it.
+</div>
 
 Deletes specified events from the address book.
 
@@ -407,7 +552,18 @@ Format: `delete INDEX…`
 * The indexes **must be positive integers** 1, 2, 3, …​
 * Delete multiple events in a single command by inputting multiple indexes, each separated by a space.
 
-Examples:
+Example:<br>
+Suppose Football Training is cancelled due to a tightening of COVID-19 measures. To keep the addressbook updated, you might want to remove the event from the list of events.
+
+You can easily do this a single `delete` command.<br>
+
+1. Note that the event "Football Training" has an index of 2 in the current event list. To remove it from the list of events, simply enter `delete 2`.
+   ![Step1](images/logic/commands/deletecommand/event/step1.png)
+
+2. The result box will notify you of the deleted event. The event will also be removed from the event list.
+   ![Step2](images/logic/commands/deletecommand/event/step2.png)
+   
+More Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 events in the address book.
 * `find n/Football Training` followed by `delete 1` deletes the 1st event named Football Training in the results of the `find` command.
 
@@ -417,11 +573,26 @@ Add multiple residents to an event based on the information given(name or room n
 
 Format: `include INDEX r/RESIDENTS`
 
-* Residents can be given in the form of name or room, but all has to be all rooms or all names
-* The resident's name/room inputted has to exist in the address book under the `Resident` Tab to be added to an `Event`  
-* When adding multiple names/rooms, each resident's name/room is separated by a comma
-* The resident's name/room inputted is case-insensitive
-* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room is added to the event
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Residents can be given in the form of `names/rooms`, but all has to be all `rooms` or all `names`
+* The residents' `names/rooms` inputted have to exist in the address book under the `Resident` Tab to be added to an `Event`
+* When adding multiple `names/rooms`, each resident's `name/room` is separated by a comma
+* The resident's `name/room` inputted is case-insensitive
+
+</div>
+
+Here's a step-by-step guide:<br>
+1. Type the `include` command with the `index` of the event, and the `names/rooms` of the residents to include to
+   the event. When adding multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
+   ![Step1](images/logic/commands/includecommand/step1.png)
+
+
+2. The sidebar will now show the updated list of residents in the event.
+   ![Step2](images/logic/commands/includecommand/step2.png)
+   
 
 Examples:
 * `include 1 r/A101` adds the resident who stays in room A101 to the first event in the address book
@@ -435,11 +606,26 @@ Remove multiple residents from an event based on the information given(name or r
 
 Format: `exclude INDEX r/RESIDENTS`
 
-* Residents can be given in the form of name or room, but all has to be all rooms or all names
-* The resident's name/room inputted has to be invovled with the `Event` under the `Event` Tab, to be removed from that event
-* When removing multiple names/rooms, each resident's name/room is separated by a comma
-* The resident's name/room inputted is case-insensitive
-* If one or more of the given name/room is invalid, an error message is outputted and none of the name/room is removed from the event
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Residents can be given in the form of `names/rooms`, but all has to be all `rooms` or all `names`
+* The residents' `names/rooms` inputted have to be involved in the `Event` under the `Event` Tab, to be removed from
+  that event
+* When removing multiple `names/rooms`, each resident's `name/room` is separated by a comma
+* The resident's `name/room` inputted is case-insensitive
+
+</div>
+
+Here's a step-by-step guide:<br>
+1. Type the `exclude` command with the `index` of the event, and the `names/rooms` of the residents to exclude from
+   the event. When removing multiple `names/rooms`, remember to separate the `names/rooms` by a comma.
+   ![Step1](images/logic/commands/excludecommand/step1.png)
+
+
+2. The sidebar will now show the updated list of residents in the event.
+   ![Step2](images/logic/commands/excludecommand/step2.png)
 
 Examples:
 * `exclude 1 r/A101` removes the resident who stays in room A101 from the first event in the address book
@@ -448,6 +634,9 @@ Examples:
 * `exclude 4 r/John Doe, Jane Doe` removes John Doe and Jane Doe from the fourth event in the address book
 
 #### Sorting events : `sort`
+
+<div markdown="span" class="alert alert-primary"> :bulb: **Tip:** To undo the `sort` command, simply run `view`.
+</div>
 
 Sorts the events according to specified fields in ascending or descending order.
 
@@ -552,7 +741,7 @@ Command | Format | Examples
 |--------|-------|----------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]`| `view 30`
-**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` | `deadline k/f 15-8-2021 20-08-2021`
+**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` or<br>`deadline k/LATE_KEYWORD d1/DATE1` | `deadline k/f d1/15-08-2021 d2/20-08-2021` or<br>`deadline k/lf d1/15-08-2021`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/john alex v/false f/fass` <br>
 **Edit** | `edit INDEX… [FLAG/UPDATED_PARTICULARS]…` | `edit 1 2 3 v/true fd/20-10-2021` <br>
 **Delete** | `delete INDEX…` | `delete 1 2 3`
@@ -565,7 +754,7 @@ Command | Format | Examples
 
 Command | Format | Examples
 |--------|-------|----------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` | `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+**Add** |  `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]` | `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201`
 **View** | `view [INDEX]`| `view 30`
 **Find** | `find [PREFIX/KEYWORD]...` | `find n/Swim d/28-10-2021`
 **Edit** | `edit INDEX [FLAG/UPDATED_PARTICULARS]…` | `edit 1 n/Football Training l/Field`
@@ -576,8 +765,8 @@ Command | Format | Examples
 
 ### Commons
 
-Command | Format | Examples
-|--------|-------|----------
+Command | Format
+|--------|-------
 **Help** | `help`
 **Switch** | `switch`
 **Clear** | `clear`
