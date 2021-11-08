@@ -222,7 +222,7 @@ Examples:
 
 ![result for `find -n Alex`](images/FindAlexResult.png)
 <div markdown="span" class="alert alert-primary">
-:memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
+:memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the
 start of any word in a person's name or if the keywords do not appear in the same order in the persons' name as they do
 in the given input, it will not match that particular task. For instance, `find -n alex` will match a person with
 the name "Alex Yeoh". However, `find -n lex` and `find -n yeo alex` will not match the same person with the name
@@ -319,7 +319,7 @@ Shows you a list of tasks that has been attached to a specific person.
    ![result for `cat 1 -f work`](images/ViewTaskAlexFilteredResult.png)
 
 <div markdown="span" class="alert alert-primary">
-:memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the 
+:memo:**Note**: The keywords will only be matched against the start of any word. If any of the keywords are not the
 start of any word in a task name or if the keywords do not appear in the same order in the task name as they do in the
 given input, it will not match that particular task. For instance, `cat 1 -f work` will match a task with the name
 "Work at 5pm". However, `cat 1 -f ork` and `cat 1 -f 5pm work" will not match the same task with the name "Work at 5pm".
@@ -472,7 +472,7 @@ Email of Person | `-e` | Email should be of format `local-part@domain`. <br>1) T
 Address of Person | `-a` | Address can take any values, but must not be blank.
 Description of Person | `-d` | Description can take any values, but must not be more than 500 characters long.
 Label of Person | `-l` | Labels should consists of alphanumeric characters only. <br>Cannot be blank.
-Denotes if a Person is important | `-impt` | Input should be `true` or `false`, case of the words does not matter. 
+Denotes if a Person is important | `-impt` | Input should be `true` or `false`, case of the words does not matter.
 Task Index of the Task | `-ti` | Task Index should be a positive integer less than or equal to 2147483647: 1, 2, 3, …​, 2147483647.<br>
 Name of the Task | `-tn` | Task name should contain at least one non-whitespace character.
 Date of the Task | `-td` | Task date should follow the format: `YYYY-MM-DD`.

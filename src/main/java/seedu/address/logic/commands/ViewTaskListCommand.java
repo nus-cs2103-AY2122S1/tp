@@ -20,8 +20,7 @@ public class ViewTaskListCommand extends Command {
     public static final String COMMAND_WORD = "cat";
     public static final String ALL_FLAG = "-A";
     public static final String DISPLAY_SINGLE_DESCRIPTION = "Displays the task list of a "
-            + "person specified by index number"
-            + " used in the displayed person list";
+            + "person in the displayed person list.";
     public static final String DISPLAY_ALL_DESCRIPTION = "Displays the task list of every person";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": " + DISPLAY_SINGLE_DESCRIPTION + "\n"

@@ -48,7 +48,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String DESCRIPTION = "Edits the details of the person/task identified.";
+    public static final String DESCRIPTION = "Edits the details of the person or the specified task of a person";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION
             + " by the index number used in the displayed person list. "

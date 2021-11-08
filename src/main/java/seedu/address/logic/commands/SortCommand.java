@@ -17,7 +17,7 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " -r";
 
-    public static final String DESCRIPTION = "Sorts the list of persons";
+    public static final String DESCRIPTION = "Sorts the list of persons.";
 
     private static String messageSuccess = "Sorted all persons";
 

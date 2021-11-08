@@ -25,8 +25,8 @@ Given below are my contributions to the project.
   * Justification: Repeating commands is something which people do all the time. Allowing them to access commands they input earlier allows for a convenience. Moreover, since this product
     is aimed for Linux user, a familiar feature such as this one is very beneficial and would feel like second nature.
   * Highlights: This feature was quite difficult to implement. The first issue was to understand how the GUI handles key input. Moreover, it also needs to handle executing the command while not allowing user to access the `cache` manually. After a lot of consideration, I finally ended up creating an internal command and changing the commandResult to allow for passing the text straight into the CommandBox.
-  
-  
+ 
+
 * **New Feature**: Added the `task`, `addtask`, and `deletetask`.
   * What it does: Allow user to attach task to people and add or delete them.
   * Justification: When working with a lot of people, there is a need to keep track of what's going on with everyone. This
@@ -34,8 +34,8 @@ Given below are my contributions to the project.
   * Highlights: This feature was medium level in terms of implementing. Adding `task` itself was not too much. However, allowing for
   adding and deleting multiple `task` was quite challenging. It required me to fully understand how the model and storage work and
   putting into consideration possible issues such as deleting one `task` affecting the index of other `tasks`.
-  
-  
+
+
 * **New Feature**: Added the `description`.
   * What it does: Add little notes and descriptor to people.
   * Justification: Sometimes merely contact details are not enough. Perhaps more important text are needed. Hence, the description
