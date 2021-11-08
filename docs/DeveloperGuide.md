@@ -98,7 +98,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -108,7 +108,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -135,7 +135,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -153,7 +153,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -174,12 +174,14 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="600" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* saves both address book data and user preference data in json format, and read them back into corresponding objects.
+* exports address book data JSON or CSV files.
+* imports address book data from JSON or CSV files.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -591,12 +593,12 @@ The Find command accepts names, tags, Telegram handles or GitHub usernames as pa
 
 and allows users to search for contacts based on the specified criterion.
 It is facilitated by the `FindCommandParser` class, which implements `Parser<FindCommand>`.
-It implements the `parse()` method, which parses the find parameter (eg: name, tag, etc) and returns a `FindCommand`, to be executed in
+It implements the `parse()` method, which parses the find parameter (eg: name, tag, etc.) and returns a `FindCommand`, to be executed in
 `LogicManager`.
 
 The `FindCommand` class extends `Command`. Its instance is created by providing a predicate (condition to be fulfilled by the elements of 
 the `FilteredPersonList` that contains the contact(s) matching the find parameters). Its implementation of
-`Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+`Command#execute()` updates the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
 the `execute("find Bob Joe")` API call.
@@ -883,7 +885,7 @@ the `execute("show 5")` API call.
 This is called if the parameter is **NOT** a parsable Integer.
 The method calls `model.setSelectedIndex(index)` with index gotten from the `filteredList` which displays the details of the contact on the Details Pane.
 If there are multiple contacts with names that contain the parameter keyword then a list of such persons are shown.
-If there is no contact with name that contain the parameter keyword in the `filteredList`, then the entire addressbook is searched.
+If there is no contact with name that contain the parameter keyword in the `filteredList`, then the entire address book is searched.
 
 
 The Sequence Diagram below illustrates the interactions within the `Logic`, `Model` and `UI` components for
@@ -1188,7 +1190,78 @@ Extensions
     * Steps 1b1-1b3 are repeated until the data entered are valid.
     * Use case resumes from step 2.
 
-**Use Case 3: Delete user**
+**Use Case 4: Edit profile**
+
+MSS
+
+1. User enters command to edit profile.
+2. CohortConnect shows a successfully edited message.
+3. CohortConnect updates user's profile with the new details.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+**Use Case 5: Add tags**
+
+MSS
+
+1. User enters command to add tags to a specific contact.
+2. CohortConnect shows a successfully added message.
+3. CohortConnect updates tags of specific contact to contain new tags.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+* 1b. User tries to add existing tag.
+   * 1b1. CohortConnect prompts that the tag already exists.
+   * 1b2. CohortConnect requests for correct format.
+   * 1b3. User enters new data.
+   * Steps 1b1-1b3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+**Use Case 6: Remove tags**
+
+MSS
+
+1. User enters command to remove tags from a specific contact.
+2. CohortConnect shows a successfully removed message.
+3. CohortConnect updates tags of specific contact.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+* 1b. User tries to remove non-existent tag.
+   * 1b1. CohortConnect prompts that the tag to be removed does not exist.
+   * 1b2. CohortConnect requests for correct format.
+   * 1b3. User enters new data.
+   * Steps 1b1-1b3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+**Use Case 7: Delete user**
 
 MSS
 
@@ -1214,7 +1287,8 @@ Extensions
     * Steps 1b1-1b3 are repeated until the data entered are valid.
     * Use case resumes from step 2.
   
-**Use Case 4: Find a contact using name**
+  
+**Use Case 8: Find a contact by name**
 
 MSS
 
@@ -1225,30 +1299,94 @@ MSS
         
 Extensions
 
-* 1a. The given name is not present.
-  * 1a1. CohortConnect shows an error message.
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+* 1b. Contact with this name does not exist.
+  * 1b1. CohortConnect shows an error message.
   * Use case ends.
 
 * 2a. The list is empty.
   * Use case ends.
-    
-**Use Case 5: Find a contact using tag**
+
+**Use Case 9: Find a contact by GitHub username**
+
+MSS
+
+1. User enters command to find a contact by GitHub username.
+2. CohortConnect shows list of contacts with matching GitHub username.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+* 1b. Contact with this GitHub username does not exist.
+   * 1b1. CohortConnect shows an error message.
+   * Use case ends.
+
+* 2a. The list is empty.
+   * Use case ends.
+
+**Use Case 10: Find a contact by Telegram handle**
+
+MSS
+
+1. User enters command to find a contact by Telegram handle.
+2. CohortConnect shows list of contacts with matching Telegram handle.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+  
+* 1b. Contact with this Telegram handle does not exist.
+   * 1b1. CohortConnect shows an error message.
+   * Use case ends.
+
+* 2a. The list is empty.
+   * Use case ends.
+
+**Use Case 11: Find a contact using tag**
 
 MSS
 
 1. User enters command to find a contact by tag.
 2. CohortConnect shows list of contacts labelled with matching tag.
-    
-    Use case ends.
+
+   Use case ends.
 
 Extensions
-    
-* 1a. The given tag doesn't exist.
-  * 1a1. CohortConnect shows an error message.
-  * Use case ends.
-        
+
+* 1a. The input command is invalid.
+   * 1a1. CohortConnect shows an error message.
+   * 1a2. CohortConnect requests for correct format.
+   * 1a3. User enters new data.
+   * 1a1-1a3 are repeated until the data entered are valid.
+   * Use case resumes from step 2.
+
+* 1b. Contact with this tag does not exist.
+   * 1b1. CohortConnect shows an error message.
+   * Use case ends.
+
 * 2a. The list is empty.
-  * Use case ends.
+   * Use case ends.
 
 
 **Use Case 12: Show a person's details using Index**
@@ -1311,13 +1449,13 @@ Extensions
   * 3b2. Displays list of users with names containing the keyword.
   * Use case resumes at step 3.
 
-**Use Case 14: Show a person's details using Github Username**
+**Use Case 14: Show a person's details using GitHub Username**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list using Github usernam.
+3.  User requests to show details of a specific person in the list using GitHub username.
 4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
@@ -1334,23 +1472,23 @@ Extensions
 * 2a. The list is empty.
   * Use case ends.
 
-* 3a. The given github username is not present.
+* 3a. The given GitHub username is not present.
   * 3a1. CohortConnect shows an error message.
   * Use case resumes at step 3.
 
-* 3b. Multiple matching github usernames.
+* 3b. Multiple matching GitHub usernames.
   * 3b1. CohortConnect shows an error message.
-  * 3b2. Displays list of users with github usernames containing the keyword.
+  * 3b2. Displays list of users with GitHub usernames containing the keyword.
   * Use case resumes at step 3.
 
 
-**Use Case 15: Show a person's details using Telegram Id**
+**Use Case 15: Show a person's details using Telegram Username**
 
 MSS
 
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
-3.  User requests to show details of a specific person in the list using Telegram Id.
+3.  User requests to show details of a specific person in the list using Telegram Username.
 4.  CohortConnect shows the person's details in the detail pane.
     
     Use case ends.
