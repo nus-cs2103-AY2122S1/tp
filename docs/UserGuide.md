@@ -21,6 +21,8 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
     look at [Command Summary](#command-summary) to see all commands easily.
 5. Refer to our [FAQ](#faq) if you have any questions.
 
+<div style="page-break-after: always;"></div>
+
 ## Installation Guide
 
 1. Ensure you have Java `11` or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html)
@@ -49,6 +51,8 @@ The UI consists of a:
 * Task Panel - Displays all added tasks
 * Group Panel - Displays all added groups
 * Viewing Panel - Displays either the schedule, group or person to be viewed
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
