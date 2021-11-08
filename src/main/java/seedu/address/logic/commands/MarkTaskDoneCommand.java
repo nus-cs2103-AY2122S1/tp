@@ -43,6 +43,12 @@ public class MarkTaskDoneCommand extends Command {
             if (targetIndex.getZeroBased() >= savedStateList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
+        }
+
+        for (Index targetIndex : targetIndexList) {
+            if (targetIndex.getZeroBased() >= savedStateList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
 
             Task taskToMarkCompleted = savedStateList.get(targetIndex.getZeroBased());
             model.toggleTaskIsDone(taskToMarkCompleted);
