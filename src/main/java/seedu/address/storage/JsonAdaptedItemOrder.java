@@ -47,6 +47,6 @@ public class JsonAdaptedItemOrder {
     }
 
     public Item toModelType() {
-        return new Item(new Name(name), id, count, Collections.emptySet(), 0.0, sp);
+        return new Item(new Name(name), id, count, Collections.emptySet(), -1.0, sp);
     }
 }

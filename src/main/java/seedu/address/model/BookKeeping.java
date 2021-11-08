@@ -95,4 +95,17 @@ public class BookKeeping implements ReadOnlyBookKeeping {
         return revenue.equals(other.revenue)
                 && cost.equals(other.cost);
     }
+
+    @Override
+    public String toString() {
+        String costString = String.format("$%.2f", cost);
+        String revenueString = String.format("$%.2f", revenue);
+
+        String profitString = getProfit() >= 0
+                ? String.format("$%.2f", getProfit())
+                : String.format("-$%.2f", -getProfit());
+
+        return "Total costs: " + costString + ", Total revenue: "
+                + revenueString + ", Total profit: " + profitString;
+    }
 }
