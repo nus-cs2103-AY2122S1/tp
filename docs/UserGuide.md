@@ -449,7 +449,7 @@ When editing tags, all existing tags of the client will be replaced with the new
 
 You can delete the specified client from FAST. This is useful when a client has stopped using your services.
 
-**Format 1**: `del INDEX...` <br>
+**Format 1**: `del INDEX [INDEX]...` <br>
 **Format 2**: `del INDEX-INDEX`
 
 * Deletes the client(s) at the specified `INDEX`.
@@ -517,7 +517,6 @@ Try to add remarks with specific keywords so that it is easier to [search](#sear
 Adding a remark will overwrite any previous remarks that were made for the client!
 </div>
 
-<div style="page-break-after: always"></div>
 
 #### Appointments
 
@@ -933,7 +932,7 @@ The commands are categorised (based on their purpose) into 5 different categorie
 Action | Format, Examples
 --------|------------------
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete Contact** | `del INDEX`<br> e.g. `del 3`
+**Delete Contact** | `del INDEX [INDEX]...`<br> e.g. `del 3 1` <br> `del INDEX-INDEX` <br> e.g. `del 3-5`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Add Remark** | `rmk INDEX [r/REMARK]`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
@@ -945,7 +944,7 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **Add appointment** |`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br>
-**Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
+**Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br> 
 **Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br>
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 **Undo Marked Appointment** | `ua INDEX` <br> e.g. `ua 1`
