@@ -32,7 +32,7 @@ This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ Let's break down what happens when you call a command, like the find command. Th
 * The common logic for all commands is shared in `LogicManager` and `NotorParser`, which uses the Command design pattern. Making use of polymorphism, we know we will have a `Command` returned which can be executed by the `LogicManager`, while different classes hold the functionality.
 * Each specific command parser (`FindCommandParser` in the diagram) is responsible for checking that the correct parameters have been passed, and forming them into the appropriate parameters. The parser creates an appropriate command (`FindPersonCommand`), which extends the `Command` interface. Hence, we know the `FindPersonCommand` will definitely implement `execute`.
 * In the constructor for the `FindPersonCommand`, the `FindPersonExecutor` is initialised. As mentioned earlier, executors hold all the execution functionality. In the case of find, this means in its initialisation it is passed the predicate initialised in the `FindCommandParser` which is used to filter the list of persons in the model later
-* After the initialisation of the `FindPersonCommand` is done, the Command is returned all the way to `LogicManager`. 
+* After the initialisation of the `FindPersonCommand` is done, the Command is returned all the way to `LogicManager`.
 * `LogicManager` uses the Command API to call execute() on the command, which calls the execute method on the executor.
 * The executor updates the model and returns the command result, which is passed back to the `LogicManager`.
 
@@ -285,7 +285,7 @@ Priorities:<p>
    Use case ends.
 
 #### General Use Cases
-    
+
 ##### Use case: Export Data
 
 **MSS**
@@ -380,7 +380,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 * 3a. User cancels their request.
   * 3a1. Notor displays a confirmation of the cancelling of the request
     Use case ends.
-    
+
 #### Basic Group Commands
 
 ##### Use case: Add a note to a Group
@@ -401,7 +401,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 1. User informs Notor to create a group, specifying its name.
 2. Notor creates the group and displays a success message.
-    
+
     Use case ends.
 **Extensions**
 
@@ -409,14 +409,14 @@ Precondition: The person or group whose tags or notes you want to clear is visib
   * 1a1. Resume use case from step 1.
 * 1b. Group name is invalid.
   * 1b1. Resume use case from step 1.
-    
+
 ##### Use Case : Create Subgroup
 
 **MSS**
 
 1. User informs Notor to create a subgroup, specifying its name and the name of the group that the subgroup will be in.
 2. Notor creates the group and displays a success message.
-    
+
     Use case ends.
 **Extensions**
 
@@ -463,7 +463,7 @@ Precondition: The person or group whose tags or notes you want to clear is visib
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: 
+<div markdown="span" class="alert alert-info">:information_source:
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -641,7 +641,7 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
     1. Test case: `person 1 /note` <br>
         Expected: Note window opened with title of note window named as the person to add note to.
-        Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving 
+        Within the note window, user can make use of keyboard shortcuts in  **User Guide** for saving
         and quiting of note.
         Upon saving of note, first three lines of note excluding empty line is shown for the first person in the list.
 
@@ -653,17 +653,17 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ### Clearing note of a person
 1. Clearing note of a person in person list. <br>
-   Prerequisites: List all persons using the `person /list` command or already in person list. 
+   Prerequisites: List all persons using the `person /list` command or already in person list.
         Must have at least one person in the list.
 
     1. Test case: `person 1 /clearnote` <br>
-       Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person. 
-       Note of first person is cleared in the list upon confirmation to clear note. 
+       Expected: Warning Window opened to prompt user whether to proceed with clearing of note for the person.
+       Note of first person is cleared in the list upon confirmation to clear note.
        Note of first person in the list remains upon confirmation to cancel clear note.
-       
+
    1. Test case: `person 0 /clearnote `<br>
       Expected: No warning window is opened. Error details shown in the status message.
-      
+
     1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
@@ -683,9 +683,9 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 
 ### GUI Test (Implemented but scrapped due to CI failure)
 
-We have initially decided to implement **Gui Testing** because many of our functionalities 
+We have initially decided to implement **Gui Testing** because many of our functionalities
 such as clearing notes, tags and Notor, and adding notes uses a pop up window.
 
 The difficulty level of GUI Testing is moderate because there is very limited
-guides available on **TestFx** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally, 
+guides available on **TestFx** Library. Despite our best efforts to try to fix CI failure and the GUI testcases passing locally,
 all efforts are of no avail.

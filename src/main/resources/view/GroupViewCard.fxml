@@ -3,14 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -30,7 +29,7 @@
             </HBox>
             <VBox fx:id="vBox" prefHeight="75.0" prefWidth="130.0" HBox.hgrow="ALWAYS">
                 <children>
-                    <Label fx:id="note" alignment="TOP_LEFT" maxWidth="Infinity" prefHeight="90.0" prefWidth="130.0" style="-fx-background-color: #808080; -fx-background-radius: 5 5 0 0;" styleClass="cell_small_label" />
+                    <Label fx:id="note" alignment="TOP_LEFT" maxWidth="Infinity" prefHeight="90.0" prefWidth="130.0" style="-fx-background-color: #808080; -fx-background-radius: 5 5 0 0;" styleClass="cell_small_label" wrapText="true" />
                     <Label fx:id="noteLastModified" maxWidth="Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="200.0" style="-fx-background-color: #888888; -fx-background-radius: 0 0 5 5;" styleClass="cell_small_label" text="\$noteLastSaved" />
                 </children>
             </VBox>
