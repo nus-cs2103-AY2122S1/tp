@@ -487,8 +487,6 @@ The following activity diagrams summarize what happens when a user executes the 
 </center>
 <center>
     <img src="images/ShowStudentActivityDiagram.png" />
-</center>
-<center>
     <img src="images/ShowStudentsActivityDiagram.png" />
 </center>
 <br>
