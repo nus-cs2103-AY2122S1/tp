@@ -480,22 +480,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | potential user exploring the app           | see the app populated with sample data | easily see how the app will look when in use                   |
 | `*`      | user ready to start using the app          | view a list of basic commands  | refer to instructions when I forget how to use the App                 |
 | `*`      | user ready to start using the app          | purge all current data         | get rid of sample/experiment data I used for exploring the App         |
+| `*`      | user ready to start using the app          | confirm to purge the existing data         | not accidentally executing a ‘clear’ command               |
+| `*`      | new user                                   | view valid faculty and major data fields to assign to a Person            | begin adding new Persons in a valid manner                  |
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
+| `*`  | new user                                   | view valid skills and misc data fields to assign to a Person              | begin adding new Persons in a valid manner                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
-| `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |
 | `* * *`  | beginner user                              | append data fields to a contact | add on new data fields to existing ones                          |
 | `* * *`  | beginner user                              | remove specific data fields | precisely remove incorrect data fields of a contact                       |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
+| `* * *`  | slightly familiar user                 | remove appended data fields          | remove outdated or incorrect data fields                                   |
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
 | `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | delete an organisation                | remove any organisations that are irrelevant or errors                                   |
 | `* * *`  | slightly familiar user                 | add a person to an organisation                | record a person's link to an organsiation                                   |
 | `* * *`  | slightly familiar user                 | delete a person from an organisation                | remove a person's link to an organisation or errors                                   |
 | `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
+| `* * *`  | slightly familiar user                 | view a Person in detail                | view the miscellaneous data fields such as remarks and interactions                            |
 | `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
 | `* * `  | slightly familiar user                 | list all my interactions               | have an overview of my interactions with a particular contact                                  |
 | `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
+| `*`  | slightly familiar user                                       | confirm deletion of a contact         | not accidentally execute a ‘delete’ command |
+| `*`  | slightly familiar user                                       | confirm deletion of a data field         | not accidentally execute a ‘delete’ command |
 | `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
 | `*`      | user with many persons in the address book | sort contacts by name           | locate a contact easily                                                 |
 | `*`      | expert user                                | sort contacts by faculty           | consult them should i need help for a project                       |
