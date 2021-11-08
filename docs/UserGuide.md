@@ -536,28 +536,32 @@ Format: `listclass`
 ### 3.9 Sort tuition classes: `sort` | `s`
 
 Sorts tuition class list according to time or alphabetical order.
-
-<div markdown="block" class="alert alert-primary"> 
-  
-:information_source: Note: <br>
-  
-  * After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
-  
-  * The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
-
-  * For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
-
-  * For time order, the sorting assumes Gregorian calendar format. i.e. Sunday is considered the start of a week and 
-    Saturday is considered the end of a week.
-
-
-</div>
+* After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
+* The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
 
 The possible usages of `sort` are given below:
 * `sort` sorts by time
 * `sort o/asc` sorts by ascending alphabetical order
 * `sort o/desc` sorts by descending alphabetical order
 * `sort o/time` sorts by time
+
+<div markdown="block" class="alert alert-primary"> 
+
+:information_source: Note: <br>
+
+* For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
+
+* For time order, the sorting assumes Gregorian calendar format. i.e. Sunday is considered the start of a week and
+  Saturday is considered the end of a week.
+
+</div>
+
+An example output is shown below:
+
+<p align="center">
+    <img src="images/sort.png" alt="Sort by ascending order" width="650" height="420"><br>
+    <i>Figure 7: Example of executing `sort o/asc` command</i>
+</p>
 
 ### 3.10 View timetable: `timetable` | `tt`
 Shows classes scheduled in this week in a timetable.
@@ -577,7 +581,7 @@ timetable
 
 <p align="center">
     <img src="images/time_table.png" alt="Timetable" width="620" height="540"><br>
-    <i>Figure 7: A timetable view of all tuition classes in a week</i>
+    <i>Figure 8: A timetable view of all tuition classes in a week</i>
 </p>
 
 ### 3.11 View today's classes: `today` | `td`
@@ -587,7 +591,7 @@ when the TutAssistor is reopened.
 
 <p align="center">
     <img src="images/today_view.png" alt="Today view" width="450" height="450"><br>
-    <i>Figure 8: The view of all classes scheduled today in the Main Display Pane</i>
+    <i>Figure 9: The view of all classes scheduled today in the Main Display Pane</i>
 </p>
 
 ### 3.12 View help: `help` | `h`
@@ -598,7 +602,7 @@ Format: `help`
 
 <p align="center">
     <img src="images/helpWindow.png" alt="Help window" width="280" height="520"><br>
-    <i>Figure 9: The help window</i>
+    <i>Figure 10: The help window</i>
 </p>
 
 ### 3.13 Navigate input history
