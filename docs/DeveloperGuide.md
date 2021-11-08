@@ -39,32 +39,7 @@ title: Developer Guide
        1. Rewriting the Command Syntax 
        2. Designing New UI Components 
        3. Working with Third-Party Libraries 
-       4. Implementing Dynamic Features 
-
-- [Quick Start](#quick-start)
-- [Features](#features)
-    1. [Parameter Summary](#parameter-summary)
-    2. [General Features](#general-features)
-        1. [View Help: `help`](#view-help)
-        2. [View Dashboard `dashboard`](#view-dashboard)
-        3. [Exit: `exit`](#exit)
-    3. [Data Features](#data-features)
-        1. [Fill Sample Data: `fill`](#fill-sample-data)
-        2. [Purge All Data: `purge`](#purge-all-data)
-        3. [Download Data: `download`](#download-data)
-        4. [Upload Data: `upload`](#upload-data)
-    4. [Student Features](#student-features)
-        1. [Add Student: `add`](#add-student)
-        2. [Edit Student Details: `edit`](#edit-student)
-        3. [Delete Student: `delete`](#delete-student)
-        4. [Filter Students: `filter`](#filter-student)
-        5. [Show Student Details: `show`](#show-student)
-        6. [List All Students: `list`](#list-students)
-    5. [Lab Features](#lab-features)
-        1. [Add Lab: `addlab`](#add-lab)
-        2. [Edit Lab: `editlab`](#edit-lab)
-        3. [Delete Lab: `dellab`](#delete-lab)
-- [Command Summary](#command-summary)
+       4. Implementing Dynamic Features
 
 --------------------------------------------------------------------------------------------------------------------
 
