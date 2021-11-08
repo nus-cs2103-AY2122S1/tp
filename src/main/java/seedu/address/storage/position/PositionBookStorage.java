@@ -27,19 +27,20 @@ public interface PositionBookStorage {
     Optional<ReadOnlyPositionBook> readPositionBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getPositionBookFilePath().
+     * @see #getPositionBookFilePath()
      */
     Optional<ReadOnlyPositionBook> readPositionBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyPositionBook} to the storage.
+     *
      * @param positionBook The position book to be saved. Cannot be null.
      * @throws IOException If there was any problem writing to the file.
      */
     void savePositionBook(ReadOnlyPositionBook positionBook) throws IOException;
 
     /**
-     * @see #savePositionBook(ReadOnlyPositionBook).
+     * @see #savePositionBook(ReadOnlyPositionBook)
      */
     void savePositionBook(ReadOnlyPositionBook positionBook, Path filePath) throws IOException;
 }

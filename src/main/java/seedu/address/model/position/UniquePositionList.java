@@ -22,7 +22,7 @@ import seedu.address.model.position.exceptions.PositionNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Position#isSamePosition(Position).
+ * @see Position#isSamePosition(Position)
  */
 public class UniquePositionList implements Iterable<Position> {
     private final ObservableList<Position> internalList = FXCollections.observableArrayList();

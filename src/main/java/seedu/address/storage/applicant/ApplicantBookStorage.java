@@ -29,7 +29,7 @@ public interface ApplicantBookStorage {
             DataConversionException, IOException;
 
     /**
-     * @see #getApplicantBookFilePath().
+     * @see #getApplicantBookFilePath()
      */
     Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws
             DataConversionException, IOException;
@@ -43,7 +43,7 @@ public interface ApplicantBookStorage {
     void saveApplicantBook(ReadOnlyApplicantBook applicantBook) throws IOException;
 
     /**
-     * @see #saveApplicantBook(ReadOnlyApplicantBook).
+     * @see #saveApplicantBook(ReadOnlyApplicantBook)
      */
     void saveApplicantBook(ReadOnlyApplicantBook applicantBook, Path filePath) throws IOException;
 }

@@ -26,7 +26,7 @@ import seedu.address.model.position.Position;
  *
  * Supports a minimal set of list operations.
  *
- * @see Applicant#isSameApplicant(Applicant).
+ * @see Applicant#isSameApplicant(Applicant)
  */
 public class UniqueApplicantList implements Iterable<Applicant> {
 
