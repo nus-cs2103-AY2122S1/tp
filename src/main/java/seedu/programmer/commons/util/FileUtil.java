@@ -131,10 +131,10 @@ public class FileUtil {
      * @param nextLine line in a CSV file of student data
      */
     private static void addStudentFromCsvLine(List<Student> stuList, String[] nextLine) {
-        StudentId sid = new StudentId(nextLine[0]);
-        ClassId cid = new ClassId(nextLine[1]);
-        Name name = new Name(nextLine[2]);
-        Email email = new Email(nextLine[3]);
+        StudentId sid = new StudentId(nextLine[0].trim());
+        ClassId cid = new ClassId(nextLine[1].trim());
+        Name name = new Name(nextLine[2].trim());
+        Email email = new Email(nextLine[3].trim());
         Student s = new Student(name, sid, cid, email);
         stuList.add(s);
     }
