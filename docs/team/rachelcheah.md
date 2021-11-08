@@ -32,7 +32,7 @@ Given below are my contributions to the project.
   * Setting up and maintaining issue Tracking for each milestone
   * Facilitated submission and template of weekly deliverables
   * Facilitated deadlines planning for deliverables and milestones.
-  * 
+  
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `export`, `exportemail` and `stat` [\#103](https://github.com/AY2122S1-CS2103-T16-2/tp/pull/103)
