@@ -103,22 +103,6 @@ public class MainApp extends Application {
             initialAddressBook = new AddressBook();
         }
 
-        ReadOnlyTaskBook initialTaskBook;
-        Optional<ReadOnlyTaskBook> taskBookOptional;
-        try {
-            taskBookOptional = storage.readTaskList();
-            if (!taskBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TaskBook");
-            }
-            initialTaskBook = taskBookOptional.orElseGet(SampleDataUtil::getSampleTaskBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
-            initialTaskBook = new TaskBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBook");
-            initialTaskBook = new TaskBook();
-        }
-
         ReadOnlyOrderBook initialOrderBook;
         Optional<ReadOnlyOrderBook> orderBookOptional;
         try {
@@ -135,7 +119,32 @@ public class MainApp extends Application {
             initialOrderBook = new OrderBook();
         }
 
-        return new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        ReadOnlyTaskBook initialTaskBook;
+        Optional<ReadOnlyTaskBook> taskBookOptional;
+        try {
+            taskBookOptional = storage.readTaskList();
+            if (!taskBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskBook");
+            }
+            initialTaskBook = taskBookOptional.orElseGet(SampleDataUtil::getSampleTaskBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
+            initialTaskBook = new TaskBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBook");
+            initialTaskBook = new TaskBook();
+        }
+
+        ModelManager modelManager = new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
+        try {
+            modelManager.checkClientAndOrderRelation();
+            modelManager.checkTaskAndOrderRelation();
+        } catch (DataConversionException e) {
+            logger.warning(e.getMessage() + ". Will be starting with empty data.");
+            modelManager = modelManager.resetModelManager();
+        }
+
+        return modelManager;
     }
 
     private void initLogging(Config config) {

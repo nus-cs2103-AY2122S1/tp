@@ -28,7 +28,6 @@ public class JsonSerializableTaskBookTest {
         TaskBook taskBookBookFromFile = dataFromFile.toModelType();
         TaskBook typicalTasksTaskBook = TypicalTasks.getTypicalTaskBook();
         assertEquals(taskBookBookFromFile, typicalTasksTaskBook);
-
     }
 
     @Test

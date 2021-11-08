@@ -46,9 +46,11 @@ class AddTaskCommandTest {
 
     @Test
     public void execute_taskWithValidTag_addSuccessful() throws Exception {
-        Task validTask = new TaskBuilder().withTaskTag("SO2021").build(); //based on default orderid from orderbuilder
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-        ModelStub modelStub = new ModelStubAcceptingTaskWithOrder(new OrderBuilder().build());
+        Order order = new OrderBuilder().build();
+        String orderId = "SO" + order.getId();
+        ModelStub modelStub = new ModelStubAcceptingTaskWithOrder(order);
+
+        Task validTask = new TaskBuilder().withTaskTag(orderId).build();
         CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
 
         assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
@@ -57,7 +59,7 @@ class AddTaskCommandTest {
 
     @Test
     public void execute_taskDeclinedByModel_throwsCommandException() {
-        Task validTask = new TaskBuilder().withTaskTag("SO1").build();
+        Task validTask = new TaskBuilder().withTaskTag("SO19").build(); //invalid order id
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
         ModelStub modelStub = new ModelStubAcceptingTaskWithOrder(new OrderBuilder().build());
 

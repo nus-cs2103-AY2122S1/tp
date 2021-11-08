@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowFontSize 12
+
+Package Task <<Rectangle>>{
+
+Class Task
+Class Label
+Class Boolean
+Class Date
+Class TaskTag
+
+}
+
+Task *--> Label
+Task *--> TaskTag
+Task *--> Date
+Task *--> "isDone" Boolean
+
+Label -[hidden]right-> Date
+Date -[hidden]right-> TaskTag
+TaskTag -[hidden]right-> Boolean
+
+
+@enduml

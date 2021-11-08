@@ -5,8 +5,8 @@ import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
 
-    private static final String idPrefix = "SO";
-    private static long count = 1;
+    public static final String ID_PREFIX = "SO";
+    private static long count = 3;
 
     private final Customer customer;
     private long id;
@@ -24,10 +24,27 @@ public class Order implements Comparable<Order> {
         this.date = date;
         this.amount = amount;
         this.label = label;
-        this.id = Order.count;
         this.isComplete = false;
+    }
 
-        Order.count++;
+    /**
+     * Overloaded constructor for an {@code Order} that also initializes its {@code id}.
+     */
+    public Order(Label label, Customer customer, Date date, Amount amount, int id) {
+        this.customer = customer;
+        this.date = date;
+        this.amount = amount;
+        this.label = label;
+        this.id = id;
+        this.isComplete = false;
+    }
+
+    /**
+     * Confirms the id when the application is sure the order is valid.
+     */
+    public void confirmId() {
+        this.id = count;
+        count++;
     }
 
     public boolean getIsComplete() {
@@ -35,7 +52,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Mark an order as completed by setting isComplete to true.
+     * Marks an order as completed by setting isComplete to true.
      * @return boolean indicating whether isComplete has been changed or not.
      */
     public boolean markCompleted() {
@@ -93,7 +110,7 @@ public class Order implements Comparable<Order> {
      * @return Prefixed order id
      */
     public String getDisplayId() {
-        return idPrefix + this.id;
+        return ID_PREFIX + this.id;
     }
 
     /**
@@ -106,7 +123,7 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Returns true if both orders have the same customer, date and amount.
+     * Returns true if both orders have the same customer, date, amount and label.
      * This defines a weaker notion of equality between two orders.
      */
     public boolean isSameOrder(Order otherOrder) {
@@ -130,7 +147,7 @@ public class Order implements Comparable<Order> {
         } else {
             builder.append("[ ] ");
         }
-        builder.append("ID: " + idPrefix)
+        builder.append("ID: " + ID_PREFIX)
                 .append(getId())
                 .append("; Label: ")
                 .append(getLabel())
@@ -144,7 +161,7 @@ public class Order implements Comparable<Order> {
         return builder.toString();
     }
 
-    // Required for OrderList to check if an Order exists, before marking it.
+    // Required for UniqueOrderList to check if an Order exists, before marking it.
     @Override
     public boolean equals(Object other) {
         if (other == this) {

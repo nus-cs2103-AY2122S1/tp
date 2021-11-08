@@ -30,8 +30,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-*  Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Application logo - Copyright by **[yupiramos](https://www.canva.com/media/MADeEQ5DO1Y)**
+* Adapted code - [`formatTotalColumn`](https://stackoverflow.com/a/34924734/13896417) and [`setCloseOnEsc`](https://stackoverflow.com/a/42104595/13896417)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -119,11 +120,11 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a client).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("deletetask 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+![Interactions Inside the Logic Component for the `deletetask 1` Command](images/DeleteTaskSequenceDiagram.png)
+    
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -137,26 +138,30 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W08-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="550" />
 
+Class Diagram of the `Person`'s entity:
+
+<img src="images/PersonClassDiagram.png" />
+
+Class Diagram of the `Task`'s entity:
+
+<img src="images/TaskClassDiagram.png" />
+
+Class Diagram of the `Order`'s entity:
+
+<img src="images/OrderClassDiagram.png" />
 
 The `Model` component,
 
-* ModelManager class stores these four components.
+* stores these three types of data in SalesNote
   * Address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-  * Task book data i.e., all `Tasks` objects (which are contained in a `TaskList` object).
-  * Order book data i.e., all `Orders` objects (which are contained in a `OrderList` object).
-  * `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+  * Task book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
+  * Order book data i.e., all `Order` objects (which are contained in a `UniqueOrderList` object).
 
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person`, `Tasks`, and `Orders` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>`, `ObservableList<Task>` and `ObservableList<Order>` respectively  that can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `SalesNote`, which `Person` references. This allows `SalesNote` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -164,80 +169,20 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
-The `Storage` component,
-* can save address book data, task book data, sales order book data
+How the Storage component works:
+* Saves address book data, task book data, sales order book data
   and user preference data in json format, and read them back into corresponding objects.
-* inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
+* The main storage class inherits from all of `AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`,
   and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
-
+* Each Book Storage component (`AddressBookStorage`, `TaskBookStorage`, `OrderBookStorage`) has a `JsonSerializable` class which is in charge of converting the model's data into correct json file and retrieving the data from 
+  the json file to convert it to a model data.
+* Each `JsonSerializable` class implements its own `JsonAdapted` class which specifies methods to convert model Object
+  (i.e `Person`, `Task`, `Order`) into json object and vise versa. 
+* The `JsonSerializable` class and `JsonAdapted` class also checks the correctness of the json files format, and in the 
+  case when any of the format is wrong, it will then throw a `DataConversionException` and  `IllegalValueException`
 ### Common classes
 
-Classes used by multiple components are in the `seedu.salesnote.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-## **Implementation - Shawn **
-
-(this division and header is temporary; and is just to demarcate my part of the DG update for this week's requirement)
-
-###`task` and `order` package
-This section describes the implementation of the `task` and `order` packages in the application. These two packages are 
-similar in functionality to the `person` package, now allowing the user to track tasks and orders. Below is a diagram
-showing the partial implementation of these packages in the application:
-
-![`Updated Model Diagram`](images/UpdatedModelClassDiagram.png)
-
-`OrderList` and `TaskList` manage `Order` and `Task` objects, in the same way a `UniquePersonList` manages `Person`
-objects, and there are a few significant points about this implementation.
-
-The first is the distinction between the `Person` class, and the `Customer` class. Since every order is made by 
-a customer, and the `Person` class is used to track customers, we initially considered linking the two classes, and tying
-every `Order` to a `Person`. However, the issue with this is that we did not want deleting of a `Person` to affect 
-sales records, which should continue to show all completed orders. We thus decided instead to create the `Customer` 
-class which essentially serves as a field for the `Order` class, implementing validity checks for the input, similar to 
-how the `Name` field works for the `Person` class.
-
-The next note is that a `UniquePersonList` has a `AddressBook` wrapper that contains other functionalities needed in
-the application (e.g. storage related functions). Our Implementation intends to mirror this with a `TaskBook` and 
-`OrderBook` wrapper around `TaskList` and `OrderList` respectively, but this was not handled by me, and hence these 
-were omitted from the diagram above.
-
-Finally, as mentioned partially above, the `Amount` `Customer` `Date` and `Label` classes are what handle checking the 
-validity of fields, similar to the implementation in the associated classes for Person, and also respect a whole-part 
-relationship. The validity checking in all cases was implemented using regular expressions, and they respect the
-following guarantees:
-
-`Amount` Begins with 1 or more numbers, followed optionally by a block that consists of a '.' followed by 1 or 2 numbers.
-
-`Customer` Blocks of 1 or more alphanumeric characters, separated by at most one space.
-
-`Date` `Label` Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
-length for both fields, and would guarantee the UI display worked the way we intended.'
-
-### Addressing feature flaws
-
-A small and related task I addressed was input validation for customers, and adjusting the way we treated equality 
-between person objects. The original AB3 treated two people as equal only if their names were spelt exactly the same, 
-with this being case-sensitive. When we discussed this as a group, we decided that multiple clients having the exact same name was rare
-enough that this notion of equality made sense. However, we felt it should apply regardless of case, i.e. john doe 
-should be recognised as the same person as JOHN DOE. I updated the implementation to take care of this, and also changed
-the input validation for `Name` to allow at most one space between blocks of characters.
-
-### Implementing commands
-
-Lastly, I implemented several commands related to the `Task` and `Order` classes. These are fairly self-explanatory, 
-and their implementation closely mirrors that of similar commands for the `Person` class. The exception is the marktask
-and markorder commands, which allow the user to mark tasks and orders as completed. The list of implemented commands
-is below:
-
-* addtask
-* deletetask
-* listtasks
-* marktask
-* markorder
-
-
-
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -245,106 +190,218 @@ is below:
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Sort orders by amount feature
+### Task and Order Package
+
+#### Implementation
+The implementation of both of these packages is largely similar to the `person` package. In the original AB3, there is a
+`person` class, stored in a `UniquePersonList` that handles list operations, further stored in a `AddressBook` that handled
+other utility functions like data management.
+
+Following this structure and outline, we had a `task` class, stored in a `UniqueTaskList` stored in a `TaskBook`, and a
+`order` class, stored in a `UniqueOrderList` stored in a `OrderBook`. Below is an updated model diagram reflecting these
+changes:
+
+![`Updated Model Diagram`](images/ModelClassDiagram.png)
+
+Similar to the `Person` class, the `Task` and `Order` classes have fields, as seen here:
+
+![`Order Class Diagram`](images/OrderClassDiagram.png)
+
+![`Task Class Diagram`](images/TaskClassDiagram.png))
+
+These fields satisfy the following conditions:
+* Both:
+    * `Date`, `Label`: Nonempty block of alphanumeric characters of length at most 100 characters. We felt this was a reasonable
+      length for both fields, and would guarantee the UI display worked the way we intended.
+* Task:
+    * `TaskTag`: This is a tag that is either `General`, or `SO{ID}` where `ID` is the `Id` field of some `Order` object.
+    * `isDone`: Boolean flag to indicate whether or not the task is done.
+
+* Order:
+    * `Amount` Accepts any string that can be parsed by Double.parseDouble(), that results in a non-negative real number.
+      Represents the amount the user charges for a given `Order`
+    * `Customer` Blocks of 1 or more alphanumeric characters, separated by at most one space. Represents the `Person` the order
+      is addressed to.
+    * `id` Long used to uniquely identify `Order` objects. In this case, we did not deal with potential overflow given that
+      the range of a Long in Java is up to 2^63 (which is > 10^18!). We judged that this should be more than sufficient for
+      any realistic use of the application.
+    * `isComplete`: Boolean flag to indicate when the `Order` is complete, and payment has been received.
+
+Something alluded to in the fields above, is that there are implicit dependencies between the `Task`, `Order`, and `Person` classes.
+To add an `Order` to SalesNote, we decided it made the most sense for there to already be a `Person` in the application
+the `Order` was addressed to. So for instance, to add an order from a client named `Jamie Tan`, the user would need to ensure
+that a `Person` with `Name` `Jamie Tan` existed in the application first.
+
+Another link we thought would make sense to allow for, was to make it possible to tie a `Order` object to related `Task` objects.
+`Task` objects were meant to help users manage their work, and so we felt there should be a way for a user to relate a `Task`
+to a specific `Order` if they wanted to.
+
+In both of these cases, we did not link the classes directly, hence there is no arrow between the `Order` and `Person` class
+and no arrow between the `Order` and `Task` class in the diagram above. Instead we simply made use of the fact that SalesNote
+maintains both a `UniquePersonList` and a `UniqueOrderList`. To relate a `Order` to a `Person`, it is enough to remember the
+`Name` field (in `UniquePersonList`, two `Person` objects with the same `Name` are considered equal). To relate a `Task` to
+a `Order`, we can make use of the fact that `Order` objects have unique `id` fields.
+
+##### Design choices
+A very reasonable alternative one might consider is linking the classes directly. For instance, allowing a `Person`, to
+have a list of `Order` objects related to the `Person`, and a `Order`, to have a list of `Task` objects related to the `Order`.
+This was an alternative method we considered, that would come with a cost in complexity by relating the `Person`,
+`Task` and `Order` objects. We felt that the method we chose that made use of the `UniqueXList` properties and kept the
+classes more distinct better adhered to the Separation of concerns and Law of Demeter principle.
+
+#### Updating related fields in Person class
+In implementing the fields for the `Task` and `Order` object and considering possible feature flaws, we decided to update
+the fields for the `Person` class as well. The original AB3 treated two people as equal only if their names were spelt exactly
+the same, with this being case-sensitive. We decided that multiple clients having the exact same name was rare
+enough that this notion of equality made sense, however, we felt it should apply regardless of case, i.e. a `Person` with `Name` `john doe`
+should be recognised as the same a `Person` with `Name` `JOHN DOE`.
+
+We updated the equality check to account for this, and also updated the input validation for `Name` to allow at most one
+space between blocks of characters (previously `John   Doe` would be different from `John Doe`. We felt this likely to be
+a mistake and should be avoided).
+
+### Add Order feature
+As mentioned above, to add an `Order`, the `Person` the `Order` is addressed to should already be in `SalesNote`. The
+following is a sequence diagram showing the execution of the command:
+
+![AddOrderSequenceDiagram](images/AddOrderSequenceDiagram.png)
+Focusing on after `AddOrderCommand:execute` is called,
+
+1. First the application calls `model:hasOrder(toAdd)` to check if `toAdd` is already in the model.
+2. Next, the application calls `model:hasPersonWithName(toAdd.getCustomer.getName())` to check if the `Person` the `Order`
+   is addressed to is already in the application
+4. If both checks pass, the application finally calls `model:addOrder(toAdd)` to add the `Order`.
+
+Note that in the diagram above, the "else" clause for the `alt` boxes have been omitted for brevity. If either check fails, 
+an exception is thrown and an error is displayed back to the user. 
+
+Here is an activity diagram to more clearly illustrate the logic of the application:
+![AddOrderActivityDiagram](images/AddOrderActivityDiagram.png)
+
+#### Result
+An Order can only be added to SalesNote if the `Person` it is addressed to is already in SalesNote, and the `Order`
+is unique and does not duplicate an existing `Order` object in SalesNote.
+
+### Update Person Changes in Order List and Task List
+
+Other commands where the relationships between the `Order`, `Person` and `Task` classes comes up is in
+editing and deletion of clients. We wanted to achieve the following:
+
+* When a client is deleted, their orders and the tasks linked to the orders will be deleted as well.
+* When a client name is modified, this change will be updated in their existing orders.
+
+#### Execution
+
+The sequence diagram below shows the interaction within the Logic component for a delete command is executed.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+1. `DeleteCommand::execute` is called and deletes the client from the list.
+2. Related orders are obtained by matching the client's name and the customer of the existing orders.
+3. Tasks linked to the orders and the orders themselves are deleted.
+
+![Interactions Inside the Logic Component for the `edit 1 n/[new name]` command ](images/EditSequenceDiagram.png)
+
+1. `EditCommand::execute` is called and the client's details are modified.
+2. Related orders are obtained by matching the client's **old** name and the customer of the existing orders.
+3. The related orders' customer's name are updated.
+
+#### Result
+The changes in person objects are updated in their order and task objects.
+
+### Other related commands
+Note that similar considerations are addressed in the following commands:
+* `DeleteOrderCommand` where `Task` objects related to the deleted `Order` is also deleted.
+  
+* `AddTaskCommand` `EditTaskCommand` where if the user attempts to tag a `Task` to a `Order`, SalesNote first checks if the
+`Order` already exists. 
+  
+We have omitted these as their implementation concerns are largely similar to the two above that we have already presented.
+
+### Sort Order Feature
 
 #### Implementation
 
-The feature sorts all the orders in the addressbook by their amount in descending order. 
+By default, orders are sorted in ascending order of their `id`. 
+This arrangement is also followed when SalesNote starts up or the `listorders` command is executed.
 
-To ensure that the orders can be sorted, both `Order` and its attribute `Amount` implement the `Comparable` interface. 
-Order uses its `id` field to produce the default ordering of the `OrderList`. 
+The `sortorders` command sorts the orders in the `OrderBook` based on a field and an ordering specified by the user.
 
-{to be completed}
+The field is represented using the `SortFieldType` enumeration which is encapsulated as a `SortField` object.
+Currently, SalesNote supports sorting by the following fields, which have been adapted to implement the `Comparable` interface:
+1. `Amount` - Represented by `SortFieldType.AMOUNT`
+2. `Date` - Represented by `SortFieldType.DATE`
 
+The ordering is represented using the `SortOrderingType` enumeration which is encapsulated as a `SortOrderingType` object. SalesNote supports sorting in: 
+1. Ascending order - Represented by `SortOrderingType.ASCENDING`
+2. Descending order - Represented by `SortOrderingType.DESCENDING`
+
+
+The class structure of the feature is shown in the diagram below:
+
+![SortOrdersCommandClassDiagram](images/SortOrdersCommandClassDiagram.png)
+
+Orders are sorted using the `SortDescriptor`, which implements the `Comparator<Order>` interface.
+Its `compare` method uses the `SortField` and `SortOrdering` to compare orders based on the user specified arrangement.
+
+#### Usage
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `parseCommand("sortorder f/a o/asc")` API call. 
+Details about tokenizing the user input to retrieve the field and ordering have been omitted.
+
+![SortOrdersParserSequenceDiagram](images/SortOrdersParserSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortOrdersCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+When the `SortOrderCommand` is executed, the following interactions take place in the `Logic` and the `Model` components.
+
+![SortOrdersModelSequenceDiagram](images/SortOrdersModelSequenceDiagram.png)
+
+After the `OrderBook` has been sorted by the amount field in ascending order, 
+
+1.  The `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`.
+2.  A `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
+3.  The UI proceeds to display the sorted list of orders.
+
+#### Design choices
+
+* **Alternative 1 (current choice):**  Mutating the `OrderList`.
+    * Pros: Allows the sorting functionality to be less coupled with the `FilteredList` of orders.
+      * This allows the user the flexibility to combine various filtering and sorting commands.
+      * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
+    * Cons: Commands that mutate the list might disrupt the ordering of the sorted list. 
+      * For instance, adding an `Order` to an `OrderBook` simply appends it
+        at the end of the `OrderList`. Thus, the `OrderBook` needs to be reverted to its default arrangement by calling `ModelManager.resetOrderView()` whenever an order is added.
+      * Note that this is not a concern for the `markorder` and `deleteorder` commands since they do not disrupt the ordering of the list.
+* **Alternative 2:** Wrapping the `FilteredList` around the `SortedList`. 
+    * Pros: 
+      * Maintains the immutability of the order list. 
+      * Ensures that the sorting arrangement is always preserved, even when another command e.g. `addorder` mutates the underlying list.
+    * Cons: More difficult to implement since it entails more coupling with the `FilteredList` of orders.
+    
 ### Display client's total orders feature
 
-#### Implementation
+The feature displays the total orders for all clients except those without orders in a new window. 
+Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`.
 
-The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`. 
+Similar to `help` and `exit`, `CommandResult` has a dedicated `boolean` field to indicate whether the command is a 
+`totalorders` command. There is also a dedicated method to handle `totalorders` command in `MainWindow` class.
+By calling this method, the data of total orders is reloaded similar to loading other data (`Client/Task/Order`) in the Main Window, i.e. 
+through the `Logic` component. After reloading data, that method shows or focuses the total orders window similar to that of the 
+help window.
 
-### \[Proposed\] Undo/redo feature
+#### Execution
 
-#### Proposed Implementation
+The sequence diagram below shows the interaction within the `UI` component when a `totalorders` command is executed.
 
-The proposed undo/redo mechanism is facilitated by `VersionedSalesNote`. It extends `SalesNote` with an undo/redo history, stored internally as an `salesNoteStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+![Interactions Inside the UI Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram0.png)
 
-* `VersionedSalesNote#commit()` — Saves the current address book state in its history.
-* `VersionedSalesNote#undo()` — Restores the previous address book state from its history.
-* `VersionedSalesNote#redo()` — Restores a previously undone address book state from its history.
+The sequence diagram below shows the interaction within the `Logic` component when the `UI` component calls 
+`execute("totalorders")`. Note that there is no need to have a `TotalOrdersCommandParser`. This is because the 
+`SalesNoteParser` can directly create and return a `TotalOrdersCommand`, similar to that of `help` and `exit` commands.  
 
-These operations are exposed in the `Model` interface as `Model#commitSalesNote()`, `Model#undoSalesNote()` and `Model#redoSalesNote()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedSalesNote` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitSalesNote()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `SalesNoteStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitSalesNote()`, causing another modified address book state to be saved into the `SalesNoteStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitSalesNote()`, so the address book state will not be saved into the `SalesNoteStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoSalesNote()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial SalesNote state, then there are no previous SalesNote states to restore. The `undo` command uses `Model#canUndoSalesNote()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoSalesNote()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `SalesNoteStateList.size() - 1`, pointing to the latest address book state, then there are no undone SalesNote states to restore. The `redo` command uses `Model#canRedoSalesNote()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitSalesNote()`, `Model#undoSalesNote()` or `Model#redoSalesNote()`. Thus, the `SalesNoteStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitSalesNote()`. Since the `currentStatePointer` is not pointing at the end of the `SalesNoteStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+![Interactions Inside the Logic Component for the `totalorders` Command](images/TotalOrdersSequenceDiagram1.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -417,34 +474,124 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+For the use cases that are very similar, only the differences between them have been highlighted.
+
 (For all use cases below, the **System** is the `SalesNote` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: Add a client
 
 **MSS**
 
-1. User requests to add a specific client to the list
-2. SalesNote adds the client
+1. User requests to add a specific client to the client list.
+2. SalesNote adds the client to the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The format of the request is invalid.
+* 1a. The format / details of the request are invalid.
 
-    * 1a1. SalesNote shows an error message.
-    
-      Use case ends.
+  * 1a1. SalesNote shows an error message. 
+  * 1a2. User enters a new request. 
+  * Steps 1a1-1a2 are repeated until the request is valid.
+  
+    Use case resumes from step 2.
+  
+* 2a. The client already exists in the client list
 
+  * 2a1. SalesNote shows an error message
+
+    Use case resumes from step 1.
+
+#### Use case: Add a task
+
+Analogous to the use case for [adding a client](#use-case-add-a-client).
+
+**Additional Extensions**
+
+* 2b. The tag specified for the task does not correspond to an existing sales order.
+
+  * 2b1. SalesNote shows an error message.
+
+    Use case resumes from step 1.
+
+#### Use case: Add an order
+
+Analogous to the use case for [adding a client](#use-case-add-a-client).
+
+**Additional Extensions**
+
+* 2b. The customer specified for the task does not correspond to an existing client.
+
+    * 2b1. SalesNote shows an error message.
+
+      Use case resumes from step 1.
 
 #### Use case: Delete a client
 
 **MSS**
 
-1.  User requests to list clients
-2.  SalesNote shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  SalesNote deletes the client
+1. User requests to list clients.
+2. SalesNote shows a list of clients.
+3. User requests to delete a specific client in the list.
+4. SalesNote deletes the client.
+5. SalesNote deletes the orders related to that client.
+6. SalesNote deletes the tasks related to those orders.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+  
+* 5a. No related orders found.
+
+    Use case ends.
+
+* 6a. No related tasks found.
+
+    Use case ends.
+    
+#### Use case: Delete a task
+
+**MSS**
+
+1. User requests to list tasks.
+2. SalesNote shows a list of tasks.
+3. User requests to delete a specific task in the list.
+4. SalesNote deletes the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+
+#### Use case: Delete an order
+
+**MSS**
+
+1. User requests to list orders.
+2. SalesNote shows a list of orders.
+3. User requests to delete a specific order in the list.
+4. SalesNote deletes the order.
+5. SalesNote deletes the tasks related to the order.
 
     Use case ends.
 
@@ -460,34 +607,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
     
-#### Use case: Add a task
+* 5a. No related tasks found.
+
+  Use case ends.
+
+#### Use case: Edit a task
 
 **MSS**
 
-1. User requests to add a specific task to the list
-2. SalesNote adds the task
+1. User requests to list tasks.
+2. SalesNote shows a list of tasks.
+3. User requests to edit the details of a specific task in the list.
+4. SalesNote edits the details of the task.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The format of the request is invalid.
+* 2a. The list is empty.
 
-    * 1a1. SalesNote shows an error message.
+  Use case ends.
+
+* 3a. The format / details of the request are invalid.
+
+    * 3a1. SalesNote shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the request is valid.
+
+      Use case resumes from step 4.
+
+* 4a. The user has not made any changes to the task details.
+
+    Use case resumes at step 3.
+
+* 4b. A task with the edited details already exists in the task list.
+
+    * 2b1. SalesNote shows an error message.
+
+      Use case resumes from step 3.
+
+
+#### Use case: Edit a client
+
+Analogous to the use case for [editing a task](#use-case-edit-a-task).
+
+**Additional Extensions**
+
+* 4c. The user edits the name of the client.
+
+    * 4d1. SalesNote updates all orders linked to the client with the new client name.
 
       Use case ends.
 
+* 4d. The user updates the gender of a client without updating their dimensions.
 
-#### Use case: Delete a task
+    * 4d1. SalesNote shows an error message.
+
+      Use case resumes from step 3.
+
+#### Use case: Find a client
 
 **MSS**
 
-1.  User requests to list tasks
-2.  SalesNote shows a list of tasks
-3.  User requests to delete a specific task in the list
-4.  SalesNote deletes the task
+1. User requests to find clients by a given keyword.
+2. SalesNote shows a list of clients whose details match at least 1 keyword.
 
-    Use case ends.
+   Use case ends.
+
+**Extensions**
+
+* 2a. None of the clients match the keyword.
+
+    * 2a1. SalesNote displays an empty client list.
+
+      Use case ends.
+
+#### Use case: Find a task
+
+Analogous to the use case for [finding a client](#use-case-find-a-client).
+
+#### Use case: Find an order
+
+Analogous to the use case for [finding a client](#use-case-find-a-client).
+
+#### Use case: Mark a task as done
+
+**MSS**
+
+1. User requests to list incomplete tasks.
+2. SalesNote shows a list of incomplete tasks.
+3. User requests to mark a specific task in the list as done.
+4. SalesNote marks the task as done.
+
+   Use case ends.
 
 **Extensions**
 
@@ -501,45 +713,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-#### Use case: Add an order
+#### Use case: Mark an order as complete
+
+Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-done).
+
+#### Use case: Sort orders
 
 **MSS**
 
-1. User requests to add a specific order to the list
-2. SalesNote adds the order
+1. User requests to list orders.
+2. SalesNote shows a list of orders.
+3. User requests to sort the orders by either the date or amount field in ascending or descending order.  
+4. SalesNote displays the sorted list of orders.
 
    Use case ends.
 
-**Extensions**
+**Extension**
 
-* 1a. The format of the request is invalid.
-
-    * 1a1. SalesNote shows an error message.
-
-      Use case ends.
-
-#### Use case: Delete an order
-
-**MSS**
-
-1.  User requests to list orders
-2.  SalesNote shows a list of orders
-3.  User requests to delete a specific order in the list
-4.  SalesNote deletes the order
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
+- 2a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The format / details of the request are invalid
 
     * 3a1. SalesNote shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the request is valid.
 
-      Use case resumes at step 2.
+      Use case resumes from step 3.
 
 
 *{More to be added}*
@@ -559,6 +760,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client**: A customer in the database, identified by their name. 
 * **Order**: A sales order from a customer scheduled for a target date.
 * **Task**: A task for the user that has a due date and a completion status.
+* **Tag**: A short string descriptor attached to a `Person` or `Task` object.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -575,40 +777,77 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file.<br>
+      Expected: Shows the GUI with sample clients, tasks and orders. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutdown
+
+   1. Shut down the app using the `exit` command.<br>
+      Expected: The app shuts down.
 
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+   1. Prerequisites: List all clients using the `listclients` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `deleteclient 1`<br>
+      Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deleteclient 0`<br>
       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete client commands to try: `deleteclient`, `deleteclient x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a client while no clients are being shown
+
+   1. Prerequisite: Use `findclients keyword` command (where keyword matches none of the clients) to display an empty list of clients.<br>
+
+   1. Test case: `deleteclient 1`<br>
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other delete client commands to try: `deleteclient`, `deleteclient x`, `...` (where x is anything)<br>
+      Expected: Similar to previous. Note that there is no valid command because the client list is empty.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisite: The folder containing the jar file contains a `data` folder.
 
-1. _{ more test cases …​ }_
+   1. Delete the `data` folder then launch the app by double-clicking the jar file.<br>
+      Expected: Shows the GUI with sample clients, tasks and orders. The window size may not be optimum.
+
+1. Dealing with corrupted data files
+
+   1. Prerequisites: The folder containing the jar file contains a `data` folder, which contains `addressBook.json`,  
+      `taskBook.json` and `salesBook.json`.
+
+   1. Test case: Corrupt the `addressBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+
+      1. Scenario: There exists at least one order, or there is at least one task tagged with an order ID.<br>
+         Expected: Shows the GUI without any data.
+
+      1. Scenario: There are no orders, and all tasks have the `General` tag.<br>
+         Expected: Shows the GUI without any clients or orders, but with previously saved tasks. 
+
+   1. Test case: Corrupt the `taskBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.<br>
+      Expected: Shows the GUI without any tasks, but with previously saved clients and orders.
+
+   1. Test case: Corrupt the `salesBook.json` file by deleting a closing curly bracket (`}`) or any other brackets.
+
+      1. Scenario: All tasks have the 'General' tag.<br>
+         Expected: Shows the GUI with previously saved clients and tasks.
+
+      1. Scenario: There exists at least one task tagged with an order ID.<br>
+         Expected: Shows the GUI without any data.

@@ -45,7 +45,7 @@ class JsonAdaptedOrder {
      */
     public JsonAdaptedOrder(Order source) {
         id = String.valueOf(source.getId());
-        date = source.getDate().toString();
+        date = source.getDate().dateString;
         amount = source.getAmount().toString();
         customer = source.getCustomer().toString();
         isComplete = String.valueOf(source.getIsComplete());
@@ -59,7 +59,7 @@ class JsonAdaptedOrder {
      */
     public Order toModelType() throws IllegalValueException {
         if (label == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "label"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Label.class.getSimpleName()));
         }
         if (!Label.isValidLabel(label)) {
             throw new IllegalValueException(Label.MESSAGE_CONSTRAINTS);
@@ -108,7 +108,7 @@ class JsonAdaptedOrder {
         } else if (isComplete.equals("false")) {
             // intentionally allow fall through
         } else {
-            throw new IllegalValueException("Something is wrong");
+            throw new IllegalValueException("isComplete field is not in the correct format");
         }
 
         return newOrder;

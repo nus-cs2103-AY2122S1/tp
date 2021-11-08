@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SortOrdersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.sort.SortField;
 import seedu.address.model.sort.SortOrdering;
 
@@ -30,7 +31,10 @@ public class SortOrdersCommandParser implements Parser<SortOrdersCommand> {
         SortField sortField = ParserUtil.parseSortField(argMultimap.getValue(PREFIX_SORT_FIELD).get());
         SortOrdering sortOrdering = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_SORT_ORDERING)
                 .orElse("ascending"));
-        return new SortOrdersCommand(sortField, sortOrdering);
+
+        SortDescriptor sortDescriptor = new SortDescriptor(sortField, sortOrdering);
+
+        return new SortOrdersCommand(sortDescriptor);
     }
 
     /**

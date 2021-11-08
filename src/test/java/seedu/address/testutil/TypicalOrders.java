@@ -17,11 +17,15 @@ import seedu.address.model.order.Order;
 public class TypicalOrders {
 
     public static final Order SALESORDER1 = new OrderBuilder().withCustomer("Josh")
-            .withDate("2021-09-18").withAmount("10").withLabel("testorder1").withId(1).build();
+            .withDate("2021-09-18").withAmount("10").withId(1).withLabel("testorder1").withIsComplete(true).build();
     public static final Order SALESORDER2 = new OrderBuilder().withCustomer("Mac")
-            .withDate("2021-09-19").withAmount("15").withIsComplete(true).withId(2).withLabel("testorder2").build();
+            .withDate("2021-09-19").withAmount("20").withId(2).withIsComplete(true).withLabel("testorder2").build();
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
-            .withDate("2021-09-20").withAmount("20").withIsComplete(true).withId(3).withLabel("testorder3").build();
+            .withDate("2021-09-20").withAmount("15").withId(3).withIsComplete(true).withLabel("testorder3").build();
+    public static final Order SALESORDER4 = new OrderBuilder().withCustomer("Justin").withLabel("testorder4")
+            .withDate("2021-09-20").withAmount("20").withId(4).build();
+    public static final Order SALESORDER5 = new OrderBuilder().withCustomer("Stuart").withLabel("testorder5")
+            .withDate("2021-09-20").withAmount("5").withId(5).withIsComplete(false).build();
 
     // Manually added - Order's details found in {@code CommandTestUtil}
     public static final Order ORDER1 = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
@@ -34,14 +38,14 @@ public class TypicalOrders {
      */
     public static OrderBook getTypicalOrderBook() {
         OrderBook sb = new OrderBook();
-        for (Order order : getTypicalOrder()) {
+        for (Order order : getTypicalOrders()) {
             sb.addOrder(order);
         }
         return sb;
     }
 
-    public static List<Order> getTypicalOrder() {
-        return new ArrayList<>(Arrays.asList(SALESORDER1, SALESORDER2, SALESORDER3));
+    public static List<Order> getTypicalOrders() {
+        return new ArrayList<>(Arrays.asList(SALESORDER1, SALESORDER2, SALESORDER3, SALESORDER4, SALESORDER5));
     }
 
 }

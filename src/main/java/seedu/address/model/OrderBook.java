@@ -2,13 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
-
+import seedu.address.model.order.UniqueOrderList;
 
 
 /**
@@ -17,7 +19,7 @@ import seedu.address.model.order.OrderList;
  */
 public class OrderBook implements ReadOnlyOrderBook {
 
-    private final OrderList orders;
+    private final UniqueOrderList orders;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,7 +29,7 @@ public class OrderBook implements ReadOnlyOrderBook {
      *   among constructors.
      */
     {
-        orders = new OrderList();
+        orders = new UniqueOrderList();
     }
 
     public OrderBook() {}
@@ -48,6 +50,22 @@ public class OrderBook implements ReadOnlyOrderBook {
         this.orders.setOrders(orders);
     }
 
+    /**
+     * Updates the orders matching the predicate, according to the given function.
+     */
+    public void updateOrders(Predicate<Order> pred, Function<Order, Order> f) {
+        ArrayList<Order> newList = new ArrayList<Order>();
+        for (Order order : orders) {
+            if (pred.test(order)) {
+                // if it matches predicate, replace it by applying the given function
+                newList.add(f.apply(order));
+            } else {
+                // else retain it.
+                newList.add(order);
+            }
+        }
+        this.setOrders(newList);
+    }
 
     /**
      * Resets the existing data of this {@code OrderBook} with {@code newData}.
@@ -67,6 +85,10 @@ public class OrderBook implements ReadOnlyOrderBook {
 
     public void deleteOrder(Order toDelete) {
         orders.remove(toDelete);
+    }
+
+    public void deleteOrderIf(Predicate<Order> pred) {
+        orders.removeIf(pred);
     }
 
     public boolean markOrder(Order order) {

@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ORDERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_INCOMPLETE_ORDERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,11 +19,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -101,6 +105,21 @@ public class EditCommand extends Command {
             }
             throw new CommandException(response);
         }
+
+        // at this point, we are certain the person is a valid person to add. What remains is to edit orders
+        // in the application to match this person.
+        ObservableList<Order> relatedOrders = model.getOrderBook().getOrderList()
+                .filtered(order -> order.getCustomer().getName().equalsIgnoreCase(personToEdit.getName().fullName));
+
+        for (Order order : relatedOrders) {
+            order.getCustomer().setName(editedPerson.getName().fullName);
+        }
+
+        // and we need to refresh the orderList to have it display properly. This was the easiest way I could find
+        // to properly refresh the list; if I don't switch the predicate; for some reason the cards wont update properly
+        // if you continually edit the clients name.
+        model.updateFilteredOrderList(PREDICATE_SHOW_INCOMPLETE_ORDERS);
+        model.updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_SEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_ORDER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_SEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.address.logic.commands.EditTaskCommand.MESSAGE_DUPLICATE_TASK;
 import static seedu.address.logic.commands.EditTaskCommand.MESSAGE_NO_CHANGES_MADE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
@@ -75,12 +77,43 @@ public class EditTaskCommandTest {
     }
 
     @Test
+    public void execute_filteredList_success() {
+        showTaskAtIndex(model, Index.fromOneBased(4));
+
+        Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task edited = new TaskBuilder(taskInFilteredList).withLabel(VALID_LABEL_SEW).build();
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK,
+                new EditTaskDescriptorBuilder().withLabel(VALID_LABEL_SEW).build());
+
+        String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, edited);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new TaskBook(model.getTaskBook()), new OrderBook(model.getOrderBook()),
+                new UserPrefs());
+        expectedModel.setTask(model.getFilteredTaskList().get(0), edited);
+
+        assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_duplicateTaskUnfilteredList_failure() {
         Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(firstTask).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_SECOND_TASK, descriptor);
 
         assertCommandFailure(editTaskCommand, model, MESSAGE_DUPLICATE_TASK);
+    }
+
+    @Test
+    public void execute_duplicateFilteredList_failure() {
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+
+        // edit task in filtered list into a duplicate in task book
+        Task taskInList = model.getTaskBook().getTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK,
+                new EditTaskDescriptorBuilder(taskInList).build());
+
+        assertCommandFailure(editTaskCommand, model, EditTaskCommand.MESSAGE_DUPLICATE_TASK);
     }
 
     @Test
@@ -105,6 +138,24 @@ public class EditTaskCommandTest {
     public void execute_invalidTaskIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withLabel(VALID_LABEL_ORDER).build();
+        EditTaskCommand editTaskCommand = new EditTaskCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(editTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of task book
+     */
+    @Test
+    public void execute_invalidIndexFilteredList_failure() {
+        showTaskAtIndex(model, INDEX_FIRST_TASK);
+        Index outOfBoundIndex = INDEX_SECOND_TASK;
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withLabel(VALID_LABEL_ORDER).build();
+
+        // ensures that outOfBoundIndex is still in bounds of task book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTaskBook().getTaskList().size());
+
         EditTaskCommand editTaskCommand = new EditTaskCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
