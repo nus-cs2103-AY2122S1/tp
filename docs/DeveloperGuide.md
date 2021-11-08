@@ -544,6 +544,7 @@ testers are expected to do more *exploratory* testing.
   Prerequisite: List the archived persons
 
 Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Must have at least one group in the list.
+
 1. Test case: `person 3 /list`<br>
   Expected: View list of all persons in the third group who are not archived
 2. Test case: `group 2 /list`<br>
@@ -551,15 +552,37 @@ Prerequisites: Be in a list of groups. They can be subgroups or supergroups. Mus
 3. Test case: `person 0 /list `<br>
   Expected: No change in list display. Error details shown in the status message.
 
-### Find Commands
+### Finding a person
+
+Prerequisites: Be in person list. Must have at least one person in the list.
+
 1. Test case: `person /find n:John t:AI `<br>
   Expected: Display all people who's names include 'John' tagged with the specific tag 'AI'.
 2. Test case: `person /find` <br>
   Expected: Display an error message as no parameters were provided.
 
+
+### Finding a group
+
+Prerequisites: List all groups using the `group /list` command. Multiple groups in the list.
+
+1. Test case: `Group /find n:Orbital `<br>
+   Expected: Display all groups that have names that include 'Orbital'.
+2. Test case: `Group /find` <br>
+   Expected: Display an error message as no parameters were provided.
+
+
+### Finding a subgroup in a group
+
+Prerequisites: List all subgroups in a group using the `group x /list` command, where x is the index of a group.
+Must have at least one subgroup in the list.
+
+1. Similar to **Finding a group** except that all subgroups in a group is listed.
+
+
 ### Deleting a person
 
-1. Prerequisites: Be in person list. Must have at least one person in the list.
+Prerequisites: Be in person list. Must have at least one person in the list.
 
 1. Test case: `person 1 /delete`<br>
    Expected: First contact is deleted from the list. Details of the deleted person shown in the status message.
@@ -684,7 +707,22 @@ Must have at least one person in the list.
 
 1. Other incorrect delete commands to try: `p /note`, `p x /note`, `...` (where x is larger than the list size)<br>
   Expected: Similar to previous.
+   
+### Adding note to a group
 
+Prerequisites: List all groups using the `group /list` command or already in group list.
+Must have at least one group in the list.
+
+1. Similar to **Adding note to a person** except that group is listed, and group note command is used.
+
+### Adding note to a subgroup in a group
+
+Prerequisites: List all subgroups in a group using the `group x /list` command, where x is the index of a group. 
+Must have at least one subgroup in the list.
+
+1. Similar to **Adding note to a person** except that all subgroups in a group is listed,
+   and group note command is used.
+   
 ### Clearing note of a person
 
 Prerequisites: List all persons using the `person /list` command or already in person list.
@@ -701,6 +739,22 @@ Prerequisites: List all persons using the `person /list` command or already in p
 1. Other incorrect delete commands to try: `p /clearnote`, `p x /clearnote`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
+### Clearing note of a group
+
+Prerequisites: List all groups using the `group /list` command or already in group list.
+Must have at least one group in the list.
+
+1. Similar to **Clearing note of a person** except that group is listed, and group clear note command is used.
+
+### Clearing note of a subgroup in a group
+
+Prerequisites: List all subgroups in a group using the `group x /list` command, where x is the index of a group.
+Must have at least one subgroup in the list.
+
+1. Similar to **Clearing note of a person** except that all subgroups in a group is listed,
+   and group note command is used.
+   
+   
 ### Tagging a person
 
 {Todo...}
