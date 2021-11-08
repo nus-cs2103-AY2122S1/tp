@@ -1,0 +1,65 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="0" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="10" right="15" bottom="10" left="15" />
+            </padding>
+
+            <GridPane>
+                <children>
+                    <HBox alignment="BASELINE_LEFT"  GridPane.columnIndex="0" spacing="4">
+                        <Label fx:id="id" styleClass="cell_big_label">
+                            <minWidth>
+                                <!-- Ensures that the label text is never truncated -->
+                                <Region fx:constant="USE_PREF_SIZE" />
+                            </minWidth>
+                        </Label>
+                        <Label fx:id="recipeName" wrapText="true" styleClass="cell_big_label" text="\$recipe name" />
+                        <Label fx:id="orderQuantity" wrapText="true" styleClass="cell_big_label" text="x $qty">
+                            <minWidth>
+                                <!-- Ensures that the label text is never truncated -->
+                                <Region fx:constant="USE_PREF_SIZE" />
+                            </minWidth>
+                        </Label>
+                        <Label fx:id="orderPrice" wrapText="true" minWidth="175" styleClass="cell_big_label" text="- $price">
+                            <minWidth>
+                                <!-- Ensures that the label text is never truncated -->
+                                <Region fx:constant="USE_PREF_SIZE" />
+                            </minWidth>
+                        </Label>
+                    </HBox>
+
+                    <HBox alignment="TOP_RIGHT" GridPane.columnIndex="1">
+                        <Label fx:id="orderDeadline" wrapText="true" styleClass="order-deadline" text="\$deadline"/>
+                        <SVGPath fx:id="orderIsFinished" styleClass="order-tick-mark" scaleX="0.5" scaleY="0.5" />
+                    </HBox>
+                </children>
+
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="65.0"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="35.0"/>
+                </columnConstraints>
+            </GridPane>
+
+            <Label text="Ingredients" wrapText="true" styleClass="cell_small_label_header"/>
+            <Label fx:id="recipeIngredients" wrapText="true" styleClass="cell_small_label"/>
+            <Label text="Client Details" wrapText="true" styleClass="cell_small_label_header"/>
+            <Label fx:id="clientName" wrapText="true" styleClass="cell_small_label" text="\$client name" />
+            <Label fx:id="clientPhone" wrapText="true" styleClass="cell_small_label" text="\$client phone" />
+            <Label fx:id="clientAddress" wrapText="true" styleClass="cell_small_label" text="\$client address" />
+        </VBox>
+    </GridPane>
+</HBox>

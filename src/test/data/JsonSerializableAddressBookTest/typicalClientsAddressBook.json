@@ -1,0 +1,284 @@
+{
+  "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
+  "clients" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111"
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25"
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street"
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street"
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave"
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo"
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street"
+  } ],
+  "ingredients": [ {
+    "ingredientName": "Avocado",
+    "quantity": "5",
+    "unit": "whole"
+  }, {
+    "ingredientName": "Bread",
+    "quantity": "1000",
+    "unit": "slice"
+  }, {
+    "ingredientName": "Butter",
+    "quantity": "550",
+    "unit": "grams"
+  }, {
+    "ingredientName": "Chicken",
+    "quantity": "10",
+    "unit": "whole"
+  }, {
+    "ingredientName": "Dark Chocolate",
+    "quantity": "300",
+    "unit": "grams"
+  }, {
+    "ingredientName": "Fish",
+    "quantity": "20",
+    "unit": "whole"
+  }, {
+    "ingredientName": "Flour",
+    "quantity": "4",
+    "unit": "kg"
+  }, {
+    "ingredientName": "Ginger",
+    "quantity": "8",
+    "unit": "whole"
+  }, {
+    "ingredientName": "Kaya",
+    "quantity": "1000",
+    "unit": "grams"
+  }, {
+    "ingredientName": "Noodles",
+    "quantity": "4000",
+    "unit": "grams"
+  }, {
+    "ingredientName": "Prawn",
+    "quantity": "200",
+    "unit": "whole"
+  }, {
+    "ingredientName": "Rice",
+    "quantity": "5000",
+    "unit": "grams"
+  } ],
+  "orders": [ {
+    "clientPhone": "94351253",
+    "clientName": "Alice Pauline",
+    "clientAddress": "123, Jurong West Ave 6, #08-111",
+    "recipeName" : "Chicken Rice",
+    "recipeIngredients" : [ {
+      "quantity" : "1",
+      "unit" : "whole",
+      "name" : "Chicken"
+    }, {
+      "quantity" : "200",
+      "unit" : "grams",
+      "name" : "Rice"
+    } ],
+    "price" : "4.50",
+    "deadline" : "12-12-2021 1900",
+    "quantity" : "4",
+    "isFinished" : "yes"
+  }, {
+    "clientPhone": "98765432",
+    "clientName": "Benson Meier",
+    "clientAddress": "311, Clementi Ave 2, #02-25",
+    "recipeName" : "Nasi Lemak",
+    "recipeIngredients" : [ {
+      "quantity" : "1",
+      "unit" : "whole",
+      "name" : "Fish"
+    }, {
+      "quantity" : "200",
+      "unit" : "grams",
+      "name" : "Rice"
+    } ],
+    "price" : "5.50",
+    "deadline" : "01-01-2019 1300",
+    "quantity" : "2",
+    "isFinished" : "no"
+  }, {
+    "clientPhone": "95352563",
+    "clientName": "Carl Kurz",
+    "clientAddress": "wall street",
+    "recipeName" : "Prata",
+    "recipeIngredients" : [],
+    "price" : "6.50",
+    "deadline" : "29-02-2020 1600",
+    "quantity" : "1",
+    "isFinished" : "yes"
+  }, {
+    "clientPhone": "87652533",
+    "clientName": "Daniel Meier",
+    "clientAddress": "10th street",
+    "recipeName" : "Char kuay teow",
+    "recipeIngredients" : [ {
+      "quantity" : "200",
+      "unit" : "grams",
+      "name" : "Noodles"
+    } ],
+    "price" : "7.00",
+    "deadline" : "29-02-2024 1200",
+    "quantity" : "2",
+    "isFinished" : "no"
+  }, {
+    "clientPhone": "9482224",
+    "clientName": "Elle Meyer",
+    "clientAddress": "michegan ave",
+    "recipeName" : "Hokkien prawn mee",
+    "recipeIngredients" : [ {
+      "quantity" : "200",
+      "unit" : "grams",
+      "name" : "Noodles"
+    }, {
+      "quantity" : "20",
+      "unit" : "whole",
+      "name" : "Prawn"
+    } ],
+    "price" : "8.50",
+    "deadline" : "16-12-2021 1900",
+    "quantity" : "2",
+    "isFinished" : "yes"
+  }, {
+    "clientPhone": "9482427",
+    "clientName": "Fiona Kunz",
+    "clientAddress": "little tokyo",
+    "recipeName" : "Kaya toast",
+    "recipeIngredients" : [ {
+      "quantity" : "2",
+      "unit" : "slice",
+      "name" : "Bread"
+    }, {
+      "quantity" : "100",
+      "unit" : "grams",
+      "name" : "Kaya"
+    } ],
+    "price" : "10",
+    "deadline" : "17-12-2021 2100",
+    "quantity" : "2",
+    "isFinished" : "no"
+  }, {
+    "clientPhone": "9482442",
+    "clientName": "George Best",
+    "clientAddress": "4th street",
+    "recipeName" : "Satay",
+    "recipeIngredients" : [ {
+      "quantity" : "1",
+      "unit" : "whole",
+      "name" : "Chicken"
+    } ],
+    "price" : "10.00",
+    "deadline" : "18-12-2021 2359",
+    "quantity" : "2",
+    "isFinished" : "yes"
+  } ],
+  "recipes": [{
+    "name": "Egg Prata",
+    "price" : "2",
+    "recipeIngredients": [{
+      "name": "Egg",
+      "quantity": "2",
+      "unit": "whole"
+    }, {
+      "name": "Flour",
+      "quantity": "100",
+      "unit": "g"
+    }]
+  }, {
+    "name": "Chicken Rice",
+    "price" : "3",
+    "recipeIngredients": [{
+      "name": "Chicken",
+      "quantity": "5",
+      "unit": "cuts"
+    }, {
+      "name": "Rice",
+      "quantity": "100",
+      "unit": "g"
+    }]
+  }, {
+    "name": "Laksa",
+    "price" : "4",
+    "recipeIngredients": [{
+      "name": "Egg",
+      "quantity": "1",
+      "unit": "whole"
+    }, {
+      "name": "Noodles",
+      "quantity": "100",
+      "unit": "g"
+    }]
+  }, {
+    "name": "Pasta",
+    "price" : "4",
+    "recipeIngredients": [{
+      "name": "Egg",
+      "quantity": "1",
+      "unit": "whole"
+    }, {
+      "name": "Noodles",
+      "quantity": "100",
+      "unit": "g"
+    }, {
+      "name": "Tomato Sauce",
+      "quantity": "10",
+      "unit": "g"
+    }]
+  }, {
+    "name": "Mee Rebus",
+    "price" : "3",
+    "recipeIngredients": [{
+      "name": "Egg",
+      "quantity": "2",
+      "unit": "whole"
+    }, {
+      "name": "Noodles",
+      "quantity": "100",
+      "unit": "g"
+    }, {
+      "name": "Curry Powder",
+      "quantity": "10",
+      "unit": "g"
+    }]
+  }, {
+    "name": "Mee Goreng",
+    "price" : "4",
+    "recipeIngredients": [{
+      "name": "Egg",
+      "quantity": "2",
+      "unit": "whole"
+    }, {
+      "name": "Noodles",
+      "quantity": "100",
+      "unit": "g"
+    }, {
+      "name": "Chilli Powder",
+      "quantity": "10",
+      "unit": "g"
+    }]
+  }]
+}

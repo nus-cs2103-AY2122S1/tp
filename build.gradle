@@ -4,9 +4,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.4'
     id 'application'
     id 'jacoco'
+    id 'com.github.jakemarsden.git-hooks' version '0.0.2'
 }
 
-mainClassName = 'seedu.address.Main'
+mainClassName = 'ay2122s1_cs2103t_w16_2.btbb.Main'
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
@@ -16,8 +17,14 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '8.29'
+    ignoreFailures = false
+    maxWarnings = 0
 }
 
 test {
@@ -35,9 +42,17 @@ task coverage(type: JacocoReport) {
         })
     }
     reports {
-        html.enabled = true
-        xml.enabled = true
+        html.required = true
+        xml.required = true
     }
+}
+
+gitHooks {
+    hooks = [
+            'pre-push': 'clean check && .github/run-checks.sh'
+    ]
+    hooksDirectory = file('.git/hooks')
+    gradleCommand = './gradlew'
 }
 
 dependencies {
@@ -66,7 +81,11 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveFileName = 'btbb.jar'
+}
+
+jacoco {
+    toolVersion = "0.8.7"
 }
 
 defaultTasks 'clean', 'test'
