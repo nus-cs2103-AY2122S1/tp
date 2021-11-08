@@ -1206,7 +1206,7 @@ This use case is similar to that of <span style="text-decoration: underline">mar
 * **Graphical User Interface (GUI)**: A user interface that includes graphical representation like buttons and icons for
   users to interact with
 * **Command Line Interface (CLI)**: A text-based user interface that the user interacts with by typing in commands
-* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format.
+* **JSON** : JSON (JavaScript Object Notation) is a lightweight data-interchange format
 * **Group size regulations**: Maximum allowable group size for sporting activities as specified by Covid-19 regulations
 * **Fast typists**: Types faster than 40wpm (words per minute)
 * **Alias**: A shortcut name for any command in SportsPA
@@ -1229,7 +1229,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+    1. Double-click the jar file 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
 2. Saving window preferences
