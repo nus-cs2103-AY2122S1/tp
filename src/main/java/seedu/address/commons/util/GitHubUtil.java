@@ -39,6 +39,7 @@ public class GitHubUtil {
      * updates the response code accordingly.
      *
      * @param extension The extension of the url to go to.
+     * @return String representation of establishment of connection to website.
      */
     private static String establishConnectionForWebsite(String extension) {
         try {

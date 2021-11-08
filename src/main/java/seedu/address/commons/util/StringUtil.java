@@ -46,6 +46,10 @@ public class StringUtil {
 
     /**
      * Returns a detailed message of the t, including the stack trace.
+     *
+     * @param t used to print stack trace.
+     * @return String representation of the detailed message of the t,
+     * inlcuding the stack trace.
      */
     public static String getDetails(Throwable t) {
         requireNonNull(t);
@@ -60,6 +64,7 @@ public class StringUtil {
      * Will return false for any other non-null string input
      * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
      *
+     * @param s String representation of a zero unsigned integer.
      * @throws NullPointerException if {@code s} is null.
      */
     public static boolean isNonZeroUnsignedInteger(String s) {
@@ -79,6 +84,7 @@ public class StringUtil {
      * Will return null for any other non-null string input
      * e.g. empty string, "-1", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
      *
+     * @param s String representation of an integer.
      * @throws NullPointerException if {@code s} is null.
      */
     public static Integer getInt(String s) {
@@ -91,10 +97,24 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Replaces the prefixes with an empty string.
+     *
+     * @param s String to be cleaned.
+     * @return Cleaned version of the string.
+     */
     public static String clean(String s) {
         return s.strip().replaceAll("[\n|\r|\"|\f|\b|']", "").replaceAll(multiSpace, " ").strip();
     }
 
+    /**
+     * Replaces any instance of {@code toRemove} in {@code s}
+     * with an empty string.
+     *
+     * @param s String to e cleaned.
+     * @param toRemove String to look for in s.
+     * @return Cleaned version of the string.
+     */
     public static String clean(String s, String toRemove) {
         return clean(s).replaceAll(toRemove, "").strip();
     }
