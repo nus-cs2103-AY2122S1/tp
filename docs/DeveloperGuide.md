@@ -10,7 +10,7 @@ title: Developer Guide
     * [Logic component](#logic-component)
     * [Model component](#model-component)
     * [Storage component](#storage-component)
-    * [Command classes](#common-classes)
+    * [Common classes](#common-classes)
 
 * [Implementation](#implementation)
     * [Tags](#tags)
@@ -31,7 +31,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* [Opencsv](http://opencsv.sourceforge.net/) is used when creating the CSV file in `mailingList` comman-d.
+* [Opencsv](http://opencsv.sourceforge.net/) is used when creating the CSV file in `mailingList` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -439,6 +439,8 @@ Step 1. On app startup, contacts with a birthday are sorted by birth month and d
 Step 2. The `BirthdayReminderListPanel` in CONNECTIONS' `UI` displays birthday reminders in sorted order, starting with the earliest upcoming birthday to the latest upcoming birthday for the year, after which displays birthdays that have passed for the current year in sorted order.
 
 Step 3. The user executes `add n/person3 b/01012000 …​` to add a new contact. 
+
+<div style="page-break-before: always;"></div>
 
 Step 4. CONNECTIONS will store the new contact. The `ObservableList<Person> birthdayReminders` for `BirthdayReminderPanelList` will be updated to include the new contact, ensuring the birthday reminder list remains sorted as shown below. 
 
