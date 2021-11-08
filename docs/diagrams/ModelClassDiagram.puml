@@ -31,6 +31,7 @@ Package Event <<Rectangle>>{
 Class UniqueEventList
 Class Event
 Class EventName
+Class EventTime
 Class EventDate
 Class Venue
 Class Capacity
@@ -65,6 +66,7 @@ AddressBook *--> "1" UniqueEventList
 UniqueEventList -->"~*all" Event
 Event *--> EventName
 Event *--> EventDate
+Event *--> EventTime
 Event *--> Venue
 Event *--> Capacity
 Event *--> ResidentList

@@ -71,7 +71,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="700"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -116,13 +116,13 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-4/tp/blob/master/src/main/java/safeforhall/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="900" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Event` objects (which are contained in a `UniqueEventList` object).
+* stores the currently 'selected' `Person` or `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` or `ObservableList<Event>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -298,7 +298,9 @@ public boolean test(Person person) {
 }
 ```
 
-Most variables are checked against using it's respective `equals` method except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support 1. Multiple keywords matching for name and 2. Room matching by block, level and block-level.
+Most variables are checked against using their respective `equals` methods except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support:
+1. Multiple keywords matching for name and 
+2. Room matching by block, level and block-level.
 
 #### Design considerations:
 
@@ -324,9 +326,11 @@ The following activity diagram illustrates how the `AddressBook#findPerson()` me
 The command extends the `Command` class and implements `IncludeCommand#execute()` to execute the command. 
 A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
 
-When `Event#addResidentsToEvent()` is called, it calls `ResidentList#addResidentList()` to create a new 
-String `newResidents` that consists of current `Person` in the `Event` and append all the `Person` in `toAdd` to 
-this String while making sure that there is no duplicate.
+When `IncludeCommand#createEditedEvent()` is called, two methods of `Event` are invoked:
+* `Event#getCombinedDisplayString()` creates a display String with just the names of each `Person` in the combination 
+  of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate.
+* `Event#getCombinedStorageString()` creates a storage String with the full information of each `Person` in the 
+  combination of current `Person` in the Event` and all the `Person` in `toAdd` with no duplicate. 
 
 The following sequence diagram demonstrates what happens when the `IncludeCommand` is executed:
 
@@ -440,10 +444,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Actor requests to list residents
-2.  System shows a list of residents
-3.  Actor requests to delete a specific resident in the list
-4.  System deletes the resident
+1. Actor requests to list residents.
+2. System shows a list of residents.
+3. Actor requests to delete a specific resident in the list.
+4. System deletes the resident.
 
     Use case ends.
 
@@ -452,64 +456,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+
 
 * 3a. The given index is invalid.
-
     * 3a1. System shows an error message.
-
+  
       Use case resumes at step 2.
 
-**Use case: UC02 - Remind residents to take FET**
+
+**Use case: UC02 - View details of an event**
 
 **MSS**
 
-1. Actor filters residents, specifying desired FET due date.
-2. System shows the list of residents filtered.
-3. Actor requests for a list of the email addresses of the residents shown.
-4. System outputs the list email addresses.
-5. Actor sends an email to these residents to remind them to take their FET soon.
+1. Actor navigates to the `Event` tab of the application.
+2. Actor requests to view an event from the list of events.
+3. System shows the relevant information of the event and list of residents involved in the event.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. System shows an error message.
+  
+      Use case resumes at step 2.
+
+
+* 3a. The list is empty.
 
     Use case ends.
 
-**Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC03 - View residents involved in an event**
-
-**MSS**
-
-1. Actor navigates to the `events` tab of the application.
-2. Actor requests to view an event.
-3. System shows the list of residents involved in the event and their relevant personal information.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC04 - View any unvaccinated residents involved in an event**
-
-**MSS**
-
-1. Actor <u>views residents involved in an event (UC03)</u>
-2. Actor filters for unvaccinated residents.
-3. System shows the list of unvaccinated residents.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC05 - Include a resident to an event**
+**Use case: UC03 - Include a resident to an event**
 
 **MSS**
 
@@ -528,10 +506,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a2 are repeated until the residents entered are valid.
-
       Use case resumes from step 4.
 
-**Use case: UC06 - Exclude a resident from an event**
+**Use case: UC04 - Exclude a resident from an event**
 
 **MSS**
 
@@ -550,10 +527,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a3. Hall admin enters new data.
 
       Steps 3a1-3a3 are repeated until the residents entered are valid.
-
+  
       Use case resumes from step 4.
 
-**Use case: UC07 - List residents who missed their FET**
+**Use case: UC05 - List residents who missed their FET**
 
 **MSS**
 
@@ -571,10 +548,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a3. Hall admin enters a new date.
 
       Steps 2a1-2a2 are repeated until the date entered are valid.
-
+  
       Use case resumes from step 3.
 
-**Use case: UC08 - List residents whose FET or Test Kit collection dates are due soon**
+**Use case: UC06 - List residents whose FET or Test Kit collection dates are due soon**
 
 **MSS**
 
@@ -595,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-**Use case: UC09 - Update a resident's last FET date**
+**Use case: UC07 - Update a resident's last FET date**
 
 **MSS**
 
@@ -610,6 +587,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
 * 3a. SafeFor(H)all detects invalid index entered.
     * 3a1. SafeFor(H)all displays an error message.
     * 3a2. SafeFor(H)all requests for a valid index.
@@ -619,6 +597,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
     
+
 * 3b. SafeFor(H)all detects invalid date entered.
     * 3b1. SafeFor(H)all displays an error message.
     * 3b2. SafeFor(H)all requests for a valid date.
@@ -628,6 +607,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 4.
     
+
 * 5a. SafeFor(H)all detects invalid index entered.
     * 5a1. SafeFor(H)all displays an error message.
     * 5a2. SafeFor(H)all requests for a valid index.
@@ -636,6 +616,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 5a1-5a2 are repeated until the index entered is valid.
 
       Use case resumes from step 6.
+
+**Use case: UC08 - Export current list of residents' email as csv**
+
+**MSS**
+
+1. Actor requests for a list of the email addresses of the residents shown.
+2. Actor enters filename of file to be created.
+3. System outputs the list of email addresses in the form of a csv file.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. System detects duplicate file.
+    * 2a1. System displays an error message.
+      Use case resumes at step 2.
+
+**Use case: UC09 - Remind residents to take FET**
+
+**MSS**
+
+1. Actor <u>lists residents who missed their FET (UC05)</u>
+2. Actor <u>exports current list of residents' email as csv (UC08)</u>
+3. Actor sends an email to these residents to remind them to take their FET soon.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+**Use case: UC10 - Remind residents to collect FET kits**
+
+**MSS**
+
+1. Actor <u>lists residents whose FET or Test Kit collection dates are due soon (UC06)</u>
+2. Actor <u>exports current list of residents' email as csv (UC08)</u>
+3. Actor sends an email to these residents to remind them to collect their FET kits soon.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
 
 
 ### Non-Functional Requirements
@@ -676,16 +704,41 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample residents. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a resident
+
+1. Adding a resident and their information into the app
+
+   1. Test case: `add n/Tommy r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: A resident named `Tom` with the relevant information is added into the app, shown in the GUI. Success message is shown.
+
+2. Adding a duplicate resident with the same name or same room
+
+   1. Prerequisites: A resident with the same name `Tommy` or room `A123` is already in the app.
+
+   2. Test case: `add n/Tommy r/A101 p/87654321 e/bern@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: Error message shown, `This resident or room already exists in the address book`
+   
+   3. Test case: `add n/Tom r/A123 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: Error message shown, `This resident or room already exists in the address book`
+   
+3. Adding a resident with invalid parameters
+
+   1. Test case: `add n/Tom! r/A201 p/87654321 e/tom@gmail.com v/t f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: Error message shown, `Names should only contain alphabetic characters and spaces, and it should not be blank`
+
+   2. Test case: `add n/Tom r/A201 p/87654321 e/tom@gmail.com v/true f/SOC fd/10-10-2020 cd/20-10-2020`<br>
+      Expected: Error message shown, `Vaccination status can be T or F (case insensitive).`
 
 ### Viewing a resident
 
@@ -693,15 +746,41 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: NIL
 
-    1. Test case: `view`<br>
+    2. Test case: `view`<br>
        Expected: A list of all the residents is displayed in the app's GUI
 
-    1. Test case: `view 3`<br>
+    3. Test case: `view 3`<br>
        Expected: The details of the resident at index 3 (meaning the 3rd resident in the list when `view` without the 
        index parameter is called) of the address book are displayed in the GUI.
 
-    1. Other incorrect delete commands to try: `view 0`, `view x` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `view 0`, `view x` (where x is larger than the list size)<br>
        Expected: Error message shown
+
+### Listing residents by FET/Collection Deadlines
+1. Listing residents' deadline with normal keyword and valid dates
+
+    1. Prerequisites: There are residents whose FET deadline lies between the 2 gates given
+   
+    2. Test case: `deadline k/f d1/10-10-2021 d2/15-10-2021`<br>
+       Expected: Residents whose FET deadline lies between these 2 dates are listed.
+    
+
+2. Listing residents' deadline with late keyword and valid dates
+
+    1. Prerequisites: There are residents whose FET deadline is due before the given date
+   
+    2. Test case: `deadline k/lf d1/10-10-2021`<br>
+       Expected: Residents whose FET is due before the given date is listed.
+
+
+3. Listing residents' deadline with invalid parameters
+
+    1. Test case: `deadline k/f d1/10-10-2021`<br>
+       Expected: The result box will indicate that the given command format is invalid.
+
+    2. Test case: `deadline k/f d1/12-10-2021 d2/10-10-2021`<br>
+       Expected: The result box will indicate that the second date is earlier than the first.
+
 
 ### Editing residents
 
@@ -734,6 +813,55 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Sorting residents
+
+1. Sorting the list of residents by valid fields and order
+
+   1. Test case: `sort by/n o/a`<br>
+      Expected: List of residents are sorted by their names in the alphabetical order.
+
+
+2. Sorting the list of residents by invalid fields or order
+
+   1. Test case: `sort by/z o/a`<br>
+      Expected: Error message shown, `FIELD should be one of the following: n, e, r, p, f, v, fd, cd`
+
+   2. Test case: `sort by/n o/z`<br>
+      Expected: Error message shown, `ORDER should be one of the following: a, d`
+   
+### Exporting residents' emails
+
+1. Export email addresses of list of residents
+
+   1. Test case: `export testEmailExport`<br>
+      Expected: Csv file filled with column of email addresses of the residents displayed in the app.
+   
+
+2. Duplicate filename provided
+
+   1. Prerequisites: csv file `testDuplicateExport.csv` is already in existing `/data/exports` directory
+   2. Test case: `export testDuplicateExport`<br>
+      Expected: Error message shown, `This filename already exists`
+
+<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+For all Event commands, ensure that you are on the Events tab before continuing.
+</div>
+
+
+### Viewing an event
+
+1. View a list of all the events in the app, or the information of a specific event
+
+    1. Test case: `view`<br>
+       Expected: A list of all the events is displayed in the app's GUI
+
+    2. Test case: `view 3`<br>
+    Expected: Additional details of the event currently at index 3 will be displayed in the GUI.
+       
+2. Invalid indexes provided
+   1. Test case: `view x` (where x is larger than the list size)<br>
+      Expected: Error message shown, `The event index provided is invalid`
 
 ### Finding an event
 
@@ -772,49 +900,36 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all events using the `view` command (without any parameters). Multiple events in the list.
 
-    1. Test case: `delete 3`<br>
+    2. Test case: `delete 3`<br>
        Expected: The third event is deleted from the list. Details of the deleted event shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No event is deleted. Error details shown.
 
-    1. Other incorrect delete commands to try: `delete -1`, `delete x` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete -1`, `delete x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Switch between tabs
+### Sorting events
 
-1. Switch between the event and resident tabs
+1. Sorting the list of events by valid fields and order
 
-    1. Prerequisites: NIL
+    1. Test case: `sort by/n o/a`<br>
+       Expected: List of events are sorted by their names in the alphabetical order.
 
-    1. Test case: `switch`<br> when the user is at the Event tab
-       Expected: The GUI switches from displaying the Event tab to the Resident tab
+2. Sorting the list of events by invalid fields or order
 
-### Listing residents by FET/Collection Deadlines
-1. Listing residents' deadline with normal keyword and valid dates
-    1. Prerequisites: There are residents whose FET deadline lies between the 2 gates given
-    2. Test case: `deadline k/f d1/10-10-2021 d2/15-10-2021`<br>
-       Expected: Residents whose FET deadline lies between these 2 dates are listed.
-       
+    1. Test case: `sort by/z o/a`<br>
+       Expected: Error message shown, `FIELD should be one of the following: n, d, c, v`
 
-2. Listing residents' deadline with late keyword and valid dates
-    1. Prerequisites: There are residents whose FET deadline is due before the given date
-    2. Test case: `deadline k/lf d1/10-10-2021`<br>
-       Expected: Residents whose FET is due before the given date is listed.
-
-3. Listing residents' deadline with invalid parameters
-    1. Test case: `deadline k/f d1/10-10-2021`<br>
-       Expected: The result box will indicate that the given command format is invalid.
-       
-    2. Test case: `deadline k/f d1/12-10-2021 d2/10-10-2021`<br>
-       Expected: The result box will indicate that the second date is earlier than the first.
+    2. Test case: `sort by/n o/z`<br>
+       Expected: Error message shown, `ORDER should be one of the following: a, d`
+    
 
 ### Adding residents to an Event
 1. Add a single valid resident by name to a valid Event
     1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1. 
     2. Test case: `include 1 r/Alex Yeoh`<br>
        Expected: The given resident will be added to the event. Sidebar will reflect that the resident is in the event.
-
 
 2. Add a single valid resident by room to a valid Event
     1. Prerequisites: There is resident with name "Alex Yeoh" and room "A101", and an event with index 1.
@@ -910,6 +1025,16 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `exclude 1 r/A101`<br>
        Expected: The given resident is not removed from the event. The result box will show that no residents with the
        given information could be found.
+
+### Switch between tabs
+
+1. Switch between the event and resident tabs
+
+    1. Prerequisites: NIL
+
+    1. Test case: `switch`<br> when the user is at the Event tab
+       Expected: The GUI switches from displaying the Event tab to the Resident tab
+
 
 ### Saving data
 
