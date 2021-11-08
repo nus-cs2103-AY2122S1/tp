@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("friend --unlink draco -g Valorant")
+[-> LogicManager : execute("friend --unlink draco\n -g Valorant")
 activate LogicManager
 
-LogicManager -> MainParser : parseCommand("friend --unlink draco -g Valorant")
+LogicManager -> MainParser : parseCommand("friend --unlink draco\n -g Valorant")
 activate MainParser
 
 create FriendCommandParser
@@ -28,7 +28,7 @@ activate FriendCommandParser
 FriendCommandParser --> MainParser
 deactivate FriendCommandParser
 
-MainParser -> FriendCommandParser : parse(" --unlink draco -g Valorant")
+MainParser -> FriendCommandParser : parse(" --unlink draco\n -g Valorant")
 activate FriendCommandParser
 
 create UnlinkFriendCommandParser
@@ -38,7 +38,7 @@ activate UnlinkFriendCommandParser
 UnlinkFriendCommandParser --> FriendCommandParser
 deactivate UnlinkFriendCommandParser
 
-FriendCommandParser -> UnlinkFriendCommandParser : parse("--unlink draco -g Valorant")
+FriendCommandParser -> UnlinkFriendCommandParser : parse("--unlink draco\n -g Valorant")
 activate UnlinkFriendCommandParser
 
 create UnlinkFriendCommand

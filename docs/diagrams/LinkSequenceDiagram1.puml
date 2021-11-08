@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("friend --link draco -g Valorant -u DracoPlat")
+[-> LogicManager : execute("friend --link draco\n -g Valorant -u DracoPlat")
 activate LogicManager
 
-LogicManager -> MainParser : parseCommand("friend --link draco -g Valorant -u DracoPlat")
+LogicManager -> MainParser : parseCommand("friend --link draco\n -g Valorant -u DracoPlat")
 activate MainParser
 
 create FriendCommandParser
@@ -28,7 +28,7 @@ activate FriendCommandParser
 FriendCommandParser --> MainParser
 deactivate FriendCommandParser
 
-MainParser -> FriendCommandParser : parse(" --link draco -g Valorant -u DracoPlat")
+MainParser -> FriendCommandParser : parse(" --link draco\n -g Valorant -u DracoPlat")
 activate FriendCommandParser
 
 create LinkFriendCommandParser
@@ -38,7 +38,7 @@ activate LinkFriendCommandParser
 LinkFriendCommandParser --> FriendCommandParser
 deactivate LinkFriendCommandParser
 
-FriendCommandParser -> LinkFriendCommandParser : parse("--link draco -g Valorant -u DracoPlat")
+FriendCommandParser -> LinkFriendCommandParser : parse("--link draco\n -g Valorant -u DracoPlat")
 activate LinkFriendCommandParser
 
 create LinkFriendCommand
@@ -63,6 +63,7 @@ destroy FriendCommandParser
 MainParser --> LogicManager : command
 deactivate MainParser
 
+
 LogicManager -> LinkFriendCommand : command.execute()
 activate LinkFriendCommand
 
@@ -81,6 +82,9 @@ deactivate CommandResult
 
 LinkFriendCommand --> LogicManager : result
 deactivate LinkFriendCommand
+
+LogicManager -[hidden]-> LogicManager
+LinkFriendCommand -[hidden]-> LinkFriendCommand
 
 [<--LogicManager
 deactivate LogicManager
