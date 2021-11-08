@@ -3,15 +3,19 @@ layout: page
 title: Developer Guide
 ---
 
-- Table of Contents
-{:toc}
+## Table of Contents
+1. [Design](#design)
+2. [Implementation](#imple)
+3. [Guides and Documentation](#guides)
+4. [Appendix](#appen)
+   1. [Requirements](#requirements)
+   2. [Manual Testing](#test)
 
 ---
 
 ## **Acknowledgements**
-
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 - PlantUML was used for the UML diagrams in this project.
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 ---
 
 ## **Setting up, getting started**
@@ -19,6 +23,8 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
+
+<a name="design"></a>
 
 ## **Design**
 
@@ -153,6 +159,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 ---
+
+<a name="imple"></a>
 
 ## **Implementation**
 
@@ -484,11 +492,9 @@ Each of the following expressions return a `TaskFilter`:
 
 1. Task filters could be implemented using a `FunctionalInterface` having a `boolean filter(Task task)` method. However, this does not allow a task filter to contain extra information like having a custom string representation.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ---
+
+<a name="guides"></a>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -500,6 +506,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ---
 
+<a name="appen"></a>
+
+<a name="requirements"></a>
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -522,28 +531,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                                          | I want to …​                                                       | So that I can…​                                         |
 | -------- | ---------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
-| `* * *`  | student                                                          | add tasks into a tasklist                                          | keep a list of tasks I need to do                       |
+| `* * *`  | student                                                          | add tasks into a task list                                          | keep a list of tasks I need to do                      |
 | `* * *`  | student                                                          | delete tasks                                                       | remove tasks that are no longer applicable              |
 | `* * *`  | student with one laptop                                          | access my data locally                                             | use the application without an internet connection      |
-| `* * *`  | new user                                                         | use the GUI                                                        | use the app easily from the desktop                     |
+| `* * *`  | student                                                          | see the task list as a GUI                                         | easily visualize the tasks I have                       |
 | `* * *`  | student who often makes typos                                    | edit tasks                                                         | correct tasks that were entered wrongly                 |
-| `* * *`  | student with similar tasks                                       | create skeleton templates                                          | add tasks without repeating actions                     |
-| `* * *`  | student with different commitments                               | categorise tasks using tags                                        | differentiate whcih tasks belongs to which commitment   |
-| `* * *`  | student with different commitments                               | overview of my tasks by workload                                   | understand which tasks I need to prioritise             |
-| `* * *`  | student who is forgetful                                         | receive reminders                                                  | be reminded for upcoming tasks                          |
-| `* * *`  | student who receives periodic assignments                        | create recurring tasks that repeat at a set interval               | save time                                               |
-| `* *`    | student with varying type of tasks                               | attach various files or messages                                   | increase convenience of access                          |
-| `* *`    | a veteran user                                                   | have CLI to organise my tasks                                      | save time from not having to point and click on the GUI |
-| `* *`    | busy student                                                     | be able to add tasks using CLI                                     | save time from not needing to sort my schedule          |
-| `* *`    | student that manages multiple projects across different modules  | tag tasks with contacts                                            | know who is participating in which meeting or task      |
-| `* *`    | a student who love data and visualisations                       | view previously completed tasks over time                          | gain insights into my producitvity                      |
-| `*`      | student with similar tasks                                       | create custom macros                                               | save time                                               |
-| `*`      | student that is finishing their semester                         | purge data on tasks and templates                                  | remove clutter on my app                                |
-| `*`      | student with many tasks                                          | track progress for tasks                                           | visualise the time required for each task               |
-| `*`      | student who has to manage projects with peers                    | create tasks that can be emailed to individuals on my contact list | facilitate quick communication                          |
-| `*`      | student who easily gets bored focusing too much on a single task | shuffle the arrangement of upcoming tasks                          | work on another task with similar priority              |
+| `* * *`  | student with different commitments                               | categorise tasks using tags                                        | differentiate which tasks belongs to which commitment   |
+| `* * *`  | student                                                          | mark a task as complete                                            | know that a task is complete and move on to other tasks |
+| `* * *`  | student                                                          | search for tasks using keywords in title and description           | look for specific or relevant tasks in the list         |
+| `* * *`  | student                                                          | filter the task list displayed by their tags                       | look for specific categories of tasks                   |
+| `* *`    | student that manages tasks involving people                      | tag tasks with contacts                                            | know who is participating in which meeting or task      |
+| `* *`    | student                                                          | add description to a task                                          | add further information about the task                  |
+| `* *`    | student                                                          | add timestamps to a task                                           | keep track of deadlines of individual tasks             |
+| `* *`    | student                                                          | filter the task list displayed by their completion status          | view only tasks that are done/undone                    |
+| `* *`    | student                                                          | use arrow up and down keys to view previous commands that were executed | quickly repeat similar commands                    |
+| `*`      | student that is finishing a certain type of tasks                | purge data on tasks based on filters                               | remove clutter on my app                                |
+| `*`      | student who is loses track of deadlines                          | see which tasks are overdue                                        | to be reminded of what tasks I urgently need to do      |
 | `*`      | student who may make mistakes                                    | undo my changes                                                    | revert any changes if needed                            |
-| `*`      | student who has some tasks of utmost importance                  | designate special tasks that block out a certain time period       | avoid scheduling other tasks that clash with them       |
 
 ### Use cases
 
@@ -879,7 +883,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Tags**: User-defined label attached a task to provide identification and/or information
 
 ---
-
+<a name="test"></a>
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -895,7 +899,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts and tasks. The window size may not be optimum and should be adjusted.
 
 1. Saving window preferences
 
@@ -903,8 +907,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   
 
 ### Deleting a person
 
@@ -921,12 +924,13 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. To simulate missing file, you can delete any files in the '`ata` folder.<br>
+       Expected: Re-starting the application would result in the default set of sample contacts and/or tasks depending on which file(s) was deleted.
+   2. To simulate corrupted data file, you can alter data entries of any files in the `data` folder.<br>
+       Expected: Re-starting the application would result in either loading in the altered `data` file if the alteration fits the definitions of a `task` and `contact`, or it would result in the data file being deleted and restarting from the sample set of data if the definitions were not followed.
 
-1. _{ more test cases …​ }_

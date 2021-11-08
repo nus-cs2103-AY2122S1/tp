@@ -35,7 +35,7 @@ Below are my contributions to the project.
     The feature also keeps track of whatever one has currently typed. Pressing up or down after typing something that
       has not been executed stores the typed command down, and can be accessed simply by pressing down to the very last
       command.
-      
+
 - **Code contributed**: [Reposense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=yeppog&tabRepo=AY2122S1-CS2103-F09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 - **Enhancements to existing features**: Improved the preliminary design of the help window.
