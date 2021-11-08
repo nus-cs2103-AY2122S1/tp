@@ -157,7 +157,7 @@ Creates a person.
 Format: `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`<br>
 Advanced user Format: `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
 
-* Creates a person with the `NAME`.
+* Creates a person with the `NAME`. This name cannot start with a number.
 * Optional arguments:
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
@@ -379,7 +379,7 @@ Creating a group command works no matter what list is in the List Pane. **Howeve
 Format: `group (GROUP_NAME) /create`<br>
 Advanced user Format: `g (GROUP_NAME) /c`
 
-* Creates a new group with the name `GROUP_NAME`.
+* Creates a new group with the name `GROUP_NAME`. This name cannot start with a number, and may contain `-` or `.` characters
 * The new group must not have a same name with other existing groups.
 
 Examples:
@@ -412,8 +412,9 @@ Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
 Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
 å
 * Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
+* This name cannot start with a number, and may contain `-` or `.` characters
 * The new subgroup must not have the same name as other existing subgroups in the same group.
-* The new subgroup's name must not include any backslash (`/`) or underscore (`_`).
+* The new subgroup's name must not include any backslash (`/`) or underscore (`_`). 
 
 Examples :
 
