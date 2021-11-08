@@ -493,12 +493,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
-
-* 1a. User requests to <u>find entries by keyword (UC01)</u>.
-    * 1a1. GameBook shows a filtered list of entries. 
-      
-    Use case ends.
 
 **Use case: Edit an entry**
 
