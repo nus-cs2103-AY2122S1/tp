@@ -5,10 +5,10 @@ title: Kevin Foong's Project Portfolio Page
 
 ### Project: gitGud
 
-#### What is gitGud?
+[gitGud](https://ay2122s1-cs2103t-w13-4.github.io/tp/) is a typing-focused desktop application for managing friends' gaming information. 
+It is dedicated to busy gamers and aims to solve their key problem by helping them find available and highest skilled 
+friends to win competitive games with. <br>
 
-gitGud is a typing-based desktop application for storing friends' gaming information and helps busy gamers find available and highest skilled 
-friends to play with.
 Given below are my contributions to the project.
 
 #### New Features
@@ -19,10 +19,10 @@ Given below are my contributions to the project.
      **What it does**: Allows users to edit friend's name.<br>
      **Justification**: Allows user to update friend's name without having to re-create friend which 
      requires user to re-provide the previous information of the deleted friend when adding again which can be tedious.
-  3. Add Game functionality <br> (mostly implemented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69))
+  3. Add Game functionality (mostly implemented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69)) <br>
      **What it does**: Allows users to add games to the gitGud games list.<br>
      **Justification**: Core functionality for users to store list of games.
-  4. Implemented Storage support for Friends and Games <br> (mostly implemented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69))
+  4. Implemented Storage support for Friends and Games (mostly implemented in [PR #68](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/69)) <br>
      **What it does**: Allows friends and games data to be stored across multiple application runs by storing data in JSON files on the hard drive.
      **Justification**: This allows our application to fulfill its main objective of being able to record friends' gaming information.<br>
   5. Add friend skill functionality (mostly implemented in [PR #102](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/102)) <br>
@@ -34,7 +34,7 @@ Given below are my contributions to the project.
      is the most skilled. 
 
 #### Testing 
-  1. Wrote unit/integration tests for
+  1. Wrote unit/integration tests achieving >96% lines and 100% method coverage for:
      1. Storage component. 
      2. Add Friend and Add Game functionalities. 
      3. Edit Friend functionality (including integration testing with Model component). 
