@@ -18,8 +18,8 @@ Given below are my contributions to the project.
   * Justification: This feature allows the user to export a list of emails of the last searched contacts to a file so that they can create a group in Outlook to mass send emails to a particular group of students.
   
 * **New Feature**: Added a Stat(istics) command
-* What it does: Allows users to see the count of tags, student and tutorial ID 
-* Justification: This feature allows the user to summarise the last search list in terms of the count of tags, student and tutorial ID. This has many uses, such as allows the user to get a count of how many students and TA are in a particular tutorial group or if there are a particularly large number of problematic students from a particular tutorial group.
+  * What it does: Allows users to see the count of tags, student and tutorial ID 
+  * Justification: This feature allows the user to summarise the last search list in terms of the count of tags, student and tutorial ID. This has many uses, such as allows the user to get a count of how many students and TA are in a particular tutorial group or if there are a particularly large number of problematic students from a particular tutorial group.
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=rachelcheah)
