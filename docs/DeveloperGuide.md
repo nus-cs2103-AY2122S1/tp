@@ -456,7 +456,7 @@ Step 10. The headers and rows are written to the CSV file that is specified by t
     * Cons: Requires large changes to the attributes and purpose of CommandResult. 
 
 * **Option 2 (current choice):** Store data in model and access using logic
-    * Pros: Minimal changes to commandResult structure are necessary.
+    * Pros: Minimal changes to CommandResult structure are necessary.
     * Cons: Additional calls to logic and model are needed to get the required information.
 
 

@@ -58,10 +58,10 @@ LogicManager -> MailingListCommand : execute()
 activate MailingListCommand
 
 
-MailingListCommand --> LogicManager : result
+MailingListCommand --> LogicManager : CommandResult
 deactivate MailingListCommand
 
-UI <--LogicManager: result
+UI <--LogicManager: CommandResult
 deactivate LogicManager
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 MailingListCommand -[hidden]-> LogicManager
