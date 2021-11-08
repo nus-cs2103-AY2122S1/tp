@@ -17,7 +17,7 @@ You can reach us at the email `e0540149@u.nus.edu`
 [[portfolio](team/lwj1711.md)]
 
 * Role: Developer
-* Responsibilities: Delete feature + Testing
+* Responsibilities: Delete + Documents
 
 ### Kelvin Soo
 
@@ -37,7 +37,7 @@ You can reach us at the email `e0540149@u.nus.edu`
 [[portfolio](team/naranghardik16.md)]
 
 * Role: Developer
-* Responsibilities: Priority Feature + UI/UX
+* Responsibilities: Priority + UI/UX
 
 ### Sourabh Jaiswal
 
@@ -47,7 +47,7 @@ You can reach us at the email `e0540149@u.nus.edu`
 [[portfolio](team/srj31.md)]
 
 * Role: Developer
-* Responsibilities: Add Feature + Algorithm
+* Responsibilities: Add + Algorithm
 
 ### Loo Wee Sing Caspian Michael
 
@@ -57,4 +57,4 @@ You can reach us at the email `e0540149@u.nus.edu`
 [[portfolio](team/Dr-Octavius.md)]
 
 * Role: Developer
-* Responsibilities: Show Feature + Code Logic
+* Responsibilities: Show + Code Logic
