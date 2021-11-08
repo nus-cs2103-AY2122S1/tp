@@ -89,7 +89,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         String days = searchInput.get().trim();
         if (days.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
         }
 
         List<String> lessonDayKeywordsList = Arrays.stream(days.split("\\s+"))
@@ -99,14 +99,10 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
             try {
                 int dayValue = Integer.parseInt(day);
                 if (dayValue < 0 || dayValue > 7) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
-                    );
+                    throw new ParseException(MESSAGE_INVALID_DAY);
                 }
             } catch (NumberFormatException e) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_DAY, FindModuleLessonCommand.MESSAGE_USAGE)
-                );
+                throw new ParseException(MESSAGE_INVALID_DAY);
             }
         }
 
@@ -118,7 +114,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         String times = searchInput.get().trim();
         if (times.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
         }
 
         List<String> lessonTimeKeywordsList = Arrays.stream(times.split("\\s+"))
@@ -126,9 +122,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
 
         for (String time : lessonTimeKeywordsList) {
             if (!isValidTime(time)) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_TIME, FindModuleLessonCommand.MESSAGE_USAGE)
-                );
+                throw new ParseException(MESSAGE_INVALID_TIME);
             }
         }
 
