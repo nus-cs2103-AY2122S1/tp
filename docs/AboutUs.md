@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/meerian.png" width="200px">
 
-[[github](http://github.com/meerian) [[portfolio](team/meerian.md)]
+[[github](http://github.com/meerian) [portfolio](team/meerian.md)]
 
 * Role: Developer
 * Responsibilities: Models IC
@@ -36,9 +36,9 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Sherwin Poh Kai Xun
 
-<img src="images/sherwinprofile.png" width="200px">
+<img src="images/sherwinprofile.jpg" width="200px">
 
-[[github](https://github.com/sherrpass)]
+[[github](https://github.com/sherrpass) [portfolio](team/sherwinpoh.md)]
 
 * Role: Developer
 * Responsibilities: Storage IC
