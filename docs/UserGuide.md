@@ -152,7 +152,7 @@ After launching the app, the GUI similar to the one shown below should appear in
 
 Component | What it does
 -------|--------
-Help Window | Exits TutAssistor or views help.
+Menu Bar | Exits TutAssistor or views help.
 Command Box | Keys in command.
 Result Display Pane | Displays feedback of command to user.
 TuitionList Panel | Displays all tuition classes.
