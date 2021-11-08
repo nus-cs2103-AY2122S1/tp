@@ -57,7 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT_EMAIL = "This student with the same Email "
             + "already exists in the ProgrammerError";
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Lab %1$s score has been updated!\n";
-    public static final String MESSAGE_NO_LAB_EDITED = "No labs has been updated.";
+    public static final String MESSAGE_NO_LAB_EDITED = "No lab has been updated.";
 
     private static LabNum labNum2;
     private final Index index;
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
             try {
                 currTotalScore = studentToEdit.getLab(labNum).getLabTotal();
             } catch (NullPointerException e) { //when getLab does not find anything
-                throw new CommandException(Lab.MESSAGE_LAB_NOT_EXISTS);
+                throw new CommandException(String.format(Lab.MESSAGE_LAB_NOT_EXISTS, updatedLab));
             }
             labNum2 = labNum;
             updatedLab.updateTotal(currTotalScore);
