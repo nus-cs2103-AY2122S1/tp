@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+mainframe **sd View Shift Command Execution**
+
+box Logic LOGIC_COLOR_T1
+
+participant "command:ViewShiftCommand" as ViewShiftCommand LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+activate ViewShiftCommand
+
+
+ViewShiftCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> ViewShiftCommand
+deactivate Model
+
+alt viewShift by Slot Number
+    ViewShiftCommand -> ViewShiftCommand : executeViewShiftBySlot()
+    activate ViewShiftCommand
+    ViewShiftCommand -> Model : updateFilteredPersonList()
+    activate Model
+    Model --> ViewShiftCommand
+    deactivate Model
+    deactivate ViewShiftCommand
+
+else  viewShift by Time
+    ViewShiftCommand -> ViewShiftCommand : executeViewShiftByTime()
+    activate ViewShiftCommand
+    ViewShiftCommand -> Model : updateFilteredPersonList()
+    activate Model
+    Model --> ViewShiftCommand
+    deactivate Model
+
+    deactivate ViewShiftCommand
+end
+
+
+deactivate Model
+@enduml
+

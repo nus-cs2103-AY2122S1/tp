@@ -52,5 +52,4 @@ public class Tag implements Field {
     public String toString() {
         return '[' + tagName + ']';
     }
-
 }

@@ -20,8 +20,13 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
-import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewScheduleCommand;
+import seedu.address.logic.commands.SchedulePeriodChangeCommand;
+import seedu.address.logic.commands.SetRoleReqCommand;
+import seedu.address.logic.commands.SetShiftTimeCommand;
+import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
+import seedu.address.logic.commands.StaffStatisticsCommand;
+import seedu.address.logic.commands.SwapShiftCommand;
+import seedu.address.logic.commands.SwitchTabCommand;
 import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -61,9 +66,6 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ViewScheduleCommand.COMMAND_WORD:
-            return new ViewScheduleCommandParser().parse(arguments);
-
         case ViewShiftCommand.COMMAND_WORD:
             return new ViewShiftCommandParser().parse(arguments);
 
@@ -73,9 +75,17 @@ public class AddressBookParser {
         case RemoveMarkCommand.COMMAND_WORD:
             return new RemoveMarkCommandParser().parse(arguments);
 
+        case SwitchTabCommand.COMMAND_WORD:
+            return new SwitchTabCommand();
+
         case DeleteShiftCommand.COMMAND_WORD:
             return new DeleteShiftCommandParser().parse(arguments);
 
+        case StaffIndividualStatisticsCommand.COMMAND_WORD:
+            return new StaffIndividualStatisticsCommandParser().parse(arguments);
+
+        case SwapShiftCommand.COMMAND_WORD:
+            return new SwapShiftCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -83,20 +93,29 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
-
         case AddShiftCommand.COMMAND_WORD:
             return new AddShiftCommandParser().parse(arguments);
 
+        case SetShiftTimeCommand.COMMAND_WORD:
+            return new SetShiftTimeCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case SetRoleReqCommand.COMMAND_WORD:
+            return new SetRoleReqCommandParser().parse(arguments);
+
+        case SchedulePeriodChangeCommand.COMMAND_WORD:
+            return new SchedulePeriodChangeCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case StaffStatisticsCommand.COMMAND_WORD:
+            return new StaffStatisticsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

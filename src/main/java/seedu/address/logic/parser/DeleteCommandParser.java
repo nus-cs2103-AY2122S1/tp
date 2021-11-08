@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -28,23 +28,32 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DASH_NAME, PREFIX_DASH_ROLE,
+                        PREFIX_DASH_STATUS);
 
         if (!exactlyOneAcceptedPrefix(argMultimap)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            if (argMultimap.getValue(PREFIX_DASH_INDEX).get() == "") {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
+            return new DeleteCommand(index);
+        }
+
         try {
-            if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
-                Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-                return new DeleteCommand(index);
-            } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
+                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
                 return new DeleteCommand(name);
-            } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-                Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
+            } else if (argMultimap.getValue(PREFIX_DASH_ROLE).isPresent()) {
+                Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_DASH_ROLE).get());
                 return new DeleteCommand(role);
-            } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-                Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            } else if (argMultimap.getValue(PREFIX_DASH_STATUS).isPresent()) {
+                Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_DASH_STATUS).get());
                 return new DeleteCommand(status);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
@@ -56,7 +65,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     }
 
     private boolean exactlyOneAcceptedPrefix(ArgumentMultimap argMultimap) {
-        Prefix[] prefixes = {PREFIX_INDEX, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS};
+        Prefix[] prefixes = {PREFIX_DASH_INDEX, PREFIX_DASH_NAME, PREFIX_DASH_ROLE, PREFIX_DASH_STATUS};
         boolean isTrueOnlyOnce = false;
         for (Prefix prefix : prefixes) {
             if (argMultimap.getValue(prefix).isPresent()) {

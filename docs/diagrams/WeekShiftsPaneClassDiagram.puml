@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+Class "{abstract}\nUiPart" as UiPart
+
+package "Schedule view" <<Rectangle>>{
+
+class WeekShiftsPane
+class DayCard
+class SlotCard
+
+}
+
+WeekShiftsPane -|> UiPart
+DayCard -|> UiPart
+SlotCard -|> UiPart
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> WeekShiftsPane
+WeekShiftsPane --> "7" DayCard
+DayCard --> "2" SlotCard
+
+
+@enduml

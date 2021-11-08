@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
@@ -33,11 +32,10 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String salary;
     private final String status;
-    private final String schedule;
+    private final JsonAdaptedSchedule schedule;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedPeriod> absentDates = new ArrayList<>();
 
@@ -47,20 +45,23 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("role") List<JsonAdaptedRole> roles,
-            @JsonProperty("salary") String salary, @JsonProperty("status") String status,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule,
+            @JsonProperty("role") List<JsonAdaptedRole> roles, @JsonProperty("salary") String salary,
+            @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("schedule") JsonAdaptedSchedule schedule,
             @JsonProperty("absentDates") List<JsonAdaptedPeriod> absentDates) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         if (roles != null) {
             this.roles.addAll(roles);
         }
         this.salary = salary;
         this.status = status;
-        this.schedule = schedule;
+        if (schedule != null) {
+            this.schedule = schedule;
+        } else {
+            this.schedule = new JsonAdaptedSchedule(new Schedule());
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -78,7 +79,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
@@ -90,8 +90,7 @@ class JsonAdaptedPerson {
         absentDates.addAll(source.getAbsentDates().stream()
                 .map(JsonAdaptedPeriod::new)
                 .collect(Collectors.toList()));
-        schedule = source.getSchedule().toString();
-
+        schedule = new JsonAdaptedSchedule(source.getSchedule());
     }
 
     /**
@@ -111,9 +110,12 @@ class JsonAdaptedPerson {
         }
 
 
-        final List<Role> personRoles = new ArrayList<>();
+        final Set<Role> personRoles = new HashSet<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
+        }
+        if (personRoles.contains(Role.NO_ROLE) && personRoles.size() != 1) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
 
         if (name == null) {
@@ -139,14 +141,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
         final Set<Role> modelRoles = new HashSet<>(personRoles);
 
@@ -174,18 +168,11 @@ class JsonAdaptedPerson {
                     Schedule.class.getSimpleName()));
         }
 
-        if (!Schedule.isValidSchedule(schedule.trim())) {
-            throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
-        }
-        Schedule modelSchedule;
-        if (schedule.trim().equals("")) {
-            modelSchedule = new Schedule();
-        } else {
-            modelSchedule = new Schedule(schedule.trim());
-        }
-        Person p = new Person(modelName, modelPhone, modelEmail,
-                modelAddress, modelRoles, modelSalary, modelStatus, modelTags, modelPeriods);
 
+        Schedule modelSchedule;
+        modelSchedule = schedule.toModelType();
+        Person p = new Person(modelName, modelPhone, modelEmail,
+                modelRoles, modelSalary, modelStatus, modelTags, modelPeriods);
 
         p.setSchedule(modelSchedule);
         return p;

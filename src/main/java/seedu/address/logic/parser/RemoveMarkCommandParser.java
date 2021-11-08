@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -9,12 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
-import static seedu.address.logic.parser.ParserUtil.parsePeriod;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.util.List;
-
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.RemoveMarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Period;
@@ -33,19 +31,21 @@ public class RemoveMarkCommandParser implements Parser<RemoveMarkCommand> {
         //created to test if there are any identifiers
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_DASH_NAME,
-                        PREFIX_DASH_PHONE, PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT,
-                        PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
-                        PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
+                        PREFIX_DASH_PHONE, PREFIX_DASH_INDEX, PREFIX_DATE,
+                        PREFIX_DASH_EMAIL, PREFIX_DASH_TAG, PREFIX_DASH_STATUS,
+                        PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
         //created to test if there are
-        List<String> periods = argMultimap.getAllValues(PREFIX_DAY_SHIFT);
-        if ((periods.size() != 1 && periods.size() != 2)) {
-            throw NO_FIELD_EXCEPTION;
+        Period period = DateTimeUtil.getDisplayedPeriod();
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            period = ParserUtil.extractPeriodDates(argMultimap);
         }
-        Period period = parsePeriod(periods);
 
         PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
         //checks for index
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            if (!ParserUtil.isValidInt(argMultimap.getValue(PREFIX_DASH_INDEX).get())) {
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
             return new RemoveMarkCommand(predicate, index, period);
         }
@@ -53,8 +53,6 @@ public class RemoveMarkCommandParser implements Parser<RemoveMarkCommand> {
         if (predicate.isEmpty()) {
             throw NO_FIELD_EXCEPTION;
         }
-
         return new RemoveMarkCommand(predicate, period);
-
     }
 }

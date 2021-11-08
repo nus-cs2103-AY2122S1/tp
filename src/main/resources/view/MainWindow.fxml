@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1250" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/staffd_icon.jpg" />
   </icons>
@@ -37,12 +37,12 @@
                 </MenuBar>
                 <HBox fx:id="windowHbox" prefHeight="513.0" prefWidth="954.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                     <children>
-                          <StackPane fx:id="resultDisplayPlaceholder" alignment="TOP_LEFT" minHeight="100" prefHeight="423.0" prefWidth="257.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                          <StackPane fx:id="resultDisplayPlaceholder" alignment="TOP_LEFT" minHeight="100" prefHeight="423.0" prefWidth="300.0" styleClass="pane-with-border" HBox.hgrow="SOMETIMES">
                               <padding>
                                   <Insets bottom="5" left="10" right="10" top="5" />
                               </padding>
                           </StackPane>
-                        <TabPane prefHeight="322.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+                        <TabPane fx:id="tabPane" prefHeight="322.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                             <tabs>
                                 <Tab closable="false" styleClass="dark" text="Staff View">
                                     <content>
@@ -58,6 +58,20 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
+                                <Tab closable="false" styleClass="dark" text="Schedule">
+                                    <content>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <children>
+                                                <VBox fx:id="schedulePanel" minWidth="340" prefHeight="431.0" prefWidth="432.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <padding>
+                                                        <Insets bottom="10" left="10" right="10" top="10" />
+                                                    </padding>
+                                                    <StackPane fx:id="schedulePanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
                             </tabs>
                         </TabPane>
                     </children>
@@ -67,7 +81,6 @@
                             <Insets bottom="5" left="10" right="10" top="5" />
                         </padding>
                     </StackPane>
-                    <StackPane fx:id="statusbarPlaceholder" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="472.0" VBox.vgrow="NEVER" />
             </VBox>
         </Scene>
     </scene>

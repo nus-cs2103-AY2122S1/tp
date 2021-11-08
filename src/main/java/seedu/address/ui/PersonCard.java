@@ -2,11 +2,14 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 
@@ -31,11 +34,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label index;
+    @FXML
     private Label name;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private ListView<String> periodListView;
     @FXML
     private Label email;
     @FXML
@@ -45,7 +50,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private FlowPane tags;
+    private ListView<String> tagsListView;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -54,19 +59,23 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.staff = staff;
         this.displayedIndex = displayedIndex;
-        name.setText(displayedIndex + ". " + staff.getName().fullName);
+        index.setText(String.valueOf(displayedIndex));
+        name.setText(staff.getName().fullName);
         phone.setText(staff.getPhone().value);
-        address.setText(staff.getAddress().value);
         email.setText(staff.getEmail().value);
         salary.setText(staff.getSalary().convertToDollars());
         status.setText(staff.getStatus().getValue());
 
+        String[] periodArray =
+                staff.getAbsentDates().stream().map(Period::toDisplayString).sorted().toArray(String[]::new);
+        periodListView.setItems(FXCollections.observableArrayList(periodArray));
+
         staff.getRoles().stream()
                 .sorted(Comparator.comparing(Role::toString))
                 .forEach(role -> roles.getChildren().add(new Label(role.toString())));
-        staff.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        String[] tagArray = staff.getTags().stream().map(tag -> tag.tagName).sorted().toArray(String[]::new);
+        tagsListView.setItems(FXCollections.observableArrayList(tagArray));
     }
 
     public int getDisplayedIndex() {
