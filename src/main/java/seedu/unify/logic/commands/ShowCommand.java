@@ -76,6 +76,7 @@ public class ShowCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         if (!isValidWeekNumber) {
             throw new CommandException(String.format(MESSAGE_FLOW_ERROR, weekNumber));
         }

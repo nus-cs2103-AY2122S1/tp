@@ -103,9 +103,9 @@ public interface Model {
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
-     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * Updates the week of the weekly task list to the given {@code week}.
      *
-     * @throws NullPointerException if {@code predicate} is null.
+     * @throws NullPointerException if {@code week} is null.
      */
     void updateWeeklyTaskList(Integer week);
 
