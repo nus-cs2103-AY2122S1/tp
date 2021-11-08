@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 nav-text: User Guide
 ---
-![](images/sportsPA_logo.png)
+<img src = "images/sportsPA_logo.png" width="400"/> <br>
+
 <span style = "font-size: 32px; color: #e46c0a">
 Welcome to the SportsPA User Guide!
 </span>
@@ -107,7 +108,7 @@ Prefix        | Parameter                    | Requirements
 ----------------- | ------------------|------------------
 `p/ `             | `PHONE`             | Maximum of 15 digits
 `d/`              | `DAY(S)`              | Integer, 1-7 only
-`t/`              | `TAG(S)`            | Alphanumeric characters and spaces
+`t/`              | `TAG`            | Alphanumeric characters and spaces
 `tda/` | `TODAY_ATTENDANCE`       | `true` for present or `false` for absent
 `tta/`| `TOTAL_ATTENDANCE`          | Integer, non-negative only
 `by` | `SORT_ORDER` | `name` or `tag` only 

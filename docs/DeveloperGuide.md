@@ -12,8 +12,8 @@ Welcome to the SportsPA Developer Guide!
 
 <div style="page-break-after: always;"></div>
 
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
@@ -72,7 +72,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
+the [diagrams](https://github.com/AY2122S1-CS2103T-W12-1/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML
 Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
 diagrams.
 </div>
@@ -232,7 +232,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -413,6 +413,7 @@ which will be updated accordingly when the attendance of that `Member` is marked
 as absent.
 * `ModelManager#markOneMemberAttendance(Member)` — Marks attendance of specified member.
 * `ModelManager#unmarkMembersAttendance(Member)` — Unmarks attendance of specified member.
+* `ModelManager#isWithinListIndex(List<Index>)` — Checks if given indices are valid.
   
 Additionally, `Member` implements the following operations:
 * `Member#setPresent()` — Sets `todayAttendance` as present and increments `totalAttendance`
@@ -427,9 +428,10 @@ by executing the `addm` command. Each `Member` in the `filteredMembers` list wil
 ![MarkObjectDiagram](images/MarkObjectDiagram_InitialState.png)
 
 
-Step 2. The user executes `mark 1 2` command to mark the members at index 1 and 2 in the filtered list as present. The `mark` command
-calls `ModelManager#markMembersAttendance(List<Index>)`. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
-and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The newly edited 
+Step 2. The user executes `mark 1 2` command to mark the members at index 1 and 2 in the filtered list as present. The `mark` command 
+first checks if the given indices 1 and 2 are within the displayed list of members via the `ModelManager#isWithinListIndex(List<Index>)`. Then
+if all indices are valid,`ModelManager#markMembersAttendance(List<Index>)` is then called. This then calls `ModelManager#markOneMemberAttendance(Member)` to increment `todayAttendance`
+and `totalAttendance` of the `Member` at the 1st and 2nd index in the list by calling `Member#setPresent()` for each `Member`. The 
 newly edited`Member`s with the updated attendance are now referenced by `ModelManager`.
 
 ![MarkObjectDiagramModified](images/MarkObjectDiagramModified_FinalState.png)
@@ -841,7 +843,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes from step 2.
 
-**Use case: UC10 - Mark attendance of members**
+**Use case: UC10 - Unmark attendance of members**
 
 This use case is similar to that of <span style="text-decoration: underline">mark attendance (UC09)</span>.
 
