@@ -44,8 +44,8 @@ public class RedoCommand extends Command {
             throw new CommandException(CORRUPTED_FILES);
         }
 
-        new RevertCommand(nextCommit.getHash()).execute(model);
-        return new CommandResult(MESSAGE_SUCCESS);
+        CommandResult commandResult = new RevertCommand(nextCommit.getHash()).execute(model);
+        return new CommandResult(MESSAGE_SUCCESS, commandResult.getCommitMessage());
     }
 
     @Override
