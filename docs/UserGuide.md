@@ -83,7 +83,11 @@ Below are some formats used used to convey different kinds of information:
 **Format:** `command_word Prefix/PARAMETER`
 
 * `command_word` is a word at the start of the command to specify the action to be done. <br> e.g. in `add n/NAME`, `add` is the command word.
+
+
 * `PARAMETER` are word(s) in `UPPER_CASE` to be supplied by the user.<br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+
+
 * `Prefix` are letter(s) before `PARAMETER` to denote the information supplied as parameter. <br>e.g. in `add n/NAME`, `n/` is a prefix to indicate that NAME is being supplied.
 
 
@@ -126,7 +130,7 @@ Parameter | Constraints
 |--------|-------
 **NAME** | Unique, only containing alphabetical characters and spaces
 **PHONE** | At least 6 digits long
-**ROOM** | Made up of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
+**ROOM** | Unique, made up of **block** + **level** + **number** <br>**block** is an alphabetical character from A to E <br>**level** is a digit from 1 to 4 <br>**number** is two digits from 00 to 29 <br>e.g. `A100`
 **EMAIL** |  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br> The domain name must: <br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 **VACCINATION_STATUS** | `T` or `F` (case insensitive)
 **FACULTY** | Single alphabetical word
@@ -144,9 +148,19 @@ Parameter | Constraints
 `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are optional parameters.
 </div>
 
+Here's a step by step guide:<br>
+1. Type the `add` command and the rest of the parameters with help from the command suggestion.
+   ![Step1](images/logic/commands/addpersoncommand/step1.png)
+
+
+2. After execution, the person list will now show the new person.
+   ![Step2](images/logic/commands/addpersoncommand/step2.png)
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+
+
 
 #### Viewing residents information : `view`
 
@@ -411,6 +425,15 @@ Format: `export FILE_NAME`
 * The file format (`.csv`) is not to be included in the `FILE_NAME`
 
 </div>
+
+1. Run `export FILE_NAME`.
+   ![Export](images/logic/commands/exportcommand/command.png)
+
+2. Find your csv file in the `data/exports` folder.
+   ![FileStructure](images/logic/commands/exportcommand/filefolder.png)
+
+3. Your exported csv file should look like this.
+   ![Csv](images/logic/commands/exportcommand/csvFormat.png)
 
 Examples:
 * `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the residents currently displayed on the application.
