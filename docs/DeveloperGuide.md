@@ -1124,7 +1124,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **Extensions:**
 
-* 1a. CS2100 TA chooses to cancel the upload. 
+* 1a. CS2100 TA chooses to cancel the download. 
 
   Use case ends.
 
