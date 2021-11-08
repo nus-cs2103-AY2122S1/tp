@@ -2,6 +2,9 @@ package seedu.programmer.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a Lab in the ProgrammerError.
+ */
 public class Lab implements DisplayableObject {
 
     public static final String MESSAGE_LAB_SCORE_AND_LAB_NUMBER_REQUIREMENT =
@@ -47,7 +50,7 @@ public class Lab implements DisplayableObject {
     }
 
     /**
-     * Constructor for Lab.
+     * Constructor for Lab with a specific lab number.
      *
      * @param labNum The labNum of the lab.
      *

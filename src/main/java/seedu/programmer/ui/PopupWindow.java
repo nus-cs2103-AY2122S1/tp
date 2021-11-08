@@ -3,23 +3,23 @@ package seedu.programmer.ui;
 import javafx.stage.Stage;
 
 /**
- * Controller for a help page
+ * Controller for a popup page.
  */
 public abstract class PopupWindow extends UiPart<Stage> {
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new PopupWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the PopupWindow.
      */
     public PopupWindow(String fxml, Stage root) {
         super(fxml, root);
     }
 
     /**
-     * Shows the help window.
+     * Shows the popup window.
      *
-     * @throws IllegalStateException if the state of the help window is not valid.
+     * @throws IllegalStateException if the state of the popup window is not valid.
      * <ul>
      *     <li>
      *         if this method is called on a thread other than the JavaFX Application Thread.
@@ -41,21 +41,21 @@ public abstract class PopupWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the popup window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the popup window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the popup window.
      */
     public void focus() {
         getRoot().requestFocus();
