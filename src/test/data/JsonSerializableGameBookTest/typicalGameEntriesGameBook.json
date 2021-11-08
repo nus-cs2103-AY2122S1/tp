@@ -1,0 +1,52 @@
+{
+  "gameEntries" : [ {
+    "gameType" : "Poker",
+    "startAmount" : "123.0",
+    "endAmount" : "134.0",
+    "date" : "2020-10-10 12:00",
+    "durationMinutes" : "30",
+    "location" : "Marina Bay Sands",
+    "tagged" : [ "friends" ]
+  }, {
+    "gameType" : "Poker",
+    "startAmount" : "0.0",
+    "endAmount" : "-10.0",
+    "date" : "2020-10-09 12:00",
+    "durationMinutes" : "30",
+    "location" : "Home",
+    "tagged" : [ ]
+  }, {
+    "gameType" : "Blackjack",
+    "startAmount" : "0.0",
+    "endAmount" : "5.0",
+    "date" : "2020-11-10 06:00",
+    "durationMinutes" : "10",
+    "location" : "Friend’s Place",
+    "tagged" : [ "drunk", "friends" ]
+  }, {
+    "gameType" : "Blackjack",
+    "startAmount" : "200.0",
+    "endAmount" : "199.0",
+    "date" : "2020-11-10 07:00",
+    "durationMinutes" : "30",
+    "location" : "Friend’s Place",
+    "tagged" : [ "drunk", "friends" ]
+  }, {
+    "gameType" : "Darts",
+    "startAmount" : "0.0",
+    "endAmount" : "0.0",
+    "date" : "2020-12-10 12:00",
+    "durationMinutes" : "30",
+    "location" : "Local Bar",
+    "tagged" : [ "solo" ]
+  }, {
+    "gameType" : "Darts",
+    "startAmount" : "0.0",
+    "endAmount" : "0.0",
+    "date" : "2020-12-10 12:00",
+    "durationMinutes" : "30",
+    "location" : "Local Bar",
+    "tagged" : [ "solo" ]
+  } ]
+
+}

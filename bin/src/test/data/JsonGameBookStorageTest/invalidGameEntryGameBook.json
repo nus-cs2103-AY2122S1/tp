@@ -1,0 +1,11 @@
+{
+  "gameEntries" : [ {
+    "gameType" : "Game Entry with Invaid Duration",
+    "startAmount" : "20.0",
+    "endAmount" : "55.0",
+    "date" : "2020-11-10 12:00",
+    "durationMinutes" : "-10",
+    "location" : "Genting Casino",
+    "tagged" : [ "smoked" ]
+  } ]
+}

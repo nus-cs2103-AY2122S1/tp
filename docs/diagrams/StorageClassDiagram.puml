@@ -14,11 +14,11 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "GameBook Storage" #F4F6F6{
+Interface GameBookStorage <<Interface>>
+Class JsonGameBookStorage
+Class JsonSerializableGameBook
+Class JsonAdaptedGameEntry
 Class JsonAdaptedTag
 }
 
@@ -29,15 +29,15 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" GameBookStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> GameBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonGameBookStorage .up.|> GameBookStorage
+JsonGameBookStorage ..> JsonSerializableGameBook
+JsonSerializableGameBook --> "*" JsonAdaptedGameEntry
+JsonAdaptedGameEntry --> "*" JsonAdaptedTag
 
 @enduml

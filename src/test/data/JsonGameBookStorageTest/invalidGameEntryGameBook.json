@@ -1,0 +1,13 @@
+{
+  "gameEntries" : [ {
+    "gameType" : "Game Entry with Invalid Duration",
+    "startAmount" : "20.0",
+    "endAmount" : "55.0",
+    "date" : "2020-11-10 12:00",
+    "durationMinutes" : null,
+    "location" : "Genting Casino",
+    "tagged" : [ "smoked" ]
+  } ]
+
+}
+

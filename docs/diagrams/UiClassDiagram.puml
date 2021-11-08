@@ -2,6 +2,9 @@
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
+skinparam classFontSize 17
+skinparam nodesep 10
+
 skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
@@ -9,12 +12,16 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class ClearWindow
+Class CommandNoteListPanel
+Class CommandNoteCard
+Class GameEntryListPanel
+Class GameEntryCard
 Class StatusBarFooter
 Class CommandBox
+Class StatsPanel
+Class GraphPanel
 }
 
 package Model <<Rectangle>> {
@@ -26,35 +33,41 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside .right.> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ClearWindow
+MainWindow *-down-> "1" GameEntryListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" CommandNoteListPanel
+MainWindow *-down-> "1" StatsPanel
+MainWindow *-down-> "1" GraphPanel
 
-PersonListPanel -down-> "*" PersonCard
+GameEntryListPanel -down-> "*" GameEntryCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
+ClearWindow --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+GameEntryListPanel --|> UiPart
+GameEntryCard --left|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+CommandNoteListPanel --|> UiPart
+CommandNoteCard -|> UiPart
+StatsPanel --|> UiPart
+GraphPanel --|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+CommandNoteListPanel -- CommandNoteCard
+GameEntryCard ..> Model
+StatsPanel ..> Model
+GraphPanel ..> Model
+UiManager -up-> Logic
+MainWindow -up-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml

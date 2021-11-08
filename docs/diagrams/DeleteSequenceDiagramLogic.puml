@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontSize = 15
+skinparam ParicipantFontSize = 15
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":GameBookParser" as GameBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete 1", true)
+activate LogicManager
+
+LogicManager -> GameBookParser : parseCommand("delete 1", true)
+activate GameBookParser
+
+note over LogicManager
+    The boolean true signifies that
+     GameEntryList is visible, in which
+    case a delete command is allowed.
+end note
+
+create DeleteCommandParser
+GameBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> GameBookParser
+deactivate DeleteCommandParser
+
+GameBookParser -> DeleteCommandParser : parse("1")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> GameBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> GameBookParser
+destroy DeleteCommandParser
+
+GameBookParser --> LogicManager : d
+deactivate GameBookParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> Model : deleteGameEntry(1)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommand -[hidden]-> LogicManager
+destroy DeleteCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

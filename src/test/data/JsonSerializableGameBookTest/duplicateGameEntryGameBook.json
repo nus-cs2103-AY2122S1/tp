@@ -1,0 +1,19 @@
+{
+  "gameEntries" : [ {
+    "gameType" : "Poker",
+    "startAmount" : "0.1",
+    "endAmount" : "1.5",
+    "date" : "2010-10-10 12:00",
+    "durationMinutes" : "55",
+    "location" : "Home",
+    "tagged" : [ ]
+  }, {
+    "gameType" : "Poker",
+    "startAmount" : "0.1",
+    "endAmount" : "1.5",
+    "date" : "2010-10-10 12:00",
+    "durationMinutes" : "55",
+    "location" : "Home",
+    "tagged" : [ ]
+  } ]
+}

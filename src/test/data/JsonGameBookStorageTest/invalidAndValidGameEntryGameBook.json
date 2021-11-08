@@ -1,0 +1,21 @@
+{
+  "gameEntries" : [ {
+    "gameType" : "Valid Game Entry",
+    "startAmount" : "30.0",
+    "endAmount" : "45.0",
+    "date" : "2020-11-10 12:00",
+    "durationMinutes" : "50",
+    "location" : "Resort World Sentosa Casino",
+    "tagged" : [ "drinking" ]
+  }, {
+    "gameType" : "Game Entry with Invalid Location",
+    "startAmount" : "20.0",
+    "endAmount" : "55.0",
+    "date" : "2020-11-10 12:00",
+    "durationMinutes" : "50",
+    "location" : null,
+    "tagged" : [ "smoked" ]
+  } ]
+
+}
+

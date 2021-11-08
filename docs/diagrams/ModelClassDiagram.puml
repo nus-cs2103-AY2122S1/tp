@@ -5,50 +5,67 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyGameBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class GameBook
+Class ReadOnlyGameBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
+Class GameEntryList
+Class GameEntry
+Class GameType
+Class Amount
+Class StartAmount
+Class EndAmount
+Class DatePlayed
+Class Duration
+Class Location
 Class Tag
+Class Average
+Class Median
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Class Ui #1D8900
+
+GameBook .up.|> ReadOnlyGameBook
+Ui .right.> Average
+Ui .right.> Median
+Average .right-> GameEntryList
+Median .right-> GameEntryList
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyGameBook
+ModelManager -left-> "1" GameBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+StartAmount -up-|> Amount
+EndAmount -up-|> Amount
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+GameBook *--> "1" GameEntryList
+GameEntryList --> "~* all" GameEntry
+GameEntry *--> GameType
+GameEntry *--> StartAmount
+GameEntry *--> EndAmount
+GameEntry *--> DatePlayed
+GameEntry *--> Duration
+GameEntry *--> Location
+GameEntry *--> "*" Tag
 
-ModelManager -->"~* filtered" Person
+GameType -[hidden]right-> StartAmount
+StartAmount -[hidden]right-> EndAmount
+EndAmount -[hidden]right-> DatePlayed
+
+
+ModelManager -->"~* filtered" GameEntry
 @enduml
