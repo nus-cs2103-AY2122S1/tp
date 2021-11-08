@@ -350,7 +350,7 @@ of a group to organize people based on a more specific category.
 Creates a group.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Creating a group command will only work when persons are listed in Notor.
+Creating a group command will work when any type of list is shown.
 The rest of group commands below will work only when groups or subgroups are listed.
 </div> <br>
 

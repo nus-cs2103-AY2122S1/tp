@@ -132,8 +132,9 @@ The following sequence diagram shows the detail when `PersonNoteCommand` is exec
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 * `MainWindow` does not contain PersonListPanel anymore.
-Now it contains ListPanel which can be a PersonListPanel, GroupListPanel or SubgroupListPanel.
-* `MainWindow` contains a new GeneralNote which displays the general note.
+Now it contains `ListPanel` which can be a `PersonListPanel`, `GroupListPanel` or `SubgroupListPanel`.
+* `MainWindow` contains `GeneralNote` which displays the general note.
+* `MainWindow` has dependency with  `PersonNoteWindow`, `GroupNoteWindow` and GeneralNoteWindow.
 
 
 ### Model Changes
