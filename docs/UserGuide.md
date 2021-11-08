@@ -2,8 +2,6 @@
 title: User Guide
 ---
 
-![app logo](images/ui/logo_size.jpg)
-
 ## Table of Contents
 * [Overview](#overview)
 * [Information About this User Guide](#information-about-this-user-guide)
@@ -49,24 +47,18 @@ title: User Guide
   * [Other Resources](#other-sources)
 * [Acknowledgements](#acknowledgements)
 
---------------------------------------------------------------------------------------------------------------------
+***
 ## Overview
-Are you a CS1101S Avenger? Are you tired of dealing with
-so many platforms like Luminus, Source Academy, etc.? And none of these platforms are even remotely useful for you? 
-
-Well, we have good news. Academy Directory is just the application for you!
-
+![app logo](images/ui/logo_size.jpg) <br>
 Academy Directory (AD) is a **desktop application for CS1101S tutors to manage their students.** Its main features are as follows: 
 - [Manage students’ personal details](#managing-students-personal-details)
 - [Track students' grades, Studio attendance, and participation](#tracking-students-grades-studio-attendance-and-participation)
 - [Visualize data in Academy Directory](#visualization-tools)
 
-![app logo](images/ui/logo_size.jpg)
-
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
 Academy Directory is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I - at the National University of Singapore.
-
+***
 ## Information about this User Guide
 ### Purpose
 This user guide aims to: 
@@ -81,14 +73,13 @@ The current version of Academy Directory is specifically designed for
 **CS1101S Avengers**. Therefore, the main Target Audience of this user guide are CS1101S Avengers.
 As such, the following assumptions are made regarding the Target Audience:
 - Can type fast and are comfortable using a CLI.
-- Is comfortable downloading and installing software such as Java 11
-onto their system.
+- Is comfortable downloading and installing software such as Java 11 onto their system.
 - Is familiar with the common terms relating to Computer Science.
 - Is familiar with CS1101S module structure and teaching pedagogy.
 
 While some technical background is assumed, we also provide the definitions for
 certain technical terms commonly used in this user guide [here](#glossary).
---------------------------------------------------------------------------------------------------------------------
+***
 ## Quick Start
 This section provides instructions to begin using Academy Directory.
 
@@ -179,7 +170,7 @@ Adds a student to Academy Directory
 Format: `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can be added without phone number
+A student can be added without phone number.
 </div>
 
 * `PHONE_NUMBER` is an optional field. The default value is `NA` which stands for "Not Applicable".
@@ -226,9 +217,9 @@ Examples:
 * `tag 1 t/mission` sets `mission` tag to the student specified at index 1.
 * `tag 2 t/streams t/envmodel` sets `streams` and `envmodel` tags to the student specified at index 2.
 
-#### Getting personal detail of students': `get`
+#### Getting students' personal details: `get`
 
-Gets personal detail of student/s. Personal detail refers to:
+Gets personal details of student(s). Personal detail refers to:
 - Telegram Handle
 - Email address
 - Telephone number, if any
@@ -277,7 +268,8 @@ Adds a student’s grade for a particular assessment.
 
 Format: `grade INDEX as/ASSESSMENT g/GRADE`
 
-* Record the student’s `GRADE` for the `ASSESSMENT`.
+* Record the student’s `GRADE` for the `ASSESSMENT` based on `INDEX`
+* Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * The input `ASSESSMENT` must be one of the following: RA1, MIDTERM, RA2, PE, FINAL.
 * The input `GRADE` must be a non-negative integer from 0 to 100 inclusive.
 
@@ -339,7 +331,7 @@ Examples:
 ![View Command (after)](images/ug/View%20Command%20(after).PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Avengers can also click on the student card to execute `view` command instead
+Avengers can also click on the student card to execute `view` command instead.
 </div>
 
 #### Displaying the grades for an assessment:  `show`
@@ -354,7 +346,7 @@ Examples:
 * `show RA1`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Avengers can also browse the first menu on the top left (with the paper and pencil symbol) to execute `show` command instead
+Avengers can also browse the first menu on the top left (with the paper and pencil symbol) to execute `show` command instead.
 </div>
 
 #### Visualizing assessments' grades of the entire class: `visualize`
@@ -369,7 +361,7 @@ Format: `visualize`
 ![visualizecommand](images/ug/visualizeCommand.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Avengers can also browse the second menu on the top left (with the chart symbol) to execute `visualize` command instead
+Avengers can also browse the second menu on the top left (with the chart symbol) to execute `visualize` command instead.
 </div>
 
 #### Filtering Academy Directory by name or tag: `filter`
@@ -447,7 +439,7 @@ Example:
 ![undoCommandAfter](images/ug/undoCommandAfter.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Avengers can also browse the third menu on the top left (with the clock symbol) to execute `undo` command instead
+Avengers can also browse the third menu on the top left (with the clock symbol) to execute `undo` command instead.
 </div>
 
 #### Redo changes to Academy Directory: `redo`
@@ -469,7 +461,7 @@ Example:
 ![redoCommand](images/ug/redoCommand.PNG)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Avengers can also browse the third menu on the top left (with the clock symbol) to execute `redo` command instead
+Avengers can also browse the third menu on the top left (with the clock symbol) to execute `redo` command instead.
 </div>
 
 #### Seeking help : `help`
@@ -501,7 +493,7 @@ Examples:
   or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Avengers can also browse the fourth menu on the top left (with the question symbol) to execute a general `help` command instead
+Avengers can also browse the fourth menu on the top left (with the question symbol) to execute a general `help` command instead.
 </div>
 
 #### Exiting the program : `exit`
@@ -541,7 +533,7 @@ Avengers can also browse the third menu on the top left (with the clock symbol) 
 </div>
 
 #### [For Advanced Users] Reverting Commit: `revert`
-Reverts state of Academy Directory to a previous commit
+Reverts state of Academy Directory to a previous commit.
 
 Format: `revert HASH`
 
@@ -567,6 +559,10 @@ Example:
 the data of your previous Academy Directory home folder. Overwrite the version control folder it creates with the version
 control folder of your previous Academy Directory to retain commit history.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Invalid changes to any of the version control files may result in undefined behavior as this is not an intended use case. Proceed at your own risk.
+</div>
+
 **Q**: How do I save my data?<br>
 **A**: Academy Directory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -590,10 +586,6 @@ look at the files in this folder.
 
 **Q**: Why is Telegram a compulsory field and not shown on the student card, yet phone number is optional and is shown on the student card?<br>
 **A**: There are many internal considerations when we design this. Initially, we have planned to put all 3 fields into the student card. However, due to some privacy concerns regarding Telegram handle, as well as the fact that it does not look nice on the card, we decided to remove Telegram out of the card and leave it only for `view`. We may add Telegram again in the future iterations depending on the future.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Invalid changes to any of the version control files may result in undefined behavior as this is not an intended use case. Proceed at your own risk.
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Summary

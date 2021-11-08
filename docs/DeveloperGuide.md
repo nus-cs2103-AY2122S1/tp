@@ -472,7 +472,7 @@ This command edits a `Student`'s personal details such as their `NAME`, `PHONE`,
 
 #### Implementation
 `EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `EditCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `EditCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
 unless the `NAME` is the same  as the `Student` being edited.
@@ -494,7 +494,7 @@ This command serves to update the `Grade` of various `Assessment` that the stude
 #### Implementation
 
 `GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `GradeCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `GradeCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`.
 The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
@@ -510,7 +510,7 @@ This command serves to update the attendance status of students. A student's `At
 #### Implementation
 
 `AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `AttendanceCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `AttendanceCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
 
@@ -529,7 +529,7 @@ This command serves to update the `Participation` score of students. Following t
 #### Implementation
 
 `ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `ParticipationCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `ParticipationCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done.
 
@@ -620,7 +620,7 @@ This command sorts the `AcademyDirectory` student list based on their `Participa
 #### Implementation
 
 `SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-The `SortCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `SortCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
 
@@ -663,7 +663,7 @@ This command clears all `Student` entries from `AcademyDirectory`.
 and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
 Note that this is a singular command - meaning that no argument should follow after `clear`.
 
-The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands)
+The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 ![ClearCommandSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
 
@@ -747,7 +747,7 @@ Because `RevertCommand` has to restore academy directory data which is the respo
 and set the current `VersionedModel` internal data to the newly reloaded data. This is indicated in the sequence diagram
 as the sudden use of `Storage` component directly from `RevertCommand`. This is (highly) not 
 ideal, but the implementer has no idea how to do this properly i.e. without sudden creation of a new `StorageManager`
-... Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
+. Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
 access from elsewhere, and to put this limitation in this documentation to be solved one day. 
 
 ### UndoCommand
