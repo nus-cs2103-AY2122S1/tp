@@ -53,6 +53,7 @@ public class SCallCommand extends Command {
         if (personToIncrement.getCallStatus().isCalledInCurrentSession()) {
             throw new CommandException(MESSAGE_INVALID_MULTIPLE_CALLS);
         }
+
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         model.setPerson(personToIncrement, newPerson);
 

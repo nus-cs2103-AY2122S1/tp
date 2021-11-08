@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.track2gather.commons.core.Messages;
 import seedu.track2gather.commons.core.index.Index;
@@ -32,8 +33,10 @@ public class DeleteCommand extends Command {
      * Creates a DeleteCommand to delete the specified {@code Person}(s)
      */
     public DeleteCommand(List<Index> targetIndices) {
-        targetIndices.sort(Comparator.reverseOrder());
-        this.targetIndices = targetIndices;
+        this.targetIndices = targetIndices.stream()
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
     }
 
     @Override

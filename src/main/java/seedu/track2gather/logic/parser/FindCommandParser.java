@@ -58,40 +58,40 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] keywords = value.split("\\s+");
         List<String> keywordList = Arrays.asList(keywords);
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            boolean areValidNames = keywordList.stream().allMatch(Name::isValidName);
-            if (!areValidNames) {
+            boolean areValidNameKeywords = keywordList.stream().allMatch(Name::isValidName);
+            if (!areValidNameKeywords) {
                 throw new ParseException(Name.MESSAGE_CONSTRAINTS_KEYWORDS);
             }
             return new FindCommand(new NameContainsKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            boolean areValidPhones = keywordList.stream().allMatch(Phone::isValidPhoneKeyword);
-            if (!areValidPhones) {
+            boolean areValidPhoneKeywords = keywordList.stream().allMatch(Phone::isValidPhoneKeyword);
+            if (!areValidPhoneKeywords) {
                 throw new ParseException(Phone.MESSAGE_CONSTRAINTS_KEYWORDS);
             }
             return new FindCommand(new PhoneStartsWithKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_CASE_NUMBER).isPresent()) {
-            boolean areValidCaseNumbers = keywordList.stream().allMatch(CaseNumber::isValidCaseNumber);
-            if (!areValidCaseNumbers) {
+            boolean areValidCaseNumberKeywords = keywordList.stream().allMatch(CaseNumber::isValidCaseNumber);
+            if (!areValidCaseNumberKeywords) {
                 throw new ParseException(CaseNumber.MESSAGE_CONSTRAINTS_KEYWORDS);
             }
             return new FindCommand(new CaseNumberEqualsKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
-            boolean areValidDates = keywordList.stream().allMatch(Period::isValidDate);
-            if (!areValidDates) {
+            boolean areValidDateKeywords = keywordList.stream().allMatch(Period::isValidDate);
+            if (!areValidDateKeywords) {
                 throw new ParseException(Period.MESSAGE_CONSTRAINTS_DATE_KEYWORDS);
             }
             return new FindCommand(new ShnPeriodStartEqualsKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
-            boolean areValidDates = keywordList.stream().allMatch(Period::isValidDate);
-            if (!areValidDates) {
+            boolean areValidDateKeywords = keywordList.stream().allMatch(Period::isValidDate);
+            if (!areValidDateKeywords) {
                 throw new ParseException(Period.MESSAGE_CONSTRAINTS_DATE_KEYWORDS);
             }
             return new FindCommand(new ShnPeriodEndEqualsKeywordsPredicate(keywordList));
