@@ -45,6 +45,8 @@ skinparam Shadowing false
 
 skinparam Class {
     FontColor #000000
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
     BorderThickness 1
     BorderColor #FFFFFFF
     StereotypeFontColor #000000
