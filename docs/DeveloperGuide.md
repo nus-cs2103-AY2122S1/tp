@@ -7,14 +7,15 @@ title: Developer Guide
 
 1. [Acknowledgements](#Acknowledgements)
 2. [Setting up, getting started](#Setting up)
-3. [Design](#Design)
-4. [Architecture](#Architecture)
-5. [UI Components](#UI component)
-6. [Logic Component](#Logic component)
-7. [Model Component](#Model component)
-8. [Storage component](#Storage component)
-9. [Common Classes](#Common Classes)
-10. [Implementations](#Implementations)
+3. [Glossary](#Glossary)
+4. [Design](#Design)
+5. [Architecture](#Architecture)
+6. [UI Components](#UI component)
+7. [Logic Component](#Logic component)
+8. [Model Component](#Model component)
+9. [Storage component](#Storage component)
+10. [Common Classes](#Common Classes)
+11. [Implementations](#Implementations)
     1. [\[Proposed\] `Undo`/`Redo` Feature](#undoredo)
     2. [`Add` Student Feature](#add student)
     3. [`Filter` Student List Feature](#filter student)
@@ -22,11 +23,11 @@ title: Developer Guide
     5. [`Edit` Lab Feature](#edit lab)
     6. [`Download` Data Feature](#download data)
     7. [`Purge` Feature](#purge data)
-11. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
-12. [Appendix: Requirements](#Appendix Requirements)
+12. [Documentation, logging, testing, configuration, dev-ops](#Documentation)
+13. [Appendix: Requirements](#Appendix Requirements)
     1. [Product Scope](#Product Scope)
-13. [User Stories](#User Stories)
-14. [Use Cases](#Use Cases)
+14. [User Stories](#User Stories)
+15. [Use Cases](#Use Cases)
     1. [Use Case: UC1 Purge/Delete all sample student records](#Use Case1)
     2. [Use Case: UC2 Create a student record](#Use Case2)
     3. [Use Case: UC3 View a student record](#Use Case3)
@@ -35,8 +36,7 @@ title: Developer Guide
     6. [Use Case: UC6 Download student records](#Use Case6)
     7. [Use Case: UC7 Create a lab record](#Use Case7)
     8. [Use Case: UC8 Edit a lab record](#Use Case8)
-15. [Non-Functional Requirements](#Non-Functional Requirements)
-16. [Glossary](#Glossary)
+16. [Non-Functional Requirements](#Non-Functional Requirements)
 17. [Appendix: Instructions for Manual Testing](#Appendix Testing)
     1. [Launch and Shutdown](#Launch and Shutdown)
     2. [Deleting a Student](#Del student)
@@ -68,7 +68,16 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Design"></a> **3. Design**
+## <a name="Glossary"></a> **3. Glossary**
+
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
+- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
+- **TA**: A CS2100 teaching assistant
+- **PE**: ProgrammerError
+--------------------------------------------------------------------------------------------------------------------
+
+## <a name="Design"></a> **4. Design**
 
 <div markdown="span" class="alert alert-primary">
 
@@ -76,7 +85,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 the [diagrams](https://github.com/AY2122S1-CS2103-F09-3/tp/tree/master/docs/diagrams) folder.
 </div>
 
-## <a name="Architecture"></a> **4. Architecture**
+## <a name="Architecture"></a> **5. Architecture**
 
 <img src="images/ArchitectureDiagram.png" width="280"/>
 
@@ -125,7 +134,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-## <a name="UI component"></a> **5. UI component**
+## <a name="UI component"></a> **6. UI component**
 
 The **API** of this component is specified
 in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/ui/Ui.java)
@@ -174,7 +183,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
-## <a name="Logic component"></a> **6. Logic component**
+## <a name="Logic component"></a> **7. Logic component**
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -212,7 +221,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-## <a name="Model component"></a> **7. Model component**
+## <a name="Model component"></a> **8. Model component**
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/model/Model.java)
 
@@ -236,7 +245,7 @@ The `Model` component,
 
 </div>
 
-## <a name="Storage component"></a> **8. Storage component**
+## <a name="Storage component"></a> **9. Storage component**
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-3/tp/blob/master/src/main/java/seedu/programmer/storage/Storage.java)
 
@@ -251,13 +260,13 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-## <a name="Common classes"></a> **9. Common classes**
+## <a name="Common classes"></a> **10. Common classes**
 
 Classes used by multiple components are in the `seedu.programmer.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Implementations"></a> **10. Implementation**
+## <a name="Implementations"></a> **11. Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -678,7 +687,7 @@ This sequence diagram shows how the `purge` command works:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Documentation"></a> **11. Documentation, logging, testing, configuration, dev-ops**
+## <a name="Documentation"></a> **12. Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -688,7 +697,7 @@ This sequence diagram shows how the `purge` command works:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <a name="Appendix Requirements"></a> **12. Appendix: Requirements**
+## <a name="Appendix Requirements"></a> **13. Appendix: Requirements**
 
 ### <a name="Product Scope"></a> **Product Scope**
 
@@ -709,7 +718,7 @@ CS2100 Lab TAs who
 
 CS2100 Lab TAs who use ProgrammerError enjoys greater productivity and efficiency when managing their classes of students.
 
-## <a name="User Stories"></a> **13. User Stories**
+## <a name="User Stories"></a> **14. User Stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -743,7 +752,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a CS2100 TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
-## <a name="Use Cases"></a> **14. Use Cases**
+## <a name="Use Cases"></a> **15. Use Cases**
 
 For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless otherwise specified.
@@ -917,7 +926,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
   Use case ends.
 
 
-## <a name="Non-Functional Requirements"></a> **15. Non-Functional Requirements**
+## <a name="Non-Functional Requirements"></a> **16. Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands
@@ -934,13 +943,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions
    1280x720 and higher, and screen scales 150%.
 
-## <a name="Glossary"></a> **16. Glossary**
 
-- **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Student ID**: An NUS student's matriculation number (AXXXXXXXY)
-- **Email**: An NUS student email (eXXXXXXX@u.nus.edu)
-- **TA**: A CS2100 teaching assistant
-- **PE**: ProgrammerError
 
 --------------------------------------------------------------------------------------------------------------------
 
