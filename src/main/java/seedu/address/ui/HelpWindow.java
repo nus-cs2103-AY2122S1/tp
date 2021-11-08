@@ -22,7 +22,7 @@ import seedu.address.logic.commands.util.CommandSummary;
 import seedu.address.ui.util.TableUtil;
 
 /**
- * Controller for a help page
+ * Controller for a help page.
  */
 public class HelpWindow extends ExternalWindow {
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html";

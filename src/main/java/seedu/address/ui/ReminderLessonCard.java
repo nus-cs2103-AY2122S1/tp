@@ -9,6 +9,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.lesson.Lesson;
 
+/**
+ * A UI component that displays relevant information of lesson in the Reminder list.
+ */
 public class ReminderLessonCard extends UiPart<Region> {
 
     private static final String FXML = "ReminderLessonCard.fxml";
