@@ -934,5 +934,5 @@ The following is a non-exhaustive list of challenges we encountered during the d
   4. **Implementing Dynamic Features**
   - AB3's features typically work by having the user type in text commands to be executed. We felt this was core, but we wanted to go a step further and implement our features to minimise the TA having to type unecessary commands.
   - For instance, the list of students always remains sorted whenever updates are made to the student data. This required many checks and careful organization of the student data so that the sorting can be done efficiently at minimal cost to the user TA.
-  - Additionally, the `show` and `dashboard` feature were also designed to update dynamically whenever changes are made to the student data. This saves the TA much time in keeping track of the labs they have yet to mark, thereby enhancing their user experience and satisfaction.
+  - Additionally, the `show` panel and `dashboard` window were also designed to update dynamically whenever changes are made to the student data. This saves the TA much time in keeping track of the labs they have yet to mark, thereby enhancing their user experience and satisfaction.
 
