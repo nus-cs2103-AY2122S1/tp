@@ -32,6 +32,6 @@ Given below are my contributions to the project:
       * Added implementation details for the `sortorders` feature.
       * Maintained Use Cases and the Glossary.
       
-* **Review/mentoring contributions**:
+* * **Review/mentoring contributions**:
     * PRs reviewed (with non-trivial comments): [\#273](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/273), [\#247](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/247), [\#119](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/119), [\#287](https://github.com/AY2122S1-CS2103T-W08-3/tp/pull/287)
     
