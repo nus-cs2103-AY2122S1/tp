@@ -1,0 +1,9 @@
+{
+  "positions" : [ {
+    "title" : "invalid position acc-manager",
+    "positionStatus" : "OPEN"
+  }, {
+    "title" : "valid position account manager",
+    "positionStatus" : "OPEN"
+  } ]
+}

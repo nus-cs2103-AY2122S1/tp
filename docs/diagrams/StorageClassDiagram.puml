@@ -14,12 +14,19 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "HrManager Storage" #F4F6F6{
+Interface HrManagerStorage <<Interface>>
+Class JsonHrManagerStorage
+Class JsonSerializableHrManagerCandidates
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonSerializableHrManagerPositions
+Class JsonAdaptedPosition
+Class JsonAdaptedTitle
+Class PositionStatus
+Class JsonSerializableHrManagerInterviews
+Class JsonAdaptedInterview
+Class InterviewStatus
 }
 
 }
@@ -29,15 +36,88 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" HrManagerStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> HrManagerStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonHrManagerStorage .up.|> HrManagerStorage
+
+JsonHrManagerStorage ..> JsonSerializableHrManagerCandidates
+JsonSerializableHrManagerCandidates --> "*" JsonAdaptedPerson
+JsonAdaptedPerson --> "*" JsonAdaptedPosition
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonHrManagerStorage ..> JsonSerializableHrManagerPositions
+JsonSerializableHrManagerPositions --> "*" JsonAdaptedTitle
+JsonSerializableHrManagerPositions --> "1" PositionStatus
+
+JsonHrManagerStorage ..> JsonSerializableHrManagerInterviews
+
+JsonSerializableHrManagerInterviews --> "*" JsonAdaptedInterview
+JsonAdaptedInterview --> "1" InterviewStatus
+
+@enduml
+
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage{
+
+package "UserPrefs Storage" #F4F6F6{
+Interface UserPrefsStorage <<Interface>>
+Class JsonUserPrefsStorage
+}
+
+Interface Storage <<Interface>>
+Class StorageManager
+
+package "HrManager Storage" #F4F6F6{
+Interface HrManagerStorage <<Interface>>
+Class JsonHrManagerStorage
+Class JsonSerializableHrManagerCandidates
+Class JsonAdaptedPerson
+Class JsonAdaptedTag
+Class JsonSerializableHrManagerPositions
+Class JsonAdaptedPosition
+Class JsonAdaptedTitle
+Class PositionStatus
+Class JsonSerializableHrManagerInterviews
+Class JsonAdaptedInterview
+Class InterviewStatus
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Storage
+
+StorageManager .up.|> Storage
+StorageManager -up-> "1" UserPrefsStorage
+StorageManager -up-> "1" HrManagerStorage
+
+Storage -left-|> UserPrefsStorage
+Storage -right-|> HrManagerStorage
+
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonHrManagerStorage .up.|> HrManagerStorage
+
+JsonHrManagerStorage ..> JsonSerializableHrManagerCandidates
+JsonSerializableHrManagerCandidates --> "*" JsonAdaptedPerson
+JsonAdaptedPerson --> "*" JsonAdaptedPosition
+JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonHrManagerStorage ..> JsonSerializableHrManagerPositions
+JsonSerializableHrManagerPositions --> "*" JsonAdaptedTitle
+JsonSerializableHrManagerPositions --> "1" PositionStatus
+
+JsonHrManagerStorage ..> JsonSerializableHrManagerInterviews
+
+JsonSerializableHrManagerInterviews --> "*" JsonAdaptedInterview
+JsonAdaptedInterview --> "1" InterviewStatus
 
 @enduml

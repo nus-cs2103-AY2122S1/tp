@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include style.puml
+
+skinparam class {
+    FontColor white
+    StereotypeFontColor white
+    BorderColor transparent
+    ArrowColor LOGIC_COLOR
+}
+
+class Parser << Interface >> LOGIC_COLOR
+class Command LOGIC_COLOR
+class AddXCommandParser LOGIC_COLOR
+class AddXCommand LOGIC_COLOR
+
+skinparam shadowing false
+
+Parser <|.. AddXCommandParser
+Command <|-- AddXCommand
+
+hide methods
+hide fields
+hide circle
+
+@enduml

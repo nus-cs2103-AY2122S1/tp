@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HRManagerParser" as HRManagerParser LOGIC_COLOR
+participant ":ListXCommand" as ListXCommand LOGIC_COLOR
+
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+
+ -> MainWindow : executeCommand
+MainWindow-> LogicManager : execute(list_x ...)
+activate MainWindow
+
+activate LogicManager
+
+LogicManager -> HRManagerParser : parseCommand(list_x ...)
+activate HRManagerParser
+
+create ListXCommand
+HRManagerParser -> ListXCommand
+activate ListXCommand
+deactivate ListXCommand
+HRManagerParser --> LogicManager : ListXCommand
+deactivate HRManagerParser
+
+LogicManager -> ListXCommand : execute(model)
+
+
+ListXCommand -> ModelManager : updateFilteredXList
+activate ModelManager
+ModelManager --> ListXCommand
+deactivate ModelManager
+
+ListXCommand --> LogicManager : CommandResult
+deactivate ListXCommand
+
+
+LogicManager --> MainWindow
+
+@enduml

@@ -14,7 +14,9 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path hrManagerCandidatesFilePath = Paths.get("data" , "candidates.json");
+    private Path hrManagerPositionsFilePath = Paths.get("data" , "positions.json");
+    private Path hrManagerInterviewsFilePath = Paths.get("data" , "interviews.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +37,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setHrManagerCandidatesFilePath(newUserPrefs.getHrManagerCandidatesFilePath());
+        setHrManagerPositionsFilePath(newUserPrefs.getHrManagerPositionsFilePath());
+        setHrManagerInterviewsFilePath(newUserPrefs.getHrManagerInterviewsFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,14 +51,33 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getHrManagerCandidatesFilePath() {
+        return hrManagerCandidatesFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public Path getHrManagerPositionsFilePath() {
+        return hrManagerPositionsFilePath;
     }
+
+    public Path getHrManagerInterviewsFilePath() {
+        return hrManagerInterviewsFilePath;
+    }
+
+    public void setHrManagerCandidatesFilePath(Path hrManagerCandidatesFilePath) {
+        requireNonNull(hrManagerCandidatesFilePath);
+        this.hrManagerCandidatesFilePath = hrManagerCandidatesFilePath;
+    }
+
+    public void setHrManagerPositionsFilePath(Path hrManagerPositionsFilePath) {
+        requireNonNull(hrManagerPositionsFilePath);
+        this.hrManagerPositionsFilePath = hrManagerPositionsFilePath;
+    }
+
+    public void setHrManagerInterviewsFilePath(Path hrManagerInterviewsFilePath) {
+        requireNonNull(hrManagerInterviewsFilePath);
+        this.hrManagerInterviewsFilePath = hrManagerInterviewsFilePath;
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -68,20 +91,23 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && hrManagerCandidatesFilePath.equals(o.hrManagerCandidatesFilePath)
+                && hrManagerPositionsFilePath.equals(o.hrManagerPositionsFilePath)
+                && hrManagerInterviewsFilePath.equals(o.hrManagerInterviewsFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, hrManagerCandidatesFilePath, hrManagerPositionsFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal candidates data file location : " + hrManagerCandidatesFilePath);
+        sb.append("\nLocal positions data file location : " + hrManagerPositionsFilePath);
+        sb.append("\nLocal interviews data file location : " + hrManagerInterviewsFilePath);
         return sb.toString();
     }
-
 }

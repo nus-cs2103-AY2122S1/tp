@@ -1,0 +1,10 @@
+{
+  "interviews" : [ {
+    "position" : "Valid position",
+    "candidateIDs" : [ "-550871537", "-2024498055", "-1834523193" ],
+    "date" : "15/10/2021",
+    "startTime" : "1400",
+    "duration" : "120",
+    "status" : "PENDING"
+  } ]
+}

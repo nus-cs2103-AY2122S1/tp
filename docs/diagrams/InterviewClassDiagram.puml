@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Interview <<Rectangle>>{
+
+
+Class Interview {
+    <color:#white> LocalTime startTime
+    <color:#white> LocalDate date
+    <color:#white> Duration duration
+    <color:#white> Set<Integer> candidateIDs
+}
+Class InterviewStatus<<enumeration>> {
+    <color:#white>PENDING
+    <color:#white>COMPLETED
+}
+Class Person
+Class Position
+Class Interview
+
+Interview --> "*" Person
+Interview --> "1" Position
+Interview --> "1" InterviewStatus
+
+}
+
+show Interview fields
+show InterviewStatus fields
+
+@enduml

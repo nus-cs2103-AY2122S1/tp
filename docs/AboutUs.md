@@ -5,55 +5,68 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Xu Jiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeffzincatz.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/JeffZincatz)] [[portfolio](team/jeffzincatz.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities:
+  * Position and interview modelling
+  * List commands (`list_p` and `list_i`)
+  * Refactoring GUI components
+  * Formatting for UG and DG
+  * Reviewing PRs
 
-### Jean Doe
+### Chua Sue-Ann
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sueann-chua.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/sueann-chua)] [[portfolio](team/sueann-chua.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+    * Edit and Assign commands (`edit_p`, `edit_i` and `assign`)
+    * Proofreading changes to UG and DG
+
+### Mohamed Noriman
+
+<img src="images/seaweediman.png" width="200px">
+
+[[github](http://github.com/seaweediman)] [[portfolio](team/seaweediman.md)]
+
+* Role: Developer
+* Responsibilities:
+  * Remark candidate command (`remark_c`)
+  * Add position command (`add_p`)
+  * Delete interview command (`delete_i`)
+  * 'Unassign' command (`unassign`)
+  * Reviewing PRs
+
+### Liu Wanyu
+
+<img src="images/wanyu-l.png" width="200px">
+
+[[github](http://github.com/wanyu-l)] [[portfolio](team/wanyu-l.md)]
+
+* Role: Developer
+* Responsibilities:
+  * Draft Position Model
+  * Changes to Storage Component
+  * Delete position command (`delete_p`)
+  * Add interview command (`add_i`)
+  * Code tests
+
+### Nobel Ang
+
+<img src="images/angnobel.png" width="200px">
+
+[[github](http://github.com/angnobel)] [[portfolio](team/angnobel.md)]
+
+* Role: Developer
+* Responsibilities:
+    * Handle Github issues and milestones
+    * `find_x` command, documentation and tests

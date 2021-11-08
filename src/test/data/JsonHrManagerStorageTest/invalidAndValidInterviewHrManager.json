@@ -1,0 +1,17 @@
+{
+  "interviews" : [ {
+    "position" : "Accountant",
+    "candidateIDs" : [ "-550871537", "-2024498055" ],
+    "date" : "15/10/2021",
+    "startTime" : "1400",
+    "duration" : "120",
+    "status" : "PENDING"
+  }, {
+    "position" : "Invalid position acc-Manager",
+    "candidateIDs" : [ "-550871537", "-2024498055", "-1834523193" ],
+    "date" : "2021/10/15",
+    "startTime" : "14:00",
+    "duration" : "PT1H20M",
+    "status" : "PENDING"
+  } ]
+}

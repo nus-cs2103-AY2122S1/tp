@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":DisplayListPanel" as displayListPanel UI_COLOR
+participant "listLabel:Label" as listLabel UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+
+participant ":FindXCommand" as FindXCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+activate MainWindow
+MainWindow -> FindXCommand : execute
+activate FindXCommand
+
+FindXCommand -> Model : updateFilteredPersonList
+activate Model
+Model --> FindXCommand
+deactivate Model
+FindXCommand --> MainWindow : CommandResult
+deactivate FindXCommand
+FindXCommand -[hidden]-> MainWindow : CommandResult
+destroy FindXCommand
+
+MainWindow -> MainWindow : handleFindX
+activate MainWindow
+
+create displayListPanel
+MainWindow -> displayListPanel
+activate displayListPanel
+displayListPanel --> MainWindow
+deactivate displayListPanel
+
+MainWindow -> listLabel : setText("X (filtered)")
+activate listLabel
+listLabel --> MainWindow
+deactivate listLabel
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+@enduml

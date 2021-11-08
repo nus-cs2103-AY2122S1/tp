@@ -1,19 +1,26 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.candidate.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.candidate.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.candidate.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.candidate.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.candidate.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class PersonTest {
 
@@ -31,23 +38,31 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name, same phone number, same email, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
+        // different name, all other attributes same -> same email -> returns true
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        //different phone, all other attributes same -> same email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        //different email, all other attributes same -> return false
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> same email -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> same email -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -87,5 +102,46 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different remarks -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark("Hello").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different positions -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark("Admin Assistant").build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void appliedForPosition() {
+        //ALICE initially has position HR Manager
+        assertTrue(ALICE.appliedForPosition(new Position(new Title("Accountant"))));
+
+        assertFalse(ALICE.appliedForPosition(new Position(new Title("Bookkeeper"))));
+
+        //ALICE now has positions, Bookkeeper and Admin Assistant
+        Person editedAlice = new PersonBuilder(ALICE).withPositions("Bookkeeper", "Admin Assistant").build();
+
+        assertFalse(editedAlice.appliedForPosition(new Position(new Title("HR Manager"))));
+        assertTrue(editedAlice.appliedForPosition(new Position(new Title("Bookkeeper"))));
+        assertTrue(editedAlice.appliedForPosition(new Position(new Title("Admin Assistant"))));
+
+    }
+
+    @Test
+    public void deletePosition() {
+        Person editedAlice = new PersonBuilder(ALICE).withPositions("Bookkeeper", "Admin Assistant").build();
+
+        Position aa = new Position(new Title("Admin Assistant"));
+        Position bk = new Position(new Title("Bookkeeper"));
+
+        editedAlice.deletePosition(aa);
+        //editedAlice now no longer has AA in its positions
+        assertFalse(editedAlice.appliedForPosition(aa));
+
+        Set<Position> positions = new HashSet<>();
+        positions.add(bk);
+        //editedAlice now only has BK in its positions
+        assertEquals(positions, editedAlice.getPositions());
     }
 }

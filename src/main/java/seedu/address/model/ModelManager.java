@@ -11,34 +11,41 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
+import seedu.address.model.position.Position;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the HR Manager data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final HrManager hrManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Position> filteredPositions;
+    private final FilteredList<Interview> filteredInterviews;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyHrManager hrManager, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(hrManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with HR Manager: " + hrManager + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.hrManager = new HrManager(hrManager);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.hrManager.getPersonList());
+        filteredPositions = new FilteredList<>(this.hrManager.getPositionList());
+        filteredInterviews = new FilteredList<>(this.hrManager.getInterviewList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new HrManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +73,190 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getHrManagerCandidatesFilePath() {
+        return userPrefs.getHrManagerCandidatesFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
-
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public Path getHrManagerPositionsFilePath() {
+        return userPrefs.getHrManagerPositionsFilePath();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public Path getHrManagerInterviewsFilePath() {
+        return userPrefs.getHrManagerInterviewsFilePath();
+    }
+
+    @Override
+    public void setHrManagerCandidatesFilePath(Path hrManagerCandidatesFilePath) {
+        requireNonNull(hrManagerCandidatesFilePath);
+        userPrefs.setHrManagerCandidatesFilePath(hrManagerCandidatesFilePath);
+    }
+
+    @Override
+    public void setHrManagerPositionsFilePath(Path hrManagerPositionsFilePath) {
+        requireNonNull(hrManagerPositionsFilePath);
+        userPrefs.setHrManagerPositionsFilePath(hrManagerPositionsFilePath);
+    }
+
+    @Override
+    public void setHrManagerInterviewsFilePath(Path hrManagerInterviewsFilePath) {
+        requireNonNull(hrManagerInterviewsFilePath);
+        userPrefs.setHrManagerInterviewsFilePath(hrManagerInterviewsFilePath);
+    }
+
+    //=========== HrManager ================================================================================
+
+    @Override
+    public void setHrManager(ReadOnlyHrManager hrManager) {
+        this.hrManager.resetData(hrManager);
+    }
+
+    @Override
+    public ReadOnlyHrManager getHrManager() {
+        return hrManager;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return hrManager.hasPerson(person);
+    }
+
+    @Override
+    public Person getPerson(Index index) {
+        return hrManager.getPerson(index);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        hrManager.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        hrManager.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        hrManager.setPerson(target, editedPerson);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public boolean hasPosition(Position position) {
+        requireNonNull(position);
+        return hrManager.hasPosition(position);
+    }
+
+    @Override
+    public Position getPositionReference(Position position) {
+        return hrManager.getPosition(position);
+    }
+
+    @Override
+    public void deletePosition(Position target) {
+        hrManager.removePosition(target);
+    }
+
+    @Override
+    public void addPosition(Position position) {
+        hrManager.addPosition(position);
+        updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
+    }
+
+    @Override
+    public void setPosition(Position target, Position editedPosition) {
+        requireAllNonNull(target, editedPosition);
+        hrManager.setPosition(target, editedPosition);
+    }
+
+    public void deletePositionFromPerson(Position p) {
+        hrManager.deletePositionFromPerson(p);
+    }
+
+    public boolean isPositionClosed(Position toCheck) {
+        return hrManager.isPositionClosed(toCheck);
+    }
+
+    @Override
+    public boolean hasInterview(Interview interview) {
+        requireNonNull(interview);
+        return hrManager.hasInterview(interview);
+    }
+
+    @Override
+    public void deleteInterview(Interview target) {
+        hrManager.removeInterview(target);
+    }
+
+    @Override
+    public void addInterview(Interview interview) {
+        hrManager.addInterview(interview);
+        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
+    }
+
+    @Override
+    public void setInterview(Interview target, Interview editedInterview) {
+        requireAllNonNull(target, editedInterview);
+        hrManager.setInterview(target, editedInterview);
+    }
+
+    public void deleteInterviewFromPerson(Interview interview) {
+        hrManager.deleteInterviewFromPerson(interview);
+    }
+
+    public void deletePersonFromInterview(Person person) {
+        hrManager.deletePersonFromInterview(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedHrManager}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Position} backed by the internal list of
+     * {@code versionedHrManager}
+     */
+    @Override
+    public ObservableList<Position> getFilteredPositionList() {
+        return filteredPositions;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Interview} backed by the internal list of
+     * {@code versionedHrManager}
+     */
+    @Override
+    public ObservableList<Interview> getFilteredInterviewList() {
+        return filteredInterviews;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPositionList(Predicate<Position> predicate) {
+        requireNonNull(predicate);
+        filteredPositions.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredInterviewList(Predicate<Interview> predicate) {
+        requireNonNull(predicate);
+        filteredInterviews.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +273,11 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return hrManager.equals(other.hrManager)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredPositions.equals(other.filteredPositions)
+                && filteredInterviews.equals(other.filteredInterviews);
     }
 
 }

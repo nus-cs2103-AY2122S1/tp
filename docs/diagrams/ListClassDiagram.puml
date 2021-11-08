@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+package Logic {
+    Class HrManagerParser
+    Class ListXCommand
+    Class CommandResult
+    Class "{abstract}\nCommand" as Command
+    Class LogicManager
+    Interface Logic <<Interface>>
+}
+
+package Model {
+    Class ModelManager MODEL_COLOR
+}
+
+package UI  {
+    Class MainWindow UI_COLOR
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Logic
+
+MainWindow ..> CommandResult
+
+LogicManager .right.|> Logic
+LogicManager -right->"1" HrManagerParser
+'HrManagerParser ..> ListXCommandPredicate : creates >
+
+ListXCommand -right-> ModelManager
+
+ListXCommand -up-|> Command
+LogicManager .left.> Command : executes >
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+Command .up.> CommandResult : produces >
+
+MainWindow --> Logic
+
+
+@enduml

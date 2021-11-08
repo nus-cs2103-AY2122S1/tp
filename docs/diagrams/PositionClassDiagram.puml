@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam PositionStatus fields MODEL_COLOR
+
+Package Position <<Rectangle>> {
+
+Class Position
+Class Title
+
+class PositionStatus<<enumeration>> {
+  <color:#white>OPEN
+  <color:#white>CLOSED
+}
+
+
+show PositionStatus fields
+skinparam PositionStatus MODEL_COLOR
+
+}
+
+Position --> "1" Title
+Position --> PositionStatus
+
+
+@enduml

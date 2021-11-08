@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant "xListPanel:XListPanel" as XListPanel UI_COLOR
+participant "xListLabel:Label" as XListLabel UI_COLOR
+end box
+
+activate MainWindow
+
+MainWindow -> MainWindow : handleListX
+activate MainWindow
+
+create XListPanel
+MainWindow -> XListPanel
+activate XListPanel
+XListPanel --> MainWindow
+deactivate XListPanel
+
+MainWindow -> XListLabel : setText("X")
+activate XListLabel
+XListLabel --> MainWindow
+deactivate XListLabel
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+@enduml

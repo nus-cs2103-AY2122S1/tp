@@ -3,10 +3,16 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POSITIONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInterviews.ASSISTANT_INTERVIEW;
+import static seedu.address.testutil.TypicalInterviews.BOOKKEEPER_INTERVIEW;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPositions.ADMIN_ASSISTANT;
+import static seedu.address.testutil.TypicalPositions.BOOKKEEPER;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,8 +21,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.model.interview.PositionTitleContainsKeywordsPredicate;
+import seedu.address.model.person.FindCandidateCommandPredicate;
+import seedu.address.model.position.TitleContainsKeywordsPredicate;
+import seedu.address.testutil.HrManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +34,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new HrManager(), new HrManager(modelManager.getHrManager()));
     }
 
     @Test
@@ -37,14 +45,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setHrManagerCandidatesFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setHrManagerCandidatesFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +69,39 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setHrManagerCandidateFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setHrManagerCandidatesFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setHrManagerCandidateFilePath_validPath_setsHrManagerCandidateFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setHrManagerCandidatesFilePath(path);
+        assertEquals(path, modelManager.getHrManagerCandidatesFilePath());
+    }
+
+    @Test
+    public void setHrManagerPositionsFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setHrManagerPositionsFilePath(null));
+    }
+
+    @Test
+    public void setHrManagerPositionsFilePath_validPath_setsHrManagerPositionsFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setHrManagerPositionsFilePath(path);
+        assertEquals(path, modelManager.getHrManagerPositionsFilePath());
+    }
+
+    @Test
+    public void setHrManagerInterviewsFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setHrManagerInterviewsFilePath(null));
+    }
+
+    @Test
+    public void setHrManagerInterviewsFilePath_validPath_setsHrManagerInterviewsFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setHrManagerInterviewsFilePath(path);
+        assertEquals(path, modelManager.getHrManagerInterviewsFilePath());
     }
 
     @Test
@@ -78,12 +110,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInHrManager_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInHrManager_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -94,14 +126,60 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasPosition_nullPosition_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasPosition(null));
+    }
+
+    @Test
+    public void hasPosition_positionNotInHrManager_returnsFalse() {
+        assertFalse(modelManager.hasPosition(ADMIN_ASSISTANT));
+    }
+
+    @Test
+    public void hasPosition_positionInHrManager_returnsTrue() {
+        modelManager.addPosition(ADMIN_ASSISTANT);
+        assertTrue(modelManager.hasPosition(ADMIN_ASSISTANT));
+    }
+
+    @Test
+    public void getFilteredPositionList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPositionList().remove(0));
+    }
+
+    @Test
+    public void hasInterview_nullInterview_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasInterview(null));
+    }
+
+    @Test
+    public void hasInterview_interviewNotInHrManager_returnsFalse() {
+        assertFalse(modelManager.hasInterview(ASSISTANT_INTERVIEW));
+    }
+
+    @Test
+    public void hasInterview_interviewInHrManager_returnsTrue() {
+        modelManager.addInterview(ASSISTANT_INTERVIEW);
+        assertTrue(modelManager.hasInterview(ASSISTANT_INTERVIEW));
+    }
+
+    @Test
+    public void getFilteredInterviewList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredInterviewList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        HrManager hrManager = new HrManagerBuilder()
+                .withPerson(ALICE).withPerson(BENSON)
+                .withPosition(ADMIN_ASSISTANT).withPosition(BOOKKEEPER)
+                .withInterview(ASSISTANT_INTERVIEW).withInterview(BOOKKEEPER_INTERVIEW)
+                .build();
+        HrManager differentHrManager = new HrManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(hrManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(hrManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +191,30 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different hrManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentHrManager, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.updateFilteredPersonList(new FindCandidateCommandPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(hrManager, userPrefs)));
+
+        String[] keywordsTitle = ADMIN_ASSISTANT.getTitle().fullTitle.split("\\s+");
+        modelManager.updateFilteredPositionList(new TitleContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(hrManager, userPrefs)));
+
+        String[] keywordsInterviewPositionTitle = ADMIN_ASSISTANT.getTitle().fullTitle.split("\\s+");
+        modelManager.updateFilteredInterviewList(new PositionTitleContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(hrManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
+        modelManager.updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setHrManagerCandidatesFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(hrManager, differentUserPrefs)));
     }
 }

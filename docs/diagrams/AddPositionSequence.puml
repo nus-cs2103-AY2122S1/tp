@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":HRManagerParser" as HRManagerParser LOGIC_COLOR
+participant ":AddPositionCommandParser" as AddPositionCommandParser LOGIC_COLOR
+participant "command:AddPositionCommand" as AddPositionCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add_p title=Accountant")
+activate LogicManager
+
+LogicManager -> HRManagerParser : parseCommand("add_p title=Accountant")
+activate HRManagerParser
+
+create AddPositionCommandParser
+HRManagerParser -> AddPositionCommandParser
+activate AddPositionCommandParser
+
+AddPositionCommandParser --> HRManagerParser
+deactivate AddPositionCommandParser
+
+HRManagerParser -> AddPositionCommandParser : parse("title=Accountant")
+activate AddPositionCommandParser
+
+create AddPositionCommand
+AddPositionCommandParser -> AddPositionCommand
+activate AddPositionCommand
+
+AddPositionCommand --> AddPositionCommandParser : command
+deactivate AddPositionCommand
+
+AddPositionCommandParser --> HRManagerParser : command
+deactivate AddPositionCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddPositionCommandParser -[hidden]-> HRManagerParser
+destroy AddPositionCommandParser
+
+HRManagerParser --> LogicManager : command
+deactivate HRManagerParser
+
+LogicManager -> AddPositionCommand : execute()
+activate AddPositionCommand
+
+AddPositionCommand -> Model : hasPosition(p)
+activate Model
+AddPositionCommand -> Model : addPosition(p)
+Model --> AddPositionCommand
+
+deactivate Model
+
+create CommandResult
+AddPositionCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPositionCommand
+deactivate CommandResult
+
+AddPositionCommand --> LogicManager : result
+deactivate AddPositionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

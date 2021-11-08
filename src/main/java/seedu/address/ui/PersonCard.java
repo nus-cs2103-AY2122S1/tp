@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -40,6 +41,14 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label remark;
+    @FXML
+    private Label status;
+    @FXML
+    private FlowPane positions;
+    @FXML
+    private Label interviews;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,9 +61,34 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        remark.setText(person.getRemark().value);
+        status.setText(person.getStatus().toString());
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getPositions().stream()
+                .sorted(Comparator.comparing(position -> position.getTitle().fullTitle))
+                .forEach(position -> positions.getChildren().add(new Label(position.getTitle().fullTitle + " ")));
+
+        //instead of individual labels with wrap text, create one label with all interviews and then wrap
+        StringBuilder stringBuilder = new StringBuilder();
+        person.getInterviews().stream()
+                .sorted(Comparator.comparing(Interview::getDate))
+                .forEach(interview -> {
+                    String temp = interview.getDisplayStringWithoutNames();
+                    for (int i = 0; i < temp.length(); i += 60) {
+                        if (i + 60 < temp.length()) {
+                            stringBuilder.append(temp.substring(i, i + 60) + "\n");
+                        } else {
+                            stringBuilder.append(temp.substring(i) + "\n");
+                        }
+                    }
+                });
+        if (!stringBuilder.toString().equals("")) {
+            interviews.setText(stringBuilder.toString());
+            interviews.setStyle("-fx-text-fill: khaki;");
+        }
     }
 
     @Override

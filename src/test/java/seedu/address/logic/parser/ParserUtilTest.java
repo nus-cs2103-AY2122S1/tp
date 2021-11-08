@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,11 +14,13 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.position.Position.PositionStatus;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TITLE = "Acc-Manager";
+    private static final String INVALID_POSITION_STATUS = "status";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +38,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_OPEN_POSITION_STATUS = "open";
+    private static final String VALID_CLOSED_POSITION_STATUS = "closed";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +199,92 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTitle_invalidTitle_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTitle(INVALID_TITLE));
+    }
+
+    @Test
+    public void parseTitle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTitle((String) null));
+    }
+
+    @Test
+    public void parsePositionStatus_invalidStatus_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePositionStatus(INVALID_POSITION_STATUS));
+    }
+
+    @Test
+    public void parsePositionStatus_validStatusWithWhitespace_returnsTrimmedStatus() throws ParseException {
+        String statusWithWhitespace = WHITESPACE + VALID_OPEN_POSITION_STATUS + WHITESPACE;
+        PositionStatus expectedStatus = PositionStatus.OPEN;
+
+        assertEquals(expectedStatus, ParserUtil.parsePositionStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parsePositionStatus_validStatusWithoutWhitespace_returnsTrimmedStatus() throws ParseException {
+        PositionStatus expectedStatus = PositionStatus.CLOSED;
+        assertEquals(expectedStatus, ParserUtil.parsePositionStatus(VALID_CLOSED_POSITION_STATUS));
+    }
+
+    @Test
+    public void parsePositionStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePositionStatus((String) null));
+    }
+
+    @Test
+    public void parseDuration_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration("string"));
+    }
+
+    @Test
+    public void parseDuration_invalidValueMoreThanOneDay_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration("1440"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(String.valueOf(Long.MAX_VALUE)));
+    }
+
+    @Test
+    public void parseDuration_invalidValueTooShort_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDuration("0"));
+    }
+
+    @Test
+    public void parseDate_invalidValueNoPatternFound_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate("222/12/2021"));
+    }
+
+    @Test
+    public void parseTime_invalidValueNoPatternFound_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTime("22222"));
+    }
+
+    @Test
+    public void parseCandidateIndexes_validValues_returnsCandidateIndexes() throws ParseException {
+        Set<Index> indexes = new HashSet<>();
+        indexes.add(INDEX_FIRST_PERSON);
+        indexes.add(INDEX_SECOND_PERSON);
+
+        Set<Index> test = ParserUtil.parseCandidateIndexes("2 1");
+
+        assertEquals(indexes, test);
+    }
+
+    @Test
+    public void parseCandidateIndexes_duplicateValues_returnsCandidateIndexesWithoutDuplicates() throws ParseException {
+        Set<Index> indexes = new HashSet<>();
+        indexes.add(INDEX_FIRST_PERSON);
+        indexes.add(INDEX_SECOND_PERSON);
+
+        Set<Index> test = ParserUtil.parseCandidateIndexes("2 1 2 2 2 2 2 2 2 2 2 2 1 1");
+
+        assertEquals(indexes, test);
+    }
+
+    @Test
+    public void parseCandidateIndexes_empty_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCandidateIndexes(""));
     }
 }
