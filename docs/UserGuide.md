@@ -98,6 +98,8 @@ Let's try adding a student with the following details:
    Type `student -v 4` in the Command Panel and hit `Enter`.
     * This displays the student at `INDEX` 4 in the Viewing Panel.
 
+<div style="page-break-after: always;"></div>
+
 ### Managing Tasks
 
 Next, let us add a task with description __Lab Report__ and deadline __12 November 2021__. 
@@ -119,6 +121,8 @@ Next, let us add a task with description __Lab Report__ and deadline __12 Novemb
       __Science Report__ is __3__ while the index of __David__ is __4__.
     * Type the command `task -as 4 3` in the Command Panel and hit `Enter`.
     * This assigns __Science Report__ to __David__.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Groups
 
@@ -241,6 +245,8 @@ Examples:
 Shows a list of all students in the Person Panel.
 
 Format: `list`
+
+<div style="page-break-after: always;"></div>
 
 #### Locating students by name: `student -f`
 
