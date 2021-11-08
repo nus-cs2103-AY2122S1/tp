@@ -34,13 +34,13 @@ Given below are my contributions to the project.
     * Credits: Ability to graphically view call status outside of enforcement mode from the UI in the form of an icon was
       implemented by [Frederick](https://github.com/frederickpek)
 
-* **New Feature**: Added the ability to track the total number of failed calls on a person.
+* **New Feature**: Added the ability to track the total number of failed calls on a person. [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
     * What it does: Allows the user to track the total number of failed calls on a person across enforcement sessions.
     * Justification: This allows the user to track persons who consistently fail to comply with SHN requirements.
     * Highlight: Failed call tracking can also be done across save states by copying JSON data over manually
-    * Credits: Naming convention and design refinements by [Lauren](https://github.com/lrnshk)
+    * Credits: Naming convention and design refinements by [Lauren](https://github.com/lrnshk) and [Wei En](https://github.com/wei2912)
 
-* **New Feature**: Added the ability to indicate successful and failed calls to person for the given session. [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
+* **New Feature**: Added the ability to indicate successful and failed calls to a person for the given session. [\114](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/114)
     * What it does: Allows the user to indicate that a person has been called, removing that person from the
       enforcement view, in addition to whether the person has been non-compliant to be recorded by the prior feature.
     * Justification: This allows the user to remove called persons from the schedule without unnecessary modification to
@@ -52,7 +52,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Audited tests prior to `v1.5`
-    * Filed issues pertaining to suboptimal testing and informed relevant parties such as through github with [\#244](https://github.com/AY2122S1-CS2103-W14-2/tp/issues/244) and [#243](https://github.com/AY2122S1-CS2103-W14-2/tp/issues/243),
+    * Filed issues pertaining to suboptimal testing and informed relevant parties such as through Github with [\#244](https://github.com/AY2122S1-CS2103-W14-2/tp/issues/244) and [#243](https://github.com/AY2122S1-CS2103-W14-2/tp/issues/243),
       in addition to informal means such as by messaging app to reduce issue maintenance complexity.
     * Audited enforcement mode.
     * Provided advice on writing tests and how to navigate pre-existing tests.
@@ -61,7 +61,7 @@ Given below are my contributions to the project.
     * Added tests to miscellaneous items over the course of auditing tests such as [\246](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/246) and [\240](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/240)
 
 * **Documentation**:
-    * Wrote initial draft for enforcement DG abd UG documentation before it was superceded by the current iteration of the docs [\133](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/133)
+    * Wrote initial draft for enforcement DG and UG documentation before it was superseded by the current iteration of the docs [\133](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/133)
 
 * **Community**:
     * PRs reviewed (with non-trivial comments): [\59](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/59), [\84](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/84), [\225](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/225), [\248](https://github.com/AY2122S1-CS2103-W14-2/tp/pull/248)
