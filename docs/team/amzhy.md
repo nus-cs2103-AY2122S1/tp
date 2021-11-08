@@ -53,7 +53,7 @@ repeating similar commands multiple times.
 * Added to the FAQ and Introduction, formatted figures and enabled quicklinks for the command summary. (Pull Request [\#139](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/139))
 * Added implementation details for `EditClassCommand`, `EditCommand`, `DeleteClassCommand`. (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217))
 * Fix some documentation bugs from PE-D. (Pull Request [\#187](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/187))
-* Added screenshots for the `DeleteCommand` and `EditClassCommand`. (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217), [\#232](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/232))
+* Added screenshots for the `DeleteCommand` and `EditClassCommand`. (Pull Request [\#217](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/217), [\#233](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/233))
 
 #### Contributions to the Developer Guide
 * Added the implementation details of `EditClassCommand`. (Pull Request [\#135](https://github.com/AY2122S1-CS2103T-T12-4/tp/pull/135))
