@@ -1386,6 +1386,8 @@ The test cases are similar to those of [Deleting a member](#deleting-a-member).
    4. Run SportsPA. 
    5. SportsPA will start up without any data being present.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Effort**
 
 Our team has put in significant effort in evolving AB3 (Address Book Level 3) into SportsPA. In the following subsections, we list some notable contributions to the project as well as challenges that we faced during the course.
