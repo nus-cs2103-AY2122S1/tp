@@ -289,7 +289,7 @@ Currently, SalesNote supports sorting by the following fields, which have been a
 
 The ordering is represented using the `SortOrderingType` enumeration which is encapsulated as a `SortOrderingType` object. SalesNote supports sorting in: 
 1. Ascending order - Represented by `SortOrderingType.ASCENDING`
-2. Descending - Represented by `SortOrderingType.DESCENDING`
+2. Descending order - Represented by `SortOrderingType.DESCENDING`
 
 
 The class structure of the feature is shown in the diagram below:
@@ -313,7 +313,7 @@ When the `SortOrderCommand` is executed, the following interactions take place i
 
 ![SortOrdersModelSequenceDiagram](images/SortOrdersModelSequenceDiagram.png)
 
-After the `OrderBook` has been sorted, 
+After the `OrderBook` has been sorted by the amount field in ascending order, 
 
 1.  The `SortCommand` obtains the relevant success message by invoking `sortDescriptor.generateSuccessMessage()`.
 2.  A `CommandResult` object is then instantiated using the message, and returned to `LogicManager`.
@@ -321,7 +321,7 @@ After the `OrderBook` has been sorted,
 
 #### Design choices
 
-* **Alternative 1:**  Mutating the `OrderList`.
+* **Alternative 1 (current choice):**  Mutating the `OrderList`.
     * Pros: Allows the sorting functionality to be less coupled with the `FilteredList` of orders.
       * This allows the user the flexibility to combine various filtering and sorting commands.
       * For instance, executing `incompleteorders` followed by `sortorders f/d o/desc` would list the incomplete orders sorted by their date in descending order.
