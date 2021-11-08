@@ -342,8 +342,8 @@ The following sequence diagram show how the parsing of alias works, using the ex
 **Target user profile**:
 * NUS student
 * Tech savvy and familiar with command line interface
-* is a Teaching Assistant (TA)
-* does not have much time and wants to get manage student contacts efficiently without hassle
+* Is a Teaching Assistant (TA)
+* Does not have much time and wants to manage student contacts and classes efficiently without hassle
 
 
 **Value proposition**:<br />
