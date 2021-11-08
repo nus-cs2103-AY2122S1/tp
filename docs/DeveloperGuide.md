@@ -159,12 +159,12 @@ The `Model` component also,
              
 **Description** :                                                                                    
 
-The `Storage` component is responsible for persisting application data to be stored in json file format and reading stored data
+The `Storage` component is responsible for persisting application data to be stored in JSON file format and reading stored data
 back into the application. 
 
 **Functionality** :
 
-The storage component saves the following application data in json format and reads them back into corresponding objects:
+The storage component saves the following application data in JSON format and reads them back into corresponding objects:
 * friends list
 * games list
 * user preferences
@@ -173,8 +173,8 @@ The storage component saves the following application data in json format and re
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-There are 3 main model objects stored by the Storage component in json format, namely `Friend`, `Game`,
-and `UserPrefs`, each stored in separate json files.
+There are 3 main model objects stored by the Storage component in JSON format, namely `Friend`, `Game`,
+and `UserPrefs`, each stored in separate JSON files.
 
 The Storage component inherits from `FriendsListStorage`, `GamesListStorage` and 
 `UserPrefStorage`, which means it can be treated as any one of the three.
