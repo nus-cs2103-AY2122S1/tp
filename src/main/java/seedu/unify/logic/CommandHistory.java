@@ -64,9 +64,11 @@ public class CommandHistory {
      */
     public String retrievePreviousCommand(int previousIndex) throws CommandException {
         if (previousIndex >= previousCommands.size()) {
+            counter--;
             throw new CommandException(MESSAGE_NO_MORE_HISTORY);
         }
         if (previousIndex < 0) {
+            counter++;
             throw new CommandException(MESSAGE_NO_MORE_HISTORY);
         }
 
