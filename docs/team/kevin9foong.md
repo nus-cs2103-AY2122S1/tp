@@ -30,10 +30,10 @@ Given below are my contributions to the project.
      is the most skilled.
 
 * Testing 
-  1. Wrote unit/integration tests (>96% lines and 100% method coverage) for Storage component and the features I added above 
+  1. Wrote unit/integration tests (>=98% lines and 100% method coverage) for Storage component and the features I added above 
   (including e.g. integration tests which ensures recommend works with list command in succession)
   2. Manual testing and reporting of bugs in application, UG and DG. ([Issues raised and resolved](https://github.com/AY2122S1-CS2103T-W13-4/tp/issues?q=is%3Aissue+author%3Akevin9foong+is%3Aclosed))
-  3. Discovered testing bugs (e.g. schedule tests which use shared mutable references) (fixed in [PR #153](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/153/files))  
+  3. Discovered and fixed testing bugs (e.g. schedule tests which use shared mutable references)
 
 * Contribution to team based tasks
   1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs ([PR #45](https://github.com/AY2122S1-CS2103T-W13-4/tp/pull/45)).
