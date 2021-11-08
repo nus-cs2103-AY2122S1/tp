@@ -82,7 +82,7 @@ If you can type fast, MTR can get your application management tasks done faster 
 * Editing a position: [`edit-position`](#editing-a-position-edit-position)
 * Listing all positions : [`list-position`](#listing-all-positions--list-position)
 * Visualizing a position with a pie chart: [`visualize`](#visualizing-a-position-with-a-pie-chart-visualize)
-* Get rejection rate of a specified position : [`rate`](#get-rejection-rate-of-a-specified-position--rate)
+* Getting rejection rate of a specified position : [`rate`](#get-rejection-rate-of-a-specified-position--rate)
 
 ### Applicant-Related Commands
 * Adding an applicant: [`add-applicant`](#adding-an-applicant-add-applicant)
@@ -147,7 +147,7 @@ Format: `visualize POSITION_TITLE​`
 * `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
 
 
-### Get rejection rate of a specified position : `rate`
+### Getting rejection rate of a specified position : `rate`
 
 Shows the rejection rate of an existing position in MrTechRecruiter.
 
