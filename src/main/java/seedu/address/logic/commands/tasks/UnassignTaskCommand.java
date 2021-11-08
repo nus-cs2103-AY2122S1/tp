@@ -4,11 +4,13 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.id.UniqueId;
 
 public abstract class UnassignTaskCommand extends ManageTaskAssignmentCommand {
-    public static final String MESSAGE_USAGE = "%1$s: Unassigns a task of the %1$s "
+    public static final String MESSAGE_USAGE = "%1$s: Unassigns a task of the %2$s "
             + ManageTaskAssignmentCommand.MESSAGE_USAGE;
 
     public static final String MISSING_TASK = "Specified task is not assigned to this %s!";
@@ -35,5 +37,9 @@ public abstract class UnassignTaskCommand extends ManageTaskAssignmentCommand {
                                         UniqueId taskId) {
         newTaskSet.remove(taskId);
         newTasksCompletion.remove(taskId);
+    }
+
+    public CommandResult executeWithGivenMessage(Model model, String assigneeType) throws CommandException {
+        return executeWithGivenMessage(model, assigneeType, MESSAGE_SUCCESS);
     }
 }

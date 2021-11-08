@@ -156,7 +156,7 @@ You can refer to the [Features](#features) below for details of each command.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* `INDEX` parameters are very common in this application. Ensure that they are a positive integer and is less than 2,147,483,648.
+* `INDEX` parameters are very common in this application. Ensure that **they are a positive integer and is less than 2,147,483,648**.
 
 </div>
 
@@ -182,7 +182,7 @@ Examples:
 
 #### Viewing a student: `student -v`
 
-Views a particular student's details in the Person Panel.</summary>
+Views a particular student's details in the Person Panel.
 
 Format: `student -v INDEX`
 
@@ -442,7 +442,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/2021-12-31` edits the deadline to 31 December 2021
+* `task -e 4 d/2021-12-31` edits the deadline of the fourth task to 31 December 2021
 
 ![taskedit](images/imagesInUG/task-edit.png)
 
