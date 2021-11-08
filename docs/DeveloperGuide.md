@@ -41,6 +41,7 @@ The purpose of the Developer Guide is to guide you through our application's arc
     - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -55,6 +56,7 @@ The purpose of the Developer Guide is to guide you through our application's arc
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -196,6 +198,8 @@ How the Storage component works:
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Implementation
 
@@ -417,6 +421,7 @@ The sequence diagram below shows the interaction within the `Logic` component wh
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -427,6 +432,7 @@ The sequence diagram below shows the interaction within the `Logic` component wh
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -770,6 +776,7 @@ Analogous to the use case for [marking a task as done](#use-case-mark-a-task-as-
 * **Task**: A task for the user that has a due date and a completion status.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
