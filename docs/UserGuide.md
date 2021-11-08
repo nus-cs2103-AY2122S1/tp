@@ -7,7 +7,7 @@ title: ClassMATE User Guide
 
 Are you having trouble with administrative work as a CS2101 tutor? Do current tools like Excel sheets or the pen and paper cause a lot of pain when trying to organize and search for students or recording class participation? Could there be a way to streamline this process while providing you a better way to visualise the information? Well, ClassMATE has it all covered!
 
-**ClassMATE** is a **desktop app designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' class participation without much hassle. Having both a Command Line Interface** (CLI) and a **Graphical User Interface** (GUI), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
+**ClassMATE** is a **desktop app designed for you to manage student contacts and organize them into their tutorial classes and groups neatly, as well as recording of students' class participation without much hassle. Having both a Command Line Interface** ([CLI](#glossary)) and a **Graphical User Interface** ([GUI](#glossary)), it saves you time on your CS2101 administrative work while providing a pleasant experience at the same time.
 
 This user guide for ClassMATE will teach you how to:
 * Create students, classes and groups
@@ -60,9 +60,9 @@ We hope you find this User Guide helpful when using ClassMATE!
    ![Ui](images/Ui-annotated.png)
    
 1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
-   Check out some examples in the [Tutorial](#CLI Tutorial)
+   Check out some examples in the [Tutorial](#cli-tutorial)
    
-1. Refer to the [Features](#Features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 ## CLI Tutorial
 
@@ -279,13 +279,16 @@ Entering format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] 
 
 * At least one of the optional fields must be provided.
 
-  <div markdown="span" class="alert alert-primary"> :information-source: **Note:**
-      An error message will be displayed to provide at least one parameter if no parameters are provided, regardless of whether the INDEX is valid or not. The INDEX will be checked after at least one optional parameter is provided.
+  <div markdown="span" class="alert alert-primary">:warning: **Warning:**
+  An error message will be displayed to provide at least one parameter if no parameters are provided, regardless of whether the INDEX is valid or not. The INDEX will be checked after at least one optional parameter is provided. :warning:
   </div>
 
 * The index must be a positive integer 1, 2, 3, …​
+
 * Existing values will be updated to the input values.
+
 * When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
+
 * You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
 <div markdown="span" class="alert alert-primary">:warning: **Warning:**
@@ -526,7 +529,7 @@ Example:
 
 These are other commands and features you can use in ClassMATE!
 
-## Viewing help : `help`
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page, which directs you to this user guide. So, don't worry about forgetting commands, just refer to this guide!
 
@@ -534,7 +537,7 @@ Shows a message explaining how to access the help page, which directs you to thi
 
 Entering format: `help`
 
-## Clearing all data : `clear` :warning:
+### Clearing all data : `clear` :warning:
 
 Clears all data from ClassMATE. Below is how it would look like.
 
@@ -546,17 +549,17 @@ This command deletes **ALL** data and is irreversible :warning:
 
 Entering format: `clear`
 
-## Exiting the program : `exit`
+### Exiting the program : `exit`
 
 Exits the program.
 
 Entering format: `exit`
 
-## Saving the data
+### Saving the data
 
 Saving ClassMATE data is a hassle-free process. Data is saved in the hard disk *automatically* after any command that changes the data. **There is no need to save manually.**
 
-## Editing the data file
+### Editing the data file
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Recommended to be done only by advanced users.
@@ -564,7 +567,9 @@ Recommended to be done only by advanced users.
 
 In order to find a specific class, use the `findc` command to find a particular class before viewing it.
 
-ClassMATE data are saved as a [JSON](#Glossary) file `[JAR file location]/data/classmate.json`. Advanced users are welcome to update data directly by editing that data file.
+ClassMATE data are saved as a [JSON](#Glossary) file `[Home Folder/JAR File Location]/data/classmate.json`.
+
+Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ClassMATE will discard all data and start with an empty data file at the next run.
@@ -575,7 +580,7 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the [JSON](#Glossary) file that contains the data of your previous ClassMATE home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the [JSON](#glossary) file that contains the data of your previous ClassMATE home folder.
 
 **Q**: Can I create tutorial groups that are not for Oral Presentation 1 or 2?<br>
 **A**: No, currently ClassMATE only supports the creation of Tutorial Groups for Oral Presentations 1 and 2 only.
@@ -600,7 +605,7 @@ Action | Format, Examples
 ### Student Commands
 
 Action | Format, Examples
---------|------------------
+:-------|------------------
 **[Add student](#adding-a-student-addstu)** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `addstu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 t/attentive`
 **[Edit student](#editing-a-student--editstu)** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `editstu 2 n/James Lee e/jameslee@example.com`
 **[List students](#listing-all-students--liststu)** | `liststu`<br> e.g., `liststu` 
@@ -639,9 +644,9 @@ For any assistance or difficulties, feel free to drop us an email at [classMatey
 
 Term | Definition
 --------|------------------
-**[Java 11](#How to use this User Guide)** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
-**[JSON](#Editing the data file)** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
-**[CLI](#How to use this User Guide)** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following visual prompts from the program.
-**[GUI](#How to use this User Guide)** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with a program through graphical icons.
+**[Java 11](#quick-start)** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
+**[JSON](#editing-the-data-file)** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
+**[CLI](#cli-tutorial)** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following visual prompts from the program.
+**[GUI](#quick-start)** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with a program through graphical icons.
 
-[Back to top](#ClassMATE-User-Guide)
+[Back to top](#classmate-user-guide)
