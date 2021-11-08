@@ -56,9 +56,11 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added implementation details of the `sum` feature: [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68).
         * Added implementation details of the `review` feature: [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68).
-        * Added implementation details of the `delete` (by name) feature: [\#190](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/190)
+        * Added implementation details of the `delete` (by name) feature: [\#190](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/190).
+        * Added use cases: [\#190](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/190).
+        * Formatted and vetted DG: [\#213](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/213).
 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#161](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/161), [\#91](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/91)
-    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/ryantianj/ped/issues/8), [2](https://github.com/ryantianj/ped/issues/5), [3](https://github.com/ryantianj/ped/issues/6))
+    * PRs reviewed (with non-trivial review comments): [\#161](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/161), [\#91](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/91).
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/ryantianj/ped/issues/8), [2](https://github.com/ryantianj/ped/issues/5), [3](https://github.com/ryantianj/ped/issues/6)).
