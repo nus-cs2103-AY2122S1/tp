@@ -570,7 +570,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Staff'd` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Edit staff details**
+**Use case: UC01 - Add a new staff**
+
+**MSS**
+1. User chooses to add a new staff.
+1. User inputs relevant details.
+1. Staff’d requests for confirmation.
+1. User confirms.
+1. Staff’d adds the new staff to the address book.
+    
+    Use case ends.
+
+**Extensions**
+
+* 3a. Staff'd detects an error in the entered data.
+
+    * 3a1. Staff'd displays an error message.
+    * 3a2. User enters new data.
+    * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+    
+**Use case: UC02 - Edit staff details**
 
 **MSS**
 
@@ -592,7 +613,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-**Use case: UC02 - Edit staff schedule**
+**Use case: UC03 - Edit staff schedule**
 
 **MSS**
 
@@ -613,6 +634,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
+    
+
 
 *{More to be added}*
 
