@@ -57,8 +57,8 @@ View my code contribution here: [RepoSense](https://nus-cs2103-ay2122s1.github.i
     * Logic.Commands
         * [Add group command](https://github.com/AY2122S1-CS2103T-W16-4/tp/blob/master/src/test/java/seedu/address/logic/commands/groups/AddGroupCommandIntegrationTest.java).
     * Storage
-        * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest
-    * Modified existing test cases such as JsonAdaptedPerson and Person when implementing features.
+        * JsonAdaptedLessonTest and JsonAdaptedTimeslotTest.
+    * Modified existing test cases such as JsonAdaptedPerson and Person.
 
 
 #### Other contributions:
