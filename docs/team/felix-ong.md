@@ -26,6 +26,8 @@ Given below are my contributions to the project.
     * Pull Request [\#160](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/160)
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=felix-ong)
+* 
+<div style="page-break-after: always;"></div>
 
 * **Team Tasks**:
     * Set up project notes document and suggested initial idea for the project.
@@ -44,7 +46,7 @@ Given below are my contributions to the project.
         * Updated screenshots and documentation for `editm`, `editf`, `split`, `allocate` and `deallocate` commands. (Pull Request [\#227](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/227))
     * Developer Guide:
         * Added implementation details of the `split` feature as well as UML diagrams for illustration. (Pull Request [\#265](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/265))
-        * Updated Storage section to reflect changes made. (Pull Request [\#240](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/265))
+        * Updated Storage section to reflect changes made. (Pull Request [\#240](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/240))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#98](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/98), [\#89](https://github.com/AY2122S1-CS2103T-W12-1/tp/pull/89))
