@@ -60,7 +60,7 @@ Relevant PRs include: [#95](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/95
 
 Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/110)
 
-## **UI/UX contributions**
+## **UI/UX contributions:**
 * Designed and implemented the task list panel and statistics panel, both of which are core
    portions of the GUI.
 * Implemented split sliding panels to allow greater resize flexibility for users.
@@ -87,6 +87,6 @@ Relevant PRs include: [#110](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/1
   [#195](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/195)
 * Added Implementation for view tasks functionality. [#73](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/73)
 
-## **Testing**
+## **Testing:**
 * Added more Junit tests for LogicManager and ModelManager. [#54](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/54)
 * Added more Junit tests for DeleteTaskCommand and DeleteTaskCommandParser. [#56](https://github.com/AY2122S1-CS2103T-W10-1/tp/pull/56)
