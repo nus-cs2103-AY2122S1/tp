@@ -79,7 +79,7 @@ The EdRecord codebase was initially adapted from [AddressBook Level 3](https://s
     * Edited documentation to integrate with team project  [\#62](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/62)
     * Updated documentation for the features: `mkmod`, `mkclass`, `dlmod`, `dlclass`, `mv`, `rm`
 * Developer Guide:
-    * Added implementation details of the `Module` and `Group` features [/#335](https://github.com/nus-cs2103-AY2122S1/tp/pull/335).
+    * Added implementation details of the `Module` and `Group` features [/223](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/223).
     * Diagrams contributed [/#215](https://github.com/AY2122S1-CS2103-W14-3/tp/pull/215):
       <img src="images/ModelClassDiagram.png" width="450" />
       <img src="images/ModuleSystemModelClassDiagram.png" width="450" />
