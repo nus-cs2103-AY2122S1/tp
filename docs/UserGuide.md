@@ -286,7 +286,7 @@ Find tasks with matching keywords and show them in the task list.
 
 **:green_book: Examples:**
 
-* `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
+* `find assignment d/2021-01-05 tg/CS2106` returns CS2106 Assignment due on 5 January 2021.
 
 </div>
 
