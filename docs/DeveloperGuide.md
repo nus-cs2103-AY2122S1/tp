@@ -549,7 +549,7 @@ choice.
 #### Implementation
 
 The implementation details of this feature can be found mainly in `MainWindow` as most of the necessary operations are
-related to the UI. In addition, the following classes are utilised:
+related to the UI. In addition, the following classes are utilized:
 
 - `DownloadCommand`: for generating the `DownloadCommandResult`
 - `DownloadCommandResult`: for displaying the feedback to the CS2100 TA
@@ -577,7 +577,7 @@ destination.
 Additionally, a pop-up message was chosen to be displayed for two reasons. First, it provides the user a clear visual
 indicator of the result of their command, as compared to the typical textual output they would see. Second, we would
 only know if the data was successfully downloaded after the textual response is shown to the user. Using a pop-up
-message right at the end of this operation means we can customise the message depending on whether the download was a
+message right at the end of this operation means we can customize the message depending on whether the download was a
 success.
 
 #### Alternatives
@@ -775,7 +775,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
-| `* * *`  | potential CS2100 TA exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
+| `* * *`  | potential CS2100 TA exploring the app      | see the app populated with sample data| easily see how the app will look like when it is in use.
 | `* * *`  | CS2100 TA ready to start using the app          | purge all current data         |  get rid of data in the app.
 | `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, email)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.
@@ -1166,7 +1166,7 @@ The following is a non-exhaustive list of challenges we encountered during the d
   * Through this process, we also encountered dependency issues with the new libraries and spent significant time and effort debugging these issues.
 
 ### <a name="Implementing Dynamic Features"></a>9.4 Implementing Dynamic Features
-  * AB3's features typically work by having the user type in text commands to be executed. We felt this was core, but we wanted to go a step further and implement our features to minimise the TA having to type unnecessary commands.
+  * AB3's features typically work by having the user type in text commands to be executed. We felt this was core, but we wanted to go a step further and implement our features to minimize the TA having to type unnecessary commands.
   * For instance, the list of students always remains sorted whenever updates are made to the student data. This required many checks and careful organization of the student data so that the sorting can be done efficiently at minimal cost to the user TA.
   * Additionally, the `show` panel and `dashboard` window were also designed to update dynamically whenever changes are made to the student data. This saves the TA much time in keeping track of the labs they have yet to mark, thereby enhancing their user experience and satisfaction.
 
