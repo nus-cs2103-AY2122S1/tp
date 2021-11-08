@@ -14,12 +14,10 @@ import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
-
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-
 
     public static Position[] getSamplePositions() {
         return new Position[] {
@@ -51,7 +49,6 @@ public class SampleDataUtil {
         }
         return sampleApplicantBook;
     }
-
 
     public static ReadOnlyPositionBook getSamplePositionBook() {
         PositionBook samplePb = new PositionBook();

@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.position.exceptions.DuplicatePositionException;
 import seedu.address.model.position.exceptions.PositionNotFoundException;
 
-
 /**
  * A list of positions that enforces uniqueness between its elements and does not allow nulls.
  * A position is considered unique by comparing using {@code Position#isSamePosition(Position)}.
@@ -60,6 +59,8 @@ public class UniquePositionList implements Iterable<Position> {
 
     /**
      * Searches for a position with the given {@code title}.
+     *
+     * @return The position with the given title.
      */
     public Position getPositionWithTitle(Title title) {
         requireNonNull(title);
@@ -125,9 +126,6 @@ public class UniquePositionList implements Iterable<Position> {
         return internalUnmodifiableList;
     }
 
-
-
-
     @Override
     public Iterator<Position> iterator() {
         return internalList.iterator();
@@ -167,6 +165,4 @@ public class UniquePositionList implements Iterable<Position> {
 
         return copiedPositions;
     }
-
-
 }

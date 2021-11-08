@@ -12,7 +12,7 @@ import seedu.address.storage.applicant.ApplicantBookStorage;
 import seedu.address.storage.position.PositionBookStorage;
 
 /**
- * API of the Storage component
+ * API of the Storage component.
  */
 public interface Storage extends UserPrefsStorage, PositionBookStorage, ApplicantBookStorage {
 
@@ -21,7 +21,6 @@ public interface Storage extends UserPrefsStorage, PositionBookStorage, Applican
 
     @Override
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
-
 
     @Override
     void saveApplicantBook(ReadOnlyApplicantBook applicantBook) throws IOException;

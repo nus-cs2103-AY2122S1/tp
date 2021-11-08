@@ -1,0 +1,17 @@
+@startuml
+start
+if () then ([else])
+    if () then ([else])
+        :Create new applicant instance
+            with the edited information;
+        :Delete old applicant from applicantBook;
+        :Add new applicant to applicantBook;
+    else ([edited position not exist
+or has applicant duplicate])
+        :CommandException;
+    endif
+else ([Index is invalid])
+    :CommandException;
+endif
+stop
+@enduml

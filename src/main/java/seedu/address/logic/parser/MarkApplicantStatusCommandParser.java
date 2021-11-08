@@ -14,11 +14,11 @@ import seedu.address.model.applicant.Name;
  * Parses input arguments and creates a new MarkApplicantStatusCommand object
  */
 public class MarkApplicantStatusCommandParser implements Parser<MarkApplicantStatusCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the MarkApplicantStatusCommand
      * and returns a MarkApplicantStatusCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public MarkApplicantStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -35,5 +35,4 @@ public class MarkApplicantStatusCommandParser implements Parser<MarkApplicantSta
 
         return new MarkApplicantStatusCommand(name, applicationStatus);
     }
-
 }

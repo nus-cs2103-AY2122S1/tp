@@ -51,8 +51,8 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks:** 
   * Maintain issue tracker with the team
   * Milestone management
-  * Documentation for overall code
-  
+  * Documentation for overall code ([#209](https://github.com/AY2122S1-CS2103-F10-1/tp/pull/209))
+
 
 * **Contributions to community:** 
 

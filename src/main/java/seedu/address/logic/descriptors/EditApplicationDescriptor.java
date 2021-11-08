@@ -7,10 +7,14 @@ import seedu.address.model.applicant.Application;
 import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 
+/**
+ * Stores the details to edit an application with. Each non-empty field value will replace the
+ * corresponding field value of the application.
+ */
 public class EditApplicationDescriptor {
+
     private Position position;
     private ApplicationStatus status;
-
 
     public EditApplicationDescriptor() {}
 
@@ -40,8 +44,10 @@ public class EditApplicationDescriptor {
     /**
      * Creates and returns a {@code Application} with the details of {@code applicationToEdit}
      * edited with {@code editApplicationDescriptor}.
+     *
+     * @param applicationToEdit The application to be changed.
+     * @return The application with the updated details.
      */
-
     public Application createEditedApplication(Application applicationToEdit) {
         assert applicationToEdit != null;
         Position updatedPosition = getPosition().orElse(applicationToEdit.getPosition());
@@ -49,7 +55,6 @@ public class EditApplicationDescriptor {
 
         return new Application(updatedPosition, updatedStatus);
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -69,5 +74,4 @@ public class EditApplicationDescriptor {
         return getPosition().equals(e.getPosition())
                 && getStatus().equals(e.getStatus());
     }
-
 }

@@ -8,14 +8,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.position.Title;
 
 /**
- * Parses input arguments and creates a new VisualizePositionCommand object
+ * Parses input arguments and creates a new VisualizePositionCommand object.
  */
 public class VisualizePositionCommandParser implements Parser<VisualizePositionCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the VisualizePositionCommand
      * and returns a VisualizePositionCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public VisualizePositionCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -30,5 +30,4 @@ public class VisualizePositionCommandParser implements Parser<VisualizePositionC
 
         return new VisualizePositionCommand(titleToShow);
     }
-
 }

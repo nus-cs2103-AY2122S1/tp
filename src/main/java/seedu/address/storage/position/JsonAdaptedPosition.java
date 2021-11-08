@@ -39,7 +39,7 @@ class JsonAdaptedPosition {
     /**
      * Converts this Jackson-friendly adapted position object into the model's {@code Position} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted position.
+     * @throws IllegalValueException If there were any data constraints violated in the adapted position.
      */
     public Position toModelType() throws IllegalValueException {
 
@@ -61,5 +61,4 @@ class JsonAdaptedPosition {
         final Description modelDescription = new Description(description);
         return new Position(modelTitle, modelDescription);
     }
-
 }

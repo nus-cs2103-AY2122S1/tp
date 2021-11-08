@@ -34,7 +34,8 @@ public class JsonSerializableApplicantBook {
     /**
      * Converts a given {@code ReadOnlyApplicantBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableApplicantBook}.
+     * @param source The actual applicant book in read-only mode.
+     *               Future changes to this will not affect the created {@code JsonSerializableApplicantBook}.
      */
     public JsonSerializableApplicantBook(ReadOnlyApplicantBook source) {
         applicants.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new)
@@ -44,7 +45,7 @@ public class JsonSerializableApplicantBook {
     /**
      * Converts this applicant book into the model's {@code ApplicantBook} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @throws IllegalValueException If there were any data constraints violated.
      */
     public ApplicantBook toModelType(ReadOnlyPositionBook positionBook) throws IllegalValueException {
         ApplicantBook applicantBook = new ApplicantBook();
@@ -57,5 +58,4 @@ public class JsonSerializableApplicantBook {
         }
         return applicantBook;
     }
-
 }

@@ -18,7 +18,9 @@ public class FilterApplicantDescriptor {
     public FilterApplicantDescriptor() {}
 
     /**
-     * Copy constructor.
+     * A constructor copying an existing FilterApplicantDescriptor.
+     *
+     * @param toCopy The FilterApplicantDescriptor to be copied from.
      */
     public FilterApplicantDescriptor(FilterApplicantDescriptor toCopy) {
         setPositionTitle(toCopy.positionTitle);
@@ -78,5 +80,4 @@ public class FilterApplicantDescriptor {
                 getPositionTitle().map(title -> " Position: " + title).orElse("")
                 + getApplicationStatus().map(status -> " Status: " + status).orElse(""));
     }
-
 }

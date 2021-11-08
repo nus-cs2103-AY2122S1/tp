@@ -45,5 +45,4 @@ public class PositionListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

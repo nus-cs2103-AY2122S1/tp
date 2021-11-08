@@ -11,6 +11,7 @@ public class FilterApplicantDescriptorVerifier extends FilterApplicantDescriptor
 
     /**
      * Constructor for a FilterApplicantDescriptorVerifier.
+     *
      * Verifies the validity of each filter in the specified {@code descriptor} against the given {@code model}.
      */
     public FilterApplicantDescriptorVerifier(Model model, FilterApplicantDescriptor descriptor) {

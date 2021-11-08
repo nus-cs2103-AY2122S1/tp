@@ -26,6 +26,9 @@ public class DeleteApplicantCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteApplicantCommand according to the specified {@code targetIndex}.
+     */
     public DeleteApplicantCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -58,5 +61,4 @@ public class DeleteApplicantCommand extends Command {
                 || (other instanceof DeleteApplicantCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteApplicantCommand) other).targetIndex)); // state check
     }
-
 }
