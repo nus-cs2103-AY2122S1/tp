@@ -1144,6 +1144,7 @@ testers are expected to do more *exploratory* testing.
 
 ### <a name="Challenges Faced"></a> Challenges Faced and Achievements Made
 The following is a non-exhaustive list of challenges we encountered during the development of ProgrammerError:
+
 ### <a name="Rewriting the Command Syntax"></a> **1. Rewriting the Command Syntax** 
   - This was challenging as it required a nuanced understanding of how CLI syntax is constructed and following standard conventions. 
   - Not all of us were familiar with Unix syntax, which made it more difficult to design a solution that would be suitable for users who prefer typing.
