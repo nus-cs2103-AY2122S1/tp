@@ -268,9 +268,12 @@ Examples:
 * `add property n/Blk 123 a/123, Clementi Rd, #04-20, S654321 s/James Lee p/(hp) 61234567 e/james@email.com $/100000 t/hdb t/3rm`
 * `add buyer n/Sam p/91234567 e/sam@email.com $/740000 t/hdb t/3rm`
 
+Visual Example:
 Shown below is the output for the valid input `add property n/Blk 123 a/123, Clementi Rd, #04-20, S654321 s/James Lee p/(hp) 61234567 e/james@email.com $/100000 t/hdb t/3rm`.
 
 ![Add Property](images/AddValidUi.png)
+You will see the newly added property at the top of the property listing.
+<br>
 
 See the section [Valid properties/buyers](#valid-propertiesbuyers) for more details about the different fields.
 
@@ -354,7 +357,12 @@ Format:
 * View price chart of properties: `stat property`
 * View price chart of buyers: `stat buyer`
 
+Visual Example:
+The below image shows a sample output from the command `stat`.
+
 ![stat example](images/StatUi.png)
+Since neither the property nor buyer list is empty, you should see the combined chart of both properties and buyers.
+The price chart shows the number of properties and buyers for each price range.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If only buyers or only properties are visible, `stat` automatically presents the only buyers or only properties view.
@@ -392,12 +400,14 @@ Examples:
   * Returns buyers `sally` and `Sally Brown`
 * `find property Jurong t/4rm t/near school` 
   * Returns properties `jurong [4rm] [near school] [near mrt]` and `Jurong East [4rm] [near school] [near mrt]` but not `jurong [4rm] [near mrt]`
-* `find buyer $min/100000 $max/1000000` 
-  * Returns buyers with budgets between $100000 and $1000000
+* `find buyer $min/200000 $max/3000000` 
+  * Returns buyers with budgets between $200000 and $3000000
 
+Visual Example:
 Shown below is the output for the valid input `find buyer $min/100000 $max/1000000`.
 
 ![Find Buyer](images/FindBuyerUi.png)
+The buyer list is filtered to only show buyers with budgets between $100000 and $1000000.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -417,7 +427,7 @@ This command deletes the property/buyer at a specified `INDEX`. The index refers
 
 Examples:
 * `list` followed by `delete property 2` deletes the 2nd property in PropertyWhiz.
-* `find East Coast` followed by `delete property 1` deletes the 1st property in the results of the `find` command.
+* `find property East Coast` followed by `delete property 1` deletes the 1st property in the results of the `find` command.
 
 ### Sorting properties/buyers: `sort`
 
@@ -431,16 +441,17 @@ Format: `sort (property | buyer) (price | name) (asc | desc)`
 * Selecting `desc` (descending) will sort budgets/prices from highest to lowest or names in reverse alphabetical order.
 
 Examples:
-
 * `sort buyer price desc` 
   * Sorts the list of buyers by their budgets from highest to lowest.
 * `sort property name asc` 
   * Sorts the list of properties by their names in alphabetical order.
 
+Visual Example:
 Shown below is the output for the valid input `sort buyer price desc` after previously having entered
 `find buyer $min/100000 $max/1000000`.
 
-![Find Buyer](images/SortBuyerUi.png)
+![Sort Buyer](images/SortBuyerUi.png)
+The buyer list now contains only buyers whose budgets are between $100000 and $1000000. Furthermore, the buyers are sorted in decreasing order of budget. For instance, Mecurius has the highest budget of $800000.
 
 ### Matching properties and buyers: `match`
 
@@ -534,6 +545,12 @@ Format: `import (buyer | property)`
   * All fields [valid](#valid-propertiesbuyers)
   * No missing fields
 * The CSV must begin with a header that includes the names of each column.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+As PropertyWhiz does not allow properties with duplicate **addresses** or buyers with duplicate **names**, please ensure that the properties or buyers you are importing do not conflict with existing data within PropertyWhiz. This applies to *all* properties and buyers, not just those currently displayed.
+
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
