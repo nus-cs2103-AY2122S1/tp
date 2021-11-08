@@ -336,7 +336,7 @@ The implementation of `Model#unlinkFriend()` is as follows:
 
 ![Implementation of unlink command in model](images/UnlinkSequenceDiagram2.png)
 
-#### Design considerations
+#### 4.3.2 Design Considerations
  - As mentioned previously in the implementation for [link](#42-link-feature), the use of a separate `GameFriendLink` class to which only the `Friend` class has a reference to greatly simplifies the unlinking command as only the `Friend` objects (and not the `Game` objects) have to be changed.
 
 ### 4.4 Schedule Feature
