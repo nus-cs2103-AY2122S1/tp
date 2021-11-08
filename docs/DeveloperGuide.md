@@ -1014,7 +1014,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a participant
 
-1. Edit a participant's name to another non-existent participant
+1. Edit a participant's name (new name is unique and does not match any other participant's)
 
    1. Prerequisite: At least 1 participant in the participant list.
 
@@ -1089,7 +1089,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing an event
 
-1. Edit an event to a non-existent event
+1. Edit an event (new name and date of the event does not match any other event's)
 
    1. Prerequisite: At least one event in the event list.
 
