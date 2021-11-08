@@ -172,12 +172,12 @@ It then returns a `AddCommand` back to `UniFyParser`, initialized with the `Task
 
 ##### Usage Scenario
 
-The following demonstrates a usage scenario where the user wants to add a task with name CS2103, date 2021-10-10, time 23:59, priority level LOW and tag Important
+The following demonstrates a usage scenario where the user wants to add a task with name Test, date 2021-10-10, time 23:59 (default time), priority level LOW(default priority level) and tag CS2103
 
-1. The method `execute("add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
-2. `parseCommand` in `UniFyParser` takes in the String `"add n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW"` as its parameter and initializes a `AddCommandParser` object.
-3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/CS2103 d/2021-10-10 t/23:59 tg/Important p/LOW"`.
-4. An `AddCommand` object will be initialized, taking in the `Task` with a `Name`, `Date`, `Time`, `Priority` and `Set<Tag>`, in this case containing `Name`: `CS2103`, `Date`: `2021-10-10`, `Time`: `23:59`, `Priority`: `LOW` and one tag in `Set<Tag>`: `Important`.
+1. The method `execute("add n/Test d/2021-10-10 tg/CS2103")` inside LogicManager calls the `parseCommand` method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String `"add n/Test d/2021-10-10 tg/CS2103"` as its parameter and initializes a `AddCommandParser` object.
+3. It then calls the `parse` method in `AddCommandParser` to parse the string `"n/Test d/2021-10-10 tg/CS2103"`.
+4. An `AddCommand` object will be initialized, taking in the `Task` with a `Name`, `Date`, `Time`, `Priority` and `Set<Tag>`, in this case containing `Name`: `Test`, `Date`: `2021-10-10`, `Time`: `23:59`, `Priority`: `LOW` and one tag in `Set<Tag>`: `CS2103`.
 5. The method call then returns to `LogicManager`, which calls the `execute` method of `AddCommand`.
 6. By using the `hasTask` method of the `Model` , the `AddCommand` checks for a duplicate task in its `execute` method.
 7. If no errors are found, the `addTask` method under `Model` is called.
@@ -366,7 +366,33 @@ The following activity diagram summarizes what happens when the user inputs a fi
     * Cons: Inconvenient for users if they have recurring task on different dates.
     
 
-### 3.5 Tag task feature
+### 3.5 Sort task feature
+
+The sort feature enables users to sort tasks by specifying whether to sort by time or priority as well as sort in ascending or descending order.
+
+#### 3.5.1 Implementation
+
+##### SortCommand class
+
+The `SortCommand` class extends the `Command` class. It manages the sorting of the task list as specified by the user based on time or priority. The user also specifies the order in which the tasks have to be sorted i.e. ascending or descending order. It contains a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, a `String` representing the successful sorting of task list, a functional interface `BiFunction` that accepts two Task class arguments and produces an Integer result.
+
+The `execute` method in `SortCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. A `CommandException` is thrown in case of `model` being `null`. In the happy path, the task list is sorted depending on the time or priority and the given ascending or descending order.
+
+##### SortCommandParser class
+
+The `SortCommandParser` class implements the `Parser<SortCommand>` interface. It manages the parsing of the arguments (sorting type and sorting order in the case of a sort command) in the user input. The `parse` method in `SortCommandParser` first checks if the sorting order has been given or not. It uses a BiFunction function that accepts two Long variables and produces an Integer result. This function decides the sorting order. If the sorting order is not specified, then ascending order is chosen to be the default option. If an invalid sorting order is entered by the user, a `ParseException` is thrown with the feedback message of Invalid Command Format and correct usage message for the sort command. The second if condition checks if the sorting type has been given or not. If the sorting type has not been specified, then time is chosen to be the default option. If an invalid sorting type is entered by the user, a `ParseException` is thrown with the feedback message of Invalid Command Format and correct usage message for the sort command. It then returns a `SortCommand` back to `UniFyParser`, applying the sort function to the given arguments.
+
+##### Usage Scenario
+
+The following demonstrates a usage scenario where the user wants to delete the first, second and third item in her/his task list.
+
+1. The method `execute("sort x/time o/asc")` inside LogicManager calls the `parseCommand`method of `UniFyParser`.
+2. `parseCommand` in `UniFyParser` takes in the String “sort x/time o/asc” as its parameter and initializes a `SortCommandParser` object.
+3. It then calls the `parse` method in `SortCommandParser` to parse the string `”x/time o/asc”`.
+4. A `SortCommand` object will be initialized, taking in the sort type and sort order in the function, in this case the type being time and order being asc (ascending order).
+5. The method call then returns to `LogicManager`, which calls the `execute` method of `SortCommand`.
+6. By using a functional interface called ‘BiFunction’, the `SotCommand` sorts the task list by calling a method ‘sortTasks’ under ‘Model’.
+7. A `CommandResult` object is created with the appropriate messages and returned to `LogicManager`.
 
 ### 3.6 \[Proposed\] Undo/redo feature
 
@@ -503,24 +529,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a task at a certain date and time.
+1.  User requests to add a task at a certain date, time, priority level and tags.
 2.  Uni-Fy adds the task at the given date and time and displays success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User requests to add a task at a certain date without time.
+* 1a. User requests to add a task at a certain date, a priority level and tags but without time.
     * 1a1. Uni-Fy adds the task at the given date and time of 23:59 and displays success message
 
       Use case ends.
-* 1b. User enters invalid date format.
-  * 1b1. Uni-Fy shows an error message.
+* 1b. User requests to add a task without a priority level.
+  * 1b1. Uni-Fy adds the task at the given date, time and tags with the default priority level LOW.
+
+    Use case ends.
+* 1c. User enters invalid date format.
+  * 1c1. Uni-Fy shows an error message.
 
     Use case resumes at step 1.
 
 
+
 **Use case: UC02 - List all tasks**
+
 
 **MSS**
 
@@ -688,14 +720,30 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Adding a task
+
+1. Adding a task 
+
+   1. Test case: `add n/CS2103 d/2021-11-11 t/20:00 p/LOW tg/Important`<br>
+       Expected: Task is added to the list with the index being the length of the list. Details of the added task is shown in the status message.
+   2. Test case: `add n/CS2103 d/2021-11-11`<br>
+      Expected: Task is added with the default value of `23:59` for time and `LOW` for priority level and empty `Set<Tag>` for tags.Details of the added task is shown in the status message.
+
+   3. Test case: `add n/Task`<br>
+       Expected: No task is added. Error details for invalid command shown in the status message. Status bar remains the same.
+
+   4. Other incorrect delete commands to try: `add`, `add abcd`, `...`<br>
+       Expected: Similar to previous.
+
 
 ### Deleting a task
 

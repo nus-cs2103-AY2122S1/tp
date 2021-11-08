@@ -14,9 +14,9 @@ title: Uni-Fy User Guide
 
 Welcome to the Uni-Fy User Guide!
 
-Uni-Fy is a **desktop app for managing your university workload** and it is designed **by university students for university students**.
+Uni-Fy is a **desktop app for managing your university workload**, designed **by university students for university students**.
 This application is optimized for use via a **Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI).
+while still having the benefits of a **Graphical User Interface** (GUI).
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
 
 Interested to jump right in? Take a look at [**3. Getting started**](#3-getting-started). Enjoy!
@@ -26,7 +26,6 @@ Interested to jump right in? Take a look at [**3. Getting started**](#3-getting-
 The following is the GUI of our application:
 
 ![UI Preview](images/userguide/1.2.1%20UI%20Preview.png)
-- Note that Daily Panel is in red only for visibility purposes
 
 GUI Components:
 1. **Task List Panel**: Displays all your tasks
@@ -166,12 +165,12 @@ Adds a task to the task list. The parameters for the command can be input in any
 <div markdown="block" class="alert alert-success">
 
 :green_book: **Examples:**
-* `add n/Test d/2021-12-01 t/16:30 tg/CS2103 p/MEDIUM` adds the `Test` task on `2021-12-01`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `MEDIUM`
+* `add n/Quiz d/2021-01-06 t/16:30 tg/CS2103 p/MEDIUM` adds the `Test` task on `2021-01-06`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `MEDIUM`
 </div>
 
 ![add_command](images/addCommand.jpeg)
 
-After running the add command the task gets added to the task list as shown below:
+After running the add command the task gets added to the task list and on the weekly panel as shown below:
 
 
 ![add_command_after](images/addCommandAfter.jpeg)
@@ -192,6 +191,7 @@ Adds tags to a task.
 **:information_source: Interpretation:**<br>
 * Adds <code><i>tg/tag</i></code> tag to the task having index <code><i>task_id</i></code>
 * Adds multiple tags if more than one <code><i>tg/tag</i></code> used
+* The tags entered will overwrite the pre-existing tags
 </div>
 
 
@@ -199,14 +199,21 @@ Adds tags to a task.
 <div markdown="block" class="alert alert-success">
 
 **:green_book: Examples:**
-* `tag 5 tg/CS2103` sets the tag of task 5 in the task list to `CS2103`
-* `tag 4 tg/CS2106 tg/tough` sets the tags of task 4 in the task list to `CS2106` and `tough`
+* `tag 3 tg/CS2103T tg/Homework` sets the tags of task 3 in the task list to `CS2103T` and `Homework`
 </div>
+
+![tag_command](images/tagCommand.jpeg)
+
+After running the tag command the task gets tagged and displayed on the task list as shown below:
+
+
+![tag_command_after](images/tagCommandAfter.jpeg)
+
 
 
 ### 4.3 Mark your tasks as DONE : `done`
 
-Marks your task as DONE or finished
+Marks your task as DONE
 
 <div markdown="block" class="alert alert-primary">
 
@@ -214,6 +221,31 @@ Marks your task as DONE or finished
 - <code>done <i>task_id</i></code>
 
 </div>
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
+
+* `done 1` mark first task as done
+</div>
+
+**Demonstration:**
+
+
+<div style="page-break-after: always;"></div>
+
+
+![done_command](images/doneCommandBefore.png)
+
+
+After running the done command, the task at that particular index gets mark as done:
+
+![done_command_after](images/doneCommandAfter.png)
+
+
+When all tasks for the week is done, the progress bar will be full:
+
+![done_command_full](images/doneCommandFull.png)
 
 ### 4.4 Mark your tasks as TODO : `undone`
 
@@ -241,17 +273,21 @@ Find tasks with matching keywords and show them in the task list.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Interpretation:**<br>
+
 * The search is case-insensitive.
 * The order of the keywords does not matter.
-* Only the name,date or tag of the task is searched.
+* Only the name,date and tag of the task is searched.
 * Incomplete keywords will be matched e.g. Qu will match Quiz
 * Only tasks containing all keywords will be shown
 
 </div>
 
 <div markdown="block" class="alert alert-success">
-:green_book: **Examples:**
+
+**:green_book: Examples:**
+
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
+
 </div>
 
 ![find_command](images/findCommand.png)
@@ -328,9 +364,16 @@ Sorts the tasks in the task list of Uni-Fy.
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
 
-* `sort x/time o/asc` sorts the tasks in ascending order of time
+
 * `sort x/priority o/desc` sorts the tasks in the descending order of priority i.e. from `HIGH` to `LOW`
 </div>
+
+![sort_command](images/sortCommand.jpeg)
+
+After running the sort command the task gets sorted and displayed on the task list and weekly panel as shown below:
+
+
+![sort_command_after](images/sortCommandAfter.jpeg)
 
 ### 4.9 Editing tasks : `edit`
 
@@ -389,16 +432,10 @@ Removes a specific task that has been added to your app.
 
 **:green_book: Examples:**
 
-* `delete 3` removes the third item in the task list
-* `delete 1 2` removes the first and second items in the task list
+* `delete 2` removes the second item in the task list
+* `delete 1 3` removes the first and third items in the task list
 
 </div>
-
-**Demonstration:**
-
-
-<div style="page-break-after: always;"></div>
-
 
 ![delete_command](images/userguide/deleteCommandBefore.png)
 
@@ -420,11 +457,11 @@ Clears all entries from the Uni-Fy app.
 
 </div>
 
-![clear_command_before](images/clearCommandBefore.jpeg)
+![clear_command_before](images/clearCommandBefore.png)
 
 When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
 
-![clear_command_after](images/clearCommandAfter.jpeg)
+![clear_command_after](images/clearCommandAfter.png)
 
 
 ### 4.12 Retrieving past commands
