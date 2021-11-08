@@ -21,18 +21,18 @@ Given below are my contributions to the project.
   * Added the ability to list/filter games.
     * What it does: allows the user to list all games stored in gitGud, with the ability to optionally filter by `GAME_ID` containing any of the given keywords.
     * Justification: This feature improves the product significantly because a user can easily view all games they have and apply any filters to easily find specific games.
-  * Added the schedule friend command.
-    * What it does: allows the user save the schedule of their friend to record when they are free or busy during the week.
-    * Challenge: This feature required creating of the `Schedule` and `Day` fields, so the logic (command, parser), model (schedule, day) and storage(Jackson serialization of new fields) packages all had to be updated to support the feature, as well as relevant tests for all the mentioned layers.
+  * Added the schedule friend's availability command.
+    * What it does: allows the user store the schedule of their friend, to record when they are free to play or busy during the week.
+    * Challenge: This feature required creating of the `Schedule` and `Day` fields, so the logic (command, parser), model (schedule, day, util for to handle time conversion) and storage (Serialization/Deserialization of new fields into/out of JSON) packages all had to be updated to support the feature.
     * Justification: This feature improves the product significantly because a user can easily save the schedule of their friend and not have to manually remember when they are free or busy.
   * Added the UI to display schedule of friend when friend get command is input.
     * What it does: allows the user to view the schedule of a friend to view their blocks of free time.
-    * Challenge: This feature required designing and implementing how to effectively display the schedule of a user in limited space, which was ultimately done by grouping of adjacent 1h timeslots into a larger timeslots (e.g. `0800 - 0900` and `0900 - 1000` will be displayed as `0800 - 1000`) to save space. 
+    * Challenge: This feature required designing and implementing how to effectively display the schedule of a user in limited space, which was ultimately done by grouping adjacent 1h timeslots into a larger timeslots (e.g. `0800 - 0900` and `0900 - 1000` will be displayed as `0800 - 1000`) to save space. 
     * Justification: This feature improves the product significantly because a user can easily view the free timeslots of their friend to know when they are able to play with them.
 
 * **Testing**: 
-  * Added unit tests for classes in the logic package to help attain 100% methods and 98% lines coverage.  
-  * Added unit tests for all relevant classes (logic/util/model etc.) involved in the list friend, list game and schedule friend features.
+  * Added unit/integration tests for all classes in the logic package to help attain 100% methods and 98% lines coverage.  
+  * Added unit/integration tests for all relevant classes (logic/util/model etc.) involved in the list friend, list game and schedule friend features.
   
 * **Documentation**:
   * User Guide:
@@ -44,15 +44,15 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added target user profiles for gitGud.
     * Added user story `list` feature.
-    * Updated the logic component section of the Developer Guide to follow gitGud.
+    * Updated the logic component section of the Developer Guide to follow gitGud's implementation.
     * Added implementation section of `friend --schedule` feature.
-    * Added missing/Updated existing use cases for all implemented features to be consistent.
-
+    * Added use cases for all existing features Updated existing use cases for all implemented features to be consistent
+  
 * **Contributions to team-based tasks**:
   * Refactored the parser to support new syntax of commands for games and friends each having their own CRUD commands using the flag system.
-  * Updated application name and logo to gitGud's.
+  * Updated gitGud application name and logo.
   * Updated `Ui.png` and README.md for initial project setup (`v1.1`).
-  * Created and managed milestones `v1.3b` and `v1.4`.   
+  * Created and managed milestones `v1.3b` and `v1.4`.  
   * Added branch protection for `master` branch to support transition to feature branch workflow and prevent accidental pushes to `master` branch.
   * Added Pull Request checks, for at least 1 Approval and for all checks to pass before allowing the PR to be merged, to ensure `master` branch code is always working.
   
