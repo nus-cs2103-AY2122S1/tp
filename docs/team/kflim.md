@@ -38,7 +38,3 @@ Given below are my contributions to the project.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [PED-Issues](https://github.com/kflim/ped/issues)
-
-* **Tools**:
-
-* _{you can add/remove categories in the list above}
