@@ -670,6 +670,8 @@ testers are expected to do more *exploratory* testing.
 
 1. TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a module
 
 1. Adding a module while all modules are being shown.
@@ -745,6 +747,8 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect edit student commands to try: `edit student`, `edit agent`, `...`<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a student
 
 1. Deleting a student while all modules are being shown.
@@ -774,6 +778,8 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect find commands to try: `lookup`, `search`, `...`<br>
        Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Going to the homepage
 
