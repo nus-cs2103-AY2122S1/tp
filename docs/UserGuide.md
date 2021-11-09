@@ -37,7 +37,7 @@ Here are the commonly used syntax and symbols throughout the UG:
 <div class="alert alert-warning">:warning: Caution</div>denotes a possible fault that could occur.
 <br/>
 
-<div class="alert alert-info">:information_source: Notes</div>denotes extra information to aid user in understanding the app.
+<div class="alert alert-info">:information_source: Notes</div>denotes extra information to aid you in understanding the app.
 <br/>
 
 
@@ -290,7 +290,7 @@ Format: `list`
 
 #### 4.2 List all profiles marked as favorite : `listFav`
 
-Shows a list of all profiles that the user has added to their favourites list.
+Shows a list of all profiles that you have added to your favourites list.
 
 Format: `listFav`
 <br>
