@@ -15,11 +15,12 @@ Interface Storage <<Interface>>
 Class StorageManager
 
 package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+Interface TeachingAssistantBuddyStorage <<Interface>>
+Class JsonTeachingAssistantBuddyStorage
+Class JsonSerializableTeachingAssistantBuddy
+Class JsonAdaptedModule
+Class JsonAdaptedStudent
+Class JsonAdaptedTask
 }
 
 }
@@ -29,15 +30,18 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" TeachingAssistantBuddyStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> TeachingAssistantBuddyStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonTeachingAssistantBuddyStorage .up.|> TeachingAssistantBuddyStorage
+JsonTeachingAssistantBuddyStorage ..> JsonSerializableTeachingAssistantBuddy
+JsonSerializableTeachingAssistantBuddy --> "*" JsonAdaptedModule
+JsonAdaptedModule --> "*" JsonAdaptedStudent
+JsonAdaptedModule --> "*" JsonAdaptedTask
+JsonAdaptedStudent --> "*" JsonAdaptedTask
+
 
 @enduml

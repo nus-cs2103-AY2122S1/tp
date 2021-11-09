@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="-Infinity" GridPane.columnIndex="0" styleClass="task-card_complete">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="15" />
+            </padding>
+            <HBox spacing="5">
+                <Label fx:id="id" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <VBox alignment="CENTER_LEFT">
+                    <Label fx:id="taskName" styleClass="task_default_big_label" text="\$taskName"/>
+                    <HBox spacing="5">
+                        <Label fx:id="taskId" text="\$taskId" styleClass="task_default_small_label" />
+                        <Label fx:id="taskDeadline" styleClass="task_default_small_label" text="\$taskDeadline" />
+                        <Label fx:id="isComplete" styleClass="task_complete_small_label" text="\$isComplete" />
+                    </HBox>
+                </VBox>
+            </HBox>
+        </VBox>
+    </GridPane>
+</HBox>

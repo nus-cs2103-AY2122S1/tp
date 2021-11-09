@@ -1,0 +1,38 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "d:DeleteModuleCommand" as DeleteModuleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager :
+activate LogicManager
+LogicManager -> DeleteModuleCommand : execute()
+activate DeleteModuleCommand
+
+DeleteModuleCommand -> Model : deleteModule(moduleName)
+activate Model
+
+Model --> DeleteModuleCommand
+deactivate Model
+
+create CommandResult
+DeleteModuleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteModuleCommand
+deactivate CommandResult
+
+DeleteModuleCommand --> LogicManager : result
+deactivate DeleteModuleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

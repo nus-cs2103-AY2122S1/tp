@@ -5,55 +5,53 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Wang Mengzhe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/charliemoweng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/charliemoweng)]
+[[portfolio](team/charliemoweng.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Task
 
-### Jean Doe
+### Wang Ruofan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruofan1023.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ruofan1023)] [[portfolio](team/ruofan1023.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI, Module
+
+### Joe Wel
+
+<img src="images/tanjoewel.png" width="200px">
+
+[[github](http://github.com/tanjoewel)]
+[[portfolio](team/tanjoewel.md)]
+
+* Role: Developer
+* Responsibilities: Module, Storage
+
+### Wang Guanlin (Joseph)
+
+<img src="images/wanggljoseph.png" width="200px">
+
+[[github](https://github.com/WangGLJoseph)]
+[[portfolio](team/wanggljoseph.md)]
+
+* Role: Developer
+* Responsibilities: Module, Task
+
+### Felissa Faustine
+
+<img src="images/felissaf.png" width="200px">
+
+[[github](http://github.com/felissaf)]
+[[portfolio](team/felissaf.md)]
+
+* Role: Developer
+* Responsibilities: Student

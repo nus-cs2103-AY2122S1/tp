@@ -1,0 +1,56 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant ":DeleteTaskCommandParser" as DeleteTaskCommandParser LOGIC_COLOR
+participant "d:DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
+
+end box
+
+[-> LogicManager : execute("delete task \nm/CS2103 \nti/T1")
+activate LogicManager
+
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("delete task \nm/CS2103 \nti/T1")
+activate TeachingAssistantBuddyParser
+
+create DeleteCommandParser
+TeachingAssistantBuddyParser -> DeleteCommandParser
+activate DeleteCommandParser
+DeleteCommandParser --> TeachingAssistantBuddyParser
+deactivate DeleteCommandParser
+
+TeachingAssistantBuddyParser -> DeleteCommandParser : parse("task \nm/CS2103 \nti/T1")
+activate DeleteCommandParser
+
+create DeleteTaskCommandParser
+DeleteCommandParser -> DeleteTaskCommandParser
+activate DeleteTaskCommandParser
+DeleteTaskCommandParser --> DeleteCommandParser
+deactivate DeleteTaskCommandParser
+
+DeleteCommandParser -> DeleteTaskCommandParser : parse("m/CS2103 \nti/T1")
+activate DeleteTaskCommandParser
+
+create DeleteTaskCommand
+DeleteTaskCommandParser -> DeleteTaskCommand
+activate DeleteTaskCommand
+
+DeleteTaskCommand --> DeleteTaskCommandParser : d
+deactivate DeleteTaskCommand
+
+DeleteTaskCommandParser --> DeleteCommandParser : d
+deactivate DeleteTaskCommandParser
+
+DeleteCommandParser --> TeachingAssistantBuddyParser : d
+deactivate DeleteCommandParser
+
+TeachingAssistantBuddyParser --> LogicManager : d
+deactivate TeachingAssistantBuddyParser
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

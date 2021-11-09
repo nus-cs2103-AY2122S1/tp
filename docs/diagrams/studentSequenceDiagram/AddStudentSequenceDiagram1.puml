@@ -1,0 +1,58 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant "d:AddStudentCommand" as AddStudentCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("add student \nm/CS2103 \ni/A1234567A \nn/Amy bee \nt/@amybee \ne/amybee@gmail.com")
+activate LogicManager
+
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("add student \nm/CS2103 \ni/A1234567A \nn/Amy bee \nt/@amybee \ne/amybee@gmail.com")
+activate TeachingAssistantBuddyParser
+
+create AddCommandParser
+TeachingAssistantBuddyParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser
+deactivate AddCommandParser
+
+TeachingAssistantBuddyParser -> AddCommandParser : parse("student \nm/CS2103\ni/A1234567A \nn/Amy bee \nt/@amybee \ne/amybee@gmail.com")
+activate AddCommandParser
+
+create AddStudentCommandParser
+AddCommandParser -> AddStudentCommandParser
+activate AddStudentCommandParser
+AddStudentCommandParser --> AddCommandParser
+deactivate AddStudentCommandParser
+
+
+AddCommandParser -> AddStudentCommandParser : parse("m/CS2103 \ni/A1234567A \nn/Amy bee \nt/@amybee \ne/amybee@gmail.com")
+activate AddStudentCommandParser
+
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand
+activate AddStudentCommand
+
+AddStudentCommand --> AddStudentCommandParser : d
+deactivate AddStudentCommand
+
+AddStudentCommandParser --> AddCommandParser : d
+deactivate AddStudentCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser : d
+deactivate AddCommandParser
+
+TeachingAssistantBuddyParser --> LogicManager : d
+deactivate TeachingAssistantBuddyParser
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

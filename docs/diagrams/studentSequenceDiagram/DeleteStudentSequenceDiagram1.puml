@@ -1,0 +1,54 @@
+@startuml
+ !include ../style.puml
+
+ box Logic LOGIC_COLOR_T1
+ participant ":LogicManager" as LogicManager LOGIC_COLOR
+ participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+ participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+ participant ":DeleteStudentCommandParser" as DeleteStudentCommandParser LOGIC_COLOR
+ participant "d:DeleteStudentCommand" as DeleteStudentCommand LOGIC_COLOR
+ end box
+
+ [-> LogicManager : execute("delete student \nm/CS2103 \ni/A1234567A")
+ activate LogicManager
+
+ LogicManager -> TeachingAssistantBuddyParser : parseCommand("delete student \nm/CS2103 \ni/A1234567A")
+ activate TeachingAssistantBuddyParser
+
+ create DeleteCommandParser
+ TeachingAssistantBuddyParser -> DeleteCommandParser
+ activate DeleteCommandParser
+ DeleteCommandParser --> TeachingAssistantBuddyParser
+ deactivate DeleteCommandParser
+
+ TeachingAssistantBuddyParser -> DeleteCommandParser : parse("student \nm/CS2103 \ni/A1234567A")
+ activate DeleteCommandParser
+
+ create DeleteStudentCommandParser
+ DeleteCommandParser -> DeleteStudentCommandParser
+ activate DeleteStudentCommandParser
+ DeleteStudentCommandParser --> DeleteCommandParser
+ deactivate DeleteStudentCommandParser
+
+ DeleteCommandParser -> DeleteStudentCommandParser : parse("m/CS2103 i/A1234567A")
+ activate DeleteStudentCommandParser
+
+ create DeleteStudentCommand
+ DeleteStudentCommandParser -> DeleteStudentCommand
+ activate DeleteStudentCommand
+
+ DeleteStudentCommand --> DeleteStudentCommandParser : d
+ deactivate DeleteStudentCommand
+
+ DeleteStudentCommandParser --> DeleteCommandParser : d
+ deactivate DeleteStudentCommandParser
+
+ DeleteCommandParser --> TeachingAssistantBuddyParser : d
+ deactivate DeleteCommandParser
+
+ TeachingAssistantBuddyParser --> LogicManager : d
+ deactivate TeachingAssistantBuddyParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

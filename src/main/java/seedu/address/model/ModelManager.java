@@ -11,34 +11,41 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the TAB data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TeachingAssistantBuddy teachingAssistantBuddy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Module> filteredModules;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given teachingAssistantBuddy and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTeachingAssistantBuddy tab, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(tab, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
+        logger.fine("Initializing with TAB: " + tab + " and user prefs " + userPrefs);
+        //The string name is hardcoded for now. Ability to change teachingAssistantBuddy name will come later
+        this.teachingAssistantBuddy = new TeachingAssistantBuddy(tab);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.teachingAssistantBuddy.getStudentList());
+        filteredModules = new FilteredList<>(this.teachingAssistantBuddy.getModuleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TeachingAssistantBuddy(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +73,137 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getAssistantBuddyFilePath() {
+        return userPrefs.getAssistantBuddyFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setAssistantBuddyFilePath(Path assistantBuddyFilePath) {
+        requireNonNull(assistantBuddyFilePath);
+        userPrefs.setAssistantBuddyFilePath(assistantBuddyFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== TeachingAssistantBuddy ==================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setBuddy(ReadOnlyTeachingAssistantBuddy module) {
+        this.teachingAssistantBuddy.resetData(module);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyTeachingAssistantBuddy getBuddy() {
+        return teachingAssistantBuddy;
     }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
-    }
-
-    //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Deletes the given module.
+     * The module must exist in the TAB.
+     *
+     * @param target The module to be deleted.
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public void deleteModule(Module target) {
+        teachingAssistantBuddy.removeModule(target);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public boolean hasModuleName(ModuleName moduleName) {
+        requireNonNull(moduleName);
+        return teachingAssistantBuddy.hasModuleName(moduleName);
+    }
+
+    /**
+     * Checks whether the specified student is inside the TAB model.
+     *
+     * @param student The students to be found.
+     * @return True if current teachingAssistantBuddy has specified student.
+     */
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return teachingAssistantBuddy.hasStudent(student);
+    }
+
+    @Override
+    public void deleteStudent(Student target) {
+        teachingAssistantBuddy.removeStudent(target);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        teachingAssistantBuddy.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        teachingAssistantBuddy.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public void addTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(moduleName, task);
+        teachingAssistantBuddy.addTask(moduleName, task);
+    }
+
+    @Override
+    public boolean hasTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(moduleName, task);
+        return teachingAssistantBuddy.hasTask(moduleName, task);
+    }
+
+    @Override
+    public boolean isDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        return teachingAssistantBuddy.isDone(moduleName, studentId, taskId);
+    }
+
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return teachingAssistantBuddy.hasModule(module);
+    }
+
+    @Override
+    public void addModule(Module module) {
+        requireNonNull(module);
+        teachingAssistantBuddy.addModule(module);
+    }
+
+    @Override
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+        teachingAssistantBuddy.setModule(target, editedModule);
+    }
+
+    //=========== Filtered List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the filtered student list.
+     */
+    @Override
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered module list.
+     */
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredModules.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
+        requireNonNull(predicate);
+        filteredStudents.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +220,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return teachingAssistantBuddy.equals(other.teachingAssistantBuddy)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredModules.equals(other.filteredModules);
     }
 
 }

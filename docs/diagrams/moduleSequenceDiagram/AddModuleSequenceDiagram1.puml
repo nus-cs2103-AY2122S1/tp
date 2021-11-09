@@ -1,0 +1,56 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddModuleCommandParser" as AddModuleCommandParser LOGIC_COLOR
+participant "d:AddModuleCommand" as AddModuleCommand LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute("add module \nm/CS2103")
+activate LogicManager
+
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("add module \nm/CS2103")
+activate TeachingAssistantBuddyParser
+
+create AddCommandParser
+TeachingAssistantBuddyParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser
+deactivate AddCommandParser
+
+TeachingAssistantBuddyParser -> AddCommandParser : parse("module \nm/CS2103")
+activate AddCommandParser
+
+create AddModuleCommandParser
+AddCommandParser -> AddModuleCommandParser
+activate AddModuleCommandParser
+AddModuleCommandParser --> AddCommandParser
+deactivate AddModuleCommandParser
+
+AddCommandParser -> AddModuleCommandParser : \nparse("m/CS210")
+activate AddModuleCommandParser
+
+create AddModuleCommand
+AddModuleCommandParser -> AddModuleCommand
+activate AddModuleCommand
+
+AddModuleCommand --> AddModuleCommandParser : d
+deactivate AddModuleCommand
+
+AddModuleCommandParser --> AddCommandParser : d
+deactivate AddModuleCommandParser
+
+AddCommandParser --> TeachingAssistantBuddyParser : d
+deactivate AddCommandParser
+
+TeachingAssistantBuddyParser --> LogicManager : d
+deactivate TeachingAssistantBuddyParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

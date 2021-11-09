@@ -1,0 +1,53 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
+participant "d:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("edit task \nm/CS2103 \nti/T1 \na/final exam")
+activate LogicManager
+
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("edit task \nm/CS2103 \nti/T1 \na/final exam")
+activate TeachingAssistantBuddyParser
+
+create EditCommandParser
+TeachingAssistantBuddyParser -> EditCommandParser
+activate EditCommandParser
+EditCommandParser --> TeachingAssistantBuddyParser
+deactivate EditCommandParser
+
+TeachingAssistantBuddyParser -> EditCommandParser : parse("task \nm/CS2103 \nti/T1 \na/final exam")
+activate EditCommandParser
+
+create EditTaskCommandParser
+EditCommandParser -> EditTaskCommandParser
+activate EditTaskCommandParser
+EditTaskCommandParser --> EditCommandParser
+deactivate EditTaskCommandParser
+EditCommandParser -> EditTaskCommandParser : parse("\nm/CS2103 \nti/T1 \na/final exam")
+activate EditTaskCommandParser
+
+create EditTaskCommand
+EditTaskCommandParser -> EditTaskCommand
+activate EditTaskCommand
+
+EditTaskCommand --> EditTaskCommandParser : d
+deactivate EditTaskCommand
+
+EditTaskCommandParser --> EditCommandParser : d
+deactivate EditTaskCommandParser
+
+EditCommandParser --> TeachingAssistantBuddyParser : d
+deactivate EditCommandParser
+
+TeachingAssistantBuddyParser --> LogicManager : d
+deactivate TeachingAssistantBuddyParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

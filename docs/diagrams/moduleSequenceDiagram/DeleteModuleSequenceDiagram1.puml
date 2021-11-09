@@ -1,0 +1,61 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachingAssistantBuddyParser" as TeachingAssistantBuddyParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant ":DeleteModuleCommandParser" as DeleteModuleCommandParser LOGIC_COLOR
+participant "d:DeleteModuleCommand" as DeleteModuleCommand LOGIC_COLOR
+'participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+'box Model MODEL_COLOR_T1
+'participant ":Model" as Model MODEL_COLOR
+'end box
+
+[-> LogicManager : execute("delete module \nm/CS2103")
+activate LogicManager
+
+LogicManager -> TeachingAssistantBuddyParser : parseCommand("delete module \nm/CS2103")
+activate TeachingAssistantBuddyParser
+
+create DeleteCommandParser
+TeachingAssistantBuddyParser -> DeleteCommandParser
+activate DeleteCommandParser
+DeleteCommandParser --> TeachingAssistantBuddyParser
+deactivate DeleteCommandParser
+
+TeachingAssistantBuddyParser -> DeleteCommandParser : parse("module \nm/CS2103")
+activate DeleteCommandParser
+
+create DeleteModuleCommandParser
+DeleteCommandParser -> DeleteModuleCommandParser
+activate DeleteModuleCommandParser
+DeleteModuleCommandParser --> DeleteCommandParser
+deactivate DeleteModuleCommandParser
+
+DeleteCommandParser -> DeleteModuleCommandParser : parse("m/CS2103")
+activate DeleteModuleCommandParser
+
+create DeleteModuleCommand
+DeleteModuleCommandParser -> DeleteModuleCommand
+activate DeleteModuleCommand
+
+DeleteModuleCommand --> DeleteModuleCommandParser : d
+deactivate DeleteModuleCommand
+
+DeleteModuleCommandParser --> DeleteCommandParser : d
+deactivate DeleteModuleCommandParser
+
+DeleteCommandParser --> TeachingAssistantBuddyParser : d
+deactivate DeleteCommandParser
+
+TeachingAssistantBuddyParser --> LogicManager : d
+deactivate TeachingAssistantBuddyParser
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
