@@ -893,9 +893,8 @@ testers are expected to do more *exploratory* testing.
       Expected: The TAB application will not exit. Error details shown in ths status message
 <div style="page-break-after: always;"></div>
 
-------------------------------------------
 
-### Effort
+## **Appendix: Effort**
 
 With AB3 as the baseline of comparison, our project is much more demanding. 
 AB3, as an address book application that manages contact details, has only one model which is a Person. 
