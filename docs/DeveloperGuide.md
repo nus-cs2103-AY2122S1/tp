@@ -919,6 +919,4 @@ Kudos to them!
 Overall, this project posed many difficulties and challenges that we had to overcome.
 To many of us, this was the first collaborative software engineering project that involved facets that were once unfamiliar, such as testing, UI and storage.
 It would be an understatement to say that it was not easy.
-Nevertheless, we, together as a team, rose above all these obstacles and passed this trial of diligence, determination, resourcefulness, and teamwork. 
-
-Thank you for reading until here. Have a nice day! : )
+Nevertheless, we, together as a team, rose above all these obstacles and passed this trial of diligence, determination, resourcefulness, and teamwork.
