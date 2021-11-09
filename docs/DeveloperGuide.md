@@ -661,7 +661,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
+   2. Double-click the jar file.
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 2. Shutting down the TAB application.
 
@@ -681,7 +682,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all modules using the `home` command. TAB can be empty.
    
    2. Test case: `add module m/CS2105`<br>
-     Expected: The `Module` with the name `CS2105` is added to the list of modules
+     Expected: The `Module` with the name `CS2105` is added to the list of modules.
    
    3. Test case: `add module m/ALREADY_EXISTING_MODULE`<br>
      Expected: No `Module` is added. Error details shown in the status message.
