@@ -657,37 +657,235 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch of the TAB application.
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Shutting down the TAB application.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Close the application using the close button in the application window, or using the exit command as listed in a section below.
+   
+3. Dealing with missing/corrupted data files. 
+   1. When the data file is missing or not in the correct format, the application will be starting with an empty TeachingAssistantBuddy.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+### Saving the data
+
+1. TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Adding a module
+
+1. Adding a module while all modules are being shown.
+
+   1. Prerequisites: List all modules using the `home` command. TAB can be empty.
+   
+   2. Test case: `add module m/CS2105`<br>
+     Expected: The `Module` with the name `CS2105` is added to the list of modules
+   
+   3. Test case: `add module m/ALREADY_EXISTING_MODULE`<br>
+     Expected: No `Module` is added. Error details shown in the status message.
+   
+   4. Other incorrect add module commands to try: `add module`, `add subject`, `...`<br>
+     Expected: Similar to previous.
+   
+### Editing a module
+
+1. Editing a module while all modules are being shown.
+
+   1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB.
+   
+   2. Test case: `edit module m/CS2100 mn/CS2106`<br>
+      Expected: The `Module` with the name `CS2100` is edited to have the name `CS2106`. 
+   
+   3. Test case: `edit module m/NON_EXISTENT_MODULE mn/NEW_MODULE_NAME`<br>
+      Expected: No `Module` is deleted. Error details shown in the status message.
+   
+   4. Other incorrect edit module commands to try: `edit module`, `edit lesson`, `...`<br>
+      Expected: Similar to previous.
 
 ### Deleting a module
 
-1. Deleting a module while all modules are being shown
+1. Deleting a module while all modules are being shown.
 
-   1. Prerequisites: List all modules using the `home` command. Multiple modules in the list.
+   1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB.
 
-   1. Test case: `delete module m/CS2103`<br>
-      Expected: The `Module` with the name `CS2103` is deleted from the list.
+   2. Test case: `delete module m/CS2103`<br>
+     Expected: The `Module` with the name `CS2103` is deleted from the list of modules.
 
-   1. Test case: `delete module m/NON_EXISTENT_MODULE`<br>
-      Expected: No Module is deleted. Error details shown in the status message.
+   3. Test case: `delete module m/NON_EXISTENT_MODULE`<br>
+     Expected: No `Module` is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete module`, `delete tutor`, `...`<br>
+   4. Other incorrect delete module commands to try: `delete module`, `delete tutor`, `...`<br>
+     Expected: Similar to previous.
+
+### Adding a student
+
+1. Adding a student to a module while all modules are being shown.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB.
+
+    2. Test case: `add student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`<br>
+       Expected: The `Student` with the student id `A0123456A` is added to the `Module` `CS2103`.
+
+    3. Test case: `add student m/NON_EXISTENT_MODULE i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`<br>
+       Expected: No `Student` is added. Error details shown in the status message.
+
+    4. Other incorrect add student commands to try: `add student i/A0123456A n/John Doe`, `add tutee m/CS2103 i/A0123456A`, `...`<br>
+       Expected: Similar to previous.
+
+### Editing a student
+
+1. Editing a student while all modules are being shown.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB and that `Module` has at least 1 `Student`.
+
+    2. Test case: `edit student m/CS2103 i/A0123456A n/John Wick`<br>
+       Expected: The `Student` in `Module` `CS2103` with the student id `A0123456A` is edited to have the name `John Wick`.
+
+    3. Test case: `edit student m/CS2103 i/NON_EXISTENT_STUDENT_ID n/Johnny English`<br>
+       Expected: No `Student` is deleted. Error details shown in the status message.
+
+    4. Other incorrect edit student commands to try: `edit student`, `edit agent`, `...`<br>
+       Expected: Similar to previous.
+
+### Deleting a student
+
+1. Deleting a student while all modules are being shown.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB and that `Module` has at least 1 `Student`.
+
+    2. Test case: `delete student m/CS2103 i/A0123456A`<br>
+       Expected: The `Student` with the student id `A0123456A` is deleted from the `Module` `CS2103`.
+
+    3. Test case: `delete student m/NON_EXISTENT_STUDENT_ID`<br>
+       Expected: No `Student` is deleted. Error details shown in the status message.
+
+    4. Other incorrect delete student commands to try: `delete student`, `delete person i/A0123456A`, `...`<br>
+       Expected: Similar to previous.
+
+### Adding a task
+
+1. Adding a task to a module (and all its students) while all modules are being shown.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB. The task will still be added if there are no `Student`s in the `Module`, but the change will only be visible after a `Student` has been added.
+
+    2. Test case: `add task m/CS2103 ti/T10 a/assignment1 d/2021-10-12`<br>
+       Expected: The `Task` with the task id `T10`, name `assignment1` and the deadline `Tue, Oct 12 2021` is added to the `Module` `CS2103` and all the `Students` in that module.
+
+    3. Test case: `add task m/NON_EXISTENT_MODULE ti/T10 a/assignment1 d/2021-10-12`<br>
+       Expected: No `Task` is added. Error details shown in the status message.
+
+    4. Other incorrect add task commands to try: `add task m/CS2103 a/task with no id`, `add assignment`, `...`<br>
+       Expected: Similar to previous.
+
+### Editing a task
+
+1. Editing a task of a module (and all its students) while all modules are being shown.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB and that `Module` has at least 1 `Task`. The task will still be edited if there are no `Student`s in the `Module`, but the change will only be visible after a `Student` has been added.
+
+    2. Test case: `edit task m/CS2103 ti/T10 a/Final exam d/2021-11-23`<br>
+     Expected: The `Task` in `Module` `CS2103` with the task id `T10` is edited to have the name `Final exam` and deadline `Tue, Nov 23 2021`.
+
+    3. Test case: `edit task m/CS2103 ti/NON_EXISTENT_TASK_ID a/Practical exam`<br>
+     Expected: No `Task` is deleted. Error details shown in the status message.
+
+    4. Other incorrect edit task commands to try: `edit exam`, `edit task m/NON_EXISTENT_MODULE`, `...`<br>
+     Expected: Similar to previous.
+
+### Deleting a task
+
+1. Deleting a task from a module (and from all its students) while all modules are being shown.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the TAB and that `Module` has at lest 1 `Task`. The task will still be deleted if there are no `Student`s in the `Module`, but the change will only be visible after a `Student` has been added.
+
+    2. Test case: `delete task m/CS2103 ti/T1`<br>
+       Expected: The `Task` with the task id `T1` is deleted from the `Module` `CS2103`.
+
+    3. Test case: `delete task m/NON_EXISTENT_MODULE`<br>
+       Expected: No `Task` is deleted. Error details shown in the status message.
+
+    4. Other incorrect delete task commands to try: `delete assignment`, `delete task m/CS2103 i/NON_EXISTENT_TASK_ID`, `...`<br>
+       Expected: Similar to previous.
+
+### Marking a task as done
+
+1. Marking a task from a student in a particular module as done (`Completed`).
+
+   1. Prerequisites: List all modules using the `home` command. The `Task` being marked done must belong to a `Student` in a `Module` in TAB and the `Task` must be `Incomplete`.
+   
+   2. Test case: `mark done m/CS2103 i/A1234567A ti/T1`<br>
+      Expected: The `Task` with the task id `T1` is marked as `Completed` for `Student` with student id `A1234567A` of `Module` `CS2103`.
+   
+   3. Test case: `mark done m/CS2103 i/A1234567A ti/T1` (again, after the task is already marked as `Completed`)<br>
+      Expected: No `Task` is marked as `Completed`. Error details shown in the status message.
+   
+   4. Other incorrect mark done commands to try: `mark finished`, `mark done m/NON_EXISTENT_MODULE i/NON_EXISTENT_STUDENT_ID ti/NON_EXISTENT_TASK_ID`, `...`<br>
+      Expected: Similar to previous.
+
+### Marking a task as undone
+
+1. Marking a task from a student in a particular module as undone (`Incomplete`).
+
+    1. Prerequisites: List all modules using the `home` command. The `Task` being marked undone must belong to a `Student` in a `Module` in TAB and the `Task` must be `Completed`.
+
+    2. Test case: `mark undone m/CS2103 i/A1234567A ti/T1`<br>
+       Expected: The `Task` with the task id `T1` is marked as `Incomplete` for `Student` with student id `A1234567A` of `Module` `CS2103`.
+
+    3. Test case: `mark undone m/CS2103 i/A1234567A ti/T1` (again, after the task is already marked as `Incomplete`)<br>
+       Expected: No `Task` is marked as `Completed`. Error details shown in the status message.
+   
+    4. Other incorrect mark undone commands to try: `mark unfinished`, `mark undone m/NON_EXISTENT_MODULE i/NON_EXISTENT_STUDENT_ID ti/NON_EXISTENT_TASK_ID`, `...`<br>
+       Expected: Similar to previous.
+
+### Finding a student
+
+1. Finding the information of a specific student in a specific module.
+
+   1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the list and that `Module` contains at least 1 `Student`.
+   
+   2. Test case: `find m/CS2103 i/A1234567A`<br>
+      Expected: The `Student` with student id `A1234567A` in the `Module` `CS2103` will be chosen and displayed in TAB.
+   
+   3. Test case: `find m/CS2103 i/NON_EXISTING_STUDENT_ID`<br>
+      Expected: No `Student` will be chosen and displayed in TAB. Error details shown in the status message.
+   
+   4. Other incorrect find commands to try: `lookup`, `search`, `...`<br>
+      Expected: Similar to previous.
+
+### Going to the homepage
+
+1. Going to the homepage of TAB from anywhere in the application.
+
+   1. Prerequisites: The TAB application is running.
+
+   2. Test case: `home`<br>
+      Expected: The home page of TAB will be shown, along with all the data currently in TAB.
+
+   3. Other incorrect home commands to try: `list`, `back`, `...`<br>
+      Expected: Similar to previous.
+
+### Clearing all information
+
+1. Clearing all information from TAB using the `clear` command.
+
+   1. Prerequisites: The TAB application is running.
+   
+   2. Test case: `clear` <br>
+      Expected: All information in TAB will be cleared. If TAB has no information, the successful status message will still be shown.
+   
+   3. Other incorrect clear commands to try: `reset`, `refresh`, `...`<br>
       Expected: Similar to previous.
    
-### Saving data
+### Exiting the application
 
-1. Dealing with missing/corrupted data files
+1. Exiting the application using the `exit` command.
 
-   1. When the data file is missing or not in the correct format, the application will be starting with an empty TeachingAssistantBuddy.
+   1. Prerequisites: The TAB application is running.
+   
+   2. Test case: `exit`<br>
+      Expected: The TAB application will exit.
 
+   3. Other incorrect exit commands to try: `bye`, `quit`, `logout`, `...`<br>
+      Expected: The TAB application will not exit. Error details shown in ths status message
