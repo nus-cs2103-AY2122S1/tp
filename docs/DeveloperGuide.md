@@ -893,7 +893,6 @@ testers are expected to do more *exploratory* testing.
       Expected: The TAB application will not exit. Error details shown in ths status message
 <div style="page-break-after: always;"></div>
 
-------------------------------------------
 
 ## **Appendix: Effort**
 
