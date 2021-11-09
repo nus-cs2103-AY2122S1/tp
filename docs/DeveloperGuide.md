@@ -169,11 +169,12 @@ This section describes some noteworthy details on how certain features are imple
 3. The `AddCommandParser` then figures out the type of object to add, in this case a `Module` object as indicated by `module`.
 4. The `AddModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `AddModuleCommand`.
 5. This results in a `AddModuleCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic Manager`.
-   ![How the command `add module m/CS2103` is parsed in the Logic component](images/AddModuleSequenceDiagram1.png)
+![How the command `add module m/CS2103` is parsed in the Logic component](images/AddModuleSequenceDiagram1.png)
 6. The `AddModuleCommand` communicates with the `Model` when it is executed.
 7. The `Model` will add a new `Module` with the new `ModuleName`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-   ![How the command `add module m/CS2103` is executed](images/AddModuleSequenceDiagram2.png)
+
+![How the command `add module m/CS2103` is executed](images/AddModuleSequenceDiagram2.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -184,23 +185,23 @@ This section describes some noteworthy details on how certain features are imple
 3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Module` object as indicated by `module`.
 4. The `EditModuleCommandParser` will parse the tokens `m/<old module name>` and `mn/<new module name>`.
 5. `EditModuleCommandParser` will also create a `EditModuleCommand` and the module to edit, which is executed by the `LogicManager`
-   ![How the command `edit module m/CS2103 mn/CS2105` is parsed in the Logic component](images/EditModuleSequenceDiagram1.png)
+![How the command `edit module m/CS2103 mn/CS2105` is parsed in the Logic component](images/EditModuleSequenceDiagram1.png)
 6. The `EditModuleCommand` communicates with the `Model` when it is executed.
 7. The `EditModuleCommand` will look for a `Module` with the specified name and edit the name after getting a list of modules from `Model`.
 8. The `Model` will then cahnge the old module to the newly edited module.
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-   ![How the command `edit module m/CS2103 mn/CS2105` is executed](images/EditModuleSequenceDiagram2.png)
+
+![How the command `edit module m/CS2103 mn/CS2105` is executed](images/EditModuleSequenceDiagram2.png)
 
 <div style="page-break-after: always;"></div>
 
 ### Add Student
 
-1. When the `Logic` is called upon to execute `add student m/CS2103 i/A1234567A n/Amy bee t/@amybee e/amybee@gmail.com`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+1. When the `Logic` is called upon to execute `add student m/CS2103 i/A1234567A n/Amy bee t/@amybee e/amybee@gmail.com`, it uses the `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram for **Add Module**)
 2. The `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to a `AddCommandParser`.
 3. The `AddCommandParser` then figures out the type of object to add, in this case a `Student` object as indicated by `student`.
 4. The `AddStudentCommandParser` will wrap the module name in a `ModuleName` object and the student's information in a `Student` object and pass it into a `AddStudentCommand`.
 5. This results in a `AddStudentCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic Manager`.
-![How the command `add student m/CS2103 i/A1234567A n/Amy bee t/@amybee e/amybee@gmail.com` is parsed in the Logic component](images/AddStudentSequenceDiagram1.png)
 6. The `AddStudentCommand` communicates with the `Model` when it is executed.
 7. The `Model` will look for a `Module` with the specified `ModuleName`.
 8. The `Module` with the specified `ModuleName` will then add the new `Student` object to its student list.
@@ -211,12 +212,11 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete Student
 
-1. When the `Logic` is called upon to execute `delete student m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+1. When the `Logic` is called upon to execute `delete student m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram for **Delete Module** under **Design** > **Logic component**)
 2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
 3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Student` object as indicated by `student`.
 4. The `DeleteStudentCommandParser` will wrap the module name in a `ModuleName` object and the student ID in a `StudentId` object and pass them into a `DeleteStudentCommand`.
 5. This results in a `DeleteStudentCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
-![How the command `delete student m/CS2103 i/A1234567A` is parsed in the Logic component](images/DeleteStudentSequenceDiagram1.png)
 6. The `DeleteStudentCommand` communicates with the `Model` when it is executed.
 7. The `Model` will look for a `Module` with the specified `ModuleName`.
 8. The `Module` with the specified `ModuleName` will then look for the student with the specified `StudentId` and delete the student.
@@ -228,14 +228,13 @@ This section describes some noteworthy details on how certain features are imple
 ### Edit Student
 
 1. When `Logic` is called upon to execute the user input `edit student m/CS2103 i/A1234567A n/Amy Lee`, it uses the
-   `TeachingAssistantBuddyParser` class to parse the user command.
+   `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram for **Edit Module**)
 2. `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to `EditCommandParser`.
 3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Student` object as indicated by `student`.
 4. The `EditStudentCommandParser` will then parse the tokens, `m/CS2103`, `i/A1234567A` and `n/Amy Lee` in this case, to determine the moduleName (`CS2103`in this case),
    and to create an `EditStudentDescriptor` with the student ID `A1234567A` and the name `Amy Lee`, and pass these `ModuleName` and `EditStudentDescriptor` objects into an `EditStudentCommand`.
 5. This results in a `EditStudentCommand` object (which is a subclass of `EditCommand`), which is executed by the `Logic
    Manager`.
-![How the command `edit student m/CS2103 i/A1234567A n/Amy Lee` is parsed in the Logic component](images/EditStudentSequenceDiagram1.png)
 6. The `EditStudentCommand` communicates with the `Model` when it is executed.
 7. The `Model` will look for the `Student` with the specified student id, `A1234567A` in this case,  inside the `Module` specified by
    the module name, `CS2103` in this case, and then replacing the old editable fields (such as student name, tele handle and email)
@@ -247,11 +246,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find Student
 
-1. When the `Logic` is called upon to execute `find m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+1. When the `Logic` is called upon to execute `find m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram under **Design** > **Logic component**)
 2. The `TeachingAssistantBuddyParser` parses the first command word `find`, and pass the rest of the input to a `FindStudentCommandParser`.
 3. The `FindStudentCommandParser` will wrap the module name in a `ModuleName` object and the student's ID in a `StudentId` object and pass it into a `FindStudentCommand`.
 4. This results in a `FindStudentCommand` object, which is executed by the `Logic Manager`.
-![How the command `find m/CS2103 i/A1234567A` is parsed in the Logic component](images/FindStudentSequenceDiagram1.png)
 5. The `FindStudentCommand` communicates with the `Model` when it is executed.
 6. The `Model` will look for a `Module` with the specified `ModuleName`.
 7. The `Module` with the specified `ModuleName` will then look for the `Student` with the specified `StudentId` and update the module's filtered student's list to only contain this specific student.
@@ -263,7 +261,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Task
 
 1. When `Logic` is called upon to execute the user input `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20`, it uses the 
-   `TeachingAssistantBuddyParser` class to parse the user command.
+   `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram for **Add Module**)
 2. `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to `AddCommandParser`.
 3. `AddCommandParser` then figures out the type of object to add, in this case a `task` object as indicated by the 
    keyword `task`, and pass the rest of the arguments to `AddTaskCommandParser`.
@@ -271,19 +269,18 @@ This section describes some noteworthy details on how certain features are imple
    the input arguments. They are then passed to `AddTaskCommand`.
 5. This results in a `AddTaskCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic 
    Manager`.
-   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is parsed in the Logic component](images/AddTaskSequenceDiagram1.png)
 6. The `AddTaskCommand` communicates with the `Model` when it is executed.
 7. The `Model` will add a new `Task` with the new `taskName` under the `Module` with that `moduleName`. The `Task` will also be 
    added to all the `Student`s under the specified `Module`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-   ![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is executed](images/AddTaskSequenceDiagram2.png)
+![How the command `add task m/CS2103 ti/T1 a/assignment1 d/2021-10-20` is executed](images/AddTaskSequenceDiagram2.png)
 
 <div style="page-break-after: always;"></div>
 
 ### Edit Task
 
 1. When `Logic` is called upon to execute the user input `edit task m/CS2103 ti/T1 a/final exam`, it uses the
-   `TeachingAssistantBuddyParser` class to parse the user command.
+   `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram for **Edit Module**)
 2. `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to `EditCommandParser`.
 3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Task` object as indicated by `task`.
 4. The `EditTaskCommandParser` will then parse the tokens, `m/CS2103` and `ti/T1` in this case, to determine the module (`CS2103`in this case), 
@@ -292,7 +289,6 @@ This section describes some noteworthy details on how certain features are imple
    `taskId` object, and any other tokens passed from `EditTaskCommandParser` representing the newly updated fields of the task object.
 6. This results in a `EditTaskCommand` object (which is a subclass of `EditCommand`), which is executed by the `Logic
    Manager`.
-   ![How the command `edit task m/CS2103 ti/T1 a/final exam` is parsed in the Logic component](images/EditTaskSequenceDiagram1.png)
 7. The `EditTaskCommand` communicates with the `Model` when it is executed.
 8. The `EditTaskCommand` will get a list of modules from `Model` and look for the specified `Module`.
 9. The `EditTaskCommand` will look for the `Task` with the specified task id, `T1` in this case, for every `Student` in 
@@ -306,12 +302,11 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Delete Task
 
-1. When the `Logic` is called upon to execute `delete task m/CS2103 ti/T1`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+1. When the `Logic` is called upon to execute `delete task m/CS2103 ti/T1`, it uses the `TeachingAssistantBuddyParser` class to parse the user command. (refer to the diagram for **Delete Module** under **Design** > **Logic component**)
 2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
 3. The `DeleteTaskCommandParser` then figures out the type of object to delete, in this case a `Task` object as indicated by `task`.
 4. The `DeleteStudentCommandParser` will wrap the module name in a `ModuleName` object and the task ID in a `TaskId` object and pass them into a `DeleteTaskCommand`.
 5. This results in a `DeleteTaskCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
-   ![How the command `delete task m/CS2103 ti/T1` is parsed in the Logic component](images/DeleteTaskSequenceDiagram1.png)
 6. The `DeleteTaskCommand` communicates with the `Model` when it is executed.
 7. The `DeleteTaskCommand` will get the current list of modules from `Model`, and look for the specified `Module`.
 8. The `Module` with the specified `ModuleName` will then look for the task with the specified `TaskId` and delete the task.
@@ -675,6 +670,8 @@ testers are expected to do more *exploratory* testing.
 
 1. TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a module
 
 1. Adding a module while all modules are being shown.
@@ -750,6 +747,8 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect edit student commands to try: `edit student`, `edit agent`, `...`<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a student
 
 1. Deleting a student while all modules are being shown.
@@ -779,6 +778,8 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect find commands to try: `lookup`, `search`, `...`<br>
        Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Going to the homepage
 
@@ -890,3 +891,4 @@ testers are expected to do more *exploratory* testing.
 
    3. Other incorrect exit commands to try: `bye`, `quit`, `logout`, `...`<br>
       Expected: The TAB application will not exit. Error details shown in ths status message
+<div style="page-break-after: always;"></div>
