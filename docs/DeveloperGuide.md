@@ -763,6 +763,33 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete student commands to try: `delete student`, `delete person i/A0123456A`, `...`<br>
        Expected: Similar to previous.
+    
+### Finding a student
+
+1. Finding the information of a specific student in a specific module.
+
+    1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the list and that `Module` contains at least 1 `Student`.
+
+    2. Test case: `find m/CS2103 i/A1234567A`<br>
+       Expected: The `Student` with student id `A1234567A` in the `Module` `CS2103` will be chosen and displayed in TAB.
+
+    3. Test case: `find m/CS2103 i/NON_EXISTING_STUDENT_ID`<br>
+       Expected: No `Student` will be chosen and displayed in TAB. Error details shown in the status message.
+
+    4. Other incorrect find commands to try: `lookup`, `search`, `...`<br>
+       Expected: Similar to previous.
+
+### Going to the homepage
+
+1. Going to the homepage of TAB from anywhere in the application.
+
+    1. Prerequisites: The TAB application is running.
+
+    2. Test case: `home`<br>
+       Expected: The home page of TAB will be shown, along with all the data currently in TAB.
+
+    3. Other incorrect home commands to try: `list`, `back`, `...`<br>
+       Expected: Similar to previous.
 
 ### Adding a task
 
@@ -838,33 +865,6 @@ testers are expected to do more *exploratory* testing.
    
     4. Other incorrect mark undone commands to try: `mark unfinished`, `mark undone m/NON_EXISTENT_MODULE i/NON_EXISTENT_STUDENT_ID ti/NON_EXISTENT_TASK_ID`, `...`<br>
        Expected: Similar to previous.
-
-### Finding a student
-
-1. Finding the information of a specific student in a specific module.
-
-   1. Prerequisites: List all modules using the `home` command. At least 1 `Module` is in the list and that `Module` contains at least 1 `Student`.
-   
-   2. Test case: `find m/CS2103 i/A1234567A`<br>
-      Expected: The `Student` with student id `A1234567A` in the `Module` `CS2103` will be chosen and displayed in TAB.
-   
-   3. Test case: `find m/CS2103 i/NON_EXISTING_STUDENT_ID`<br>
-      Expected: No `Student` will be chosen and displayed in TAB. Error details shown in the status message.
-   
-   4. Other incorrect find commands to try: `lookup`, `search`, `...`<br>
-      Expected: Similar to previous.
-
-### Going to the homepage
-
-1. Going to the homepage of TAB from anywhere in the application.
-
-   1. Prerequisites: The TAB application is running.
-
-   2. Test case: `home`<br>
-      Expected: The home page of TAB will be shown, along with all the data currently in TAB.
-
-   3. Other incorrect home commands to try: `list`, `back`, `...`<br>
-      Expected: Similar to previous.
 
 ### Clearing all information
 
