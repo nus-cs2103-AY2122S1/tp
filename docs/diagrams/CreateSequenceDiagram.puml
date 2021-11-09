@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
+participant ":CreateCommandParser" as CreateCommandParser LOGIC_COLOR
+participant "p:CreateCommand" as CreateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("create n/... id/... p/... e/...")
+activate LogicManager
+
+LogicManager -> ModuLinkParser : parseCommand("create n/... id/... p/... e/...")
+activate ModuLinkParser
+
+create CreateCommandParser
+ModuLinkParser -> CreateCommandParser
+activate CreateCommandParser
+
+CreateCommandParser --> ModuLinkParser
+deactivate CreateCommandParser
+
+ModuLinkParser -> CreateCommandParser : parse("n/... id/... p/... e/...")
+activate CreateCommandParser
+
+create CreateCommand
+CreateCommandParser -> CreateCommand
+activate CreateCommand
+
+CreateCommand --> CreateCommandParser : p
+deactivate CreateCommand
+
+CreateCommandParser --> ModuLinkParser : p
+deactivate CreateCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CreateCommandParser -[hidden]-> ModuLinkParser
+destroy CreateCommandParser
+
+ModuLinkParser --> LogicManager : p
+deactivate ModuLinkParser
+
+LogicManager -> CreateCommand : execute()
+activate CreateCommand
+
+CreateCommand -> Model : createProfile(myProfile)
+activate Model
+
+Model --> CreateCommand
+deactivate Model
+
+create CommandResult
+CreateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CreateCommand
+deactivate CommandResult
+
+CreateCommand --> LogicManager : result
+deactivate CreateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

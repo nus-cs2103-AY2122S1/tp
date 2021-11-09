@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
+participant ":EditGroupStatusCommandParser" as EditGroupStatusCommandParser LOGIC_COLOR
+participant "p:EditGroupStatusCommand" as EditGroupStatusCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("editGroupStatus mod/CS2101 need member")
+activate LogicManager
+
+LogicManager -> ModuLinkParser : parseCommand("editGroupStatus mod/CS2101 need member")
+activate ModuLinkParser
+
+create EditGroupStatusCommandParser
+ModuLinkParser -> EditGroupStatusCommandParser
+activate EditGroupStatusCommandParser
+
+EditGroupStatusCommandParser --> ModuLinkParser
+deactivate EditGroupStatusCommandParser
+
+ModuLinkParser -> EditGroupStatusCommandParser : parse("mod/CS2101 need member")
+activate EditGroupStatusCommandParser
+
+create EditGroupStatusCommand
+EditCommandParser -> EditGroupStatusCommand
+activate EditGroupStatusCommand
+
+EditGroupStatusCommand --> EditGroupStatusCommandParser : e
+deactivate EditGroupStatusCommand
+
+EditGroupStatusCommandParser --> ModuLinkParser : e
+deactivate EditGroupStatusCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditGroupStatusCommandParser -[hidden]-> ModuLinkParser
+destroy EditGroupStatusCommandParser
+
+ModuLinkParser --> LogicManager : e
+deactivate ModuLinkParser
+
+LogicManager -> EditGroupStatusCommand : execute()
+activate EditGroupStatusCommand
+
+EditCommand -> Model : setPerson(myProfile, editedProfile)
+activate Model
+
+Model --> EditGroupStatusCommand
+deactivate Model
+
+EditCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> EditGroupStatusCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditGroupStatusCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : result
+deactivate EditGroupStatusCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

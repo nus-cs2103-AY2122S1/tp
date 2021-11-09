@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "p:EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit n/...")
+activate LogicManager
+
+LogicManager -> ModuLinkParser : parseCommand("edit n/...")
+activate ModuLinkParser
+
+create EditCommandParser
+ModuLinkParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> ModuLinkParser
+deactivate EditCommandParser
+
+ModuLinkParser -> EditCommandParser : parse("n/...")
+activate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser : p
+deactivate EditCommand
+
+EditCommandParser --> ModuLinkParser : p
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> ModuLinkParser
+destroy EditCommandParser
+
+ModuLinkParser --> LogicManager : p
+deactivate ModuLinkParser
+
+LogicManager -> EditCommand : execute()
+activate EditCommand
+
+EditCommand -> Model : setPerson(myProfile, editedProfile)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+EditCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
+participant ":ListFavCommand" as ListFavCommand LOGIC_COLOR
+participant "pred:IsFavouritePredicate" as IsFavouritePredicate LOGIC_COLOR
+
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("listFav")
+activate LogicManager
+
+LogicManager -> ModuLinkParser : parseCommand("listFav")
+activate ModuLinkParser
+
+create ListFavCommand
+ModuLinkParser -> ListFavCommand
+activate ListFavCommand
+
+ListFavCommand --> ModuLinkParser
+deactivate ListFavCommand
+
+ModuLinkParser --> LogicManager
+deactivate ModuLinkParser
+
+LogicManager -> ListFavCommand : execute()
+activate ListFavCommand
+
+create IsFavouritePredicate
+ListFavCommand -> IsFavouritePredicate
+activate IsFavouritePredicate
+
+IsFavouritePredicate --> ListFavCommand :pred
+deactivate IsFavouritePredicate
+
+ListFavCommand -> Model : updateFilteredPersonList(pred)
+activate Model
+
+Model --> ListFavCommand
+deactivate Model
+
+create CommandResult
+ListFavCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListFavCommand
+deactivate CommandResult
+
+ListFavCommand --> LogicManager
+deactivate ListFavCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

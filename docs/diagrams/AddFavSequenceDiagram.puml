@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
+participant ":AddFavCommandParser" as AddFavCommandParser LOGIC_COLOR
+participant "a:AddFavCommand" as AddFavCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addFav A0123456A")
+activate LogicManager
+
+LogicManager -> ModuLinkParser : parseCommand("addFav A0123456A")
+activate ModuLinkParser
+
+create AddFavCommandParser
+ModuLinkParser -> AddFavCommandParser
+activate AddFavCommandParser
+
+AddFavCommandParser --> ModuLinkParser
+deactivate AddFavCommandParser
+
+ModuLinkParser -> AddFavCommandParser : parse("A0123456A")
+activate AddFavCommandParser
+
+create AddFavCommand
+AddFavCommandParser -> AddFavCommand
+activate AddFavCommand
+
+AddFavCommand --> AddFavCommandParser : a
+deactivate AddFavCommand
+
+AddFavCommandParser --> ModuLinkParser : a
+deactivate AddFavCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddFavCommandParser -[hidden]-> ModuLinkParser
+destroy AddFavCommandParser
+
+ModuLinkParser --> LogicManager : a
+deactivate ModuLinkParser
+
+LogicManager -> AddFavCommand : execute()
+activate AddFavCommand
+
+AddFavCommand -> Model : getPersonList()
+activate Model
+
+Model --> AddFavCommand
+deactivate Model
+
+AddFavCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> AddFavCommand
+deactivate Model
+
+create CommandResult
+AddFavCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddFavCommand
+deactivate CommandResult
+
+AddFavCommand --> LogicManager : result
+deactivate AddFavCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

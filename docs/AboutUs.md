@@ -5,55 +5,53 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Aakansha Narain
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/developerPhotos/aakanshanarain.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/aakanshanarain)]
+[[portfolio](team/aakanshanarain.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Delivarables
+### Charlton Tan
 
-### Jane Doe
+<img src="images/developerPhotos/charltonator.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/charltonator)]
+[[portfolio](team/charltonator.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Developer
+* Responsibilities: Testing
+
+### Ethan Wong
+
+<img src="images/developerPhotos/ethanwong6362.png" width="200px">
+
+[[github](http://github.com/ethanwong6362)]
+[[portfolio](team/ethanwong6362.md)]
+
+* Role: Developer
+* Responsibilities: Logic flow
+
+### Ng Jia Yuan
+
+<img src="images/developerPhotos/ngjiayuan.png" width="200px">
+
+[[github](http://github.com/ngjiayuan)]
+[[portfolio](team/ngjiayuan.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Code quality and team operations
 
-### Johnny Doe
+### Zachary Lau
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/developerPhotos/zacharylwy.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zacharylwy)]
+[[portfolio](team/zacharylwy.md)]
 
 * Role: Developer
 * Responsibilities: UI
