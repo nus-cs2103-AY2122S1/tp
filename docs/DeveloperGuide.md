@@ -892,3 +892,33 @@ testers are expected to do more *exploratory* testing.
    3. Other incorrect exit commands to try: `bye`, `quit`, `logout`, `...`<br>
       Expected: The TAB application will not exit. Error details shown in ths status message
 <div style="page-break-after: always;"></div>
+
+------------------------------------------
+
+### Effort
+
+With AB3 as the baseline of comparison, our project is much more demanding. 
+AB3, as an address book application that manages contact details, has only one model which is a Person. 
+For our project which is building a helper for teaching assistants, there are three models, namely, Modules, Students, and Tasks.
+
+This created some problems when we were designing the UI, including how to arrange these three types of objects, and what their relationship would be. 
+A meeting was held, during which we used Miro to come up with wireframes and prototypes and conducted discussions to finalise our design. 
+Although it was harder to manage more than one type of object, we all embraced this challenge and successfully rendered a working product.
+
+Another challenge we faced was more specific. When we added in students and tasks to TAB, tasks under some students were not shown.
+And this bug was inconsistent - sometimes we could not reproduce it even when following the exact steps.
+We initially considered it as a UI bug and wasn't sure how to go about solving it. But we did not give up and leave it unattended.
+After much effort, one of us discovered that these missing tasks were not added to their corresponding students in time.
+Following this lead, another team member located to code that was causing this issue and fixed it.
+With hard work and perseverance, we managed to solve something previously thought of as unsolvable.
+
+Other challenges we had included dealing with testing and storage. For many of us, this was the first time handling these aspects of coding.
+It was not easy, especially for those members who volunteered as trailblazers and set the standard for writing test cases and storage-related logic. 
+Kudos to them!
+
+Overall, this project posed many difficulties and challenges that we had to overcome.
+To many of us, this was the first collaborative software engineering project that involved facets that were once unfamiliar, such as testing, UI and storage.
+It would be an understatement to say that it was not easy.
+Nevertheless, we, together as a team, rose above all these obstacles and passed this trial of diligence, determination, resourcefulness, and teamwork. 
+
+Thank you for reading until here. Have a nice day! : )
