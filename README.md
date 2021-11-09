@@ -1,11 +1,8 @@
-<h1 align="center"> <img src="docs/images/socialite.jpeg" width="80px"> </h1> 
+<img align="center" src="docs/images/socialite.jpeg" width="80px"> 
+
 <h1 align="center"> SociaLite </h1>
 
-<p align="centre">
-
 [![CI Status](https://github.com/AY2122S1-CS2103T-F11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-F11-4/tp/actions) [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp/branch/master/graph/badge.svg?token=KPARXU5FYH)](https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp)
-
-</p>
 
 ![Ui](docs/images/Ui.png)
 
