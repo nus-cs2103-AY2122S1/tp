@@ -133,6 +133,9 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
 
+    //@@author janjanchen-reused
+    //Reused from https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping
+    // with minor modifications
     public <S> Callback<TableColumn<S, String>,
                 TableCell<S, String>> getCallback(TableColumn<S, String> header) {
         return tc -> {
@@ -145,6 +148,7 @@ public class HelpWindow extends UiPart<Stage> {
             return cell;
         };
     }
+    //@@author
 
 
     /**
