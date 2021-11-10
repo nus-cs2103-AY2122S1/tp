@@ -144,7 +144,6 @@ command is to clear the dummy starting data, but you can also use it to reset yo
 </div>
 
 #### _Exiting the program_
-
 Exits the program and saves your data.
 
 Format: `exit`
@@ -408,15 +407,15 @@ A few ideas on how you can use groups are:<br>
 </ul>
 </div>
 
+<div markdown="span" class="alert alert-info">:exclamation: <strong>Caution:</strong>
+All group commands except **Creating a group** will only work when groups or subgroups are listed.
+</div>
+
 <div style="page-break-after: always;"></div>
 
 #### _Creating a group_
 
 Creates a group.
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Creating a group command works no matter what list is in the List Pane. **However, the rest of group commands below will work only when groups or subgroups are listed.**
-</div> <br>
 
 | Format                     | Example               | What the example does         |
 |----------------------------|-----------------------|-------------------------------|
@@ -426,6 +425,10 @@ Creating a group command works no matter what list is in the List Pane. **Howeve
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
   * You cannot create a group with name starting with a number, and may contain `-` or `.` characters
   * The new group must not have a same name with other existing groups.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+You can execute this command no matter what list is in the List Pane.
 </div>
 
 ![groupCreate](images/groupCreate.png)
@@ -441,11 +444,13 @@ Deletes an existing group at the index `INDEX` specified.
 | group (INDEX) /delete | group 1 /delete | Deletes the group at index 1|
 | g (INDEX) /d          | group 2 /d      | Deletes the group at index 2|
 
+<div markdown="span" class="alert alert-info">:exclamation: <strong>Caution:</strong>
+  * You can only execute this command when groups are listed in the list pane.
+</div>
+
 #### _Creating a subgroup_
 
 Creates a new subgroup.
-
-
 
 | Format                                | Example                   | What the example does                                    |
 |---------------------------------------|---------------------------|----------------------------------------------------------|
@@ -455,11 +460,6 @@ Creates a new subgroup.
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
   * This name cannot start with a number, and may contain `-` or `.` characters
   * The new subgroup must not have the same name as other existing subgroups in the same group.
-</div>
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-This command only works when groups are listed in the list pane, and not when subgroups are listed. 
-In other words, a subgroup cannot have subgroups.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -490,7 +490,8 @@ Removes note of an existing group or subgroup.
 
 ## Filtering with Notor
 
-Sometimes, you will want to view all people, groups, subgroups to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
+Sometimes, you will want to view all people, groups, subgroups to understand what you have saved in your Notor. 
+At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
 
 ### List
 
