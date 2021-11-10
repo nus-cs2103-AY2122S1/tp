@@ -1,0 +1,17 @@
+@startuml
+start
+:User executes delete-by-name command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Found the name in AddressBook])
+    :Delete all persons
+    with the specified name;
+    :Update the person list;
+else ([else])
+    :Show person-not-found
+    message;
+endif
+stop
+@enduml

@@ -7,8 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -19,8 +21,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCountdown;
+import seedu.address.model.ReadOnlyShortcut;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -84,6 +89,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public int size() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
@@ -104,7 +114,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getCountdownFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getShortcutFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCountdownFilePath(Path countdownFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShortcutFilePath(Path shortcutFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,7 +144,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addShortcut(String keyword, String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCountdown(ReadOnlyCountdown countdown) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShortcut(ReadOnlyShortcut shortcut) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,7 +169,37 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyCountdown getCountdown() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyShortcut getShortcut() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String listShortcut() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String removeShortcut(String keyword) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getShortcutFromKey(String keyword) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonName(String name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,12 +214,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setDate(LocalDate newDate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public LocalDate getWeddingDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Hashtable<Tag, Integer> getUniqueTagTable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tag> getUniqueTagList() {
             throw new AssertionError("This method should not be called.");
         }
     }

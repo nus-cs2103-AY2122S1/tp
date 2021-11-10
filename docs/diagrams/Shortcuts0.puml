@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+show members
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam DefaultFontSize 13
+
+title Shortcuts List
+
+package "shortcuts" {
+    object "__:JsonAdaptedShortcut__" as Shortcut1
+    object "__:JsonAdaptedShortcut__" as Shortcut2
+    object "__:JsonAdaptedShortcut__" as Shortcut3
+}
+
+Shortcut1 : keyword = "a"
+Shortcut1 : commandString = "find Bagels t/Food"
+
+Shortcut2 : keyword = "s"
+Shortcut2 : commandString = "list"
+
+Shortcut3 : keyword = "f"
+Shortcut3 : commandString = "find pr/>0.00"
+
+Shortcut1 -[hidden]right-> Shortcut2
+
+@enduml

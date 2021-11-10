@@ -4,13 +4,10 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Storage
+
 package Storage{
-
-package "UserPrefs Storage" #F4F6F6{
-Interface UserPrefsStorage <<Interface>>
-Class JsonUserPrefsStorage
-}
-
 Interface Storage <<Interface>>
 Class StorageManager
 
@@ -22,22 +19,46 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+package "Countdown Storage" #F4F6F6 {
+Interface CountdownStorage <<Interface>>
+Class JsonCountdownStorage
+Class JsonSerializableCountdown
+Class JsonAdaptedDate
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+package "UserPrefs Storage" #F4F6F6{
+Interface UserPrefsStorage <<Interface>>
+Class JsonUserPrefsStorage
+}
+
+package "Shortcut Storage" #F4F6F6{
+Interface ShortcutStorage <<Interface>>
+Class JsonShortcutStorage
+Class JsonSerializableShortcut
+Class JsonAdaptedShortcut
+}
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -down-> "1" AddressBookStorage
+StorageManager -down-> "1" CountdownStorage
+StorageManager -down-> "1" UserPrefsStorage
+StorageManager -down-> "1" ShortcutStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -down-|> UserPrefsStorage
+Storage -down-|> AddressBookStorage
+Storage -down-|> CountdownStorage
+Storage -down-|> ShortcutStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
+JsonCountdownStorage .up.|> CountdownStorage
+JsonShortcutStorage .up.|> ShortcutStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonCountdownStorage ..> JsonSerializableCountdown
+JsonShortcutStorage ..> JsonSerializableShortcut
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableShortcut --> "*" JsonAdaptedShortcut
+JsonSerializableCountdown --> "1" JsonAdaptedDate
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
 @enduml

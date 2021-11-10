@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial Countdown Data Storage
+
+package "Wedding Date" {
+    class LocalDate0 as "__2021-11-04:LocalDate__"
+}
+
+@end

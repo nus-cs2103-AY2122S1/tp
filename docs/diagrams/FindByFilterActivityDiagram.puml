@@ -1,0 +1,30 @@
+@startuml
+start
+:User executes find command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+:Creates a TruePredicate that lists everyone;
+if () then ([Parameters before any prefixes])
+    :Create a predicate with
+    the names listed;
+    :Update predicate to be
+    NameContainsKeywordPredicate;
+else ([else])
+endif
+if () then ([Contains tag prefix)
+    :Add TagContainKeywordPredicate with
+    current predicate;
+else ([else)
+endif
+if () then ([Contains price prefix)
+    if () then ([Valid price operator])
+        :Add relevant price predicate with
+        current predicate;
+    else ([else)
+    endif
+else ([else)
+endif
+:List persons with current predicate;
+stop
+@enduml

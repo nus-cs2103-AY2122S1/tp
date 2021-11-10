@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+show members
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam DefaultFontSize 13
+
+title Address Book Person List
+
+package "Confirmed Person List" {
+    object "__Alex Yeoh:Person__" as Person1
+    object "__Bernice Yu:Person__" as Person2
+}
+
+Person1 : tag = "Caterer"
+Person1 : price = 650.00
+Person1 : status = "Confirmed"
+
+Person2 : tag = "Florist"
+Person2 : price = 300.00
+Person2 : status = "Confirmed"
+
+Person1 -[hidden]right-> Person2
+
+@enduml

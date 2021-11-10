@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Hashtable;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -14,7 +15,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCountdown;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.Storage;
 
 /**
@@ -47,6 +50,8 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveCountdown(model.getCountdown());
+            storage.saveShortcut(model.getShortcut());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -60,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyCountdown getCountdown() {
+        return model.getCountdown();
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
@@ -70,6 +80,21 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Tag> getUniqueTagList() {
+        return model.getUniqueTagList();
+    }
+
+    @Override
+    public Hashtable<Tag, Integer> getUniqueTagTable() {
+        return model.getUniqueTagTable();
+    }
+
+    @Override
+    public Path getCountdownFilePath() {
+        return model.getCountdownFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
@@ -77,5 +102,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public int size() {
+        return model.size();
     }
 }

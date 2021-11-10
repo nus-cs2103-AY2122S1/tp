@@ -5,7 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +69,44 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if {@code str} represents a name
+     * e.g. " n/John Doe", " n/Molly 3", " n/12345" <br>
+     * Will return false for any other non-name string input
+     * e.g. empty string, "-1", "0", "+1", " 2 ", "Betsy Crowe",
+     */
+    public static boolean isName(String str) {
+        Pattern pattern = Pattern.compile("^( n/)([a-zA-Z0-9 ]*)");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
+
+    /**
+     * Returns true if {@code str} consists of tag as expected.
+     *
+     * @param str The string to be checked.
+     * @return true if {@code str} consists of tag, else false.
+     */
+    public static boolean isTag(String str) {
+        Pattern pattern = Pattern.compile("^( t/)([a-zA-Z0-9 ]*)");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
+
+    /**
+     * Returns true if {@code dateStr} is a valid date string.
+     *
+     * @param dateStr The date string to be checked.
+     * @return true if {@code dateStr} is a valid date string
+     */
+    public static boolean isValidDate(String dateStr) {
+        try {
+            LocalDate.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 }

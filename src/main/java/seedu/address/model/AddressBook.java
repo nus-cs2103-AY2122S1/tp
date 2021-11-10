@@ -37,6 +37,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
+    /**
+     * Returns the current size of the internalList in the UniquePersonList variable
+     * persons
+     *
+     * @return Integer for size of the list
+     */
+    public int getPersonsSize() {
+        return persons.size();
+    }
+
+
     //// list overwrite operations
 
     /**

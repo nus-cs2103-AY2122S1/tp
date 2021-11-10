@@ -9,13 +9,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses are limited to 100 characters and "
+            + "use alphanumeric characters apart from these selected special characters, "
+            + "excluding the parentheses,\n(,.#-;)";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Checks if information keyed in only contains alphanumeric
+     * characters (apart from selected special characters like:, . # - ;), spaces and
+     * is also limited to 100 characters.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9'\\.\\-\\s\\,\\#\\;]{0,100}$";
 
     public final String value;
 

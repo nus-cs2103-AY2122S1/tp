@@ -3,13 +3,20 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam classFontSize 13
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyCountdown <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
+Interface ReadOnlyShortcut <<Interface>>
 Interface Model <<Interface>>
 Class AddressBook
+Class Countdown
+Class Shortcut
 Class ReadOnlyAddressBook
+Class ReadOnlyCountdown
+Class ReadOnlyShortcut
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -24,21 +31,30 @@ Class Name
 Class Phone
 Class Tag
 
+Class LocalDate
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+Countdown .up.|> ReadOnlyCountdown
+UserPrefs .up.|> ReadOnlyUserPrefs
+Shortcut .up.|> ReadOnlyShortcut
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+Model .down.> ReadOnlyUserPrefs
+Model .down.> ReadOnlyAddressBook
+Model .down.> ReadOnlyCountdown
+Model .down.> ReadOnlyShortcut
+
+ModelManager -down-> "1" AddressBook
+ModelManager -down-> "1" Countdown
+ModelManager -down-> "1" UserPrefs
+ModelManager -down-> "1" Shortcut
 
 AddressBook *--> "1" UniquePersonList
+Countdown *--> "1" LocalDate
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone

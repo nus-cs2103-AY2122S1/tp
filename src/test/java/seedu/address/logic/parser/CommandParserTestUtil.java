@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,6 +34,21 @@ public class CommandParserTestUtil {
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
+        }
+    }
+
+    /**
+     * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
+     * equals to {@code expectedCommand}.
+     */
+    public static void assertFindCommandParseSuccess(FindCommandParser parser,
+                                                     String userInput,
+                                                     FindCommand expectedCommand) {
+        try {
+            FindCommand command = parser.parse(userInput);
+            assertEquals(command.getMessage(), expectedCommand.getMessage());
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
         }
     }
 }

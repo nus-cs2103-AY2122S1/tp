@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class Person
+Interface Predicate <<Interface>>
+package "Person Predicate classes"{
+Class NameContainsKeywordPredicate
+Class PriceEqualsNumberPredicate
+Class PriceGreaterThanNumberPredicate
+Class StatusEqualsConfirmedPredicate
+Class TagContainsKeywordPredicate
+Class TruePredicate
+}
+
+NameContainsKeywordPredicate ..|> Predicate
+PriceEqualsNumberPredicate ..|> Predicate
+PriceGreaterThanNumberPredicate ..|> Predicate
+StatusEqualsConfirmedPredicate ..|> Predicate
+TagContainsKeywordPredicate ..|> Predicate
+TruePredicate ..|> Predicate
+
+Predicate ..> Person
+
+
+@enduml

@@ -39,6 +39,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label price;
+    @FXML
+    private Label info;
+    @FXML
+    private Label status;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -49,12 +55,44 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText("Phone: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
+        price.setText("Price: $" + person.getPrice().value);
+        info.setText("Important info: " + person.getInfo().value);
+        status = setStatus(status, person.getStatus().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label lab = new Label(tag.tagName);
+                    tags.getChildren().add(lab);
+                });
+    }
+
+    /**
+     * Sets the text and background of the status Label.
+     *
+     * @param status the Label
+     * @param text the status info
+     * @return the label with the text and background
+     */
+    public Label setStatus(Label status, String text) {
+        String newText = text.toUpperCase();
+        if (newText.equals("CONFIRMED")
+                || newText.equals("C")) {
+            text = "Confirmed";
+            status.setStyle("-fx-background-color : #0CA70A;");
+        } else if (newText.equals("PENDING")
+                || newText.equals("P")) {
+            text = "Pending";
+            status.setStyle("-fx-background-color : #E1C10B;");
+        } else if (newText.equals("DECLINED")
+                || newText.equals("D")) {
+            text = "Declined";
+            status.setStyle("-fx-background-color : #FF3232;");
+        }
+        status.setText("Status: " + text);
+        return status;
     }
 
     @Override

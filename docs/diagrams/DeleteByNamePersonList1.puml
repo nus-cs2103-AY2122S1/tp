@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "delete n/John Doe"
+
+package "Person List" {
+    class Person1 as "__Alex Yeoh:Person__"
+    class Person2 as "__Bernice Yu:Person__"
+    class Person3 as "__John Doe:Person__"
+}
+Person1 -[hidden]right-> Person2
+Person2 -[hidden]right-> Person3
+hide Person3
+
+@end

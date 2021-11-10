@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam DefaultFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PriceCommandParser" as PriceCommandParser LOGIC_COLOR
+participant "p:PriceCommand" as PriceCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("price t/Florist Photographer")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand\n("price t/Florist Photographer")
+activate AddressBookParser
+
+create PriceCommandParser
+AddressBookParser -> PriceCommandParser
+activate PriceCommandParser
+
+PriceCommandParser --> AddressBookParser
+deactivate PriceCommandParser
+
+AddressBookParser -> PriceCommandParser : parse("t/Florist Photographer")
+activate PriceCommandParser
+
+create PriceCommand
+PriceCommandParser -> PriceCommand
+activate PriceCommand
+
+PriceCommand --> PriceCommandParser : p
+deactivate PriceCommand
+
+PriceCommandParser --> AddressBookParser : p
+deactivate PriceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PriceCommandParser -[hidden]-> AddressBookParser
+destroy PriceCommandParser
+
+AddressBookParser --> LogicManager : p
+deactivate AddressBookParser
+
+LogicManager -> PriceCommand : execute()
+activate PriceCommand
+
+PriceCommand -> Model : updateFilteredPersonList\n(PREDICATE_STATUS_IS_CONFIRMED)
+activate Model
+
+PriceCommand -> Model : updateFilteredPersonList(containSameTag)
+activate Model
+
+Model --> PriceCommand
+deactivate Model
+
+create CommandResult
+PriceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PriceCommand
+deactivate CommandResult
+
+PriceCommand --> LogicManager : result
+deactivate PriceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

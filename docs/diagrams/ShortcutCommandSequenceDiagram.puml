@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "main:AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "temp:AddressBookParser" as tempAddressBookParser LOGIC_COLOR
+participant ":ShortcutCommandParser" as ShortcutCommandParser LOGIC_COLOR
+participant "s:ShortcutCommand" as ShortcutCommand LOGIC_COLOR
+participant "f:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("sc f")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sc f)
+activate AddressBookParser
+
+create ShortcutCommandParser
+AddressBookParser -> ShortcutCommandParser
+activate ShortcutCommandParser
+
+ShortcutCommandParser --> AddressBookParser
+deactivate ShortcutCommandParser
+
+AddressBookParser -> ShortcutCommandParser : parse("f")
+activate ShortcutCommandParser
+
+create ShortcutCommand
+ShortcutCommandParser -> ShortcutCommand
+activate ShortcutCommand
+
+ShortcutCommand --> ShortcutCommandParser : sc
+deactivate ShortcutCommand
+
+ShortcutCommandParser --> AddressBookParser : sc
+deactivate ShortcutCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ShortcutCommandParser -[hidden]-> AddressBookParser
+destroy ShortcutCommandParser
+
+AddressBookParser --> LogicManager : sc
+deactivate AddressBookParser
+
+LogicManager -> ShortcutCommand : execute()
+activate ShortcutCommand
+
+ShortcutCommand -> Model : getShortcutFromKey("f")
+activate Model
+
+Model --> ShortcutCommand : commandString
+deactivate Model
+
+create tempAddressBookParser
+ShortcutCommand -> tempAddressBookParser
+
+activate tempAddressBookParser
+tempAddressBookParser --> ShortcutCommand
+deactivate tempAddressBookParser
+
+ShortcutCommand -> tempAddressBookParser : parse("find pr/>0.00")
+activate tempAddressBookParser
+
+create FindCommand
+tempAddressBookParser -> FindCommand
+activate FindCommand
+FindCommand --> tempAddressBookParser :findCommand
+deactivate FindCommand
+
+tempAddressBookParser --> ShortcutCommand : findCommand
+deactivate tempAddressBookParser
+
+ShortcutCommand -> FindCommand: execute()
+activate FindCommand
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand:
+deactivate CommandResult
+
+FindCommand --> ShortcutCommand:
+deactivate FindCommand
+
+ShortcutCommand --> LogicManager : result
+deactivate ShortcutCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -16,15 +16,25 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Countdown;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCountdown;
+import seedu.address.model.ReadOnlyShortcut;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Shortcut;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleCountdownUtil;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleShortcutUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CountdownStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCountdownStorage;
+import seedu.address.storage.JsonShortcutStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ShortcutStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -36,7 +46,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -45,6 +55,8 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+
+    private String errorMessageInStartup = "";
 
     @Override
     public void init() throws Exception {
@@ -57,7 +69,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CountdownStorage countdownStorage = new JsonCountdownStorage(userPrefs.getCountdownFilePath());
+        ShortcutStorage shortcutStorage = new JsonShortcutStorage(userPrefs.getShortcutFilePath());
+        storage = new StorageManager(addressBookStorage, countdownStorage, userPrefsStorage, shortcutStorage);
 
         initLogging(config);
 
@@ -69,28 +83,86 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, countdown as well as
+     * {@code userPrefs}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Same goes with the countdown.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+
+        // initiate address book
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
+                errorMessageInStartup = errorMessageInStartup
+                        .concat("Data file not found. Will be starting with a sample AddressBook\n");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Data file not in the correct format. Will be starting with an empty AddressBook\n");
             initialData = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Problem while reading from the file. Will be starting with an empty AddressBook\n");
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<ReadOnlyCountdown> countdownOptional;
+        ReadOnlyCountdown initialCountdownData;
+
+        // initiate count down
+        try {
+            countdownOptional = storage.readCountdown();
+            if (!countdownOptional.isPresent()) {
+                logger.info("Countdown data file not found. Will be starting with a sample Countdown");
+                errorMessageInStartup = errorMessageInStartup
+                        .concat("Countdown data file not found. Will be starting with a sample Countdown\n");
+            }
+            initialCountdownData = countdownOptional.orElseGet(SampleCountdownUtil::getSampleCountdown);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty Countdown");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Data file not in the correct format. Will be starting with an empty Countdown\n");
+            initialCountdownData = new Countdown();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Countdown");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Problem while reading from the file. Will be starting with an empty Countdown\n");
+            initialCountdownData = new Countdown();
+        }
+
+        Optional<ReadOnlyShortcut> shortcutOptional;
+        ReadOnlyShortcut initialShortcutData;
+
+        // initiate count down
+        try {
+            shortcutOptional = storage.readShortcut();
+            if (!shortcutOptional.isPresent()) {
+                logger.info("Shortcut data file not found. Will be starting with a sample Shortcut");
+                errorMessageInStartup = errorMessageInStartup
+                        .concat("Shortcut data file not found. Will be starting with a sample Shortcut\n");
+            }
+            initialShortcutData = shortcutOptional.orElseGet(SampleShortcutUtil::getSampleShortcut);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty Shortcut");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Data file not in the correct format. Will be starting with an empty Shortcut\n");
+            initialShortcutData = new Shortcut();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty Shortcut");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Problem while reading from the file. Will be starting with an empty Shortcut\n");
+            initialShortcutData = new Shortcut();
+        }
+
+        return new ModelManager(initialData, initialCountdownData, userPrefs, initialShortcutData);
     }
 
     private void initLogging(Config config) {
@@ -149,9 +221,16 @@ public class MainApp extends Application {
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
                     + "Using default user prefs");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("UserPrefs file at "
+                            + prefsFilePath
+                            + " is not in the correct format.\n"
+                            + "Using default user prefs\n");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            errorMessageInStartup = errorMessageInStartup
+                    .concat("Problem while reading from the file. Will be starting with an empty AddressBook\n");
             initializedPrefs = new UserPrefs();
         }
 
@@ -168,7 +247,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        ui.start(primaryStage, this.errorMessageInStartup);
     }
 
     @Override
@@ -179,5 +258,9 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+    }
+
+    public String getErrorMessageInStartup() {
+        return this.errorMessageInStartup;
     }
 }

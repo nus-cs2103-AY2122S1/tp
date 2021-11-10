@@ -1,0 +1,12 @@
+{
+  "shortcuts" : [ {
+    "keyword" : "valid",
+    "commandString" : "list"
+  }, {
+    "keyword" : "unknown command",
+    "commandString" : "a"
+  }, {
+    "keyword" : "invalid command",
+    "commandString" : "delete 100"
+  }]
+}

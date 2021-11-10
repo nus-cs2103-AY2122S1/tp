@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+show Members
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam DefaultFontSize 13
+
+title Commands
+
+package "" {
+    object "__undo:UndoCommand__" as Undo1
+    object "__e1:EditCommand__" as Edit1
+}
+
+Undo1 : prevCommand = e1
+
+Edit1 : index = Index.getZeroBased(1)
+@enduml

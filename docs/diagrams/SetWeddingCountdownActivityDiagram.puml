@@ -1,0 +1,15 @@
+@startuml
+start
+:User executes set-wedding-countdown command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([else])
+    :Update the wedding date stored;
+else ([Date specified has passed])
+    :Show date-cannot-be-set
+    message;
+endif
+stop
+@enduml

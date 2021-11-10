@@ -1,0 +1,23 @@
+@startuml
+start
+:User executes shortcut-keyword command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Found keyword in model])
+    :Obtain the commandString
+    attached;
+    :Parse the commandString;
+    if () then ([Error in parsing])
+        :Show parsing-error
+        message;
+    else ([else])
+    endif
+    :Execute the command returned;
+else ([else])
+    :Show command-not-found
+    message;
+endif
+stop
+@enduml

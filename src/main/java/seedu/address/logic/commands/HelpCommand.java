@@ -14,8 +14,13 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private UndoCommand commandToUndo;
+
     @Override
     public CommandResult execute(Model model) {
+        commandToUndo = new UndoCommand();
+        commandToUndo.setPrevCommand(this);
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
+
 }
