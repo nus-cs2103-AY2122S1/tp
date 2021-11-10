@@ -457,7 +457,7 @@ Creates a new subgroup.
 | group (INDEX) /create n:SUBGROUP_NAME | group 1 /create n:Artemis | Creates a new subgroup named Artemis in group at index 1 |
 | g (INDEX) /c n:SUBGROUP_NAME          | g 2 /create n:Year2       | Create a new subgroup named Year2 in group at index 2    |
 
-<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
   * This name cannot start with a number, and may contain `-` or `.` characters
   * The new subgroup must not have the same name as other existing subgroups in the same group.
 </div>
