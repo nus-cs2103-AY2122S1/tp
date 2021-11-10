@@ -642,8 +642,8 @@ TutorAid student data are saved as a JSON file `[JAR file location]/data/tutorAi
 **Q**: I am currently only able to view my students' latest progress entry, how can I view all the entries?<br>
 **A**: To view all the progress entries of a student, you can key `view -s STUDENT_INDEX` into the Command Box and hit ENTER. You should be able to see you 10 most recently added progress entries. Please note that you will not be able to view all the progress entries of multiple students at any one time.<br><br> 
 
-**Q**: I just added a new progress entry for one of my students, and all my other students and lessons have disappeared. How do I view them again?
-**A**: To revert back to the original view of all students and all lessons, simply key in `list -a` into the Command Box and hit ENTER.
+**Q**: I just added a new progress entry for one of my students, and all my other students and lessons have disappeared. How do I view them again?<br>
+**A**: To revert back to the original view of all students and all lessons, simply key in `list -a` into the Command Box and hit ENTER.<br><br>
 
 **Q**: I have added more than 10 progress entries for a student, but why am I only able to see up to the 10 most recent entries?<br>
 **A**: TutorAid only support storing up to 10 progress entries so that it is easier for tutors to manage and view all of their entries for each student.
