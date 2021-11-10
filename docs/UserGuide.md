@@ -36,8 +36,9 @@ Some terminology that might help when referring to Notor:
 4. **Command Box**: The box on the left pane, underneath the view pane, where you may type commands.
 
 Pay attention to these callouts:
-<div markdown="block" class="alert alert-info">
-This block is used to highlight information you should pay attention to.
+
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+This block is used to highlight information you should pay attention to
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
@@ -84,7 +85,7 @@ Some example commands you can try sequentially to get familiarized with Notor:
 * **`clear`** : Deletes all contacts and groups.
 * **`exit`** : Exits the application. <br>
 
-Refer to the [Features](#features) below for details of each command.
+Refer to the [Command Breakdown](#features) below for details of each command.
 
 
 <div style="page-break-after: always;"></div>
@@ -93,7 +94,7 @@ Refer to the [Features](#features) below for details of each command.
 
 <a name = "features"></a>
 ## Command Breakdown
-Here is a detailed breakdown of all the commands Notor has available. All the commands have a shortened command format, referred to interchangeably as 'advanced format' and 'short format'.
+What follows is a detailed breakdown of all the commands Notor has available and what they do. All the commands have a shortened command format to make typing them easier.
 
 <div markdown="block" class="alert alert-info">
 
@@ -122,6 +123,11 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
 #### _Viewing help_
 
 Displays a summary of commands, as well as a link you can copy to get to this full user guide.
+
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+If you type in a command with no arguments and the command requires arguments, this command will 
+display a prompt for the arguments which should be given.
+</div>
 
 ![help message](images/helpMessage.png)
 
@@ -279,6 +285,7 @@ Creates a note window pop-up to take notes in for the person at the given `INDEX
 Format: `person (INDEX) /note`<br>
 Advanced user Format:`p (INDEX) /n`
 
+
 Examples:
 
 * `person 1 /note`
@@ -393,9 +400,10 @@ You must be on the list of archived persons in order to use this command, as it 
 You can also create a group to organize people based on their common traits. In addition to groups, you can also create a subgroup
 of a group to organize people based on a more specific category. 
 
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-You can sort your contacts in Notor by the group that they are in, as well as taking general notes on the group. <br>
-A few ideas on how you can use groups are:<br>
+
+<div markdown="block" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+You can sort your contacts in Notor by the group that they are in, as well as taking general notes 
+on the group. A few ideas on how you can use groups are:
 
 <ul>
   <li>Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts</li>
@@ -619,7 +627,8 @@ Notor data are saved as a JSON file in Notor's Directory. Advanced users are wel
 directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-If your changes to the data file makes its format invalid, Notor will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Notor will 
+discard all data and start with an empty data file at the next run.
 </div>
 
 
@@ -649,10 +658,9 @@ Shortcut Key            | Linux/Window                                   | MacOS
 **Quit without Saving** | `Ctrl + W`                                     | `Cmd + W`
 **Save and Quit**       | `Ctrl + Q`                                     | `Cmd + Q`
 
-<div markdown="block" class="alert alert-info">
-<strong>Notes on Timestamp:</strong><br>
-- <strong>Timestamp: </strong> shortcut key types the current date and time in Note Window in this format <code>E, MMM dd yyyy HH:mm"</code>. <br>
-- Example: `Fri., Oct. 22 2021 00:07`
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+* <strong>Timestamp: </strong> shortcut key types the current date and time in Note Window in this format <code>E, MMM dd yyyy HH:mm"</code>. <br>
+* Example: `Fri., Oct. 22 2021 00:07`
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -660,9 +668,10 @@ Shortcut Key            | Linux/Window                                   | MacOS
 <a name = "command-summary"></a>
 
 ## Command Summary
-<div markdown="block" class="alert alert-info">
-Round brackets `()` refer to COMPULSORY arguments. <br>
-Square brackets `[]` refer to optional arguments.
+
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+* Round brackets `()` refer to COMPULSORY arguments.
+* Square brackets `[]` refer to optional arguments.<p>
 </div>
 
 ### Person
@@ -692,17 +701,23 @@ Action                    | Format                                              
 **List Archived Persons**       | `person /listarchive`                                                           | `p /lar`
 **Unarchive**             | `person (INDEX) /unarchive`                                                   | `p (INDEX) /uar`
 
-<div markdown="span" class="alert alert-warning">:exclamation: <b>Caution:</b>
+<div markdown="block" class="alert alert-warning">:exclamation: <b>Caution:</b>
 For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
-    the card.
+the card.
+
 </div>
 
-<div markdown="block" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
 
-For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, please use the <b>List</b> command to make sure the <code>Group</code> you want to
-      use the command on is displayed before using them via <code>GROUP_INDEX</code>.<br>
-For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> command to list out all the subgroups in a Group you want to view,
-    then list out the persons inside that subgroup by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
+<ul>
+  <li>For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
+      please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
+      before using them via <code>GROUP_INDEX</code></li>
+  <li>For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
+      command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
+      by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.</li>
+</ul>
+
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -721,12 +736,14 @@ Action                 | Format                                         | Short 
 **Find**               | `group /find (n:QUERY)`                        | `g /f (n:QUERY)`
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Before using the group actions, remember to use <code>g /list</code> or <code>g /find</code> to change the list display so that you can access the indexes of the group.
+Before using the group actions, remember to use <code>g /list</code> or <code>g /find</code> 
+to change the list display so that you can access the indexes of the group.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-for the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, depending on what is in the list display.
-Change the <code>person /list</code> or <code>group /list</code>.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+For the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, 
+depending on what is in the list display.
+You can change the list display using <code>person /list</code> or <code>group /list</code>.
 </div>
 
 
