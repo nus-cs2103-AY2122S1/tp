@@ -196,13 +196,15 @@ public class MainWindow extends UiPart<Stage> {
     public TaskListPanel gettaskListPanel() {
         return taskListPanel;
     }
-
     /**
      * Executes the command and returns the result.
      *
      * @see seedu.unify.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        //@@author naranghardik16-reused
+        //Reused from rajobasu, a previous student
+        //with minor modiciations
         try {
             if (commandText.trim().startsWith("/prev")) {
                 CommandHistory commandHistory = CommandHistory.getInstance();
@@ -225,7 +227,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             this.commandBox.setCommandTextField("");
-
+            //@@author
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -241,4 +243,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+    //@@author
 }
