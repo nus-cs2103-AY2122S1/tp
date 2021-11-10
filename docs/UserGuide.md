@@ -375,6 +375,7 @@ Shows the list of archived Persons.
 |---------------------|---------------------------|
 | person /listarchive | List all archived persons |
 | p /lar              | List all archived persons |
+
 ![archivedList](images/archivePersonList.png)
 
 #### _Unarchiving_ 
@@ -510,6 +511,7 @@ Lists all groups in the list panel.
 |-------------|--------------------------------|
 | group /list | Lists all groups in list panel |
 | g /l        | Lists all groups in list panel |
+
 ![groupList](images/groupList.png)
 
 #### _Listing all persons in a group or subgroup_
