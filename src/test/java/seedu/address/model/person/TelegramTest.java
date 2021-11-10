@@ -37,4 +37,43 @@ public class TelegramTest {
         assertTrue(Telegram.isValidTelegram("12345678")); // all number
         assertTrue(Telegram.isValidTelegram("John_doe_123")); // mix of all possible characters
     }
+
+    @Test
+    public void equals_twoSameObjects_success() {
+        Telegram telegram = new Telegram("Jai2501");
+        assertTrue(telegram.equals(telegram));
+    }
+
+    @Test
+    public void equals_twoDifferentObjects_falseOutput() {
+        Telegram telegram = new Telegram("Jai2501");
+        Email email = new Email("jay@gmail.com");
+        assertFalse(telegram.equals(email));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithSameTelegramHandles_success() {
+        Telegram telegram1 = new Telegram("Jai2501");
+        Telegram telegram2 = new Telegram("Jai2501");
+        assertTrue(telegram1.equals(telegram2));
+    }
+
+    @Test
+    public void equals_twoDifferentObjectsWithDifferentTelegramHandles_falseOutput() {
+        Telegram telegram1 = new Telegram("Jai2501");
+        Telegram telegram2 = new Telegram("Atin1234");
+        assertFalse(telegram1.equals(telegram2));
+    }
+
+    @Test
+    public void toString_aValidInput_success() {
+        Telegram telegram = new Telegram("Jai2501");
+        assertTrue(telegram.toString().equals("Jai2501"));
+    }
+
+    @Test
+    public void hashCode_validInput_correctOutput() {
+        Telegram telegram = new Telegram("Jai2501");
+        assertTrue(telegram.hashCode() == -168664970);
+    }
 }

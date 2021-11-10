@@ -49,7 +49,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        JsonUserProfileStorage userProfileStorage = new JsonUserProfileStorage();
+        JsonUserProfileStorage userProfileStorage =
+                new JsonUserProfileStorage(temporaryFolder.resolve("userprofile.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, userProfileStorage);
         logic = new LogicManager(model, storage);
     }
@@ -80,7 +81,7 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         JsonUserProfileStorage userProfileStorage =
-                new JsonUserProfileStorage();
+                new JsonUserProfileStorage(temporaryFolder.resolve("userprofile.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, userProfileStorage);
         logic = new LogicManager(model, storage);
 

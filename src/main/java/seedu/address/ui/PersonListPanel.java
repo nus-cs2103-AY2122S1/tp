@@ -92,6 +92,10 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void refreshPersonListUI() {
         personListView.refresh();
+        if (getTabIndex() != 0) {
+            setTabIndex(0);
+        }
+        personDetails.setPerson(personListView.getItems().get(getSelectedIndex()));
     }
 
     /**

@@ -55,12 +55,21 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
+     *
+     * @param person Person to be added to the existing address book.
      */
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
 
+    /**
+     * This method attempts to add the Person into the existing model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -69,14 +78,22 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.addPerson(toAdd);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         if (model.getPersonListControl() != null) {
             model.setTabIndex(0);
             model.getPersonListControl().setSelectedIndex(model.getFilteredPersonList().indexOf(toAdd));
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    /**
+     * Method to compare two AddCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the AddCommand object that called this method.
+     * @return boolean representation of whether the AddCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

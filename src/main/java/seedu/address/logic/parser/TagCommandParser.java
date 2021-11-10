@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
@@ -8,25 +9,27 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
-public class TagCommandParser implements Parser<Command> {
+public class TagCommandParser implements Parser<TagCommand> {
 
     private void checkInputFormat(String args, ArgumentMultimap argMultimap) throws ParseException {
+        assert(!args.isEmpty());
         boolean isAddTagArgsEmpty = argMultimap.getAllValues(PREFIX_ADD_TAG).size() == 1
                 && argMultimap.getAllValues(PREFIX_ADD_TAG).indexOf("") == 0;
         boolean isRemoveTagArgsEmpty = argMultimap.getAllValues(PREFIX_REMOVE_TAG).size() == 1
                 && argMultimap.getAllValues(PREFIX_REMOVE_TAG).indexOf("") == 0;
-        boolean isAddAndRemoveTagsMissing = !args.contains("a/") && !args.contains("r/");
+        boolean isAddAndRemoveTagsMissing = !args.contains(PREFIX_ADD_TAG.getPrefix())
+                && !args.contains(PREFIX_REMOVE_TAG.getPrefix());
         if (isAddAndRemoveTagsMissing
-                || (args.contains("a/") && args.contains("r/") && isAddTagArgsEmpty && isRemoveTagArgsEmpty)) {
+                || (args.contains(PREFIX_ADD_TAG.getPrefix()) && args.contains(PREFIX_REMOVE_TAG.getPrefix())
+                && isAddTagArgsEmpty && isRemoveTagArgsEmpty)) {
             throw new ParseException(TagCommand.MESSAGE_MISSING_ADD_AND_REMOVE_TAG_ARGS);
-        } else if (args.contains("a/") && isAddTagArgsEmpty) {
+        } else if (args.contains(PREFIX_ADD_TAG.getPrefix()) && isAddTagArgsEmpty) {
             throw new ParseException(TagCommand.MESSAGE_MISSING_ADD_TAG_ARGS);
-        } else if (args.contains("r/") && isRemoveTagArgsEmpty) {
+        } else if (args.contains(PREFIX_REMOVE_TAG.getPrefix()) && isRemoveTagArgsEmpty) {
             throw new ParseException(TagCommand.MESSAGE_MISSING_REMOVE_TAG_ARGS);
         } else {
             return;
@@ -37,9 +40,15 @@ public class TagCommandParser implements Parser<Command> {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      *
+     * @param args to be parsed.
+     * @return TagCommand containing the target index to be tagged.
      * @throws ParseException if the user input does not conform the expected format
      */
     public TagCommand parse(String args) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(TagCommand.COMMAND_WORD + MESSAGE_COMMAND_DESCRIPTION_CANNOT_BE_EMPTY);
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_TAG, PREFIX_REMOVE_TAG);
         Index index;
@@ -51,6 +60,14 @@ public class TagCommandParser implements Parser<Command> {
         checkInputFormat(args, argMultimap);
 
         try {
+            if (!argMultimap.getValue(PREFIX_ADD_TAG).stream().allMatch(Tag::isValidTagName)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
+            if (!argMultimap.getValue(PREFIX_REMOVE_TAG).stream().allMatch(Tag::isValidTagName)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
             ArrayList<Tag> tagsToAdd = argMultimap.getAllValues(PREFIX_ADD_TAG)
                     .parallelStream()
                     .map(Tag::new)

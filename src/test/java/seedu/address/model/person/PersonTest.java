@@ -67,22 +67,22 @@ public class PersonTest {
     }
 
     @Test
-    public void isFavourite_defaultAlice() {
-        ALICE.setIsNotFavourite();
-        assertFalse(ALICE.isFavourite());
+    public void isFavorite_defaultAlice() {
+        ALICE.setIsNotFavorite();
+        assertFalse(ALICE.isFavorite());
     }
 
     @Test
-    public void isFavourite_modifyAliceOnce() {
-        ALICE.setIsFavourite();
-        assertTrue(ALICE.isFavourite());
+    public void isFavorite_modifyAliceOnce() {
+        ALICE.setIsFavorite();
+        assertTrue(ALICE.isFavorite());
     }
 
     @Test
-    public void isFavourite_modifyAliceTwice() {
-        ALICE.setIsFavourite();
-        ALICE.setIsNotFavourite();
-        assertFalse(ALICE.isFavourite());
+    public void isFavorite_modifyAliceTwice() {
+        ALICE.setIsFavorite();
+        ALICE.setIsNotFavorite();
+        assertFalse(ALICE.isFavorite());
     }
 
     @Test

@@ -26,12 +26,26 @@ UiPart --> WelcomeWindow
 deactivate UiPart
 
 WelcomeWindow -> WelcomeWindow : displayAnimatedText(tagLine, delayTime)
+activate WelcomeWindow
+
+WelcomeWindow --> WelcomeWindow
+deactivate WelcomeWindow
 
 WelcomeWindow -> WelcomeWindow : fadeTransition()
+activate WelcomeWindow
+
+WelcomeWindow --> WelcomeWindow
+deactivate WelcomeWindow
 
 WelcomeWindow -> WelcomeWindow : close(mainWindow)
+activate WelcomeWindow
+
+WelcomeWindow --> WelcomeWindow
+deactivate WelcomeWindow
 
 WelcomeWindow --> UiManager
 deactivate WelcomeWindow
+
+<-- UiManager
 
 @enduml

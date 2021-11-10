@@ -15,6 +15,13 @@ public class TelegramCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Telegram shown";
 
+    /**
+     * This method attempts to open the Telegram of the user.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (model.getSelectedIndex() == -1) {

@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":UserProfileInMenuBar" as UserProfileWindow UI_COLOR
+participant ":UiPart" as UiPart UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "<<class>> \n EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+[-> MainWindow : start()
+activate MainWindow
+
+MainWindow -> MainWindow : setUserProfileInMenuBar()
+activate MainWindow
+
+MainWindow -> LogicManager : isProfilePresent()
+activate LogicManager
+
+LogicManager --> MainWindow
+deactivate LogicManager
+
+alt Profile is Present and Profile has not been set up
+
+create UserProfileWindow
+MainWindow -> UserProfileWindow : new UserProfileInMenuBar(LogicManager)
+activate UserProfileWindow
+
+UserProfileWindow -> UserProfileWindow : setUserProfileOnMenuBar()
+activate UserProfileWindow
+
+UserProfileWindow -> LogicManager : getUserProfile()
+activate LogicManager
+
+LogicManager --> UserProfileWindow
+deactivate LogicManager
+
+UserProfileWindow --> UserProfileWindow
+deactivate UserProfileWindow
+
+UserProfileWindow -> UserProfileWindow : addToUserProfileWatcherList()
+activate UserProfileWindow
+
+UserProfileWindow -> EditCommand : addUserProfileWatcher(this)
+activate EditCommand
+
+EditCommand --> UserProfileWindow
+deactivate EditCommand
+
+UserProfileWindow --> UserProfileWindow
+deactivate UserProfileWindow
+
+UserProfileWindow --> MainWindow
+deactivate UserProfileWindow
+
+MainWindow -> UiPart : userProfileInMenuBar.getRoot()
+activate UiPart
+
+UiPart --> MainWindow
+deactivate UiPart
+
+else Profile is not Present or Profile has already been set up
+
+end alt
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+<-- MainWindow
+deactivate MainWindow
+
+@enduml

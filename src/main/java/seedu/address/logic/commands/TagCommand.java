@@ -71,6 +71,18 @@ public class TagCommand extends Command {
         newTags.addAll(toAdd);
         return newTags;
     }
+
+    public String getTagSuccessMessage(Person editedPerson, boolean tagsAdded, boolean tagsRemoved) {
+        String successMessage = "";
+        if (tagsAdded && tagsRemoved) {
+            successMessage = String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson);
+        } else if (tagsAdded) {
+            successMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson);
+        } else if (tagsRemoved) {
+            successMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson);
+        }
+        return successMessage;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -92,28 +104,33 @@ public class TagCommand extends Command {
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getTelegram(), personToEdit.getGithub(),
                 personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(), newTags,
-                personToEdit.isFavourite(), personToEdit.getProfilePicture(), personToEdit.getGitStats());
+                personToEdit.isFavorite(), personToEdit.getProfilePicture(), personToEdit.getGitStats());
 
         model.setPerson(personToEdit, editedPerson);
-        model.getPersonListControl().refreshPersonListUI();
+        if (model.getPersonListControl() != null) {
+            model.getPersonListControl().refreshPersonListUI();
+        }
+        if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(editedPerson));
+            model.getPersonListControl().refreshPersonListUI();
+        }
         return new CommandResult(getTagSuccessMessage(editedPerson, !toAdd.isEmpty(), !toRemove.isEmpty()));
     }
 
-    public String getTagSuccessMessage(Person editedPerson, boolean tagsAdded, boolean tagsRemoved) {
-        String successMessage = "";
-        if (tagsAdded && tagsRemoved) {
-            successMessage = String.format(MESSAGE_TAGGED_PERSON_SUCCESS, editedPerson);
-        } else if (tagsAdded) {
-            successMessage = String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson);
-        } else if (tagsRemoved) {
-            successMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson);
-        }
-        return successMessage;
-    }
+    /**
+     * Method to compare two TagCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the TagCommand object that called this method.
+     * @return boolean representation of whether the TagCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TagCommand // instanceof handles nulls
-                && targetIndex.equals(((TagCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((TagCommand) other).targetIndex))
+                && toAdd.containsAll(((TagCommand) other).toAdd)
+                && toRemove.containsAll(((TagCommand) other).toRemove); // state check
     }
 }

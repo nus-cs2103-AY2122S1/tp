@@ -32,7 +32,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_TELEGRAM_AMY = "amy_bee";
     public static final String VALID_TELEGRAM_BOB = "bob_choo";
-    public static final String VALID_GITHUB_AMY = "amy-bee";
+    public static final String VALID_GITHUB_AMY = "amy-bee3";
     public static final String VALID_GITHUB_BOB = "bob-choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";

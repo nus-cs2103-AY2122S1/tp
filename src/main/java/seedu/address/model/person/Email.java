@@ -49,16 +49,32 @@ public class Email {
 
     /**
      * Returns if a given string is a valid email.
+     *
+     * @param test String of email to be tested against the validation regex.
+     * @return Boolean representation of validity of String of email.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the String representation of Email.
+     *
+     * @return String representation of Email.
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * Method to compare two Email objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the Email object that called this method.
+     * @return boolean representation of whether the Email
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -66,6 +82,11 @@ public class Email {
                 && value.equals(((Email) other).value)); // state check
     }
 
+    /**
+     * Returns the {@code hashCode} of Email.
+     *
+     * @return hashCode of Email.
+     */
     @Override
     public int hashCode() {
         return value.hashCode();

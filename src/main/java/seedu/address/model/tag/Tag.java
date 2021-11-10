@@ -14,7 +14,8 @@ public class Tag {
         MODULE
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric"
+            + " and can only have mod- or event- type prefixes.";
     private static final String[] stringTypes = new String[] {"", "event-", "mod-"};
     public static final String VALIDATION_REGEX =
             "\\p{Alnum}+|" + stringTypes[1] + "\\s*\\p{Alnum}+|" + stringTypes[2] + "\\s*\\p{Alnum}+";
@@ -100,7 +101,7 @@ public class Tag {
      * Parses the tag name based on the given tag type and description.
      *
      * @param tagType Type of tag.
-     * * @param tagDescription A valid tag description.
+     * @param tagDescription A valid tag description.
      * @return Name of tag represented by tag description.
      */
     public String parseTagName(Type tagType, String tagDescription) {

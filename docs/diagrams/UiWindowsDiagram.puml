@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+title Windows
+
+Package "" <<Rectangle>>{
+Class ProfileSetUpWindow
+Class HelpWindow
+Class UserProfileWindow
+}
+
+Class MainWindow
+
+MainWindow *-down-> "1" ProfileSetUpWindow
+MainWindow *-down-> "1" HelpWindow
+MainWindow *-down-> "1" UserProfileWindow
+
+@enduml

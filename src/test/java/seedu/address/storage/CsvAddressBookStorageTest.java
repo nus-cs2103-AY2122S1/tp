@@ -20,6 +20,9 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
+/**
+ * A class for testing {@link CsvAddressBookStorage}.
+ */
 public class CsvAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CsvAddressBookStorageTest");
 
@@ -27,7 +30,6 @@ public class CsvAddressBookStorageTest {
     public Path testFolder;
 
     // Helper methods
-
     private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
         return new CsvAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
     }
@@ -82,17 +84,17 @@ public class CsvAddressBookStorageTest {
         assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.csv"));
     }
 
+
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        // JSON for storing app data needs to be overwritten, except for in an Export Command.
-        // Unlike JSON, CSV is NOT used for storage of app data, and is only used for exporting and importing.
-        // CSV files are not allowed to overwrite existing CSV files, hence requiring a second filePath.
+        // Csv is only used for Export.
+        // Export is not allowed to overwrite existing files, hence requiring a second filePath.
         Path filePath = testFolder.resolve("TempAddressBook.csv");
         Path filePathExported = testFolder.resolve("TempAddressBookExported.csv");
         AddressBook original = getTypicalAddressBook();
         CsvAddressBookStorage csvAddressBookStorage = new CsvAddressBookStorage(filePath);
 
-        // Save in new file and read back
+        // Save in new file, read back, and compare.
         csvAddressBookStorage.saveAddressBook(original, filePathExported);
         ReadOnlyAddressBook readBack = csvAddressBookStorage.readAddressBook(filePathExported).get();
         assertEquals(original, new AddressBook(readBack));

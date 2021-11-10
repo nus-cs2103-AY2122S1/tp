@@ -14,7 +14,7 @@ import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.Model;
 import seedu.address.model.person.FindABuddyPredicate;
 import seedu.address.model.person.IsEventTagPredicate;
-import seedu.address.model.person.IsFavouritePredicate;
+import seedu.address.model.person.IsFavoritePredicate;
 
 /**
  * Ui component for navigating between different tabs.
@@ -71,7 +71,7 @@ public class TabPaneHeader extends UiPart<Region> {
                 logic.sort();
                 stopFabLoader();
             } else if (newValue.equals(favorite)) {
-                logic.updateFilteredPersonList(new IsFavouritePredicate(true));
+                logic.updateFilteredPersonList(new IsFavoritePredicate(true));
                 logic.getPersonList().getRoot().setVisible(true);
                 indicator.getRoot().setVisible(false);
                 logic.sort();

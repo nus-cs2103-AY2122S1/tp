@@ -60,19 +60,19 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void favourite_targetPersonNotInList_throwsPersonNotFoundException() {
+    public void favorite_targetPersonNotInList_throwsPersonNotFoundException() {
         Person editedAlice = new PersonBuilder(ALICE)
                 .withGithub("DifferentAlice")
                 .build();
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.favourite(editedAlice));
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.favorite(editedAlice));
     }
 
     @Test
-    public void unfavourite_targetPersonNotInList_throwsPersonNotFoundException() {
+    public void unfavorite_targetPersonNotInList_throwsPersonNotFoundException() {
         Person editedAlice = new PersonBuilder(ALICE)
                 .withGithub("DifferentAlice")
                 .build();
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.unfavourite(editedAlice));
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.unfavorite(editedAlice));
     }
 
     @Test

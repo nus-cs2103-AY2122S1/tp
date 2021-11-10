@@ -19,19 +19,28 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.ui.PersonListPanel;
 
+/**
+ * A class for testing the {@link TelegramCommand}.
+ */
 public class TelegramCommandTest {
 
+    /**
+     * Checks if the command is executed when there is a current person selected in Model.
+     */
     @Test
     public void execute_telegram_success() {
-        Model model = new ModelStub(1);
-        Model expectedModel = new ModelStub(1);
+        Model model = new ModelStubWithSelectedPerson(1);
+        Model expectedModel = new ModelStubWithSelectedPerson(1);
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
         assertCommandSuccess(new TelegramCommand(), model, expectedCommandResult, expectedModel);
     }
 
+    /**
+     * Checks if the command fails when there is no current person selected in Model.
+     */
     @Test
     public void execute_telegram_failure() {
-        Model model = new ModelStub(-1);
+        Model model = new ModelStubWithSelectedPerson(-1);
         CommandResult expectedCommandResult = new CommandResult(
                 TelegramCommand.MESSAGE_NO_USER_SELECTED, false, false, true, false);
         assertCommandFailure(new TelegramCommand(), model, TelegramCommand.MESSAGE_NO_USER_SELECTED);
@@ -40,11 +49,11 @@ public class TelegramCommandTest {
     /**
      * A stub Model which simulates getting index of selected person.
      */
-    private static class ModelStub implements Model {
+    private class ModelStubWithSelectedPerson implements Model {
 
         private final int selectedIndex;
 
-        ModelStub(int selectedIndex) {
+        ModelStubWithSelectedPerson(int selectedIndex) {
             this.selectedIndex = selectedIndex;
         }
 
@@ -114,12 +123,12 @@ public class TelegramCommandTest {
         }
 
         @Override
-        public void favouritePerson(Person target) {
+        public void favoritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void unfavouritePerson(Person target) {
+        public void unfavoritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,10 +182,10 @@ public class TelegramCommandTest {
             if (this == other) {
                 return true;
             }
-            if (!(other instanceof ModelStub)) {
+            if (!(other instanceof ModelStubWithSelectedPerson)) {
                 return false;
             }
-            return getSelectedIndex() == ((ModelStub) other).getSelectedIndex();
+            return getSelectedIndex() == ((ModelStubWithSelectedPerson) other).getSelectedIndex();
         }
 
         @Override

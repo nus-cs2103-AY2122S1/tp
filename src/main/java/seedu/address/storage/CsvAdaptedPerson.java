@@ -101,9 +101,82 @@ public class CsvAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final Name modelName = getNameFromString();
+        final Telegram modelTelegram = getTelegramFromString();
+        final Github modelGithub = getGithubFromString();
+        final Phone modelPhone = getPhoneFromString();
+        final Email modelEmail = getEmailFromString();
+        final Address modelAddress = getAddressFromString();
+        final Set<Tag> modelTags = getTagsFromString();
+        return new Person(modelName, modelTelegram, modelGithub, modelPhone, modelEmail, modelAddress, modelTags);
+    }
+
+    private Name getNameFromString() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(name);
+    }
+
+    private Telegram getTelegramFromString() throws IllegalValueException {
+        if (telegram == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName()));
+        }
+        if (!Telegram.isValidTelegram(telegram)) {
+            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return new Telegram(telegram);
+    }
+
+    private Github getGithubFromString() throws IllegalValueException {
+        if (github == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Github.class.getSimpleName()));
+        }
+        if (!Github.isValidGithub(github)) {
+            throw new IllegalValueException(Github.MESSAGE_CONSTRAINTS);
+        }
+        return new Github(github);
+    }
+
+    private Phone getPhoneFromString() throws IllegalValueException {
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+
+        if (!phone.isBlank() && !Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(phone);
+    }
+
+    private Email getEmailFromString() throws IllegalValueException {
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!email.isBlank() && !Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(email);
+    }
+
+    private Address getAddressFromString() throws IllegalValueException {
+        if (address == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
+        if (!address.isBlank() && !Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new Address(address);
+    }
+
+    private Set<Tag> getTagsFromString() throws IllegalValueException {
         if (tagged == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
-
         }
         List<Tag> personTags = new ArrayList<>();
         String[] stringTags = tagged.split(" ");
@@ -115,59 +188,6 @@ public class CsvAdaptedPerson {
             }
             personTags.add(new Tag(tagString));
         }
-
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
-        if (telegram == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName()));
-        }
-        if (!Telegram.isValidTelegram(telegram)) {
-            throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
-        }
-        final Telegram modelTelegram = new Telegram(telegram);
-
-        if (github == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Github.class.getSimpleName()));
-        }
-        if (!Github.isValidGithub(github)) {
-            throw new IllegalValueException(Github.MESSAGE_CONSTRAINTS);
-        }
-        final Github modelGithub = new Github(github);
-
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-
-        if (!phone.isBlank() && !Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!email.isBlank() && !Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!address.isBlank() && !Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelTelegram, modelGithub, modelPhone, modelEmail, modelAddress, modelTags);
+        return new HashSet<>(personTags);
     }
 }

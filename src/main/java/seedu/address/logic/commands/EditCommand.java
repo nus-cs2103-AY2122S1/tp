@@ -58,6 +58,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PROFILE_SUCCESS = "Successfully edited profile!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_PROFILE_DESCRIPTION_CANNOT_BE_EMPTY = "Edit profile description "
+            + "cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_PARAMETERS_CANNOT_BE_EMPTY = "Name, Telegram and GitHub "
+            + "parameters cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_NAME_CANNOT_BE_EMPTY = "Name to be edited cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_TELEGRAM_CANNOT_BE_EMPTY = "Telegram handle to be edited "
+            + "cannot be empty!";
+    public static final String MESSAGE_EDIT_PROFILE_GITHUB_CANNOT_BE_EMPTY = "GitHub username to be edited "
+            + "cannot be empty!";
 
     private static List<UserProfileWatcher> userProfileWatchers = new ArrayList<>();
 
@@ -78,6 +87,9 @@ public class EditCommand extends Command {
 
     /**
      * Executes the command to edit user's profile.
+     *
+     * @param model used to retrieve the user profile.
+     * @return CommandResult holds the outcome of this method.
      */
     public CommandResult executeEditProfile(Model model) {
         requireNonNull(model);
@@ -113,7 +125,11 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Executes the command to edit a contact.
+     * This method attempts to edit the details of an existing contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
      */
     public CommandResult executeEditContact(Model model) throws CommandException {
         requireNonNull(model);
@@ -132,8 +148,21 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (model.getPersonListControl() != null) {
+            model.setSelectedIndex(model.getFilteredPersonList().indexOf(editedPerson));
+            model.getPersonListControl().refreshPersonListUI();
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
+
+    /**
+     * This method determines if the editing command is meant to
+     * edit the profile or edit a contact.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (editPersonDescriptor.getIsProfile()) {
@@ -145,6 +174,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param editPersonDescriptor details to edit the person with.
+     * @param personToEdit is the person to edit.
+     * @return Person object of the edited person.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -156,12 +189,20 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        boolean updatedIsFavourite = editPersonDescriptor.getIsFavourite().orElse(personToEdit.isFavourite());
+        boolean updatedIsFavorite = editPersonDescriptor.getIsFavorite().orElse(personToEdit.isFavorite());
 
         return new Person(updatedName, updatedTelegram, updatedGithub,
-                updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedIsFavourite);
+                updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedIsFavorite);
     }
 
+    /**
+     * Method to compare two EditCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the EditCommand object that called this method.
+     * @return boolean representation of whether the EditCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -192,7 +233,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private boolean isFavourite;
+        private boolean isFavorite;
         private boolean isProfile;
 
         public EditPersonDescriptor() {}
@@ -200,6 +241,8 @@ public class EditCommand extends Command {
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy contains details of person to be edited.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -209,12 +252,15 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setIsFavourite(toCopy.isFavourite);
+            setIsFavorite(toCopy.isFavorite);
             setIsProfile(toCopy.isProfile);
         }
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return Boolean representation of whether either of
+         * the fields have been edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, telegram, github, phone, email, address, tags);
@@ -276,17 +322,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setIsFavourite(boolean isFavourite) {
-            this.isFavourite = isFavourite;
+        public void setIsFavorite(boolean isFavorite) {
+            this.isFavorite = isFavorite;
         }
 
-        public Optional<Boolean> getIsFavourite() {
-            return Optional.ofNullable(isFavourite);
+        public Optional<Boolean> getIsFavorite() {
+            return Optional.ofNullable(isFavorite);
         }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param tags to be set.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
@@ -301,6 +349,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Method to compare two EditPersonDescriptor objects.
+         *
+         * @param other is the object that is going to be compared
+         *              to the EditPersonDescriptor object that called this method.
+         * @return boolean representation of whether the EditPersonDescriptor
+         * object is equal to the other object passed as parameter.
+         */
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -323,7 +379,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getIsFavourite().equals(e.getIsFavourite());
+                    && getIsFavorite().equals(e.getIsFavorite());
         }
     }
 }

@@ -14,14 +14,14 @@ import seedu.address.storage.CsvAddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 
 /**
- * Exports the contacts into a named JSON file.
+ * Exports the contacts into a named Json or Csv file.
  */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports the current list of contacts to a specified filename.\n"
+            + ": Exports the current list of contacts to a specified JSON or CSV file.\n"
             + "Parameters: FILENAME.json or FILENAME.csv\n"
             + "Example: " + COMMAND_WORD + " friends.csv";
 
@@ -39,7 +39,7 @@ public class ExportCommand extends Command {
     /**
      * Creates an ExportCommand to export the AddressBook to a specified fileName.
      *
-     * @param fileName Name of the JSON file.
+     * @param fileName Name of the Json or Csv file.
      */
     public ExportCommand(String fileName) {
         requireNonNull(fileName);
@@ -50,8 +50,8 @@ public class ExportCommand extends Command {
     /**
      * Creates an ExportCommand with a custom filePath for testing purposes.
      *
-     * @param testPath Path where the JSON file will be exported to.
-     * @param fileName Name of the JSON file.
+     * @param testPath Path where the Json or Csv file will be exported to.
+     * @param fileName Name of the Json or Csv file.
      */
     public ExportCommand(String testPath, String fileName) {
         requireNonNull(fileName);
@@ -59,10 +59,16 @@ public class ExportCommand extends Command {
         this.fileName = fileName;
     }
 
+    /**
+     * This method attempts to export existing contacts.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         ReadOnlyAddressBook currentAddressBook = model.getAddressBook();
-
         try {
             executeByCase(currentAddressBook);
         } catch (FileAlreadyExistsException faee) {
@@ -86,6 +92,8 @@ public class ExportCommand extends Command {
     private void exportAddressBookToJson(ReadOnlyAddressBook currentAddressBook) throws IOException {
         Path filePath = Path.of(testPath + fileName);
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
+        // The third argument true indicates that this method is triggered by an Export command to prevent overwriting.
+        // Necessary because normal saving of address book also uses this method, but requires overwriting.
         temporaryStorage.saveAddressBook(currentAddressBook, filePath, true);
     }
 

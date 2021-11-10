@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_PERSON_FILENAME_JSON;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_FILENAME_TXT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_CSV;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.commands.CommandTestUtil.WRONGLY_FORMATTED_CSV;
@@ -110,18 +109,6 @@ public class ImportCommandTest {
     public void execute_csvFileMissing_importFail() {
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_FILE_NOT_FOUND, VALID_FILENAME_CSV);
         ImportCommand importNewPerson = new ImportCommand(PATH_EMPTY_FOLDER, VALID_FILENAME_CSV);
-        assertCommandFailure(importNewPerson, modelStub, expectedMessage);
-    }
-
-    /**
-     * Tests if Import command fails when there is the file provided is of the wrong type.
-     * This should not happen as file type should be verified in ImportCommandParser.
-     * However, it is still checked here for completeness.
-     */
-    @Test
-    public void execute_fileNameWrongFileType_importFail() {
-        String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_FILE_WRONG_TYPE, INVALID_FILENAME_TXT);
-        ImportCommand importNewPerson = new ImportCommand(PATH_TEST_FILES, INVALID_FILENAME_TXT);
         assertCommandFailure(importNewPerson, modelStub, expectedMessage);
     }
 
@@ -278,12 +265,12 @@ public class ImportCommandTest {
         }
 
         @Override
-        public void favouritePerson(Person target) {
+        public void favoritePerson(Person target) {
 
         }
 
         @Override
-        public void unfavouritePerson(Person target) {
+        public void unfavoritePerson(Person target) {
 
         }
 

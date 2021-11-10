@@ -17,6 +17,11 @@ public class JsonUserProfileStorage implements UserProfileStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonUserProfileStorage.class);
     private Path filePath = Paths.get("userprofile.json");
+
+    public JsonUserProfileStorage(Path filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public Path getUserProfilePath() {
         return filePath;

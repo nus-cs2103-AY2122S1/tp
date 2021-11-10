@@ -14,6 +14,14 @@ public class IsEventTagPredicate implements Predicate<Person> {
         return person.getTags().stream().anyMatch(Tag::isEvent);
     }
 
+    /**
+     * Method to compare two IsEventTagPredicate objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the IsEventTagPredicate object that called this method.
+     * @return boolean representation of whether the IsEventTagPredicate
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other instanceof IsEventTagPredicate;

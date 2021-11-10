@@ -153,12 +153,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void favouritePerson(Person target) {
+        public void favoritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void unfavouritePerson(Person target) {
+        public void unfavoritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -174,7 +174,6 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override

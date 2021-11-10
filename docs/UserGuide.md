@@ -61,22 +61,22 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 <br/>
 
 1. Telegram Handle Conventions:  
-• Handles can use a-z, 0-9 and underscores.
+• Can only contain the letters a-z or A-Z, digits 0-9 and underscores.
 <br/>
-• Handles are case-insensitive.
+• Is case-insensitive.
 <br/>
-• Handles must be at least five characters long, and maximum is 39 characters.
+• Must be 5 to 32 characters long.
 <br/>
 <br/>  
 2. GitHub Username Conventions:
 <br/>
-• GitHub username may only contain alphanumeric characters or hyphens.
+• Can only contain alphanumeric characters or hyphens.
 <br/>
-• GitHub username cannot have multiple consecutive hyphens. 
+• Cannot have multiple consecutive hyphens. 
 <br/>
-• GitHub username cannot begin or end with a hyphen. 
+• Cannot begin or end with a hyphen. 
 <br/>
-• Maximum is 39 characters.
+• Can have a maximum of 39 characters.
 <br/>
 
 </div>
@@ -180,16 +180,51 @@ edit 1 n/John te/john_123 t/TA
 
 Edits the Profile linked to the Address Book.
 
+
 Format:
 
 ```
 edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
+<div markdown="span" class="alert alert-primary">
 
-Example:
-```
-edit profile te/bob_osum
-```
+:bulb: TIP:
+<br/>
+
+1. Name Conventions:  
+   • Should only contain alphabetical characters.
+   <br/>
+2. Telegram Handle Conventions:
+   <br/>
+   • Can contain the letters a-z or A-Z, digits 0-9 and underscores.
+   <br/>
+   • Must be 5 to 32 characters long.
+   <br/>
+3. GitHub Username Conventions:
+   <br/>
+   • May only contain alphanumeric characters or hyphens.
+   <br/>
+   • Cannot have multiple consecutive hyphens.
+   <br/>
+   • Cannot begin or end with a hyphen.
+   <br/>
+   • Can have a maximum of 39 characters.
+   <br/>
+
+</div>
+
+* Edits name, Telegram and GitHub fields of user's profile.
+* If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
+E.g. `edit profile te/` and `edit profile n/Bob te/` would result in an error because the updated Telegram handle 
+has not been specified. 
+* If multiple prefixes are missing parameters, then the user is notified of the first missing parameter.
+E.g. `edit profile n/ te/` would result in an error saying that the name to be edited is missing.
+
+Examples:
+* `edit profile te/bob_osum`
+* `edit profile n/Bob g/bob-codes`
+* `edit profile n/Alex te/alex_1 g/alex123`
+
 
 ### Find a Student - `find`
 
@@ -203,7 +238,10 @@ find <NAME> [MORE_NAMES]
 
 * Searches for matching names
 
-  **:information_source: Name must contain only alphabetical characters.**<br>
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: Name must contain only alphabetical characters.
+</div>
+
 * Matches contact names with the **exact** keyword or those that contain the keyword as substring. e.g. `find al` will return <b><u>Al</u></b>ex Yeoh as well as Roy B<b><u>al</u></b>akrishnan
 * The search **is case-insensitive**.  e.g. alex will match Alex
 * Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
@@ -223,7 +261,7 @@ find <TAG> [MORE_TAGS]
 
 * Searches for contacts with matching tags.
 * Matches students with the **exact** tag name. e.g. `find t/friend` will only display student contacts with the tag `friend` and not `friends`.
-* The search **is case-insensitive**. e.g `find t/Friends` will match contacts with the tag `friends` too.
+* The search **is case-insensitive**. e.g. `find t/Friends` will match contacts with the tag `friends` too.
 
 Examples:
 
@@ -239,8 +277,8 @@ find te/<TELEGRAM_HANDLE> [MORE_TELEGRAM_HANDLES]
 
 
 * Searches for a student contact by telegram handle.
-* Matches student contacts with the exact Telegram handle or Telegram handle that contain the keyword as a substring. e.g `find te/Al` will display student contacts with the Telegram handles `al_x1` and `randall_xo`.
-* The search **is case-insensitive**. e.g `find te/Al` will find the contact with the Telegram handle `alex` too.
+* Matches student contacts with the exact Telegram handle or Telegram handle that contain the keyword as a substring. e.g. `find te/Al` will display student contacts with the Telegram handles `al_x1` and `randall_xo`.
+* The search **is case-insensitive**. e.g. `find te/Al` will find the contact with the Telegram handle `alex` too.
 
 Examples:
 
@@ -255,20 +293,46 @@ find g/GITHUB_USERNAME [MORE_GITHUB_USERNAMES]
 ```
 
 * Searches for a student contact by GitHub username.
-* Matches student contacts with the exact GitHub username or GitHub username that contain the keyword as a substring. e.g `find g/ai` will display student contacts with the GitHub usernames `ai-coder` and `kaira1208`.
-* The search **is case-insensitive**. e.g `find g/Al` will find the contact with the github username `Alex`.
+* Matches student contacts with the exact GitHub username or GitHub username that contain the keyword as a substring. e.g. `find g/ai` will display student contacts with the GitHub usernames `ai-coder` and `kaira1208`.
+* The search **is case-insensitive**. e.g. `find g/Al` will find the contact with the GitHub username `Alex`.
 
 Examples:
 
 * Search by single GitHub username: `find g/dY` 
 * Search by multiple GitHub usernames: `find g/ai-coder kaira1208`
 
-<h3 id = "Show"> </h3>
+### Find A Buddy Tab
+
+The Find a Buddy feature can be accessed by just switching to the last tab. The tab will display the top 5 matches to your profile based on gathered GitHub data.
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Find%20A%20Buddy.png?raw=true">
+</p>
+
+
+#### Working
+
+The GitHub data used includes the percentage of contributions for different languages in the top 30 repositories, and the number of repos in the user's profile.
+
+A similarity score is calculated using these features. The similarity score is based on the following three metrics:
+
+- Euclidean Distance
+- Manhattan Distance
+- Cosine Similarity
+
+On clicking a student, you can view the similarity score and the languages you have in common with the selected student.
 
 ### Show a Student Contact - `show`
 
 Shows detailed information of a Student Contact. This can be done using the name 
-of the contact or the index.
+of the contact, GitHub username, telegram id or the index. It shows the student with the corresponding detail containing the keyword.
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: Note:
+The show keywords are case-insensitive, john Doe will match with John Doe, JOHN DOE and JoHN DoE
+
+</div>
 
 Format 1: 
 
@@ -282,15 +346,42 @@ Example 1:
 show John Doe
 ```
 
+<div markdown="span" class="alert alert-primary">
+:information_source: Note:
 If the exact name is not given, the show function will act similar to find and then you can pick out one contact from the given list.
+</div>
 
-Format 2: 
+Format 2:
+
+```
+show g/<GITHUB_USERNAME>
+```
+
+Example 2:
+
+```
+show g/john-doe
+```
+
+Format 3:
+
+```
+show te/<TELEGRAM_ID>
+```
+
+Example 3:
+
+```
+show te/john_doe
+```
+
+Format 4: 
 
 ```
 show <INDEX>
 ```
 
-Example 2:
+Example 4:
 
 ```
 show 4
@@ -396,9 +487,56 @@ Example:
 unfav 1
 ```
 
+### Adding or removing tags from a contact - `tag`
+
+Allows user to directly add or remove tag(s) from a specific student contact.
+
+Format:
+
+```
+tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]
+```
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: TIP:
+<br/>
+• Index cannot be left blank, must be a positive integer and be specified after the `tag` keyword.<br>
+• To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
+• Users can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
+
+</div>
+
+* Adding tags : 
+  * If `a/` is entered, it must be followed by the name(s) of tag(s) to be added. E.g. `tag 1 a/ r/friends` 
+  would result in an error even if only the `friends` tag was to be removed.
+  * Duplicate tags aren't allowed. E.g. `tag 1 a/teammate` would result in an error if the student contact at index 1 
+  already has the tag `teammate`.
+  * If multiple tags are to be added and there is at least 1 tag that is not already assigned to the specific contact, 
+  then this tag is added and the remaining duplicate tags are ignored. E.g. if `tag 1 a/classmate a/cca` would result in only the `classmate` tag being added to the student contact at index 1 if it already has the tag `cca`.
+
+
+* Removing tags :
+  * If `r/` is entered, it must be followed by the name(s) of tag(s) to be removed. E.g. `tag 1 a/friends r/`
+    would result in an error even if only the `friends` tag was to be added.
+  * Attempting to remove a tag that is not assigned to the specified contact is not allowed. E.g. `tag 1 r/teammate` would result in an error if the student contact at index 1
+    is not assigned the tag `teammate`.
+  * If multiple tags are to be removed and there is at least 1 valid tag that can be removed from the specific contact,
+    then this tag is removed and the remaining invalid tags are ignored. E.g. if `tag 1 r/classmate r/cca` would result in only the `classmate` tag being removed from the student contact at index 1 if the tag `cca` is not assigned to them already.
+
+Examples:
+* Adding single (general) tag : `tag 1 a/friends`
+* Adding single (event) tag : `tag 2 a/event-hackathon`
+* Adding multiple tags : `tag 3 a/friends a/teammate`
+* Removing multiple (general) tags : `tag 2 r/family r/owesmoney`
+* Removing multiple (module) tags : `tag 2 r/module-CS1101S module-MA1521`
+* Adding and removing a tag : `tag 4 a/friends r/colleagues`
+
 ### Displaying the Help Window - `help`
 
 Displays the Help Window, which consists of a list of possible Commands, and a link to this UserGuide.
+
+When the `Visit URL` button is clicked, the UserGuide is opened in the system's default web browser.
 
 Format:
 
@@ -497,7 +635,12 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
 | Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
 | List all the Student Contacts Present | `list` |
+| Open Current Student's GitHub Profile in the Web Browser | `g` |
+| Open Current Student's Telegram Link in the Web Browser | `te` |
 | Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |
+| To Add Tag(s) | `tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS]` |
+| To Remove Tag(s) | `tag <INDEX> r/<TAG_TO_REMOVE> [MORE_TAGS]` |
+| To Add and Remove Tag(s) Simultaneously | `tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]` |
 | Unfavorite a Student Contact | `unfav <INDEX>` |

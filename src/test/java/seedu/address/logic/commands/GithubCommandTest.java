@@ -19,32 +19,41 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.ui.PersonListPanel;
 
+/**
+ * A class for testing {@link GithubCommand}.
+ */
 public class GithubCommandTest {
 
+    /**
+     * Checks if the command is executed when there is a current person selected in Model.
+     */
     @Test
     public void execute_github_success() {
-        Model model = new ModelStub(1);
-        Model expectedModel = new ModelStub(1);
+        Model model = new ModelStubWithSelectedPerson(1);
+        Model expectedModel = new ModelStubWithSelectedPerson(1);
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
         assertCommandSuccess(new GithubCommand(), model, expectedCommandResult, expectedModel);
     }
 
+    /**
+     * Checks if command fails when there is no current person selected in Model.
+     */
     @Test
     public void execute_github_failure() {
-        Model model = new ModelStub(-1);
+        Model model = new ModelStubWithSelectedPerson(-1);
         CommandResult expectedCommandResult = new CommandResult(
                 GithubCommand.MESSAGE_NO_USER_SELECTED, false, false, false, true);
         assertCommandFailure(new GithubCommand(), model, GithubCommand.MESSAGE_NO_USER_SELECTED);
     }
 
     /**
-     * A stub Model which simulates getting index of selected person.
+     * A stub Model which simulates the presence of a selected person.
      */
-    private static class ModelStub implements Model {
+    private class ModelStubWithSelectedPerson implements Model {
 
         private final int selectedIndex;
 
-        ModelStub(int selectedIndex) {
+        ModelStubWithSelectedPerson(int selectedIndex) {
             this.selectedIndex = selectedIndex;
         }
 
@@ -114,12 +123,12 @@ public class GithubCommandTest {
         }
 
         @Override
-        public void favouritePerson(Person target) {
+        public void favoritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void unfavouritePerson(Person target) {
+        public void unfavoritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,10 +182,10 @@ public class GithubCommandTest {
             if (this == other) {
                 return true;
             }
-            if (!(other instanceof ModelStub)) {
+            if (!(other instanceof ModelStubWithSelectedPerson)) {
                 return false;
             }
-            return getSelectedIndex() == ((ModelStub) other).getSelectedIndex();
+            return getSelectedIndex() == ((ModelStubWithSelectedPerson) other).getSelectedIndex();
         }
 
         @Override

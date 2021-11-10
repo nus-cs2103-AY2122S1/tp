@@ -13,8 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -36,7 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete ALL Contacts";
     private static final String DELETE_CONTACTS_FEATURE_COMMAND = "clear";
     private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
-    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [p/] [g/] [e/] [a/] [t/]";
+    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [te/] [p/] [g/] [e/] [a/] [t/]";
     private static final String EDIT_PROFILE_FEATURE_NAME = "Edit Your Profile";
     private static final String EDIT_PROFILE_FEATURE_COMMAND = "edit profile [n/] [g/] [te/]";
     private static final String FIND_CONTACT_FEATURE_NAME_V1 = "Find a Contact (by Name)";
@@ -53,10 +51,18 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
     private static final String LIST_CONTACTS_FEATURE_NAME = "List all Contacts present";
     private static final String LIST_CONTACTS_FEATURE_COMMAND = "list";
-    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favourite";
-    private static final String FAVOURITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavourite";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
+    private static final String FAVORITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favorite";
+    private static final String FAVORITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
+    private static final String UNFAVORITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavorite";
+    private static final String UNFAVORITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
+    private static final String ADD_TAGS_FEATURE_NAME = "To Add Tag(s)";
+    private static final String ADD_TAGS_FEATURE_COMMAND = "tag <INDEX> a/<TAG> [MORE_TAGS]";
+    private static final String REMOVE_TAGS_FEATURE_NAME = "To Remove Tag(s)";
+    private static final String REMOVE_TAGS_FEATURE_COMMAND = "tag <INDEX> r/<TAG> [MORE_TAGS]";
+    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME = "To Add and Remove Tag(s) "
+            + "Simultaneously";
+    private static final String ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND = "tag <INDEX> a/<TAG> [TAGS] "
+            + "r/<TAG> [TAGS]";
     private static final String IMPORT_CONTACT_CSV_FEATURE_NAME = "Import Contacts from CSV file";
     private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
     private static final String IMPORT_CONTACT_JSON_FEATURE_NAME = "Import Contacts from JSON file";
@@ -65,6 +71,10 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String EXPORT_CONTACT_CSV_FEATURE_COMMAND = "export <FILENAME>.csv";
     private static final String EXPORT_CONTACT_JSON_FEATURE_NAME = "Export Contacts to JSON file";
     private static final String EXPORT_CONTACT_JSON_FEATURE_COMMAND = "export <FILENAME>.json";
+    private static final String OPEN_CONTACT_TELEGRAM_FEATURE_NAME = "Open Current Contact's Telegram Link";
+    private static final String OPEN_CONTACT_TELEGRAM_FEATURE_COMMAND = "te";
+    private static final String OPEN_CONTACT_GITHUB_FEATURE_NAME = "Open Current Contact's GitHub Profile";
+    private static final String OPEN_CONTACT_GITHUB_FEATURE_COMMAND = "g";
     private static final String HELP_FEATURE_NAME = "Launch this Help Window";
     private static final String HELP_FEATURE_COMMAND = "help";
     private static final String EXIT_APP_FEATURE_NAME = "Exit the App";
@@ -130,9 +140,11 @@ public class HelpWindow extends UiPart<Stage> {
      * Sets up the table view. Disables scrolling and
      * adjusts the height according to the number of rows.
      */
+    // Solution below adapted from
+    // https://stackoverflow.com/questions/27945817/javafx-adapt-tableview-height-to-number-of-rows
     public void setUpHelpTableView() {
         helpTable.addEventFilter(ScrollEvent.ANY, Event::consume);
-        helpTable.setFixedCellSize(25);
+        helpTable.setFixedCellSize(27);
         helpTable.prefHeightProperty().bind(helpTable.fixedCellSizeProperty()
                 .multiply(Bindings.size(helpTable.getItems()).add(1.01)));
         helpTable.minHeightProperty().bind(helpTable.prefHeightProperty());
@@ -160,17 +172,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
     }
 
     /**
@@ -205,10 +206,15 @@ public class HelpWindow extends UiPart<Stage> {
                 SHOW_CONTACT_FEATURE_COMMAND_V2);
         CommandDetails listAllContactsCommandDetails = new CommandDetails(LIST_CONTACTS_FEATURE_NAME,
                 LIST_CONTACTS_FEATURE_COMMAND);
-        CommandDetails favouriteContactCommandDetails = new CommandDetails(FAVOURITE_CONTACT_FEATURE_NAME,
-                FAVOURITE_CONTACT_FEATURE_COMMAND);
-        CommandDetails unFavouriteContactCommandDetails = new CommandDetails(UNFAVOURITE_CONTACT_FEATURE_NAME,
-                UNFAVOURITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails favoriteContactCommandDetails = new CommandDetails(FAVORITE_CONTACT_FEATURE_NAME,
+                FAVORITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails unFavoriteContactCommandDetails = new CommandDetails(UNFAVORITE_CONTACT_FEATURE_NAME,
+                UNFAVORITE_CONTACT_FEATURE_COMMAND);
+        CommandDetails addTagsCommandDetails = new CommandDetails(ADD_TAGS_FEATURE_NAME, ADD_TAGS_FEATURE_COMMAND);
+        CommandDetails removeTagsCommandDetails = new CommandDetails(REMOVE_TAGS_FEATURE_NAME,
+                REMOVE_TAGS_FEATURE_COMMAND);
+        CommandDetails addAndRemoveTagsSimultaneouslyCommandDetails = new CommandDetails(
+                ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_NAME, ADD_AND_REMOVE_TAGS_SIMULTANEOUSLY_FEATURE_COMMAND);
         CommandDetails importContactCsvCommandDetails = new CommandDetails(IMPORT_CONTACT_CSV_FEATURE_NAME,
                 IMPORT_CONTACT_CSV_FEATURE_COMMAND);
         CommandDetails importContactJsonCommandDetails = new CommandDetails(IMPORT_CONTACT_JSON_FEATURE_NAME,
@@ -217,6 +223,10 @@ public class HelpWindow extends UiPart<Stage> {
                 EXPORT_CONTACT_CSV_FEATURE_COMMAND);
         CommandDetails exportContactJsonCommandDetails = new CommandDetails(EXPORT_CONTACT_JSON_FEATURE_NAME,
                 EXPORT_CONTACT_JSON_FEATURE_COMMAND);
+        CommandDetails openContactsTelegramCommandDetails = new CommandDetails(OPEN_CONTACT_TELEGRAM_FEATURE_NAME,
+                OPEN_CONTACT_TELEGRAM_FEATURE_COMMAND);
+        CommandDetails openContactsGitHubCommandDetails = new CommandDetails(OPEN_CONTACT_GITHUB_FEATURE_NAME,
+                OPEN_CONTACT_GITHUB_FEATURE_COMMAND);
         CommandDetails helpWindowCommandDetails = new CommandDetails(HELP_FEATURE_NAME,
                 HELP_FEATURE_COMMAND);
         CommandDetails exitAppCommandDetails = new CommandDetails(EXIT_APP_FEATURE_NAME,
@@ -234,12 +244,17 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(showContactByNameCommandDetails);
         helpSectionCommandDetails.add(showContactByIndexCommandDetails);
         helpSectionCommandDetails.add(listAllContactsCommandDetails);
-        helpSectionCommandDetails.add(favouriteContactCommandDetails);
-        helpSectionCommandDetails.add(unFavouriteContactCommandDetails);
+        helpSectionCommandDetails.add(favoriteContactCommandDetails);
+        helpSectionCommandDetails.add(unFavoriteContactCommandDetails);
+        helpSectionCommandDetails.add(addTagsCommandDetails);
+        helpSectionCommandDetails.add(removeTagsCommandDetails);
+        helpSectionCommandDetails.add(addAndRemoveTagsSimultaneouslyCommandDetails);
         helpSectionCommandDetails.add(importContactCsvCommandDetails);
         helpSectionCommandDetails.add(importContactJsonCommandDetails);
         helpSectionCommandDetails.add(exportContactCsvCommandDetails);
         helpSectionCommandDetails.add(exportContactJsonCommandDetails);
+        helpSectionCommandDetails.add(openContactsTelegramCommandDetails);
+        helpSectionCommandDetails.add(openContactsGitHubCommandDetails);
         helpSectionCommandDetails.add(helpWindowCommandDetails);
         helpSectionCommandDetails.add(exitAppCommandDetails);
     }

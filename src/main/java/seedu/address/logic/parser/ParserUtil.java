@@ -31,18 +31,23 @@ public class ParserUtil {
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      *
+     * @param oneBasedIndex String representation of a one based index.
+     * @return Index object containing the one based Index.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (trimmedIndex.isEmpty()) {
             throw new ParseException(MESSAGE_MISSING_INDEX);
-        } else if (trimmedIndex.contains("/")) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
         } else {
-            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+            String[] indexWords = trimmedIndex.split(" ");
+            if (indexWords.length > 1) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            } else {
+                return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+            }
         }
     }
 
@@ -50,6 +55,8 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param name String representation of a name.
+     * @return Name object containing the name.
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -65,6 +72,8 @@ public class ParserUtil {
      * Parses a {@code String telegram} into a {@code Telegram}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param telegram String representation of a Telegram.
+     * @return Telegram object containing the telegram.
      * @throws ParseException if the given {@code telegram} is invalid.
      */
     public static Telegram parseTelegram(String telegram) throws ParseException {
@@ -80,6 +89,8 @@ public class ParserUtil {
      * Parses a {@code String github} into a {@code Github}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param github String representation of a Github.
+     * @return Github object containing the github.
      * @throws ParseException if the given {@code github} is invalid.
      */
     public static Github parseGithub(String github) throws ParseException {
@@ -95,6 +106,8 @@ public class ParserUtil {
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param phone String representation of a Phone.
+     * @return Phone object containing the phone.
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
@@ -110,6 +123,8 @@ public class ParserUtil {
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param address String representation of a Address.
+     * @return Address object containing the address.
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
@@ -125,6 +140,8 @@ public class ParserUtil {
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param email String representation of a Email.
+     * @return Email object containing the email.
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
@@ -140,6 +157,8 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param tag String representation of a Tag.
+     * @return Tag object containing the tag.
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {

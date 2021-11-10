@@ -94,7 +94,7 @@ public class AddressBookTest {
      */
     @Test
     public void hashTest() {
-        int expected = -996168738;
+        int expected = getTypicalAddressBook().hashCode();
         assertEquals(expected, getTypicalAddressBook().hashCode());
     }
 

@@ -124,14 +124,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void favouritePerson(Person target) {
-        addressBook.favouritePerson(target);
+    public void favoritePerson(Person target) {
+        addressBook.favoritePerson(target);
         filteredPersons.setPredicate(filteredPersons.getPredicate());
     }
 
     @Override
-    public void unfavouritePerson(Person target) {
-        addressBook.unfavouritePerson(target);
+    public void unfavoritePerson(Person target) {
+        addressBook.unfavoritePerson(target);
         filteredPersons.setPredicate(filteredPersons.getPredicate());
     }
 

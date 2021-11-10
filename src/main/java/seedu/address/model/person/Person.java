@@ -34,7 +34,7 @@ public class Person implements Comparable<Person> {
     private final Set<Tag> tags = new HashSet<>();
 
     // Status fields
-    private boolean isFavourite;
+    private boolean isFavorite;
 
     // Extra fields
     private Image profilePicture;
@@ -61,7 +61,7 @@ public class Person implements Comparable<Person> {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.isFavourite = false;
+        this.isFavorite = false;
         this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
         this.getProfilePicThread = new Thread(() -> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
@@ -76,16 +76,16 @@ public class Person implements Comparable<Person> {
      * Overloaded constructor used when loading contacts from Json file.
      */
     public Person(Name name, Telegram telegram, Github github,
-                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite) {
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavorite) {
         this(name, telegram, github, phone, email, address, tags);
-        this.isFavourite = isFavourite;
+        this.isFavorite = isFavorite;
     }
 
     /**
      * Overloaded constructor used when loading contacts from Json file with Image.
      */
     public Person(Name name, Telegram telegram, Github github,
-                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite, Image image) {
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavorite, Image image) {
         requireAllNonNull(name, telegram, github, phone, email, address, tags);
         this.name = name;
         this.telegram = telegram;
@@ -94,7 +94,7 @@ public class Person implements Comparable<Person> {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.isFavourite = isFavourite;
+        this.isFavorite = isFavorite;
         this.profilePicture = image;
         this.gitStats = new HashMap<>();
         startGetStatThread();
@@ -104,7 +104,7 @@ public class Person implements Comparable<Person> {
      * Overloaded constructor used when loading contacts from Json file with Image.
      */
     public Person(Name name, Telegram telegram, Github github,
-                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavorite,
                   Image image, HashMap<String, Double> gitStats) {
         requireAllNonNull(name, telegram, github, phone, email, address, tags);
         this.name = name;
@@ -114,7 +114,7 @@ public class Person implements Comparable<Person> {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.isFavourite = isFavourite;
+        this.isFavorite = isFavorite;
         this.profilePicture = image;
         this.gitStats = gitStats;
     }
@@ -177,18 +177,18 @@ public class Person implements Comparable<Person> {
 
     /**
      * Returns a boolean flag to tell whether the Person
-     * is "Favourite" or not.
+     * is "Favorite" or not.
      */
-    public boolean isFavourite() {
-        return isFavourite;
+    public boolean isFavorite() {
+        return isFavorite;
     }
 
-    public void setIsFavourite() {
-        this.isFavourite = true;
+    public void setIsFavorite() {
+        this.isFavorite = true;
     }
 
-    public void setIsNotFavourite() {
-        this.isFavourite = false;
+    public void setIsNotFavorite() {
+        this.isFavorite = false;
     }
 
     public Image getProfilePicture() {
@@ -222,6 +222,11 @@ public class Person implements Comparable<Person> {
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
+     *
+     * @param other is the object that is going to be compared
+     *              to the Person object that called this method.
+     * @return boolean representation of whether the Person
+     * object is equal to the other object passed as parameter.
      */
     @Override
     public boolean equals(Object other) {
@@ -238,6 +243,11 @@ public class Person implements Comparable<Person> {
                 || otherPerson.getGithub().equals(getGithub());
     }
 
+    /**
+     * Returns the {@code hashCode} of Person.
+     *
+     * @return hashCode of Person.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -249,6 +259,11 @@ public class Person implements Comparable<Person> {
         return name.compareTo(p.getName());
     }
 
+    /**
+     * Returns the String representation of Person.
+     *
+     * @return String representation of Person.
+     */
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

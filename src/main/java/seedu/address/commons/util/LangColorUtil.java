@@ -504,6 +504,12 @@ public class LangColorUtil {
         return res < 128;
     }
 
+    /**
+     * Gets the color of the font.
+     *
+     * @param language of the font.
+     * @return Color of the font.
+     */
     public static Color getFontColor(String language) {
         Color back = getBackColor(language);
         if (isDark(back)) {
@@ -513,6 +519,12 @@ public class LangColorUtil {
         }
     }
 
+    /**
+     * Returns the hex of the color.
+     *
+     * @param color
+     * @return String representation of the hex of the color.
+     */
     public static String getHex(Color color) {
         return color.toString().replace("0x", "#");
     }

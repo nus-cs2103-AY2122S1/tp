@@ -42,9 +42,12 @@ public class PersonDetails extends UiPart<Region> {
      */
 
     private Person person;
+    private boolean isFab;
 
     @FXML
     private VBox cardPane;
+    @FXML
+    private VBox addressWindow;
     @FXML
     private Label name;
     @FXML
@@ -83,6 +86,7 @@ public class PersonDetails extends UiPart<Region> {
 
     public void setPerson(Person person, boolean showSimilarity) {
         this.person = person;
+        this.isFab = showSimilarity;
         if (person == null) {
             cardPane.setVisible(false);
             return;
@@ -111,6 +115,7 @@ public class PersonDetails extends UiPart<Region> {
             address.setText("-");
         } else {
             address.setText(person.getAddress().value);
+            address.setWrapText(true);
         }
         if (person.getEmail().value.isBlank()) {
             email.setText("-");
@@ -163,6 +168,10 @@ public class PersonDetails extends UiPart<Region> {
             similarityOptional.setVisible(false);
             similarityOptional.getChildren().parallelStream().forEach(n -> n.setVisible(false));
         }
+    }
+
+    public void setPerson(Person person) {
+        setPerson(person, isFab);
     }
 
     /**

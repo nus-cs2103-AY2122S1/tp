@@ -1,0 +1,125 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":ProfileSetUpWindow" as ProfileSetUpWindow UI_COLOR
+participant ":UiPart" as UiPart UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "<<Class>> \n Name" as Name MODEL_COLOR
+participant "<<Class>> \n Telegram" as Telegram MODEL_COLOR
+participant "<<Class>> \n Github" as Github MODEL_COLOR
+participant ":Github" as Github1 MODEL_COLOR
+participant ":Name" as Name1 MODEL_COLOR
+participant ":Telegram" as Telegram1 MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> ProfileSetUpWindow : start()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow -> LogicManager : isProfilePresent()
+activate LogicManager
+
+LogicManager --> ProfileSetUpWindow : (Not Present - false)
+deactivate LogicManager
+
+ProfileSetUpWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> ProfileSetUpWindow
+deactivate UiPart
+
+opt Submit
+
+ProfileSetUpWindow -> ProfileSetUpWindow : submit()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow -> ProfileSetUpWindow : areUserCredentialsValid()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow -> Name : isValidName(userName)
+activate Name
+
+Name --> ProfileSetUpWindow : true
+deactivate Name
+
+ProfileSetUpWindow -> Telegram : Telegram.isValidTelegram(userTelegram)
+activate Telegram
+
+Telegram --> ProfileSetUpWindow : true
+deactivate Telegram
+
+ProfileSetUpWindow -> Github : isValidGithub(userGitHub)
+activate Github
+
+Github --> ProfileSetUpWindow : true
+deactivate Github
+
+ProfileSetUpWindow --> ProfileSetUpWindow : true
+deactivate ProfileSetUpWindow
+
+alt Credentials are Valid
+
+create Github1
+ProfileSetUpWindow -> Github1 : new Github(userGithub)
+activate Github1
+
+Github1 --> ProfileSetUpWindow
+deactivate Github1
+
+create Name1
+ProfileSetUpWindow -> Name1 : new Name(userName)
+activate Name1
+
+Name1 --> ProfileSetUpWindow
+deactivate Name1
+
+create Telegram1
+ProfileSetUpWindow -> Telegram1 : new Telegram(userTelegram)
+activate Telegram1
+
+Telegram1 --> ProfileSetUpWindow
+deactivate Telegram1
+
+create Person
+ProfileSetUpWindow -> Person : new Person()
+activate Person
+
+Person --> ProfileSetUpWindow
+deactivate Person
+
+ProfileSetUpWindow -> LogicManager : setUserProfile(user)
+activate LogicManager
+
+LogicManager --> ProfileSetUpWindow
+deactivate LogicManager
+
+ProfileSetUpWindow -> ProfileSetUpWindow : close()
+activate ProfileSetUpWindow
+
+ProfileSetUpWindow --> ProfileSetUpWindow
+deactivate ProfileSetUpWindow
+
+<-- ProfileSetUpWindow : mainWindow.start()
+
+ProfileSetUpWindow --> ProfileSetUpWindow
+deactivate ProfileSetUpWindow
+
+else Credentials are not Valid
+
+<-- ProfileSetUpWindow
+
+end
+
+<-- ProfileSetUpWindow
+deactivate ProfileSetUpWindow
+
+end
+
+@enduml

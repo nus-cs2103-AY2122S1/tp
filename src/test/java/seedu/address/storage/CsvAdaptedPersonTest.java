@@ -23,6 +23,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 
+/**
+ * A class for testing {@link CsvAdaptedPerson}.
+ */
 public class CsvAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM = "c4nnot!!!";
@@ -39,12 +42,18 @@ public class CsvAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON_ADDRESS;
     private static final String VALID_TAGS = String.join(" ", BENSON_TAG_1, BENSON_TAG_2);
 
+    /**
+     * Successful conversion from {@code CsvAdaptedPerson} to {@code Person}.
+     */
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         CsvAdaptedPerson person = new CsvAdaptedPerson(BENSON);
         assertEquals(BENSON, person.toModelType());
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is an invalid name.
+     */
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         CsvAdaptedPerson person =
@@ -54,6 +63,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is a null name.
+     */
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(null, VALID_TELEGRAM, VALID_GITHUB, VALID_PHONE,
@@ -62,6 +74,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is an invalid Telegram username.
+     */
     @Test
     public void toModelType_invalidTelegram_throwsIllegalValueException() {
         CsvAdaptedPerson person =
@@ -71,6 +86,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is a null Telegram username.
+     */
     @Test
     public void toModelType_nullTelegram_throwsIllegalValueException() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(
@@ -79,6 +97,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is an invalid GitHub username.
+     */
     @Test
     public void toModelType_invalidGithub_throwsIllegalValueException() {
         CsvAdaptedPerson person =
@@ -88,6 +109,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is a null GitHub username.
+     */
     @Test
     public void toModelType_nullGithub_throwsIllegalValueException() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, VALID_TELEGRAM, null, VALID_PHONE,
@@ -96,6 +120,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is an invalid phone number.
+     */
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         CsvAdaptedPerson person =
@@ -105,6 +132,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is a null phone number.
+     */
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, VALID_TELEGRAM, VALID_GITHUB, null,
@@ -113,6 +143,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is an invalid email.
+     */
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         CsvAdaptedPerson person =
@@ -122,6 +155,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is a null email.
+     */
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, VALID_TELEGRAM, VALID_GITHUB, VALID_PHONE,
@@ -130,6 +166,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there is a null address.
+     */
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, VALID_TELEGRAM, VALID_GITHUB, VALID_PHONE,
@@ -138,6 +177,9 @@ public class CsvAdaptedPersonTest {
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
+    /**
+     * Conversion from {@code CsvAdaptedPerson} to {@code Person} fails when there are invalid tags present.
+     */
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         String invalidTags = VALID_TAGS + " " + INVALID_TAG;
