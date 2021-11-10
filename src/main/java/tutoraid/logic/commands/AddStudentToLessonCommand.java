@@ -43,8 +43,8 @@ public class AddStudentToLessonCommand extends AddCommand {
     /**
      * Constructs an AddStudentToLessonCommand.
      *
-     * @param studentIndexes of the student in the filtered student list to add to the lesson
-     * @param lessonIndexes  of the lesson in the filtered lesson list to add to the student
+     * @param studentIndexes of the students in the filtered student list to add to the lessons
+     * @param lessonIndexes  of the lessons in the filtered lesson list to add to the students
      */
     public AddStudentToLessonCommand(ArrayList<Index> studentIndexes, ArrayList<Index> lessonIndexes) {
         // Indexes are guaranteed to be distinct from ParserUtil
@@ -103,10 +103,10 @@ public class AddStudentToLessonCommand extends AddCommand {
         int maxLessonIndex = lessonIndexes.stream().max(
                 Comparator.comparingInt(Index::getZeroBased)).get().getZeroBased();
         if (maxStudentIndex >= lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENTS_DISPLAYED_INDEX);
         }
         if (maxLessonIndex >= lastShownLessonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSONS_DISPLAYED_INDEX);
         }
     }
 

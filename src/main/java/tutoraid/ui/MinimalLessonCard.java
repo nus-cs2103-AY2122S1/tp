@@ -39,7 +39,7 @@ public class MinimalLessonCard extends Card<Lesson> {
     public MinimalLessonCard(Lesson lesson, int displayedIndex) {
         super(FXML, lesson, displayedIndex);
         id.setText(displayedIndex + ". ");
-        lessonName.setText(formatCardLabel(LABEL_LESSON_NAME, lesson.getLessonName().toString()));
+        lessonName.setText(lesson.toNameString());
         timing.setText(formatCardLabel(LABEL_TIMING, lesson.getTiming().toString()));
     }
 }

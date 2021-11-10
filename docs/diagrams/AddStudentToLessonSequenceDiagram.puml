@@ -1,17 +1,22 @@
 @startuml
 !include style.puml
 
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
 mainframe **sd**  get commandResult
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddStudentToLessonCommand" as AddStudentToLessonCommand LOGIC_COLOR
-participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "lastShownStudentList:List<Student>" as List1 MODEL_COLOR
-participant "lastShownLessonList:List<Lesson>" as List2 MODEL_COLOR
+participant ":List<Student>" as List1 MODEL_COLOR
+participant ":List<Lesson>" as List2 MODEL_COLOR
 participant "lesson:Lesson" as Lesson MODEL_COLOR
 participant "student:Student" as Student MODEL_COLOR
 end box
@@ -55,9 +60,9 @@ create CommandResult
 AddStudentToLessonCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddStudentToLessonCommand : commandResult
+CommandResult --> AddStudentToLessonCommand
 deactivate CommandResult
 
-LogicManager <-- AddStudentToLessonCommand : commandResult
+LogicManager <-- AddStudentToLessonCommand
 deactivate AddStudentToLessonCommand
 @enduml

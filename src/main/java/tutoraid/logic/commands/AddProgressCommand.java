@@ -13,7 +13,10 @@ import tutoraid.model.student.Student;
 
 
 /**
- * Adds progress string to an exiting student in TutorAid. Updates the progress if one already exists.
+ * Adds a progress entry to an exiting student in TutorAid.
+ * A student can have up to 10 progress entries. Adding a new progress entry when the student already has
+ * 10 progress entries will result in the deletion of the oldest progress entry of the student while adding the new one
+ * to the student.
  */
 public class AddProgressCommand extends AddCommand {
 
@@ -35,7 +38,7 @@ public class AddProgressCommand extends AddCommand {
     private final Progress progress;
 
     /**
-     * @param targetIndex of the student in the filtered student list to add progress
+     * @param targetIndex of the student in the filtered student list to add a progress entry to
      * @param progress    Progress object to be added to the student
      */
     public AddProgressCommand(Index targetIndex, Progress progress) {
@@ -53,6 +56,7 @@ public class AddProgressCommand extends AddCommand {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+
         studentToEdit.addProgress(this.progress);
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);

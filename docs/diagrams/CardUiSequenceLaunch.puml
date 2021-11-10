@@ -5,7 +5,7 @@ Participant ":MainApp" as mainApp LOGIC_COLOR
 Participant ":UiManager" as ui UI_COLOR
 Participant ":MainWindow" as mainWin STORAGE_COLOR
 
-mainApp -[UI_COLOR]> ui: start()
+mainApp -[LOGIC_COLOR]> ui: start()
 activate ui UI_COLOR
 
 
@@ -25,7 +25,7 @@ deactivate mainWin STORAGE_COLOR
 mainWin -[STORAGE_COLOR]-> ui
 deactivate mainWin STORAGE_COLOR
 
-ui -[LOGIC_COLOR]-> mainApp
+ui -[UI_COLOR]-> mainApp
 deactivate ui
 
 @enduml
