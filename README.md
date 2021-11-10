@@ -16,5 +16,5 @@
 ### <span style="color:orangered">Acknowledgement</span>
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org),
 inherited and continue optimized by AY2122S1-CS2103T-W10-4 developers.
-
-
+* Icon used for WedFast application is from [flaticon](https://www.flaticon.com/free-icon/wedding-couple_703213?term=wedding%20couple&page=1&position=3&page=1&position=3&related_id=703213&origin=search).
+* Icon used for report functionality is from [flaticon](https://www.flaticon.com/free-icon/report_1055644).
