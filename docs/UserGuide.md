@@ -16,7 +16,7 @@ title: User Guide
 
 CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 
-With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute `csv` or `json` files containing a list of students. Instantly load them into CohortConnect with a single **Import** command. With data collected from students before the semester, our **Find A Buddy** feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the **Events** tab, you can identify events and hackathons that your peers will be attending.
+With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute `CSV` or `JSON` files containing a list of students. Instantly load them into CohortConnect with a single **Import** command. With data collected from students before the semester, our **Find A Buddy** feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the **Events** tab, you can identify events and hackathons that your peers will be attending.
 
 ## Table of Contents
 * Table of Contents
@@ -28,7 +28,7 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 
 ## Prerequisites
 
-1. Basic knowledge about `csv` and `json` type file formats.
+1. Basic knowledge about `CSV` and `JSON` type file formats.
 2. Basic knowledge about Technical Terms like `CLI`, `UI` and `JAR`.
 3. `Java 11` Installed on the System.
 
@@ -298,9 +298,13 @@ show 4
 
 ### Exporting Student Contacts - `export`
 
-Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
+You can export your entire address book to a specified `JSON` or `CSV` file. This can be used to share contacts with others, or to store contacts in an external format. 
 
-Exporting will not overwrite existing files.
+<div markdown="span" class="alert alert-primary">
+:bulb: TIP: `CSV` files can be opened and edited with Excel.
+</div>
+
+The exported file will be in the same folder as the application. Exporting will not overwrite existing files.
 
 Format 1:
 
@@ -328,9 +332,13 @@ export Friends.csv
 
 ### Importing Student Contacts - `import`
 
-Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
+You can import contacts from a specified `JSON` or `CSV` file, saving you the hassle of adding contacts individually. This can be used to load the module contacts provided at the start of the semester, or any other contacts shared with you.
 
-Importing will not remove existing contacts, and ignores duplicate contacts.
+<div markdown="span" class="alert alert-primary">
+:bulb: TIP: `CSV` files can be opened and edited with Excel.
+</div>
+
+The import file must be in the same folder as the application. Importing will not remove existing contacts, and ignores duplicate contacts.
 
 Format 1:
 
@@ -426,9 +434,13 @@ clear
 :exclamation: DANGER: Use With Caution!
 </div>
 
-### Open Telegram of Current User
+### Open Telegram of Current Contact
 
-Opens the current user's Telegram link in the user's default web browser. If the user has the Telegram application installed on his device, he will be redirected to the application.
+Opens the current contact's Telegram link in your default web browser. If you have Telegram installed on your device, you will be redirected to the application.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: TIP: Select a contact with `show <INDEX>` or `show <NAME>`.
+</div>
 
 Format:
 
@@ -436,9 +448,9 @@ Format:
 te
 ```
 
-### Open GitHub of Current User
+### Open GitHub of Current Contact
 
-Opens the current user's GitHub profile in the user's default web browser.
+Opens the current contact's GitHub profile in your default web browser.
 
 Format:
 
