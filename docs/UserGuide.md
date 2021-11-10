@@ -694,19 +694,21 @@ Action                    | Format                                              
 **Unarchive**             | `person (INDEX) /unarchive`                                                   | `p (INDEX) /uar`
 
 <div markdown="block" class="alert alert-warning">:exclamation: <b>Caution:</b>
-<ul>
-<li>For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
-  the card.</li>
-</ul>
+For the <b>Add</b> and <b>Remove</b> commands, please make sure that the <code>GROUP_NAME</code> is typed exactly as how it is spelt on
+the card.
+
 </div>
 
 <div markdown="block" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-* For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
-  please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
-  before using them via <code>GROUP_INDEX</code>
-* For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
-  command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
-  by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
+
+<ul>
+  <li>For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
+      please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
+      before using them via <code>GROUP_INDEX</code></li>
+  <li>For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
+      command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
+      by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.</li>
+</ul>
 
 </div>
 
