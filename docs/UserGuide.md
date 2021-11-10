@@ -124,14 +124,12 @@ What follows is a detailed breakdown of all the commands Notor has available and
 
 Displays a summary of commands, as well as a link you can copy to get to this full user guide.
 
-<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
-If you type in a command with no arguments and the command requires arguments, this command will 
-display a prompt for the arguments which should be given.
-</div>
-
 ![help message](images/helpMessage.png)
 
-Format: `help`
+| Format      | What the command does          |
+|-------------|--------------------------------|
+| `help`      | Opens the help panel           |
+| `h`         | Same as above                  |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
@@ -141,7 +139,9 @@ You don't even need to use the help command to get help! If you type in a comman
 
 Clears all entries from Notor. This means that all your contacts, as well as the groups you keep them in, will be removed.
 
-Format: `clear`
+| Format      | Short Format    |
+|-------------|-----------------|
+| `clear`     | `c`             |
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Data will be deleted and **will not be saved**. The intended use of this
@@ -151,83 +151,82 @@ command is to clear the dummy starting data, but you can also use it to reset yo
 #### _Exiting the program_
 Exits the program and saves your data.
 
-Format: `exit`
+| Format      | Short Format    |
+|-------------|-----------------|
+| `exit`      | `e`             |
 
 <a name = "exporting-data"></a>
 #### _Exporting data_
 
 Exports all the data of Notor into a CSV file to Notor's home directory.
 
-Format: `export`
+| Format      | Short Format    |
+|-------------|-----------------|
+| `export`    | `exp`           |
 <div style="page-break-after: always;"></div>
 
 <a name = "person-command"></a>
 ### Working with people
-The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-This command only works when persons are listed in Notor (visible in the list pane).
-</div> <br>
+The base functionality of Notor is allowing you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 #### _Creating a person_
 
-Creates a person.
+Creates a person's contact card within Notor. When creating this person, you can pass optional arguments to fill out more information about them in a single command.
 
-Format: `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`<br>
-Advanced user Format: `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
+| Format                                                                        | Example                                                                    | What the example does                                                                                                                                                                   |
+|-------------------------------------------------------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `person John Lim /create p:91119111 e:notor@notor.com t:scholar g:1` | Creates the contact `John Lim`, with a phone number of `9111911`, and email of `notor@notor.com`. John is tagged with `scholar` and belongs to the group at index `1`              |
+| `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`           | `p Dhruv Chopra /c p:92229222 e:notor@notor.com t:AI, Crypto g:2`          | Creates the contact `Dhruv Chopra`, with a phone number of `9222922`, and email of `dhruv.chopra@u.nus.sg`. Dhruv is tagged with `AI` and `Crypto`, and belongs to the group at index `2` |
 
+
+<div markdown="block" class="alert alert-info">:information_source: <strong>Notes on parameters:</strong>
 * Creates a person with the `NAME`. This name cannot start with a number.
 * Optional arguments:
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
   * `TAG1,TAG2..`: Tag(s) that describe the person.
   * `GROUP_INDEX`: Index of the group in Notor to add the person to.
+* The person cannot have the same name as someone else in the group.<p>
+</div>
 
-Examples:
 
-* `person John Lim /create p:91119111 e:notor@notor.com t:Loves Dancing g:1`
-* `p Michael Joe /c p:92229222 e:notor@notor.com t:Loves Singing g:2`
-  ![personCreate](images/personCreate.png)
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+Notor minimizes what you need to remember. To add the person to a group, you need to have groups displayed in the list panel, so that you can select the group by its index instead of memorising and typing its name.
+</div>
 
 <div style="page-break-after: always;"></div>
 
-#### _Adding a person to a group_
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+The following commands only work when persons are listed in Notor (visible in the list pane).
+</div> <br>
 
-Adds a person at the given index `INDEX` to a specified group.
+#### _Adding a person to a group or subgroup_
 
-Format: `person (INDEX) /add (g:GROUP_NAME)`<br>
-Advanced user Format: `p (INDEX) /a (g:GROUP_NAME)`
+Adds a person at the given index `INDEX` to a specified group. To add a person to a subgroup, include the subgroup parameter.
 
-Examples:
+| Format                                                | Example                              | What the example does                                                                                  |
+|-------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `person (INDEX) /add (g:GROUP_NAME)`                  | `person 1 /add g:Orbital`            | Add the person at index 1 to the group `Orbital`                                                       |
+| `p (INDEX) /a (g:GROUP_NAME)`                         | `p 2 /a g:Alumni`                    | Add the person at index 2 to the group `Alumni`                                                        |
+| `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 3 /add g:Orbital sg:Artemis` | Add the person at index 3 to the subgroup `Artemis` which is contained within the group `Orbital`      |
+| `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 2 /a g:Alumni sg:Class 2010`      | Add the person at index 4 to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
 
-* `person 1 /add g:Orbital`
-* `p 2 /a g:Orbital`
-
-#### _Adding a person to a subgroup_
-
-Adds a person at the given index `INDEX` to a specified subgroup.
-
-Format: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
-Advanced user Format: `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
-
-Examples:
-* `person 1 /add g:Orbital sg:Artemis`
-* `p 2 /a g:Orbital sg:Artemis`
-
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+Notor considers people within a subgroup as also being within the group that contains it (the supergroup). Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
+</div>
 
 #### _Deleting a person_
 
-Deletes an existing person.
+Removes the contact and the data saved for a person from Notor.
 
-Format: `person (INDEX) /delete`<br>
-Advanced user Format: `p (INDEX) /d`
+| Format                  | Example            | What the example does         |
+|-------------------------|--------------------|-------------------------------|
+| `person (INDEX) /delete`| `person 1 /delete` | Deletes the person at index 1 |
+| `p (INDEX) /d`          | `p 3 /d`           | Deletes the person at index 3 |
 
-* Deletes an existing person at the given `INDEX`.
-
-Examples:
-
-* `person 1 /delete `
-* `p 2 /d`
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Data will be deleted and **will not be saved**. Be careful when deleting people. You may prefer to [archive them](#archiving-people) or make a backup of your data first by [exporting the data](#exporting-data).
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -235,114 +234,94 @@ Examples:
 
 Edits the data of the person at the index `INDEX` in the List Pane and replaces the fields specified with the new parameters.
 
-Format: `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`<br>
-Advanced user Format:`p (INDEX) /e [n:NAME] [p:PHONE] [e:EMAIL]`
+| Format                                              | Example                                           | What the example does                                                                                          |
+|-----------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]` | `person 1 /edit n:Amira e:amira.hannah@gmail.com` | Changes the name of the person at index `1` to `Amira` and also change their email to `amira.hannah@gmail.com` |
+| `p (INDEX) /e [n:NAME] [p:PHONE] [e:EMAIL]`         | `p 2 /e n:Tan See Kiat p:93339333`                | Change the name of the person at index `2` to `Tan See Kiat` and also change their phone number to `93339333`  |
 
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 * Please specify at least one field to be edited.
-
 * Optional arguments:
   * `NAME`: Name of the person.
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
-
-
-Examples:
-* `person 1 /edit n:John Cena e:notor@notor.com`
-* `p 2 /e n:John Doe p:93339333`
+* You cannot change the name of the person to the same name as someone else in the group.
+</div>
 
 #### _Removing a person from group_
 
-Removes an existing person from a group.
+Removes a person from a group or a subgroup. To remove a person from a subgroup, include the subgroup parameter along with the group it is under.
 
-Format: `person (INDEX) /remove (g:GROUP_NAME)`<br>
-Advanced user Format:`p (INDEX) /r (g:GROUP_NAME)`
-
-* Removes an existing person at the given `INDEX` from a `GROUP_NAME`.
-
-Examples:
-* `person 1 /remove g:Orbital`
-* `p 2 /r g:Orbital`
-
-<div style="page-break-after: always;"></div>
-
-#### _Removing a person from subgroup_
-
-Removes an existing person from a subgroup.
-
-Format: `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
-Advanced user Format:`p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`
-
-* Removes an existing person at the given `INDEX` from the `SUBGROUP_NAME` of `GROUP_NAME`.
-
-Examples:
-* `person 1 /remove g:Orbital sg:GroupA`
-* `p 1 /r g:Orbital sg:GroupA`
+| Format                                                   | Example                                 | What the example does                                                                             |
+|----------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------|
+| `person (INDEX) /remove (g:GROUP_NAME)`                  | `person 1 /remove g:Orbital`            | Remove the person at index  `1`  from the group  `Orbital`                                        |
+| `p (INDEX) /r (g:GROUP_NAME)`                            | `p 2 /r g:Final Year Project`           | Remove the person at index `2` from the group `Final Year Project`                                |
+| `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 1 /remove g:Orbital sg:Group A` | Remove the person at index  `1`  from the group  `Group A` which is the subgroup of `Orbital`. The person is still in the group `Orbital`|
+| `p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`           | `p 2 /r g:Research sg:AI focus`         | Remove the person at index  `2`  from the group  `AI focus`  which is the subgroup of  `Research`. The person is still in the group `Research`|
 
 #### _Taking notes for a person_
 
-Creates a note window pop-up to take notes in for the person at the given `INDEX` in the List Pane.
+Opens a note window pop-up to take notes in.
 
-Format: `person (INDEX) /note`<br>
-Advanced user Format:`p (INDEX) /n`
+| Format                 | Example          | What the example does                                          |
+|------------------------|------------------|----------------------------------------------------------------|
+| `person (INDEX) /note` | `person 1 /note` | Opens the note window which belongs to the person at index `1` |
+| `p (INDEX) /n`         | `p 2 /n`         | Opens the note window which belongs to the person at index `2` |
 
-
-Examples:
-
-* `person 1 /note`
-* `p 2 /n`
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+For keyboard shortcuts within the note, you can reference [tips on using Notor](#tips-on-using-notor).
+</div>
 
 #### _Clearing notes of a person_
 
 Removes the note of the person at the given `INDEX` in the List Pane.
 
-Format: `person (INDEX) /clearnote`<br>
-Advanced user Format:`p (INDEX) /cn`
+| Format                      | Example               | What the example does                       |
+|-----------------------------|-----------------------|---------------------------------------------|
+| `person (INDEX) /clearnote` | `person 1 /clearnote` | Removes the note of the person at index `1` |
+| `p (INDEX) /cn`             | `p 2 /cn`             | Removes the note of the person at index `2` |
 
-Examples:
-
-* `person 1 /clearnote`
-* `p 2 /cn`
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Data will be deleted and **will not be saved**. Be careful.
+</div>
 
 <div style="page-break-after: always;"></div>
 
 #### _Tagging a person_
 
-Tags an existing person.
+Add tags to an existing person. Please specify at least one tag to be added.
 
-Format: `person (INDEX) /tag [t:TAG1,TAG2,...]` <br>
-Advanced user Format: `p (INDEX) /t [t:TAG1,TAG2,...]`
+| Format                                  | Example                          | What the example does                                      |
+|-----------------------------------------|----------------------------------|------------------------------------------------------------|
+| `person (INDEX) /tag [t:TAG1,TAG2,...]` | `person 1 /tag t:friends,family` | Tag person with index  `1`  with  `friends`  and  `family` |
+| `p (INDEX) /t [t:TAG1,TAG2,...]`        | `p 2 /t t:friday`                | Tag person with index `2` with `friday`                    |
 
-* Tags the person with specified `INDEX` with `TAG1, TAG2, ...`.
-* Please specify at least one tag to be added.
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong><br>
+What are tags? Well, tags can be used to flag information about a person that you want to highlight and find later. Tags are searchable, while notes are not. Some ideas of what you could use tags for are ... <br>
+* Areas of interest the mentee has
+* Graduation year
+* Where they are currently or have previously worked
+* Outstanding qualities they might have
+* The day you usually meet this mentee
 
-Examples:
-
-* `person 1 /tag t:friends,family` will tag person with index `1` with `friends` and `family`.
-* `p 2 /t t:friday`
+</div>
 
 #### _Untagging a person_
 
 Removes tag(s) from an existing person.
 
-Format: `person (INDEX) /untag [t:TAG1,TAG2,...]` <br>
-Advanced user Format: `p (INDEX) /ut [t:TAG1,TAG2,...]`
-
-* Removes tag(s) from the person with specified `INDEX` with `TAG1, TAG2, ...`.
-* Please specify at least one tag to be removed.
-* The tags to remove must have the exact same name with existing tags of the person, otherwise will do nothing.
-
-* `person 1 /untag t:friends,family` will untag the person with index `1` with `friends` and `family`.
-* `p 2 /t ut:friday`
+| Format                                    | Example                            | What the example does                                                   |
+|-------------------------------------------|------------------------------------|-------------------------------------------------------------------------|
+| `person (INDEX) /untag [t:TAG1,TAG2,...]` | `person 1 /untag t:friends,family` | For the person at index  `1`, remove the tags  `friends`  and  `family` |
+| `p (INDEX) /ut [t:TAG1,TAG2,...]`         | `p 2 /t ut:friday`                 | For the person at index  `2` , remove the tag `friday`                  |
 
 #### _Clearing tags from a person_
 
-Clears all the tags from an existing person.
+Removes all the tags from an existing person. Use with caution.
 
-Format: `person (INDEX) /cleartags` <br>
-Advanced user Format: `p (INDEX) /ct`
-
-* Tags the person with specified `INDEX` with `TAG1, TAG2, ...`.
-* Please specify at least one tag to be added.
+| Format                      | Short Format     |
+|-----------------------------|------------------|
+| `person (INDEX) /cleartags` | `p (INDEX) /ct`  |
 
 <div style="page-break-after: always;"></div>
 
@@ -508,7 +487,7 @@ It can also list archived persons: see [Archiving People](#archiving-people).
 
 Lists all persons in the list panel.
 
-| Format       | What the example does |
+| Format       | What the command does |
 |--------------|-----------------------|
 | person /list | List all persons      |
 | p /l         | List all persons      |
@@ -528,6 +507,7 @@ Lists all groups in the list panel.
 
 ![groupList](images/groupList.png)
 
+<a name = "list-persons-in-group"></a>
 #### _Listing all persons in a group or subgroup_
 
 Lists all persons in that group or subgroup.<br>
