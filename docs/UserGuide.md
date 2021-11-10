@@ -124,8 +124,9 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
 
 Shows a message explaining how to access the help page.
 
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-If you type in a command with no arguments and the command requires arguments, this command will display a prompt for the arguments which should be given.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+If you type in a command with no arguments and the command requires arguments, this command will 
+display a prompt for the arguments which should be given.
 </div>
 
 ![help message](images/helpMessage.png)
@@ -282,6 +283,7 @@ Creates a note window pop-up to take notes in for the person at the given `INDEX
 
 Format: `person (INDEX) /note`<br>
 Advanced user Format:`p (INDEX) /n`
+
 
 Examples:
 
@@ -699,7 +701,7 @@ the card.
 
 </div>
 
-<div markdown="block" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
 
 <ul>
   <li>For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
@@ -732,9 +734,10 @@ Before using the group actions, remember to use <code>g /list</code> or <code>g 
 to change the list display so that you can access the indexes of the group.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-For the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, depending on what is in the list display.
-Change the <code>person /list</code> or <code>group /list</code>.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+For the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, 
+depending on what is in the list display.
+You can change the list display using <code>person /list</code> or <code>group /list</code>.
 </div>
 
 
