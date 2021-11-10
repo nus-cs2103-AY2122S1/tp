@@ -72,18 +72,43 @@ Note how the app contains some sample data. <br>
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
-Some example commands you can try sequentially to get familiarise with Notor:
+You can try out these commands sequentially to get familiar with Notor:
 
-* **`person /list`** : Lists all contacts.
-* **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
-* **`person User /create`** : Creates a person named `User`.
-* **`group Orbital /create`** : Creates a group named `Orbital`.
-* **`person 3 /add g:Orbital`** : Adds the person with index `3` to the group `Orbital`.
-* **`group /list`** : Lists all groups.
-* **`group 1 /note`** : Edits the group note for the group with index number `1`.
-* **`group 1 /create n:Artemis`** : Creates a subgroup `Artemis` inside the group with index number `1`.
-* **`clear`** : Deletes all contacts and groups.
-* **`exit`** : Exits the application. <br>
+1. **`person /list`** : First, to list all the people in your contact, type in this command.
+  ![Example1](images/Example1.png)
+2. **`person 3 /delete`** : Next, if you want to delete the 3rd contact person from your list 
+                    (contact with index number `3`, type in this command.
+  ![Example2](images/Example2.png)
+  In the example shown above, the user named `Charlotte Oliviero` is the contact with the third index. 
+  Hence, Charlotte's contact will be removed from the list. 
+3. **`person User /create`** : To create a new contact person, type in this command. You can replace `User` with the
+  name of your new contact.
+  ![Example3](images/Example3.png)
+4. **`group CS2103T /create`** : To create a new group, type in this command. You can replace `CS2103T` with any group
+  name you want.
+  ![Example4](images/Example4.png)
+5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`.
+  ![Example5](images/Example5.png)
+  In the example shown above, the user named `David Li` is currently the contact with the third index.
+  Hence, David Li will be added into group `CS2103T`.
+6. **`group /list`** : To refer to the current group list, you can simply type in this command.
+  ![Example6](images/Example6.png)
+7. **`group 1 /note`** : Then, if you want to edit the notes of group with index number `1`, you can type
+  in this command.
+  ![Example7](images/Example7.png)
+  In this example, you will be editing the notes for the group `Orbital`. Notor will autosave your note,
+  so you can type `Ctrl + Q` to exit the note window, or you can also type in `Ctrl + W` if you do not want to
+  save your current note.
+8. **`group 1 /create n:Gemini`** : To create a new subgroup inside a group, type in this command.
+  ![Example8](images/Example8.png)
+  In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`.
+  The syntax `n:` is to indicate the **name** of the subgroup you have created.
+9. **`clear`** : Then, if you want to clear all your contacts and groups, type in this command.
+  ![Example9](images/Example9.png)
+  Before you clear out every contacts and groups in the list, there will be a warning window for you to confirm
+  whether you really want to clear out all of the contacts in your list, as shown below.
+  ![Example10](images/Example10.png)
+10. **`exit`** : Finally, type in this command to exit the application. <br>
 
 Refer to the [Features](#features) below for details of each command.
 
@@ -117,7 +142,7 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
 
 <div style="page-break-after: always;"></div>
 
-<a name = "general"></a>
+<a name = "general-command"></a>
 ### General Commands
 
 #### _Viewing help_
@@ -668,6 +693,17 @@ Shortcut Key            | Linux/Window                                   | MacOS
 * Square brackets `[]` refer to optional arguments.
 </div>
 
+### General
+Refer to the details of the general commands [here](#general-command).
+
+Action     | Format   | Short Format
+-----------|----------|----------
+**Help**   | `help`   | `h`
+**Exit**   | `exit`   | `e`
+**Clear**  | `clear`  | `c`
+**Export** | `export` | `exp`
+
+
 ### Person
 Refer to the details of Person commands [here](#person-command).
 
@@ -703,14 +739,12 @@ the card.
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 
-<ul>
-  <li>For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
-      please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
-      before using them via <code>GROUP_INDEX</code></li>
-  <li>For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
-      command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
-      by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.</li>
-</ul>
+  * For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
+    please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
+    before using them via <code>GROUP_INDEX</code>
+  * For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
+    command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
+    by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
 
 </div>
 
@@ -735,24 +769,13 @@ to change the list display so that you can access the indexes of the group.
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
-For the <b>List</b> command, the `INDEX` argument can be either a <code>Group</code> or a <code>Person</code>, 
+For the <b>List</b> command, the <code>INDEX</code> argument can be either a <code>Group</code> or a <code>Person</code>, 
 depending on what is in the list display.
 You can change the list display using <code>person /list</code> or <code>group /list</code>.
 </div>
 
 
 <div style="page-break-after: always;"></div>
-
-### General
-Refer to the details of the general commands [here](#general).
-
-Action     | Format   | Short Format
------------|----------|----------
-**Help**   | `help`   | `h`
-**Exit**   | `exit`   | `e`
-**Clear**  | `clear`  | `c`
-**Export** | `export` | `exp`
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -767,4 +790,4 @@ In the future, we would like to implement these features to enhance the experien
   * Expand help window to improve user's experience in looking for help.
   * Import command to support importing data from CSV into Notor.
   * Tagging for groups.
-  * And...more! Feel free to contact the team and share your suggestions at e0588244@u.nus.edu .
+  * And...more! Feel free to contact the team and share your suggestions at e0588244@u.nus.edu.
