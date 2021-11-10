@@ -71,7 +71,7 @@ Note how the app contains some sample data. <br>
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
-Some example commands you can try sequentially to get familiarise with Notor:
+Some example commands you can try sequentially to get familiarised with Notor:
 
 * **`person /list`** : Lists all contacts.
 * **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
@@ -351,30 +351,39 @@ archived mentees at any time.
 #### _Archiving a person_
 Archives a single person by their index.
 
-Format: `person (INDEX) /archive` <br>
-Advanced user Format: `p (INDEX) /ar`
+| Format                  | Example           | What the example does          |
+|-------------------------|-------------------|--------------------------------|
+| person (INDEX) /archive | person 1 /archive | Archives the person at index 1 |
+| p (INDEX) /ar           | p 2 /ar           | Archives the person at index 2 |
 
 ![personArchive](images/personArchive.png)
 
 #### _Archiving All_
 Archives every person displayed in the list panel.
 
-Format: `person /archive` <br>
-Advanced user Format: `p /ar`
+| Format          | What the command does             |
+|-----------------|-----------------------------------|
+| person /archive | Archives every person on the list |
+| person /ar      | Archives every person on the list |
 
 <div style="page-break-after: always;"></div>
 
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
-Format: `person /listarchive` <br>
-Advanced user Format: `p /lar`
+| Format              | What the command does     |
+|---------------------|---------------------------|
+| person /listarchive | List all archived persons |
+| p /lar              | List all archived persons |
+![archivedList](images/archivePersonList.png)
 
 #### _Unarchiving_ 
 Restores an archived person back to your person list in Notor.
 
-Format: `person (INDEX) /unarchive` <br>
-Advanced user Format:`p (INDEX) /uar`
+| Format                    | Example        | What the example does                                        |
+|---------------------------|----------------|--------------------------------------------------------------|
+| person (INDEX) /unarchive | p 1 /unarchive | Restores archived person at index 1 back to your person list |
+| p (INDEX) /uar            | p 2 /uar       | Restores archived person at index 2 back to your person list |
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 You must be on the list of archived persons in order to use this command, as it needs the index of the person to unarchive.
@@ -408,17 +417,15 @@ Creates a group.
 Creating a group command works no matter what list is in the List Pane. **However, the rest of group commands below will work only when groups or subgroups are listed.**
 </div> <br>
 
-Format: `group (GROUP_NAME) /create`<br>
-Advanced user Format: `g (GROUP_NAME) /c`
+| Format                     | Example               | What the example does         |
+|----------------------------|-----------------------|-------------------------------|
+| group (GROUP_NAME) /create | group Orbital /create | Creates a group named Orbital |
+| g (GROUP_NAME) /c          | g FYP /c              | Creates a group named FYP     |
 
 * Creates a new group with the name `GROUP_NAME`. This name cannot start with a number, and may contain `-` or `.` characters
 * The new group must not have a same name with other existing groups.
 
-Examples:
-
-* `group Orbital /create` will create a new group called Orbital.
-* `g Orbital /c`
-  ![groupCreate](images/groupCreate.png)
+![groupCreate](images/groupCreate.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -426,13 +433,10 @@ Examples:
 
 Deletes an existing group at the index `INDEX` specified.
 
-Format: `group (INDEX) /delete`<br>
-Advanced user Format: `g (INDEX) /d`
-
-Examples :
-
-* `group 1 /delete` will delete the group at index 1.
-* `g 1 /d`
+| Format                | Example         | What the example does       |
+|-----------------------|-----------------|-----------------------------|
+| group (INDEX) /delete | group 1 /delete | Deletes the group at index 1|
+| g (INDEX) /d          | group 2 /d      | Deletes the group at index 2|
 
 #### _Creating a subgroup_
 
@@ -442,49 +446,40 @@ Creates a new subgroup.
 This command only works when groups are listed in the list pane, and not when subgroups are listed. In other words, a subgroup cannot have subgroups.
 </div> <br>
 
-Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
-Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
+| Format                                | Example                   | What the example does                                    |
+|---------------------------------------|---------------------------|----------------------------------------------------------|
+| group (INDEX) /create n:SUBGROUP_NAME | group 1 /create n:Artemis | Creates a new subgroup named Artemis in group at index 1 |
+| g (INDEX) /c n:SUBGROUP_NAME          | g 2 /create n:Year2       | Create a new subgroup named Year2 in group at index 2    |
 
 * Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
 * This name cannot start with a number, and may contain `-` or `.` characters
 * The new subgroup must not have the same name as other existing subgroups in the same group.
 
-Examples :
-
-* `group 1 /create n:Artemis` will create a new subgroup Artemis in group at index 1.
-* `g 1 /create n:Artemis`
-
 <div style="page-break-after: always;"></div>
 
 #### _Adding notes to a group or subgroup_
 
-Pops up a note window to add note to group or subgroup.
+Opnes a pop-up a note window to add note to group or subgroup.
 
-Format: `group (INDEX) /note`<br>
-Advanced user Format: `group (INDEX) /n`
+| Format              | Example       | What the example does                                                        |
+|---------------------|---------------|------------------------------------------------------------------------------|
+| group (INDEX) /note | group 1 /note | Opens a pop-up window where you can edit notes for group/subgroup at index 1 |
+| group (INDEX) /n    | g 2 /n        | Opens a pop-up window where you can edit notes for group/subgroup at index 2 |
 
-* Add notes on a group at the index specified.
-* Entering the command will lead to a popup window where the user can edit notes for group at that index.
+* Add notes on a group/subgroup at the index specified.
+* Entering the command will lead to a popup window where the user can edit notes for group/subgroup at that index.
 * The time when the note is edited will be saved.
-
-Examples :
-
-* `group 1 /note` will prompt a popup window where the user can edit the notes for group at index 1.
-* `g 1 /n`
 
 #### _Clearing notes of a group or subgroup_
 
 Removes note of an existing group or subgroup.
 
-Format: `group (INDEX) /clearnote`<br>
-Advanced user Format:`g (INDEX) /cn`
+| Format                   | Example            | What the example does                         |
+|--------------------------|--------------------|-----------------------------------------------|
+| group (INDEX) /clearnote | group 1 /clearnote | Removes the note of group/subgroup at index 1 |
+| g (INDEX) /cn            | g 2 /cn            | Removes the note of group/subgroup at index 2 |
 
-* Removes note of an existing group at the given `INDEX`.
-
-Examples:
-
-* `group 1 /clearnote`
-* `g 2 /cn`
+* Removes note of an existing group/subgroup at the given `INDEX`.
 
 <div style="page-break-after: always;"></div>
 
@@ -511,8 +506,10 @@ Advanced user Format:`p /l`
 
 Lists all groups in the list panel.
 
-Format:  `group /list`<br>
-Advanced user Format: `g /l`
+| Format      | What the command does          |
+|-------------|--------------------------------|
+| group /list | Lists all groups in list panel |
+| g /l        | Lists all groups in list panel |
 ![groupList](images/groupList.png)
 
 #### _Listing all persons in a group or subgroup_
@@ -541,24 +538,12 @@ Lists all the subgroups within a group.
 Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
 </div> <br>
 
+| Format              | Example       | What the example does                   |
+|---------------------|---------------|-----------------------------------------|
+| group (INDEX) /list | group 3 /list | Lists all subgroups of group at index 3 |
+| g (INDEX) /l        | g 2 /l        | Lists all subgroups of group at index 2 |
+
 * Only works if you have listed out all groups or subgroups in Notor.
-* Do not confuse this with the list all persons command, whose first command word is `person`
-
-Format: `group (INDEX) /list`<br>
-Advanced user Format: `g (INDEX) /l`
-
-Examples:
-
-* `group 3 /list`
-* `g 2 /l`
-
-#### _Listing Archived Persons_
-Shows the list of archived Persons.
-
-Format: `person /listarchive` <br>
-Advanced user Format: `p /lar`
-
-![archivedList](images/archivePersonList.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -589,21 +574,16 @@ Examples:
 
 #### _Finding groups or subgroups_
 
-Finds all the groups with the keyword specified. This will search for the keyword within the group's name.
+Finds all the groups/subgroups with the keyword specified. This will search for the keyword within the group's name.
 Use after you have listed out all groups or subgroups.
 
-Format:  `group /find n:QUERY_NAME`<br>
-Advanced user Format: `g /f n:QUERY_NAME`
+| Format                   | Example               | What the example does                             |
+|--------------------------|-----------------------|---------------------------------------------------|
+| group /find n:QUERY_NAME | group /find n:Artemis | Finds all the groups/subgroups that match Artemis |
+| g /f n:QUERY_NAME        | g /f n:CS2103         | Finds all the groups/subgroups that match CS2103  |
 
-* Finds all the groups that match the `KEYWORD`.
+* Finds all the groups/subgroups that match the `KEYWORD`.
 * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
-
-Examples of finding group:
-
-* `group /find n:Artemis`
-* `g /f n:GroupA`
-* `group /f n:Test`
-
 
 ## Miscellaneous information
 
