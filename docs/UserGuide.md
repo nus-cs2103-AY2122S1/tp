@@ -665,7 +665,7 @@ Shortcut Key            | Linux/Window                                   | MacOS
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 * Round brackets `()` refer to COMPULSORY arguments.
-* Square brackets `[]` refer to optional arguments.<p>
+* Square brackets `[]` refer to optional arguments.
 </div>
 
 ### Person
@@ -701,7 +701,7 @@ the card.
 
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 
 <ul>
   <li>For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
