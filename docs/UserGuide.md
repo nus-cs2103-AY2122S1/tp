@@ -29,7 +29,7 @@ If you're new to Notor, hop over to [Quick Start](#quick-start) to install and b
 
 If you've used Notor for a while and are looking to get the best out of Notor, 'level-up' by reading our [Tips on Using Notor](#tips-on-using-notor).
 
-Some terminology that might help:
+Some terminology that might help when referring to Notor:
 1. **List pane** : The panel located on the right, which is used to display the list of persons or groups
 2. **View pane** : The panel on the left, used to view notes, such as general notes
 3. **Note Window**: The pop up window you may use to edit and add notes
@@ -55,9 +55,9 @@ Used to highlight dangers.
 <a name = "quick-start"></a>
 ## Quick Start
 ### 1. Setup
-Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
+Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/java/technologies/downloads/#java11-windows).
 ### 2. Installing the project
-Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor.
+Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor. The *home folder* is where the data that Notor uses will be stored.
 
 <div style="page-break-after: always;"></div>
 
@@ -71,7 +71,7 @@ Note how the app contains some sample data. <br>
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
-Some example commands you can try sequentially to get familiarised with Notor:
+Some example commands you can try sequentially to get familiarized with Notor:
 
 * **`person /list`** : Lists all contacts.
 * **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
@@ -121,22 +121,21 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
 
 #### _Viewing help_
 
-Shows a message explaining how to access the help page.
-
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-If you type in a command with no arguments and the command requires arguments, this command will display a prompt for the arguments which should be given.
-</div>
+Displays a summary of commands, as well as a link you can copy to get to this full user guide.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
+</div>
+
 #### _Clearing all entries_
 
-Clears all entries from Notor. 
+Clears all entries from Notor. This means that all your contacts, as well as the groups you keep them in, will be removed.
 
 Format: `clear`
-* Take care not to confuse this command with the more specific `/clearnote` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Data will be deleted and **will not be saved**. The intended use of this
@@ -151,10 +150,9 @@ Format: `exit`
 <a name = "exporting-data"></a>
 #### _Exporting data_
 
-Exports all the data of Notor into a CSV file to Notor's Directory.
+Exports all the data of Notor into a CSV file to Notor's home directory.
 
 Format: `export`
-
 <div style="page-break-after: always;"></div>
 
 <a name = "person-command"></a>
