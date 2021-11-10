@@ -423,8 +423,10 @@ Creating a group command works no matter what list is in the List Pane. **Howeve
 | group (GROUP_NAME) /create | group Orbital /create | Creates a group named Orbital |
 | g (GROUP_NAME) /c          | g FYP /c              | Creates a group named FYP     |
 
-* Creates a new group with the name `GROUP_NAME`. This name cannot start with a number, and may contain `-` or `.` characters
-* The new group must not have a same name with other existing groups.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * You cannot create a group with name starting with a number, and may contain `-` or `.` characters
+  * The new group must not have a same name with other existing groups.
+</div>
 
 ![groupCreate](images/groupCreate.png)
 
@@ -443,18 +445,22 @@ Deletes an existing group at the index `INDEX` specified.
 
 Creates a new subgroup.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-This command only works when groups are listed in the list pane, and not when subgroups are listed. In other words, a subgroup cannot have subgroups.
-</div> <br>
+
 
 | Format                                | Example                   | What the example does                                    |
 |---------------------------------------|---------------------------|----------------------------------------------------------|
 | group (INDEX) /create n:SUBGROUP_NAME | group 1 /create n:Artemis | Creates a new subgroup named Artemis in group at index 1 |
 | g (INDEX) /c n:SUBGROUP_NAME          | g 2 /create n:Year2       | Create a new subgroup named Year2 in group at index 2    |
 
-* Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
-* This name cannot start with a number, and may contain `-` or `.` characters
-* The new subgroup must not have the same name as other existing subgroups in the same group.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * This name cannot start with a number, and may contain `-` or `.` characters
+  * The new subgroup must not have the same name as other existing subgroups in the same group.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+This command only works when groups are listed in the list pane, and not when subgroups are listed. 
+In other words, a subgroup cannot have subgroups.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -467,9 +473,9 @@ Opnes a pop-up a note window to add note to group or subgroup.
 | group (INDEX) /note | group 1 /note | Opens a pop-up window where you can edit notes for group/subgroup at index 1 |
 | group (INDEX) /n    | g 2 /n        | Opens a pop-up window where you can edit notes for group/subgroup at index 2 |
 
-* Add notes on a group/subgroup at the index specified.
-* Entering the command will lead to a popup window where the user can edit notes for group/subgroup at that index.
-* The time when the note is edited will be saved.
+<div markdown="span" class="alert alert-info">:bulb: <strong>Tip:</strong>
+You can open add notes to multiple groups at the same time by executing the command multiple times.
+</div>
 
 #### _Clearing notes of a group or subgroup_
 
@@ -479,8 +485,6 @@ Removes note of an existing group or subgroup.
 |--------------------------|--------------------|-----------------------------------------------|
 | group (INDEX) /clearnote | group 1 /clearnote | Removes the note of group/subgroup at index 1 |
 | g (INDEX) /cn            | g 2 /cn            | Removes the note of group/subgroup at index 2 |
-
-* Removes note of an existing group/subgroup at the given `INDEX`.
 
 <div style="page-break-after: always;"></div>
 
@@ -497,8 +501,11 @@ It can also list archived persons: see [Archiving People](#archiving-people).
 
 Lists all persons in the list panel.
 
-Format: `person /list`<br>
-Advanced user Format:`p /l`
+| Format       | What the example does |
+|--------------|-----------------------|
+| person /list | List all persons      |
+| p /l         | List all persons      |
+
 ![personList](images/personList.png)
 
 <div style="page-break-after: always;"></div>
@@ -518,12 +525,21 @@ Lists all groups in the list panel.
 
 Lists all persons in that group or subgroup.<br>
 
-Format: `person (INDEX) /list`<br>
-Advanced user Format:`p (INDEX) /l`
+| Format               | Example        | What the example does                         |
+|----------------------|----------------|-----------------------------------------------|
+| person (INDEX) /list | person 2 /list | List all persons in group/subgroup at index 2 |
+| p (INDEX) /l         | p 3 /list      | List all persons in group/subgroup at index 3 |
 
-* Only works if you have listed out all groups or subgroups in Notor.
-* Lists all persons of a group or subgroup that is at the given `INDEX` .
-* Do not confuse this with the list all subgroups command, whose first command word is `group`
+
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * Only works if you have listed out all groups or subgroups in Notor.
+  * Lists all persons of a group or subgroup that is at the given `INDEX` .
+  * Do not confuse this with the list all subgroups command, whose first command word is `group`
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Only works if you have listed out all groups or subgroups in Notor.
+</div>
 
 Examples:
 
@@ -545,7 +561,10 @@ Do not confuse this with the list all persons command, whose first command word 
 | group (INDEX) /list | group 3 /list | Lists all subgroups of group at index 3 |
 | g (INDEX) /l        | g 2 /l        | Lists all subgroups of group at index 2 |
 
-* Only works if you have listed out all groups or subgroups in Notor.
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Only works if you have listed out all groups or subgroups in Notor.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -584,8 +603,10 @@ Use after you have listed out all groups or subgroups.
 | group /find n:QUERY_NAME | group /find n:Artemis | Finds all the groups/subgroups that match Artemis |
 | g /f n:QUERY_NAME        | g /f n:CS2103         | Finds all the groups/subgroups that match CS2103  |
 
-* Finds all the groups/subgroups that match the `KEYWORD`.
-* Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * Finds all the groups/subgroups that match the `KEYWORD`.
+  * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
+</div>
 
 ## Miscellaneous information
 
