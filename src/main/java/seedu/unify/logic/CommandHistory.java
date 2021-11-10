@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.commands.exceptions.CommandException;
 
+//@@author naranghardik16-reused
+//Reused from rajobasu, a previous student
+//with minor modiciations
+
 public class CommandHistory {
 
     public static final String MESSAGE_NO_MORE_HISTORY = "The command history ends here.";
@@ -36,18 +40,18 @@ public class CommandHistory {
     }
 
     /**
-     * safsfs
-     * @return sfsdf
-     * @throws CommandException sfasfsd
+     * update counter to retrieve next command
+     * @return counter
+     * @throws CommandException
      */
     public String retrieveNextCommand() throws CommandException {
         return retrievePreviousCommand(--counter);
     }
 
     /**
-     * some function.
+     * update counter to retrieve previous command
      *
-     * @return some function
+     * @return counter
      * @throws CommandException
      */
     public String retrievePreviousCommand() throws CommandException {
@@ -56,10 +60,10 @@ public class CommandHistory {
 
 
     /**
-     * some function
+     * Retrieve previous command using the given index
      *
      * @param previousIndex
-     * @return some function
+     * @return previous command
      * @throws CommandException
      */
     public String retrievePreviousCommand(int previousIndex) throws CommandException {
@@ -80,3 +84,4 @@ public class CommandHistory {
     }
 
 }
+//@@author
