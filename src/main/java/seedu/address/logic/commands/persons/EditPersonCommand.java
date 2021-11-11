@@ -196,7 +196,7 @@ public class EditPersonCommand extends Command {
          * @throws IndexOutOfBoundsException if any index is out of bounds
          */
         private static Person removeLessons(Person personToEdit,
-                                            List<Index> lessonsToRemove) throws IndexOutOfBoundsException {
+                List<Index> lessonsToRemove) throws IndexOutOfBoundsException {
             // sort because removing from the back will not hurt the earlier indexes!
             lessonsToRemove.sort(new Index.SortDescending());
             for (Index i : lessonsToRemove) {

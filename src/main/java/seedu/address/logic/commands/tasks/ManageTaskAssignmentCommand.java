@@ -33,7 +33,6 @@ public abstract class ManageTaskAssignmentCommand extends Command {
             + "TASK INDEX (must be a positive integer) ";
 
     public static final String MESSAGE_DUPLICATE_TASK_ASSIGNABLE = "This %s already exists in the address book";
-    public static final String MESSAGE_SUCCESS = "Task %1$s (un)assigned from/to %3$s %2$s";
 
     private final Index assigneeIndex;
     private final Index taskIndex;
@@ -83,7 +82,8 @@ public abstract class ManageTaskAssignmentCommand extends Command {
      * @return Feedback message of the operation result for display.
      * @throws CommandException If an error occurs during command execution.
      */
-    public CommandResult executeWithGivenMessage(Model model, String assigneeType) throws CommandException {
+    public CommandResult executeWithGivenMessage(Model model, String assigneeType, String successMessage)
+            throws CommandException {
         requireNonNull(model);
         List<? extends TaskAssignable> assigneeList = getTaskAssignableListFromModel(model);
         List<Task> taskList = model.getFilteredTaskList();
@@ -119,7 +119,7 @@ public abstract class ManageTaskAssignmentCommand extends Command {
 
         updateModel(model, taskAssignableToEdit, newTaskAssignable);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAssign.getDescription(),
+        return new CommandResult(String.format(successMessage, taskToAssign.getDescription(),
                 newTaskAssignable.getNameInString(), assigneeType));
     }
 }
