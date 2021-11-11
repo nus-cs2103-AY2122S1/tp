@@ -573,21 +573,19 @@ Example:
   A student is considered a match only when `all`, `any` or `none` of the fields which you are searching for match the student.
 * The match condition is optional and defaults to `all` if not specified.
 
-Examples:
-  * `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
-  * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
-  * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
-
-**Example of finding by different types of fields**
+Example:
 
 Suppose you want to find students with the tag `new` or with lessons between `1100-1300`.
-1. Type the command `find cond/any t/new time/1100-1300` into the command box. 
-   
+1. Type the command `find cond/any t/new time/1100-1300` into the command box.
 2. Press <kbd>Enter</kbd> and you should see that the list now displays only students matching the given keywords.
 
 ![find](images/find.png)
 
 <div class="caption">TAB displays two students after the find command.</div>
+
+Other examples:
+* `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
+* `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
 <br />
 
