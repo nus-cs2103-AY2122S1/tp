@@ -21,29 +21,17 @@ This user guide covers a quick walk-through on how to use this application, as w
 ## Quick start
 
 
-  1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>
-If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same.
+1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same. <br><p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
 
-<p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
+2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar). <br>You may ignore the warning pop-up and click on "Keep" to download Intern Watcher. <br><p style="text-align:center;"><img src="images/DownloadApp.png" width="500" alt="DownloadApp" ></p>
 
-  2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar). <br>
-You may ignore the warning pop-up and click on "Keep" to download Intern Watcher.
-<p style="text-align:center;"><img src="images/DownloadApp.png" width="500" alt="DownloadApp" ></p>
+3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher. <br>|macOS|Windows| <br>|---|---| <br>|<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
 
-  3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. <br>This didn't work? Refer to the [FAQ](#faq) for more information on alternative ways to launch Intern Watcher. <br>![Ui](images/Ui.png)
 
-|macOS|Windows|
-|---|---|
-|<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
+5. Type any command in the command box and press the "Enter" key to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-
-  4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-
-This didn't work? Refer to the [FAQ](#faq) for more information on alternative ways to launch Intern Watcher.
-<br>![Ui](images/Ui.png)
-  5. Type any command in the command box and press the "Enter" key to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-
-  6. Here's an example usage of Intern Watcher:
+6. Here's an example usage of Intern Watcher:
 
 * Let's start by adding a few [applicants](#glossary) to Intern Watcher. `add n/John Doe p/85912735 e/johndoe@example.com g/4.50 i/NUS c/Computer Science y/06/2025 j/Software Engineer a/APPLIED` : Adds an applicant named `John` to Intern Watcher.
 
