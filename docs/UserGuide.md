@@ -5,7 +5,7 @@ title: User Guide
 
 # AniList V1.4
 
-AniList is a desktop application made to be a single centralized location for anime lovers to keep track of all the animes they are interested in. In AniList, users will be able to keep track of animes that they are watching, wanting to watch or even animes that they have finished. Users will also be able to get statistics on their watching habits such as the genre distribution of their current list of animes.
+AniList is a desktop application made to be a single centralized location for anime lovers to keep track of all the animes they are interested in. With AniList, users are able to keep track of animes that they are watching, want to watch, and finished watching. Users are also able to get statistics on their watching habits such as the genre distribution of their current list of animes.
 
 AniList is optimized for use via a Command Line Interface (CLI) while still having the benefits of a customizable Graphical User Interface (GUI). If you are a fast typist, AniList can get your anime management tasks done FASTER than traditional GUI applications!
 
@@ -16,7 +16,7 @@ This User Guide is to be used by any AniList user. No technical background is re
 ## Table of Content
 
 - [Quick Start](#quick-start)
-- [GUI Breakdown](#gui-breakdown)
+- [Graphical User Interface (GUI) Breakdown](#graphical-user-interface-(gui)-breakdown)
 - [Hot-Keys](#hot-keys)
 - [Commands](#commands)
   * [Adding an anime: `add`](#adding-an-anime-add)
@@ -46,7 +46,7 @@ This User Guide is to be used by any AniList user. No technical background is re
 
 4. Double-click to launch the application. A window similar to the one shown below should appear shortly.
 
-5. On first launch, AniList will contain sample anime data which you could play around with. Once you are done and
+5. On the first launch, AniList will contain sample anime data which you could play around with. Once you are done and
    wish to clear the sample data, enter `list` to [list](#listing-anime-based-on-watch-status-list) all sample animes,
    and then use the [clear](#clearing-all-animes-currently-displayed-clear) command to delete them.
 
@@ -58,13 +58,13 @@ ___
 
 <div style="page-break-after: always;"></div>
 
-## GUI Breakdown
+## Graphical User Interface (GUI) Breakdown
 
 ![](images/UG-images/gui.JPG)
 
-1. **Menu Bar:** Here the user have the option to to change the application theme
+1. **Menu Bar:** Here the user has the option to change the application theme
 
-2. **Tabs Bar:** Here the user can change the tabs to view their anime list filtered based on their watch status. (watching, towatch, finished)
+2. **Tabs Bar:** Here the user can change tabs to view their animes filtered based on an anime's watch status (watch status can be one of `watching`, `to watch`, or `finished`)
 
 3. **Anime List Panel:** The panel where all of the user's animes are listed. The order of listing is based on the order in which each anime was added —
 the latest to be added appears last in the list
@@ -73,7 +73,7 @@ the latest to be added appears last in the list
 
 5. **Command Result Panel:** This panel shows the result of the command based on user input in the Command Input Box
 
-6. **Command Input Box:** User inputs the desired command in this box and runs the command by pressing `enter`
+6. **Command Input Box:** User inputs the desired command in this box and runs the command by pressing `enter` on the keyboard
 
 <div style="page-break-after: always;"></div>
 
@@ -84,6 +84,7 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 <div markdown="block" class="alert alert-info">
 
 * The hotkeys only work when the focus is on the main window. The hotkey for closing the statistics window is an exception as it can only be used when the focus is on the stats window
+* To focus on a window, simply click on the window to bring it to the front
 
 </div>
 
@@ -138,8 +139,7 @@ ___
   <br/>e.g. <code>&nbsp; list</code> and <code>list &nbsp;</code> will both be registered as `list`
 
 * Order of prefixed parameters do not matter:
-  <br/> e.g. `add n/NAME e/EPISODE` will obtain the same result as `add e/EPISODE n/NAME`
-  <br/> e.g. `genre c/add 1 g/comedy` will not work as `1` is not a prefixed parameter
+  <br/> e.g. `add n/NAME e/EPISODE` will obtain the same result as `add e/EPISODE n/NAME`. However, `genre c/add 1 g/comedy` will not work as `1` is not a prefixed parameter
 
 </div>
 
@@ -152,12 +152,12 @@ Adds a user-defined anime into the anime list.
 Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE] [g/GENRE] ...`
 
 Notes:
-* If multiple `n/NAME` are given in the command, the last provided `NAME` will be used
-* If multiple `e/EPISODE` are given in the command, the last provided `EPISODE` will be used
-* If multiple `s/STATUS` are given in the command, the last provided `STATUS` will be used
+* If more than one `n/NAME` is given in the command, the last provided `NAME` will be used
+* If more than one `e/EPISODE` is given in the command, the last provided `EPISODE` will be used
+* If more than one `s/STATUS` is given in the command, the last provided `STATUS` will be used
 * If `EPISODE` is not provided, it will be set to `0`
 * If `STATUS` is not provided, it will be set to `watching`
-* All genres provided must be valid for the command to be successful
+* If genres are provided, all of them must be valid for the command to be successful
 
 Parameters:
 * [`NAME`](#name)
@@ -171,7 +171,7 @@ Parameters:
 Example usages:
 * `add n/Shingeki no Kyojin`
 * `add n/Shingeki no Kyojin e/2`
-* `add n/Shingeki no Kyojin s/w`
+* `add n/Shingeki no Kyojin s/w` (Tip: `w` here is short for the status `watching`. See the [`STATUS`](#status) section for more details.)
 * `add n/Shingeki no Kyojin e/2 s/w g/fantasy`
 * `add n/Shingeki no Kyojin e/2 s/w g/fantasy g/action g/comedy`
 
@@ -217,7 +217,7 @@ Updates the episode that you are currently on for the specified anime.
 Format: `update INDEX e/EPISODE`
 
 Notes:
-* If multiple `e/EPISODE` are given in the command, the last provided `EPISODE` will be used
+* If more than one `e/EPISODE` is given in the command, the last provided `EPISODE` will be used
 
 Parameters:
 * [`INDEX`](#index)
@@ -246,7 +246,7 @@ Updates the watch status of a specified anime.
 Format: `status INDEX s/STATUS`
 
 Notes:
-* If multiple `s/STATUS` are given in the command, the last provided `STATUS` will be used
+* If more than one `s/STATUS` is given in the command, the last provided `STATUS` will be used
 
 Parameters:
 * [`INDEX`](#index)
@@ -276,7 +276,7 @@ Updates the anime title for the user specified anime.
 Format: `rename INDEX n/NAME`
 
 Notes:
-* If multiple `n/NAME` are given in the command, the last provided `NAME` will be used
+* If more than one `n/NAME` is given in the command, the last provided `NAME` will be used
 
 Parameters:
 * [`INDEX`](#index)
@@ -305,9 +305,9 @@ Adds or deletes genre(s) from a specified anime
 Format: `genre INDEX c/ACTION g/GENRE [g/GENRE] ...`
 
 Notes:
-* If multiple `c/ACTION` are given in the command, the last provided `ACTION` will be used
+* If more than one `c/ACTION` is given in the command, the last provided `ACTION` will be used
 * Duplicate genres are not allowed
-* At least 1 `g/GENRE` needs to be provided
+* At least one `g/GENRE` needs to be provided
 * All valid genres provided will be successfully added/deleted from the anime
 
 Parameters:
@@ -551,8 +551,9 @@ ___
 
 ### NAME
 * Refers to the anime title
-* Must consist of only ASCII characters
 * Must have a length of at least 1 and at most 140
+* Must consist of only ASCII characters. The ASCII character set contains the numbers from 0-9, the upper and lower case English letters from A to Z, and some special characters. Check if a character is an ASCII character [here](https://onlineasciitools.com/validate-ascii)
+
 
 ### EPISODE
 *  Refers to the latest episode watched for the anime
@@ -578,7 +579,7 @@ ___
 <div style="page-break-after: always;"></div>
 
 ## List of Available Genres
-These are the current list of available Genres in the genre list:
+These are the current available genres in the genre list:
 *  Action
 *  Adventure
 *  Comedy
