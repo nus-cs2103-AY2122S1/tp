@@ -105,7 +105,7 @@ Let's try adding a student with the following details:
 
 4. If you wish to view more details of a student, you can use the student view command.<br>
    Type `student -v 4` in the Command Panel and hit `Enter`.
-    * This displays the student at `INDEX` 4 in the Viewing Panel.
+    * This displays the student at `STUDENT_INDEX` 4 in the Viewing Panel.
 
 <div style="page-break-after: always;"></div>
 
@@ -137,13 +137,13 @@ Next, let us add a task with description __Lab Report__ and deadline __12 Novemb
 Let us now add "David" to a group named "CS2103T".
 
 1.  Type `group -a 4 n/CS2103T` in the Command Panel and hit `Enter`.
-    * This creates a group named __CS2103T__ and includes __David__ who is at `INDEX` 4 in the Person Panel.
-    * __CS2103T__ is now added to the Group Panel. It has an `INDEX` of 3 in the Group Panel.
+    * This creates a group named __CS2103T__ and includes __David__ who is at `STUDENT_INDEX` 4 in the Person Panel.
+    * __CS2103T__ is now added to the Group Panel. It has an `GROUP_INDEX` of 3 in the Group Panel.
     * This group currently has __David__ inside
       ![Add David To Group](images/imagesInUG/group-addDavidInGroup.png)
 
 2. Type `group -v 3` in the Command Panel and hit `Enter`.
-    * This displays the details of the group at `INDEX` 3 in the Viewing Panel.
+    * This displays the details of the group at `GROUP_INDEX` 3 in the Viewing Panel.
 
 You can refer to the [Features](#features) below for details of each command.
 
@@ -469,7 +469,8 @@ Deletes a lesson from the specific group.
 If you are not continuing this lesson with the group anymore, you can type this command to 
 remove the lesson from the group.
 
-Format: `group -dl GROUP_INDEX LESSON_INDEX`
+Format: `group -dl GROUP_
+LESSON_INDEX`
 
 * Specifies the group at `GROUP_INDEX`.
 * Deletes the specified lesson at `LESSON_INDEX` of the group specified.
