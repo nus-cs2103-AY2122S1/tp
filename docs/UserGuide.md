@@ -746,7 +746,8 @@ Suppose you have a student named Betsy Crowe with index number 7. You have a his
 
 1. Type the command `ladd 7 recurring/ date/20 Dec 2021 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
 2. Press <kbd>Enter</kbd> and you should see that a lesson has been added to Betsy!
-   ![laddExample](images/laddExample.png)
+   ![ladd Example](images/laddExample.png)
+   <div class="caption">Adding a lesson to Betsy Crowe</div>
 
 Other examples:
 
@@ -794,7 +795,8 @@ Suppose you have a student named Betsy Crowe with index number 7. You mistakenly
 
 1. Type the command `ledit 7 1 recurring/30 Dec 2021 date/2 Dec 2021 cancel/16 dec 2021` into the command box.
 2. Press <kbd>Enter</kbd> and you should see the first lesson of Betsy being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
-   ![leditExample](images/leditExample.png)
+   ![ledit Example](images/leditExample.png)
+   <div class="caption">Editing a lesson of Betsy Crowe</div>
 
 Other examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
