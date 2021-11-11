@@ -23,11 +23,11 @@ This user guide covers a quick walk-through on how to use this application, as w
 
 1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-Insert java screenshot with circle
+![DownloadJava](images/DownloadJava.png)
 
 2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar).
 
-Insert picture ( keep don't discard)
+![DownloadApp](images/DownloadApp.png)
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
