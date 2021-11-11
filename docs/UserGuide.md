@@ -393,7 +393,7 @@ Emails should be of the format **local-part@domain** and adhere to the following
 
 Adds a student to TAB.
 
-Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
+[Format](#student-parameters): `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0).
@@ -404,31 +404,21 @@ A student can have any number of tags (including 0).
 
 Example:
 
-Suppose you have got a new student named "John Doe" with the following details:
+Suppose you have got a new student, `Betsy Crowe`, whose phone number is `91234567` and lives at `Newgate`. 
+However, you forgot to ask for her school and academic level, so you decided to add a remark and labelled her with tags `missinginfo` and `new`.
 
-- phone: 98765432
-- email: john@gmail.com
-- address: Sengkang Ave 2, Block 123, #02-01
-- parent phone: 92345678
-- parent email: jackdoe@gmail.com
-- school: Seng Kang Secondary School
-- academic stream: O-Level
-- academic level: S1
+Let’s see how you can record Betsy Crowe’s details into TAB!
 
-Let's see how you can record these details in TAB in just two steps!
-
-1. Type `add n/John Doe p/98765432 e/johnd@gmail.com a/Sengkang Ave 2, Block 123, #02-01 pp/92345678 pe/jackdoe@gmail.com sch/Seng Kang Secondary School stream/O-Level lvl/S1` into the command box as shown.
+1. Type `add n/Betsy Crowe p/91234567 a/Newgate r/Remember to get school and academic level! t/missinginfo t/new` into the command box as shown.
    ![add1](images/add1.png)
 
-2. Press <kbd>Enter</kbd> and you will see John Doe's details in the student list in just an instant!
+2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
    ![add2](images/add2.png)
-
-3. If you mistakenly keyed in invalid parameters or prefixes, the command would be highlighted red, and an error message will be displayed in the command result box. In the following example, `p/12` is an invalid phone number. TAB requires phone numbers to be at least 3 characters long.
-   ![add3](images/add3.png)
 
 
 Other example:
-* `add n/Betsy Crowe a/Newgate p/91234567 r/Remember to get school and academic level! t/missinginfo t/new` Adds a student named `Betsy Crowe` who lives at `Newgate`, with phone number `91234567`, remark `Remember to get school and academic level!` as well as tags `missinginfo` and `new`.
+- `add n/John Doe p/98765432 a/Sengkang Ave 2, Blk 123, #02-01 pe/jackdoe@gmail.com sch/Sengkang Secondary lvl/S1` Adds a student named `John Doe` who lives at `Sengkang Ave 2, Blk 123, #02-01` with phone `98765432`, parent email `jackdoe@gmail.com`, currently studying `S1` at `Sengkang Secondary`.
+
 
 #### Editing a student: `edit`
 
