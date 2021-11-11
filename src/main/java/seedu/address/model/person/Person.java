@@ -153,24 +153,23 @@ public class Person {
                 .append(getPhone())
                 .append(";")
                 .append(getEmail());
-        builder.append(";");
         if (!address.isEmpty()) {
-
+            builder.append(";");
             builder.append(getAddress());
         }
-        builder.append(";");
         if (!gender.isEmpty()) {
+            builder.append(";");
             builder.append(getGender());
         }
-        builder.append(";");
         if (!age.isEmpty()) {
+            builder.append(";");
             builder.append(getAge());
         }
-        builder.append(";");
         if (!interests.isEmpty()) {
+            builder.append(";");
             builder.append(interests.toStringNoNumbering());
         }
-        builder.append(";").append(getIsCalled());
+        builder.append(";").append(getIsCalled()).append(";");
         return builder.toString();
     }
 
