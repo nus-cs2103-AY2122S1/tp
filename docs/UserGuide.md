@@ -444,7 +444,7 @@ on the group. A few ideas on how you can use groups are:
 </ul>
 </div>
 
-<div markdown="span" class="alert alert-info">:exclamation: <strong>Caution:</strong>
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 All group commands except **Creating a group** will only work when groups or subgroups are listed.
 </div>
 
@@ -479,7 +479,7 @@ Deletes an existing group at the index `INDEX` specified.
 | `group (INDEX) /delete` | `group 1 /delete` | Deletes the group at index `1`|
 | `g (INDEX) /d`         | `group 2 /d`      | Deletes the group at index `2`|
 
-<div markdown="span" class="alert alert-info">:exclamation: <strong>Caution:</strong>
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
   You can only execute this command when groups are listed in the list pane.
 </div>
 
@@ -493,7 +493,7 @@ Creates a new subgroup.
 | `g (INDEX) /c n:SUBGROUP_NAME`         | `g 2 /create n:Year2`       | Creates a new subgroup named `Year2` in group at index `2`    |
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
-  * This name cannot start with a number, and may contain `-` or `.` characters
+  * This name cannot start with a number, and may contain `-` or `.` characters.
   * The new subgroup must not have the same name as other existing subgroups in the same group.
 </div>
 
@@ -501,7 +501,7 @@ Creates a new subgroup.
 
 #### _Adding notes to a group or subgroup_
 
-Opnes a pop-up a note window to add note to group or subgroup.
+Opens a pop-up a note window to add note to group or subgroup.
 
 | Format              | Example       | What the example does                                                        |
 |---------------------|---------------|------------------------------------------------------------------------------|
@@ -570,8 +570,8 @@ Lists all persons in that group or subgroup.<br>
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
   * Only works if you have listed out all groups or subgroups in Notor.
-  * Lists all persons of a group or subgroup that is at the given `INDEX` .
-  * Do not confuse this with the list all subgroups command, whose first command word is `group`
+  * Lists all persons of a group or subgroup that is at the given `INDEX`.
+  * Do not confuse this with the list all subgroups command, whose first command word is `group`.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
@@ -582,14 +582,14 @@ Only works if you have listed out all groups or subgroups in Notor.
 
 Lists all the subgroups within a group.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
-</div> <br>
-
 | Format              | Example       | What the example does                   |
 |---------------------|---------------|-----------------------------------------|
 | `group (INDEX) /list` | `group 3 /list` | Lists all subgroups of group at index `3` |
 | `g (INDEX) /l`        | `g 2 /l`        | Lists all subgroups of group at index `2` |
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
+</div> <br>
 
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
@@ -674,9 +674,12 @@ Users can also use the Down arrow key to navigate back to the more recent comman
 ### Keyboard Shortcuts
 Notor has keyboard shortcuts to give you added convenience and allow you to control Notor using your keyboard alone. Here are the shortcuts we have available.
 
-**Note Pop-Up Windows**
+####Pop-Up Window
 
-Navigate the buttons using the arrow keys. On Windows and Linux, select the button by pressing enter; on MacOS, press space.
+You can navigate the buttons in a pop-up window using the arrow keys. On Windows and Linux, 
+select the button by pressing enter; on MacOS, press space.
+
+#### Shortcut Keys for Note Window
 
 Shortcut Key            | Linux/Window                                   | MacOS
 ------------------------|------------------------------------------------|---------------------------------------
@@ -749,7 +752,7 @@ the card.
 
   * For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
     please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
-    before using them via <code>GROUP_INDEX</code>
+    before using them via <code>GROUP_INDEX</code>.
   * For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
     command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
     by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
