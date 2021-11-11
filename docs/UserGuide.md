@@ -952,11 +952,25 @@ Examples:
 
 Pays for a specific lesson.
 
-The amount paid would be deducted from the outstanding fees field. The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
+The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
+After the paid command is executed, the amount paid would be deducted from the outstanding fees field.
 
 Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
-Examples:
+Example:
+
+Suppose you have a student named Betsy Crowe with index number 7. For Betsy Crowe, 4 lessons have passed since she last paid her lesson fees, hence the current outstanding fees is $140.
+You have just received payment recently from Betsy for her lessons, and you want to record the amount paid.
+
+Let's take a look at how you can record the payment for Betsy Crowe's lesson in TAB!
+
+1. Type the command `paid 7 1 amt/140` into the command box.
+2. Press <kbd>Enter</kbd> and you should see the outstanding fees of the lesson being deducted by the paid amount accordingly! The updated fee is now $0.
+   ![paidExample](images/paidExample.png)
+<div class="caption">TAB displays the updated fees after the paid command.</div>
+
+Other Examples:
+
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
 
@@ -964,8 +978,8 @@ Examples:
 
 #### Behaviour of the Fees Calculator
 
-TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
-The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
+TAB will update all your lessons' outstanding fees accordingly upon launching TAB using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
+The Fees Calculator will account for cancelled dates in the future and ensure that lesson fees on these dates will not be added.
 
 However, the Fees Calculator will not account for any changes to lessons that have passed. 
 
