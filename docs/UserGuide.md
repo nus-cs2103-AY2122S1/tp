@@ -934,6 +934,7 @@ Let's take a look at how you can record the payment for Betsy Crowe's lesson in 
 1. Type the command `paid 7 1 amt/140` into the command box.
 2. Press <kbd>Enter</kbd> and you should see the outstanding fees of the lesson being deducted by the paid amount accordingly! The updated fee is now $0.
    ![paidExample](images/paidExample.png)
+<div class="caption">TAB displays the updated fees after the paid command.</div>
 
 Other Examples:
 
