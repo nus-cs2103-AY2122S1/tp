@@ -30,6 +30,12 @@ Each Command section is separated into:<br>
 
 * Common issues
 
+Throughout this guide, you may encounter the following icons"
+
+* **:exclamation: Caution:** Warns you about possible irreversible behaviours <br>
+* **:information_source: Notes:** Provides general information that you might find useful <br>
+* **:bulb: Tip:** Provides useful practical advice about their respective features <br>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** Straightforward commands such as 'list' may not have the sections "Things to note", "Examples" and "Common issues"
@@ -256,10 +262,6 @@ Marks the specified contact from the address book as called. (i.e., contact has 
 
 Format: `called INDEX`
 
-Example:
-
-* `called 3` marks the 3rd contact in the displayed list as Called
-
 **Things to note:**
 
 * `INDEX` refers to the index number shown in the displayed list
@@ -267,6 +269,11 @@ Example:
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
 
 * If you want to un-call a contact, use the [edit command](#54-editing-a-contact--edit)
+
+Example:
+
+* `called 3` marks the 3rd contact in the displayed list as Called
+
 
 **Common issues:**
 
