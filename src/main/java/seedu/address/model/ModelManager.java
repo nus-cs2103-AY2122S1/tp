@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,34 +12,38 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the ClassMATE data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Classmate classmate;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
+    private final FilteredList<TutorialClass> filteredTutorialClasses;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given classmate and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyClassmate classmate, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(classmate, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with ClassMATE: " + classmate + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.classmate = new Classmate(classmate);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.classmate.getStudentList());
+        filteredTutorialClasses = new FilteredList<>(this.classmate.getTutorialClassList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Classmate(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +71,125 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getClassmateFilePath() {
+        return userPrefs.getClassmateFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setClassmateFilePath(Path classmateFilePath) {
+        requireNonNull(classmateFilePath);
+        userPrefs.setClassmateFilePath(classmateFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Classmate ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setClassmate(ReadOnlyClassmate classmate) {
+        this.classmate.resetData(classmate);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyClassmate getClassmate() {
+        return classmate;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return classmate.hasStudent(student);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireAllNonNull(tutorialClass);
+        return classmate.hasTutorialClass(tutorialClass);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {
+        requireAllNonNull(tutorialGroup);
+        return classmate.hasTutorialGroup(tutorialGroup);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void deleteStudent(Student target) {
+        classmate.removeStudent(target);
+    }
+
+    @Override
+    public void deleteTutorialClass(TutorialClass target) {
+        classmate.removeTutorialClass(target);
+    }
+
+    @Override
+    public void deleteTutorialGroup(TutorialGroup target) {
+        classmate.removeTutorialGroup(target);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        classmate.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void addTutorialClass(TutorialClass tutorialClass) {
+        classmate.addTutorialClass(tutorialClass);
+    }
+
+    @Override
+    public void addTutorialGroup(TutorialGroup tutorialGroup) {
+        classmate.addTutorialGroup(tutorialGroup);
+    }
+
+    @Override
+    public void sortTutorialGroups() {
+        classmate.sortTutorialGroups();
+    }
+
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+
+        classmate.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public ObservableList<Student> getUnfilteredStudentList() {
+        return classmate.getStudentList();
+    }
+
+    @Override
+    public ObservableList<TutorialClass> getFilteredTutorialClassList() {
+        return filteredTutorialClasses;
+    }
+
+    @Override
+    public void updateUnfilteredStudentList(List<Student> students) {
+        classmate.setStudents(students);
+    }
+
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * {@code versionedClassmate}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
+        requireNonNull(predicate);
+        filteredTutorialClasses.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +206,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return classmate.equals(other.classmate)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents);
     }
 
 }

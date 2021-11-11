@@ -1,18 +1,24 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<TutorialClass> PREDICATE_SHOW_ALL_CLASSES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +41,103 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' ClassMATE file path.
      */
-    Path getAddressBookFilePath();
+    Path getClassmateFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' ClassMATE file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setClassmateFilePath(Path classmateFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces ClassMATE data with the data in {@code classmate}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setClassmate(ReadOnlyClassmate classmate);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Classmate */
+    ReadOnlyClassmate getClassmate();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the Classmate.
      */
-    boolean hasPerson(Person person);
+    boolean hasStudent(Student student);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if a tutorial class with the same identity as {@code tutorialClass} exists in Classmate.
      */
-    void deletePerson(Person target);
+    boolean hasTutorialClass(TutorialClass tutorialClass);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Returns true if a tutorial group with the same identity as {@code tutorialGroup} exists in Classmate.
      */
-    void addPerson(Person person);
+    boolean hasTutorialGroup(TutorialGroup tutorialGroup);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Deletes the given student.
+     * The student must exist in Classmate.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void deleteStudent(Student target);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Deletes the given class.
+     * The student must exist in Classmate.
+     */
+    void deleteTutorialClass(TutorialClass target);
+
+    /**
+     * Deletes the given group.
+     * The TutorialGroup must exist in Classmate.
+     */
+    void deleteTutorialGroup(TutorialGroup target);
+
+    /**
+     * Adds the given student.
+     * {@code student} must not already exist in the Classmate.
+     */
+    void addStudent(Student student);
+
+    /**
+     * Adds the given class.
+     * {@code tutorialClass} must not already exist in Classmate.
+     */
+    void addTutorialClass(TutorialClass tutorialClass);
+
+    /**
+     * Adds the given group.
+     * {@code tutorialGroup} must not already exist in Classmate.
+     */
+    void addTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
+     * Sorts the tutorial groups.
+     */
+    void sortTutorialGroups();
+
+    /**
+     * Replaces the given student {@code target} with {@code editedStudent}.
+     * {@code target} must exist in the ClassMATE.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
+     */
+    void setStudent(Student target, Student editedStudent);
+
+    /** Returns an unmodifiable view of the filtered student list */
+    ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the unfiltered student list */
+    ObservableList<Student> getUnfilteredStudentList();
+
+    /** Returns unmodifiable view of filtered Tutorial ClassList */
+    ObservableList<TutorialClass> getFilteredTutorialClassList();
+
+    /**
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredStudentList(Predicate<Student> predicate);
+
+    void updateUnfilteredStudentList(List<Student> students);
+
+    void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
+
 }

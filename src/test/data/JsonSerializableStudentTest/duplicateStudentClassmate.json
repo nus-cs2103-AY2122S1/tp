@@ -1,0 +1,28 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "classCode": "G04",
+    "tagged": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "classCode": "G04",
+    "tagged": [ "friends" ]
+  } ],
+  "tutorialClasses": [ {
+      "classCode": "G04",
+      "schedule": "mon 16:00 to 18:00, tues 17:00 to 19:00",
+      "tagged": ["evening"]
+    }
+  ],
+  "tutorialGroups": [ {
+    "groupName" : "1",
+    "classCode" : "G06",
+    "groupType" : "OP1"
+  } ]
+}

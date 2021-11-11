@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClassmateParser" as ClassmateParser LOGIC_COLOR
+participant "a:AddLastMarkCommand" as AddLastMarkCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Student" as Student MODEL_COLOR
+end box
+[-> LogicManager : execute(m)
+activate LogicManager
+
+LogicManager -> ClassmateParser : parseCommand(m)
+activate ClassmateParser
+
+create AddLastMarkCommand
+ClassmateParser -> AddLastMarkCommand
+activate AddLastMarkCommand
+
+AddLastMarkCommand --> ClassmateParser
+deactivate AddLastMarkCommand
+
+ClassmateParser --> LogicManager : a
+deactivate ClassmateParser
+
+LogicManager -> AddLastMarkCommand : execute()
+activate AddLastMarkCommand
+
+create Student
+AddLastMarkCommand -> Student : addStudentMark()
+activate Student
+
+note right
+""sm"" is the StudentMark
+that is to be added
+to Student ""s""
+end note
+
+Student --> AddLastMarkCommand
+deactivate Student
+
+AddLastMarkCommand --> LogicManager : ""r""
+deactivate AddLastMarkCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

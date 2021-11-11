@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant "**:UniqueTutorialClassList**" as UniqueTutorialClassList MODEL_COLOR
+participant "<<class>>\n**TutorialClass**" as StaticTutorialClass MODEL_COLOR
+participant ":**TutorialClass**" as TutorialClass MODEL_COLOR
+participant ":**UniqueTutorialGroupList**" as UniqueTutorialGroupList MODEL_COLOR
+end box
+
+
+[-> UniqueTutorialClassList : ""contains(tc)""
+
+note right
+""tc"" is the TutorialClass
+that the TutorialGroup ""tg""
+being added to ClassMATE
+belongs to
+end note
+
+UniqueTutorialClassList -> TutorialClass : ""check for matching tutorial class""
+
+note right
+using streams and
+""isSameTutorialClass"" method
+end note
+
+[-> UniqueTutorialClassList : ""contains(tg)""
+
+ref over UniqueTutorialClassList, StaticTutorialClass, TutorialClass
+get tutorial groups
+end ref
+
+UniqueTutorialClassList -> UniqueTutorialGroupList : ""contains(tg)""
+activate UniqueTutorialGroupList
+
+UniqueTutorialGroupList --> UniqueTutorialClassList
+deactivate UniqueTutorialGroupList
+
+[-> UniqueTutorialClassList : ""add(tg)""
+
+ref over UniqueTutorialClassList, StaticTutorialClass, TutorialClass
+get tutorial groups
+end ref
+
+UniqueTutorialClassList -> UniqueTutorialGroupList : ""add(tg))""
+activate UniqueTutorialGroupList
+
+UniqueTutorialGroupList --> UniqueTutorialClassList
+deactivate UniqueTutorialGroupList
+
+@enduml
