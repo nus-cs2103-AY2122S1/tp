@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -27,13 +28,17 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
+    private OrderListPanel orderListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private Toggle toggle;
+    private final TotalOrdersWindow totalOrdersWindow;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +47,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane togglePlaceholder;
+
+    @FXML
+    private ToggleGroup datatype;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -65,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        totalOrdersWindow = new TotalOrdersWindow(logic);
         helpWindow = new HelpWindow();
     }
 
@@ -78,6 +90,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -111,16 +124,21 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getTaskBookFilePath(),
+                logic.getOrderBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        toggle = new Toggle(this::toggleToListPersons, this::toggleToListTasks, this::toggleToListOrders);
+        togglePlaceholder.getChildren().add(toggle.getRoot());
     }
 
     /**
@@ -132,6 +150,18 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    /**
+     * Opens the total orders window or focuses on it if it's already opened.
+     */
+    public void handleTotalOrders() {
+        totalOrdersWindow.reloadData();
+        if (!totalOrdersWindow.isShowing()) {
+            totalOrdersWindow.show();
+        } else {
+            totalOrdersWindow.focus();
         }
     }
 
@@ -159,12 +189,9 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        totalOrdersWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**
@@ -177,6 +204,40 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            CommandResult.DisplayState displayState = commandResult.getState();
+            assert displayState != null;
+
+            switch (displayState) {
+            case CLIENT:
+                logger.info("Displaying client tab...");
+                toggle.selectClientTab();
+                toggleToListPersons();
+                break;
+
+            case TASK:
+                logger.info("Displaying task tab...");
+                toggle.selectTaskTab();
+                toggleToListTasks();
+                break;
+
+            case ORDER:
+                logger.info("Displaying order tab...");
+                toggle.selectOrderTab();
+                toggleToListOrders();
+                break;
+
+            case UNIMPORTANT:
+                logger.info("Displaying the same tab...");
+                break;
+
+            default:
+                throw new CommandException("Undefined State");
+            }
+
+            if (commandResult.isShowTotalOrders()) {
+                handleTotalOrders();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -192,5 +253,36 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * List persons in list panel.
+     */
+    private void toggleToListPersons() {
+        listPanelPlaceholder.getChildren().clear();
+        assert personListPanel != null : "personListPanel should have been created when filling inner parts";
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * List tasks in list panel.
+     */
+    private void toggleToListTasks() {
+        if (taskListPanel == null) {
+            taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        }
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+    }
+
+    /**
+     * List orders in list panel.
+     */
+    private void toggleToListOrders() {
+        if (orderListPanel == null) {
+            orderListPanel = new OrderListPanel(logic.getFilteredOrderList());
+        }
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(orderListPanel.getRoot());
     }
 }

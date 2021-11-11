@@ -10,11 +10,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.SalesNoteParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.storage.Storage;
 
 /**
@@ -26,7 +29,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final SalesNoteParser salesNoteParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +37,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        salesNoteParser = new SalesNoteParser();
     }
 
     @Override
@@ -42,12 +45,15 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = salesNoteParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveTaskBook(model.getTaskBook());
+            storage.saveOrderBook(model.getOrderBook());
         } catch (IOException ioe) {
+            logger.info("could not save");
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
@@ -65,8 +71,28 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
+        return model.getFilteredOrderList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getTaskBookFilePath() {
+        return model.getTaskBookFilePath();
+    }
+
+    @Override
+    public Path getOrderBookFilePath() {
+        return model.getOrderBookFilePath();
     }
 
     @Override
@@ -77,5 +103,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        return model.getClientTotalOrders();
     }
 }

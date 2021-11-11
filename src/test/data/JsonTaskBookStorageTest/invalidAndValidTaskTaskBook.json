@@ -1,0 +1,14 @@
+{
+  "tasks" : [ {
+    "label" : "Valid task",
+    "date" : "2021-09-18",
+    "taskTag": "SO100",
+    "isDone" : "false"
+  },
+  {
+    "label" : "Invalid task",
+    "date" : "2021-09-18",
+    "taskTag": "SO007",
+    "isDone" : "idk"
+  }]
+}

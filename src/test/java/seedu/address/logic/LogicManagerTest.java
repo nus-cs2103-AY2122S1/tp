@@ -5,8 +5,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.MEASUREMENT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -28,6 +31,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonOrderBookStorage;
+import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -45,8 +50,14 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonTaskBookStorage taskListStorage =
+                new JsonTaskBookStorage(temporaryFolder.resolve("taskList.json"));
+        JsonOrderBookStorage salesOrderBookStorage =
+                new JsonOrderBookStorage(temporaryFolder.resolve("saleOrder.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage,
+                salesOrderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -58,7 +69,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "deleteclient 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -73,14 +84,20 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonTaskBookStorage taskBookStorage =
+                new JsonTaskBookStorage(temporaryFolder.resolve("ioExceptionTaskList.json"));
+        JsonOrderBookStorage orderBookStorage =
+                new JsonOrderBookStorage(temporaryFolder.resolve("ioExceptionSalesOrderBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        StorageManager storage = new StorageManager(addressBookStorage,
+                taskBookStorage, orderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + MEASUREMENT_DESC_AMY + ADDRESS_DESC_AMY + REMARK_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
@@ -91,6 +108,21 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void getFilteredOrderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredOrderList().remove(0));
+    }
+
+    @Test
+    public void getClientTotalOrders_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> logic.getClientTotalOrders().remove(0));
     }
 
     /**
@@ -127,9 +159,11 @@ public class LogicManagerTest {
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    private void assertCommandFailure(String inputCommand,
+                                      Class<? extends Throwable> expectedException,
+                                      String expectedMessage) {
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(),
+                model.getOrderBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

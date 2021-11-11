@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowFontSize 12
+
+Package Order <<Rectangle>>{
+
+Class Order
+Class Label
+Class Amount
+Class Customer
+Class Boolean
+Class Integer
+Class Date
+
+}
+
+Order *--> Label
+Order *--> Amount
+Order *--> Customer
+Order *--> Date
+Order *--> "isComplete" Boolean
+Order *--> "Id" Integer
+
+Label -[hidden]right-> Amount
+Amount -[hidden]right-> Customer
+Customer -[hidden]right-> Date
+Date -[hidden]right-> Boolean
+Boolean -[hidden]left-> Integer
+
+@enduml

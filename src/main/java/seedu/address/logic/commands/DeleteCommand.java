@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,14 +18,14 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deleteclient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Client: %1$s";
 
     private final Index targetIndex;
 
@@ -41,7 +44,19 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+
+        // in addition, we delete all related orders, and all tasks related to these orders.
+        Predicate<Order> toDelete =
+            order -> order.getCustomer().getName().equalsIgnoreCase(personToDelete.getName().fullName);
+        ObservableList<Order> relatedOrders = model.getOrderBook().getOrderList().filtered(toDelete);
+
+        for (Order order : relatedOrders) {
+            model.deleteRelatedTasks(order);
+        }
+        model.deleteOrderIf(toDelete);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete),
+                CommandResult.DisplayState.CLIENT);
     }
 
     @Override

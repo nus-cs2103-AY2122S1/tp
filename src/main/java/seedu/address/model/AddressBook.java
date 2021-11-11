@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
+
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -15,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -47,6 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -54,6 +58,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+
     }
 
     //// person-level operations
@@ -64,6 +69,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with given name ignoring case exists in the address book.
+     */
+    public boolean hasPersonWithName(String name) {
+        requireNonNull(name);
+        return persons.containsWithName(name);
     }
 
     /**
@@ -97,14 +110,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return persons.asUnmodifiableObservableList().size() + " clients";
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
 
     @Override
     public boolean equals(Object other) {

@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{abstract}\nCommand" as Command
+Interface Parser <<Interface>>
+
+
+SortOrdersCommandParser ..> SortOrdersCommand : creates >
+SortOrdersCommandParser .up.|> Parser
+SortOrdersCommand -up-|> Command
+SortOrdersCommand *--> SortDescriptor
+SortDescriptor .up.|> "Comparator<Order>"
+SortDescriptor *--> SortField
+SortDescriptor *--> SortOrdering
+
+@enduml
+
+

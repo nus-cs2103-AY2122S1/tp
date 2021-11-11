@@ -18,3 +18,7 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+#totalCol {
+    -fx-alignment: CENTER-RIGHT;
+}

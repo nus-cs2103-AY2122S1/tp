@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SalesNoteParser" as SalesNoteParser LOGIC_COLOR
+participant ":AddOrderCommandParser" as AddOrderCommandParser LOGIC_COLOR
+participant "AddOrderCommand" as AddOrderCommand LOGIC_COLOR
+participant "CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addorder ...")
+activate LogicManager
+
+LogicManager -> SalesNoteParser : parseCommand("addorder ...")
+activate SalesNoteParser
+
+create AddOrderCommandParser
+SalesNoteParser -> AddOrderCommandParser
+activate AddOrderCommandParser
+
+AddOrderCommandParser --> SalesNoteParser
+deactivate AddOrderCommandParser
+
+SalesNoteParser -> AddOrderCommandParser : parse("...")
+activate AddOrderCommandParser
+
+create AddOrderCommand
+AddOrderCommandParser -> AddOrderCommand
+activate AddOrderCommand
+
+AddOrderCommand --> AddOrderCommandParser : d
+deactivate AddOrderCommand
+
+AddOrderCommandParser --> SalesNoteParser : d
+deactivate AddOrderCommandParser
+
+AddOrderCommandParser -[hidden]-> SalesNoteParser
+destroy AddOrderCommandParser
+
+SalesNoteParser --> LogicManager
+deactivate SalesNoteParser
+
+LogicManager -> AddOrderCommand : execute()
+activate AddOrderCommand
+
+AddOrderCommand -> Model : hasOrder(toAdd)
+activate Model
+Model --> AddOrderCommand : notDuplicate
+deactivate Model
+
+alt notDuplicate
+    AddOrderCommand -> Model : hasPersonWithName(...)
+    activate Model
+    Model --> AddOrderCommand : personExists
+    deactivate Model
+
+    alt personExists
+        AddOrderCommand -> Model : addOrder(toAdd)
+        activate Model
+        Model --> AddOrderCommand
+        deactivate Model
+    end
+end
+
+create CommandResult
+AddOrderCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddOrderCommand
+deactivate CommandResult
+
+AddOrderCommand --> LogicManager
+deactivate AddOrderCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
