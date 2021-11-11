@@ -451,17 +451,12 @@ Example:
 Suppose we want to update Betsy Crowe with her school and academic level, and remove her remarks and tags.
 Here's how to do it:
 
-1. Look for Betsy Crowe in your list of students. In this example, she's the second student in our list.
-
-<div align="center">
-  <img src="images/EditCommandEditBetsyInitial.png" width="600" />
-</div>
-
-2. Type `edit 2 sch/BC Example School lvl/Secondary 3 r/ t/` to set her school and academic level to `BC Example School` and `Secondary 3` respectively, and remove any remarks and tags.
+1. Look for Betsy Crowe in the list of students. In this example, she's the seventh student in the list.
+   ![Updated Betsy Crowe](images/EditCommandEditBetsyInitial.png)
+2. Type `edit 7 sch/BC Example School lvl/Secondary 3 r/ t/` to set her school and academic level to `BC Example School` and `Secondary 3` respectively and remove any remarks and tags.
    Now, Betsy Crowe's data in TAB should look like this:
 
 ![Updated Betsy Crowe](images/EditCommandEditBetsyResult.png)
-
 
 #### Deleting a student: `delete`
 
