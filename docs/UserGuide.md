@@ -9,7 +9,7 @@ ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The
 ThunderCat **also** acts as a tool for Year 2 Computing Students to build up their confidence in using a **Command Line Interface** ([CLI](#cli-glossary)) to navigate applications and manipulating **[JSON](#json) files** - a popular data file format widely used in Computing.
 
 ThunderCat **does not** act as a messaging application. This application is optimized for you to use via a **Command Line Interface** ([CLI](#cli-glossary)) while still having the benefits of a Graphical User Interface ([GUI](#gui-glossary)). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
-<div style="page-break-after: always;"></div>
+
 ___
 <a name="table-of-contents"></a>
 * Table of Contents
