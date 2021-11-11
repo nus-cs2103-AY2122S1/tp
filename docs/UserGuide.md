@@ -391,9 +391,11 @@ Emails should be of the format **local-part@domain** and adhere to the following
 
 #### Adding a student: `add`
 
-Adds a student to TAB.
+Adds a student to TAB.<br>
 
-Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br>
+
+Available fields are as described in [Student parameters](#student-parameters).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0).
@@ -408,9 +410,11 @@ Examples:
 
 #### Editing a student: `edit`
 
-Edits an existing student in TAB.
+Edits an existing student in TAB.<br>
 
-Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br>
+
+Available fields are as described in [Student parameters](#student-parameters).
 
 * Edits the student at the specified `INDEX`. <br>
   e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
@@ -471,7 +475,9 @@ This section guides you on how to find or filter students of your choice in TAB.
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 You can find students by tags, student fields and lesson fields.
 
-Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`
+Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`<br>
+
+Available fields are as described in [Student parameters](#student-parameters) and [Lesson parameters](#lesson-parameters).
 
 * You must specify at least one field to search for, and provide at least one keyword.<br>
   e.g. `find cond/any` or `find n/` are invalid commands.
@@ -732,9 +738,11 @@ Do look forward to these features!
 
 #### Adding a lesson: `ladd`
 
-Adds a lesson to the specified student in TAB, provided you do not have any other lessons scheduled at that time.
+Adds a lesson to the specified student in TAB, provided you do not have any other lessons scheduled at that time.<br>
 
-Format: `ladd INDEX [recurring/END_DATE] date/START_DATE time/TIME_RANGE subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/END_DATE] date/START_DATE time/TIME_RANGE subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br>
+
+Available fields are as described in [Lesson parameters](#lesson-parameters).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
