@@ -267,6 +267,10 @@ Format: `called INDEX`
 
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
 
+* If `INDEX` is valid, the `Called` field will be updated to 'True'
+
+* No changes would be made if the `Called` field is already 'True'
+
 * If you want to un-call a contact, use the [edit command](#54-editing-a-contact--edit)
 
 Example:
@@ -536,6 +540,12 @@ The full details of the contact are shown on the right side of the application (
 
 Format: `display INDEX`
 
+**Things to note:**
+
+* `INDEX` refers to the index number shown in the displayed list
+
+* `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
+
 Example:
 
 * `display 3` displays full contact details of the 3rd contact in the displayed list
@@ -587,7 +597,7 @@ Format: `filter CATEGORY [COUNT]`
 
 Example:
 
-* `filter called 2` Filters the displayed list to show uncalled contacts first and to only show the first two contacts
+* `filter called 2` Filters the displayed list to prioritise uncalled contacts and limits the size of the list to 2
 
 The screenshot below shows the expected result.
 
@@ -751,9 +761,7 @@ CMM is able to export the current database as semicolon delimited CSV files. As 
 
 2. The CMM will export the database to the data file location
 
-3. Export file will have the following file name : `export[Date HH:MM:SS].csv` where date and time will follow your system settings
-
-<div markdown="span" class="alert alert-primary">:bulb: 
+3. Export file will have the following file name : `export[Date HH:MM:SS].csv` where date and time will follow your system settings 
 
 **How to find the exported file:**
 
