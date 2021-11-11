@@ -72,7 +72,7 @@ Hope you have a great time with CMM.
    ![importPopUpUi](images/importPopUpMessage.png) <br>
    To learn more about what each option does in detail, click [here](#514-importing-the-data-into-database).
    An example file import can be downloaded [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases/tag/Test_Files)
-
+<div style="page-break-after: always;"></div>
 5. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data upon first startup
 
    ![Ui](images/Ui.png)
