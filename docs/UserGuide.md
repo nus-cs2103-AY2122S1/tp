@@ -919,10 +919,20 @@ Examples:
 Pays for a specific lesson.
 
 The amount paid would be deducted from the outstanding fees field. The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
+You want to record the most updated outstanding fees in TAB.
+
 
 Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
-Examples:
+Example:
+For student 1, Alex, 4 lessons have passed since the last time you were paid and Alex's parents have recently just paid you for his recurring lesson, the second lesson in the lesson list. 
+
+1. Type the command `paid 1 2 amt/400` into the command box.
+    ![beforePaid](images/screenshotBeforePaid.png)
+2. Press <kbd>Enter</kbd> – You should see the outstanding fees of the lesson being deducted by the paid amount accordingly!
+   ![afterPaid](images/screenshotAfterPaid.png)
+
+Other Examples:
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
 
