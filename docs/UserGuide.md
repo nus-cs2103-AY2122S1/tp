@@ -72,7 +72,7 @@ Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1
 ### 3. Running the application
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds.
 Note how the app contains some sample data. <br>
-![Ui](images/Ui.png)
+<img src="images/Ui.png" alt="Ui" width="75%" height="75%">
 
 <div style="page-break-after: always;"></div>
 
@@ -174,13 +174,13 @@ Exports all the data of Notor into a CSV file to Notor's home directory.
 |----------|--------------|
 | `export` | `exp`        |
 
-You can usually find the exported data in the home directory that contains Notor. The numbers after the exported data indicates the time and date when you exported the data.
+You can usually find the exported data in the home directory that contains Notor. The data file indicates the exported data, and the time and date when you exported the data.
 
-![ExportData](images/Export.png)
+<img src="images/Export.png" alt="export" width="10%" height="10%">
 
 The data exported will be displayed as follows:
 
-![ExportedData](images/Exported.png)
+<img src="images/Exported.png" alt="exported" width="60%" height="30%">
 
 <div style="page-break-after: always;"></div>
 
@@ -283,7 +283,7 @@ Removes a person from a group or a subgroup. To remove a person from a subgroup,
 
 Opens a note window pop-up to take notes in.
 
-![PersonNote](images/PersonNote.png)
+<img src="images/PersonNote.png" alt="personNote" width="75%" height="75%">
 
 | Format                 | Example          | What the example does                                          |
 |------------------------|------------------|----------------------------------------------------------------|
@@ -358,7 +358,7 @@ archived mentees at any time.
 #### _Archiving a person_
 Archives a single person by their index.
 
-![personArchive](images/personArchive.png)
+<img src="images/personArchive.png" alt="personArchive" width="75%" height="75%">
 
 | Format                  | Example           | What the example does          |
 |-------------------------|-------------------|--------------------------------|
@@ -378,7 +378,7 @@ Archives every person displayed in the list panel.
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
-![archivedList](images/archivePersonList.png)
+<img src="images/archivePersonList.png" alt="archiveList" width="75%" height="75%">
 
 | Format   | Short Format |
 |----------|--------------|
@@ -779,39 +779,39 @@ When you open Notor for the first time, you will see some dummy data for you to 
 
 2. **`person 3 /delete`** : Use this command to delete the 3rd contact you have saved in Notor. This is the one listed at the 3rd index. In the example below `Charlotte Oliviero` will be removed.
 
-   ![Example2](images/Example2.png)
+   <img src="images/Example2.png" alt="example2" width="75%" height="75%">
 
 3. **`person User /create`** : To create a new contact person, type in this command. You can replace `User` with a name of your choice.
 
-   ![Example3](images/Example3.png)
+   <img src="images/Example3.png" alt="example3" width="75%" height="75%">
 
 4. **`group CS2103T /create`** : To create a new group, type in this command. You can replace `CS2103T` with any group
    name you want.
-   ![Example4](images/Example4.png)
+   <img src="images/Example4.png" alt="example4" width="75%" height="75%">
 
 5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`. In the example shown below, the user named `David Li` will be added to the group `CS2103T`.
-   ![Example5](images/Example5.png)
+   <img src="images/Example5.png" alt="example5" width="75%" height="75%">
 
 6. **`group /list`** : To refer to the current group list, you can simply type in this command.
-   ![Example6](images/Example6.png)
+   <img src="images/Example6.png" alt="example6" width="75%" height="75%">
 
 7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on
 
-   ![Example7](images/Example7.png)
+   <img src="images/Example7.png" alt="example7" width="75%" height="75%">
    When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
 
 8. **`group 1 /create n:Gemini`** : This command creates a new subgroup inside the group at index `1`. In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`. The syntax `n:` is to indicate the **name** of the subgroup you have created.
 
-    ![Example8](images/Example8.png)
+    <img src="images/Example8.png" alt="example8" width="75%" height="75%">
 
 9. Test out whatever commands you like. When you're done...
 
 10. **`clear`** : Type this and hit enter to remove all the dummy data prepared for you.
 
-     ![Example9](images/Example9.png)
+     <img src="images/Example9.png" alt="example9" width="75%" height="75%"> <br>
      This will delete every contact and group in the list. A warning window will ask you to confirm your decision <br>
 
-     ![Example10](images/Example10.png)
+     <img src="images/Example10.png" alt="example10" width="35%" height="15%">
 
 11. **`exit`** : Finally, type in this command to exit the application and save all your data. <br>
 
