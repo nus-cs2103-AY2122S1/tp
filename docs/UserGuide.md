@@ -288,7 +288,7 @@ Example Usage:
 
 <br>![result for 'view 1'](images/UG-screenshots/viewFirstResult.png)
 
-## Adding a Next-of-Kin to a participant: `addNok`
+### Adding a Next-of-Kin to a participant: `addNok`
 
 Adds a Next-of-Kin (NOK) to a participant.
 
