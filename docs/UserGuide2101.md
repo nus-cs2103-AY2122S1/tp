@@ -4,7 +4,7 @@ title: User Guide
 ---
 ![App Logo](images/intern_watcher.png)
 
-Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
+Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a [Command Line Interface (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary)**. If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
 You can use Intern Watcher to add, edit and delete the internship applicants. Intern Watcher also allows you to track applicants' details such as grades and skills, as well as filter applicants by their details.
 
@@ -14,43 +14,46 @@ This user guide covers a quick walk-through on how to use this application, as w
 
 ## Components Of Ui
 
-
+![UiComponents](images/UIComponents.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 
-1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>
+If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same.
 
-Insert java screenshot with circle
+<p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
 
-2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar).
-
-Insert picture ( keep don't discard)
+2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar). <br>
+You may ignore the warning pop-up and click on "Keep" to download Intern Watcher.
+<p style="text-align:center;"><img src="images/DownloadApp.png" width="500" alt="DownloadApp" ></p>
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
-Insert table for mac and win ss
+|macOS|Windows|
+|---|---|
+|<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
 
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-If doesnt work, go to terminal and type java -jar command (FAQ)
+This didn't work? Refer to the [FAQ](#faq) for more information on alternative ways to launch Intern Watcher.
 <br>
 ![Ui](images/Ui.png)
 5. Type any command in the command box and press the "Enter" key to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Here's an example usage of Intern Watcher:
 
-* Let's start by adding a few applicants to Intern Watcher. `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/APPLIED` : Adds an applicant named `John` to Intern Watcher.
+* Let's start by adding a few [applicants](#glossary) to Intern Watcher. `add n/John Doe p/85912735 e/johndoe@example.com g/4.50 i/NUS c/Computer Science y/06/2025 j/Software Engineer a/APPLIED` : Adds an applicant named `John` to Intern Watcher.
 
-* You can try adding another applicant to the list: `add n/Jane p/999 e/b@b.com g/4.80 i/NTU c/Computer Science y/06/2025 j/software engineer a/APPLIED`.
+* You can try adding another applicant to the list: `add n/Jane Doe p/98274537 e/jane_doe@example.com g/4.80 i/NTU c/Computer Science y/06/2025 j/Software Engineer a/APPLIED`.
 
 * Say you only want to interview applicants studying computer science with a GPA greater than or equal to 4.80.
   `filter g/4.80 c/Computer Science` : Lists all applicants satisfying the criterias. Namely, applicant `Jane`.
 
-Insert picture
+![Filter](images/QuickstartFilter.png)
 
 * Let's give the filtered applicants the `SCHEDULED` application status to indicate our plans to interview them.
   `edit ALL a/SCHEDULED` : Edits all currently displayed applicants(`Jane`) to have the `SCHEDULED` application status.
@@ -64,13 +67,14 @@ Insert picture
 
 * To view the skills `John` has, try `view 1 T` which will display the skills of the 1st applicant.
 
-* Perhaps due to the incompatible skillset John has with regards to the job requirements, you make the final decision that `John` is not a good fit. `redo` : Reverses the last undo command, and deletes `John`.
+* Perhaps due to the incompatible skill set John has with regard to the job requirements, you make the final decision that `John` is not a good fit. `redo` : Reverses the last undo command, and deletes `John`.
 
 * Typing `exit` will save the data we have and exit the application.
 
-* If you encounter any problems, please refer to the [FAQ](#faq) section below.
 
+* If you encounter any problems, please refer to the [FAQ section](#faq) below.
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
@@ -81,7 +85,7 @@ Insert picture
 * Words in `UPPER_CASE` are [fields](#specification-of-fields) to be supplied by you.<br>
     * e.g. in `add n/NAME`, `NAME` is to be replaced with the name of the applicant you want to add such as `add n/John Doe`.<br>
 
-* Fields in square brackets are optional.<br>
+* Fields in [square brackets](#glossary) are optional.<br>
     * e.g. in `n/NAME [s/SKILL]`, the `SKILL` field is optional. You can enter `n/John Doe s/Python` or just `n/John Doe`.
 
 * Fields with `…+` notation behind them can be specified once or more times.<br>
@@ -127,7 +131,7 @@ If you want to display the list of all applicants in Intern Watcher, type `list`
 
 Format: `view INDEX [T]`
 
-If you want to view more details about a specific applicant, type `view` with the corresponding index of the applicant you wish to view.
+If you want to view more details about a specific applicant, type `view` with the corresponding [index](#glossary) of the applicant you wish to view.
 
 For example, to view the first applicant in the currently displayed applicant list, type: `view 1` to see the 1st applicant's academic records.
 
@@ -151,7 +155,7 @@ e.g. `view 2 T` to view the 2nd applicant’s skill tab from the academic tab, a
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/APPLICATION_STATUS]…+ [s/SKILL]…+`
 
-If you want to view applicants in Intern Watcher who match certain criterias, type `filter` followed by the criteria specified.
+If you want to view applicants in Intern Watcher who match certain criteria, type `filter` followed by the criteria specified.
 
 Example:
 * `filter g/4.50` will show applicants with grades not less than 4.50.
@@ -159,7 +163,7 @@ Example:
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterAfter.png" alt="drawing" />|
+|<img src="images/FilterBefore2101.png" alt="drawing" />|<img src="images/FilterAfter2101.png" alt="drawing" />|
 
 ### How to edit a specific applicant
 
@@ -230,9 +234,9 @@ Format: `find NAME`
 If you want to find applicants by name, simply type `find NAME`.
 
 Examples:
-* `find John` returns both `john` and `John Doe`
+* `find Doe` returns both `Jane Doe` and `John Doe`
   <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find Doe'](images/FindDoe.png)
 
 
 ### How to undo an action
@@ -261,7 +265,7 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
+|<img src="images/RedoDeleteBefore.png" alt="drawing" />|<img src="images/RedoDeleteAfter.png" alt="drawing" />|
 
 
 ### How to exit the program
@@ -279,13 +283,16 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 
 ## FAQ
-Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to contact [us](#contact-us).
+Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](#contact-us).
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
 
 **Q**: Can I use multiple save files?<br>
 **A**: No, only Intern Watcher currently only supports single save files.
+
+**Q**: I couldn't start Intern Watcher by double-clicking on the file, what should I do?<br>
+**A**: Go to terminal and type `java -jar internwatcher.jar` command to launch Intern Watcher.
 
 **Q**: Why is my applicant list empty?<br>
 **A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file is corrupted. Revert the save to your last backup, or contact us if you need help.
@@ -297,7 +304,7 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
 
 **Q**: Can I manually alter my data outside applications?<br>
-**A**: Yes, Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file. Beginner users are advised to do the editing through the application to avoid any incidents.
+**A**: Yes, Intern Watcher saves data as a [JSON file](#glossary) `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file. Beginner users are advised to do the editing through the application to avoid any incidents.
 
 
 --------------------------------------------------------------------------------------------------------------------
