@@ -4,7 +4,7 @@ title: User Guide
 ---
 ![App Logo](images/intern_watcher.png)
 
-Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
+Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a [Command Line Interface** (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
 You can use Intern Watcher to add, edit and delete the internship applicants. Intern Watcher also allows you to track applicants' details such as grades and skills, as well as filter applicants by their details.
 
@@ -24,17 +24,17 @@ This user guide covers a quick walk-through on how to use this application, as w
 1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>
 If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same.
 
-![DownloadJava](images/DownloadJava.png)
+<p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
 
 2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar). <br>
-You may ignore the warning pop-up and click on `Keep` to download Intern Watcher.
-![DownloadApp](images/DownloadApp.png)
+You may ignore the warning pop-up and click on "Keep" to download Intern Watcher.
+<p style="text-align:center;"><img src="images/DownloadApp.png" width="500" alt="DownloadApp" ></p>
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
 |macOS|Windows|
 |---|---|
-|<img src="images/MacFolder.png" alt="drawing" width="200" />|<img src="images/WindowsFolder.png" alt="drawing" width="200" />|
+|<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
 
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -46,7 +46,7 @@ This didn't work? Refer to the [FAQ](#faq) for more information on alternative w
 
 6. Here's an example usage of Intern Watcher:
 
-* Let's start by adding a few applicants to Intern Watcher. `add n/John Doe p/85912735 e/johndoe@example.com g/4.50 i/NUS c/Computer Science y/06/2025 j/Software Engineer a/APPLIED` : Adds an applicant named `John` to Intern Watcher.
+* Let's start by adding a few [applicants](#glossary) to Intern Watcher. `add n/John Doe p/85912735 e/johndoe@example.com g/4.50 i/NUS c/Computer Science y/06/2025 j/Software Engineer a/APPLIED` : Adds an applicant named `John` to Intern Watcher.
 
 * You can try adding another applicant to the list: `add n/Jane Doe p/98274537 e/jane_doe@example.com g/4.80 i/NTU c/Computer Science y/06/2025 j/Software Engineer a/APPLIED`.
 
@@ -283,7 +283,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 
 ## FAQ
-Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to contact [us](#contact-us).
+Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](#contact-us).
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
