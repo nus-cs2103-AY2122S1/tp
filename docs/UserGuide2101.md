@@ -68,10 +68,9 @@ Insert picture
 
 * Typing `exit` will save the data we have and exit the application.
 
-* If you encounter any problems, please refer to the FAQ section(link) below.
+* If you encounter any problems, please refer to the [FAQ](#faq) section below.
+
 --------------------------------------------------------------------------------------------------------------------
-
-
 
 ## Features
 
@@ -280,7 +279,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 
 ## FAQ
-Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](##contact-us).
+Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to contact [us](#contact-us).
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
