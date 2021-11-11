@@ -21,7 +21,7 @@ This user guide covers a quick walk-through on how to use this application, as w
 ## Quick start
 
 
-1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same. <br><p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
+1. proof of change Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same. <br><p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
 
 2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar). <br>You may ignore the warning pop-up and click on "Keep" to download Intern Watcher. <br><p style="text-align:center;"><img src="images/DownloadApp.png" width="500" alt="DownloadApp" ></p>
 
