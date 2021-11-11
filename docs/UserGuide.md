@@ -53,13 +53,16 @@ Symbol | Explanation
 
    ![Labelled UI](images/imagesInUG/labelledUI.png)
 
-The UI consists of a:
-* Command Panel - To enter commands to be executed
-* Result Display - Displays result of executed command
-* Person Panel - Displays all added students
-* Task Panel - Displays all added tasks
-* Group Panel - Displays all added groups
-* Viewing Panel - Displays either the schedule, group or student to be viewed
+The UI consists of:
+
+Parts | Explanation
+--------|------------------
+Command Panel | To enter commands to be executed
+Result Display | Displays result of executed command
+Person Panel | Displays all added students with their respective `STUDENT_INDEX`
+Task Panel | Displays all added tasks with their respective `TASK_INDEX`
+Group Panel | Displays all added groups with their respective `GROUP_INDEX`
+Viewing Panel | Displays either the schedule, group or student to be viewed
 
 <div style="page-break-after: always;"></div>
 
