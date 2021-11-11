@@ -502,7 +502,7 @@ The command `ab create newAddressBook` creates a new address book as shown.
 </p>
 
 
-### 6.2 Delete existing address book: `ab delete`
+### 6.2 Delete existing address book : `ab delete`
 
 Delete an address book that currently exists.
 
