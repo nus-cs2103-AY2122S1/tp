@@ -243,8 +243,8 @@ The client list view consist of the list of clients from the user's address book
 <img src="images/ClientInfoView.png" width="500"/>
 </p>
 
-The client information view provides in-depth information about the client's attributes. Using
-the [`View`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info
+The client information view provides in-depth information about a client and fully shows all their information without truncated values. Using
+the [`View`](#52-retrieve-particular-contact--view) command, users can fully view information of a particular client in the client info
 view.
 
 ### 4.4 Meeting Schedule View
