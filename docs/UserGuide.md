@@ -138,7 +138,6 @@ This includes the attributes age, gender, address and interests
 CMM displays an 'empty contact' with all the fields set to 'N.A'
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## 4. Command Notations
 
