@@ -10,7 +10,13 @@ title: User Guide
 
 ## Introduction
 
-TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
+Tutor Master is a desktop application for freelance tutors to store and look up their students' details, group them together 
+based on their lessons and create tasks to assign to students individually or in groups. Tutor Master aims to help you manage 
+your commitments and workload to focus on providing a better coaching for their students.
+It is optimised for use via a Command Line Interface (CLI) which requires you to simply type and enter commands to use 
+the application. Our application also includes a Graphical User Interface (GUI) which makes it easy for you to interact 
+with the interface by scrolling and clicking on buttons.  
+
 
 ## How To Use This User Guide
 
@@ -36,9 +42,9 @@ Symbol | Explanation
 
 1. Ensure you have __Java 11__ or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `tutormaster.jar` [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/releases).
+2. Download the latest __tutormaster.jar__ [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the home folder for your TutorMaster.
+3. Copy the file to the folder you want to use as the home folder for your Tutor Master.
 
 4. To open the application,
     * If you are a Mac user, open Terminal and navigate to the directory with Tutor Master. Type `java -jar tutormaster.jar` and run the command.
@@ -71,9 +77,9 @@ Viewing Panel | Displays either the schedule, group or student to be viewed
 Now that you have installed Tutor Master, let us give it a try!
 
 Let us 
-* Create a student named "David" 
-* Add and assign a task named "Science Report" to "David".
-* Add him to a group named "CS2103T"
+1. Create a student named "David" 
+2. Add and assign a task named "Science Report" to "David".
+3. Add him to a group named "CS2103T"
 
 We shall type commands in the Command Panel and hit `Enter` to execute it.
 
@@ -424,7 +430,7 @@ Examples:
 Deletes a group of students.
 
 If you have stopped teaching a particular group of students, you can easily remove the group
-from the application by typing this command. This will still not remove the students from your Person Panel.
+from the application by typing this command. This will not remove any students in the group from your Person Panel.
 
 Format: `group -d GROUP_INDEX`
 
@@ -491,6 +497,9 @@ Example:
 
 Adds a task to the Task Panel.
 
+Let's say, you have come up with a challenging task for your students. You may create a new task in Tutor Master by executing 
+the `task -a` command and specifying the `NAME` and `DEADLINE` of the task. 
+
 Format: `task -a n/NAME d/DEADLINE`
 
 * Adds a task with the name `NAME` and deadline `DEADLINE`
@@ -506,9 +515,13 @@ Examples:
 
 Edits a task in the Task Panel.
 
+Let's say that the deadline for one of your tasks changed. In that case, instead of deleting the existing task and
+creating a new one with the updated deadline, you can simply edit the deadline of the task by typing the command below.  
+
 Format: `task -e TASK_INDEX [n/NAME] [d/DEADLINE]`
 
 * Edits a task with the index `TASK_INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
+* The deadline must be in the format `YYYY-MM-DD`
 * `-e` refers to the edit command
 * It is a requirement that **at least one of the optional fields should be provided!**
 * The current value will be updated to the value input by the user
@@ -524,6 +537,9 @@ Examples:
 
 Deletes the specific task from the Task Panel.
 
+Now, let us assume that all your students have completed a task and you no longer have to store it in Tutor Master. You can 
+simply delete the task by using the command below and specifying the index of the task in the Task Panel. 
+
 Format: `task -d TASK_INDEX`
 
 * Deletes the task specified at `TASK_INDEX`. The index should be a positive number.
@@ -534,15 +550,12 @@ Examples:
 
 * `task -d 1` deletes the task at index 1
 
-#### Listing all tasks: `task -l`
-
-Shows a list of all the tasks in the Task Panel.
-
-Format: `task -l`
-
 #### Finding a task by name: `task -f`
 
 Find tasks whose names contain any of the given keywords.
+
+Let's say you would like to look up all the tasks with the name __English__. Instead of having to scroll through the
+long list of tasks in the Task Panel, you simply have to use the find task command and specify __English__ as the keyword.
 
 Format: `task -f KEYWORD…​`
 
@@ -559,9 +572,21 @@ Examples:
 
 ![taskfind](images/imagesInUG/task-find.png)
 
+#### Listing all tasks: `task -l`
+
+Shows a list of all the tasks in the Task Panel.
+
+After looking up a particular task using the `task -f` command, let's assume that you would like to view all the tasks 
+in the task panel. In that case, you can simply execute the `task -l` command. 
+
+Format: `task -l`
+
 #### Assigning tasks to students: `task -as`
 
 Assigns a specific task to students’ task list.
+
+In the situation that you would like to assign a task to a particular student, you could use the command below by specifying
+the index of the student in the Student Panel and the index of the task to be assigned in the Task Panel. 
 
 Format: `task -as STUDENT_INDEX TASK_INDEX`
 
@@ -577,6 +602,9 @@ Examples:
 
 Assigns a specific task to groups’ task list.
 
+Let's say you would like to assign a particular task to all the students in a class. Instead of having to assign the task
+to each student individually, you can directly assign the task to all the students in one go by using the command below.
+
 Format: `task -ag GROUP_INDEX TASK_INDEX`
 
 * Assigns the task specified at index `TASK_INDEX` to the “Group” object specified at index `GROUP_INDEX`.
@@ -588,6 +616,8 @@ Examples:
 #### Unassigning tasks from students: `task -unas`
 
 Unassigns a specific task from students’ task list.
+
+Suppose you assigned a particular task to a student by accident, you can simply unassign the task by entering the command below. 
 
 Format: `task -unas STUDENT_INDEX TASK_INDEX`
 
@@ -601,6 +631,9 @@ Examples:
 
 Unassigns a specific task from groups’ task list.
 
+If you wish to remove a task that has already been assigned to a class of students to reduce their workload, you could simply 
+execute the command below. 
+
 Format: `task -unag GROUP_INDEX TASK_INDEX`
 
 * Unassigns the task specified at index `TASK_INDEX` from the “Group” object specified at index `GROUP_INDEX`.
@@ -613,7 +646,10 @@ Examples:
 
 #### Marking a task as done by student: `task -do`
 
-Marks that a student has done a task.
+Marks that a student has done a task. 
+
+Suppose a particular student has already completed a particular task assigned to him or her and you would like to track 
+this information, you could simply indicate that the student has done the task by using the command below.
 
 Format: `task -do STUDENT_INDEX TASK_INDEX`
 
@@ -639,6 +675,9 @@ Examples:
 #### Marking a task as not done by student: `task -undo`
 
 Marks that a student has not done a task.
+
+In the case that a student has already completed a task and you would like him or her to reattempt it, you could simply 
+indicate the task as undone by the student by using the command below.
 
 Format: `task -undo STUDENT_INDEX TASK_INDEX`
 
