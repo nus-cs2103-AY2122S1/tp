@@ -432,7 +432,7 @@ For instance, using `filter t/colleagues` will produce the following result.
 | :---: | :---: |
 | <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
 
-### 4.10 Clearing all entries : `clear`
+### 5.10 Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
