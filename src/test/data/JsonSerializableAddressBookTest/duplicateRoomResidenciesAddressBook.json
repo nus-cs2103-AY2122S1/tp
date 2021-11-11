@@ -1,0 +1,46 @@
+{
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "nric" : "S98765432N",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "nric" : "S98765432M",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Charlie D",
+    "phone" : "11111111",
+    "email" : "amy@example.com",
+    "address" : "Block 312, Amy Street 1",
+    "nric" : "S98765432L",
+    "tagged" : [ "friend" ]
+  } ],
+  "rooms" : [ {
+    "roomNumber" : "001",
+    "isVacant" : true,
+    "guests" : [ ],
+    "tags" : [ "normal" ]
+  } ],
+  "residencyBook" : {
+    "residencies" : [ {
+      "roomNumber" : "001",
+      "checkInTime" : "2021-10-16T13:56:43.151757900",
+      "checkOutTime" : null,
+      "guestNRICs" : [ "S98765432N", "S98765432M", "S98765432L" ]
+    }, {
+      "roomNumber" : "001",
+      "checkInTime" : "2021-10-16T13:56:43.151757900",
+      "checkOutTime" : null,
+      "guestNRICs" : [ "S98765432N", "S98765432M", "S98765432L" ]
+    }]
+  },
+  "recordsBook" : {
+    "residencies" : [ ]
+  }
+}

@@ -13,6 +13,10 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class RoomListPanel
+Class RoomCard
+Class ResidencyListPanel
+Class ResidencyCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,11 +36,15 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" RoomListPanel
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ResidencyListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+RoomListPanel -down-> "*" RoomCard
+ResidencyListPanel -down-> "*" ResidencyCard
 
 MainWindow -left-|> UiPart
 
@@ -44,10 +52,15 @@ ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
+RoomListPanel --|> UiPart
+RoomCard --|> UiPart
+ResidencyListPanel --|> UiPart
+ResidencyCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
+RoomCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

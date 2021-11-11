@@ -307,6 +307,15 @@
     -fx-padding: 8 1 8 1;
 }
 
+.table-header {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -350,3 +359,97 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+
+/*
+==================================== ROOM STYLE ========================================
+ */
+
+
+#guests {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#guests .label {
+    -fx-text-fill: white;
+    -fx-background-color: #caa224;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 14;
+}
+
+.cell_occupancy_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 14px;
+
+    /*
+    -fx-text-fill: #1be3b2 !important;
+    -fx-background-color: #ac3cb7;
+    */
+    -fx-font-weight: 700 !important;
+    -fx-background-radius: 10px;
+    -fx-label-padding: 3px;
+}
+
+.cell_room_sub_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}
+
+
+/*
+==================================== HISTORY STYLE ========================================
+ */
+
+#personInfo {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#personInfo .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 14;
+}
+
+.cell_occupancy_label_checkin {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 14px;
+
+    /*
+    -fx-text-fill: #1be3b2 !important;
+    -fx-background-color: #ac3cb7;
+    */
+    -fx-font-weight: 700 !important;
+    -fx-background-radius: 10px;
+    -fx-label-padding: 3px;
+    -fx-text-fill: #d6e31b !important;
+}
+
+.cell_occupancy_label_checkout {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 14px;
+
+    /*
+    -fx-text-fill: #1be3b2 !important;
+    -fx-background-color: #ac3cb7;
+    */
+    -fx-font-weight: 700 !important;
+    -fx-background-radius: 10px;
+    -fx-label-padding: 3px;
+    -fx-text-fill: #f5941d !important;
+}
+
+
+
+
+
+
+
+

@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private RoomListPanel roomListPanel;
+    private ResidencyListPanel residencyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -49,6 +51,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane roomListPanelPlaceholder;
+
+    @FXML
+    private StackPane residencyListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -112,6 +120,12 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        roomListPanel = new RoomListPanel(logic.getFilteredRoomList());
+        roomListPanelPlaceholder.getChildren().add(roomListPanel.getRoot());
+
+        residencyListPanel = new ResidencyListPanel(logic.getFilteredRecordList());
+        residencyListPanelPlaceholder.getChildren().add(residencyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -185,6 +199,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            roomListPanel = new RoomListPanel(logic.getFilteredRoomList());
+            roomListPanelPlaceholder.getChildren().add(roomListPanel.getRoot());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

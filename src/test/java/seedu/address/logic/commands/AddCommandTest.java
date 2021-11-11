@@ -9,6 +9,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.residency.Residency;
+import seedu.address.model.room.Room;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -52,8 +56,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withNric("Alice").build();
+        Person bob = new PersonBuilder().withNric("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -70,7 +74,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different person because different nric -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -119,12 +123,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addRoom(Room room) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasRoom(Room room) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,12 +153,67 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setRoom(Room target, Room editedRoom) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void register(Room room, Set<Person> guests) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void record(Residency residency) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeResidency(Residency residency) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Residency> getResidency(Room room) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Residency> getResidency(Person guest) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Room> getFilteredRoomList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getNumberOfRooms() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Residency> getFilteredRecordList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredRoomList(Predicate<Room> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredRecordList(Predicate<Residency> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

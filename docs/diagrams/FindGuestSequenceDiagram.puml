@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindGuestCommandParser" as FindGuestCommandParser LOGIC_COLOR
+participant "f:FindGuestCommand" as FindGuestCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("guest Alex")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("guest Alex")
+activate AddressBookParser
+
+create FindGuestCommandParser
+AddressBookParser -> FindGuestCommandParser
+activate FindGuestCommandParser
+
+FindGuestCommandParser --> AddressBookParser
+deactivate FindGuestCommandParser
+
+AddressBookParser -> FindGuestCommandParser : parse("Alex")
+activate FindGuestCommandParser
+
+create FindGuestCommand
+FindGuestCommandParser -> FindGuestCommand
+activate FindGuestCommand
+
+FindGuestCommand --> FindGuestCommandParser : f
+deactivate FindGuestCommand
+
+FindGuestCommandParser --> AddressBookParser : f
+deactivate FindGuestCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindGuestCommandParser -[hidden]-> AddressBookParser
+destroy FindGuestCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindGuestCommand : execute()
+activate FindGuestCommand
+
+FindGuestCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model --> FindGuestCommand
+deactivate Model
+
+create CommandResult
+FindGuestCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindGuestCommand
+deactivate CommandResult
+
+FindGuestCommand --> LogicManager : result
+deactivate FindGuestCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

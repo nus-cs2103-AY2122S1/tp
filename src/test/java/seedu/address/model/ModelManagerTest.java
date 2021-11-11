@@ -7,16 +7,24 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalRecordsBook.RESIDENCY_ONE;
+import static seedu.address.testutil.TypicalRooms.ROOM_ONE;
+import static seedu.address.testutil.TypicalRooms.ROOM_TWO;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.residency.exceptions.ResidencyContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalRecordsBook;
 
 public class ModelManagerTest {
 
@@ -94,6 +102,51 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getRecord_validPerson_returnsTrue() {
+        modelManager.setAddressBook(TypicalRecordsBook.getTypicalAddressBook());
+        assertEquals(Optional.of(RESIDENCY_ONE), modelManager.getRecord(ALICE));
+    }
+
+    @Test
+    public void getRecord_invalidPerson_returnsEmptyOptional() {
+        modelManager.setAddressBook(TypicalRecordsBook.getTypicalAddressBook());
+        assertEquals(Optional.empty(), modelManager.getRecord(DANIEL));
+    }
+
+    @Test
+    public void getRecord_validRoom_returnsTrue() {
+        modelManager.setAddressBook(TypicalRecordsBook.getTypicalAddressBook());
+        assertEquals(Optional.of(RESIDENCY_ONE), modelManager.getRecord(ROOM_ONE));
+    }
+
+    @Test
+    public void getRecord_invalidRoom_returnsEmptyOptional() {
+        modelManager.setAddressBook(TypicalRecordsBook.getTypicalAddressBook());
+        assertEquals(Optional.empty(), modelManager.getRecord(ROOM_TWO));
+    }
+
+    @Test
+    public void getFilteredRecordList_validRecordList_success() {
+        modelManager.setAddressBook(TypicalRecordsBook.getTypicalAddressBook());
+        assertEquals(TypicalRecordsBook.getTypicalAddressBook().getRecordsList(), modelManager.getFilteredRecordList());
+    }
+
+    @Test
+    public void getFilteredRecordList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredRecordList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredRecordList_validPredicate_success() {
+        modelManager.setAddressBook(TypicalRecordsBook.getTypicalAddressBook());
+        String[] searchTerm = new String[] {"001"};
+        modelManager.updateFilteredRecordList(
+                new ResidencyContainsKeywordsPredicate(new ArrayList<String>(Arrays.asList(searchTerm))) {
+            });
+        assertEquals(modelManager.getFilteredRecordList(), TypicalRecordsBook.getTypicalAddressBook().getRecordsList());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -129,4 +182,5 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
 }

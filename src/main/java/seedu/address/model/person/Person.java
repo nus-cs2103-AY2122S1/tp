@@ -17,6 +17,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Nric nric;
     private final Phone phone;
     private final Email email;
 
@@ -27,13 +28,22 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Nric nric, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, nric, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.nric = nric;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a new {@code Person} with the specified data fields, and generates a new {@code Id} for them.
+     * Every field must be present and not null.
+     */
+    public static Person createPerson(Name name, Phone phone, Email email, Address address, Nric nric, Set<Tag> tags) {
+        return new Person(name, phone, email, address, nric, tags);
     }
 
     public Name getName() {
@@ -52,6 +62,10 @@ public class Person {
         return address;
     }
 
+    public Nric getNric() {
+        return nric;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -61,8 +75,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same nric.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -70,7 +83,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
     }
 
     /**
@@ -88,17 +101,22 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return otherPerson.getNric().equals(getNric());
+
+        /*
+        otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+         */
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        //return Objects.hash(name, phone, email, address, tags, id);
+        return Objects.hash(name, phone, email, address, nric, tags);
     }
 
     @Override
@@ -110,7 +128,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Id: ")
+                .append(getNric());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
