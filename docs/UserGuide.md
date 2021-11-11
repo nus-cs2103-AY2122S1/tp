@@ -925,7 +925,8 @@ You want to record the most updated outstanding fees in TAB.
 Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
 Example:
-For Betsy Crowe, 4 lessons have passed since she last paid you, the current outstanding fees is `$140. Betsy's parents have recently just paid you for her lesson, the first lesson in the lesson list. 
+For Betsy Crowe, 4 lessons have passed since she last paid you, the current outstanding fees is `$140.
+You have just received payment from Betsy for her lessons, and you would like to record the amount paid. 
 
 1. Type the command `paid 7 1 amt/140` into the command box.
 2. Press <kbd>Enter</kbd> – You should see the outstanding fees of the lesson being deducted by the paid amount accordingly! Her updated fees is now $0.
