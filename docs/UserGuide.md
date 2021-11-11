@@ -785,6 +785,8 @@ CMM is able to export the current database as semicolon delimited CSV files. As 
 
     ![findingExport2](images/FindingExportFile2.png)
 
+<div style="page-break-after: always;"></div>
+
 ### 5.16 Editing the data file (JSON)
 
 AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
