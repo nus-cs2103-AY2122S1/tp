@@ -852,7 +852,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Move the window to a different location. Close the window.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
@@ -876,6 +876,7 @@ A success message is shown in the `Result Box`, showing the details of the added
 ### Editing an application
 
 Prerequisites: The currently displayed application list is not empty.
+
 Assumptions: 
 - There are three applications in the full application list, which are all displayed at first.
 - The application at index `1` has company name `Amazon`.
@@ -892,7 +893,7 @@ Assumptions:
 - Expected output: An error message is shown in the `Result Box`, as the index specified exceeds the length of the displayed application list.
 
 4. Test case: `edit 3 p/tester`
-- Expected output: An error message is shown in the `Result Box`, as the field after editing is exactly the same as before.
+- Expected output: A warning message is shown in the `Result Box`, as the field after editing is exactly the same as before.
 
 ### Completing an application
 
@@ -906,7 +907,7 @@ Assumptions:
 - Expected output: The `Completion` of the application at index `1` is changed to `Completed`. A success message is shown in the `Result Box`, showing the details of the completed application. The entire application list is displayed.
 
 2. Test case: `complete 2`
-- Expected output: An error message is shown in the `Result Box`, as the application is already marked as `Completed`.
+- Expected output: A warning message is shown in the `Result Box`, as the application is already marked as `Completed`.
 
 3. Test case: `complete 10`
 - Expected output: An error message is shown in the `Result Box`, as the index specified exceeds the length of the displayed application list.
@@ -927,7 +928,7 @@ Assumptions:
 - Expected output: The `Status` of the application at index `1` is changed to `Rejected`. A success message is shown in the `Result Box`, showing the details of the rejected application. The entire application list is displayed.
 
 3. Test case: `reject 3`
-   Expected output: An error message is shown in the `Result Box`, as the application at index `3` is already marked as `Rejected`.
+   Expected output: A warning message is shown in the `Result Box`, as the application at index `3` is already marked as `Rejected`.
 
 4. Test case: `accept 10`
 - Expected output: An error message is shown in the `Result Box`, as the index specified exceeds the length of the displayed application list.
@@ -940,7 +941,7 @@ Assumptions:
 - The position of the application at index `1`, `2`, `3` are `frontend developer`, `backend developer`, and `tester` respectively.
 
 1. Test case: `find p/developer`
-- Expected output: The application list updates to only displaying the first two applications of the original list.  A success message is shown in the `Result Box`, describing that the currently displayed list is a result of filtering by position 
+- Expected output: The application list updates to only displaying the first two applications of the original list.  A success message is shown in the `Result Box`, describing that the currently displayed list is a result of filtering by position.
 
 2. Test case: `find p/engineer`
 - Expected output: A message is shown in the `Result Box` which indicates that there is no matching result. An empty application list is displayed.
@@ -951,7 +952,7 @@ Assumptions:
 4. Test case: `find d/2021-12-21`
 - Expected output: An error message is shown in the `Result Box`, as InternSHIP currently doesn't support finding applications by `Deadline`.
 
-## Listing all applications that are close to submission deadline or interview time
+### Listing all applications that are close to submission deadline or interview time
 Prerequisites: The currently displayed application list is not empty.
 Assumptions:
 - There are three applications in the full application list, which are all displayed at first.
@@ -971,7 +972,7 @@ Assumptions:
 4. Test case: `soon d/`
 - Expected output: An error is shown in the `Result Box`, as the day is not specified. 
 
-## Listing all applications
+### Listing all applications
 
 1. Test case: `list`
 - Assumption: The application list is not empty.
@@ -981,7 +982,7 @@ Assumptions:
 - Assumption: The application list is empty.
 - Expected output: An error message is shown in the `Result Box`, as there is no application to be displayed.
 
-## Soring the applications
+### Sorting the applications
 
 Prerequisites: The currently displayed application list is not empty.
 Assumptions:
@@ -996,7 +997,7 @@ Assumptions:
    - Expected output: An error message is shown in the `Result Box`, as there is no interview time specified for any of the applications. 
 
 3. Test case: `sort`
-- Expected output: An error message is shown in the `Result Box`, as the sorting criteria is not specified.
+- Expected output: An error message is shown in the `Result Box`, as the sorting criterion is not specified.
 
 ### Deleting an application
 
@@ -1013,12 +1014,12 @@ Assumptions:
 3. Test case: `delete`
 - Expected output: An error message is shown in the `Result Box`, as the index of the application to be deleted is not specified. 
 
-## Clearing all applications
+### Clearing all applications
 
 1. Test case: `clear`
 - Expected output: All applications in the InternSHIP application list are cleared. A success message is shown in the `Result Box`. An empty application list is shown.
 
-## Undoing/redoing a change
+### Undoing/redoing a change
 Assumptions: 
 - InternSHIP is just launched and the user has not typed in any command yet. 
 - There are three applications in the full application list, which are all displayed at first.
@@ -1039,12 +1040,12 @@ Assumptions:
 - Expected output: An error message is shown in the `Result Box`, as the app is just launched and there is no change to be redone.
 
 
-## Exiting the app
+### Exiting the app
 
 1. Test case: `exit`
 -Expected output: The app shuts down.
 
-## Viewing help
+### Viewing help
 
 1. Test case: `help`
 -Expected output: The `Help` Window pops up, showing a link to the `User Guide`.
