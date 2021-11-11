@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("ledit...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("ledit...")
+LogicManager -> AddressBookParser : parseCommand(\n"ledit...")
 activate AddressBookParser
 
 create LessonEditCommandParser

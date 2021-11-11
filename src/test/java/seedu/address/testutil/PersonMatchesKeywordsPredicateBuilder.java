@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 
 public class PersonMatchesKeywordsPredicateBuilder {
@@ -103,6 +105,62 @@ public class PersonMatchesKeywordsPredicateBuilder {
      */
     public PersonMatchesKeywordsPredicateBuilder withTags(String... keywords) {
         predicate.setTagKeywords(Arrays.asList(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the remark keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withRemark(String keywords) {
+        predicate.setRemarkKeywords(parseKeywords(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the time range of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withTimeRange(String timeRange) {
+        predicate.setTimeRange(new TimeRange(timeRange));
+        return this;
+    }
+
+    /**
+     * Sets the start date of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withDate(String date) {
+        predicate.setDate(new Date(date));
+        return this;
+    }
+
+    /**
+     * Sets the cancelled date of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withCancelledDate(String cancelledDate) {
+        predicate.setCancelledDate(new Date(cancelledDate));
+        return this;
+    }
+
+    /**
+     * Sets the subject keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withSubject(String keywords) {
+        predicate.setSubjectKeywords(parseKeywords(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the rates keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withRates(String keywords) {
+        predicate.setRatesKeywords(parseKeywords(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the homework keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withHomework(String keywords) {
+        predicate.setHomeworkKeywords(parseKeywords(keywords));
         return this;
     }
 

@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.math.BigDecimal;
 
+//@@author Chesterwongz
 /**
  * Represents the amount of money and money-related fields in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMonetaryField(String)} (String)}
  */
 public class Money {
-
     public static final String MESSAGE_FORMAT_CONSTRAINTS =
             "Money-related fields should be formatted with a decimal point '.' "
                     + "as a separator between the dollars and cents, "
@@ -63,15 +63,25 @@ public class Money {
 
     /**
      * Returns true if a given string is a valid format for monetary fields.
+     *
+     * @param test The string to check for.
+     * @return Returns true if a given string is a valid format for monetary fields.
      */
     public static boolean isValidMonetaryField(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    //@@author angkoonhwee
+    /**
+     * Get the value in Money object such that it can be used for calculations in {@code FeesCalculator}.
+     *
+     * @return Value in Big Decimal.
+     */
     public BigDecimal getMonetaryValue() {
         return valueInBigDec;
     }
 
+    //@@author Chesterwongz
     @Override
     public String toString() {
         return value;

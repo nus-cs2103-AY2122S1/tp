@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find n/John t/unpaid")
+[-> LogicManager : execute(\n"find n/Jo t/paid")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/John t/unpaid")
+LogicManager -> AddressBookParser : parseCommand(\n"find n/Jo t/paid")
 activate AddressBookParser
 
 create FindCommandParser
@@ -26,7 +26,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse("n/John doe t/unpaid")
+AddressBookParser -> FindCommandParser : parse("n/Jo t/paid")
 activate FindCommandParser
 
 create PersonMatchesKeywordsPredicate
@@ -38,7 +38,7 @@ PersonMatchesKeywordsPredicate --> FindCommandParser : p
 deactivate PersonMatchesKeywordsPredicate
 
 create FindCommand
-FindCommandParser -> FindCommand : FindCommand(p)
+FindCommandParser -> FindCommand :
 activate FindCommand
 
 FindCommand --> FindCommandParser : f

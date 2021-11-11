@@ -24,6 +24,9 @@ public class ClearCommand extends UndoableCommand {
 
     private ReadOnlyAddressBook previousAddressBook;
 
+    /**
+     * Constructs a Clear Command.
+     */
     public ClearCommand() {
         super(COMMAND_ACTION);
     }

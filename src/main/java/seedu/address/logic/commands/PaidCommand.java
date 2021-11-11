@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,6 +15,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -62,6 +62,8 @@ public class PaidCommand extends UndoableCommand {
     private Person personAfterLessonPaid;
 
     /**
+     * Creates a PaidCommand to pay for a specified {@code Lesson}.
+     *
      * @param index of the person in the filtered person list to pay.
      * @param indexToEdit to edit.
      * @param payment amount to the lesson.
@@ -84,48 +86,36 @@ public class PaidCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        personBeforeLessonPaid = lastShownList.get(index.getZeroBased());
+        personBeforeLessonPaid = CommandUtil.getPerson(lastShownList, index);
 
-        Set<Lesson> lessons = new TreeSet<>(personBeforeLessonPaid.getLessons());
-        if (indexToEdit.getZeroBased() >= lessons.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
+        // Get lessons as a list copy
+        List<Lesson> lessonList = personBeforeLessonPaid.getLessons().stream().sorted().collect(Collectors.toList());
+        Lesson lessonToPay = CommandUtil.getLesson(lessonList, indexToEdit);
 
         if (payment.getMonetaryValue().compareTo(BigDecimal.ZERO) <= 0) {
             throw new CommandException(MESSAGE_PAID_AMT_LESS_THAN_ZERO_ERROR);
         }
 
-        List<Lesson> lessonList = new ArrayList<>(lessons);
-        Lesson toPay = lessonList.get(indexToEdit.getZeroBased());
-        Lesson paidLesson = createEditedLesson(toPay, payment);
+        Lesson paidLesson = createEditedLesson(lessonToPay, payment);
 
-        personAfterLessonPaid = createEditedPerson(personBeforeLessonPaid, toPay, paidLesson);
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessonList, paidLesson, lessonToPay);
+        personAfterLessonPaid = PersonUtil.createdEditedPerson(personBeforeLessonPaid, updatedLessons);
 
         model.setPerson(personBeforeLessonPaid, personAfterLessonPaid);
         if (!model.hasPersonFilteredList(personAfterLessonPaid)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
         return new CommandResult(String.format(MESSAGE_PAID_LESSON_SUCCESS, personAfterLessonPaid.getName(),
-                toPay, paidLesson), personAfterLessonPaid);
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Lesson toEdit, Lesson editedLesson) {
-        assert personToEdit != null;
-
-        Set<Lesson> updatedLessons = new TreeSet<>(personToEdit.getLessons().stream()
-                .map(lesson -> lesson.equals(toEdit) ? editedLesson : lesson)
-                .collect(Collectors.toSet()));
-
-        return PersonUtil.createdEditedPerson(personToEdit, updatedLessons);
+                lessonToPay, paidLesson), personAfterLessonPaid);
     }
 
     /**
      * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * paid with {@code payment}.
+     *
+     * @param lessonToEdit Lesson to be updated.
+     * @param payment Amount to be paid.
+     * @return Updated lesson with all the correct amount for outstanding fees.
      */
     private static Lesson createEditedLesson(Lesson lessonToEdit, Money payment) throws CommandException {
         assert lessonToEdit != null;
@@ -150,6 +140,23 @@ public class PaidCommand extends UndoableCommand {
                 copiedLessonRates, updatedOutstandingFees, copiedCancelledDates)
                 : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
                 copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
+    }
+
+    /**
+     * Replaces lesson {@code toEdit} with lesson {@code edited} in {@code lessonList}.
+     *
+     * @param lessonList A list of lessons to update.
+     * @param paidLesson The paid lesson.
+     * @param lessonToPay The original lesson to be pay.
+     * @return A set of updated lessons with the lesson edited.
+     * @throws CommandException If the edited lesson results in a clash.
+     */
+    private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson paidLesson, Lesson lessonToPay) {
+        lessonList.remove(lessonToPay);
+        lessonList.add(paidLesson);
+        Set<Lesson> updatedLessonSet = new TreeSet<>(lessonList);
+
+        return updatedLessonSet;
     }
 
     @Override
@@ -187,7 +194,7 @@ public class PaidCommand extends UndoableCommand {
         // state check
         PaidCommand e = (PaidCommand) other;
         return index.equals(e.index)
-                && indexToEdit.equals(indexToEdit)
+                && indexToEdit.equals(e.indexToEdit)
                 && payment.equals(e.payment);
     }
 }
