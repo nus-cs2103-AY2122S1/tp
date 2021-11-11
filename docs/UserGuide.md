@@ -134,8 +134,6 @@ What follows is a detailed breakdown of all the commands Notor has available and
 
 Displays a summary of commands, as well as a link you can copy to get to this full user guide.
 
-![help message](images/HelpCommand.png)
-
 | Format      | What the command does          |
 |-------------|--------------------------------|
 | `help`      | Opens the help panel           |
@@ -564,20 +562,8 @@ Lists all the subgroups within a group.
 | `g (INDEX) /l`        | `g 2 /l`        | Lists all subgroups of group at index `2` |
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
+Do not confuse this with the list all persons in a group command, whose first command word is <code>person</code>.
 </div> <br>
-
-#### _Listing Archived Persons_
-Shows the list of archived Persons.
-
-| Format      | What the command does          |
-|-------------|--------------------------------|
-| `person /listarchive` | Lists all person in the archived list in list panel |
-| `p /lar`        |  Lists all person in the archived list in list panel |
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Only works if you have listed out all groups or subgroups in Notor.
-</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -763,6 +749,7 @@ You can change the list display using <code>person /list</code> or <code>group /
 
 
 <div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -780,6 +767,7 @@ In the future, we would like to implement these features to enhance the experien
   * And...more! Feel free to contact the team and share your suggestions at e0588244@u.nus.edu.
 
 <div style="page-break-after: always;"></div>
+
 <a name = "tutorial"></a>
 ## Appendix: Tutorial
 
@@ -787,7 +775,7 @@ When you open Notor for the first time, you will see some dummy data for you to 
 
 1. **`person /list`** : First, type this in to list all the people you have saved as contacts.
 
-   ![Example1](images/Example1.png)
+   <img src="images/Example1.png" alt="example1" width="75%" height="75%">
 
 2. **`person 3 /delete`** : Use this command to delete the 3rd contact you have saved in Notor. This is the one listed at the 3rd index. In the example below `Charlotte Oliviero` will be removed.
 
