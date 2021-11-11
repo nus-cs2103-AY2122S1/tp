@@ -72,8 +72,8 @@ This didn't work? Refer to the [FAQ](#faq) for more information on alternative w
 
 * Typing `exit` will save the data we have and exit the application.
 
-
 * If you encounter any problems, please refer to the [FAQ section](#faq) below.
+
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -293,13 +293,13 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **A**: No, only Intern Watcher currently only supports single save files.
 
 **Q**: I couldn't start Intern Watcher by double-clicking on the file, what should I do?<br>
-**A**: Go to terminal and type `java -jar internwatcher.jar` command to launch Intern Watcher.
+**A**: Open your command prompt by searching for "Command Prompt"(Windows) or "Terminal"(MacOS). From there, type `java -jar internwatcher.jar` and press enter to launch Intern Watcher.
 
 **Q**: Why is my applicant list empty?<br>
-**A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file is corrupted. Revert the save to your last backup, or contact us if you need help.
+**A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file has been corrupted. Revert the save to your last backup, or contact us if you need help.
 
 **Q**: Why does my command not work?<br>
-**A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' [specifications](#specification-of-fields).
+**A**: Firstly check if the command is in the specified format. If it is, it could be due to a mismatch in the input fields' [specifications](#specification-of-fields).
 
 **Q**: Is my data automatically saved?<br>
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
