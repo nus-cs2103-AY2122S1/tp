@@ -40,6 +40,8 @@ Some terminology that might help when referring to Notor:
 3. **Note Window**: The pop up window you may use to edit and add notes
 4. **Command Box**: The box on the left pane, underneath the view pane, where you may type commands.
 
+![image](images/NotorLabelled.png)
+
 Pay attention to these callouts:
 
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
@@ -382,12 +384,12 @@ archived mentees at any time.
 #### _Archiving a person_
 Archives a single person by their index.
 
+![personArchive](images/personArchive.png)
+
 | Format                  | Example           | What the example does          |
 |-------------------------|-------------------|--------------------------------|
 | `person (INDEX) /archive`| `person 1 /archive` | Archives the person at index `1` |
 | `p (INDEX) /ar`          | `p 2 /ar`          | Archives the person at index `2` |
-
-![personArchive](images/personArchive.png)
 
 <div style="page-break-after: always;"></div>
 
