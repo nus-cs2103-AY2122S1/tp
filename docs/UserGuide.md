@@ -14,7 +14,7 @@ title: User Guide
     * [Add Student](#adding-a-student-add)
     * [Delete Student](#deleting-a-student-delete)
     * [Tag Student](#tagging-a-student--tag)
-    * [Get Personal Detail](#getting-personal-detail-of-students-get)
+    * [Get Personal Detail](#getting-students-personal-details-get)
     * [Edit Personal Detail](#editing-a-students-detail--edit)
   * [Track Students' Grades, Studio Attendance, and Participation](#tracking-students-grades-studio-attendance-and-participation)
     * [Add Grade](#adding-grades-for-an-assessment--grade)
@@ -44,7 +44,7 @@ title: User Guide
 * [Glossary](#glossary)
 * [Links](#links)
   * [Academy Directory Resources](#academy-directory-resources)
-  * [Other Resources](#other-sources)
+  * [Other Resources](#other-resources)
 * [Acknowledgements](#acknowledgements)
 
 ***
@@ -686,7 +686,7 @@ cannot be reverted to and / or be undone or redone.
 - [About Us](https://ay2122s1-cs2103t-t15-3.github.io/tp/AboutUs.html): If you're interested to learn more about us
 - [Github](https://github.com/AY2122S1-CS2103T-t15-3/tp): If you want to see our code or report any issues
 
-### Other Sources
+### Other Resources
 - [Java SE Runtime Download](https://www.oracle.com/java/technologies/downloads/) to install the latest Java version
 - [AddressBook 3 (AB3)](https://github.com/se-edu/addressbook-level3) to see where we started this project from
 
@@ -694,17 +694,17 @@ cannot be reverted to and / or be undone or redone.
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 - The formatting and content of the User Guide and Developer Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
-- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com)
-- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview)
+- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com).
+- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview).
 - Libraries used:
   - [JavaFX](https://openjfx.io/) for the amazing GUI
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
-  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free
   - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
 - Background and icons used:
   - Source Academy classroom front page, taken from the [Asset page in Source Academy front-end](https://github.com/source-academy/frontend/tree/master/src/assets)
-    License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
-  - Slides Carnival background [here](https://www.slidescarnival.com/iris-free-presentation-template/3923)
+    - License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
+  - Slides Carnival background [here](https://www.slidescarnival.com/iris-free-presentation-template/3923).
   - External icons used on the UI
     - [Student icon](https://icons8.com/icon/iZBBn0SF22gW/programmer) taken from IconS8
     - [Grade icon](https://pngtree.com/freepng/test-papers-stationery-illustration_4652639.html) taken from PNGTree
