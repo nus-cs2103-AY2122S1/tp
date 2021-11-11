@@ -34,7 +34,7 @@ Symbol | Explanation
 --------|------------------
 `command` | A blue highlight (called a mark-up) indicates a command or a parameter that can be typed into the Command Panel and executed by Tutor Master
 :information_source: | This symbol indicates additional information about the heading or subheading
-:exclamation | This symbol indicates crucial information you should be aware of when using Tutor Master
+:exclamation: | This symbol indicates crucial information you should be aware of when using Tutor Master
 
 
 <div style="page-break-after: always;"></div>
