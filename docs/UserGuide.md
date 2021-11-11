@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: The Ultimate User Guide to the Tuition Address Book (TAB)
 ---
 <span id="toc"/>
 * Table of Contents
@@ -10,26 +10,32 @@ title: User Guide
 
 ## Introduction: TAB Is More Than an App
 
-There used to be a time for private 1-to-1 home tutors when administrative work meant opening up multiple apps and switching between them. It meant losing track of things because of a messy, decentralised workflow. However, this guide to using TAB will show you how to make the most of this all-in-one app, so you can say goodbye to all your other apps. 
+There used to be a time for private 1-to-1 home tutors when administrative work meant opening up multiple apps and switching between them. 
+It meant losing track of things because of a messy, decentralised workflow.
+However, this guide to using TAB will show you how to make the most of this all-in-one app, so you can say goodbye to all your other apps. 
 
-TAB enables you to keep track of your student and lesson information, schedule, and tuition fees – everything a private 1-to-1 home tutor needs – without needing to lift your hands off the keyboard. TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of texts.
+TAB enables you to keep track of your student and lesson information, schedule, and tuition fees – everything a private 1-to-1 home tutor needs – without needing to lift your hands off the keyboard. 
+TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of texts.
 
-If you can type fast, the CLI will enable you to accomplish your tasks much faster. For a new user, it can be difficult to become familiar with all the commands and options available, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along, and this guide will get you started and speeding through your administrative tasks in no time.
-
+If you can type fast, the CLI will enable you to accomplish your tasks much faster. 
+For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along, 
+and this guide will get you started and speeding through your administrative tasks in no time.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## About This Guide
+## How to Read This Guide
 
 This user guide is intended for any user and contains everything you need to know to make the best use out of TAB.
 If this is your first-time using TAB, we recommend reading this User Guide in order.
 
 If there are any terms used in this user guide which you are unfamiliar with, their definitions may be found in the [Glossary](#glossary).
 
-
 **Navigation**
 
-In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide. At the end of every section, there will be a link which says [back to table of contents](#toc) which you can click on to return to the Table of Contents.
+You can click on the [Table of Contents](#toc) to get to the information relevant to you. 
+To help you with this, there is a [back to table of contents](#toc) link at the end of every major section.
+
+There will also be links in relevant places to help you navigate the document
 
 **Conventions Used**
 
@@ -47,38 +53,42 @@ _text_ | Caption for images.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Getting Started
 
 1. Ensure you have **Java 11** or above installed on your computer. If you need help with installation, you can visit this [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for more details.
 
 2. Download the latest **TAB.jar** [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TAB.
+3. Create a new folder in your computer and move **TAB.jar** inside. This will be the home folder for the application.
 
-4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![start](images/start.png) <br> _Screenshot of our interface on a Mac. Note the icon beside "Quick Tips" may vary slightly for Windows users._
+4. Double-click **TAB.jar** to start the app. A window similar to the one below should appear in a few seconds. 
+   TAB starts up with some sample data to let you explore and see how the app will look like when it’s in use.
+   ![start](images/start.png) <br> _How TAB looks when you start it for the first time._
 
-5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>ENTER</kbd> will open the help window.<br>
+5. Simply type a command in the command box and press <kbd>ENTER</kbd> to execute it. 
+   You can try opening the help window by typing `help` and pressing <kbd>ENTER</kbd>.<br>
    
-   Some example commands you can try:
+   Some other commands you can try:
 
-   * **`list`** : Lists all students.
+   * **`view 1`** : Views the lessons of the first person in the list.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a student named `John Doe` to TAB.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all students.
+   * **`ladd 1 `** : Adds a lesson.
 
-   * **`exit`** : Exits the app.
-
-6. You can type `help` to view all the commands available in TAB. Do refer to the [Features](#features) section for details of each command.
+   * 
+   
+6. If you wish to clear the sample data and start using the app, simply type `clear` and press enter.
+   However, if you’re a new user, we recommend that you read on and try out our features with the sample data to get yourself familiarised.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Overview of the Graphical User Interface (GUI)
 
-This section briefly explains the various section of TAB's GUI.
+The more you use TAB, the more useful it becomes. 
+Our clean GUI allows you to see at a glance the information you need and browse through your list of students with ease.
 
 ![layout](images/annotatedGui.png)
 <div class="caption">Basic layout of TAB's user interface.</div>
@@ -96,13 +106,18 @@ Lesson Card | The area that shows the details of a lesson. See [Managing Lessons
 Center Panel | The region that displays the lists of students and lessons, calendar, or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB is located) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The Command Box intelligently recognises when you're typing a command even if your cursor is somewhere else in the main window.
+This means that after clicking any button in the main window, you do not have to click in the Command Box again to continue. Just type away!
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 ## Features
 This section describes the available features in TAB. 
-The features are categorised into the different categories as follows:
+The features are categorised as follows:
 
 * [Getting Help](#getting-help)
 * [Managing Students](#managing-students)
@@ -116,7 +131,6 @@ The features are categorised into the different categories as follows:
 --------------------------------------------------------------------------------------------------------------------
 
 ### Overview of the Command Format
-This section explains the command format used for TAB's commands.<br/>
 
 Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
 
@@ -133,7 +147,7 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 
 * **Prefixes** are **case-sensitive**<br>
   e.g. `n/` is the prefix for student name but `N/` is invalid.
-t
+
 * **Command words** are **case-insensitive** <br>
   e.g. `LIST` is equivalent to `list`.
 </div>
@@ -1182,11 +1196,6 @@ Menu Item | Shortcut | Action | Description
 <kbd>View</kbd> → <kbd>Tags</kbd> | <kbd>F4</kbd> | View Tags | Brings you to your list of tags.
 <kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 <kbd>File</kbd> → <kbd>Exit</kbd> | N.A. | Exit | Quits TAB.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The Command Box intelligently recognises when you're typing a command even if your cursor is somewhere else in the main window.
-This means that after clicking any button in the main window, you do not have to click in the Command Box again to continue. Just type away!
-</div>
 
 <br />
 
