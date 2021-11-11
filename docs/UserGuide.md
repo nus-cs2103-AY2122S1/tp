@@ -398,6 +398,8 @@ Format: `delete INDEX`
 
   c. Index specified is not a positive integer <br>
 
+<div style="page-break-after: always;"></div>
+
 ### 5.6 Finding contacts that match **ANY** of the keywords specified: `findAny`
 
 Finds all contacts that match any of the fields specified by the user
@@ -440,6 +442,8 @@ Click [here](#57-finding-contacts-that-match-all-the-keywords-specified--findall
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 * `findAny findAny n/o p/87` Finds all contacts that have the letter `o` in their name and the substring '87' in their phone number
@@ -464,6 +468,7 @@ The screenshot below shows the expected result.
 
   d. Did not specify either 'm', 'f', 'male', 'female', 'n.a' after `g/` <br>
 
+    <div style="page-break-after: always;"></div>
 ### 5.7 Finding contacts that match **ALL** the keywords specified : `findAll`
 
 Format: `findAll [n/NAME…​] [p/PHONE…​] [e/EMAIL…​] [a/ADDRESS…​] [g/GENDER…​] [age/AGE…​] [c/CALLED…​] [i/INTEREST…​]`
@@ -504,6 +509,8 @@ Finds only the contacts that match all the keywords specified in their respectiv
 Click [here](#56-finding-contacts-that-match-any-of-the-keywords-specified-findany) to learn more about findAny
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 **Example:**
 
