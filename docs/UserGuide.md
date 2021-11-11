@@ -98,7 +98,7 @@ A GUI similar to the below image should appear in a few seconds. Note how the ap
 
    * **`list`** : Lists all contacts. For new users, the list will contain some sample data which users can delete.
 
-   * **`visualize`** : Visualize grades of students. For new users, an empty whisker box plot diagram will be shown. Otherwise, the above image will be shown.
+   * **`visualize`** : Visualize grades of students. For new users, the sample grades for the assessments will be displayed in a box plot diagram.
 
    * **`exit`** : Exits the app.
 
@@ -603,7 +603,7 @@ This subsection provides a summary for all the commands used in Academy Director
 |[**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` | `tag 1 t/mission t/streams`
 |[**Get Personal Detail**](#getting-personal-detail-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
 |[**Edit Personal Detail**](#editing-a-students-detail--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [te/TELE_HANDLE]` | `edit 2 n/James Lee e/jameslee@example.com`
-|[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade INDEX as/RA1 g/15`
+|[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade 1 as/RA1 g/15`
 |[**Edit Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` | `attendance 1, 2 ses/1 att/1`
 |[**Edit Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD` | `participation 1 ses/12 att/0`
 |[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` | `show RA1`
