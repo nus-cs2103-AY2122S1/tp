@@ -412,11 +412,10 @@ However, you forgot to ask for her school and academic level, so you decided to 
 Let’s see how you can record Betsy Crowe’s details into TAB!
 
 1. Type `add n/Betsy Crowe p/91234567 a/Newgate r/Remember to get school and academic level! t/missinginfo t/new` into the command box as shown.
-   ![add1](images/add1.png)
+   ![add1](images/add1.png)<div class="caption">Command box with the add command.</div>
 
 2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
-   ![add2](images/add2.png)
-
+   ![add2](images/add2.png)<div class="caption">TAB with the new student added.</div>
 
 Other example:
 - `add n/John Doe p/98765432 a/Sengkang Ave 2, Blk 123, #02-01 pe/jackdoe@gmail.com sch/Sengkang Secondary lvl/S1` Adds a student named `John Doe` who lives at `Sengkang Ave 2, Blk 123, #02-01` with phone `98765432`, parent email `jackdoe@gmail.com`, currently studying `S1` at `Sengkang Secondary`.
