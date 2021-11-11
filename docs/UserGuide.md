@@ -203,7 +203,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [g/GENDER] [age/AGE] [i/I
 * `Age` must only contain numbers
 
 * `Address` and `Interest` can be in any format
-*  All the fields are case-insensitive  
+
+* All the fields are case-insensitive  
 
 <div markdown="span" class="alert alert-primary">:bulb: 
 
