@@ -304,7 +304,7 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
 
 **Q**: Can I manually alter my data outside applications?<br>
-**A**: Yes, Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file. Beginner users are advised to do the editing through the application to avoid any incidents.
+**A**: Yes, Intern Watcher saves data as a [JSON file](#glossary) `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file. Beginner users are advised to do the editing through the application to avoid any incidents.
 
 
 --------------------------------------------------------------------------------------------------------------------
