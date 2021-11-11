@@ -60,9 +60,10 @@ This table describes the main symbols used in the user guide and their respectiv
 ## **3. Quick start**
 
 1. Ensure you have Java `11` installed on your computer. 
-   1. To check if Java `11` is currently installed, you may follow this short [guide](https://www.baeldung.com/java-check-is-installed).
-   Otherwise, if Java `11` is not installed, you may follow the installation instructions over 
+   * To check if Java `11` is currently installed, you may follow this short [guide](https://www.baeldung.com/java-check-is-installed).
+   <br> If Java `11` is not installed, you may follow the installation instructions over 
    [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+
 
 2. Next, download the latest `gitgud.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-4/tp/releases).
 
