@@ -16,12 +16,19 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
+import seedu.address.logic.state.GroupInformationState;
+import seedu.address.model.group.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
+
+    public static final String MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED =
+            "The %s application state is not implemented.";
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -31,9 +38,11 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ListPanel listPanelLeft;
+    private ListPanel listPanelRight;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +51,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholderLeft;
+
+    @FXML
+    private StackPane listPanelPlaceholderRight;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,17 +122,22 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelLeft = new ListPanel();
+        listPanelRight = new ListPanel();
+
+        listPanelPlaceholderLeft.getChildren().add(listPanelLeft.getRoot());
+        listPanelPlaceholderRight.getChildren().add(listPanelRight.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        changeDisplayForHomeAppState();
     }
 
     /**
@@ -163,10 +180,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -178,13 +191,15 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isGoingToShowHelp()) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult.isGoingToExit()) {
                 handleExit();
             }
+
+            changeDisplayForNextAppState(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -192,5 +207,42 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void changeDisplayForNextAppState(CommandResult commandResult) {
+        ApplicationState nextApplicationState = commandResult.getNextApplicationState();
+        ApplicationStateType nextApplicationStateType = nextApplicationState.getApplicationStateType();
+        switch (nextApplicationStateType) {
+        case HOME:
+            changeDisplayForHomeAppState();
+            break;
+        case GROUP_INFORMATION:
+            GroupInformationState groupInformationState = (GroupInformationState) nextApplicationState;
+            Group group = groupInformationState.getStoredData();
+            changeDisplayForGroupInformationAppState(group);
+            break;
+        default:
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationStateType);
+        }
+    }
+
+    private void changeDisplayForHomeAppState() {
+        listPanelLeft.setState(ListPanel.PanelState.PERSONS);
+        listPanelRight.setState(ListPanel.PanelState.GROUPS);
+
+        listPanelLeft.setList(logic.getFilteredPersonList());
+        listPanelRight.setList(logic.getFilteredGroupList());
+
+        statusBarFooter.changeDisplayForHomeAppState();
+    }
+
+    private void changeDisplayForGroupInformationAppState(Group group) {
+        listPanelLeft.setState(ListPanel.PanelState.GROUP_MATES);
+        listPanelRight.setState(ListPanel.PanelState.TASKS);
+
+        listPanelLeft.setList(group.getPersons().asUnmodifiableObservableList());
+        listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
+
+        statusBarFooter.changeDisplayForGroupInformationAppState(group);
     }
 }

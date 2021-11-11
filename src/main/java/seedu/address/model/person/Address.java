@@ -6,12 +6,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * The only invalid instance allowed is {@code EMPTY_ADDRESS} used to remove a Person's address in the edit command.
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank, "
+            + "unless you want there to be no address.";
 
-    /*
+    public static final Address EMPTY_ADDRESS = new Address();
+
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -31,7 +35,17 @@ public class Address {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Constructs an {@code Address}.
+     */
+    private Address() {
+        value = "";
+    }
+
+    /**
+     * Returns true if a given string is a valid address and false otherwise.
+     *
+     * @param test String to be tested.
+     * @return Returns true if a given string is a valid address and false otherwise.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -3,9 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -34,7 +34,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -89,8 +88,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Finishes building the {@code Person}.
+     *
+     * @return The person being built.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person.Builder(name, phone, email)
+                .withAddress(address)
+                .withTags(tags)
+                .build();
     }
 
 }

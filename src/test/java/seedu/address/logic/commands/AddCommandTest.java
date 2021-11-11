@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -48,6 +50,23 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() throws CommandException {
+        UndoModelStub modelStub = new UndoModelStub();
+        Person person = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(person);
+        addCommand.execute(modelStub);
+        assertTrue(modelStub.hasPerson(person));
+
+        CommandResult actualUndoResult = addCommand.undo(modelStub);
+        String expectedMessage = String.format(AddCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, person);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .build();
+        assertEquals(expectedUndoResult, actualUndoResult);
+        assertFalse(modelStub.hasPerson(person));
+        assertEquals(new ArrayList<>(), modelStub.personsAdded);
     }
 
     @Test
@@ -114,6 +133,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -129,6 +153,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -139,12 +169,47 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setGroup(Group target, Group editedGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
+        }
+
+        @Override
+        public void deleteGroup(Group target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
+        }
+
+        @Override
+        public void addToGroup(Group target, Set<Person> persons) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -171,7 +236,11 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Person> personsAdded;
+
+        private ModelStubAcceptingPersonAdded() {
+            personsAdded = new ArrayList<>();
+        }
 
         @Override
         public boolean hasPerson(Person person) {
@@ -189,6 +258,44 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof ModelStubAcceptingPersonAdded)) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
+            ModelStubAcceptingPersonAdded other = (ModelStubAcceptingPersonAdded) obj;
+            return personsAdded.equals(other.personsAdded);
+        }
     }
 
+    /**
+     * A Model stub that can add and remove a person.
+     */
+    private class UndoModelStub extends ModelStubAcceptingPersonAdded {
+
+        @Override
+        public void deletePerson(Person target) {
+            personsAdded.remove(target);
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {}
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {}
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
+        }
+    }
 }

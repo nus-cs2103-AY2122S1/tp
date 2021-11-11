@@ -1,0 +1,84 @@
+{
+  "_comment": "AddressBook save file which contains the same Group values as in TypicalGroups#getTypicalAddressBook()",
+
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "id" : "0-0",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Benson Meier",
+    "id" : "0-1",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "name" : "Carl Kurz",
+    "id" : "0-2",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street"
+  }, {
+    "name" : "Daniel Meier",
+    "id" : "0-3",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Elle Meyer",
+    "id" : "0-4",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave"
+  }, {
+    "name" : "Fiona Kunz",
+    "id" : "0-5",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo"
+  }, {
+    "name" : "George Best",
+    "id" : "0-6",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street"
+  } ],
+  "groups" : [ {
+    "name" : "CS2103T Project Group",
+    "description" : "CS module",
+    "groupMateIds" : [ "0-0", "0-1", "0-2" ],
+    "tasks" : [ {
+      "description" : "Prepare demo",
+      "isDone" : false
+    }, {
+      "description" : "Deliver v1.3",
+      "isDone" : false
+    }, {
+      "description" : "Delegate roles",
+      "isDone" : false
+    } ]
+  }, {
+    "name" : "CS2101 Project Group",
+    "description" : "CS module",
+    "groupMateIds" : [ "0-4", "0-5", "0-6" ],
+    "tasks" : [ {
+      "description" : "Add testing",
+      "isDone" : false
+    }, {
+      "description" : "Group meeting",
+      "isDone" : false
+    } ]
+  }, {
+    "name" : "Volleyball club",
+    "description" : "Sports Club",
+    "groupMateIds" : [ "0-4", "0-5", "0-6" ],
+    "tasks" : [ {
+      "description" : "Delegate roles",
+      "isDone" : false
+    } ]
+  } ]
+}

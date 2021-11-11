@@ -13,15 +13,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
+import seedu.address.model.common.Name;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -29,7 +33,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -49,11 +53,19 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of edit of person: %1$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
+    private Person personBeforeEdit;
+    private Person personAfterEdit;
+    private Predicate<? super Person> personPredicate;
+    private Predicate<? super Group> groupPredicate;
+
     /**
+     * Creates an EditCommand to edit the specified {@code Person}.
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -68,6 +80,9 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        personPredicate = model.getFilteredPersonListPredicate();
+        groupPredicate = model.getFilteredGroupListPredicate();
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -82,13 +97,37 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        personBeforeEdit = personToEdit;
+        personAfterEdit = editedPerson;
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        assert model.hasPerson(personAfterEdit) : "The edited person must be in the records to undo its edit.";
+        model.setPerson(personAfterEdit, personBeforeEdit);
+        if (personPredicate == null) {
+            personPredicate = Model.PREDICATE_SHOW_ALL_PERSONS;
+        }
+        model.updateFilteredPersonList(personPredicate);
+        if (groupPredicate == null) {
+            groupPredicate = Model.PREDICATE_SHOW_ALL_GROUPS;
+        }
+        model.updateFilteredGroupList(groupPredicate);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personBeforeEdit))
+                .goToHome()
+                .build();
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param personToEdit target person to edit.
+     * @param editPersonDescriptor the descriptor that contains the changed fields.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -99,7 +138,19 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Person.Builder personBuilder = new Person.Builder(updatedName, updatedPhone, updatedEmail)
+                .withTags(updatedTags);
+        if (updatedAddress != null && !updatedAddress.equals(Address.EMPTY_ADDRESS)) {
+            personBuilder.withAddress(updatedAddress);
+        }
+
+        return personBuilder.build();
+    }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
+        return applicationStateType == ApplicationStateType.HOME;
     }
 
     @Override
@@ -136,6 +187,8 @@ public class EditCommand extends Command {
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy the descriptor containing all the changed fields.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
