@@ -591,7 +591,7 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 
 ### Managing Lessons
 
-This section guides you on how to use the commands for managing the lessons of your students in TAB.
+Use TAB's lesson management features to record your students' lesson details and have this information at your fingertips!
 
 1. [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
 2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
@@ -742,10 +742,10 @@ You can add multiple pieces of homework to a lesson in TAB.
 
 Example: 
 
-You have a student named Betsy Crowe with index number 7. You have a history lesson with her every Sunday at 11am to 12pm, starting from 20 December 2021, and you want to add it in TAB. The end date is not known, and you are getting paid $35 per hour. For the first lesson, you want to assign assignment 1 as homework. 
+Suppose you have a student named Betsy Crowe with index number 7. You have a history lesson with her every Sunday from 11am to 12pm, starting from 20 December 2021, and you want to add it in TAB. The end date is not known, and you are getting paid $35 per hour. For the first lesson, you want to assign assignment 1 as homework. 
 
 1. Type the command `ladd 7 recurring/ date/20 Dec 2021 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
-2. Press <kbd>Enter</kbd> – You should see the lesson being added to the seventh student in the displayed list!
+2. Press <kbd>Enter</kbd> and you should see that a lesson has been added to the seventh student in the displayed list!
    ![laddExample](images/laddExample.png)
 
 Other examples:
@@ -793,10 +793,10 @@ If you change the start date of the lesson, the cancelled dates that become inva
 
 Example:
 
-You have a student named Betsy Crowe with index number 7. You mistakenly added the wrong start and end date for her lesson with index number 1. The lesson should start on 20 December 2021 and end on 30 December 2021. Furthermore, she has a school event on the third lesson (16 Dec 2021) for this recurring lesson which means the third lesson has to be cancelled.
+Suppose you have a student named Betsy Crowe with index number 7. You mistakenly added the wrong start and end date for her lesson with index number 1. The lesson should start on 2 December 2021 and end on 30 December 2021. Furthermore, she has a school event on the third lesson (16 Dec 2021) for this recurring lesson which means the third lesson has to be cancelled.
 
 1. Type the command `ledit 7 1 recurring/30 Dec 2021 date/2 Dec 2021 cancel/16 dec 2021` into the command box.
-2. Press <kbd>Enter</kbd> – You should see the first lesson of the seventh student being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
+2. Press <kbd>Enter</kbd> and you should see the first lesson of the seventh student being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
    ![leditExample](images/leditExample.png)
 
 Other examples:
