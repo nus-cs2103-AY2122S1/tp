@@ -3,7 +3,7 @@ layout: page
 title: ClassMATE User Guide
 ---
 
-# ClassMATE User Guide
+## Introduction
 
 Are you having trouble with administrative work as a CS2101 tutor? Do current tools like Excel sheets or the pen and paper cause a lot of pain when trying to organize and search for students or recording class participation? Could there be a way to streamline this process while providing you a better way to visualise the information? Well, ClassMATE has it all covered!
 
@@ -652,4 +652,4 @@ Term | Definition
 **[CLI](#cli-tutorial)** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following visual prompts from the program.
 **[GUI](#quick-start)** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with a program through graphical icons.
 
-[Back to top](#classmate-user-guide)
+[Back to top](#introduction)
