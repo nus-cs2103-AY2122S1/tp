@@ -157,7 +157,7 @@ An example of a command in TAB:
 #### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter that can be substituted as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter that can be substituted with `John Doe`.
 
 * Items in square brackets are optional. They can be left out, or left empty (e.g. `t/`)<br>
   e.g. `n/NAME [t/TAG]` : `n/John Doe t/` is equivalent to `n/John Doe`.
