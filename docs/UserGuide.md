@@ -227,6 +227,7 @@ Format: `help`
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
+Easily manage your student information with these commands and say goodbye to messy Excel sheets.
 
 1. [Adding a student: `add`](#adding-a-student-add)
 2. [Editing a student: `edit`](#editing-a-student-edit)
@@ -492,6 +493,7 @@ Format: `list`
 ### Finding Students
 
 This section guides you on how to find or filter students of your choice in TAB.
+Quickly find a student no matter how many you have!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -623,11 +625,12 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
+Never lose track of your lessons ever again.
 
 1. [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
 2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
 3. [Deleting a lesson: `ldelete`](#deleting-a-lesson-ldelete)
-4. [Viewing a student's lessons: `view`](#viewing-lessons-view)
+4. [Viewing a student's lessons: `view`](#viewing-a-students-lessons-view)
 5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
 
 <br>
@@ -903,6 +906,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 ### Managing Lesson Fees
 
 This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
+Easily keep track of the students that haven't paid for their lessons yet.
 
 1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
 2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
@@ -990,7 +994,10 @@ This value would be used to calculate and flag out which lesson's fees are due b
 
 ### Managing Your Schedule
 
-This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
+This section guides you on how to use TAB's calendar interface. 
+Typing any of the commands in this section will bring you to the calendar interface. 
+Any command from other sections, such as `list` or `tag`, will bring you right out.
+Arrange your schedule and plan ahead with our powerful in-built calendar!
 
 1. [Switching to the calendar interface: `calendar`](#switching-to-the-calendar-interface-calendar)
 2. [Viewing your daily calendar: `day`](#viewing-your-daily-calendar-day)
@@ -1305,7 +1312,7 @@ Action | Format
 
 Action | Format
 --------|------------------
-[**Help**](#viewing-help-help) | `help`
+[**Help**](#viewing-the-help-window-help) | `help`
 [**Clear**](#clearing-all-entries-clear) |`clear`
 [**Undo**](#undoing-previous-commands-undo) | `undo`
 [**Redo**](#redoing-undone-commands-redo) | `redo`
