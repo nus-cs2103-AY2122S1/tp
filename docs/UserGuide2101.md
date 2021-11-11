@@ -68,7 +68,7 @@ Insert picture
 
 * Typing `exit` will save the data we have and exit the application.
 
-7. If you encounter any problems, please refer to the FAQ section(link) below.
+* If you encounter any problems, please refer to the FAQ section(link) below.
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -83,7 +83,7 @@ Insert picture
     * e.g. in `add n/NAME`, `NAME` is to be replaced with the name of the applicant you want to add such as `add n/John Doe`.<br>
 
 * Fields in square brackets are optional.<br>
-    * e.g in `n/NAME [s/SKILL]`, the `SKILL` field is optional. You can enter `n/John Doe s/Python` or just `n/John Doe`.
+    * e.g. in `n/NAME [s/SKILL]`, the `SKILL` field is optional. You can enter `n/John Doe s/Python` or just `n/John Doe`.
 
 * Fields with `…+` notation behind them can be specified once or more times.<br>
     * e.g. `[s/SKILL]…+` can be specified as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc since the field is optional and can be specified more than once.
@@ -92,7 +92,7 @@ Insert picture
 
 </div>
 
-### How to get help :
+### How to get help
 
 Format: `help`
 
@@ -102,7 +102,7 @@ If you are lost and wish to refer to help listed in this user guide, type `help`
 
 
 
-### How to add an applicant:
+### How to add an applicant
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
@@ -117,14 +117,14 @@ An applicant can have any number of skills (including 0)
 </div>
 
 
-### How to list all applicants:
+### How to list all applicants
 
 Format: `list`
 
 If you want to display the list of all applicants in Intern Watcher, type `list`. All applicants you currently have in the application will be displayed in the applicant list panel.
 
 
-### How to view an applicant's details:
+### How to view an applicant's details
 
 Format: `view INDEX [T]`
 
@@ -142,13 +142,13 @@ For example, to view the first applicant in the currently displayed applicant li
 
 * If you wish to switch between an applicant's skills and academic tab, type an additional `T` behind your view command.
 
-e.g `view 2 T` to view the 2nd applicant’s skill tab from the academic tab, and vice versa.
+e.g. `view 2 T` to view the 2nd applicant’s skill tab from the academic tab, and vice versa.
 
 |Command|Effect|
 |---|---|
 |<img src="images/ViewTwoTBefore.png" alt="drawing" />|<img src="images/ViewTwoTAfter.png" alt="drawing" />|
 
-### How to filter the applicants:
+### How to filter the applicants
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/APPLICATION_STATUS]…+ [s/SKILL]…+`
 
@@ -162,7 +162,7 @@ Example:
 |---|---|
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterAfter.png" alt="drawing" />|
 
-### How to edit a specific applicant:
+### How to edit a specific applicant
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…+`
 
@@ -177,7 +177,7 @@ Example:
 |<img src="images/EditIndexBefore.png" alt="drawing" />|<img src="images/EditIndexAfter.png" alt="drawing" />|
 
 
-### How to edit the application status of multiple applicants:
+### How to edit the application status of multiple applicants
 
 Format: `edit ALL a/APPLICATION_STATUS`
 
@@ -195,7 +195,7 @@ Examples:
 |---|---|
 |<img src="images/EditAllStatusBefore.png" alt="drawing" />|<img src="images/EditAllStatusAfter.png" alt="drawing" />|
 
-### How to delete a specific applicant:
+### How to delete a specific applicant
 
 Format: `delete INDEX`
 
@@ -208,7 +208,7 @@ Examples:
 |---|---|
 |<img src="images/DeleteTwoBefore.png" alt="drawing" />|<img src="images/DeleteTwoAfter.png" alt="drawing" />|
 
-### How to delete multiple applicants:
+### How to delete multiple applicants
 
 Format: `delete ALL`
 
@@ -224,7 +224,7 @@ Examples:
 
 
 
-### How to find applicants by name:
+### How to find applicants by name
 
 Format: `find NAME`
 
@@ -236,7 +236,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
-### How to undo an action:
+### How to undo an action
 
 Format: `undo`
 
@@ -251,7 +251,7 @@ Examples:
 
 
 
-### How to reverse an undo:
+### How to reverse an undo
 
 Format: `redo`
 
@@ -265,21 +265,11 @@ Examples:
 |<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
 
 
-### How to exit the program : `exit`
+### How to exit the program
 
 Format: `exit`
 
 If you want to exit the program, type `exit`.
-
-
-
-### Saving the data
-
-Intern Watcher data is saved after any command. There is no need for you to save manually.
-
-### Editing the data file
-
-Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -290,7 +280,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 
 ## FAQ
-Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](link).
+Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](##contact-us).
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
@@ -304,16 +294,18 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **Q**: Why does my command not work?<br>
 **A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' specifications. (link)
 
-**Q**: Is my data automatically saved? <br>
+**Q**: Is my data automatically saved?<br>
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
 
-**Q**: Can I manually alter my data outside applications?
+**Q**: Can I manually alter my data outside applications?<br>
 **A**: Yes, Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file. Beginner users are advised to do the editing through the application to avoid any incidents.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Specification of Fields
+## Specification of Fields
+
+This section is to check for the validity of fields. If fields do not match the specifications closely, there is a chance that your command will not be valid.
 
 `Name` : The applicant's name. Should only include alphanumeric characters and spaces only. Should not be blank.
 
