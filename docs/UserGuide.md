@@ -26,7 +26,7 @@ Each Command section is separated into:<br>
 
 * Things to note
 
-* Examples
+* Example
 
 * Common issues
 
@@ -38,7 +38,7 @@ Throughout this guide, you may encounter the following icons"
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** Straightforward commands such as 'list' may not have the sections "Things to note", "Examples" and "Common issues"
+**:information_source: Note:** Straightforward commands such as 'clear' may not have the sections "Things to note", "Example" and "Common issues"
 </div>
 
 It is highly recommended that you familiarise yourself with the [Command Notations](#4-command-notations) we use. <br>
@@ -229,7 +229,7 @@ Example:
   
     * All other unspecified fields will be set to N.A by default
 
-The screenshot below shows the expected result. To display the full contact details, you can use the [display command](#58-displaying-full-contact-details--display)  
+The screenshot below shows the expected result. To display the full contact details, you can use the [display command](#58-displaying-full-contact-details--display).
 
 ![addCommandExample](images/AddCommandExample.png)
 
@@ -251,6 +251,10 @@ Format: `list`
 
 * `list` shows all contacts in ascending order by name
 
+The screenshot below shows the expected result.
+
+![listCommandExample](images/ListCommandExample.png)
+
 ### 5.3 Marking a contact as called : `called`
 
 Marks the specified contact from the address book as called. (i.e., contact has already been called)
@@ -269,6 +273,9 @@ Example:
 
 * `called 3` marks the 3rd contact in the displayed list as Called
 
+The screenshot below shows the expected result. Note how the "❌" changes to a "✔️".
+
+![calledCommandExample](images/CalledCommandExample.png)
 
 **Common issues:**
 
@@ -290,6 +297,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
 
 **Things to note:**
 
+* All the fields are case-insensitive
+
 * `INDEX` refers to the index number shown in the displayed list
 
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
@@ -300,8 +309,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
 
 * The Interests list of a contact can be found here (refer to the screenshot below) and can be displayed by using the [display command](#58-displaying-full-contact-details--display)
    ![interestsList](images/interestsList.png)
-
-* All the fields are case-insensitive
 
 <div markdown="block" class="alert alert-primary">
 
@@ -315,33 +322,25 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
 
 * If it is not, then an interest would be added to the list instead
 
-* You can refer to the examples below for a better understanding of the edit command functionality
+* You can refer to the example below for a better understanding of the edit command functionality
 
 </div>
 
-Examples:
+Example:
 
-* `edit 1 n/Malan i/Painting i/(2) Swimming` Edits the following fields of the **first contact in the displayed list** :<br>
+* `edit 1 n/Malan g/F i/Painting i/(2) Swimming` Edits the following fields of the **first contact in the displayed list** :<br>
 
     * Edit `Name` to 'Malan'
+
+    * Edit `Gender` to 'F' 
   
     * Adds 'painting' as a *new* `Interest`
   
     * Edits the **second** `Interest` to 'Swimming'
 
-* `edit 2 g/M e/myEmail@email.com age/55` Edits the following fields of the **second contact in the displayed list** :<br>
+The screenshot below shows the expected result.
 
-    * Edits the `Gender` to 'M'
-  
-    * Edits `Email` to 'myEmail@email.com'
-  
-    * Edits `Age` to '55'
-
-* `edit 3 i/(1) eat i/(2) remove` Edits the following fields of the **third contact in the displayed list** :<br>
-
-    * Edits the **first** `Interest` to 'eat'
-  
-    * Removes the second `Interest`
+![editCommandExample](images/EditCommandExample.png)
 
 **Common issues:**
 
@@ -424,7 +423,7 @@ Format: `findAny [n/NAME…​] [p/PHONE…​] [e/EMAIL…​] [a/ADDRESS…​
 
 * All the fields are case-insensitive
 
-* You can refer to the examples below for a better understanding
+* You can refer to the example below for a better understanding
 
 <div markdown="block" class="alert alert-primary"> 
 
@@ -438,16 +437,13 @@ Click [here](#57-finding-contacts-that-match-all-the-keywords-specified--findall
 
 </div>
 
-Examples:
+Example:
 
-* `findAny n/John` Finds all contacts that have the substring `john` in their name
+* `findAny findAny n/o p/87` Finds all contacts that have the letter `o` in their name and the substring '87' in their phone number
 
-* `findAny n/alex david` Finds all contacts that have either the substring 'alex' or 'david' in their name<br>
+The screenshot below shows the expected result.
 
-* `findAny n/alex david a/woodlands` Finds all contacts that have either the substring 'alex' or 'david' in their name or
-have the substring 'woodlands' in their address
-
-* `findAny n/alex n/david` Finds only the contacts that have the substring 'david' in their name
+![findAnyCommandExample](images/FindAnyCommandExample.png)
 
 **Common issues:**
 
@@ -492,7 +488,7 @@ Finds only the contacts that match all the keywords specified in their respectiv
 
 * All the fields are case-insensitive
 
-* You can refer to the examples below for a better understanding
+* You can refer to the example below for a better understanding
 
 <div markdown="block" class="alert alert-primary"> 
 
@@ -506,20 +502,18 @@ Click [here](#56-finding-contacts-that-match-any-of-the-keywords-specified-finda
 
 </div>
 
-Examples:
-* `findAll n/alex` Finds all the contacts that have the substring 'alex' in their name
+Example:
+* `findAll n/o p/87` Finds all contacts that have **both** the letter 'o' in their name and the substring '87' in their phone number
 
-* `findAll n/Malan i/Swimming` Finds only the contacts that have **BOTH** the substring 'Malan' in the name and the substring 'swimming' as their interests
+The screenshot below shows the expected result.
 
-* `findAll i/Painting i/ Running` Finds only the contacts that have 'running' as a substring as their interests
-
-* `findAll n/al da vi a/ho oh` Finds only the contacts that have **ALL 3** substrings of 'al', 'da' and 'vi' in their name **AND both** substrings of 'ho' and 'oh' in the address
+![findAllCommandExample](images/FindAllCommandExample.png)
 
 **Common issues:**
 
 * _Unknown command_: <br>
 
-  a. Using `findany` instead of `findAny` (not capitalising the 'A')
+  a. Using `findall` instead of `findAll` (not capitalising the 'A')
 
 * _Invalid command format!_: <br>
 
@@ -545,6 +539,10 @@ Format: `display INDEX`
 Example:
 
 * `display 3` displays full contact details of the 3rd contact in the displayed list
+
+The screenshot below shows the expected result.
+
+![displayCommandExample](images/DisplayCommandExample.png)
 
 **Common issues:**
 
@@ -587,13 +585,13 @@ Format: `filter CATEGORY [COUNT]`
 * If only one argument is given, it will be interpreted as a `CATEGORY`
   (e.g., `filter 1000` will cause `1000` to be interpreted as a `CATEGORY`)
 
-Examples:
-
-* `filter called` Filters the displayed list to show uncalled contacts first
+Example:
 
 * `filter called 2` Filters the displayed list to show uncalled contacts first and to only show the first two contacts
 
-* `filter gender 3` Filters the displayed list to show female contacts first and to only show the first three contacts
+The screenshot below shows the expected result.
+
+![filterCommandExample](images/FilterCommandExample.png)
 
 **Common issues:**
 
@@ -648,7 +646,7 @@ CMM data are saved in the hard disk automatically after any command that changes
 
 CMM is able to import Excel files into CMM. The import files have to be in an Excel Csv format (semicolon delimited).
 
-**Steps to Import from Excel file**
+**Steps to Import from Excel file:**
 
 1. Ensure that the Excel file is a CSV file type that is **semicolon delimited**
 
@@ -660,7 +658,7 @@ CMM is able to import Excel files into CMM. The import files have to be in an Ex
 
 ![importPopUpUi](images/importPopUpMessage.png)
 
-**Import options**
+**Import options:**
 
 `Add On Imports`
 
@@ -684,7 +682,7 @@ CMM is able to import Excel files into CMM. The import files have to be in an Ex
 Currently, import is **irreversible**. Please double-check before importing. This is especially important when choosing the add-on import option.
 </div>
 
-**Things to note**
+**Things to note:**
 
 * CMM will prompt user for imports upon **every** application startup
 
@@ -700,7 +698,7 @@ Currently, import is **irreversible**. Please double-check before importing. Thi
 
 * Unsuccessful file import will result in an empty database. The previous database can be recovered in the latest export file
 
-**Common Issues**
+**Common Issues:**
 
 * _CSV file not found in data\import.csv_<br>
 
@@ -746,7 +744,7 @@ An example file import can be downloaded [here](https://github.com/AY2122S1-CS21
 
 CMM is able to export the current database as semicolon delimited CSV files. As such, there is no need for you to ensure that the formatting is right for furture use.
 
-**Steps to Export data as CSV file**
+**Steps to Export data as CSV file:**
 
 1. Closing the application in any way would prompt user to export the current database <br>
 ![exportPopup](images/exportPopup.png)
@@ -757,10 +755,15 @@ CMM is able to export the current database as semicolon delimited CSV files. As 
 
 <div markdown="span" class="alert alert-primary">:bulb: 
 
-**Tip:**
-CSV file can be found under the "data" folder found in the same directory as the CMM jar file.
-</div>
+**How to find the exported file:**
 
+1. Go to the directory that the CMM jar file is stored in and click on the 'data' folder
+
+![findingExport1](images/FindingExportFile1.png)
+
+2. You can find the exported CSV file here
+
+![findingExport2](images/FindingExportFile2.png)
 
 ### 5.16 Editing the data file (JSON)
 
