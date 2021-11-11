@@ -1,0 +1,15 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "year" : "1",
+    "major" : "CS",
+    "studentId": "e9034800"
+  }],
+  "events": [ {
+    "name": "Invalid event",
+    "extrafield": "@20213127",
+    "participants": [ "e9831818" ],
+    "blacklist" : [ ]
+  }]
+}

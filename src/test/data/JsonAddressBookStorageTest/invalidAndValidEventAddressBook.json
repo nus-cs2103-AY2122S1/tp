@@ -1,0 +1,22 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "phone": "9482424",
+    "studentId": "e8123832",
+    "major": "CS",
+    "year": "1",
+    "email": "hans@example.com",
+    "address": "4th street"
+  } ],
+  "events": [ {
+      "name": "Valid event",
+      "date": "09-10-2021",
+      "time": "1900",
+      "participants": [ "e9831818" ],
+      "blacklist" : [ ]
+  }, {
+    "name": "Invalid event",
+    "date": "@20213127",
+    "time": "abcd"
+  } ]
+}

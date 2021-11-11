@@ -1,14 +1,31 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2122S1-CS2103T-T11-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T11-1/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+![Ui](docs/images/user-guide/after-creating-event.png)
+
+This is the Team Project for CS2103T, done by T11-1.
+
+The code is adapted from **[Address Book](https://se-education.org/addressbook-level3)** which provides a **reasonably
+well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules.
+
+**nustracker** is a desktop application, made for NUS event directors and student leaders of student organizations in NUS School of Computing to:
+* keep track
+* manage events
+
+that their members are a part of.
+
+<br>
+
+While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+
+## What nustracker can do:
+1. Keep track of students
+2. Keep tracks of events and event attendance
+3. Keep track of event blacklists
+4. Easily export e-mails of a group of students
+5. Be customized to the user’s liking
+
+
+Check out the [**nustracker** website](https://ay2122s1-cs2103t-t11-1.github.io/tp/) to find out more about **nustracker**.
+

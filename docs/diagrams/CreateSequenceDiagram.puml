@@ -1,0 +1,95 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CreateCommandParser" as CreateCommandParser LOGIC_COLOR
+participant "cmd:CreateCommand" as CreateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "e:Event" as Event MODEL_COLOR
+end box
+
+[->LogicManager: execute
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("create \nn/Orientation d/08-01-2021 t/1000")
+activate AddressBookParser
+
+create CreateCommandParser
+AddressBookParser -> CreateCommandParser
+activate CreateCommandParser
+
+CreateCommandParser --> AddressBookParser
+deactivate CreateCommandParser
+
+AddressBookParser -> CreateCommandParser : parse("n/Orientation d/08-01-2021 t/1000")
+activate CreateCommandParser
+
+ref over CreateCommandParser
+get create arguments
+from prefixes
+end ref
+
+create Event
+CreateCommandParser -> Event: new Event("Orientation", "08-01-2021", "1000")
+activate Event
+
+Event --> CreateCommandParser : e
+deactivate Event
+
+create CreateCommand
+CreateCommandParser -> CreateCommand : e
+activate CreateCommand
+
+CreateCommand --> CreateCommandParser : cmd
+deactivate CreateCommand
+
+CreateCommandParser --> AddressBookParser : cmd
+deactivate CreateCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CreateCommandParser -[hidden]-> AddressBookParser
+destroy CreateCommandParser
+
+AddressBookParser --> LogicManager : cmd
+deactivate AddressBookParser
+
+LogicManager -> CreateCommand : execute()
+activate CreateCommand
+
+CreateCommand -> Model : hasEvent(e)
+activate Model
+
+Model --> CreateCommand :
+deactivate Model
+
+CreateCommand -> Model : addEvent(e)
+ref over Model
+add event to
+AddressBook
+end ref
+activate Model
+
+Model --> CreateCommand :
+deactivate Model
+
+create CommandResult
+CreateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CreateCommand : result
+deactivate CommandResult
+
+CreateCommand --> LogicManager : result
+deactivate CreateCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CreateCommand -[hidden]-> LogicManager
+destroy CreateCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

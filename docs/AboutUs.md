@@ -1,59 +1,65 @@
 ---
-layout: page
+layout: page-noheader
 title: About Us
 ---
 
+![about-us](images/aboutus.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us through the [team repository](https://github.com/AY2122S1-CS2103T-T11-1/tp).
 
 ## Project team
 
-### John Doe
+### Siddanth
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wowsiddanth.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/wowsiddanth)]
+[[portfolio](team/wowsiddanth.md)]
 
-* Role: Project Advisor
+* Role: Code Quality
+* Responsibilities: Ensure code is elegant and meets the coding conventions.
 
-### Jane Doe
+### Rehad
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rehad-a.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rehad-a)]
+[[portfolio](team/rehad-a.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and covers a sufficient portion of the code.
 
-### Johnny Doe
+### Elvis Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tlchicken.png" width="200px" height="236px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/TLChicken)]
+[[portfolio](team/tlchicken.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Scheduling and Tracking
+* Responsibilities: In charge of the Issue Tracker for the team's repo.
 
-### Jean Doe
+### Joel Sung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joel-sung.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/joel-sung)]
+[[portfolio](team/joel-sung.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Team lead
+* Responsibilities: Overall project coordination + Project documentation quality
 
-### James Doe
+### Sun Yu Pei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/syoopie.png" width="300px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/syoopie)]
+[[portfolio](team/syoopie.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
+

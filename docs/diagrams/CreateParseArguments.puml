@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":CreateCommandParser" as CreateCommandParser LOGIC_COLOR
+participant ":ArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "n:EventName" as EventName MODEL_COLOR
+participant "d:EventDate" as EventDate MODEL_COLOR
+participant "t:EventTime" as EventTime MODEL_COLOR
+end box
+
+activate CreateCommandParser
+
+CreateCommandParser -> ArgumentTokenizer: tokenize("n/Orientation d/08-01-2021 t/1000", \n "n/", "d/", "t/")
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> CreateCommandParser: argMultiMap
+deactivate ArgumentTokenizer
+
+'Parse EventName'
+CreateCommandParser -> ParserUtil:parseEventName(argMultiMap.getValue("n/"))
+activate ParserUtil
+
+create EventName
+ParserUtil -> EventName: new EventName("Orientation")
+activate EventName
+
+EventName --> ParserUtil: n
+deactivate EventName
+
+ParserUtil --> CreateCommandParser: n
+deactivate ParserUtil
+
+'Parse EventDate'
+CreateCommandParser -> ParserUtil:parseEventDate(argMultiMap.getValue("d/"))
+activate ParserUtil
+
+create EventDate
+ParserUtil -> EventDate: new EventDate("08-01-2021")
+activate EventDate
+
+EventDate --> ParserUtil: d
+deactivate EventDate
+
+ParserUtil --> CreateCommandParser: d
+deactivate ParserUtil
+
+'Parse EventTime'
+CreateCommandParser -> ParserUtil:parseEventTime(argMultiMap.getValue("t/"))
+activate ParserUtil
+
+create EventTime
+ParserUtil -> EventTime: new EventTime("1000")
+activate EventTime
+
+EventTime --> ParserUtil: t
+deactivate EventTime
+
+ParserUtil --> CreateCommandParser: t
+deactivate ParserUtil
+
+CreateCommandParser -[hidden]-> ArgumentTokenizer
+deactivate CreateCommandParser
+
+@enduml

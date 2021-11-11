@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+participant ":LogicManager"             as Foo LOGIC_COLOR
+participant ":AddressBookParser"        as Foo1 LOGIC_COLOR
+participant ":ExportCommand"            as Foo2 LOGIC_COLOR
+participant "Exporting"                 as Foo3 STORAGE_COLOR
+
+box "Logic" LOGIC_COLOR_T1
+participant Foo
+participant Foo1
+participant Foo2
+endbox
+
+box "Storage" STORAGE_COLOR_T1
+participant Foo3
+endbox
+
+activate Foo
+
+Foo -> Foo1 : execute("export FILENAME")
+activate Foo1
+create Foo2
+Foo1 -> Foo2 : parseCommand("export FILENAME")
+activate Foo2
+return
+return
+
+Foo -> Foo2 : execute()
+activate Foo2
+Foo2 -> Foo3 : exportEmails()
+return Success Message
+
+Foo -[hidden]-> Foo1
+
+deactivate Foo
+
+@enduml

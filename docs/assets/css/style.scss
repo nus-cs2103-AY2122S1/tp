@@ -6,6 +6,9 @@
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize";
 
+$nustracker-orange: #ff914d;
+$nustracker-blue: #0049ac;
+
 .icon {
     height: 21px;
     width: 21px

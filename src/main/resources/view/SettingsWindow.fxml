@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.stage.Stage?>
+
+<fx:root resizable="false" title="Settings" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@LightTheme.css" />
+            </stylesheets>
+
+            <VBox fx:id="container" prefHeight="400" prefWidth="1000">
+
+                <HBox>
+                    <Text fill="#fdb703" text="settings" style="-fx-font-family: 'Open Sans Bold'; -fx-font-size: 40" translateX="8.0" translateY="-5.0"/>
+                    <Text fill="#377adf" text="window" style="-fx-font-family: 'Open Sans Bold'; -fx-font-size: 40" translateX="8.0" translateY="-5.0" />
+                </HBox>
+
+                <HBox>
+                    <Text fill="#779cff" text="Profile picture glow" style="-fx-font-family: 'Open Sans Bold'; -fx-font-size: 24" textAlignment="CENTER" translateX="10.0" />
+                    <Pane prefHeight="54.0" prefWidth="59.0" HBox.hgrow="ALWAYS" />
+                    <ColorPicker fx:id="glowColorPicker" translateX="-10.0" translateY="15.0" />
+                </HBox>
+
+                <Button fx:id="doneButton" onAction="#hide" text="Done" translateX="467.0" translateY="226.0" />
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

@@ -14,6 +14,11 @@
 }
 
 @font-face {
+    font-family: "Open Sans Bold";
+    src: url("/fonts/open-sans/OpenSans-Bold.ttf");
+}
+
+@font-face {
     font-family: "Open Sans Bold Italic";
     src: url("/fonts/open-sans/OpenSans-BoldItalic.ttf");
 }
@@ -42,3 +47,14 @@
     font-family: "Open Sans SemiBold Italic";
     src: url("/fonts/open-sans/OpenSans-SemiBoldItalic.ttf");
 }
+
+@font-face {
+    font-family: "Roboto-Thin";
+    src: url("/fonts/roboto/Roboto-Thin.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Bold";
+    src: url("/fonts/roboto/Roboto-Bold.ttf");
+}
+

@@ -1,0 +1,13 @@
+{
+  "students": [ {
+    "name": "Valid Person",
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "address": "4th street"
+  } ],
+  "events": [ {
+    "name": "Invalid event",
+    "date": "@20213127",
+    "time": "abcd"
+  }]
+}

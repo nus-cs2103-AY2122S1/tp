@@ -1,3 +1,19 @@
-#copyButton, #helpMessage {
-    -fx-font-family: "Open Sans";
+.button{
+    -fx-focus-traversable: false;
 }
+
+.button:hover {
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-base: -fx-accent ;
+}
+
+.text {
+    -fx-font-size: 14px;
+    -fx-font-family: Roboto-Bold;
+    -fx-text-fill: #FFFFFF;
+}
+
+

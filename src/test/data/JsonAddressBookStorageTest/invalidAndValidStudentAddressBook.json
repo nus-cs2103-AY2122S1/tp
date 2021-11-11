@@ -1,0 +1,26 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "phone": "9482424",
+    "studentId": "e8123832",
+    "major": "CS",
+    "year": "1",
+    "email": "hans@example.com",
+    "address": "4th street"
+  }, {
+    "name": "Student With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "studentId": "e8123183",
+    "major": "IS",
+    "year": "1",
+    "email": "hans@example.com",
+    "address": "4th street"
+  } ],
+  "events": [ {
+    "name": "Valid event",
+    "date": "09-10-2021",
+    "time": "1900",
+    "participants": [ "e9831818" ],
+    "blacklist" : [ ]
+  } ]
+}

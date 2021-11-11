@@ -1,0 +1,16 @@
+{
+  "students": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "extrafield": "invalid@email!3e",
+    "year" : "1",
+    "major" : "CS"
+  } ],
+  "events": [ {
+    "name": "Valid event",
+    "date": "09-10-2021",
+    "time": "1900",
+    "participants" : [ "e9034800" ],
+    "blacklist" : [ ]
+  }]
+}

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import java.net.URL?>
 
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 <GridPane styleClass="status-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+  <stylesheets>
+    <URL value="@LightTheme.css"/>
+  </stylesheets>
+
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
-  <Label fx:id="saveLocationStatus" />
+  <Text fx:id="saveLocationStatus" style="-fx-font-family: 'Open Sans SemiBold'" fill="#E9AFFF" />
 </GridPane>

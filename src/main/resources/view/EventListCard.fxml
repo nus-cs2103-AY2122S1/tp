@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<?import java.net.URL?>
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+
+            <padding>
+                <Insets bottom="10" left="15" right="5" top="5" />
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Text fx:id="name" style="-fx-font-family: 'Open Sans Bold Italic'; -fx-font-size: 22" fill="#779cff" />
+            </HBox>
+
+            <Text fx:id="date" style="-fx-font-family: 'Open Sans SemiBold'; -fx-font-size: 22" fill="#e9afff">
+            </Text>
+
+            <Text fx:id="time" style="-fx-font-family: 'Open Sans'; -fx-font-size: 22" fill="#e9afff" />
+
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Text text="Participants: " style="-fx-font-family: 'Open Sans'; -fx-font-size: 12px;" fill="#e9afff" />
+                <FlowPane fx:id="participants" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <Pane prefHeight="4" />
+
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Text text="Blacklist: " style="-fx-font-family: 'Open Sans'; -fx-font-size: 12px;" fill="#e9afff" />
+                <FlowPane fx:id="blacklist" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+        </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+</HBox>
