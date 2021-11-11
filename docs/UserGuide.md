@@ -39,7 +39,7 @@ It is highly recommended that you familiarise yourself with the [Command Notatio
 
 For new users, head over to [Quick Start](#2-quick-start) to get started. You can learn the command notations along the way as well. <br>
 
-For more experienced users, feel free to skip over to the [Features](#5-overview-of-features) section to check out detailed descriptions of the features offered in our application. <br>
+For more experienced users, feel free to skip over to the [Features](#5-overview-of-features) section to check out detailed descriptions of the features we offer. <br>
 
 If you have any questions about CMM, please refer to the [FAQ](#6-faq). <br>
 
@@ -438,14 +438,14 @@ Click [here](#57-finding-contacts-that-match-all-the-keywords-specified--findall
 
 Examples:
 
-* `findAny n/John` finds all contacts that have the substring `john` in their name
+* `findAny n/John` Finds all contacts that have the substring `john` in their name
 
-* `findAny n/alex david` finds all contacts that have either the substring 'alex' or 'david' in their name<br>
+* `findAny n/alex david` Finds all contacts that have either the substring 'alex' or 'david' in their name<br>
 
-* `findAny n/alex david a/woodlands` finds all contacts that have either the substring 'alex' or 'david' in their name or
+* `findAny n/alex david a/woodlands` Finds all contacts that have either the substring 'alex' or 'david' in their name or
 have the substring 'woodlands' in their address
 
-* `findAny n/alex n/david` only finds all contacts that have the substring 'david' in their name
+* `findAny n/alex n/david` Finds only the contacts that have the substring 'david' in their name
 
 **Common issues:**
 
@@ -505,13 +505,13 @@ Click [here](#56-finding-contacts-that-match-any-of-the-keywords-specified-finda
 </div>
 
 Examples:
-* `findAll n/alex` finds all the contacts that have the substring 'alex' in their name
+* `findAll n/alex` Finds all the contacts that have the substring 'alex' in their name
 
-* `findAll n/Malan i/Swimming` finds only the contacts that have **BOTH** the substring 'Malan' in the name and the substring 'swimming' as their interests
+* `findAll n/Malan i/Swimming` Finds only the contacts that have **BOTH** the substring 'Malan' in the name and the substring 'swimming' as their interests
 
-* `findAll i/Painting i/ Running` finds only the contacts that have 'running' as a substring as their interests
+* `findAll i/Painting i/ Running` Finds only the contacts that have 'running' as a substring as their interests
 
-* `findAll n/al da vi a/ho oh` finds only the contacts that have **ALL 3** substrings of 'al', 'da' and 'vi' in their name **AND both** substrings of 'ho' and 'oh' in the address
+* `findAll n/al da vi a/ho oh` Finds only the contacts that have **ALL 3** substrings of 'al', 'da' and 'vi' in their name **AND both** substrings of 'ho' and 'oh' in the address
 
 **Common issues:**
 
@@ -587,11 +587,11 @@ Format: `filter CATEGORY [COUNT]`
 
 Examples:
 
-* `filter called` filters the displayed list to show uncalled contacts first
+* `filter called` Filters the displayed list to show uncalled contacts first
 
-* `filter called 2` filters the displayed list to show uncalled contacts first and to only show the first two contacts
+* `filter called 2` Filters the displayed list to show uncalled contacts first and to only show the first two contacts
 
-* `filter gender 3` filters the displayed list to show female contacts first and to only show the first three contacts
+* `filter gender 3` Filters the displayed list to show female contacts first and to only show the first three contacts
 
 **Common issues:**
 
