@@ -10,7 +10,9 @@ title: User Guide
     Manage students with ease.
 </h1>
 <div align="center">
-No more sleepless nights deriving Excel formulas. nustracker does everything for you, preserving your energy—for a happier school life.
+
+No more sleepless nights deriving Excel formulas. **nustracker** does everything for you, preserving your energy—for a happier school life.
+
 </div><br>
 <p align="center">
   <img src="images/image1.jpg" />
@@ -21,7 +23,7 @@ No more sleepless nights deriving Excel formulas. nustracker does everything for
     Track event attendance.
 </h1>
 <div align="center">
-nustracker specializes in displaying event information, each complete with student attendance and even a blacklist feature. Clean, silky management is here.
+**nustracker** specializes in displaying event information, each complete with student attendance and even a blacklist feature. Clean, silky management is here.
 </div><br>
 <p align="center">
   <img src="images/image2.jpg" />
@@ -32,12 +34,14 @@ nustracker specializes in displaying event information, each complete with stude
     Customize to your liking.
 </h1>
 <div align="center">
-    We know you're tired of staring at grid boxes (because we are too). With nustracker, you can switch between a light and dark mode, and customize the profile picture glow. Customization has never been simpler.
+    We know you're tired of staring at grid boxes (because we are too). With **nustracker**, you can switch between a light and dark mode, and customize the profile picture glow. Customization has never been simpler.
 </div><br>
 <p align="center">
   <img src="images/image3.jpg" />
 </p> 
+
 <div style="page-break-after: always;"></div>
+
 **nustracker** is a desktop application for NUS event directors and student leaders of student organizations in NUS School of Computing to manage students and events.
 
 As an event director and student leader, you will be able to add students and events into **nustracker** and use it to keep track of event attendance, blacklist students, etc. These are just _some_ of the features and there will be more to come in the future. **nustracker** is customized to your needs—simple, intuitive, and easy to pick up.
@@ -57,6 +61,15 @@ These boxes will give you tips on how to use the application better.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Caution:**
 These boxes warn you about important things! It is imperative that you read these, otherwise bad things might happen.
+</div>
+
+Example (this is also an actual tip!):
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+If you see blue words that look like [this](https://en.wikipedia.org/wiki/Hyperlink), clicking on them bring you to different sections of the user guide, or to relevant materials outside the user guide.
+
 </div>
 
 <h1 align="center"> Let's get started with nustracker!</h1><br>
@@ -110,10 +123,14 @@ _(Optional)_ If you would like to have some sample profile pictures to go along 
 </div>
 
 
-**nustracker** is now up and running on your system! To get started, we suggest this flow:
+**nustracker** is now up and running on your system! 
+
+
+For getting started, we suggest this flow:
 1. [General Layout](#general-layout)
 2. [Basics of nustracker](#basics-of-nustracker)
 3. [Commands](#commands-section)
+
 
 _If you are an experienced CLI user, you can jump straight to the [Command Summary](#command-summary)._
 
@@ -198,12 +215,18 @@ The following is a description of the general layout of **nustracker**.
 
 ## Basics of nustracker
 
-<div markdown="span" class="alert alert-info"> :label:
-The profile pictures shown here are provided with the .zip file! You can add them to the profile-pictures folder (see Customization for more information), or you can ignore them for now.
+<div markdown="span" class="alert alert-info">
+
+:label:
+The profile pictures shown here are provided with the .zip file! You can add them to the profile-pictures folder (see [Customization](#customization) for more information), or you can ignore them for now.
+
 </div>
 
 We hope you are excited to learn the basics of **nustracker**!
-But, before we do anything, let’s set the premise. Imagine that you are the manpower executive of a newly-formed NUS society called the Imaginary Society (Very creative we know). 
+
+But, before we do anything, let’s learn how to use a Command Line Interface (CLI). CLI is a command line program that accepts text input to execute different actions. In other words, all you have to do to use **nustracker** is to type a command in the command bar, and press enter.
+
+Now for the premise. Imagine that you are the manpower executive of a newly-formed NUS society called the Imaginary Society (very creative we know). 
 
 It plans on holding a fair—appropriately titled the Imaginary Fair—on the 1st of December 2021, at 9am.
 
@@ -235,7 +258,7 @@ So, in the case of Sae Byeok, her fields would be:
 The fields do not have to be in any specific order. For example, `MAJOR` can come before `STUDENT_NAME`.
 </div>
 
-Using the fields above, type this into the command box: `add n/Sae Byeok m/CS id/e1111111 y/1 p/87438007 e/saebyeok@example.com` and press **Enter**.
+Using the fields above, type this into the command bar: `add n/Sae Byeok m/CS id/e1111111 y/1 p/87438007 e/saebyeok@example.com` and press **Enter**.
 
 After entering the command and pressing **Enter**, scroll all the way down using the scrollbar on the right to view your newly added student!
 **nustracker** should look like this: 
@@ -256,10 +279,9 @@ So, in the case of Imaginary Fair, the fields would be:
 - `EVENT_DATE (DD-MM-YYYY)`: 01-12-2021
 - `EVENT_TIME (24 Hour Time)`: 0900
 
-Using the fields above, type this into the command box: `create n/Imaginary Fair d/01-12-2021 t/0900` and press **Enter**.
+Using the fields above, type this into the command bar: `create n/Imaginary Fair d/01-12-2021 t/0900` and press **Enter**.
 
-Now lets view the newly created event! To make **nustracker** show the current list of events, either press the **Events** button in the top bar, or type `events` into the command box and press **Enter**.
-(_If you are unsure about the buttons, refer [here](#general-layout)._) Then scroll down using the scrollbar on the right.
+Let's take a look at the newly created event. To make **nustracker** show the current list of events, either press the **Events** button in the top bar, or type `events` into the command bar and press **Enter**. (_If you are unsure about the buttons, refer [here](#general-layout)._) Then scroll down using the scrollbar on the right.
 
 If done right, **nustracker** should look like this: 
 
@@ -278,19 +300,17 @@ So, in the case of Sae Byeok and the Imaginary Fair, it would be:
 - `STUDENT_ID`: e1111111 
 - `EVENT`: Imaginary Fair
 
-Using the fields above, type this into the command box: `enroll id/e1111111 ev/Imaginary Fair` and press **Enter**.
+Using the fields above, type this into the command bar: `enroll id/e1111111 ev/Imaginary Fair` and press **Enter**.
 
 If done correctly, this change should be reflected in both the Imaginary Fair's details and Sae Byeok's particulars.
 
 ![event-card](images/user-guide/imaginary-fair-event-card-after-enroll.png)
 _Under Participants, there is a participant with the Student ID `e111111`, which corresponds to Sae Byeok_
 
-To make **nustracker** go back to the students list, either press the **Students** button in the top bar, or type `students` into the command box and press **Enter**.
+To make **nustracker** go back to the students list, either press the **Students** button in the top bar, or type `students` into the command bar and press **Enter**.
 
 ![student-card](images/user-guide/student-card-after-enroll.png)<br>
 _Under Enrolled Events, we can see that Sae Byeok is enrolled in the Imaginary Fair_ <br>
-
-
 
 
 **Congratulations!** You have reached the end of this very brief tutorial where you learnt how to add your first student, create your
@@ -316,7 +336,7 @@ You're on your way to becoming an **nustracker** pro!
 
 **:label: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -350,7 +370,7 @@ You're on your way to becoming an **nustracker** pro!
 3. [Editing a student](#editing-a-student--edit)
 4. [Deleting a student](#deleting-a-student--delete)
 5. [Filtering students](#filtering-students-filter)
-6. [Delete shown students](#delete-shown-students--delfiltered)
+6. [Delete shown students](#deleting-displayed-students--delfiltered)
 7. [Blacklisting students](#blacklisting-students-blacklist)
 8. [Whitelisting students](#whitelisting-students-whitelist)
 
@@ -363,8 +383,8 @@ Command: `add n/STUDENT_NAME m/MAJOR id/STUDENT_ID y/YEAR p/PHONE e/EMAIL`
 Formatting:
 
 - Student name:
-  - Does not need to be unique.
-  - Can only contain alphanumerical characters and spaces.
+  - Does not need to be unique
+  - Can only contain alphanumerical characters and spaces
 
 - Major is to be specified via acronyms. The following acronyms are valid:
   1. CS (Computer Science)
@@ -373,10 +393,10 @@ Formatting:
   4. ISEC (Information Security)
 
 - Student ID:
-  - Must be specified exactly as the letter e, followed by 7 numbers. (eXXXXXXX)
+  - Must be specified exactly as the letter e, followed by 7 numbers (eXXXXXXX)
   - Must be unique
 
-- Year must be a number from 1 to 6 inclusive.
+- Year must be a number from 1 to 6 inclusive
 - Phone:
   - Must be unique
   - Have length of 3 - 20 numbers inclusive
@@ -469,8 +489,8 @@ Command: `filter [id/STUDENT_ID [MORE_STUDENT_IDs]...] [n/STUDENT_NAME [MORE_STU
 * You can search by partial keywords for names. e.g. `n/al` will match with `n/alice`
 
 Examples:
-* `filter id/e1234567` returns the student with the ID e1234567 if that student exists in nustracker.
-* `filter id/e1234567 e2345678` returns two students whose student IDs are e1234567 and e2345678 if they exist in nustracker.
+* `filter id/e1234567` returns the student with the ID e1234567 if that student exists in **nustracker**.
+* `filter id/e1234567 e2345678` returns two students whose student IDs are e1234567 and e2345678 if they exist in **nustracker**.
 * `filter n/John` returns the students whose names contain John.
 * `filter n/John alice` returns the students whose names contain John OR Alice.
 * `filter m/CS IS` returns the students majoring in CS or IS.
@@ -481,15 +501,17 @@ _**Coming soon:** Filter by phone number._
 
 _**Coming soon:** Filter by multiple fields._
 
-### Delete shown students : `delfiltered`
+### Deleting displayed students : `delfiltered`
 
-Mass deletes all students currently shown in the student list. This is typically used after a filter
-command to delete students based on a certain criteria.
+Deletes all currently displayed students. This is typically used after a filter command to delete students based on a certain criteria.
 
 Command: `delfiltered`
 
-<div markdown="span" class="alert alert-danger">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-danger">
+
+:exclamation: **Caution:**
 Use with caution! If the student list is not filtered before using `delfiltered`, all the students currently in **nustracker** will be deleted since all of them are shown.
+
 </div>
 
 * This command can only be used when **nustracker** is showing the Student list.
@@ -502,7 +524,7 @@ Examples:
 
 ### Blacklisting students: `blacklist`
 
-Blacklists students from an event. Blacklisted Students will not be allowed to enroll into the events they are blacklisted from.
+Blacklists students from an event. Blacklisted students will not be allowed to enroll into the events they are blacklisted from.
 
 Command: `blacklist id/STUDENT_ID ev/EVENT_NAME`
 
@@ -654,8 +676,7 @@ Exports the emails of the students that are currently being displayed.
 
 Command: `export fn/FILE_NAME`
 
-- Filenames cannot contain these illegal characters:
-`\ : * ? " < > | `
+- Filenames cannot contain these illegal characters: `\ : * ? " < > | `
 - Filenames cannot exceed 50 characters.
 
 The file will be located in the `data` directory, which is where the app's save files are located.
@@ -705,7 +726,8 @@ Another key feature of **nustracker** is its ability to be customized greatly. T
 customized to your liking.
 
 ### Changing between Light/Dark Theme
-**nustracker** has a light/dark theme. To toggle between the two, type `theme` into the command box, or click the button (to the left of _**Settings**_) as shown in the image below and voila!
+
+**nustracker** has a light/dark theme. To toggle between the two, type `theme` into the command bar, or click the button (to the left of _**Settings**_) as shown in the image below and voila!
  
 ![change_theme](images/user-guide/change_theme.PNG)
 
@@ -724,15 +746,15 @@ customized to your liking.
 
 4. Rename the image to correspond to the **Student ID** of the student in **nustracker** that will use this profile picture.
 
-    For example, let's say there is a student in **nustracker** with the Student ID **e1111111**.
+    For example, let's say there is a student in **nustracker** with the Student ID **e1111111**. You should rename the picture to **e1111111** as shown below.
 
    ![match-student-id](images/user-guide/match-student-id.PNG)
  
    ![changed-profile-picture](images/user-guide/changed-profile-picture.PNG)
 
-      *The updated student card (belonging to the student with Student ID **e1111111** in **nustracker**)*
+      *The updated information (belonging to the student with Student ID **e1111111** in **nustracker**)*
 
-5. The profile picture will update once you type `refresh` into the command box, click the Refresh button, or restart **nustracker**.
+5. The profile picture will update once you type `refresh` into the command bar, click the Refresh button, or restart **nustracker**.
 
 6. You're done!
 
@@ -742,7 +764,7 @@ customized to your liking.
 
 **nustracker** allows you to change the color of the glow of the profile picture.
 
-1. Open up the **Settings** window either by clicking the **Settings** button or by typing in `settings` into the command box.
+1. Open up the **Settings** window either by clicking the **Settings** button or by typing in `settings` into the command bar.
  
 
 2. Click the dropdown menu, and pick a color.
@@ -751,13 +773,14 @@ customized to your liking.
 
     *You can choose one of the pre-selected colors.*
  
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 Advanced users: You can manually input your own color hex code in preferences.json! (If it is invalid,
 the glow will be the default pink!).
+
 </div>
 
-
-<div style="page-break-after: always;"></div>
 ### Customization FAQs
  
 **Q**: I have added the image, but it does not appear. <br>
@@ -774,7 +797,9 @@ You have now learnt to customize **nustracker** to its fullest. Go ahead and pla
     
 
 ---------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
+
 ## Misc
 ### Saving the data
 
@@ -793,12 +818,18 @@ The folder `C:\Users\JohnDoe\data` is also where exported files are contained!
 
 **nustracker** data is saved as a JSON file. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-danger"> :exclamation: **Caution:**
+<div markdown="span" class="alert alert-danger">
+
+:exclamation: **Caution:**
 Please edit carefully! **nustracker** will not be able to load your data if any errors are present. If you type a command while the application has no data, your own data will be overwritten. 
 We recommend that you make a backup of your original data file first just in case.
+
 </div>
+
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: Is **nustracker** free?<br>
@@ -832,7 +863,7 @@ We recommend that you make a backup of your original data file first just in cas
 **[edit](#editing-a-student--edit)** | Edits a student | `edit id/ID_OF_STUDENT_TO_EDIT [n/NEW_NAME] [m/NEW_MAJOR] [id/NEW_STUDENT_ID] [y/NEW_YEAR] [p/NEW_PHONE] [e/NEW_EMAIL]` |
 **[delete](#deleting-a-student--delete)** | Deletes a student | `delete id/STUDENT_ID` |
 **[filter](#filtering-students-filter)** | Filters by field  | `filter n/STUDENT_NAME [MORE_STUDENT_NAMES]...` <br> `filter id/STUDENT_ID [MORE_STUDENT_IDS]...` <br> `filter m/MAJOR [MORE_MAJORS]...` <br> `filter y/YEAR [MORE_YEARS]...` <br> `filter ev/EVENT_NAME` |
-**[delfiltered](#delete-shown-students--delfiltered)** | Mass deletes shown students | `delfiltered` |
+**[delfiltered](#deleting-displayed-students--delfiltered)** | Deletes all students that are currently displayed | `delfiltered` |
 **[blacklist](#blacklisting-students-blacklist)** | Blacklists a student from attending an event | `blacklist id/STUDENT_ID ev/EVENT_NAME` |
 **[whitelist](#whitelisting-students-whitelist)** | Whitelists a student from attending an event | `whitelist id/STUDENT_ID ev/EVENT_NAME` |
 
