@@ -70,9 +70,9 @@ This didn't work? Refer to the [FAQ](#faq) for more information on alternative w
 
 * Typing `exit` will save the data we have and exit the application.
 
+
 * If you encounter any problems, please refer to the [FAQ section](#faq) below.
 --------------------------------------------------------------------------------------------------------------------
-
 
 
 ## Features
@@ -81,7 +81,7 @@ This didn't work? Refer to the [FAQ](#faq) for more information on alternative w
 
 **:information_source: Notes about the command formats:**<br>
 
-* Words in `UPPER_CASE` are fields (link to specification of fields) to be supplied by you.<br>
+* Words in `UPPER_CASE` are [fields](#specification-of-fields) to be supplied by you.<br>
     * e.g. in `add n/NAME`, `NAME` is to be replaced with the name of the applicant you want to add such as `add n/John Doe`.<br>
 
 * Fields in [square brackets](#glossary) are optional.<br>
@@ -282,7 +282,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 
 ## FAQ
-Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](##contact-us).
+Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to contact [us](#contact-us).
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
@@ -297,7 +297,7 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file is corrupted. Revert the save to your last backup, or contact us if you need help.
 
 **Q**: Why does my command not work?<br>
-**A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' specifications. (link)
+**A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' [specifications](#specification-of-fields).
 
 **Q**: Is my data automatically saved?<br>
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
@@ -367,5 +367,5 @@ Word | Definition
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contact Us
-If you have any questions or have suggestions for the application, feel free to contact us at internwatcher@gmail.com.
+If you have any questions or have suggestions for the application, feel free to contact us at [internwatcher@gmail.com](mailto: internwatcher@gmail.com).
 
