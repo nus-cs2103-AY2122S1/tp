@@ -855,7 +855,7 @@ Displays a list of upcoming lessons that ends within the next 48 hours.
 Format: `remind`
 
 <div align="center">
-  <img src="images/remind.png" width="400" />
+  <img src="images/remind.png" width="450" />
 </div>
 
 <div class="caption">Reminder window interface.</div>
