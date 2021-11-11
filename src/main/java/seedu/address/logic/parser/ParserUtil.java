@@ -1,6 +1,20 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_OLD_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,6 +35,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String REGEX_SURROUNDING_DOUBLE_QUOTE = "^\"|\"$";
+    // Matches word NOT surrounded by "double quotes"
+    public static final String TEMPLATE_REGEX_REPLACEMENT_PATTERN = "(?<![\"'])((?i)%s)(?![\"'])";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -37,7 +54,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces, and surrounding double quote marks will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -52,7 +69,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces, and surrounding double quote marks will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -67,7 +84,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces, and surrounding double quote marks will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -82,7 +99,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces, and surrounding double quote marks will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -116,9 +133,32 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        for (String tagSequence : tags) {
+            String[] tokenizedTags = tagSequence.trim().split(",");
+            for (String tag : tokenizedTags) {
+                tagSet.add(parseTag(tag));
+            }
         }
         return tagSet;
+    }
+
+    /**
+     * Replaces the long form prefixes in the argument with their respective short forms.
+     */
+    public static String mapPrefixesToShortForm(String args) {
+        return args.replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_NAME), PREFIX_NAME.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_ADDRESS), PREFIX_ADDRESS.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_EMAIL), PREFIX_EMAIL.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_PHONE), PREFIX_PHONE.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_TAG), PREFIX_TAG.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_OLD_PASSWORD), PREFIX_OLD_PASSWORD.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_NEW_PASSWORD), PREFIX_NEW_PASSWORD.getPrefix());
+    }
+
+    /**
+     * Given a long prefix, generates a regex pattern that matches the prefix in a string.
+     */
+    private static String replacePrefixRegexGenerator(Prefix longPrefix) {
+        return String.format(TEMPLATE_REGEX_REPLACEMENT_PATTERN, longPrefix.getPrefix());
     }
 }

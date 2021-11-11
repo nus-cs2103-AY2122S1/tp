@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandInput commandInput = new CommandInput();
 
     @FXML
     private TextField commandTextField;
@@ -32,21 +35,67 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles the Enter button pressed event.
+     * Handles any key button pressed event.
+     *
+     * @param event The key pressed event.
      */
     @FXML
+    private void handleKeyPressed(KeyEvent event) {
+        KeyCode keyCode = event.getCode();
+        switch (keyCode) {
+        case ENTER:
+            handleCommandEntered();
+            break;
+        case UP:
+        case DOWN:
+            handleNavigateHistory(keyCode);
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Handles the Enter button pressed event.
+     */
     private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
+        String commandText = commandInput.value();
         if (commandText.equals("")) {
             return;
         }
 
+        commandInput.save();
+        commandTextField.setText(commandInput.value());
+
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the Up button pressed event.
+     */
+    private void handleNavigateHistory(KeyCode keyCode) {
+        switch (keyCode) {
+        case UP:
+            commandTextField.setText(commandInput.next());
+            commandTextField.end();
+            break;
+        case DOWN:
+            commandTextField.setText(commandInput.previous());
+            commandTextField.end();
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Handles a key typed event.
+     */
+    @FXML
+    private void handleKeyTyped(KeyEvent event) {
+        commandInput.set(commandTextField.getText());
     }
 
     /**
@@ -81,5 +130,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }

@@ -6,13 +6,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * International phone validation regex pattern adapted from
+ * <a href="https://www.baeldung.com/java-regex-validate-phone-numbers">Validate Phone Numbers With Java Regex</a>
+ * by Baeldung.
  */
 public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should be at least 3 digits long and can contain international prefixes.";
+    public static final String VALIDATION_REGEX = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
+            + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
+            + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$"
+            + "|^(\\d{3,})"
+            + "|^\\+(\\d{3,})";
     public final String value;
 
     /**
@@ -30,7 +37,16 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.matches("");
+    }
+
+    /**
+     * Returns true if the phone number is empty.
+     *
+     * @return boolean that represents whether phone number is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
     }
 
     @Override

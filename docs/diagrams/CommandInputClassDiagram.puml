@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+
+package "UI" {
+    class CommandBox UI_COLOR
+    class CommandInput UI_COLOR_T3
+}
+
+package "History" {
+    class History COMMONS_COLOR_T2
+    class StringHistory COMMONS_COLOR_T3
+}
+
+CommandBox -down->"1" CommandInput
+CommandInput -right->"1" StringHistory
+StringHistory .up.|> History
+
+
+@enduml

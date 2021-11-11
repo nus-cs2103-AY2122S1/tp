@@ -8,8 +8,15 @@ src/main/resources/docs/
 /out/
 /*.iml
 
+# VSCode/Eclipse files
+/.vscode/
+/.classpath
+/.settings/
+bin/
+
 # Storage/log files
 /data/
+/exports/
 /config.json
 /preferences.json
 /*.log.*
@@ -20,3 +27,6 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+
+# Encrypted file formats
+*.enc

@@ -1,0 +1,22 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+.jumbotron {
+  padding: $jumbotron-padding ($jumbotron-padding / 2);
+  margin-bottom: $jumbotron-padding;
+  background-color: $jumbotron-bg;
+  @include border-radius($border-radius-lg);
+
+  @include media-breakpoint-up(sm) {
+    padding: ($jumbotron-padding * 2) $jumbotron-padding;
+  }
+}
+
+.jumbotron-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  @include border-radius(0);
+}
+
+//@@author

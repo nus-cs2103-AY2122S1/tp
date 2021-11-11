@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import seedu.address.commons.core.GuiSettings.Theme?>
+
+<fx:root resizable="false" title="Settings" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"  minWidth="300">
+    <icons>
+        <Image url="@/images/settings_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@Fonts.css" />
+                <URL value="@SettingsTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+
+            <VBox>
+                <GridPane alignment="center" hgap="10" vgap="10">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25" />
+                    </padding>
+                    <Label text="Theme:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="themeChooser" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="DARK" />
+                                <String fx:value="LIGHT" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </GridPane>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

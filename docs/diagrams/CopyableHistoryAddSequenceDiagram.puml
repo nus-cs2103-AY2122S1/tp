@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+box "History" COMMONS_COLOR
+participant ":CopyableHistory" as copyableHistory COMMONS_COLOR_T2
+participant ":BaseHistory" as baseHistory COMMONS_COLOR_T3
+end box
+
+participant "object:Copyable" as copyable #grey
+participant "duplicateObject:Copyable" as duplicateCopyable #grey
+
+-> copyableHistory : add(object)
+activate copyableHistory
+
+copyableHistory -> copyable : copy()
+activate copyable
+
+create duplicateCopyable
+copyable -> duplicateCopyable :
+activate duplicateCopyable
+
+copyable <-- duplicateCopyable : duplicateObject
+deactivate duplicateCopyable
+
+copyableHistory <-- copyable : duplicateObject
+deactivate copyable
+
+copyableHistory -> baseHistory : add(duplicateObject)
+activate baseHistory
+
+copyableHistory <-- baseHistory
+deactivate baseHistory
+
+<-- copyableHistory :
+deactivate copyableHistory
+
+@enduml

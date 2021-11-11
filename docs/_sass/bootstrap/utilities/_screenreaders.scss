@@ -1,0 +1,17 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+//
+// Screenreaders
+//
+
+.sr-only {
+  @include sr-only();
+}
+
+.sr-only-focusable {
+  @include sr-only-focusable();
+}
+
+//@@author

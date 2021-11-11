@@ -1,0 +1,16 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+// Horizontal dividers
+//
+// Dividers (basically an hr) within dropdowns and nav lists
+
+@mixin nav-divider($color: #e5e5e5) {
+  height: 0;
+  margin: ($spacer / 2) 0;
+  overflow: hidden;
+  border-top: 1px solid $color;
+}
+
+//@@author

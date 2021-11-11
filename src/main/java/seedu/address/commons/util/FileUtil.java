@@ -1,13 +1,15 @@
 package seedu.address.commons.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Writes and reads files
+ * Utility class for file operations
  */
 public class FileUtil {
 
@@ -44,14 +46,26 @@ public class FileUtil {
     /**
      * Creates a file if it does not exist along with its missing parent directories.
      */
-    public static void createFile(Path file) throws IOException {
+    public static boolean createFile(Path file) throws IOException {
         if (Files.exists(file)) {
-            return;
+            return false;
         }
 
         createParentDirsOfFile(file);
-
         Files.createFile(file);
+        return true;
+    }
+
+    /**
+     * Creates a directory if it does not exist.
+     */
+    public static boolean createDirectoryIfEmpty(Path directory) throws IOException {
+        if (Files.exists(directory)) {
+            return false;
+        }
+
+        Files.createDirectory(directory);
+        return true;
     }
 
     /**
@@ -80,4 +94,41 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Checks if two files have the same content.
+     */
+    public static boolean areFilesEqual(Path testedFile, Path expectedFile) throws IOException {
+        BufferedReader bf1 = Files.newBufferedReader(testedFile);
+        BufferedReader bf2 = Files.newBufferedReader(expectedFile);
+
+        String line1;
+        String line2;
+
+        while ((line1 = bf1.readLine()) != null) {
+            line2 = bf2.readLine();
+            if (!line1.equals(line2)) {
+                return false;
+            }
+        }
+
+        return bf2.readLine() == null;
+    }
+
+    /**
+     * Deletes the file specified in the filepath, regardless if it exists or not.
+     */
+    public static void deleteFile(Path filePath) {
+        filePath.toFile().delete();
+    }
+
+    /**
+     * Copies the source to the target if the target is missing.
+     */
+    public static boolean copyFileIfMissing(InputStream src, Path target) throws IOException {
+        if (isFileExists(target)) {
+            return false;
+        }
+        Files.copy(src, target);
+        return true;
+    }
 }

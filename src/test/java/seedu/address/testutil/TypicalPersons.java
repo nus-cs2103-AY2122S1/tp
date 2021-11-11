@@ -42,6 +42,14 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
+    public static final Person ALICE_NAME_ONLY = new PersonBuilder().withName("Alice Pauline").buildNameOnly();
+    public static final Person BENSON_NAME_ONLY = new PersonBuilder().withName("Benson Meier").buildNameOnly();
+    public static final Person CARL_NAME_ONLY = new PersonBuilder().withName("Carl Kurz").buildNameOnly();
+    public static final Person DANIEL_NAME_ONLY = new PersonBuilder().withName("Daniel Meier").buildNameOnly();
+    public static final Person ELLE_NAME_ONLY = new PersonBuilder().withName("Elle Meyer").buildNameOnly();
+    public static final Person FIONA_NAME_ONLY = new PersonBuilder().withName("Fiona Kunz").buildNameOnly();
+    public static final Person GEORGE_NAME_ONLY = new PersonBuilder().withName("George Best").buildNameOnly();
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
@@ -73,4 +81,71 @@ public class TypicalPersons {
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static List<Person> getTypicalPersonsNameOnly() {
+        return new ArrayList<>(Arrays.asList(ALICE_NAME_ONLY, BENSON_NAME_ONLY, CARL_NAME_ONLY,
+                DANIEL_NAME_ONLY, ELLE_NAME_ONLY, FIONA_NAME_ONLY, GEORGE_NAME_ONLY));
+    }
+
+    public static List<String> getTypicalNamesStringForm() {
+        return new ArrayList<>(Arrays.asList("Alice Pauline",
+                "Benson Meier",
+                "Carl Kurz",
+                "Daniel Meier",
+                "Elle Meyer",
+                "Fiona Kunz",
+                "George Best"));
+    }
+
+    public static List<String> getTypicalPhonesStringForm() {
+        return new ArrayList<>(Arrays.asList("94351253",
+                "98765432",
+                "95352563",
+                "87652533",
+                "9482224",
+                "9482427",
+                "9482442"));
+    }
+
+    public static List<String> getTypicalEmailsStringForm() {
+        return new ArrayList<>(Arrays.asList("alice@example.com",
+                "johnd@example.com",
+                "heinz@example.com",
+                "cornelia@example.com",
+                "werner@example.com",
+                "lydia@example.com",
+                "anna@example.com"));
+    }
+
+    public static List<String> getTypicalAddressesStringFormWithDoubleQuoutes() {
+        return new ArrayList<>(Arrays.asList("\"123, Jurong West Ave 6, #08-111\"",
+                "\"311, Clementi Ave 2, #02-25\"",
+                "\"wall street\"",
+                "\"10th street\"",
+                "\"michegan ave\"",
+                "\"little tokyo\"",
+                "\"4th street\""));
+    }
+
+    public static List<String> getTypicalAddressesStringForm() {
+        return new ArrayList<>(Arrays.asList("123, Jurong West Ave 6, #08-111",
+                "311, Clementi Ave 2, #02-25",
+                "wall street",
+                "10th street",
+                "michegan ave",
+                "little tokyo",
+                "4th street"));
+    }
+
+    public static List<String> getTypicalTagsStringForm() {
+        return new ArrayList<>(Arrays.asList("friends",
+                "owesMoney;friends",
+                "",
+                "friends",
+                "",
+                "",
+                ""));
+    }
+
+
 }

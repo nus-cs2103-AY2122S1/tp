@@ -1,0 +1,17 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+// stylelint-disable declaration-no-important
+
+@mixin float-left {
+  float: left !important;
+}
+@mixin float-right {
+  float: right !important;
+}
+@mixin float-none {
+  float: none !important;
+}
+
+//@@author

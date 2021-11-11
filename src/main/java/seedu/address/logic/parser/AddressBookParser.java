@@ -12,10 +12,16 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PasswordCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UnselectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.CsvFileSelector;
 
 /**
  * Parses user input.
@@ -40,12 +46,20 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            CsvParser csvParser = new CsvParser();
+            csvParser.parse(new CsvFileSelector("imports"));
+            return new ImportCommandParser().parse(csvParser);
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -62,11 +76,20 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser().parse(arguments);
+
+        case UnselectCommand.COMMAND_WORD:
+            return new UnselectCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case PasswordCommand.COMMAND_WORD:
+            return new PasswordCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

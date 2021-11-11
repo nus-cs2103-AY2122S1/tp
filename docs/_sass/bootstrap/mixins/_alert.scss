@@ -1,0 +1,19 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+@mixin alert-variant($background, $border, $color) {
+  color: $color;
+  @include gradient-bg($background);
+  border-color: $border;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+
+  .alert-link {
+    color: darken($color, 10%);
+  }
+}
+
+//@@author

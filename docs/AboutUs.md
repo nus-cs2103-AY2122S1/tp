@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Siew Hui Zhuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/huizhuansam.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://huizhuansam.github.io)]
+[[github](https://github.com/huizhuansam)]
+[[portfolio](team/huizhuansam.md)]
 
-* Role: Project Advisor
+- Role: Scheduling and Tracking, Deliverables and Deadlines
+- Responsibilities: Command syntax, encryption module
 
-### Jane Doe
+### Kishendran Vendar Kon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kishendranvendarkon.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/KishendranVendarKon)]
+[[portfolio](team/kishendranvendarkon.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Testing
+- Responsibilities: In charge of `Storage` component
 
-### Johnny Doe
+### Lee Zheng Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhenghanlee.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/zhenghanlee)]
+[[portfolio](team/zhenghanlee.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Documentation, VSCode Expert
+- Responsibility: Search by categories
 
-### Jean Doe
+### Loh Xian Ze, Bryan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/anonymxtrix.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/anonymxtrix)]
+[[portfolio](team/anonymxtrix.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Code Quality, Git Expert
+- Responsibility: Logic
 
-### James Doe
+### Zhou Jiahao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhou-jiahao-1998.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Zhou-Jiahao-1998)]
+[[portfolio](team/zhou-jiahao-1998.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Integration
+- Responsibility: Search by categories

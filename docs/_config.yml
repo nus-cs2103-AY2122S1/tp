@@ -1,15 +1,20 @@
-title: "AB-3"
+title: "SPAM"
 theme: minima
 
 header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
+  - Search.html
 
 markdown: kramdown
 
-repository: "se-edu/addressbook-level3"
+repository: "AY2122S1-CS2103T-W13-2/tp"
 github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
+
+tipue_search:
+  include:
+    pages: true

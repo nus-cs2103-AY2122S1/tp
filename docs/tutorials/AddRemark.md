@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Tutorial: Adding a command"
+exclude_from_search: true
 ---
 
 Let's walk you through the implementation of a new command — `remark`.

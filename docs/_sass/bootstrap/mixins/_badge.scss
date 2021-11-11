@@ -1,0 +1,18 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+@mixin badge-variant($bg) {
+  color: color-yiq($bg);
+  background-color: $bg;
+
+  &[href] {
+    @include hover-focus {
+      color: color-yiq($bg);
+      text-decoration: none;
+      background-color: darken($bg, 10%);
+    }
+  }
+}
+
+//@@author

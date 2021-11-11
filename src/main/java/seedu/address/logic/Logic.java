@@ -1,9 +1,11 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,12 +18,21 @@ import seedu.address.model.person.Person;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Executes the command if it is a PasswordCommand.
+     *
+     * @param command The command as entered by the user.
+     * @return The result of the command execution.
+     */
+    Optional<CommandResult> executePasswordCommand(Command command);
 
     /**
      * Returns the AddressBook.
@@ -32,6 +43,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the selected list of persons */
+    ObservableList<Person> getSelectedPersonList();
 
     /**
      * Returns the user prefs' address book file path.

@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+Package Model <<Rectangle>>{
+Interface Model <<Interface>>
+Class ModelManager
+}
+Model <|.. ModelManager
+
+Package Logic <<Rectangle>>{
+    Class FindCommandParser
+    Class FindCommand
+    Class FindConditions
+}
+
+FindCommandParser *-right-> FindConditions
+FindConditions .up.|> Predicate
+FindCommandParser ..> FindCommand
+FindCommand .left.> ModelManager
+
+@enduml

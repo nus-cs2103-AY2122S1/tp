@@ -1,0 +1,20 @@
+//@@author anonymxtrix-reused
+// Stylesheet was taken from Bootstrap (https://getbootstrap.com/) so that we can make use of their components in our
+// documentation.
+
+// stylelint-disable declaration-no-important
+
+// Typography
+
+@mixin text-emphasis-variant($parent, $color) {
+  #{$parent} {
+    color: $color !important;
+  }
+  a#{$parent} {
+    @include hover-focus {
+      color: darken($color, 10%) !important;
+    }
+  }
+}
+
+//@@author

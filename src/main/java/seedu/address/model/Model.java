@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -76,12 +77,28 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Adds a list of persons into the selected list of persons.
+     * The person must exist in the address book.
+     */
+    void addSelected(List<Person> persons);
+
+    /**
+     * Removes a list of persons from the selected list of persons.
+     * The person must exist in the selected list.
+     */
+    void removeSelected(List<Person> persons);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodified view of the selected person list */
+    ObservableList<Person> getSelectedPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<? super Person> predicate);
+
 }

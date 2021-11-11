@@ -1,0 +1,98 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "cp:CsvParser" as CsvParser LOGIC_COLOR
+participant "fc:CsvFileSelector" as CsvFileSelector LOGIC_COLOR
+participant ":ImportCommandParser" as ImportCommandParser LOGIC_COLOR
+participant "i:ImportCommand" as ImportCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("import")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("import")
+activate AddressBookParser
+
+create CsvParser
+AddressBookParser -> CsvParser
+activate CsvParser
+
+CsvParser --> AddressBookParser
+deactivate CsvParser
+
+create CsvFileSelector
+AddressBookParser -> CsvFileSelector
+activate CsvFileSelector
+
+CsvFileSelector --> AddressBookParser
+deactivate CsvFileSelector
+
+AddressBookParser -> CsvParser : parse(fc)
+activate CsvParser
+
+CsvParser -> CsvFileSelector : selectFile()
+activate CsvFileSelector
+
+CsvFileSelector --> CsvParser
+deactivate CsvFileSelector
+
+CsvParser --> AddressBookParser
+deactivate CsvParser
+
+create ImportCommandParser
+AddressBookParser -> ImportCommandParser
+activate ImportCommandParser
+
+ImportCommandParser --> AddressBookParser
+deactivate ImportCommandParser
+
+AddressBookParser -> ImportCommandParser : parse(cp)
+activate ImportCommandParser
+
+create ImportCommand
+ImportCommandParser -> ImportCommand :
+activate ImportCommand
+
+ImportCommand --> ImportCommandParser : i
+deactivate ImportCommand
+
+ImportCommandParser --> AddressBookParser : i
+deactivate ImportCommandParser
+
+ImportCommandParser -[hidden]-> AddressBookParser
+destroy ImportCommandParser
+
+AddressBookParser --> LogicManager : i
+deactivate AddressBookParser
+
+LogicManager -> ImportCommand : execute()
+activate ImportCommand
+
+loop Till all persons added
+    ImportCommand -> Model : addPerson(p)
+    activate Model
+    Model --> ImportCommand
+    deactivate Model
+end
+
+create CommandResult
+ImportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ImportCommand
+deactivate CommandResult
+
+ImportCommand --> LogicManager : result
+deactivate ImportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

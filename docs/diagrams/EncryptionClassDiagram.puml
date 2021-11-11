@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor ENCRYPTION_COLOR
+skinparam classBackgroundColor ENCRYPTION_COLOR
+
+Package Encryption <<Rectangle>>{
+Interface Encryption <<Interface>>
+Class EncryptionManager
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Encryption
+
+EncryptionManager .up.|> Encryption
+@enduml
