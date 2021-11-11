@@ -562,8 +562,6 @@ Example:
     </tbody>
 </table>
 
-* In the future, we will allow search by lesson fees and end date.
-
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
 
@@ -582,7 +580,10 @@ Examples:
 
 **Example of finding by different types of fields**
 
-To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
+Suppose you want to find students with the tag `new` or with lessons between `1100-1300`.
+1. Type the command `find cond/any t/new time/1100-1300` into the command box. 
+   
+2. Press <kbd>Enter</kbd> and you should see that the list now displays only students matching the given keywords.
 
 ![find](images/find.png)
 
