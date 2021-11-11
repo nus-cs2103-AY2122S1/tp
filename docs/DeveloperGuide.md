@@ -1042,13 +1042,13 @@ Assumptions:
 
 ### Exiting the app
 
-1. Test case: `exit`
--Expected output: The app shuts down.
+1. Test case: `exit` <br> 
+- Expected output: The app shuts down.
 
 ### Viewing help
 
-1. Test case: `help`
--Expected output: The `Help` Window pops up, showing a link to the `User Guide`.
+1. Test case: `help` <br> 
+- Expected output: The `Help` Window pops up, showing a link to the `User Guide`.
 
 ### Saving data
 
