@@ -331,7 +331,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 | :---: | :--- |
 | **Example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), McDonald's` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at McDonald's |
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
-| <img src="images/tip_icon.png" width="50"/> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
+| <img src="images/tip_icon.png" width="50"/> | • Multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
 
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
@@ -367,9 +367,9 @@ All clients in an address book would be shown in the client view list.
 ### 5.6 Sort Contacts : `sort`
 
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
-based on the given `SORT DIRECTION`.
+based on the given `SORT_DIRECTION`.
 
-| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
+| Format | `sort <attribute>/SORT_DIRECTION...` <br> <br> • `SORT_DIRECTION` can take on the values `asc` or `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. |
 | :---: | :--- |
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
@@ -379,7 +379,7 @@ based on the given `SORT DIRECTION`.
 For instance, if you were to sort clients by risk appetite.
 
 | `sort r/asc`| `sort r/dsc` |
-| :---: | :--- |
+| :---: | :---: |
 | <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
 
 
@@ -396,7 +396,7 @@ Finds the meeting schedule on a specified date.
 For instance, using `schedule 30-11-2021` will produce the following result. <br>
 
 | Before | After |
-| --- | --- |
+| :---: | :---: |
 | <img src="images/ExpectedScheduleCommand.png" width="400"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="400"/> |
 
 ### 5.8 Locating clients by keywords : `search`
@@ -412,7 +412,7 @@ Finds clients whose contacts match with the given keywords.
 For instance, using `search Alex` will produce the following result. <br>
 
 | Before | After |
-| --- | --- |
+| :---: | :---: |
 | <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
 
 ### 5.9 Filter current list by keywords : `filter`
@@ -429,7 +429,7 @@ Filters the current list by the given keywords.
 For instance, using `filter t/colleagues` will produce the following result.
 
 | Before | After |
-| --- | --- |
+| :---: | :---: |
 | <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
 
 ### 4.10 Clearing all entries : `clear`

@@ -184,7 +184,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 As client attributes often share a few similarities in their constraints, some with their own differences, we provide interfaces for developers to customise the constraints of client attributes.
 
-### 3.7.1 Field options
+#### 3.7.1 Field options
 
 We provide options for developers to easily customise the constraints on the user input such as whether the input is required or whether it is editable. These field options are encapsulated within the `Field` interface, which further branches into more concrete interfaces which can be implemented by `Client` attributes.
 
@@ -197,7 +197,7 @@ IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for i
 DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Client` creation. Default to `""`.
 IS_EDITABLE | If set to `true`, the field is editable by the user through edit command. Default to `true`.
 
-### 3.7.2 Field interfaces
+#### 3.7.2 Field interfaces
 
 <p align="center">
 <img src="images/FieldClassDiagram.png" width="900" />
@@ -205,7 +205,7 @@ IS_EDITABLE | If set to `true`, the field is editable by the user through edit c
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
-#### 3.7.2.1 OptionalStringBasedField
+##### 3.7.2.1 OptionalStringBasedField
 
 Option | Default
 --- | ---
@@ -214,7 +214,7 @@ IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
-#### 3.7.2.2 OptionalNonStringBasedField
+##### 3.7.2.2 OptionalNonStringBasedField
 
 Option | Default
 --- | ---
@@ -223,7 +223,7 @@ IS_NULL_VALUE_ALLOWED | `true`
 DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
-#### 3.7.2.3 RequiredField
+##### 3.7.2.3 RequiredField
 
 Option | Default
 --- | ---
@@ -232,7 +232,7 @@ IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`(But not used as value is required)
 IS_EDITABLE | `true`
 
-### 3.7.3 FieldLength interfaces
+#### 3.7.3 FieldLength interfaces
 
 <p align="center">
 <img src="images/FieldLengthDiagram.png" width="700" />
@@ -597,8 +597,15 @@ Let's say you dislike the look of our current `BookTheme`: you want the backgrou
 Here's what you should do:
 1. cd to `tp/src/main/resources/view`.
 2. Open `BookTheme.css`.
-3. On the top of the css file, you will see that all the [css variables](https://www.w3schools.com/css/css3_variables.asp) are nicely organised and defined for you.
-The following table describes what each of the css variables does:
+3. On the top of the css file, you will see that all the [css variables](#5111-summary-of-the-functions-of-css-variables) are nicely organised and defined for you. 
+4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
+5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
+
+<p align="center">
+<img src="images/BookThemeModified.png" width="500" />
+</p>
+
+##### 5.1.1.1 Summary of the functions of CSS variables:
 
 CSS Variable | Description | Default (in BookTheme)
 --------|---------|---------
@@ -613,12 +620,6 @@ CSS Variable | Description | Default (in BookTheme)
 -fx-menu-color-highlighted | Color of the menu when highlighted | #455a64
 -fx-menu-font-color | Color of the menu font | #ffffff
 -fx-menu-font-color-highlighted | Color of the menu font when highlighted | #ffffff
-
-4. Let's change the value of `-fx-base-1` to `#5C4033` instead (the color code for dark brown).
-5. Save the file and boot up LeadsForce. You will see that the change in the background color of `BookTheme` is reflected immediately.
-<p align="center">
-<img src="images/BookThemeModified.png" width="500" />
-</p>
 
 #### 5.1.2 Give LeadsForce a new theme
 If you want to add more themes on top of our existing themes, here's what you should do:
@@ -690,116 +691,119 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User adds a client into the contact book
-2. LeadsForce adds the client to the contact book
+2. LeadsForce adds the client to the contact book<br>
    Use case ends.
 
 **Extensions**
 
 * 1a.  Missing parameters - name and email
 
-    * 1a1. LeadsForce shows an invalid command error message.
+    * 1a1. LeadsForce shows an invalid command error message.<br>
       Use case ends.
 
 #### 6.3.2 UC02 View a client's information
 
 **MSS**
 
-1. User requests to view the client's information
-2. LeadsForce shows the detailed view of the client's information
+1. User requests to view the client's information.
+2. LeadsForce shows the detailed view of the client's information.<br>
+   Use case ends.
 
 **Extensions**
 
 * 2a.  User inputs an invalid Client ID
-    * 2a1. LeadsForce shows an invalid command error to user.
+    * 2a1. LeadsForce shows an invalid command error to user.<br>
       Use case ends.
 
 #### 6.3.3 UC03 Edit client information
 
 **MSS**
 
-1. User request to edit multiple attributes of a client
+1. User request to edit multiple attributes of a client.
 2. LeadsForce updates the client's information.
-3. User __UC02 Views a client's information__ to see that the information of the client have been changed.
+3. User __UC02 Views a client's information__ to see that the information of the client have been changed.<br>
+   Use case ends.
 
 **Extensions**
 
 * 1a.  User inputs invalid attributes
-    * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format.
+    * 1a1. LeadsForce shows an error to user, and informs the user of the valid attribute format.<br>
       Use case ends.
 
 #### 6.3.4 UC04 Delete a client
 
 **MSS**
 
-1.  User requests to list clients
-2.  LeadsForce shows a list of clients
+1.  User requests to list clients.
+2.  LeadsForce shows a list of clients.
 3.  User requests to delete a specific client by their Client ID.
-4.  LeadsForce deletes the client
-
+4.  LeadsForce deletes the client.<br>
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty.<br>
   Use case ends.
 
 * 3a. The given client id is invalid.
-    * 3a1. LeadsForce shows an error message, informing the user that there is no client with the given Client ID .
+    * 3a1. LeadsForce shows an error message, informing the user that there is no client with the given Client ID.<br>
       Use case resumes at step 2.
 
 #### 6.3.5 UC05 Showcases list of clients
 
 **MSS**
 
-1. User request to view the full list of clients
-2. LeadsForce showcases the client's information.
+1. User request to view the full list of clients.
+2. LeadsForce showcases the client's information.<br>
+   Use case ends.
 
 #### 6.3.6 UC06 Search for a client
 
 **MSS**
 
-1. User requests to list clients
-2. LeadsForce shows a list of clients
-3. User requests to search using specific keywords
-4. LeadsForce shows the list of all people which match the keyword
+1. User requests to list clients.
+2. LeadsForce shows a list of clients.
+3. User requests to search using specific keywords.
+4. LeadsForce shows the list of all people which match the keyword.<br>
    Use case ends.
 
 **Extensions**
 
-* 2a.  LeadsForce returns an empty list since there is no clients in the list.
+* 2a.  LeadsForce returns an empty list since there is no clients in the list.<br>
   Use case ends.
 
-* 3a. LeadsForce returns an empty list since there is no client who fits the inputted keyword
+* 3a. LeadsForce returns an empty list since there is no client who fits the inputted keyword.<br>
   Use case ends.
-
 
 #### 6.3.7 UC07 Setting a meeting with clients
 
 **MSS**
 
 1. User requests to set a meeting with the client
-2. LeadsForce updates the client's next meeting portion to show the meeting that was inputted
+2. LeadsForce updates the client's next meeting portion to show the meeting that was inputted.<br>
+   Use case ends.
 
 **Extensions**
 
 * 1a.  User inputs invalid commands
-    * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format.
+    * 1a1. LeadsForce shows an error to user, and informs the user of the valid command format.<br>
       Use case ends.
 
 #### 6.3.8 UC08 Showing schedule for the day
 
 **MSS**
 
-1. User requests to see the schedule of meetings on a particular day
-2. LeadsForce shows a schedule of meetings on the day
+1. User requests to see the schedule of meetings on a particular day.
+2. LeadsForce shows a schedule of meetings on the day.<br>
+   Use case ends.
 
 **Extensions**
 
 * 1a.  User inputs an invalid date
-    * 1a1. LeadsForce shows an invalid command error to user.
+    * 1a1. LeadsForce shows an invalid command error to user.<br>
       Use case ends.
 
-* 2a. The meeting schedule is empty as the user has no meetings on the day
+* 2a. The meeting schedule is empty as the user has no meetings on the day.<br>
   Use case ends.
 
 #### 6.3.9 UC09 Clearing a client list
@@ -807,31 +811,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to clear the client list.
-2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information)
-3. User validates the request
-4. LeadsForce shows address book with no clients
+2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information).
+3. User validates the request.
+4. LeadsForce shows address book with no clients.<br>
+   Use case ends.
 
 **Extensions**
 
 * 3a.  User does not validate the request
-    * 3a1. LeadsForce does not clear the client list.
+    * 3a1. LeadsForce does not clear the client list.<br>
       Use case ends.
 
 * 3b.  User inputs invalid commands
-    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands.
+    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands.<br>
       Use case resumes at step 3.
 
 #### 6.3.10 UC10 Create a new address book
 
 **MSS**
 
-1. User requests to create another address book with a specified name
-2. LeadsForce shows view of the new address book
+1. User requests to create another address book with a specified name.
+2. LeadsForce shows view of the new address book.<br>
+   Use case ends.
 
 **Extensions**
 
 * 1a.  User inputs name that is the same as an existing address book
-    * 1a1. LeadsForce shows an error to user, and informs the user that an address book with the same name already exists.
+    * 1a1. LeadsForce shows an error to user, and informs the user that an address book with the same name already exists.<br>
       Use case ends.
 
 #### 6.3.11 UC11 Clear an address book of clients
@@ -839,18 +845,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to clear the address book.
-2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information)
-3. User validates the request
-4. LeadsForce shows address book with no clients
+2. LeadsForce asks for the user's validation (asking if the user is very sure in deleting clients' information).
+3. User validates the request.
+4. LeadsForce shows address book with no clients.<br>
+   Use case ends.
 
 **Extensions**
 
 * 3a.  User does not validate the request
-    * 3a1. LeadsForce does not clear the address book.
+    * 3a1. LeadsForce does not clear the address book.<br>
       Use case ends.
 
 * 3a.  User inputs invalid commands
-    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands.
+    * 3b1. LeadsForce shows an error to user, and informs the user of the valid commands.<br>
       Use case resumes at step 3.
 
 ### 6.4 Non-Functional Requirements
