@@ -33,16 +33,15 @@ You may ignore the warning pop-up and click on "Keep" to download Intern Watcher
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
-|macOS|Windows|
-|---|---|
-|<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
-
+    |macOS|Windows|
+    |---|---|
+    |<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-
-This didn't work? Refer to the [FAQ](#faq) for more information on alternative ways to launch Intern Watcher.
 <br>
-![Ui](images/Ui.png)
+Encountered problems? Refer to the [FAQ](#faq) for troubleshooting information and alternative ways to launch Intern Watcher.
+
+    ![Ui](images/Ui.png)
 5. Type any command in the command box and press the "Enter" key to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Here's an example usage of Intern Watcher:
