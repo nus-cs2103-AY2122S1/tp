@@ -99,7 +99,8 @@ Before we jump into the commands, let us take a moment to familiarise ourselves 
 gitGud provides a gamer-themed user interface as shown in the image below with 6 main sections.
 
 ![Ui-labelled](images/ui-screenshots/ui-overview.png)
-<br><center><ins>Image: User interface layout of gitGud</ins></center>
+<br><center><ins>Image: User interface layout of gitGud</ins></center><br>
+
 
 | Number | Section Name | Description |
 | -------| -------------- | ----------- | 
