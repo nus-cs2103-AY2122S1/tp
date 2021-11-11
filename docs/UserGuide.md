@@ -294,7 +294,7 @@ Adds a new client to the address book.
 | Format | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`|
 | :---: | --- |
 | **Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
-| <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
+| <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added can be found in the Client Info Section |
 
 **Expected Outcome:** <br>
 For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br>
