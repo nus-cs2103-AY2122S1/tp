@@ -220,7 +220,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
    pressing `enter`, LeadsForce can filter out clients based on the tag that is chosen. Further details of
    the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
-<img src="images/info_icon.png" width="30"/>Not liking the current colour scheme? LeadsForce offers 3 other darker themes for you to use, toggle the `theme` bar to change the colour scheme of the application.
+<img src="images/info_icon.png" width="30"/> Not liking the current colour scheme? LeadsForce offers 3 other darker themes for you to use, toggle the `theme` bar to change the colour scheme of the application.
 
 | Space theme | Twilight theme | Dark theme |
 | :--: | :--: | :--: |
