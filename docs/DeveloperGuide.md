@@ -991,10 +991,10 @@ Assumptions:
 - The interview time of all three applications are not specified.
 
 1. Test case: `sort c/`
-   - Expected output: The applications at index `1` and `2` switches their order. A success message is shown in the `Result Box`, indicating that the currently displayed list is sorted by company name in alphabetical order. 
+- Expected output: The applications at index `1` and `2` switches their order. A success message is shown in the `Result Box`, indicating that the currently displayed list is sorted by company name in alphabetical order. 
 
 2. Test case: `sort i/`
-   - Expected output: An error message is shown in the `Result Box`, as there is no interview time specified for any of the applications. 
+- Expected output: An error message is shown in the `Result Box`, as there is no interview time specified for any of the applications. 
 
 3. Test case: `sort`
 - Expected output: An error message is shown in the `Result Box`, as the sorting criterion is not specified.
