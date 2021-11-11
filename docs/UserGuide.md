@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: Tuition Address Book (TAB) User Guide
 ---
 <span id="toc"/>
 * Table of Contents
@@ -8,27 +8,34 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Introduction
+## Introduction: TAB Is More Than an App
 
-**Tuition Address Book (TAB)** is an all-in-one desktop application that helps private 1-to-1 home tutors like you keep track of the large number of students and your respective lesson information, and empower you to provide the best quality home tuition service.
+There used to be a time for private 1-to-1 home tutors when administrative work meant opening up multiple apps and switching between them. 
+It meant losing track of things because of a messy, decentralised workflow.
+However, this guide to using TAB will show you how to make the most of this all-in-one app, so you can say goodbye to all your other apps. 
 
-TAB is a Command Line Interface (CLI) application which allows you to interact with it with just text inputs. On top of that, TAB also comes with a clean and aesthetic Graphical User Interface (GUI), allowing you to view your data easily.
+TAB enables you to keep track of your student and lesson information, schedule, and tuition fees – everything a private 1-to-1 home tutor needs – without needing to lift your hands off the keyboard. 
+TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of text.
 
-With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
+If you can type fast, the CLI will enable you to accomplish your tasks much faster. 
+For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along, 
+and this guide will get you started and speeding through your administrative tasks in no time.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## About This Guide
+## How to Read This Guide
 
-This user guide aims to help new users become familiar with TAB. If this is your first time using TAB, we recommend reading this User Guide in order.
-
-It provides [installation instructions](#quick-start) to help get you started with using TAB, and describes in detail the [features](#features) available in TAB. 
+This user guide is intended for any user and contains everything you need to know to make the best use out of TAB.
+If this is your first-time using TAB, we recommend reading this User Guide in order.
 
 If there are any terms used in this user guide which you are unfamiliar with, their definitions may be found in the [Glossary](#glossary).
 
 **Navigation**
 
-In the [Table of Contents](#toc), each item listed is a link which you can click on to go directly to that section in the guide. At the end of every section, there will be a link which says [back to table of contents](#toc) which you can click on to return to the Table of Contents.
+You can click on the [Table of Contents](#toc) to get to the information relevant to you. 
+To help you with this, there is a [back to table of contents](#toc) link at the end of every major section.
+
+There will also be links in relevant places to help you navigate the document.
 
 **Conventions Used**
 
@@ -37,54 +44,57 @@ As you read this user guide, you may also encounter these syntax and symbols.
 Syntax | Meaning
 --------|------------------
 `text` | A command to be entered into the command box in TAB.
-<kbd>text</kbd> | A keyboard input, or a button to be clicked on.
-[text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
+<kbd>text</kbd> | A keyboard input or a button to be clicked on.
+[text](#about-this-guide) | Links to other pages or other parts of the document.
 _text_ | Caption for images.
-<div markdown="block" class="alert alert-info"> :information_source: </div> | Indication that the following text is a note, which is useful in helping you understand how TAB works.
-<div markdown="block" class="alert alert-primary"> :bulb: </div> | Indication that the following text is a tip, which allows you to interact with TAB more effectively and quickly. 
-<div markdown="block" class="alert alert-warning"> :exclamation: </div> | Indication that the following text is important. Missing it out may impair your user experience and may potentially cause TAB to misbehave!
+<div markdown="block" class="alert alert-info"> :information_source: </div> | An informative note that can help you understand how TAB works.
+<div markdown="block" class="alert alert-primary"> :bulb: </div> | A tip that can help you to interact with TAB more effectively and efficiently. 
+<div markdown="block" class="alert alert-warning"> :exclamation: </div> | A cautionary note of things that you should be careful about.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Getting Started
 
 1. Ensure you have **Java 11** or above installed on your computer. If you need help with installation, you can visit this [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for more details.
 
-2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
+2. Download the latest **TAB.jar** [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TAB.
+3. Create a new folder in your computer and move **TAB.jar** inside. This will be the home folder for the application.
 
-4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![start](images/start.png) <br> _Example screenshot of the full screen interface on a Mac. Note the icon beside "Quick Tips" may vary slightly for Windows users._
+4. Double-click **TAB.jar** to start the app. A window similar to the one below should appear in a few seconds. 
+   TAB starts up with some sample data to let you explore and see how the app will look like when it’s in use.
+   ![start](images/start.png) 
+   <div class="caption">How TAB looks when you start it for the first time.</div>
 
-5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>ENTER</kbd> will open the help window.<br>
+5. Simply type a command in the command box and press <kbd>ENTER</kbd> to execute it. 
+   You can try opening the help window by typing `help` and pressing <kbd>ENTER</kbd>.<br>
    
-   Some example commands you can try:
+   Some other commands you can try:
 
-   * **`list`** : Lists all students.
+   * **`view 1`** : Views the lessons of the first person in the list.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a student named `John Doe` to TAB.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all students.
-
-   * **`exit`** : Exits the app.
-
-6. Refer to the [Features](#features) section for details of each command.
+   * **`ladd 1 `** : Adds a lesson.
+   
+6. If you wish to clear the sample data and start using the app, simply type `clear` and press <kbd>ENTER</kbd>.
+   However, if you’re a new user, we recommend that you read on and try out our features with the sample data to get yourself familiarised.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Overview of the Graphical User Interface (GUI)
 
-This section briefly explains the various section of TAB's GUI.
+The more you use TAB, the more useful it becomes. 
+Our clean GUI allows you to see at a glance the information you need and browse through your list of students with ease.
 
 ![layout](images/annotatedGui.png)
 <div class="caption">Basic layout of TAB's user interface.</div>
 
 Section | Representation
 ---------|---------
-Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
+Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder, and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
 Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
 Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
 Result Display | The area that shows the result of the execution of commands typed in the Command Box. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
@@ -92,8 +102,13 @@ Student List | The panel that shows the list of students you have in TAB.
 Student Card | The area that shows the details of a student. See [Managing Students](#managing-students) for more details.
 Lesson List | The panel that shows the name of the student you have selected together with a list of lessons that the student has.
 Lesson Card | The area that shows the details of a lesson. See [Managing Lessons](#managing-lessons) for more details.
-Center Panel | The region that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
-Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB located in) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
+Center Panel | The region that displays the lists of students and lessons, calendar, or the list of tags depending on the command you have entered. See [Features](#features) for more details.
+Footer | The area which shows where TAB saves your student details to. <br> e.g. **./data/addressbook.json** means that TAB saves your data to the sub-folder **data** in the home folder (where TAB is located) with file name **addressbook.json** as shown in the following screenshot: <br> ![fileStorage](images/annotatedFileStorage.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The Command Box intelligently recognises when you're typing a command even if your cursor is somewhere else in the main window.
+This means that after clicking any button in the main window, you do not have to click in the Command Box again to continue. Just type away!
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -101,7 +116,7 @@ Footer | The area which shows where TAB saves your student details to. <br> e.g.
 
 ## Features
 This section describes the available features in TAB. 
-The features are categorised into the different categories as follows:
+These features are categorized as follows:
 
 * [Getting Help](#getting-help)
 * [Managing Students](#managing-students)
@@ -115,7 +130,6 @@ The features are categorised into the different categories as follows:
 --------------------------------------------------------------------------------------------------------------------
 
 ### Overview of the Command Format
-This section explains the command format used for TAB's commands.<br/>
 
 Commands are text that you can enter into TAB's command box to tell TAB which operation you would like to perform. Commands in TAB have several components and follow a general format as follows:<br/>
 
@@ -124,7 +138,7 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 |Component|Description|
 |---------|-----------|
 |Command word|The word that specifies which action you want TAB to execute.|
-|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student or lesson indices for commands that require them. The preamble may or may not be empty depending on the command.|
+|Preamble| The text before the first valid parameter prefix in the command. The preamble is where you would specify the student and lesson indices for the commands that require them. The preamble may or may not be empty depending on the command.|
 |Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
 |Parameter| An input provided by the user for the execution of the command.|
 
@@ -143,15 +157,15 @@ An example of a command in TAB:
 #### Command format notation
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter that can be substituted with `John Doe`.
 
 * Items in square brackets are optional. They can be left out, or left empty (e.g. `t/`)<br>
   e.g. `n/NAME [t/TAG]` : `n/John Doe t/` is equivalent to `n/John Doe`.
 
-* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.<br>
-  e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
+* Items in curly brackets separated by the pipe character `|` indicates that only one parameter should be selected from the list of choices.<br>
+  e.g. `cond/{all | any | none}` is used as `cond/all`, `cond/any`, or `cond/none`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used any number of times, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 <div style="page-break-after: always;"></div>
@@ -166,14 +180,14 @@ An example of a command in TAB:
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
   
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `calendar`, `exit`, `clear` etc.) are not valid.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `calendar`, `exit`, `clear`, etc.) are not valid.<br>
   e.g. `help 123` is not a valid command.
 
 * Chaining commands is not supported.<br>
-  e.g. A chain of commands such as `next next back next` or `list calendar day` are not valid commands.
+  e.g. A chain of commands such as `next next back next` or `list calendar day` are **not** valid commands.
 
-* There are constraints in place to determine whether the value you provided for a field is valid. 
-  TAB will inform you if you gave an invalid input for a field.
+* There are constraints in place to help TAB understand your inputs for commands and parameters. 
+  TAB will help you with these constraints by displaying relevant messages to you if you give an invalid input.
 
 <br />
 
@@ -183,19 +197,20 @@ An example of a command in TAB:
 <div style="page-break-after: always;"></div>
 
 ### Getting Help 
-This section tells you what to do if you require help while using TAB.
+
+Help is just a moment away when you use TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing help: `help`
+#### Viewing the help window: `help`
 
-Shows a command summary table as well as a link to access this user guide page.
+This command pops open a help window that includes a summary of our commands, as well as a link to access this user guide page.
 
 Format: `help`
 
-- You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
+- You can select a cell and copy its value using <kbd>Ctrl</kbd> + <kbd>C</kbd> on Windows or <kbd>COMMAND</kbd> + <kbd>C</kbd> on Mac.
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
-- You can click the right end to each column to sort the rows alphabetically.
+- You can click the right end of each column header to sort rows alphabetically.
 
 <div align="center">
   <img src="images/help.png" width="650" />
@@ -211,7 +226,7 @@ Format: `help`
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
-Executing any of the commands in this section will bring you to the students interface. Any command from other sections, such as `day` or `tag`, will bring you right out.
+Easily manage your student information with these commands and say goodbye to messy Excel sheets.
 
 1. [Adding a student: `add`](#adding-a-student-add)
 2. [Editing a student: `edit`](#editing-a-student-edit)
@@ -449,10 +464,20 @@ Available fields are as described in [Student parameters](#student-parameters).
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
 
-Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-* `edit 3 sch/NJC stream/` Edits the school of the 3rd student to be `NJC` and clears academic stream data.
+Example:
+
+Suppose that you want to update Betsy Crowe with her school and academic level, and remove her remarks and tags.
+Here's how to do it:
+
+1. Look for Betsy Crowe in the list of students. In this example, she's the seventh student in the list.
+   ![Updated Betsy Crowe](images/EditCommandEditBetsyInitial.png)
+   <div class="caption">Betsy Crowe is at index 7.</div>
+
+2. Type `edit 7 sch/BC Example School lvl/Secondary 3 r/ t/` to set her school and academic level to `BC Example School` and `Secondary 3` respectively and remove any remarks and tags.
+   Now, Betsy Crowe's data in TAB should look like this:
+
+![Updated Betsy Crowe](images/EditCommandEditBetsyResult.png)
+   <div class="caption">Editing Betsy Crowe.</div>
 
 #### Deleting a student: `delete`
 
@@ -480,7 +505,9 @@ Format: `list`
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
+
 This section guides you on how to find or filter students of your choice in TAB.
+Quickly find a student no matter how many you have!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -612,11 +639,12 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
+Never lose track of your lessons ever again.
 
 1. [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
 2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
 3. [Deleting a lesson: `ldelete`](#deleting-a-lesson-ldelete)
-4. [Viewing a student's lessons: `view`](#viewing-lessons-view)
+4. [Viewing a student's lessons: `view`](#viewing-a-students-lessons-view)
 5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
 
 <br>
@@ -904,6 +932,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 ### Managing Lesson Fees
 
 This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
+Easily keep track of the students that haven't paid for their lessons yet.
 
 1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
 2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
@@ -1005,7 +1034,10 @@ This value would be used to calculate and flag out which lesson's fees are due b
 
 ### Managing Your Schedule
 
-This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
+This section guides you on how to use TAB's calendar interface. 
+Typing any of the commands in this section will bring you to the calendar interface. 
+Any command from other sections, such as `list` or `tag`, will bring you right out.
+Arrange your schedule and plan ahead with our powerful in-built calendar!
 
 1. [Switching to the calendar interface: `calendar`](#switching-to-the-calendar-interface-calendar)
 2. [Viewing your daily calendar: `day`](#viewing-your-daily-calendar-day)
@@ -1217,11 +1249,6 @@ Menu Item | Shortcut | Action | Description
 <kbd>Reminder</kbd> | <kbd>F5</kbd> | View Reminder | Opens or updates the reminder window with the list of upcoming lessons that ends within the next 48 hours.
 <kbd>File</kbd> → <kbd>Exit</kbd> | N.A. | Exit | Quits TAB.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The Command Box intelligently recognises when you're typing a command even if your cursor is somewhere else in the main window.
-This means that after clicking any button in the main window, you do not have to click in the Command Box again to continue. Just type away!
-</div>
-
 <br />
 
 [back to table of contents](#toc)
@@ -1325,7 +1352,7 @@ Action | Format
 
 Action | Format
 --------|------------------
-[**Help**](#viewing-help-help) | `help`
+[**Help**](#viewing-the-help-window-help) | `help`
 [**Clear**](#clearing-all-entries-clear) |`clear`
 [**Undo**](#undoing-previous-commands-undo) | `undo`
 [**Redo**](#redoing-undone-commands-redo) | `redo`
