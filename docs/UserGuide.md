@@ -918,8 +918,8 @@ Examples:
 
 Pays for a specific lesson.
 
-The amount paid would be deducted from the outstanding fees field. The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
-You want to record the most updated outstanding fees in TAB.
+The amount paid would be deducted from the outstanding fees field. 
+The amount paid should be greater than 0 and should not be greater than the current outstanding fees.
 
 
 Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
@@ -944,8 +944,8 @@ Other Examples:
 
 #### Behaviour of the Fees Calculator
 
-TAB will update your lesson's outstanding fees upon launching TAB after the lesson has ended using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
-The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
+TAB will update all your lesson's outstanding fees upon launching TAB using the Fees Calculator feature. Fees will not be updated while TAB is open, it will only update fees upon launch.
+The Fees Calculator will account for cancelled dates in the future and ensure that lesson fees on these dates will not be added.
 
 However, the Fees Calculator will not account for any changes to lessons that have passed. 
 
