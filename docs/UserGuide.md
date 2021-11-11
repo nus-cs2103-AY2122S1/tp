@@ -10,7 +10,13 @@ title: User Guide
 
 ## Introduction
 
-TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
+TutorMaster is a desktop application for freelance tutors to store and look up their students' details, group them together 
+based on their lessons and create tasks to assign to students individually or in groups. TutorMaster aims to help you manage 
+your commitments and workload to focus on providing a better coaching for their students.
+It is optimised for use via a Command Line Interface (CLI) which requires you to simply type and enter commands to use 
+the application. Our application also includes a Graphical User Interface (GUI) which makes it easy for you to interact 
+with the interface by scrolling and clicking on buttons.  
+
 
 ## How To Use This User Guide
 
@@ -27,7 +33,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 1. Ensure you have __Java 11__ or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `tutormaster.jar` [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/releases).
+2. Download the latest __tutormaster.jar__ [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
@@ -59,9 +65,9 @@ The UI consists of a:
 Now that you have installed Tutor Master, let us give it a try!
 
 Let us 
-* Create a student named "David" 
-* Add and assign a task named "Science Report" to "David".
-* Add him to a group named "CS2103T"
+1. Create a student named "David" 
+2. Add and assign a task named "Science Report" to "David".
+3. Add him to a group named "CS2103T"
 
 We shall type commands in the Command Panel and hit `Enter` to execute it.
 
@@ -439,6 +445,9 @@ Example:
 
 Adds a task to the Task Panel.
 
+Let's say, you have come up with a challenging task for your students. You may create a new task in TutorMaster by executing 
+the `task -a` command and specifying the `NAME` and `DEADLINE` of the task. 
+
 Format: `task -a n/NAME d/DEADLINE`
 
 * Adds a task with the name `NAME` and deadline `DEADLINE`
@@ -454,9 +463,13 @@ Examples:
 
 Edits a task in the Task Panel.
 
+Let's say that the deadline for one of your tasks changed. In that case, instead of deleting the existing task and
+creating a new one with the updated deadline, you can simply edit the deadline of the task by typing the command below.  
+
 Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
+* The deadline must be in the format `YYYY-MM-DD`
 * `-e` refers to the edit command
 * It is a requirement that **at least one of the optional fields should be provided!**
 * The current value will be updated to the value input by the user
@@ -472,6 +485,9 @@ Examples:
 
 Deletes the specific task from the Task Panel.
 
+Now, let us assume that all your students have completed a task and you no longer have to store it in TutorMaster. You can 
+simply delete the task by using the command below and specifying the index of the task in the Task Panel. 
+
 Format: `task -d INDEX`
 
 * Deletes the task specified at `INDEX`. The index should be a positive number.
@@ -482,15 +498,13 @@ Examples:
 
 * `task -d 1` deletes the task at index 1
 
-#### Listing all tasks: `task -l`
-
-Shows a list of all the tasks in the Task Panel.
-
-Format: `task -l`
-
 #### Finding a task by name: `task -f`
 
 Find tasks whose names contain any of the given keywords.
+
+Let's say you would like to look up all the tasks with the name __English__. Instead of having to scroll through the
+long list of tasks in the Task Panel, you simply have to use the find task command and specify __English__ as the keyword
+to look up tasks related to English.
 
 Format: `task -f KEYWORD…​`
 
@@ -507,9 +521,21 @@ Examples:
 
 ![taskfind](images/imagesInUG/task-find.png)
 
+#### Listing all tasks: `task -l`
+
+Shows a list of all the tasks in the Task Panel.
+
+After looking up a particular task using the `task -f` command, let's assume that you would like to view all the tasks 
+in the task panel. In that case, you can simply execute the `task -l` command. 
+
+Format: `task -l`
+
 #### Assigning tasks to students: `task -as`
 
 Assigns a specific task to students’ task list.
+
+In the situation that you would like to assign a task to a particular student, you could use the command below by specifying
+the index of the student in the Student Panel and the index of the task to be assigned in the Task Panel. 
 
 Format: `task -as STUDENTINDEX TASKINDEX`
 
@@ -524,6 +550,10 @@ Examples:
 #### Assigning tasks to groups: `task -ag`
 
 Assigns a specific task to groups’ task list.
+
+Let's say you would like to assign a particular task to all the students in a class. Instead of having to assign the task
+to each student individually, you can directly assign the task to all the students in one go by using the command below 
+and specifying the index of the task in the Task Panel and the index of the group the students belong to in the Group Panel.
 
 Format: `task -ag GROUPINDEX TASKINDEX`
 
@@ -561,7 +591,7 @@ Examples:
 
 #### Marking a task as done by student: `task -do`
 
-Marks that a student has done a task.
+Marks that a student has done a task. 
 
 Format: `task -do STUDENTINDEX TASKINDEX`
 
