@@ -213,16 +213,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [g/GENDER] [age/AGE] [i/I
 `Address`, `Gender`, `Age`, `Interest` fields are optional. A contact can have multiple interests.
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com` Adds a contact with the following fields:
-
-    * `Name`: John Doe
-  
-    * `Phone`: 98765432
-  
-    * `Email`: johnd@example.com
-  
-    * All other unspecified fields will be set to N.A by default
+Example:
   
 * `add n/Betsy Crowe p/92345679 e/betsycrowe@example.com a/her house i/running i/swimming i/eating` Adds a contact with the following fields:
 
@@ -237,6 +228,10 @@ Examples:
     * `Intrests`: running, swimming, eating
   
     * All other unspecified fields will be set to N.A by default
+
+The screenshot below shows the expected result. To display the full contact details, you can use the [display command](#58-displaying-full-contact-details--display)  
+
+![addCommandExample](images/AddCommandExample.png)
 
 **Common issues:**
 
