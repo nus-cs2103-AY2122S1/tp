@@ -9,7 +9,7 @@ Notor is a desktop application **optimized for use via a Command Line Interface*
 
 Key features of Notor are:
 
-* Powerful Organisation which is up to the user to manage many mentees
+* Powerful Organization which is up to the user to manage many mentees
   * Group mentees, and place groups into subgroups for greater control
   * Add tags to mentees and sort by tags to easily identify meta-data about your contacts
   * Archive contacts you’re no longer actively mentoring, but keep them in your Notor to retrieve at any time
@@ -77,50 +77,26 @@ Note how the app contains some sample data. <br>
 <div style="page-break-after: always;"></div>
 
 ### 4. Try Running Examples!
+
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
 
-You can try out these commands sequentially to get familiar with Notor:
+If you'd like a guided tour of a few of Notor's features, go to [Appendix: Tutorial](#tutorial) to try Notor out. We recommend this if you have never used Notor before.
 
-1. **`person /list`** : First, to list all the people in your contact, type in this command.
-  ![Example1](images/Example1.png)
-2. **`person 3 /delete`** : Next, if you want to delete the 3rd contact person from your list 
-                    (contact with index number `3`, type in this command.
-  ![Example2](images/Example2.png)
-  In the example shown above, the user named `Charlotte Oliviero` is the contact with the third index. 
-  Hence, Charlotte's contact will be removed from the list. 
-3. **`person User /create`** : To create a new contact person, type in this command. You can replace `User` with the
-  name of your new contact.
-  ![Example3](images/Example3.png)
-4. **`group CS2103T /create`** : To create a new group, type in this command. You can replace `CS2103T` with any group
-  name you want.
-  ![Example4](images/Example4.png)
-5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`.
-  ![Example5](images/Example5.png)
-  In the example shown above, the user named `David Li` is currently the contact with the third index.
-  Hence, David Li will be added into group `CS2103T`.
-6. **`group /list`** : To refer to the current group list, you can simply type in this command.
-  ![Example6](images/Example6.png)
-7. **`group 1 /note`** : Then, if you want to edit the notes of group with index number `1`, you can type
-  in this command.
-  ![Example7](images/Example7.png)
-  In this example, you will be editing the notes for the group `Orbital`. Notor will autosave your note,
-  so you can type `Ctrl + Q` to exit the note window, or you can also type in `Ctrl + W` if you do not want to
-  save your current note.
-8. **`group 1 /create n:Gemini`** : To create a new subgroup inside a group, type in this command.
-  ![Example8](images/Example8.png)
-  In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`.
-  The syntax `n:` is to indicate the **name** of the subgroup you have created.
-9. **`clear`** : Then, if you want to clear all your contacts and groups, type in this command.
-  ![Example9](images/Example9.png)
-  Before you clear out every contacts and groups in the list, there will be a warning window for you to confirm
-  whether you really want to clear out all of the contacts in your list, as shown below. <br>
-  ![Example10](images/Example10.png)
-10. **`exit`** : Finally, type in this command to exit the application. <br>
+Otherwise, you can jump right into it! Here are a few other commands you can try:
 
+* `person /list` : Lists all contacts.
+* `person 3 /delete` : Deletes the 3rd contact (contact with index number 3) shown in the current list.
+* `person User /create` : Creates a person named User.
+* `group Orbital /create` : Creates a group named Orbital.
+* `person 3 /add g:Orbital` : Adds the person with index 3 to the group Orbital.
+* `group /list` : Lists all groups.
+* `group 1 /note` : Edits the group note for the group with index number 1.
+* `group 1 /create n:Artemis` : Creates a subgroup Artemis inside the group with index number 1.
+* `clear` : Deletes all contacts.
+* `exit` : Exits the application. <br>
 
-Refer to the [Command Breakdown](#features) below for details of each command.
-
+Refer to the [Command Breakdown](#features) below for more details on each command.
 
 <div style="page-break-after: always;"></div>
 
@@ -802,3 +778,54 @@ In the future, we would like to implement these features to enhance the experien
   * Import command to support importing data from CSV into Notor.
   * Tagging for groups.
   * And...more! Feel free to contact the team and share your suggestions at e0588244@u.nus.edu.
+
+<div style="page-break-after: always;"></div>
+<a name = "tutorial"></a>
+## Appendix: Tutorial
+
+When you open Notor for the first time, you will see some dummy data for you to test out commands on. You can try out these commands sequentially to get familiar with Notor:
+
+1. **`person /list`** : First, type this in to list all the people you have saved as contacts.
+
+   ![Example1](images/Example1.png)
+
+2. **`person 3 /delete`** : Use this command to delete the 3rd contact you have saved in Notor. This is the one listed at the 3rd index. In the example below `Charlotte Oliviero` will be removed.
+
+   ![Example2](images/Example2.png)
+
+3. **`person User /create`** : To create a new contact person, type in this command. You can replace `User` with a name of your choice.
+
+   ![Example3](images/Example3.png)
+
+4. **`group CS2103T /create`** : To create a new group, type in this command. You can replace `CS2103T` with any group
+   name you want.
+   ![Example4](images/Example4.png)
+
+5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`. In the example shown below, the user named `David Li` will be added to the group `CS2103T`.
+   ![Example5](images/Example5.png)
+
+6. **`group /list`** : To refer to the current group list, you can simply type in this command.
+   ![Example6](images/Example6.png)
+
+7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on
+
+   ![Example7](images/Example7.png)
+   When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
+
+8. **`group 1 /create n:Gemini`** : This command creates a new subgroup inside the group at index `1`. In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`. The syntax `n:` is to indicate the **name** of the subgroup you have created.
+
+    ![Example8](images/Example8.png)
+
+9. Test out whatever commands you like. When you're done...
+
+10. **`clear`** : Type this and hit enter to remove all the dummy data prepared for you.
+
+     ![Example9](images/Example9.png)
+     This will delete every contact and group in the list. A warning window will ask you to confirm your decision <br>
+
+     ![Example10](images/Example10.png)
+
+11. **`exit`** : Finally, type in this command to exit the application and save all your data. <br>
+
+
+And that concludes this short tutorial. Check out [Command Breakdown](#features) above for more details on each command.
