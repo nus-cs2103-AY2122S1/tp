@@ -67,17 +67,17 @@ Hope you have a great time with CMM.
 
 3. Copy the file to the folder you want to use as the home folder for CMM
 
-4. Double-click the file to start the app. A prompt will popup asking whether you want to import any new contacts. The prompt will look like the screenshot below :
+5. Double-click the file to start the app. A prompt will popup asking whether you want to import any new contacts. The prompt will look like the screenshot below :
 
    ![importPopUpUi](images/importPopUpMessage.png) <br>
    To learn more about what each option does in detail, click [here](#514-importing-the-data-into-database).
    An example file import can be downloaded [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases/tag/Test_Files)
-<div style="page-break-after: always;"></div>
-5. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data upon first startup
+    <div style="page-break-after: always;"></div>
+6. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data upon first startup
 
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will open the help window
+7. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will open the help window
    You can find the commands that CallMeMaybe supports below:
    - `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named John Doe to the CMM database
    
@@ -101,13 +101,12 @@ Hope you have a great time with CMM.
    
    - `exit` : Exits the app
 
-7. Remember to clear the sample data using `clear` command before adding your own data
+8. Remember to clear the sample data using `clear` command before adding your own data
 
-8. Refer to the [Features](#5-overview-of-features) below for details of each command
+9. Refer to the [Features](#5-overview-of-features) below for details of each command
 
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## 3. Interface layout
 
