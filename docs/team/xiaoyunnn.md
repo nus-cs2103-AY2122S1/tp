@@ -47,7 +47,7 @@ Given below are my contributions to the project.
 <div style="page-break-after: always;"></div>
 
 #### Contribution to User Guide
-Given below is an excerpt from TAB's [User Guide](/UserGuide) detailing instructions on how to use the new `remind` feature I added.
+Given below is an excerpt from TAB's [User Guide](https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html) detailing instructions on how to use the new `remind` feature I added.
 Due to page limits, some content is not included.
 
 ##### Viewing upcoming lessons: `remind`
@@ -70,10 +70,10 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 **:information_source: Note:**<br>
   <ul>
     <li>Reminder does not refresh the list of upcoming lessons automatically.</li>
-    <li>Type <code>remind</code>, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> (see <a href="/UserGuide/#menu-bar-shortcuts">Menu Bar Shortcuts</a> for more available shortcuts) to refresh the list of upcoming lessons.</li>
+    <li>Type <code>remind</code>, click <kbd>Reminder</kbd> on the menu bar or press <kbd>F5</kbd> (see <a href="https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html#menu-bar-shortcuts">Menu Bar Shortcuts</a> for more available shortcuts) to refresh the list of upcoming lessons.</li>
     <li>Reminder also updates when valid <code>ladd</code>, <code>ledit</code>, <code>ldelete</code> commands are executed. 
       <ul>
-        <li>See <a href="/UserGuide/#managing-lessons">Managing Lessons</a> for more details regarding these commands.</li>
+        <li>See <a href="https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html#managing-lessons">Managing Lessons</a> for more details regarding these commands.</li>
       </ul>
     </li>
   </ul>
@@ -82,7 +82,7 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 <div style="page-break-after: always;"></div>
 
 #### Contribution to Developer Guide
-Given below is an excerpt from TAB's [Developer Guide](/DeveloperGuide) detailing the implementation of the new `tag` and `remind` features I added.
+Given below is an excerpt from TAB's [Developer Guide](https://ay2122s1-cs2103t-f13-3.github.io/tp/DeveloperGuide.html) detailing the implementation of the new `tag` and `remind` features I added.
 Due to page limits, some content is not included.
 
 ##### Implementation - Reminder Feature

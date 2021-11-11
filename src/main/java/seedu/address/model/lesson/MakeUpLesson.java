@@ -13,11 +13,11 @@ public class MakeUpLesson extends Lesson {
      * Every field must be present and not null.
      *
      * @param date Start and end Date of lesson.
-     * @param timeRange      Time range of the lesson.
-     * @param subject        Subject of the lesson.
-     * @param homework       Homework for the lesson.
-     * @param rates          Cost per lesson for the lesson.
-     * @param fees           Outstanding fees for the lesson.
+     * @param timeRange Time range of the lesson.
+     * @param subject Subject of the lesson.
+     * @param homework Homework for the lesson.
+     * @param rates Cost per lesson for the lesson.
+     * @param fees Outstanding fees for the lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
     public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
@@ -40,7 +40,7 @@ public class MakeUpLesson extends Lesson {
     /**
      * Check if the Lesson object is recurring.
      *
-     * @return False
+     * @return False.
      */
     @Override
     public boolean isRecurring() {
@@ -76,9 +76,9 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public boolean isClashing(Lesson otherLesson) {
-        return !isCancelled() && !otherLesson.isCancelled()
+        return !isCancelled() && !otherLesson.isCancelled() // Check if either lessons is cancelled
                 && otherLesson.hasLessonOnDate(getStartDate())
-                && getTimeRange().isClashing(otherLesson.getTimeRange());
+                && getTimeRange().isClashing(otherLesson.getTimeRange()); // Check if timings overlap
     }
 
     /**

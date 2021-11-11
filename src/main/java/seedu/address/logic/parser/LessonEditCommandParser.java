@@ -35,6 +35,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LessonEditCommand
      * and returns a LessonEditCommand object for execution.
+     *
+     * @param args String argument to be parsed.
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public LessonEditCommand parse(String args) throws ParseException {
@@ -59,11 +61,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            if (date.isEmpty()) {
-                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-            }
-            editLessonDescriptor.setDate(date.get());
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get())
+                    .orElseThrow(() -> new ParseException(Date.MESSAGE_CONSTRAINTS));
+            editLessonDescriptor.setDate(date);
         }
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             editLessonDescriptor.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));

@@ -87,6 +87,7 @@ public class TimeRange implements Comparable<TimeRange> {
      * Checks if the given time range overlaps with this time range.
      *
      * @param other The TimeRange to be tested.
+     * @return True if the time ranges are overlapping; false if otherwise.
      */
     public boolean isClashing(TimeRange other) {
         if (start.compareTo(other.start) <= 0 && end.compareTo(other.end) >= 0) {

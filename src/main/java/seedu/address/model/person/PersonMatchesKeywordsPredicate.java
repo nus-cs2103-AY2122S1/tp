@@ -215,7 +215,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns optional remark level keywords.
+     * Returns optional remark keywords.
      */
     public Optional<List<String>> getRemarkKeywords() {
         return Optional.ofNullable(remarkKeywords);
@@ -449,31 +449,73 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
 
     // Person Lesson predicates ----------------------------------------------------------------------------------------
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s overlaps with
+     * the {@code TimeRange} given.
+     *
+     * @return A predicate that tests a person's lesson's TimeRanges.
+     */
     private Predicate<Person> getTimeRangeMatchPredicate() {
         return getLessonAnyMatch(lesson -> timeRange.isClashing(lesson.getTimeRange()));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s occur on the
+     * {@code Date} given.
+     *
+     * @return A predicate that tests a person's lesson's Dates.
+     */
     private Predicate<Person> getDateMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.hasLessonOnDate(date));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has cancelled dates
+     * that occur on the {@code Date} given.
+     *
+     * @return A predicate that tests a person's lesson's canceled dates.
+     */
     private Predicate<Person> getCancelledDateMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.getCancelledDates().contains(cancelledDate));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has a subject
+     * that matches the keywords given.
+     *
+     * @return A predicate that tests a person's lesson's subject.
+     */
     private Predicate<Person> getSubjectMatchPredicate() {
         return getLessonAnyMatch(lesson -> isMatch(subjectKeywords, lesson.getSubject().value));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has a rate
+     * that matches the keywords given.
+     *
+     * @return A predicate that tests a person's lesson's rates.
+     */
     private Predicate<Person> getRatesMatchPredicate() {
         return getLessonAnyMatch(lesson -> isMatch(ratesKeywords, lesson.getLessonRates().value));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has a homework
+     * that matches the keywords given.
+     *
+     * @return A predicate that tests a person's lesson's homework.
+     */
     private Predicate<Person> getHomeworkMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.getHomework().stream()
                 .anyMatch(homework -> isMatch(homeworkKeywords, homework.description)));
     }
 
+    /**
+     * Checks if any lesson matches the predicate given.
+     *
+     * @param predicate The predicate to test a person's lessons with.
+     * @return A predicate that tests a person's lesson's to a given predicate.
+     */
     private Predicate<Person> getLessonAnyMatch(Predicate<Lesson> predicate) {
         return person -> person.getLessons().stream().anyMatch(predicate);
     }
@@ -637,6 +679,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
                 && getAcadStreamKeywords().equals(p.getAcadStreamKeywords())
                 && getAcadLevelKeywords().equals(p.getAcadLevelKeywords())
                 && getRemarkKeywords().equals(p.getRemarkKeywords())
+                && getTagKeywords().equals(p.getTagKeywords())
                 && getTimeRange().equals(p.getTimeRange())
                 && getDate().equals(p.getDate())
                 && getCancelledDate().equals(p.getCancelledDate())
@@ -653,34 +696,34 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         builder.append("match " + condition.toString() + " of these keywords.");
 
         if (getNameKeywords().isPresent()) {
-            builder.append("\nName: ").append(String.join(" ", getNameKeywords().get()));
+            builder.append("\nName: ").append(String.join("; ", getNameKeywords().get()));
         }
         if (getPhoneKeywords().isPresent()) {
-            builder.append("\nPhone: ").append(String.join(" ", getPhoneKeywords().get()));
+            builder.append("\nPhone: ").append(String.join("; ", getPhoneKeywords().get()));
         }
         if (getEmailKeywords().isPresent()) {
-            builder.append("\nEmail: ").append(String.join(" ", getEmailKeywords().get()));
+            builder.append("\nEmail: ").append(String.join("; ", getEmailKeywords().get()));
         }
         if (getParentPhoneKeywords().isPresent()) {
-            builder.append("\nParent Phone: ").append(String.join(" ", getParentPhoneKeywords().get()));
+            builder.append("\nParent Phone: ").append(String.join("; ", getParentPhoneKeywords().get()));
         }
         if (getParentEmailKeywords().isPresent()) {
-            builder.append("\nParent Email: ").append(String.join(" ", getParentEmailKeywords().get()));
+            builder.append("\nParent Email: ").append(String.join("; ", getParentEmailKeywords().get()));
         }
         if (getAddressKeywords().isPresent()) {
-            builder.append("\nAddress: ").append(String.join(" ", getAddressKeywords().get()));
+            builder.append("\nAddress: ").append(String.join("; ", getAddressKeywords().get()));
         }
         if (getSchoolKeywords().isPresent()) {
-            builder.append("\nSchool: ").append(String.join(" ", getSchoolKeywords().get()));
+            builder.append("\nSchool: ").append(String.join("; ", getSchoolKeywords().get()));
         }
         if (getAcadStreamKeywords().isPresent()) {
-            builder.append("\nAcademic Stream: ").append(String.join(" ", getAcadStreamKeywords().get()));
+            builder.append("\nAcademic Stream: ").append(String.join("; ", getAcadStreamKeywords().get()));
         }
         if (getAcadLevelKeywords().isPresent()) {
-            builder.append("\nAcademic Level: ").append(String.join(" ", getAcadLevelKeywords().get()));
+            builder.append("\nAcademic Level: ").append(String.join("; ", getAcadLevelKeywords().get()));
         }
         if (getRemarkKeywords().isPresent()) {
-            builder.append("\nRemark: ").append(String.join(" ", getRemarkKeywords().get()));
+            builder.append("\nRemark: ").append(String.join("; ", getRemarkKeywords().get()));
         }
         if (getTagKeywords().isPresent()) {
             builder.append("\nTags: ").append(String.join("; ", getTagKeywords().get()));

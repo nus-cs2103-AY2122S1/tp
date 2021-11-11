@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:copy all fields except OutstandingFees;
+if () then ([Recurring Lesson])
+  if () then ([lesson has started])
+    :getUpdatedOutstandingFeesRecurring();
+    :calculate number of lessons since last updated;
+    :deduct number of cancelled dates\n between last updated and current;
+    if () then ([lesson is before last updated\n or lesson is after current])
+    :deduct from outstanding fees;
+      else ([else])
+      endif
+  endif
+  :number of lessons * cost per lesson;
+else ([Makeup Lesson])
+  :getUpdatedOutstandingFeesMakeup();
+  if () then ([lesson is between \n last updated and current])
+    :add to outstanding fees;
+  else ([else])
+  endif
+endif
+:updated outstanding fees;
+:updated lesson object;
+stop
+
+@enduml

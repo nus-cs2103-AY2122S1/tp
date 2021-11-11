@@ -38,6 +38,8 @@ public class LessonListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
+     *
+     * @param lessonList Observable list of lessons for items in the list view.
      */
     public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
@@ -50,6 +52,9 @@ public class LessonListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
+     *
+     * @param lessonList Observable list of lessons to display.
+     * @param student Student with the lesson list.
      */
     public LessonListPanel(ObservableList<Lesson> lessonList, Person student) {
         super(FXML);

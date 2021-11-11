@@ -152,9 +152,17 @@ public interface Model {
      */
     void setLastUpdatedDate();
 
-    /** Returns an unmodifiable view of the observable tag list */
+    /**
+     * Returns an unmodifiable view of the observable tag list.
+     *
+     * @return An unmodifiable view of the observable tag list.
+     */
     ObservableList<Tag> getObservableTagList();
 
-    /** Returns the tag counter map. */
+    /**
+     * Returns an unmodifiable view of the observable tag counter map.
+     *
+     * @return An unmodifiable view of the observable tag counter map.
+     */
     ObservableMap<Tag, Integer> getTagCounter();
 }

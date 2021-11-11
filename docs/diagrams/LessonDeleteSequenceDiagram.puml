@@ -48,7 +48,7 @@ destroy LessonDeleteCommandParser
 AddressBookParser --> LogicManager : ld
 deactivate AddressBookParser
 
-LogicManager -> LessonDeleteCommand : execute()
+LogicManager -> LessonDeleteCommand : executeUndoableCommand()
 activate LessonDeleteCommand
 
 create Lesson
