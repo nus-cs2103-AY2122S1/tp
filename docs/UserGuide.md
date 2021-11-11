@@ -68,9 +68,9 @@ The app provides some sample data to help you get started.
 5. Type the command in the command box and press Enter to execute it.
 e.g. typing **`listtasks`** and pressing Enter will list all tasks.
 Some example commands you can try:
-   * **`list`**: List all clients.
-   * **`add`**`n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
-   * **`delete`**`2`: Deletes the 2nd client shown in the current client list.
+   * **`listclients`**: List all clients.
+   * **`addclient`**`n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
+   * **`deleteclient`**`2`: Deletes the 2nd client shown in the current client list.
    * **`clear`**: Deletes all existing data.
    * **`exit`**: Exits the app.
 6. Refer to the [Features](#features) below to learn more about the commands.
