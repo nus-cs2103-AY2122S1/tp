@@ -9,18 +9,22 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ContactBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyContactBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.alias.AliasTable;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -99,12 +103,47 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public AliasTable getAliasTable() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setAliasTable(AliasTable aliasTable) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAlias(String alias, String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<String> getExistingAlias() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean containsAlias(String alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAlias(String alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getCorrespondingCommand(String alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getContactBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setContactBookFilePath(Path contactBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,17 +153,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setContactBook(ReadOnlyContactBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyContactBook getContactBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonExcludingOtherPerson(Person person, Person personToExclude) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +189,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableSet<Tag> getUniqueTagList() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -186,8 +235,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyContactBook getContactBook() {
+            return new ContactBook();
         }
     }
 

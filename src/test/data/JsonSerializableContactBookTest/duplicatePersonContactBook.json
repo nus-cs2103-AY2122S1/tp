@@ -1,0 +1,19 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "github": "aliceio",
+    "linkedin": "https://www.linkedin.com/in/alice/",
+    "detail" : "Y1 CS",
+    "tagged": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "github": "aliceio",
+    "linkedin": "https://www.linkedin.com/in/alice/",
+    "tagged": [ "friends" ],
+    "detail": "Y1 CS"
+  } ]
+}

@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Dasco Gabriel
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dystoriax.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/dystoriax)]
+[[portfolio](team/dystoriax.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Logic
 
-### Jane Doe
+### Hester James Douglas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/e0543403.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/e0543403)]
+[[portfolio](team/e0543403.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jerome Wong Jia Jin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeromewjj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jeromewjj)] [[portfolio](team/jeromewjj.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Samuel Yip
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samyipsh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/samyipsh)]
+[[portfolio](team/samyipsh.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Dev Ops + Storage
+
+### Winston Cahya
+
+<img src="images/commanderw324.png" width="200px">
+
+[[github](http://github.com/commanderw324)]
+[[portfolio](team/commanderw324.md)]
+
+* Role: Developer
+* Responsibilities: UI & Model

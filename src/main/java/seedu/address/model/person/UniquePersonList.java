@@ -37,6 +37,33 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person as the given argument
+     * excluding the person identical to the person to exclude.
+     *
+     * @param toCheck Person to check if similar.
+     * @param personToExclude Person to be excluded from checking.
+     * @return Whether there is a Person similar to the person to check excluding the person to exclude.
+     */
+    public boolean containsExcludingPerson(Person toCheck, Person personToExclude) {
+        requireNonNull(toCheck);
+        requireNonNull(personToExclude);
+
+        for (int i = 0; i < internalList.size(); i++) {
+            Person person = internalList.get(i);
+
+            if (person.equals(personToExclude)) {
+                continue;
+            }
+
+            if (person.isSamePerson(toCheck)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -95,6 +122,14 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Returns length of the {@code UniquePersonList}.
+     */
+    public int length() {
+        int length = internalList.size();
+        return length;
     }
 
     /**

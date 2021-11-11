@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ReadOnlyContactBook;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,12 +37,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AliasTableDisplayWindow aliasWindow;
+    private ArrayList<DetailedPersonWindow> shownPersonWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+    @FXML
+    private MenuItem showAliasMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -49,6 +56,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -60,12 +68,16 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        shownPersonWindow = new ArrayList<>();
+        aliasWindow = new AliasTableDisplayWindow(logic.getAliasTable().getAliasTable());
+
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(showAliasMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -113,10 +126,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        ReadOnlyContactBook contactBook = logic.getContactBook();
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getContactBookFilePath(), contactBook);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -161,6 +175,25 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+        aliasWindow.hide();
+        shownPersonWindow.stream().forEach(window -> window.hide());
+    }
+
+    /**
+     * Open the show alias mapping window and focuses it on the screen.
+     */
+
+    @FXML
+    private void handleShowAlias() {
+        aliasWindow.refresh(logic.getAliasTable().getAliasTable());
+        aliasWindow.show();
+    }
+
+    /**
+     * Reloads the data of the alias window with current alias table.
+     */
+    private void updateAliasWindow() {
+        aliasWindow.refresh(logic.getAliasTable().getAliasTable());
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -178,12 +211,32 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            //Update status Bar
+            StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getContactBookFilePath(),
+                    logic.getContactBook());
+            statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPerson()) {
+                Integer indexToShow = commandResult.getIndexToShow();
+                Stage stage = new Stage();
+                DetailedPersonWindow showPerson = new DetailedPersonWindow(
+                        logic.getFilteredPersonList().get(indexToShow), stage);
+                this.shownPersonWindow.add(showPerson);
+                showPerson.show();
+            }
+
+            if (commandResult.isShowAlias()) {
+                handleShowAlias();
+            } else {
+                updateAliasWindow();
             }
 
             return commandResult;

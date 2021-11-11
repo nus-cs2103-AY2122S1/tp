@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,15 +21,17 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Detail;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.LinkedIn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in the contact book.
  */
 public class EditCommand extends Command {
 
@@ -40,7 +44,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_GITHUB + "GITHUB] "
+            + "[" + PREFIX_LINKEDIN + "LINKEDIN] "
+            + "[" + PREFIX_DETAIL + "DETAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -48,7 +54,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Identical person detected in stored contacts.\n"
+            + "Contact may have already been added.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -77,7 +84,7 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (model.hasPersonExcludingOtherPerson(editedPerson, personToEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -96,10 +103,15 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Github updatedGithub = editPersonDescriptor.getGithub().orElse(personToEdit.getGithub());
+        LinkedIn updatedLinkedIn = editPersonDescriptor.getLinkedIn()
+                .orElse(personToEdit.getLinkedin());
+        Detail updatedDetail = editPersonDescriptor.getDetail().orElse(personToEdit.getDetail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedGithub,
+                updatedLinkedIn, updatedDetail, updatedTags);
+
     }
 
     @Override
@@ -128,7 +140,9 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Github github;
+        private LinkedIn linkedin;
+        private Detail detail;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -141,7 +155,9 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setGithub(toCopy.github);
+            setLinkedIn(toCopy.linkedin);
+            setDetail(toCopy.detail);
             setTags(toCopy.tags);
         }
 
@@ -149,7 +165,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, github, linkedin, detail, tags);
         }
 
         public void setName(Name name) {
@@ -176,12 +192,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setLinkedIn(LinkedIn linkedin) {
+            this.linkedin = linkedin;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<LinkedIn> getLinkedIn() {
+            return Optional.ofNullable(linkedin);
+        }
+
+        public void setGithub(Github github) {
+            this.github = github;
+        }
+
+        public Optional<Github> getGithub() {
+            return Optional.ofNullable(github);
+        }
+
+        public void setDetail(Detail detail) {
+            this.detail = detail;
+        }
+
+        public Optional<Detail> getDetail() {
+            return Optional.ofNullable(detail);
         }
 
         /**
@@ -219,7 +251,9 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getGithub().equals(e.getGithub())
+                    && getLinkedIn().equals(e.getLinkedIn())
+                    && getDetail().equals(e.getDetail())
                     && getTags().equals(e.getTags());
         }
     }

@@ -4,41 +4,45 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.alias.AliasTable;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the contact book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ContactBook contactBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given contactBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyContactBook contactBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(contactBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + contactBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.contactBook = new ContactBook(contactBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.contactBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ContactBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,42 +70,91 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public AliasTable getAliasTable() {
+        return userPrefs.getAliasTable();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
-    }
-
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setAliasTable(AliasTable aliasTable) {
+        requireNonNull(aliasTable);
+        userPrefs.setAliasTable(aliasTable);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void addAlias(String alias, String command) {
+        requireNonNull(alias);
+        requireNonNull(command);
+        userPrefs.addAlias(alias, command);
+    }
+
+    @Override
+    public Set<String> getExistingAlias() {
+        return userPrefs.getExistingAliases();
+    }
+
+    @Override
+    public String getCorrespondingCommand(String alias) {
+        requireNonNull(alias);
+        return userPrefs.getCorrespondingCommand(alias);
+    }
+
+    @Override
+    public boolean containsAlias(String alias) {
+        requireNonNull(alias);
+        return userPrefs.containsAlias(alias);
+    }
+
+    @Override
+    public void deleteAlias(String alias) {
+        requireNonNull(alias);
+        userPrefs.deleteAlias(alias);
+    }
+
+    @Override
+    public Path getContactBookFilePath() {
+        return userPrefs.getContactBookFilePath();
+    }
+
+    @Override
+    public void setContactBookFilePath(Path contactBookFilePath) {
+        requireNonNull(contactBookFilePath);
+        userPrefs.setContactBookFilePath(contactBookFilePath);
+    }
+
+    //=========== ContactBook ================================================================================
+
+    @Override
+    public void setContactBook(ReadOnlyContactBook contactBook) {
+        this.contactBook.resetData(contactBook);
+    }
+
+    @Override
+    public ReadOnlyContactBook getContactBook() {
+        return contactBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return contactBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPersonExcludingOtherPerson(Person person, Person personToExclude) {
+        requireNonNull(person);
+        requireNonNull(personToExclude);
+
+        return contactBook.hasPersonExcludingOtherPerson(person, personToExclude);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        contactBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        contactBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -109,14 +162,14 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        contactBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedContactBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -127,6 +180,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableSet<Tag> getUniqueTagList() {
+        return contactBook.getUniqueTagList();
     }
 
     @Override
@@ -143,7 +201,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return contactBook.equals(other.contactBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
