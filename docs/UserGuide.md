@@ -30,7 +30,7 @@ Each Command section is separated into:<br>
 
 * Common issues
 
-Throughout this guide, you may encounter the following icons"
+Throughout this guide, you may encounter the following icons:
 
 * **:exclamation: Caution:** Warns you about possible irreversible behaviours <br>
 * **:information_source: Notes:** Provides general information that you might find useful <br>
