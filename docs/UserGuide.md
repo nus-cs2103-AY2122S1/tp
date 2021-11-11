@@ -419,9 +419,23 @@ A student can have any number of tags (including 0).
 * **At least one** [contact field](#student-contact) is required.<br>
 * `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
-* `add n/Betsy Crowe t/new a/Newgate p/91234567 r/Remember to get school and academic level! t/missinginfo`
+Example:
+
+Suppose you have got a new student, `Betsy Crowe`, whose phone number is `91234567` and lives at `Newgate`. 
+However, you forgot to ask for her school and academic level, so you decided to add a remark and labelled her with tags `missinginfo` and `new`.
+
+Let’s see how you can record Betsy Crowe’s details into TAB!
+
+1. Type `add n/Betsy Crowe p/91234567 a/Newgate r/Remember to get school and academic level! t/missinginfo t/new` into the command box as shown.
+   ![add1](images/add1.png)
+
+2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
+   ![add2](images/add2.png)
+
+
+Other example:
+- `add n/John Doe p/98765432 a/Sengkang Ave 2, Blk 123, #02-01 pe/jackdoe@gmail.com sch/Sengkang Secondary lvl/S1` Adds a student named `John Doe` who lives at `Sengkang Ave 2, Blk 123, #02-01` with phone `98765432`, parent email `jackdoe@gmail.com`, currently studying `S1` at `Sengkang Secondary`.
+
 
 #### Editing a student: `edit`
 
