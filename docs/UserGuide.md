@@ -213,7 +213,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [g/GENDER] [age/AGE] [i/I
 `Address`, `Gender`, `Age`, `Interest` fields are optional. A contact can have multiple interests.
 </div>
 
-Example:
+**Example:**
   
 * `add n/Betsy Crowe p/92345679 e/betsycrowe@example.com a/her house i/running i/swimming i/eating` Adds a contact with the following fields:
 
@@ -273,7 +273,7 @@ Format: `called INDEX`
 
 * If you want to un-call a contact, use the [edit command](#54-editing-a-contact--edit)
 
-Example:
+**Example:**
 
 * `called 3` marks the 3rd contact in the displayed list as Called
 
@@ -330,7 +330,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
 
 </div>
 
-Example:
+**Example:**
 
 * `edit 1 n/Malan g/F i/Painting i/(2) Swimming` Edits the following fields of the **first contact in the displayed list** :<br>
 
@@ -374,7 +374,7 @@ Deletes the specified contact from the CMM database.
 
 Format: `delete INDEX`
 
-Example:
+**Example:**
 
 * `delete 2` deletes the *second contact in the displayed list*
 
@@ -441,7 +441,7 @@ Click [here](#57-finding-contacts-that-match-all-the-keywords-specified--findall
 
 </div>
 
-Example:
+**Example:**
 
 * `findAny findAny n/o p/87` Finds all contacts that have the letter `o` in their name and the substring '87' in their phone number
 
@@ -506,7 +506,8 @@ Click [here](#56-finding-contacts-that-match-any-of-the-keywords-specified-finda
 
 </div>
 
-Example:
+**Example:**
+
 * `findAll n/o p/87` Finds all contacts that have **both** the letter 'o' in their name and the substring '87' in their phone number
 
 The screenshot below shows the expected result.
@@ -546,7 +547,7 @@ Format: `display INDEX`
 
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
 
-Example:
+**Example:**
 
 * `display 3` displays full contact details of the 3rd contact in the displayed list
 
@@ -595,7 +596,7 @@ Format: `filter CATEGORY [COUNT]`
 * If only one argument is given, it will be interpreted as a `CATEGORY`
   (e.g., `filter 1000` will cause `1000` to be interpreted as a `CATEGORY`)
 
-Example:
+**Example:**
 
 * `filter called 2` Filters the displayed list to prioritise uncalled contacts and limits the size of the list to 2
 
@@ -765,13 +766,13 @@ CMM is able to export the current database as semicolon delimited CSV files. As 
 
 **How to find the exported file:**
 
-1. Go to the directory that the CMM jar file is stored in and click on the 'data' folder
+1. Go to the directory that the CMM jar file is stored in and click on the 'data' folder <br>
 
-![findingExport1](images/FindingExportFile1.png)
+    ![findingExport1](images/FindingExportFile1.png)
 
-2. You can find the exported CSV file here
+2. You can find the exported CSV file here <br>
 
-![findingExport2](images/FindingExportFile2.png)
+    ![findingExport2](images/FindingExportFile2.png)
 
 ### 5.16 Editing the data file (JSON)
 
