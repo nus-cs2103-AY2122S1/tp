@@ -187,7 +187,7 @@ An example of a command in TAB:
   e.g. A chain of commands such as `next next back next` or `list calendar day` are **not** valid commands.
 
 * There are constraints in place to help TAB understand your inputs for commands and parameters. 
-  TAB will help you with these constraints through a message in the UI if you give an invalid input.
+  TAB will help you with these constraints by displaying relevant messages to you if you give an invalid input.
 
 <br />
 
