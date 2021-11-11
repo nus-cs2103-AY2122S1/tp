@@ -78,7 +78,7 @@ Insert picture
 
 **:information_source: Notes about the command formats:**<br>
 
-* Words in `UPPER_CASE` are fields (link to specification of fields) to be supplied by you.<br>
+* Words in `UPPER_CASE` are [fields](#specification-of-fields) to be supplied by you.<br>
     * e.g. in `add n/NAME`, `NAME` is to be replaced with the name of the applicant you want to add such as `add n/John Doe`.<br>
 
 * Fields in square brackets are optional.<br>
@@ -291,7 +291,7 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file is corrupted. Revert the save to your last backup, or contact us if you need help.
 
 **Q**: Why does my command not work?<br>
-**A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' specifications. (link)
+**A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' [specifications](#specification-of-fields).
 
 **Q**: Is my data automatically saved?<br>
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
@@ -361,5 +361,5 @@ Word | Definition
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contact Us
-If you have any questions or have suggestions for the application, feel free to contact us at internwatcher@gmail.com.
+If you have any questions or have suggestions for the application, feel free to contact us at [internwatcher@gmail.com](mailto: internwatcher@gmail.com).
 
