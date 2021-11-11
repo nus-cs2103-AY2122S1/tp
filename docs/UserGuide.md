@@ -112,7 +112,7 @@ You can try out these commands sequentially to get familiar with Notor:
 9. **`clear`** : Then, if you want to clear all your contacts and groups, type in this command.
   ![Example9](images/Example9.png)
   Before you clear out every contacts and groups in the list, there will be a warning window for you to confirm
-  whether you really want to clear out all of the contacts in your list, as shown below.
+  whether you really want to clear out all of the contacts in your list, as shown below. <br>
   ![Example10](images/Example10.png)
 10. **`exit`** : Finally, type in this command to exit the application. <br>
 
@@ -193,6 +193,7 @@ Exits the program and saves your data.
 #### _Exporting data_
 
 Exports all the data of Notor into a CSV file to Notor's home directory.
+
 | Format   | Short Format |
 |----------|--------------|
 | `export` | `exp`        |
@@ -304,9 +305,9 @@ Removes a person from a group or a subgroup. To remove a person from a subgroup,
 
 #### _Taking notes for a person_
 
-![PersonNote](images/PersonNote.png)
-
 Opens a note window pop-up to take notes in.
+
+![PersonNote](images/PersonNote.png)
 
 | Format                 | Example          | What the example does                                          |
 |------------------------|------------------|----------------------------------------------------------------|
@@ -401,12 +402,12 @@ Archives every person displayed in the list panel.
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
+![archivedList](images/archivePersonList.png)
+
 | Format   | Short Format |
 |----------|--------------|
 | `person /listarchive` | `p /lar`|
 
-
-![archivedList](images/archivePersonList.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -448,8 +449,6 @@ All group commands except **Creating a group** will only work when groups or sub
 <div style="page-break-after: always;"></div>
 
 #### _Creating a group_
-
-![groupCreate](images/groupCreate.png)
 
 Creates a group.
 
