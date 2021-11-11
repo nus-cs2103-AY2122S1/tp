@@ -932,7 +932,7 @@ You have just received payment recently from Betsy for her lessons, and you want
 Let's take a look at how you can record the payment for Betsy Crowe's lesson in TAB!
 
 1. Type the command `paid 7 1 amt/140` into the command box.
-2. Press <kbd>Enter</kbd> – You should see the outstanding fees of the lesson being deducted by the paid amount accordingly! Her updated fees is now $0.
+2. Press <kbd>Enter</kbd> and you should see the outstanding fees of the lesson being deducted by the paid amount accordingly! The updated fee is now $0.
    ![paidExample](images/paidExample.png)
 
 Other Examples:
