@@ -200,7 +200,7 @@ Exports all the data of Notor into a CSV file to Notor's home directory.
 |----------|--------------|
 | `export` | `exp`        |
 
-You can usually find the exported data in the home directory that contains Notor.
+You can usually find the exported data in the home directory that contains Notor. The numbers after the exported data indicates the time and date when you exported the data.
 
 ![ExportData](images/Export.png)
 
