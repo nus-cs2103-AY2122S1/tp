@@ -927,7 +927,7 @@ Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 Example:
 
 Suppose you have a student named Betsy Crowe with index number 7. For Betsy Crowe, 4 lessons have passed since she last paid her lesson fees, hence the current outstanding fees is $140.
-You have just received payment recently from Betsy for her lessons, and you would like to record the amount paid.
+You have just received payment recently from Betsy for her lessons, and you want to record the amount paid.
 
 Let's take a look at how you can record the payment for Betsy Crowe's lesson in TAB!
 
