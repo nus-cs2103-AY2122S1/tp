@@ -16,6 +16,11 @@ This user guide covers a quick walk-through on how to use this application, as w
 
 ![UiComponents](images/UIComponents.png)
 
+* Command Box: Enter command here to perform different tasks.
+* Result Display: Refer here for detailed information of command results.
+* Applicant List Panel: Refer here for a list of applicants and their personal details
+* Applicant Detail Panel: Refer here for academic/skill information of the specific applicant selected.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
