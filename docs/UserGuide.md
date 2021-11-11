@@ -428,10 +428,12 @@ Let’s see how you can record Betsy Crowe’s details into TAB!
 
 1. Type `add n/Betsy Crowe p/91234567 a/Newgate r/Remember to get school and academic level! t/missinginfo t/new` into the command box as shown.
    ![add1](images/add1.png)
+   <div class="caption"> Command box with the add command.</div>
 
 2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
-   ![add2](images/add2.png)
-
+   ![add2](images/add2.png) 
+   
+   <div class="caption">TAB with the new student added.</div>
 
 Other example:
 - `add n/John Doe p/98765432 a/Sengkang Ave 2, Blk 123, #02-01 pe/jackdoe@gmail.com sch/Sengkang Secondary lvl/S1` Adds a student named `John Doe` who lives at `Sengkang Ave 2, Blk 123, #02-01` with phone `98765432`, parent email `jackdoe@gmail.com`, currently studying `S1` at `Sengkang Secondary`.
@@ -603,8 +605,6 @@ Example:
     </tbody>
 </table>
 
-* In the future, we will allow search by lesson fees and end date.
-
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
 
@@ -616,18 +616,19 @@ Example:
   A student is considered a match only when `all`, `any` or `none` of the fields which you are searching for match the student.
 * The match condition is optional and defaults to `all` if not specified.
 
-Examples:
-  * `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
-  * `find n/John t/zoom cond/any` returns students with only the name `John`, or only the tag `zoom`, or both.
-  * `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
+Example:
 
-**Example of finding by different types of fields**
-
-To find students with the tag `new` or with lessons between `1100-1300`, you may type the command `find cond/any t/new time/1100-1300`. The figure below shows the list after this find command is executed.
+Suppose you want to find students with the tag `new` or with lessons between `1100-1300`.
+1. Type the command `find cond/any t/new time/1100-1300` into the command box.
+2. Press <kbd>Enter</kbd> and you should see that the list now displays only students matching the given keywords.
 
 ![find](images/find.png)
 
 <div class="caption">TAB displays two students after the find command.</div>
+
+Other examples:
+* `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
+* `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
 
 <br />
 
