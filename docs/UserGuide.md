@@ -180,7 +180,7 @@ You can usually find the exported data in the home directory that contains Notor
 
 The data exported will be displayed as follows:
 
-<img src="images/Exported.png" alt="exported" width="60%" height="60%">
+<img src="images/Exported.png" alt="exported" width="60%" height="30%">
 
 <div style="page-break-after: always;"></div>
 
