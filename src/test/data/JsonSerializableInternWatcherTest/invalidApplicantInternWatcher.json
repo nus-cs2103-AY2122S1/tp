@@ -1,0 +1,11 @@
+{
+  "applicants": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "grade": "4.50",
+    "institution": "NUS",
+    "graduationYearMonth" : "12/2021",
+    "job" : "Software Engineer"
+  } ]
+}

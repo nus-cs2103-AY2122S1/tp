@@ -1,0 +1,66 @@
+package seedu.intern.ui;
+
+import java.util.logging.Logger;
+
+import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Region;
+import seedu.intern.commons.core.LogsCenter;
+import seedu.intern.model.applicant.Applicant;
+
+/**
+ * Panel containing the list of applicants.
+ */
+public class ApplicantListPanel extends UiPart<Region> {
+    private static final String FXML = "ApplicantListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ApplicantListPanel.class);
+
+    @FXML
+    private ListView<Applicant> applicantListView;
+
+    /**
+     * Creates a {@code ApplicantListPanel} with the given {@code ObservableList}.
+     */
+    public ApplicantListPanel(ObservableList<Applicant> applicantList) {
+        super(FXML);
+        applicantListView.setItems(applicantList);
+        applicantListView.setCellFactory((listView) -> new ApplicantListViewCell());
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Applicant} using a {@code ApplicantCard}.
+     */
+    class ApplicantListViewCell extends ListCell<Applicant> {
+        @Override
+        protected void updateItem(Applicant applicant, boolean empty) {
+            super.updateItem(applicant, empty);
+            if (empty || applicant == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ApplicantCard(applicant, getIndex() + 1).getRoot());
+            }
+        }
+    }
+
+    /**
+     * Selects the provided applicant.
+     *
+     * @param applicant applicant to select.
+     */
+    public void selectApplicant(Applicant applicant) {
+        applicantListView.getSelectionModel().select(applicant);
+    }
+
+    /**
+     * Adds a listener that will be called when a different {@code ApplicantCard} is selected.
+     *
+     * @param listener listener to be added to the ListView
+     */
+    public void addSelectedListener(ChangeListener<Applicant> listener) {
+        applicantListView.getSelectionModel().selectedItemProperty().addListener(listener);
+    }
+}

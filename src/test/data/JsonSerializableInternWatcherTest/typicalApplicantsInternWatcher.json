@@ -1,0 +1,81 @@
+{
+  "_comment": "InternWatcher save file which contains the same Applicant values as in TypicalApplicants#getTypicalInternWatcher()",
+  "applicants" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "grade": "4.50",
+    "institution": "NUS",
+    "course": "Computer Science",
+    "status": "REJECTED",
+    "graduationYearMonth" : "12/2020",
+    "job" : "Software Engineer",
+    "skills" : [ "python" ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "grade": "4.60",
+    "institution": "NTU",
+    "course": "Computer Engineering",
+    "status": "INTERVIEWED",
+    "graduationYearMonth" : "06/2025",
+    "job" : "Hardware Engineer",
+    "skills" : [ "java", "python" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "grade": "4.70",
+    "institution": "NTU",
+    "status": "ACCEPTED",
+    "course": "Business and Accounting",
+    "graduationYearMonth" : "12/2023",
+    "job" : "Accountant",
+    "skills" : [ "java" ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "grade": "4.80",
+    "institution": "SMU",
+    "course": "Accountancy",
+    "status": "INTERVIEWED",
+    "graduationYearMonth" : "01/2027",
+    "job" : "Finance Manager",
+    "skills" : [ "python" ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "grade": "4.90",
+    "institution": "SUTD",
+    "course": "Philosophy",
+    "status": "ACCEPTED",
+    "graduationYearMonth" : "12/2024",
+    "job" : "Helper",
+    "skills" : [ "C" ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "grade": "5.00",
+    "institution": "PATHLIGHT",
+    "course": "Life Science",
+    "status": "INTERVIEWED",
+    "graduationYearMonth" : "12/2021",
+    "job" : "Researcher",
+    "skills" : [ "C" ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "grade": "4.40",
+    "institution": "SUSS",
+    "course": "Social Work",
+    "status": "REJECTED",
+    "graduationYearMonth" : "03/2023",
+    "job" : "Software Engineer",
+    "skills" : [ "C" ]
+  } ]
+}

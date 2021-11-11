@@ -5,55 +5,60 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chang Chuan Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chang-ch.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Chang-CH)]
+[[portfolio](team/chang-ch.md)]
 
-* Role: Project Advisor
+* Role: Team lead
+* Responsibilities: Responsible for overall project coordination.
+* Features: Edit ALL, UI
 
-### Jane Doe
+### Gu Geng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jackgugz.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jackgugz)]
+[[portfolio](team/jackgugz.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Features: Filter feature
 
-### Johnny Doe
+### Jerome Soh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeromesyl.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Jeromesyl)]
+[[portfolio](team/jeromesyl.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Scheduling and tracking
+* Responsibilities: : In charge of defining, assigning, and tracking project tasks.
+* Features: Undo/Redo features
 
-### Jean Doe
+### Nicole Joseph
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicolej2122.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nicolej2122)]
+[[portfolio](team/nicolej2122.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
+* Features: View feature
 
-### James Doe
+### Xiao Yunpeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yunpeng1234.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yunpeng1234)]
+[[portfolio](team/yunpeng1234.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
+* Features: UI, Delete ALL

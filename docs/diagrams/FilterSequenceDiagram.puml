@@ -1,0 +1,87 @@
+@startuml
+!include style.puml
+'https://plantuml.com/sequence-diagram
+
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternWatcherParser" as InternWatcherParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "d:FilterApplicantDescriptor" as FilterApplicantDescriptor LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
+participant "p:CombineFiltersPredicate" as CombineFiltersPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FilteredList<Applicant>" as filteredApplicants MODEL_COLOR
+end box
+[-> LogicManager : execute(filter)
+activate LogicManager
+
+LogicManager -> InternWatcherParser : parseCommand(filter)
+activate InternWatcherParser
+
+create FilterCommandParser
+InternWatcherParser -> FilterCommandParser
+activate FilterCommandParser
+
+create FilterApplicantDescriptor
+FilterCommandParser -> FilterApplicantDescriptor
+activate FilterApplicantDescriptor
+
+FilterApplicantDescriptor --> FilterCommandParser : d
+
+create FilterCommand
+FilterCommandParser -> FilterCommand  : FilterCommand(d)
+
+create CombineFiltersPredicate
+FilterCommand -> CombineFiltersPredicate
+activate CombineFiltersPredicate
+CombineFiltersPredicate --> FilterCommand : p
+
+
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser : f
+
+FilterCommandParser --> InternWatcherParser : f
+deactivate FilterCommandParser
+
+InternWatcherParser --> LogicManager : f
+deactivate InternWatcherParser
+
+LogicManager -> FilterCommand : execute(model)
+activate FilterCommand
+
+FilterCommand -> Model : updateFilteredApplicantList(p)
+activate Model
+
+Model -> filteredApplicants : setPredicate(p)
+activate filteredApplicants
+
+loop until all filtered
+filteredApplicants ->  CombineFiltersPredicate : test(applicant)
+activate CombineFiltersPredicate
+
+CombineFiltersPredicate --> filteredApplicants : b
+deactivate CombineFiltersPredicate
+end
+
+deactivate CombineFiltersPredicate
+
+
+filteredApplicants --> Model
+deactivate filteredApplicants
+
+Model --> FilterCommand
+deactivate Model
+
+FilterCommand --> LogicManager : result
+deactivate FilterCommand
+FilterCommand -[hidden]-> LogicManager : result
+destroy FilterCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

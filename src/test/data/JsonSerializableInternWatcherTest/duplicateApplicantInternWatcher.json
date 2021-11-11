@@ -1,0 +1,22 @@
+{
+  "applicants": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "grade": "4.50",
+    "institution": "NUS",
+    "course": "Computer Science",
+    "graduationYearMonth" : "12/2021",
+    "skills": [ "skills" ],
+    "job" : "Software Engineer"
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "grade": "4.40",
+    "institution": "NUSS",
+    "course": "Computer Engineering",
+    "graduationYearMonth" : "12/2021",
+    "job" : "Hardware Engineer"
+  } ]
+}

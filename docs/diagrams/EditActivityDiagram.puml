@@ -1,0 +1,20 @@
+@startuml
+start
+:User executes edit command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([index provided])
+    :get applicant to edit;
+    :create edited applicant;
+    :update model with edited applicant;
+else ([all flag provided])
+    :get all displayed applicants;
+    while () is ([has displayed applicant not yet edited])
+        :create edited applicant;
+        :update model with edited applicant;
+    endwhile ([all displayed applicants edited])
+endif
+stop
+@enduml

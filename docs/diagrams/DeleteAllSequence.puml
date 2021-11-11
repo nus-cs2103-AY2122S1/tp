@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternWatcherParser" as InternWatcherParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant ":DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete ALL")
+activate LogicManager
+
+LogicManager -> InternWatcherParser : parseCommand
+activate InternWatcherParser
+
+create DeleteCommandParser
+InternWatcherParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> InternWatcherParser
+deactivate DeleteCommandParser
+
+InternWatcherParser -> DeleteCommandParser : parse
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> InternWatcherParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> InternWatcherParser
+destroy DeleteCommandParser
+
+InternWatcherParser --> LogicManager : d
+deactivate InternWatcherParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+loop for all applicants displayed
+DeleteCommand -> DeleteCommand : lastShowList.get(0)
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommand : d
+deactivate DeleteCommand
+
+DeleteCommand -> Model : deleteApplicant(applicantToDelete)
+activate Model
+
+Model --> DeleteCommand : d
+
+end
+
+DeleteCommand -> Model : commitInternWatcher(commitMessage)
+
+Model -> Model : commitState
+
+activate Model
+Model --> Model
+deactivate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
+DeleteCommand -[hidden]-> LogicManager : result
+destroy DeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
