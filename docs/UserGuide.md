@@ -2,8 +2,10 @@
 layout: page
 title: User Guide
 ---
-## Overview <br>
-Notor is a desktop application for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently during meetings with mentees, and group those notes with your mentee's information powerfully and easily.
+
+**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. However, we're sure that Notor can still help people outside our target audience in situations where they have a **many mentees to one mentor relationship**, where they need to **take notes quickly**. Personal CRMs (CRM stands for Customer Relationship Manager) are useful tools to keep track of people's information and keep it organised, which can really benefit you in making connections with people.
+
+Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently during meetings with mentees, and group those notes with your mentee's information powerfully and easily.
 
 Key features of Notor are:
 
@@ -18,6 +20,9 @@ Key features of Notor are:
   * Commands with short forms
   * Works offline for better performance
 
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -29,7 +34,7 @@ If you're new to Notor, hop over to [Quick Start](#quick-start) to install and b
 
 If you've used Notor for a while and are looking to get the best out of Notor, 'level-up' by reading our [Tips on Using Notor](#tips-on-using-notor).
 
-Some terminology that might help:
+Some terminology that might help when referring to Notor:
 1. **List pane** : The panel located on the right, which is used to display the list of persons or groups
 2. **View pane** : The panel on the left, used to view notes, such as general notes
 3. **Note Window**: The pop up window you may use to edit and add notes
@@ -56,9 +61,9 @@ Used to highlight dangers.
 <a name = "quick-start"></a>
 ## Quick Start
 ### 1. Setup
-Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
+Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/java/technologies/downloads/#java11-windows).
 ### 2. Installing the project
-Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor.
+Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor. The *home folder* is where the data that Notor uses will be stored.
 
 <div style="page-break-after: always;"></div>
 
@@ -72,6 +77,7 @@ Note how the app contains some sample data. <br>
 ### 4. Try Running Examples!
 Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will
 open the help window. <br>
+
 You can try out these commands sequentially to get familiar with Notor:
 
 1. **`person /list`** : First, to list all the people in your contact, type in this command.
@@ -110,7 +116,8 @@ You can try out these commands sequentially to get familiar with Notor:
   ![Example10](images/Example10.png)
 10. **`exit`** : Finally, type in this command to exit the application. <br>
 
-Refer to the [Features](#features) below for details of each command.
+
+Refer to the [Command Breakdown](#features) below for details of each command.
 
 
 <div style="page-break-after: always;"></div>
@@ -119,7 +126,7 @@ Refer to the [Features](#features) below for details of each command.
 
 <a name = "features"></a>
 ## Command Breakdown
-Here is a detailed breakdown of all the commands Notor has available. All the commands have a shortened command format, referred to interchangeably as 'advanced format' and 'short format'.
+What follows is a detailed breakdown of all the commands Notor has available and what they do. All the commands have a shortened command format to make typing them easier.
 
 <div markdown="block" class="alert alert-info">
 
@@ -147,41 +154,48 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
 
 #### _Viewing help_
 
-Shows a message explaining how to access the help page.
-
-<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
-If you type in a command with no arguments and the command requires arguments, this command will 
-display a prompt for the arguments which should be given.
-</div>
+Displays a summary of commands, as well as a link you can copy to get to this full user guide.
 
 ![help message](images/HelpCommand.png)
 
-Format: `help`
+| Format      | What the command does          |
+|-------------|--------------------------------|
+| `help`      | Opens the help panel           |
+| `h`         | Same as above                  |
+
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
+</div>
 
 #### _Clearing all entries_
 
-Clears all entries from Notor. 
+Clears all entries from Notor. This means that all your contacts, as well as the groups you keep them in, will be removed.
 
-Format: `clear`
-* Take care not to confuse this command with the more specific `/clearnote` command.
+| Format      | Short Format    |
+|-------------|-----------------|
+| `clear`     | `c`             |
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Data will be deleted and **will not be saved**. The intended use of this
-command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
+  Data will be deleted and **will not be saved**. The intended use of this
+  command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 </div>
 
-#### _Exiting the program_
+<div style="page-break-after: always;"></div>
 
+#### _Exiting the program_
 Exits the program and saves your data.
 
-Format: `exit`
+| Format      | Short Format    |
+|-------------|-----------------|
+| `exit`      | `e`             |
 
 <a name = "exporting-data"></a>
 #### _Exporting data_
 
-Exports all the data of Notor into a CSV file to Notor's Directory.
-
-Format: `export`
+Exports all the data of Notor into a CSV file to Notor's home directory.
+| Format   | Short Format |
+|----------|--------------|
+| `export` | `exp`        |
 
 You can usually find the exported data in the home directory that contains Notor.
 
@@ -195,69 +209,67 @@ The data exported will be displayed as follows:
 
 <a name = "person-command"></a>
 ### Working with people
-The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
+The base functionality of Notor is allowing you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-This command only works when persons are listed in Notor (visible in the list pane).
+The following commands only work when persons are listed in Notor (visible in the list pane).
 </div> <br>
 
 #### _Creating a person_
 
-Creates a person.
+Creates a person's contact card within Notor. When creating this person, you can pass optional arguments to fill out more information about them in a single command.
 
-Format: `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`<br>
-Advanced user Format: `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
+| Format                                                                        | Example                                                                    | What the example does                                                                                                                                                                   |
+|-------------------------------------------------------------------------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `person John Lim /create p:91119111 e:notor@notor.com t:scholar g:1` | Creates the contact `John Lim`, with a phone number of `9111911`, and email of `notor@notor.com`. John is tagged with `scholar` and belongs to the group at index `1`              |
+| `p (NAME) /c [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`           | `p Dhruv Chopra /c p:92229222 e:notor@notor.com t:AI, Crypto g:2`          | Creates the contact `Dhruv Chopra`, with a phone number of `9222922`, and email of `dhruv.chopra@u.nus.sg`. Dhruv is tagged with `AI` and `Crypto`, and belongs to the group at index `2` |
 
+
+<div markdown="block" class="alert alert-info">:information_source: <strong>Notes on parameters:</strong>
 * Creates a person with the `NAME`. This name cannot start with a number.
 * Optional arguments:
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
   * `TAG1,TAG2..`: Tag(s) that describe the person.
   * `GROUP_INDEX`: Index of the group in Notor to add the person to.
+* The person cannot have the same name as someone else in the group.<p>
+</div>
 
-Examples:
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+Notor minimizes what you need to remember. To add the person to a group, you need to have groups displayed in the list panel, so that you can select the group by its index instead of memorising and typing its name.
+</div>
 
-* `person John Lim /create p:91119111 e:notor@notor.com t:Loves Dancing g:1`
-* `p Michael Joe /c p:92229222 e:notor@notor.com t:Loves Singing g:2`
 <div style="page-break-after: always;"></div>
 
-#### _Adding a person to a group_
+#### _Adding a person to a group or subgroup_
 
-Adds a person at the given index `INDEX` to a specified group.
+Adds a person at the given index `INDEX` to a specified group. To add a person to a subgroup, include the subgroup parameter.
 
-Format: `person (INDEX) /add (g:GROUP_NAME)`<br>
-Advanced user Format: `p (INDEX) /a (g:GROUP_NAME)`
+| Format                                                | Example                              | What the example does                                                                                  |
+|-------------------------------------------------------|--------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `person (INDEX) /add (g:GROUP_NAME)`                  | `person 1 /add g:Orbital`            | Add the person at index `1` to the group `Orbital`                                                       |
+| `p (INDEX) /a (g:GROUP_NAME)`                         | `p 2 /a g:Alumni`                    | Add the person at index `2` to the group `Alumni`                                                        |
+| `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 3 /add g:Orbital sg:Artemis` | Add the person at index `3` to the subgroup `Artemis` which is contained within the group `Orbital`      |
+| `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 2 /a g:Alumni sg:Class 2010`      | Add the person at index `4` to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
 
-Examples:
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+Notor considers people within a subgroup as also being within the group that contains it (the supergroup). Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
+</div>
 
-* `person 1 /add g:Orbital`
-* `p 2 /a g:Orbital`
-
-#### _Adding a person to a subgroup_
-
-Adds a person at the given index `INDEX` to a specified subgroup.
-
-Format: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
-Advanced user Format: `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
-
-Examples:
-* `person 1 /add g:Orbital sg:Artemis`
-* `p 2 /a g:Orbital sg:Artemis`
-
+<div style="page-break-after: always;"></div>
 
 #### _Deleting a person_
 
-Deletes an existing person.
+Removes the contact and the data saved for a person from Notor.
 
-Format: `person (INDEX) /delete`<br>
-Advanced user Format: `p (INDEX) /d`
+| Format                  | Example            | What the example does         |
+|-------------------------|--------------------|-------------------------------|
+| `person (INDEX) /delete`| `person 1 /delete` | Deletes the person at index `1` |
+| `p (INDEX) /d`          | `p 3 /d`           | Deletes the person at index `3` |
 
-* Deletes an existing person at the given `INDEX`.
-
-Examples:
-
-* `person 1 /delete `
-* `p 2 /d`
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Data will be deleted and **will not be saved**. Be careful when deleting people. You may prefer to [archive them](#archiving-people) or make a backup of your data first by [exporting the data](#exporting-data).
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -265,117 +277,100 @@ Examples:
 
 Edits the data of the person at the index `INDEX` in the List Pane and replaces the fields specified with the new parameters.
 
-Format: `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`<br>
-Advanced user Format:`p (INDEX) /e [n:NAME] [p:PHONE] [e:EMAIL]`
+| Format                                              | Example                                           | What the example does                                                                                          |
+|-----------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]` | `person 1 /edit n:Amira e:amira.hannah@gmail.com` | Changes the name of the person at index `1` to `Amira` and also change their email to `amira.hannah@gmail.com` |
+| `p (INDEX) /e [n:NAME] [p:PHONE] [e:EMAIL]`         | `p 2 /e n:Tan See Kiat p:93339333`                | Change the name of the person at index `2` to `Tan See Kiat` and also change their phone number to `93339333`  |
 
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 * Please specify at least one field to be edited.
-
 * Optional arguments:
   * `NAME`: Name of the person.
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
-
-
-Examples:
-* `person 1 /edit n:John Cena e:notor@notor.com`
-* `p 2 /e n:John Doe p:93339333`
+* You cannot change the name of the person to the same name as someone else in the group.
+</div>
 
 #### _Removing a person from group_
 
-Removes an existing person from a group.
+Removes a person from a group or a subgroup. To remove a person from a subgroup, include the subgroup parameter along with the group it is under.
 
-Format: `person (INDEX) /remove (g:GROUP_NAME)`<br>
-Advanced user Format:`p (INDEX) /r (g:GROUP_NAME)`
-
-* Removes an existing person at the given `INDEX` from a `GROUP_NAME`.
-
-Examples:
-* `person 1 /remove g:Orbital`
-* `p 2 /r g:Orbital`
-
-<div style="page-break-after: always;"></div>
-
-#### _Removing a person from subgroup_
-
-Removes an existing person from a subgroup.
-
-Format: `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
-Advanced user Format:`p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`
-
-* Removes an existing person at the given `INDEX` from the `SUBGROUP_NAME` of `GROUP_NAME`.
-
-Examples:
-* `person 1 /remove g:Orbital sg:GroupA`
-* `p 1 /r g:Orbital sg:GroupA`
+| Format                                                   | Example                                 | What the example does                                                                             |
+|----------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------|
+| `person (INDEX) /remove (g:GROUP_NAME)`                  | `person 1 /remove g:Orbital`            | Remove the person at index  `1`  from the group  `Orbital`                                        |
+| `p (INDEX) /r (g:GROUP_NAME)`                            | `p 2 /r g:Final Year Project`           | Remove the person at index `2` from the group `Final Year Project`                                |
+| `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 1 /remove g:Orbital sg:Group A` | Remove the person at index  `1`  from the group  `Group A` which is the subgroup of `Orbital`. The person is still in the group `Orbital`|
+| `p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`           | `p 2 /r g:Research sg:AI focus`         | Remove the person at index  `2`  from the group  `AI focus`  which is the subgroup of  `Research`. The person is still in the group `Research`|
 
 #### _Taking notes for a person_
 
-Creates a note window pop-up to take notes in for the person at the given `INDEX` in the List Pane.
+![PersonNote](images/PersonNote.png)
 
-Format: `person (INDEX) /note`<br>
-Advanced user Format:`p (INDEX) /n`
+Opens a note window pop-up to take notes in.
 
+| Format                 | Example          | What the example does                                          |
+|------------------------|------------------|----------------------------------------------------------------|
+| `person (INDEX) /note` | `person 1 /note` | Opens the note window which belongs to the person at index `1` |
+| `p (INDEX) /n`         | `p 2 /n`         | Opens the note window which belongs to the person at index `2` |
 
-Examples:
-
-* `person 1 /note` will allow the user to edit the note of the first person.
-  ![PersonNote](images/PersonNote.png)
-* `p 2 /n`
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+For keyboard shortcuts within the note, you can reference [tips on using Notor](#tips-on-using-notor).
+</div>
+ 
+  
+<div style="page-break-after: always;"></div>
 
 #### _Clearing notes of a person_
 
 Removes the note of the person at the given `INDEX` in the List Pane.
 
-Format: `person (INDEX) /clearnote`<br>
-Advanced user Format:`p (INDEX) /cn`
+| Format                      | Example               | What the example does                       |
+|-----------------------------|-----------------------|---------------------------------------------|
+| `person (INDEX) /clearnote` | `person 1 /clearnote` | Removes the note of the person at index `1` |
+| `p (INDEX) /cn`             | `p 2 /cn`             | Removes the note of the person at index `2` |
 
-Examples:
-
-* `person 1 /clearnote`
-* `p 2 /cn`
-
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Data will be deleted and **will not be saved**. Be careful.
+</div>
 
 #### _Tagging a person_
 
-Tags an existing person.
+Add tags to an existing person. Please specify at least one tag to be added.
 
-Format: `person (INDEX) /tag [t:TAG1,TAG2,...]` <br>
-Advanced user Format: `p (INDEX) /t [t:TAG1,TAG2,...]`
+| Format                                  | Example                          | What the example does                                      |
+|-----------------------------------------|----------------------------------|------------------------------------------------------------|
+| `person (INDEX) /tag [t:TAG1,TAG2,...]` | `person 1 /tag t:friends,family` | Tag person with index  `1`  with  `friends`  and  `family` |
+| `p (INDEX) /t [t:TAG1,TAG2,...]`        | `p 2 /t t:friday`                | Tag person with index `2` with `friday`                    |
 
-* Tags the person with specified `INDEX` with `TAG1, TAG2, ...`.
-* Please specify at least one tag to be added.
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong><br>
+What are tags? Well, tags can be used to flag information about a person that you want to highlight and find later. Tags are searchable, while notes are not. Some ideas of what you could use tags for are ... <br>
+* Areas of interest the mentee has
+* Graduation year
+* Where they are currently or have previously worked
+* Outstanding qualities they might have
+* The day you usually meet this mentee
 
-Examples:
-
-* `person 1 /tag t:friends,family` will tag person with index `1` with `friends` and `family`.
-* `p 2 /t t:friday`
+</div>
+<div style="page-break-after: always;"></div>
 
 #### _Untagging a person_
 
 Removes tag(s) from an existing person.
 
-Format: `person (INDEX) /untag [t:TAG1,TAG2,...]` <br>
-Advanced user Format: `p (INDEX) /ut [t:TAG1,TAG2,...]`
-
-* Removes tag(s) from the person with specified `INDEX` with `TAG1, TAG2, ...`.
-* Please specify at least one tag to be removed.
-* The tags to remove must have the exact same name with existing tags of the person, otherwise will do nothing.
-
-* `person 1 /untag t:friends,family` will untag the person with index `1` with `friends` and `family`.
-* `p 2 /t ut:friday`
+| Format                                    | Example                            | What the example does                                                   |
+|-------------------------------------------|------------------------------------|-------------------------------------------------------------------------|
+| `person (INDEX) /untag [t:TAG1,TAG2,...]` | `person 1 /untag t:friends,family` | For the person at index  `1`, remove the tags  `friends`  and  `family` |
+| `p (INDEX) /ut [t:TAG1,TAG2,...]`         | `p 2 /t ut:friday`                 | For the person at index  `2` , remove the tag `friday`                  |
 
 #### _Clearing tags from a person_
 
-Clears all the tags from an existing person.
+Removes all the tags from an existing person. Use with caution.
 
-Format: `person (INDEX) /cleartags` <br>
-Advanced user Format: `p (INDEX) /ct`
+| Format                      | Short Format     |
+|-----------------------------|------------------|
+| `person (INDEX) /cleartags` | `p (INDEX) /ct`  |
 
-* Tags the person with specified `INDEX` with `TAG1, TAG2, ...`.
-* Please specify at least one tag to be added.
 
-<div style="page-break-after: always;"></div>
 
 <a name = "archiving-people"></a>
 ### Archiving People
@@ -386,30 +381,42 @@ archived mentees at any time.
 #### _Archiving a person_
 Archives a single person by their index.
 
-Format: `person (INDEX) /archive` <br>
-Advanced user Format: `p (INDEX) /ar`
+| Format                  | Example           | What the example does          |
+|-------------------------|-------------------|--------------------------------|
+| `person (INDEX) /archive`| `person 1 /archive` | Archives the person at index `1` |
+| `p (INDEX) /ar`          | `p 2 /ar`          | Archives the person at index `2` |
 
 ![personArchive](images/personArchive.png)
+
+<div style="page-break-after: always;"></div>
 
 #### _Archiving All_
 Archives every person displayed in the list panel.
 
-Format: `person /archive` <br>
-Advanced user Format: `p /ar`
+| Format   | Short Format |
+|----------|--------------|
+| `person /archive`| `person /ar`|
 
-<div style="page-break-after: always;"></div>
 
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
-Format: `person /listarchive` <br>
-Advanced user Format: `p /lar`
+| Format   | Short Format |
+|----------|--------------|
+| `person /listarchive` | `p /lar`|
+
+
+![archivedList](images/archivePersonList.png)
+
+<div style="page-break-after: always;"></div>
 
 #### _Unarchiving_ 
 Restores an archived person back to your person list in Notor.
 
-Format: `person (INDEX) /unarchive` <br>
-Advanced user Format:`p (INDEX) /uar`
+| Format                    | Example        | What the example does                                        |
+|---------------------------|----------------|--------------------------------------------------------------|
+| `person (INDEX) /unarchive` | `p 1 /unarchive` | Restores archived person at index `1` back to your person list |
+| `p (INDEX) /uar `           | `p 2 /uar`       | Restores archived person at index `2` back to your person list |
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 You must be on the list of archived persons in order to use this command, as it needs the index of the person to unarchive.
@@ -434,26 +441,31 @@ on the group. A few ideas on how you can use groups are:
 </ul>
 </div>
 
+<div markdown="span" class="alert alert-info">:exclamation: <strong>Caution:</strong>
+All group commands except **Creating a group** will only work when groups or subgroups are listed.
+</div>
+
 <div style="page-break-after: always;"></div>
 
 #### _Creating a group_
 
+![groupCreate](images/groupCreate.png)
+
 Creates a group.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-Creating a group command works no matter what list is in the List Pane. **However, the rest of group commands below will work only when groups or subgroups are listed.**
-</div> <br>
+| Format                     | Example               | What the example does         |
+|----------------------------|-----------------------|-------------------------------|
+| `group (GROUP_NAME) /create` | `group Orbital /create` | Creates a group named `Orbital` |
+| `g (GROUP_NAME) /c`          | `g FYP /c`              | Creates a group named `FYP`     |
 
-Format: `group (GROUP_NAME) /create`<br>
-Advanced user Format: `g (GROUP_NAME) /c`
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * You cannot create a group with name starting with a number, and may contain `-` or `.` characters
+  * The new group must not have a same name with other existing groups.
+</div>
 
-* Creates a new group with the name `GROUP_NAME`. This name cannot start with a number, and may contain `-` or `.` characters
-* The new group must not have a same name with other existing groups.
-
-Examples:
-
-* `group Orbital /create` will create a new group called Orbital.
-* `g Orbital /c`
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+You can execute this command no matter what list is in the List Pane.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -461,71 +473,59 @@ Examples:
 
 Deletes an existing group at the index `INDEX` specified.
 
-Format: `group (INDEX) /delete`<br>
-Advanced user Format: `g (INDEX) /d`
+| Format                | Example         | What the example does       |
+|-----------------------|-----------------|-----------------------------|
+| `group (INDEX) /delete` | `group 1 /delete` | Deletes the group at index `1`|
+| `g (INDEX) /d`         | `group 2 /d`      | Deletes the group at index `2`|
 
-Examples :
-
-* `group 1 /delete` will delete the group at index 1.
-* `g 1 /d`
+<div markdown="span" class="alert alert-info">:exclamation: <strong>Caution:</strong>
+  You can only execute this command when groups are listed in the list pane.
+</div>
 
 #### _Creating a subgroup_
 
 Creates a new subgroup.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-This command only works when groups are listed in the list pane, and not when subgroups are listed. In other words, a subgroup cannot have subgroups.
-</div> <br>
+| Format                                | Example                   | What the example does                                    |
+|---------------------------------------|---------------------------|----------------------------------------------------------|
+| `group (INDEX) /create n:SUBGROUP_NAME` | `group 1 /create n:Artemis` | Creates a new subgroup named `Artemis` in group at index `1` |
+| `g (INDEX) /c n:SUBGROUP_NAME`         | `g 2 /create n:Year2`       | Creates a new subgroup named `Year2` in group at index `2`    |
 
-Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
-Advanced user Format: `g (INDEX) /c n:SUBGROUP_NAME`
-
-* Creates a new subgroup of group at the index specified with the name `SUBGROUP_NAME`.
-* This name cannot start with a number, and may contain `-` or `.` characters
-* The new subgroup must not have the same name as other existing subgroups in the same group.
-
-Examples :
-
-* `group 1 /create n:Artemis` will create a new subgroup Artemis in group at index 1.
-* `g 1 /create n:Artemis`
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * This name cannot start with a number, and may contain `-` or `.` characters
+  * The new subgroup must not have the same name as other existing subgroups in the same group.
+</div>
 
 <div style="page-break-after: always;"></div>
 
 #### _Adding notes to a group or subgroup_
 
-Pops up a note window to add note to group or subgroup.
+Opnes a pop-up a note window to add note to group or subgroup.
 
-Format: `group (INDEX) /note`<br>
-Advanced user Format: `group (INDEX) /n`
+| Format              | Example       | What the example does                                                        |
+|---------------------|---------------|------------------------------------------------------------------------------|
+| `group (INDEX) /note` | `group 1 /note` | Opens a pop-up window where you can edit notes for group/subgroup at index `1` |
+| `group (INDEX) /n`   | `g 2 /n`        | Opens a pop-up window where you can edit notes for group/subgroup at index `2` |
 
-* Add notes on a group at the index specified.
-* Entering the command will lead to a popup window where the user can edit notes for group at that index.
-* The time when the note is edited will be saved.
-
-Examples :
-
-* `group 1 /note` will prompt a popup window where the user can edit the notes for group at index 1.
-* `g 1 /n`
+<div markdown="span" class="alert alert-info">:bulb: <strong>Tip:</strong>
+You can open add notes to multiple groups at the same time by executing the command multiple times.
+</div>
 
 #### _Clearing notes of a group or subgroup_
 
 Removes note of an existing group or subgroup.
 
-Format: `group (INDEX) /clearnote`<br>
-Advanced user Format:`g (INDEX) /cn`
-
-* Removes note of an existing group at the given `INDEX`.
-
-Examples:
-
-* `group 1 /clearnote`
-* `g 2 /cn`
+| Format                   | Example            | What the example does                         |
+|--------------------------|--------------------|-----------------------------------------------|
+| `group (INDEX) /clearnote` | `group 1 /clearnote` | Removes the note of group/subgroup at index `1` |
+| `g (INDEX) /cn`            | `g 2 /cn`           | Removes the note of group/subgroup at index `2` |
 
 <div style="page-break-after: always;"></div>
 
 ## Filtering with Notor
 
-Sometimes, you will want to view all people, groups, subgroups to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
+Sometimes, you will want to view all people, groups, subgroups to understand what you have saved in your Notor. 
+At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
 
 ### List
 
@@ -536,8 +536,11 @@ It can also list archived persons: see [Archiving People](#archiving-people).
 
 Lists all persons in the list panel.
 
-Format: `person /list`<br>
-Advanced user Format:`p /l`
+
+| Format       | What the command does |
+|--------------|-----------------------|
+| `person /list` | List all persons      |
+| `p /l`        | List all persons      |
 
 <div style="page-break-after: always;"></div>
 
@@ -545,26 +548,34 @@ Advanced user Format:`p /l`
 
 Lists all groups in the list panel.
 
-Format:  `group /list`<br>
-Advanced user Format: `g /l`
 
+| Format      | What the command does          |
+|-------------|--------------------------------|
+| `group /list` | Lists all groups in list panel |
+| `g /l`        | Lists all groups in list panel |
+
+<div style="page-break-after: always;"></div>
+
+<a name = "list-persons-in-group"></a>
 #### _Listing all persons in a group or subgroup_
 
 Lists all persons in that group or subgroup.<br>
 
-Format: `person (INDEX) /list`<br>
-Advanced user Format:`p (INDEX) /l`
+| Format               | Example        | What the example does                         |
+|----------------------|----------------|-----------------------------------------------|
+| `person (INDEX) /list` | `person 2 /list` | List all persons in group/subgroup at index `2` |
+| `p (INDEX) /l`         | `p 3 /list`      | List all persons in group/subgroup at index `3` |
 
-* Only works if you have listed out all groups or subgroups in Notor.
-* Lists all persons of a group or subgroup that is at the given `INDEX` .
-* Do not confuse this with the list all subgroups command, whose first command word is `group`
 
-Examples:
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * Only works if you have listed out all groups or subgroups in Notor.
+  * Lists all persons of a group or subgroup that is at the given `INDEX` .
+  * Do not confuse this with the list all subgroups command, whose first command word is `group`
+</div>
 
-* `person 1 /list`
-* `p 2 /l`
-
-<div style="page-break-after: always;"></div>
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Only works if you have listed out all groups or subgroups in Notor.
+</div>
 
 #### _Listing all subgroups in a group_
 
@@ -574,22 +585,22 @@ Lists all the subgroups within a group.
 Do not confuse this with the list all persons command, whose first command word is <code>person</code>.
 </div> <br>
 
-* Only works if you have listed out all groups or subgroups in Notor.
-* Do not confuse this with the list all persons command, whose first command word is `person`
-
-Format: `group (INDEX) /list`<br>
-Advanced user Format: `g (INDEX) /l`
-
-Examples:
-
-* `group 3 /list`
-* `g 2 /l`
+| Format              | Example       | What the example does                   |
+|---------------------|---------------|-----------------------------------------|
+| `group (INDEX) /list` | `group 3 /list` | Lists all subgroups of group at index `3` |
+| `g (INDEX) /l`        | `g 2 /l`        | Lists all subgroups of group at index `2` |
 
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
-Format: `person /listarchive` <br>
-Advanced user Format: `p /lar`
+| Format      | What the command does          |
+|-------------|--------------------------------|
+| `person /listarchive` | Lists all person in the archived list in list panel |
+| `p /lar`        |  Lists all person in the archived list in list panel |
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+Only works if you have listed out all groups or subgroups in Notor.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -601,38 +612,34 @@ Find allows you to obtain the results that match with the keyword specified. You
 
 Finds all persons that match your search term. You may search for substrings within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
 
-Format: `person  /find [n:NAME_QUERY] [t:TAG1, TAG2...]`<br>
-Advanced user Format:`p /f [n:NAME_QUERY] [t:TAG1, TAG2...]`
+| Format                                        | Example                        | What the example does                                                  |
+|-----------------------------------------------|--------------------------------|------------------------------------------------------------------------|
+| `person /find [n:NAME_QUERY] [t:TAG1, TAG2...]` | `person /find n:Elton t:CS2103T` | Find all persons that that match `Elton` with tag that match `CS2103T` |
+| `p /f [n:NAME_QUERY] [t:TAG1, TAG2...] `        | `p /f t:SWE`                     | Find all persons with tag that match `SWE`                             |
 
-* Finds all persons that match with given `NAME_QUERY`, or are tagged with the tags specified.
-* The query for the name will match if the string exists within the name, regardless of case: `jo` will match `John` and `joanne`.
-* Tags must be spelled exactly. You may specify more than one tag
-* While the parameters have been marked optional, you must specify at least one of the parameters if you want to filter the results.
-
-Examples:
-
-* `person /find n:Alex t:graduated, engineering`
-* `p /f n:Mary`
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * Finds all persons that match with given `NAME_QUERY`, or are tagged with the tags specified.
+  * The query for the name will match if the string exists within the name, regardless of case: `jo` will match `John` and `joanne`.
+  * Tags must be spelled exactly. You may specify more than one tag.
+  * While the parameters have been marked optional, you must specify at least one of the parameters if you want to filter the results.
+</div>
 
 <div style="page-break-after: always;"></div>
 
 #### _Finding groups or subgroups_
 
-Finds all the groups with the keyword specified. This will search for the keyword within the group's name.
+Finds all the groups/subgroups with the keyword specified. This will search for the keyword within the group's name.
 Use after you have listed out all groups or subgroups.
 
-Format:  `group /find n:QUERY_NAME`<br>
-Advanced user Format: `g /f n:QUERY_NAME`
+| Format                   | Example               | What the example does                             |
+|--------------------------|-----------------------|---------------------------------------------------|
+| `group /find n:QUERY_NAME` | `group /find n:Artemis` | Finds all the groups/subgroups that match `Artemis` |
+| `g /f n:QUERY_NAME`        | `g /f n:CS2103`         | Finds all the groups/subgroups that match `CS2103`  |
 
-* Finds all the groups that match the `KEYWORD`.
-* Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
-
-Examples of finding group:
-
-* `group /find n:Artemis`
-* `g /f n:GroupA`
-* `group /f n:Test`
-
+<div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
+  * Finds all the groups/subgroups that match the `KEYWORD`.
+  * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
+</div>
 
 ## Miscellaneous information
 
