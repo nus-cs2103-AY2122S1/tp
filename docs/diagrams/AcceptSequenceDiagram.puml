@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternshipParser" as InternshipParser LOGIC_COLOR
+participant ":AcceptCommandParser" as AcceptCommandParser LOGIC_COLOR
+participant "a:AcceptCommand" as AcceptCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("accept 2")
+activate LogicManager
+
+LogicManager -> InternshipParser : parseCommand("accept 2")
+activate InternshipParser
+
+create AcceptCommandParser
+InternshipParser -> AcceptCommandParser
+activate AcceptCommandParser
+
+AcceptCommandParser --> InternshipParser
+deactivate AcceptCommandParser
+
+InternshipParser -> AcceptCommandParser : parse(" 2")
+activate AcceptCommandParser
+
+create AcceptCommand
+AcceptCommandParser -> AcceptCommand
+activate AcceptCommand
+
+AcceptCommand --> AcceptCommandParser : a
+deactivate AcceptCommand
+
+AcceptCommandParser --> InternshipParser : a
+deactivate AcceptCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AcceptCommandParser -[hidden]-> InternshipParser
+destroy AcceptCommandParser
+
+InternshipParser --> LogicManager : a
+deactivate InternshipParser
+
+LogicManager -> AcceptCommand : execute(model)
+activate AcceptCommand
+
+AcceptCommand -> Model : setApplication(applicationToAccept, acceptedApplication)
+activate Model
+
+Model --> AcceptCommand
+deactivate Model
+
+create CommandResult
+AcceptCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AcceptCommand
+deactivate CommandResult
+
+AcceptCommand --> LogicManager : result
+deactivate AcceptCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

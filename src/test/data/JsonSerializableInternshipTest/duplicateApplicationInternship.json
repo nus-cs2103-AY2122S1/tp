@@ -1,0 +1,21 @@
+{
+  "applications": [ {
+    "company": "Amazon",
+    "position": "Software Engineer",
+    "deadline": "2021-12-12",
+    "completion": "Uncompleted",
+    "status": "Pending",
+    "priority": "Medium",
+    "requirements": [ "CV" ],
+    "tagged": [ "Important" ]
+  }, {
+    "company": "Amazon",
+    "position": "Software Engineer",
+    "deadline": "2021-12-12",
+    "completion": "Uncompleted",
+    "status": "Pending",
+    "priority": "Medium",
+    "requirements": [ "CV" ],
+    "tagged": [ "Important" ]
+  } ]
+}

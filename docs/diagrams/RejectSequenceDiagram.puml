@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternshipParser" as InternshipParser LOGIC_COLOR
+participant ":RejectCommandParser" as RejectCommandParser LOGIC_COLOR
+participant "r:RejectCommand" as RejectCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("reject 2")
+activate LogicManager
+
+LogicManager -> InternshipParser : parseCommand("reject 2")
+activate InternshipParser
+
+create RejectCommandParser
+InternshipParser -> RejectCommandParser
+activate RejectCommandParser
+
+RejectCommandParser --> InternshipParser
+deactivate RejectCommandParser
+
+InternshipParser -> RejectCommandParser : parse(" 2")
+activate RejectCommandParser
+
+create RejectCommand
+RejectCommandParser -> RejectCommand
+activate RejectCommand
+
+RejectCommand --> RejectCommandParser : r
+deactivate RejectCommand
+
+RejectCommandParser --> InternshipParser : r
+deactivate RejectCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RejectCommandParser -[hidden]-> InternshipParser
+destroy RejectCommandParser
+
+InternshipParser --> LogicManager : r
+deactivate InternshipParser
+
+LogicManager -> RejectCommand : execute(model)
+activate RejectCommand
+
+RejectCommand -> Model : setApplication(applicationToReject, rejectedApplication)
+activate Model
+
+Model --> RejectCommand
+deactivate Model
+
+create CommandResult
+RejectCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RejectCommand
+deactivate CommandResult
+
+RejectCommand --> LogicManager : result
+deactivate RejectCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+

@@ -1,0 +1,11 @@
+{
+  "internships": [ {
+    "company": "Valid Company Name",
+    "position": "Valid Position",
+    "deadline": "2021-12-25"
+  }, {
+    "company": "#*A%t4w",
+    "position": "A#($g5r",
+    "deadline": "12345"
+  } ]
+}

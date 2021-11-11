@@ -9,6 +9,30 @@ import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
     @Test
+    public void isShowHelp_true_success() {
+        CommandResult commandResult = new CommandResult("feedback", true, false);
+        assertTrue(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void isShowHelp_false_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, false);
+        assertFalse(commandResult.isShowHelp());
+    }
+
+    @Test
+    public void isExit_true_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, true);
+        assertTrue(commandResult.isExit());
+    }
+
+    @Test
+    public void isExit_false_success() {
+        CommandResult commandResult = new CommandResult("feedback", false, false);
+        assertFalse(commandResult.isExit());
+    }
+
+    @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 

@@ -5,50 +5,55 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyInternship <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Internship
+Class ReadOnlyInternship
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
+Class UniqueApplicationList
+Class Application
+Class Company
+Class Position
+Class Deadline
+Class Priority
+Class Completion
+Class Status
+Class RequirementSet
+Class InterviewDateAndTimeSet
+Class Requirement
+Class InterviewDateAndTime
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Internship .up.|> ReadOnlyInternship
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyInternship
+ModelManager -left-> "1" Internship
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Internship *--> "1" UniqueApplicationList
+UniqueApplicationList --> "~* all" Application
+Application *--> "1" Company
+Application *--> "1" Position
+Application *--> "1" Deadline
+Application *--> "1" Priority
+Application *--> "1" Completion
+Application *--> "1" Status
+Application *-left> "1" RequirementSet
+Application *-right> "1" InterviewDateAndTimeSet
+RequirementSet --left> "*" Requirement
+InterviewDateAndTimeSet --right> "*" InterviewDateAndTime
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Application
 @enduml

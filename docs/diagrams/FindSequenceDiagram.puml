@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternshipParser" as InternshipParser LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "predicate:PriorityContainsKeywordsPredicate" as PriorityContainsKeywordsPredicate LOGIC_COLOR
+participant "f:FindCommand" as FindCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+
+end box
+[-> LogicManager : execute("find pr/High")
+activate LogicManager
+
+LogicManager -> InternshipParser : parseCommand("find pr/High")
+activate InternshipParser
+
+create FindCommandParser
+InternshipParser -> FindCommandParser : FindCommandParser()
+activate FindCommandParser
+
+FindCommandParser --> InternshipParser
+deactivate FindCommandParser
+
+InternshipParser -> FindCommandParser : parse(" pr/High")
+activate FindCommandParser
+
+create PriorityContainsKeywordsPredicate
+FindCommandParser -> PriorityContainsKeywordsPredicate : PriorityContainsKeywordsPredicate([High])
+activate PriorityContainsKeywordsPredicate
+
+PriorityContainsKeywordsPredicate --> FindCommandParser
+deactivate PriorityContainsKeywordsPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : FindCommand(predicate)
+activate FindCommand
+
+FindCommand --> FindCommandParser : f
+deactivate FindCommand
+
+FindCommandParser --> InternshipParser : f
+deactivate FindCommandParser
+
+FindCommandParser -[hidden]-> LogicManager : return
+destroy FindCommandParser
+
+InternshipParser --> LogicManager : f
+deactivate InternshipParser
+
+LogicManager -> FindCommand : execute(model)
+activate FindCommand
+
+FindCommand -> Model : updateFilteredApplicationList(predicate)
+activate Model
+
+Model --> FindCommand
+deactivate Model
+
+create CommandResult
+FindCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindCommand
+deactivate CommandResult
+
+FindCommand --> LogicManager : result
+deactivate FindCommand
+
+PriorityContainsKeywordsPredicate -[hidden]-> LogicManager : return
+destroy PriorityContainsKeywordsPredicate
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

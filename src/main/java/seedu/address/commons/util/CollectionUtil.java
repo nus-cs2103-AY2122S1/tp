@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 /**
  * Utility methods related to Collections
  */
-public class CollectionUtil {
+public final class CollectionUtil {
 
     /** @see #requireAllNonNull(Collection) */
     public static void requireAllNonNull(Object... items) {

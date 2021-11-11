@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.application.Application;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,26 +19,31 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Internship internship;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Application> filteredApplications;
+    private final VersionedInternship versionedInternship;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given internship and userPrefs.
+     * The VersionedInternship is initialized to the current version of Internship retrieved from storage
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInternship internship, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(internship, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with InternSHIP: " + internship + " and user preferences " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.internship = new Internship(internship);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplications = new FilteredList<>(this.internship.getApplicationList());
+
+        Internship copied = new Internship(internship);
+        versionedInternship = new VersionedInternship(copied);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Internship(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,67 +71,67 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getInternshipFilePath() {
+        return userPrefs.getInternshipFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setInternshipFilePath(Path internshipFilePath) {
+        requireNonNull(internshipFilePath);
+        userPrefs.setInternshipFilePath(internshipFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Internship ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setInternship(ReadOnlyInternship internship) {
+        this.internship.resetData(internship);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyInternship getInternship() {
+        return internship;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasApplication(Application application) {
+        requireNonNull(application);
+        return internship.hasApplication(application);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteApplication(Application target) {
+        internship.removeApplication(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addApplication(Application application) {
+        internship.addApplication(application);
+        updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setApplication(Application target, Application editedApplication) {
+        requireAllNonNull(target, editedApplication);
+
+        internship.setApplication(target, editedApplication);
+    }
+
+    //=========== Filtered Application List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Application} backed by the internal list of
+     * {@code versionedInternship}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Application> getFilteredApplicationList() {
+        return filteredApplications;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredApplicationList(Predicate<Application> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredApplications.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +148,47 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return internship.equals(other.internship)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredApplications.equals(other.filteredApplications);
     }
 
+    //=========== Methods for handling undo and undo feature ======================================================
+    @Override
+    public void commitInternship(ReadOnlyInternship currentVersion) {
+        versionedInternship.commit(currentVersion);
+    }
+
+    @Override
+    public void undoInternship() {
+        ReadOnlyInternship versionToBeRecovered = versionedInternship.undo();
+        setInternship(versionToBeRecovered);
+    }
+
+    @Override
+    public boolean canUndoInternship() {
+        return versionedInternship.canUndo();
+    }
+
+    @Override
+    public void redoInternship() {
+        ReadOnlyInternship versionToBeRecovered = versionedInternship.redo();
+        setInternship(versionToBeRecovered);
+    }
+
+    @Override
+    public boolean canRedoInternship() {
+        return versionedInternship.canRedo();
+    }
+
+    //=========== Other utility methods ===========================================================================
+    @Override
+    public boolean hasInterviewTimeInList() {
+        for (Application application: filteredApplications) {
+            if (application.hasInterviewTime()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

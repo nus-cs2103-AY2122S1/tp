@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternshipParser" as InternshipParser LOGIC_COLOR
+participant ":SoonCommandParser" as SoonCommandParser LOGIC_COLOR
+participant "s:SoonCommand" as SoonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("soon d/1")
+activate LogicManager
+
+LogicManager -> InternshipParser : parseCommand("soon d/1")
+activate InternshipParser
+
+create SoonCommandParser
+InternshipParser -> SoonCommandParser
+activate SoonCommandParser
+
+SoonCommandParser --> InternshipParser
+deactivate SoonCommandParser
+
+InternshipParser -> SoonCommandParser : parse(" d/1")
+activate SoonCommandParser
+
+create SoonCommand
+SoonCommandParser -> SoonCommand
+activate SoonCommand
+
+SoonCommand --> SoonCommandParser : s
+deactivate SoonCommand
+
+SoonCommandParser --> InternshipParser : s
+deactivate SoonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SoonCommandParser -[hidden]-> InternshipParser
+destroy SoonCommandParser
+
+InternshipParser --> LogicManager : s
+deactivate InternshipParser
+
+LogicManager -> SoonCommand : execute(model)
+activate SoonCommand
+
+SoonCommand -> Model : updateFilteredApplicationList(predicate)
+activate Model
+
+Model --> SoonCommand
+deactivate Model
+
+create CommandResult
+SoonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SoonCommand
+deactivate CommandResult
+
+SoonCommand --> LogicManager : result
+deactivate SoonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

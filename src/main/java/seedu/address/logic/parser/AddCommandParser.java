@@ -1,23 +1,26 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE_OF_APPLICATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERNSHIP_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_DATE_AND_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REQUIREMENT;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.application.Application;
+import seedu.address.model.application.Company;
+import seedu.address.model.application.Completion;
+import seedu.address.model.application.Deadline;
+import seedu.address.model.application.InterviewDateAndTime;
+import seedu.address.model.application.Position;
+import seedu.address.model.application.Priority;
+import seedu.address.model.application.Requirement;
+import seedu.address.model.application.Status;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -31,22 +34,29 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_NAME, PREFIX_INTERNSHIP_POSITION,
+                        PREFIX_DEADLINE_OF_APPLICATION, PREFIX_REQUIREMENT, PREFIX_INTERVIEW_DATE_AND_TIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY_NAME, PREFIX_INTERNSHIP_POSITION,
+                PREFIX_DEADLINE_OF_APPLICATION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY_NAME).get());
+        Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_INTERNSHIP_POSITION).get());
+        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE_OF_APPLICATION).get());
+        Completion completion = new Completion("Uncompleted");
+        Status status = new Status("Pending");
+        Priority priority = new Priority("Medium");
+        Set<Requirement> requirementList = ParserUtil.parseRequirements(argMultimap.getAllValues(PREFIX_REQUIREMENT));
+        Set<InterviewDateAndTime> interviewDateAndTimeList = ParserUtil.parseInterviewDateAndTimes(
+                argMultimap.getAllValues(PREFIX_INTERVIEW_DATE_AND_TIME));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Application application = new Application(company, position, deadline, completion, status, priority,
+                requirementList, interviewDateAndTimeList);
 
-        return new AddCommand(person);
+        return new AddCommand(application);
     }
 
     /**

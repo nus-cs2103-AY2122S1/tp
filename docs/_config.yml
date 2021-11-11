@@ -1,4 +1,4 @@
-title: "AB-3"
+title: "InternSHIP"
 theme: minima
 
 header_pages:
@@ -8,8 +8,8 @@ header_pages:
 
 markdown: kramdown
 
-repository: "se-edu/addressbook-level3"
-github_icon: "images/github-icon.png"
+repository: "AY2122S1-CS2103T-W17-1/tp"
+github_icon: "images/logos/github-icon.png"
 
 plugins:
   - jemoji

@@ -1,19 +1,33 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: InternSHIP
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W17-1/tp/branch/master/graph/badge.svg?token=BILLNCEE86)](https://codecov.io/gh/AY2122S1-CS2103T-W17-1/tp)
+
+<div align = "center">
+    <img alt="logo" src="images/logos/InternSHIP.png">
+</div>
+
+**InternSHIP is a desktop app for university students to manage their internship applications.** InternSHIP has been optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InternSHIP can get your internship management tasks done faster than traditional GUI apps.
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+## Useful Webpages
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using InternSHIP, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start).
+* If you are interested about developing InternSHIP, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
+* If you want to know more about the team behind InternSHIP, check out [**About Us**](https://ay2122s1-cs2103t-w17-1.github.io/tp/AboutUs.html).
 
+## Acknowledgements
 
-**Acknowledgements**
-
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* The formatting and content of this project's documentations are referenced from [AY2021S2-CS2103T-T11-2/tp](https://ay2021s2-cs2103t-t11-2.github.io/tp/).
+* The ship in the InternSHIP icon was obtained from [flaticon.com](https://www.flaticon.com/free-icon/ship_4012401?term=ship&page=1&position=66&page=1&position=66&related_id=4012401&origin=search).
+* [Canva](https://www.canva.com) was used to make the InternSHIP icon.
+* Libraries used:
+  - [JavaFX](https://openjfx.io/)
+  - [Jackson](https://github.com/FasterXML/jackson)
+  - [JUnit5](https://github.com/junit-team/junit5)
+  - [TestFX](https://github.com/TestFX/TestFX)

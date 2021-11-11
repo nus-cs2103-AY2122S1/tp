@@ -1,59 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Scene?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.stage.*?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="InternSHIP"
+         type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/ship.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css"/>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@Fonts.css" />
+        <URL value="@AppTheme.css" />
       </stylesheets>
 
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+      <VBox alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="19.0" styleClass="menu-bar" spacing="10">
+          <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+              <Image url="@../images/ship.png" />
+            </image>
+          </ImageView>
+            <Text fill="#15b1bd" strokeType="OUTSIDE" strokeWidth="0.0" text="InternSHIP">
+              <font>
+                <Font name="Segoe UI Bold" size="25.0" />
+              </font>
+            </Text>
+          <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+            <Menu mnemonicParsing="false" text="File">
+              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+            </Menu>
+          </MenuBar>
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets left="10" right="10" top="10" bottom="5" />
+          </padding>
+        </HBox>
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+          <padding>
+            <Insets left="10" right="10" top="5" />
           </padding>
         </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150" minHeight="150" prefHeight="150"
+                   styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="10" left="10" right="10" top="2" />
           </padding>
         </StackPane>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <StackPane>
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="15" right="10" top="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <GridPane prefHeight="25.0" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="160.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+              <Label fx:id="id" styleClass="cell_big_label">
+                <minWidth>
+                  <!-- Ensures that the label text is never truncated -->
+                  <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+              </Label>
+              <Label fx:id="name" styleClass="cell_big_label" text="Company">
+                <padding>
+                  <Insets left="36" />
+                </padding>
+              </Label>
+            </HBox>
+            <Label fx:id="position" styleClass="cell_big_label" text="Position" GridPane.columnIndex="1">
+              <padding>
+                <Insets left="26" />
+              </padding>
+            </Label>
+            <Label fx:id="deadline" styleClass="cell_big_label" text="Deadline" GridPane.columnIndex="2">
+              <padding>
+                <Insets left="5" />
+              </padding>
+            </Label>
+            <Label fx:id="requirements" styleClass="cell_big_label" text="Requirements" GridPane.columnIndex="3">
+              <padding>
+                <Insets left="1" />
+              </padding>
+            </Label>
+            <Label fx:id="interviewDateAndTime" styleClass="cell_big_label" text="Interview Time"
+                   GridPane.columnIndex="4" />
+            <Label fx:id="priority" styleClass="cell_big_label" text="Priority" GridPane.columnIndex="5">
+              <padding>
+                <Insets left="5" />
+              </padding>
+            </Label>
+            <Label fx:id="completion" styleClass="cell_big_label" text="Completed?" GridPane.columnIndex="6" />
+            <Label fx:id="status" styleClass="cell_big_label" text="Status" GridPane.columnIndex="7">
+              <padding>
+                <Insets left="30" />
+              </padding>
+            </Label>
+          </GridPane>
+        </StackPane>
+        <VBox fx:id="applicationList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+          <padding>
+            <Insets bottom="5" left="5" right="5" top="5" />
+          </padding>
+          <StackPane fx:id="applicationListPanelPlaceholder" VBox.vgrow="ALWAYS" />
         </VBox>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

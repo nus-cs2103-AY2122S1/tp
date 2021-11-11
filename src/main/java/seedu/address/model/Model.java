@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.application.Application;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Application> PREDICATE_SHOW_ALL_APPLICATIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +35,91 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Internship file path.
      */
-    Path getAddressBookFilePath();
+    Path getInternshipFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Internship file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setInternshipFilePath(Path internshipFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Internship data with the data in {@code internship}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setInternship(ReadOnlyInternship internship);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Internship */
+    ReadOnlyInternship getInternship();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a application with the same identity as {@code application} exists in the Internship.
      */
-    boolean hasPerson(Person person);
+    boolean hasApplication(Application application);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given application.
+     * The application must exist in the Internship.
      */
-    void deletePerson(Person target);
+    void deleteApplication(Application target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given application.
+     * {@code application} must not already exist in the Internship.
      */
-    void addPerson(Person person);
+    void addApplication(Application application);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given application {@code target} with {@code editedApplication}.
+     * {@code target} must exist in the Internship.
+     * The application identity of {@code editedApplication} must not be the same as another
+     * existing application in the Internship.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setApplication(Application target, Application editedApplication);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered application list */
+    ObservableList<Application> getFilteredApplicationList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered application list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredApplicationList(Predicate<Application> predicate);
+
+    /**
+     * Commits the change made to Internship data to the versionedInternship
+     * @param currentVersion the current version of Internship data as a result of change
+     */
+    void commitInternship(ReadOnlyInternship currentVersion);
+
+    /**
+     * Undo the most recent change made to Internship data
+     */
+    void undoInternship();
+
+    /**
+     * Redo the most recent change made to Internship data
+     */
+    void redoInternship();
+
+    /**
+     * Determines whether the undo action is allowed at the current state
+     * @return whether the undo action is allowed
+     */
+    boolean canUndoInternship();
+
+    /**
+     * Determines whether the redo action is allowed at the current state
+     * @return whether the redo action is allowed
+     */
+    boolean canRedoInternship();
+
+    /**
+     * Returns true if there is at least one application in the currently visible list whose
+     * interview time list is not empty
+     * @return true if there is at least one application in the currently visible list whose
+     *      * interview time list is not empty, and false otherwise
+     */
+    boolean hasInterviewTimeInList();
+
 }

@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternshipParser" as InternshipParser LOGIC_COLOR
+participant ":CompleteCommandParser" as CompleteCommandParser LOGIC_COLOR
+participant "c:CompleteCommand" as CompleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("complete 1")
+activate LogicManager
+
+LogicManager -> InternshipParser : parseCommand("complete 1")
+activate InternshipParser
+
+create CompleteCommandParser
+InternshipParser -> CompleteCommandParser
+activate CompleteCommandParser
+
+CompleteCommandParser --> InternshipParser
+deactivate CompleteCommandParser
+
+InternshipParser -> CompleteCommandParser : parse(" 1")
+activate CompleteCommandParser
+
+create CompleteCommand
+CompleteCommandParser -> CompleteCommand
+activate CompleteCommand
+
+CompleteCommand --> CompleteCommandParser : c
+deactivate CompleteCommand
+
+CompleteCommandParser --> InternshipParser : c
+deactivate CompleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CompleteCommandParser -[hidden]-> InternshipParser
+destroy CompleteCommandParser
+
+InternshipParser --> LogicManager : c
+deactivate InternshipParser
+
+LogicManager -> CompleteCommand : execute(model)
+activate CompleteCommand
+
+CompleteCommand -> Model : setApplication(applicationToComplete, completedApplication)
+activate Model
+
+Model --> CompleteCommand
+deactivate Model
+
+create CommandResult
+CompleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CompleteCommand
+deactivate CommandResult
+
+CompleteCommand --> LogicManager : result
+deactivate CompleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

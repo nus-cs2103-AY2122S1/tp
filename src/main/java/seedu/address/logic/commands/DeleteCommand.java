@@ -8,24 +8,31 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.application.Application;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an application identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD.toUpperCase()
+            + " command: Deletes the details of the application at the specified index"
+            + " (as identified by the index in the displayed application list)\n"
+            + "Parameters: "
+            + Messages.MESSAGE_INDEX_REQUIREMENT + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_APPLICATION_SUCCESS = "Deleted Application: %1$s";
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand to delete the specified {@code Application}
+     *
+     * @param targetIndex Inndex of the application to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -33,15 +40,17 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Application> lastShownList = model.getFilteredApplicationList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INDEX_EXCEEDS_LIST_LENGTH);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Application applicationToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteApplication(applicationToDelete);
+        model.commitInternship(model.getInternship());
+
+        return new CommandResult(String.format(MESSAGE_DELETE_APPLICATION_SUCCESS, applicationToDelete));
     }
 
     @Override

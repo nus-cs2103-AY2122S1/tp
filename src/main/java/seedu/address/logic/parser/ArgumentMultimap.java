@@ -57,4 +57,11 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns the size of prefixes.
+     */
+    public int getSize() {
+        return argMultimap.size();
+    }
 }
