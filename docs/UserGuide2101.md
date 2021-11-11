@@ -10,7 +10,7 @@ You can use Intern Watcher to add, edit and delete the internship applicants. In
 
 This user guide covers a quick walk-through on how to use this application, as well as the full descriptions of the features available.
 * Table of Contents
-{:toc}
+  {:toc}
 
 ## Components Of Ui
 
@@ -21,18 +21,27 @@ This user guide covers a quick walk-through on how to use this application, as w
 ## Quick start
 
 
-1. proof of change Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same. <br><p style="text-align:center;"><img src="images/DownloadJava.png" width="500" alt="DownloadJava" ></p>
+1. Ensure you have Java `11` or above installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11). <br>
+   If you are a Windows user, you may select the Windows tab and download the application as shown in the image below. Mac users can click on the macOS tab and follow the same.
 
     <img src="images/DownloadJava.png" width="500" alt="DownloadJava" >
 
 2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases/download/v1.4/internwatcher.jar). <br>
-You may ignore the warning pop-up and click on "Keep" to download Intern Watcher.
+   You may ignore the warning pop-up and click on "Keep" to download Intern Watcher.
 
     <img src="images/DownloadApp.png" width="500" alt="DownloadApp" >
 
+3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. <br>This didn't work? Refer to the [FAQ](#faq) for more information on alternative ways to launch Intern Watcher. <br>![Ui](images/Ui.png)
+   |macOS|Windows|
+       |---|---|
+   |<img src="images/MacFolder.png" alt="drawing" width="550" />|<img src="images/WindowsFolder.png" alt="drawing" width="500" />|
 
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   <br>
+   Encountered problems? Refer to the [FAQ](#faq) for troubleshooting information and alternative ways to launch Intern Watcher.
+
+   ![Ui](images/Ui.png)
 5. Type any command in the command box and press the "Enter" key to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Here's an example usage of Intern Watcher:
@@ -62,8 +71,8 @@ You may ignore the warning pop-up and click on "Keep" to download Intern Watcher
 
 * Typing `exit` will save the data we have and exit the application.
 
-
 * If you encounter any problems, please refer to the [FAQ section](#faq) below.
+
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -283,13 +292,13 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **A**: No, only Intern Watcher currently only supports single save files.
 
 **Q**: I couldn't start Intern Watcher by double-clicking on the file, what should I do?<br>
-**A**: Go to terminal and type `java -jar internwatcher.jar` command to launch Intern Watcher.
+**A**: Open your command prompt by searching for "Command Prompt"(Windows) or "Terminal"(MacOS). From there, type `java -jar internwatcher.jar` and press enter to launch Intern Watcher.
 
 **Q**: Why is my applicant list empty?<br>
-**A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file is corrupted. Revert the save to your last backup, or contact us if you need help.
+**A**: To protect the user from malicious save files, Intern Watcher resets the applicant list if the save file has been corrupted. Revert the save to your last backup, or contact us if you need help.
 
 **Q**: Why does my command not work?<br>
-**A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' [specifications](#specification-of-fields).
+**A**: Firstly check if the command is in the specified format. If it is, it could be due to a mismatch in the input fields' [specifications](#specification-of-fields).
 
 **Q**: Is my data automatically saved?<br>
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
@@ -360,4 +369,3 @@ Word | Definition
 
 ## Contact Us
 If you have any questions or have suggestions for the application, feel free to contact us at [internwatcher@gmail.com](mailto: internwatcher@gmail.com).
-
