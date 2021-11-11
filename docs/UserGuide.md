@@ -264,7 +264,7 @@ Examples:
 #### Adding a lesson to a student: `student -al`
 
 Adds a lesson so that you can note down your lesson schedule with each student. You must specify the lesson subject, as well
-as the day and time of the lesson.
+as the day of week and time of the lesson.
 
 Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
@@ -323,7 +323,7 @@ Example:
 
 #### Deleting an exam from a student: `student -de`
 
-Deletes an exam from the specific student if you do not want to note down the exam anymore.
+Deletes an exam from the specific student if you do not want to note down this exam anymore.
 
 Format: `student -de STUDENT_INDEX EXAM_INDEX`
 
@@ -393,7 +393,7 @@ Examples:
 #### Adding a lesson to a group: `group -al`
 
 Adds a lesson to the specific group so that you can note down your lesson schedule with the entire group.
-You must specify the lesson subject, as well as the day and time of the lesson.
+You must specify the lesson subject, as well as the day of week and time of the lesson.
 
 Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
