@@ -63,7 +63,8 @@ _text_ | Caption for images.
 
 4. Double-click **TAB.jar** to start the app. A window similar to the one below should appear in a few seconds. 
    TAB starts up with some sample data to let you explore and see how the app will look like when it’s in use.
-   ![start](images/start.png) <br> _How TAB looks when you start it for the first time._
+   ![start](images/start.png) 
+   <div class="caption">How TAB looks when you start it for the first time.</div>
 
 5. Simply type a command in the command box and press <kbd>ENTER</kbd> to execute it. 
    You can try opening the help window by typing `help` and pressing <kbd>ENTER</kbd>.<br>
@@ -460,10 +461,13 @@ Here's how to do it:
 
 1. Look for Betsy Crowe in the list of students. In this example, she's the seventh student in the list.
    ![Updated Betsy Crowe](images/EditCommandEditBetsyInitial.png)
+   <div class="caption">Betsy Crowe is at index 7.</div>
+
 2. Type `edit 7 sch/BC Example School lvl/Secondary 3 r/ t/` to set her school and academic level to `BC Example School` and `Secondary 3` respectively and remove any remarks and tags.
    Now, Betsy Crowe's data in TAB should look like this:
 
 ![Updated Betsy Crowe](images/EditCommandEditBetsyResult.png)
+   <div class="caption">Editing Betsy Crowe.</div>
 
 #### Deleting a student: `delete`
 
