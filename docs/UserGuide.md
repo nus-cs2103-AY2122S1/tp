@@ -1,6 +1,6 @@
 ---
 layout: page
-title: The Ultimate User Guide to the Tuition Address Book (TAB)
+title: Tuition Address Book (TAB) User Guide
 ---
 <span id="toc"/>
 * Table of Contents
