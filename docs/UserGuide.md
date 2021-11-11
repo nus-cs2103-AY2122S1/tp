@@ -25,7 +25,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 
 ## Installation Guide
 
-1. Ensure you have Java `11` or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+1. Ensure you have __Java 11__ or above installed in your Computer. You can also install it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `tutormaster.jar` [here](https://github.com/AY2122S1-CS2103T-W16-4/tp/releases).
 
@@ -34,7 +34,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ de
 4. To open the application,
     * If you are a Mac user, open Terminal and navigate to the directory with Tutor Master. Type `java -jar tutormaster.jar` and run the command.
     * If you are Windows user, double-click the jar file to start the app.
-    * The GUI similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
+    * The GUI similar to below should appear in a few seconds. Note how the app contains some sample data for you to view.<br>
 
    ![Ui](images/Ui.png)
 
@@ -263,7 +263,8 @@ Examples:
 
 #### Adding a lesson to a student: `student -al`
 
-Adds a lesson to the specific student
+Adds a lesson so that you can note down your lesson schedule with each student. You must specify the lesson subject, as well
+as the day of week and time of the lesson.
 
 Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
@@ -288,8 +289,7 @@ Example:
 
 #### Deleting a lesson from a student: `student -dl`
 
-Deletes a lesson from the specific student
-
+Deletes a lesson from the specific student if you are not continuing this lesson anymore.
 
 Format: `student -dl STUDENT_INDEX LESSON_INDEX`
 
@@ -306,8 +306,8 @@ Example:
 
 #### Adding an exam to a student: `student -ae`
 
-Adds an exam to the specific student
-
+Adds an exam to the specific student so that you can note down your student's exam dates. You must specify
+the date and time of the exam as well as the subject that the exam is for.
 
 Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
 
@@ -323,8 +323,7 @@ Example:
 
 #### Deleting an exam from a student: `student -de`
 
-Deletes an exam from the specific student
-
+Deletes an exam from the specific student if you do not want to note down this exam anymore.
 
 Format: `student -de STUDENT_INDEX EXAM_INDEX`
 
@@ -344,8 +343,8 @@ Example:
 
 #### Grouping students: `group -a`
 
-Groups students by their names together.
-
+Group students together. This is useful for when you have a group of students that has the same lesson schedule or
+tasks to complete.
 
 Format: `group -a INDEX…​ n/GROUPNAME`
 
@@ -393,7 +392,8 @@ Examples:
 
 #### Adding a lesson to a group: `group -al`
 
-Adds a lesson to the specified group.
+Adds a lesson to the specific group so that you can note down your lesson schedule with the entire group.
+You must specify the lesson subject, as well as the day of week and time of the lesson.
 
 Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
@@ -419,7 +419,7 @@ Example:
 
 #### Deleting a lesson from a group: `group -dl`
 
-Deletes a lesson from the specified group
+Deletes a lesson from the specific group if you are not continuing this lesson anymore.
 
 Format: `group -dl GROUP_INDEX LESSON_INDEX`
 
@@ -618,6 +618,8 @@ Examples:
 
 Views the current lesson schedule for the week.
 
+Format: `schedule`
+
 #### Viewing help : `help`
 
 Views an info page for a list of commands and examples
@@ -659,9 +661,12 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?
-
+**Q**: How do I transfer my data to another Computer? <br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor Master home folder.
+
+**Q**: How do I edit lesson details of a student? <br>
+**A**: There is currently no functionality for that, the workaround will be to [delete the lesson](#deleting-a-lesson-from-a-student-student--dl)
+first before [adding it again](#adding-a-lesson-to-a-student-student--al) with the new details.
 
 
 --------------------------------------------------------------------------------------------------------------------
