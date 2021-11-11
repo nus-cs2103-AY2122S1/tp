@@ -40,13 +40,13 @@ nustracker specializes in displaying event information, each complete with stude
 <div style="page-break-after: always;"></div>
 **nustracker** is a desktop application for NUS event directors and student leaders of student organizations in NUS School of Computing to manage students and events.
 
-As an event director and student leader, you will be able to add students and events into **nustracker** and use it to keep track event attendance, blacklist students, etc. These are just _some_ of the features and there will be more to come in the future. **nustracker** is customized to your needs—simple, intuitive, and easy to pick up.
+As an event director and student leader, you will be able to add students and events into **nustracker** and use it to keep track of event attendance, blacklist students, etc. These are just _some_ of the features and there will be more to come in the future. **nustracker** is customized to your needs—simple, intuitive, and easy to pick up.
 
 All these things can be done through a simple and intuitive Command Line Interface (CLI), whilst being complimented by a detailed and elegant interface. 
 
 This document will guide you through on how to start using **nustracker**.
 
-You might see text formatted within colored boxes, so here's a quick run-through what they mean:
+You might see text formatted within colored boxes, so here's a quick run-through on what they mean:
 
 <div markdown="span" class="alert alert-info"> :label: **Note:** These boxes will provide you with extra information that is good to know.
 </div>
@@ -143,7 +143,7 @@ Get ready for an unprecedented overhaul in student and event management using **
     Events often have blacklists, which can also be managed using **nustracker**.
 
 
-5. **Be customized to the user's liking**
+5. **Be customized to the your liking**
     
     One of the key points of **nustracker** is its customization. For more information, see [Customization](#customization).
 
@@ -221,7 +221,7 @@ Here are the particulars of our first member and participant: <br><br>
 Okay, now that we know who our first member is, let's add her as a student to **nustracker**.
 
 To add her, we are going to use the `add` command, which follows the format:
-` add n/STUDENT_NAME m/MAJOR id/STUDENT_ID y/YEAR p/PHONE e/EMAIL`
+`add n/STUDENT_NAME m/MAJOR id/STUDENT_ID y/YEAR p/PHONE e/EMAIL`
 
 So, in the case of Sae Byeok, her fields would be:
 - `STUDENT_NAME`: Sae Byeok
@@ -232,7 +232,7 @@ So, in the case of Sae Byeok, her fields would be:
 - `EMAIL`: saebyeok@example.com
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The fields do not have to be any specific order. For example, `MAJOR` can come before `STUDENT_NAME`.
+The fields do not have to be in any specific order. For example, `MAJOR` can come before `STUDENT_NAME`.
 </div>
 
 Using the fields above, type this into the command box: `add n/Sae Byeok m/CS id/e1111111 y/1 p/87438007 e/saebyeok@example.com` and press **Enter**.
@@ -541,7 +541,7 @@ Examples:
 5. [Deleting an event](#deleting-an-event--delete)
 
 ### Creating an event: `create`
-Adds an event to **nustracker**
+Adds an event to **nustracker**.
 
 Command: `create n/EVENT_NAME d/EVENT_DATE t/EVENT_TIME`
 
@@ -566,7 +566,7 @@ Examples:
 
 ### Listing all events : `events`
 
-Shows all events in the app.
+Shows all events in **nustracker**.
 
 This command has the same function as clicking the **_events_** button in the top bar.
 
@@ -705,7 +705,7 @@ Another key feature of **nustracker** is its ability to be customized greatly. T
 customized to your liking.
 
 ### Changing between Light/Dark Theme
-**nustracker** has a light/dark theme. To toggle between the two, click the button (to the left of _**Settings**_) as shown in the image below and voila!
+**nustracker** has a light/dark theme. To toggle between the two, type `theme` into the command box, or click the button (to the left of _**Settings**_) as shown in the image below and voila!
  
 ![change_theme](images/user-guide/change_theme.PNG)
 
@@ -730,7 +730,7 @@ customized to your liking.
  
    ![changed-profile-picture](images/user-guide/changed-profile-picture.PNG)
 
-      *The updated student card (belonging to student with Student ID **e1111111** in **nustracker**)*
+      *The updated student card (belonging to the student with Student ID **e1111111** in **nustracker**)*
 
 5. The profile picture will update once you type `refresh` into the command box, click the Refresh button, or restart **nustracker**.
 
@@ -763,9 +763,9 @@ the glow will be the default pink!).
 **Q**: I have added the image, but it does not appear. <br>
 
 **A**: Please check if:  
-* the image is either **.jpg** or **.png**. Other image types are NOT supported. 
-* you have the correct name format used—refer to [Setting a profile picture](#setting-a-profile-picture) point 3 above. 
-* the image size is too small or too large. Due to the limitations of JavaFX, extreme image sizes cannot be displayed (more than 10 mb). 
+* The image is either **.jpg** or **.png**. Other image types are NOT supported. 
+* You have the correct name format used—refer to point 3 of [Setting a profile picture](#setting-a-profile-picture) above. 
+* The image size is too small or too large. Due to the limitations of JavaFX, extreme image sizes cannot be displayed (more than 10 mb). 
 
 If you have exhausted all options, you can file a bug report on our [GitHub page](https://github.com/AY2122S1-CS2103T-T11-1/tp/issues).
 <br>
@@ -801,23 +801,23 @@ We recommend that you make a backup of your original data file first just in cas
 <div style="page-break-after: always;"></div>
 ## FAQ
 
-**Q**: Is nustracker free?<br>
-**A**: Yes! nustracker is completely free to use.
+**Q**: Is **nustracker** free?<br>
+**A**: Yes! **nustracker** is completely free to use.
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **nustracker** home folder.
 
 **Q**: Is my data in **nustracker** secure?<br>
 **A**: Yes! Your data is stored locally on your computer, so it cannot be stolen unless someone has physical access to your computer.
 
-**Q**: Do I need an internet connection to use nustracker?<br>
-**A**: No. An internet connection is not required. nustracker can work completely offline.
+**Q**: Do I need an internet connection to use **nustracker**?<br>
+**A**: No. An internet connection is not required. **nustracker** can work completely offline.
 
-**Q**: Can I use nustracker on a mobile device?<br>
-**A**: Unfortunately not. nustracker is designed to work best on a desktop / laptop with the ability to make full use of the command line interface.
+**Q**: Can I use **nustracker** on a mobile device?<br>
+**A**: Unfortunately not. **nustracker** is designed to work best on a desktop / laptop with the ability to make full use of the command line interface.
 
 **Q**: I noticed a bug in **nustracker**. How do I report it?<br>
-**A**: We are committed to delivering well-made software and to achieve that, every single bug report counts. To submit a bug report, please visit the [issues](https://github.com/AY2122S1-CS2103T-T11-1/tp/issues) page. Thank you for contributing to **nustracker**!
+**A**: We are committed to delivering a well-made software and to achieve that, every single bug report counts. To submit a bug report, please visit the [issues](https://github.com/AY2122S1-CS2103T-T11-1/tp/issues) page. Thank you for contributing to **nustracker**!
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -842,7 +842,7 @@ We recommend that you make a backup of your original data file first just in cas
 **Command** | **Description** | **Example** |
 ----------------|-------------------------|-----------------|
 **[create](#creating-an-event-create)**  | Creates an event | `create n/EVENT_NAME d/EVENT_DATE t/EVENT_TIME` _<br> Date format: DD-MM-YYYY <br> Time format: HHMM_ |
-**[events](#listing-all-events--events)**  | Lists events | `events` |
+**[events](#listing-all-events--events)**  | Lists all events | `events` |
 **[enroll](#enrolling-a-student-in-an-event--enroll)**  | Adds a student to an event | `enroll id/STUDENT_ID ev/EVENT_NAME` |
 **[remove](#removing-a-student-from-an-event--remove)**  | Removes a student from an event | `remove id/STUDENT_ID ev/EVENT_NAME` |
 **[delete](#deleting-an-event--delete)**  | Deletes an event | `delete ev/EVENT_NAME` |
@@ -854,7 +854,7 @@ We recommend that you make a backup of your original data file first just in cas
 **[help](#viewing-help--help)** | Opens the help window | `help` |
 **[settings](#viewing-the-settings-settings)** | Opens the settings window | `settings`|
 **[export](#exporting-emails--export)** | Exports the emails of the students that are currently displayed | `export fn/FILE_NAME` |
-**[refresh](#refreshing-the-main-window-refresh)**| Refresh the main window | `refresh` |
+**[refresh](#refreshing-the-main-window-refresh)**| Refreshes the main window | `refresh` |
 **[theme](#changing-the-theme-theme)** | Toggles the current theme | `theme` |
 **[exit](#exiting-the-program--exit)** | Exits the app | `exit` |
 
