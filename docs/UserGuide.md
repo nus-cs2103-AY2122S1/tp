@@ -468,7 +468,8 @@ The screenshot below shows the expected result.
 
   d. Did not specify either 'm', 'f', 'male', 'female', 'n.a' after `g/` <br>
 
-    <div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>
+
 ### 5.7 Finding contacts that match **ALL** the keywords specified : `findAll`
 
 Format: `findAll [n/NAME…​] [p/PHONE…​] [e/EMAIL…​] [a/ADDRESS…​] [g/GENDER…​] [age/AGE…​] [c/CALLED…​] [i/INTEREST…​]`
@@ -553,6 +554,8 @@ Format: `display INDEX`
 
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
 
+<div style="page-break-after: always;"></div>
+
 **Example:**
 
 * `display 3` displays full contact details of the 3rd contact in the displayed list
@@ -601,6 +604,8 @@ Format: `filter CATEGORY [COUNT]`
 
 * If only one argument is given, it will be interpreted as a `CATEGORY`
   (e.g., `filter 1000` will cause `1000` to be interpreted as a `CATEGORY`)
+
+<div style="page-break-after: always;"></div>
 
 **Example:**
 
