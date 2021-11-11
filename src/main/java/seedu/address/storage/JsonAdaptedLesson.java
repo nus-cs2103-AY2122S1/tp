@@ -150,7 +150,9 @@ class JsonAdaptedLesson {
 
         final List<Date> dates = new ArrayList<>();
 
-        for (JsonAdaptedDate date : cancelledDates) {
+        List<JsonAdaptedDate> nonEmptyCancelledDates = cancelledDates.stream()
+                .filter(date -> !date.getValue().isEmpty()).collect(Collectors.toList());
+        for (JsonAdaptedDate date : nonEmptyCancelledDates) {
             Date cancelledDate = date.toModelType();
             if (!lessonWithoutCancelledDates.hasLessonOnDate(cancelledDate)) {
                 throw new IllegalValueException(MESSAGE_INVALID_CANCELLED_DATE);

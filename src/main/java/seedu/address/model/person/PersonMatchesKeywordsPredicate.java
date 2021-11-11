@@ -215,7 +215,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns optional remark level keywords.
+     * Returns optional remark keywords.
      */
     public Optional<List<String>> getRemarkKeywords() {
         return Optional.ofNullable(remarkKeywords);
@@ -449,31 +449,73 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
 
     // Person Lesson predicates ----------------------------------------------------------------------------------------
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s overlaps with
+     * the {@code TimeRange} given.
+     *
+     * @return A predicate that tests a person's lesson's TimeRanges.
+     */
     private Predicate<Person> getTimeRangeMatchPredicate() {
         return getLessonAnyMatch(lesson -> timeRange.isClashing(lesson.getTimeRange()));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s occur on the
+     * {@code Date} given.
+     *
+     * @return A predicate that tests a person's lesson's Dates.
+     */
     private Predicate<Person> getDateMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.hasLessonOnDate(date));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has cancelled dates
+     * that occur on the {@code Date} given.
+     *
+     * @return A predicate that tests a person's lesson's canceled dates.
+     */
     private Predicate<Person> getCancelledDateMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.getCancelledDates().contains(cancelledDate));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has a subject
+     * that matches the keywords given.
+     *
+     * @return A predicate that tests a person's lesson's subject.
+     */
     private Predicate<Person> getSubjectMatchPredicate() {
         return getLessonAnyMatch(lesson -> isMatch(subjectKeywords, lesson.getSubject().value));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has a rate
+     * that matches the keywords given.
+     *
+     * @return A predicate that tests a person's lesson's rates.
+     */
     private Predicate<Person> getRatesMatchPredicate() {
         return getLessonAnyMatch(lesson -> isMatch(ratesKeywords, lesson.getLessonRates().value));
     }
 
+    /**
+     * Returns a {@code Predicate} that tests if any {@code Lesson} in a {@code Person}'s has a homework
+     * that matches the keywords given.
+     *
+     * @return A predicate that tests a person's lesson's homework.
+     */
     private Predicate<Person> getHomeworkMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.getHomework().stream()
                 .anyMatch(homework -> isMatch(homeworkKeywords, homework.description)));
     }
 
+    /**
+     * Checks if any lesson matches the predicate given.
+     *
+     * @param predicate The predicate to test a person's lessons with.
+     * @return A predicate that tests a person's lesson's to a given predicate.
+     */
     private Predicate<Person> getLessonAnyMatch(Predicate<Lesson> predicate) {
         return person -> person.getLessons().stream().anyMatch(predicate);
     }

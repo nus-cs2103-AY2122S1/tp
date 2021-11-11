@@ -45,7 +45,10 @@ public class LessonDeleteCommand extends UndoableCommand {
     private Person personAfterLessonDelete;
 
     /**
-     * @param index of the person in the filtered person list to delete lesson from
+     * Creates a LessonDeleteCommand to delete the specified {@code Lesson}
+     *
+     * @param index of the person in the filtered person list to delete lesson from.
+     * @param lessonIndex of the lesson to delete in the lesson list of the person.
      */
     public LessonDeleteCommand(Index index, Index lessonIndex) {
         super(COMMAND_ACTION);

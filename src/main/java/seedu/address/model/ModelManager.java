@@ -171,9 +171,6 @@ public class ModelManager implements Model {
         addressBook.updateUpcomingLessons();
     }
 
-    /**
-     * Returns an unmodifiable view of the observable tag list.
-     */
     @Override
     public ObservableList<Tag> getObservableTagList() {
         return addressBook.getTagList();
@@ -209,11 +206,20 @@ public class ModelManager implements Model {
 
     //=========== Last Updated Accessors =============================================================
 
+    /**
+     * Returns an immutable last updated date of the address book.
+     *
+     * @return An immutable {@code LastUpdatedDate}.
+     */
     @Override
     public LastUpdatedDate getLastUpdatedDate() {
         return addressBook.getLastUpdatedDate();
     }
 
+    /**
+     * Sets the lastUpdatedDate field in {@code AddressBook} to the local date time when
+     * the application was initially launched.
+     */
     @Override
     public void setLastUpdatedDate() {
         addressBook.setLastUpdatedDate(new LastUpdatedDate());

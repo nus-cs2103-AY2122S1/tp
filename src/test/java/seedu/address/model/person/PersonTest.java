@@ -222,7 +222,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different acad stream -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ACAD_STREAM_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withAcadStream(VALID_ACAD_STREAM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

@@ -3,7 +3,7 @@ layout: page
 title: Ng Lingshan's Project Portfolio Page
 ---
 
-### Project: TuitionAddressBook (TAB)
+### Project: Tuition Address Book
 
 Tuition Address Book (TAB) is an all-in-one desktop application for 1-to-1 private home tutors that helps to keep track of students and their respective lesson information. TAB utilises a Command Line Interface (CLI) to allow tutors to perform tasks efficiently, while providing a clean Graphical User Interface (GUI) for tutors to easily view student and lesson data.
 
@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **Enhancement to existing Feature**: Adapting from the existing find feature, I added the ability to find students by all student fields, and specify a match condition. 
   * What it does: Allows the user to find students by all other student fields. It also allows users to customise the match condition, allowing for a more powerful search function.
   * Justification: This feature is necessary so that tutors are able to search and filter the list for a specific group of students.
-  * Highlights: This enhancement required much consideration of users' needs, to implement a search feature that is most flexible and usable. This included consideration of whether keywords should be a partial word match or a whole word match, and whether all keywords are required to be matched. It also complements the fee calculator, where tutors may want to search for students with the "unpaid" tag, for instance. The inital design of the code was well thought out, allowing easy extension of the feature to search for students by lesson fields afterwards.
+  * Highlights: This enhancement required much consideration of users' needs, to implement a search feature that is most flexible and usable. This included consideration of whether keywords should be a partial word match or a whole word match, and whether all keywords are required to be matched. It was also challenging to implement a data structure to allow searching by multiple fields concurrently, which may each accept multiple keywords, and may have different search behaviours. The find feature also allows users to optionally customise the matching condition, which increased the complexity of the implementation. The large number of parameters and variations also meant that it was more susceptible to bugs, and it required intensive and careful testing. The initial design of the code was well thought out, allowing easy extension of the feature to search for students by lesson fields afterwards.
   
 * **Other Enhancements**:
   * Retrieve last command [\#111](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/111)
@@ -25,7 +25,7 @@ Given below are my contributions to the project.
   * Improve sample data with lessons [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183)
   * Improve index error messages [\#280](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/280)
   * Improve lesson ordering [\#311](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/311)
-  
+  * Refactor code to adhere to coding standards [\#183](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/183)
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=lingshan&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=lingshanng&tabRepo=AY2122S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
@@ -55,4 +55,3 @@ Given below are my contributions to the project.
     [\#191](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/191)
     [\#208](https://github.com/AY2122S1-CS2103T-F13-3/tp/pull/208)
 
-* _{you can add/remove categories in the list above}_

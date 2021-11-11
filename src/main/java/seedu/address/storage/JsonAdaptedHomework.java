@@ -15,6 +15,8 @@ class JsonAdaptedHomework {
 
     /**
      * Constructs a {@code JsonAdaptedHomework} with the given {@code description}.
+     *
+     * @param description Description of the homework.
      */
     @JsonCreator
     public JsonAdaptedHomework(String description) {
@@ -23,6 +25,8 @@ class JsonAdaptedHomework {
 
     /**
      * Converts a given {@code Homework} into this class for Jackson use.
+     *
+     * @param source Homework to convert to Json.
      */
     public JsonAdaptedHomework(Homework source) {
         description = source.description;
