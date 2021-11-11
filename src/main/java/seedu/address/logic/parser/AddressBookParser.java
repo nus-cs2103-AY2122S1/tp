@@ -7,14 +7,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddHoursWorkedCommand;
+import seedu.address.logic.commands.AddLeaveBalanceCommand;
+import seedu.address.logic.commands.AssignLeaveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeductHoursWorkedCommand;
+import seedu.address.logic.commands.DeductLeaveBalanceCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PayCommand;
+import seedu.address.logic.commands.RemoveLeavesBeforeCommand;
+import seedu.address.logic.commands.SetOvertimePayRateCommand;
+import seedu.address.logic.commands.StartPayrollCommand;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewOvertimePayRateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,6 +79,42 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AddLeaveBalanceCommand.COMMAND_WORD:
+            return new AddLeaveBalanceCommandParser().parse(arguments);
+
+        case DeductLeaveBalanceCommand.COMMAND_WORD:
+            return new DeductLeaveBalanceCommandParser().parse(arguments);
+
+        case AssignLeaveCommand.COMMAND_WORD:
+            return new AssignLeaveCommandParser().parse(arguments);
+
+        case RemoveLeavesBeforeCommand.COMMAND_WORD:
+            return new RemoveLeavesBeforeCommandParser().parse(arguments);
+
+        case AddHoursWorkedCommand.COMMAND_WORD:
+            return new AddHoursWorkedCommandParser().parse(arguments);
+
+        case DeductHoursWorkedCommand.COMMAND_WORD:
+            return new DeductHoursWorkedCommandParser().parse(arguments);
+
+        case StartPayrollCommand.COMMAND_WORD:
+            return new StartPayrollCommand();
+
+        case PayCommand.COMMAND_WORD:
+            return new PayCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case ViewOvertimePayRateCommand.COMMAND_WORD:
+            return new ViewOvertimePayRateCommand();
+
+        case SetOvertimePayRateCommand.COMMAND_WORD:
+            return new SetOvertimePayRateCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

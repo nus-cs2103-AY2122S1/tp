@@ -24,15 +24,55 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Employee fields
+    private final Role role;
+    private final LeaveBalance leaveBalance;
+    private final LeavesTaken leavesTaken;
+    private final HourlySalary hourlySalary;
+    private final HoursWorked hoursWorked;
+    private final Overtime overtime;
+    private final CalculatedPay calculatedPay;
+
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person} object.
+     * All fields except for overtime and leavesTaken must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Role role, LeaveBalance leaveBalance,
+                  HourlySalary hourlySalary, HoursWorked hoursWorked, CalculatedPay pay, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, leaveBalance, hourlySalary, hoursWorked, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
+        this.leaveBalance = leaveBalance;
+        this.leavesTaken = new LeavesTaken();
+        this.hourlySalary = hourlySalary;
+        this.hoursWorked = hoursWorked;
+        this.overtime = new Overtime("0");
+        this.calculatedPay = pay;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructs a {@code Person} object with overtime.
+     * All fields, including overtime and leavesTaken, must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Role role, LeaveBalance leaveBalance,
+                  LeavesTaken leavesTaken, HourlySalary salary, HoursWorked hoursWorked, Overtime overtime,
+                  CalculatedPay pay, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, leaveBalance, salary, hoursWorked, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.role = role;
+        this.leaveBalance = leaveBalance;
+        this.leavesTaken = leavesTaken;
+        this.hourlySalary = salary;
+        this.hoursWorked = hoursWorked;
+        this.overtime = overtime;
+        this.calculatedPay = pay;
         this.tags.addAll(tags);
     }
 
@@ -52,12 +92,48 @@ public class Person {
         return address;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public LeaveBalance getLeaveBalance() {
+        return leaveBalance;
+    }
+
+    public LeavesTaken getLeavesTaken() {
+        return leavesTaken;
+    }
+
+    public HourlySalary getSalary() {
+        return hourlySalary;
+    }
+
+    public HoursWorked getHoursWorked() {
+        return hoursWorked;
+    }
+
+    public Overtime getOvertime() {
+        return overtime;
+    }
+
+    public CalculatedPay getCalculatedPay() {
+        return calculatedPay;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if the person's {@code CalculatedPay} value is not zero.
+     * This means that the person still has pay that has not been paid yet.
+     */
+    public boolean isPaid() {
+        return calculatedPay.value == 0;
     }
 
     /**
@@ -71,6 +147,30 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same phone.
+     * No two different employees should have the same phone number.
+     */
+    public boolean hasSamePhone(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        return otherPerson != null
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if both persons have the same email.
+     * No two different employees should have the same email.
+     */
+    public boolean hasSameEmail(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        return otherPerson != null
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -92,13 +192,20 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRole().equals(getRole())
+                && otherPerson.getLeaveBalance().equals(getLeaveBalance())
+                && otherPerson.getLeavesTaken().equals(getLeavesTaken())
+                && otherPerson.getSalary().equals(getSalary())
+                && otherPerson.getOvertime().equals(getOvertime())
+                && otherPerson.getCalculatedPay().equals(getCalculatedPay())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, role, leaveBalance, leavesTaken,
+                hourlySalary, hoursWorked, overtime, calculatedPay, tags);
     }
 
     @Override
@@ -110,7 +217,15 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Role: ")
+                .append(getRole())
+                .append("; Leaves: ")
+                .append(getLeaveBalance())
+                .append("; Salary: ")
+                .append(getSalary())
+                .append("; Hours Worked: ")
+                .append(getHoursWorked());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

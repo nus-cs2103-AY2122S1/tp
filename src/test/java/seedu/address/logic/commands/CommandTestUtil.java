@@ -4,8 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURLYSALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURSWORKED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -17,8 +22,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -34,6 +39,18 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ROLE_AMY = "Mobile App Developer";
+    public static final String VALID_ROLE_BOB = "Front End Developer";
+    public static final String VALID_LEAVES_AMY = "20";
+    public static final String VALID_LEAVES_BOB = "15";
+    public static final String VALID_DATE_AMY = "2021-10-10";
+    public static final String VALID_DATE_BOB = "2021-09-09";
+    public static final String VALID_HOURLYSALARY_AMY = "33.33";
+    public static final String VALID_HOURLYSALARY_BOB = "9.33";
+    public static final String VALID_HOURSWORKED_AMY = "80";
+    public static final String VALID_HOURSWORKED_BOB = "40";
+    public static final String VALID_OVERTIME_AMY = "5";
+    public static final String VALID_OVERTIME_BOB = "0";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -45,6 +62,16 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
+    public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
+    public static final String LEAVES_DESC_AMY = " " + PREFIX_LEAVE + VALID_LEAVES_AMY;
+    public static final String LEAVES_DESC_BOB = " " + PREFIX_LEAVE + VALID_LEAVES_BOB;
+    public static final String HOURLYSALARY_DESC_AMY = " " + PREFIX_HOURLYSALARY + VALID_HOURLYSALARY_AMY;
+    public static final String HOURLYSALARY_DESC_BOB = " " + PREFIX_HOURLYSALARY + VALID_HOURLYSALARY_BOB;
+    public static final String HOURSWORKED_DESC_AMY = " " + PREFIX_HOURSWORKED + VALID_HOURSWORKED_AMY;
+    public static final String HOURSWORKED_DESC_BOB = " " + PREFIX_HOURSWORKED + VALID_HOURSWORKED_BOB;
+    public static final String OVERTIME_DESC_AMY = " " + PREFIX_OVERTIME + VALID_OVERTIME_AMY;
+    public static final String OVERTIME_DESC_BOB = " " + PREFIX_OVERTIME + VALID_OVERTIME_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -52,9 +79,15 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "4owerRanger"; // non-alphabet as first character
+    public static final String INVALID_LEAVES_DESC = " " + PREFIX_LEAVE + "12a"; // 'a' not allowed in leaves
+    public static final String INVALID_HOURLYSALARY_DESC =
+            " " + PREFIX_HOURLYSALARY + "90%00"; // '%' not allowed in salary
+    public static final String INVALID_HOURSWORKED_DESC = " " + PREFIX_HOURSWORKED + "90-00"; // '-' not allowed in HW
+    public static final String INVALID_OVERTIME_DESC = " " + PREFIX_OVERTIME + "90-00"; // '-' not allowed in overtime
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String PREAMBLE_WHITESPACE = "\t  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
