@@ -644,7 +644,10 @@ The flags used in `password` are as follows:
 password
 ```
 
-Do note that the password needs to be between **8** and **32** (inclusive) ASCII characters.
+Note that: 
+- The minimum password length is 8.
+- The maximum password length is 32.
+- Only [ASCII Printable characters](https://www.w3schools.com/charsets/ref_html_ascii.asp) are allowed. This means that only english characters and symbols found on a standard keyboard can be used. 
 
 The prohibited characters are : `/`, `-`. Note that password cannot contain blank space.
 
