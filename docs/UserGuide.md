@@ -15,7 +15,7 @@ It meant losing track of things because of a messy, decentralised workflow.
 However, this guide to using TAB will show you how to make the most of this all-in-one app, so you can say goodbye to all your other apps. 
 
 TAB enables you to keep track of your student and lesson information, schedule, and tuition fees – everything a private 1-to-1 home tutor needs – without needing to lift your hands off the keyboard. 
-TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of texts.
+TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of text.
 
 If you can type fast, the CLI will enable you to accomplish your tasks much faster. 
 For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along, 
@@ -35,7 +35,7 @@ If there are any terms used in this user guide which you are unfamiliar with, th
 You can click on the [Table of Contents](#toc) to get to the information relevant to you. 
 To help you with this, there is a [back to table of contents](#toc) link at the end of every major section.
 
-There will also be links in relevant places to help you navigate the document
+There will also be links in relevant places to help you navigate the document.
 
 **Conventions Used**
 
@@ -78,10 +78,8 @@ _text_ | Caption for images.
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
    * **`ladd 1 `** : Adds a lesson.
-
-   * 
    
-6. If you wish to clear the sample data and start using the app, simply type `clear` and press enter.
+6. If you wish to clear the sample data and start using the app, simply type `clear` and press <kbd>ENTER</kbd>.
    However, if you’re a new user, we recommend that you read on and try out our features with the sample data to get yourself familiarised.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -118,7 +116,7 @@ This means that after clicking any button in the main window, you do not have to
 
 ## Features
 This section describes the available features in TAB. 
-The features are categorised as follows:
+These features are categorized as follows:
 
 * [Getting Help](#getting-help)
 * [Managing Students](#managing-students)
@@ -431,8 +429,6 @@ Edits an existing student in TAB.<br>
 
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br>
 
-Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
-
 Available fields are as described in [Student parameters](#student-parameters).
 
 * Edits the student at the specified `INDEX`. <br>
@@ -456,7 +452,7 @@ Available fields are as described in [Student parameters](#student-parameters).
 
 Example:
 
-Suppose we want to update Betsy Crowe with her school and academic level, and remove her remarks and tags.
+Suppose that you want to update Betsy Crowe with her school and academic level, and remove her remarks and tags.
 Here's how to do it:
 
 1. Look for Betsy Crowe in the list of students. In this example, she's the seventh student in the list.
@@ -797,7 +793,7 @@ Examples:
 
 #### Editing a lesson: `ledit`
 
-Need to update lesson information? This command allows you to do just that.
+Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
 Format: `ledit INDEX LESSON_INDEX [recurring/END_DATE] [date/START_DATE] [time/TIME_RANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
