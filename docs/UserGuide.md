@@ -742,15 +742,11 @@ You can add multiple pieces of homework to a lesson in TAB.
 
 Example: 
 
-You have a student named Alex Yeoh with index number 1. You have a history lesson with him every Monday at 11am to 12pm, starting from 20 December 2020, and you want to add it in TAB. The end date is not known, and you are getting paid $35 per hour. For the first lesson, you want to assign assignment 1 as homework. 
+You have a student named Betsy Crowe with index number 7. You have a history lesson with her every Sunday at 11am to 12pm, starting from 20 December 2021, and you want to add it in TAB. The end date is not known, and you are getting paid $35 per hour. For the first lesson, you want to assign assignment 1 as homework. 
 
-1. Type the command `ladd 1 recurring/ date/20 Dec 2020 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
-2. Press <kbd>Enter</kbd> – You should see the lesson being added to the first student in the displayed list!
+1. Type the command `ladd 7 recurring/ date/20 Dec 2021 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
+2. Press <kbd>Enter</kbd> – You should see the lesson being added to the seventh student in the displayed list!
    ![laddExample](images/laddExample.png)
-   
-3. If you mistakenly keyed in invalid parameters or prefixes, the command would be highlighted red, and an error message will be displayed in the command result box. In the following example, `rate/` is an invalid prefix. The correct prefix is `rates/`.
-   ![laddErrorMessage](images/laddErrorMessage.png)
-   
 
 Other examples:
 
@@ -797,15 +793,11 @@ If you change the start date of the lesson, the cancelled dates that become inva
 
 Example:
 
-You have a student named Alex Yeoh with index number 1. You mistakenly added the wrong start and end date for his lesson with index number 1. The lesson should start on 2 December 2020 and end on 30 December 2020. Furthermore, he has a school event on the third lesson (16 Dec 2021) for this recurring lesson which means the third lesson has to be cancelled.
+You have a student named Betsy Crowe with index number 7. You mistakenly added the wrong start and end date for her lesson with index number 1. The lesson should start on 20 December 2021 and end on 30 December 2021. Furthermore, she has a school event on the third lesson (16 Dec 2021) for this recurring lesson which means the third lesson has to be cancelled.
 
-1. Type the command `ledit 1 1 recurring/30 Dec 2020 date/2 Dec 2020 cancel/16 dec 2020` into the command box.
-2. Press <kbd>Enter</kbd> – You should see the first lesson of the first student being edited to start on `2 Dec 2020` and ends on `30 Dec 2020`. The lesson happening on `16 Dec 2020` will also be cancelled!
+1. Type the command `ledit 7 1 recurring/30 Dec 2021 date/2 Dec 2021 cancel/16 dec 2021` into the command box.
+2. Press <kbd>Enter</kbd> – You should see the first lesson of the seventh student being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
    ![leditExample](images/leditExample.png)
-
-3. Let's say you got confused with the dates and decided to cancel `15 Dec 2020` instead. However, the lesson occurs every Thursday and `15 Dec 2020` is a Wednesday! TAB will highlight the command in red and display an error message in the command result box.
-   ![leditErrorMessage](images/leditErrorMessage.png)
-   
 
 Other examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
