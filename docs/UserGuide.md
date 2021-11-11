@@ -464,9 +464,7 @@ Exits LeadsForce.
 | <img src="images/info_icon.png" width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work |
 
 
-Examples:
-* `filter John` returns `john` and `John Doe`
-* `filter alex david` returns `Alex Yeoh`, `David Li`<br>
+### 5.13 Saving the data
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
