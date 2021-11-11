@@ -38,7 +38,7 @@ Throughout this guide, you may encounter the following icons"
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** Straightforward commands such as 'clear' may not have the sections "Things to note", "Example" and "Common issues"
+**:information_source: Note:** Straightforward commands such as `clear` may not have the sections "Things to note", "Example" and "Common issues"
 </div>
 
 It is highly recommended that you familiarise yourself with the [Command Notations](#4-command-notations) we use. <br>
