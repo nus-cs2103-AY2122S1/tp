@@ -2,8 +2,10 @@
 layout: page
 title: User Guide
 ---
-## Overview <br>
-Notor is a desktop application for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently during meetings with mentees, and group those notes with your mentee's information powerfully and easily.
+
+**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. However, we're sure that Notor can still help people outside our target audience in situations where they have a **many mentees to one mentor relationship**, where they need to **take notes quickly**. Personal CRMs (CRM stands for Customer Relationship Manager) are useful tools to keep track of people's information and keep it organised, which can really benefit you in making connections with people.
+
+Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently during meetings with mentees, and group those notes with your mentee's information powerfully and easily.
 
 Key features of Notor are:
 
@@ -18,6 +20,9 @@ Key features of Notor are:
   * Commands with short forms
   * Works offline for better performance
 
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
 * Table of Contents
 {:toc}
 
