@@ -154,7 +154,7 @@ If you type in a command with no arguments and the command requires arguments, t
 display a prompt for the arguments which should be given.
 </div>
 
-![help message](images/helpMessage.png)
+![help message](images/HelpCommand.png)
 
 Format: `help`
 
@@ -182,6 +182,14 @@ Format: `exit`
 Exports all the data of Notor into a CSV file to Notor's Directory.
 
 Format: `export`
+
+You can usually find the exported data in the home directory that contains Notor.
+
+![ExportData](images/Export.png)
+
+The data exported will be displayed as follows:
+
+![ExportedData](images/Exported.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -211,8 +219,6 @@ Examples:
 
 * `person John Lim /create p:91119111 e:notor@notor.com t:Loves Dancing g:1`
 * `p Michael Joe /c p:92229222 e:notor@notor.com t:Loves Singing g:2`
-  ![personCreate](images/personCreate.png)
-
 <div style="page-break-after: always;"></div>
 
 #### _Adding a person to a group_
@@ -312,7 +318,8 @@ Advanced user Format:`p (INDEX) /n`
 
 Examples:
 
-* `person 1 /note`
+* `person 1 /note` will allow the user to edit the note of the first person.
+  ![PersonNote](images/PersonNote.png)
 * `p 2 /n`
 
 #### _Clearing notes of a person_
@@ -447,7 +454,6 @@ Examples:
 
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
-  ![groupCreate](images/groupCreate.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -532,7 +538,6 @@ Lists all persons in the list panel.
 
 Format: `person /list`<br>
 Advanced user Format:`p /l`
-![personList](images/personList.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -542,7 +547,6 @@ Lists all groups in the list panel.
 
 Format:  `group /list`<br>
 Advanced user Format: `g /l`
-![groupList](images/groupList.png)
 
 #### _Listing all persons in a group or subgroup_
 
@@ -587,8 +591,6 @@ Shows the list of archived Persons.
 Format: `person /listarchive` <br>
 Advanced user Format: `p /lar`
 
-![archivedList](images/archivePersonList.png)
-
 <div style="page-break-after: always;"></div>
 
 ### Find
@@ -611,8 +613,6 @@ Examples:
 
 * `person /find n:Alex t:graduated, engineering`
 * `p /f n:Mary`
-
-![personFind](images/personFind.png)
 
 <div style="page-break-after: always;"></div>
 
