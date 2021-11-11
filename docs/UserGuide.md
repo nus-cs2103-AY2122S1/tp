@@ -926,8 +926,10 @@ Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 
 Example:
 
-You have a student named Betsy Crowe with index number 7. For Betsy Crowe, 4 lessons have passed since she last paid her lesson fees hence the current outstanding fees is $140.
-You have just received payment from Betsy for her lessons, and you would like to record the amount paid. 
+Suppose you have a student named Betsy Crowe with index number 7. For Betsy Crowe, 4 lessons have passed since she last paid her lesson fees, hence the current outstanding fees is $140.
+You have just received payment recently from Betsy for her lessons, and you would like to record the amount paid.
+
+Let's take a look at how you can record the payment for Betsy Crowe's lesson in TAB!
 
 1. Type the command `paid 7 1 amt/140` into the command box.
 2. Press <kbd>Enter</kbd> – You should see the outstanding fees of the lesson being deducted by the paid amount accordingly! Her updated fees is now $0.
