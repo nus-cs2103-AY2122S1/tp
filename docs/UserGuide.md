@@ -29,6 +29,7 @@ with the interface by scrolling and clicking on buttons.
 6. Refer to our [FAQ](#faq) if you have any questions.
 
 ## About This Document
+
 Symbol | Explanation
 --------|------------------
 `command` | A blue highlight (called a mark-up) indicates a command or a parameter that can be typed into the Command Panel and executed by Tutor Master
