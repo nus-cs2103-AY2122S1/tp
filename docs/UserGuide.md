@@ -45,7 +45,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [5.14 Edit data file](#514-edit-data-file)
 * [**6. Multiple Address Books Features**](#6-multiple-address-books-feature)
     * [6.1 Create new address book: ab create](#61-create-new-address-book--ab-create)
-    * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book-ab-delete--ab-delete)
+    * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book--ab-delete)
     * [6.3 Switch to different address book: ab switch](#63-switch-to-different-address-book--ab-switch)
     * [6.4 List all address book: ab list](#64-list-all-address-book--ab-list)
 * [**7. FAQ**](#7-faq)
