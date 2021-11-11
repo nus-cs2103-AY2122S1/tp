@@ -591,7 +591,7 @@ To find students with the tag `new` or with lessons between `1100-1300`, you may
 
 ### Managing Lessons
 
-Use TAB's lesson management features to record your students' lesson details and have this information at your fingertips!
+This section guides you on how to use the commands for managing the lessons of your students in TAB.
 
 1. [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
 2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
