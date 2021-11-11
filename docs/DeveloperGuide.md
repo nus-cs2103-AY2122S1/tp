@@ -6,6 +6,7 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -18,6 +19,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and Getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -73,7 +75,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+`GroupListPanel`, `TaskListPanel`, StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +85,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person`, `Task` and `Group` objects residing in the `Model`.
 
 ### Logic component
 
@@ -116,13 +119,15 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![ModelClassDiagram](images/ModelClassDiagram.png)
+![ModelClassDiagram2](images/ModelClassDiagram2.png)
+![ModelClassDiagram3](images/ModelClassDiagram3.png)
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person`, `Task` and `Group` objects (which are contained in a `UniquePersonList`, `UniqueTaskList` or `UniqueGroupList` object respectively).
+* stores the currently 'selected' `Person`, `Task` or `Group` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -149,6 +154,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -206,7 +212,7 @@ The implementation currently supports two task commands:
 #### Implementation Rationale
 
 - `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects.
-- Storing assignments as a set in each `Person` and `Group` makes it easy to display and retrieve all assigned tasks for each `Person` or `Group`. 
+- Storing assignments as a set in each `Person` and `Group` makes it easy to display and retrieve all assigned tasks for each `Person` or `Group`.
 It also makes implementation relatively simple, without having to use external lists.
 
 #### Alternatives considered
@@ -226,7 +232,7 @@ passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` o
 `LogicManager` class to be executed. The `EditTaskCommand` object will create a newly edited task with the edited details and
 set the edited task in place of the original task in the model. It also returns a `CommandResult` object that is returned
 to the `LogicManager` class. The `AddressBookParser` class and `EditTaskCommandParser` class were not added in the below
-diagram for simplicity. 
+diagram for simplicity.
 
 ![EditTask](images/EditTaskSequenceDiagram.png)
 
@@ -249,10 +255,10 @@ task. However, this seemed inefficient and hence, we went with the current imple
 The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
 checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
 object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be
-executed. 
+executed.
 
 The `ViewPersonCommand` object gets the list of students via `ModelManager#getfilteredPersonsList()`. It then obtains the
-target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying 
+target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying
 the details of the student in the 'Result Display'.
 
 The `ViewPersonCommand` calls the methods `ModelManager#setViewingType` and `ModelManager#setPersonToView` to modify the
@@ -343,6 +349,7 @@ Add support for a custom recurrence of lessons. Right now it is guaranteed that 
 what many of our users require, but the ability to customise can be useful.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -371,6 +378,7 @@ what many of our users require, but the ability to customise can be useful.
 **Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app.
 The app is purely offline, and does not include any online feature.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -398,8 +406,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
 | `*`      | tutor                                      | monitor number of tasks assigned to a student| assign tasks to students while ensuring they can manage the workload   |
 
-
-*{More to be added}*
 
 ### Use cases
 
@@ -503,6 +509,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -560,7 +568,8 @@ testers are expected to do more *exploratory* testing.
 ### Adding a lesson to a student
 
 1. Adding a lesson while all students are being shown
-    1. Prerequisites: List all students using the list command. Multiple students in the list.
+    1. Prerequisites: List all students using the list command. Multiple students in the list. First student in the index
+       should not have any overlapping lessons with the first test case. Use default data to be sure.
     1. Test case: `student -al 1 s/Biology st/23:00 et/23:59 d/Fri` <br>
     Expected: Lesson is added to first student in the list. Student details are shown in the viewing panel on the right.
     Lesson can be seen under "Lessons" in the viewing panel.

@@ -36,6 +36,7 @@ Given below are my contributions to the project.
   - **Developer Guide**
     - Added use cases for deleting and assigning tasks [#38](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/38)
     - Detailed the implementation of task assignment [#99](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/99)
+    - Updated the model diagram and description [#251](https://github.com/AY2122S1-CS2103T-W16-4/tp/pull/251)
 
 - **Contributions to team-based tasks:**
   - Set up the GitHub team org and repo

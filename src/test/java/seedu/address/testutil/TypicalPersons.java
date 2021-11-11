@@ -81,7 +81,7 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical persons and tasks.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -94,14 +94,29 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns all typical persons.
+     *
+     * @return List of all typical persons.
+     */
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    /**
+     * Returns a particular person with lesson and all other persons.
+     *
+     * @return List including a particular person with lesson and all other typical persons.
+     */
     public static List<Person> getTypicalPersonsWithLesson() {
         return new ArrayList<>(Arrays.asList(ALICE_WITH_LESSON, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    /**
+     * Returns all typical tasks.
+     *
+     * @return List of typical tasks.
+     */
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(List.of(REPORT_1));
     }

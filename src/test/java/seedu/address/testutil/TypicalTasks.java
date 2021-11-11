@@ -30,6 +30,11 @@ public class TypicalTasks {
         return ab;
     }
 
+    /**
+     * Returns all typical tasks.
+     *
+     * @return List of typical tasks.
+     */
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(List.of(REPORT_1, REPORT_2,
                 MATH_HOMEWORK, STATS_ASSIGNMENT));

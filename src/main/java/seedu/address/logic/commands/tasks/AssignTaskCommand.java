@@ -4,12 +4,14 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.id.UniqueId;
 
 public abstract class AssignTaskCommand extends ManageTaskAssignmentCommand {
 
-    public static final String MESSAGE_USAGE = "%1$s: Assigns a task to the %1$s"
+    public static final String MESSAGE_USAGE = "%1$s: Assigns a task to the %2$s"
             + ManageTaskAssignmentCommand.MESSAGE_USAGE;
 
     public static final String OVERLAPPING_TASK = "Task is already assigned to this %s!";
@@ -36,5 +38,9 @@ public abstract class AssignTaskCommand extends ManageTaskAssignmentCommand {
                                         UniqueId taskId) {
         newTaskSet.add(taskId);
         newTasksCompletion.put(taskId, false);
+    }
+
+    public CommandResult executeWithGivenMessage(Model model, String assigneeType) throws CommandException {
+        return executeWithGivenMessage(model, assigneeType, MESSAGE_SUCCESS);
     }
 }
