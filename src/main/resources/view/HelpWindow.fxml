@@ -1,45 +1,298 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.text.TextFlow?>
 <?import javafx.stage.Stage?>
+<?import java.net.URL?>
+<fx:root resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/help_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@Fonts.css" />
+                <URL value="@HelpWindow.css" />
+            </stylesheets>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-  <icons>
-    <Image url="@/images/help_icon.png" />
-  </icons>
-  <scene>
-    <Scene>
-      <stylesheets>
-        <URL value="@Fonts.css" />
-        <URL value="@HelpWindow.css" />
-      </stylesheets>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="450.0" prefWidth="950.0">
+                <content>
+            <VBox fx:id="helpWindow" maxHeight="Infinity" prefWidth="948.0">
+                <children>
+                    <Label fx:id="userGuideTitle" text="Label"/>
+                    <Label fx:id="overview" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="fullUserGuide" text="Label" wrapText="true"/>
+                        <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL"/>
+                    </TextFlow>
 
-      <HBox alignment="CENTER">
-        <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
-        </children>
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
-      </HBox>
-    </Scene>
-  </scene>
+                    <Label fx:id="quickStartTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="quickStart" text="Label" wrapText="true"/>
+
+                    <Label fx:id="featuresTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="featuresNotes" text="Label" wrapText="true"/>
+
+                    <Label fx:id="helpTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="helpDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format" text="Label" wrapText="true"/>
+                        <Label fx:id="helpCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="listTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="listDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format2" text="Format: " wrapText="true"/>
+                        <Label fx:id="listGeneralCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example1" text="Label" wrapText="true"/>
+                        <Label fx:id="listExample" text="Label" wrapText="true"/>
+                        <Label fx:id="listExampleDesc" text="Label" wrapText="true"/>
+                        <Label fx:id="listAExample" text="Label" wrapText="true"/>
+                        <Label fx:id="listAExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="addSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format1" text="format" wrapText="true"/>
+                        <Label fx:id="addSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example" text="Label" wrapText="true"/>
+                        <Label fx:id="addSExample" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="delSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="delSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format3" text="Format: " wrapText="true"/>
+                        <Label fx:id="delSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example2" text="Label" wrapText="true"/>
+                        <Label fx:id="delSExample" text="Label" wrapText="true"/>
+                        <Label fx:id="delSExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="editSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="editSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format4" text="Format: " wrapText="true"/>
+                        <Label fx:id="editSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example3" text="Label" wrapText="true"/>
+                        <Label fx:id="editSExample" text="Label" wrapText="true"/>
+                        <Label fx:id="editSExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="viewSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="viewSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format5" text="Format: " wrapText="true"/>
+                        <Label fx:id="viewSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example4" text="Label" wrapText="true"/>
+                        <Label fx:id="viewSExample" text="Label" wrapText="true"/>
+                        <Label fx:id="viewSExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="findSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="findSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format12" text="Format: " wrapText="true"/>
+                        <Label fx:id="findSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example9" text="Label" wrapText="true"/>
+                        <Label fx:id="findSExample" text="Label" wrapText="true"/>
+                        <Label fx:id="findSExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="addPTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addPDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format6" text="Format: " wrapText="true"/>
+                        <Label fx:id="addPCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example5" text="Label" wrapText="true"/>
+                        <Label fx:id="addPExample" text="Label" wrapText="true"/>
+                        <Label fx:id="addPExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="delPTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="delPDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format7" text="Format: " wrapText="true"/>
+                        <Label fx:id="delPCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example6" text="Label" wrapText="true"/>
+                        <Label fx:id="delPExample" text="Label" wrapText="true"/>
+                        <Label fx:id="delPExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="addLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format13" text="format" wrapText="true"/>
+                        <Label fx:id="addLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example10" text="Label" wrapText="true"/>
+                        <Label fx:id="addLExample" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="delLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="delLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format14" text="Format: " wrapText="true"/>
+                        <Label fx:id="delLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example11" text="Label" wrapText="true"/>
+                        <Label fx:id="delLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="delLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="editLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="editLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format15" text="Format: " wrapText="true"/>
+                        <Label fx:id="editLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example12" text="Label" wrapText="true"/>
+                        <Label fx:id="editLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="editLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="viewLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="viewLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format16" text="Format: " wrapText="true"/>
+                        <Label fx:id="viewLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example13" text="Label" wrapText="true"/>
+                        <Label fx:id="viewLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="viewLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="findLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="findLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format19" text="Format: " wrapText="true"/>
+                        <Label fx:id="findLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example16" text="Label" wrapText="true"/>
+                        <Label fx:id="findLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="findLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="addSlTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addSlDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format17" text="Format: " wrapText="true"/>
+                        <Label fx:id="addSlCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example14" text="Label" wrapText="true"/>
+                        <Label fx:id="addSlExample" text="Label" wrapText="true"/>
+                        <Label fx:id="addSlExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="delSlTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="delSlDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format18" text="Format: " wrapText="true"/>
+                        <Label fx:id="delSlCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example15" text="Label" wrapText="true"/>
+                        <Label fx:id="delSlExample" text="Label" wrapText="true"/>
+                        <Label fx:id="delSlExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="clearTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="clearDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format10" text="Format: " wrapText="true"/>
+                        <Label fx:id="clearCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="exitTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="exitDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format11" text="Format: " wrapText="true"/>
+                        <Label fx:id="exitCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="savingDataTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="savingDataDesc" text="Label" wrapText="true"/>
+
+                    <Label fx:id="editDataTitle" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="editDataDesc1" text="Label" wrapText="true"/>
+                        <Label fx:id="editStudentsFilePath" text="Label" wrapText="true"/>
+                        <Label fx:id="editDataDesc2" text="Label" wrapText="true"/>
+                        <Label fx:id="editLessonsFilePath" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <Label fx:id="editDataDesc3" text="Label" wrapText="true"/>
+                    <Label fx:id="editCaution" text="Label" wrapText="true"/>
+
+                    <Label fx:id="glossaryTitle" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="cli" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="gui1" text="Label" wrapText="true"/>
+                        <Label fx:id="gui2" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="progress1" text="Label" wrapText="true"/>
+                        <Label fx:id="progress2" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="faqTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="faq1" text="Label" wrapText="true"/>
+                    <Label fx:id="faq2Q" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="faq2AnsPart1" text="Label" wrapText="true"/>
+                        <Label fx:id="faqViewCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <Label fx:id="faq2AnsPart2" text="Label" wrapText="true"/>
+                    <Label fx:id="faq2AnsPart3" text="Label" wrapText="true"/>
+                    <Label fx:id="faq3Q" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="faq3AnsPart1" text="Label" wrapText="true"/>
+                        <Label fx:id="faqListCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <Label fx:id="faq3AnsPart2" text="Label" wrapText="true"/>
+                    <Label fx:id="faq4" text="Label" wrapText="true"/>
+
+                </children>
+                <opaqueInsets>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                </padding>
+            </VBox>
+                </content>
+            </ScrollPane>
+        </Scene>
+    </scene>
 </fx:root>

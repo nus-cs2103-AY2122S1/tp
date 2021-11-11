@@ -1,0 +1,53 @@
+{
+  "_comment": "TutorAid save file which contains the same Student values as in TypicalPersons#getTypicalStudentBook()",
+  "students" : [ {
+    "studentName" : "Alice Pauline",
+    "studentPhone" : "94351234",
+    "parentName" : "Mrs Tan",
+    "parentPhone" : "94351253",
+    "progressList" : [],
+    "lessons" : []
+  }, {
+    "studentName" : "Benson Meier",
+    "studentPhone" : "98765423",
+    "parentName" : "Mrs Meier",
+    "parentPhone" : "98765432",
+    "progressList" : [],
+    "lessons" : []
+  }, {
+    "studentName" : "Carl Kurz",
+    "studentPhone" : "95352563",
+    "parentName" : "Mr Kurz",
+    "parentPhone" : "95352567",
+    "progressList" : [],
+    "lessons" : []
+  }, {
+    "studentName" : "Daniel Meier",
+    "studentPhone" : "87652533",
+    "parentName" : "Mrs Meier",
+    "parentPhone" : "98765432",
+    "progressList" : [],
+    "lessons" : []
+  }, {
+    "studentName" : "Elle Meyer",
+    "studentPhone" : "9482224",
+    "parentName" : "Mrs Meyer",
+    "parentPhone" : "9482290",
+    "progressList" : [],
+    "lessons" : []
+  }, {
+    "studentName" : "Fiona Kunz",
+    "studentPhone" : "9482427",
+    "parentName" : "Mr Daniel",
+    "parentPhone" : "9482423",
+    "progressList" : [],
+    "lessons" : []
+  }, {
+    "studentName" : "George Best",
+    "studentPhone" : "9482442",
+    "parentName" : "Mrs Kayla",
+    "parentPhone" : "94824432",
+    "progressList" : [],
+    "lessons" : []
+  } ]
+}

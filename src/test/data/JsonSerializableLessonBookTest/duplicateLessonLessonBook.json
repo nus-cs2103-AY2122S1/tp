@@ -1,0 +1,31 @@
+{
+  "lessons" : [ {
+    "lessonName" : "Maths 1",
+    "capacity" : "50",
+    "price" : "100",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progressList" : [],
+      "hasPaid" : false,
+      "lessons" : []
+    } ],
+    "timing" : "1000-1200"
+  }, {
+    "lessonName" : "Maths 1",
+    "capacity" : "50",
+    "price" : "100",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progressList" : [],
+      "hasPaid" : false,
+      "lessons" : []
+    } ],
+    "timing" : "1000-1200"
+  } ]
+}

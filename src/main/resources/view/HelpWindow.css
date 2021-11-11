@@ -1,3 +1,109 @@
-#copyButton, #helpMessage {
-    -fx-font-family: "Open Sans";
+#copyButton {
+    -fx-font-family: "Arial";
+}
+
+#userGuideTitle {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-label-padding: 15 0 15 0;
+}
+
+#overview {
+    -fx-alignment: top-left;
+    -fx-font-size: 16;
+    -fx-font-family: "Arial";
+}
+
+#fullUserGuide {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+    -fx-label-padding: 15 0 15 0;
+}
+
+#quickStartTitle, #featuresTitle, #helpTitle, #addSTitle, #listTitle, #delSTitle, #editSTitle, #viewSTitle,
+#addPTitle, #delPTitle, #clearTitle, #exitTitle, #savingDataTitle, #editDataTitle, #findSTitle,
+#findLTitle, #addLTitle, #delLTitle, #editLTitle, #addSlTitle, #delSlTitle, #viewLTitle, #faqTitle, #glossaryTitle {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 23;
+    -fx-font-weight: bold;
+    -fx-label-padding: 20 20 20 20;
+    -fx-text-fill: #d2691e;
+}
+
+#quickStart {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+}
+
+#format, #format1, #format2, #format3, #format4, #format5, #format6, #format7, #format8, #format9,
+#format10, #format11, #format12, #format13, #format14, #format15, #format16, #format17, #format18, #format19 {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+    -fx-label-padding: 2 2 2 2;
+}
+
+#example, #example1, #example2, #example3, #example4, #example5, #example6, #example7, #example8, #example9,
+#example10, #example11, #example12, #example13, #example14, #example15, #example16 {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+    -fx-label-padding: 2 2 2 2;
+}
+
+#featuresNotes {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+}
+
+#listDesc, #addSDesc, #delSDesc, #helpDesc, #editSDesc,#viewSDesc, #addPDesc, #delPDesc,
+#clearDesc, #exitDesc, #savingDataDesc, #editDataDesc1, #editDataDesc2, #editDataDesc3, #findSDesc, #findLDesc,
+#addLDesc, #delLDesc, #editLDesc, #addSlDesc, #delSlDesc, #viewLDesc {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+    -fx-label-padding: 2 2 2 2;
+}
+
+#delSExampleDesc, #listExampleDesc, #listAExampleDesc, #editSExampleDesc, #viewSExampleDesc, #addPExampleDesc,
+#delPExampleDesc, #findSExampleDesc, #findLExampleDesc, #delLExampleDesc,
+#editLExampleDesc, #addSlExampleDesc, #delSlExampleDesc, #viewLExampleDesc {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+    -fx-label-padding: 2 2 2 2;
+}
+
+#editCaution {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+    -fx-label-padding: 2 2 2 2;
+}
+
+#faq1, #faq2Q, #faq3Q, #faq2AnsPart1, #faq2AnsPart2, #faq2AnsPart3, #faq3AnsPart1, #faq3AnsPart2, #faq4, #cli,
+#gui1, #gui2, #progress1, #progress2 {
+    -fx-alignment: top-left;
+    -fx-font-family: "Arial";
+    -fx-font-size: 16;
+}
+
+#helpCommand, #addSCommand, #addSExample, #delSCommand, #delSExample, #listGeneralCommand, #listExample,
+#listAExample, #editSCommand, #editSExample, #viewSCommand, #viewSExample, #addPCommand, #addPExample,
+#delPCommand, #delPExample, #clearCommand, #addSlCommand, #addSlExample, #delSlCommand, #delSlExample,
+#exitCommand, #findSCommand, #findSExample, #findLExample, #addLCommand, #addLExample, #delLCommand, #delLExample,
+#viewLCommand, #viewLExample, #editLCommand, #editLExample, #editStudentsFilePath, #editLessonsFilePath,
+#findLCommand, #faqViewCommand, #faqListCommand {
+    -fx-alignment: top-left;
+    -fx-background-color: lavender;
+    -fx-font-family: "monospace";
+    -fx-font-size: 16;
+    -fx-font-weight: 600;
+    -fx-label-padding: 2 2 2 2;
 }

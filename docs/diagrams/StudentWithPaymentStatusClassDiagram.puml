@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Student <<Rectangle>>{
+Class Student
+Class PaymentStatus
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> Student
+
+Student *--> PaymentStatus
+
+@enduml

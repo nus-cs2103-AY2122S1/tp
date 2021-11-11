@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant ":AddStudentCommand" as AddStudentCommand LOGIC_COLOR
+end box
+
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> TutorAidParser : parseCommand()
+activate TutorAidParser
+
+create AddCommandParser
+TutorAidParser -> AddCommandParser : parse()
+activate AddCommandParser
+
+create AddStudentCommandParser
+AddCommandParser -> AddStudentCommandParser : parse()
+activate AddStudentCommandParser
+
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand : AddStudentCommand()
+activate AddStudentCommand
+
+AddStudentCommand --> AddStudentCommandParser
+deactivate AddStudentCommand
+
+AddStudentCommandParser --> AddCommandParser
+deactivate AddStudentCommandParser
+
+AddCommandParser --> TutorAidParser
+deactivate AddCommandParser
+
+TutorAidParser --> LogicManager
+deactivate TutorAidParser
+
+destroy AddStudentCommandParser
+
+destroy AddCommandParser
+
+@enduml

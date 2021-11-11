@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Logic {
+
+together {
+Class TutorAidParser
+Class XYCommandParser
+Class XYZCommandParser
+}
+
+Class XYZCommand
+Class CommandResult
+Class "{abstract}\nCommand" as Command
+
+Interface Logic <<Interface>>
+Class LogicManager
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Logic
+
+LogicManager .left.|> Logic
+LogicManager -right->"1" TutorAidParser
+TutorAidParser ..> XYCommandParser : creates >
+
+XYZCommand -up-|> Command
+LogicManager .left.> Command : executes >
+
+note right of XYZCommand: XYZCommand = AddStudentCommand, \nFindStudentCommand, etc.
+
+XYCommandParser ..> XYZCommandParser : creates >
+note left of XYCommandParser: XYCommandParser = AddCommandParser, \nFindCommandParser, etc.
+
+XYZCommandParser ..> XYZCommand : creates >
+note left of XYZCommandParser: XYZCommandParser = AddStudentCommandParser, \nFindStudentCommandParser, etc.
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+Command .up.> CommandResult : produces >
+
+@enduml

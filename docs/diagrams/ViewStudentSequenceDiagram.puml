@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":ViewStudentCommand" as ViewStudentCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant ":UIManager" as UIManager UI_COLOR
+end box
+
+[-> LogicManager: execute()
+activate LogicManager
+
+LogicManager -> TutorAidParser: parseCommand()
+activate TutorAidParser
+
+create ViewStudentCommand
+TutorAidParser -> ViewStudentCommand:
+activate ViewStudentCommand
+
+TutorAidParser <-- ViewStudentCommand:
+deactivate ViewStudentCommand
+
+LogicManager <-- TutorAidParser:
+deactivate TutorAidParser
+
+LogicManager -> ViewStudentCommand: execute()
+activate ViewStudentCommand
+
+ViewStudentCommand -> Model: viewStudent()
+activate Model
+
+Model -> ModelManager: viewStudent()
+activate ModelManager
+
+ModelManager -> UIManager: showViewWindow()
+activate UIManager
+
+ModelManager <-- UIManager:
+deactivate UIManager
+
+Model <-- ModelManager:
+deactivate ModelManager
+
+ViewStudentCommand <-- Model:
+deactivate Model
+
+LogicManager <-- ViewStudentCommand: result
+deactivate ViewStudentCommand
+
+[<-- LogicManager:
+deactivate LogicManager
+@enduml

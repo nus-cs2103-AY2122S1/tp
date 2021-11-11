@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
+mainframe **sd**  get commandResult
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddStudentToLessonCommand" as AddStudentToLessonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":List<Student>" as List1 MODEL_COLOR
+participant ":List<Lesson>" as List2 MODEL_COLOR
+participant "lesson:Lesson" as Lesson MODEL_COLOR
+participant "student:Student" as Student MODEL_COLOR
+end box
+
+activate LogicManager
+LogicManager -> AddStudentToLessonCommand : execute(model)
+
+activate AddStudentToLessonCommand
+
+loop for each lesson index
+loop for each student index
+AddStudentToLessonCommand -> AddStudentToLessonCommand : executeSingle()
+activate AddStudentToLessonCommand
+
+AddStudentToLessonCommand -> List1 : get(studentIndex)
+activate List1
+List1 --> AddStudentToLessonCommand : student
+deactivate List1
+
+AddStudentToLessonCommand -> List2 : get(lessonIndex)
+activate List2
+List2 --> AddStudentToLessonCommand : lesson
+deactivate List2
+
+AddStudentToLessonCommand -> Lesson : addStudent(student)
+activate Lesson
+Lesson --> AddStudentToLessonCommand
+deactivate Lesson
+
+AddStudentToLessonCommand -> Student : addLesson(lesson)
+activate Student
+Student --> AddStudentToLessonCommand
+deactivate Student
+
+AddStudentToLessonCommand --> AddStudentToLessonCommand
+deactivate AddStudentToLessonCommand
+end
+end
+
+create CommandResult
+AddStudentToLessonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddStudentToLessonCommand
+deactivate CommandResult
+
+LogicManager <-- AddStudentToLessonCommand
+deactivate AddStudentToLessonCommand
+@enduml

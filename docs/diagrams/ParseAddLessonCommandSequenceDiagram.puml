@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddLessonCommandParser" as AddLessonCommandParser LOGIC_COLOR
+participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "lesson:Lesson" as Lesson MODEL_COLOR
+end box
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> TutorAidParser : parseCommand()
+activate TutorAidParser
+
+create AddCommandParser
+TutorAidParser -> AddCommandParser : parse()
+activate AddCommandParser
+
+create AddLessonCommandParser
+AddCommandParser -> AddLessonCommandParser : parse()
+activate AddLessonCommandParser
+
+create Lesson
+AddLessonCommandParser -> Lesson : Lesson()
+activate Lesson
+
+Lesson --> AddLessonCommandParser
+deactivate Lesson
+
+create AddLessonCommand
+AddLessonCommandParser -> AddLessonCommand : AddLessonCommand()
+activate AddLessonCommand
+
+AddLessonCommand --> AddLessonCommandParser
+deactivate AddLessonCommand
+
+AddLessonCommandParser --> AddCommandParser
+deactivate AddLessonCommandParser
+
+AddCommandParser --> TutorAidParser
+deactivate AddCommandParser
+
+TutorAidParser --> LogicManager
+deactivate TutorAidParser
+
+destroy AddCommandParser
+
+destroy AddLessonCommandParser
+
+@enduml

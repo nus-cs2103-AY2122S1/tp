@@ -1,0 +1,16 @@
+{
+  "lessons" : [ {
+    "lessonName" : "Maths 1",
+    "capacity" : "fifty",
+    "price" : "100",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progress" : "No Progress",
+      "hasPaid" : false
+    } ],
+    "timing" : "1000-1200"
+  } ]
+}

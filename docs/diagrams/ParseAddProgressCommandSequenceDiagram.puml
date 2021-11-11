@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddProgressCommandParser" as AddProgressCommandParser LOGIC_COLOR
+participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
+end box
+
+skinparam classFontSize 18
+skinparam packageFontSize 18
+skinparam classStereotypeFontSize 18
+skinparam defaultFontSize 18
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> TutorAidParser : parseCommand()
+activate TutorAidParser
+
+TutorAidParser -> AddCommandParser : parse()
+activate AddCommandParser
+
+AddCommandParser -> AddProgressCommandParser : parse()
+activate AddProgressCommandParser
+
+create AddProgressCommand
+AddProgressCommandParser -> AddProgressCommand : AddProgressCommand()
+activate AddProgressCommand
+AddProgressCommandParser <-- AddProgressCommand
+deactivate AddProgressCommand
+
+AddCommandParser <-- AddProgressCommandParser
+deactivate AddProgressCommandParser
+
+TutorAidParser <-- AddCommandParser
+deactivate AddCommandParser
+
+LogicManager <-- TutorAidParser
+deactivate TutorAidParser
+
+destroy AddProgressCommandParser
+
+destroy AddCommandParser
+
+ref over LogicManager, AddProgressCommand : get commandResult
+<-- LogicManager : commandResult
+deactivate LogicManager
+
+@enduml

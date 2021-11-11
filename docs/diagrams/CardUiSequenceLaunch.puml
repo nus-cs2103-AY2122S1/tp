@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+Participant ":MainApp" as mainApp LOGIC_COLOR
+Participant ":UiManager" as ui UI_COLOR
+Participant ":MainWindow" as mainWin STORAGE_COLOR
+
+mainApp -[LOGIC_COLOR]> ui: start()
+activate ui UI_COLOR
+
+
+ui -[UI_COLOR]> mainWin : fillInnerParts()
+activate mainWin STORAGE_COLOR
+
+mainWin -[STORAGE_COLOR]> mainWin: fillStudentCard(MED)
+activate mainWin STORAGE_COLOR
+mainWin --[STORAGE_COLOR]> mainWin
+deactivate mainWin STORAGE_COLOR
+
+mainWin -[STORAGE_COLOR]> mainWin: fillLessonCard(MED)
+activate mainWin STORAGE_COLOR
+mainWin --[STORAGE_COLOR]> mainWin
+deactivate mainWin STORAGE_COLOR
+
+mainWin -[STORAGE_COLOR]-> ui
+deactivate mainWin STORAGE_COLOR
+
+ui -[UI_COLOR]-> mainApp
+deactivate ui
+
+@enduml

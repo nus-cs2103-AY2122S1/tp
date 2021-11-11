@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddLessonCommand" as AddLessonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:ModelManager" as ModelManager MODEL_COLOR
+participant ":LessonBook" as LessonBook MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> AddLessonCommand : execute(m)
+activate AddLessonCommand
+
+AddLessonCommand -> ModelManager : addLesson(lesson)
+activate ModelManager
+
+ModelManager -> LessonBook : addLesson(lesson)
+activate LessonBook
+
+LessonBook --> ModelManager
+deactivate LessonBook
+
+ModelManager --> AddLessonCommand
+deactivate ModelManager
+
+create CommandResult
+AddLessonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddLessonCommand
+deactivate CommandResult
+
+AddLessonCommand --> LogicManager
+deactivate AddLessonCommand
+
+<-- LogicManager
+deactivate LogicManager
+
+@enduml

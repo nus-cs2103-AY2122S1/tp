@@ -1,0 +1,29 @@
+{
+  "lessons" : [ {
+    "lessonName" : "Valid Lesson",
+    "capacity" : "50",
+    "price" : "100",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progress" : "No Progress",
+      "hasPaid" : false
+    } ],
+    "timing" : "1000-1200"
+  }, {
+    "lessonName" : "Lesson With Invalid Capacity Field",
+    "capacity" : "fifty",
+    "price" : "100",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progress" : "No Progress",
+      "hasPaid" : false
+    } ],
+    "timing" : "1000-1200"
+  } ]
+}
