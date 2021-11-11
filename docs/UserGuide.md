@@ -404,9 +404,23 @@ A student can have any number of tags (including 0).
 * **At least one** [contact field](#student-contact) is required.<br>
 * `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
-* `add n/Betsy Crowe t/cousin a/Newgate p/91234567 r/hasnt pay tuition fee for Aug t/retainee`
+Example:
+
+Suppose you have got a new student, `Betsy Crowe`, whose phone number is `91234567` and lives at `Newgate`. 
+However, you forgot to ask for her school and academic level, so you decided to add a remark and labelled her with tags `missinginfo` and `new`.
+
+Let’s see how you can record Betsy Crowe’s details into TAB!
+
+1. Type `add n/Betsy Crowe p/91234567 a/Newgate r/Remember to get school and academic level! t/missinginfo t/new` into the command box as shown.
+   ![add1](images/add1.png)
+
+2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
+   ![add2](images/add2.png)
+
+
+Other example:
+- `add n/John Doe p/98765432 a/Sengkang Ave 2, Blk 123, #02-01 pe/jackdoe@gmail.com sch/Sengkang Secondary lvl/S1` Adds a student named `John Doe` who lives at `Sengkang Ave 2, Blk 123, #02-01` with phone `98765432`, parent email `jackdoe@gmail.com`, currently studying `S1` at `Sengkang Secondary`.
+
 
 #### Editing a student: `edit`
 
@@ -747,12 +761,18 @@ Available fields are as described in [Lesson parameters](#lesson-parameters).
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
 
-Examples:
+Example: 
+
+Suppose you have a student named Betsy Crowe with index number 7. You have a history lesson with her every Sunday from 11am to 12pm, starting from 20 December 2021, and you want to add it in TAB. The end date is not known, and you are getting paid $35 per hour. For the first lesson, you want to assign assignment 1 as homework. 
+
+1. Type the command `ladd 7 recurring/ date/20 Dec 2021 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
+2. Press <kbd>Enter</kbd> and you should see that a lesson has been added to Betsy!
+   ![ladd Example](images/laddExample.png)
+   <div class="caption">Adding a lesson to Betsy Crowe.</div>
+
+Other examples:
 
 * `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
-
-* `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50`
-  adds the recurring lesson to the 1st student in the displayed student list.
 
 * `list` followed by `ladd 4 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report rates/40`
   adds the makeup lesson to the 4th student in the displayed student list.
@@ -790,13 +810,19 @@ If you change the start date of the lesson, the cancelled dates that become inva
 
 </div>
 
-Examples:
+Example:
+
+Suppose you have a student named Betsy Crowe with index number 7. You mistakenly added the wrong start and end date for her lesson with index number 1. The lesson should start on 2 December 2021 and end on 30 December 2021. Furthermore, she has a school event on the third lesson (16 Dec 2021) for this recurring lesson which means the third lesson has to be cancelled.
+
+1. Type the command `ledit 7 1 recurring/30 Dec 2021 date/2 Dec 2021 cancel/16 dec 2021` into the command box.
+2. Press <kbd>Enter</kbd> and you should see the first lesson of Betsy being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
+   ![ledit Example](images/leditExample.png)
+   <div class="caption">Editing a lesson of Betsy Crowe.</div>
+
+Other examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
-* `ledit 1 1 recurring/30 Nov 2021` Edits the end date of the 1st lesson (assumed to be recurring with start date before 30 Nov 2021) of the 1st student to be `30 Nov 2021`.
 * `ledit 2 3 rates/35.85 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
-* `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 * `ledit 1 2 date/1 Oct 2021 cancel/15 Oct 2021 cancel/03 Dec 2021`. Cancels the specific lessons on `15 Oct 2021` and `03 Dec 2021` for the 2nd lesson (recurring) of the 1st student.
-* `ledit 2 2 uncancel/10 Oct 2021` Uncancels the specific lesson on `10 Oct 2021`, which was previously cancelled, for the 2nd lesson of the 2nd student.
 
 
 #### Deleting a lesson: `ldelete`
