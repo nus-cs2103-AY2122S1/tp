@@ -1,0 +1,88 @@
+{
+  "_comment": "Track-O save file which contains the same Tutee values as in TypicalTutees#getTypicalTrackO()",
+  "tutees" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "school": "Tao Nan School",
+    "level" : "p1",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "remark" : "-",
+    "payment" : "0",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ "rescheduled" ],
+    "lessons" : [ ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "school": "Riverside Primary School",
+    "level" : "p2",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "remark" : "-",
+    "payment" : "90",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ "practical" ],
+    "lessons" : [ "{\r\n  \"subject\" : {\r\n    \"value\" : \"Physics\"\r\n  },\r\n  \"time\" : {\r\n    \"dayOfOccurrence\" : \"SUNDAY\",\r\n    \"startTime\" : \"12:30\",\r\n    \"endTime\" : \"14:30\",\r\n    \"duration\" : 2.0\r\n  },\r\n  \"hourlyRate\" : 40.0,\r\n  \"cost\" : 80.0\r\n}" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "school": "acs primary",
+    "level" : "p3",
+    "address" : "wall street",
+    "remark" : "-",
+    "payment" : "80",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ ],
+    "lessons" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "school": "henry park primary school",
+    "level" : "p4",
+    "address" : "10th street",
+    "remark" : "-",
+    "payment" : "85",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ "language" ],
+    "lessons" : [ ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "94822244",
+    "school": "scgs",
+    "level" : "p5",
+    "address" : "michegan ave",
+    "remark" : "-",
+    "payment" : "75",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ ],
+    "lessons" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "94824277",
+    "school": "South View Primary School",
+    "level" : "p6",
+    "address" : "little tokyo",
+    "remark" : "-",
+    "payment" : "70",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ ],
+    "lessons" : [ ]
+  }, {
+    "name" : "George Best",
+    "phone" : "94824422",
+    "school": "Temasek Primary School",
+    "level" : "p5",
+    "address" : "4th street",
+    "remark" : "-",
+    "payment" : "65",
+    "payByDateAsString" : "20-10-2021",
+    "paymentHistory" : [ "Never" ],
+    "tagged" : [ ],
+    "lessons" : [ ]
+  } ]
+}

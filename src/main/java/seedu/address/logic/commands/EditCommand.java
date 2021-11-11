@@ -2,11 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUTEES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,87 +20,104 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.Schedule;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.Address;
+import seedu.address.model.tutee.Level;
+import seedu.address.model.tutee.Name;
+import seedu.address.model.tutee.Payment;
+import seedu.address.model.tutee.Phone;
+import seedu.address.model.tutee.Remark;
+import seedu.address.model.tutee.School;
+import seedu.address.model.tutee.Tutee;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing tutee in Track-O.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the tutee identified "
+            + "by the index number used in the displayed tutee list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_LEVEL + "LEVEL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_LEVEL + "p5";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_TUTEE_SUCCESS = "Edited Tutee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TUTEE = "This tutee already exists in Track-O.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditTuteeDescriptor editTuteeDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the tutee in the filtered tutee list to edit
+     * @param editTuteeDescriptor details to edit the tutee with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditTuteeDescriptor editTuteeDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editTuteeDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editTuteeDescriptor = new EditTuteeDescriptor(editTuteeDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Tutee> lastShownList = model.getFilteredTuteeList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Tutee tuteeToEdit = lastShownList.get(index.getZeroBased());
+        Tutee editedTutee = createEditedTutee(tuteeToEdit, editTuteeDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!tuteeToEdit.isSameTutee(editedTutee) && model.hasTutee(editedTutee)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TUTEE);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        if (editTuteeDescriptor.getName().isPresent()) {
+            // update schedule to reflect the edited tutee's name
+            Schedule schedule = model.getSchedule();
+            schedule.updateWithNewTuteeName(editedTutee.getLessons(), editedTutee.getName().toString());
+        }
+
+        model.setTutee(tuteeToEdit, editedTutee);
+        model.updateFilteredTuteeList(PREDICATE_SHOW_ALL_TUTEES);
+        return new CommandResult(String.format(MESSAGE_EDIT_TUTEE_SUCCESS, editedTutee));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Tutee} with the details of {@code tuteeToEdit}
+     * edited with {@code editTuteeDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Tutee createEditedTutee(Tutee tuteeToEdit, EditTuteeDescriptor editTuteeDescriptor) {
+        assert tuteeToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editTuteeDescriptor.getName().orElse(tuteeToEdit.getName());
+        Phone updatedPhone = editTuteeDescriptor.getPhone().orElse(tuteeToEdit.getPhone());
+        School updatedSchool = editTuteeDescriptor.getSchool().orElse(tuteeToEdit.getSchool());
+        Level updatedLevel = editTuteeDescriptor.getLevel().orElse(tuteeToEdit.getLevel());
+        Address updatedAddress = editTuteeDescriptor.getAddress().orElse(tuteeToEdit.getAddress());
+        Payment updatedPayment = tuteeToEdit.getPayment(); // edit command does not allow editing fees
+        Remark updatedRemark = tuteeToEdit.getRemark(); // edit command does not allow editing remarks
+        Set<Tag> updatedTags = editTuteeDescriptor.getTags().orElse(tuteeToEdit.getTags());
+        List<Lesson> updatedLessons = tuteeToEdit.getLessons(); // edit command does not allow editing lessons
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Tutee(updatedName, updatedPhone, updatedSchool, updatedLevel, updatedAddress,
+                updatedPayment, updatedRemark, updatedTags, updatedLessons);
     }
 
     @Override
@@ -117,30 +135,32 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editTuteeDescriptor.equals(e.editTuteeDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the tutee with. Each non-empty field value will replace the
+     * corresponding field value of the tutee.
      */
-    public static class EditPersonDescriptor {
+    public static class EditTuteeDescriptor {
         private Name name;
         private Phone phone;
-        private Email email;
+        private School school;
+        private Level level;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditTuteeDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditTuteeDescriptor(EditTuteeDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
-            setEmail(toCopy.email);
+            setSchool(toCopy.school);
+            setLevel(toCopy.level);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -149,7 +169,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, school, level, address, tags);
         }
 
         public void setName(Name name) {
@@ -168,12 +188,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setSchool(School school) {
+            this.school = school;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
+        }
+
+        public void setLevel(Level level) {
+            this.level = level;
+        }
+
+        public Optional<Level> getLevel() {
+            return Optional.ofNullable(level);
         }
 
         public void setAddress(Address address) {
@@ -209,16 +237,17 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditTuteeDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditTuteeDescriptor e = (EditTuteeDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
+                    && getSchool().equals(e.getSchool())
+                    && getLevel().equals(e.getLevel())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }

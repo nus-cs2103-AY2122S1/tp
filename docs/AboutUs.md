@@ -5,55 +5,51 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our respective emails as shown below.
 
-## Project team
+## Project Team
 
-### John Doe
+### Amos Tan Yan Heng
 
-<img src="images/johndoe.png" width="200px">
+![profile_atyhamos](images/atyhamos.png)
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/atyhamos)][[portfolio](team/atyhamos.md)]
 
-* Role: Project Advisor
+* Role: UI Expert
+* Responsibilities: Be most familiar with UI component, ensure quality and vision of product is maintained throughout iterations
 
-### Jane Doe
+### Liao Keng I
 
-<img src="images/johndoe.png" width="200px">
+![profile_kengxiii](images/kengxiii.png)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/KengXIII)][[portfolio](team/kengxiii.md)]
+
+* Role: GitHub Expert
+* Responsibilities: Help other team members with matters related to GitHub
+
+### Ng Hong Jie Ryan
+
+![profile_nhjryan](images/nhjryan.png)
+
+[[github](https://github.com/nhjryan)][[portfolio](team/nhjryan.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Be most familiar with documentation and tracks deadlines, ensuring quality of deliverables
 
-### Johnny Doe
+### Ong Ting Rui, Brandon
 
-<img src="images/johndoe.png" width="200px">
+![profile_botr99](images/botr99.png)
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/botr99)][[portfolio](team/botr99.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Testing Developer
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
-### Jean Doe
+### Wei Yangken
 
-<img src="images/johndoe.png" width="200px">
+![profile_ykwei7](images/ykwei7.png)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ykwei7)][[portfolio](team/ykwei7.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: In charge of defining, assigning, and tracking project tasks

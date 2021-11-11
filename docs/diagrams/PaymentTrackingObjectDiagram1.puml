@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After valid command "add n/John..."
+
+package "Payment tracking" <<rectangle>> {
+
+    class Tutee as "__John:Tutee__"
+    class Payment as "__p:Payment__" {
+         value = "0.00"
+         payByDate = null
+         paymentHistory = ["Never"]
+         isOverdue = false
+    }
+}
+Tutee -right-> Payment
+
+
+show Payment members
+hide methods
+@end
