@@ -40,7 +40,7 @@ The user guide is sectioned such that each chapter [has](#table-of-contents) an
   * **Examples** : Tutorial with pictures on how to use the commands. 
 
 <div markdown="span" class="alert alert-info">
-:bulb: **Tip:** You can always go back to the table of content page and just click on which feature you are currently interested at, as each feature has a very comprehensive tutorial !
+:bulb: **Tip:** You can always go back to the table of contents page and just click on which feature you are currently interested in, as each feature has a very comprehensive tutorial !
 </div>
 
 To get the most out of this user guide, it would be best to understand the terminologies and notations that would often be used in this user guide. 
