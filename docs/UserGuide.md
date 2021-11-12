@@ -314,6 +314,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
    ![interestsList](images/interestsList.png)
 
 <div markdown="block" class="alert alert-primary">
+    
+<div style="page-break-after: always;"></div>
 
 **:bulb: Tip:** <br>
 
@@ -341,6 +343,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
   
     * Edits the **second** `Interest` to 'Swimming'
 
+<div style="page-break-after: always;"></div>
+
 The screenshot below shows the expected result.
 
 ![editCommandExample](images/EditCommandExample.png)
@@ -366,6 +370,8 @@ The screenshot below shows the expected result.
   a. Duplicate of the edited contact already exists on the address book <br>
   (e.g., editing name from 'Bob' to 'bob' is not allowed. Since names are case-insensitive, both 'Bob' and 'bob' are recognised
   as the same name)
+
+<div style="page-break-after: always;"></div>
 
 ### 5.5 Deleting a contact : `delete`
 
