@@ -40,7 +40,7 @@ This section gives you a quick summary on how to download and run our applicatio
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases/tag/v1.3.1).
+1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Module Tracker.
 
