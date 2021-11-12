@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":LessonAddCommandParser" as LessonAddCommandParser LOGIC_COLOR
+participant "la:LessonAddCommand" as LessonAddCommand LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("ladd...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("ladd...)
+activate AddressBookParser
+
+create LessonAddCommandParser
+AddressBookParser -> LessonAddCommandParser
+activate LessonAddCommandParser
+
+LessonAddCommandParser --> AddressBookParser
+deactivate LessonAddCommandParser
+
+AddressBookParser -> LessonAddCommandParser : parse("...")
+activate LessonAddCommandParser
+
+create LessonAddCommand
+LessonAddCommandParser -> LessonAddCommand
+activate LessonAddCommand
+
+LessonAddCommand --> LessonAddCommandParser : la
+deactivate LessonAddCommand
+
+LessonAddCommandParser --> AddressBookParser : la
+deactivate LessonAddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LessonAddCommandParser -[hidden]-> AddressBookParser
+destroy LessonAddCommandParser
+
+AddressBookParser --> LogicManager : la
+deactivate AddressBookParser
+
+LogicManager -> LessonAddCommand : executeUndoableCommand()
+activate LessonAddCommand
+
+LessonAddCommand -> Model : handle logic
+activate Model
+
+note bottom
+Details of lesson add logic is given in another diagram
+end note
+
+Model --> LessonAddCommand
+deactivate Model
+
+LessonAddCommand --> LogicManager : result
+deactivate LessonAddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

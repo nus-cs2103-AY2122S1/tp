@@ -8,15 +8,17 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of persons that enforces uniqueness between its elements, and does not allow nulls.
+ * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}.
+ * As such, adding and updating of persons uses Person#isSamePerson(Person) for equality to ensure that the person
+ * being added or updated is unique in terms of identity in the UniquePersonList.
+ * However, the removal of a person uses Person#equals(Object) to ensure that the person with exactly the same fields
+ * will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -46,6 +48,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a person to a specific index in the list for list to return to state before undo command.
+     * The person must not already exist in the list.
+     */
+    public void add(Person toAdd, Index toIndex) {
+        requireAllNonNull(toAdd, toIndex);
+        if (contains(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.add(toIndex.getZeroBased(), toAdd);
     }
 
     /**
@@ -87,13 +101,14 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+     *
+     * @param persons The Persons to be set.
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
         internalList.setAll(persons);
     }
 
@@ -133,5 +148,10 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Internal list:\n" + internalList;
     }
 }

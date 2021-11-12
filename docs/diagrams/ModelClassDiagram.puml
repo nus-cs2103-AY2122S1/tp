@@ -16,13 +16,25 @@ Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+package "Person" {
+    Class UniquePersonList
+    Class Person
+}
+
+package "Tag" {
+    Class UniqueTagList
+    Class Tag
+}
+
+
+package "Lesson" {
+    Class CalendarEntryList
+    Class "{abstract}\nLesson" as Lesson
+}
+
+package "LastUpdatedDate" {
+    Class LocalDateTime
+}
 
 }
 
@@ -38,17 +50,31 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+AddressBook *--> "1" LocalDateTime
+
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
 Person *--> "*" Tag
+Person *--> "*" Lesson
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *--> "1" CalendarEntryList
+CalendarEntryList --> "~* all" Lesson
+
+note bottom
+Details of Lesson is given in another
+diagram under Lesson Management section.
+end note
+
+AddressBook *--> "1" UniqueTagList
+UniqueTagList --> "~*" Tag
+
+UniqueTagList -[hidden]right-> UniquePersonList
+CalendarEntryList -[hidden]right-> UniquePersonList
 
 ModelManager -->"~* filtered" Person
+
+note bottom
+Details of Person is given in another diagram.
+end note
+
 @enduml

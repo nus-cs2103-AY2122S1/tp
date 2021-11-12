@@ -1,11 +1,20 @@
 package seedu.address.model;
 
+
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
+
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -58,6 +67,31 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     */
+    boolean hasClashingLesson(Lesson lesson);
+
+    /**
+     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     */
+    boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore);
+
+    /**
+     * Returns the set of clashing lessons for {@code lesson}in the address book.
+     */
+    Set<String> getClashingLessonsString(Lesson lesson);
+
+    /**
+     * Returns the set of clashing lessons for {@code lesson}in the address book.
+     */
+    Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore);
+
+    /**
+     * Returns the full unfiltered list of students in the address book.
+     */
+    ObservableList<Person> getUnfilteredPersonList();
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -69,12 +103,31 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    void addPersonAtIndex(Person person, Index targetIndex);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Returns the Calendar.
+     */
+    Calendar getCalendar();
+
+    /**
+     * Returns a list of upcoming lessons within the next two days.
+     *
+     * @return List of upcoming lessons within the next two days.
+     */
+    ObservableList<Entry<Lesson>> getUpcomingLessons();
+
+    /**
+     * Updates the list of upcoming lessons.
+     */
+    void updateUpcomingLessons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -84,4 +137,32 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * If person is in the filtered list, return true.
+     * @param person Person to check for.
+     */
+    boolean hasPersonFilteredList(Person person);
+
+    /** Returns an immutable Last Updated Date object. */
+    LastUpdatedDate getLastUpdatedDate();
+
+    /**
+     * Sets the last updated date to today.
+     */
+    void setLastUpdatedDate();
+
+    /**
+     * Returns an unmodifiable view of the observable tag list.
+     *
+     * @return An unmodifiable view of the observable tag list.
+     */
+    ObservableList<Tag> getObservableTagList();
+
+    /**
+     * Returns an unmodifiable view of the observable tag counter map.
+     *
+     * @return An unmodifiable view of the observable tag counter map.
+     */
+    ObservableMap<Tag, Integer> getTagCounter();
 }

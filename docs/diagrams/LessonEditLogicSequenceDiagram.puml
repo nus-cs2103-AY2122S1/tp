@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "le:LessonEditCommand" as LessonEditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "editedPerson:Person" as Person LOGIC_COLOR
+participant "editedLesson:Lesson" as Lesson LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : ...
+activate LogicManager
+
+LogicManager -> LessonEditCommand : executeUndoableCommand()
+activate LessonEditCommand
+
+LessonEditCommand -> Model : getPerson(personList, index)
+activate Model
+
+Model --> LessonEditCommand : personToEdit
+deactivate Model
+
+create Lesson
+LessonEditCommand -> Lesson : createEditedLesson(eld)
+activate Lesson
+
+Lesson --> LessonEditCommand : editedLesson
+deactivate Lesson
+
+note right
+Details omitted:
+Get lessonToEdit for personToEdit
+end note
+
+LessonEditCommand -> Model : hasClashingLesson(editedLesson, lessonToEdit)
+activate Model
+
+Model --> LessonEditCommand
+deactivate Model
+
+create Person
+LessonEditCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
+activate Person
+
+Person --> LessonEditCommand : person
+deactivate Person
+
+LessonEditCommand -> Model : setPerson(person, editedPerson)
+activate Model
+
+Model --> LessonEditCommand
+deactivate Model
+
+create CommandResult
+LessonEditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LessonEditCommand
+deactivate CommandResult
+
+LessonEditCommand --> LogicManager : result
+deactivate LessonEditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

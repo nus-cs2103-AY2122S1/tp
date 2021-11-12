@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":LessonDeleteCommandParser" as LessonDeleteCommandParser LOGIC_COLOR
+participant "le:LessonDeleteCommand" as LessonDeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "editedPerson:Person" as Person LOGIC_COLOR
+participant "lesson:Lesson" as Lesson LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("ldelete 1 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("ldelete 1 1")
+activate AddressBookParser
+
+create LessonDeleteCommandParser
+AddressBookParser -> LessonDeleteCommandParser
+activate LessonDeleteCommandParser
+
+LessonDeleteCommand --> AddressBookParser
+deactivate LessonDeleteCommandParser
+
+AddressBookParser -> LessonDeleteCommandParser : parse("1 1")
+activate LessonDeleteCommandParser
+
+create LessonDeleteCommand
+LessonDeleteCommandParser -> LessonDeleteCommand
+activate LessonDeleteCommand
+
+LessonDeleteCommand --> LessonDeleteCommandParser : ld
+deactivate LessonDeleteCommand
+
+LessonDeleteCommandParser --> AddressBookParser : ld
+deactivate LessonDeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LessonDeleteCommandParser -[hidden]-> AddressBookParser
+destroy LessonDeleteCommandParser
+
+AddressBookParser --> LogicManager : ld
+deactivate AddressBookParser
+
+LogicManager -> LessonDeleteCommand : executeUndoableCommand()
+activate LessonDeleteCommand
+
+create Lesson
+LessonDeleteCommand -> Lesson
+activate Lesson
+
+Lesson --> LessonDeleteCommand : lesson
+deactivate Lesson
+
+create Person
+LessonDeleteCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
+activate Person
+
+Person --> LessonDeleteCommand : person
+deactivate Person
+
+LessonDeleteCommand -> Model : setPerson(person, editedPerson)
+activate Model
+
+Model --> LessonDeleteCommand
+deactivate Model
+
+create CommandResult
+LessonDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LessonDeleteCommand
+deactivate CommandResult
+
+LessonDeleteCommand --> LogicManager : result
+deactivate LessonDeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

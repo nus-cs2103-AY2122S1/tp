@@ -43,7 +43,7 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
+            commandTextField.deleteText(0, commandText.length());
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -67,6 +67,10 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    public TextField getCommandTextField() {
+        return commandTextField;
     }
 
     /**

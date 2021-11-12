@@ -1,12 +1,24 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.CalendarEntryList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,7 +27,9 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final CalendarEntryList entries;
+    private LastUpdatedDate lastUpdatedDate;
+    private final UniqueTagList tags;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +39,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        entries = new CalendarEntryList();
+        lastUpdatedDate = new LastUpdatedDate();
+        tags = new UniqueTagList();
     }
 
     public AddressBook() {}
@@ -45,6 +62,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+        entries.resetLessons(persons);
+        tags.addTagFromPersonList(persons);
     }
 
     /**
@@ -54,6 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLastUpdatedDate(newData.getLastUpdatedDate());
     }
 
     //// person-level operations
@@ -67,11 +87,79 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if {@code lesson} clashes with an existing lesson in the address book.
+     *
+     * @param lesson The lesson we want to check.
+     * @return True if any existing lesson clashes with the given lesson.
+     */
+    public boolean hasClashingLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return entries.hasClashes(lesson);
+    }
+
+    /**
+     * Returns true if {@code lesson} clashes with an existing lesson in the address book
+     * excluding the {@code lessonToIgnore}
+     *
+     * @param lesson The lesson we want to check.
+     * @param lessonToIgnore The lesson we do not want to check against.
+     * @return True if any existing lesson, excluding the {@code lessonToIgnore},clashes with the given lesson.
+     */
+    public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return entries.hasClashes(lesson, lessonToIgnore);
+    }
+
+    /**
+     * Returns true if any of the specified lessons clashes with existing lesson in the address book.
+     *
+     * @param lessons The lessons we want to check.
+     * @return True if any of the given lessons clash with any existing lessons.
+     */
+    public boolean hasClashingLesson(Iterable<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        return entries.hasClashes(lessons);
+    }
+
+    /**
+     * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
+     */
+    public Set<String> getClashingLessonsString(Lesson lesson) {
+        requireNonNull(lesson);
+        return entries.getClashes(lesson);
+    }
+
+    /**
+     * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
+     */
+    public Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return entries.getClashes(lesson, lessonToIgnore);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
+     *
+     * @param p Person to be added to the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+        entries.addLessons(p);
+        tags.addTagFromPerson(p);
+    }
+
+    /**
+     * Adds a person to a specific index in address book.
+     * Called when undoing a Delete Command.
+     *
+     * @param index Index in the list for which the person has to be added to.
+     * @param p Person to be added.
+     */
+    public void addPerson(Index index, Person p) {
+        persons.add(p, index);
+        entries.addLessons(p);
+        tags.addTagFromPerson(p);
     }
 
     /**
@@ -81,8 +169,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        entries.setLessons(target, editedPerson);
+        tags.editTagFromPerson(target, editedPerson);
     }
 
     /**
@@ -91,14 +180,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        entries.removeLessons(key);
+        tags.removeTagFromPerson(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return persons.asUnmodifiableObservableList().size() + " persons\n"
+                + persons;
     }
 
     @Override
@@ -107,14 +198,81 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+    public LastUpdatedDate getLastUpdatedDate() {
+        return new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
+    }
+
+    /**
+     * Sets the lastUpdatedDate field of {@code AddressBook} to the specified last updated date.
+     *
+     * @param lastUpdatedDate The specified last updated date to set addressbook to.
+     */
+    public void setLastUpdatedDate(LastUpdatedDate lastUpdatedDate) {
+        this.lastUpdatedDate = new LastUpdatedDate(lastUpdatedDate.toString());
+    }
+
+    /**
+     * Returns an unmodifiable view of the tag list.
+     *
+     * @return An unmodifiable view of the tag list.
+     */
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return tags.asUnmodifiableTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return tags.asUnmodifiableMap();
+    }
+
+    /**
+     * Returns the Calendar consisting of all lessons entries.
+     *
+     * @return The Calendar consisting of all lessons entries.
+     */
+    public Calendar getCalendar() {
+        return entries.getCalendar();
+    }
+
+    /**
+     * Returns a list of upcoming lessons within the next two days.
+     *
+     * @return List of upcoming lessons within the next two days.
+     */
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return entries.getUpcomingLessons();
+    }
+
+    /**
+     * Updates the list of upcoming lessons.
+     */
+    public void updateUpcomingLessons() {
+        entries.updateUpcomingLessons();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof AddressBook)) {
+            return false;
+        }
+
+        // state check
+        AddressBook other = (AddressBook) obj;
+        return persons.equals(other.persons)
+                && entries.equals(other.entries)
+                && lastUpdatedDate.equals(other.lastUpdatedDate)
+                && tags.equals(((AddressBook) other).tags);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, tags);
     }
 }

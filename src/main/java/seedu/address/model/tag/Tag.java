@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric.";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}*";
 
-    public final String tagName;
+    private final String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -22,16 +22,25 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = tagName.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid tag name.
+     *
+     * @param test String to be checked if it is a valid tag name.
+     * @return True if the string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both tags are the same object or both tags have the same tag name.
+     *
+     * @param other Object to be checked.
+     * @return True if both tags are the same object or both tags have the same tag name.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -48,7 +57,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
     }
 
 }

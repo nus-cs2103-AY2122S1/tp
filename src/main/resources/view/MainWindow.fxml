@@ -6,15 +6,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="TAB" minWidth="900" minHeight="800" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/TABlogo.png" />
   </icons>
   <scene>
     <Scene>
@@ -32,27 +31,30 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu mnemonicParsing="false" text="View">
+            <MenuItem fx:id="studentsMenuItem" mnemonicParsing="false" onAction="#handlePersonGridPanel" text="Students" />
+            <MenuItem fx:id="calendarMenuItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
+            <MenuItem fx:id="tagsMenuItem" mnemonicParsing="false" onAction="#handleShowTagList" text="Tags" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Reminder">
+            <MenuItem fx:id="remindMenuItem" mnemonicParsing="false" onAction="#handleReminder" text="Upcoming Lessons" />
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets top="10" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+                   minHeight="115" prefHeight="100" maxHeight="200">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets top="5" right="10" bottom="0" left="10" />
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <StackPane fx:id="centerPanelPlaceholder" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" />
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

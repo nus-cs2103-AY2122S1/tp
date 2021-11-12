@@ -1,53 +1,34 @@
 @startuml
-!include style.puml
+!include ./style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":AddressBookParser" as abp LOGIC_COLOR
+Participant "u:UndoCommand" as u LOGIC_COLOR
+Participant ":UndoRedoStack" as urs LOGIC_COLOR
+Participant "x:XYZCommand" as x LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
-end box
-[-> LogicManager : execute(undo)
-activate LogicManager
+[-> logic : execute("undo")
+activate logic
+logic -> abp ++: parseCommand("undo")
+create u
+abp -> u ++
+u --> abp
+deactivate u
+abp --> logic : u
+deactivate abp
+logic -> u ++: execute()
+u -> urs ++: popUndo()
+urs --> u : x
+deactivate urs
+u -> x ++: undo()
+x --> u
+deactivate x
+u --> logic :CommandResult
+deactivate u
+logic -->[
+destroy u
+deactivate logic
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
-
-create UndoCommand
-AddressBookParser -> UndoCommand
-activate UndoCommand
-
-UndoCommand --> AddressBookParser
-deactivate UndoCommand
-
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
-
-LogicManager -> UndoCommand : execute()
-activate UndoCommand
-
-UndoCommand -> Model : undoAddressBook()
-activate Model
-
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
-
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
-
-Model --> UndoCommand
-deactivate Model
-
-UndoCommand --> LogicManager : result
-deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
-
-[<--LogicManager
-deactivate LogicManager
 @enduml

@@ -5,55 +5,47 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Chester Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chesterwongz.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/Chesterwongz)]
+[[portfolio](team/chesterwongz.md)]
 
 * Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Eliana Pang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eeliana.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/eeliana)] [[Portfolio](./team/eeliana.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ng Lingshan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lingshanng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lingshanng)] [[Portfolio](team/lingshanng.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibility: Code Quality
+
+### Wu Xiao Yun
+
+<img src="images/xiaoyunnn.png" width="200px">
+
+[[github](http://github.com/Xiaoyunnn)] [[Portfolio](team/xiaoyunnn.md)]
+
+* Role: Developer, UI Designer
+* Responsibility: UI
+
+### Ang Koon Hwee
+
+<img src="images/angkoonhwee.png" width="200px">
+
+[[github](http://github.com/angkoonhwee)] [[Portfolio](team/angkoonhwee.md)]
+
+* Role: Developer

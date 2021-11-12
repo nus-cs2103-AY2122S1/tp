@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #FFFFFF
+skinparam ClassBorderColor #000000
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+title Inheritance for commands in Logic Component
+
+package Logic {
+    Class XYZCommand
+    Class UndoableXYZCommand
+    Class "{abstract}\nCommand" as Command
+    Class "{abstract}\nUndoableCommand" as UndoableCommand
+}
+
+UndoableCommand .up.|> Command
+UndoableXYZCommand .right.|> UndoableCommand
+XYZCommand .right.|> Command
+
+
+
+@enduml

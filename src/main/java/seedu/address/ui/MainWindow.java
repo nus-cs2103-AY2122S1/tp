@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -13,9 +16,16 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -25,15 +35,25 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static final String QUICK_START_INSTRUCTIONS = "💡 Quick Tips:\n"
+            + AddCommand.USER_TIP + "\n\n"
+            + DeleteCommand.USER_TIP + "\n\n"
+            + LessonAddCommand.USER_TIP + "\n\n"
+            + WeekCommand.USER_TIP + "\n\n"
+            + ClearCommand.USER_TIP + "\n\n"
+            + HelpCommand.USER_TIP + "\n\n"
+            + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +62,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private MenuItem remindMenuItem;
+
+    @FXML
+    private MenuItem studentsMenuItem;
+
+    @FXML
+    private MenuItem calendarMenuItem;
+
+    @FXML
+    private MenuItem tagsMenuItem;
+
+    @FXML
+    private StackPane centerPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -66,6 +98,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        reminderWindow = new ReminderWindow(logic.getUpcomingLessons());
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +107,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F3"));
+        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F4"));
+        setAccelerator(remindMenuItem, KeyCombination.valueOf("F5"));
     }
 
     /**
@@ -94,33 +131,106 @@ public class MainWindow extends UiPart<Stage> {
          * not work when the focus is in them because the key event is consumed by
          * the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * ListViews will also consume F2 function key events.
+         *
+         * For now, we add following event filter to capture such key events
+         * purposely so to support accelerators even when focus is
+         * in CommandBox, ResultDisplay, or CenterPanel.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+            if (keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
         });
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getEmptyLessonList(),
+                logic.getObservableTagList(), logic.getTagCounter());
+        centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.setFeedbackToUser(QUICK_START_INSTRUCTIONS);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        initListeners();
+
+        initKeyPressEventHandler(commandBox);
+    }
+
+    /**
+     * initialise {@code CommandBox} key press event handlers.
+     *
+     * @param commandBox The {@code MainWindow}'s {@code CommandBox}
+     */
+    private void initKeyPressEventHandler(CommandBox commandBox) {
+        // Add handler to request focus on commandBox when user wants to type
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (commandBox.getCommandTextField().isFocused()) {
+                return; // Don't filter if already in focus
+            }
+            if (!event.isShortcutDown() && isTextInputKeyCode(event.getCode())) {
+                commandBox.getCommandTextField().requestFocus();
+                commandBox.getCommandTextField().selectEnd();
+            }
+        });
+    }
+
+    /**
+     * Determines if keycode is a punctuation key base on optionally fixed virtual key codes
+     *
+     * @param keyCode The {@code KeyCode} to check
+     * @return True if it's a punctuation
+     */
+    private boolean isPunctuationKey(KeyCode keyCode) {
+        KeyCode[] punctuationKeyCodes = {
+            KeyCode.SPACE, KeyCode.BACK_SPACE,
+            KeyCode.BACK_QUOTE, KeyCode.MINUS, KeyCode.EQUALS, KeyCode.SLASH, // first row
+            KeyCode.OPEN_BRACKET, KeyCode.CLOSE_BRACKET, KeyCode.BACK_SLASH, // second row
+            KeyCode.SEMICOLON, KeyCode.QUOTE, KeyCode.COMMA, KeyCode.PERIOD, KeyCode.SLASH, // third row
+            KeyCode.DIVIDE, KeyCode.MULTIPLY, KeyCode.SUBTRACT, KeyCode.ADD, KeyCode.DECIMAL // Num pad Keys
+        };
+        for (KeyCode code : punctuationKeyCodes) {
+            if (code.equals(keyCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isTextInputKeyCode(KeyCode keyCode) {
+        return keyCode.isLetterKey() || keyCode.isDigitKey()
+                || isPunctuationKey(keyCode);
+    }
+
+    /**
+     * Initialis {@code MainWindow} listeners
+     */
+    private void initListeners() {
+        ListView<Person> personListView = centerPanel.getPersonListView();
+        personListView.getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldVal, newVal) -> {
+                    if (newVal != null) {
+                        logger.info("Showing lessons for " + newVal.getName());
+                        handlePersonGridPanel(newVal);
+                    }
+                });
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(
+                personListView.getSelectionModel().getSelectedItem()));
     }
 
     /**
@@ -147,8 +257,17 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
-        primaryStage.show();
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminder() {
+        logic.updateUpcomingLessons();
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
     }
 
     /**
@@ -160,11 +279,106 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Switches to the calendar.
+     */
+    @FXML
+    private void handleCalendar() {
+        centerPanel.displaySchedulePanel();
+    }
+
+    /**
+     * Shows the day view of the calendar.
+     */
+    private void handleDay() {
+        centerPanel.showDay();
+    }
+
+    /**
+     * Shows the week view of the calendar.
+     */
+    private void handleWeek() {
+        centerPanel.showWeek();
+    }
+
+    /**
+     * Shows the month view of the calendar.
+     */
+    private void handleMonth() {
+        centerPanel.showMonth();
+    }
+
+    /**
+     * Shows the year view of the calendar.
+     */
+    private void handleYear() {
+        centerPanel.showYear();
+    }
+
+    /**
+     * Go next in the calendar.
+     */
+    private void handleNext() {
+        centerPanel.goNext();
+    }
+
+    /**
+     * Go to today in the calendar.
+     */
+    private void handleToday() {
+        centerPanel.goToday();
+    }
+
+    /**
+     * Go back in the calendar.
+     */
+    private void handleBack() {
+        centerPanel.goBack();
+    }
+
+    /**
+     * Switches to the personGridPanel.
+     */
+    @FXML
+    private void handlePersonGridPanel() {
+        centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
+    }
+
+    /**
+     * Displays the person on the personGridPanel
+     *
+     * @param student The person whose lessons we wish to display.
+     */
+    private void handlePersonGridPanel(Person student) {
+        requireNonNull(student);
+        centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
+    }
+
+    /**
+     * Switches to the student view.
+     *
+     * @param commandResult The commandResult that causes this change.
+     */
+    private void handleStudents(CommandResult commandResult) {
+        if (commandResult.getStudent().isPresent()) {
+            Person student = commandResult.getStudent().get();
+            handlePersonGridPanel(student);
+            centerPanel.getPersonListView().scrollTo(student);
+        } else {
+            handlePersonGridPanel();
+        }
+    }
+
+    /**
+     * Displays tag list instead of the default person list.
+     */
+    @FXML
+    private void handleShowTagList() {
+        centerPanel.displayTagListPanel();
     }
 
     /**
@@ -178,12 +392,61 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getDisplayType()) {
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.isExit()) {
+            case REMINDER:
+                handleReminder();
+                break;
+
+            case EXIT:
                 handleExit();
+                break;
+
+            case STUDENTS:
+                handleStudents(commandResult);
+                break;
+
+            case TAGS:
+                handleShowTagList();
+                break;
+
+            case CALENDAR:
+                handleCalendar();
+                break;
+
+            case DAY:
+                handleDay();
+                break;
+
+            case WEEK:
+                handleWeek();
+                break;
+
+            case MONTH:
+                handleMonth();
+                break;
+
+            case YEAR:
+                handleYear();
+                break;
+
+            case NEXT:
+                handleNext();
+                break;
+
+            case TODAY:
+                handleToday();
+                break;
+
+            case BACK:
+                handleBack();
+                break;
+
+            default:
+                throw new AssertionError("Should not reach here.");
             }
 
             return commandResult;

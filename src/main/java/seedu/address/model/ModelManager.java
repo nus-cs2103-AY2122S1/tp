@@ -4,14 +4,23 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
+
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -95,6 +104,35 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasClashingLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasClashingLesson(lesson);
+    }
+
+    @Override
+    public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return addressBook.hasClashingLesson(lesson, lessonToIgnore);
+    }
+
+    @Override
+    public Set<String> getClashingLessonsString(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.getClashingLessonsString(lesson);
+    }
+
+    @Override
+    public Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return addressBook.getClashingLessonsString(lesson, lessonToIgnore);
+    }
+
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -106,10 +144,41 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonAtIndex(Person person, Index index) {
+        addressBook.addPerson(index, person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return addressBook.getCalendar();
+    }
+
+    @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return addressBook.getUpcomingLessons();
+    }
+
+    @Override
+    public void updateUpcomingLessons() {
+        addressBook.updateUpcomingLessons();
+    }
+
+    @Override
+    public ObservableList<Tag> getObservableTagList() {
+        return addressBook.getTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return addressBook.getTagCounter();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -130,6 +199,38 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonFilteredList(Person person) {
+        requireNonNull(person);
+        return filteredPersons.contains(person);
+    }
+
+    //=========== Last Updated Accessors =============================================================
+
+    /**
+     * Returns an immutable last updated date of the address book.
+     *
+     * @return An immutable {@code LastUpdatedDate}.
+     */
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return addressBook.getLastUpdatedDate();
+    }
+
+    /**
+     * Sets the lastUpdatedDate field in {@code AddressBook} to the local date time when
+     * the application was initially launched.
+     */
+    @Override
+    public void setLastUpdatedDate() {
+        addressBook.setLastUpdatedDate(new LastUpdatedDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressBook, userPrefs, filteredPersons);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -147,5 +248,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }
