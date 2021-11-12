@@ -341,7 +341,6 @@ Update the attributes of existing users using the prefix of the client’s attri
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
 | <img src="images/tip_icon.png" width="50"/> | • Multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
 
-<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client 3's information as such. <br>
 <p align="center" >
