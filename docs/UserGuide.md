@@ -313,9 +313,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
 * The Interests list of a contact can be found here (refer to the screenshot below) and can be displayed by using the [display command](#58-displaying-full-contact-details--display)
    ![interestsList](images/interestsList.png)
 
-<div markdown="block" class="alert alert-primary">
-    
 <div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:** <br>
 
@@ -342,8 +342,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
     * Adds 'painting' as a *new* `Interest`
   
     * Edits the **second** `Interest` to 'Swimming'
-
-<div style="page-break-after: always;"></div>
 
 The screenshot below shows the expected result.
 
@@ -580,6 +578,8 @@ The screenshot below shows the expected result.
   b. Index specified is larger than 2147483647 <br>
 
   c. Index specified is not a positive integer <br>
+
+<div style="page-break-after: always;"></div>
 
 ### 5.9 Filtering contacts : `filter`
 
