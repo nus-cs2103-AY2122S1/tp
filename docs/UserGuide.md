@@ -212,8 +212,8 @@ Examples:
 
 #### 5.1.4 Link a game to a friend: `friend --link`
 
-Links a game with the specified `GAME_ID` and the associated in-game username specified by `IN_GAME_USERNAME` for the 
-game to a friend with the provided `FRIEND_ID`.
+Links a game with the specified `GAME_ID` and the associated in-game username specified by `IN_GAME_USERNAME` to a 
+friend with the provided `FRIEND_ID`.
 A link between a particular friend and game shows that the friend plays the game. 
 This association is required for subsequent commands, e.g. for the application to display all games that a friend plays 
 or to recommend a friend to play with based on a particular game.
