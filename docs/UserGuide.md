@@ -639,6 +639,8 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |
+| Show a Student Contact (by Github) | `show g/<GITHUB>` |
+| Show a Student Contact (by Telegram) | `show te/<TELEGRAM>` |
 | To Add Tag(s) | `tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS]` |
 | To Remove Tag(s) | `tag <INDEX> r/<TAG_TO_REMOVE> [MORE_TAGS]` |
 | To Add and Remove Tag(s) Simultaneously | `tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]` |
