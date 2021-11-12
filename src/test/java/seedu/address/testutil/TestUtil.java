@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
@@ -13,6 +15,8 @@ import seedu.address.model.person.Person;
  * A utility class for test cases.
  */
 public class TestUtil {
+
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
 
     /**
      * Folder used for temp files created during testing. Ignored by Git.
@@ -51,5 +55,9 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    public static LocalDateTime createLocalDateTime(String input) {
+        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 }

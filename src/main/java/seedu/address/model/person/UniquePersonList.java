@@ -3,11 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -22,7 +26,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  *
  * @see Person#isSamePerson(Person)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniquePersonList implements Iterable<Person>, UniqueIdMapper<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
@@ -64,7 +68,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
-
         internalList.set(index, editedPerson);
     }
 
@@ -95,6 +98,21 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Removes the groupId from all persons
+     * @param toRemove id to remove
+     */
+    public void cleanUpGroupId(UniqueId toRemove) {
+        List<Person> persons = new ArrayList<>(internalList);
+        for (int i = 0; i < persons.size(); i++) {
+            Person current = persons.get(i);
+            if (current.containsGroupId(toRemove)) {
+                Person withoutId = current.removeGroupId(toRemove);
+                internalList.set(i , withoutId);
+            }
+        }
     }
 
     /**
@@ -133,5 +151,10 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    @Override
+    public Set<Person> getFromUniqueIds(Set<UniqueId> ids) {
+        return UniqueIdMapper.<Person>getFromUniqueIdsAndItemList(ids, internalList);
     }
 }

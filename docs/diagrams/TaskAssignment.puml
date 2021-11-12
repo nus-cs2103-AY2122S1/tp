@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+
+show members
+hide empty members
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeFontColor classFontColor
+
+UniqueId "*" <--> "1" Person
+UniqueId "*" <--> "1" Task
+UniqueId "*" <--> "1" Group
+
+class UniqueId {
+    owner
+    id
+}
+
+class Person {
+    UniqueId id
+    updateAssignedTaskIds()
+}
+
+class Task {
+    UniqueId id
+}
+
+class Group {
+    UniqueId id
+    updateAssignedTaskIds()
+}
+
+@enduml

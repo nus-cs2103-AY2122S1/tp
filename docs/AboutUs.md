@@ -5,55 +5,55 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `seer@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yeh Yu-Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eltonyeh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/eltonyeh)]
+[[portfolio](team/eltonyeh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Unique Id for entities and task assignments.
 
-### Jean Doe
+### Tan Hua Kun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanhuakun.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tanhuakun)]
+[[portfolio](team/tanhuakun.md)]
+
+* Role: Full Stack Developer
+* Responsibilities: Creating Lesson, Exams and Viewing Panel logic.
+
+### Srinivasan Neharikha
+
+<img src="images/neha-5678.png" width="200px">
+
+[[github](http://github.com/neha-5678)] [[portfolio](team/neha-5678.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Storage for tasks and groups and creating logic for features related to Tasks.
 
-### James Doe
+### Le Quoc Huy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeremy-7007.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jeremy-7007)]
+[[portfolio](team/jeremy-7007.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Assigning tasks to students and marking their completion status
+
+### Keerthi Vihashini
+
+<img src="images/kvihashini.png" width="200px">
+
+[[github](http://github.com/kvihashini)]
+[[portfolio](team/kvihashini.md)]
+
+* Role: Developer
+* Responsibilities: UI,  Model and logic for Groups and related features.
