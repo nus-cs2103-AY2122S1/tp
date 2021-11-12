@@ -129,20 +129,6 @@ What follows is a detailed breakdown of all the commands Notor has available and
 <a name = "general-command"></a>
 ### General Commands
 
-#### _Clearing all entries_
-
-Clears all entries from Notor. This means that all your contacts, as well as the groups you keep them in, will be removed.
-
-| Format      | Short Format    |
-|-------------|-----------------|
-| `clear`     | `c`             |
-
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-  Data will be deleted and **will not be saved**. The intended use of this
-  command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
-</div>
-
-
 #### _Viewing help_
 
 Opens a help window with a summary of commands, as well as a link you can copy to get to this full user guide.
@@ -154,6 +140,19 @@ Opens a help window with a summary of commands, as well as a link you can copy t
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
+</div>
+
+#### _Clearing all entries_
+
+Clears all entries from Notor. This means that all your contacts, as well as the groups you keep them in, will be removed.
+
+| Format      | Short Format    |
+|-------------|-----------------|
+| `clear`     | `c`             |
+
+<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
+  Data will be deleted and **will not be saved**. The intended use of this
+  command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 </div>
 
 #### _Editing the General Note_
