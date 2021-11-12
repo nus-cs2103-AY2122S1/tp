@@ -3,20 +3,18 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
- * Represents a Person's name in the address book.
+ * Represents a Person's name in contHACKS.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphabets and spaces, and it should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
     public final String fullName;
 
@@ -38,6 +36,25 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the other full name is similar to this full name.
+     */
+    public boolean isSimilarTo(Name other) {
+        if (other == null) {
+            return false;
+        }
+
+        return this.contains(other) && other.contains(this);
+    }
+
+    private boolean contains(Name other) {
+        String[] fullNameArr = fullName.split(" ");
+        return Arrays
+                .stream(fullNameArr)
+                .map(String::trim)
+                .map(String::toLowerCase)
+                .allMatch(s -> other.fullName.toLowerCase().contains(s));
+    }
 
     @Override
     public String toString() {
@@ -56,4 +73,7 @@ public class Name {
         return fullName.hashCode();
     }
 
+    public int compareTo(Name n) {
+        return this.fullName.toLowerCase().compareTo(n.fullName.toLowerCase());
+    }
 }

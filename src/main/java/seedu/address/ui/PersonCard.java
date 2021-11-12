@@ -21,7 +21,7 @@ public class PersonCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on Conthacks level 4</a>
      */
 
     public final Person person;
@@ -35,11 +35,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label teleHandle;
+    @FXML
+    private Label remark;
+    @FXML
+    private FlowPane moduleCodes;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,12 +51,14 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        remark.setText(person.getRemark().value);
+        person.getModuleCodes().stream()
+                        .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
+                                .forEach(moduleCode -> moduleCodes.getChildren().add(
+                                new Label(moduleCode.formattedToString())));
+        phone.setText(person.getPhone().value);
+        teleHandle.setText(person.getTeleHandle().value);
     }
 
     @Override

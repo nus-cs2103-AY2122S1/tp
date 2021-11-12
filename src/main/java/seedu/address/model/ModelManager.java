@@ -11,34 +11,37 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of contHACKS data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Conthacks conthacks;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<ModuleLesson> filteredModuleLessons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given conthacks and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyConthacks addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.conthacks = new Conthacks(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.conthacks.getPersonList());
+        filteredModuleLessons = new FilteredList<>(this.conthacks.getModuleLessonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Conthacks(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,50 +69,100 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getConthacksFilePath() {
+        return userPrefs.getConthacksFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setConthacksFilePath(Path conthacksFilePath) {
+        requireNonNull(conthacksFilePath);
+        userPrefs.setConthacksFilePath(conthacksFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Conthacks ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setConthacks(ReadOnlyConthacks conthacks) {
+        this.conthacks.resetData(conthacks);
+    }
+
+    /**
+     * Sorts the address book data in alphabetical order.
+     * For {@code Person}, it is sorted by their name.
+     * For {@code ModuleLesson}, it is sorted by their module code.
+     */
+    @Override
+    public void sortConthacks() {
+        conthacks.sortConthacks();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyConthacks getConthacks() {
+        return conthacks;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return conthacks.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasModuleLesson(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return conthacks.hasLesson(moduleLesson);
+    }
+
+    @Override
+    public boolean hasModuleLessonClashingWith(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return conthacks.hasLessonClashingWith(moduleLesson);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        conthacks.removePerson(target);
+    }
+
+    @Override
+    public void deleteLesson(ModuleLesson moduleLesson) {
+        conthacks.removeLesson(moduleLesson);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        conthacks.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addLesson(ModuleLesson moduleLesson) {
+        conthacks.addLesson(moduleLesson);
+        updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        conthacks.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+
+        conthacks.setModuleLesson(target, editedLesson);
+    }
+
+    @Override
+    public void clearPersons() {
+        conthacks.clearPersonList();
+    }
+
+    @Override
+    public void clearLessons() {
+        conthacks.clearLessonList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -130,6 +183,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<ModuleLesson> getFilteredModuleLessonList() {
+        return filteredModuleLessons;
+    }
+
+    @Override
+    public void updateFilteredModuleLessonList(Predicate<ModuleLesson> predicate) {
+        requireNonNull(predicate);
+        filteredModuleLessons.setPredicate(predicate);
+    }
+
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -143,9 +208,10 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return conthacks.equals(other.conthacks)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredModuleLessons.equals(other.filteredModuleLessons);
     }
 
 }

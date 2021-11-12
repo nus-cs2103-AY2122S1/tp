@@ -1,0 +1,30 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "teleHandle": "",
+    "remark" : "",
+    "moduleCodes" : [ {
+      "moduleCode" : "CS2030S",
+      "tags" : [ "T12" ]
+    }, {
+      "moduleCode": "CS2040",
+      "tags": [ ]
+    } ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "remark" : "",
+    "teleHandle": "",
+    "moduleCodes" : [ {
+      "moduleCode" : "CS2030S",
+      "tags" : [ "T12" ]
+    }, {
+      "moduleCode": "CS2040",
+      "tags": [ ]
+    } ]
+  } ],
+  "lessons": [ ]
+}

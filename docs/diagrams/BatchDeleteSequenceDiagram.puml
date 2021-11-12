@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ConthacksParser" as ConthacksParser LOGIC_COLOR
+participant ":DeletePersonCommandParser" as DeletePersonCommandParser LOGIC_COLOR
+participant "d:DeletePersonCommand" as DeletePersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete m/CS2103T")
+activate LogicManager
+
+LogicManager -> ConthacksParser : parseCommand("delete m/CS2103T")
+activate ConthacksParser
+
+create DeletePersonCommandParser
+ConthacksParser -> DeletePersonCommandParser
+activate DeletePersonCommandParser
+
+DeletePersonCommandParser --> ConthacksParser
+deactivate DeletePersonCommandParser
+
+ConthacksParser -> DeletePersonCommandParser : parse(" m/CS2103T")
+activate DeletePersonCommandParser
+
+create DeletePersonCommand
+DeletePersonCommandParser -> DeletePersonCommand
+activate DeletePersonCommand
+
+DeletePersonCommand --> DeletePersonCommandParser : d
+deactivate DeletePersonCommand
+
+DeletePersonCommandParser --> ConthacksParser : d
+deactivate DeletePersonCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeletePersonCommandParser -[hidden]-> ConthacksParser
+destroy DeletePersonCommandParser
+
+ConthacksParser --> LogicManager : d
+deactivate ConthacksParser
+
+LogicManager -> DeletePersonCommand : execute()
+activate DeletePersonCommand
+
+loop no. of contacts with module code CS2103T
+alt contact tagged to only CS2103T
+DeletePersonCommand -> Model : deletePerson()
+activate Model
+
+Model --> DeletePersonCommand
+deactivate Model
+else contacts attached to other module codes
+DeletePersonCommand -> Model : setPerson()
+activate Model
+
+Model --> DeletePersonCommand
+deactivate Model
+end
+end
+
+create CommandResult
+DeletePersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeletePersonCommand
+deactivate CommandResult
+
+DeletePersonCommand --> LogicManager : result
+deactivate DeletePersonCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

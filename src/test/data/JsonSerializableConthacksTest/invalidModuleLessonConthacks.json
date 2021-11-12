@@ -1,0 +1,9 @@
+{
+  "persons" : [ ],
+  "lessons": [ {
+    "moduleCode": "CS2106",
+    "lessonDay": "invalid",
+    "lessonTime": "10:00",
+    "remark": "T01"
+  } ]
+}

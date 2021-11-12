@@ -10,10 +10,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.ConthacksParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyConthacks;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -26,7 +27,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final ConthacksParser conthacksParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        conthacksParser = new ConthacksParser();
     }
 
     @Override
@@ -42,11 +43,12 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = conthacksParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        model.sortConthacks();
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveConthacks(model.getConthacks());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,8 +57,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyConthacks getConthacks() {
+        return model.getConthacks();
     }
 
     @Override
@@ -65,8 +67,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObservableList<ModuleLesson> getFilteredModuleLessonList() {
+        return model.getFilteredModuleLessonList();
+    }
+
+    @Override
+    public Path getConthacksFilePath() {
+        return model.getConthacksFilePath();
     }
 
     @Override

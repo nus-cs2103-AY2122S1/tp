@@ -2,11 +2,12 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -20,7 +21,7 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getModuleCodes().remove(0));
     }
 
     @Test
@@ -31,23 +32,37 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        // same email -> returns true
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withTeleHandle(VALID_TELE_HANDLE_BOB)
+                .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // same phone -> returns true
+        editedAlice = new PersonBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withTeleHandle(VALID_TELE_HANDLE_BOB)
+                .build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same telegram handle -> return true
+        editedAlice = new PersonBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // different email, phone and telegram handle -> returns false
+        editedAlice = new PersonBuilder(ALICE)
+                .withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withTeleHandle(VALID_TELE_HANDLE_BOB)
+                .build();
         assertFalse(ALICE.isSamePerson(editedAlice));
-
-        // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -80,12 +95,16 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different tele handle -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTeleHandle(VALID_TELE_HANDLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different remark -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark(VALID_REMARK_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different modules -> return false
+        editedAlice = new PersonBuilder(ALICE).withModuleCodes(VALID_MODULE_CODE_CS2030S_T12).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
