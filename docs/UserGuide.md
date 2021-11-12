@@ -574,7 +574,7 @@ _Staff marked as present in Schedule View_
 Adds a [shift](#flag-legend):triangular_flag_on_post: to a specified staff's schedule.
 
 * Takes [0, 1, or 2 date inputs](#flag-legend):triangular_flag_on_post:. Shifts would be added to all occurances in the period.
-* The start time and end time will be set to the [default shift timings](#glossary):mag:
+* The start time and end time will be set to the default [shift timings](#glossary):mag:
 
 
 **Formats:**  
