@@ -2,35 +2,75 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-    </VBox>
-  </GridPane>
+<HBox id="cardPane" fx:id="cardPane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <HBox alignment="CENTER_LEFT">
+                <children>
+                    <ImageView id="profileView" fx:id="profileView" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../images/profile.png" />
+                        </image>
+                        <HBox.margin>
+                            <Insets right="20.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <VBox alignment="CENTER_LEFT">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" spacing="5">
+                                <Label fx:id="id" styleClass="cell_big_label">
+                                    <minWidth>
+                                        <!-- Ensures that the label text is never truncated -->
+                                        <Region fx:constant="USE_PREF_SIZE" />
+                                    </minWidth>
+                                </Label>
+                        <TextFlow fx:id="name" styleClass="text-flow" />
+                                <VBox.margin>
+                                    <Insets bottom="8.0" />
+                                </VBox.margin>
+                            </HBox>
+                            <FlowPane fx:id="tags">
+                                <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                </VBox.margin>
+                            </FlowPane>
+                        </children>
+                    </VBox>
+                </children>
+            </HBox>
+        </VBox>
+        <VBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
+            <children>
+                <ImageView fx:id="favBtn" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/unfav.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                    </VBox.margin>
+                </ImageView>
+            </children>
+        </VBox>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
 </HBox>

@@ -5,6 +5,9 @@ package seedu.address.model.person.exceptions;
  * identity).
  */
 public class DuplicatePersonException extends RuntimeException {
+    /**
+     * This class is created if there is a duplicated person.
+     */
     public DuplicatePersonException() {
         super("Operation would result in duplicate persons");
     }

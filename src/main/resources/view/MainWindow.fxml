@@ -6,55 +6,110 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="910.0" minWidth="950.0" onCloseRequest="#handleExit" title="CohortConnect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/logo.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css"/>
+        <URL value="@Fonts.css" />
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+      <VBox fx:id="mainWindow" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;">
+            <HBox fx:id="menuHolder" alignment="CENTER_LEFT" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 20%);">
+               <children>
+              <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS">
+                <Menu mnemonicParsing="false" text="File">
+                  <MenuItem fx:id="profileMenuItem" mnemonicParsing="false" onAction="#handleUserProfileWindow" text="Profile" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                </Menu>
+                     <Menu mnemonicParsing="false" text="Window">
+                       <items>
+                         <MenuItem fx:id="contactsMenuItem" mnemonicParsing="false" onAction="#handleContacts" text="Contacts" />
+                           <MenuItem fx:id="favoritesMenuItem" mnemonicParsing="false" onAction="#handleFavorites" text="Favorites" />
+                           <MenuItem fx:id="eventsMenuItem" mnemonicParsing="false" onAction="#handleEvents" text="Events" />
+                           <MenuItem fx:id="findABuddyMenuItem" mnemonicParsing="false" onAction="#handleFindABuddy" text="Find A Buddy" />
+                       </items>
+                     </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelpWindow" text="Help" />
+                </Menu>
+              </MenuBar>
+                   <HBox fx:id="userDetails" style="-fx-border-color: #313131 #313131 #313131 #313131;">
+                   </HBox>
+                  <ImageView fx:id="eventsIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/events.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+                                <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+                                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            <HBox fx:id="mainHBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+               <children>
+                  <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <StackPane fx:id="tabPanePlaceholder" GridPane.hgrow="ALWAYS">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </StackPane>
+                   <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                     </children>
+                  </GridPane>
+                  <StackPane id="personCardPlaceholder" fx:id="personCardPlaceholder" maxWidth="-Infinity" minWidth="-Infinity" style="-fx-background-color: #121212;">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </StackPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="footerHBar" maxHeight="1.7976931348623157E308" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 25%);">
+               <children>
+              <StackPane fx:id="statusbarPlaceholder" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </StackPane>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" top="2.0" />
+               </padding>
+            </HBox>
       </VBox>
     </Scene>
   </scene>

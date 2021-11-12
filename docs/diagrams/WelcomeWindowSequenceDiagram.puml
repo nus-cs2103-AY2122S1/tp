@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":WelcomeWindow" as WelcomeWindow UI_COLOR
+participant ":UiPart" as UiPart UI_COLOR
+
+[-> UiManager : start(primaryStage)
+activate UiManager
+
+create WelcomeWindow
+UiManager -> WelcomeWindow : new WelcomeWindow()
+activate WelcomeWindow
+
+WelcomeWindow --> UiManager
+deactivate
+
+UiManager -> WelcomeWindow : start(mainWindow)
+activate WelcomeWindow
+
+WelcomeWindow -> UiPart : getRoot()
+activate UiPart
+
+UiPart --> WelcomeWindow
+deactivate UiPart
+
+WelcomeWindow -> WelcomeWindow : displayAnimatedText(tagLine, delayTime)
+activate WelcomeWindow
+
+WelcomeWindow --> WelcomeWindow
+deactivate WelcomeWindow
+
+WelcomeWindow -> WelcomeWindow : fadeTransition()
+activate WelcomeWindow
+
+WelcomeWindow --> WelcomeWindow
+deactivate WelcomeWindow
+
+WelcomeWindow -> WelcomeWindow : close(mainWindow)
+activate WelcomeWindow
+
+WelcomeWindow --> WelcomeWindow
+deactivate WelcomeWindow
+
+WelcomeWindow --> UiManager
+deactivate WelcomeWindow
+
+<-- UiManager
+
+@enduml

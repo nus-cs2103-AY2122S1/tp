@@ -24,6 +24,14 @@ public class Prefix {
         return prefix == null ? 0 : prefix.hashCode();
     }
 
+    /**
+     * Method to compare two Prefix objects.
+     *
+     * @param obj is the object that is going to be compared
+     *              to the Prefix object that called this method.
+     * @return boolean representation of whether the Prefix
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Prefix)) {

@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant ":EditCommand" as EditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit profile te/john_doe g/john-codes")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit profile te/john_doe g/john-codes")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("profile te/john_doe g/john-codes")
+activate EditCommandParser
+
+EditCommandParser -> EditCommandParser : checkEditProfileInputFormat()
+activate EditCommandParser
+EditCommandParser --> EditCommandParser :
+deactivate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser :
+deactivate EditCommand
+
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> EditCommand : execute()
+activate EditCommand
+
+EditCommand -> EditCommand : executeEditProfile(model)
+activate EditCommand
+EditCommand --> EditCommand :
+deactivate EditCommand
+
+EditCommand -> Model : model.getUserProfile()
+activate Model
+Model --> EditCommand :
+deactivate Model
+
+EditCommand -> EditCommand : createEditedPerson(currentProfile, editPersonDescriptor)
+activate EditCommand
+EditCommand --> EditCommand :
+deactivate EditCommand
+
+
+EditCommand -> Model : model.setUserProfile(editedProfile)
+activate Model
+Model --> EditCommand :
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand : result
+deactivate CommandResult
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+
+[<--LogicManager
+
+@enduml

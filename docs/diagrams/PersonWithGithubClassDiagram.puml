@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class Person
+Class Telegram
+Class Github
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Tag
+
+Class HiddenOutside #FFFFFF
+
+Person *---> Name
+Person *---> Telegram
+Person *---> Github
+Person *---> "0..1" Phone
+Person *---> "0..1" Email
+Person *---> "0..1" Address
+Person *---> "*" Tag
+
+
+Name -[hidden]right-> Telegram
+Telegram -[hidden]right-> Github
+Github -[hidden]right-> Phone
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Address
+Address -[hidden]right-> Tag
+
+@enduml

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonListPanel;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,21 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /**
+     * Returns the user profile.
+     */
+    Person getUserProfile();
+
+    /**
+     * Checks if user profile exists.
+     */
+    boolean isProfilePresent();
+
+    /**
+     * Replaces user profile data with the data in {@code userProfile}.
+     */
+    void setUserProfile(Person userProfile);
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -64,6 +80,18 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Favorites the given person.
+     * The person must exist in the address book.
+     */
+    void favoritePerson(Person target);
+
+    /**
+     * Favorites the given person.
+     * The person must exist in the address book.
+     */
+    void unfavoritePerson(Person target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -81,7 +109,43 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sets the Index of the Person's Detail to view
+     *
+     * @param index is index to selected index to
+     */
+    void setSelectedIndex(int index);
+
+    /**
+     * Returns the Index of the Person's Detail to view
+     *
+     * @return currently selected index
+     */
+    int getSelectedIndex();
+
+    /**
+     * Sets the PersonListPanel to control
+     *
+     * @param personListPanel the person list panel in GUI
+     */
+    void setPersonListControl(PersonListPanel personListPanel);
+
+    /**
+     * Returns the PersonListPanel used by Model
+     *
+     * @return PersonListPanel object
+     */
+    PersonListPanel getPersonListControl();
+
+    /**
+     * Selects the Tab at given index
+     *
+     * @param index the index of tab to select
+     */
+    void setTabIndex(int index);
 }

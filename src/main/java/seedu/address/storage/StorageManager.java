@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,15 +20,35 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private UserProfileStorage userProfileStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage}
+     * and {@code UserProfileStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          UserProfileStorage userProfileStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.userProfileStorage = userProfileStorage;
     }
+
+    // ================ UserProfile methods ==============================
+    @Override
+    public Path getUserProfilePath() {
+        return userProfileStorage.getUserProfilePath();
+    }
+
+    @Override
+    public Optional<Person> readUserProfile() throws DataConversionException, IOException {
+        return userProfileStorage.readUserProfile();
+    }
+    @Override
+    public void saveUserProfile(JsonSerializableUserProfile profile) throws IOException {
+        userProfileStorage.saveUserProfile(profile);
+    }
+
 
     // ================ UserPrefs methods ==============================
 
@@ -75,5 +96,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
-
 }

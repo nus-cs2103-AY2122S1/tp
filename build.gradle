@@ -4,6 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.4'
     id 'application'
     id 'jacoco'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 mainClassName = 'seedu.address.Main'
@@ -44,6 +45,9 @@ dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
 
+    implementation group: 'org.json', name: 'json', version: '20210307'
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -56,9 +60,13 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-swing', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-swing', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-swing', version: javaFxVersion, classifier: 'linux'
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.12.2'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
@@ -66,7 +74,16 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'CohortConnect.jar'
 }
 
 defaultTasks 'clean', 'test'
+
+javafx {
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+run {
+    enableAssertions = true
+}
+

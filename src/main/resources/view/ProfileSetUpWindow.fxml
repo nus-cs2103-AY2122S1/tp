@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+
+<fx:root resizable="false" onCloseRequest="#handleExit" title="Profile Set Up" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <icons>
+        <Image url="@/images/User_Avatar.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@ProfileSetUpWindow.css" />
+            </stylesheets>
+            <AnchorPane prefHeight="270" prefWidth="260">
+                <children>
+                    <VBox>
+                        <HBox>
+                            <children>
+                                <ImageView fitHeight="260.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/logo_neon.png" />
+                                    </image>
+                                </ImageView>
+                                <VBox>
+                                    <children>
+                                        <GridPane alignment="center" hgap="10" vgap="18">
+                                            <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+                                            <Text fx:id="welcomeMessage" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                                  GridPane.columnSpan="2"/>
+                                            <TextField fx:id="name" promptText="Name" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+                                            <TextField fx:id="telegram" promptText="Telegram" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                                            <TextField fx:id="github" promptText="GitHub" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+
+                                            <HBox spacing="10" alignment="bottom_center"
+                                                  GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                                <Button fx:id="submit" onAction="#submit" mnemonicParsing="false" text="Submit" />
+                                            </HBox>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <VBox alignment="CENTER">
+                            <VBox.margin>
+                                <Insets bottom="7.0" />
+                            </VBox.margin>
+                            <Text fx:id="errorMessage"/>
+                        </VBox>
+                    </VBox>
+                </children>
+            </AnchorPane>
+        </Scene>
+    </scene>
+</fx:root>

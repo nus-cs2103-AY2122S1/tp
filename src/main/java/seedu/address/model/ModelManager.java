@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonListPanel;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,23 +24,45 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private PersonListPanel personList;
+    private Person userProfile;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Person userProfile) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs "
+                + userPrefs + " and user profile " + userProfile);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.userProfile = userProfile;
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
+    /**
+     * Initializes a ModelManager with default values.
+     */
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), null);
+    }
+
+
+    //=========== UserProfile ==================================================================================
+    @Override
+    public Person getUserProfile() {
+        return userProfile;
+    }
+    @Override
+    public boolean isProfilePresent() {
+        return userProfile != null;
+    }
+    @Override
+    public void setUserProfile(Person userProfile) {
+        this.userProfile = userProfile;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -100,6 +124,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void favoritePerson(Person target) {
+        addressBook.favoritePerson(target);
+        filteredPersons.setPredicate(filteredPersons.getPredicate());
+    }
+
+    @Override
+    public void unfavoritePerson(Person target) {
+        addressBook.unfavoritePerson(target);
+        filteredPersons.setPredicate(filteredPersons.getPredicate());
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -108,7 +144,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -126,7 +161,14 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        if (!(predicate instanceof NameContainsKeywordsPredicate)) {
+            clearHighlights();
+        }
         filteredPersons.setPredicate(predicate);
+    }
+
+    private void clearHighlights() {
+        filteredPersons.forEach(Person::clearHighlights);
     }
 
     @Override
@@ -148,4 +190,28 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    @Override
+    public void setSelectedIndex(int index) {
+        this.personList.setSelectedIndex(index);
+    }
+
+    @Override
+    public int getSelectedIndex() {
+        return this.personList.getSelectedIndex();
+    }
+
+    @Override
+    public void setPersonListControl(PersonListPanel personListPanel) {
+        this.personList = personListPanel;
+    }
+
+    @Override
+    public PersonListPanel getPersonListControl() {
+        return this.personList;
+    }
+
+    @Override
+    public void setTabIndex(int index) {
+        this.personList.setTabIndex(index);
+    }
 }

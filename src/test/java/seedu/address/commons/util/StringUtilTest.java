@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -66,12 +67,6 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
-    }
-
-    @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(null, "abc"));
     }
@@ -109,7 +104,7 @@ public class StringUtilTest {
         assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
+        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
         assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
 
         // Matches word in the sentence, different upper/lower case letters
@@ -140,4 +135,152 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void containsWordIgnoreCase_emptySentence_correctOutput() {
+        boolean contains = StringUtil.containsWordIgnoreCase(" ", "empty");
+        assertFalse(contains);
+    }
+
+    @Test
+    public void getInt_emptyString_correctOutput() {
+        Integer i = StringUtil.getInt(" ");
+        assertNull(i);
+    }
+
+    @Test
+    public void getInt_invalidString_correctOutput() {
+        Integer i = StringUtil.getInt("ab");
+        assertNull(i);
+    }
+
+    @Test
+    public void getInt_validString_correctOutput() {
+        Integer i = StringUtil.getInt("2");
+        assertTrue(i == 2);
+    }
+
+    @Test
+    public void getInt_nullInput_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            Integer i = StringUtil.getInt(null);
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
+
+    @Test
+    public void isJson_validFileName_correctOutput() {
+        boolean validFileName = StringUtil.isJson("file.json");
+        assertTrue(validFileName);
+    }
+
+    @Test
+    public void isJson_invalidFileName_correctOutput() {
+        boolean validFileName = StringUtil.isJson("file.csv");
+        assertFalse(validFileName);
+    }
+
+    @Test
+    public void isJson_nullInput_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            boolean validFileName = StringUtil.isJson(null);
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
+
+    @Test
+    public void isCsv_validFileName_correctOutput() {
+        boolean validFileName = StringUtil.isCsv("file.csv");
+        assertTrue(validFileName);
+    }
+
+    @Test
+    public void isCsv_invalidFileName_correctOutput() {
+        boolean validFileName = StringUtil.isCsv("file.json");
+        assertFalse(validFileName);
+    }
+
+    @Test
+    public void isCsv_nullInput_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            boolean validFileName = StringUtil.isCsv(null);
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
+
+    @Test
+    public void clean_aNormalString_correctOutput() {
+        String s = StringUtil.clean("jai2501");
+        assertTrue(s.equals("jai2501"));
+    }
+
+    @Test
+    public void clean_aStringWithNewLineCharacter_correctOutput() {
+        String s = StringUtil.clean("Hello\nWorld");
+        assertTrue(s.equals("HelloWorld"));
+    }
+
+    @Test
+    public void clean_nullInput_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            String s = StringUtil.clean(null);
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
+
+    @Test
+    public void clean_aStringContainingTheStringToBeRemoved_correctOutput() {
+        String s = StringUtil.clean("Hello World", "World");
+        assertTrue(s.equals("Hello"));
+    }
+
+    @Test
+    public void clean_aStringNotContainingTheStringToBeRemoved_correctOutput() {
+        String s = StringUtil.clean("Hello World", "Boy");
+        assertTrue(s.equals("Hello World"));
+    }
+
+    @Test
+    public void clean_twoNullInputs_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            String s = StringUtil.clean(null, null);
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
+
+    @Test
+    public void clean_firstNullSecondString_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            String s = StringUtil.clean(null, "null");
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
+
+    @Test
+    public void clean_firstStringSecondNull_nullPointerException() {
+        boolean nullPointerException = true;
+        try {
+            String s = StringUtil.clean("null", null);
+            nullPointerException = false;
+        } catch (NullPointerException e) {
+            assertTrue(nullPointerException);
+        }
+    }
 }

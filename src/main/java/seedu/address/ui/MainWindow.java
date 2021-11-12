@@ -1,18 +1,24 @@
 package seedu.address.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,16 +30,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static boolean isDone = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
+    private final UserProfileWindow userProfileWindow;
+    private TabPaneHeader tabPaneHeader;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +51,58 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem profileMenuItem;
+
+    @FXML
+    private MenuItem contactsMenuItem;
+
+    @FXML
+    private MenuItem favoritesMenuItem;
+
+    @FXML
+    private MenuItem eventsMenuItem;
+
+    @FXML
+    private MenuItem findABuddyMenuItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane personCardPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane progressPlaceHolder;
+
+    @FXML
+    private StackPane tabPanePlaceholder;
+
+    @FXML
+    private VBox mainWindow;
+
+    @FXML
+    private MenuBar menuBar;
+
+    @FXML
+    private HBox menuHolder;
+
+    @FXML
+    private HBox mainHBox;
+
+    @FXML
+    private HBox footerHBar;
+
+    @FXML
+    private ImageView eventsIcon;
+
+    @FXML
+    private HBox userDetails;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -63,22 +117,50 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+        // Fix dimension based on screen resolution
+        primaryStage.setMinHeight(850);
+        primaryStage.setMaxHeight(850);
+        primaryStage.setMinWidth(950);
+
+        // Configure all keyboard shortcuts
         setAccelerators();
 
+        // Initialize Help window
         helpWindow = new HelpWindow();
+
+        userProfileWindow = new UserProfileWindow(logic);
+
+        // Configure User Profile Window to be shown when clicked
+        userDetails.setOnMouseClicked(event -> {
+            handleUserProfileWindow();
+        });
+
+        // Configure Events Icon
+        eventsIcon.setOnMouseClicked(event -> {
+            tabPaneHeader.getTabPane().getSelectionModel().select(2);
+        });
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * Configures individual keyboard shortcuts.
+     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+        setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+        setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+        setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+        setAccelerator(profileMenuItem, KeyCombination.valueOf("Shortcut+P"));
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -110,17 +192,36 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        PersonDetails personDetails = new PersonDetails(null);
+        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
+        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails, tabPaneHeader);
+        logic.setPersonList(personListPanel);
+
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personCardPlaceholder.getChildren().add(personDetails.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
+        personListPanelPlaceholder.getChildren().add(progressIndicator.getRoot());
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
+        personListPanel.setTabPaneHeader(tabPaneHeader);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Sets the User Data to be displayed on the
+     * Menu Bar.
+     */
+    public void setUserProfileInMenuBar() {
+        if (logic.isProfilePresent() && userDetails.getChildren().isEmpty()) {
+            UserProfileInMenuBar userProfileInMenuBar = new UserProfileInMenuBar(logic);
+            userDetails.getChildren().add(userProfileInMenuBar.getRoot());
+        }
     }
 
     /**
@@ -139,16 +240,96 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
+            helpWindow.getRoot().toFront();
         }
     }
 
-    void show() {
+    /**
+     * Opens the current user's Telegram.
+     */
+    public void handleTelegram() {
+        personListPanel.openTelegram();
+    }
+
+    /**
+     * Opens the current user's GitHub.
+     */
+    public void handleGithub() {
+        personListPanel.openGithub();
+    }
+
+    /**
+     * Opens the user profile window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleUserProfileWindow() {
+        if (!userProfileWindow.isShowing()) {
+            userProfileWindow.show();
+        } else {
+            userProfileWindow.focus();
+            userProfileWindow.getRoot().toFront();
+        }
+    }
+
+    /**
+     * Switches to the Contacts tab.
+     */
+    @FXML
+    public void handleContacts() {
+        tabPaneHeader.activateContacts(logic);
+    }
+
+    /**
+     * Activates the Favorites tab.
+     */
+    @FXML
+    public void handleFavorites() {
+        tabPaneHeader.activateFavorites(logic);
+    }
+
+    /**
+     * Switches to the Events tab.
+     */
+    @FXML
+    public void handleEvents() {
+        tabPaneHeader.activateEvents(logic);
+    }
+
+    /**
+     * Switches to the Find A Buddy Tab.
+     */
+    @FXML
+    public void handleFindABuddy() {
+        tabPaneHeader.activateFindABuddy(logic);
+    }
+
+    /**
+     * Launches the {@code ProfileWindow}.
+     */
+    public void show() {
+        ProfileSetUpWindow profileSetUpWindow = new ProfileSetUpWindow(new Stage(), this, logic);
+        profileSetUpWindow.start();
+    }
+
+    /**
+     * Shows the {@code MainWindow}.
+     */
+    public void start() {
+        setUserProfileInMenuBar();
         primaryStage.show();
+    }
+
+    public static boolean isDone() {
+        return isDone;
+    }
+
+    public static void setDone(boolean isDone) {
+        MainWindow.isDone = isDone;
     }
 
     /**
@@ -159,8 +340,18 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        try {
+            logic.saveAllData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.severe("Unable to save Address Book to Memory");
+        }
         helpWindow.hide();
+        userProfileWindow.hide();
         primaryStage.hide();
+        tabPaneHeader.stopFabLoader();
+        isDone = true;
+        ThreadProcessor.stopAllThreads();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -179,11 +370,19 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                handleHelpWindow();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTelegram()) {
+                handleTelegram();
+            }
+
+            if (commandResult.isGithub()) {
+                handleGithub();
             }
 
             return commandResult;

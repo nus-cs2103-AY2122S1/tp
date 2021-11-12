@@ -29,6 +29,8 @@ public class LogsCenter {
      * Loggers obtained *AFTER* this initialization will have their logging level changed<br>
      * Logging levels for existing loggers will only be updated if the logger with the same name
      * is requested again from the LogsCenter.
+     *
+     * @param config is the configuration used to set log level for logger.
      */
     public static void init(Config config) {
         currentLogLevel = config.getLogLevel();
@@ -37,6 +39,9 @@ public class LogsCenter {
 
     /**
      * Creates a logger with the given name.
+     *
+     * @param name of the logger.
+     * @return Logger.
      */
     public static Logger getLogger(String name) {
         Logger logger = Logger.getLogger(name);
@@ -50,7 +55,10 @@ public class LogsCenter {
     }
 
     /**
-     * Creates a Logger for the given class name.
+     * Creates a logger with the given name.
+     *
+     * @param clazz of the logger.
+     * @return Logger.
      */
     public static <T> Logger getLogger(Class<T> clazz) {
         if (clazz == null) {
@@ -62,6 +70,8 @@ public class LogsCenter {
     /**
      * Adds the {@code consoleHandler} to the {@code logger}. <br>
      * Creates the {@code consoleHandler} if it is null.
+     *
+     * @param logger in which will be added a consoleHandler.
      */
     private static void addConsoleHandler(Logger logger) {
         if (consoleHandler == null) {
@@ -72,6 +82,8 @@ public class LogsCenter {
 
     /**
      * Remove all the handlers from {@code logger}.
+     *
+     * @param logger in while any consoleHandlers will be removed.
      */
     private static void removeHandlers(Logger logger) {
         Arrays.stream(logger.getHandlers())
@@ -81,6 +93,8 @@ public class LogsCenter {
     /**
      * Adds the {@code fileHandler} to the {@code logger}. <br>
      * Creates {@code fileHandler} if it is null.
+     *
+     * @param logger in which will be added a fileHandler.
      */
     private static void addFileHandler(Logger logger) {
         try {
@@ -95,6 +109,8 @@ public class LogsCenter {
 
     /**
      * Creates a {@code FileHandler} for the log file.
+     *
+     * @return FileHandler object.
      * @throws IOException if there are problems opening the file.
      */
     private static FileHandler createFileHandler() throws IOException {
@@ -104,6 +120,11 @@ public class LogsCenter {
         return fileHandler;
     }
 
+    /**
+     * Creates a {@code ConsoleHandler} for the log file.
+     *
+     * @return ConsoleHandler object.
+     */
     private static ConsoleHandler createConsoleHandler() {
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(currentLogLevel);

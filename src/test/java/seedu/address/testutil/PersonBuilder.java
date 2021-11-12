@@ -5,9 +5,11 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,25 +19,34 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_TELEGRAM = "amy_bee";
+    public static final String DEFAULT_GITHUB = "amy-bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final boolean DEFAULT_FAVORITE = false;
 
     private Name name;
+    private Telegram telegram;
+    private Github github;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private boolean isFavorite;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
+        github = new Github(DEFAULT_GITHUB);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        isFavorite = DEFAULT_FAVORITE;
     }
 
     /**
@@ -43,10 +54,13 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        telegram = personToCopy.getTelegram();
+        github = personToCopy.getGithub();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        isFavorite = personToCopy.isFavorite();
     }
 
     /**
@@ -89,8 +103,32 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Telegram} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Github} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGithub(String github) {
+        this.github = new Github(github);
+        return this;
+    }
+
+    /**
+     * Sets the {@code isFavorite} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIsFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, telegram, github, phone, email, address, tags, isFavorite);
     }
 
 }

@@ -93,17 +93,34 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public void favoritePerson(Person key) {
+        persons.favorite(key);
+    }
+
+    public void unfavoritePerson(Person key) {
+        persons.unfavorite(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> getModifiableList() {
+        return persons.getInternalList();
+    }
+
+    @Override
+    public void sort() {
+        persons.sortList();
     }
 
     @Override

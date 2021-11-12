@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookUnsorted;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -83,6 +84,40 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    @Test
+    public void getModifiableList_emptyAddressBook_emptyList() {
+        assertEquals(FXCollections.observableArrayList(), addressBook.getModifiableList());
+    }
+
+    /**
+     * Tests if hashcode is correct.
+     */
+    @Test
+    public void hashTest() {
+        int expected = getTypicalAddressBook().hashCode();
+        assertEquals(expected, getTypicalAddressBook().hashCode());
+    }
+
+    /**
+     * Sorts an already sorted {@code AddressBook}. No change is expected.
+     */
+    @Test
+    public void sort_sortedAddressBook_noChange() {
+        AddressBook sortedAddressBook = getTypicalAddressBook();
+        sortedAddressBook.sort();
+        assertEquals(getTypicalAddressBook(), sortedAddressBook);
+    }
+
+    /**
+     * Sorts an unsorted {@code AddressBook}.
+     */
+    @Test
+    public void sort_unsortedAddressBook_sorted() {
+        AddressBook addressBook = getTypicalAddressBookUnsorted();
+        addressBook.sort();
+        assertEquals(getTypicalAddressBook(), addressBook);
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -97,6 +132,18 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public ObservableList<Person> getModifiableList() {
+            return null;
+        }
+
+        @Override
+        public void sort() {
+
+        }
+
+
     }
 
 }

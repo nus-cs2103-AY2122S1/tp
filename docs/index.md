@@ -1,19 +1,32 @@
----
-layout: page
-title: AddressBook Level-3
----
+[![Java CI](https://github.com/AY2122S1-CS2103T-T10-1/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2122S1-CS2103T-T10-1/tp/actions/workflows/gradle.yml)    [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T10-1/tp/branch/master/graph/badge.svg?token=GVVTTMGRUF)](https://codecov.io/gh/AY2122S1-CS2103T-T10-1/tp)
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+<img src = "https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/logo.jpeg?raw=true" align = "left" width="100" height="100" style="margin-right: 1.25em">
+<div>
+  
+  <h1> CohortConnect </h1>
+  
+  <b> Type. Explore. Connect. </b>
+  
+ </div>
 
-![Ui](images/Ui.png)
+<br><br>
+CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+With advanced features for managing large groups of contacts, CohortConnect is intended for use in a university setting. At the start of the semester, professors will distribute `csv` or `json` files containing a list of students. Instantly load them into CohortConnect with a single **Import** command. With data collected from students before the semester, our **Find A Buddy** feature helps you find potential groupmates by leveraging GitHub’s metadata using a proprietary algorithm. In the **Events** tab, you can identify events and hackathons that your peers will be attending.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+<br><br>
+
+<div align = "center">
+<img src ="images/Ui.png">
+</div>
+<br>
+
+Get started at our **[CohortConnect User Guide](https://ay2122s1-cs2103t-t10-1.github.io/tp/UserGuide.html)**.
+
+If you are a developer, have a look at the **[CohortConnect Developer Guide](https://ay2122s1-cs2103t-t10-1.github.io/tp/DeveloperGuide.html)**.
 
 
-**Acknowledgements**
+## Acknowledgements
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
+* This project uses [jackson-dataformat-csv](https://github.com/FasterXML/jackson-dataformats-text/tree/master/csv) for reading from and writing to CSV files.

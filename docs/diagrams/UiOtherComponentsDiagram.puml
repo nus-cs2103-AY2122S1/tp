@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+title OtherComponents
+
+Package "" <<Rectangle>>{
+Class UserProfileInMenuBar
+Class ResultDisplay
+Class CommandBox
+Class StatusBarFooter
+}
+
+Class MainWindow
+
+MainWindow *-down-> "1" UserProfileInMenuBar
+MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" CommandBox
+MainWindow *-down-> "1" StatusBarFooter
+
+@enduml

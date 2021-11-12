@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,13 +22,17 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_NAME + "<NAME> "
+            + PREFIX_TELEGRAM + "<TELEGRAM> "
+            + PREFIX_GITHUB + "<GITHUB> "
+            + "[" + PREFIX_PHONE + "<PHONE>] "
+            + "[" + PREFIX_EMAIL + "<EMAIL>] "
+            + "[" + PREFIX_ADDRESS + "<ADDRESS>] "
+            + "[" + PREFIX_TAG + "<TAG>]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
+            + PREFIX_TELEGRAM + "@john_doe_123"
+            + PREFIX_GITHUB + "john-doe"
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
@@ -35,17 +41,35 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_ALL_COMPULSORY_FIELDS_MISSING =
+            "The Name, Github and Telegram fields, are compulsory!";
+    public static final String MESSAGE_NAME_GITHUB_FIELDS_MISSING = "The Name and Github fields are compulsory!";
+    public static final String MESSAGE_NAME_TELEGRAM_FIELDS_MISSING = "The Name and Telegram fields are compulsory!";
+    public static final String MESSAGE_GITHUB_TELEGRAM_FIELDS_MISSING =
+            "The Github and Telegram fields are compulsory!";
+    public static final String MESSAGE_NAME_FIELD_MISSING = "The Name field is compulsory!";
+    public static final String MESSAGE_GITHUB_FIELD_MISSING = "The GitHub field is compulsory!";
+    public static final String MESSAGE_TELEGRAM_FIELD_MISSING = "The Telegram field is compulsory!";
 
     private final Person toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
+     *
+     * @param person Person to be added to the existing address book.
      */
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
 
+    /**
+     * This method attempts to add the Person into the existing model.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult which holds the outcome of this method.
+     * @throws CommandException if there are any errors during execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -53,11 +77,23 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.addPerson(toAdd);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        if (model.getPersonListControl() != null) {
+            model.setTabIndex(0);
+            model.getPersonListControl().setSelectedIndex(model.getFilteredPersonList().indexOf(toAdd));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    /**
+     * Method to compare two AddCommand objects.
+     *
+     * @param other is the object that is going to be compared
+     *              to the AddCommand object that called this method.
+     * @return boolean representation of whether the AddCommand
+     * object is equal to the other object passed as parameter.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

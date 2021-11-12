@@ -14,4 +14,7 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    ObservableList<Person> getModifiableList();
+
+    void sort();
 }

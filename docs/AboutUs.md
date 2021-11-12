@@ -5,55 +5,57 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-1/tp/issues).
 
 ## Project team
 
-### John Doe
+### Adam Oh Zhi Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/moretriangles.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/moreTriangles)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/moretriangles.html)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Data & Storage
 
-### Johnny Doe
+### Aishwarya Radhakrishnan Nair
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aishh12.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/aishh12)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/aishh12.html)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality
+* Responsibilities: Commands
 
-### Jean Doe
+### Atin Sakkeer Hussain
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/crypto-code.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/crypto-code)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/crypto-code.html)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Integration
+* Responsibilities: AI Model and Commands
 
-### James Doe
+### Cheong Yee Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cheongyeeming.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/CheongYeeMing)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/cheongyeeming.html)]
 
-* Role: Developer
+* Role: Testing
+* Responsibilities: Model
+
+
+### Jai Lal Lulla
+
+<img src="images/jai2501.png" width="200px">
+
+[[github](http://github.com/jai2501)]
+[[portfolio](https://ay2122s1-cs2103t-t10-1.github.io/tp/team/jai2501.html)]
+
+* Role: Deliverables and Deadlines
 * Responsibilities: UI

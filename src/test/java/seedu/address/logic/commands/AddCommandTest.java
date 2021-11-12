@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.PersonListPanel;
 
 public class AddCommandTest {
 
@@ -52,8 +53,14 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice")
+                .withGithub("alice-g")
+                .withTelegram("alice")
+                .build();
+        Person bob = new PersonBuilder().withName("Bob")
+                .withGithub("bob-the-builder")
+                .withTelegram("bob_01")
+                .build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -78,6 +85,18 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public boolean isProfilePresent() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person getUserProfile() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setUserProfile(Person p) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -134,6 +153,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void favoritePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unfavoritePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -145,6 +174,30 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+        }
+
+        @Override
+        public void setSelectedIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getSelectedIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersonListControl(PersonListPanel personListPanel) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public PersonListPanel getPersonListControl() {
+            return null;
+        }
+
+        @Override
+        public void setTabIndex(int index) {
             throw new AssertionError("This method should not be called.");
         }
     }

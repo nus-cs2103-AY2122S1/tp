@@ -20,6 +20,9 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class CsvAddressBookStorage
+Class CsvSerializableAddressBook
+Class CsvAdaptedPerson
 }
 
 }
@@ -40,4 +43,7 @@ JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
+CsvAddressBookStorage .up.|> AddressBookStorage
+CsvAddressBookStorage ..> CsvSerializableAddressBook
+CsvSerializableAddressBook --> "*" CsvAdaptedPerson
 @enduml

@@ -1,31 +1,31 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: #121212;
+    background-color: #121212; /* Used in the default.html file */
 }
 
 .label {
-    -fx-font-size: 11pt;
+    -fx-font-size: 0.95em;
     -fx-font-family: "Open Sans Semibold";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
+    -fx-font-size: 0.95em;
     -fx-font-family: "Open Sans Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 2.55em;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 1em;
     -fx-font-family: "Open Sans Semibold";
 }
 
@@ -40,9 +40,9 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #121212;
+    -fx-control-inner-background: #121212;
+    -fx-background-color: #121212;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -59,13 +59,13 @@
     -fx-border-color:
         transparent
         transparent
-        derive(-fx-base, 80%)
+        derive(#121212, 80%)
         transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 1.6em;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -77,73 +77,87 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #121212;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #121212;
 }
 
 .list-view {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color:  #121212;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0em 0em 0.8em 0em;
+    -fx-background-color: #121212;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+.list-cell:filled #cardPane {
+    -fx-background-color: #383838;
+    -fx-padding: 0.25em ;
+    -fx-background-insets: 0em, 0.8em;
+    -fx-background-radius: 20;
+    -fx-margin: 0.8em;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #aeaeae;
+    -fx-background-color: #414141;
+    -fx-border-radius: 20;
     -fx-border-width: 1;
+    -fx-background-insets: 0em, 0.8em;
+    -fx-background-radius: 20;
+    -fx-margin: 0.8em;
 }
 
-.list-cell .label {
+.list-cell .label,
+.list-cell .text-flow > * {
     -fx-text-fill: white;
+}
+
+#cardDetailPane {
+    -fx-background-color: #414141;
+    -fx-background-insets: 0em, 0.8em;
+    -fx-background-radius: 20;
+    -fx-alignment: center;
 }
 
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 1.125em;
     -fx-text-fill: #010504;
+}
+
+.big_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 1.125em;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 1.3em;
     -fx-text-fill: #010504;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #121212;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+     -fx-background-color: #121212;
+     -fx-border-color: #121212;
+     -fx-border-top-width: 0.0625em;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#121212, 30%);
 }
 
 .result-display {
@@ -160,14 +174,14 @@
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
-    -fx-padding: 4px;
-    -fx-pref-height: 30px;
+    -fx-padding: 0.25em;
+    -fx-pref-height: 1.8em;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
-    -fx-border-width: 1px;
+    -fx-background-color: derive(#121212, 30%);
+    -fx-border-color: derive(#121212, 25%);
+    -fx-border-width: 0.0625em;
 }
 
 .status-bar-with-border .label {
@@ -175,13 +189,13 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
-    -fx-border-width: 1px;
+    -fx-background-color: derive(#121212, 30%);
+    -fx-border-color: derive(#121212, 30%);
+    -fx-border-width: 0.0625em;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#121212, 30%);
 }
 
 .context-menu {
@@ -219,7 +233,7 @@
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 11pt;
+    -fx-font-size: 0.95em;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
@@ -265,7 +279,7 @@
 }
 
 .dialog-pane > *.label.content {
-    -fx-font-size: 14px;
+    -fx-font-size: 0.875em;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
@@ -275,23 +289,23 @@
 }
 
 .dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 18px;
+    -fx-font-size: 1.125em;
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #121212;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #121212;
     -fx-background-insets: 3;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
-    -fx-background-color: transparent;
+    -fx-background-color: #121212;
     -fx-padding: 0 0 0 0;
 }
 
@@ -313,14 +327,14 @@
 }
 
 #commandTypeLabel {
-    -fx-font-size: 11px;
+    -fx-font-size: 0.6875em;
     -fx-text-fill: #F70D1A;
 }
 
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: transparent transparent #ffffff transparent;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
@@ -333,20 +347,100 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: #232323;
     -fx-background-radius: 0;
 }
 
 #tags {
     -fx-hgap: 7;
-    -fx-vgap: 3;
+    -fx-vgap: 7;
 }
 
 #tags .label {
+    -fx-text-fill: white;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 1.05em;
+}
+
+#tags #tag-general {
+    -fx-background-color: #408ec6;
+}
+
+#tags #tag-event {
+    -fx-background-color: #7a2048;
+}
+
+#tags #tag-mod {
+    -fx-background-color: #1e2761;
+}
+
+#langs {
+    -fx-hgap: 7;
+    -fx-vgap: 7;
+}
+
+#langs .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 1.05em;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+    -fx-font-family: "Open Sans Light";
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:5.625em;
+    -fx-font-family: "Open Sans Light";
+}
+
+.tab-pane .tab
+{
+    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+.tab-pane .tab:selected
+{
+    -fx-border-color: #77c5d4;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-background-color: #77c5d4;
+}
+
+.tab {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 1em;
+    -fx-font-weight: bold;
+    -fx-font-family: "Open Sans Light";
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: derive(#1d1d1d, 25%);
+    -fx-font-size: 1.125em;
+     -fx-font-weight: bold;
+    -fx-font-family: "Open Sans Light";
+}
+
+.tab-down-button {
+-fx-padding: 0;
+}
+
+.tab-down-button .arrow {
+-fx-padding: 0;
 }

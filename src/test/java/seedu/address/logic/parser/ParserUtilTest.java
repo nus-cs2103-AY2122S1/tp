@@ -16,18 +16,24 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_TELEGRAM = "c4nnot!!";
+    private static final String INVALID_GITHUB = "a--b";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_TELEGRAM = "rachel_walker";
+    private static final String VALID_GITHUB = "rachel-walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
@@ -37,7 +43,35 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
+    public void parseException_toString() {
+        String expectedErrorMessage = "Index is missing!";
+        String errorMessage = "";
+        try {
+            ParserUtil.parseIndex("");
+        } catch (ParseException e) {
+            errorMessage = e.toString();
+        }
+        assertEquals(expectedErrorMessage, errorMessage);
+
+    }
+
+    @Test
+    public void parseIndex_emptyInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex(""));
+    }
+
+    @Test
+    public void parseIndex_invalidInputNegativeNumber_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-1"));
+    }
+
+    @Test
+    public void parseIndex_invalidInputNumbersWithSpace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("3 0"));
+    }
+
+    @Test
+    public void parseIndex_invalidInputNumbersAndAlphabet_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
     }
 
@@ -58,7 +92,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -80,8 +114,54 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTelegram_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTelegram(null));
+    }
+
+    @Test
+    public void parseTelegram_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegram(INVALID_TELEGRAM));
+    }
+
+    @Test
+    public void parseTelegram_validValueWithoutWhitespace_returnsTelegram() throws Exception {
+        Telegram expectedTelegram = new Telegram(VALID_TELEGRAM);
+        assertEquals(expectedTelegram, ParserUtil.parseTelegram(VALID_TELEGRAM));
+    }
+
+    @Test
+    public void parseTelegram_validValueWithWhitespace_returnsTrimmedTelegram() throws Exception {
+        String telegramWithWhitespace = WHITESPACE + VALID_TELEGRAM + WHITESPACE;
+        Telegram expectedTelegram = new Telegram(VALID_TELEGRAM);
+        assertEquals(expectedTelegram, ParserUtil.parseTelegram(telegramWithWhitespace));
+    }
+
+    @Test
+    public void parseGithub_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGithub(null));
+    }
+
+    @Test
+    public void parseGithub_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGithub(INVALID_GITHUB));
+    }
+
+    @Test
+    public void parseGithub_validValueWithoutWhitespace_returnsGithub() throws Exception {
+        Github expectedGithub = new Github(VALID_GITHUB);
+        assertEquals(expectedGithub, ParserUtil.parseGithub(VALID_GITHUB));
+    }
+
+    @Test
+    public void parseGithub_validValueWithWhitespace_returnsTrimmedGithub() throws Exception {
+        String githubWithWhitespace = WHITESPACE + VALID_GITHUB + WHITESPACE;
+        Github expectedGithub = new Github(VALID_GITHUB);
+        assertEquals(expectedGithub, ParserUtil.parseGithub(githubWithWhitespace));
+    }
+
+    @Test
     public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -104,7 +184,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -127,7 +207,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -189,7 +269,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

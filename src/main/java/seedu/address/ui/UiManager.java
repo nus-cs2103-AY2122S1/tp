@@ -20,10 +20,11 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/logo.png";
 
     private Logic logic;
     private MainWindow mainWindow;
+    private WelcomeWindow welcomeWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -42,7 +43,11 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
+
+            // Shows the Welcome Splash Screen.
+            welcomeWindow = new WelcomeWindow();
+            welcomeWindow.start(mainWindow);
+
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
