@@ -113,7 +113,7 @@ for beginners.
 
 ## Preview
 
-Have you installed Academy Directory successfully? Let us now walk you through you how Academy Directory works, by starting off with a tutorial on how to interpret our User Interface design.
+Have you installed Academy Directory successfully? Let us now walk you through how Academy Directory works by starting off with a tutorial on how to interpret our User Interface design.
 
 ![Ui](images/ui-explained.png)
 
@@ -475,7 +475,7 @@ Provides in-depth assistance using Academy Directory with `help` command, either
 ##### Viewing general help
 Format: `help`
 
-* Type in `help` singularly displays a menu of all commands available to use as a list, how
+* Typing in `help` singularly will display a menu of all commands available to use as a list, how
   to navigate each command, alongside the syntax for each command.
 
 ##### Viewing specific help
@@ -591,10 +591,10 @@ look at the files in this folder.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Summary
-This section provides a summary of commands and prefixes in Academy Directory
+This section provides a summary of commands and prefixes in Academy Directory.
 
 ### Command Summary
-This subsection provides a summary for all the commands used in Academy Directory
+This subsection provides a summary for all the commands used in Academy Directory.
 
 | Action | Format | Examples
 |--------|--------|----------
@@ -622,7 +622,7 @@ This subsection provides a summary for all the commands used in Academy Director
 ### Prefix Summary
 This subsection provides a summary for all the fields and their prefixes 
 used in Academy Directory. Note that not all fields have a prefix; such fields
-will have `N.A.` be written in their `Prefix` column
+will have `N.A.` be written in their `Prefix` column.
 
 Field | Prefix
 ------|-------
@@ -643,7 +643,7 @@ ORDER | **ord/**
 HASH| **N.A**
 
 ## Glossary
-This section explains the commonly used terms in this user guide
+This section explains the commonly used terms in this user guide.
 
 Term | Definition | Comments
 -----| ----------- | ---------- 
