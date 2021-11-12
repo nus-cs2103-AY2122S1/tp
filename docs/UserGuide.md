@@ -14,7 +14,7 @@ title: User Guide
     * [Add Student](#adding-a-student-add)
     * [Delete Student](#deleting-a-student-delete)
     * [Tag Student](#tagging-a-student--tag)
-    * [Get Personal Detail](#getting-personal-detail-of-students-get)
+    * [Get Personal Detail](#getting-students-personal-details-get)
     * [Edit Personal Detail](#editing-a-students-detail--edit)
   * [Track Students' Grades, Studio Attendance, and Participation](#tracking-students-grades-studio-attendance-and-participation)
     * [Add Grade](#adding-grades-for-an-assessment--grade)
@@ -44,7 +44,7 @@ title: User Guide
 * [Glossary](#glossary)
 * [Links](#links)
   * [Academy Directory Resources](#academy-directory-resources)
-  * [Other Resources](#other-sources)
+  * [Other Resources](#other-resources)
 * [Acknowledgements](#acknowledgements)
 
 ***
@@ -98,7 +98,7 @@ A GUI similar to the below image should appear in a few seconds. Note how the ap
 
    * **`list`** : Lists all contacts. For new users, the list will contain some sample data which users can delete.
 
-   * **`visualize`** : Visualize grades of students. For new users, an empty whisker box plot diagram will be shown. Otherwise, the above image will be shown.
+   * **`visualize`** : Visualize grades of students. For new users, the sample grades for the assessments will be displayed in a box plot diagram.
 
    * **`exit`** : Exits the app.
 
@@ -113,7 +113,7 @@ for beginners.
 
 ## Preview
 
-Have you installed Academy Directory successfully? Let us now walk you through you how Academy Directory works, by starting off with a tutorial on how to interpret our User Interface design.
+Have you installed Academy Directory successfully? Let us now walk you through how Academy Directory works by starting off with a tutorial on how to interpret our User Interface design.
 
 ![Ui](images/ui-explained.png)
 
@@ -475,7 +475,7 @@ Provides in-depth assistance using Academy Directory with `help` command, either
 ##### Viewing general help
 Format: `help`
 
-* Type in `help` singularly displays a menu of all commands available to use as a list, how
+* Typing in `help` singularly will display a menu of all commands available to use as a list, how
   to navigate each command, alongside the syntax for each command.
 
 ##### Viewing specific help
@@ -591,19 +591,19 @@ look at the files in this folder.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Summary
-This section provides a summary of commands and prefixes in Academy Directory
+This section provides a summary of commands and prefixes in Academy Directory.
 
 ### Command Summary
-This subsection provides a summary for all the commands used in Academy Directory
+This subsection provides a summary for all the commands used in Academy Directory.
 
 | Action | Format | Examples
 |--------|--------|----------
 |[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER] [t/TAG]` | `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
 |[**Delete Student**](#deleting-a-student-delete) | `delete INDEX` | `delete 3`
 |[**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` | `tag 1 t/mission t/streams`
-|[**Get Personal Detail**](#getting-personal-detail-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
+|[**Get Personal Detail**](#getting-students-personal-details-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
 |[**Edit Personal Detail**](#editing-a-students-detail--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [te/TELE_HANDLE]` | `edit 2 n/James Lee e/jameslee@example.com`
-|[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade INDEX as/RA1 g/15`
+|[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade 1 as/RA1 g/15`
 |[**Edit Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` | `attendance 1, 2 ses/1 att/1`
 |[**Edit Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD` | `participation 1 ses/12 att/0`
 |[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` | `show RA1`
@@ -622,7 +622,7 @@ This subsection provides a summary for all the commands used in Academy Director
 ### Prefix Summary
 This subsection provides a summary for all the fields and their prefixes 
 used in Academy Directory. Note that not all fields have a prefix; such fields
-will have `N.A.` be written in their `Prefix` column
+will have `N.A.` be written in their `Prefix` column.
 
 Field | Prefix
 ------|-------
@@ -643,7 +643,7 @@ ORDER | **ord/**
 HASH| **N.A**
 
 ## Glossary
-This section explains the commonly used terms in this user guide
+This section explains the commonly used terms in this user guide.
 
 Term | Definition | Comments
 -----| ----------- | ---------- 
@@ -686,7 +686,7 @@ cannot be reverted to and / or be undone or redone.
 - [About Us](https://ay2122s1-cs2103t-t15-3.github.io/tp/AboutUs.html): If you're interested to learn more about us
 - [Github](https://github.com/AY2122S1-CS2103T-t15-3/tp): If you want to see our code or report any issues
 
-### Other Sources
+### Other Resources
 - [Java SE Runtime Download](https://www.oracle.com/java/technologies/downloads/) to install the latest Java version
 - [AddressBook 3 (AB3)](https://github.com/se-edu/addressbook-level3) to see where we started this project from
 
@@ -694,17 +694,17 @@ cannot be reverted to and / or be undone or redone.
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 - The formatting and content of the User Guide and Developer Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
 - Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
-- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com)
-- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview)
+- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com).
+- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview).
 - Libraries used:
   - [JavaFX](https://openjfx.io/) for the amazing GUI
   - [Jackson](https://github.com/FasterXML/jackson) to save your data
-  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free
   - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
 - Background and icons used:
   - Source Academy classroom front page, taken from the [Asset page in Source Academy front-end](https://github.com/source-academy/frontend/tree/master/src/assets)
-    License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
-  - Slides Carnival background [here](https://www.slidescarnival.com/iris-free-presentation-template/3923)
+    - License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
+  - Slides Carnival background [here](https://www.slidescarnival.com/iris-free-presentation-template/3923).
   - External icons used on the UI
     - [Student icon](https://icons8.com/icon/iZBBn0SF22gW/programmer) taken from IconS8
     - [Grade icon](https://pngtree.com/freepng/test-papers-stationery-illustration_4652639.html) taken from PNGTree
