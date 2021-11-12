@@ -43,7 +43,7 @@ you can quickly look up all of gitGud's core commands at a glance.
 ### 2.2 Reading this document
 
 This guide utilizes symbols and syntax to highlight specific points made throughout the guide and to enhance your 
-overall reading experience. The section below on the meanings of [symbols and syntax used](#221-general-symbols-used) 
+overall reading experience. The section below on the meanings of [symbols used](#221-general-symbols-used) 
 provides more details for your reference. 
 
 #### 2.2.1 General symbols used
@@ -63,6 +63,7 @@ This table describes the main symbols used in the user guide and their respectiv
    * To check if Java `11` is currently installed, you may follow this short [guide](https://www.baeldung.com/java-check-is-installed).
    <br> If Java `11` is not installed, you may follow the installation instructions over 
    [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+   <br>
 
 
 2. Next, download the latest `gitgud.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-4/tp/releases).
@@ -176,7 +177,7 @@ Examples:
 
 #### 5.1.2 Editing a friend: `friend --edit` 
 
-Updates the friend's name to a new name for an existing friend with the given `FRIEND_ID`. 
+Updates the friend's name to a new name for an existing friend with the given `FRIEND_ID`.
 
 Format: `friend --edit FRIEND_ID -n NEW_FRIEND_NAME`
 
