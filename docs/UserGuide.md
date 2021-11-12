@@ -180,7 +180,7 @@ Command aliases: `quit` `q`
 [Back to table of contents](#table-of-contents)
 
 ***
-### Managing contacts <a name="managing-contacts"></a>
+### Managing contacts <a name="g"></a>
 #### Adding a contact: `add` <a name="add"></a>
 
 Adds a contact to contHACKS.
@@ -471,6 +471,7 @@ Command aliases: `clrc` `cc`
 <img src="images/ClearLessonCommand.png" width="800px">
 
 [Back to table of contents](#table-of-contents)
+
 ***
 
 <div style="page-break-after: always;"></div>
