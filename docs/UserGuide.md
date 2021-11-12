@@ -372,6 +372,8 @@ Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME]
 To remove a remark from a lesson, simply input `r/`.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `editc 1 m/CS2100 B05`: Edits the module of the 1st lesson to be `CS2100 B05`
 * `editc 2 d/3`: Edits the day of the 2nd lesson to be Wednesday
@@ -412,6 +414,8 @@ Command aliases: `delc` `rmc` `dc`
 [Back to table of contents](#table-of-contents)
 
 ***
+
+<div style="page-break-after: always;"></div>
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
 
