@@ -73,7 +73,8 @@ This table describes the main symbols used in the user guide and their respectiv
 
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   * For MacOS users, you may encounter an error because it is from an unidentified developer. No worries, just go to System Preferences -> Security & Privacy -> General and click on Open Anyway.
+   * For MacOS users, you may encounter an error stating that the app is from unidentified developer. No worries, just 
+     go to System Preferences -> Security & Privacy -> General and click on Open Anyway.
    * Alternatively, just open Terminal and enter `java -jar gitGud.jar` into the command line to start the app.
    ![Ui](images/ui-screenshots/startup.png)
 <br><center><ins>Image: gitGud upon startup.</ins></center>
@@ -121,6 +122,10 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `game --get GAME_ID`, `GAME_ID` is a parameter which can be used as such: `game --get CSGO`.
+
+* Items in square brackets are optional.
+  e.g. `friend --add FRIEND_ID [-n NAME]` can be used as `friend --add ketanyeluri -n Yeluri Ketan` or `friend --add 
+  ketanyeluri`. 
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the **last occurrence**
   of the parameter will be taken.<br> e.g. if you specify `-n Marcus Tang -n Taufiq`, only `-n Taufiq` will be taken.
