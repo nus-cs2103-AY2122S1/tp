@@ -760,8 +760,7 @@ or searching for the specific activity using [`find t/activity` command](#344-fi
 
 ![tut-delete-activity-2](images/activityug/tut_delete_activity_2.png)
 
-&#8291;3. If there are any errors, the command will turn red as shown by **1**. Also, feedback about the error is displayed in the  
-feedback box, as seen by **2**. Fix the issue and the command should work correctly now!
+&#8291;3. If there are any errors, the command will turn red as shown by **1**. Also, feedback about the error is displayed in the feedback box, as seen by **2**. Fix the issue and the command should work correctly now!
 
 ![tut-delete-activity-error](images/activityug/tut_delete_activity_error.png)
 
