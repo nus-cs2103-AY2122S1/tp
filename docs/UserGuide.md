@@ -70,12 +70,12 @@ ________________________________________________________________________________
   <p align="center">
    <img src="images/FirstLook.png" height="500" align="center"/>
   </p>
+  
+  If you are on macOS and encounter the below issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
 
-5. If you are on macOS and encounter the below issue when launching SportsPA, follow [this](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac).
-
-    <p align="center">
-   <img src="images/mac_error.png" height="200" align="center"/>
-    </p>
+   <p align="center">
+    <img src="images/mac_error.png" height="200" align="center"/>
+   </p>
 
 [Back to Table of Contents](#table-of-contents)
 
