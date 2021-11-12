@@ -5,7 +5,7 @@ title: User Guide
 
 ## Introducing CallMeMaybe
 
-CallMeMaybe (CMM) is a **desktop app** that helps Telemarketers in customer contact management.
+CallMeMaybe (CMM) is a **desktop app** that helps Singaporean Telemarketers in customer contact management.
 CMM provides a solution to quickly catalog contacts based on whether they have already been called or not.
 The in-built tracking functionality serves as a reminder for you to reach back on previously unreachable customers.
 Importing and exporting of existing customer database is also supported by CMM to facilitate team-based environments.
