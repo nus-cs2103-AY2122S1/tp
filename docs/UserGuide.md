@@ -405,6 +405,8 @@ Format: `group -a STUDENT_INDEX…​ n/GROUPNAME`
 * The student index refers to the student index number shown in the displayed Person Panel.
 * The student index **must be a positive integer** 1, 2, 3, …​
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `group -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
 
@@ -425,10 +427,10 @@ Format: `group -v GROUP_INDEX`
 * The group index refers to the group index number shown in the displayed Group Panel.
 * The group index **must be a positive integer** 1, 2, 3, …​
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `group -v 5` views the group specified at the index 5.
-
-<div style="page-break-after: always;"></div>
 
 #### Deleting a group: `group -d`
 
