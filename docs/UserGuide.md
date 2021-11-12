@@ -1046,7 +1046,8 @@ Parameters      |  Explanation                                                  
 
 **Example:**
 
-&#8291;1. Type the command `referral ti/some referral di/D001 pi/P001` into the command box.
+&#8291;1. Ensure that Patient `P001` and Doctor `D001` exist by using `list t/patient` and `list t/doctor` accordingly.
+Type the command `referral ti/some referral di/D001 pi/P001` into the command box.
 
 ![tut-referral-1](images/referral/tut_referral_1.png)
 
