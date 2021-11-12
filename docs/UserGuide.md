@@ -16,7 +16,7 @@ This User Guide is to be used by any AniList user. No technical background is re
 ## Table of Content
 
 - [Quick Start](#quick-start)
-- [Graphical User Interface (GUI) Breakdown](#graphical-user-interface-(gui)-breakdown)
+- [Graphical User Interface (GUI) Breakdown](#graphical-user-interface-gui-breakdown)
 - [Hot-Keys](#hot-keys)
 - [Commands](#commands)
   * [Adding an anime: `add`](#adding-an-anime-add)
