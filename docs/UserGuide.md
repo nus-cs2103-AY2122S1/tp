@@ -21,7 +21,8 @@ Previously, keeping track of all of yours friends' gaming information and schedu
 However, with gitGud, there is no need to get tilted (frustrated) by this anymore as gitGud provides you with a convenient 
 platform to manage essential gaming information of your fellow gamer friends.
 
-For example, to get you excited, gitGud supports many time-saving features such as finding friends available to play with
+For example, to get you excited, gitGud supports many time-saving features such as finding friends who are available to 
+play with
 just a single command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -73,7 +74,8 @@ This table describes the main symbols used in the user guide and their respectiv
 
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   * For MacOS users, you may encounter an error because it is from an unidentified developer. No worries, just go to System Preferences -> Security & Privacy -> General and click on Open Anyway.
+   * For MacOS users, you may encounter an error stating that the app is from unidentified developer. No worries, just 
+     go to System Preferences -> Security & Privacy -> General and click on Open Anyway.
    * Alternatively, just open Terminal and enter `java -jar gitGud.jar` into the command line to start the app.
    ![Ui](images/ui-screenshots/startup.png)
 <br><center><ins>Image: gitGud upon startup.</ins></center>
@@ -121,6 +123,10 @@ gitGud provides a gamer-themed user interface as shown in the image below with 6
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `game --get GAME_ID`, `GAME_ID` is a parameter which can be used as such: `game --get CSGO`.
+
+* Items in square brackets are optional.
+  e.g. `friend --add FRIEND_ID [-n NAME]` can be used as `friend --add ketanyeluri -n Yeluri Ketan` or `friend --add 
+  ketanyeluri`. 
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the **last occurrence**
   of the parameter will be taken.<br> e.g. if you specify `-n Marcus Tang -n Taufiq`, only `-n Taufiq` will be taken.
@@ -207,7 +213,8 @@ Examples:
 
 #### 5.1.4 Link a game to a friend: `friend --link`
 
-Links a game and the associated in-game username for the game to a friend with the provided `FRIEND_ID`.
+Links a game with the specified `GAME_ID` and the associated in-game username specified by `IN_GAME_USERNAME` to a 
+friend with the provided `FRIEND_ID`.
 A link between a particular friend and game shows that the friend plays the game. 
 This association is required for subsequent commands, e.g. for the application to display all games that a friend plays 
 or to recommend a friend to play with based on a particular game.
@@ -245,7 +252,7 @@ to a game `RocketLeague`</ins></center>
 
 #### 5.1.5 Unlinking a game from a friend: `friend --unlink`
 
-Removes the link between a friend and a game.
+Removes the link between a friend specified by the `FRIEND_ID` and a game specified by the `GAME_ID`.
 This may be used if for example, a friend no longer plays a previously linked game. 
 
 Format: `friend --unlink FRIEND_ID -g GAME_ID`
@@ -268,7 +275,8 @@ friend
 
 #### 5.1.6 Assigning a skill value for a linked game : `friend --skill`
 
-Assigns the provided skill value to the friend with the given `FRIEND_ID` for the linked game with the given `GAME_ID`.
+Assigns the provided skill value specified by the `NUMBER_VALUE` to the friend with the given `FRIEND_ID` for the linked 
+game with the given `GAME_ID`.
 This command allows you to record your personal gauge of a friend's skill at a particular game.
 
 Format: `friend --skill FRIEND_ID -g GAME_ID -v NUMBER_VALUE`
