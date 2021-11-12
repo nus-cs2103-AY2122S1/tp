@@ -165,11 +165,13 @@ CMM displays an 'empty contact' with all the fields set to 'N.A'
 
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## 5. Overview of Features
-### 5.1 Adding a contact: `add`
 
+### 5.1 Adding a contact: `add`
 Adds a contact to the CMM database.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [g/GENDER] [age/AGE] [i/INTEREST]…​`
