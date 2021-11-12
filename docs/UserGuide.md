@@ -16,26 +16,6 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
 <img src="images/Ui.png" width="600"/>
 </p>
 
-## Keep track of client information
-
-Manage your client's information such as risk appetite and disposable income!
-
-* [**How to add clients to address book**](#51-create-new-contact--add)
-
-
-## Keep track of client meetings
-
-View your schedule of client meetings on a particular day! 
-
-* [**How to view schedule of client meetings**](#57-find-meeting-schedule--schedule)
-
-## Separate clients into multiple address books
-
-Categorise your clients into different address books to 
-
-* [**How to manage multiple address books**](#6-multiple-address-books-feature)
-
-
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
@@ -188,6 +168,8 @@ Each `Next Meeting` consists of a `DATE`, `START_TIME`, `END_TIME` and a `LOCATI
 | Example | `m/25-12-2021 (00:00~23:59), Santa's Workshop` |
 | <img src="images/info_icon.png" width="50"/> | • `DATE` is in the format `dd-MM-yyyy`, where day, month and year are numerical values. <br>• `START_TIME` and `END_TIME` are in `hh:mm` (24 hour format). <br>• `LOCATION` can take any value, but it cannot be blank. <br>• `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
+<div style="page-break-after: always;"></div>
+
 ### 3.3 Last Met Attribute
 
 The `Last Met` attribute refers to the last date the user have met the client.
@@ -218,6 +200,7 @@ application. An overview of LeadsForce's interface is shown below.
 <img src="images/NavigatingLeadsForce.png" />
 </p>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.1 Command View
 
@@ -326,6 +309,8 @@ For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` w
 <p align="center" >
 <img src="images/ExpectedAddCommand.png" width="400"/>
 </p>
+   
+<div style="page-break-after: always;"></div>
 
 ### 5.2 Retrieve Particular Contact : `view`
 
