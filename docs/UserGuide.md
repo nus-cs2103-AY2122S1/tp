@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. NUS faculty who are asked to mentor tend to have many mentees, and may not meet them often, but are still expected to understand their situation and provide useful advice. A personal CRM (CRM stands for Customer Relationship Manager) like Notor is a useful aid to track information about mentees and keep it organised, which hugely benefits forming meaningful connections. However, Notor can still help people outside our target audience in situations where one must manage **many contacts** and need to **take notes quickly**. 
+**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. NUS faculty mentors tend to have many mentees who they might not meet often, but they are still expected to understand their mentee's situations and provide useful advice. A personal CRM (CRM stands for Customer Relationship Manager) like Notor is a useful aid to track information and organize information about mentees, which hugely benefits forming meaningful connections. However, Notor can still help people outside our target audience in situations where one must manage **many contacts** and need to **take notes quickly**. 
 
 Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, the CLI is likely faster than alternatives on the market.
 
@@ -673,10 +673,11 @@ Refer to the details of the general commands [here](#general-command).
 
 Action     | Format   | Short Format
 -----------|----------|----------
-**Help**   | `help`   | `h`
-**Exit**   | `exit`   | `e`
 **Clear**  | `clear`  | `c`
+**Exit**   | `exit`   | `e`
 **Export** | `export` | `exp`
+**Help**   | `help`   | `h`
+**Note**   | `note`   | `n`
 
 <div style="page-break-after: always;"></div>
 
