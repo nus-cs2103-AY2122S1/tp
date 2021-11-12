@@ -5,7 +5,7 @@ title: User Guide
 
 <p align="center">
 
-<img src="images/LeadsForceLogo.jpg" alt="logo" width="300" />
+<img src="images/LeadsForceLogo.jpg" alt="logo" width="200" />
 
 </p>
 <p align="center">
