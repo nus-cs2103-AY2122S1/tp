@@ -546,6 +546,7 @@ The screenshot below shows the expected result.
   c. Did not specify either 't', 'f', 'true', 'false' after `c/` <br>
 
   d. Did not specify either 'm', 'f', 'male', 'female', 'n.a' after `g/` <br>
+
 <div style="page-break-after: always;"></div>
 
 ### 5.8 Displaying full contact details : `display`
