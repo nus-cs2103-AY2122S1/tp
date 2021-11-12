@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+skinparam maxMessageSize 10
+
+mainframe **sd** Executing LinkFriendCommand
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LinkFriendCommand" as LinkFriendCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FriendsList" as FriendsList MODEL_COLOR
+participant ":UniqueFriendsList" as UniqueFriendsList MODEL_COLOR
+participant "friendToEdit:Friend" as Friend MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> LinkFriendCommand : execute(model)
+activate LinkFriendCommand
+
+LinkFriendCommand -> Model : linkFriend(friendToLink, gameFriendLink)
+activate Model
+Model -> FriendsList : linkFriend(friendToLink, gameFriendLink)
+activate FriendsList
+FriendsList -> UniqueFriendsList : link(friendToLink, gameFriendLink)
+activate UniqueFriendsList
+create Friend
+UniqueFriendsList -> Friend
+activate Friend
+Friend --> UniqueFriendsList : friendToEdit
+deactivate Friend
+UniqueFriendsList -> Friend : link(gameFriendLink)
+activate Friend
+Friend --> UniqueFriendsList
+deactivate Friend
+UniqueFriendsList -> UniqueFriendsList : setFriend(friendToLink, friendToEdit)
+activate UniqueFriendsList
+UniqueFriendsList --> UniqueFriendsList
+deactivate UniqueFriendsList
+UniqueFriendsList --> FriendsList
+deactivate UniqueFriendsList
+FriendsList --> Model
+deactivate FriendsList
+Model --> LinkFriendCommand
+deactivate Model
+
+create CommandResult
+LinkFriendCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LinkFriendCommand
+deactivate CommandResult
+
+return
+@enduml

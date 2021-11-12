@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 18
+
+|UI_COLOR_T1|UI|
+start
+- MainWindow#executeCommand called
+|LOGIC_COLOR_T1|Logic|
+- LogicManager#execute called
+- MainParser#parseCommand called
+if () then ([is friend command])
+- FriendCommandParser#parse called
+- GetFriendCommandParser#parse called
+- GetFriendCommand created
+else ([is game command])
+- GameCommandParser#parse called
+- GetGameCommandParser#parse called
+- GetGameCommand created
+endif
+- LogicManager#execute receives the Command
+- LogicManager#execute executes the Command
+floating note right
+ This is shown in detail
+ in the sequence diagram below
+end note
+|UI|
+- MainWindow#executeCommand receives the CommandResult
+stop
+
+@enduml

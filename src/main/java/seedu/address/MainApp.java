@@ -2,8 +2,10 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -15,15 +17,21 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FriendsList;
+import seedu.address.model.GamesList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
+import seedu.address.storage.FriendsListStorage;
+import seedu.address.storage.GamesListStorage;
+import seedu.address.storage.JsonFriendsListStorage;
+import seedu.address.storage.JsonGamesListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -56,8 +64,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        FriendsListStorage friendsListStorage = new JsonFriendsListStorage(userPrefs.getFriendsListFilePath());
+        GamesListStorage gamesListStorage = new JsonGamesListStorage(userPrefs.getGamesListFilePath());
+        storage = new StorageManager(friendsListStorage, gamesListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,28 +78,83 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s friends list, games list and
+     * {@code userPrefs}. <br>
+     * The data from the sample friend's list will be used instead if {@code storage}'s friends list is not found,
+     * or an empty friends list will be used instead if errors occur when reading {@code storage}'s friends list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+        assert storage != null;
+
+        ReadOnlyGamesList initialGamesList = loadInitialGamesList(storage);
+        ReadOnlyFriendsList initialFriendsList = loadInitialFriendsList(storage);
+
+        // verify valid Games exist for all GameFriendLinks in initial friends list.
+        if (!checkFriendsGamesExist(initialGamesList, initialFriendsList)) {
+            logger.info("Games linked to friends are not found in the games list. "
+                    + "Loading an empty friends list.");
+            initialFriendsList = new FriendsList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialFriendsList, initialGamesList, userPrefs);
+    }
+
+    private ReadOnlyGamesList loadInitialGamesList(Storage storage) {
+        try {
+            Optional<ReadOnlyGamesList> loadedGamesList = storage.readGamesList();
+            if (loadedGamesList.isEmpty()) {
+                logger.info("Game data file not found. Loading an empty games list.");
+                return new GamesList();
+            } else {
+                return loadedGamesList.get();
+            }
+        } catch (DataConversionException e) {
+            logger.warning("Game data file not in the correct format/corrupted. Loading an empty games list.");
+            return new GamesList();
+        } catch (IOException e) {
+            logger.info("Problem encountered reading game data file. Loading an empty games list.");
+            return new GamesList();
+        }
+    }
+
+    private ReadOnlyFriendsList loadInitialFriendsList(Storage storage) {
+        try {
+            Optional<ReadOnlyFriendsList> loadedFriendsList = storage.readFriendsList();
+            if (loadedFriendsList.isEmpty()) {
+                logger.info("Friend data file not found. Loading empty friends list.");
+                return new FriendsList();
+            }
+
+            return loadedFriendsList.get();
+        } catch (DataConversionException e) {
+            logger.warning("Friend data file not in the correct format/corrupted. "
+                    + "Loading an empty friends list.");
+            return new FriendsList();
+        } catch (IOException e) {
+            logger.info("Problem encountered reading friend data file. Loading an empty friends list.");
+            return new FriendsList();
+        }
+    }
+
+    /**
+     * Checks if all games linked as {@code GameFriendLink} in Friend stored in {@code friendsList} exist in the
+     * {@code gamesList}.
+     *
+     * @param gamesList   list of games which should contain all games friends link to.
+     * @param friendsList list of friends to check if all games linked by Friend elements are stored in the gamesList.
+     * @return whether all games linked to by friends in the friends list exist in the games list.
+     */
+    private boolean checkFriendsGamesExist(ReadOnlyGamesList gamesList, ReadOnlyFriendsList friendsList) {
+        List<GameId> includedGameIds = gamesList.getGamesList().stream().map(Game::getGameId)
+                .collect(Collectors.toList());
+        for (Friend friend : friendsList.getFriendsList()) {
+            for (GameId gameId : friend.getGameFriendLinks().keySet()) {
+                if (!includedGameIds.contains(gameId)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void initLogging(Config config) {

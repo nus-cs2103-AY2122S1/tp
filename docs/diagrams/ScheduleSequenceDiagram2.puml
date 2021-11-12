@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+
+box Logic LOGIC_COLOR_T1
+
+
+mainframe **sd** execute ScheduleFriendCommand
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ScheduleFriendCommand" as ScheduleFriendCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> ScheduleFriendCommand : execute(model)
+activate ScheduleFriendCommand
+
+ScheduleFriendCommand -> Model : getFriend("draco")
+activate Model
+
+Model --> ScheduleFriendCommand : friendToSchedule
+deactivate Model
+
+ScheduleFriendCommand -> ScheduleFriendCommand : createScheduledFriend(friendToSchedule)
+activate ScheduleFriendCommand
+
+ScheduleFriendCommand --> ScheduleFriendCommand : scheduledFriend
+deactivate ScheduleFriendCommand
+
+ScheduleFriendCommand -> Model : setFriend(scheduledFriend)
+activate Model
+
+Model --> ScheduleFriendCommand
+deactivate Model
+
+create CommandResult
+ScheduleFriendCommand -> CommandResult : CommandResult(messageToDisplay,\n CommandType.FRIEND_SCHEDULE)
+activate CommandResult
+
+CommandResult --> ScheduleFriendCommand
+deactivate CommandResult
+
+ScheduleFriendCommand --> LogicManager
+
+@enduml

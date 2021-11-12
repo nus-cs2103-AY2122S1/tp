@@ -1,11 +1,13 @@
 @startuml
 !include style.puml
+skinparam defaultFontSize 20
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":MainParser" as MainParser LOGIC_COLOR
+participant ":FriendCommandParser" as FriendCommandParser LOGIC_COLOR
+participant ":DeleteFriendCommandParser" as DeleteFriendCommandParser LOGIC_COLOR
+participant "c:DeleteFriendCommand" as DeleteFriendCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +15,72 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("friend\n --delete draco")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> MainParser : parseCommand("friend\n --delete draco")
+activate MainParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create FriendCommandParser
+MainParser -> FriendCommandParser
+activate FriendCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+FriendCommandParser --> MainParser
+deactivate FriendCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+MainParser -> FriendCommandParser : parse(" --delete draco")
+activate FriendCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteFriendCommandParser
+FriendCommandParser -> DeleteFriendCommandParser
+activate DeleteFriendCommandParser
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteFriendCommandParser --> FriendCommandParser
+deactivate DeleteFriendCommandParser
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+FriendCommandParser -> DeleteFriendCommandParser : parse("draco")
+activate DeleteFriendCommandParser
+
+create DeleteFriendCommand
+DeleteFriendCommandParser -> DeleteFriendCommand
+activate DeleteFriendCommand
+
+DeleteFriendCommand --> DeleteFriendCommandParser : c
+deactivate DeleteFriendCommand
+
+DeleteFriendCommandParser --> FriendCommandParser : c
+deactivate DeleteFriendCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+DeleteFriendCommandParser -[hidden]-> FriendCommandParser
+destroy DeleteFriendCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+FriendCommandParser --> MainParser : c
+deactivate FriendCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FriendCommandParser -[hidden]-> MainParser
+destroy FriendCommandParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+MainParser --> LogicManager : c
+deactivate MainParser
 
-DeleteCommand -> Model : deletePerson(1)
+LogicManager -> DeleteFriendCommand : execute()
+activate DeleteFriendCommand
+
+DeleteFriendCommand -> Model : deleteFriend("draco")
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteFriendCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteFriendCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteFriendCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteFriendCommand --> LogicManager : result
+deactivate DeleteFriendCommand
 
 [<--LogicManager
 deactivate LogicManager

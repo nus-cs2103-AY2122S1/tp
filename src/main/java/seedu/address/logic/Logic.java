@@ -7,8 +7,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
 
 /**
  * API of the Logic component
@@ -16,22 +18,37 @@ import seedu.address.model.person.Person;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the FriendsBook.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getFriendsList()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyFriendsList getFriendsBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /**
+     * Returns the GamesBook.
+     *
+     * @see seedu.address.model.Model#getGamesList()
+     */
+    ReadOnlyGamesList getGamesBook();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of friends
+     */
+    ObservableList<Friend> getFilteredFriendsList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of games
+     */
+    ObservableList<Game> getFilteredGamesList();
 
     /**
      * Returns the user prefs' address book file path.

@@ -1,14 +1,18 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +20,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,16 +30,26 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String FRIEND_TITLE = "Friend's ID: %s (Name: %s)";
+    private static final String GAME_TITLE = "Game: %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
+    private boolean isFriendTable;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private FriendListPanel friendListPanel;
+    private GameListPanel gameListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
+    private Friend currentFriendToGet;
+    private FriendMainCardTable friendMainCardTable;
+    private FriendSchedulePanel friendSchedulePanel;
+    private GameMainCardTable gameMainCardTable;
+    private Game currentGameToGet;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,13 +58,31 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane friendsPlaceholder;
+
+    @FXML
+    private VBox friendBox;
+
+    @FXML
+    private VBox gameBox;
+
+    @FXML
+    private StackPane gamesPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private HBox mainCard;
+
+    @FXML
+    private VBox leftMainCard;
+
+    @FXML
+    private VBox rightMainCard;
+
+    @FXML
+    private Label mainCardTitle;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -78,6 +112,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -98,29 +133,26 @@ public class MainWindow extends UiPart<Stage> {
          * help window purposely so to support accelerators even when focus is
          * in CommandBox or ResultDisplay.
          */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        friendListPanel = new FriendListPanel(logic.getFilteredFriendsList());
+        showFriendList();
+
+        gameListPanel = new GameListPanel(logic.getFilteredGamesList(), logic.getFriendsBook().getFriendsList());
+        showGameList();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        showFriendBox();
+        showGameBox();
     }
 
     /**
@@ -163,14 +195,146 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void showFriendBox() {
+        friendBox.setVisible(true);
+        friendBox.setManaged(true);
+    }
+
+    private void showGameBox() {
+        gameBox.setVisible(true);
+        gameBox.setManaged(true);
+    }
+
+    private void addFriendListPanelToFriendsPlaceholder() {
+        // only shows friend list if not already being shown
+        if (!friendsPlaceholder.getChildren().contains(friendListPanel.getRoot())) {
+            friendsPlaceholder.getChildren().add(friendListPanel.getRoot());
+        }
+    }
+
+    private void addGameListPanelToGamesPlaceholder() {
+        if (!gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
+            gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
+        }
     }
 
     /**
-     * Executes the command and returns the result.
+     * Shows the {@Code friendListPanel} when the {@Code friend --list} command is run.
+     */
+    private void showFriendList() {
+        // only shows friend list if not already being shown
+        addFriendListPanelToFriendsPlaceholder();
+    }
+
+    private void showGameList() {
+        addGameListPanelToGamesPlaceholder();
+    }
+
+    private ObservableList<Friend> getFriendList() {
+        return logic.getFriendsBook().getFriendsList();
+    }
+
+    private ObservableList<Game> getGameList() {
+        return logic.getGamesBook().getGamesList();
+    }
+
+    private Friend getUpdatedFriend(Friend toUpdate) {
+        ObservableList<Friend> friendsList = getFriendList();
+        for (Friend friend : friendsList) {
+            if (friend.getFriendId().equals(toUpdate.getFriendId())) {
+                return friend;
+            }
+        }
+        return toUpdate;
+    }
+
+    private boolean friendListHasFriend(ObservableList<Friend> friendList, Friend friendToTest) {
+        return friendList.stream().anyMatch(x -> x.isSameFriendId(friendToTest));
+    }
+
+    private void clearRightCard() {
+        rightMainCard.getChildren().clear();
+    }
+
+    private void clearLeftCard() {
+        leftMainCard.getChildren().clear();
+    }
+
+    private void clearMainCard() {
+        clearRightCard();
+        clearLeftCard();
+        mainCardTitle.setText("");
+    }
+
+    private void handleFriendGet(Friend friendToGet) {
+        ObservableList<Friend> friendList = this.getFriendList();
+        currentFriendToGet = friendToGet;
+        clearMainCard();
+        // If currentFriendToGet is null, we do nothing.
+        if (currentFriendToGet == null) {
+            return;
+        }
+
+        // If friendToGet is in friendList, populate the table with the games associated to it.
+        if (this.friendListHasFriend(friendList, currentFriendToGet)) {
+            mainCardTitle.setText(String.format(FRIEND_TITLE, friendToGet.getFriendId().toString(),
+                    friendToGet.getFriendName().toString()));
+            friendToGet = friendList
+                    .stream()
+                    .filter(x -> x.isSameFriendId(currentFriendToGet))
+                    .findFirst()
+                    .get();
+            friendMainCardTable = new FriendMainCardTable(friendToGet);
+            rightMainCard.getChildren().add(friendMainCardTable.getRoot());
+            friendSchedulePanel = new FriendSchedulePanel(friendToGet);
+            leftMainCard.getChildren().add(friendSchedulePanel.getRoot());
+        }
+    }
+
+    private boolean gameListHasGame(ObservableList<Game> gameList, Game gameToTest) {
+        return gameList.stream().filter(game -> game.isSameGameId(gameToTest)).count() == 0;
+    }
+
+    private boolean friendListHasGameAssociation(ObservableList<Friend> friendList, Game gameToTest) {
+        return friendList.stream().anyMatch(friend -> friend.hasGameAssociation(gameToTest));
+    }
+
+    private void handleGameGet(Game gameToGet) {
+        ObservableList<Friend> friendList = this.getFriendList();
+        currentGameToGet = gameToGet;
+        clearMainCard();
+        ObservableList<Game> gameList = this.getGameList();
+
+        // If currentGameToGet is null, we do nothing.
+        if (currentGameToGet == null) {
+            return;
+        }
+        // If current gameList does not contain gameToGet, clear rightMainCard
+        if (this.gameListHasGame(gameList, currentGameToGet)) {
+            clearRightCard();
+            return;
+        }
+
+        // If current friendList has a friend(s) which is associated to currentGameToGet, return the list of friends.
+        if (friendListHasGameAssociation(friendList, currentGameToGet)) {
+            mainCardTitle.setText(String.format(GAME_TITLE, gameToGet.getGameId().toString()));
+            List<Friend> friendsWithGame = friendList.stream()
+                    .filter(friend -> friend.hasGameAssociation(currentGameToGet))
+                    .collect(Collectors.toList());
+
+            gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), currentGameToGet);
+        } else {
+            clearRightCard();
+            gameMainCardTable = new GameMainCardTable();
+        }
+        rightMainCard.getChildren().add(gameMainCardTable.getRoot());
+    }
+
+    /**
+     * Executes the command based on the {@Code CommandType}
+     * enumeration.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -178,14 +342,47 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getCommandType()) {
+            case FRIEND_GET:
+                isFriendTable = true;
+                handleFriendGet(commandResult.getFriendToGet());
+                break;
+            case GAME_GET:
+                isFriendTable = false;
+                handleGameGet(commandResult.getGameToGet());
+                break;
+            case FRIEND_SCHEDULE:
+            case RECOMMEND:
+            case FRIEND_ADD:
+            case FRIEND_EDIT:
+            case FRIEND_LINK:
+            case FRIEND_UNLINK:
+            case FRIEND_DELETE:
+            case FRIEND_ADD_GAME_SKILL:
+            case FRIEND_LIST:
+            case GAME_ADD:
+            case GAME_DELETE:
+            case GAME_LIST:
+                gameListPanel.updateNumberOfFriends();
+                if (isFriendTable) {
+                    Friend updatedFriend = getUpdatedFriend(this.currentFriendToGet);
+                    handleFriendGet(updatedFriend);
+                } else {
+                    handleGameGet(this.currentGameToGet);
+                }
+                break;
+            case CLEAR:
+                clearMainCard();
+                break;
+            case HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                break;
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

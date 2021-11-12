@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="cardPane" prefHeight="26.0">
+         <children>
+            <Label fx:id="id" maxWidth="50.0" styleClass="cell_big_label" HBox.hgrow="NEVER">
+               <minWidth>
+                  <Region fx:constant="USE_PREF_SIZE" />
+               </minWidth>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+            <Label fx:id="friendName" minWidth="240.0" styleClass="cell_big_label" text="\\$first" />
+         </children>
+      </HBox>
+      <Label fx:id="games" styleClass="cell_small_label" text="Label">
+         <VBox.margin>
+            <Insets left="5.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
+</VBox>

@@ -1,0 +1,11 @@
+{
+  "games" : [
+    {
+      "gameId": "ValidGameId2"
+    },
+    {
+      "gameId": "InvalidGameId23$*X"
+    }, {
+      "gameId": "ValidGameId1"
+    } ]
+}

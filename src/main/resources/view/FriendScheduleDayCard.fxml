@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="100.0" minHeight="60.0" minWidth="100.0" prefWidth="100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="dayName" text="dayName">
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" />
+         </VBox.margin></Label>
+      <FlowPane fx:id="timeslots" prefWidth="100.0">
+         <VBox.margin>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </FlowPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

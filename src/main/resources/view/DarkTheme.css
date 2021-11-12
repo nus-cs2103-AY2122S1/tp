@@ -1,32 +1,22 @@
+.root {
+   -light-gray: #393E46;
+   -dark-gray: #222831;
+   -list-cell-odd: #808080;
+   -list-cell-even: #3c3e3f;
+   -blurple: #7289DA;
+   -light-primary: #eeeeee;
+}
+
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: -light-gray;
+    background-color: -light-gray; /* Used in the default.html file */
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: #555555;
+    -fx-font-family: "Open Sans";
     -fx-opacity: 0.9;
-}
-
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Semibold";
     -fx-text-fill: white;
-    -fx-opacity: 1;
-}
-
-.label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
-}
-
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Open Sans Semibold";
 }
 
 .tab-pane {
@@ -65,8 +55,8 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-size: 11pt;
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -76,21 +66,20 @@
     -fx-background-color: -fx-focus-color;
 }
 
+.table-view .table-cell{
+    -fx-font-size: 10pt;
+    -fx-font-family: "Open Sans";
+}
+
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -light-gray;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-.list-view {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -light-gray;
 }
 
 .list-cell {
@@ -99,21 +88,16 @@
     -fx-padding: 0 0 0 0;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+.list-cell:filled {
+    -fx-background-color: -light-gray;
+    -fx-border-color: -dark-gray;
+    -fx-border-width: 1;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-color: -blurple;
+    -fx-border-width: 0.75;
+    -fx-background-color: #4f609c;
 }
 
 .list-cell .label {
@@ -122,23 +106,23 @@
 
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 11px;
     -fx-text-fill: #010504;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: -light-gray;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: -light-gray;
+     -fx-border-color: transparent;
      -fx-border-top-width: 1px;
 }
 
@@ -148,13 +132,19 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Monaco";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
-.result-display .label {
-    -fx-text-fill: black !important;
+.result-display .scroll-pane {
+    -fx-background-color: transparent;
+}
+.result-display .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.result-display .scroll-pane .content{
+    -fx-background-color: transparent;
 }
 
 .status-bar .label {
@@ -193,12 +183,12 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -light-gray;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Monaco";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -282,11 +272,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -light-gray;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #D3D3D3;
     -fx-background-insets: 3;
 }
 
@@ -307,10 +297,6 @@
     -fx-padding: 8 1 8 1;
 }
 
-#cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
-}
 
 #commandTypeLabel {
     -fx-font-size: 11px;
@@ -318,35 +304,54 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: -light-primary;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: black;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
-    -fx-font-family: "Open Sans Light";
+    -fx-border-width: 0.5;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-family: "Monaco";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
-#filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+#commandTextField:focused {
+    -fx-effect: dropshadow(gaussian, -blurple, 20, 0.6, 0.0, 0.0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+    -fx-background-color: -light-primary;
+    -fx-text-fill: black;
 }
 
-#tags {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
+#mainCard {
+    -fx-background-color: -dark-gray;
+    -fx-text-fill: -light-primary;
+    -fx-background-radius: 10px;
 }
 
-#tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+#leftMainCard {
+
 }
+
+#rightMainCard {
+
+}
+
+.main-card-title {
+    -fx-text-fill: -light-primary;
+    -fx-font-size: 15px;
+}
+
+.items-list {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-background-color: -dark-gray;
+    -fx-padding: 0 0 0 0;
+}
+
+.items-list:focused {
+    -fx-effect: dropshadow(gaussian, -blurple, 20, 0.5, 0.0, 0.0);
+    }
+

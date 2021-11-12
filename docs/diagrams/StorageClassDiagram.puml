@@ -3,8 +3,24 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
+skinparam defaultFontSize 20
 
 package Storage{
+
+package "GamesList Storage" #F4F6F6 {
+Interface GamesListStorage <<Interface>>
+Class JsonGamesListStorage
+Class JsonSerializableGamesList
+Class JsonAdaptedGame
+}
+
+package "FriendsList Storage" #F4F6F6{
+Interface FriendsListStorage <<Interface>>
+Class JsonFriendsListStorage
+Class JsonSerializableFriendsList
+Class JsonAdaptedFriend
+Class JsonAdaptedGameFriendLink
+}
 
 package "UserPrefs Storage" #F4F6F6{
 Interface UserPrefsStorage <<Interface>>
@@ -14,30 +30,29 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
-}
-
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
+StorageManager -up-> "1" GamesListStorage
+StorageManager -up-> "1" FriendsListStorage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -left-|> FriendsListStorage
+Storage -left-|> GamesListStorage
+Storage -right-|> UserPrefsStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonFriendsListStorage .up.|> FriendsListStorage
+JsonFriendsListStorage ..> JsonSerializableFriendsList
+JsonSerializableFriendsList --> "*" JsonAdaptedFriend
+JsonAdaptedFriend --> "*" JsonAdaptedGameFriendLink
+
+JsonGamesListStorage .up.|> GamesListStorage
+JsonGamesListStorage ..> JsonSerializableGamesList
+JsonSerializableGamesList --> "*" JsonAdaptedGame
 
 @enduml

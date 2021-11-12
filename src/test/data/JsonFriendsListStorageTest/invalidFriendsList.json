@@ -1,0 +1,36 @@
+{
+  "friends": [{
+      "friendId" : "RoyJoy 3space",
+      "friendName" : "Roy Balakrishnan",
+      "schedule" : {
+        "schedule" : [ {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "MONDAY"
+        }, {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "TUESDAY"
+        }, {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "WEDNESDAY"
+        }, {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "THURSDAY"
+        }, {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "FRIDAY"
+        }, {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "SATURDAY"
+        }, {
+          "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+          "dayOfWeek" : "SUNDAY"
+        } ]
+      },
+      "gameFriendLinks" : [ ]
+    }, {
+      "friendId" : "",
+      "friendName" : "world",
+      "gameFriendLinks" : [ ]
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "friends" : [ {
+    "friendId" : "AlexY123",
+    "friendName" : "Alex Yeoh",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "AlexY123",
+    "friendName" : "Bernice Yu",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "ChickenTender",
+    "friendName" : "Charlotte Oliveiro",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "Davidz",
+    "friendName" : "David Li",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "II3",
+    "friendName" : "Irfan Ibrahim",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "RoyJoy",
+    "friendName" : "Roy Balakrishnan",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "hello",
+    "friendName" : "world",
+    "schedule" : {
+      "schedule" : [ {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "MONDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "TUESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "WEDNESDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "THURSDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "FRIDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SATURDAY"
+      }, {
+        "timeSlots" : [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+        "dayOfWeek" : "SUNDAY"
+      } ]
+    },
+    "gameFriendLinks" : [ ]
+  } ]
+}

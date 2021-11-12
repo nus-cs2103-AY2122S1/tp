@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class MainWindow
+Class HelpWindow
+Class ResultDisplay
+Class FriendListPanel
+Class FriendCard
+Class StatusBarFooter
+Class CommandBox
+Class GameListPanel
+Class GameCard
+Class GameMainCardTable
+Class FriendMainCardTable
+Class FriendSchedulePanel
+Class FriendScheduleDayCard
+}
+
+UiPart <|-l- MainWindow
+UiPart <|-u- ResultDisplay
+UiPart <|-- CommandBox
+UiPart <|-r- FriendListPanel
+UiPart <|-r- FriendCard
+UiPart <|-l- GameListPanel
+UiPart <|-l- GameCard
+UiPart <|-- FriendMainCardTable
+UiPart <|-- GameMainCardTable
+UiPart <|-u- StatusBarFooter
+UiPart <|-r- HelpWindow
+UiPart <|-- FriendSchedulePanel
+UiPart <|-- FriendScheduleDayCard
+
+@enduml

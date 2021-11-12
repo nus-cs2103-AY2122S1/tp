@@ -1,0 +1,10 @@
+@startuml
+start
+:receive valid recommend command user input with specified game and available timing into input textbox;
+:parse user input into recommend command with specified game and available timing to be used as filters;
+:execute the recommend command;
+:filter friends list by specified game and available timing provided;
+:sort filtered friends list by friends' skill value;
+:display the filtered and sorted friends list as recommendation;
+stop
+@enduml

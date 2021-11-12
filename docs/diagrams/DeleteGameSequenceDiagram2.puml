@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+
+mainframe **sd** Executing DeleteGameCommand
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":DeleteGameCommand" as DeleteGameCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> DeleteGameCommand : execute(model)
+activate DeleteGameCommand
+
+DeleteGameCommand -> Model : getGame(gameToDeleteId)
+activate Model
+
+Model --> DeleteGameCommand : gameToDelete
+deactivate Model
+
+DeleteGameCommand -> Model : removeLinkAllFriends(gameToDelete)
+activate Model
+
+Model --> DeleteGameCommand
+deactivate Model
+
+DeleteGameCommand -> Model : deleteGame(gameToDelete)
+activate Model
+
+Model --> DeleteGameCommand
+deactivate Model
+
+create CommandResult
+DeleteGameCommand -> CommandResult : CommandResult(messageToDisplay,\n CommandType.GAME_DELETE)
+activate CommandResult
+
+CommandResult --> DeleteGameCommand
+deactivate CommandResult
+
+DeleteGameCommand --> LogicManager
+@enduml

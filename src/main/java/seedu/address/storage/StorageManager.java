@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -7,7 +9,8 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -17,15 +20,23 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final FriendsListStorage friendsListStorage;
+    private final GamesListStorage gamesListStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(FriendsListStorage friendsListStorage, GamesListStorage gamesListStorage,
+                          UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+
+        requireNonNull(friendsListStorage);
+        requireNonNull(gamesListStorage);
+        requireNonNull(userPrefsStorage);
+
+        this.friendsListStorage = friendsListStorage;
+        this.gamesListStorage = gamesListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -47,33 +58,61 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Friends list methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getFriendsListFilePath() {
+        return friendsListStorage.getFriendsListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyFriendsList> readFriendsList() throws DataConversionException, IOException {
+        return readFriendsList(friendsListStorage.getFriendsListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+    public Optional<ReadOnlyFriendsList> readFriendsList(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read friends list data from file: " + filePath);
+        return friendsListStorage.readFriendsList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveFriendsList(ReadOnlyFriendsList friendsList) throws IOException {
+        saveFriendsList(friendsList, friendsListStorage.getFriendsListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+    public void saveFriendsList(ReadOnlyFriendsList friendsList, Path filePath) throws IOException {
+        logger.fine("Attempting to write friends list data to file: " + filePath);
+        friendsListStorage.saveFriendsList(friendsList, filePath);
     }
 
+    // ================ Games list methods ==============================
+
+    @Override
+    public Path getGamesListFilePath() {
+        return gamesListStorage.getGamesListFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyGamesList> readGamesList() throws DataConversionException, IOException {
+        return readGamesList(gamesListStorage.getGamesListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyGamesList> readGamesList(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read games list data from file: " + filePath);
+        return gamesListStorage.readGamesList(filePath);
+    }
+
+    @Override
+    public void saveGamesList(ReadOnlyGamesList gamesList) throws IOException {
+        saveGamesList(gamesList, gamesListStorage.getGamesListFilePath());
+    }
+
+    @Override
+    public void saveGamesList(ReadOnlyGamesList gamesList, Path filePath) throws IOException {
+        logger.fine("Attempting to write games list data to file: " + filePath);
+        gamesListStorage.saveGamesList(gamesList, filePath);
+    }
 }

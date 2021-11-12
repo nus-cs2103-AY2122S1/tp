@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam defaultFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MainParser" as MainParser LOGIC_COLOR
+participant ":GameCommandParser" as GameCommandParser LOGIC_COLOR
+participant ":DeleteGameCommandParser" as DeleteGameCommandParser LOGIC_COLOR
+participant "c:DeleteGameCommand" as DeleteGameCommand LOGIC_COLOR
+end box
+
+
+[-> LogicManager : parse("game \n--delete DOTA")
+activate LogicManager
+
+LogicManager -> MainParser : parseCommand("game \n--delete DOTA")
+activate MainParser
+
+create GameCommandParser
+MainParser -> GameCommandParser : new \n GameCommandParser()
+activate GameCommandParser
+
+GameCommandParser --> MainParser
+deactivate GameCommandParser
+
+MainParser -> GameCommandParser : parse(" --delete \n DOTA")
+activate GameCommandParser
+
+create DeleteGameCommandParser
+GameCommandParser -> DeleteGameCommandParser : new \n DeleteGameCommandParser()
+activate DeleteGameCommandParser
+DeleteGameCommandParser --> GameCommandParser
+deactivate DeleteGameCommandParser
+
+GameCommandParser -> DeleteGameCommandParser : parse("--delete  \n DOTA")
+activate DeleteGameCommandParser
+
+create DeleteGameCommand
+DeleteGameCommandParser -> DeleteGameCommand : new \n DeleteGameCommand(gameId)
+activate DeleteGameCommand
+DeleteGameCommand --> DeleteGameCommandParser : c
+deactivate DeleteGameCommand
+
+
+DeleteGameCommandParser --> GameCommandParser : c
+deactivate DeleteGameCommandParser
+DeleteGameCommandParser -[hidden]-> GameCommandParser
+destroy DeleteGameCommandParser
+
+GameCommandParser --> MainParser : c
+deactivate GameCommandParser
+GameCommandParser -[hidden]-> MainParser
+GameCommandParser -[hidden]-> MainParser
+destroy GameCommandParser
+
+LogicManager <--MainParser : c
+deactivate MainParser
+
+ref over LogicManager, DeleteGameCommand: Executing DeleteGameCommand
+
+LogicManager -[hidden]-> LogicManager
+DeleteGameCommand -[hidden]-> DeleteGameCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+
+[<-[hidden]- DeleteGameCommand
+destroy DeleteGameCommand
+
+@enduml

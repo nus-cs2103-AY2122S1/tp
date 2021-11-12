@@ -1,0 +1,20 @@
+{
+  "games" : [
+    {
+      "gameId": "Minecraft"
+    }, {
+      "gameId": "LeagueOfLegends"
+    }, {
+      "gameId": "Fortnite"
+    }, {
+      "gameId": "GenshinImpact"
+    }, {
+      "gameId": "GTAV"
+    }, {
+      "gameId": "AnimalCrossing"
+    }, {
+      "gameId": "Valorant"
+    }, {
+      "gameId": "CSGO"
+    } ]
+}

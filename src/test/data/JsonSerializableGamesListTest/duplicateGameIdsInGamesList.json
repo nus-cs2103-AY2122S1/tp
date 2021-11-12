@@ -1,0 +1,12 @@
+{
+  "games" : [
+    {
+      "gameId": "Valorant"
+    }, {
+      "gameId": "Minecraft"
+    }, {
+      "gameId": "Valorant"
+    }, {
+      "gameId": "Apex Legends"
+    } ]
+}
