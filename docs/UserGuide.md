@@ -262,13 +262,12 @@ Examples:
 
 Command aliases: `del` `rm` `d`
 
-<img src="images/DeleteCommand.png" height="auto" width="700px">
+<img src="images/DeleteCommand.png" width="800px">
 
 [Back to table of contents](#table-of-contents)
 
 ***
 
-<div style="page-break-after: always;"></div>
 #### Finding contacts by name / module code: `find` <a name="find"></a>
 
 Finds a contact by specifying either the name/module code(s).
