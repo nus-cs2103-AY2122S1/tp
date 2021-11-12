@@ -127,7 +127,6 @@ These features are categorized as follows:
 
 * [Getting Help](#getting-help)
 * [Managing Students](#managing-students)
-* [Finding Students](#finding-students)
 * [Managing Lessons](#managing-lessons)
 * [Managing Lesson Fees](#managing-lesson-fees)
 * [Managing Your Schedule](#managing-your-schedule)
@@ -519,140 +518,6 @@ Format: `list`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-before: always;"></div>
-
-### Finding Students
-
-This section guides you on how to find or filter students of your choice in TAB.
-Quickly find a student no matter how many you have!
-
---------------------------------------------------------------------------------------------------------------------
-
-#### Finding students by fields: `find`
-
-Finds all students whose fields match the given keyword(s), based on the specified find condition.
-You can find students by tags, student fields and lesson fields.
-
-Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`<br>
-
-Available fields are as described in [Student parameters](#student-parameters) and [Lesson parameters](#lesson-parameters).
-
-* You must specify at least one field to search for, and provide at least one keyword.<br>
-  e.g. `find cond/any` or `find n/` are invalid commands.
-
-##### Search by tags
-* You can search by multiple tags. e.g. `t/paid t/new`.
-* One tag parameter can only have one keyword. e.g. `t/paid new` is invalid.
-* Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`.
-* The search is case-insensitive. e.g. keyword `new` will match `NEW`.
-
-Example:
-* `find t/unpaid t/New` will return all students with both of the tags `UNPAID` and `NEW`.
-
-##### Search by other student fields
-* You can specify one or more keywords for each parameter. e.g. `find n/Amad Ali`.
-* A field needs to contain all specified keywords to be matched.<br>
-  e.g. keywords `Amad Ali` will not match `Amad`, but it will match `Amad bin Ali`.
-* If you specify multiple keywords with the same prefix, only the last prefix will be used to search that field.  
-* A keyword can match a word partially. e.g. keyword `uni` will match `university`.
-* The search is case-insensitive.
-
-<div style="page-break-before: always;"></div>
-
-Example:
-* `find n/John a/west coast` will return students with name that contains `John`, and address that contains `west` and `coast`.
-
-##### Search by lesson fields
-* Finds all students with at least one lesson that matches the lesson parameters.
-* The find behaviour of lesson fields are specified in the table below.
-
-<table id="find-param-table">
-    <thead>
-        <tr>
-            <th style="text-align:center">Fields</th>
-            <th style="text-align:center">Find behaviour</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Subject, <br> Lesson Rates</td>
-            <td>
-              <ul>
-                <li>The same constraints for student fields apply.</li>
-              </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>Homework</td>
-            <td>
-              <ul>
-                <li>Finds students with lessons that have at least one piece of homework matching all the keywords.</li>
-                <li>The same constraints for student fields apply.</li>
-              </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>Start Date</td>
-            <td>
-              <ul>
-                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
-                <li>Finds students with lessons that fall on the specified date.</li>
-              </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>Cancelled Date</td>
-            <td>
-              <ul>
-                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
-                <li>Finds students with lessons that are cancelled on the specified date.</li>
-              </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>Time Range</td>
-            <td>
-              <ul>
-                <li>Accepts one keyword that must follow the <a href="#lesson-time-range">Time Range</a> format</li>
-                <li>Finds students with lessons that overlaps with the time range, excluding the start and end time.
-                    e.g. <code>time/1200-1400</code> matches a lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
-              </ul>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-Example:
-* `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
-
-<div style="page-break-before: always;"></div>
-
-##### Search with match condition
-
-* You can specify an optional match condition which indicates the type of matching to be applied. 
-  A student is considered a match only when `all`, `any` or `none` of the fields which you are searching for match the student.
-* The match condition is optional and defaults to `all` if not specified.
-
-Example:
-
-Suppose you want to find students with the tag `new` or with lessons between `1100-1300`.
-1. Type the command `find cond/any t/new time/1100-1300` into the command box.
-2. Press <kbd>Enter</kbd> and you should see that the list now displays only students matching the given keywords.
-
-![find](images/find.png)
-
-<div class="caption">TAB displays two students after the find command.</div>
-
-Other examples:
-* `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
-* `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
-
-<br />
-
-[back to table of contents](#toc)
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-before: always;"></div>
 
 ### Managing Lessons
 
@@ -1161,13 +1026,136 @@ Format: `today`
 
 This section describes the other miscellaneous commands available in TAB.
 
-1. [Viewing all tags: `tag`](#viewing-all-tags-tag)
-2. [Clearing all entries: `clear`](#clearing-all-entries-clear)
-3. [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
-4. [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
-5. [Exiting the program: `exit`](#exiting-the-program-exit)
+1. [Finding students: `find`](#finding-students-find)
+2. [Viewing all tags: `tag`](#viewing-all-tags-tag)
+3. [Clearing all entries: `clear`](#clearing-all-entries-clear)
+4. [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
+5. [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
+6. [Exiting the program: `exit`](#exiting-the-program-exit)
 
 --------------------------------------------------------------------------------------------------------------------
+
+#### Finding students: `find`
+
+Finds all students whose fields match the given keyword(s), based on the specified match condition.
+You can find students by tags, student fields and lesson fields.
+
+Format: `find [cond/{all | any | none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [subject/SUBJECT_KEYWORDS] [date/START_DATE] [time/TIME_RANGE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`<br>
+
+Available fields are as described in [Student parameters](#student-parameters) and [Lesson parameters](#lesson-parameters).
+
+* You must specify at least one field to search for, and provide at least one keyword.<br>
+  e.g. `find cond/any` or `find n/` are invalid commands.
+
+##### Search by tags
+* You can search by multiple tags. e.g. `t/paid t/new`.
+* One tag parameter can only have one keyword. e.g. `t/paid new` is invalid.
+* Only whole words will be matched. e.g. keyword `paid` will not match `unpaid`.
+* The search is case-insensitive. e.g. keyword `new` will match `NEW`.
+
+Example:
+* `find t/unpaid t/New` will return all students with both of the tags `UNPAID` and `NEW`.
+
+<div style="page-break-before: always;"></div>
+
+##### Search by other student fields
+* You can specify one or more keywords for each parameter. e.g. `find n/Amad Ali`.
+* A field needs to contain all specified keywords to be matched.<br>
+  e.g. keywords `Amad Ali` will not match `Amad`, but it will match `Amad bin Ali`.
+* If you specify multiple keywords with the same prefix, only the last prefix will be used to search that field.
+* A keyword can match a word partially. e.g. keyword `uni` will match `university`.
+* The search is case-insensitive.
+
+Example:
+* `find n/John a/west coast` will return students with name that contains `John`, and address that contains `west` and `coast`.
+
+
+##### Search by lesson fields
+* Finds all students with at least one lesson that matches the lesson parameters.
+* The find behaviour of lesson fields are specified in the table below.
+
+<table id="find-param-table">
+    <thead>
+        <tr>
+            <th style="text-align:center">Fields</th>
+            <th style="text-align:center">Find behaviour</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Subject, <br> Lesson Rates</td>
+            <td>
+              <ul>
+                <li>The same constraints for student fields apply.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Homework</td>
+            <td>
+              <ul>
+                <li>Finds students with lessons that have at least one piece of homework matching all the keywords.</li>
+                <li>The same constraints for student fields apply.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
+                <li>Finds students with lessons that fall on the specified date.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Cancelled Date</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the <a href="#lesson-date">Date</a> format</li>
+                <li>Finds students with lessons that are cancelled on the specified date.</li>
+              </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>Time Range</td>
+            <td>
+              <ul>
+                <li>Accepts one keyword that must follow the <a href="#lesson-time-range">Time Range</a> format</li>
+                <li>Finds students with lessons that overlaps with the time range, excluding the start and end time.
+                    e.g. <code>time/1200-1400</code> matches a lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
+              </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="page-break-before: always;"></div>
+
+Example:
+* `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
+
+##### Search with match condition
+
+* You can specify an optional match condition which indicates the type of matching to be applied.
+  A student is considered a match only when `all`, `any` or `none` of the fields which you are searching for match the student.
+* The match condition is optional and defaults to `all` if not specified.
+
+Example:
+
+Suppose you want to find students with the tag `new` or with lessons between `1100-1300`.
+1. Type the command `find cond/any t/new time/1100-1300` into the command box.
+2. Press <kbd>Enter</kbd> and you should see that the list now displays only students matching the given keywords.
+
+![find](images/find.png)
+
+<div class="caption">TAB displays two students after the find command.</div>
+
+Other examples:
+* `find n/John t/zoom cond/all` returns students with both the name `John` and the tag `zoom`.
+* `find n/John t/zoom cond/none` returns students without the name `John` and the tag `zoom`.
+
+<div style="page-break-before: always;"></div>
 
 #### Viewing all tags: `tag`
 
@@ -1178,8 +1166,6 @@ Format: `tag`
 ![tag](images/tag.png)
 
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
-
-<div style="page-break-before: always;"></div>
 
 #### Clearing all entries: `clear`
 
@@ -1192,6 +1178,8 @@ Format: `clear`
 Undo the previous command that modified the data.
 
 Format: `undo`
+
+<div style="page-break-before: always;"></div>
 
 #### Redoing undone commands: `redo`
 
@@ -1216,8 +1204,6 @@ Example:
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
     
-<div style="page-break-before: always;"></div>
-
 #### Exiting the program: `exit`
 
 Exits the program.
@@ -1229,6 +1215,7 @@ Format: `exit`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 ### Managing Data
 
