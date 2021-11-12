@@ -865,9 +865,7 @@ for other ways to open the Command line if the above shortcuts do not work for y
    ![Cli3](images/Cli3.png)
     <div style="page-break-after: always;"></div>
     
-4. If you get a response similar to the one below, it is likely that you do not have Java installed, or 
-did not properly set up Java after installing. Either way, you can head over to [Installing Java](#71-installing-java) 
-to find the steps to easily fix this problem.
+4. If you get a response similar to the one below, it is likely that you do not have Java installed, or did not properly set up Java after installing. Either way, you can head over to [Installing Java](#71-installing-java) to find the steps to easily fix this problem.
 
    ![Cli4](images/Cli4.png)
 
