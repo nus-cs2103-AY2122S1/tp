@@ -966,7 +966,7 @@ Examples:
 
 #### Editing a lesson's outstanding fees: `ledit`
 
-Edits the outstanding fees to a specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
+Edits the outstanding fees for a specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit the outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
@@ -1184,13 +1184,13 @@ Format: `redo`
 Example:
 1. Valid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of the first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. The name of the first student returns to original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
    4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
    
 2. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of the first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. The name of the first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
     
