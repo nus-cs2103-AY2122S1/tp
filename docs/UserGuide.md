@@ -18,8 +18,8 @@ TAB enables you to keep track of your student and lesson information, schedule, 
 TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of text.
 
 If you can type fast, the CLI will enable you to accomplish your tasks much faster. 
-For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along, 
-and this guide will get you started and speeding through your administrative tasks in no time.
+For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along. 
+Moreover, this guide will get you started and speeding through your administrative tasks in no time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,13 +71,13 @@ _text_ | Caption for images.
    
    Some other commands you can try:
 
-   * **`view 1`** : Views the lessons of the first person in the list.
+   * **`view`**`1` : Views the lessons of the first person in the list.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a student named `John Doe` to TAB.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`ladd 1 `** : Adds a lesson.
+   * **`ladd`**`7 date/20 Dec 2021 time/1100-1200 subject/History rates/35` : Adds a lesson that starts on 20 Dec 2021 for the 7th student shown in the current list.
    
 6. If you wish to clear the sample data and start using the app, simply type `clear` and press <kbd>ENTER</kbd>.
    However, if you’re a new user, we recommend that you read on and try out our features with the sample data to get yourself familiarised.
@@ -204,7 +204,7 @@ Help is just a moment away when you use TAB.
 
 #### Viewing the help window: `help`
 
-This command pops open a help window that includes a summary of our commands, as well as a link to access this user guide page.
+This command pops open a help window that includes a summary of our commands, as well as a link to access the user guide page.
 
 Format: `help`
 
@@ -422,7 +422,7 @@ A student can have any number of tags (including 0).
 Example:
 
 Suppose you have got a new student, `Betsy Crowe`, whose phone number is `91234567` and lives at `Newgate`. 
-However, you forgot to ask for her school and academic level, so you decided to add a remark and labelled her with tags `missinginfo` and `new`.
+However, you forgot to ask for her school and academic level, so you decided to add a remark and label her with tags `missinginfo` and `new`.
 
 Let’s see how you can record Betsy Crowe’s details into TAB!
 
@@ -943,17 +943,17 @@ Easily keep track of the students that haven't paid for their lessons yet.
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 * Outstanding fees can only be added and edited using Lesson Commands.
-* Outstanding fee displayed in Student details is the sum of all the student's lesson's outstanding fees.
+* Outstanding fee displayed in Student details is the sum of all the student's lessons' outstanding fees.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a lesson's outstanding fees: `ladd`
 
-Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
+Adds outstanding fees to a specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
 
-In the event that you have existing outstanding fees for the lesson prior to adding the lesson, you can add outstanding fees as a field when adding lesson.
-Outstanding fee is an optional field and if not added with lesson, TAB will assume outstanding fees for the newly added lesson as $0.00.
+In the event that you have an existing outstanding fees for the lesson prior to adding the lesson, you can add outstanding fees as a field when adding the lesson.
+Outstanding fee is an optional field and if not added with lesson, TAB will assume the outstanding fees for the newly added lesson as $0.00.
 
 Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
 
@@ -966,9 +966,9 @@ Examples:
 
 #### Editing a lesson's outstanding fees: `ledit`
 
-Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
+Edits the outstanding fees for a specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
 
-In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
+In the event that you disagree with the outcomes of the Fees Calculator, you can edit the outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
 Format: `ledit INDEX LESSON_INDEX OTHER_FIELDS_TO_EDIT f/OUTSTANDING_AMOUNT`
@@ -1184,13 +1184,13 @@ Format: `redo`
 Example:
 1. Valid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. The name of the first student returns to the original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
    4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
    
 2. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. The name of the first student returns to the original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
     
