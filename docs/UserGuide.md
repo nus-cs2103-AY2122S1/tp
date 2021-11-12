@@ -584,8 +584,7 @@ The screenshot below shows the expected result.
 
   c. Index specified is not a positive integer <br>
 
-<div style="page-break-after: always;"></div>
-
+    <div style="page-break-after: always;"></div>
 ### 5.9 Filtering contacts : `filter`
 
 Filters the existing contacts in the CMM database. The displayed list will show contacts sorted by the chosen category.
