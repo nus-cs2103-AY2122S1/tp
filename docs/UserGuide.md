@@ -291,6 +291,7 @@ Command alias: `f`
 <img src="images/FindCommand.png" width="800px">
 
 [Back to table of contents](#table-of-contents)
+
 ***
 
 #### Listing all contacts : `list` <a name="list"></a>
@@ -320,6 +321,7 @@ Command aliases: `clr` `c`
 <img src="images/ClearCommand.png" width="800px">
 
 [Back to table of contents](#table-of-contents)
+
 ***
 
 <div style="page-break-after: always;"></div>
@@ -465,6 +467,7 @@ Command aliases: `clrc` `cc`
 <img src="images/ClearLessonCommand.png" width="800px">
 
 [Back to table of contents](#table-of-contents)
+***
 
 <div style="page-break-after: always;"></div>
 ### Managing Data <a name="managing-data"></a>
