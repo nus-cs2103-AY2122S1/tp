@@ -318,6 +318,8 @@ Format: `student -al STUDENT_INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * However, lessons of different students can still overlap. This may be disallowed in a future version.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
@@ -357,6 +359,8 @@ Format: `student -ae STUDENT_INDEX s/SUBJECT d/DATE_TIME`
 * `SUBJECT` takes in any input with at least one alphanumeric character.
 * `DATE_TIME` takes in a date and time in the following format: `yyyy-MM-dd HH:mm`.
 * There are currently no restrictions on `DATE_TIME`, please ensure that the exam dates are correct.
+
+<div style="page-break-after: always;"></div>
 
 Example:
 * `student -ae 1 s/Math d/2021-12-20 14:00` adds an exam with the subject name Math
@@ -466,11 +470,11 @@ Format: `group -al GROUP_INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * However, lessons of different students or groups can still overlap. This may be disallowed in a future version.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
-
-<div style="page-break-after: always;"></div>
 
 #### Deleting a lesson from a group: `group -dl`
 
