@@ -343,6 +343,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
   
     * Edits the **second** `Interest` to 'Swimming'
 
+<div style="page-break-after: always;"></div>
+
 The screenshot below shows the expected result.
 
 ![editCommandExample](images/EditCommandExample.png)
