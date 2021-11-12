@@ -422,7 +422,7 @@ A student can have any number of tags (including 0).
 Example:
 
 Suppose you have got a new student, `Betsy Crowe`, whose phone number is `91234567` and lives at `Newgate`. 
-However, you forgot to ask for her school and academic level, so you decided to add a remark and labelled her with tags `missinginfo` and `new`.
+However, you forgot to ask for her school and academic level, so you decided to add a remark and label her with tags `missinginfo` and `new`.
 
 Let’s see how you can record Betsy Crowe’s details into TAB!
 
@@ -943,17 +943,17 @@ Easily keep track of the students that haven't paid for their lessons yet.
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 * Outstanding fees can only be added and edited using Lesson Commands.
-* Outstanding fee displayed in Student details is the sum of all the student's lesson's outstanding fees.
+* Outstanding fee displayed in Student details is the sum of all the student's lessons' outstanding fees.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a lesson's outstanding fees: `ladd`
 
-Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
+Adds outstanding fees to a specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
 
-In the event that you have existing outstanding fees for the lesson prior to adding the lesson, you can add outstanding fees as a field when adding lesson.
-Outstanding fee is an optional field and if not added with lesson, TAB will assume outstanding fees for the newly added lesson as $0.00.
+In the event that you have an existing outstanding fees for the lesson prior to adding the lesson, you can add outstanding fees as a field when adding the lesson.
+Outstanding fee is an optional field and if not added with lesson, TAB will assume the outstanding fees for the newly added lesson as $0.00.
 
 Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
 
@@ -966,9 +966,9 @@ Examples:
 
 #### Editing a lesson's outstanding fees: `ledit`
 
-Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
+Edits the outstanding fees to a specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson-ledit).
 
-In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
+In the event that you disagree with the outcomes of the Fees Calculator, you can edit the outstanding fees using `ledit` command.
 Refer to [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
 Format: `ledit INDEX LESSON_INDEX OTHER_FIELDS_TO_EDIT f/OUTSTANDING_AMOUNT`
@@ -1184,13 +1184,13 @@ Format: `redo`
 Example:
 1. Valid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. Name of the first student returns to original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
    4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
    
 2. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. Name of first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. Name of the first student returns to original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
     
