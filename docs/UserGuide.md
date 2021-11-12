@@ -340,10 +340,11 @@ Update the attributes of existing users using the prefix of the client’s attri
 | <img src="images/info_icon.png" width="50"/> | • Client ID cannot be changed. |
 | <img src="images/tip_icon.png" width="50"/> | • Multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
 
+<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
-<img src="images/ExpectedEditCommand.png" width="300"/>
+<img src="images/ExpectedEditCommand.png" width="400"/>
 </p>
 <div style="page-break-after: always;"></div>
 ### 5.4 Delete particular contact : `delete`
@@ -382,7 +383,7 @@ based on the given `SORT_DIRECTION`.
 | **Examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
 | <img src="images/info_icon.png" width="50"/> | • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income in ascending order first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending order. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
-
+<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 For instance, if you were to sort clients by risk appetite.
 
@@ -400,6 +401,7 @@ Finds the meeting schedule on a specified date.
 | **Examples** | • `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021. <br>  • `schedule` displays all meetings|
 | <img src="images/info_icon.png" width="50"/> | • `DATE` has to be in the format of dd-MM-yyyy. <br> • if the `DATE` is not specified, all meetings will be displayed.|
 
+<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 For instance, using `schedule 30-11-2021` will produce the following result. <br>
 
@@ -417,6 +419,7 @@ Finds clients whose contacts match with the given keywords.
 | **Examples** | • `search John` returns *john* and *John Doe* <br> • `search alex david` returns *Alex Yeoh*, *David Li* |
 | <img src="images/info_icon.png" width="50"/> | • If no `KEYWORD` is provided, search will be based on `<attribute>/ATTRIBUTE_KEYWORD` only. <br> • The search is case-insensitive. e.g `keith` will match `Keith`. <br> • The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.<br> • Clients matching at least one keyword will be returned). <br> e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. <br> • If attribute keyword is provided, only clients whose attribute matches with the attribute keyword will be returned. <br> e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`. |
 
+<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 For instance, using `search Alex` will produce the following result. <br>
 
