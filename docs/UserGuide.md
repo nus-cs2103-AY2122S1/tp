@@ -274,7 +274,8 @@ friend
 
 #### 5.1.6 Assigning a skill value for a linked game : `friend --skill`
 
-Assigns the provided skill value to the friend with the given `FRIEND_ID` for the linked game with the given `GAME_ID`.
+Assigns the provided skill value specified by the `NUMBER_VALUE` to the friend with the given `FRIEND_ID` for the linked 
+game with the given `GAME_ID`.
 This command allows you to record your personal gauge of a friend's skill at a particular game.
 
 Format: `friend --skill FRIEND_ID -g GAME_ID -v NUMBER_VALUE`
