@@ -54,6 +54,10 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 <img src="images/MainApp.png" width="800px">
 
+[Back to table of contents](#table-of-contents)
+
+***
+
 <div style="page-break-after: always;"></div>
 ## How to use this User Guide <a name="how-to-use"></a>
 
@@ -142,6 +146,10 @@ Some additional notes:
    * The contact list panel and the lesson list panel are **independent of each other**. This means that adding a contact with module and lesson code `CS2103T G09` will not create that lesson in the lesson panel list. 
    * Contacts and lessons are sorted alphabetically after every command by name and module code name respectively.  
 
+[Back to table of contents](#table-of-contents)
+
+***
+
 <div style="page-break-after: always;"></div>
 ## Features <a name="features"></a>
 ### General <a name="general"></a>
@@ -164,6 +172,10 @@ Exits the program.
 Format: `exit`
 
 Command aliases: `quit` `q`
+
+[Back to table of contents](#table-of-contents)
+
+***
 ### Managing contacts <a name="managing-contacts"></a>
 #### Adding a contact: `add` <a name="add"></a>
 
@@ -189,6 +201,8 @@ Examples:
 Command alias: `a`
 
 <img src="images/AddCommand.png" width="800px">
+
+[Back to table of contents](#table-of-contents)
 
 ***
 
@@ -217,6 +231,8 @@ Command aliases: `update` `e`
 
 <img src="images/EditCommand.png" width="800px">
 
+[Back to table of contents](#table-of-contents)
+
 ***
 
 #### Deleting a contact / contacts: `delete` <a name="delete"></a>
@@ -242,6 +258,9 @@ Examples:
 Command aliases: `del` `rm` `d`
 
 <img src="images/DeleteCommand.png" width="800px">
+
+[Back to table of contents](#table-of-contents)
+***
 
 <div style="page-break-after: always;"></div>
 #### Finding contacts by name / module code: `find` <a name="find"></a>
@@ -270,6 +289,9 @@ Command alias: `f`
 
 <img src="images/FindCommand.png" width="800px">
 
+[Back to table of contents](#table-of-contents)
+***
+
 #### Listing all contacts : `list` <a name="list"></a>
 
 Shows a list of all contacts in contHACKS.
@@ -277,6 +299,8 @@ Shows a list of all contacts in contHACKS.
 Format: `list`
 
 Command alias: `ls`
+
+[Back to table of contents](#table-of-contents)
 
 ***
 
@@ -293,6 +317,9 @@ Format: `clear`
 Command aliases: `clr` `c`
 
 <img src="images/ClearCommand.png" width="800px">
+
+[Back to table of contents](#table-of-contents)
+***
 
 <div style="page-break-after: always;"></div>
 ### Managing lessons <a name="managing-lessons"></a>
@@ -319,6 +346,8 @@ Examples:
 Command alias: `ac`
 
 <img src="images/AddLessonCommand.png" width="800px">
+
+[Back to table of contents](#table-of-contents)
 
 ***
 
@@ -347,6 +376,8 @@ Command aliases: `updatec` `ec`
 
 <img src="images/EditLessonCommand.png" width="800px">
 
+[Back to table of contents](#table-of-contents)
+
 ***
 
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
@@ -370,6 +401,8 @@ Examples:
 Command aliases: `delc` `rmc` `dc`
 
 <img src="images/DeleteLessonCommand.png" width="800px">
+
+[Back to table of contents](#table-of-contents)
 
 ***
 
@@ -400,6 +433,8 @@ Command alias: `fc`
 
 <img src="images/FindLessonCommand.png" width="800px">
 
+[Back to table of contents](#table-of-contents)
+
 ***
 
 #### Listing all lessons: `listc` <a name="listc"></a>
@@ -409,6 +444,8 @@ Shows a list of all lessons in contHACKS.
 Format: `listc`
 
 Command alias: `lsc`
+
+[Back to table of contents](#table-of-contents)
 
 ***
 
@@ -425,6 +462,8 @@ Format: `clearc`
 Command aliases: `clrc` `cc`
 
 <img src="images/ClearLessonCommand.png" width="800px">
+
+[Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 ### Managing Data <a name="managing-data"></a>
@@ -444,6 +483,9 @@ Advanced users are welcome to update data directly by editing that data file.
 <div markdown="span" class="alert alert-warning">:warning: **Warning:**
 If your changes to the data file make its format invalid, contHACKS will discard all data and start with an empty data file on the next start up.
 </div>
+
+[Back to table of contents](#table-of-contents)
+***
 
 <div style="page-break-after: always;"></div>
 ## Command Summary <a name="summary"></a>
@@ -684,3 +726,5 @@ If your changes to the data file make its format invalid, contHACKS will discard
 </tr>
 
 </table>
+
+[Back to table of contents](#table-of-contents)
