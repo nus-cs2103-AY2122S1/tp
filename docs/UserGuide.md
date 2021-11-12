@@ -854,6 +854,7 @@ for other ways to open the Command line if the above shortcuts do not work for y
     Once done, you should see an interface similar to the screenshot below. <br>
 
    ![Cli1](images/Cli1.png)
+   <div style="page-break-after: always;"></div>
 
 2. Enter the command 'java -version' and press enter.  <br>
 
