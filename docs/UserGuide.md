@@ -292,6 +292,7 @@ The screenshot below shows the expected result. Note how the "❌" changes to a 
 
   c. Index specified is not a positive integer <br>
 
+<div style="page-break-after: always;"></div>
 
 ### 5.4 Editing a contact : `edit`
 
