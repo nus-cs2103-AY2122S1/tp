@@ -496,7 +496,8 @@ update data directly by editing that data file.
 ## 6. Multiple Address Books Feature
 
 This section details the multiple address book features in LeadsForce. Separate your clients into different address books
-to better manage your clients! More information on the command format can be found [here](#5-features).
+to better manage your clients! <br>
+More information on the command format can be found [here](#5-features).
 ### 6.1 Create new address book : `ab create`
 
 Create a new address book by the name provided and switches to it.
