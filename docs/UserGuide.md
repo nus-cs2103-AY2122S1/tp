@@ -45,7 +45,7 @@ Some terminology that might help when referring to Notor:
 Pay attention to these callouts:
 
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong>
-This block is used to highlight information you should pay attention to
+This block is used to highlight information you should pay attention to.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
@@ -66,8 +66,6 @@ Used to highlight dangers.
 Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/java/technologies/downloads/#java11-windows).
 ### 2. Installing the project
 Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your Notor. The *home folder* is where the data that Notor uses will be stored.
-
-<div style="page-break-after: always;"></div>
 
 ### 3. Running the application
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds.
@@ -189,8 +187,8 @@ The data exported will be displayed as follows:
 The base functionality of Notor is allowing you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-The following commands only work when persons are listed in Notor (visible in the list pane).
-</div> <br>
+  The following commands only work when persons are listed in Notor (visible in the list pane).
+</div>
 
 #### _Creating a person_
 
@@ -233,8 +231,6 @@ Adds a person at the given index `INDEX` to a specified group. To add a person t
 Notor considers people within a subgroup as also being within the group that contains it (the supergroup). Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 #### _Deleting a person_
 
 Removes the contact and the data saved for a person from Notor.
@@ -268,6 +264,8 @@ Edits the data of the person at the index `INDEX` in the List Pane and replaces 
 * You cannot change the name of the person to the same name as someone else in the group.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### _Removing a person from group_
 
 Removes a person from a group or a subgroup. To remove a person from a subgroup, include the subgroup parameter along with the group it is under.
@@ -278,6 +276,8 @@ Removes a person from a group or a subgroup. To remove a person from a subgroup,
 | `p (INDEX) /r (g:GROUP_NAME)`                            | `p 2 /r g:Final Year Project`           | Remove the person at index `2` from the group `Final Year Project`                                |
 | `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 1 /remove g:Orbital sg:Group A` | Remove the person at index  `1`  from the group  `Group A` which is the subgroup of `Orbital`. The person is still in the group `Orbital`|
 | `p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`           | `p 2 /r g:Research sg:AI focus`         | Remove the person at index  `2`  from the group  `AI focus`  which is the subgroup of  `Research`. The person is still in the group `Research`|
+
+<div style="page-break-after: always;"></div>
 
 #### _Taking notes for a person_
 
@@ -347,7 +347,7 @@ Removes all the tags from an existing person. Use with caution.
 |-----------------------------|------------------|
 | `person (INDEX) /cleartags` | `p (INDEX) /ct`  |
 
-
+<div style="page-break-after: always;"></div>
 
 <a name = "archiving-people"></a>
 ### Archiving People
@@ -365,14 +365,14 @@ Archives a single person by their index.
 | `person (INDEX) /archive`| `person 1 /archive` | Archives the person at index `1` |
 | `p (INDEX) /ar`          | `p 2 /ar`          | Archives the person at index `2` |
 
-<div style="page-break-after: always;"></div>
-
 #### _Archiving All_
 Archives every person displayed in the list panel.
 
 | Format   | Short Format |
 |----------|--------------|
 | `person /archive`| `person /ar`|
+
+<div style="page-break-after: always;"></div>
 
 
 #### _Listing Archived Persons_
@@ -383,9 +383,6 @@ Shows the list of archived Persons.
 | Format   | Short Format |
 |----------|--------------|
 | `person /listarchive` | `p /lar`|
-
-
-<div style="page-break-after: always;"></div>
 
 #### _Unarchiving_ 
 Restores an archived person back to your person list in Notor.
@@ -398,6 +395,8 @@ Restores an archived person back to your person list in Notor.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 You must be on the list of archived persons in order to use this command, as it needs the index of the person to unarchive.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <a name = "group-command"></a>
 
@@ -421,8 +420,6 @@ on the group. A few ideas on how you can use groups are:
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 All group commands except **Creating a group** will only work when groups or subgroups are listed.
 </div>
-
-<div style="page-break-after: always;"></div>
 
 #### _Creating a group_
 
@@ -516,8 +513,6 @@ Lists all persons in the list panel.
 |--------------|-----------------------|
 | `person /list` | List all persons      |
 | `p /l`        | List all persons      |
-
-<div style="page-break-after: always;"></div>
 
 #### _Listing all groups_
 
@@ -636,10 +631,12 @@ Users can also use the Down arrow key to navigate back to the more recent comman
 ### Keyboard Shortcuts
 Notor has keyboard shortcuts to give you added convenience and allow you to control Notor using your keyboard alone. Here are the shortcuts we have available.
 
-####Pop-Up Window
+#### Pop-Up Window
 
 You can navigate the buttons in a pop-up window using the arrow keys. On Windows and Linux, 
 select the button by pressing enter; on MacOS, press space.
+
+<div style="page-break-after: always;"></div>
 
 #### Shortcut Keys for Note Window
 
@@ -654,8 +651,6 @@ Shortcut Key            | Linux/Window                                   | MacOS
 * <strong>Timestamp: </strong> shortcut key types the current date and time in Note Window in this format <code>E, MMM dd yyyy HH:mm"</code>. <br>
 * Example: `Fri., Oct. 22 2021 00:07`
 </div>
-
-<div style="page-break-after: always;"></div>
 
 <a name = "command-summary"></a>
 
@@ -676,11 +671,11 @@ Action     | Format   | Short Format
 **Clear**  | `clear`  | `c`
 **Export** | `export` | `exp`
 
+<div style="page-break-after: always;"></div>
+
 
 ### Person
 Refer to the details of Person commands [here](#person-command).
-
---------------------------------------------------------------------------------------------------------------------
 
 Action                    | Format                                                                        | Short Format
 --------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------
@@ -781,19 +776,25 @@ When you open Notor for the first time, you will see some dummy data for you to 
 
    <img src="images/Example2.png" alt="example2" width="75%" height="75%">
 
+   <div style="page-break-after: always;"></div>
+
 3. **`person User /create`** : To create a new contact person, type in this command. You can replace `User` with a name of your choice.
 
    <img src="images/Example3.png" alt="example3" width="75%" height="75%">
 
-4. **`group CS2103T /create`** : To create a new group, type in this command. You can replace `CS2103T` with any group
-   name you want.
-   <img src="images/Example4.png" alt="example4" width="75%" height="75%">
-
+4. **`group CS2103T /create`** : To create a new group, type in this command. You can replace `CS2103T` with any group name you want.
+    <img src="images/Example4.png" alt="example4" width="75%" height="75%">
+    
+    <div style="page-break-after: always;"></div>
+    
 5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`. In the example shown below, the user named `David Li` will be added to the group `CS2103T`.
    <img src="images/Example5.png" alt="example5" width="75%" height="75%">
 
 6. **`group /list`** : To refer to the current group list, you can simply type in this command.
    <img src="images/Example6.png" alt="example6" width="75%" height="75%">
+   
+   <div style="page-break-after: always;"></div>
+
 
 7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on
 
@@ -805,6 +806,9 @@ When you open Notor for the first time, you will see some dummy data for you to 
     <img src="images/Example8.png" alt="example8" width="75%" height="75%">
 
 9. Test out whatever commands you like. When you're done...
+
+   <div style="page-break-after: always;"></div>
+
 
 10. **`clear`** : Type this and hit enter to remove all the dummy data prepared for you.
 
