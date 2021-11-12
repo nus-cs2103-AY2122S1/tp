@@ -27,7 +27,6 @@ a Command Line Interface** (CLI) while still having the benefits of a Graphical 
 towards teachers who can type fast. It allows teachers to store and organise contacts related to their students into
 different classes.
 
-[comment]: <> (for 2101, rephrase the last sentence above?)
 <div style="page-break-after: always;"></div>
 
 ## How to use this guide?
@@ -53,10 +52,12 @@ Symbol                 | Meaning
 :bulb:                 | a tip (e.g. shortcut or hidden features) which you can follow to enhance your experience using TeachBook
 :exclamation:          | a caution you have to take to prevent any unwanted results
 
+--------------------------------------------------------------------------------------------------------------------
+
+[\[ Back to top \]](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
-[\[ Back to top \]](#table-of-contents)
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed on your computer.
@@ -84,10 +85,13 @@ Symbol                 | Meaning
     * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ## Graphical User Interface
 
 In this section, we will be guiding you through the different sections of TeachBook's Graphical User Interface (GUI).
@@ -98,11 +102,13 @@ There are a total of 5 different sections according to the image of our GUI belo
 * **Class List** (Place where you can see the list of classes that you have added)
 * **Student List** (Place where you can see the list of students that you have added)
 
-![GUI](images/GUI.png)
-<div style="page-break-after: always;"></div>
+![GUI](images/GUI.png) 
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -138,6 +144,8 @@ There are a total of 5 different sections according to the image of our GUI belo
 
 </div>
 
+[\[ Back to top \]](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Basic features
@@ -162,7 +170,7 @@ Format: `clear`
 Don't forget that TeachBook provides an undo feature if you accidentally clear all the data!
 </div>
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### Undoing a command : `undo`
 
@@ -190,10 +198,12 @@ Format: `redo`
 You can use this command to exit TeachBook. There is no need to save any data manually.
 
 Format: `exit`
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Class related features
 #### Adding a class : `addClass`
@@ -211,7 +221,7 @@ Examples:
 ![addClass](images/addClass.png)
 Fig 2: Class `4E4` is added after `addClass 4E4` is executed
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### Deleting a class : `deleteClass`
 
@@ -254,15 +264,11 @@ Example:
 ![select_example](images/select_example.png)
 Fig 5: Class `4E2` is highlighted in blue with its students list displayed after `select 4E2` is executed
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### Editing a class name : `editClass`
 
 You can use this command to make changes to the class name of the currently selected class, if you have made a spelling mistake or if you just want to change the class name.
-
-[comment]: <> (If you made a spelling mistake in your class name or willing to change the name of the class, you can use)
-
-[comment]: <> (this command to edit the name of the currently selected class.)
 
 Format: `editClass CLASS_NAME`
 
@@ -274,10 +280,12 @@ Examples:
 
 ![editClass](images/editClass.png)
 Fig 4: Class `4E4` added in [addClass](#adding-a-class--addclass) is now named `4E5` after `editClass 4E5` is executed
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Student related features
 #### Adding a student : `add`
@@ -395,11 +403,13 @@ Example:
 * `remark 1 r/` clears previously added remark of the 1st student.
 
 ![remark](images/remark.png)
-Fig 10: Student `Jane Doe` added in [add](#adding-a-student--add) is displayed with remark `Contracted COVID-19` after `remark 3 r/Contracted COVID-19` is executed
-<div style="page-break-after: always;"></div>
+Fig 10: Student `Jane Doe` added in [add](#adding-a-student--add) is displayed with remark `Contracted COVID-19` after `remark 3 r/Contracted COVID-19` is executed <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Grade related features
 #### Setting a grading system : `setGrade`
@@ -421,7 +431,7 @@ Example:
 ![setGrade](images/setGrade.png)<br>
 Fig 11: New grading system is set after `setGrade A>B>C>D` is executed
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### Giving grade to a student : `grade`
 
@@ -443,7 +453,7 @@ Example:
 ![Grade](images/gradeAll.png)
 Fig 12: All students in Class `4E1` are given an `A` grade after `grade all g/A` is executed
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### Resetting grading system : `resetGrade`
 
@@ -454,10 +464,12 @@ Format: `resetGrade`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 All students' grades will be cleared!
 </div>
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Attendance related features
 #### Marking the attendance of a student : `mark`
@@ -509,10 +521,12 @@ Examples:
 
 ![unmark](images/unmark.png)
 Fig 14: Student `Jane Doe`, who was previously [marked as present](#marking-the-attendance-of-a-student--mark), is now marked as absent and is displayed with a red checkbox after `unmark 3` is executed
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Utility features
 #### Printing to Excel : `print`
@@ -528,17 +542,14 @@ Format: `print [c/class] [c/phone] [c/email] [c/address] [c/tags] [c/remark] [c/
 <div markdown="block" class="alert alert-info">:information_source: **Info:**
 Putting an empty column title (i.e. `c/ `) will give you an empty column.
 </div>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can use this command to obtain a physical copy of the student list so that you can submit it to the management if required.
+This command helps you to obtain a physical copy of the student list for administrative tasks.
 </div>
 
 Examples:
 * `print c/class c/email c/Signature` creates an Excel file with four columns: student name column, class column, email column, and an empty column with title `Signature`.
-
-![excel](images/img.png)
+![excel](images/excel.png)
 Fig 15: Excel sheet generated from TeachBook after `print c/class c/email c/Signature` is executed
-
 <br>
 
 #### Sorting students : `sort`
@@ -565,7 +576,7 @@ Examples:
 * `select 4E2` followed by `sort name` sorts the students in class `4E2` according to their name.
 * `list all` followed by `sort grade` sorts all the students in the TeachBook according to their grade but will not reorder each class's student list.
 
-<br>
+<div style="page-break-after: always;"></div>
 
 #### Listing all students : `list`
 
@@ -587,10 +598,12 @@ list by listing out all the students from all the classes as no class is selecte
 
 ![list all](images/listAll.png)
 Fig 16: All students in the TeachBook are displayed after `list all` is executed
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Others
 #### Saving the data
@@ -606,10 +619,12 @@ TeachBook data are saved as a JSON file `[JAR file location]/data/teachbook.json
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, TeachBook will discard all data and start with an empty data file at the next run.
 </div>
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## FAQs
 
@@ -624,10 +639,12 @@ If your changes to the data file make its format invalid, TeachBook will discard
 
 **Q**: When performing tasks on classes (e.g. deleting or selecting a class), I find it cumbersome to type the class name all the time. Can I select it by the index? <br>
 **A**: Currently, it is still not possible. We have heard your feedback and are currently working on it to add this feature in. Do keep a lookout for our next update! <br>
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 [\[ Back to top \]](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
@@ -640,11 +657,11 @@ Action                         | Format, Examples
 **Exit**                       | `exit`
 **Add class**                  | `addClass CLASS_NAME` <br> e.g., `addClass 4E4`
 **Delete class**               | `deleteClass CLASS_NAME` <br> e.g., `deleteClass 4E4`
-**Edit class**                 | `editClass CLASS_NAME` <br> e.g., `editClass 4E5`
 **Select class**               | `select CLASS_NAME` <br> e.g., `select 4E2`
+**Edit class**                 | `editClass CLASS_NAME` <br> e.g., `editClass 4E5`
 **Add student**                | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g., `add n/Jane Doe p/91234567 e/janedoe@example.com a/21 Lower Kent Ridge Road, Singapore 119077 t/class monitor`
 **Delete student**             | <code>delete INDEX…&#124;&#124;all</code> <br> e.g., `delete 1`
-**Edit student**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit 2 n/Joseph Chan t/`
+**Edit student**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g., `edit 2 n/Joseph Chan t/`
 **Find student**               | `find KEYWORD…` <br> e.g., `find James Jake`
 **Add remark to student**      | `remark INDEX r/[REMARK]` <br> e.g., `remark 1 r/Contracted COVID-19`
 **Set grading system**         | `setGrade GRADE_1[>GRADE_2]…` <br> e.g., `setGrade A>B>C>D`
