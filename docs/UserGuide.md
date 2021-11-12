@@ -103,7 +103,7 @@ Section | Representation
 ---------|---------
 Menu Bar | The area where you can click to navigate and view some of TAB's features (e.g. help, reminder, and calendar). See [Menu Bar Shortcuts](#menu-bar-shortcuts) for more details.
 Menu Item | A button that you can click to view the stated feature, or to quit TAB (for <kbd>Exit</kbd>).
-Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>Enter</kbd>.
+Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you press <kbd>ENTER</kbd>.
 Result Display | The area that shows the result of the execution of commands typed in the Command Box. If the command entered has been executed successfully, it will display the relevant success message. Otherwise, it will show an error message indicating the cause of the error.
 Student List | The panel that shows the list of students you have in TAB.
 Student Card | The area that shows the details of a student. See [Managing Students](#managing-students) for more details.
@@ -216,7 +216,7 @@ This command pops open a help window that includes a summary of our commands, as
 
 Format: `help`
 
-- You can select a cell and copy its value using <kbd>Ctrl</kbd> + <kbd>C</kbd> on Windows or <kbd>COMMAND</kbd> + <kbd>C</kbd> on Mac.
+- You can select a cell and copy its value using <kbd>CTRL</kbd> + <kbd>C</kbd> on Windows or <kbd>COMMAND</kbd> + <kbd>C</kbd> on Mac.
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end of each column header to sort rows alphabetically.
 
@@ -439,7 +439,7 @@ Let’s see how you can record Betsy Crowe’s details into TAB!
 
     <div style="page-break-before: always;"></div>
 
-2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
+2. Press <kbd>ENTER</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
    
    ![add2](images/add2.png) 
    
@@ -678,7 +678,7 @@ Example:
 Suppose you have a student named Betsy Crowe with index number 7. You have a history lesson with her every Sunday from 11am to 12pm, starting from 20 December 2021, and you want to add it in TAB. The end date is not known, and you are getting paid $35 per hour. For the first lesson, you want to assign assignment 1 as homework. 
 
 1. Type the command `ladd 7 recurring/ date/20 Dec 2021 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
-2. Press <kbd>Enter</kbd> and you should see that a lesson has been added to Betsy!
+2. Press <kbd>ENTER</kbd> and you should see that a lesson has been added to Betsy!
    
    ![ladd Example](images/laddExample.png)
    <div class="caption">Adding a lesson to Betsy Crowe.</div>
@@ -729,7 +729,7 @@ Example:
 Suppose you have a student named Betsy Crowe with index number 7. You mistakenly added the wrong start and end date for her lesson with index number 1. The lesson should start on 2 December 2021 and end on 30 December 2021. Furthermore, she has a school event on the third lesson (16 Dec 2021) for this recurring lesson which means the third lesson has to be cancelled.
 
 1. Type the command `ledit 7 1 recurring/30 Dec 2021 date/2 Dec 2021 cancel/16 dec 2021` into the command box.
-2. Press <kbd>Enter</kbd> and you should see the first lesson of Betsy being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
+2. Press <kbd>ENTER</kbd> and you should see the first lesson of Betsy being edited to start on `2 Dec 2021` and to end on `30 Dec 2021`. The lesson happening on `16 Dec 2021` will also be cancelled!
    ![ledit Example](images/leditExample.png)
    <div class="caption">Editing a lesson of Betsy Crowe.</div>
 
@@ -882,7 +882,7 @@ You have just received payment recently from Betsy for her lessons, and you want
 Let's take a look at how you can record the payment for Betsy Crowe's lesson in TAB!
 
 1. Type the command `paid 7 1 amt/140` into the command box.
-2. Press <kbd>Enter</kbd> and you should see the outstanding fees of the lesson being deducted by the paid amount accordingly! The updated fee is now $0.
+2. Press <kbd>ENTER</kbd> and you should see the outstanding fees of the lesson being deducted by the paid amount accordingly! The updated fee is now $0.
    ![paidExample](images/paidExample.png)
 <div class="caption">TAB displays the updated fees after the paid command.</div>
 
@@ -1145,7 +1145,7 @@ Example:
 
 Suppose you want to find students with the tag `new` or with lessons between `1100-1300`.
 1. Type the command `find cond/any t/new time/1100-1300` into the command box.
-2. Press <kbd>Enter</kbd> and you should see that the list now displays only students matching the given keywords.
+2. Press <kbd>ENTER</kbd> and you should see that the list now displays only students matching the given keywords.
 
 ![find](images/find.png)
 
