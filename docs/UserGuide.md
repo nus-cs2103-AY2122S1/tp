@@ -203,7 +203,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [g/GENDER] [age/AGE] [i/I
 * `Age` must only contain numbers
 
 * `Address` and `Interest` can be in any format
-*  All the fields are case-insensitive  
+
+* All the fields are case-insensitive  
 
 <div markdown="span" class="alert alert-primary">:bulb: 
 
@@ -313,6 +314,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
    ![interestsList](images/interestsList.png)
 
 <div markdown="block" class="alert alert-primary">
+    
+<div style="page-break-after: always;"></div>
 
 **:bulb: Tip:** <br>
 
@@ -340,6 +343,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
   
     * Edits the **second** `Interest` to 'Swimming'
 
+<div style="page-break-after: always;"></div>
+
 The screenshot below shows the expected result.
 
 ![editCommandExample](images/EditCommandExample.png)
@@ -365,6 +370,8 @@ The screenshot below shows the expected result.
   a. Duplicate of the edited contact already exists on the address book <br>
   (e.g., editing name from 'Bob' to 'bob' is not allowed. Since names are case-insensitive, both 'Bob' and 'bob' are recognised
   as the same name)
+
+<div style="page-break-after: always;"></div>
 
 ### 5.5 Deleting a contact : `delete`
 
@@ -445,7 +452,8 @@ Click [here](#57-finding-contacts-that-match-all-the-keywords-specified--findall
 
 **Example:**
 
-* `findAny findAny n/o p/87` Finds all contacts that have the letter `o` in their name and the substring '87' in their phone number
+* `findAny findAny n/o p/87` Finds all contacts that have **either** the letter `o` in their name **or** 
+the substring '87' in their phone number **or** both
 
 The screenshot below shows the expected result.
 
