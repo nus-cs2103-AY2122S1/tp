@@ -67,18 +67,21 @@ Hope you have a great time with CMM.
 
 3. Copy the file to the folder you want to use as the home folder for CMM
 
-5. Double-click the file to start the app. A prompt will popup asking whether you want to import any new contacts. The prompt will look like the screenshot below :
+4. Double-click the file to start the app. A prompt will popup asking whether you want to import any new contacts. 
+The prompt will look like the screenshot below :
 
    ![importPopUpUi](images/importPopUpMessage.png) <br>
    To learn more about what each option does in detail, click [here](#514-importing-the-data-into-database).
    An example file import can be downloaded [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases/tag/Test_Files)
     <div style="page-break-after: always;"></div>
-6. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data upon first startup
+5. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot 
+below should appear in a few seconds. Note how the app contains some sample data upon first startup
 
    ![Ui](images/Ui.png)
 
-7. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will open the help window
-   You can find the commands that CallMeMaybe supports below:
+6. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will 
+open the help window. You can find the commands that CallMeMaybe supports below:
+
    - `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named John Doe to the CMM database
    
    - `list` : Lists all contacts
@@ -188,9 +191,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [g/GENDER] [age/AGE] [i/I
 
   * The local-part should only contain alphanumeric characters and these special characters, `+_.-` <br>
   
-  * The local-part may not start or end with any special characters.<br>
+  * The local-part may not start or end with any special characters<br>
   
-  * The domain-name is made up of domain labels separated by periods. (eg. @nus.edu.sg)<br>
+  * The domain-name is made up of domain labels separated by periods (eg. @nus.edu.sg)<br>
   
   * The domain-name must end with a domain label at least 2 characters long<br>
   
@@ -310,7 +313,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [age/AGE
 
 * `INTERESTSLIST INDEX` **must be a positive integer** (e.g., 1, 2, 3, …​)
 
-* The Interests list of a contact can be found here (refer to the screenshot below) and can be displayed by using the [display command](#58-displaying-full-contact-details--display)
+* You can find the Interests list of a contact here (refer to the screenshot below) and can be displayed by using the [display command](#58-displaying-full-contact-details--display)
    ![interestsList](images/interestsList.png)
 
 <div style="page-break-after: always;"></div>
@@ -408,14 +411,14 @@ Format: `delete INDEX`
 
 ### 5.6 Finding contacts that match **ANY** of the keywords specified: `findAny`
 
-Finds all contacts that match any of the fields specified by the user
+Finds **any** contacts that match any of the fields specified by the user
 
 Format: `findAny [n/NAME…​] [p/PHONE…​] [e/EMAIL…​] [a/ADDRESS…​] [g/GENDER…​] [age/AGE…​]
 [c/CALLED…​] [i/INTEREST…​]`
 
 **Things to note:**
 
-* FindAny requires at least one field. But it is optional to include all the fields <br>
+* FindAny requires at least one field. But it is optional for you to include all the fields <br>
 
 * If there are duplicate fields, CMM will only take the right-most field <br>
   (e.g., `findAny n/alex n/david` returns the same results as `findAny n/david`)
@@ -481,11 +484,11 @@ The screenshot below shows the expected result.
 
 Format: `findAll [n/NAME…​] [p/PHONE…​] [e/EMAIL…​] [a/ADDRESS…​] [g/GENDER…​] [age/AGE…​] [c/CALLED…​] [i/INTEREST…​]`
 
-Finds only the contacts that match all the keywords specified in their respective fields
+Finds only the contacts that match **all** the keywords specified in their respective fields
 
 **Things to note:**
 
-* `findAll` requires at least one field. But it is optional to include all the fields. <br>
+* `findAll` requires at least one field. But it is optional for you to include all the fields. <br>
 
 * If there are duplicate fields, CMM will only take the right-most field <br>
   (e.g., `findAll n/alex n/david` returns the same results as `findAny n/david`)
@@ -547,9 +550,9 @@ The screenshot below shows the expected result.
 ### 5.8 Displaying full contact details : `display`
 
 Displays additional information of a particular contact stored in the application. These include the
-address, gender, age and their interests.
+`Address`, `Gender`, `Age` and their `Interests`.
 
-The full details of the contact are shown on the right side of the application (inside the white box).
+You can find the full details of the displayed contact in the Person Card (refer to the screenshot below).
 
 ![displayUi](images/displayUi.png)
 
@@ -608,7 +611,7 @@ Format: `filter CATEGORY [COUNT]`
 * If the last argument is not an integer, it will be interpreted as a `CATEGORY`
   (e.g., `filter gender called` will be interpreted as `filter called`)
 
-* If more than one category is entered, the last category will be interpreted as the `CATEGORY`
+* If you enter more than one category, the last category will be interpreted as the `CATEGORY`
   (e.g., `filter gender called 3` will be interpreted as `filter called 3`)
 
 * If only one argument is given, it will be interpreted as a `CATEGORY`
