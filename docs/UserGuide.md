@@ -446,7 +446,8 @@ Click [here](#57-finding-contacts-that-match-all-the-keywords-specified--findall
 
 **Example:**
 
-* `findAny findAny n/o p/87` Finds all contacts that have the letter `o` in their name and the substring '87' in their phone number
+* `findAny findAny n/o p/87` Finds all contacts that have **either** the letter `o` in their name **or** 
+the substring '87' in their phone number **or** both
 
 The screenshot below shows the expected result.
 
