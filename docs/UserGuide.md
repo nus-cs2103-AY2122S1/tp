@@ -143,6 +143,8 @@ Contact number | p/ | `PHONE_NUMBER`<br><br>• `PHONE_NUMBER`: should only cont
 Risk appetite | r/ | `RISK_APPETITE`<br><br>• `RISK_APPETITE`: An integer from 1-5, where 1 is very low risk tolerance and 5 is very high risk tolerance. | 0 to 1
 Tag | t/ | `TAG`<br><br>• `TAG`: should be alphanumeric `e.g. friends`.<br>• More information [below](#34-tag-attribute). | 0 or more
 
+<div style="page-break-after: always;"></div>
+
 ### 3.1 Duplicate Clients
 
 A client is considered to be the same as another client if they share the same **name** and **email**.
@@ -190,7 +192,6 @@ The `Tag` attribute refers to the tags associated with the client. A client can 
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
-
 ## 4. Navigating LeadsForce
 
 This section details the various components of LeadsForce's interface and how you could go about navigating our
@@ -201,7 +202,6 @@ application. An overview of LeadsForce's interface is shown below.
 </p>
 
 <div style="page-break-after: always;"></div>
-
 ### 4.1 Command View
 
 <p align="center">
@@ -228,6 +228,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
    pressing `enter`, LeadsForce can filter out clients based on the tag that is chosen. Further details of
    the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
+<div style="page-break-after: always;"></div>
 <img src="images/info_icon.png" width="30"/> Not liking the current colour scheme? LeadsForce offers 3 other darker themes for you to use, toggle the `theme` bar to change the colour scheme of the application.
 
 | Space theme | Twilight theme | Dark theme |
@@ -245,6 +246,7 @@ The client list view consist of the list of clients from the user's address book
 • When opening the application, all clients in an address book will be shown. <br>
 • Apart from the filter tag panel on top, you can also click on the tag here to filter clients based on the tag name.
 
+<div style="page-break-after: always;"></div>
 ### 4.3 Client Info View
 
 <p align="center">
@@ -650,7 +652,8 @@ Action | Format | Examples
 **Clear** | `clear` | -
 **Help** | `help` | -
 **Exit** | `exit` | -
-
+   
+<div style="page-break-after: always;"></div>
 ### 10.2 Multiple Address Book Commands
 
 Action | Format | Examples
