@@ -674,8 +674,9 @@ Refer to the details of the general commands [here](#general-command).
 Action     | Format   | Short Format
 -----------|----------|----------
 **Help**   | `help`   | `h`
-**Exit**   | `exit`   | `e`
 **Clear**  | `clear`  | `c`
+**Exit**   | `exit`   | `e`
+**Note** | `note` | `n`
 **Export** | `export` | `exp`
 
 <div style="page-break-after: always;"></div>
