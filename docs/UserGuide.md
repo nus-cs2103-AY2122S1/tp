@@ -865,11 +865,11 @@ Name | Explanation
 **Index** | The **number corresponding to a staff** in the **displayed staff list**.
 **Graphical User Interface (GUI)** | A **visual-based user interface** where users interact with the software through graphical icons and pictures.
 **Parameters** | **Additional information** to supplement a Command Word in a **Command**. For example, `n/NAME` is a name parameter.
+**Shift Timings** | The start and end times of shifts. The default shift timings are from 10:00 to 16:00 for morning shift and 16:00 to 22:00 for afternoon shift.
 **Staff Role Requirements** | The **minimum number of staff required** for **each role** for a shift.
 **Staff List** | The **list of staff members**. Staff'd has an **overall list** with all the members, and a **displayed staff list** which can be filtered by other commands.
 **Terminal** | A **text-based user interface** for **Linux Operating Systems**. It can be used to execute text commands.
 **User Interface** | The use of **input devices and software** by which a **user and computer interacts**.
-**Default shift timings** | The default shift timings are from 10:00 to 16:00 for morning shift and 16:00 to 22:00 for afternoon shift.
 
 
 <br>
