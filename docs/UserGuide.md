@@ -131,12 +131,11 @@ What follows is a detailed breakdown of all the commands Notor has available and
 
 #### _Viewing help_
 
-Displays a summary of commands, as well as a link you can copy to get to this full user guide.
+Opens a help window with a summary of commands, as well as a link you can copy to get to this full user guide.
 
-| Format      | What the command does          |
-|-------------|--------------------------------|
-| `help`      | Opens the help window          |
-| `h`         | Same as above                  |
+| Format      | Short Format    |
+|-------------|-----------------|
+| `help`      | `h`             |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
@@ -423,8 +422,8 @@ You can sort your contacts in Notor by the group that they are in, as well as ta
 on the group. A few ideas on how you can use groups are:
 
 <ul>
-  <li>Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts</li>
-  <li>Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest</li>
+  <li>Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts.</li>
+  <li>Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest.</li>
   <li>Group mentees who you need to achieve certain checkpoints with. For example, if in your job as a mentor
     you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.</li>
 </ul>
@@ -444,7 +443,7 @@ Creates a group.
 | `g (GROUP_NAME) /c`          | `g FYP /c`              | Creates a group named `FYP`     |
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
-  * You cannot create a group with name starting with a number, and may contain `-` or `.` characters
+  * You cannot create a group with name starting with a number, and may contain `-` or `.` characters.
   * The new group must not have a same name with other existing groups.
 </div>
 
@@ -577,7 +576,7 @@ Find allows you to obtain the results that match with the keyword specified. You
 
 #### _Finding persons_
 
-Finds all persons that match your search term. You may search for substrings within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
+Finds all persons that match your search term. You may search for partial matches within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
 
 | Format                                        | Example                        | What the example does                                                  |
 |-----------------------------------------------|--------------------------------|------------------------------------------------------------------------|
@@ -605,7 +604,7 @@ Use after you have listed out all groups or subgroups.
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
   * Finds all the groups/subgroups that match the `KEYWORD`.
-  * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
+  * If the name contains the whole keyword within it, it will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -715,12 +714,11 @@ the card.
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 
-  * For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
-    please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
-    before using them via <code>GROUP_INDEX</code>.
-  * For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
-    command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
-    by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
+  * For the <strong>Create Person</strong> command, if you want to automatically add a person to a group, 
+    please use the <b>List Groups</b> to list the groups first so that you can access them via the <code>GROUP_INDEX</code>.
+  * To view a list of persons in a particular subgroup, you should first use `group /list`
+    command to list out all the subgroups in the group the subgroup is contained in. Then list out the persons inside that subgroup 
+    via the <b>List Persons in Group</b> command with the <code>GROUP_INDEX</code> of the subgroup.
 
 </div>
 
@@ -804,16 +802,17 @@ When you open Notor for the first time, you will see some dummy data for you to 
    <div style="page-break-after: always;"></div>
 
 
-7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on
+7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on.
 
    <img src="images/Example7.png" alt="example7" width="75%" height="75%">
-   When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
+
+<br> When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
 
 8. **`group 1 /create n:Gemini`** : This command creates a new subgroup inside the group at index `1`. In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`. The syntax `n:` is to indicate the **name** of the subgroup you have created.
 
-    <img src="images/Example8.png" alt="example8" width="75%" height="75%">
+     <img src="images/Example8.png" alt="example8" width="75%" height="75%">
     
-    <div style="page-break-after: always;"></div>
+     <div style="page-break-after: always;"></div>
 
 9. Test out whatever commands you like. When you're done...
 
