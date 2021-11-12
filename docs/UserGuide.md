@@ -25,7 +25,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
     * [Listing all contacts: `list`](#list)
     * [Clearing all contacts: `clear`](#clear)
 
-  * [Managing lessons](#manaaging-lessons)
+  * [Managing lessons](#managing-lessons)
     * [Adding a lesson: `addc`](#addc)
     * [Editing a lesson: `editc`](#editc)
     * [Deleting a lesson / lessons: `deletec`](#deletec)
