@@ -21,7 +21,8 @@ Previously, keeping track of all of yours friends' gaming information and schedu
 However, with gitGud, there is no need to get tilted (frustrated) by this anymore as gitGud provides you with a convenient 
 platform to manage essential gaming information of your fellow gamer friends.
 
-For example, to get you excited, gitGud supports many time-saving features such as finding friends available to play with
+For example, to get you excited, gitGud supports many time-saving features such as finding friends who are available to 
+play with
 just a single command.
 
 --------------------------------------------------------------------------------------------------------------------
