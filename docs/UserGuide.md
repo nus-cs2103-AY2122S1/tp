@@ -168,7 +168,6 @@ CMM displays an 'empty contact' with all the fields set to 'N.A'
 <div style="page-break-after: always;"></div>
 
 ## 5. Overview of Features
-
 ### 5.1 Adding a contact: `add`
 
 Adds a contact to the CMM database.
