@@ -7,6 +7,7 @@ title: Tuition Address Book (TAB) User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 ## Introduction: TAB Is More Than an App
 
@@ -37,6 +38,8 @@ To help you with this, there is a [back to table of contents](#toc) link at the 
 
 There will also be links in relevant places to help you navigate the document.
 
+<div style="page-break-before: always;"></div>
+
 **Conventions Used**
 
 As you read this user guide, you may also encounter these syntax and symbols. 
@@ -61,8 +64,11 @@ _text_ | Caption for images.
 
 3. Create a new folder in your computer and move **TAB.jar** inside. This will be the home folder for the application.
 
+   <div style="page-break-before: always;"></div>
+
 4. Double-click **TAB.jar** to start the app. A window similar to the one below should appear in a few seconds. 
    TAB starts up with some sample data to let you explore and see how the app will look like when it’s in use.
+   
    ![start](images/start.png) 
    <div class="caption">How TAB looks when you start it for the first time.</div>
 
@@ -83,6 +89,7 @@ _text_ | Caption for images.
    However, if you’re a new user, we recommend that you read on and try out our features with the sample data to get yourself familiarised.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 ## Overview of the Graphical User Interface (GUI)
 
@@ -112,7 +119,7 @@ This means that after clicking any button in the main window, you do not have to
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ## Features
 This section describes the available features in TAB. 
@@ -142,6 +149,8 @@ Commands are text that you can enter into TAB's command box to tell TAB which op
 |Parameter prefix| The specific prefix that identifies the start of the parameter. Each parameter has a unique prefix, but all prefixes end with a `/`.|
 |Parameter| An input provided by the user for the execution of the command.|
 
+<div style="page-break-before: always;"></div>
+
 <div markdown="block" class="alert alert-warning"> :exclamation: **Important** <br>
 
 * **Prefixes** are **case-sensitive**<br>
@@ -168,7 +177,7 @@ An example of a command in TAB:
 * Items with `…` after them can be used any number of times, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Notes about parameters
 
@@ -194,7 +203,7 @@ An example of a command in TAB:
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Getting Help 
 
@@ -217,12 +226,9 @@ Format: `help`
 </div>
 <div class="caption">Help window interface.</div>
 
-<br />
-
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
@@ -246,7 +252,7 @@ Easily manage your student information with these commands and say goodbye to me
   </ul>
 </div>
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Student parameters
 
@@ -403,6 +409,7 @@ Emails should be of the format **local-part@domain** and adhere to the following
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 #### Adding a student: `add`
 
@@ -427,10 +434,14 @@ However, you forgot to ask for her school and academic level, so you decided to 
 Let’s see how you can record Betsy Crowe’s details into TAB!
 
 1. Type `add n/Betsy Crowe p/91234567 a/Newgate r/Remember to get school and academic level! t/missinginfo t/new` into the command box as shown.
+   
    ![add1](images/add1.png)
    <div class="caption"> Command box with the add command.</div>
 
+    <div style="page-break-before: always;"></div>
+
 2. Press <kbd>Enter</kbd> and you will see `Betsy Crowe`'s details in the student list in just an instant!
+   
    ![add2](images/add2.png) 
    
    <div class="caption">TAB with the new student added.</div>
@@ -438,6 +449,7 @@ Let’s see how you can record Betsy Crowe’s details into TAB!
 Other example:
 - `add n/John Doe p/98765432 a/Sengkang Ave 2, Blk 123, #02-01 pe/jackdoe@gmail.com sch/Sengkang Secondary lvl/S1` Adds a student named `John Doe` who lives at `Sengkang Ave 2, Blk 123, #02-01` with phone `98765432`, parent email `jackdoe@gmail.com`, currently studying `S1` at `Sengkang Secondary`.
 
+<div style="page-break-before: always;"></div>
 
 #### Editing a student: `edit`
 
@@ -459,12 +471,13 @@ Available fields are as described in [Student parameters](#student-parameters).
 * You can delete the data in optional fields by supplying a parameter with no arguments.<br>
   e.g. `edit 2 r/` will remove the remarks for the 2nd student in the displayed list.
 
-* You cannot remove a contact field if it is the only remaining means of contact you have with a student.<br>
-  e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
-  any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
+* You cannot remove all [contact fields](#student-contact) of a student.<br>
+  e.g. `edit 2 pp/` will not work if the student does not have any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
 
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
+
+<div style="page-break-before: always;"></div>
 
 Example:
 
@@ -480,6 +493,8 @@ Here's how to do it:
 
 ![Updated Betsy Crowe](images/EditCommandEditBetsyResult.png)
    <div class="caption">Editing Betsy Crowe.</div>
+
+<div style="page-break-before: always;"></div>
 
 #### Deleting a student: `delete`
 
@@ -504,7 +519,7 @@ Format: `list`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Finding Students
 
@@ -538,9 +553,10 @@ Example:
 * You can specify one or more keywords for each parameter. e.g. `find n/Amad Ali`.
 * A field needs to contain all specified keywords to be matched.<br>
   e.g. keywords `Amad Ali` will not match `Amad`, but it will match `Amad bin Ali`.
-* If you specify multiple keywords with the same prefix, only the last prefix will be used to search that field.
 * A keyword can match a word partially. e.g. keyword `uni` will match `university`.
 * The search is case-insensitive.
+
+<div style="page-break-before: always;"></div>
 
 Example:
 * `find n/John a/west coast` will return students with name that contains `John`, and address that contains `west` and `coast`.
@@ -558,7 +574,7 @@ Example:
     </thead>
     <tbody>
         <tr>
-            <td>Subject <br> Lesson Rates</td>
+            <td>Subject, <br> Lesson Rates</td>
             <td>
               <ul>
                 <li>The same constraints for student fields apply.</li>
@@ -597,8 +613,8 @@ Example:
             <td>
               <ul>
                 <li>Accepts one keyword that must follow the <a href="#lesson-time-range">Time Range</a> format</li>
-                <li>Finds students with lessons that overlaps with the time range, excluding the start and end time.<br>
-                    e.g. <code>time/1200-1400</code> matches lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
+                <li>Finds students with lessons that overlaps with the time range, excluding the start and end time.
+                    e.g. <code>time/1200-1400</code> matches a lesson with time <code>1300-1500</code>, but not <code>1400-1500</code></li>
               </ul>
             </td>
         </tr>
@@ -608,7 +624,7 @@ Example:
 Example:
 * `find date/12 Oct 2021 time/1200-1400 subject/Math` will match a student with lesson on `12 OCT 2021`, at `1130-1230`, with the subject `Mathematics`.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ##### Search with match condition
 
@@ -635,7 +651,7 @@ Other examples:
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Managing Lessons
 
@@ -670,7 +686,7 @@ A lesson can be categorised into 2 types:
 A lesson can be identified by the index number shown in the lesson list of the student. The lesson index specified for commands must be a valid index number shown in the lesson list of the student.
 </div>
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Lesson parameters
 
@@ -777,7 +793,7 @@ Additionally, we will allow you to toggle these checks on and off, just in case 
 Do look forward to these features!
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Adding a lesson: `ladd`
 
@@ -797,8 +813,11 @@ Suppose you have a student named Betsy Crowe with index number 7. You have a his
 
 1. Type the command `ladd 7 recurring/ date/20 Dec 2021 time/1100-1200 subject/History rates/35 hw/Assignment 1` into the command box.
 2. Press <kbd>Enter</kbd> and you should see that a lesson has been added to Betsy!
+   
    ![ladd Example](images/laddExample.png)
    <div class="caption">Adding a lesson to Betsy Crowe.</div>
+
+<div style="page-break-before: always;"></div>
 
 Other examples:
 
@@ -810,7 +829,6 @@ Other examples:
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
 
 #### Editing a lesson: `ledit`
 
@@ -825,14 +843,14 @@ Field | Prefix | Constraints | Examples |
 Cancelled Date |`cancel/`| Follows the <a href="#lesson-date">Date</a> format.<br/> The date to be cancelled must be a valid lesson date, that has not already been cancelled, and cannot be left blank.<br>e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.|`cancel/20 jan 2022`|
 Uncancelled Date |`uncancel/` | Follows the <a href="#lesson-date">Date</a> format.<br/>The date to be uncancelled must be a date that has already been cancelled and cannot be left blank.| `uncancel/20 jan 2022`|
 
+<div style="page-break-before: always;"></div>
+
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
 * Editing the homework set of a lesson will clear all existing pieces of homework and add the newly specified pieces of homework.<br>
   e.g. `ledit 2 1 hw/As2` will erase the lesson's original pieces of homework and replace it with the new homework `As2`.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
-
-<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
@@ -865,10 +883,8 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
 
 #### Viewing a student's lessons: `view`
 
@@ -886,7 +902,7 @@ Examples:
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Viewing upcoming lessons: `remind`
 
@@ -910,6 +926,8 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
   - dates before 1 Nov 2021 (has passed),
   - 1 Nov 2021 with end time before 1500h (has passed),
   - 3 Nov 2021 with start time after 1500h (beyond 48 hours).
+
+<div style="page-break-before: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -947,6 +965,7 @@ Easily keep track of the students that haven't paid for their lessons yet.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 #### Adding a lesson's outstanding fees: `ladd`
 
@@ -978,6 +997,8 @@ Examples:
 * `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
 * `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
 
+<div style="page-break-before: always;"></div>
+
 #### Paying a lesson's outstanding fees: `paid`
 
 Pays for a specific lesson.
@@ -1004,7 +1025,7 @@ Other Examples:
 * `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
 * `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Behaviour of the Fees Calculator
 
@@ -1031,7 +1052,7 @@ This value would be used to calculate and flag out which lesson's fees are due b
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Managing Your Schedule
 
@@ -1065,7 +1086,7 @@ All the other commands in this [Managing Your Schedule](#managing-your-schedule)
 For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Viewing your daily calendar: `day`
 
@@ -1077,8 +1098,6 @@ Format: `day`
 
 <div class="caption">Day view for calendar interface.</div>
 
-<div style="page-break-after: always;"></div>
-
 #### Viewing your weekly calendar: `week`
 
 Shows the weekly calendar.
@@ -1089,7 +1108,7 @@ Format: `week`
 
 <div class="caption">Week view for calendar interface.</div>
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Viewing your monthly calendar: `month`
 
@@ -1101,7 +1120,6 @@ Format: `month`
 
 <div class="caption">Month view for calendar interface.</div>
 
-<div style="page-break-after: always;"></div>
 
 #### Viewing your yearly calendar: `year`
 
@@ -1136,6 +1154,7 @@ Format: `today`
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 ### Miscellaneous Commands
 
@@ -1158,6 +1177,8 @@ Format: `tag`
 ![tag](images/tag.png)
 
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
+
+<div style="page-break-before: always;"></div>
 
 #### Clearing all entries: `clear`
 
@@ -1194,7 +1215,7 @@ Example:
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
     
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 #### Exiting the program: `exit`
 
@@ -1235,7 +1256,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### Menu Bar Shortcuts
 
@@ -1255,6 +1276,7 @@ Menu Item | Shortcut | Action | Description
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before: always;"></div>
 
 ## FAQ
 
@@ -1269,14 +1291,14 @@ This section records frequently asked questions from users of TAB.
 <div align="center">
   <img src="images/macSecurity.png" width="600" />
 </div>
-<div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
+<div class="caption">The arrow indicates where you should click to open the app.</div>
 
 <br />
 
 [back to table of contents](#toc)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ## Glossary
 This section shows a list of technical and TAB-related terms used in this user guide with their respective definitions.
@@ -1295,8 +1317,6 @@ Parameter | User input required to specify the data to be saved into the applica
 Recurring lesson | A lesson that will occur more than once in patterned intervals.
 UI | User Interface - the means by which the user and the app interact.
 UX | User Experience - The experience a user has when using the app.
-
-<br />
 
 [back to table of contents](#toc)
 
@@ -1347,7 +1367,7 @@ Action | Format
 [**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
 [**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-before: always;"></div>
 
 ### General
 
