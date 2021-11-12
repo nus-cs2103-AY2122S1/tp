@@ -147,23 +147,23 @@ CMM displays an 'empty contact' with all the fields set to 'N.A'
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user<br>
+  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
 
-* Items in square brackets are optional.<br>
-  e.g., `n/NAME [g/GENDER]` can be used as `n/John Doe g/M` or as `n/John Doe`.
+* Items in square brackets are optional<br>
+  e.g., `n/NAME [g/GENDER]` can be used as `n/John Doe g/M` or as `n/John Doe`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g., `[i/INTEREST]…​` can be used as ` ` (i.e., 0 times), `i/running`, `i/running i/watching tv` etc.
+* Items with `…`​ after them can be used multiple times including zero times<br>
+  e.g., `[i/INTEREST]…​` can be used as ` ` (i.e., 0 times), `i/running`, `i/running i/watching tv` etc
 
-* Parameters can be in any order.<br>
-  e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order<br>
+  e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
 
-* If a parameter is expected only once in the command is specified multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g., if you specify `p/99998888 p/66667777`, only `p/66667777` will be taken.
+* If a parameter is expected only once in the command is specified multiple times, only the last occurrence of the parameter will be taken<br>
+  e.g., if you specify `p/99998888 p/66667777`, only `p/66667777` will be taken
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
+  e.g., if the command specifies `help 123`, it will be interpreted as `help`
 
 </div>
 
