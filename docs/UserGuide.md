@@ -130,8 +130,8 @@ These features are categorized as follows:
 * [Managing Lessons](#managing-lessons)
 * [Managing Lesson Fees](#managing-lesson-fees)
 * [Managing Your Schedule](#managing-your-schedule)
-* [Managing Data](#managing-data)
 * [Miscellaneous Commands](#miscellaneous-commands)
+* [Managing Data](#managing-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -505,7 +505,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the [find command](#finding-students-find).
 
 #### Listing all students: `list`
 
@@ -693,7 +693,7 @@ Other examples:
   adds the makeup lesson to the 4th student in the displayed student list.
 
 * `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
-  adds the makeup lesson to the 1st student in the results of the `find` command.
+  adds the makeup lesson to the 1st student in the results of the [find command](#finding-students-find).
 
 
 #### Editing a lesson: `ledit`
@@ -749,7 +749,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results of the [find command](#finding-students-find).
 
 
 #### Viewing a student's lessons: `view`
@@ -766,7 +766,7 @@ Examples:
 ![viewLessons](images/viewLessons.png)
 <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
-* `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the [find command](#finding-students-find).
 
 <div style="page-break-before: always;"></div>
 
@@ -1327,7 +1327,7 @@ Action | Format & Examples
 [**Add Student**](#adding-a-student-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
 [**Edit Student**](#editing-a-student-edit) | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
 [**Delete Student**](#deleting-a-student-delete) | `delete INDEX`<br><br> e.g. `delete 3`
-[**Find Students**](#finding-students) | `find [cond/{all &#124; any &#124; none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [subject/SUBJECT_KEYWORDS] [time/TIME_RANGE] [date/START_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`<br><br> e.g. `find cond/any n/Alex Yeo t/unpaid time/1500-1600`
+[**Find Students**](#finding-students-find) | `find [cond/{all &#124; any &#124; none}] [t/TAG_KEYWORD]…​ [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [subject/SUBJECT_KEYWORDS] [time/TIME_RANGE] [date/START_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATES_KEYWORDS] [hw/HOMEWORK_KEYWORDS]`<br><br> e.g. `find cond/any n/Alex Yeo t/unpaid time/1500-1600`
 
 ### Lessons
 
