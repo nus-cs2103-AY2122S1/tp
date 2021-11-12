@@ -3,18 +3,19 @@ layout: page
 title: User Guide
 ---
 
-**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. However, we're sure that Notor can still help people outside our target audience in situations where they have a **many mentees to one mentor relationship**, where they need to **take notes quickly**. Personal CRMs (CRM stands for Customer Relationship Manager) are useful tools to keep track of people's information and keep it organised, which can really benefit you in making connections with people.
+**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. NUS faculty who are asked to mentor tend to have many mentees, and may not meet them often, but are still expected to understand their situation and provide useful advice. A personal CRM (CRM stands for Customer Relationship Manager) like Notor is a useful aid to track information about mentees and keep it organised, which hugely benefits forming meaningful connections. However, Notor can still help people outside our target audience in situations where one must manage **many contacts** and need to **take notes quickly**. 
 
-Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently during meetings with mentees, and group those notes with your mentee's information powerfully and easily.
+Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, the CLI is likely faster than alternatives on the market.
 
 Key features of Notor are:
 
-* Powerful Organization which is up to the user to manage many mentees
+* Powerful Organization to manage many mentees, with powerful user customisation
   * Group mentees, and place groups into subgroups for greater control
-  * Add tags to mentees and sort by tags to easily identify meta-data about your contacts
-  * Archive contacts you’re no longer actively mentoring, but keep them in your Notor to retrieve at any time
+  * Add tags to mentees and sort by tags to easily identify metadata about your contacts
+  * Archive contacts you are no longer actively mentoring, but keep them in your Notor to retrieve at any time
+  * Export data to serve as a backup.
 * Clean note-taking system
-  * Take notes concurrently with meeting the mentee through no-frills text files
+  * Take notes concurrently with meeting mentees through no-frills text files
   * Drop time stamps whenever you update your information and meet with the mentee effortlessly
 * Fast CLI
   * Commands with short forms
@@ -28,7 +29,7 @@ Key features of Notor are:
 
 <div style="page-break-after: always;"></div>
 
-### Using this User Guide
+## Using this User Guide
 
 If you're new to Notor, hop over to [Quick Start](#quick-start) to install and begin using it. If you already know what you want, use the Table of Contents to find the feature you are looking for, or the [Command Summary](#command-summary) to view all commands available. 
 
@@ -108,13 +109,13 @@ What follows is a detailed breakdown of all the commands Notor has available and
 
 **Notes about the command format:**<br>
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `person /create n:NAME`, `NAME` is a parameter which can be used as `/create n:John Doe`.
+  e.g. in `person /create (n:NAME)`, `NAME` is a parameter which can be used as `/create n:John Doe`.
 * Round brackets `()` refer to COMPULSORY arguments.<br>
-  e.g. `g:(GROUP_NAME)` means that the group name must be entered at that position.
+  e.g. `(g:GROUP_NAME)` means that the group name must be entered at that position.
 * Items in square brackets are optional.<br>
-  e.g. `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
+  e.g. `(n:NAME) [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
 * Items with `…`​ after them can be used multiple times including zero times, with a comma separating terms.<br>
-  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t:tag1, tag2, tag3` etc.
+  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t/tag1, tag2, tag3` etc.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -130,15 +131,25 @@ What follows is a detailed breakdown of all the commands Notor has available and
 
 #### _Viewing help_
 
-Displays a summary of commands, as well as a link you can copy to get to this full user guide.
+Opens a help window with a summary of commands, as well as a link you can copy to get to this full user guide.
 
-| Format      | What the command does          |
-|-------------|--------------------------------|
-| `help`      | Opens the help panel           |
-| `h`         | Same as above                  |
+| Format      | Short Format    |
+|-------------|-----------------|
+| `help`      | `h`             |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
+</div>
+
+#### _Editing the General Note_
+Opens a note window to edit the General Note.
+
+| Format      | Short Format    |
+|-------------|-----------------|
+| `note`      | `n`             |
+
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+For keyboard shortcuts within the note, you can reference [tips on using Notor](#tips-on-using-notor).
 </div>
 
 #### _Clearing all entries_
@@ -187,7 +198,7 @@ The data exported will be displayed as follows:
 The base functionality of Notor is allowing you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-  The following commands only work when persons are listed in Notor (visible in the list pane).
+  The following commands only work when persons are listed in Notor (visible in the List Pane).
 </div>
 
 #### _Creating a person_
@@ -211,7 +222,7 @@ Creates a person's contact card within Notor. When creating this person, you can
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-Notor minimizes what you need to remember. To add the person to a group, you need to have groups displayed in the list panel, so that you can select the group by its index instead of memorising and typing its name.
+Notor minimizes what you need to remember. To add the person to a group, you need to have groups displayed in the List Pane, so that you can select the group by its index instead of memorising and typing its name.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -225,7 +236,7 @@ Adds a person at the given index `INDEX` to a specified group. To add a person t
 | `person (INDEX) /add (g:GROUP_NAME)`                  | `person 1 /add g:Orbital`            | Add the person at index `1` to the group `Orbital`                                                       |
 | `p (INDEX) /a (g:GROUP_NAME)`                         | `p 2 /a g:Alumni`                    | Add the person at index `2` to the group `Alumni`                                                        |
 | `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 3 /add g:Orbital sg:Artemis` | Add the person at index `3` to the subgroup `Artemis` which is contained within the group `Orbital`      |
-| `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 2 /a g:Alumni sg:Class 2010`      | Add the person at index `4` to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
+| `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 4 /a g:Alumni sg:Class 2010`      | Add the person at index `4` to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 Notor considers people within a subgroup as also being within the group that contains it. Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
@@ -338,7 +349,7 @@ Removes tag(s) from an existing person.
 | Format                                    | Example                            | What the example does                                                   |
 |-------------------------------------------|------------------------------------|-------------------------------------------------------------------------|
 | `person (INDEX) /untag [t:TAG1,TAG2,...]` | `person 1 /untag t:friends,family` | For the person at index  `1`, remove the tags  `friends`  and  `family` |
-| `p (INDEX) /ut [t:TAG1,TAG2,...]`         | `p 2 /t ut:friday`                 | For the person at index  `2` , remove the tag `friday`                  |
+| `p (INDEX) /ut [t:TAG1,TAG2,...]`         | `p 2 /t ut/friday`                 | For the person at index  `2` , remove the tag `friday`                  |
 
 #### _Clearing tags from a person_
 
@@ -367,7 +378,7 @@ Archives a single person by their index.
 | `p (INDEX) /ar`          | `p 2 /ar`          | Archives the person at index `2` |
 
 #### _Archiving All_
-Archives every person displayed in the list panel.
+Archives every person displayed in the List Pane.
 
 | Format   | Short Format |
 |----------|--------------|
@@ -411,8 +422,8 @@ You can sort your contacts in Notor by the group that they are in, as well as ta
 on the group. A few ideas on how you can use groups are:
 
 <ul>
-  <li>Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts</li>
-  <li>Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest</li>
+  <li>Group people you tend to talk to together. When meeting them, you can sort your Notor by that group, so that you can reference just their contacts.</li>
+  <li>Group mentees with common interests. This makes it convenient if you want to reach out to all mentees with a certain shared interest.</li>
   <li>Group mentees who you need to achieve certain checkpoints with. For example, if in your job as a mentor
     you must find out from every mentee a certain list of goals, you can put this checklist into Notor as a group note, then reference it as you contact each mentee.</li>
 </ul>
@@ -432,7 +443,7 @@ Creates a group.
 | `g (GROUP_NAME) /c`          | `g FYP /c`              | Creates a group named `FYP`     |
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
-  * You cannot create a group with name starting with a number, and may contain `-` or `.` characters
+  * You cannot create a group with name starting with a number, and may contain `-` or `.` characters.
   * The new group must not have a same name with other existing groups.
 </div>
 
@@ -452,7 +463,7 @@ Deletes an existing group at the index `INDEX` specified.
 | `g (INDEX) /d`         | `group 2 /d`      | Deletes the group at index `2`|
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-  You can only execute this command when groups are listed in the list pane.
+  You can only execute this command when groups are listed in the List Pane.
 </div>
 
 #### _Creating a subgroup_
@@ -507,23 +518,19 @@ It can also list archived persons: see [Archiving People](#archiving-people).
 
 #### _Listing all persons_
 
-Lists all persons in the list panel.
+Lists all persons in the List Pane.
 
-
-| Format       | What the command does |
-|--------------|-----------------------|
-| `person /list` | List all persons      |
-| `p /l`        | List all persons      |
+| Format         | Short Format |
+|----------------|--------------|
+| `person /list` | `p /l`       |
 
 #### _Listing all groups_
 
-Lists all groups in the list panel.
+Lists all groups in the List Pane.
 
-
-| Format      | What the command does          |
-|-------------|--------------------------------|
-| `group /list` | Lists all groups in list panel |
-| `g /l`        | Lists all groups in list panel |
+| Format         | Short Format |
+|----------------|--------------|
+| `group /list`  | `g /l`       |
 
 <div style="page-break-after: always;"></div>
 
@@ -569,7 +576,7 @@ Find allows you to obtain the results that match with the keyword specified. You
 
 #### _Finding persons_
 
-Finds all persons that match your search term. You may search for substrings within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
+Finds all persons that match your search term. You may search for partial matches within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
 
 | Format                                        | Example                        | What the example does                                                  |
 |-----------------------------------------------|--------------------------------|------------------------------------------------------------------------|
@@ -597,7 +604,7 @@ Use after you have listed out all groups or subgroups.
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
   * Finds all the groups/subgroups that match the `KEYWORD`.
-  * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
+  * If the name contains the whole keyword within it, it will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -707,12 +714,11 @@ the card.
 
 <div markdown="block" class="alert alert-info">:information_source: <strong>Note:</strong>
 
-  * For the <strong>Create</strong> and <strong>List</strong> commands, if you want to automatically add them to a group, 
-    please use the <b>List</b> command to make sure the <code>Group</code> you want to use the command on is displayed 
-    before using them via <code>GROUP_INDEX</code>.
-  * For the <b>List</b> commands, to view list of persons in a particular subgroup, you should first use <b>List</b> 
-    command to list out all the subgroups in a Group you want to view, then list out the persons inside that subgroup 
-    by <b>List</b> command with the <code>GROUP_INDEX</code> you want to list out.
+  * For the <strong>Create Person</strong> command, if you want to automatically add a person to a group, 
+    please use the <b>List Groups</b> to list the groups first so that you can access them via the <code>GROUP_INDEX</code>.
+  * To view a list of persons in a particular subgroup, you should first use `group /list`
+    command to list out all the subgroups in the group the subgroup is contained in. Then list out the persons inside that subgroup 
+    via the <b>List Persons in Group</b> command with the <code>GROUP_INDEX</code> of the subgroup.
 
 </div>
 
@@ -796,16 +802,17 @@ When you open Notor for the first time, you will see some dummy data for you to 
    <div style="page-break-after: always;"></div>
 
 
-7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on
+7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on.
 
    <img src="images/Example7.png" alt="example7" width="75%" height="75%">
-   When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
+
+<br> When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
 
 8. **`group 1 /create n:Gemini`** : This command creates a new subgroup inside the group at index `1`. In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`. The syntax `n:` is to indicate the **name** of the subgroup you have created.
 
-    <img src="images/Example8.png" alt="example8" width="75%" height="75%">
+     <img src="images/Example8.png" alt="example8" width="75%" height="75%">
     
-    <div style="page-break-after: always;"></div>
+     <div style="page-break-after: always;"></div>
 
 9. Test out whatever commands you like. When you're done...
 
