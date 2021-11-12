@@ -1,0 +1,27 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+Participant ":AttendanceCommand" as ac LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+Participant ":StudioRecord" as sr MODEL_COLOR
+Participant ":Student" as est MODEL_COLOR
+Participant ":VersionedModel" as mm MODEL_COLOR
+end box
+
+activate ac
+-> ac
+create sr
+ac -> sr ++ : StudioRecord(attendanceToEdit, participation)
+sr --> ac -- : newStudioRecord
+
+
+create est
+ac -> est ++ :  Student(name, phone, email, telegram, newStudioRecord, assessment, tags)
+est --> ac -- : editedStudent
+
+ac -> mm  : setStudent(studentToEdit, editedStudent)
+<-- ac --
+@enduml

@@ -87,26 +87,44 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/* List of students */
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/* Each cell containing students */
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
 }
 
+/*
+Acknowledgement: Inspired from stackoverflow:
+https://stackoverflow.com/questions/53574916/javafx-change-gradient-background-opacity-without-affecting-children
+*/
+/* Even cells */
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #818192, #303035);
 }
 
+/* Odd cells */
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #4A48A9 , #202049);
 }
 
+/*
+Acknowledgement: Taken from StackOverflow,
+https://stackoverflow.com/questions/65929630/after-adding-a-drop-shadow-to-a-list-cell-hovering-and-selection-events-are-bugg
+*/
+.list-cell:filled:hover {
+  -fx-view-order: -1;
+  -fx-effect: dropshadow(gaussian, #67676D, 12, 0.05, 0.0, 2);
+}
+
+/* When the cells are selected */
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
 }
@@ -123,13 +141,19 @@
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #CED1DC;
+}
+
+.cell_full_name {
+    -fx-font-family: "Arial";
+    -fx-font-size: 25px;
+    -fx-text-fill: #CED1DC;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #CED1DC;
 }
 
 .stack-pane {
@@ -139,7 +163,7 @@
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+     -fx-border-top-width: 4px;
 }
 
 .status-bar {
@@ -217,8 +241,8 @@
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Open Sans Regular";
+    -fx-background-color: #cfb4b4;
+    -fx-font-family: "Arial";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -328,7 +352,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #studentListPanel, #studentWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -349,4 +373,10 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#fullName .label {
+    -fx-text-fill: white;
+    -fx-font-size: 40pt;
+    -fx-font-family: "Open-Sans";
 }

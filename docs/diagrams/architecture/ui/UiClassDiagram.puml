@@ -1,0 +1,67 @@
+@startuml
+!include ../../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Interface Ui <<Interface>>
+Class "{abstract}\nUiPart" as UiPart
+Class AppMenu
+Class VisualizerDisplay
+Class UiManager
+Class MainWindow
+Class HelpWindow
+Class ResultDisplay
+Class StudentListPanel
+Class StudentCard
+Class StatusBarFooter
+Class CommandBox
+}
+
+package VersionedModel <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+package Logic <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
+
+UiManager .left.|> Ui
+UiManager -down-> "1" MainWindow
+MainWindow *-down->  "1" CommandBox
+MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" StudentListPanel
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" AppMenu
+MainWindow *-down-> "1" VisualizerDisplay
+MainWindow --> "0..1" HelpWindow
+
+
+StudentListPanel -down--> "*" StudentCard
+
+MainWindow -left-|> UiPart
+AppMenu --|> UiPart
+StudentListPanel --|> UiPart
+ResultDisplay --|> UiPart
+HelpWindow --|> UiPart
+VisualizerDisplay --|> UiPart
+CommandBox --|> UiPart
+StatusBarFooter --|> UiPart
+StudentCard --|> UiPart
+
+AppMenu ...> Logic
+
+StudentCard ..> VersionedModel
+VisualizerDisplay .> VersionedModel
+UiManager -left-> Logic
+MainWindow -left-> Logic
+
+StudentListPanel -[hidden]left- HelpWindow
+CommandBox -[hidden]right- ResultDisplay
+StatusBarFooter -[hidden]left- AppMenu
+AppMenu -[hidden]left- VisualizerDisplay
+@enduml

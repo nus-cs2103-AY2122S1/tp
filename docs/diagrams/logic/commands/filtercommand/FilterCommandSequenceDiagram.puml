@@ -1,0 +1,23 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":FilterCommand" as FilterCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+participant ":VersionedModel" as ModelManager MODEL_COLOR
+end box
+
+[-> FilterCommand ++ : execute(model)
+FilterCommand -> ModelManager ++ : updateFilteredStudentList(predicate)
+ModelManager -> ModelManager :
+ModelManager --> FilterCommand -- :
+
+create CommandResult
+FilterCommand -> CommandResult ++ : CommandResult(STUDENTS_LISTED)
+CommandResult --> FilterCommand -- : commandResult
+[<-- FilterCommand -- : commandResult
+
+@enduml

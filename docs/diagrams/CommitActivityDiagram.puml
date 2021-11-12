@@ -7,8 +7,8 @@ start
 
 if () then ([command commits AddressBook])
     :Purge redundant states;
-    :Save AddressBook to
-    addressBookStateList;
+    :Save AcademyDirectory to
+    academyDirectoryStateList;
 else ([else])
 endif
 stop

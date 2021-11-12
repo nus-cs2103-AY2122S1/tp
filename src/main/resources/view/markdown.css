@@ -1,0 +1,112 @@
+ .markdown-text {
+   -fx-font-size: 12;
+ }
+
+ .markdown-normal-flow {
+   -fx-line-spacing: 5;
+ }
+
+ .markdown-heading .markdown-text {
+ }
+ .markdown-heading-1 { -fx-padding: 14;}
+ .markdown-heading-2 { -fx-padding: 10;}
+ .markdown-heading-3 { -fx-padding: 8; }
+ .markdown-heading-4 { -fx-padding: 6; }
+ .markdown-heading-5 { -fx-padding: 4; }
+
+ .markdown-heading-1 .markdown-text {
+   -fx-font-size: 40;
+ }
+
+ .markdown-heading-2 .markdown-text {
+   -fx-font-size: 30;
+ }
+
+
+ .markdown-heading-3 .markdown-text {
+   -fx-font-size: 24;
+ }
+
+ .markdown-heading-4 .markdown-text {
+   -fx-font-size: 18;
+ }
+
+ .markdown-heading-5 .markdown-text {
+   -fx-font-size: 15;
+ }
+
+ .markdown-link {
+ }
+ .markdown-link-hover {
+   -fx-underline: true;
+ }
+
+ .markdown-paragraph-list {
+   -fx-spacing: 15;
+ }
+ .markdown-listitem-dot {
+   -fx-font-size: 16;
+   -fx-min-width: 20;
+ }
+
+ .markdown-codeblock-box,
+ .markdown-code {
+   -fx-padding: 0 8 0 8;
+ }
+ .markdown-code {
+ }
+ .markdown-code,
+ .markdown-codeblock {
+   -fx-wrap-text: true;
+   -fx-font-size: 12;
+ }
+ .markdown-codeblock-box,
+ .markdown-code-background {
+   -fx-padding: 8;
+   -fx-border-radius: 8;
+   -fx-border-width: 0.5;
+   -fx-background-radius: 8;
+   -fx-background-color: #00000009;
+ }
+ .markdown-code-background {
+   -fx-border-width: 0;
+   -fx-background-color: #0000AA10;
+ }
+
+ .markdown-code-anti-padding {
+   -fx-border-color: red;
+   -fx-border-width: 1;
+ }
+
+ .markdown-table-table {
+   -fx-vgap: -1;
+   -fx-hgap: 1;
+ }
+
+ .markdown-table-cell {
+   -fx-padding: 8;
+   -fx-border-width: 0;
+ }
+
+ .markdown-table-even {
+ }
+ .markdown-table-odd {
+ }
+ .markdown-table-cell-top {
+ }
+ .markdown-table-cell-top .markdown-normal-flow {
+   -fx-alignment: center;
+   -fx-text-alignment: center;
+ }
+
+ .markdown-hbox1 {
+   -fx-spacing: 0;
+   -fx-padding: 8;
+ }
+
+ .markdown-normal-block-quote {
+   -fx-background-insets: 10;
+   -fx-border-width: 0 0 0 3;
+   -fx-border-insets: 10 10 10 10;
+   -fx-padding: 10 10 10 10;
+ }

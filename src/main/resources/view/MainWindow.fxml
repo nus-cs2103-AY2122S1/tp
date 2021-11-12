@@ -3,18 +3,16 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Academy Directory" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/logo_size.jpg" />
   </icons>
   <scene>
     <Scene>
@@ -24,35 +22,54 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+      <VBox fx:id="container">
+        <HBox fx:id="contentHolder" styleClass="pane-with-border"
+              style="-fx-background-image: url(/images/background.jpg); -fx-background-repeat: stretch;
+              -fx-background-size: 100% 100%; -fx-background-position: center center;"
+              minWidth="800" VBox.vgrow="ALWAYS">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
 
+          <VBox minHeight="400" HBox.hgrow="ALWAYS" maxWidth="600"
+                prefWidth="200" style="-fx-background-color: transparent;">
+            <ImageView VBox.vgrow="SOMETIMES" fx:id="image" fitHeight="150" fitWidth="350">
+              <Image url="@/images/app_logo.png"/>
+            </ImageView>
+            <HBox VBox.vgrow="ALWAYS">
+              <StackPane fx:id="studentListPanelPlaceholder" HBox.hgrow="ALWAYS" minWidth="200"/>
+            </HBox>
+          </VBox>
+          <VBox HBox.hgrow="ALWAYS" minWidth="200">
+            <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder"
+                       style="-fx-background-color: transparent; -fx-border-color: transparent;
+                            -fx-background-radius: 20; -fx-border-radius: 20; -fx-opacity: 0.9;"
+                       styleClass="pane-with-border" maxHeight="150">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
+            <StackPane VBox.vgrow="ALWAYS" fx:id="visualiserDisplayPlaceholder"
+                       styleClass="pane-with-border"
+                       style="-fx-background-color: transparent; -fx-opacity: 0.95;
+                       -fx-border-color: transparent;">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
+          </VBox>
+        </HBox>
+
+        <StackPane fx:id="separator" VBox.vgrow="NEVER" styleClass="pane-with-border" prefHeight="20">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

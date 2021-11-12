@@ -1,0 +1,35 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ClearCommand" as clearCommand LOGIC_COLOR
+participant ":CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+participant ":VersionedModel" as versionedModel MODEL_COLOR
+participant ":AcademyDirectory" as academyDirectory MODEL_COLOR
+end box
+
+-> clearCommand: execute(model)
+activate clearCommand
+
+clearCommand -> versionedModel: setAcademyDirectory
+activate versionedModel
+create academyDirectory
+versionedModel -> academyDirectory: new AcademyDirectory()
+activate academyDirectory
+academyDirectory --> versionedModel: new empty record
+deactivate academyDirectory
+versionedModel --> clearCommand
+deactivate versionedModel
+
+create commandResult
+clearCommand -> commandResult: new CommandResult(MESSAGE_SUCCESS, Optional.of(MESSAGE_SUCCESS))
+activate commandResult
+commandResult --> clearCommand
+deactivate commandResult
+
+<-- clearCommand: result
+deactivate clearCommand
+@enduml

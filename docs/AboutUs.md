@@ -5,55 +5,56 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+Hi, this is Academy Directory!
 
-<img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Manh Duc
 
-* Role: Project Advisor
+<img src="images/hmanhduc2k.png" width="200px">
 
-### Jane Doe
+[[github](https://github.com/hmanhduc2k)]
+[[portfolio](team/hmanhduc2k.md)]
 
-<img src="images/johndoe.png" width="200px">
+* Role: Supreme leader
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Phuc Cuong
 
-* Role: Team Lead
-* Responsibilities: UI
+<img src="images/phuccuongngo99.png" width="200px">
 
-### Johnny Doe
+[[github](https://github.com/phuccuongngo99)]
+[[portfolio](team/phuccuongngo99.md)]
 
-<img src="images/johndoe.png" width="200px">
+* Role: Minion
+* Responsibilities: Everything
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+### Ee Jia
 
-* Role: Developer
-* Responsibilities: Data
+<img src="images/cheweejia.png" width="200px">
 
-### Jean Doe
+[[github](https://github.com/cheweejia)]
+[[portfolio](team/cheweejia.md)]
 
-<img src="images/johndoe.png" width="200px">
+* Role: Minion
+* Responsibilities: Everything
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Amadeus
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+<img src="images/amadeus-winarto.png" width="200px">
 
-### James Doe
+[[github](https://github.com/amadeus-winarto)]
+[[portfolio](team/amadeus-winarto.md)]
 
-<img src="images/johndoe.png" width="200px">
+* Role: Minion
+* Responsibilities: Everything
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Tan Jian Wei
 
-* Role: Developer
-* Responsibilities: UI
+<img src="images/jianoway.png" width="200px">
+
+[[github](https://github.com/jianoway/)]
+[[portfolio](team/jianoway.md)]
+
+* Role: Minion
+* Responsibilities: Everything

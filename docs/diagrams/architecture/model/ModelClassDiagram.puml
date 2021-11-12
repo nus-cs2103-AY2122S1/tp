@@ -1,0 +1,79 @@
+@startuml
+!include ../../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package VersionedModel <<Rectangle>> {
+Interface ReadOnlyAcademyDirectory <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
+Interface Version <<Interface>>
+Interface VersionedModel <<Interface>>
+
+Class AcademyDirectory
+Class ReadOnlyAcademyDirectory
+Class VersionedModel
+Class VersionedModelManager
+Class VersionControlController
+Class VersionControlReader
+Class UserPrefs
+Class ReadOnlyUserPrefs
+Class AdditionalViewModel
+Class AdditionalViewType
+Class AdditionalInfo
+
+
+Class UniqueStudentList
+Class Student
+Class StudioRecord
+Class Email
+Class Telegram
+Class Name
+Class Phone
+Class Tag
+Class Assessment
+}
+
+Package VersionControl {
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> VersionedModel
+
+VersionedModel .right.> ReadOnlyUserPrefs
+VersionedModel .left.> ReadOnlyAcademyDirectory
+VersionedModel .up.|> Version
+
+AcademyDirectory .up.|> ReadOnlyAcademyDirectory
+VersionedModelManager .up.|> VersionedModel
+UserPrefs .up.|> ReadOnlyUserPrefs
+VersionControlController .up.|> Version
+VersionControlController -down-> "1" VersionControlReader
+VersionControlReader --> VersionControl
+
+VersionedModelManager -left-> "1" AcademyDirectory
+VersionedModelManager -right-> "1" UserPrefs
+VersionedModelManager -left-> "1" VersionControlController
+VersionedModelManager -down-> "1" AdditionalViewModel
+
+AdditionalViewModel *-down-> "1" AdditionalInfo
+AdditionalViewModel *-down-> "1" AdditionalViewType
+
+AcademyDirectory *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" Student
+Student *--> Name
+Student *--> Phone
+Student *--> Email
+Student *--> Telegram
+Student *--> StudioRecord
+Student *--> Assessment
+Student *--> "*" Tag
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> StudioRecord
+StudioRecord -[hidden]right-> Email
+Email -[hidden]right-> Telegram
+
+VersionedModelManager -->"~* filtered" Student
+@enduml

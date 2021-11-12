@@ -1,0 +1,37 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+Participant ":SortCommand" as sc LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+Participant "<<class>>\nName" as name MODEL_COLOR
+Participant "<<class>>\nParticipation" as part MODEL_COLOR
+Participant "<<class>>\nAssessment" as assess MODEL_COLOR
+end box
+
+-> sc ++
+sc -> sc ++ : getComparator
+
+alt NAME
+sc -> name ++ : getComparator(isAscendingOrder)
+name --> sc -- : comparator
+
+else PARTICIPATION
+sc -> part ++ : getComparator(isAscendingOrder)
+part --> sc -- : comparator
+
+else AVERAGE
+sc -> assess ++ : getAverageComparator(isAscendingOrder)
+assess --> sc -- : comparator
+
+else else
+sc -> assess ++ : getIndividualComparator(isAscendingOrder, attribute)
+assess --> sc -- : comparator
+
+end
+
+sc --> sc -- : comparator
+<-- sc --
+@enduml

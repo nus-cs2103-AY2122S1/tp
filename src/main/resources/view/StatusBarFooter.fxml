@@ -4,7 +4,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane styleClass="status-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane styleClass="status-bar"
+          style="-fx-background-image: url(/images/space1.png);
+                -fx-background-repeat: stretch;
+              -fx-background-size: 100% 100%; -fx-background-position: center center;"
+          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>

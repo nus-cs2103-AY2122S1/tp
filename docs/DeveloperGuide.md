@@ -1,19 +1,102 @@
 ---
-layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+### Table of Contents
+* [Information About this Developer Guide](#information-about-this-developer-guide)
+  * [Purpose of Developer Guide](#purpose)
+  * [Target Audience of Developer Guide](#target-audience)
+* [Acknowledgements](#acknowledgements)
+* [Setting Up, Getting Started](#setting-up-getting-started)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI Component](#ui-component)
+  * [Logic Component](#logic-component)
+  * [VersionedModel Component](#versionedmodel-component)
+  * [Storage Component](#storage-component)
+  * [Common Classes](#common-classes)
+* [Implementation](#implementation)
+  * [Managing Student's Personal Details](#managing-students-personal-details)
+    * [AddCommand](#addcommand)
+    * [DeleteCommand](#deletecommand)
+    * [TagCommand](#tagcommand)
+    * [GetCommand](#getcommand)
+    * [EditCommand](#editcommand)
+  * [Track Students' Grades, Studio Attendance, and Participation](#track-students-grades-studio-attendance-and-participation)
+    * [GradeCommand](#gradecommand)
+    * [AttendanceCommand](#attendancecommand)
+    * [ParticipationCommand](#participationcommand)
+  * [Visualization Tools](#visualization-tools)
+    * [ViewCommand](#viewcommand)
+    * [ShowCommand](#showcommand)
+    * [VisualizeCommand](#visualizecommand)
+    * [FilterCommand](#filtercommand)
+    * [SortCommand](#sortcommand)
+  * [Others](#others)
+    * [ExitCommand](#exitcommand)
+    * [ListCommand](#listcommand)
+    * [ClearCommand](#clearcommand)
+    * [HistoryCommand](#historycommand)
+    * [RevertCommand](#revertcommand)
+    * [UndoCommand](#undocommand)
+    * [RedoCommand](#redocommand)
+    * [HelpCommand](#helpcommand)
+* [Guides](#guides)
+* [Appendix](#appendix)
+  * [A: Requirements](#appendix-a-requirements)
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [B: Manual Testing](#appendix-b-instructions-for-manual-testing)
+  * [C: Version Controlled Commands](#appendix-c-version-controlled-commands)
+  * [D: Effort](#appendix-d-effort)
 
 --------------------------------------------------------------------------------------------------------------------
+## Information about this Developer Guide
+### Purpose
+This developer guide aims to provide information regarding design and implementation of Academy Directory. 
+To do this effectively, the following details can be found: 
+- Design considerations of certain features
+- Implementation details of certain features
+- Possible future extensions
+
+### Target Audience
+The current version of Academy Directory is specifically designed for
+**CS1101S Avengers**. Therefore, the main Target Audience of this developer guide are Java developers who 
+are or formerly were CS1101S Avengers. As such, the following assumptions are made regarding the Target Audience:
+- Is familiar with the common terms relating to Computer Science
+- Is familiar with CS1101S module structure and teaching pedagogy
+
+Technical background is assumed. We also provide the definitions for
+certain technical terms commonly used in this developer guide [here](#glossary).
 
 ## **Acknowledgements**
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+- The formatting and content of the User Guide and Developer Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
+- Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
+- Certain code implementations may have been inspired by [Baeldung tutorials](https://www.baeldung.com/) or [StackOverflow answers](https://stackoverflow.com).
+- Application logo were designed with the assistance of [Tailor Brand](https://studio.tailorbrands.com/brands/6276554147/downloads) and [Adobe Spark](https://spark.adobe.com/express-apps/logo-maker/preview).
+- Libraries used:
+  - [JavaFX](https://openjfx.io/) for the amazing GUI
+  - [Jackson](https://github.com/FasterXML/jackson) to save your data
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
+  - [MDFX](https://github.com/JPro-one/markdown-javafx-renderer) so that you can see User Guide in help without internet
+  - [JFreeChart](https://www.jfree.org/jfreechart/) for powerful graphing and visualization APIs
+- Background and icons used:
+  - Source Academy classroom front page, taken from the [Asset page in Source Academy front-end](https://github.com/source-academy/frontend/tree/master/src/assets)
+    License for reuse and distribution [here](https://github.com/source-academy/frontend/blob/master/LICENSE)
+  - Slides Carnival background [here](https://www.slidescarnival.com/iris-free-presentation-template/3923)
+  - External icons used on the UI
+    - [Student icon](https://icons8.com/icon/iZBBn0SF22gW/programmer) taken from IconS8
+    - [Grade icon](https://pngtree.com/freepng/test-papers-stationery-illustration_4652639.html) taken from PNGTree
+    - [Statistic icon](https://pngtree.com/freepng/vector-statistics-icon_3782961.html) taken from PNGTree
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -21,14 +104,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+![Architecture Diagram](images/dg/architecture/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -36,67 +114,105 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of four main components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`VersionedModel`**](#versionedmodel-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
+On top of the above four main components, there is also an additional [`VersionControl`](#versioncontrol-component) which 
+provides common API for `VersionedModel` and `Storage` to implement version control. Because of this, the `VersionControl` component is usually left out in the diagrams in this 
+developer guide. For more information regarding the `VersionControl` component, read [here](#versioncontrol-component).
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![Architecture Sequence Diagram](images/dg/architecture/ArchitectureSequenceDiagram.png)
+
+The part labeled "VersionControl" occurs because `delete` is a version controlled command. For non-version controlled
+commands the sequence diagram stays largely the same; the difference is the lack of the "VersionControl" part. 
+For a list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+![Component Managers](images/dg/architecture/ComponentManagers.png)
 
 The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/dg/architecture/ui/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts smaller UI-part components, including `CommandBox`, `ResultDisplay`, 
+`VisualizerDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract 
+`UiPart` class which captures the commonalities between classes that represent smaller parts of the visible GUI. Of these, all components are always presented,
+except for the Help Window which can be shown or hidden depending on the results of user command.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in their respective matching `.fxml` files stored in the `src/main/resources/view` folder. For example, the layout of the 
+[`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/ui/MainWindow.java) is 
+specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* executes user commands using the `Logic` component, through the MainWindow object.
+* listens for changes in `VersionedModel` data so that the UI can be updated with the modified data.
+* keeps a reference (for Main Window) or depends (for AppMenu) on the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* depends some classes in the `VersionedModel` component, particularly the Student class, as it displays `Student` object residing in 
+  the `VersionedModel` and requires grades statistics from `Student` object in the `VersionedModel`.
+
+Some classes of the UI, notably `CommandBox`, `StudentCard` and `AppMenu`, keeps a reference of a functional interface called `CommandExecutor` that
+executes a Command from the Logic `component`. The Command Executor is first created in `MainWindow` and pass down to those components to execute commands.
+The `CommandExecutor` functional interface thus serves as a link between the UI and the Logic component, reducing dependency of UI on the Logic part
+
+![Structure of the UI Component](images/dg/architecture/ui/ExecutorClassDiagram.png)
+
+One important component of the UI is the specialized `Creator` class which extends the abstract class `UiPart` - for the purpose of reusing the `VisualizerDisplay`
+to show users the result of a command execution. After information is sent from Main Window to the Visualizer Display, the Visualizer Display then send the Additional
+Info Object to the Creator classes, which will be used to convert it for user view in the Visualizer Display itself.
+  
+![Creator Class Diagram](images/dg/architecture/ui/CreatorClassDiagram.png)
+
+Note that some details are omitted or repeated in the class diagram for better explanation of how the various components of UI work.
+
+**Design Considerations**
+
+CommandExecutor Functional Interface
+   * Initial design of AB3: Keeping the CommandExecutor functional Interface inside CommandBox
+     - Cons: This design initially is supposed to encapsulate the CommandBox UI object, that the command box is able to execute user's command on behalf of the 
+       Logic component. However, the disadvantage of this design is that if there are future extensions requiring more components that can execute commands, like another
+       input box or GUI functionalities, then another interface must be used.
+   * Current design: Separate CommandExecutor from CommandBox
+     - Pros: Allows other components of the UI to use the CommandExecutor interface for command execution, and better abstract out the design of Academy Directory, hence making CommandExecutor a medium
+       of communication between the Logic and the UI component. In addition, it serves as a basis for any future extension of Academy Directory.
+     - Cons: It makes the implementation of the UI segment more complicated in return.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
-
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Logic Class Diagram](images/dg/architecture/logic/LogicClassDiagram.png)
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `AcademyDirectoryParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The command can communicate with the `VersionedModel` when it is executed (e.g. to add a student).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -107,141 +223,606 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![Parser Classes](images/dg/logic/parsers/ParserClasses.png)
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AcademyDirectoryParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AcademyDirectoryParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+### VersionedModel component
+**API** : [`VersionedModel.java`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/model/VersionedModel.java)
+![Versioned Model Class Diagram](images/dg/architecture/model/ModelClassDiagram.png)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+The `VersionedModel` component,
 
-
-The `Model` component,
-
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the academy directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `VersionedModel` represents data entities of the domain, they should make sense on their own without depending on other components).
+* interfaces with `VersionControl` via the `VersionControlController`, which implements the `Version` API
+and thus gives the `VersionedModel` component the ability to interface with version control entities such as `Commit`.
+* stores a `AddtionalViewModel` that stores additional information required by the UI's `VisualizerDisplay` such as number statistic for the `Visualize` command.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+The above implementation is chosen because it makes _turning off_ version control relatively simple; a stub `VersionControlController`
+can be used instead.
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+For more information regarding `VersionControl`, read [here](#versioncontrol-component).
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AcademyDirectory`, which `Student` references. This allows `AcademyDirectory` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+
+![Better Model Class Diagram](images/dg/architecture/model/BetterModelClassDiagram.png)
 
 </div>
 
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/academydirectory/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage Class Diagram](images/dg/architecture/storage/StorageClassDiagram.png)
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save both academy directory data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `AcademyDirectoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `VersionedModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `VersionedModel`).
+* can write version control objects to disk.
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.academydirectory.commons` package.
+
+### VersionControl Component
+The internal version control system in Academy Directory is inspired by Git. As such, `VersionControl` 
+keeps track of Academy Directory data state by using `VcObject` which corresponds to Git objects.
+
+**Design Considerations:**
+
+**Aspect: How to save state changes**
+- **Alternative 1 (current choice):** Saves state changes to disk ala Git
+  - Pros:
+    - future-proof; even when Academy Directory supports adding and tracking many files e.g. 
+    profile pictures of students, code screenshots etc. 
+    - provides backbone for additional features e.g. regeneration of data even when data becomes 
+    corrupted, etc.
+    - Undo, redo, and history operations can be implemented easily
+    - Undo and redo operations can still be done even when application is closed and opened again
+  - Cons: Complex implementation
+    
+- **Alternative 2:** Saves state changes in memory: 
+  - Pros: Easy to implement
+  - Cons: Lacks future-proof*ness* of the first alternative
+
+
+#### VersionControl Objects
+Shown below is the corresponding class diagram:
+
+![VCObjectClassDiagram](images/dg/architecture/version/VcObjectClassDiagram.png)
+
+**Explanation of the objects shown above:**
+- `Tree`: 
+  - represents a snapshot of `data` directory of Academy Directory.  It maintains a mapping between version-controlled
+filenames and actual filename of tracked blobs.
+  - Version controlled name is by default `SHA-1` hash of the blob. However, it is possible 
+  to change this to `SHA-256` or even `MD5`. 
+  - Supported hash functions are present in `HashMethod`
+- `Commit`:
+  - saves information regarding the changes to Academy Directory data:
+    - who makes the change
+    - when was the change made
+    - what change was made exactly. 
+  - points to a `Tree` which represents the snapshot of data _after_ the change is made
+  - points to a `Commit` object which represents the parent of the current `Commit` object
+- `Label`:
+  - labels a `Commit`
+  - relevant labels are `HEAD` which represents the current commit, `MAIN` which represents
+current branch, and `OLD` which represents the most recent branch before the current branch.
+
+**A few implementation details:**
+- A `VcObject` does not actually hold a reference to 
+another `VcObject`; rather it has a `Supplier` of the `VcObject` that it's supposed to have
+a reference to. This is to defer read operations to avoid memory overhead.
+- Equality of `VcObject` is checked using its _hash_. This follows the idea that a _hash_ is 
+intended to be a reliable fingerprint, and the chosen hash function (SHA1) has a (very) low probability 
+of collision. 
+- All classes which extends `VcObject` class should have a singleton NULL private instance. This reduces headache in terms of 
+handling edge cases e.g. root of commit tree, exception handling, etc. The NULL singleton is used to indicate failure
+for whatever reason, and allows the application to remain operational.
+- Class-specific implementation details: 
+  - `Tree` supports an additional method `Tree#regenerateBlobs()`, which regenerate the files
+  maintained by the said `Tree`.
+  - `Commit` supports a few additional methods which reflect the underlying commit tree: 
+    - `Commit#findLca(Commit)` finds the lowest common ancestor of two commits, returning `Commit.emptyCommit()` 
+    if no common ancestor can be found.
+    - `Commit#getHistory()` returns all commits from given commit to the root of the commit tree.
+    - `Commit#getHighestAncestor()` returns the commit ancestor that is the furthest away,
+    limited by the given end Commit or by the root of the commit tree.
+
+**Design Considerations:**
+
+**Aspect: Which change to track**
+- **Alternative 1 (current choice):** Tracks changes at the file level
+  - Pros: Easy to implement
+  - Cons: May have performance issues in terms of disk space and memory usage
+
+- **Alternative 2:** Tracks changes at the line level of the file:
+  - Pros: Lower disk space requirements
+  - Cons: Difficult to implement
+  
+**Possible improvements in the future:** 
+- Explore implementing `VcObject` as a proper monad with the bind operator, considering the clear relationship
+between the different `VcObject`.
+
+#### Interfacing with other components
+Both the `Storage` component and `VersionedModel` component interfaces with `VersionControl`
+for different reasons:
+- `Storage`: needs to be able to write `VcObject`s to disk
+- `VersionedModel`:
+  - needs to be able to read `VcObject`s from disk.
+  - needs to be able to create new `VcObject`s. However, this requires computing the `VcObject`
+  file representation's hash i.e. `VersionedModel` needs minimum write access to disk to be able to compute hash
+
+As such, `VersionControl` provides three facade classes, each representing one of the above requirements. The following
+class diagram shows this:
+![VersionControlClassDiagram](images/dg/architecture/version/VersionControlClassDiagram.png)
+
+The facade classes are: 
+- `VersionControlGeneralReader`: to read `VcObject` from disk
+- `VersionControlGeneralWriter`: to write `VcObject` to disk
+- `HashComputer`: to compute hash of a file or hash of a `VcObject`. MUST NOT expose actual
+write methods as this would allow `VersionedModel` to write to disk, breaking abstractions.
+
+To modify disk representation of a particular class which extends from `VcObject`, modify both its `Reader`
+  and `Writer`.
+
+**Design Considerations:**
+
+**Aspect: How to represent `VcObject` in disk**
+- **Alternative 1 (current choice)**: Custom representation
+  - Pros: Smaller disk space utilisation
+  - Cons: Added layer of complexity
+- **Alternative 2**: Standard representation e.g. JSON
+  - Pros: Parsing is simple i.e. use Jackson library
+  - Cons: Larger disk space utilisation
+
+Considering that `VcObject`s are not very complicated, the added layer of complexity does not outweigh 
+the benefits of smaller disk space utilisation in our opinion. Hence, we go for alternative 1.
+
+**Possible improvements in the future:**
+- Make version control folder hidden from user
+- Make version control files read-only. This is best done if future iterations implement a login system
+- Use delta encoding to keep track of `VcObject`
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on all features are implemented. Note that the section only discusses the implementation details
+of the Command classes, and not the Parser classes, for brevity purposes. Details of Parser classes check are included within the explanation below, in combination with the Command classes.
 
-### \[Proposed\] Undo/redo feature
+### Managing Students' Personal Details
+### AddCommand
 
-#### Proposed Implementation
+This command adds a new `Student` to `AcademyDirectory`.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Implementation
+`AddCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose. 
+The `AddCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+`AddCommand` adds students to the `AcademyDirectory`. This command prevents addition of duplicate students by ensuring that each `Student` has a unique `NAME`. 
+The `NAME` field is a sufficiently unique field to identify a unique instance of a student because `AcademyDirectory` is scoped to 
+service CS1101S Avengers. In the CS110S module each _Studio_ has at most 10 `Students`. Thus, the probability of a `NAME` collision being sufficiently minimised.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student` 
+does not have unnecessary duplicate personal detail (e.g same `PHONE`) is left to the Avenger.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The specifics are shown in the sequence diagram below:
+![AddCommandSequenceDiagram](images/dg/logic/commands/addcommand/AddCommandSequenceDiagram.png)
 
-![UndoRedoState3](images/UndoRedoState3.png)
+### DeleteCommand
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+This command deletes a `Student` from `AcademyDirectory`.
 
+#### Implementation
+`DeleteCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `DeleteCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+`DeleteCommand` deletes `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`. To do this, `DeleteCommand` makes a call to `VersionedModel#deleteStudent()`.
+
+The specifics are shown in the sequence diagram below:
+![DeleteCommandSequenceDiagram](images/dg/logic/commands/deletecommand/DeleteCommandSequenceDiagram.png)
+
+### TagCommand
+This command assigns tags to a `Student`.
+
+#### Implementation
+`TagCommand` will extend the `Command` class and consequently `@Override` the `Command#execute()` method
+to serve the aforementioned purpose. The `TagCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+`TagCommand` tags a `Student` based on the relative `INDEX` in the `ObservableList`. The `Tag` is implemented with a HashSet
+that stores the `Tag`. When `TagCommand` is executed, the `Student`'s `Tag` attribute will be replaced by a new HashSet
+containing the input `Tag` object(s). In the event the input `Tag` is empty, the `Student`'s `Tag` attribute will be replaced by an
+empty HashSet.
+
+The following sequence diagram describes what happens when `TagCommand` is executed:
+
+![TagCommandSequenceDiagram](images/dg/logic/commands/tagcommand/TagCommandSequenceDiagram.png)
+
+### GetCommand
+This command serves to retrieve a specific `PersonalDetail` of students or a student.
+
+#### Implementation
+`GetCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+All fields of `Student` class which implements the `PersonalDetail` interface and whose prefix is present in
+`GetCommand#SUPPORTED_PREFIX` can be queried by `GetCommand`.
+
+A `GetCommand` is initialized with a list of `Prefix` objects which represents the prefix of the `PersonalDetail`
+to be retrieved, and a list of `String` which represents the keywords that will be matched with 
+the names of students in Academy Directory. List of `Prefix` cannot be empty, but list of keywords can be.
+An empty list of keywords is interpreted as retrieving personal details of all students in the model. If 
+list of keywords is not empty, then the pattern-matching behavior for name in `GetCommand` is similar to that
+of the [`FilterCommand`](#filtercommand).
+
+The specifics are shown in the sequence diagram below:
+
+![GetCommandSequenceDiagram](images/dg/logic/commands/getcommand/GetCommandSequenceDiagram.png)
+
+Because the output of `GetCommand` can be long, for readability reasons the result is displayed
+in the `AdditionalView` part of the UI. 
+
+### EditCommand
+This command edits a `Student`'s personal details such as their `NAME`, `PHONE`, `TELEGRAM` and `EMAIL`.
+
+#### Implementation
+`EditCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `EditCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+Similar to `AddCommand`, `EditCommand` supports duplicate prevention by checking that the `NAME` being edited is unique in the list
+unless the `NAME` is the same  as the `Student` being edited.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The responsibility of ensuring that `Student` 
+does not have unnecessary duplicate information (e.g same `PHONE`) is left to an Avenger.
 </div>
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram describes what happens when `EditCommand` is executed:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![EditCommandSequenceDiagram](images/dg/logic/commands/editcommand/EditCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+### Track Students' Grades, Studio Attendance, and Participation
 
-</div>
+### GradeCommand
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+This command serves to update the `Grade` of various `Assessment` that the students will undergo in CS1101S. The assessments include RA1, Midterm, RA2, Practical Exam (PE), and Final.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Implementation
 
-</div>
+`GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `GradeCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`.
+The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+The following sequence diagram describes what happens when `GradeCommand` is executed:
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+![GradeCommandSequenceDiagram](images/dg/logic/commands/gradecommand/GradeCommandSequenceDiagram.png)
 
-![UndoRedoState5](images/UndoRedoState5.png)
+### AttendanceCommand
 
-The following activity diagram summarizes what happens when a user executes a new command:
+This command serves to update the attendance status of students. A student's `Attendance` can be either attended or unattended.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+#### Implementation
 
-#### Design considerations:
+`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `AttendanceCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
 
-**Aspect: How undo & redo executes:**
+The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+The following sequence diagram describes what happens when `AttendanceCommand` is executed:
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+![AttendanceCommandSequenceDiagram](images/dg/logic/commands/attendancecommand/AttendanceCommandSequenceDiagram.png)
 
-_{more aspects and alternatives to be added}_
+For `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams can be found below:
 
-### \[Proposed\] Data archiving
+![UpdateModelAttendanceSequenceDiagram](images/dg/logic/commands/attendancecommand/UpdateModelAttendanceSequenceDiagram.png)
 
-_{Explain here how the data archiving feature will be implemented}_
+### ParticipationCommand
 
+This command serves to update the `Participation` score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
+
+#### Implementation
+
+`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `ParticipationCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done.
+
+`ParticipationCommand` has an additional section in the sequence diagram located above the loop in `AttendanceCommand`. The purpose of the logic below is to update a student's `Attendance` to be marked as present if the `participationUpdate` is greater than 0. This is because a student that has a positive `Participation` score would also count as having attended the `Studio`.
+
+![ParticipationCommandMarkAttendanceSequenceDiagram](images/dg/logic/commands/participationcommand/ParticipationCommandMarkAttendanceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The logic above is to update the `Attendance` and is only executed in the event that `participationUpdate` is more than 0. Otherwise, it will not run.
+
+ </div>
+
+### Visualization Tools
+
+### ViewCommand
+
+This command serves to display the summarised details of a single `Student` in the `AcademyDirectory` based on the index
+number of the student. If the index is invalid (not a positive integer or exceeds the list size), then an error message will be shown instead
+and `ViewCommand` will not be created.
+
+![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
+
+#### Implementation
+
+`ViewCommand` displays the `Student` based on the relative `INDEX` in the `ObservableList` which is the list of `Student` viewed by the `Avenger`.
+It extends the abstract class `Command` and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+Once the index and the student associated with the index is retrieved, it is set on the Additional View Model - with its associated type and info,
+to send to the UI for display. A success message containing the name of the student is later returned.
+
+![ViewCommandSequenceDiagram](images/dg/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
+
+A noteworthy detail in implementation of ViewCommand (not related to logic) is that student grades and participation score are wrapped inside a drop-down menu on the UI, and
+users will need to click on the menu to see the details of the students.
+
+### ShowCommand
+
+This command serves to display the collated score of all students in the Academy Directory for a specific `Assessment`. The assessments that can be queried are: RA1, Midterm, RA2, Practical Exam (PE), and Final.
+
+#### Implementation
+
+`ShowCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The grades are collated by iterating through all the students and extracting the score from the `Assessment` HashMap using the input `Assessment` as the key.
+The information is formatted into a String and displayed in the AdditionalView. The success message is parsed into `CommandResult` to be returned by `ShowCommand`.
+
+The following sequence diagram describes what happens when `ShowCommand` is executed:
+
+![ShowCommandSequenceDiagram](images/dg/logic/commands/showcommand/ShowCommandSequenceDiagram.png)
+
+### VisualizeCommand
+
+This command provides a Box Plot of the performance of all `Student` in `AcademyDirectory` in all `Assessment`.
+
+#### Implementation
+
+`VisualizeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The grades are collated by iterating through all the students and extracting the grades from the `Assessment` HashMap using the input `Assessment` as the key.
+
+The information is returned as a HashMap with key being the `Assessment` name and value being a list containing the class' grade in that assessment.
+The information will be displayed in the AdditionalView. The success message is parsed into `CommandResult` to be returned by `VisualizeCommand`.
+
+The following sequence diagram describes what happens when `VisualizeCommand` is executed:
+
+![VisualizeCommandSequenceDiagram](images/dg/logic/commands/visualizecommand/VisualizeCommandSequenceDiagram.png)
+
+Note that this is a singular command - meaning that no other argument should follow `visualize`.
+
+### FilterCommand
+
+This command filters the `ObservableList` by `Name` or `Tag`.  
+
+#### Implementation
+
+`FilterCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The `FilterCommand` searches the `AcademyDirectory` for students with `Name` or `Tag` matching the keyword and displays
+the student list with the filtered students.
+
+The following sequence diagram describes what happens when `FilterCommand` is executed:
+
+![FilterCommandSequenceDiagram](images/dg/logic/commands/filtercommand/FilterCommandSequenceDiagram.png)
+
+### SortCommand
+
+This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`. When sorting by `Assessment`, users have the option of sorting by individual `Assessment` or by the average grade among. Users can also choose if they want to sort by ascending or descending.
+
+#### Implementation
+
+`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+The `SortCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
+
+![SortCommandSequenceDiagram](images/dg/logic/commands/sortcommand/SortCommandSequenceDiagram.png)
+
+The reference frame for GetComparator can be found below. It details the selection process based on the `attribute` of the `SortCommand`.
+
+![GetComparatorSequenceDiagram](images/dg/logic/commands/sortcommand/GetComparatorSequenceDiagram.png)
+
+### Others
+
+### ExitCommand
+
+This command allows user to exit the application after saving all operations and data. It extends the `Command` class and will consequently `@Override` the `Command#execute()` method to serve this purpose.
+Note that this is a singular command - meaning that no argument should follow after `exit`.
+
+#### Implementation
+
+![ExitCommandSequenceDiagram](images/dg/logic/commands/exitcommand/ExitCommandSequenceDiagram.png)
+
+### ListCommand
+
+This command shows all students on the class, ordered by when the student is added to the Academy.
+
+#### Implementation
+
+`ListCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+`ListCommand` retrieves the student list and display it on the student list panel on the left side. All students will be displayed.
+Note that this is a singular command - meaning that no argument should follow after `list`.
+
+![ListCommandSequenceDiagram](images/dg/logic/commands/listcommand/ListCommandSequenceDiagram.png)
+
+### ClearCommand
+
+This command clears all `Student` entries from `AcademyDirectory`.
+
+#### Implementation
+
+`ClearCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose 
+and is Version Controllable. A new Academy Directory is created to replace the current one, meaning that the student list is set to empty.
+Note that this is a singular command - meaning that no argument should follow after `clear`.
+
+The `ClearCommand` is a version controlled command. For the list of version controlled command, refer [here](#appendix-c-version-controlled-commands).
+
+![ClearCommandSequenceDiagram](images/dg/logic/commands/clearcommand/ClearCommandSequenceDiagram.png)
+
+### HistoryCommand
+This command shows the commit history. Each commit will be shown with its five character hash, 
+author, date, and commit message. Only commands that are _version controlled_ will result in a commit
+being created and thus shown by `HistoryCommand`. Commands which can be undone are referred to as _version controlled commands_ (read [here](#glossary)
+for details on what this means).
+
+This command is meant for:
+* reminding users what changes were made to the underlying `AcademyDirectory` Data
+* revealing (five character) hash of commits that can be used with `RevertCommand`.
+
+#### Implementation
+`HistoryCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
+serve the aforementioned purpose.
+
+The `HistoryCommand` makes use of the following set of invariance:
+- The most recent commit that belongs to the current branch is always labelled as `MAIN`
+- The most recent commit that belongs to the second-most-recent branch is always labelled
+as `OLD`
+
+These guarantees are assured by the `VersionedModel#commit` method. Note that `HEAD` and `MAIN` need not
+refer to the same commit e.g. if the user reverts to a previous commit then `MAIN` and `HEAD` will refer to 
+different commits. 
+
+Because this set of invariance are respected, thus `HistoryCommand` can show commit history by doing the following: 
+- fetch the commits labelled as `MAIN` and `OLD` from disk (methods to do this exposed by `VersionedModel`)
+- find the lowest common ancestor between `MAIN` and `OLD` (`Commit#findLca` method used here)
+- show all commits from initial commit until the lowest common ancestor found above normally
+- show all commits from the lowest common ancestor until `MAIN` and `OLD` as per the desired
+formatting
+
+The following sequence diagram shows the above implementation:
+
+![HistoryCommandSequenceDiagram](images/dg/logic/commands/historycommand/HistoryCommandSequenceDiagram.png)
+
+Note that the above diagram is omits several details but should be sufficient to grasp how `HistoryCommand` works.
+In addition, this is a singular command - meaning that no argument should follow after `history`.
+
+#### Limitation
+The current implementation can only show two commit branches: `MAIN` and `OLD`. While this is
+sufficient in most cases, the ability to show arbitrary number of commit branches to give users
+the ability to revert to any previous commits easily without having to look for the commit's hash
+manually in disk. However, due to the implementer's inability to figure out how best to show
+arbitrary number of commit branches, the current `HistoryCommand` thus can only show two branches. 
+
+### RevertCommand
+This command reverts the underlying `AcademyDirectory` data to a previous commit, as identified by the commit's hash.
+Commands which can be undone are referred to as _version controlled commands_ (read [here](#glossary) 
+for details on what this means). The following is true regarding `RevertCommand`:
+
+- If any of the following occurs which leads to a failure in parsing commit file in disk, no changes
+are made to the underlying disk: 
+  - provided hash cannot be found on disk
+  - commit file with the given hash exists, but is corrupted
+  - commit file with the given hash exists, but no read access is given to AcademyDirectory
+  - other reasons which leads to failure in reading commit file
+- Otherwise, the `AcademyDirectory` storage data will be restored according to the target commit
+to be reverted to. 
+
+#### Implementation
+`RevertCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
+serve the aforementioned purpose.
+
+`RevertCommand` reverts state of `AcademyDirectory` data by doing the following:
+- fetch commit identified by the given hash
+- shift `VersionedModel`'s `HEAD` pointer to the commit
+- restores the academy directory data according to the tree that the fetched commit points to
+
+The following sequence diagram shows the above implementation:
+
+![RevertCommandSequenceDiagram](images/dg/logic/commands/revertcommand/RevertCommandSequenceDiagram.png)
+
+Note that the above diagram is incomplete; it is approximately accurate but is sufficient to help explain the limitation
+of `RevertCommand`, as in below. 
+
+#### Limitation
+Because `RevertCommand` has to restore academy directory data which is the responsibility of the
+`Storage` component, `RevertCommand` creates a `StorageManager` and uses it to load data from disk 
+and set the current `VersionedModel` internal data to the newly reloaded data. This is indicated in the sequence diagram
+as the sudden use of `Storage` component directly from `RevertCommand`. This is (highly) not 
+ideal, but the implementer has no idea how to do this properly i.e. without sudden creation of a new `StorageManager`
+. Right now the solution is to ensure that this newly created `StorageManager` is destroyed immediately to prevent
+access from elsewhere, and to put this limitation in this documentation to be solved one day. 
+
+### UndoCommand
+This command undoes a change done to the underlying `AcademyDirectory` data. Note that this is
+different from the _view_ of the data e.g. when the `ViewCommand` is used, the _view_ visible to 
+the user changes, but the underlying data does not change. Commands which can be undone are referred to 
+as _version controlled commands_ (read [here](#glossary) for details on what this means).
+
+#### Implementation
+`UndoCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
+serve the aforementioned purpose. Internally, the `UndoCommand` makes use of the `RevertCommand`. 
+Hence `UndoCommand` serves as _syntactic sugar_ for the `RevertCommand`.
+Note this is a singular command - meaning that no argument should follow after `undo`.
+
+### RedoCommand
+This command redoes a change done to the underlying `AcademyDirectory` data. Note that this is
+different from the _view_ of the data e.g. when the `ViewCommand` is used, the _view_ visible to
+the user changes, but the underlying data does not change. Commands which can be redone are referred to
+as _version controlled commands_ (read [here](#glossary) for details on what this means).
+
+#### Implementation
+`RedoCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to
+serve the aforementioned purpose. Internally, the `RedoCommand` makes use of the `RevertCommand`.
+Hence `RedoCommand` serves as _syntactic sugar_ for the `RevertCommand`.
+Note that this is a singular command - meaning that no argument should follow `redo`
+
+### HelpCommand
+
+This command serves to guide new users on using the application, which syntax to use and when to use them. Users can view a summary of all commands' syntax,
+or a specific guide on how to use a particular command. Note that if the command in queried are not exact, or if the command does not exist, then HelpMessage will not be created.
+
+#### Design considerations
+
+In implementing the Help Command, two alternative options were proposed in taking what the help message should be:
+1. To parse the help message directly from the User Guide
+   * Pros: This is a more logical way to get the help message, relying on a parser that identifies the common starting section of each command on the User Guide
+   * Cons: Unfortunately, in doing so, there was a bug exception FileNotFoundException, of which HelpCommand cannot take the help message directly from the User Guide
+   because it cannot find the file. Keeping the help message on the /resources folder was a solution, but the risk of file cannot be read is still there depending on the Operating System that Academy Directory is working on. In addition,
+   this creates the risk of the parser working incorrectly if the header section of the User Guide changes.
+2. To store a HELP_MESSAGE field in each command class
+   * Pros: Does not rely on external file, and is not prone to FileNotFoundException. Also, it encapsulates the object better, with each command having an associated
+   static field of HELP_MESSAGE inside it (except for HelpCommand itself), and could be considered a good design pattern.
+   * Cons: This requires the help message to be constantly updated manually by the developer, each time the User Guide changes. In addition, the length of the help
+   message makes the Command classes harder to read.
+     
+Ultimately, Solution 2 was adopted to reduce the risk of bugs on Help Command being vulnerable to FileNotFoundException error, and to better encapsulate the Command
+classes. In addition, Academy Directory will always require maintenance from the developers, and it is not a bad thing to keep the HELP_MESSAGE updated to the User Guide changes continuously.
+
+Hence, one of the limitations to HelpCommand is the longer and harder-to-read content of String message, which can make it difficult for reviewers to look on. In addition,
+`help` can only work when the command in queried is exact, meaning that it does not work for partial instructions in case of user's typo, like `addd` or `partcpation`. This
+is a valid use-case for Academy Directory in a sense that users who mistype command often need better instruction than a general help summary. A future extension could be to
+allow auto-suggestion and auto-assistance for `help`, for a more comprehensive assistance system.
+
+#### Implementation
+
+`HelpCommand` will extend the `Command` class, and consequently `@Override` the `Command#execute()` method to serve its initial purposes.
+
+The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). 
+This help message will be displayed to the user on a separate window of the UI.
+
+![HelpCommandSequenceDiagram](images/dg/logic/commands/helpcommand/HelpCommandSequenceDiagram.png)
+
+Help Command will check whether the queried help is a general help (meaning that a summary table of all command formats should be shown to users), or is a
+specific help (meaning that the instruction and remarks of a particular targeted command should be used).
+
+Additionally, the help message itself is sent to VersionedModel as an `AdditionalInfo` object, which will be used to convert to `HelpWindow` view later on.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Guides**
+
+The following links to guides on: Documentation, Logging, Testing, Configuration, Dev-Ops.
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -250,49 +831,79 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix**
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* is an Avenger for CS1101S (a tutor in CS1101S is known as an Avenger)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+Currently, Avengers are able to utilise Source Academy as a platform to aid in their students'
+learning. However, there is no proper feature that allows Avengers to
+maintain a nominal roll for their class, or to track their students' performance.
+
+Academy Directory is designed to fill that gap! It is specifically tailored to help Avengers
+better manage their students. The app provides ease of communication, and allows Avengers to
+track their students' performance, in terms of attendance, participation and assessments.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                | I want to …​                                                    | So that I can…​                                                     |
+| -------- | --------------------------| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | CS1101S Avenger           | add, delete and edit student's information                         | update my class list                                                   |
+| `* * *`  | CS1101S Avenger           | retrieve specific details of a student                             | view and analyse the data                                              |
+| `* * *`  | CS1101S Avenger           | keep track of my students' tutorial performance                    | accurately reward class participation marks                            |
+| `* * *`  | CS1101S Avenger           | record my students' assessment results                             | monitor my students' progress and provide timely assistance to them    |
+| `* * *`  | First time user           | access the relevant commands with a "help" command                 | learn how to use the app more easily                                   |
+| `* *`    | CS1101S Avenger           | view the personal detail of my students                            | easily broadcast information to my students            |
+| `* *`    | CS1101S Avenger           | view the average scores of my students for specific assessments    | focus on the aspects to improve on during tutorial                     |
+| `* *`    | CS1101S Avenger           | visualize the class scores for specific assessments                | gauge how well my students are doing in assessments                    |
+| `* *`    | CS1101S Avenger           | add tags to certain students to take note of their weaker topics   | focus on topics that they are struggling with                          |
+| `* *`    | CS1101S Avenger           | view all information relating to one student in one go             | have an overview of my student status                                  |
+| `* * `   | CS1101S Avenger           | see history of changes to Academy Directory data                   | easily revert accidental changes to data                               |
+| `* * `   | CS1101S Avenger           | undo changes made to Academy Directory data                        | easily revert accidental changes to data                               |
+| `* * `   | CS1101S Avenger           | redo changes made to Academy Directory data                        | easily revert accidental undos to data                                 |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AcademyDirectory` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Seeking help**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests for assistance
+2. Academy Directory shows a list of all commands available
+3. User requests for help in a specific command
+4. Academy Directory shows the User Guide instructions for that command
+   
+   Use case ends
+
+**Extensions**
+* 3b. User requests for help in a command that does not exist
+  * 3b1. Academy Directory shows an error message
+    
+    Use case resumes at step 3.
+
+**Use case: Delete a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  Academy Directory shows a list of students
+3.  User requests to delete a specific student in the list
+4.  Academy Directory deletes the student
 
     Use case ends.
 
@@ -304,74 +915,415 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Academy Directory shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Edit a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  Academy Directory shows a list of students
+3.  User requests to edit a specific student in the list
+4.  Academy Directory edits the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Academy Directory shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Update Studio attendance of student**
+
+**MSS**
+
+1.  User requests to list students attending the relevant Studio session
+2.  Academy Directory shows a list of students attending the relevant Studio session
+3.  User requests to update the attendance of the student in the relevant Studio session
+4.  Academy Directory updates the student's attendance for the relevant Studio session
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index for the Studio group is invalid.
+
+  * 1a1. Academy Directory shows an error message.
+      Use case resumes at step 1.
+
+* 1b. The given index for the Studio group's Studio session is invalid.
+
+  * 1b1. Academy Directory shows an error message.
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given keyword to search for the student is gives no result.
+
+    * 3a1. Academy Directory shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Update Studio participation of student**
+
+**MSS**
+
+1. User requests to list students attending the relevant Studio session
+2. Academy Directory shows a list of students attending the relevant Studio session
+3. User requests to update the Studio participation of the student in the relevant Studio session with the appropriate Studio participation score
+4. Academy Directory updates the student's Studio participation for the relevant Studio session
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index for the Studio group is invalid.
+
+    * 1a1. Academy Directory shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The given index for the Studio group's Studio session is invalid.
+
+    * 1b1. Academy Directory shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given keyword to search for the student is gives no result.
+
+    * 3a1. Academy Directory shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given Studio participation score is invalid (non-integer).
+
+    * 3b1. Academy Directory shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add student's grade for an assessment**
+
+**MSS**
+
+1. User enters a command to add the grade for an assessment to a student.
+2. Academy Directory checks for existing instance of the assessment.
+3. Academy Directory records the input grade for the assessment.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student's name does not match any of the names in the directory.
+
+    * 1a1. Academy Directory shows an error message.
+
+      Use case resumes at step 1.
+    
+* 1b. The input grade is not a non-negative integer.
+
+    * 1b1. Academy Directory requests for user to enter a non-negative integer.
+
+      Use case resumes at step 1.
+
+* 2a. The assessment already exists.
+
+    * 2a1. Academy Directory edits the grade for the existing assessment.
+
+      Use case ends.
+
+* 2b. The assessment is new.
+
+    * 2b1. Academy Directory adds a new assessment with the input grade.
+
+      Use case ends.
+
+**Use case: Show grades for an assessment**
+
+**MSS**
+
+1. User enters a command to display the grades for an assessment.
+2. Academy Directory parses through the students to obtain the grades.
+3. Academy Directory displays a list of students with the grades.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The assessment does not exist.
+
+    * 1a1. Academy Directory shows an error message.
+    * 1a2. Academy Directory requests for the user to try another assessment.
+
+      Use case resumes at step 1.
+
+**Use case: Get personal detail**
+
+**MSS**
+
+1. User enters a command to get personal detail
+2. Academy Directory obtains the queried personal detail from the students.
+3. Academy Directory displays the list of personal detail queried.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User provides keywords to be matched to students' names.
+
+  * 1a1. Academy Directory displays the queried information associated with the students whose name
+  matches the queried keyword.
+
+    Use case ends.
+  
+* 1b. User's queried personal detail is not supported 
+    * 1b1. Academy Directory shows an error message.
+    * 1b2. Academy Directory requests for the user to try another information.
+  
+        Use case ends.
+  
+**Use case: View student information**
+
+**MSS**
+
+1. User enter a command to view all information of one student by index
+2. Academy Directory fetches all related data of one student
+3. Academy Directory displays all information to users.
+
+**Extensions**
+* 1a. Users request information of a student whose index exceeds the student list size
+  * 1a1. Academy Directory informs users that the index is invalid via an error message
+
+    Use case resumes at step 1
+
+* 1b. The index number is invalid (not a positive integer)
+  * 1b1. Academy Directory informs users that the index is invalid and must be a positive integer for the command to be executed
+
+    Use case resumes at step 1
+  
+**Use case: Undo changes to data**
+
+**MSS**
+
+1. User enters a command to undo a *data state change*
+2. Academy Directory regenerates the corresponding data file
+3. Academy Directory reloads information with the regenerated data file
+4. Academy Directory displays information to user.
+
+**Extensions**
+* 1a. There no changes to data state to be undone
+  * 1a1. Academy Directory informs users to check that there is a change to be undone via an error message
+
+    Use case ends
+
+* 2a. Unable to regenerate data file due to folder permission issues
+  * 2a1. Academy Directory informs users to check for read/write permission of the data folder via an error message
+
+    Use case ends
+
+* 3a. Unable to reload internal data due to corruption of regenerated data file
+  * 3a1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
+
+**Use case: Redo changes to data**
+
+**MSS**
+
+1. User enters a command to redo a *data state change*
+2. Academy Directory regenerates the corresponding data file
+3. Academy Directory reloads information with the regenerated data file
+4. Academy Directory displays information to user.
+
+**Extensions**
+* 1a. There no changes to data state to be redone
+  * 1a1. Academy Directory informs users to check that there is a change to be redone via an error message
+
+    Use case ends
+
+* 2a. Unable to regenerate data file due to folder permission issues
+  * 2a1. Academy Directory informs users to check for read/write permission of the data folder via an error message
+
+    Use case ends
+
+* 3a. Unable to reload internal data due to corruption of regenerated data file
+  * 3a1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
+
+**Use case: View Commit History**
+
+**MSS**
+
+1. User enters a command to view commit history
+2. Academy Directory displays commit history to user.
+
+**Extensions**
+* 1a. Unable to load file from disk due to folder permission issues
+  * 1a1. Academy Directory informs users to check for read/write permission of the version control folder via an error message
+
+    Use case ends
+
+* 1b. Unable to reload internal data due to corruption of regenerated data file
+  * 1b1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
+
+**Use case: Revert Commit**
+
+**MSS**
+
+1. User <u>views commit history</u>
+2. Academy Directory displays commit history to user.
+3. User picks a commit hash that is not the current commit to revert to
+4. Academy Directory regenerates the corresponding data file
+5. Academy Directory reloads information with the regenerated data file
+6. Academy Directory displays information to user.
+
+**Extensions**
+* 3a. User picks a commit hash that corresponds to the current commit
+  * 3a1. Academy Directory informs users to check commit hash via an error message
+
+    Use case ends
+* 3b. User picks an invalid commit hash
+  * 3b1. Academy Directory informs users to check commit hash via an error message
+
+    Use case ends
+
+* 4a. Unable to regenerate data file due to folder permission issues
+  * 4a1. Academy Directory informs users to check for read/write permission of the data folder via an error message
+
+    Use case ends
+
+* 5a. Unable to reload internal data due to corruption of regenerated data file
+  * 5a1. Academy Directory informs users to check for corrupted file via an error message
+
+    Use case ends
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to _3000_ student without a noticeable sluggishness in performance for typical usage.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should work in computer with `32-bit` or `64-bit` processor.
+5. User data should be in human editable file and stored locally.
+6. Should run on user computer with double-click - no installer or additional libraries required.
+7. Should not require internet connection for any of its feature.
+8. All user and app data should be stored locally, not through an online database solution.
+9. Logs and previous commits stored should be based on the _Principle of Least-Privilege_.
+10. Logs and previous commits should be recoverable even when Academy Directory itself is deleted.
+11. Logs and previous commits should be transferable and functional after transfer onto other computers.
+12. Users should be able to undo up to at least _100_ commands.
+13. Software default file size should not exceed _50_ Megabytes.
+14. Most commands should take preferrably 1 second to be executed, and at most 3-4 seconds.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Term | Definition | Comments |
+|-----| ----------- | ---------- |
+| Operating System (OS) | Software that manages computer hardware and other computer software. | |
+| Mainstream OS | Examples of mainstream OS includes: Windows, Linux, Unix, OS-X, MacOS, etc. | |
+| Personal Detail | A contact detail of a student | Phone number, Telegram handle, and email address |
+| CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. | |
+| Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | < 10 students in a studio |
+| Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. | An avenger holds at most one class. |
+| Principle of Least-Privilege | Minimum levels of access – or permissions – needed to perform function. | |
+| Command Line Interface (CLI) | A text-based user interface, where users instruct the computer to do something by line-of-text commands | |
+| Graphical User Interface (GUI) | A graphics-based user interface, where users instruct the computer to do something by interacting with graphical elements | |
+| Java | A program that allows running other programs written in Java programming language. | |
+| `Command` | An interface representing an instruction typed by a user to Academy Directory. | |
+| Version controlled `Command` | a `Command` that logs a commit message, and thus stages at least one `VcObject` object upon execution. | Refer to the list of such commands [here](#appendix-c-version-controlled-commands) |
+| Command Box | A part of the Academy Directory's GUI which can be used by users to type commands. | |
+| Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix |
+| Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields |
+| Prefix | An abbreviation of a field. | Always ends with a backslash ('/') |
+| Singular Commands | A command that consists of only one word and no other arguments | If there are any other character/words following a singular command, an error message will be shown
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+
+Manual testing was conducted internally by the team as of the time of writing.
+
+The details of the testing procedure can be found here: [Manual Testing](ManualTesting.md)
+
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-
+testers are encouraged to do more *exploratory* testing.
 </div>
 
-### Launch and shutdown
+In the future, we aim to expand testing to be done by external testers to improve the testing rigour.
 
-1. Initial launch
+## **Appendix C: Version Controlled Commands**
+The following list is a list of commands that are version controlled i.e. they can be undone and
+redone using the `UndoCommand` and the `RedoCommand` command. Furthermore, the use of these commands
+will be reflected in the commit history, using the `HistoryCommand`. More concretely, these commands _stages_
+`VcObject`/s that will be saved to disk, thus facilitating `VersionControl`
+- [`AddCommand`](#addcommand)
+- [`DeleteCommand`](#deletecommand)
+- [`TagCommand`](#tagcommand)
+- [`EditCommand`](#editcommand)
+- [`GradeCommand`](#gradecommand)
+- [`AttendanceCommand`](#attendancecommand)
+- [`ParticipationCommand`](#participationcommand)
+- [`SortCommand`](#sortcommand)
+- [`ClearCommand`](#clearcommand)
 
-   1. Download the jar file and copy into an empty folder
+Commands not shown in the above list _will not_ appear in the commit history, and thus
+cannot be reverted to and / or be undone or redone.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+## **Appendix D: Effort**
+If the effort required to create **AB3** is 10, we would place the effort level required to implement the current version
+of **Academy Directory** at 15.
 
-1. Saving window preferences
+Our team has put in a significant amount of effort to get Academy Directory to the current version. Below, we list some notable changes overall and notable features implemented by us.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Notable Changes in General
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. **Morphed existing AB3 to align with our design for Academy Directory**
 
-1. _{ more test cases …​ }_
+   We have put in a significant amount of effort morphing the existing code base, AB3 to support the need of our application, which is designed for CS1101S avenger to be more effective and efficient.
 
-### Deleting a person
+   Firstly, we had to create new classes for components related to our application, such as <TO BE ADDED>. Each of these classes has different input format requirements and is related to different command.
+   Many commands and features we have implemented are not 
 
-1. Deleting a person while all persons are being shown
+   Secondly, we had to remove all the irrelevant classes and update the existing test cases to fit our need.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   Lastly, we had to integrate all these new classes with the existing code to save applications data to a file
+   in Academy Directory. This required major refactoring of existing classes to support multiple new fields and commands.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. **Redesigned GUI**
+   Compared to AB3, Academy Directory completely revamps the User Interface to bring out the best usage experiences to users. In that regard, we have updated Academy and make everything about it space-themed,
+   allowing users the various options (primarily CLI, but GUI is also offered) to interact with our system, and reorganize the appearance to make Academy Directory look more neat and stylish, thus enhancing user's experience.
+   One of the most notable change to UI was the differentiation of result display into two categories - status message and result visualized.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Notable Features
 
-1. _{ more test cases …​ }_
+Some notable features that we have designed specifically for the Avengers include the ability to record and track
+students' studio attendance, studio participation, and grades. These tools are tailored to fit the module requirements, and 
+they complement the Avengers in tracking their students' progress.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+To improve user experience, we implemented several new features that will aid Avengers in their weekly tutoring work,
+such as Show, Sort, Visualize, a set of version control tools (Undo, Redo, History, Revert), and a more comprehensive help command.
+The data visualization tools allow Avengers to perform better analysis, and customize their teaching to maximize their students'
+learning experience. With the version control tools, Academy Directory is much more forgiving and this allows
+Avengers to feel more confident and at ease while using our product. The new Help command makes new users more comfortable to learn Academy Directory.
+ 
+The implementation details and design considerations for these features could be found in [Implementation](#implementation) section
+and the [Design](#design) section respectively.

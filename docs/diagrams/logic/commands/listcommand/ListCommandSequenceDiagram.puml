@@ -1,0 +1,29 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ListCommand" as listCommand LOGIC_COLOR
+participant ":CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+participant ":VersionedModel" as versionedModel MODEL_COLOR
+end box
+
+[-> listCommand: execute(model)
+activate listCommand
+
+listCommand -> versionedModel: updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS)
+activate versionedModel
+versionedModel -> versionedModel
+versionedModel --> listCommand
+deactivate versionedModel
+
+create commandResult
+listCommand -> commandResult: new CommandResult(MESSAGE_SUCCESS)
+activate commandResult
+commandResult --> listCommand: commandResult
+deactivate commandResult
+<-- listCommand: result
+deactivate listCommand
+@enduml

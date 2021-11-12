@@ -1,0 +1,42 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ViewCommand" as viewCommand LOGIC_COLOR
+participant ":CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+participant ":VersionedModel" as versionedModel MODEL_COLOR
+participant "studentToView:Student" as student MODEL_COLOR
+end box
+
+-> viewCommand ++ : execute(model)
+viewCommand -> versionedModel : getFilteredStudentList()
+activate versionedModel
+versionedModel --> viewCommand : studentList
+deactivate versionedModel
+
+create student
+viewCommand -> student : get(index.getZeroBased())
+activate student
+student --> viewCommand: studentToView
+deactivate student
+
+viewCommand -> versionedModel : setAdditionalViewType(AdditionalViewType.VIEW)
+
+viewCommand -> versionedModel : setAdditionalInfo(AdditionalInfo.of(studentToView))
+
+create commandResult
+viewCommand -> commandResult: new CommandResult(MESSAGE_SUCCESS)
+activate commandResult
+commandResult -> student: getName()
+activate student
+student --> commandResult: name of the student
+deactivate student
+commandResult --> viewCommand
+deactivate commandResult
+
+[<-- viewCommand: result
+deactivate viewCommand
+@enduml

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.MenuItem?>
+<MenuBar fx:id="menuBar" VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+         style="-fx-background-image: url(/images/space1.png);
+         -fx-background-repeat: stretch;
+              -fx-background-size: 100% 100%; -fx-background-position: center center;">
+    <Menu mnemonicParsing="false">
+        <graphic>
+            <ImageView pickOnBounds="true" fitWidth="30" fitHeight="30"
+                       preserveRatio="true">
+                <Image url="@/images/grade.png" />
+            </ImageView>
+        </graphic>
+        <MenuItem fx:id="showRA1" mnemonicParsing="false" text="Show RA1" onAction="#showRA1"/>
+        <MenuItem fx:id="showMidterm" mnemonicParsing="false" text="Show Midterm" onAction="#showMidterm"/>
+        <MenuItem fx:id="showRA2" mnemonicParsing="false" text="Show RA2" onAction="#showRA2"/>
+        <MenuItem fx:id="showPE" mnemonicParsing="false" text="Show PE" onAction="#showPE"/>
+        <MenuItem fx:id="showFinal" mnemonicParsing="false" text="Show Final" onAction="#showFinal"/>
+    </Menu>
+    <Menu mnemonicParsing="false">
+        <graphic>
+            <ImageView pickOnBounds="true" fitWidth="30" fitHeight="30"
+                       preserveRatio="true">
+                <Image url="@/images/statistics.png" />
+            </ImageView>
+        </graphic>
+        <MenuItem fx:id="visualize" mnemonicParsing="false" text="Show statistics" onAction="#showStatistics"/>
+    </Menu>
+    <Menu mnemonicParsing="false">
+        <graphic>
+            <ImageView pickOnBounds="true" fitWidth="30" fitHeight="30"
+                       preserveRatio="true">
+                <Image url="@/images/clock.png" />
+            </ImageView>
+        </graphic>
+        <MenuItem fx:id="history" mnemonicParsing="false" text="Usage history" onAction="#showHistory"/>
+        <MenuItem fx:id="undo" mnemonicParsing="false" text="Undo recent changes" onAction="#undo"/>
+        <MenuItem fx:id="redo" mnemonicParsing="false" text="Redo" onAction="#redo"/>
+    </Menu>
+    <Menu mnemonicParsing="false">
+        <graphic>
+            <ImageView fx:id="help" pickOnBounds="true" fitWidth="30" fitHeight="30"
+                       preserveRatio="true">
+                <Image url="@/images/help_icon.png" />
+            </ImageView>
+        </graphic>
+        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="Help" onAction="#showHelp"/>
+    </Menu>
+</MenuBar>

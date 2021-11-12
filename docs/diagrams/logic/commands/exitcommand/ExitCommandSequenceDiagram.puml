@@ -1,0 +1,24 @@
+@startuml
+!include ../../../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ExitCommand" as exitCommand LOGIC_COLOR
+participant ":CommandResult" as commandResult LOGIC_COLOR
+end box
+
+box VersionedModel MODEL_COLOR_T1
+participant ":VersionedModel" as versionedModel MODEL_COLOR
+end box
+
+-> exitCommand: execute(model)
+
+create commandResult
+activate exitCommand
+exitCommand -> commandResult:  CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true)
+activate commandResult
+commandResult --> exitCommand: command result
+deactivate commandResult
+
+<-- exitCommand: result
+deactivate exitCommand
+@enduml

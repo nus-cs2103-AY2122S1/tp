@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import java.net.URL?>
+<StackPane fx:id="placeHolder" styleClass="pane-with-border"
+           style="-fx-opaque: 0.9;"
+           xmlns="http://javafx.com/javafx/11.0.1"
+           xmlns:fx="http://javafx.com/fxml/1">
+    <VBox>
+        <stylesheets>
+            <URL value="@../Fonts.css"/>
+            <URL value="@../DarkTheme.css" />
+            <URL value="@../Extensions.css" />
+        </stylesheets>
+        <HBox alignment="CENTER" spacing="10">
+          <Label fx:id="fullName" styleClass="cell_full_name"/>
+        </HBox>
+        <FlowPane fx:id="tags" alignment="CENTER" />
+        <HBox alignment="CENTER">
+            <Label text="--------------------------------"/>
+        </HBox>
+      <Accordion>
+        <panes>
+          <TitledPane fx:id="container1" animated="false" text="View Participation">
+            <content>
+              <ScrollPane fx:id="participation"  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="container2" animated="false" text="View Test Score">
+            <content>
+              <ScrollPane fx:id="testScores"  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+        <VBox alignment="BOTTOM_LEFT" spacing="10">
+            <Label />
+            <HBox alignment="CENTER">
+                <Label styleClass="cell_small_label" style="-fx-color: white"
+                       text="Contact information:" VBox.vgrow="ALWAYS">
+                    <font>
+                        <Font size="14.5" />
+                    </font>
+                </Label>
+            </HBox>
+            <Label fx:id="phone" styleClass="cell_small_label" text="- Phone number: \$phone" VBox.vgrow="ALWAYS">
+            </Label>
+            <Label fx:id="email" styleClass="cell_small_label"  text="- Email: \$email" VBox.vgrow="ALWAYS" />
+            <Label fx:id="telegram" styleClass="cell_small_label" text="- Telegram handle: \$telegram" VBox.vgrow="ALWAYS" />
+        </VBox>
+
+    </VBox>
+</StackPane>
