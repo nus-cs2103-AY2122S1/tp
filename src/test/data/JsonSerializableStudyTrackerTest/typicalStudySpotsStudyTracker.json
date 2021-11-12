@@ -1,0 +1,67 @@
+{
+  "_comment": "StudyTracker save file which contains the same StudySpot values as in TypicalStudySpots#getTypicalStudyTracker()",
+  "studySpots" : [ {
+    "name" : "Starbucks",
+    "rating" : "4",
+    "operatingHours" : "-",
+    "address" : "UTown",
+    "studiedHours" : "3",
+    "favourite" : "false",
+    "tagged" : [ "coffee" ],
+    "amenities" : [ "wifi" ]
+  }, {
+    "name" : "Central library",
+    "rating" : "3",
+    "operatingHours" : "-",
+    "address" : "NUS, Central Library",
+    "favourite" : "true",
+    "studiedHours" : "2",
+    "tagged" : [ "cold", "quiet" ],
+    "amenities" : [ "wifi", "charger", "aircon"]
+  }, {
+    "name" : "COM1",
+    "rating" : "2",
+    "operatingHours" : "-",
+    "address" : "NUS Computing",
+    "favourite" : "true",
+    "studiedHours" : "23",
+    "tagged" : [ ],
+    "amenities" : [ "wifi", "charger", "aircon"]
+  }, {
+    "name" : "Frontier Canteen",
+    "rating" : "3",
+    "operatingHours" : "0900-1800, 0900-1800",
+    "address" : "NUS Science Faculty",
+    "favourite" : "false",
+    "studiedHours" : "15",
+    "tagged" : [ "crowded" ],
+    "amenities" : ["food"]
+  }, {
+    "name" : "Tokyo Room",
+    "rating" : "3",
+    "operatingHours" : "-",
+    "address" : "NUS, Yusof Ishak House Level 3",
+    "favourite" : "false",
+    "studiedHours" : "26",
+    "tagged" : [ "cold" ],
+    "amenities" : [ "wifi", "aircon"]
+  },{
+    "name" : "PC Commons",
+    "rating" : "4",
+    "operatingHours" : "-",
+    "address" : "Utown",
+    "favourite" : "false",
+    "studiedHours" : "30",
+    "tagged" : [ ],
+    "amenities" : [ ]
+  }, {
+    "name" : "LT17",
+    "rating" : "5",
+    "operatingHours" : "-",
+    "address" : "NUS COM2",
+    "favourite" : "true",
+    "studiedHours" : "13",
+    "tagged" : [ ],
+    "amenities" : []
+  } ]
+}

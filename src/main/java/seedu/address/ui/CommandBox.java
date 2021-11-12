@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -16,6 +20,10 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private List<String> commandHistory = new ArrayList<>();
+    private ListIterator<String> scroller;
+    private int lastCommandIndex = -1;
+
     private final CommandExecutor commandExecutor;
 
     @FXML
@@ -29,6 +37,7 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        handleKeyboardShortcuts();
     }
 
     /**
@@ -42,6 +51,8 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            scroller = null;
+            commandHistory.add(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
@@ -67,6 +78,75 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Handles keyboard shortcuts in the Input box.
+     * Shortcuts: Up arrow toggles between last-entered commands.
+     *
+     * @@author qreoct-reused
+     * Reused from https://github.com/qreoct/ip/blob/master/src/main/java/duke/controllers/AppWindow.java
+     */
+    private void handleKeyboardShortcuts() {
+        commandTextField.setOnKeyReleased(event -> {
+            String key = event.getCode().toString();
+            cycleThroughCommandHistory(key);
+        });
+    }
+
+    /**
+     * Cycles through the history of commands.
+     *
+     * @param key To check if the key pressed is UP or DOWN
+     * Adapted from https://stackoverflow.com/questions/41604430/implement-command-history-within-java-program
+     */
+    private void cycleThroughCommandHistory(String key) {
+        boolean isUpArrow = key.equals("UP");
+        boolean isDownArrow = key.equals("DOWN");
+        if (scroller == null || commandTextField.getText().equals("")) {
+            lastCommandIndex = commandHistory.size();
+            scroller = commandHistory.listIterator(lastCommandIndex);
+        }
+        if (scroller.hasPrevious() && isUpArrow) {
+            scrollUp();
+        }
+        if (scroller.hasNext() && isDownArrow) {
+            scrollDown();
+        }
+    }
+
+    private void scrollUp() {
+        if (scroller.hasPrevious()) {
+            int prevIndex = scroller.previousIndex();
+            String prevCommand = scroller.previous();
+            if (scroller.hasPrevious() && prevIndex == lastCommandIndex) {
+                prevIndex = scroller.previousIndex();
+                prevCommand = scroller.previous();
+            }
+            lastCommandIndex = prevIndex;
+            commandTextField.setText(prevCommand);
+            commandTextField.end();
+            if (!scroller.hasPrevious()) {
+                scroller.next();
+            }
+        }
+    }
+
+    private void scrollDown() {
+        if (scroller.hasNext()) {
+            int nextIndex = scroller.nextIndex();
+            String nextCommand = scroller.next();
+            if (scroller.hasNext() && nextIndex == lastCommandIndex) {
+                nextIndex = scroller.nextIndex();
+                nextCommand = scroller.next();
+            }
+            lastCommandIndex = nextIndex;
+            commandTextField.setText(nextCommand);
+            commandTextField.end();
+            if (!scroller.hasNext()) {
+                scroller.previous();
+            }
+        }
     }
 
     /**

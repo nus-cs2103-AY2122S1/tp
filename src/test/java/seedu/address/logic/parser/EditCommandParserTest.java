@@ -1,51 +1,56 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.AMENITY_DESC_WIFI;
+import static seedu.address.logic.commands.CommandTestUtil.AMENITY_RM_DESC_FOOD;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_OPERATING_HOURS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATING_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATING_OUTOFRANGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.OPERATING_HOURS_DESC_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.OPERATING_HOURS_DESC_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CROWDED;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_QUIET;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_REMOVE_QUIET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMENITY_FOOD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMENITY_WIFI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OPERATING_HOURS_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OPERATING_HOURS_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RATING_DECK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RATING_FRONTIER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CROWDED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_QUIET;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMENITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_SPOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.logic.commands.EditCommand.EditStudySpotDescriptor;
+import seedu.address.model.studyspot.Address;
+import seedu.address.model.studyspot.Name;
+import seedu.address.model.studyspot.Rating;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditStudySpotDescriptorBuilder;
 
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String AMENITIES_EMPTY = " " + PREFIX_AMENITY;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -55,10 +60,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_FRONTIER, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -67,10 +72,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_FRONTIER, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_FRONTIER, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -81,52 +86,70 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + INVALID_RATING_DESC,
+                Rating.MESSAGE_CONSTRAINTS); // invalid rating
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + INVALID_RATING_OUTOFRANGE_DESC,
+                Rating.MESSAGE_CONSTRAINTS); // invalid rating
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + INVALID_ADDRESS_DESC,
+                Address.MESSAGE_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        // invalid rating followed by valid operating hours
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + INVALID_RATING_DESC
+                        + OPERATING_HOURS_DESC_FRONTIER,
+                Rating.MESSAGE_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // valid rating followed by invalid rating. The test case for invalid rating followed by valid rating
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + RATING_DESC_DECK + INVALID_RATING_DESC,
+                Rating.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code StudySpot} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + TAG_DESC_CROWDED
+                + TAG_DESC_QUIET + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + TAG_DESC_CROWDED + TAG_EMPTY
+                + TAG_DESC_QUIET, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test" + TAG_EMPTY + TAG_DESC_CROWDED
+                + TAG_DESC_QUIET, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, " " + PREFIX_EDIT_SPOT + "Test"
+                        + INVALID_NAME_DESC + INVALID_OPERATING_HOURS_DESC + VALID_ADDRESS_FRONTIER
+                        + VALID_RATING_FRONTIER,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        String userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + RATING_DESC_DECK
+                + OPERATING_HOURS_DESC_FRONTIER + ADDRESS_DESC_FRONTIER + NAME_DESC_FRONTIER
+                + TAG_DESC_CROWDED + TAG_DESC_REMOVE_QUIET
+                + AMENITY_DESC_WIFI + AMENITY_RM_DESC_FOOD;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder().withName(VALID_NAME_FRONTIER)
+                .withRating(VALID_RATING_DECK).withOperatingHours(VALID_OPERATING_HOURS_FRONTIER)
+                .withAddress(VALID_ADDRESS_FRONTIER)
+                .withAddedTags(VALID_TAG_CROWDED).withRemovedTags(VALID_TAG_QUIET)
+                .withAddedAmenities(VALID_AMENITY_WIFI).withRemovedAmenities(VALID_AMENITY_FOOD).build();
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        String userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + RATING_DESC_DECK
+                + OPERATING_HOURS_DESC_FRONTIER;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder().withRating(VALID_RATING_DECK)
+                .withOperatingHours(VALID_OPERATING_HOURS_FRONTIER).build();
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -134,48 +157,54 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        String userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + NAME_DESC_FRONTIER;
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder().withName(VALID_NAME_FRONTIER).build();
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        // rating
+        userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + RATING_DESC_FRONTIER;
+        descriptor = new EditStudySpotDescriptorBuilder().withRating(VALID_RATING_FRONTIER).build();
+        expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        // operating hours
+        userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + OPERATING_HOURS_DESC_FRONTIER;
+        descriptor = new EditStudySpotDescriptorBuilder().withOperatingHours(VALID_OPERATING_HOURS_FRONTIER).build();
+        expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + ADDRESS_DESC_FRONTIER;
+        descriptor = new EditStudySpotDescriptorBuilder().withAddress(VALID_ADDRESS_FRONTIER).build();
+        expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + TAG_DESC_CROWDED;
+        descriptor = new EditStudySpotDescriptorBuilder().withAddedTags(VALID_TAG_CROWDED).build();
+        expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        Name extraInputName = new Name(VALID_NAME_DECK);
+        String userInput = " " + PREFIX_EDIT_SPOT + extraInputName.fullName + RATING_DESC_FRONTIER
+                + ADDRESS_DESC_FRONTIER + OPERATING_HOURS_DESC_FRONTIER + TAG_DESC_CROWDED + RATING_DESC_FRONTIER
+                + ADDRESS_DESC_FRONTIER + OPERATING_HOURS_DESC_FRONTIER + TAG_DESC_CROWDED + RATING_DESC_DECK
+                + ADDRESS_DESC_DECK
+                + OPERATING_HOURS_DESC_DECK + TAG_DESC_QUIET + " " + PREFIX_EDIT_SPOT + targetName.fullName;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder()
+                .withRating(VALID_RATING_DECK)
+                .withOperatingHours(VALID_OPERATING_HOURS_DECK)
+                .withAddress(VALID_ADDRESS_DECK)
+                .withAddedTags(VALID_TAG_CROWDED, VALID_TAG_QUIET)
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -183,28 +212,40 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        String userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + INVALID_RATING_DESC + RATING_DESC_DECK;
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder().withRating(VALID_RATING_DECK).build();
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
-                + PHONE_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + OPERATING_HOURS_DESC_DECK + INVALID_RATING_DESC
+                + ADDRESS_DESC_DECK + RATING_DESC_DECK;
+        descriptor = new EditStudySpotDescriptorBuilder().withRating(VALID_RATING_DECK)
+                .withOperatingHours(VALID_OPERATING_HOURS_DECK)
+                .withAddress(VALID_ADDRESS_DECK).build();
+        expectedCommand = new EditCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        String userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder().withAddedTags().build();
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetAmenities_success() {
+        Name targetName = new Name(VALID_NAME_FRONTIER);
+        String userInput = " " + PREFIX_EDIT_SPOT + targetName.fullName + AMENITIES_EMPTY;
+
+        EditStudySpotDescriptor descriptor = new EditStudySpotDescriptorBuilder().withAddedAmenities().build();
+        EditCommand expectedCommand = new EditCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

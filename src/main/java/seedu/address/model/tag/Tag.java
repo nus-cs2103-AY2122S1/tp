@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the study tracker.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
+    public static final int TAG_LENGTH = 50;
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, e.g. t/cold.";
+    public static final String MESSAGE_LENGTH = "Tags must be less than " + TAG_LENGTH + " characters long!";
+    public static final String MESSAGE_NO_SPACE = "Tags names should not have spaces, e.g. t/veryCrowded.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -22,6 +25,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagLength(tagName), MESSAGE_LENGTH);
         this.tagName = tagName;
     }
 
@@ -30,6 +34,13 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid tag length.
+     */
+    public static boolean isValidTagLength(String test) {
+        return test.length() < TAG_LENGTH;
     }
 
     @Override

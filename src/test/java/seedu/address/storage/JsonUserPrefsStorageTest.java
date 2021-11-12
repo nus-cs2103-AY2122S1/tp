@@ -24,6 +24,13 @@ public class JsonUserPrefsStorageTest {
     public Path testFolder;
 
     @Test
+    public void constructor_getUserPrefsFilePath_success() {
+        Path initialPath = addToTestDataPathIfNotNull("TypicalUserPref.json");
+        JsonUserPrefsStorage storage = new JsonUserPrefsStorage(initialPath);
+        assertEquals(initialPath, storage.getUserPrefsFilePath());
+    }
+
+    @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
@@ -51,30 +58,28 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
-        UserPrefs expected = getTypicalUserPrefs();
+        UserPrefs expected = new UserPrefs();
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
+        UserPrefs expected = new UserPrefs();
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
-        assertEquals(new UserPrefs(), actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
-        UserPrefs expected = getTypicalUserPrefs();
+        UserPrefs expected = new UserPrefs();
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
-
         assertEquals(expected, actual);
     }
 
-    private UserPrefs getTypicalUserPrefs() {
-        UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
-        return userPrefs;
+    @Test
+    public void readUserPrefs_invalidValuesInFile_throwsDataConversionException() throws DataConversionException {
+        assertThrows(DataConversionException.class, () -> readUserPrefs("InvalidValuesUserPref.json"));
     }
 
     @Test
@@ -103,7 +108,7 @@ public class JsonUserPrefsStorageTest {
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
+        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2, "default"));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
@@ -114,7 +119,7 @@ public class JsonUserPrefsStorageTest {
         assertEquals(original, readBack);
 
         //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
+        original.setGuiSettings(new GuiSettings(5, 5, 5, 5, "default"));
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);

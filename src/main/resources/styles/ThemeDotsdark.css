@@ -1,0 +1,62 @@
+/* DotsDark Theme for StudyTracker */
+/* Inspired by GMK Dots by biip */
+/* Some colours from monkeytype https://github.com/Miodec/monkeytype/blob/3b6fb2d3b3bfb4e822db210f0183ed89fcf1b5a6/static/themes/dots.css */
+
+.root {
+    -fx-base: #121520;
+
+    fg-accent: #4E536A;
+    fg-surface: derive(fg-accent, -40%);
+    bg-surface: #3D4152;
+
+    fg-text: #ffffff;
+    bg-text: #f3f4f5;
+    accent-text: #111111;
+    -fx-text-base-color: fg-text;
+
+    -fx-default-button: #4ACB8A;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+
+    accent-0: #ffd543;
+    accent-1: #ff9349;
+    accent-2: #4acb8a;
+    accent-3: #f94348;
+    accent-4: #ab85ff;
+    accent-5: #3cc5f8;
+}
+
+.button {
+    -fx-text-fill: accent-text;
+}
+
+.error {
+     -fx-text-fill: #f94348 !important;
+}
+
+.tag-accent-0 {
+    -fx-background-color: accent-0 !important;
+}
+
+.tag-accent-1 {
+    -fx-background-color: accent-1 !important;
+}
+
+.tag-accent-2 {
+    -fx-background-color: accent-2 !important;
+}
+
+.tag-accent-3 {
+    -fx-background-color: accent-3 !important;
+}
+
+.tag-accent-4 {
+    -fx-background-color: accent-4 !important;
+}
+
+#help-window .list-cell:filled:selected {
+    -fx-background-color: -fx-default-button;
+    -fx-text-fill: accent-text;
+}

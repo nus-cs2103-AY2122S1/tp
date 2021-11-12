@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":StudyTrackerParser" as StudyTrackerParser LOGIC_COLOR
+participant ":LogCommandParser" as LogCommandParser LOGIC_COLOR
+participant "lc:LogCommand" as LogCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("log -ra")
+activate LogicManager
+
+LogicManager -> StudyTrackerParser : parseCommand("log -ra")
+activate StudyTrackerParser
+
+create LogCommandParser
+StudyTrackerParser -> LogCommandParser
+activate LogCommandParser
+
+LogCommandParser --> StudyTrackerParser
+deactivate LogCommandParser
+
+StudyTrackerParser -> LogCommandParser : parse("-ra")
+activate LogCommandParser
+
+create LogCommand
+LogCommandParser -> LogCommand
+activate LogCommand
+
+LogCommand --> LogCommandParser : lc
+deactivate LogCommand
+
+LogCommandParser --> StudyTrackerParser : lc
+deactivate LogCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LogCommandParser -[hidden]-> StudyTrackerParser
+destroy LogCommandParser
+
+StudyTrackerParser --> LogicManager : lc
+deactivate StudyTrackerParser
+
+LogicManager -> LogCommand : execute()
+activate LogCommand
+
+LogCommand -> LogCommand : handleResetAll()
+activate LogCommand
+
+loop for each StudySpot s
+
+LogCommand -> LogCommand : setStudySpotHours(s, '0')
+activate LogCommand
+
+LogCommand --> LogCommand : updatedStudySpot
+deactivate LogCommand
+
+LogCommand -> Model : setStudySpot(s,\n updatedStudySpot)
+activate Model
+
+Model --> LogCommand
+deactivate Model
+
+end
+
+create CommandResult
+LogCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LogCommand
+deactivate CommandResult
+
+LogCommand --> LogCommand : result
+deactivate LogCommand
+
+LogCommand --> LogicManager : result
+deactivate LogCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LogCommand -[hidden]-> StudyTrackerParser
+destroy LogCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

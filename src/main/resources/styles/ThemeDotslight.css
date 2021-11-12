@@ -1,0 +1,55 @@
+/* Dots Light Theme for StudyTracker */
+
+.root {
+    -fx-base: #e8e9ee;
+
+    fg-accent: #ffffff;
+    fg-surface: #b9bccb;
+    bg-surface: #a4accc;
+
+    fg-text: #121520;
+    bg-text: #121520;
+    accent-text: #121520;
+    -fx-text-base-color: fg-text;
+
+    -fx-default-button: #ff9349;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+
+    accent-0: #ffd543;
+    accent-1: #ff9349;
+    accent-2: #4acb8a;
+    accent-3: #f94348;
+    accent-4: #ab85ff;
+    accent-5: #3cc5f8;
+}
+
+.list-cell:filled:hover .card{
+    -fx-background-color: derive(fg-surface, -10%);
+}
+
+.error {
+     -fx-text-fill: #f94348 !important;
+}
+
+.tag-accent-0 {
+    -fx-background-color: accent-0 !important;
+}
+
+.tag-accent-1 {
+    -fx-background-color: accent-1 !important;
+}
+
+.tag-accent-2 {
+    -fx-background-color: accent-2 !important;
+}
+
+.tag-accent-3 {
+    -fx-background-color: accent-3 !important;
+}
+
+.tag-accent-4 {
+    -fx-background-color: accent-4 !important;
+}

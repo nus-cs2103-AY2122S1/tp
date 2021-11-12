@@ -1,53 +1,61 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_SPOT;
 
-import java.util.List;
+import java.util.logging.Logger;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.studyspot.Name;
+import seedu.address.model.studyspot.StudySpot;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a study spot identified using it's displayed index from the study tracker.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the specified study spot (case insensitive)\n"
+            + "Parameters: n/NAME* \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DELETE_SPOT + "starbucks";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_STUDYSPOT_SUCCESS = "Deleted study spot: %1$s";
 
-    private final Index targetIndex;
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    private Name name;
+
+    public DeleteCommand(Name name) {
+        this.name = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("Executing Delete Command...");
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        StudySpot studySpotToDelete = model.findStudySpot(name);
+        if (studySpotToDelete == null) {
+            throw new CommandException(MESSAGE_INVALID_NAME);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        if (studySpotToDelete.isFavourite()) {
+            StudySpot unfavStudySpot = model.removeStudySpotFromFavourites(studySpotToDelete);
+            model.deleteStudySpot(unfavStudySpot);
+        } else {
+            model.deleteStudySpot(studySpotToDelete);
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDYSPOT_SUCCESS, studySpotToDelete.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && name.equals(((DeleteCommand) other).name)); // state check
     }
+
 }

@@ -1,14 +1,30 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+<img align="left" height="155" width="155" src="src/main/resources/images/books.png">
 
+# StudyTracker
+
+#### Maximizing your productivity by making it easy to find the best places to study.
+
+[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T09-1/tp/actions)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T09-1/tp/branch/master/graph/badge.svg?token=WFNH625241)](https://codecov.io/gh/AY2122S1-CS2103T-T09-1/tp)
+[![latest release](https://badgen.net/github/release/AY2122S1-CS2103T-T09-1/tp)](https://github.com/AY2122S1-CS2103T-T09-1/tp/releases)
+
+--- 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+## Features
+1. **Make informed decisions** of where to study —  every study spot includes details about *amenities* like chargers, 
+   aircon, food, and wifi! Not forgetting the personalised *tags*, *address* and *operating hour* information that you 
+   can add to every study spot!
+2. **Data-driven statistics** to **track time spent studying** ensures that you know where to go to be productive
+3. Made a mistake? Found out something new? **Editing details is quick and simple!**
+4. **Powerful customization** with user-defined aliases and custom themes!
+5. **Built for cross-platform use** with JavaFX. Bring your StudyTracker data with you to any device!
+6. **Optimized for Command Line Interface (CLI) lovers!**
+
+### Acknowledgement
+StudyTracker is an application developed based on the `AddressBook Level 3` application created by the [SE-EDU initiative](https://se-education.org).
+
+Images and icons are [licensed for use](copyright.txt).
+
+### License
+StudyTracker is licensed under the [MIT license](LICENSE)

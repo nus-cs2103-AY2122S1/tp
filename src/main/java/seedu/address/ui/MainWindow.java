@@ -8,7 +8,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -24,6 +26,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String CSS_PATH = "/styles/";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -31,24 +34,33 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudySpotListPanel studySpotListPanel;
+    private FavouritesListPanel favouritesListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private InfoDisplay infoDisplay;
+    private SettingsWindow settingsWindow;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
+    private HBox commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studySpotListPanelPlaceholder;
+
+    @FXML
+    private StackPane favouritesListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox infoDisplayPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -61,11 +73,15 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Configure the UI
+        setStylesheet("Fonts.css");
+        setStylesheet("Main.css");
         setWindowDefaultSize(logic.getGuiSettings());
+        setThemeFromSettings(logic.getGuiSettings());
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = new HelpWindow(logic);
+        settingsWindow = new SettingsWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -110,13 +126,20 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studySpotListPanel = new StudySpotListPanel(logic.getFilteredStudySpotList(),
+                logic.getFullList().size());
+        studySpotListPanelPlaceholder.getChildren().add(studySpotListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        infoDisplay = new InfoDisplay(logic.getTopFiveStudySpotList(), logic.getFullList());
+        infoDisplayPlaceholder.getChildren().add(infoDisplay.getRoot());
+
+        favouritesListPanel = new FavouritesListPanel(logic.getFavouriteStudySpotList());
+        favouritesListPanelPlaceholder.getChildren().add(favouritesListPanel.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudyTrackerFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -133,6 +156,43 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Sets the theme based on {@code guiSettings}.
+     */
+    private void setThemeFromSettings(GuiSettings guiSettings) {
+        primaryStage.getScene().getStylesheets().add(guiSettings.getStyleSheetPath());
+    }
+
+    /**
+     * Sets the stylesheet based on {@code file name}.
+     */
+    private void setStylesheet(String fileName) {
+        primaryStage.getScene().getStylesheets().add(CSS_PATH + fileName);
+    }
+
+    /**
+     * Updates theme to be the latest theme
+     */
+    private void updateTheme() {
+        int numberOfStyleSheets = primaryStage.getScene().getStylesheets().size() - 1;
+        primaryStage.getScene().getStylesheets().remove(numberOfStyleSheets);
+        primaryStage.getScene().getStylesheets().add(logic.getGuiSettings().getStyleSheetPath());
+    }
+
+    /**
+     * Opens the settings window or focuses on it if it's already opened.
+     * Will always update the theme.
+     */
+    @FXML
+    public void handleSettings() {
+        if (!settingsWindow.isShowing()) {
+            settingsWindow.showAndWait();
+        } else {
+            settingsWindow.focus();
+        }
+        updateTheme();
     }
 
     /**
@@ -157,14 +217,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getGuiSettings().getTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudySpotListPanel getStudySpotListPanel() {
+        return studySpotListPanel;
     }
 
     /**
@@ -177,6 +237,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            studySpotListPanel.updateStudySpotCountDisplay(logic.getFilteredStudySpotList().size(),
+                    logic.getFullList().size());
+            favouritesListPanel.updateFavouritesCountDisplay(logic.getFavouriteStudySpotList().size());
+            infoDisplay.updatePieChart(logic.getTopFiveStudySpotList(), logic.getFullList());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

@@ -5,55 +5,45 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Owen Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/mslevis.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/mslevis)] 
+[[portfolio](team/mslevis.md)]
 
-* Role: Project Advisor
+* Responsibility: Integration
 
-### Jane Doe
+### Lim Danqi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/limdanqi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/limdanqi)][[portfolio](team/limdanqi.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Responsibility: Testing
 
-### Johnny Doe
+### Jefferson Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qreoct.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/qreoct)][[portfolio](team/qreoct.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Responsibilities: Team lead, documentation
 
-### Jean Doe
+### Kim-Chan Tze Yong, Joenz
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joenzkimchan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/joenzkimchan)][[portfolio](team/joenzkimchan.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code quality, Sourcetree 
 
-### James Doe
+### Yin Ruoyan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruoyann.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ruoyann)][[portfolio](team/ruoyann.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables, Deadlines 

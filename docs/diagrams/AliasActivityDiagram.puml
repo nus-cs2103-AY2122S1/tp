@@ -1,0 +1,24 @@
+@startuml
+title Activity: StudyTrackerParser parsing Aliases
+
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command contains alias])
+    :Parser gets expanded
+    command from alias;
+    :Prepend expanded
+    command to initial
+    command;
+else ([else])
+endif
+
+:Create new Command
+from command word
+and arguments;
+
+stop
+@enduml

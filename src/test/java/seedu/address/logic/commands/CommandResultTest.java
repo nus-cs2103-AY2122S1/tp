@@ -9,12 +9,26 @@ import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
     @Test
+    public void getters_correctValues_success() {
+        CommandResult two = new CommandResult("010", false, true, false);
+        CommandResult five = new CommandResult("101", true, false, true);
+
+        assertFalse(two.isLogHours());
+        assertTrue(two.isShowHelp());
+        assertFalse(two.isExit());;
+
+        assertTrue(five.isLogHours());
+        assertFalse(five.isShowHelp());
+        assertTrue(five.isExit());
+    }
+
+    @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -28,11 +42,14 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
+        // different logHours value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
+
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
     }
 
     @Test
@@ -45,10 +62,16 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
+        // different logHours value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                true, false, false).hashCode());
+
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                false, true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                false, false, true).hashCode());
     }
 }
