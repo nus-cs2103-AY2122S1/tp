@@ -1,54 +1,71 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowColor #8B008B
+skinparam classBackgroundColor #8B008B
+
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyNotor <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Notor
+Class ReadOnlyNotor
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
+class "HashSet<String>" as DisplaySuperGroups #8B008B
+class "HashSet<String>" as DisplaySubGroups #8B008B
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
-
+Class Note
+Class UniqueSuperGroupList
+Class Group
+Class SuperGroup
+Class SubGroup
 }
 
+
 Class HiddenOutside #FFFFFF
+
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+
+Notor .up.|> ReadOnlyNotor
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyNotor
+ModelManager -left-> "1" Notor
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+Notor *--> "1" UniquePersonList
+Notor *--> "1" UniqueSuperGroupList
+
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Note
 Person *--> "*" Tag
+Person *--> "*" DisplaySuperGroups
+Person *--> "*" DisplaySubGroups
+
+UniqueSuperGroupList *--> "*" SuperGroup
+SuperGroup *--> "*" SubGroup
+Group <|-- SuperGroup
+Group <|-- SubGroup
+Group *--> Note
+Group *--> "*" Person
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
 @enduml

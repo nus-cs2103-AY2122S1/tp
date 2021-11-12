@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #FFFFFF
+skinparam ClassBorderColor #FFFFFF
+
+package Model {
+    class Person as "Person" MODEL_COLOR_T3
+    class LastContact as "LastContactDate" MODEL_COLOR_T1
+    class NextContact as "NextContactDate" MODEL_COLOR_T1
+}
+
+Person -down-> "1" LastContact
+Person -down-> "1" NextContact
+
+@enduml

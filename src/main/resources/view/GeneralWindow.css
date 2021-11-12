@@ -1,0 +1,11 @@
+#textFlow > Text {
+    -fx-fill: #1261A0;
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size : 14px;
+}
+
+.button {
+  -fx-font-family: "Open Sans Regular";
+  -fx-font-size : 12px;
+
+}

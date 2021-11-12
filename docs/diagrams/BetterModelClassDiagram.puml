@@ -4,18 +4,33 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+class "HashSet<String>" as DisplaySuperGroups MODEL_COLOR
+class "HashSet<String>" as DisplaySubGroups MODEL_COLOR
+HashSet *- String
+Notor *-right-> "1" UniquePersonList
+Notor *-right-> "1" UniqueSuperGroupList
+Notor *-right-> "1" Trie
+Trie -[hidden]down- UniquePersonList
+Trie -[hidden]down- UniquePersonList
 
-UniqueTagList *-right-> "*" Tag
+Trie *-right-> "*" String
 UniquePersonList -right-> Person
+UniqueSuperGroupList -right-> SuperGroup
+SuperGroup  *--> "*" SubGroup
 
-Person -up-> "*" Tag
+Group <|-- SuperGroup
+Group <|-- SubGroup
+
+Group  *--> "*" Person
+Group *--> Note
+
+Person -up-> "*" String
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Note
+Person *--> "*" DisplaySuperGroups
+Person *--> "*" DisplaySubGroups
+
 @enduml

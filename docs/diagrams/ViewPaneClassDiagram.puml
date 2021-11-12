@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T5
+skinparam classBackgroundColor UI_COLOR_T6
+
+package UI <<Rectangle>> {
+abstract class "{abstract}\nViewPane" as ViewPane
+interface Ui <<Interface>>
+class UiManager
+class GeneralNote
+class PersonViewCard
+class GroupViewCard
+class SubgroupViewCard
+Class "{abstract}\nUiPart" as UiPart
+class MainWindow
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
+
+UiManager .left.|> Ui
+UiManager -down-> "1" MainWindow
+
+MainWindow *-down-> "1" ViewPane
+
+
+ViewPane *-down->  "0..1" GeneralNote
+ViewPane *-down->  "0..1" PersonViewCard
+ViewPane *-down->  "0..1" GroupViewCard
+ViewPane *-down->  "0..1" SubgroupViewCard
+
+ViewPane --|> UiPart
+GeneralNote--|> UiPart
+PersonViewCard--|> UiPart
+GroupViewCard--|> UiPart
+SubgroupViewCard--|> UiPart
+MainWindow -down-|> UiPart
+@enduml

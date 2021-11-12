@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters PersonViewCommand;
+  if () then ([Index within bounds])
+    :Replace the content in the ViewPane
+    with the `Person` of the specified index;
+    else([else])
+    :Content in View Pane remain intact,
+    Display an error message;
+endif
+stop
+
+@enduml

@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":NotorParser" as NotorParser LOGIC_COLOR
+participant ":PersonFindCommandParser" as PersonFindCommandParser LOGIC_COLOR
+participant "pFind:PersonFindCommand" as PersonFindCommand LOGIC_COLOR
+participant ":PersonFindExecutor" as PersonFindExecutor LOGIC_COLOR
+participant "ourSearch:NameContainsPredicate" as NameContainsPredicate MODEL_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("p /find t:AI")
+activate LogicManager
+
+LogicManager -> NotorParser : parseCommand("p /find t:AI")
+activate NotorParser
+
+create PersonFindCommandParser
+NotorParser -> PersonFindCommandParser : arguments
+activate PersonFindCommandParser
+
+PersonFindCommandParser --> NotorParser
+deactivate PersonFindCommandParser
+
+NotorParser -> PersonFindCommandParser : parse()
+activate PersonFindCommandParser
+
+create NameContainsPredicate
+PersonFindCommandParser -> NameContainsPredicate : NameContainsPredicate(nameQuery, tagQuery)
+activate NameContainsPredicate
+
+NameContainsPredicate -> PersonFindCommandParser :ourSearch
+deactivate NameContainsPredicate
+
+create PersonFindCommand
+PersonFindCommandParser -> PersonFindCommand : PersonFindCommand(ourSearch)
+activate PersonFindCommand
+
+create PersonFindExecutor
+PersonFindCommand -> PersonFindExecutor : PersonFindExecutor(ourSearch)
+activate PersonFindExecutor
+PersonFindExecutor -> PersonFindCommand
+deactivate PersonFindExecutor
+
+PersonFindCommand --> PersonFindCommandParser : pFind
+deactivate PersonFindCommand
+
+PersonFindCommandParser --> NotorParser : pFind
+deactivate PersonFindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PersonFindCommandParser -[hidden]-> NotorParser
+destroy PersonFindCommandParser
+
+NotorParser --> LogicManager : pFind
+deactivate NotorParser
+
+LogicManager -> PersonFindCommand : execute()
+activate PersonFindCommand
+
+PersonFindCommand -> PersonFindExecutor : execute()
+activate PersonFindExecutor
+PersonFindExecutor -> Model : updateFilteredPersonList(ourSearch)
+activate Model
+Model --> PersonFindExecutor
+deactivate Model
+
+create CommandResult
+PersonFindExecutor -> CommandResult
+activate CommandResult
+
+CommandResult --> PersonFindExecutor : result
+deactivate CommandResult
+
+PersonFindExecutor -> PersonFindCommand : result
+deactivate PersonFindExecutor
+
+PersonFindCommand --> LogicManager : result
+deactivate PersonFindCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

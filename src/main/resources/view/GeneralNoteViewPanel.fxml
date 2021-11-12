@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
+    <children>
+        <TextArea stylesheets="@DarkTheme.css" prefHeight="1700" maxHeight="1.7976931348623157E308" styleClass="generalNote" fx:id="generalNote" promptText="Note" />
+    </children>
+</VBox>
