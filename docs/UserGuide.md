@@ -846,12 +846,18 @@ You can follow these guides to install Java 17:
     * MacOS: Use the keyboard shortcut **Command** + **Space** to bring up the search bar, then type in 'terminal' and press **enter**
    
     * Linux: Use the keyboard shortcut **ctrl** + **alt** + **T**
-
-
+    
     Click [here](https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955) 
 for other ways to open the Command line if the above shortcuts do not work for you.
 
-    Once done, you should see an interface similar to the screenshot below. <br>
+    <div markdown="block" class="alert alert-info">
+
+    **:information_source: Note:** The screenshots below uses the Windows Command Line as examples. However, the Command Lines for 
+    the other Operating Systems should be similar.
+    </div>
+
+
+   Once done, you should see an interface similar to the screenshot below. <br>
 
    ![Cli1](images/Cli1.png)
    <div style="page-break-after: always;"></div>
