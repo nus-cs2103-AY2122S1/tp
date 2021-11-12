@@ -40,7 +40,7 @@ Some terminology that might help when referring to Notor:
 3. **Note Window**: The pop-up window you may use to edit and add notes
 4. **Command Box**: The box on the left pane, underneath the view pane, where you may type commands.
 
-![image](images/NotorLabelled.png)
+<img src="images/NotorLabelled.png" alt="Notor-Labelled" width="90%" height="90%">
 
 Pay attention to these callouts:
 
@@ -178,7 +178,7 @@ You can usually find the exported data in the home directory that contains Notor
 
 The data exported will be displayed as follows:
 
-<img src="images/Exported.png" alt="exported" width="60%" height="30%">
+<img src="images/Exported.png" alt="exported" width="80%" height="50%">
 
 <div style="page-break-after: always;"></div>
 
