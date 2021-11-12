@@ -343,7 +343,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
-<img src="images/ExpectedEditCommand.png" width="400"/>
+<img src="images/ExpectedEditCommand.png" width="300"/>
 </p>
 <div style="page-break-after: always;"></div>
 ### 5.4 Delete particular contact : `delete`
@@ -388,7 +388,7 @@ For instance, if you were to sort clients by risk appetite.
 
 | `sort r/asc`| `sort r/dsc` |
 | :---: | :---: |
-| <img src="images/ExpectedSortCommand.png" width="400"/> | <img src="images/ExpectedSortCommand_DSC.png" width="400"/> |
+| <img src="images/ExpectedSortCommand.png" width="300"/> | <img src="images/ExpectedSortCommand_DSC.png" width="300"/> |
 
 
 ### 5.7 Find meeting schedule : `schedule`
@@ -405,7 +405,7 @@ For instance, using `schedule 30-11-2021` will produce the following result. <br
 
 | Before | After |
 | :---: | :---: |
-| <img src="images/ExpectedScheduleCommand.png" width="400"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedScheduleCommand.png" width="300"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="300"/> |
 
 <div style="page-break-after: always;"></div>
 ### 5.8 Locating clients by keywords : `search`
@@ -422,7 +422,7 @@ For instance, using `search Alex` will produce the following result. <br>
 
 | Before | After |
 | :---: | :---: |
-| <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedSearchCommand.png" width="300"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="300"/> |
 
 <div style="page-break-after: always;"></div>
 ### 5.9 Filter current list by keywords : `filter`
@@ -440,7 +440,7 @@ For instance, using `filter t/colleagues` will produce the following result.
 
 | Before | After |
 | :---: | :---: |
-| <img src="images/ExpectedFilterCommand.png" width="400"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedFilterCommand.png" width="300"/> | <img src="images/ExpectedFilterCommand_AFTER.png" width="300"/> |
 
 ### 5.10 Clearing all entries : `clear`
 
@@ -451,6 +451,7 @@ Clears all entries from the address book.
 | <img src="images/info_icon.png" width="50"/> | • As long as the first word in the command is `clear`, the command will still work regardless of the additional inputs. <br> eg. the command `clear asdknkjsaf` will still work. <br> • This command clears all clients in the **current** address book <br> • After inputting `clear`, another prompt will appear requesting for confirmation to clear the address book. The input required for the confirmation will either be: <br>    • `yes`: to confirm and proceed with the clear command. <br>    •`no`: to cancel the clear command.|
 | <img src="images/warn_icon.png" width="50"/> | • This action is irreversible. Once you have clear all client information from the current address book, this information will be removed from the storage file and will not be retrievable.|
 
+<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 
 <p align="center">
@@ -473,7 +474,7 @@ Exits LeadsForce.
 | :---: | --- |
 | <img src="images/info_icon.png" width="50"> | • As long as the first word in the command is `exit`, the command will still work regardless of the additional inputs. <br> eg. the command `exit asdknkjsaf` will still work |
 
-
+<div style="page-break-after: always;"></div>
 ### 5.13 Saving the data
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to
@@ -528,14 +529,14 @@ Switch to a different address book that currently exists.
 | Format | `ab switch ADDRESSBOOK_NAME` <br> <br> • `ADDRESSBOOK_NAME` refers to the name of the address book to switched to .|
 | :---: | :--- |
 | **Example** | `ab switch other` will switch over to the address book named `other` |
-| <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="400"/> |
+| <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="300"/> |
 
 **Expected Outcome:** <br>
 For instance, using `ab switch youngadults` when on the `newAddressBook` address book will produce the following result.
 
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedSwitchAbCommand.png" width="400"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="400"/> |
+| <img src="images/ExpectedSwitchAbCommand.png" width="300"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="300"/> |
 
 ### 6.4 List all address book : `ab list`
 
