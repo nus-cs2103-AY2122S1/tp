@@ -820,10 +820,10 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. 
 Data found can be found at `[JAR file location]/data/addressbook.json`.
 
-**Q**: How do I install Java for my computer
+**Q**: How do I install Java for my computer<br>
 **A**: Head over to [Installing Java](#71-installing-java) to find the installation guide.
 
-**Q**: How do I know what version of Java I have running on my computer?
+**Q**: How do I know what version of Java I have running on my computer?<br>
 **A**: Steps to checking your Java version can be found [here](#72-checking-java-version)
 --------------------------------------------------------------------------------------------------------------------
 
