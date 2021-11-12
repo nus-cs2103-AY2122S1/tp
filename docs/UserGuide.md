@@ -77,7 +77,7 @@ _text_ | Caption for images.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`ladd 1 `** : Adds a lesson.
+   * **`ladd 7 date/20 Dec 2021 time/1100-1200 subject/History rates/35`** : Adds a lesson that starts on 20 Dec 2021 for the 7th student shown in the current list.
    
 6. If you wish to clear the sample data and start using the app, simply type `clear` and press <kbd>ENTER</kbd>.
    However, if you’re a new user, we recommend that you read on and try out our features with the sample data to get yourself familiarised.
