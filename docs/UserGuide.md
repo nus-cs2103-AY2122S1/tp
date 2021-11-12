@@ -178,7 +178,7 @@ You can usually find the exported data in the home directory that contains Notor
 
 The data exported will be displayed as follows:
 
-<img src="images/Exported.png" alt="exported" width="80%" height="50%">
+<img src="images/Exported.png" alt="exported" width="80%" height="80%">
 
 <div style="page-break-after: always;"></div>
 
@@ -231,8 +231,6 @@ Adds a person at the given index `INDEX` to a specified group. To add a person t
 Notor considers people within a subgroup as also being within the group that contains it (the supergroup). Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 #### _Deleting a person_
 
 Removes the contact and the data saved for a person from Notor.
@@ -245,6 +243,8 @@ Removes the contact and the data saved for a person from Notor.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Data will be deleted and **will not be saved**. Be careful when deleting people. You may prefer to [archive them](#archiving-people) or make a backup of your data first by [exporting the data](#exporting-data).
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### _Editing a person_
 
@@ -599,6 +599,8 @@ Use after you have listed out all groups or subgroups.
   * Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## Miscellaneous information
 
 ### Saving the data
@@ -614,9 +616,6 @@ directly by editing that data file.
 If your changes to the data file makes its format invalid, Notor will 
 discard all data and start with an empty data file at the next run.
 </div>
-
-
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -789,7 +788,7 @@ When you open Notor for the first time, you will see some dummy data for you to 
     
     <div style="page-break-after: always;"></div>
     
-5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`. In the example shown below, the user named `David Li` will be added to the group `CS2103T`.
+5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`. In the example shown below, the user named `David Li` will be added to the group `CS2103T`.<br>
     <img src="images/Example5.png" alt="example5" width="75%" height="75%">
 
 6. **`group /list`** : To refer to the current group list, you can simply type in this command.
