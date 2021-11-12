@@ -164,6 +164,10 @@ Command aliases: `man` `h`
 
 <img src="images/HelpCommand.png" width="800px">
 
+[Back to table of contents](#table-of-contents)
+
+***
+
 <div style="page-break-after: always;"></div>
 #### Exiting the program : `exit` <a name="exit"></a>
 
