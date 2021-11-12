@@ -171,7 +171,7 @@ Parameters:
 Example usages:
 * `add n/Shingeki no Kyojin`
 * `add n/Shingeki no Kyojin e/2`
-* `add n/Shingeki no Kyojin s/w` (Tip: `w` here is short for the status `watching`. See the [`STATUS`](#status) section for more details.)
+* `add n/Shingeki no Kyojin s/w`
 * `add n/Shingeki no Kyojin e/2 s/w g/fantasy`
 * `add n/Shingeki no Kyojin e/2 s/w g/fantasy g/action g/comedy`
 
