@@ -3,29 +3,32 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":InputParser" as InputParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":HistoryManager" as HistoryManager MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+
+
+LogicManager -> InputParser : parseCommand(undo)
+activate InputParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+InputParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> InputParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+InputParser --> LogicManager : u
+deactivate InputParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
@@ -36,7 +39,14 @@ activate Model
 Model -> VersionedAddressBook : undo()
 activate VersionedAddressBook
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
+VersionedAddressBook -> HistoryManager : undo()
+activate HistoryManager
+
+HistoryManager -> HistoryManager : peek()
+HistoryManager --> VersionedAddressBook : undoneState
+deactivate HistoryManager
+
+VersionedAddressBook -> VersionedAddressBook :resetData(undoneState)
 VersionedAddressBook --> Model :
 deactivate VersionedAddressBook
 

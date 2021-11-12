@@ -1,0 +1,40 @@
+package teletubbies.model.person;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static teletubbies.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+public class RemarkTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Remark(null));
+    }
+
+    // @@author: j-lum
+    // Reused from
+    // https://github.com/se-edu/addressbook-level3/compare/tutorial-add-remark
+    @Test
+    public void equals() {
+        Remark remark = new Remark("Hello");
+
+        // same object -> returns true
+        assertTrue(remark.equals(remark));
+
+        // same values -> returns true
+        Remark remarkCopy = new Remark(remark.value);
+        assertTrue(remark.equals(remarkCopy));
+
+        // different types -> returns false
+        assertFalse(remark.equals(1));
+
+        // null -> returns false
+        assertFalse(remark.equals(null));
+
+        // different remark -> returns false
+        Remark differentRemark = new Remark("Bye");
+        assertFalse(remark.equals(differentRemark));
+    }
+}
