@@ -235,6 +235,8 @@ Additionally, there are special flags that are feature-specific and **do not req
 * `-ong`: Ongoing
 * `-inc`: Incomplete
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Important:**<br>
@@ -551,6 +553,8 @@ The commands will be displayed in order from the most recently issued command to
 Format: `history`
 
 ![history](images/userGuide/history.png)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
