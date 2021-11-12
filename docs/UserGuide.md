@@ -995,6 +995,8 @@ Format: `year`
 
 <div class="caption">Year view for calendar interface.</div>
 
+<div style="page-break-before: always;"></div>
+
 #### Navigating forward in the calendar: `next`
 
 Goes to the next day/week/month/year in the calendar interface.
