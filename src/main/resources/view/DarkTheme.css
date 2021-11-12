@@ -132,6 +132,59 @@
     -fx-text-fill: #010504;
 }
 
+.cell_remark_label {
+    -fx-font-family: "Open Sans Italic" !important;
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFD966 !important;
+}
+
+.cell_grade_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #69ff66 !important;
+}
+
+.cell_class_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 11px;
+    -fx-text-fill: #D5F3FE !important;
+
+
+    -fx-background-color: #3e9154;
+    -fx-padding: 1 10 1 10;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+.cell_present_label {
+    -fx-padding: 0 0 10 0;
+}
+
+.check-box {
+    /* default properties */
+    selected-box-color: green;
+    box-color: red;
+    mark-color: white;
+    -fx-border-radius: 0px;
+}
+
+.check-box:selected > .box {
+    /* background color for selected checkbox */
+    -fx-background-color: selected-box-color;
+}
+
+.check-box > .box {
+    /* background color of unselected checkbox */
+    -fx-background-color: box-color;
+    -fx-padding: 8px;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate  > .box > .mark {
+    /* modify mark color */
+    -fx-background-color: mark-color;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

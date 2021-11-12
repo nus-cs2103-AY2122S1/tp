@@ -5,50 +5,68 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyTeachBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
-Class Model
-Class ModelManager
-Class UserPrefs
+Class ReadOnlyTeachBook
 Class ReadOnlyUserPrefs
+Class Model
 
+Class TeachBook
+Class UserPrefs
+Class ModelManager
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UniqueClassList
+Class GeneralIndex
+Class UniqueStudentList
+Class GradingSystem
+
+Class Student
 Class Name
 Class Phone
+Class Class
+Class Address
+Class Email
 Class Tag
-
+Class Attendance
+Class Grade
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
-
+TeachBook .up.|> ReadOnlyTeachBook
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+Model .left.> ReadOnlyTeachBook
+Model .right.> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModelManager -up-> "1" TeachBook
+ModelManager -up-> "1" UserPrefs
+ModelManager --> "~* filtered" Student
+ModelManager -right-> "1 selected class" GeneralIndex
+
+TeachBook *--> "1" GradingSystem
+TeachBook *--> "1" UniqueClassList
+UniqueClassList --> "~* all" Class
+Class *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" Student
+
+GradingSystem *--> "*" Grade
+
+Student *--> "1" Name
+Student *--> "1" Phone
+Student --> "1" Class
+Student *--> "1" Email
+Student *--> "1" Address
+Student *--> "1" Attendance
+Student *--> "1" Grade
+Student *--> "*" Tag
+
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+UniqueClassList -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
 @enduml

@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ListCommand" as ListCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":TeachBook" as TeachBook MODEL_COLOR
+end box
+
+[-> MainWindow : executeCommand("list")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("list")
+activate LogicManager
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> ModelManager : updateCurrentlySelectedClass(INDEX_LIST_ALL)
+activate ModelManager
+
+ModelManager -> ModelManager : updateSourceOfFilteredStudentList()
+activate ModelManager
+
+ModelManager -> TeachBook : getStudentList()
+activate TeachBook
+
+TeachBook --> ModelManager : studentList
+deactivate TeachBook
+
+ModelManager --> ModelManager
+deactivate ModelManager
+
+ModelManager --> ListCommand
+deactivate ModelManager
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand : commandResult
+deactivate CommandResult
+
+ListCommand --> LogicManager : commandResult
+deactivate ListCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleUpdateStudentListPanel()
+activate MainWindow
+
+MainWindow -> MainWindow : updateStudentListPanel()
+activate MainWindow
+
+MainWindow -> LogicManager : getFilteredPersonList()
+activate LogicManager
+
+LogicManager --> MainWindow : filteredStudentList
+deactivate LogicManager
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+[<--MainWindow : commandResult
+deactivate MainWindow
+@enduml

@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachBookParser" as TeachBookParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "l:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":StudentIsAbsentPredicate" as StudentIsAbsentPredicate MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list absent")
+activate LogicManager
+
+LogicManager -> TeachBookParser : parseCommand("list absent")
+activate TeachBookParser
+
+TeachBookParser -> ListCommandParser : parse("absent")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand
+activate ListCommand
+
+ListCommand --> ListCommandParser : l
+deactivate ListCommand
+
+ListCommandParser --> TeachBookParser : l
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> TeachBookParser
+destroy ListCommandParser
+
+TeachBookParser --> LogicManager : l
+deactivate TeachBookParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+create StudentIsAbsentPredicate
+ListCommand -> StudentIsAbsentPredicate
+activate StudentIsAbsentPredicate
+
+StudentIsAbsentPredicate --> ListCommand : predicate
+deactivate StudentIsAbsentPredicate
+
+ListCommand -> Model : updateFilteredStudentList(predicate)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

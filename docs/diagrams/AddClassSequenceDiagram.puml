@@ -1,0 +1,107 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TeachBookParser" as TeachBookParser LOGIC_COLOR
+participant ":AddClassCommandParser" as AddClassCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Class" as Class LOGIC_COLOR
+participant "a:AddClassCommand" as AddClassCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":TeachBook" as TeachBook MODEL_COLOR
+participant ":UniqueClassList" as UniqueClassList MODEL_COLOR
+participant ":ObservableList" as ObservableList MODEL_COLOR
+end box
+
+
+
+[-> LogicManager : execute("addClass A")
+activate LogicManager
+
+LogicManager -> TeachBookParser : parseCommand("addClass A")
+activate TeachBookParser
+
+create AddClassCommandParser
+TeachBookParser -> AddClassCommandParser
+activate AddClassCommandParser
+
+AddClassCommandParser --> TeachBookParser
+deactivate AddClassCommandParser
+
+TeachBookParser -> AddClassCommandParser : parse("A")
+activate AddClassCommandParser
+
+create ParserUtil
+AddClassCommandParser -> ParserUtil : parseClassName("A")
+activate ParserUtil
+
+ParserUtil --> AddClassCommandParser
+deactivate ParserUtil
+
+create Class
+AddClassCommandParser -> Class
+activate Class
+
+Class --> AddClassCommandParser
+deactivate Class
+
+create AddClassCommand
+AddClassCommandParser -> AddClassCommand
+activate AddClassCommand
+
+AddClassCommand --> AddClassCommandParser : a
+deactivate AddClassCommand
+
+AddClassCommandParser --> TeachBookParser : a
+deactivate AddClassCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddClassCommandParser -[hidden]-> TeachBookParser
+destroy AddClassCommandParser
+
+TeachBookParser --> LogicManager : a
+deactivate TeachBookParser
+
+LogicManager -> AddClassCommand : execute()
+activate AddClassCommand
+
+AddClassCommand -> Model : addClass()
+activate Model
+
+Model -> TeachBook : addClass()
+activate TeachBook
+
+TeachBook -> UniqueClassList : add()
+activate UniqueClassList
+
+UniqueClassList -> ObservableList : add()
+activate ObservableList
+deactivate ObservableList
+
+deactivate UniqueClassList
+deactivate TeachBook
+
+Model -> Model : updateCurrentlySelectedClass()
+activate Model
+Model -> Model : updateSourceOfFilteredStudentList()
+activate Model
+deactivate Model
+deactivate Model
+
+create CommandResult
+AddClassCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddClassCommand
+deactivate CommandResult
+
+AddClassCommand --> LogicManager : result
+deactivate AddClassCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

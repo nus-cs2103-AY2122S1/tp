@@ -3,23 +3,27 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600.0" minWidth="777.0" onCloseRequest="#handleExit" title="TeachBook" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css"/>
+        <URL value="@Fonts.css" />
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
@@ -34,25 +38,53 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+          <StackPane fx:id="listContainer" alignment="BOTTOM_CENTER" minHeight="100" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+              <SplitPane dividerPositions="0.45">
+                  <AnchorPane>
+                      <Pane layoutX="1.0" layoutY="-47.0" prefHeight="86.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                      <VBox fx:id="classList" layoutX="10.0" layoutY="10.0" minWidth="200.0" prefHeight="86.0" prefWidth="520.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                          <padding>
+                              <Insets bottom="10" left="10" right="10" top="10" />
+                          </padding>
+                          <AnchorPane>
+                              <Label alignment="CENTER" prefHeight="21.0" style="-fx-background-color: blue; -fx-text-fill: white;" text="CLASS" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                  <font>
+                                      <Font size="40.0" />
+                                  </font>
+                              </Label>
+                          </AnchorPane>
+                          <StackPane fx:id="classListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      </VBox>
+                  </AnchorPane>
+                  <AnchorPane>
+                      <Pane layoutX="-3.0" layoutY="-2.0" prefHeight="86.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                      <VBox fx:id="studentList" layoutX="10.0" layoutY="10.0" minWidth="530.0" prefHeight="86.0" prefWidth="780.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <padding>
+                              <Insets bottom="10" left="10" right="10" top="10" />
+                          </padding>
+                          <AnchorPane>
+                              <Label alignment="CENTER" prefHeight="21.0" style="-fx-background-color: red; -fx-text-fill: white;" text="STUDENTS INFORMATION" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                          </AnchorPane>
+                          <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      </VBox>
+                  </AnchorPane>
+              </SplitPane>
+          </StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

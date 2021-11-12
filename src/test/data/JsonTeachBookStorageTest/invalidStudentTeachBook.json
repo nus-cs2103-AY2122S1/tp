@@ -1,0 +1,16 @@
+{
+  "classes" : [ {
+    "className" : "Valid",
+    "classList" : [  {
+      "name" : "Invalid Person",
+      "phone" : "98765432",
+      "email" : "johnd",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "remark" : "Needs to improve on maths.",
+      "tagged" : [ "vice monitor" ],
+      "attendance" : "Present 2021-11-02T00:15:10.749009800",
+      "grade" : ""
+    } ]
+  } ],
+  "gradeList" : [ ]
+}

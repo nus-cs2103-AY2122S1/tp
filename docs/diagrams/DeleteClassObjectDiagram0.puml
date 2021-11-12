@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor MODEL_COLOR
+skinparam ClassBorderThickness 1.5
+
+title Initial TeachBook
+
+Package {
+class "<u>:TeachBook</u>" as TeachBook
+class "<u>:UniqueClassList</u>" as UniqueClassList
+
+class "<u>A:Class</u>" as ClassA
+class "<u>B:Class</u>" as ClassB
+class "<u>:UniqueStudentList</u>" as UniqueStudentListA
+class "<u>:UniqueStudentList</u>" as UniqueStudentListB
+
+class "<u>Alice:Student</u>" as Alice
+class "<u>Ann:Student</u>" as Ann
+class "<u>Bob:Student</u>" as Bob
+class "<u>Bryan:Student</u>" as Bryan
+}
+
+TeachBook *--> UniqueClassList
+UniqueClassList --> ClassA
+UniqueClassList --> ClassB
+ClassA *--> UniqueStudentListA
+ClassB *--> UniqueStudentListB
+
+UniqueStudentListA --> Alice
+UniqueStudentListA --> Ann
+UniqueStudentListB --> Bob
+UniqueStudentListB --> Bryan
+
+@enduml

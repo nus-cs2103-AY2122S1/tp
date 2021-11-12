@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SelectCommand" as SelectCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":TeachBook" as TeachBook MODEL_COLOR
+end box
+
+[-> MainWindow : executeCommand("select A")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("select A")
+activate LogicManager
+
+LogicManager -> SelectCommand : execute()
+activate SelectCommand
+
+SelectCommand -> ModelManager : getIndexOfClass(A)
+activate ModelManager
+
+ModelManager --> SelectCommand : 1
+deactivate ModelManager
+
+SelectCommand -> ModelManager : updateCurrentlySelectedClass(1)
+activate ModelManager
+
+ModelManager -> ModelManager : updateSourceOfFilteredStudentList()
+activate ModelManager
+
+ModelManager -> TeachBook : getStudentListOfClass(1)
+activate TeachBook
+
+TeachBook --> ModelManager : studentListOfClass
+deactivate TeachBook
+
+ModelManager --> ModelManager
+deactivate ModelManager
+
+ModelManager --> SelectCommand
+deactivate ModelManager
+
+create CommandResult
+SelectCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SelectCommand : commandResult
+deactivate CommandResult
+
+SelectCommand --> LogicManager : commandResult
+deactivate SelectCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+MainWindow -> MainWindow : handleUpdateStudentListPanel()
+activate MainWindow
+
+MainWindow -> MainWindow : updateStudentListPanel()
+activate MainWindow
+
+MainWindow -> LogicManager : getFilteredPersonList()
+activate LogicManager
+
+LogicManager --> MainWindow : filteredStudentList
+deactivate LogicManager
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+[<--MainWindow : commandResult
+deactivate MainWindow
+@enduml

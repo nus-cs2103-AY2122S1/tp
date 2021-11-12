@@ -1,0 +1,21 @@
+@startuml
+start
+:User enters command "edit 1 n/john";
+:TeachBook creates TeachBookParser;
+:TeachBookParser tries to parse command;
+if () then ([command matches expected format])
+    : TeachBookParser creates EditCommandParser;
+    if () then ([Something has been edited])
+        : EditCommandParser creates new EditCommand;
+        : Edited student is set in model;
+        : Filtered list of students updated in model;
+        : CommandResult returned to LogicManager;
+        : Changes are saved to Storage;
+    else ([else])
+        : Throws ParseException(MESSAGE_NOT_EDITED);
+    endif
+else ([else])
+    : Throws ParseException(INVALID_MESSAGE_FORMAT);
+endif
+stop
+@enduml

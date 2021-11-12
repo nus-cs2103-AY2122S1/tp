@@ -1,0 +1,28 @@
+{
+  "classes" : [ {
+    "className" : "A",
+    "classList" : [ {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "remark" : "Allergic to seafood.",
+      "tagged" : [ "monitor" ],
+      "attendance" : "Absent 2021-11-02T00:15:10.749009800",
+      "grade" : ""
+    }, {
+      "name" : "Benson Meier",
+      "phone" : "98765432",
+      "email" : "johnd@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "remark" : "Needs to improve on maths.",
+      "tagged" : [ "vice monitor" ],
+      "attendance" : "Present 2021-11-02T00:15:10.749009800",
+      "grade" : "C"
+    } ]
+  }, {
+    "className" : "B",
+    "classList" : [ ]
+  } ],
+  "gradeList" : [ "A" , "B" ]
+}
