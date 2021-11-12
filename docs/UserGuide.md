@@ -64,7 +64,7 @@ Hope you have a great time with CMM.
 1. Ensure you have Java 11 or above installed in your computer. You can learn how to install the latest version of Java [here](#71-installing-java).
 If you already have Java installed, you can follow [these steps](#72-checking-java-version) to check if you have an appropriate version of java.
 
-2. Download the latest CallMeMaybe.jar from [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases)
+2. Download the latest CallMeMaybe.jar from [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for CMM.
 
