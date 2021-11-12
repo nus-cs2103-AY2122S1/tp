@@ -409,7 +409,6 @@ For instance, using `schedule 30-11-2021` will produce the following result. <br
 | :---: | :---: |
 | <img src="images/ExpectedScheduleCommand.png" width="300"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="300"/> |
 
-<div style="page-break-after: always;"></div>
 ### 5.8 Locating clients by keywords : `search`
 
 Finds clients whose contacts match with the given keywords.
@@ -524,7 +523,6 @@ Delete an address book that currently exists.
 | **Example** | `ab delete test` will delete the address book named `test` |
 | <img src="images/info_icon.png" width="50"/> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
 
-<div style="page-break-after: always;"></div>
 ### 6.3 Switch to different address book : `ab switch`
 
 Switch to a different address book that currently exists.
@@ -534,6 +532,7 @@ Switch to a different address book that currently exists.
 | **Example** | `ab switch other` will switch over to the address book named `other` |
 | <img src="images/tip_icon.png" width="50"/> | • Switch between different address books by toggling the address book tab (which is the 3rd tab from the left) <br> <img src="images/MultipleAddressBookTab.jpg" width="300"/> |
 
+<div style="page-break-after: always;"></div>
 **Expected Outcome:** <br>
 For instance, using `ab switch youngadults` when on the `newAddressBook` address book will produce the following result.
 
