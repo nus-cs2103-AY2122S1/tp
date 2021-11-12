@@ -54,7 +54,6 @@ This table describes the main symbols used in the user guide and their respectiv
 --------------- | ---------------
 :heavy_exclamation_mark: | Indicates warnings (take caution when you see this symbol)
 :information_source: | Important information to take note about
-:bulb: | Usage tips
 
 --------------------------------------------------------------------------------------------------------------------
 
