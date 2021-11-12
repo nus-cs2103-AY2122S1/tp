@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+'Package " "<<Rectangle>>{
+'    Class UI UI_COLOR
+'    Class Logic LOGIC_COLOR
+'    Class Storage STORAGE_COLOR
+'    Class Model MODEL_COLOR
+'    Class Main #grey
+'    Class Commons LOGIC_COLOR_T2
+'}
+
+
+participant " : MainWindow" as MainWindow  UI_COLOR
+participant " : Logic" as Logic LOGIC_COLOR
+participant " : CsvAddressBookImportExport" as CsvAddressBookImportExport STORAGE_COLOR
+participant " : CsvUtil" as CsvUtil LOGIC_COLOR_T3
+participant " : StorageManager" as StorageManager STORAGE_COLOR
+participant " : Model" as Model MODEL_COLOR
+
+
+box UI UI_COLOR_T1
+    participant MainWindow
+end box
+
+
+box Logic LOGIC_COLOR_T1
+    participant Logic
+end box
+
+box Storage STORAGE_COLOR_T1
+    participant StorageManager
+    participant CsvAddressBookImportExport
+end box
+box Common LOGIC_COLOR_T2
+    participant CsvUtil
+end box
+
+
+box Model MODEL_COLOR_T1
+    participant Model
+end box
+
+
+
+
+MainWindow -> Logic: importData()
+Logic -> StorageManager: importIntoAddressBook(model)
+StorageManager -> CsvAddressBookImportExport: importIntoAddressBook(model)
+
+CsvAddressBookImportExport -> CsvUtil: readCsvFile(filepath)
+
+return  optional(list of valid people)
+CsvAddressBookImportExport -> CsvAddressBookImportExport: addImportIntoAddressBook(list, model)
+
+loop Number of valid people
+    CsvAddressBookImportExport  -> Model : duplicateIndex()
+
+    return int of duplicate in list
+    alt Import does not has duplicate in current database
+        CsvAddressBookImportExport ->  Model: addPerson(person)
+    else Import has duplicate in current database
+        alt import duplicate has been called
+                    CsvAddressBookImportExport ->  Model: updatePerson(index, person)
+        end
+    end
+    end
+
+Logic -> Model: getAddressbook()
+Logic -> StorageManager: saveAddressbook(model)
+Logic -> StorageManager: getImportStatus()
+
+return status details
+
+@enduml

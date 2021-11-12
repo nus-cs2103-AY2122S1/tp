@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -58,6 +59,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns index of duplicate. Returns -1 if does not exists
+     */
+    int duplicateIndex(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -76,12 +82,33 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the original filtered person list */
+    ObservableList<Person> getOriginalPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sort the filtered person list in alphabetically ascending order by a default ordering.
+     */
+    void sortFilteredPersonList();
+
+    /**
+     * Sort the filtered person list in alphabetically ascending order by the given {@code category}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortFilteredPersonList(Comparator<Person> comparator);
+
+    /**
+     * Limit the number of people displayed in filtered person list by the given {@code count}.
+     * @throws IllegalArgumentException if {@code count} is less than zero.
+     */
+    void limitFilteredPersonList(int count);
 }

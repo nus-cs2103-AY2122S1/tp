@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters add command;
+:AddressBookParser parses the command;
+:AddCommandParser parses the arguments provided;
+if () then ([command is valid])
+  :new contact with the specified fields is created;
+  :new AddCommand object is created;
+  if() then ([contact already exists])
+  :outputs error message;
+  else ([contact does not exist])
+  :contact is added into the address book;
+  endif
+else ([command is invalid])
+  :outputs error message;
+endif
+
+stop
+
+@enduml

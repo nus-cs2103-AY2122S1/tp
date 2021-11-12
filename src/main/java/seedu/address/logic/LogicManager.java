@@ -7,11 +7,14 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.comparators.exceptions.ComparatorException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -28,17 +31,18 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        this.addressBookParser = new AddressBookParser();
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException, ComparatorException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
@@ -65,6 +69,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Person> getOriginalPersonList() {
+        return model.getOriginalPersonList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
@@ -78,4 +87,38 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    @Override
+    public String importData() {
+        try {
+            storage.importIntoAddressBook(model);
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (DataConversionException | IOException e) {
+            String error = "Data file not in the correct format.\n" + e.getMessage()
+                    + "\nData will not be imported. Importing aborted";
+            logger.warning(error);
+            return error;
+        }
+        return storage.getImportStatus();
+    }
+
+    @Override
+    public String exportResetData() {
+        exportData();
+        this.model.setAddressBook(new AddressBook());
+        return "Exported and reset";
+    }
+
+    @Override
+    public String exportData() {
+        try {
+            storage.exportCurrentAddressBook(model);
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (DataConversionException | IOException e) {
+            logger.warning("Data file not in the correct format.\n" + e.toString()
+                    + "\nData will not be imported. Importing aborted");
+        }
+        return storage.getImportStatus();
+    }
+
 }

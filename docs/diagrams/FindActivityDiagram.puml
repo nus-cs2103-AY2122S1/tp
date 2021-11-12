@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters findAny command;
+:AddressBookParser parses the command;
+:FindAnyCommandParser parses the arguments provided;
+if () then ([command is valid])
+  :new predicates for each specified field are created;
+  :predicates are saved in a CombinedPredicate object;
+  :new FindAnyCommand object is created;
+  :filtered list is updated with the new CombinedPredicate;
+else ([command is invalid])
+  :outputs error message;
+endif
+
+stop
+
+@enduml

@@ -22,8 +22,8 @@ public class UiManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
-    private Logic logic;
-    private MainWindow mainWindow;
+    private static Logic logic;
+    private static MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -48,6 +48,16 @@ public class UiManager implements Ui {
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+        }
+    }
+
+    /**
+     * Displays the full person card (additional details) of the chosen person if the MainWindow is
+     * initialised.
+     */
+    public static void displayFunction() {
+        if (mainWindow != null) {
+            mainWindow.fillFullPersonCard();
         }
     }
 

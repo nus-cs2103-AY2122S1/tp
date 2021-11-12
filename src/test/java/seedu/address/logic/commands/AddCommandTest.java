@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.comparators.NameComparator;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -119,6 +121,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public int duplicateIndex(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -144,7 +151,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getOriginalPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void limitFilteredPersonList(int count) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -188,6 +215,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void sortFilteredPersonList() {
+            personsAdded.sort(new NameComparator());
         }
     }
 

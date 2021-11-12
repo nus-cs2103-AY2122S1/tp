@@ -67,6 +67,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public int duplicateIndex(Person person) {
+        requireNonNull(person);
+        return persons.indexOfDuplicate(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -84,6 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         persons.setPerson(target, editedPerson);
     }
+
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
@@ -104,6 +113,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Person> getModifiablePersonList() {
+        return persons.asModifiableObservableList();
     }
 
     @Override

@@ -1,0 +1,4 @@
+Name;Phone;Email;Address;Gender;Age;Interest;Called
+Alice Pauline;94351253;alice@example.com;MY HOUSE;F;22;Running;false
+Benson Meier;98765432;johnd@example.com;HIS HOUSE;M;18;Eating, Sleeping;True
+Ida Mueller;84821318;hans@example.com;;;;;false

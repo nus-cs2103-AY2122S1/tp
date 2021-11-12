@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Model{
+Class Person MODEL_COLOR
+}
+
+package "Comparator classes"{
+Interface Comparator <<Interface>>
+Class PersonComparator
+Class XYZComparator
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> PersonComparator
+
+PersonComparator .down.> XYZComparator: creates >
+
+XYZComparator .right.> Person : compares >
+XYZComparator .up.|> Comparator
+@enduml

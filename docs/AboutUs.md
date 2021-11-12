@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### David Liu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kangxun.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kangxun)]
+[[portfolio](team/kangxun.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Pranav Ganesh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pranav-ganesh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/pranav-ganesh)]
+[[portfolio](team/pranav-ganesh.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Houten Teo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/houtenteo.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/houtenteo)] 
+[[portfolio](team/houtenteo.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Irfan Danial
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/idgrr.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/idgrr)]
+[[portfolio](team/idgrr.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Mulanur Subramanian Saketh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/loose-bus-change.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/loose-bus-change)]
+[[portfolio](team/loose-bus-change.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI/Add function

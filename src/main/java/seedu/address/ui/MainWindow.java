@@ -1,21 +1,30 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.comparators.exceptions.ComparatorException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,10 +39,14 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    private double windowWidth;
+
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FullPersonCard fullPersonCard;
+    private String importStatus;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane fullPersonCardPlaceholder;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -61,11 +77,13 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        setWindowDefaultSize();
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        this.windowWidth = this.primaryStage.getWidth();
     }
 
     public Stage getPrimaryStage() {
@@ -109,8 +127,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+    public void fillInnerParts() {
+        personListPanel = new PersonListPanel(logic.getOriginalPersonList(), this.windowWidth);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -121,18 +139,39 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        //Displays first person in the list by default
+        fullPersonCard = new FullPersonCard(this.logic.getFilteredPersonList(), this.windowWidth);
+        fullPersonCardPlaceholder.getChildren().add(fullPersonCard.getRoot());
+        resultDisplay.setFeedbackToUser(importStatus);
     }
 
     /**
-     * Sets the default size based on {@code guiSettings}.
+     * Returns a list containing full details of persons stored in the address book.
+     * @return An ObservableList of people stored in the address book.
      */
-    private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowHeight());
-        primaryStage.setWidth(guiSettings.getWindowWidth());
-        if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
-            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
-        }
+    public ObservableList<Person> getPersonList() {
+        return this.logic.getFilteredPersonList();
+    }
+
+    /**
+     * Updates the FullPersonCard window with the details of the person chosen for display
+     */
+    public void fillFullPersonCard() {
+        fullPersonCardPlaceholder.getChildren().remove(fullPersonCard.getRoot());
+        fullPersonCard = new FullPersonCard(getPersonList(), this.windowWidth);
+        fullPersonCardPlaceholder.getChildren().add(fullPersonCard.getRoot());
+        resultDisplay.setFeedbackToUser(importStatus);
+    }
+
+    /**
+     * Sets the default size to full screen
+     */
+    private void setWindowDefaultSize() {
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setHeight(primaryScreenBounds.getHeight());
+        primaryStage.setWidth(primaryScreenBounds.getWidth());
+        primaryStage.setMaximized(true);
     }
 
     /**
@@ -147,7 +186,12 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Runs popupwindow to get import settings and showing of primary stage
+     *
+     */
     void show() {
+        importStatus = importCsvUserPrompt();
         primaryStage.show();
     }
 
@@ -159,6 +203,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        exportCsvUserPrompt();
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -170,9 +215,10 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, ComparatorException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -187,10 +233,55 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | ComparatorException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
+
+    /**
+     * getting the user setting for excel import
+     *
+     */
+    private String importCsvUserPrompt() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Do you want to import contacts from csv?");
+        alert.setContentText("There are " + logic.getFilteredPersonList().size() + " people currently in the "
+                + "addressbook");
+        ButtonType startNewUsingImport = new ButtonType("Start New Using Import", ButtonBar.ButtonData.NO);
+        ButtonType addOnImports = new ButtonType("Add on imports", ButtonBar.ButtonData.YES);
+        ButtonType dontImport = new ButtonType("Don't  Import", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(addOnImports, startNewUsingImport, dontImport);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == addOnImports) {
+            return logic.importData();
+        } else if (result.get() == startNewUsingImport) {
+            logic.exportResetData();
+            return logic.importData();
+        }
+        return "No additional import";
+    }
+
+    /**
+     * getting the user setting for excel import
+     *
+     */
+    private String exportCsvUserPrompt() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Do you want to export contacts from csv?");
+        alert.setContentText("There are " + logic.getAddressBook().getPersonList().size() + " people currently in the "
+                + "addressbook");
+        ButtonType yesButton = new ButtonType("Export", ButtonBar.ButtonData.YES);
+        ButtonType noButton = new ButtonType("Don't export", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(yesButton, noButton);
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == yesButton) {
+            return logic.exportData();
+        }
+        return "Exiting application";
+    }
+
 }

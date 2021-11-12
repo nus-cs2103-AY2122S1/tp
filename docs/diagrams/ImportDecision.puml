@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+if () then ([else])
+  if () then ([Add on import])
+    :Adds on new imports \ninto existing database;
+  else ( [Start new with import] )
+      :Exports and reset the current database.\nCMM will then populate the reset database with new imports;
+  endif
+else ([Don't import])
+    :CMM will not import anything;
+endif
+- CMM starts up normally
+stop
+
+@enduml

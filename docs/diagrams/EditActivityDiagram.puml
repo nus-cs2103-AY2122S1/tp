@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters edit command;
+:AddressBookParser parses the command;
+:EditCommandParser parses the arguments provided;
+if () then ([command is valid])
+  :All the arguments are initialized in an EditPersonDescriptor object;
+  :New EditCommand object is created;
+  if() then ([invalid index])
+    :Outputs error message;
+  else ([else])
+    :EditCommand creates and returns a new person object\ncontaining the updated data fields;
+  endif
+  if() then ([else])
+    :Outputs error message;
+  else ([contact is valid])
+    :Model sets the person to edit to the edited person;
+    :Edited person is displayed on the user interface;
+  endif
+else ([else])
+:Outputs error message;
+endif
+
+stop
+
+@enduml

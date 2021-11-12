@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ": LogicManager" as LogicManager LOGIC_COLOR
+participant ": AddressBook \n Parser" as AddressBookParser LOGIC_COLOR
+participant ": FindAny \n CommandParser" as FindAnyCommandParser LOGIC_COLOR
+participant "f:FindAny \n Command" as FindAnyCommand LOGIC_COLOR
+participant ": CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:NameContains \n KeywordPredicate" as namePredicate MODEL_COLOR
+participant "c:Combined \n Predicate" as combinedPredicate MODEL_COLOR
+end box
+
+-> LogicManager : execute("findAny n/alex")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findAny n/alex")
+activate AddressBookParser
+
+create FindAnyCommandParser
+AddressBookParser -> FindAnyCommandParser
+activate FindAnyCommandParser
+return
+
+AddressBookParser -> FindAnyCommandParser : parse("n/alex")
+activate FindAnyCommandParser
+
+create namePredicate
+FindAnyCommandParser -> namePredicate
+activate namePredicate
+
+return p
+
+create combinedPredicate
+FindAnyCommandParser -> combinedPredicate
+activate combinedPredicate
+return c
+
+create FindAnyCommand
+FindAnyCommandParser -> FindAnyCommand
+activate FindAnyCommand
+
+return f
+
+FindAnyCommandParser --> AddressBookParser : f
+deactivate FindAnyCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindAnyCommandParser -[hidden]-> AddressBookParser
+destroy FindAnyCommandParser
+
+
+
+LogicManager -> FindAnyCommand : execute()
+activate FindAnyCommand
+
+FindAnyCommand -> Model : updateFilteredPersonList(p)
+activate Model
+return
+
+create CommandResult
+FindAnyCommand -> CommandResult
+activate CommandResult
+return
+
+return result
+@enduml

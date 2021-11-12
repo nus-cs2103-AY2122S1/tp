@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters filter command;
+:AddressBookParser parses the command;
+:FilterCommandParser parses the arguments provided;
+if () then ([command is valid])
+  :new FilterCommand object is created;
+  :PersonComparator creates new \ncomparator object based on category;
+  :contacts are sorted using comparator;
+  :limit number of contacts shown based on count;
+  :new DisplayCommand object is created;
+  :first contact in list is displayed on person card;
+else ([command is invalid])
+  :output error message;
+endif
+
+
+stop
+
+@enduml

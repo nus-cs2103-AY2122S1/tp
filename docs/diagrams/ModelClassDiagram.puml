@@ -21,9 +21,12 @@ Class Person
 Class Address
 Class Email
 Class Name
+Class isCalled
 Class Phone
-Class Tag
-
+Class Gender
+Class Age
+Class InterestsList
+Class Interest
 }
 
 Class HiddenOutside #FFFFFF
@@ -41,10 +44,14 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
+Person *---> Phone
 Person *--> Email
+Person *---> isCalled
 Person *--> Address
-Person *--> "*" Tag
+Person *---> Gender
+Person *---> Age
+Person *--> InterestsList
+InterestsList *--> "*" Interest
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+- Reading file from Csv file
+-Import person created based \non  Csv file row detail
+
+-Import person to be\nadded in  model
+if () then ([ **No duplicates of import person** \nin  database ])
+    :Import Person is added into\ndatabase;
+else ([ **Found duplicates of import person** \nin  database ])
+      if () then  ( [ Import has been  called  ])
+        :Update duplicate  in  database \nto "called"  status;
+      else ([ Import has not  been  called ])
+        :CMM does nothing with the \nimport person;
+      endif
+endif
+- Continue import process
+stop
+
+@enduml

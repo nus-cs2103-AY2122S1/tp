@@ -2,14 +2,17 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,14 +22,17 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private final ImportExport importExportManager;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          ImportExport importExportManager) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.importExportManager = importExportManager;
     }
 
     // ================ UserPrefs methods ==============================
@@ -66,14 +72,38 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
-    }
-
-    @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
+
+    @Override
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    }
+
+    // ================== ImportExport Methods =============================
+
+    @Override
+    public Optional<List<Person>> importIntoAddressBook(Model model) throws DataConversionException {
+        return importExportManager.importIntoAddressBook(model);
+    }
+
+    @Override
+    public void exportCurrentAddressBook(Model model) throws DataConversionException {
+        importExportManager.exportCurrentAddressBook(model);
+    }
+
+    @Override
+    public String getImportStatus() {
+        return importExportManager.getImportStatus();
+    }
+
+    @Override
+    public Path getImportExportPath() {
+        return importExportManager.getImportExportPath();
+    }
+
+
 
 }

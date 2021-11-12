@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.comparators.exceptions.ComparatorException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -20,8 +21,9 @@ public interface Logic {
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
+     * @throws ComparatorException If an error occurs during comparing Persons.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult execute(String commandText) throws CommandException, ParseException, ComparatorException;
 
     /**
      * Returns the AddressBook.
@@ -32,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the original filtered list of persons */
+    ObservableList<Person> getOriginalPersonList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -47,4 +52,19 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Import data from CSV
+     */
+    String importData();
+
+    /**
+     * Exports and Resets current database
+     */
+    String exportResetData();
+
+    /**
+     * Export data to CSV
+     */
+    String exportData();
 }

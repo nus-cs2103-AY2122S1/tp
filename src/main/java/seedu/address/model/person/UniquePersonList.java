@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,9 +14,9 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
+ * A person is considered unique by comparing using {@code Person#equals(Person)}. As such, adding and updating of
+ * persons uses Person#equals(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of identity in the UniquePersonList. Removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -33,7 +34,19 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(x -> x.equals(toCheck));
+    }
+
+    /**
+     * Returns index of duplicate. If duplicate exists, return value >= 0. If no duplicate return -1.
+     */
+    public int indexOfDuplicate(Person toCheck) {
+        requireNonNull(toCheck);
+        int pos = IntStream.range(0, internalList.size())
+                .filter(x -> (internalList.get(x).hashCode() == toCheck.hashCode())
+                        && internalList.get(x).equals(toCheck))
+                .findFirst().orElse(-1);
+        return pos;
     }
 
     /**
@@ -67,6 +80,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         internalList.set(index, editedPerson);
     }
+
 
     /**
      * Removes the equivalent person from the list.
@@ -104,6 +118,13 @@ public class UniquePersonList implements Iterable<Person> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the backing list as an modifiable {@code ObservableList}.
+     */
+    public ObservableList<Person> asModifiableObservableList() {
+        return internalList;
+    }
+
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
@@ -127,7 +148,7 @@ public class UniquePersonList implements Iterable<Person> {
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+                if (persons.get(i).equals(persons.get(j))) {
                     return false;
                 }
             }

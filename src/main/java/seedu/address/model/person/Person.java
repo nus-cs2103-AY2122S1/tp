@@ -2,12 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.interests.Interest;
+import seedu.address.model.person.interests.InterestsList;
 
 /**
  * Represents a Person in the address book.
@@ -19,21 +18,28 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Address address;
+    private final Gender gender;
+    private final Age age;
+    private final InterestsList interests;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final IsCalled isCalled;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, IsCalled isCalled,
+                  Address address, Gender gender, Age age, InterestsList interests) {
+        requireAllNonNull(name, phone, email, isCalled, address, gender, age, interests);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.isCalled = isCalled;
         this.address = address;
-        this.tags.addAll(tags);
+        this.gender = gender;
+        this.age = age;
+        this.interests = interests;
     }
 
     public Name getName() {
@@ -48,16 +54,28 @@ public class Person {
         return email;
     }
 
+    public IsCalled getIsCalled() {
+        return isCalled;
+    }
+
     public Address getAddress() {
         return address;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Age getAge() {
+        return age;
+    }
+
+    public InterestsList getInterests() {
+        return interests;
+    }
+
+    public List<Interest> getAllInterests() {
+        return interests.getAllInterests();
     }
 
     /**
@@ -74,7 +92,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both persons have the name, phone and email data fields.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -90,15 +108,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        // return Objects.hash(name, phone, email);
+        return Objects.hash(name, phone, email);
     }
 
     @Override
@@ -109,14 +126,50 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+                .append("; Called: ")
+                .append(getIsCalled());
+        if (!address.isEmpty()) {
+            builder.append("; Address: ").append(getAddress());
         }
+        if (!gender.isEmpty()) {
+            builder.append("; Gender: ").append(getGender());
+        }
+        if (!age.isEmpty()) {
+            builder.append("; Age: ").append(getAge());
+        }
+        if (!interests.isEmpty()) {
+            builder.append("; Interests: ").append(getInterests());
+        }
+        return builder.toString();
+    }
+
+    /**
+     * Display details without headers. If field is empty, field will be an empty string
+     */
+    public String toStringNoHeaders() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(";")
+                .append(getPhone())
+                .append(";")
+                .append(getEmail());
+        if (!address.isEmpty()) {
+            builder.append(";");
+            builder.append(getAddress());
+        }
+        if (!gender.isEmpty()) {
+            builder.append(";");
+            builder.append(getGender());
+        }
+        if (!age.isEmpty()) {
+            builder.append(";");
+            builder.append(getAge());
+        }
+        if (!interests.isEmpty()) {
+            builder.append(";");
+            builder.append(interests.toStringNoNumbering());
+        }
+        builder.append(";").append(getIsCalled()).append(";");
         return builder.toString();
     }
 

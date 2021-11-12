@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ": LogicManager" as LogicManager LOGIC_COLOR
+participant ": AddressBook\nParser" as AddressBookParser LOGIC_COLOR
+participant ": FilterCommand\nParser" as FilterCommandParser LOGIC_COLOR
+participant "a:FilterCommand" as FilterCommand LOGIC_COLOR
+participant ": Person\nComparator" as PersonComparator LOGIC_COLOR
+participant "c:Comparator" as Comparator LOGIC_COLOR
+participant ": Command\nResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ": Model" as Model MODEL_COLOR
+end box
+
+-> LogicManager : execute("filter gender 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("filter gender 3")
+activate AddressBookParser
+
+create FilterCommandParser
+AddressBookParser -> FilterCommandParser
+activate FilterCommandParser
+return
+
+AddressBookParser -> FilterCommandParser : parse("filter gender 3")
+activate FilterCommandParser
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+return a
+
+FilterCommandParser --> AddressBookParser : d
+deactivate FilterCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FilterCommandParser -[hidden]-> AddressBookParser
+destroy FilterCommandParser
+
+
+
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+FilterCommand -> PersonComparator : getComparator(genderCategory)
+activate PersonComparator
+
+create Comparator
+PersonComparator -> Comparator
+activate Comparator
+return c
+
+return c
+
+FilterCommand -> Model : sortFilteredPersonList(c)
+activate Model
+return
+
+FilterCommand -> Model : limitFilteredPersonList(3)
+activate Model
+return
+
+create CommandResult
+FilterCommand -> CommandResult
+activate CommandResult
+return
+
+return result
+
+@enduml

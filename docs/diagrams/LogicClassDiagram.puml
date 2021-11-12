@@ -23,6 +23,9 @@ Class HiddenModel #FFFFFF
 package Storage{
 }
 
+package ImportExport{
+}
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
@@ -35,6 +38,7 @@ LogicManager .left.> Command : executes >
 
 LogicManager --> Model
 LogicManager --> Storage
+LogicManager --> ImportExport
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model

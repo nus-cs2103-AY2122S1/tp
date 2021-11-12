@@ -4,24 +4,30 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.comparators.NameComparator;
 import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    public static final String MESSAGE_INVALID_LIMIT = "Count must be more than 0.";
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
+    private ObservableList<Person> source;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +40,11 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        source = this.addressBook.getModifiablePersonList();
+        //Wrap ObservableList into FilteredList
+        filteredPersons = new FilteredList<>(source, person -> true);
+        //Wrap ObservableList into SortedList
+        sortedPersons = new SortedList<>(source);
     }
 
     public ModelManager() {
@@ -95,6 +105,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int duplicateIndex(Person person) {
+        requireNonNull(person);
+        return addressBook.duplicateIndex(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -102,7 +118,6 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -111,6 +126,7 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -123,10 +139,67 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns the original unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getOriginalPersonList() {
+        sortFilteredPersonList();
+        return filteredPersons;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredPersonList() {
+        sortedPersons.setComparator(new NameComparator());
+        source.setAll(sortedPersons);
+    }
+
+    @Override
+    public void sortFilteredPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortedPersons.setComparator(comparator);
+        source.setAll(sortedPersons);
+    }
+
+    @Override
+    public void limitFilteredPersonList(int count) {
+        if (count < 0) {
+            throw new IndexOutOfBoundsException(MESSAGE_INVALID_LIMIT);
+        }
+        Predicate<Person> limit = limitByCount(count);
+        updateFilteredPersonList(limit);
+    }
+
+    /**
+     * Returns a Predicate to limit number of {@code Person} to {@code count}
+     */
+    private Predicate<Person> limitByCount(int count) {
+        var ref = new Object() {
+            private Integer i = count;
+
+            public Integer get() {
+                return i;
+            }
+
+            public void minus() {
+                i--;
+            }
+        };
+        Predicate<Person> predicate = person -> {
+            if (ref.get() <= 0) {
+                return false;
+            }
+            ref.minus();
+            return true;
+        };
+        return predicate;
     }
 
     @Override
