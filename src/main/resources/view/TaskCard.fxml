@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets bottom="5" left="15" right="5" top="5" />
+      </padding>
+         <FlowPane>
+            <children>
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+                 <Label fx:id="id" styleClass="cell_big_label" text="\$id">
+                   <minWidth>
+                     <!-- Ensures that the label text is never truncated -->
+                     <Region fx:constant="USE_PREF_SIZE" />
+                   </minWidth>
+                        <HBox.margin>
+                           <Insets right="5.0" />
+                        </HBox.margin>
+                 </Label>
+                     <Label fx:id="group" alignment="CENTER" contentDisplay="CENTER" styleClass="group_badge" text="\$group" textAlignment="CENTER" />
+                     <Label fx:id="taskType" alignment="CENTER" contentDisplay="CENTER" styleClass="taskType_badge" text="\$taskType" textAlignment="CENTER" />
+                     <Label fx:id="priority" alignment="CENTER" contentDisplay="CENTER" styleClass="priority_badge" text="\$priority" textAlignment="CENTER" />
+                  </children>
+                  <FlowPane.margin>
+                     <Insets right="10.0" />
+                  </FlowPane.margin>
+               </HBox>
+            <Label fx:id="description" minWidth="100.0" styleClass="cell_big_label" text="\$description" wrapText="true" />
+            </children>
+         </FlowPane>
+         <HBox>
+            <children>
+            <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+               <Label fx:id="done" styleClass="cell_small_label" text="\$done" />
+            </children>
+         </HBox>
+        <HBox>
+            <Label fx:id="recurringFrequency" styleClass="cell_small_label" text="\$recurringFrequency" />
+        </HBox>
+    </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+  </GridPane>
+</HBox>

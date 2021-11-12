@@ -1,0 +1,12 @@
+{
+  "persons": [ {
+    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "group": [
+      "CS2103T"
+    ],
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "telegram": "hans",
+    "github": "hans"
+  } ]
+}

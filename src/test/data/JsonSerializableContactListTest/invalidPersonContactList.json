@@ -1,0 +1,12 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "groups": [
+      "CS2103T"
+    ],
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "telegram": "hans",
+    "github": "hans"
+  } ]
+}

@@ -9,51 +9,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Alina Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/alinaleehx.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/alinaleehx)] [[portfolio](team/alinaleehx.md)]
 
-* Role: Project Advisor
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
-### Jane Doe
+### Joseph Nathanael
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/josephn37.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/JosephN37)] [[portfolio](team/JosephN37.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Johnny Doe
+### Yeu Chen Yuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cyyeu.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/cyyeu)] [[portfolio](team/cyyeu.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code quality
+* Responsibilities: Ensure overall adherence to coding standards.
 
-### Jean Doe
+### Ambrose Boo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ambroseboo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ambroseboo)] [[portfolio](team/ambroseboo.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling and Tracking
+* Responsibilities: In charge of defining, assigning and tracking project tasks.
 
-### James Doe
+### Tan Zhen Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhenxuantan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/zhenxuantan)] [[portfolio](team/zhenxuantan.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: UI/UX
+* Responsibilities: Responsible for the UI/UX component of the SWEe-book app.

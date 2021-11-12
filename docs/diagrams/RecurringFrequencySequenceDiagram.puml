@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+participant ":MainApp" as MainApp LOGIC_COLOR
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":TaskRecords" as TaskRecords MODEL_COLOR
+participant ":TaskList" as TaskList MODEL_COLOR
+participant "task:Task" as Task MODEL_COLOR
+participant "date:Date" as Date MODEL_COLOR
+end box
+
+create MainApp
+activate MainApp
+
+create ModelManager
+MainApp-> ModelManager : new ModelManager(initialData,\nuserPrefs, initialTasks)
+activate ModelManager
+
+ModelManager -> TaskRecords : updateRecurringTasks()
+activate TaskRecords
+
+TaskRecords -> TaskList : updateRecurringTaskDates()
+activate TaskList
+
+loop all tasks
+opt is a recurring task
+TaskList -> Task : updateRecurringTaskDate()
+activate Task
+
+opt is from last week
+Task -> Date : getDateForThisWeek()
+activate Date
+Date --> Task : newDate
+deactivate Date
+end
+
+Task -->TaskList
+deactivate Task
+end
+end
+TaskList --> TaskRecords
+deactivate TaskList
+
+TaskRecords -->ModelManager
+deactivate TaskRecords
+
+ModelManager --> MainApp
+deactivate ModelManager
+
+deactivate MainApp
+@enduml

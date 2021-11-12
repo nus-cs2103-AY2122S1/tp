@@ -1,0 +1,22 @@
+{
+  "persons": [ {
+    "name": "Valid Person",
+    "group": [
+      "CS2103T"
+    ],
+    "phone": "9482424",
+    "email": "hans@example.com",
+    "telegram": "valid",
+    "github": "valid"
+  },
+    {
+      "name": "Person With Invalid Phone Field",
+      "group": [
+        "CS2103T"
+      ],
+      "phone": "948asdf2424",
+      "email": "hans@example.com",
+      "telegram": "valid",
+      "github": "valid"
+    } ]
+}

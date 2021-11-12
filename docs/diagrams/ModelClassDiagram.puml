@@ -5,50 +5,47 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
-Class Model
+Interface ReadOnlyUserPrefs <<Interface>>
+Interface ReadOnlyContactList <<Interface>>
+Interface ReadOnlyTaskRecords <<Interface>>
+
 Class ModelManager
 Class UserPrefs
-Class ReadOnlyUserPrefs
-
+Class ContactList
+Class TaskRecords
 
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
 
+Class TaskList
+Class Task
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
+Model .left......> ReadOnlyUserPrefs
+Model ..> ReadOnlyContactList
+Model .right.> ReadOnlyTaskRecords
 
-AddressBook .up.|> ReadOnlyAddressBook
-
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+ContactList .up.|> ReadOnlyContactList
+TaskRecords .up.|> ReadOnlyTaskRecords
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModelManager .up...|> Model
+ModelManager --> "1" ContactList
+ModelManager --> "1" UserPrefs
+ModelManager --> "1" TaskRecords
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
-ModelManager -->"~* filtered" Person
+ContactList *--> "1" UniquePersonList
+UniquePersonList ----> "~* all" Person
+TaskRecords -> "1" TaskList
+TaskList  --> "~* all" Task
+
+ModelManager ----> "~* filtered" Person
+ModelManager -----> "~* filtered" Task
+
+ReadOnlyUserPrefs -right[hidden]- ReadOnlyContactList
+ReadOnlyContactList -right[hidden]- ReadOnlyTaskRecords
 @enduml
