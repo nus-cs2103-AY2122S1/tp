@@ -626,6 +626,8 @@ Unassigns a specific task from students’ task list.
 
 Suppose you assigned a particular task to a student by accident, you can simply unassign the task by entering the command below. 
 
+<div style="page-break-after: always;"></div>
+
 Format: `task -unas STUDENT_INDEX TASK_INDEX`
 
 * Unassigns the task specified at index `TASK_INDEX` from the “Student” object specified at index `STUDENT_INDEX`.
@@ -664,6 +666,7 @@ Format: `task -do STUDENT_INDEX TASK_INDEX`
 Examples:
 * `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
 
+<div style="page-break-after: always;"></div>
 
 #### Marking a task as done by group: `task -dog`  (Coming soon)
 
@@ -705,6 +708,8 @@ Examples:
 * `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Others
 
