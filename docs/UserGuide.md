@@ -100,7 +100,6 @@ When reading our User Guide, here are some important information to take note of
    contains some sample data.<br>
    ![Ui](images/Ui.png)
    
-<div style="page-break-after: always;"></div>
 5. Type the command in the command box and press Enter to execute it. Here are some example commands you can try:
 
     * **`list`** : Lists all contacts.
@@ -325,7 +324,8 @@ LeadsForce. <br>
 <p align="center">
 <img src="images/ClientInfoView.png" width="400"/>
 </p>
-
+   
+<div style="page-break-after: always;"></div>
 ### 5.3 Update Existing Contact : `edit`
 
 Update the attributes of existing users using the prefix of the client’s attribute, and set/edit meetings with clients.
@@ -343,7 +343,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
-<img src="images/ExpectedEditCommand.png" width="500"/>
+<img src="images/ExpectedEditCommand.png" width="400"/>
 </p>
 <div style="page-break-after: always;"></div>
 ### 5.4 Delete particular contact : `delete`
@@ -454,7 +454,7 @@ Clears all entries from the address book.
 **Expected Outcome:** <br>
 
 <p align="center">
-<img src="images/ExpectedClearCommand.png" width="600"/>
+<img src="images/ExpectedClearCommand.png" width="400"/>
 </p>
 
 ### 5.11 Getting help : `help`
@@ -494,7 +494,6 @@ update data directly by editing that data file.
 
 This section details the multiple address book feature in LeadsForce. Separate your clients into different address books
 to better manage your clients!
-
 ### 6.1 Create new address book : `ab create`
 
 Create a new address book by the name provided and switches to it.
@@ -521,7 +520,7 @@ Delete an address book that currently exists.
 | **Example** | `ab delete test` will delete the address book named `test` |
 | <img src="images/info_icon.png" width="50"/> | • The current address book cannot be deleted, switch to another address book first before deleting the address book.|
 
-
+<div style="page-break-after: always;"></div>
 ### 6.3 Switch to different address book : `ab switch`
 
 Switch to a different address book that currently exists.
@@ -536,9 +535,8 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 
 | Before | After |
 | --- | --- |
-| <img src="images/ExpectedSwitchAbCommand.png" width="500"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="500"/> |
+| <img src="images/ExpectedSwitchAbCommand.png" width="400"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="400"/> |
 
-<div style="page-break-after: always;"></div>
 ### 6.4 List all address book : `ab list`
 
 List all the name of all the existing address books.
@@ -550,7 +548,7 @@ List all the name of all the existing address books.
 **Expected Outcome:** <br>
 If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the output from the command result view.
 <p align="center">
-<img src="images/ExpectedAbListCommand.png" width="500"/>
+<img src="images/ExpectedAbListCommand.png" width="400"/>
 </p><br>
 
 --------------------------------------------------------------------------------------------------------------------
