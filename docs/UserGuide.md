@@ -553,6 +553,7 @@ Example:
 * You can specify one or more keywords for each parameter. e.g. `find n/Amad Ali`.
 * A field needs to contain all specified keywords to be matched.<br>
   e.g. keywords `Amad Ali` will not match `Amad`, but it will match `Amad bin Ali`.
+* If you specify multiple keywords with the same prefix, only the last prefix will be used to search that field.  
 * A keyword can match a word partially. e.g. keyword `uni` will match `university`.
 * The search is case-insensitive.
 
