@@ -228,10 +228,10 @@ Format: `help`
 This section guides you on how to use the commands for managing students in TAB.
 Easily manage your student information with these commands and say goodbye to messy Excel sheets.
 
-1. [Adding a student: `add`](#adding-a-student-add)
-2. [Editing a student: `edit`](#editing-a-student-edit)
-3. [Deleting a student: `delete`](#deleting-a-student-delete)
-4. [Listing all students: `list`](#listing-all-students-list)
+* [Adding a student: `add`](#adding-a-student-add)
+* [Editing a student: `edit`](#editing-a-student-edit)
+* [Deleting a student: `delete`](#deleting-a-student-delete)
+* [Listing all students: `list`](#listing-all-students-list)
 
 <br>
 ![studentCard](images/annotatedStudentCard.png)
@@ -642,11 +642,11 @@ Other examples:
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
 Never lose track of your lessons ever again.
 
-1. [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
-2. [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
-3. [Deleting a lesson: `ldelete`](#deleting-a-lesson-ldelete)
-4. [Viewing a student's lessons: `view`](#viewing-a-students-lessons-view)
-5. [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
+* [Adding a lesson: `ladd`](#adding-a-lesson-ladd)
+* [Editing a lesson: `ledit`](#editing-a-lesson-ledit)
+* [Deleting a lesson: `ldelete`](#deleting-a-lesson-ldelete)
+* [Viewing a student's lessons: `view`](#viewing-a-students-lessons-view)
+* [Viewing upcoming lessons: `remind`](#viewing-upcoming-lessons-remind)
 
 <br>
 
@@ -935,10 +935,10 @@ Example: Suppose the date today is 1 Nov 2021 and current time is 1500h,
 This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
 Easily keep track of the students that haven't paid for their lessons yet.
 
-1. [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
-2. [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
-3. [Paying a lesson's outstanding fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
-4. [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator)
+* [Adding a lesson's outstanding fees: `ladd`](#adding-a-lessons-outstanding-fees-ladd)
+* [Editing a Lesson's outstanding fees: `ledit`](#editing-a-lessons-outstanding-fees-ledit)
+* [Paying a lesson's outstanding fees: `paid`](#paying-a-lessons-outstanding-fees-paid)
+* [Behaviour of the Fees Calculator](#behaviour-of-the-fees-calculator)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -1040,16 +1040,14 @@ Typing any of the commands in this section will bring you to the calendar interf
 Any command from other sections, such as `list` or `tag`, will bring you right out.
 Arrange your schedule and plan ahead with our powerful in-built calendar!
 
-1. [Switching to the calendar interface: `calendar`](#switching-to-the-calendar-interface-calendar)
-2. [Viewing your daily calendar: `day`](#viewing-your-daily-calendar-day)
-3. [Viewing your weekly calendar: `week`](#viewing-your-weekly-calendar-week)
-4. [Viewing your monthly calendar: `month`](#viewing-your-monthly-calendar-month)
-5. [Viewing your yearly calendar: `year`](#viewing-your-yearly-calendar-year)
-6. [Navigating forward in the calendar: `next`](#navigating-forward-in-the-calendar-next)
-7. [Navigating backwards in the calendar: `back`](#navigating-backwards-in-the-calendar-back)
-8. [Navigate to today in the calendar: `today`](#navigate-to-today-in-the-calendar-today)
-
-[Coming soon... jump to a specific date in the calendar]
+* [Switching to the calendar interface: `calendar`](#switching-to-the-calendar-interface-calendar)
+* [Viewing your daily calendar: `day`](#viewing-your-daily-calendar-day)
+* [Viewing your weekly calendar: `week`](#viewing-your-weekly-calendar-week)
+* [Viewing your monthly calendar: `month`](#viewing-your-monthly-calendar-month)
+* [Viewing your yearly calendar: `year`](#viewing-your-yearly-calendar-year)
+* [Navigating forward in the calendar: `next`](#navigating-forward-in-the-calendar-next)
+* [Navigating backwards in the calendar: `back`](#navigating-backwards-in-the-calendar-back)
+* [Navigate to today in the calendar: `today`](#navigate-to-today-in-the-calendar-today)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1212,8 +1210,8 @@ Format: `exit`
 
 This section informs you on how data is handled in TAB.
 
-1. [Saving the data](#saving-the-data)
-2. [Editing the data file](#editing-the-data-file)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1305,6 +1303,7 @@ UX | User Experience - The experience a user has when using the app.
 ## Command Summary
 This section lists all the available commands in TAB, along with examples on how you can use them.
 The commands are categorised into 4 different categories:
+
 * [Students](#students)
 * [Lessons](#lessons)
 * [Navigating the UI](#navigating-the-ui)
