@@ -37,7 +37,7 @@ If you've used Notor for a while and are looking to get the best out of Notor, '
 Some terminology that might help when referring to Notor:
 1. **List pane** : The panel located on the right, which is used to display the list of persons or groups
 2. **View pane** : The panel on the left, used to view notes, such as general notes
-3. **Note Window**: The pop up window you may use to edit and add notes
+3. **Note Window**: The pop-up window you may use to edit and add notes
 4. **Command Box**: The box on the left pane, underneath the view pane, where you may type commands.
 
 ![image](images/NotorLabelled.png)
@@ -231,6 +231,8 @@ Adds a person at the given index `INDEX` to a specified group. To add a person t
 Notor considers people within a subgroup as also being within the group that contains it (the supergroup). Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### _Deleting a person_
 
 Removes the contact and the data saved for a person from Notor.
@@ -243,8 +245,6 @@ Removes the contact and the data saved for a person from Notor.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Data will be deleted and **will not be saved**. Be careful when deleting people. You may prefer to [archive them](#archiving-people) or make a backup of your data first by [exporting the data](#exporting-data).
 </div>
-
-<div style="page-break-after: always;"></div>
 
 #### _Editing a person_
 
@@ -631,12 +631,12 @@ Users can also use the Down arrow key to navigate back to the more recent comman
 ### Keyboard Shortcuts
 Notor has keyboard shortcuts to give you added convenience and allow you to control Notor using your keyboard alone. Here are the shortcuts we have available.
 
+<div style="page-break-after: always;"></div>
+
 #### Pop-Up Window
 
 You can navigate the buttons in a pop-up window using the arrow keys. On Windows and Linux, 
 select the button by pressing enter; on MacOS, press space.
-
-<div style="page-break-after: always;"></div>
 
 #### Shortcut Keys for Note Window
 
@@ -651,6 +651,8 @@ Shortcut Key            | Linux/Window                                   | MacOS
 * <strong>Timestamp: </strong> shortcut key types the current date and time in Note Window in this format <code>E, MMM dd yyyy HH:mm"</code>. <br>
 * Example: `Fri., Oct. 22 2021 00:07`
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <a name = "command-summary"></a>
 
@@ -788,7 +790,7 @@ When you open Notor for the first time, you will see some dummy data for you to 
     <div style="page-break-after: always;"></div>
     
 5. **`person 3 /add g:CS2103T`** : Now, if you want to add the person with index `3` to the group `CS2103T`. In the example shown below, the user named `David Li` will be added to the group `CS2103T`.
-   <img src="images/Example5.png" alt="example5" width="75%" height="75%">
+    <img src="images/Example5.png" alt="example5" width="75%" height="75%">
 
 6. **`group /list`** : To refer to the current group list, you can simply type in this command.
    <img src="images/Example6.png" alt="example6" width="75%" height="75%">
@@ -804,10 +806,10 @@ When you open Notor for the first time, you will see some dummy data for you to 
 8. **`group 1 /create n:Gemini`** : This command creates a new subgroup inside the group at index `1`. In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`. The syntax `n:` is to indicate the **name** of the subgroup you have created.
 
     <img src="images/Example8.png" alt="example8" width="75%" height="75%">
+    
+    <div style="page-break-after: always;"></div>
 
 9. Test out whatever commands you like. When you're done...
-
-   <div style="page-break-after: always;"></div>
 
 
 10. **`clear`** : Type this and hit enter to remove all the dummy data prepared for you.
