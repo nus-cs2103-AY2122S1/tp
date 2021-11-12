@@ -17,7 +17,6 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
 </p>
 
 <div style="page-break-after: always;"></div>
-
 ## Table of Contents
 
 * [**1. Introduction**](#1-introduction)
@@ -64,7 +63,6 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
-
 ## 1. Introduction
 
 Are you a student financial advisor (FA) who finds it difficult to **manage client information**, and would like a
@@ -83,7 +81,6 @@ When reading our User Guide, here are some important information to take note of
 
 ### 1.1.1 Icons and its meaning
 
-
 **Icon** | **Meaning of icons**
 :---: | :---
 <img src="images/info_icon.png" width="50"/> | Notes: specific conditions or behaviours of a feature.
@@ -91,7 +88,6 @@ When reading our User Guide, here are some important information to take note of
 <img src="images/warn_icon.png" width="50"/> | Warnings: important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files.
 
 <div style="page-break-after: always;"></div>
-
 ## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your computer.
@@ -103,7 +99,8 @@ When reading our User Guide, here are some important information to take note of
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
    ![Ui](images/Ui.png)
-
+   
+<div style="page-break-after: always;"></div>
 5. Type the command in the command box and press Enter to execute it. Here are some example commands you can try:
 
     * **`list`** : Lists all contacts.
@@ -121,13 +118,11 @@ When reading our User Guide, here are some important information to take note of
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
-
 ## 3. Client Information
 
 This section details the client information that financial advisors can keep track of with LeadsForce. Every client that
 is registered in LeadsForce have the following attributes that has the corresponding attribute prefix and value(s).
 The attribute prefix and value specified here constitute the parameter format to be used in the commands of several [features](#5-features).
-
 
 Attribute | Prefix | Value | Multiplicity
 -----------------|-----------------|-----------------|-----------------
@@ -250,18 +245,17 @@ The client list view consist of the list of clients from the user's address book
 ### 4.3 Client Info View
 
 <p align="center">
-<img src="images/ClientInfoView.png" width="500"/>
+<img src="images/ClientInfoView.png" width="400"/>
 </p>
 
 The client information view provides in-depth information about a client and fully shows all their information without truncated values. Using
 the [`View`](#52-retrieve-particular-contact--view) command, users can fully view information of a particular client in the client info
 view.
 
-<div style="page-break-after: always;"></div>
 ### 4.4 Meeting Schedule View
 
 <p align="center">
-<img src="images/MeetingScheduleView.png" width="500"/>
+<img src="images/MeetingScheduleView.png" width="400"/>
 </p>
 
 The meeting schedule view showcases the upcoming meetings that the client has, and they are sorted from the earliest to
@@ -514,7 +508,7 @@ Create a new address book by the name provided and switches to it.
 The command `ab create newAddressBook` creates a new address book as shown.
 
 <p align="center">
-<img src="images/ExpectedCreateAddressBook.png" width="500"/>
+<img src="images/ExpectedCreateAddressBook.png" width="400"/>
 </p>
 
 <div style="page-break-after: always;"></div>
@@ -562,7 +556,6 @@ If you have 2 address books named `newAddressBook` and `YoungAdults`, here's the
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
-
 ## 7. FAQ
 
 **Q**: Is LeadsForce free to use? <br>
@@ -594,9 +587,7 @@ the data of your previous LeadsForce home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
-
 ## 8. Troubleshooting
-
 ### Unable to launch LeadsForce
 
 * Do check that you indeed have Java `11` or above installed in your computer.
@@ -638,7 +629,6 @@ recreate the bug.
 ## 10. Command summary
 
 This section details all commands in using the features in LeadsForce.
-
 ### 10.1 Client Management Commands
 
 Action | Format | Examples
@@ -669,9 +659,7 @@ Action | Format | Examples
 <div style="page-break-after: always;"></div>
 
 ## 11. Appendix
-
 ### 11.1 Glossary
-
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Command Line Interface (CLI)**: Text-based user interface that is used to view and manage device files
 * **Graphical User Interface (GUI)**: A visual way of interacting with a device using a variety of items
