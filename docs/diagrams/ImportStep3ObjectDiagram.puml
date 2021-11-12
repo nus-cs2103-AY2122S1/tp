@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Final state
+
+object "__:ModelManager__" as State1
+
+object "__:SportsPa__" as State2
+
+object "__:Member__" as State3 {
+Name:Bob
+Phone:97848343
+}
+
+object "__:Member__" as State4 {
+Name:Amy
+Phone:94379855
+}
+
+State1 --> State2
+State1 --> State3
+State1 --> State4
+
+State2 --> State3
+State2 --> State4
+@enduml

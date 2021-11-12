@@ -1,0 +1,21 @@
+@startuml
+start
+:User enters command;
+:Parse command word;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command word is an alias])
+    :Replace shortcut with
+    actual command word;
+else ([else])
+endif
+:Parse command arguments;
+if () then ([command is valid])
+    :Execute command;
+else ([else])
+: Throw ParseException;
+endif
+stop
+@enduml

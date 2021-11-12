@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+start
+:User enters split command;
+:Parse command word;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command word is an alias])
+    :Replace shortcut with
+    actual command word;
+else ([else])
+endif
+:Parse command arguments;
+
+if () then ([arguments are valid])
+    : Execute split command;
+
+if () then ([Member list or
+Facility list is empty])
+    : Throw CommandException;
+stop
+else ([else])
+    :Split is attempted;
+    if () then ([Insufficient capacity or no members available])
+        :Throw CommandException;
+    stop
+    else ([else])
+        : All members allocated to facilities;
+    endif
+endif
+
+:Allocation maps of facilities are updated;
+
+stop
+else ([else])
+:Throw ParseException;
+stop
+@enduml

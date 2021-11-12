@@ -17,13 +17,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should display Facility Tab */
+    private final boolean showFacilityTab;
+
+    /** The application should display Member Tab */
+    private final boolean showMemberTab;
+
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * Constructs a {@code CommandResult} with all its fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showFacilityTab, boolean showMemberTab) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showFacilityTab = showFacilityTab;
+        this.showMemberTab = showMemberTab;
     }
 
     /**
@@ -31,7 +40,26 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false,
+                false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, {@code showHelp} and {@code exit},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * {@code showFacilityTab}, {@code showMemberTab}, and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean isHelpOrExit, boolean showFacilityTab, boolean showMemberTab) {
+        this(feedbackToUser, false, false, showFacilityTab, showMemberTab);
+        assert !isHelpOrExit;
+        assert showFacilityTab != showMemberTab;
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +72,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowFacilityTab() {
+        return showFacilityTab;
+    }
+
+    public boolean isShowMemberTab() {
+        return showMemberTab;
     }
 
     @Override
@@ -60,12 +96,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showFacilityTab == otherCommandResult.showFacilityTab
+                && showMemberTab == otherCommandResult.showMemberTab;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showFacilityTab, showMemberTab);
     }
 
 }

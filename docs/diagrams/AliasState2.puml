@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title After command "alias s/l cw/listm"
+
+object "__:Shortcut__" as State1 {
+shortcut = "l"
+}
+
+object "__:CommandWord__" as State2 {
+command = "listm"
+}
+
+note "CommandWord replaced" as N1
+
+class State3 as "__:AliasMap__"
+class State4 as "__:Alias__"
+
+
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+State3 -[hidden]up-> State4
+
+State4 -up-> State2
+State4 -up-> State1
+State3 --> State4
+
+@end
