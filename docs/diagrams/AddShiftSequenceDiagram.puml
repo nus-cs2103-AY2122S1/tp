@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddShiftCommandParser" as AddShiftCommandParser LOGIC_COLOR
+participant "command:AddShiftCommand" as AddShiftCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addShift -n Steve d/Monday-0")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand()
+activate AddressBookParser
+
+create AddShiftCommandParser
+AddressBookParser -> AddShiftCommandParser
+activate AddShiftCommandParser
+
+AddShiftCommandParser --> AddressBookParser
+deactivate AddShiftCommandParser
+
+AddressBookParser -> AddShiftCommandParser : parse()
+activate AddShiftCommandParser
+
+create AddShiftCommand
+AddShiftCommandParser -> AddShiftCommand
+activate AddShiftCommand
+
+AddShiftCommand --> AddShiftCommandParser
+deactivate AddShiftCommand
+
+AddShiftCommandParser --> AddressBookParser
+deactivate AddShiftCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddShiftCommandParser -[hidden]-> AddressBookParser
+destroy AddShiftCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> AddShiftCommand : execute()
+activate AddShiftCommand
+
+AddShiftCommand -> Model : findPersonByName()
+activate Model
+
+Model --> AddShiftCommand : staff
+
+AddShiftCommand -> Model : addShift()
+
+Model --> AddShiftCommand
+deactivate Model
+
+create CommandResult
+AddShiftCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddShiftCommand
+deactivate CommandResult
+
+AddShiftCommand --> LogicManager
+deactivate AddShiftCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

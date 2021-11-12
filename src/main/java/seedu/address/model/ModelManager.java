@@ -4,14 +4,25 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Slot;
+import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,7 +40,6 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
@@ -100,16 +110,26 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public void addPerson(Person staff) {
+        addressBook.addPerson(staff);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Person target, Person editedStaff) {
+        requireAllNonNull(target, editedStaff);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedStaff);
+    }
+
+    @Override
+    public Person findPersonByName(Name name) {
+        List<Person> results = filteredPersons.stream().filter(person -> person.getName().equals(name))
+                .collect(Collectors.toList());
+        if (results.size() == 0) {
+            return null;
+        }
+        return results.get(0);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -123,10 +143,71 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns the Person from the filtered list with the corresponding index.
+     *
+     * @return the Person from the filtered list with the corresponding index.
+     */
+    @Override
+    public Person getFilteredPersonListByIndex(int index) {
+        if (filteredPersons.size() == 0) {
+            return new FilteredList<>(this.addressBook.getPersonList()).get(index);
+        } else {
+            return filteredPersons.get(index);
+        }
+    }
+
+
+    /**
+     * Returns the unfiltered person list.
+     *
+     * @return Unfiltered Person list.
+     */
+    @Override
+    public ObservableList<Person> getUnFilteredPersonList() {
+        return new FilteredList<>(this.addressBook.getPersonList());
+    }
+
+    /**
+     * Updates the filtered person list based on the predicate.
+     *
+     * @param predicate This filters the filtered person list.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+
+    @Override
+    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
+        requireAllNonNull(target, dayOfWeek, slot, startDate, endDate);
+        Person staffToReplaceWith = Person.copy(target);
+        Schedule editSchedule = target.getSchedule();
+        editSchedule.addShift(dayOfWeek, slot, startDate, endDate);
+        staffToReplaceWith.setSchedule(editSchedule);
+        setPerson(target, staffToReplaceWith);
+    }
+
+    @Override
+    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                             LocalDate startDate, LocalDate endDate)
+            throws InvalidShiftTimeException {
+        requireAllNonNull(target, dayOfWeek, slot, startTime, endTime, startDate, endDate);
+        target.setShiftTime(dayOfWeek, slot, startTime, endTime, startDate, endDate);
+    }
+
+    @Override
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                            LocalDate startDate, LocalDate endDate) throws NoShiftException {
+        requireAllNonNull(target, dayOfWeek, slot);
+        Person staffToReplaceWith = Person.copy(target);
+        Schedule editSchedule = target.getSchedule();
+        editSchedule.removeShift(dayOfWeek, slot, startDate, endDate);
+        staffToReplaceWith.setSchedule(editSchedule);
+        setPerson(target, staffToReplaceWith);
     }
 
     @Override
@@ -147,5 +228,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

@@ -7,6 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +22,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Status;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -74,6 +83,59 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_nameNotFound_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Name outOfBoundName = GEORGE.getName();
+
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundName);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_SEARCHED);
+    }
+
+    @Test
+    public void execute_validName_success() {
+        Person staffToDelete = model.findPersonByName(ALICE.getName());
+
+        DeleteCommand deleteCommand = new DeleteCommand(ALICE.getName());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(staffToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validRole_success() {
+        DeleteCommand deleteCommand = new DeleteCommand(Role.FLOOR);
+
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS + ALICE + "\n\n"
+                + DANIEL + "\n\n" + ELLE + "\n\n";
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(ALICE);
+        expectedModel.deletePerson(DANIEL);
+        expectedModel.deletePerson(ELLE);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validStatus_success() {
+        DeleteCommand deleteCommand = new DeleteCommand(Status.PART_TIME);
+
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS + BENSON + "\n\n"
+                + FIONA + "\n\n";
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(BENSON);
+        expectedModel.deletePerson(FIONA);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

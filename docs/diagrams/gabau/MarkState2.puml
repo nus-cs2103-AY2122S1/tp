@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title "Final absentDates"
+
+package Periods <<Rectangle>>{
+Class Period as "__initial:Period__"
+Class P1 as "__additionalPeriod:Period__"
+Class P2 as "__merged:Period__"
+
+}
+
+P1 -[hidden]left-> Period
+P2 -[hidden]left-> Period
+P2 -[hidden]left-> P1
+hide P1
+hide Period
+
+
+
+@enduml

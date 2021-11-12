@@ -5,55 +5,53 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Gabriel Au
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gabau.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Gabau)]
+[[portfolio](team/gabau.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI, Code Quality, Testing and Integration
 
-### Jean Doe
+### Jonathan Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fullfatwasabi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/fullfatwasabi)]
+[[portfolio](team/fullfatwasabi.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Tool, Documentation, Scheduling and tracking
+
+### Sreenivasa Kalpana Surya
+
+<img src="images/tetrerox.png" width="200px">
+
+[[github](http://github.com/tetrerox)]
+[[portfolio](team/tetrerox.md)]
+
+* Role: Developer
+* Responsibilities: Integration, Code Quality and Documentation
+
+### He Outong
+
+<img src="images/irvinghe000.png" width="200px">
+
+[[github](http://github.com/IrvingHe000)]
+[[portfolio](team/irvinghe000.md)]
+
+* Role: Developer
+* Responsibilities: Testing, Integration, Tool expert
+
+### Megan Wee Rui En
+
+<img src="images/mweeruien.png" width="200px">
+
+[[github](http://github.com/mweeruien)][[portfolio](team/mweeruien.md)]
+
+* Role: Developer
+* Responsibilities: Team Lead, Deliverables and deadlines, and Assistant GUI Expert

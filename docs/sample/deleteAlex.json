@@ -1,0 +1,63 @@
+{
+  "persons" : [ {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "salary" : "6.00",
+    "status" : "fulltime",
+    "tagged" : [ "colleagues", "friends" ],
+    "schedule" : {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    },
+    "absentDates" : [ ],
+    "roles" : [ "kitchen" ]
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "salary" : "7.50",
+    "status" : "parttime",
+    "tagged" : [ "neighbours" ],
+    "schedule" : {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    },
+    "absentDates" : [ ],
+    "roles" : [ "bartender" ]
+  }, {
+    "name" : "David Li",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "salary" : "8.00",
+    "status" : "fulltime",
+    "tagged" : [ "family" ],
+    "schedule" : {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    },
+    "absentDates" : [ ],
+    "roles" : [ "kitchen" ]
+  }, {
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "salary" : "8.50",
+    "status" : "parttime",
+    "tagged" : [ "classmates" ],
+    "schedule" : {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    },
+    "absentDates" : [ ],
+    "roles" : [ "kitchen" ]
+  }, {
+    "name" : "Roy Balakrishnan",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "salary" : "7.00",
+    "status" : "parttime",
+    "tagged" : [ "colleagues" ],
+    "schedule" : {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    },
+    "absentDates" : [ ],
+    "roles" : [ "floor" ]
+  } ]
+}

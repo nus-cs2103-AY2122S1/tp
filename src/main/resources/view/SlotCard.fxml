@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="slotCard" styleClass="slotCard" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane>
+         <center>
+             <Label fx:id="shiftName" contentDisplay="CENTER" styleClass="big_label_white" text="\$shiftName" wrapText="true" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+       <ListView fx:id="staffWorkingList" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

@@ -2,12 +2,16 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -24,37 +28,58 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Person staff;
+    private int displayedIndex;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label index;
     @FXML
-    private Label id;
+    private Label name;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private ListView<String> periodListView;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane roles;
+    @FXML
+    private Label salary;
+    @FXML
+    private Label status;
+    @FXML
+    private ListView<String> tagsListView;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person staff, int displayedIndex) {
         super(FXML);
-        this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        this.staff = staff;
+        this.displayedIndex = displayedIndex;
+        index.setText(String.valueOf(displayedIndex));
+        name.setText(staff.getName().fullName);
+        phone.setText(staff.getPhone().value);
+        email.setText(staff.getEmail().value);
+        salary.setText(staff.getSalary().convertToDollars());
+        status.setText(staff.getStatus().getValue());
+
+        String[] periodArray =
+                staff.getAbsentDates().stream().map(Period::toDisplayString).sorted().toArray(String[]::new);
+        periodListView.setItems(FXCollections.observableArrayList(periodArray));
+
+        staff.getRoles().stream()
+                .sorted(Comparator.comparing(Role::toString))
+                .forEach(role -> roles.getChildren().add(new Label(role.toString())));
+
+        String[] tagArray = staff.getTags().stream().map(tag -> tag.tagName).sorted().toArray(String[]::new);
+        tagsListView.setItems(FXCollections.observableArrayList(tagArray));
+    }
+
+    public int getDisplayedIndex() {
+        return displayedIndex;
     }
 
     @Override
@@ -71,7 +96,7 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+        return displayedIndex == card.getDisplayedIndex()
+                && staff.equals(card.staff);
     }
 }

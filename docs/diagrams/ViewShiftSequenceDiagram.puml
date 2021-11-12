@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewShiftCommandParser" as ViewShiftCommandParser LOGIC_COLOR
+participant "command:ViewShiftCommand" as ViewShiftCommand LOGIC_COLOR
+end box
+
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand()
+activate AddressBookParser
+
+create ViewShiftCommandParser
+AddressBookParser -> ViewShiftCommandParser
+activate ViewShiftCommandParser
+
+ViewShiftCommandParser --> AddressBookParser
+deactivate ViewShiftCommandParser
+
+AddressBookParser -> ViewShiftCommandParser : parse()
+activate ViewShiftCommandParser
+
+create ViewShiftCommand
+ViewShiftCommandParser -> ViewShiftCommand
+activate ViewShiftCommand
+
+
+
+ViewShiftCommand --> ViewShiftCommandParser
+deactivate ViewShiftCommand
+
+ViewShiftCommandParser --> AddressBookParser
+deactivate ViewShiftCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewShiftCommandParser -[hidden]-> AddressBookParser
+destroy ViewShiftCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> ViewShiftCommand : execute()
+
+activate ViewShiftCommand
+ref over ViewShiftCommand : View Shift Command Execution
+
+note right  : Refer to the View Shift Command Execution \nfor details on this function
+
+ViewShiftCommand --> LogicManager
+
+
+deactivate ViewShiftCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
