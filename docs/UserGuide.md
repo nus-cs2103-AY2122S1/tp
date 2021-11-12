@@ -1319,8 +1319,6 @@ The commands are categorised into 4 different categories:
 * [Navigating the UI](#navigating-the-ui)
 * [General](#general)
 
-<br/>
-
 ### Students
 
 Action | Format & Examples
@@ -1355,8 +1353,6 @@ Action | Format
 [**Navigate Forward in Calendar**](#navigating-forward-in-the-calendar-next) | `next`
 [**Navigate Backward in Calendar**](#navigating-backwards-in-the-calendar-back) | `back`
 [**View Reminders**](#viewing-upcoming-lessons-remind) | `remind`
-
-<div style="page-break-before: always;"></div>
 
 ### General
 
