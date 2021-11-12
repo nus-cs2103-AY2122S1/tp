@@ -61,25 +61,26 @@ Hope you have a great time with CMM.
 
 ## 2. Quick start
 
-1. Ensure you have Java 11 or above installed in your computer
+1. Ensure you have Java 11 or above installed in your computer. You can learn how to install the latest version of Java [here](#installing-java).
+If you already have java installed, you can follow the steps [here](#checking-java-version) to check if you have an appropriate version of java
 
-2. Download the latest CallMeMaybe.jar from [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases)
+3. Download the latest CallMeMaybe.jar from [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases)
 
-3. Copy the file to the folder you want to use as the home folder for CMM
+4. Copy the file to the folder you want to use as the home folder for CMM
 
-4. Double-click the file to start the app. A prompt will popup asking whether you want to import any new contacts. 
+5. Double-click the file to start the app. A prompt will popup asking whether you want to import any new contacts. 
 The prompt will look like the screenshot below :
 
    ![importPopUpUi](images/importPopUpMessage.png) <br>
    To learn more about what each option does in detail, click [here](#514-importing-the-data-into-database).
    An example file import can be downloaded [here](https://github.com/AY2122S1-CS2103T-T13-4/tp/releases/tag/Test_Files)
     <div style="page-break-after: always;"></div>
-5. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot 
-below should appear in a few seconds. Note how the app contains some sample data upon first startup
+6. After you click any button on the prompt, CMM will execute the selected option, and a GUI similar to the screenshot 
+below should appear in a few seconds. Note how the app contains some sample data upon first startup.
 
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will 
+7. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will 
 open the help window. You can find the commands that CallMeMaybe supports below:
    - `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named John Doe to the CMM database
    
@@ -103,9 +104,9 @@ open the help window. You can find the commands that CallMeMaybe supports below:
    
    - `exit` : Exits the app
 
-8. Remember to clear the sample data using `clear` command before adding your own data
+8. Remember to clear the sample data using `clear` command before adding your own data.
 
-9. Refer to the [Features](#5-overview-of-features) below for details of each command
+9. Refer to the [Features](#5-overview-of-features) below for details of each command.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -683,11 +684,11 @@ CMM is able to import Excel files into CMM. The import files have to be in an Ex
 
 **Steps to Import from Excel file:**
 
-1. Ensure that the Excel file is a CSV file type that is **semicolon delimited**
+1. Ensure that the Excel file is a CSV file type that is **semicolon delimited**.
 
-   Instructions on how to import to this file type can be found [here](SettingImportFileType.md)
+   Instructions on how to import to this file type can be found [here](SettingImportFileType.md).
 
-2. Ensure that the import file is named import.csv under the "data" folder found in the same directory as the CMM jar file
+2. Ensure that the import file is named import.csv under the "data" folder found in the same directory as the CMM jar file.
 
 3. Upon CMM application startup, a prompt will popup with 3 options : `Add On Imports`, `Start New Using Import`, `Don't Import`. The popup will look like the image below:
 
@@ -777,24 +778,24 @@ An example file import can be downloaded [here](https://github.com/AY2122S1-CS21
     
 ### 5.15 Exporting state of database
 
-CMM is able to export the current database as semicolon delimited CSV files. As such, there is no need for you to ensure that the formatting is right for furture use.
+CMM is able to export the current database as semicolon delimited CSV files. As such, there is no need for you to ensure that the formatting is right for future use.
 
 **Steps to Export data as CSV file:**
 
-1. Closing the application in any way would prompt user to export the current database <br>
+1. Closing the application in any way would prompt user to export the current database. <br>
 ![exportPopup](images/exportPopup.png)
 
-2. The CMM will export the database to the data file location
+2. The CMM will export the database to the data file location.
 
-3. Export file will have the following file name : `export[Date HH:MM:SS].csv` where date and time will follow your system settings 
+3. Export file will have the following file name : `export[Date HH:MM:SS].csv` where date and time will follow your system settings.
 
 **How to find the exported file:**
 
-1. Go to the directory that the CMM jar file is stored in and click on the 'data' folder <br>
+1. Go to the directory that the CMM jar file is stored in and click on the 'data' folder. <br>
 
     ![findingExport1](images/FindingExportFile1.png)
 
-2. You can find the exported CSV file here <br>
+2. You can find the exported CSV file here. <br>
 
     ![findingExport2](images/FindingExportFile2.png)
 
@@ -816,10 +817,54 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ## 6. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. Data found can be found at `[JAR file location]/data/addressbook.json`.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. 
+Data found can be found at `[JAR file location]/data/addressbook.json`.
+
+**Q**: How do I install java for my computer
+**A**: Head over to [Installing Java](#installing-java) to find the installation guide.
+
+**Q**: How do I know what version of Java I have running on my computer?
+**A**: Steps to checking your Java version can be found [here](#checking-java-version)
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. Command summary
+## 7. Troubleshooting
+
+### Installing Java 
+
+You can follow these guides to install Java 17:
+
+* [Installing Java 17 for Windows](https://java.tutorials24x7.com/blog/how-to-install-java-17-on-windows)
+* [Installing Java 17 for MacOS](https://java.tutorials24x7.com/blog/how-to-install-java-17-on-mac)
+* [Installing Java 17 on Linux](https://java.tutorials24x7.com/blog/how-to-install-openjdk-17-on-ubuntu-20-04-lts)
+
+### Checking java version
+
+1. Open the Command line.
+    * Windows: Type 'cmd' in the windows search bar and press enter
+    * MacOS: Use the keyboard shortcut **Command** + **Space** to bring up the search bar, then type in 'terminal' and press **enter**
+    * Linux: Use the keyboard shortcut **ctrl** + **alt** + **T**
+
+Click [here] for other ways to open the Command line if the above shortcuts do not work for you.
+
+Once done, you should see an interface similar to the screenshot below. <br>
+
+   ![Cli1](images/Cli1.png)
+
+2. Enter the command 'java -version' and press enter.  <br>
+
+   ![Cli2](images/Cli2.png)
+
+3. The java version will be displayed here. As long as you have a java version higher than 11, CMM will work as expected.
+
+   ![Cli3](images/Cli3.png)
+
+4. If you get a response similar to the one below, it is likely that you do not have java installed, or 
+did not properly set up Java after installing. Either way, you can head over to [Installing Java](#installing-java) 
+to find the steps to easily fix this problem.
+
+   ![Cli4](images/Cli4.png)
+
+## 8. Command summary
 
 Action | Format, Examples
 --------|------------------
