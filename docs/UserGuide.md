@@ -70,7 +70,7 @@ Categorise your clients into different address books to
     * [5.14 Edit data file](#514-edit-data-file)
 * [**6. Multiple Address Books Features**](#6-multiple-address-books-feature)
     * [6.1 Create new address book: ab create](#61-create-new-address-book--ab-create)
-    * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book-ab-delete--ab-delete)
+    * [6.2 Delete existing address book: ab delete](#62-delete-existing-address-book--ab-delete)
     * [6.3 Switch to different address book: ab switch](#63-switch-to-different-address-book--ab-switch)
     * [6.4 List all address book: ab list](#64-list-all-address-book--ab-list)
 * [**7. FAQ**](#7-faq)
@@ -245,7 +245,7 @@ The command view is where you will be able to input commands into LeadsForce. Th
    pressing `enter`, LeadsForce can filter out clients based on the tag that is chosen. Further details of
    the `filter` command can be found [here](#59-filter-current-list-by-keywords--filter)
 
-<img src="images/info_icon.png" width="30"/>Not liking the current colour scheme? LeadsForce offers 3 other darker themes for you to use, toggle the `theme` bar to change the colour scheme of the application.
+<img src="images/info_icon.png" width="30"/> Not liking the current colour scheme? LeadsForce offers 3 other darker themes for you to use, toggle the `theme` bar to change the colour scheme of the application.
 
 | Space theme | Twilight theme | Dark theme |
 | :--: | :--: | :--: |
@@ -268,8 +268,8 @@ The client list view consist of the list of clients from the user's address book
 <img src="images/ClientInfoView.png" width="500"/>
 </p>
 
-The client information view provides in-depth information about the client's attributes. Using
-the [`View`](#52-retrieve-particular-contact--view) command, users can view the client information in the client info
+The client information view provides in-depth information about a client and fully shows all their information without truncated values. Using
+the [`View`](#52-retrieve-particular-contact--view) command, users can fully view information of a particular client in the client info
 view.
 
 ### 4.4 Meeting Schedule View
@@ -299,15 +299,15 @@ used in the management of client information and client meetings.
 * We use `...` to indicate multiplicity. Parameters with `...` after them can be used multiple times, including zero times if it is also optional.
 e.g. `KEYWORD...` can be used as `John`, `alex david` etc. Whereas, `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters with prefix `e.g. n/NAME` can be in any order.
-e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, inputting `p/PHONE_NUMBER n/NAME` is also acceptable.
 * Prefix-less parameters must occur before parameters with prefix.
 e.g. if the command specifies `KEYWORD... p/PHONE_NUMBER`, then `p/PHONE_NUMBER KEYWORD...` is not acceptable.
 * If a parameter is expected only once in the command (i.e. not appended with `...`), but you specified it multiple times, only the last occurrence of the parameter will be taken.
 e.g. if you specify `p/12341234 p/56785678`, only` p/56785678` will be taken.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* Some attributes are hidden due to space constraints, e.g. `[<attribute>/VALUE]...` means that you can optionally (indicated by `[]`) provide one or more (indicated by `...`) parameters of the format `<attribute>/VALUE`.
-* For multiplicity of hidden attributes, please refer to this [section](#3-client-information).
+* Some attributes are not explicitly stated due to space constraints, e.g. `[<attribute>/VALUE]...` means that you can optionally (indicated by `[]`) provide one or more (indicated by `...`) parameters of the format `<attribute>/VALUE`.
+* For multiplicity of specific client attributes, please refer to this [section](#3-client-information).
 
 </div>
 
@@ -319,7 +319,7 @@ Adds a new client to the address book.
 | Format | `add n/CLIENT_NAME e/EMAIL [<attribute>/VALUE]...`|
 | :---: | --- |
 | **Example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 d/10000 r/4`|
-| <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added are as seen in the client information in the Client Info Section |
+| <img src="images/info_icon.png" width="50"/> | • A client must have minimally the name and email prefix filled during creation <br> • Any other prefixes are optional, except for Client ID as Client ID cannot be given to the client.  <br> • Prefixes that can be added can be found in the Client Info Section |
 
 **Expected Outcome:** <br>
 For instance, if the command `add n/Keith e/keithtan@ymail.com p/12345678 r/4` was used, a new client will be recorded in the client list view with the corresponding attributes. <br>
@@ -527,7 +527,7 @@ The command `ab create newAddressBook` creates a new address book as shown.
 </p>
 
 
-### 6.2 Delete existing address book: `ab delete`
+### 6.2 Delete existing address book : `ab delete`
 
 Delete an address book that currently exists.
 
