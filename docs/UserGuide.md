@@ -92,9 +92,9 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 ![User Interface](images/UiLabelled.png)
 
 1. **Menu Bar**: Contains links and keyboard shortcuts for navigating to other UI components.
-2. **Profile Window**: Opens the Profile Window, where users can see the details they have entered during profile set up.
-3. **Events Icon**: Switches to the events tab.
-4. **Command Box**: A text field for users to enter their commands and view previous commands command-line style.
+2. **Profile Window**: Opens the Profile Window, where you can see your profile details entered during set up.
+3. **Events Icon**: Switches to the Events tab.
+4. **Command Box**: A text field to enter their commands and view previous commands command-line style.
 5. **Result Box**: Displays the results of commands entered into the Command Box.
 6. **Tab Switcher**: Shows all tabs, highlights the current tab, and switches between tabs by clicking or keyboard shortcuts.
 7. **Contact List**: Shows all contacts in a scrollable list.
@@ -180,7 +180,6 @@ edit 1 n/John te/john_123 t/TA
 
 Edits the Profile linked to the Address Book.
 
-
 Format:
 
 ```
@@ -213,11 +212,11 @@ edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 
 </div>
 
-* Edits name, Telegram and GitHub fields of user's profile.
+* Edits the name, Telegram and GitHub fields of your profile.
 * If the prefix of the field to be edited is mentioned, then its parameters cannot be left empty.
 E.g. `edit profile te/` and `edit profile n/Bob te/` would result in an error because the updated Telegram handle 
 has not been specified. 
-* If multiple prefixes are missing parameters, then the user is notified of the first missing parameter.
+* If multiple prefixes are missing parameters, CohortConnect will notify you of the first missing parameter.
 E.g. `edit profile n/ te/` would result in an error saying that the name to be edited is missing.
 
 Examples:
@@ -457,7 +456,7 @@ import CS2103T.csv
 
 ### Setting a Contact as Favorite - `fav`
 
-Helps to set a particular Student Contact as a Favorite only if the contact has not been favorited.
+Sets a particular Student Contact as a Favorite, only if the contact has not been favorited.
 
 Format:
 
@@ -473,7 +472,7 @@ fav 1
 
 ### Setting a Contact as Unfavorite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavorite only if the contact has been favorited.
+Sets a particular Student Contact as an Unfavorite, only if the contact has been favorited.
 
 Format:
 
@@ -489,7 +488,7 @@ unfav 1
 
 ### Adding or removing tags from a contact - `tag`
 
-Allows user to directly add or remove tag(s) from a specific student contact.
+Directly adds or removes tag(s) from a specific student contact.
 
 Format:
 
@@ -503,7 +502,7 @@ tag <INDEX> a/<TAG_TO_ADD> [MORE_TAGS] r/<TAG_TO_REMOVE> [MORE_TAGS]
 <br/>
 • Index cannot be left blank, must be a positive integer and be specified after the `tag` keyword.<br>
 • To add or remove an event or module type tag, specify the tag type before the name of the tag. E.g. `tag 2 a/event-hackathon` (to add an event tag) or `tag 2 a/module-CS2103T` (to add a module tag) and likewise for remove. Tags specified without valid type before the name will be considered as general tags.<br>
-• Users can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
+• You can choose to only add tag(s), only remove tag(s) or add tag(s) and remove tag(s)
 
 </div>
 
@@ -550,7 +549,7 @@ help
 
 ### Listing All Student Contacts - `list`
 
-Lists all the Student Contacts present.
+Lists all the student contacts in the address book.
 
 Format:
 
@@ -560,7 +559,7 @@ list
 
 ### Deleting All Student Contacts - `clear`
 
-Deletes all the Student Contacts present.
+Deletes all the student contacts present in the address book.
 
 Format:
 
@@ -612,13 +611,13 @@ exit
 
 ## FAQ
 
-Q: On typing and running commands, the error message "XXXX" is shown, what shall I do?
+Q: On typing and running commands, the error message "XXXX" is shown, what should I do?
 
 A: Please **strictly** follow the command format to avoid such issues.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 | Feature | Command(s) |
 | ------ | ------ |
