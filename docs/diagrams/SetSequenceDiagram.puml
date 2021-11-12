@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuleTrackerParser" as ModuleTrackerParser LOGIC_COLOR
+participant ":SetCommandParser" as SetCommandParser LOGIC_COLOR
+participant "s:SetCommand" as SetCommand1 LOGIC_COLOR
+participant "s:SetCommand" as SetCommand2 LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "mc:Mc" as Mc MODEL_COLOR
+participant "ac:AcademicCalendar" as AcademicCalendar MODEL_COLOR
+end box
+
+[-> LogicManager : execute("set...")
+activate LogicManager
+
+LogicManager -> ModuleTrackerParser : parseCommand("set...")
+activate ModuleTrackerParser
+
+create SetCommandParser
+ModuleTrackerParser -> SetCommandParser
+activate SetCommandParser
+
+SetCommandParser --> ModuleTrackerParser
+deactivate SetCommandParser
+
+ModuleTrackerParser -> SetCommandParser : parse(arguments)
+activate SetCommandParser
+
+alt arguments contain Mc
+    create Mc
+    SetCommandParser -> Mc
+    activate Mc
+
+    Mc --> SetCommandParser : mc
+    deactivate Mc
+
+    create SetCommand1
+    SetCommandParser -> SetCommand1 : mc
+    activate SetCommand1
+
+    SetCommand1 --> SetCommandParser : s
+    deactivate SetCommand1
+else arguments contain AcademicYear and Semester
+    create AcademicCalendar
+    SetCommandParser -> AcademicCalendar
+    activate AcademicCalendar
+
+    AcademicCalendar --> SetCommandParser : ac
+    deactivate AcademicCalendar
+
+    create SetCommand2
+    SetCommandParser -> SetCommand2 : ac
+    activate SetCommand2
+
+    SetCommand2 --> SetCommandParser : s
+    deactivate SetCommand2
+end
+
+SetCommandParser --> ModuleTrackerParser : s
+deactivate SetCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SetCommandParser -[hidden]-> ModuleTrackerParser
+destroy SetCommandParser
+ModuleTrackerParser --> LogicManager : s
+deactivate ModuleTrackerParser
+
+
+ref over LogicManager, Model
+execute SetCommand
+
+end ref
+
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

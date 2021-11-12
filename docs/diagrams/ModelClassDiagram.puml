@@ -5,50 +5,73 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyModuleTracker <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
+Interface ReadOnlyUserInfo <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Interface ObservableList <<Interface>>
+Class ModuleTracker
+Class ReadOnlyModuleTracker
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class UserInfo
+Class ReadOnlyUserInfo
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
+Class UniqueModuleList
+Class Module
+Class Description
+Class Mc
+Class Title
+Class Code
+Class AcademicCalendar
+Class AcademicYear
+Class Semester
 Class Tag
+
+Class McProgress
+Class McProgressList
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModuleTracker .up.|> ReadOnlyModuleTracker
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+Model .right.> ObservableList
+ModelManager o-down-> "1" ModuleTracker
+ModelManager o-right-> "1" UserInfo
+ModelManager o-down-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+UserInfo .up.|> ReadOnlyUserInfo
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModuleTracker *--> "1" UniqueModuleList
+ModuleTracker *--> "1" UserInfo
+ModuleTracker *--> "1" McProgressList
+UniqueModuleList o--> "~* all" Module
+Module *--> Title
+Module *--> Code
+Module o--> Mc
+Module *--> Description
+Module o--> AcademicCalendar
+Module *--> "*" Tag
+AcademicCalendar *--> AcademicYear
+AcademicCalendar *--> Semester
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+UserInfo o--> AcademicCalendar
+UserInfo o--> Mc
 
-ModelManager -->"~* filtered" Person
+Title -[hidden]right-> Code
+Code -[hidden]right-> Description
+Description -[hidden]right-> Mc
+
+McProgressList *--> McProgress
+McProgressList o--> UserInfo
+McProgress o--> Mc
+
+ModelManager -down->"~* filtered" Module
 @enduml

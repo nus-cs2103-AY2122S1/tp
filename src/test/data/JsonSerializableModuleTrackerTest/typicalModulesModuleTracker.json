@@ -1,0 +1,103 @@
+{
+  "_comment": "ModuleTracker save file which contains the same Module values as in TypicalModules#getTypicalModuleTracker()",
+  "modules" : [ {
+    "code": "CS2103T",
+    "title": "Software Engineering",
+    "description": "Covers the main areas of software development",
+    "mc": 4,
+    "academicYear" : 0,
+    "semester" : 0,
+    "tagged": [ ]
+  }, {
+    "code": "CS2101",
+    "title": "Effective Communication for Computing Professionals",
+    "description": "equip students with the skills needed to communicate technical information",
+    "mc": 4,
+    "academicYear" : 0,
+    "semester" : 0,
+    "tagged": [ ]
+  }, {
+    "code": "GEQ1000",
+    "title": "Asking Questions",
+    "description": "introduces six dominant modes of questioning",
+    "mc": 4,
+    "academicYear" : 0,
+    "semester" : 0,
+    "tagged": [ "GE" ]
+  }, {
+    "code": "MA1521",
+    "title": "Calculus",
+    "description": "introduces calculus",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 1,
+    "tagged": [ ]
+  }, {
+    "code": "CS1231S",
+    "title": "Discrete math",
+    "description": "introduces discrete math",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 1,
+    "tagged": [ ]
+  }, {
+    "code": "CS2030S",
+    "title": "OOP",
+    "description": "OOP",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 2,
+    "tagged": [ ]
+  }, {
+    "code": "MA1101R",
+    "title": "Linear Algebra",
+    "description": "introduction to linear algebra",
+    "mc": 4,
+    "academicYear" : 2,
+    "semester" : 1,
+    "tagged": [ "math and science" ]
+  }, {
+    "code": "CS2102",
+    "title": "Database Systems",
+    "description": "introduction to relational algebra, database design",
+    "mc": 4,
+    "academicYear" : 2,
+    "semester" : 1,
+    "tagged": [ "breadth and depth" ]
+  }, {
+    "code": "IS1103",
+    "title": "Ethics in Computing",
+    "description": "introduction to ethics in the computing domain",
+    "mc": 4,
+    "academicYear" : 2,
+    "semester" : 1,
+    "tagged": [ "it professionalism" ]
+  }, {
+    "code": "GEA1000",
+    "title": "Quantitative Reasoning with Data",
+    "description": "essential data literacy skills to analyse data",
+    "mc": 4,
+    "academicYear" : 2,
+    "semester" : 1,
+    "tagged": [ "ge" ]
+  }, {
+    "code": "CS2040S",
+    "title": "Data Structures and Algorithms",
+    "description": "introduces students to the design and implementation of fundamental data structures and algorithms",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 3,
+    "tagged": [ "foundation" ]
+  }, {
+    "code": "CP2106",
+    "title": "Orbital",
+    "description": "platform for students to gain hands-on industrial experience for computing technologies",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 3,
+    "tagged": [ "ue" ]
+  } ]
+}
+
+
+

@@ -1,0 +1,64 @@
+@startuml
+
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuleTrackerParser" as ModuleTrackerParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "a:AcademicCalendar" as AcademicCalendar MODEL_COLOR
+participant ":ModuleInSpecificSemesterPredicate" as ModuleInSpecificSemesterPredicate MODEL_COLOR
+end box
+
+[-> LogicManager++ : execute("view y/2 s/1")
+
+LogicManager -> ModuleTrackerParser++ : parseCommand("view y/2 s/1")
+
+create ViewCommandParser
+ModuleTrackerParser -> ViewCommandParser++
+
+ViewCommandParser --> ModuleTrackerParser--
+
+ModuleTrackerParser -> ViewCommandParser++ : parse("y/2 s/1")
+
+create AcademicCalendar
+ViewCommandParser -> AcademicCalendar++
+
+AcademicCalendar --> ViewCommandParser-- : a
+
+create ModuleInSpecificSemesterPredicate
+ViewCommandParser -> ModuleInSpecificSemesterPredicate++
+
+ModuleInSpecificSemesterPredicate --> ViewCommandParser--
+
+create ViewCommand
+ViewCommandParser -> ViewCommand++
+ViewCommand -->ViewCommandParser-- : v
+
+ViewCommandParser --> ModuleTrackerParser-- : v
+destroy ViewCommandParser
+
+ModuleTrackerParser --> LogicManager-- : v
+
+LogicManager -> ViewCommand++ : execute()
+
+ViewCommand -> Model++ : updateFilteredModuleList( predicate )
+
+Model --> ViewCommand--
+
+create CommandResult
+ViewCommand -> CommandResult++
+CommandResult --> ViewCommand--
+
+ViewCommand --> LogicManager-- : commandResult
+
+destroy ViewCommand
+LogicManager -->[
+
+@enduml

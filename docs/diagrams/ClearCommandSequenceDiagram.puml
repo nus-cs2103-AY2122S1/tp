@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuleTrackerParser" as ModuleTrackerParser LOGIC_COLOR
+participant ":ClearCommandParser" as ClearCommandParser LOGIC_COLOR
+participant "c:ClearCommand" as ClearCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":ModuleInSpecificSemesterPredicate" as ModuleInSpecificSemesterPredicate MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clear y/1 s/1")
+activate LogicManager
+
+LogicManager -> ModuleTrackerParser : parseCommand("clear y/1 s/1")
+activate ModuleTrackerParser
+
+create ClearCommandParser
+ModuleTrackerParser -> ClearCommandParser
+activate ClearCommandParser
+
+ClearCommandParser --> ModuleTrackerParser
+deactivate ClearCommandParser
+
+ModuleTrackerParser -> ClearCommandParser : parse("y/1 s/1")
+activate ClearCommandParser
+
+create ClearCommand
+ClearCommandParser -> ClearCommand
+activate ClearCommand
+create ModuleInSpecificSemesterPredicate
+ClearCommand-> ModuleInSpecificSemesterPredicate :
+activate ModuleInSpecificSemesterPredicate
+ModuleInSpecificSemesterPredicate --> ClearCommand : predicate
+deactivate ModuleInSpecificSemesterPredicate
+ClearCommand --> ClearCommandParser : c
+deactivate ClearCommand
+
+ClearCommandParser --> ModuleTrackerParser : c
+deactivate ClearCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ClearCommandParser -[hidden]-> ModuleTrackerParser
+destroy ClearCommandParser
+
+ModuleTrackerParser --> LogicManager : c
+deactivate ModuleTrackerParser
+
+LogicManager -> ClearCommand : execute()
+activate ClearCommand
+
+ClearCommand -> Model : updateFilteredModuleList(predicate)
+activate Model
+
+Model --> ClearCommand
+deactivate Model
+
+ClearCommand -> Model : getFilteredModuleList()
+activate Model
+
+Model --> ClearCommand : filteredList
+deactivate Model
+loop every module in the list
+ClearCommand -> Model : setModule()
+activate Model
+Model --> ClearCommand
+deactivate Model
+end
+create CommandResult
+ClearCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearCommand
+deactivate CommandResult
+
+ClearCommand --> LogicManager : commandResult
+deactivate ClearCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

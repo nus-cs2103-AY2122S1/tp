@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+mainframe sd execute SetCommand
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "s:SetCommand" as SetCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+LogicManager -> SetCommand : execute()
+activate SetCommand
+
+alt Is set Semester
+SetCommand -> Model : setCurrentSemester(semester)
+activate Model
+
+Model --> SetCommand
+deactivate Model
+
+SetCommand -> Model : updateFilteredModuleList()
+activate Model
+
+Model --> SetCommand
+deactivate Model
+
+create CommandResult
+SetCommand -> CommandResult
+activate CommandResult
+CommandResult --> SetCommand
+deactivate CommandResult
+else Is set Mc goal
+
+SetCommand -> Model : setMcGoal(mcGoal)
+activate Model
+
+Model --> SetCommand
+deactivate Model
+
+create CommandResult
+SetCommand -> CommandResult
+activate CommandResult
+CommandResult --> SetCommand
+deactivate CommandResult
+end
+
+SetCommand --> LogicManager : commandResult
+deactivate SetCommand
+
+
+@enduml
