@@ -372,7 +372,7 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 [`delete` Command](#deleting-a-staff--delete)
 
 **Go to:**  
-[Table of Contents](#table-of-contents)
+[Table of Contents](#table-of-contents)  
 [Flag Legend](#flag-legend):triangular_flag_on_post:
 
 
