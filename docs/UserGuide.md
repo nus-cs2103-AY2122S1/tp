@@ -142,7 +142,19 @@ Clears all entries from Notor. This means that all your contacts, as well as the
   command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 </div>
 
-<div style="page-break-after: always;"></div>
+
+#### _Viewing help_
+
+Opens a help window with a summary of commands, as well as a link you can copy to get to this full user guide.
+
+| Format      | Short Format    |
+|-------------|-----------------|
+| `help`      | `h`             |
+
+
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
+</div>
 
 #### _Editing the General Note_
 Opens a note window to edit the General Note.
@@ -178,18 +190,6 @@ You can usually find the exported data in the home directory that contains Notor
 The data exported will be displayed as follows:
 
 <img src="images/Exported.png" alt="exported" width="80%" height="80%">
-
-#### _Viewing help_
-
-Opens a help window with a summary of commands, as well as a link you can copy to get to this full user guide.
-
-| Format      | Short Format    |
-|-------------|-----------------|
-| `help`      | `h`             |
-
-<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
-</div>
 
 <div style="page-break-after: always;"></div>
 
