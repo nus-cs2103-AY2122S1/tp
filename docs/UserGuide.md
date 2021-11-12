@@ -29,7 +29,7 @@ Key features of Notor are:
 
 <div style="page-break-after: always;"></div>
 
-### Using this User Guide
+## Using this User Guide
 
 If you're new to Notor, hop over to [Quick Start](#quick-start) to install and begin using it. If you already know what you want, use the Table of Contents to find the feature you are looking for, or the [Command Summary](#command-summary) to view all commands available. 
 
@@ -135,7 +135,7 @@ Displays a summary of commands, as well as a link you can copy to get to this fu
 
 | Format      | What the command does          |
 |-------------|--------------------------------|
-| `help`      | Opens the help panel           |
+| `help`      | Opens the help window          |
 | `h`         | Same as above                  |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
@@ -199,7 +199,7 @@ The data exported will be displayed as follows:
 The base functionality of Notor is allowing you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-  The following commands only work when persons are listed in Notor (visible in the list pane).
+  The following commands only work when persons are listed in Notor (visible in the List Pane).
 </div>
 
 #### _Creating a person_
@@ -223,7 +223,7 @@ Creates a person's contact card within Notor. When creating this person, you can
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-Notor minimizes what you need to remember. To add the person to a group, you need to have groups displayed in the list panel, so that you can select the group by its index instead of memorising and typing its name.
+Notor minimizes what you need to remember. To add the person to a group, you need to have groups displayed in the List Pane, so that you can select the group by its index instead of memorising and typing its name.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -379,7 +379,7 @@ Archives a single person by their index.
 | `p (INDEX) /ar`          | `p 2 /ar`          | Archives the person at index `2` |
 
 #### _Archiving All_
-Archives every person displayed in the list panel.
+Archives every person displayed in the List Pane.
 
 | Format   | Short Format |
 |----------|--------------|
@@ -464,7 +464,7 @@ Deletes an existing group at the index `INDEX` specified.
 | `g (INDEX) /d`         | `group 2 /d`      | Deletes the group at index `2`|
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-  You can only execute this command when groups are listed in the list pane.
+  You can only execute this command when groups are listed in the List Pane.
 </div>
 
 #### _Creating a subgroup_
@@ -519,23 +519,19 @@ It can also list archived persons: see [Archiving People](#archiving-people).
 
 #### _Listing all persons_
 
-Lists all persons in the list panel.
+Lists all persons in the List Pane.
 
-
-| Format       | What the command does |
-|--------------|-----------------------|
-| `person /list` | List all persons      |
-| `p /l`        | List all persons      |
+| Format         | Short Format |
+|----------------|--------------|
+| `person /list` | `p /l`       |
 
 #### _Listing all groups_
 
-Lists all groups in the list panel.
+Lists all groups in the List Pane.
 
-
-| Format      | What the command does          |
-|-------------|--------------------------------|
-| `group /list` | Lists all groups in list panel |
-| `g /l`        | Lists all groups in list panel |
+| Format         | Short Format |
+|----------------|--------------|
+| `group /list`  | `g /l`       |
 
 <div style="page-break-after: always;"></div>
 
