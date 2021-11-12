@@ -318,6 +318,8 @@ Format: `student -al STUDENT_INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * However, lessons of different students can still overlap. This may be disallowed in a future version.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
@@ -357,6 +359,8 @@ Format: `student -ae STUDENT_INDEX s/SUBJECT d/DATE_TIME`
 * `SUBJECT` takes in any input with at least one alphanumeric character.
 * `DATE_TIME` takes in a date and time in the following format: `yyyy-MM-dd HH:mm`.
 * There are currently no restrictions on `DATE_TIME`, please ensure that the exam dates are correct.
+
+<div style="page-break-after: always;"></div>
 
 Example:
 * `student -ae 1 s/Math d/2021-12-20 14:00` adds an exam with the subject name Math
@@ -401,6 +405,8 @@ Format: `group -a STUDENT_INDEX…​ n/GROUPNAME`
 * The student index refers to the student index number shown in the displayed Person Panel.
 * The student index **must be a positive integer** 1, 2, 3, …​
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `group -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
 
@@ -421,10 +427,10 @@ Format: `group -v GROUP_INDEX`
 * The group index refers to the group index number shown in the displayed Group Panel.
 * The group index **must be a positive integer** 1, 2, 3, …​
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `group -v 5` views the group specified at the index 5.
-
-<div style="page-break-after: always;"></div>
 
 #### Deleting a group: `group -d`
 
@@ -466,11 +472,11 @@ Format: `group -al GROUP_INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * However, lessons of different students or groups can still overlap. This may be disallowed in a future version.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Example:
 * `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
-
-<div style="page-break-after: always;"></div>
 
 #### Deleting a lesson from a group: `group -dl`
 
@@ -582,6 +588,8 @@ in the task panel. In that case, you can simply execute the `task -l` command.
 
 Format: `task -l`
 
+<div style="page-break-after: always;"></div>
+
 #### Assigning tasks to students: `task -as`
 
 Assigns a specific task to students’ task list.
@@ -596,8 +604,6 @@ Format: `task -as STUDENT_INDEX TASK_INDEX`
 
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
-
-<div style="page-break-after: always;"></div>
 
 #### Assigning tasks to groups: `task -ag`
 
@@ -619,6 +625,8 @@ Examples:
 Unassigns a specific task from students’ task list.
 
 Suppose you assigned a particular task to a student by accident, you can simply unassign the task by entering the command below. 
+
+<div style="page-break-after: always;"></div>
 
 Format: `task -unas STUDENT_INDEX TASK_INDEX`
 
@@ -643,8 +651,6 @@ Format: `task -unag GROUP_INDEX TASK_INDEX`
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
 
-<div style="page-break-after: always;"></div>
-
 #### Marking a task as done by student: `task -do`
 
 Marks that a student has done a task. 
@@ -660,6 +666,7 @@ Format: `task -do STUDENT_INDEX TASK_INDEX`
 Examples:
 * `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
 
+<div style="page-break-after: always;"></div>
 
 #### Marking a task as done by group: `task -dog`  (Coming soon)
 
@@ -688,8 +695,6 @@ Format: `task -undo STUDENT_INDEX TASK_INDEX`
 Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
 
-<div style="page-break-after: always;"></div>
-
 #### Marking a task as not done by group: `task -undog`  (Coming soon)
 
 Marks that a group has not done a task.
@@ -703,6 +708,8 @@ Examples:
 * `task -undog 2 4` marks the task at the index 4 as not done by the group at the index 2
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Others
 
