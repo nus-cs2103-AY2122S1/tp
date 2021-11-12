@@ -588,6 +588,8 @@ in the task panel. In that case, you can simply execute the `task -l` command.
 
 Format: `task -l`
 
+<div style="page-break-after: always;"></div>
+
 #### Assigning tasks to students: `task -as`
 
 Assigns a specific task to students’ task list.
@@ -602,8 +604,6 @@ Format: `task -as STUDENT_INDEX TASK_INDEX`
 
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
-
-<div style="page-break-after: always;"></div>
 
 #### Assigning tasks to groups: `task -ag`
 
@@ -649,8 +649,6 @@ Format: `task -unag GROUP_INDEX TASK_INDEX`
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
 
-<div style="page-break-after: always;"></div>
-
 #### Marking a task as done by student: `task -do`
 
 Marks that a student has done a task. 
@@ -693,8 +691,6 @@ Format: `task -undo STUDENT_INDEX TASK_INDEX`
 
 Examples:
 * `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
-
-<div style="page-break-after: always;"></div>
 
 #### Marking a task as not done by group: `task -undog`  (Coming soon)
 
