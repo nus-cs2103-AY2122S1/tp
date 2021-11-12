@@ -262,7 +262,7 @@ Examples:
 
 Command aliases: `del` `rm` `d`
 
-<img src="images/DeleteCommand.png" width="800px">
+<img src="images/DeleteCommand.png" width="700px">
 
 [Back to table of contents](#table-of-contents)
 
