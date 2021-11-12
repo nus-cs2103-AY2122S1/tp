@@ -1,0 +1,32 @@
+{
+  "userProfile": {
+    "name" : "User profile name not set yet",
+    "position" : "User profile position not set yet",
+    "department" : "User profile department not set yet",
+    "organization" : "User profile organization not set yet"
+  },
+  "activities": [],
+  "doctors": [],
+  "patients": [
+    {
+      "name": "Tom Joe",
+      "phone": "94842424",
+      "id": "P001",
+      "age": "35",
+      "bloodtype": "AB+",
+      "gender": "M",
+      "height": "175",
+      "weight": "76"
+    },
+    {
+      "name": "Johny Star",
+      "phone": "12345678",
+      "id": "P001",
+      "age": "25",
+      "bloodtype": "A+",
+      "gender": "M",
+      "height": "178",
+      "weight": "77"
+    }
+  ]
+}

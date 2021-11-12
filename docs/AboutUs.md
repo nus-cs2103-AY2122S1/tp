@@ -5,55 +5,54 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+# Project team
 
-## Project team
+## Simon Julian Lauw
 
-### John Doe
+<img src="images/simonjulianl.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://simonjulianl.github.io)]
+[[github](https://github.com/simonjulianl)]
+[[portfolio](team/simonjulianl.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Deliverables and Deadlines
 
-### Johnny Doe
+## Radian Krisno
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/radiankrisno.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/radiankrisno)]
+[[portfolio](team/radiankrisno.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Program structure, Release manager
 
-### Jean Doe
+## Yap Yuhang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yyhangz.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yyhangz)] [[portfolio](team/yyhangz.md)]
+
+* Role: Developer
+* Responsibilities: Code quality
+
+## Ng Seng Leng
+
+<img src="images/ngsengleng.png" width="200px">
+
+[[github](http://github.com/ngsengleng)]
+[[portfolio](team/ngsengleng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+## Rama Venkatesh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ramaven.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ramaven)]
+[[portfolio](team/ramaven.md)]
 
 * Role: Developer
 * Responsibilities: UI

@@ -1,0 +1,15 @@
+@startuml
+start
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+:Decide to find patient based on name;
+:User enters the command to find a patient with specified keywords;
+    if () then ([command format and flag are valid])
+        :Set UI to show the matching patient entries;
+    else ([else])
+        :Show error message in the feedback box;
+    endif
+stop
+@enduml
+

@@ -1,0 +1,101 @@
+{
+  "_comment": "AddressBook save file which contains the same values as in TypicalPersons and TypicalActivities",
+  "userProfile": {
+    "name" : "Dr Rosalind Soo",
+    "position" : "Associate Consultant",
+    "department" : "Department of Cardiology",
+    "organization" : "National University Hospital"
+  },
+  "activities": [
+    {
+      "id": "A001",
+      "title": "Meeting me",
+      "description": "today at somewhere",
+      "startTime": "15/12/2021 13:00",
+      "endTime": "15/12/2021 14:00"
+    },
+    {
+      "id": "A005",
+      "patientId": "P001",
+      "title": "Meeting me",
+      "description": "today at somewhere",
+      "startTime": "20/09/2022 13:00",
+      "endTime": "21/09/2022 15:00"
+    },
+    {
+      "id": "A003",
+      "title": "Paper Review",
+      "description": "someone is attending this",
+      "startTime": "16/12/2021 13:00",
+      "endTime": "16/12/2021 14:00"
+    },
+    {
+      "id": "A004",
+      "title": "New Year Party",
+      "description": "at someone house",
+      "startTime": "01/01/2022 13:00",
+      "endTime": "01/01/2022 20:00"
+    }
+  ],
+  "doctors": [
+    {
+      "name": "John doe",
+      "phone": "85355255",
+      "id": "D001",
+      "department": "Pediatrics"
+    },
+    {
+      "name": "Smith John",
+      "phone": "77777777",
+      "id": "D002",
+      "department": "ENT"
+    },
+    {
+      "name": "Joe Smith",
+      "phone": "55555555",
+      "id": "D003",
+      "department": "Xray"
+    }
+  ],
+  "patients": [
+    {
+      "name": "Dohn Joe",
+      "phone": "12345678",
+      "id": "P001",
+      "age": "40",
+      "blood type": "AB+",
+      "gender": "M",
+      "height": "176",
+      "weight": "86",
+      "medical conditions": [
+        "heart failure"
+      ]
+    },
+    {
+      "name": "Smith John",
+      "phone": "77777777",
+      "id": "P002",
+      "age": "40",
+      "bloodtype": "AB+",
+      "gender": "M",
+      "height": "176",
+      "weight": "86",
+      "medical conditions": [
+        "heart failure"
+      ]
+    },
+    {
+      "name": "Joe Smith",
+      "phone": "55555555",
+      "id": "P003",
+      "age": "35",
+      "bloodtype": "AB+",
+      "gender": "M",
+      "height": "176",
+      "weight": "86",
+      "medical conditions": [
+        "heart failure"
+      ]
+    }
+  ]
+}

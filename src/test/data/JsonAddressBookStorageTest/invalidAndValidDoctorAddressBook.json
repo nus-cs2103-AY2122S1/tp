@@ -1,0 +1,24 @@
+{
+  "userProfile": {
+    "name" : "User profile name not set yet",
+    "position" : "User profile position not set yet",
+    "department" : "User profile department not set yet",
+    "organization" : "User profile organization not set yet"
+  },
+  "activities": [],
+  "doctors": [
+    {
+      "name": "There's a star in my name * LOL",
+      "phone": "99999999",
+      "id": "D001",
+      "department": "Cardiology"
+    },
+    {
+      "name": "a valid name",
+      "phone": "99999999",
+      "id": "D002",
+      "department": "Cardiology"
+    }
+  ],
+  "patients": []
+}
