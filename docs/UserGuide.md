@@ -290,6 +290,7 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
 ### 5.1 Create New Contact : `add`
 
 Adds a new client to the address book.
@@ -341,6 +342,7 @@ Update the attributes of existing users using the prefix of the client’s attri
 | <img src="images/tip_icon.png" width="50"/> | • Multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several clients, you could simply use this feature to do so. |
 
 <div style="page-break-after: always;"></div>
+   
 **Expected Outcome:** <br>
 The corresponding information will be changed to the attributes specified by the client. This change can be seen in the client list view. For instance, the command `edit 3 p/12345678 r/5` will change client's 3 information as such. <br>
 <p align="center" >
@@ -540,6 +542,7 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 | --- | --- |
 | <img src="images/ExpectedSwitchAbCommand.png" width="300"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="300"/> |
 
+<div style="page-break-after: always;"></div>
 ### 6.4 List all address book : `ab list`
 
 List all the name of all the existing address books.
