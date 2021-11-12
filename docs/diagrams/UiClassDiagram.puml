@@ -9,10 +9,10 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
+Class StatsDisplay
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class AnimeListPanel
+Class AnimeCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,27 +32,26 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" AnimeListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow --> "1" StatsDisplay
 
-PersonListPanel -down-> "*" PersonCard
+AnimeListPanel -down-> "*" AnimeCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+AnimeListPanel --|> UiPart
+AnimeCard --|> UiPart
 StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+StatsDisplay --|> UiPart
 
-PersonCard ..> Model
+AnimeCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
+StatsDisplay -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 

@@ -5,55 +5,56 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `AniList@nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Cui Langyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/clyveycui.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/clyveycui)]
+[[portfolio](team/clyveycui.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Overall project coordination
 
-### Johnny Doe
+### Chua Min Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/auhc99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/auhc99)]
+[[portfolio](team/auhc99.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Looks after code quality, ensures adherence to coding standards
 
-### James Doe
+### Ryan Chung Yi Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nekrozqliphort.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/NekrozQliphort)]
+[[portfolio](team/nekrozqliphort.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Ensuring quality of various project documents
+
+### Luo Dan
+
+<img src="images/luodan01.png" width="200px">
+
+[[github](http://github.com/luodan01)]
+[[portfolio](team/luodan01.md)]
+
+* Role: Developer
+* Responsibilities: Versioning the code, maintaining the code repository
+
+### Muhammad Faruq
+
+<img src="images/muhammad-faruq.png" width="200px">
+
+[[github](http://github.com/muhammad-faruq)]
+[[portfolio](team/muhammad-faruq.md)]
+
+* Role: Developer
+* Responsibilities: Defining, assigning, tracking project tasks. Managing UI matters.

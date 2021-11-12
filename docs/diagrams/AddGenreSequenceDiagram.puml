@@ -1,0 +1,93 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AnimeListParser" as AnimeListParser LOGIC_COLOR
+participant ":GenreCommandParser" as GenreCommandParser LOGIC_COLOR
+participant "d:GenresDescriptor" as GenresDescriptor LOGIC_COLOR
+participant "c:GenreAddCommand" as GenreAddCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("genre 1 c/add g/action g/fantasy")
+activate LogicManager
+
+LogicManager -> AnimeListParser : parseCommand("genre 1 ...")
+activate AnimeListParser
+
+create GenreCommandParser
+AnimeListParser -> GenreCommandParser
+activate GenreCommandParser
+
+GenreCommandParser --> AnimeListParser
+deactivate GenreCommandParser
+
+AnimeListParser -> GenreCommandParser : parse("1 c/add ...")
+activate GenreCommandParser
+
+create GenresDescriptor
+GenreCommandParser -> GenresDescriptor
+activate GenresDescriptor
+
+GenresDescriptor --> GenreCommandParser : d
+deactivate GenresDescriptor
+
+GenreCommandParser -> GenresDescriptor : setGenres(...)
+activate GenresDescriptor
+
+GenresDescriptor --> GenreCommandParser
+deactivate GenresDescriptor
+
+create GenreAddCommand
+GenreCommandParser -> GenreAddCommand : GenreAddCommand(..., d)
+activate GenreAddCommand
+
+GenreAddCommand --> GenreCommandParser : c
+deactivate GenreAddCommand
+
+GenreCommandParser --> AnimeListParser : c
+deactivate GenreCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+GenreCommandParser -[hidden]-> AnimeListParser
+destroy GenreCommandParser
+
+AnimeListParser --> LogicManager : c
+deactivate AnimeListParser
+
+LogicManager -> GenreAddCommand : execute()
+activate GenreAddCommand
+
+GenreAddCommand -> Model : setAnime(oldAnime, updated)
+activate Model
+
+Model --> GenreAddCommand
+deactivate Model
+
+GenreAddCommand -> Model : updateFilteredAnimeList(PREDICATE_SHOW_ALL_ANIME)
+activate Model
+
+Model --> GenreAddCommand
+deactivate Model
+
+create CommandResult
+GenreAddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GenreAddCommand
+deactivate CommandResult
+
+GenreAddCommand --> LogicManager : result
+deactivate GenreAddCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+GenreAddCommand  -[hidden]-> AnimeListParser
+destroy GenreAddCommand
+destroy GenresDescriptor
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

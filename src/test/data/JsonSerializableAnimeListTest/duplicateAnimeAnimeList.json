@@ -1,0 +1,12 @@
+{
+  "anime": [ {
+    "name": "Attack on Titan",
+    "episode" : "0",
+    "status" : "watching",
+    "genres": [ "action" ]
+  }, {
+    "name" : "Attack on Titan",
+    "episode" : "0",
+    "status" : "watching"
+  } ]
+}

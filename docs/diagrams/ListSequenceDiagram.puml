@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AnimeListParser" as AnimeListParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "ls:ListCommand" as ListCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant ":TabOption" as TabOption UI_COLOR
+end box
+
+[-> LogicManager : execute(list s/towatch)
+activate LogicManager
+
+LogicManager -> AnimeListParser : parseCommand(list s/towatch)
+activate AnimeListParser
+
+create ListCommandParser
+
+AnimeListParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> AnimeListParser
+deactivate ListCommandParser
+
+
+AnimeListParser --> ListCommandParser : parse("s/towatch")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand
+activate ListCommand
+
+
+ListCommand --> ListCommandParser : ls
+deactivate ListCommand
+
+ListCommandParser --> AnimeListParser : ls
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> AnimeListParser
+destroy ListCommandParser
+
+AnimeListParser --> LogicManager : ls
+deactivate AnimeListParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> Model : setCurrentTab(t)
+activate Model
+
+Model -> TabOption : setCurrentTab(t)
+activate TabOption
+
+TabOption --> Model
+deactivate TabOption
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand : result
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommand -[hidden]-> AnimeListParser
+destroy ListCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

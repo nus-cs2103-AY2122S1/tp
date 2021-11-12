@@ -4,18 +4,17 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+AnimeList *-right-> "1" UniqueAnimeList
+AnimeList *-right-> "1" UniqueGenreList
+UniqueGenreList -[hidden]down- UniqueAnimeList
+UniqueGenreList -[hidden]down- UniqueAnimeList
 
-UniqueTagList *-right-> "*" Tag
-UniquePersonList -right-> Person
+UniqueGenreList *-right-> "*" Genre
+UniqueAnimeList -right-> Anime
 
-Person -up-> "*" Tag
+Anime -up-> "*" Genre
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Anime *--> Name
+Anime *--> Episode
+Anime *--> Status
 @enduml
