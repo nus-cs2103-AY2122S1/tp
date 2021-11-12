@@ -18,8 +18,8 @@ TAB enables you to keep track of your student and lesson information, schedule, 
 TAB is a Command-line Interface (CLI) app, meaning that you tell TAB what to do using commands in the form of lines of text.
 
 If you can type fast, the CLI will enable you to accomplish your tasks much faster. 
-For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along, 
-and this guide will get you started and speeding through your administrative tasks in no time.
+For a new user, the commands will take some getting used to, compared to using forms and drop-down menus, but worry not as TAB has in-app help and suggestions to guide you along. 
+Moreover, this guide will get you started and speeding through your administrative tasks in no time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -204,7 +204,7 @@ Help is just a moment away when you use TAB.
 
 #### Viewing the help window: `help`
 
-This command pops open a help window that includes a summary of our commands, as well as a link to access this user guide page.
+This command pops open a help window that includes a summary of our commands, as well as a link to access the user guide page.
 
 Format: `help`
 
