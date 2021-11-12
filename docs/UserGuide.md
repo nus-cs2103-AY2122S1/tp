@@ -228,8 +228,11 @@ Adds a person at the given index `INDEX` to a specified group. To add a person t
 | `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 2 /a g:Alumni sg:Class 2010`      | Add the person at index `4` to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
-Notor considers people within a subgroup as also being within the group that contains it (the supergroup). Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
+Notor considers people within a subgroup as also being within the group that contains it. Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
 </div>
+
+<div style="page-break-after: always;"></div>
+
 
 #### _Deleting a person_
 
@@ -243,8 +246,6 @@ Removes the contact and the data saved for a person from Notor.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 Data will be deleted and **will not be saved**. Be careful when deleting people. You may prefer to [archive them](#archiving-people) or make a backup of your data first by [exporting the data](#exporting-data).
 </div>
-
-<div style="page-break-after: always;"></div>
 
 #### _Editing a person_
 
@@ -261,7 +262,7 @@ Edits the data of the person at the index `INDEX` in the List Pane and replaces 
   * `NAME`: Name of the person.
   * `PHONE`: Phone number of the person.
   * `EMAIL`: Email of the person.
-* You cannot change the name of the person to the same name as someone else in the group.
+* You cannot edit the name of the person to the same name as someone else in Notor.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -616,8 +617,6 @@ directly by editing that data file.
 If your changes to the data file makes its format invalid, Notor will 
 discard all data and start with an empty data file at the next run.
 </div>
-
---------------------------------------------------------------------------------------------------------------------
 
 <a name = "tips-on-using-notor"></a>
 
