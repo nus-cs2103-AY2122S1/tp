@@ -852,7 +852,7 @@ for other ways to open the Command line if the above shortcuts do not work for y
 
     <div markdown="block" class="alert alert-info">
 
-    **:information_source: Note:** The screenshots below uses the Windows Command Line as examples. However, the Command Lines for 
+    **:information_source: Note:** The screenshots below use the Windows Command Line as examples. However, the Command Lines for 
     the other Operating Systems should be similar.
     </div>
 
