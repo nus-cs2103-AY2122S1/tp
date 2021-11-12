@@ -31,7 +31,7 @@ conveniently bring you to the [table of content](#table-of-contents)!
 
 # [**1. How To Use This Guide**](#table-of-contents)
 
-This user guide provides information to assist you in using **GoMedic** based on which features you are most interested in. 
+This user guide provides information to assist you in using **GoMedic** based on the features that you are most interested in. 
 The user guide is sectioned such that each chapter [has](#table-of-contents) an 
 * **Overview** : Explains what the feature does and provides some important reminders about the notations used in that particular chapter
 * **Features** : List of commands available within that section 
@@ -40,7 +40,7 @@ The user guide is sectioned such that each chapter [has](#table-of-contents) an
   * **Examples** : Tutorial with pictures on how to use the commands. 
 
 <div markdown="span" class="alert alert-info">
-:bulb: **Tip:** You can always go back to the table of contents page and just click on which feature you are currently interested in, as each feature has a very comprehensive tutorial !
+:bulb: **Tip:** You can always refer back to the table of contents page and click on the feature that you are interested in. Each feature has a very comprehensive tutorial!
 </div>
 
 To get the most out of this user guide, it would be best to understand the terminologies and notations that would often be used in this user guide. 
@@ -100,11 +100,11 @@ return some suggestions on the closest commands that you can choose from!
 
 3. Should you enter a **valid** command in a **valid** format, but with invalid parameters, 
 **GoMedic** would flag the invalid parameter in the feedback box.
-   * Invalid parameters can be caused by constraints' violation, such as inputting blood type X for a patient, where such blood type does not exist.
-   * If multiple parameters are invalid, GoMedic only flags the first invalid parameter so as to not overwhelm you with the error messages!
+   * Invalid parameters can be caused by constraints' violation. For e.g., inputting `X` for a patient's `BLOOD_TYPE` field will cause a violation to occur because `X` is not a valid blood type.
+   * If multiple parameters are invalid, GoMedic only flags the first invalid parameter, so that the user is not overwhelmed by the error messages!
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** To fix the multiple parameters' errors in a command, you can fix them one by one based on the feedback that **GoMedic** give and use the [navigation](#41-navigating-past-commands) feature to get the previous command!
+:bulb: **Tip:** To fix the multiple parameters' errors in a command, you can fix them in succession, based on the feedback given by **GoMedic**, and by making use of the [navigation](#41-navigating-past-commands) feature to retrieve previous commands!
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -137,7 +137,7 @@ return some suggestions on the closest commands that you can choose from!
     * **`clear`** : Deletes all contacts including patients, doctors, and activities.
 
     * **`exit`** : Exits the app.
-5. **Address Book, GoMedic Address Book, and GoMedic** refers to the same term, which is just the application itself.
+5. **Address Book, GoMedic Address Book, and GoMedic** refers to the same term, which is the application itself.
 
 <div style="page-break-after: always;"></div>
 
@@ -148,10 +148,10 @@ return some suggestions on the closest commands that you can choose from!
 ### [3.1.1 Overview](#table-of-contents)
 Patients related features allow you to store, edit, view, and list patients.
 
-Using patients, you can store your patients' details and track all medical conditions that your patients are
+Using these patient related features, you can store your patients' details and track all medical conditions that your patients are
 diagnosed with.
 
-Each patient is **uniquely** identified by its `PATIENT_ID` in the form of `PXXX` where `XXX` is a 3-digit integer.
+Each patient is **uniquely** identified by his / her `PATIENT_ID` in the form of `PXXX`, where `XXX` is a 3-digit integer.
 Therefore, two patients with exactly same `NAME`, `PHONE_NUMBER`, `AGE`, `GENDER`, `HEIGHT`, `WEIGHT`, `BLOOD_TYPE`, 
 and `MEDICAL_CONDITIONS` with different `PATIENT_ID` are considered distinct.
 
@@ -216,8 +216,8 @@ the command box.
 
 ![tut-patient-2](images/patientug/tut_patient_2.png)
 
-&#8291;3. If there is any error, the command would turn red as indicated by **1** and the feedback would be given in the feedback box at **2**.
-In this case, the error is because we are putting invalid gender. Fix the issue and press enter again!
+&#8291;3. If there are any errors, the command would turn red as indicated by **1** and the feedback would be given in the feedback box at **2**.
+In this case, the error is caused by the invalid gender input in the command. Fix the issue and press enter again!
 Now the command should work correctly!
 
 ![tut-patient-3](images/patientug/tut_patient_error.png)
@@ -239,8 +239,8 @@ Parameters    |  Explanation                                      | Constraints 
 `PATIENT_ID`  | the Patient Id as shown by the Patient table  (case-insensitive)    | Must be in the form of `PXXX` / `pXXX` where `XXX` is 3-digit integer. For the full information, please refer to [this](#311-overview) |
 
 <div markdown="span" class="alert alert-info">
-:bulb: **Tip:** Patient ID can be obtained by listing all the patients using [`list t/patient` command](#314-list-all-patients-list-tpatient)
-or search the specific patient using [`find t/patient` command](#343-finding-a-patient-through-a-keyword-find-tpatient).
+:bulb: **Tip:** `PATIENT_ID` can be obtained by listing all the patients using [`list t/patient` command](#314-list-all-patients-list-tpatient)
+or searching for specific patients using [`find t/patient` command](#343-finding-a-patient-through-a-keyword-find-tpatient).
 </div>
 
 **Example:**
@@ -316,11 +316,11 @@ Ensure that the edited patient, as identified by his/her `PATIENT_ID`, exists!
 
 ![tut-edit-patient-1](images/patientug/tut_edit_patient_1.png)
 
-&#8291;2. Press `Enter` and the success confirmation should be shown by the feedback box as shown by **1**. As shown by **2**, patient `P002` has his information updated!
+&#8291;2. Press `Enter` and the success confirmation should be displayed in the feedback box as seen in **1**. As shown by **2**, patient `P002` has his information updated!
 
 ![tut-edit-patient-2](images/patientug/tut_edit_patient_2.png)
 
-&#8291;3. If there are any errors, the command would turn red as shown by **1**. Also, feedback about the error will be shown by the feedback box, as seen by **2**.
+&#8291;3. If there are any errors, the command would turn red as shown by **1**. Also, feedback about the error will be displayed in the feedback box, as seen by **2**.
 In this case, the error is caused by an invalid gender supplied to the `GENDER` parameter. Fix the issue and the command should work correctly now!
 
 ![tut-edit-patient-error](images/patientug/tut_edit_patient_error.png)
@@ -467,7 +467,7 @@ Parameter     |  Explanation                                      | Constraint  
 `DOCTOR_ID`   | the Doctor Id as shown by the Doctor table (case-insensitive)       | Must be in the form of `DXXX` / `dXXX` where `XXX` is 3-digit integer. For the full information, please refer to [this](#321-overview) |
 
 <div markdown="span" class="alert alert-info">
-:bulb: **Tip:** Doctor ID can be obtained by listing all the doctors using [`list t/doctor` command](#324-list-all-doctors-list-tdoctor) 
+:bulb: **Tip:** `DOCTOR_ID` can be obtained by listing all the doctors using [`list t/doctor` command](#324-list-all-doctors-list-tdoctor) 
 or searching for the specific doctor using [`find t/doctor` command](#342-finding-a-doctor-through-a-keyword-find-tdoctor).  
 </div>
 
@@ -484,7 +484,7 @@ Check the doctor table. The doctor, identified by his/her deleted ID, should not
 
 ![tut-delete-doctor-2](images/doctorug/tut_delete_doctor_2.png)
 
-&#8291;3. If there are any errors, the command would turn red as shown by **1**. Also, feedback about the error is displayed in the  
+&#8291;3. If there are any errors, the command would turn red as shown by **1**. Also, feedback about the error is displayed in the 
 feedback box, as seen by **2**. Fix the issue and the command should work correctly now!
 
 ![tut-delete-doctor-error](images/doctorug/tut_delete_doctor_error.png)
@@ -580,8 +580,8 @@ Format: `clear t/doctor`
 
 Activities related features allow you to add, delete, edit and list events and appointments with patients. 
 
-Using activities, you can track down your daily, weekly or even monthly schedules. **GoMedic** will also automatically 
-check for any conflicting activities and notify you immediately everytime you try to create a new activity or update 
+Using these activities related features, you can track your daily, weekly or even monthly schedules. **GoMedic** will also automatically 
+check for any conflicting activities and notify you everytime you try to create a new activity or update 
 an existing activity.
 
 <div markdown="block" class="alert alert-info">
@@ -627,7 +627,7 @@ as the table is sorted by `ACTIVITY_ID` by default.
 
 <a name="activity_check"></a>
 
-* GoMedic will check for any partial or full **conflicting activities** and notify you immediately if there are any. Should there be any,
+* GoMedic will check for any partial or fully **conflicting activities** and notify you immediately if there are any. Should there be any,
 the new activity will not be added. 
 * GoMedic will also check for any invalid parameters as specified [here](#activity_constraint). Should there be any, the new activity will not be added. 
 
@@ -1189,11 +1189,11 @@ If the format for the user profile is invalid, the preset user profile will be u
 
 :bulb: **Tip:** You can reorder the column to suit your preference by dragging the title, as shown by the following picture.
 
-&#8291;1. Left click and hold any header of the table, the column would turn blue, indicating that it can be dragged.
+&#8291;1. Left click and hold any header of the table. The column would turn blue, indicating that it can be dragged.
 
 ![tut-reorder](images/activityug/tut_reorder_col.png)
 
-&#8291;2. Drag the header into the location of other columns as indicated as **1**, the column would be inserted at the line indicated by **2**.
+&#8291;2. Drag the header into the location of other columns as indicated as **1**. The column would be inserted at the line indicated by **2**.
 
 ![tut-reorder2](images/activityug/tut_reorder_col2.png)
 
