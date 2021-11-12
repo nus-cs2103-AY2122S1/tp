@@ -673,10 +673,11 @@ Refer to the details of the general commands [here](#general-command).
 
 Action     | Format   | Short Format
 -----------|----------|----------
-**Help**   | `help`   | `h`
-**Exit**   | `exit`   | `e`
 **Clear**  | `clear`  | `c`
+**Exit**   | `exit`   | `e`
 **Export** | `export` | `exp`
+**Help**   | `help`   | `h`
+**Note**   | `note`   | `n`
 
 <div style="page-break-after: always;"></div>
 
