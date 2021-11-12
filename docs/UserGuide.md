@@ -257,6 +257,7 @@ The client information view provides in-depth information about a client and ful
 the [`View`](#52-retrieve-particular-contact--view) command, users can fully view information of a particular client in the client info
 view.
 
+<div style="page-break-after: always;"></div>
 ### 4.4 Meeting Schedule View
 
 <p align="center">
@@ -350,7 +351,7 @@ The corresponding information will be changed to the attributes specified by the
 <p align="center" >
 <img src="images/ExpectedEditCommand.png" width="500"/>
 </p>
-
+<div style="page-break-after: always;"></div>
 ### 5.4 Delete particular contact : `delete`
 
 Deletes an existing client from the address book using their client id.
@@ -375,7 +376,8 @@ Shows the full list of all clients in the address book.
 
 **Expected Outcome:** <br>
 All clients in an address book would be shown in the client view list.
-
+   
+<div style="page-break-after: always;"></div>
 ### 5.6 Sort Contacts : `sort`
 
 Sorts clients in order based on the inputted attribute. Clients can be sorted in ascending or descending order, and is
@@ -411,6 +413,7 @@ For instance, using `schedule 30-11-2021` will produce the following result. <br
 | :---: | :---: |
 | <img src="images/ExpectedScheduleCommand.png" width="400"/> | <img src="images/ExpectedScheduleCommand_AFTER.png" width="400"/> |
 
+<div style="page-break-after: always;"></div>
 ### 5.8 Locating clients by keywords : `search`
 
 Finds clients whose contacts match with the given keywords.
@@ -427,6 +430,7 @@ For instance, using `search Alex` will produce the following result. <br>
 | :---: | :---: |
 | <img src="images/ExpectedSearchCommand.png" width="400"/> | <img src="images/ExpectedSearchCommand_AFTER.png" width="400"/> |
 
+<div style="page-break-after: always;"></div>
 ### 5.9 Filter current list by keywords : `filter`
 
 Filters the current list by the given keywords.
@@ -510,10 +514,10 @@ Create a new address book by the name provided and switches to it.
 The command `ab create newAddressBook` creates a new address book as shown.
 
 <p align="center">
-<img src="images/ExpectedCreateAddressBook.png" width="600"/>
+<img src="images/ExpectedCreateAddressBook.png" width="500"/>
 </p>
 
-
+<div style="page-break-after: always;"></div>
 ### 6.2 Delete existing address book : `ab delete`
 
 Delete an address book that currently exists.
@@ -540,8 +544,7 @@ For instance, using `ab switch youngadults` when on the `newAddressBook` address
 | --- | --- |
 | <img src="images/ExpectedSwitchAbCommand.png" width="500"/> | <img src="images/ExpectedSwitchAbCommand_AFTER.png" width="500"/> |
 
-
-
+<div style="page-break-after: always;"></div>
 ### 6.4 List all address book : `ab list`
 
 List all the name of all the existing address books.
