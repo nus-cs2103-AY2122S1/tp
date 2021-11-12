@@ -829,7 +829,7 @@ Data found can be found at `[JAR file location]/data/addressbook.json`.
 
 ## 7. Troubleshooting
 
-### Installing Java 
+### 7.1 Installing Java 
 
 You can follow these guides to install Java 17:
 
@@ -837,14 +837,19 @@ You can follow these guides to install Java 17:
 * [Installing Java 17 for MacOS](https://java.tutorials24x7.com/blog/how-to-install-java-17-on-mac)
 * [Installing Java 17 on Linux](https://java.tutorials24x7.com/blog/how-to-install-openjdk-17-on-ubuntu-20-04-lts)
 
-### Checking java version
+### 7.2 Checking java version
 
 1. Open the Command line.
+
     * Windows: Type 'cmd' in the windows search bar and press enter
+   
     * MacOS: Use the keyboard shortcut **Command** + **Space** to bring up the search bar, then type in 'terminal' and press **enter**
+   
     * Linux: Use the keyboard shortcut **ctrl** + **alt** + **T**
 
-    Click [here] for other ways to open the Command line if the above shortcuts do not work for you.
+
+    Click [here](https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955) 
+for other ways to open the Command line if the above shortcuts do not work for you.
 
     Once done, you should see an interface similar to the screenshot below. <br>
 
@@ -857,8 +862,9 @@ You can follow these guides to install Java 17:
 3. The java version will be displayed here. As long as you have a java version higher than 11, CMM will work as expected.
 
    ![Cli3](images/Cli3.png)
-
-4. If you get a response similar to the one below, it is likely that you do not have java installed, or 
+    <div style="page-break-after: always;"></div>
+    
+5. If you get a response similar to the one below, it is likely that you do not have java installed, or 
 did not properly set up Java after installing. Either way, you can head over to [Installing Java](#installing-java) 
 to find the steps to easily fix this problem.
 
