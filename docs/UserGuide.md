@@ -239,6 +239,7 @@ Command aliases: `update` `e`
 
 ***
 
+<div style="page-break-after: always;"></div>
 #### Deleting a contact / contacts: `delete` <a name="delete"></a>
 
 Delete the specified contact(s) from contHACKS.
