@@ -1184,13 +1184,13 @@ Format: `redo`
 Example:
 1. Valid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. The name of the first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. The name of the first student returns to the original name before `edit` command.
    3. `day` displays the calendar for today. This command **does not modify any data**.
    4. `redo` redoes the edit command. The name of the first student will be `Joe Doe` now.
    
 2. Invalid Redo command
    1. `edit 1 n/Joe Doe` modifies name of the first student.
-   2. `undo` undoes the modification. The name of the first student returns to original name before `edit` command.
+   2. `undo` undoes the modification. The name of the first student returns to the original name before `edit` command.
    3. `ledit 2 1 date/3 Nov 2021` modifies the start date of the first lesson of the second student. This command **modifies data**.
    4. `redo` is invalid. TAB shows that there are no commands to be redone.
     
