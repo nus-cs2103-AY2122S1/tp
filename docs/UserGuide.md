@@ -498,12 +498,13 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 ### 4.12 Retrieving past commands
 
-Shows the previous commands run on **Uni-Fy**. The user can either type the command or use the up arrow key to go through all the pass commands.
+Shows the previous commands run on **Uni-Fy**. The user can either type the command or use arrow keys to go through all the past commands.
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `/prev` or &#8593;
+- `/prev` or &#8593; for previous command
+- `/next` or &#x2193; for next command
 
 </div>
 
@@ -521,7 +522,7 @@ Shows a message explaining how to access the help page.
 
 **:clipboard: Format:**<br>
 
-- <code>list</code>
+- <code>help</code>
 </div>
 
 ![help message](images/helpMessage.png)
