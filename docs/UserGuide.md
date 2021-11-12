@@ -81,7 +81,6 @@ below should appear in a few seconds. Note how the app contains some sample data
 
 6. Type the command in the command box and press Enter to execute it. e.g., typing "help" and pressing `Enter` will 
 open the help window. You can find the commands that CallMeMaybe supports below:
-
    - `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named John Doe to the CMM database
    
    - `list` : Lists all contacts
