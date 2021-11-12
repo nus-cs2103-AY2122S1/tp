@@ -1,0 +1,10 @@
+{
+  "tasks": [ {
+    "name" : "Task with invalid date",
+    "time" : "14:00",
+    "date" : "2021-01-32",
+    "state" : "TODO",
+    "priority" : "HIGH",
+    "tagged" : [ "CS2100" ]
+  } ]
+}

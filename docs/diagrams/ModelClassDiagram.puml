@@ -5,50 +5,47 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyUniFy <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class UniFy
+Class ReadOnlyUniFy
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class UniqueTaskList
+Class Task
 Class Name
-Class Phone
+Class Time
+Class Date
 Class Tag
-
+Class State
+Class Priority
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+UniFy .up.|> ReadOnlyUniFy
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyUniFy
+ModelManager -left-> "1" UniFy
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+UniFy *--> "1" UniqueTaskList
+UniqueTaskList --> "~* all" Task
+Task *--> Name
+Task *--> Time
+Task *--> Date
+Task *--> "*" Tag
+Task *--> State
+Task *--> Priority
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Task
 @enduml

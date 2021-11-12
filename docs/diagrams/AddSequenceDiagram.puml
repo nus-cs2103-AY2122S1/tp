@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniFyParser" as UniFyParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add n/Test d/2021-10-10 tg/CS2103")
+activate LogicManager
+
+LogicManager -> UniFyParser : parseCommand("add n/Test d/2021-10-10 tg/CS2103")
+activate UniFyParser
+
+create AddCommandParser
+UniFyParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> UniFyParser
+deactivate AddCommandParser
+
+UniFyParser -> AddCommandParser : parse("n/Test d/2021-10-10 tg/CS2103")
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(task)
+activate AddCommand
+
+AddCommand --> AddCommandParser : a
+deactivate AddCommand
+
+AddCommandParser --> UniFyParser : a
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> UniFyParser
+destroy AddCommandParser
+
+UniFyParser --> LogicManager : a
+deactivate UniFyParser
+
+LogicManager -> AddCommand : execute(model)
+activate AddCommand
+
+AddCommand -> Model : hasTask(toAdd)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+AddCommand -> Model : addTask(toAdd)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

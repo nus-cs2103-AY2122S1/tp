@@ -10,6 +10,36 @@
     -fx-opacity: 0.9;
 }
 
+.label-padded {
+    -fx-font-size: 9pt;
+    -fx-padding: 1 7 1 7;
+    -fx-background-radius: 3;
+}
+
+.state-TODO {
+    -fx-background-color: #009e3a
+}
+
+.state-DONE {
+    -fx-background-color: #00649e
+}
+
+.state-OVERDUE {
+    -fx-background-color: #9e0035
+}
+
+.priority-LOW {
+    -fx-background-color: #009e84
+}
+
+.priority-MEDIUM{
+    -fx-background-color: #9e8900
+}
+
+.priority-HIGH {
+    -fx-background-color: #9e006f
+}
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
@@ -19,6 +49,13 @@
 
 .label-header {
     -fx-font-size: 32pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-header-medium {
+    -fx-font-size: 15pt;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -307,9 +344,20 @@
     -fx-padding: 8 1 8 1;
 }
 
-#cardPane {
+.dayCard {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+}
+
+.dayCardLight {
+    -fx-background-color: #31c445;
+}
+
+.dayCardMed {
+    -fx-background-color: #ebe307;
+}
+
+.dayCardHeavy {
+    -fx-background-color: #f03e02;
 }
 
 #commandTypeLabel {
@@ -328,7 +376,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #taskListPanel, #taskWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
