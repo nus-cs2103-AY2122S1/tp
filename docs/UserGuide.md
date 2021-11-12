@@ -1026,12 +1026,12 @@ Format: `today`
 
 This section describes the other miscellaneous commands available in TAB.
 
-1. [Finding students: `find`](#finding-students-find)
-2. [Viewing all tags: `tag`](#viewing-all-tags-tag)
-3. [Clearing all entries: `clear`](#clearing-all-entries-clear)
-4. [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
-5. [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
-6. [Exiting the program: `exit`](#exiting-the-program-exit)
+* [Finding students: `find`](#finding-students-find)
+* [Viewing all tags: `tag`](#viewing-all-tags-tag)
+* [Clearing all entries: `clear`](#clearing-all-entries-clear)
+* [Undoing previous commands: `undo`](#undoing-previous-commands-undo)
+* [Redoing undone commands: `redo`](#redoing-undone-commands-redo)
+* [Exiting the program: `exit`](#exiting-the-program-exit)
 
 --------------------------------------------------------------------------------------------------------------------
 
