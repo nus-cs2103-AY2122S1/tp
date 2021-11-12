@@ -3,18 +3,19 @@ layout: page
 title: User Guide
 ---
 
-**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. However, we're sure that Notor can still help people outside our target audience in situations where they have a **many mentees to one mentor relationship**, where they need to **take notes quickly**. Personal CRMs (CRM stands for Customer Relationship Manager) are useful tools to keep track of people's information and keep it organised, which can really benefit you in making connections with people.
+**Notor** is a personal CRM, developed for faculty mentors at NUS to manage their mentees. NUS faculty who are asked to mentor tend to have many mentees, and may not meet them often, but are still expected to understand their situation and provide useful advice. A personal CRM (CRM stands for Customer Relationship Manager) like Notor is a useful aid to track information about mentees and keep it organised, which hugely benefits forming meaningful connections. However, Notor can still help people outside our target audience in situations where one must manage **many contacts** and need to **take notes quickly**. 
 
-Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently during meetings with mentees, and group those notes with your mentee's information powerfully and easily.
+Notor is a desktop application **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, the CLI is likely faster than alternatives on the market.
 
 Key features of Notor are:
 
-* Powerful Organization which is up to the user to manage many mentees
+* Powerful Organization to manage many mentees, with powerful user customisation
   * Group mentees, and place groups into subgroups for greater control
-  * Add tags to mentees and sort by tags to easily identify meta-data about your contacts
-  * Archive contacts you’re no longer actively mentoring, but keep them in your Notor to retrieve at any time
+  * Add tags to mentees and sort by tags to easily identify metadata about your contacts
+  * Archive contacts you are no longer actively mentoring, but keep them in your Notor to retrieve at any time
+  * Export data to serve as a backup.
 * Clean note-taking system
-  * Take notes concurrently with meeting the mentee through no-frills text files
+  * Take notes concurrently with meeting mentees through no-frills text files
   * Drop time stamps whenever you update your information and meet with the mentee effortlessly
 * Fast CLI
   * Commands with short forms
@@ -108,13 +109,13 @@ What follows is a detailed breakdown of all the commands Notor has available and
 
 **Notes about the command format:**<br>
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `person /create n:NAME`, `NAME` is a parameter which can be used as `/create n:John Doe`.
+  e.g. in `person /create (n:NAME)`, `NAME` is a parameter which can be used as `/create n:John Doe`.
 * Round brackets `()` refer to COMPULSORY arguments.<br>
-  e.g. `g:(GROUP_NAME)` means that the group name must be entered at that position.
+  e.g. `(g:GROUP_NAME)` means that the group name must be entered at that position.
 * Items in square brackets are optional.<br>
-  e.g. `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
+  e.g. `(n:NAME) [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
 * Items with `…`​ after them can be used multiple times including zero times, with a comma separating terms.<br>
-  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t:tag1, tag2, tag3` etc.
+  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t/tag1, tag2, tag3` etc.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -139,6 +140,17 @@ Displays a summary of commands, as well as a link you can copy to get to this fu
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 You don't even need to use the help command to get help! If you type in a command with no arguments and the command requires arguments, the error message should help you come up with the right command.
+</div>
+
+#### _Editing the General Note_
+Opens a note window to edit the General Note.
+
+| Format      | Short Format    |
+|-------------|-----------------|
+| `note`      | `n`             |
+
+<div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
+For keyboard shortcuts within the note, you can reference [tips on using Notor](#tips-on-using-notor).
 </div>
 
 #### _Clearing all entries_
@@ -225,7 +237,7 @@ Adds a person at the given index `INDEX` to a specified group. To add a person t
 | `person (INDEX) /add (g:GROUP_NAME)`                  | `person 1 /add g:Orbital`            | Add the person at index `1` to the group `Orbital`                                                       |
 | `p (INDEX) /a (g:GROUP_NAME)`                         | `p 2 /a g:Alumni`                    | Add the person at index `2` to the group `Alumni`                                                        |
 | `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)` | `person 3 /add g:Orbital sg:Artemis` | Add the person at index `3` to the subgroup `Artemis` which is contained within the group `Orbital`      |
-| `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 2 /a g:Alumni sg:Class 2010`      | Add the person at index `4` to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
+| `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`        | `p 4 /a g:Alumni sg:Class 2010`      | Add the person at index `4` to the subgroup  `Class 2010`  which is contained within the group  `Alumni` |
 
 <div markdown="span" class="alert alert-primary">:bulb: <strong>Tip:</strong>
 Notor considers people within a subgroup as also being within the group that contains it. Hence, if you later try to [list all persons in group](#list-persons-in-group), anyone within a subgroup will also be listed.
@@ -338,7 +350,7 @@ Removes tag(s) from an existing person.
 | Format                                    | Example                            | What the example does                                                   |
 |-------------------------------------------|------------------------------------|-------------------------------------------------------------------------|
 | `person (INDEX) /untag [t:TAG1,TAG2,...]` | `person 1 /untag t:friends,family` | For the person at index  `1`, remove the tags  `friends`  and  `family` |
-| `p (INDEX) /ut [t:TAG1,TAG2,...]`         | `p 2 /t ut:friday`                 | For the person at index  `2` , remove the tag `friday`                  |
+| `p (INDEX) /ut [t:TAG1,TAG2,...]`         | `p 2 /t ut/friday`                 | For the person at index  `2` , remove the tag `friday`                  |
 
 #### _Clearing tags from a person_
 
