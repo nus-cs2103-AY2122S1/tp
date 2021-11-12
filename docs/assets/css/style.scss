@@ -40,3 +40,8 @@ kbd {
 #lesson-param-table {
   font-size: small;
 }
+
+#student-param-table ul, #lesson-param-table ul, #find-param-table ul {
+  margin-bottom: 0;
+  margin-left: 15px;
+}
