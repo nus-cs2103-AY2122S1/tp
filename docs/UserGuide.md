@@ -184,7 +184,7 @@ Exports all the data of Notor into a CSV file to Notor's home directory.
 
 You can usually find the exported data in the home directory that contains Notor. The data file indicates the exported data, and the time and date when you exported the data.
 
-<img src="images/Export.png" alt="export" width="20%" height="20%">
+<img src="images/Export.png" alt="export" width="15%" height="15%">
 
 The data exported will be displayed as follows:
 
