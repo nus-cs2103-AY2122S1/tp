@@ -385,7 +385,6 @@ Archives every person displayed in the List Pane.
 
 <div style="page-break-after: always;"></div>
 
-
 #### _Listing Archived Persons_
 Shows the list of archived Persons.
 
@@ -406,7 +405,6 @@ Restores an archived person back to your person list in Notor.
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 You must be on the list of archived persons in order to use this command, as it needs the index of the person to unarchive.
 </div>
-
 <div style="page-break-after: always;"></div>
 
 <a name = "group-command"></a>
@@ -623,9 +621,9 @@ directly by editing that data file.
 If your changes to the data file makes its format invalid, Notor will 
 discard all data and start with an empty data file at the next run.
 </div>
+<div style="page-break-after: always;"></div>
 
 <a name = "tips-on-using-notor"></a>
-
 ## Tips on Using Notor
 
 ### Keeping Track of Successfully Executed Command History
@@ -804,9 +802,9 @@ When you open Notor for the first time, you will see some dummy data for you to 
 
 7. **`group 1 /note`** : Edit the notes of the group with index number `1` with this command -- in the example below, `Orbital` is the group you will take notes on.
 
-   <img src="images/Example7.png" alt="example7" width="75%" height="75%">
-
-<br> When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
+   <img src="images/Example7.png" alt="example7" width="75%" height="75%"> 
+   
+   <br> When the note window pops up, you can type whatever you like. Use the keyboard shortcut `Ctrl + T` to drop the timestamp you opened the note. When you are done, press `Ctrl + Q` to exit the note window and save what you wrote.
 
 8. **`group 1 /create n:Gemini`** : This command creates a new subgroup inside the group at index `1`. In the following example, a new subgroup called `Orbital_Gemini` is created from the parent group `Orbital`. The syntax `n:` is to indicate the **name** of the subgroup you have created.
 
