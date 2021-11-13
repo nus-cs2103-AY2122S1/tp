@@ -1,22 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.commons.mapper.PrefixMapper.parseAndEditSetDefaultFunction;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
+import static seedu.address.logic.parser.CliSyntax.allPrefixesPresent;
 
+import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
+import java.util.function.BiConsumer;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.Model;
+import seedu.address.model.client.Client.EditClientDescriptor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,37 +24,37 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    private static final Prefix[] REQUIRED_PREFIXES = {
+        PREFIX_NAME, PREFIX_EMAIL
+    };
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    @Override
+    public AddCommand parse(String args, Model model) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+            ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
+        if (!allPrefixesPresent(argMultimap, REQUIRED_PREFIXES)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
 
-        Person person = new Person(name, phone, email, address, tagList);
+        for (Prefix prefix: allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG)) {
+            BiConsumer<EditClientDescriptor, Optional<String>> parseEditSetDefaultFunction =
+                    parseAndEditSetDefaultFunction(prefix);
+            Optional<String> attributeString = argMultimap.getValue(prefix);
+            parseEditSetDefaultFunction.accept(editClientDescriptor, attributeString);
+        }
 
-        return new AddCommand(person);
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG), model);
+        editClientDescriptor.setTags(tagList);
+
+        return new AddCommand(editClientDescriptor);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

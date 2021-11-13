@@ -13,12 +13,39 @@ public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
 
+    /**
+     * Converts {@code String addressBookName} into a {@code Path}
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String convertToAddressBookPathString(String addressBookName, Path fileDirectory) {
+        String trimmedLowerCase = addressBookName.trim().toLowerCase();
+        return String.format("%s/%s.json", fileDirectory.toString(), trimmedLowerCase);
+    }
+
+    /**
+     * Converts {@code Path} into it's address book name
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String convertToAddressBookName(Path filePath) {
+        String filePathString = filePath.toString();
+        int index = filePathString.lastIndexOf("\\");
+        String fileName = filePathString.substring(index + 1);
+        return fileName.substring(0, fileName.length() - 5);
+    }
+
+    /**
+     * Return true if {@code filePath} is Json file.
+     */
+    public static boolean isJsonFile(Path filePath) {
+        return filePath.toString().endsWith(StringUtil.JSON_FILE_PREFIX);
+    }
+
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
     }
 
     /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String, String...)},
      * otherwise returns false.
      * @param path A string representing the file path. Cannot be null.
      */

@@ -7,29 +7,35 @@
 
 'T1 through T4 are shades of the original color from lightest to darkest
 
-!define UI_COLOR #1D8900
-!define UI_COLOR_T1 #83E769
-!define UI_COLOR_T2 #3FC71B
-!define UI_COLOR_T3 #166800
-!define UI_COLOR_T4 #0E4100
+!define UI_COLOR #d5e8d4
+!define UI_COLOR_T1 #c0d1bf
+!define UI_COLOR_T2 #aabaaa
+!define UI_COLOR_T3 #95a294
+!define UI_COLOR_T4 #808b7f
 
-!define LOGIC_COLOR #3333C4
-!define LOGIC_COLOR_T1 #C8C8FA
-!define LOGIC_COLOR_T2 #6A6ADC
-!define LOGIC_COLOR_T3 #1616B0
-!define LOGIC_COLOR_T4 #101086
+!define LOGIC_COLOR #dae9fc
+!define LOGIC_COLOR_T1 #b0bdcc
+!define LOGIC_COLOR_T2 #aebaca
+!define LOGIC_COLOR_T3 #99a3b0
+!define LOGIC_COLOR_T4 #838c97
 
-!define MODEL_COLOR #9D0012
-!define MODEL_COLOR_T1 #F97181
-!define MODEL_COLOR_T2 #E41F36
-!define MODEL_COLOR_T3 #7B000E
-!define MODEL_COLOR_T4 #51000A
+!define MODEL_COLOR #f8cecc
+!define MODEL_COLOR_T1 #dfb9b8
+!define MODEL_COLOR_T2 #c6a5a3
+!define MODEL_COLOR_T3 #ae908f
+!define MODEL_COLOR_T4 #957c7a
 
-!define STORAGE_COLOR #A38300
-!define STORAGE_COLOR_T1 #FFE374
-!define STORAGE_COLOR_T2 #EDC520
-!define STORAGE_COLOR_T3 #806600
-!define STORAGE_COLOR_T2 #544400
+!define STORAGE_COLOR #ffe6cc
+!define STORAGE_COLOR_T1 #e6cfb8
+!define STORAGE_COLOR_T2 #ccb8a3
+!define STORAGE_COLOR_T3 #b3a18f
+!define STORAGE_COLOR_T2 #998a7a
+
+!define MAIN_COLOR #dcdcdc
+!define MAIN_COLOR_T1 #c6c6c6
+!define MAIN_COLOR_T2 #b0b0b0
+!define MAIN_COLOR_T3 #9a9a9a
+!define MAIN_COLOR_T2 #848484
 
 !define USER_COLOR #000000
 
@@ -38,10 +44,12 @@ skinparam BackgroundColor #FFFFFFF
 skinparam Shadowing false
 
 skinparam Class {
-    FontColor #FFFFFF
+    FontColor #000000
+    FontColor<<Hidden>> #FFFFFF
+    StereotypeFontColor<<Hidden>> #FFFFFF
     BorderThickness 1
-    BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
+    BorderColor #FFFFFFF
+    StereotypeFontColor #000000
     FontName Arial
 }
 
@@ -52,15 +60,22 @@ skinparam Actor {
 }
 
 skinparam Sequence {
+    ParticipantBorderColor #000000
+    ParticipantFontColor #FFFFFF
     MessageAlign center
     BoxFontSize 15
     BoxPadding 0
-    BoxFontColor #FFFFFF
+    BoxFontColor USER_COLOR
     FontName Arial
+    FontColor USER_COLOR
+    ActorBorderColor #000000
+    ActorFontColor #FFFFFF
+    LifeLineBorderColor #000000
+    ArrowColor #000000
 }
 
 skinparam Participant {
-    FontColor #FFFFFFF
+    fontColor black
     Padding 20
 }
 
@@ -73,3 +88,4 @@ skinparam packageStyle Rectangle
 hide footbox
 hide members
 hide circle
+

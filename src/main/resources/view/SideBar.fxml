@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<StackPane alignment="TOP_CENTER" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/11"
+           xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox>
+            <TextFlow textAlignment="CENTER">
+                <children>
+                    <Label styleClass="label-header" text="Client Info"/>
+                </children>
+            </TextFlow>
+            <StackPane fx:id="clientViewPanelPlaceholder" styleClass="pane-with-border">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+            </StackPane>
+            <TextFlow textAlignment="CENTER">
+                <children>
+                    <Label styleClass="label-header" text="Meeting Schedule"/>
+                </children>
+            </TextFlow>
+            <VBox fx:id="nextMeetingList" minWidth="340" prefWidth="340" styleClass="pane-with-border"
+                  VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10"/>
+                </padding>
+                <StackPane fx:id="nextMeetingListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+        </VBox>
+    </children>
+</StackPane>

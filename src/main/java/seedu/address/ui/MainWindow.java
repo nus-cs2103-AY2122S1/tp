@@ -2,10 +2,15 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -24,31 +29,50 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
-
+    private Image leadsForceLogo = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
+    private SideBar sideBar;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
+    private AddressBookListMenu addressBookListMenu;
+    private ThemeListMenu themeListMenu;
+    private TagsPanel tagsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuBar menuBar;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane clientListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane sideBarPlaceHolder;
+
+    @FXML
+    private StackPane statusBarPlaceholder;
+
+    @FXML
+    private StackPane tagsPanelPlaceholder;
+
+    @FXML
+    private ImageView displayLogo;
+
+    @FXML
+    private Scene scene;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +90,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        displayLogo.setImage(leadsForceLogo);
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +104,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,17 +137,32 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        clientListPanel = new ClientListPanel(logic.getFilteredClientList(), commandBox);
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePathObject());
+        statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        sideBar = new SideBar(logic.getClientToView(), logic.getSortedNextMeetingList());
+        sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
+
+        tagsPanel = new TagsPanel(logic.getFilteredTagList(), commandBox);
+        tagsPanelPlaceholder.getChildren().add(tagsPanel.getRoot());
+
+
+        addressBookListMenu = new AddressBookListMenu(logic, logic.getAddressBookFilePathObject());
+        menuBar.getMenus().add(addressBookListMenu.getRoot());
+
+        ObservableList<String> styleSheets = this.scene.getStylesheets();
+        styleSheets.add(this.logic.getTheme().getFilePathName());
+        themeListMenu = new ThemeListMenu(this.logic, this.scene.getStylesheets());
+        menuBar.getMenus().add(themeListMenu.getRoot());
     }
 
     /**
@@ -163,18 +205,53 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void handleClear() {
+        commandBox.setCommandExecutor(this::warnClearCommand);
+    }
+
+    /**
+     * Executes the clear command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#clearExecute(String)
+     */
+    private CommandResult warnClearCommand(String commandText) throws CommandException, ParseException {
+        CommandResult commandResult;
+        try {
+            commandResult = logic.clearExecute(commandText);
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            commandBox.setCommandExecutor(this::executeCommand);
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+
+        return commandResult;
+    }
+
+    /**
+     * Switches the Address Book.
+     */
+    private void handleSwitchAddressBook() {
+        // TODO: either this.logic or logic
+        this.logic.switchAddressBook();
+    }
+
+    /**
+     * Create a new Address Book.
+     */
+    private void handleCreateAddressBook() throws CommandException {
+        this.logic.createAddressBook();
     }
 
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.Logic#normalExecute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.normalExecute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -186,10 +263,28 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isClearing()) {
+                handleClear();
+            }
+
+            if (commandResult.isSwitchAddressBook()) {
+                handleSwitchAddressBook();
+            }
+
+            if (commandResult.isCreateAddressBook()) {
+                handleCreateAddressBook();
+            }
+
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | RuntimeException e) {
+
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+
+            if (e.getCause() instanceof ParseException) {
+                throw (ParseException) e.getCause();
+            }
+
             throw e;
         }
     }

@@ -1,7 +1,6 @@
 @startuml
 !include style.puml
-
-box Logic LOGIC_COLOR_T1
+box Logic #FFFFFF
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
@@ -9,61 +8,63 @@ participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
+skinparam sequenceBoxBorderColor #black
+
+box Model #FFFFFF
 participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
-activate LogicManager
+activate LogicManager LOGIC_COLOR
 
 LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+activate AddressBookParser LOGIC_COLOR
 
-create DeleteCommandParser
+create DeleteCommandParser LOGIC_COLOR
 AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+activate DeleteCommandParser LOGIC_COLOR
 
 DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+deactivate DeleteCommandParser LOGIC_COLOR
 
 AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+activate DeleteCommandParser LOGIC_COLOR
 
-create DeleteCommand
+create DeleteCommand LOGIC_COLOR
 DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+activate DeleteCommand LOGIC_COLOR
 
 DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+deactivate DeleteCommand LOGIC_COLOR
 
 DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+deactivate DeleteCommandParser LOGIC_COLOR
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+destroy DeleteCommandParser LOGIC_COLOR
 
 AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+deactivate AddressBookParser LOGIC_COLOR
 
 LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+activate DeleteCommand LOGIC_COLOR
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
+DeleteCommand -> Model : deleteClient(1)
+activate Model MODEL_COLOR
 
 Model --> DeleteCommand
-deactivate Model
+deactivate Model LOGIC_COLOR
 
-create CommandResult
+create CommandResult LOGIC_COLOR
 DeleteCommand -> CommandResult
-activate CommandResult
+activate CommandResult LOGIC_COLOR
 
 CommandResult --> DeleteCommand
-deactivate CommandResult
+deactivate CommandResult LOGIC_COLOR
 
 DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+deactivate DeleteCommand LOGIC_COLOR
 
 [<--LogicManager
-deactivate LogicManager
+deactivate LogicManager LOGIC_COLOR
 @enduml

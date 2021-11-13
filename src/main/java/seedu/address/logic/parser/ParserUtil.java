@@ -1,18 +1,28 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_CONFIRMATION_FAIL;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.Model;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.CurrentPlan;
+import seedu.address.model.client.DisposableIncome;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.LastMet;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.OptionalNonStringBasedField;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.RiskAppetite;
+import seedu.address.model.client.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,19 +30,20 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_CLIENT_ID = "Client ID is not a non-negative unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code clientId} into an {@code ClientId} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     *
+     * @throws ParseException if the specified index is invalid (not non-negative integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+    public static ClientId parseClientId(String clientId) throws ParseException {
+        String trimmedId = clientId.trim();
+        if (!StringUtil.isNonNegativeInteger(trimmedId)) {
+            throw new ParseException(MESSAGE_INVALID_CLIENT_ID);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return new ClientId(trimmedId);
     }
 
     /**
@@ -96,29 +107,220 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String current plan} into an {@code CurrentPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code currentPlan} is invalid.
+     */
+    public static CurrentPlan parseCurrentPlan(String currentPlan) throws ParseException {
+        requireNonNull(currentPlan);
+        String trimmedCurrentPlan = currentPlan.trim();
+        if (!CurrentPlan.isValidCurrentPlan(trimmedCurrentPlan)) {
+            throw new ParseException(CurrentPlan.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentPlan(trimmedCurrentPlan);
+    }
+
+    /**
+     * Parses a {@code String LastMet} into an {@code LastMet}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LastMet} is invalid.
+     */
+    public static LastMet parseLastMet(String lastMet) throws ParseException {
+        requireNonNull(lastMet);
+        String trimmedLastMet = lastMet.trim();
+        if (!LastMet.isValidLastMet(trimmedLastMet)) {
+            throw new ParseException(LastMet.MESSAGE_CONSTRAINTS);
+        }
+        if (!LastMet.isNotFutureDate(trimmedLastMet)) {
+            throw new ParseException(LastMet.MESSAGE_FUTURE_DATE);
+        }
+        return new LastMet(trimmedLastMet);
+    }
+
+    /**
+     * Parses a given String {@code String nextMeeting} to return a {@code NextMeeting}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nextMeeting} is invalid.
+     */
+    public static NextMeeting parseNextMeeting(String nextMeeting) throws ParseException {
+        requireNonNull(nextMeeting);
+        String trimmedNextMeeting = nextMeeting.trim();
+        if (trimmedNextMeeting.equalsIgnoreCase(NextMeeting.NO_NEXT_MEETING) || trimmedNextMeeting.isEmpty()) {
+            return NextMeeting.NULL_MEETING;
+        }
+
+        if (!NextMeeting.isValidNextMeeting(trimmedNextMeeting)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_MEETING_STRING);
+        }
+
+        String date = trimmedNextMeeting.split(" ", 2)[0];
+        String startTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("(") + 1,
+            trimmedNextMeeting.indexOf("~"));
+        String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
+            trimmedNextMeeting.indexOf(")"));
+        String location = trimmedNextMeeting.split(",", 2)[1].trim();
+
+        if (!NextMeeting.isValidNextMeetingDate(date)) {
+            throw new ParseException(NextMeeting.DATE_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isValidNextMeetingTime(startTime)) {
+            throw new ParseException(NextMeeting.START_TIME_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isValidNextMeetingTime(endTime)) {
+            throw new ParseException(NextMeeting.END_TIME_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isNotPastMeeting(date, endTime)) {
+            throw new ParseException(NextMeeting.MESSAGE_MEETING_DATE_OVER);
+        }
+        if (!NextMeeting.isDurationValid(startTime, endTime)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_TIME_DURATION);
+        }
+
+        return new NextMeeting(date, startTime, endTime, location, "");
+    }
+
+    /**
+     * Parses a given String {@code String nextMeeting} to return a {@code Optional} containing the either a last met
+     * or next meeting
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nextMeeting} is invalid.
+     */
+    public static Optional<OptionalNonStringBasedField> parseMeeting(String nextMeeting) throws ParseException {
+        requireNonNull(nextMeeting);
+        String trimmedNextMeeting = nextMeeting.trim();
+        if (trimmedNextMeeting.equalsIgnoreCase(NextMeeting.NO_NEXT_MEETING) || trimmedNextMeeting.isEmpty()) {
+            return Optional.of(NextMeeting.NULL_MEETING);
+        }
+
+        if (!NextMeeting.isValidNextMeeting(trimmedNextMeeting)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_MEETING_STRING);
+        }
+
+        String date = trimmedNextMeeting.split(" ", 2)[0];
+        String startTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("(") + 1,
+                trimmedNextMeeting.indexOf("~"));
+        String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
+                trimmedNextMeeting.indexOf(")"));
+        String location = trimmedNextMeeting.split(",", 2)[1].trim();
+
+        if (!NextMeeting.isValidNextMeetingDate(date)) {
+            throw new ParseException(NextMeeting.DATE_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isValidNextMeetingTime(startTime)) {
+            throw new ParseException(NextMeeting.START_TIME_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isValidNextMeetingTime(endTime)) {
+            throw new ParseException(NextMeeting.END_TIME_MESSAGE_CONSTRAINTS);
+        }
+        if (!NextMeeting.isDurationValid(startTime, endTime)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_TIME_DURATION);
+        }
+        if (NextMeeting.isNotPastMeeting(date, endTime)) {
+            return Optional.of(new NextMeeting(date, startTime, endTime, location, ""));
+        } else {
+            return Optional.of(new LastMet(date));
+        }
+
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code RiskAppetite} is invalid.
+     */
+    public static RiskAppetite parseRiskAppetite(String riskAppetite) throws ParseException {
+        requireNonNull(riskAppetite);
+        String trimmedRiskAppetite = riskAppetite.trim();
+        if (!RiskAppetite.isValidRiskAppetite(trimmedRiskAppetite)) {
+            throw new ParseException(RiskAppetite.MESSAGE_CONSTRAINTS);
+        }
+        return new RiskAppetite(trimmedRiskAppetite);
+    }
+
+    /**
+     * Parses a {@code String disposableIncome} into an {@code DisposableIncome}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DisposableIncome} is invalid.
+     */
+    public static DisposableIncome parseDisposableIncome(String disposableIncome) throws ParseException {
+        requireNonNull(disposableIncome);
+        String trimmedDisposableIncome = disposableIncome.trim();
+        if (!DisposableIncome.isValidDisposableIncome(trimmedDisposableIncome)) {
+            throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
+        }
+        return new DisposableIncome(trimmedDisposableIncome);
+    }
+
+    /**
+     * Parses a {@code String sortDirection} into an {@code SortDirection}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DisposableIncome} is invalid.
+     */
+    public static SortDirection parseSortDirection(String sortDirection) throws ParseException {
+        requireNonNull(sortDirection);
+        String trimmedSortDirection = sortDirection.trim().toLowerCase();
+        if (!SortDirection.isValidDirection(trimmedSortDirection)) {
+            throw new ParseException(SortDirection.MESSAGE_CONSTRAINTS);
+        }
+        return SortDirection.of(trimmedSortDirection);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag, Model model) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        if (model.hasTagName(tag)) {
+            return model.getTag(tag);
+        } else {
+            return new Tag(trimmedTag);
+        }
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Collection<String> tags, Model model) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName, model));
         }
+
         return tagSet;
+    }
+
+    /**
+     * Parses {@code input} to true for yes and false for no, {@code ParseException} is thrown otherwise.
+     * {@code input} will be trimmed and converted to lower case before checking;
+     */
+    public static boolean parseConfirmation(String input) throws ParseException {
+        String formattedInput = input.trim().toLowerCase();
+        switch (formattedInput) {
+        case "yes":
+            return true;
+
+        case "no":
+            return false;
+
+        default:
+            throw new ParseException(MESSAGE_CONFIRMATION_FAIL);
+        }
     }
 }

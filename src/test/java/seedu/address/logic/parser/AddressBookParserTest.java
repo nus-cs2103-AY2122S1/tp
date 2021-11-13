@@ -4,40 +4,69 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.client.SortDirection.SORT_ASCENDING;
+import static seedu.address.model.client.SortDirection.SORT_DESCENDING;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_CLIENT;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
-import java.util.Arrays;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.abcommand.AbCommand;
+import seedu.address.logic.commands.abcommand.AbListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Client.EditClientDescriptor;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
+import seedu.address.model.client.ClientHasId;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.SortByAttribute;
+import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.ClientUtil;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final AddressBookParser parser = new AddressBookParser(model);
+
+    @BeforeEach
+    public void setUp() {
+        model.getAddressBook().setClientCounter("0");
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        EditClientDescriptor clientFunction = new ClientBuilder().buildFunction();
+        Client client = new ClientBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(ClientUtil.getAddCommand(client));
+        assertEquals(new AddCommand(clientFunction), command);
     }
 
     @Test
@@ -49,17 +78,20 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+            DeleteCommand.COMMAND_WORD + " 1");
+        ClientId clientId = new ClientId("1");
+        assertEquals(new DeleteCommand(List.of(clientId)), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Client client = new ClientBuilder().build();
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder(client).build();
+
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+            + CLIENTID_ZERO_CLIENT.value + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
+        List<ClientId> clientIds = List.of(new ClientId(CLIENTID_ZERO_CLIENT.value));
+        assertEquals(new EditCommand(clientIds, descriptor), command);
     }
 
     @Test
@@ -69,11 +101,58 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_search() throws Exception {
+        String keywords = "do t/friends e/example.com";
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        SearchCommand command = (SearchCommand) parser.parseCommand(
+            SearchCommand.COMMAND_WORD + " " + keywords);
+        assertEquals(new SearchCommand(new ClientContainsKeywordsPredicate(aMM)), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        String keywords = "r/asc d/dsc i/asc";
+        SortByAttribute sorter = new SortByAttribute(
+                List.of(PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME, PREFIX_CLIENTID),
+                List.of(SORT_ASCENDING, SORT_DESCENDING, SORT_ASCENDING));
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + keywords);
+        assertEquals(new SortCommand(sorter), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        String keywords = "do t/friends e/example.com";
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+            FilterCommand.COMMAND_WORD + " " + keywords);
+        assertEquals(new FilterCommand(new ClientContainsKeywordsPredicate(aMM)), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        String input = "1";
+        ClientId clientId = new ClientId(input);
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+            ViewCommand.COMMAND_WORD + " " + input);
+        assertEquals(new ViewCommand(clientId, new ClientHasId(clientId)), command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        String input = "20-12-2021";
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " " + input);
+        assertEquals(new ScheduleCommand(LocalDate.of(2021, 12, 20)), command);
+    }
+
+    @Test
+    public void parseCommand_ab() throws Exception {
+        String input = AbListCommand.COMMAND_WORD;
+        AbCommand command = (AbCommand) parser.parseCommand(AbCommand.COMMAND_WORD + " " + input);
+        assertTrue(command instanceof AbListCommand);
     }
 
     @Test

@@ -3,18 +3,26 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.storage.ThemeList;
+import seedu.address.ui.ThemeType;
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
+    public static final Path DEFAULT_ADDRESSBOOK_DIRECTORY = Path.of("data");
+    public static final Path DEFAULT_ADDRESSBOOK_FILE = DEFAULT_ADDRESSBOOK_DIRECTORY.resolve("addressbook.json");
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookDirectory = DEFAULT_ADDRESSBOOK_DIRECTORY;
+    private final SimpleObjectProperty<Path> addressBookFilePath =
+            new SimpleObjectProperty<>(DEFAULT_ADDRESSBOOK_FILE);
+    private final SimpleObjectProperty<ThemeType> theme = new SimpleObjectProperty<>(ThemeList.DEFAULT_THEME);
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,8 +44,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAddressBookDirectory(newUserPrefs.getAddressBookDirectory());
+        setTheme(newUserPrefs.getThemeType());
     }
 
+    @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
@@ -47,13 +58,37 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
+    public ObservableValue<Path> getAddressBookFilePathObject() {
         return addressBookFilePath;
+    }
+
+    @Override
+    public Path getAddressBookFilePath() {
+        return addressBookFilePath.get();
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+        this.addressBookFilePath.set(addressBookFilePath);
+    }
+
+    @Override
+    public Path getAddressBookDirectory() {
+        return addressBookDirectory;
+    }
+
+    public void setAddressBookDirectory(Path addressBookDirectory) {
+        requireNonNull(addressBookDirectory);
+        this.addressBookDirectory = addressBookDirectory;
+    }
+
+    @Override
+    public ThemeType getThemeType() {
+        return this.theme.get();
+    }
+
+    public void setTheme(ThemeType theme) {
+        this.theme.set(theme);
     }
 
     @Override
@@ -68,7 +103,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && addressBookFilePath.get().equals(o.addressBookFilePath.get());
     }
 
     @Override

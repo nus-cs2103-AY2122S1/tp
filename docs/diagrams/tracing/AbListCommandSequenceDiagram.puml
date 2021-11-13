@@ -1,0 +1,32 @@
+@startuml
+!include ../style.puml
+
+box "Logic" #FFFFFF
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
+Participant ":AbSwitchCommandParser" as abscp LOGIC_COLOR
+Participant "command:AbSwitchCommand" as abs LOGIC_COLOR
+end box
+box "Model" #FFFFFF
+Participant "model:Model" as model MODEL_COLOR
+end box
+
+skinparam sequenceBoxBorderColor #black
+[-> logic : execute
+activate logic LOGIC_COLOR
+create abscp
+logic -> abscp ++ LOGIC_COLOR: parseCommand(commandText)
+create abs
+abscp -> abs ++ LOGIC_COLOR: filePath
+abs --> abscp --: command
+abscp --> logic --: command
+logic -> abs ++ LOGIC_COLOR: execute(model)
+abs -> model ++ MODEL_COLOR: getAddressBookListString()
+model --> abs --: result
+create cr
+abs -> cr ++ LOGIC_COLOR: result
+cr --> abs --: commandResult
+abs --> logic --: commandResult
+logic -->[ --:
+
+@enduml

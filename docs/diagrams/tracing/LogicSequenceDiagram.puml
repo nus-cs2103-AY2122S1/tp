@@ -7,13 +7,13 @@ Participant ":EditCommandParser" as ecp LOGIC_COLOR
 Participant "command:EditCommand" as ec LOGIC_COLOR
 
 [-> logic : execute
-activate logic
-logic -> abp ++: parseCommand(commandText)
+activate logic LOGIC_COLOR
+logic -> abp ++ LOGIC_COLOR: parseCommand(commandText)
 create ecp
 abp -> ecp
-abp -> ecp ++: parse(arguments)
+abp -> ecp ++ LOGIC_COLOR: parse(arguments)
 create ec
-ecp -> ec ++: index, editPersonDescriptor
+ecp -> ec ++ LOGIC_COLOR: index, editClientDescriptor
 ec --> ecp --
 ecp --> abp --: command
 abp --> logic --: command

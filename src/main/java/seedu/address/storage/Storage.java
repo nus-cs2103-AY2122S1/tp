@@ -29,4 +29,10 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    /**
+     * Switches the given {@link ReadOnlyAddressBook}
+     *
+     * @param addressBook the given AddressBook storage to switch to
+     */
+    void switchAddressBookStorage(AddressBookStorage addressBook);
 }

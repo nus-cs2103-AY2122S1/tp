@@ -3,16 +3,23 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.StringComparable;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag extends StringComparable<Tag> {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    // TODO: tag color + FXML
+    private final String tagName;
+    private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
     /**
      * Constructs a {@code Tag}.
@@ -32,11 +39,55 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+    /**
+     * Adds {@code Client} to the list of clients this tag is assigned to.
+     *
+     * @param client The client to be added to the list.
+     */
+    public void addClient(Client client) {
+        requireNonNull(client);
+        if (!clients.contains(client)) {
+            clients.add(client);
+        }
+    }
+
+    /**
+     * Removes {@code Client} from the list of clients this tag is assigned to.
+     *
+     * @param client The client to be removed from the list.
+     */
+    public void removeClient(Client client) {
+        clients.remove(client);
+    }
+
+    /**
+     * Returns true if both tags have the same name.
+     * This defines a weaker notion of equality between two tags.
+     */
+    public boolean isSameTag(Tag otherTag) {
+        if (otherTag == this) {
+            return true;
+        }
+
+        return otherTag != null && otherTag.getName().equals(getName());
+    }
+
+    /**
+     * Returns the name of this tag.
+     *
+     * @return The name of this tag.
+     */
+    public String getName() {
+        return tagName;
+    }
+
+    /**
+     * Returns a list of clients that have this tag.
+     *
+     * @return A list of clients that have this tag.
+     */
+    public ObservableList<Client> getClients() {
+        return FXCollections.unmodifiableObservableList(clients);
     }
 
     @Override
@@ -44,11 +95,20 @@ public class Tag {
         return tagName.hashCode();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof Tag // instanceof handles nulls
+            && tagName.equals(((Tag) other).tagName)); // state check
+    }
+
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
+        // TODO: fix client count not accurate
+        // + " (" + clients.size() + ")";
     }
-
 }

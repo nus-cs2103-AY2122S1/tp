@@ -25,7 +25,8 @@ public class ConfigUtilTest {
 
     @Test
     public void read_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> read(null));
+        assertThrows(NullPointerException.class, () ->
+            read(null));
     }
 
     @Test

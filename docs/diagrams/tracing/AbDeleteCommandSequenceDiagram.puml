@@ -1,0 +1,27 @@
+@startuml
+!include ../style.puml
+
+box "Logic" #FFFFFF
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
+Participant ":AbDeleteCommandParser" as abdcp LOGIC_COLOR
+Participant "command:AbDeleteCommand" as abd LOGIC_COLOR
+end box
+
+skinparam sequenceBoxBorderColor #black
+[-> logic : execute
+activate logic LOGIC_COLOR
+create abdcp
+logic -> abdcp ++ LOGIC_COLOR: parseCommand(commandText)
+create abd
+abdcp -> abd ++ LOGIC_COLOR: filePath
+abd --> abdcp --: command
+abdcp --> logic --: command
+logic -> abd ++ LOGIC_COLOR: execute(model)
+    create cr
+abd -> cr ++ LOGIC_COLOR:
+cr --> abd --: commandResult
+abd --> logic --: commandResult
+logic -->[ --:
+
+@enduml
