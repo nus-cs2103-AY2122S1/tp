@@ -1,8 +1,12 @@
-# SociaLite
+<p align="center">
+    <img src="docs/images/socialite.jpeg" alt="Image" width="100px" />
+    <h1 align="center"> SociaLite </h1>
+</p>
 
-[![CI Status](https://github.com/AY2122S1-CS2103T-F11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-F11-4/tp/actions)
-
-[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp/branch/master/graph/badge.svg?token=KPARXU5FYH)](https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp)
+<div align="center">
+    <a href="https://github.com/AY2122S1-CS2103T-F11-4/tp/actions"> <img src="https://github.com/AY2122S1-CS2103T-F11-4/tp/workflows/Java%20CI/badge.svg"/></a>
+    <a href="https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp"> <img src="https://codecov.io/gh/AY2122S1-CS2103T-F11-4/tp/branch/master/graph/badge.svg?token=KPARXU5FYH"/></a>
+</div>
 
 ![Ui](docs/images/Ui.png)
 
