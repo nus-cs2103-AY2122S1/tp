@@ -1,0 +1,96 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "remark" : "She likes aardvarks.",
+    "tagged" : [ "friends" ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : "alice.p",
+    "instagram" : "alice.p",
+    "telegram": "alice_pauline",
+    "tiktok": "alice.pauline",
+    "twitter": null,
+    "dates": [ ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "remark" : "He can't take beer!",
+    "tagged" : [ "owesMoney", "friends" ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : "benson.m",
+    "instagram" : "benson.m",
+    "telegram": "benson_meier",
+    "tiktok": null,
+    "twitter": "bensonMeier",
+    "dates": [ ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "remark" : null,
+    "tagged" : [ ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : "carl.k",
+    "instagram" : "carl.k",
+    "telegram": null,
+    "tiktok": "carl.kurz",
+    "twitter": "carl",
+    "dates": [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "remark" : null,
+    "tagged" : [ "friends" ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : "daniel.m",
+    "instagram" : null,
+    "telegram": "daniel_meier",
+    "tiktok": "daniel.meier",
+    "twitter": "DanielMeier",
+    "dates": [ {
+      "name" : "Wedding Anniversary",
+      "date" : "2020-02-01",
+      "recurrenceInterval" : null
+    } ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "remark" : null,
+    "tagged" : [ ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : null,
+    "instagram" : "elle.m",
+    "telegram": "elle_meyer",
+    "tiktok": "elle.meyer",
+    "twitter": "elle_meyer01",
+    "dates": [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "remark" : null,
+    "tagged" : [ ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : "fiona.k",
+    "instagram" : "fiona.k",
+    "telegram": "fiona_kunz",
+    "tiktok": "fiona.kunz",
+    "twitter": "fiona_kunz",
+    "dates": [ {
+      "name" : "Birthday",
+      "date" : "2000-02-02",
+      "recurrenceInterval" : null
+    } ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "remark" : null,
+    "tagged" : [ ],
+    "profilePic": "images/default_profile_picture.png",
+    "facebook" : "george.b",
+    "instagram" : "george.b",
+    "telegram": "george_best",
+    "tiktok": "george.best",
+    "twitter": "georgeBest",
+    "dates": [ ]
+  } ]
+}

@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SocialiteParser" as SocialiteParser LOGIC_COLOR
+participant ":XYZCommand" as XYZcommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+box Storage STORAGE_COLOR_T1
+participant ":CommandHistoryStorage" as CommandHistoryStorage STORAGE_COLOR
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+
+
+[-> LogicManager : execute(CMD)
+activate LogicManager
+
+LogicManager -> Model : addCommandToHistory(CMD)
+activate Model
+Model --> LogicManager
+deactivate Model
+
+LogicManager -> SocialiteParser : parseCommand(CMD)
+activate SocialiteParser
+SocialiteParser --> LogicManager : command
+deactivate SocialiteParser
+
+
+LogicManager -> XYZcommand : execute()
+activate XYZcommand
+XYZcommand --> LogicManager : commandResult
+deactivate XYZcommand
+
+LogicManager -> Storage : saveCommandHistory()
+activate Storage
+Storage -> Model : getCommandHistory()
+activate Model
+Model --> Storage : commandHistory
+deactivate Model
+
+Storage -> CommandHistoryStorage : saveCommandHistory()
+activate CommandHistoryStorage
+CommandHistoryStorage --> Storage
+deactivate CommandHistoryStorage
+
+
+Storage --> LogicManager
+deactivate Storage
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SocialiteParser" as SocialiteParser LOGIC_COLOR
+participant ":PictureCommandParser" as PictureCommandParser LOGIC_COLOR
+participant "p:PictureCommand" as PictureCommand LOGIC_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(picture INDEX)
+activate LogicManager
+
+LogicManager -> SocialiteParser : parseCommand(picture INDEX)
+activate SocialiteParser
+
+create PictureCommandParser
+SocialiteParser -> PictureCommandParser
+activate PictureCommandParser
+
+create PictureCommand
+PictureCommandParser -> PictureCommand : parse(INDEX)
+activate PictureCommand
+PictureCommand --> PictureCommandParser : p
+deactivate PictureCommand
+
+PictureCommandParser --> SocialiteParser : p
+deactivate PictureCommandParser
+deactivate PictureCommand
+
+SocialiteParser --> LogicManager : p
+deactivate SocialiteParser
+destroy PictureCommandParser
+
+LogicManager -> PictureCommand : execute()
+activate PictureCommand
+
+PictureCommand -> PictureCommand : getPic()
+activate PictureCommand
+
+PictureCommand -> MainWindow : getFile()
+activate MainWindow
+
+MainWindow --> PictureCommand : file
+deactivate MainWindow
+
+PictureCommand --> PictureCommand : file
+deactivate PictureCommand
+
+PictureCommand -> Model : setPerson()
+activate Model
+
+Model --> PictureCommand :
+deactivate Model
+
+PictureCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> PictureCommand :
+deactivate Model
+
+PictureCommand --> LogicManager : commandResult
+deactivate PictureCommand
+
+PictureCommand -[hidden]-> LogicManager : result
+destroy PictureCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

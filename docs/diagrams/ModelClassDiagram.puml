@@ -5,50 +5,80 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Interface ReadOnlyContactList <<Interface>>
+Interface ReadOnlyUserPrefs <<Interface>>
+Interface ReadOnlyCommandHistory <<Interface>>
 Class Model
-Class ModelManager
+Class ContactList
+Class ReadOnlyContactList
 Class UserPrefs
+Class CommandHistory
+Class ProfilePictureSyncModel
+Class ModelManager
 Class ReadOnlyUserPrefs
 
-
+Class "{abstract}\nHandle" as Handle
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
 Class Name
 Class Phone
+Class Remark
+Class ProfilePicture
+Class Facebook
+Class Instagram
+Class Telegram
+Class TikTok
+Class Twitter
+Class Dates
+Class Date
 Class Tag
-
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Model .d.> ReadOnlyContactList
+Model .d.> ReadOnlyUserPrefs
+Model .d.> ReadOnlyCommandHistory
+ReadOnlyContactList -[hidden]r> ReadOnlyUserPrefs
+ReadOnlyUserPrefs -[hidden]r> ReadOnlyCommandHistory
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+ContactList .u.|> ReadOnlyContactList
+UserPrefs .u.|> ReadOnlyUserPrefs
+CommandHistory .u.|> ReadOnlyCommandHistory
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModelManager -u-> "1" ContactList
+ModelManager -u-> "1" UserPrefs
+ModelManager -u-> "1" CommandHistory
+ModelManager -u-> "1" ProfilePictureSyncModel
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ModelManager ...u|> Model
+ModelManager -->"~*filtered" Person
 
-ModelManager -->"~* filtered" Person
+ContactList *---> "1" UniquePersonList
+UniquePersonList -r> "~*all" Person
+UniquePersonList -[hidden]-> ContactList
+
+Person *----> "0..1" Facebook
+Person *----> "0..1" Instagram
+Person *----> "0..1" Telegram
+Person *----> "0..1" TikTok
+Person *----> "0..1" Twitter
+Facebook -d-|> Handle
+Instagram -d-|> Handle
+Telegram -d-|> Handle
+TikTok -d-|> Handle
+Twitter -d-|> Handle
+
+Person *---> "0..1" Remark
+Person *---> "0..1" ProfilePicture
+Person *--> "0..*" Tag
+
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *-r-> "1" Dates
+ProfilePictureSyncModel -[hidden]d> Date
+Dates *-u-> "0..*" Date
+
 @enduml

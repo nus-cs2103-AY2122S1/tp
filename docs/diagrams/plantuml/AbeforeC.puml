@@ -5,7 +5,10 @@ Class A LOGIC_COLOR_T3
 Class B LOGIC_COLOR_T3
 Class C UI_COLOR_T3
 Class D UI_COLOR_T3
+Class E UI_COLOR_T4
+Class F UI_COLOR_T4
 
 A --> B
+E --> F
 C --> D
 @enduml

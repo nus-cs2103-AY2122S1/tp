@@ -3,57 +3,48 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+## Meet our team!
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+**SociaLite** is a project built for CS2103T Software Engineering.
 
-## Project team
+We are a team based in the [School of Computing](https://www.comp.nus.edu.sg/), National University of Singapore.
 
-### John Doe
+### Yan Xiaozhi (David) [<img src="images/github-icon.png" width="40px">](https://github.com/david-eom)
 
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/david-eom.png" width="250px">
 
 * Role: Team Lead
-* Responsibilities: UI
+* [Email](mailto:yan_xiaozhi@u.nus.edu)
+* [Personal Portfolio Page](team/david-eom.md)
 
-### Johnny Doe
+### Stanley Tan Wen Sheng [<img src="images/github-icon.png" width="40px">](https://github.com/stanley-1)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/stanley-1.png" width="250px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+* Role: Code Quality & Documentation
+* [Email](mailto:stanley.tan@u.nus.edu)
+* [Personal Portfolio Page](team/stanley-1.md)
 
-* Role: Developer
-* Responsibilities: Data
+### Zachary Chua Yan Ern [<img src="images/github-icon.png" width="40px">](https://github.com/Zacchua)
 
-### Jean Doe
+<img src="images/zacchua.png" width="250px">
 
-<img src="images/johndoe.png" width="200px">
+* Role: Integration & Code Quality
+* [Email](mailto:e0543984@u.nus.edu)
+* [Personal Portfolio Page](team/zacchua.md)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Tan Siong Min, Benjamin [<img src="images/github-icon.png" width="40px">](https://github.com/bnjmnt4n)
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+<img src="images/bnjmnt4n.png" width="250px">
 
-### James Doe
+* Role: Testing & Integration
+* [Email](mailto:benjamint@u.nus.edu)
+* [Personal Portfolio Page](team/bnjmnt4n.md)
 
-<img src="images/johndoe.png" width="200px">
+### Tang Swen Yi [<img src="images/github-icon.png" width="40px">](https://github.com/EssWhyy)
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/esswhyy.png" width="250px">
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing & Documentation
+* [Email](mailto:e0532612@u.nus.edu)
+* [Personal Portfolio Page](team/esswhyy.md)

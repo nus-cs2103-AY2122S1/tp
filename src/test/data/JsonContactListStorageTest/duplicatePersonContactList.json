@@ -1,0 +1,9 @@
+{
+  "persons": [ {
+    "name": "Valid Person",
+    "phone": "9482424"
+  }, {
+    "name": "Duplicated Person",
+    "phone": "9482424"
+  } ]
+}

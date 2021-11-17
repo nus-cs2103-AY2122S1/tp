@@ -1,0 +1,6 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "profilePic": "images/default_profile_pic.png"
+  } ]
+}

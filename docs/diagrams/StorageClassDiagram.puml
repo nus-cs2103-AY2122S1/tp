@@ -6,38 +6,63 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage{
 
+Interface Storage <<Interface>>
+Class StorageManager
+
+package "ContactList Storage" #F4F6F6{
+Interface ContactListStorage <<Interface>>
+Class JsonContactListStorage
+Class JsonSerializableContactList
+Class JsonAdaptedPerson
+Class JsonAdaptedTag
+Class JsonAdaptedDate
+}
+
+package "CommandHistory Storage" #F4F6F6{
+Interface CommandHistoryStorage <<Interface>>
+Class JsonCommandHistoryStorage
+Class JsonSerializableCommandHistory
+}
+
 package "UserPrefs Storage" #F4F6F6{
 Interface UserPrefsStorage <<Interface>>
 Class JsonUserPrefsStorage
 }
 
-Interface Storage <<Interface>>
-Class StorageManager
-
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "ProfilePicture Storage" #F4F6F6{
+Interface ProfilePictureStorage <<Interface>>
+Class ProfilePictureStorageManager
+}
 }
 
-}
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+HiddenOutside .right.> Storage
+StorageManager ..|> Storage
+StorageManager .[hidden]up.> Storage
 
-StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
-
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+JsonContactListStorage .up.|> ContactListStorage
+JsonContactListStorage .down.> JsonSerializableContactList
+JsonSerializableContactList -down-> "*" JsonAdaptedPerson
+JsonAdaptedPerson -down-> "*" JsonAdaptedTag
+JsonAdaptedPerson -down-> "*" JsonAdaptedDate
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonCommandHistoryStorage .up.|> CommandHistoryStorage
+JsonCommandHistoryStorage .down.> JsonSerializableCommandHistory
+
+ProfilePictureStorageManager .up.|> ProfilePictureStorage
+
+StorageManager ---> "1" UserPrefsStorage
+StorageManager ---> "1" ContactListStorage
+StorageManager ---> "1" CommandHistoryStorage
+StorageManager ---> "1" ProfilePictureStorage
+
+Storage ----|> UserPrefsStorage
+Storage ----|> ContactListStorage
+Storage ----|> CommandHistoryStorage
+Storage ----|> ProfilePictureStorage
+
 
 @enduml
