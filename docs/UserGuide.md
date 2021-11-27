@@ -3,6 +3,8 @@ layout: page
 title: SoConnect User Guide
 ---
 
+<!-- @@author Gordon25 -->
+
 Made by [School of Computing](https://www.comp.nus.edu.sg/) (SoC) students, for SoC students, SoConnect is a **desktop app for SoC students to manage contacts
 of Professors and Teaching Assistants, and keep track of noteworthy events.** With SoConnect, you can **save 
 your contacts and events in one location**, and even **link events to multiple contacts**, or **bookmark
@@ -11,6 +13,8 @@ your favorite contact**.
 SoConnect is **optimized for use via a _Command Line Interface (CLI)_** while still having 
 the benefits of a _Graphical User Interface (GUI)_. If you can type fast, managing your contacts will be
 **very easy** with SoConnect.
+
+<!-- @@author -->
 
 This user guide will help you to familiarise yourself with your SoConnect quickly and teach you the
 full range of features it offers.
@@ -42,7 +46,7 @@ This is one example of a _command_:
 
 There are only 3 different parts of inputs within each _command_:
 1. **_COMMAND_ WORD**
-
+   
    You need to specify the _command_ word to tell SoConnect what action you want to do.
 
    For example, specifying `cedit` in the _command_ above will tell SoConnect to edit a contact for you.
@@ -52,7 +56,7 @@ There are only 3 different parts of inputs within each _command_:
    The _parameter_ is the supplementary information that you need to provide for the action you want to do.
 
    Using the same example, specifying `2` tells SoConnect to edit the contact at **index 2** (the second contact in the list) to the name `Betsy Crower`.
-
+   
 3. **_PREFIX_**
 
    The *prefix* separates the different types of *parameters*.
@@ -128,7 +132,10 @@ SoConnect will tell you that the _Command Format_ is invalid.
 2. Download the latest `soconnect.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your SoConnect.
+
+<!-- @@author Gordon25 -->
 ![_Home Folder_](images/demo-screenshots/homeFolder.png)
+<!-- @@author -->
 
 4. Double-click the file to start SoConnect. This is how SoConnect looks like:<br>
 
@@ -239,7 +246,10 @@ Icon | _Field_
 **![Event Icon](images/demo-screenshots/eventIcon.png)** | Linked Events
 **![Tag Icon](images/demo-screenshots/tagIcon.png)** | Tag
 
+<!-- @@author Gordon25 -->
 *The bookmark icon is only visible if the contact has been marked.
+<!-- @@author -->
+
 _See also: [Marking a contact](#marking-a-contact-cmark)_
 
 
@@ -262,7 +272,10 @@ Icon | _Field_
 **![Contact Icon](images/demo-screenshots/contactsIcon.png)** | Linked Contacts
 **![Tag Icon](images/demo-screenshots/tagIcon.png)** | Tag
 
+<!-- @@author Gordon25 -->
 *The bookmark icon is only visible if the event has been marked.
+<!-- @@author -->
+
 _See also: [Marking an event](#marking-an-event-emark)_
 
 --------------------------------------------------------------------------------------------------------------------
@@ -280,6 +293,8 @@ For each feature, you are provided with:
 * Examples of some usages of the feature (All examples use the **initial sample** of contacts and events)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<!-- @@author Gordon25 -->
 
 ### Contact Management
 
@@ -526,6 +541,7 @@ Input | Expected Output
 --------|------------------
 `cview 2` | Shows all details of the second contact of the **currently displayed** in SoConnect **fully**. <br> You should see this message in the message box:<br> `Viewing Contact: Bernice Yu; Email: berniceyu@example.com; Phone: 99272758; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Zoom Link: nus-sg.zoom.us/j/08382435376?pwd=Oow3u9N098nh8nsdLp0; Telegram: bbernicee; Tags: [TA][friends]` <br><br> You should see this change of your **viewed** contact: ![View Contact](images/demo-screenshots/cviewEx.png)
 
+<!-- @@author -->
 
 ### Event Management
 
@@ -1067,6 +1083,8 @@ _Prefix_ | _Parameter_ Type
 
 ## _Command_ Summary
 
+<!-- @@author Gordon25 -->
+
 **Contact Management**
 
 Action | Format, Examples
@@ -1080,6 +1098,8 @@ Action | Format, Examples
 **[Mark](#marking-a-contact-cmark)** | `cmark INDEX`<br> e.g. `cmark 2`
 **[Remove mark](#removing-mark-of-a-contact-cunmark)** | `cunmark INDEX [INDEX]…`<br> e.g. `cunmark 2` <br> e.g. `cunmark 2 3`
 **[View](#viewing-a-contact-cview)** | `cview INDEX`<br> e.g. `cview 2`
+
+<!-- @@author -->
 
 **Event Management**
 
