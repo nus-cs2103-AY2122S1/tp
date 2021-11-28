@@ -181,6 +181,7 @@ This is what you will see when you open SoConnect!
 ![Labelled SoConnect](images/demo-screenshots/labelledSoconnectOverview.png)
 
 1. **Menu Bar**
+   
    The Menu Bar consists of 2 tabs: `File` and `Help`.
 
    Upon clicking `File`, you can choose to:
