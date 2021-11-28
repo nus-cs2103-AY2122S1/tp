@@ -39,22 +39,31 @@ public class IndexTest {
 
     @Test
     public void equals() {
-        final Index fifthPersonIndex = Index.fromOneBased(5);
+        final Index fifthIndex = Index.fromOneBased(5);
 
         // same values -> returns true
-        assertTrue(fifthPersonIndex.equals(Index.fromOneBased(5)));
-        assertTrue(fifthPersonIndex.equals(Index.fromZeroBased(4)));
+        assertTrue(fifthIndex.equals(Index.fromOneBased(5)));
+        assertTrue(fifthIndex.equals(Index.fromZeroBased(4)));
 
         // same object -> returns true
-        assertTrue(fifthPersonIndex.equals(fifthPersonIndex));
+        assertTrue(fifthIndex.equals(fifthIndex));
 
         // null -> returns false
-        assertFalse(fifthPersonIndex.equals(null));
+        assertFalse(fifthIndex.equals(null));
 
         // different types -> returns false
-        assertFalse(fifthPersonIndex.equals(5.0f));
+        assertFalse(fifthIndex.equals(5.0f));
 
         // different index -> returns false
-        assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
+        assertFalse(fifthIndex.equals(Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void isMoreThan() {
+        Index indexWithValueOne = Index.fromOneBased(1);
+        Index indexWithValueMaxInteger = Index.fromOneBased(Integer.MAX_VALUE);
+        assertTrue(indexWithValueMaxInteger.isMoreThan(indexWithValueOne));
+        assertFalse(indexWithValueOne.isMoreThan(indexWithValueMaxInteger));
+        assertFalse(indexWithValueOne.isMoreThan(indexWithValueOne));
     }
 }

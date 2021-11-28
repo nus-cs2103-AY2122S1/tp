@@ -9,12 +9,16 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactDisplaySetting;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDisplaySetting;
 import seedu.address.storage.Storage;
 
 /**
@@ -44,6 +48,9 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        if (command instanceof Undoable) {
+            model.commitHistory();
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -60,8 +67,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Contact> getFilteredContactList() {
+        return model.getFilteredContactList();
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return model.getFilteredEventList();
     }
 
     @Override
@@ -75,7 +87,37 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public EventDisplaySetting getEventDisplaySetting() {
+        return model.getEventDisplaySetting();
+    }
+
+    @Override
+    public ContactDisplaySetting getContactDisplaySetting() {
+        return model.getContactDisplaySetting();
+    }
+
+    @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void filterContactsWithLinksToEvent(Event event) {
+        model.updateFilteredContactList(contact -> contact.getLinkedEvents().contains(event.getUuid()));
+    }
+
+    @Override
+    public void filterEventsWithLinkToContact(Contact contact) {
+        model.updateFilteredEventList(event -> event.getLinkedContacts().contains(contact.getUuid()));
+    }
+
+    @Override
+    public void resetFilterOfContacts() {
+        model.rerenderContactCards(true);
+    }
+
+    @Override
+    public void resetFilterOfEvents() {
+        model.rerenderEventCards(true);
     }
 }

@@ -3,22 +3,26 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+'skinparam linetype ortho
 
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+Class CalendarWindow
+Class ContactListPanel
+Class EventListPanel
+Class ContactCard
+Class EventCard
+package OtherUiComponents <<Rectangle>> {
+Class HiddenComponent #FFFFFF
+}
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+Class Event
+Class Contact
 }
 
 package Logic <<Rectangle>> {
@@ -30,31 +34,30 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+Ui -[hidden]---> OtherUiComponents
+MainWindow *--> OtherUiComponents
+MainWindow *--> "1" ContactListPanel
+MainWindow *--> "1" EventListPanel
+MainWindow *--> "0..1" CalendarWindow
 
-PersonListPanel -down-> "*" PersonCard
+ContactListPanel -down-> "*" ContactCard
+EventListPanel -down-> "*" EventCard
 
 MainWindow -left-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ContactListPanel --|> UiPart
+EventListPanel --|> UiPart
+ContactCard --|> UiPart
+EventCard --|> UiPart
+CalendarWindow --|> UiPart
+OtherUiComponents --|> UiPart
 
-PersonCard ..> Model
+ContactCard ..> Contact
+EventCard ..> Event
+CalendarWindow --> Event : calendar of >
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
+'MainWindow -[hidden]-|> UiPart
+ContactListPanel -[hidden]left- EventListPanel
 @enduml
