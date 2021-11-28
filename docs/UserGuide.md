@@ -518,6 +518,8 @@ Input | Expected Output
 
 _See also: [Marking a contact](#marking-a-contact-cmark)_
 
+<!-- @@author -->
+
 #### Viewing a contact: `cview`
 
 Views a contact with all details fully shown.
