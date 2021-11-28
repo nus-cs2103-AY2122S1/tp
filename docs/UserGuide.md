@@ -45,7 +45,7 @@ This is one example of a _command_:
 
 There are only 3 different parts of inputs within each _command_:
 1. **_COMMAND_ WORD**
-   
+
    You need to specify the _command_ word to tell SoConnect what action you want to do.
 
    For example, specifying `cedit` in the _command_ above will tell SoConnect to edit a contact for you.
@@ -55,7 +55,7 @@ There are only 3 different parts of inputs within each _command_:
    The _parameter_ is the supplementary information that you need to provide for the action you want to do.
 
    Using the same example, specifying `2` tells SoConnect to edit the contact at **index 2** (the second contact in the list) to the name `Betsy Crower`.
-   
+
 3. **_PREFIX_**
 
    The *prefix* separates the different types of *parameters*.
@@ -181,7 +181,7 @@ This is what you will see when you open SoConnect!
 ![Labelled SoConnect](images/demo-screenshots/labelledSoconnectOverview.png)
 
 1. **Menu Bar**
-   
+
    The Menu Bar consists of 2 tabs: `File` and `Help`.
 
    Upon clicking `File`, you can choose to:
@@ -189,7 +189,7 @@ This is what you will see when you open SoConnect!
     2. Open **Calendar** of SoConnect
 
    ![File Tab](images/demo-screenshots/fileTab.png)
-   
+
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Click the following links to see how to [exit SoConnect](#exiting-soconnect-exit) and [open the calendar](#calendar-window-calendar) using _commands_.
     </div> <br>
