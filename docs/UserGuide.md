@@ -3,8 +3,11 @@ layout: page
 title: SoConnect User Guide
 ---
 
+<!-- @@author Gordon25 -->
+
 Made by [School of Computing](https://www.comp.nus.edu.sg/) (SoC) students, for SoC students, SoConnect is a **desktop app for SoC students to manage contacts
-of Professors and Teaching Assistants, and keep track of noteworthy events.** With SoConnect, you can **save 
+of Professors and Teaching Assistants, and keep track of noteworthy events.** <!-- @@author -->
+With SoConnect, you can **save 
 your contacts and events in one location**, and even **link events to multiple contacts**, or **bookmark
 your favorite contact**.
 
@@ -128,7 +131,10 @@ SoConnect will tell you that the _Command Format_ is invalid.
 2. Download the latest `soconnect.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your SoConnect.
+
+<!-- @@author Gordon25 -->
 ![_Home Folder_](images/demo-screenshots/homeFolder.png)
+<!-- @@author -->
 
 4. Double-click the file to start SoConnect. This is how SoConnect looks like:<br>
 
@@ -291,8 +297,10 @@ This section details all the features and _commands_ available in SoConnect that
 * [Editing a contact](#editing-a-contact-cedit)
 * [Finding contacts](#finding-contacts-cfind)
 * [Listing all contacts](#listing-all-contacts-clist)
+<!-- @@author Gordon25 -->
 * [Marking a contact](#marking-a-contact-cmark)
 * [Unmarking a contact](#removing-mark-of-a-contact-cunmark)
+<!-- @@author -->
 * [Viewing a contact](#viewing-a-contact-cview)
 
 
@@ -450,6 +458,8 @@ Input | Expected Output
 `clist` | Shows **all available details** of each contact in SoConnect. <br><br> You should see this message in the message box:<br> `Listed all contacts`
 `clist e/ p/` | Shows **only the names, email addresses and phone numbers** (if available) of each contact in SoConnect. <br><br> You should see this message in the message box:<br> `Listed all contacts` <br><br> You should also see the contacts list displays **only the specified _fields_**: ![List Contact 1](images/demo-screenshots/clistEx.png)
 
+<!-- @@author Gordon25 -->
+
 #### Marking a contact: `cmark`
 
 Marks the specified contact(s).
@@ -501,6 +511,8 @@ Input | Expected Output
 [`cmark 1 2 3`](#marking-a-contact-cmark) followed by `cunmark 1 2` | Unmarks the first and second contact of the **currently displayed** contact list in SoConnect. <br><br> You should see these messages in the message box:<br> 1. After `cmark 1 2 3`: `Marked contact: Charlotte Oliveiro; Email: charlotte@example.com Marked contact: Bernice Yu; Email: berniceyu@example.com; Phone: 99272758; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Zoom Link: nus-sg.zoom.us/j/08382435376?pwd=Oow3u9N098nh8nsdLp0; Telegram: bbernicee; Tags: [TA][friends] Marked contact: Alex Yeoh; Email: alexyeoh@example.com; Phone: 87438807; Address: Blk 30 Geylang Street 29, #06-40; Telegram: yeoh_alex; Tags: [friends]` <br> 2. After `cunmark 1 2`: `Unmarked contact: Bernice Yu; Email: berniceyu@example.com; Phone: 99272758; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Zoom Link: nus-sg.zoom.us/j/08382435376?pwd=Oow3u9N098nh8nsdLp0; Telegram: bbernicee; Tags: [TA][friends] Unmarked contact: Charlotte Oliveiro; Email: charlotte@example.com` <br><br> You should see `Bernice Yu` and `Charlotte Oliveiro` moved to the **bottom of your marked contact list** without the **Bookmark Icon**: ![Unmark Contact](images/demo-screenshots/cunmarkEx2.png)
 
 _See also: [Marking a contact](#marking-a-contact-cmark)_
+
+<!-- @@author -->
 
 #### Viewing a contact: `cview`
 
@@ -571,6 +583,7 @@ Input | Expected Output
 
 *Index of the newly added event will depend on your previous number of events.
 
+<!-- @@author Gordon25 -->
 
 #### Clearing all events: `eclear`
 
@@ -680,6 +693,7 @@ Input | Expected Output
 `efind meet` | Displays events with names that contain `meet`. <br><br> You should see this message in the message box:<br> `1 events listed!` <br><br> You should also see only this **one event**: ![Find Event 1](images/demo-screenshots/efindEx1.png)
 `efind t/CS2103T Intern` | Displays events with tags that contain `CS2103T` and `Intern`.<br><br> You should see this message in the message box:<br> `2 events listed!` <br><br> You should also see only these **two events**: ![Find Event 2](images/demo-screenshots/efindEx2.png)
 
+<!-- @@author -->
 
 #### Linking an event to contacts: `elink`
 
