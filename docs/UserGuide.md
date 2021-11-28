@@ -181,13 +181,13 @@ This is what you will see when you open SoConnect!
 ![Labelled SoConnect](images/demo-screenshots/labelledSoconnectOverview.png)
 
 1. **Menu Bar**
-    The Menu Bar consists of 2 tabs: `File` and `Help`.
+   The Menu Bar consists of 2 tabs: `File` and `Help`.
 
    Upon clicking `File`, you can choose to:
     1. **Exit** SoConnect
     2. Open **Calendar** of SoConnect
 
-    ![File Tab](images/demo-screenshots/fileTab.png)
+   ![File Tab](images/demo-screenshots/fileTab.png)
    
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     Click the following links to see how to [exit SoConnect](#exiting-soconnect-exit) and [open the calendar](#calendar-window-calendar) using _commands_.
@@ -245,7 +245,6 @@ Icon | _Field_
 **![Tag Icon](images/demo-screenshots/tagIcon.png)** | Tag
 
 *The bookmark icon is only visible if the contact has been marked.
-
 _See also: [Marking a contact](#marking-a-contact-cmark)_
 
 
@@ -269,7 +268,6 @@ Icon | _Field_
 **![Tag Icon](images/demo-screenshots/tagIcon.png)** | Tag
 
 *The bookmark icon is only visible if the event has been marked.
-
 _See also: [Marking an event](#marking-an-event-emark)_
 
 --------------------------------------------------------------------------------------------------------------------
@@ -338,6 +336,7 @@ Clears **all** entries of contacts in SoConnect.
 This **will not change the events** saved in SoConnect.
 </div>
 
+
 #### Deleting a contact: `cdelete`
 
 Deletes the specified contact(s) from SoConnect.
@@ -356,7 +355,6 @@ Deletes the specified contact(s) from SoConnect.
 </div>
 
 **Examples:**
-
 
 Input | Expected Output
 --------|------------------
@@ -388,7 +386,6 @@ Edits an **existing** contact in SoConnect.
 </div>
 
 **Examples:**
-
 
 Input | Expected Output
 --------|------------------
@@ -427,14 +424,12 @@ There are **two** types of contact searches you can do in SoConnect:
 The search by `cfind` is case-insensitive. e.g. `hans` will match `Hans`.
 </div>
 
-
 **Examples:**
 
 Input | Expected Output
 --------|------------------
 `cfind alex david` | Returns contacts of `Alex Yeoh` and `David Li`. <br><br>You should see this message in the message box:<br>`2 contacts listed!`<br><br> You should also see only these **2 contacts**: ![Find Contact 1](images/demo-screenshots/cfindEx1.png)
 `cfind p/926 e/nus.edu` | Returns contacts with phone numbers that contain `926` and with emails that contain `nus.edu`.<br><br>You should see this message in the message box:<br>`2 contacts listed!`<br><br> You should also see only these **2 contacts**: ![Find Contact 2](images/demo-screenshots/cfindEx2.png)
-
 
 
 #### Listing all contacts: `clist`
@@ -449,7 +444,6 @@ Shows **all contacts** in the SoConnect, with all available details by default.
 * You can provide more than one optional _prefix_.
 * You can specify the optional _prefix_ **in any order**. e.g. both `clist e/ p/` and `clist p/ e/` will show only the names, email addresses and phone numbers of each contact.
 * _Fields_ of a contact that have no value will not appear e.g. if a contact does not have a zoom link, typing `clist z/` will not display the zoom link of this contact.
-
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -478,7 +472,6 @@ Marks the specified contact(s).
 <div markdown="block" class="alert alert-primary">:bulb: **Tip:**
 
 * `INDEX` **must be a positive integer**, e.g. 1, 2, 3,…
-
 * `INDEX` must **not be greater** than the **number of contacts** in the contact list.
 </div>
 
@@ -527,9 +520,7 @@ Views a contact with all details fully shown.
 **Format:** `cview INDEX`
 
 * displays only the contact at the specified `INDEX`.
-
 * All truncated details of the contact you want to view will be expanded fully.
-
 * `INDEX` refers to the index number shown in the displayed contact list.
 
 <div markdown="block" class="alert alert-primary">
@@ -545,6 +536,7 @@ Views a contact with all details fully shown.
 Input | Expected Output
 --------|------------------
 `cview 2` | Shows all details of the second contact of the **currently displayed** in SoConnect **fully**. <br> You should see this message in the message box:<br> `Viewing Contact: Bernice Yu; Email: berniceyu@example.com; Phone: 99272758; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Zoom Link: nus-sg.zoom.us/j/08382435376?pwd=Oow3u9N098nh8nsdLp0; Telegram: bbernicee; Tags: [TA][friends]` <br><br> You should see this change of your **viewed** contact: ![View Contact](images/demo-screenshots/cviewEx.png)
+
 
 ### Event Management
 
