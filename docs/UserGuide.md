@@ -244,9 +244,7 @@ Icon | _Field_
 **![Event Icon](images/demo-screenshots/eventIcon.png)** | Linked Events
 **![Tag Icon](images/demo-screenshots/tagIcon.png)** | Tag
 
-<!-- @@author Gordon25 -->
 *The bookmark icon is only visible if the contact has been marked.
-<!-- @@author -->
 
 _See also: [Marking a contact](#marking-a-contact-cmark)_
 
@@ -270,9 +268,7 @@ Icon | _Field_
 **![Contact Icon](images/demo-screenshots/contactsIcon.png)** | Linked Contacts
 **![Tag Icon](images/demo-screenshots/tagIcon.png)** | Tag
 
-<!-- @@author Gordon25 -->
 *The bookmark icon is only visible if the event has been marked.
-<!-- @@author -->
 
 _See also: [Marking an event](#marking-an-event-emark)_
 
@@ -328,11 +324,8 @@ Input | Expected Output
 `cadd n/Alex Doe e/e0123456@u.nus.edu a/COM1 #99-99 th/johnDoe99 t/Professor` | You should see this message in the message box: `New contact added: Alex Doe; Email: e0123456@u.nus.edu; Address: COM1 #99-99; Telegram: johnDoe99; Tags: [Professor]` <br><br> You should also see `Alex Doe` added **at the end** of your contact list: ![New Contact 1](images/demo-screenshots/caddEx1.png)
 `cadd n/ Jon Cheng t/TA e/e7654321@u.nus.edu a/COM1-0201 p/87654321 t/Senior th/jonnyjohnny z/https://nus-sg.zoom.us/j/0123456789?pwd=ABCDEFGHIJKLMNOPDJFHISDFSDH` | You should see this message in the message box: `New contact added: Jon Cheng; Email: e7654321@u.nus.edu; Phone: 87654321; Address: COM1-0201; Zoom Link: https://nus-sg.zoom.us/j/0123456789?pwd=ABCDEFGHIJKLMNOPDJFHISDFSDH; Telegram: jonnyjohnny; Tags: [Senior][TA]`<br><br> You should also see `Jon Cheng` added **at the end** of your contact list: ![New Contact 2](images/demo-screenshots/caddEx2.png)
 
-<!-- @@author Gordon25 -->
-
 *Index of the newly added contact will be one more than the previous number of contacts.
 
-<!-- @@author -->
 
 #### Clearing all contacts: `cclear`
 
@@ -381,22 +374,18 @@ Edits an **existing** contact in SoConnect.
 * Edits the contact at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed contact list.
 * You must provide **at least one** of the optional _fields_.
-  <!-- @@author Gordon25 -->
 * The input values you provide will be used to update the existing values.
-  <!-- @@author -->
 * You can use `t/` to add a tag.
 * You can remove a specific tag by typing `dt/` followed by the name of the tag that you wish to remove.
 * You can remove all existing tags of a contact by typing `dt/*`.
 * When editing tags, the tags to be deleted will be removed first, before new tags are added.
 
-<!-- @@author Gordon25 -->
 <div markdown="block" class="alert alert-primary">:bulb: **Tip:**
 
 * `INDEX` **must be a positive integer**. e.g. 1, 2, 3, …
 * `INDEX` must **not be greater** than the **number of contacts** in the contact list.
 * You **cannot** edit a contact to the **same name** as an existing contact.
 </div>
-<!-- @@author -->
 
 **Examples:**
 
@@ -409,15 +398,12 @@ Input | Expected Output
 
 #### Finding contacts: `cfind`
 
-<!-- @@author Gordon25 -->
 Finds all contacts that contain any of the given keywords that you specify.
-<!-- @@author -->
 
 **Format:** `cfind [KEYWORD]… [e/KEYWORD…] [p/KEYWORD…] [a/KEYWORD…] [th/KEYWORD…] [z/KEYWORD…] [t/KEYWORD…]`
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tip:**
 
-<!-- @@author Gordon25 -->
 There are **two** types of contact searches you can do in SoConnect:
 1. If you **do not specify any optional _fields_** in front of the keywords you specify, e.g. `cfind KEYWORD1 KEYWORD2`,
 
@@ -430,16 +416,10 @@ There are **two** types of contact searches you can do in SoConnect:
 
 * You must provide **at least one keyword**.
 * You can provide multiple keywords without specifying any optional _fields_ e.g. `cfind John David`.
-  <!-- @@author -->
 * You can only **specify each optional _field_ once**.
-  
-  <!-- @@author Gordon25 -->
 * You can the keywords **in any order**. e.g. Both `Hans Bo` and `Bo Hans` will return the same result.
-  <!-- @@author -->
 * Partial words can be matched e.g. `Han` will match `Hans`.
-  <!-- @@author Gordon25 -->
 * The contact(s) matching at least one keyword you provide will be returned.
-  <!-- @@author -->
   e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -459,21 +439,17 @@ Input | Expected Output
 
 #### Listing all contacts: `clist`
 
-<!-- @@author Gordon25 -->
 Shows **all contacts** in the SoConnect, with all available details by default.
-<!-- @@author -->
 
 **Format:** `clist [e/] [p/] [a/] [th/] [z/] [t/]`
 
 * Names of contacts are always shown.
-  <!-- @@author Gordon25 -->
 * If you do not provide any optional _prefixes_, e.g `clist`, all available details of each contact will be shown.
 * If you provide optional _prefixes_, it will only show the names and the _fields_ corresponding to specified _prefixes_ for each contact.
 * You can provide more than one optional _prefix_.
 * You can specify the optional _prefix_ **in any order**. e.g. both `clist e/ p/` and `clist p/ e/` will show only the names, email addresses and phone numbers of each contact.
 * _Fields_ of a contact that have no value will not appear e.g. if a contact does not have a zoom link, typing `clist z/` will not display the zoom link of this contact.
 
-<!-- @@author -->
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -502,8 +478,6 @@ Marks the specified contact(s).
 <div markdown="block" class="alert alert-primary">:bulb: **Tip:**
 
 * `INDEX` **must be a positive integer**, e.g. 1, 2, 3,…
-
-<!-- @@author Gordon25 -->
 
 * `INDEX` must **not be greater** than the **number of contacts** in the contact list.
 </div>
@@ -544,25 +518,16 @@ Input | Expected Output
 
 _See also: [Marking a contact](#marking-a-contact-cmark)_
 
-<!-- @@author -->
-
 #### Viewing a contact: `cview`
-
-<!-- @@author Gordon25 -->
 
 Views a contact with all details fully shown.
 
-<!-- @@author -->
-
 **Format:** `cview INDEX`
 
-<!-- @@author Gordon25 -->
 * displays only the contact at the specified `INDEX`.
-<!-- @@author -->
 
 * All truncated details of the contact you want to view will be expanded fully.
 
-<!-- @@author Gordon25 -->
 * `INDEX` refers to the index number shown in the displayed contact list.
 
 <div markdown="block" class="alert alert-primary">
@@ -572,8 +537,6 @@ Views a contact with all details fully shown.
 * `INDEX` must **not be greater** than the **number of contacts** in the contact list.
 
 </div>
-
-<!-- @@author -->
 
 **Examples:**
 
@@ -625,6 +588,7 @@ Input | Expected Output
 
 *Index of the newly added event will depend on your previous number of events.
 
+<!-- @@author Gordon25 -->
 
 #### Clearing all events: `eclear`
 
@@ -734,6 +698,7 @@ Input | Expected Output
 `efind meet` | Displays events with names that contain `meet`. <br><br> You should see this message in the message box:<br> `1 events listed!` <br><br> You should also see only this **one event**: ![Find Event 1](images/demo-screenshots/efindEx1.png)
 `efind t/CS2103T Intern` | Displays events with tags that contain `CS2103T` and `Intern`.<br><br> You should see this message in the message box:<br> `2 events listed!` <br><br> You should also see only these **two events**: ![Find Event 2](images/demo-screenshots/efindEx2.png)
 
+<!-- @@author -->
 
 #### Linking an event to contacts: `elink`
 
