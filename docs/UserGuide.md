@@ -181,17 +181,12 @@ This is what you will see when you open SoConnect!
 ![Labelled SoConnect](images/demo-screenshots/labelledSoconnectOverview.png)
 
 1. **Menu Bar**
-   
-    <!-- @@author Gordon25-->
-   
     The Menu Bar consists of 2 tabs: `File` and `Help`.
 
    Upon clicking `File`, you can choose to:
     1. **Exit** SoConnect
     2. Open **Calendar** of SoConnect
 
-    <!-- @@author -->
-   
     ![File Tab](images/demo-screenshots/fileTab.png)
    
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
