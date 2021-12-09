@@ -296,15 +296,15 @@ The sequence diagrams below illustrate how the Timetable UI is built.
 
 3.`TimetablePanel#build()` starts building the Timetable Ui by first calling `TimetablePanel#buildHeader()` which takes in the `ObservableList<TuitionClass>`.
 
-    ![Timetable Header Sequence Diagram](images/TimetableUiHeaderSequenceDiagram.png)
+![Timetable Header Sequence Diagram](images/TimetableUiHeaderSequenceDiagram.png)
 
 4.Based on the `Timetable#buildHeader()` reference frame above, it builds the `TimetableHeaderLabel` first, followed by the `TimetableHeaderTiming`s, starting from the earliest start time of the `ObservableList<TuitionClass>` until the latest end time of the `ObservableList<TuitionClass>` in 30 minutes interval.
 
-    ![Timetable Day Sequence Diagram](images/TimetableUiDaySequenceDiagram.png)
+![Timetable Day Sequence Diagram](images/TimetableUiDaySequenceDiagram.png)
 
 5.After `TimetablePanel#buildHeader()` is called, it would call `TimetablePanel#buildDays()`, which builds 7 `TimetableDay` objects to represent the 7 days of the week.
 
-    ![Timetable Slot Sequence Diagram](images/TimetableUiSlotSequenceDiagram.png)
+![Timetable Slot Sequence Diagram](images/TimetableUiSlotSequenceDiagram.png)
 
 6.Finally, the `TimetablePanel#buildClasses()` is called, which takes in the same `ObservableList<TuitionClass>` as step 3. It iterates through the _sorted_ `ObservableList<TuitionClass>`, building a `TimetableTuitionClassSlot` for each of the `TuitionClass`, and placing `TimetableEmptySlot`s in between the `TimetableTuitionClassSlot`s.
 
