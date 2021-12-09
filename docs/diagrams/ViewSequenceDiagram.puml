@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TimesTableParser" as TimesTableParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant "mainWindow:CommandObserver" as CommandObserver UI_COLOR
+end box
+
+[-> LogicManager : execute("view timetable")
+activate LogicManager
+
+LogicManager -> TimesTableParser : parseCommand("view timetable")
+activate TimesTableParser
+
+create ViewCommandParser
+TimesTableParser -> ViewCommandParser
+activate ViewCommandParser
+
+ViewCommandParser --> TimesTableParser
+deactivate ViewCommandParser
+
+TimesTableParser -> ViewCommandParser : parse("timetable")
+activate ViewCommandParser
+
+create ViewCommand
+ViewCommandParser -> ViewCommand
+activate ViewCommand
+
+ViewCommand --> ViewCommandParser : v
+deactivate ViewCommand
+
+ViewCommandParser --> TimesTableParser : v
+deactivate ViewCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewCommandParser -[hidden]-> TimesTableParser
+destroy ViewCommandParser
+
+TimesTableParser --> LogicManager : v
+deactivate TimesTableParser
+
+LogicManager -> ViewCommand : execute()
+activate ViewCommand
+
+ViewCommand -> CommandObserver : updateView(TIMETABLE)
+activate CommandObserver
+
+CommandObserver --> ViewCommand
+deactivate CommandObserver
+
+create CommandResult
+ViewCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewCommand
+deactivate CommandResult
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+'CommandResult -[hidden]-> TimesTableParser
+'destroy CommandResult
+
+ViewCommand --> LogicManager : result
+deactivate ViewCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+'ViewCommand -[hidden]-> TimesTableParser
+'destroy ViewCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

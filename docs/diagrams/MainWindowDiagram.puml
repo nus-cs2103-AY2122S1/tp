@@ -1,0 +1,74 @@
+    @startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+
+'IGNORE THIS FILE FIRST
+package MainWindow <<Rectangle>>{
+Class "{abstract}\nUiPart" as UiPart
+Class MainWindow
+Class HelpWindow
+Class ResultDisplay
+Class PersonListPanel
+Class PersonCard
+Class StatusBarFooter
+Class CommandBox
+
+package Timetable <<Rectangle>> {
+Class HiddenTimetable #FFFFFF
+}
+
+}
+
+
+Class UiManager
+Interface Ui <<Interface>>
+Interface CommandObserver <<Interface>>
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+package Logic <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+
+UiManager .right.|> Ui
+UiManager -left-> "1" MainWindow
+
+MainWindow .up.|> CommandObserver
+MainWindow *-up---> "\n\n\n1" Timetable
+MainWindow *-left->  "1" CommandBox
+MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow --> "0..1" HelpWindow
+MainWindow -down-|> UiPart
+
+PersonListPanel -down-> "*" PersonCard
+
+ResultDisplay --|> UiPart
+CommandBox --|> UiPart
+PersonListPanel --|> UiPart
+PersonCard --|> UiPart
+StatusBarFooter --|> UiPart
+HelpWindow --|> UiPart
+Timetable -right-|> UiPart
+
+PersonCard ..> Model
+UiManager -up-> Logic
+MainWindow -right-> Logic
+
+Logic -up-> "*" CommandObserver
+
+PersonListPanel -[hidden]left- HelpWindow
+HelpWindow -[hidden]left- CommandBox
+CommandBox -[hidden]left- ResultDisplay
+ResultDisplay -[hidden]left- StatusBarFooter
+
+MainWindow -[hidden]-|> UiPart
+@enduml

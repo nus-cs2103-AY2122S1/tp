@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+group sd generate updated StudentNameList
+
+box Logic LOGIC_COLOR_T1
+participant ":AddToClass" as AddToClass LOGIC_COLOR
+participant ":StudentNameList" as updatedNameList LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "lastShownTuitionClassList:FilteredList" as FilteredClass MODEL_COLOR
+participant "classToAddTo:TuitionClass" as classToAddTo MODEL_COLOR
+end box
+
+activate AddToClass
+
+AddToClass -> AddToClass : createNameList(...)
+activate AddToClass
+return namesToAdd
+
+AddToClass -> FilteredClass : get(...)
+activate FilteredClass
+return classToAddTo
+
+AddToClass -> classToAddTo : getStudentList()
+activate classToAddTo
+return currentStudentNameList
+
+
+create updatedNameList
+AddToClass -> updatedNameList : StudentNameList()
+activate updatedNameList
+return
+
+AddToClass -> updatedNameList : addAll(currentStudentNameList)
+activate updatedNameList
+return
+
+AddToClass -> updatedNameList : addAll(namesToAdd)
+activate updatedNameList
+return
+
+end
+@enduml

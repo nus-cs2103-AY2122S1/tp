@@ -1,0 +1,89 @@
+@startuml
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":AddToClassCommand" as AddToClassCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "classList:ObservableList<TuitionClass>" as tuitionClassList MODEL_COLOR
+participant "c1:TuitionClass" as TuitionClass MODEL_COLOR
+participant "studentList:ObservableList<Student>" as studentList MODEL_COLOR
+participant "c2:TuitionClass" as newTuitionClass MODEL_COLOR
+participant "sn:StudentNameList" as newStudentNameList MODEL_COLOR
+end box
+
+[-> AddToClassCommand: execute()
+activate AddToClassCommand
+
+AddToClassCommand -> Model: getFilteredStudentList()
+activate Model
+Model -> studentList: Get student list
+activate studentList
+Model <-- studentList: studentList
+deactivate
+AddToClassCommand <-- Model: studentList
+deactivate Model
+
+AddToClassCommand -> Model: getFilteredTuitionClassList()
+activate Model
+Model -> tuitionClassList: Get class list
+activate tuitionClassList
+Model <-- tuitionClassList: classList
+deactivate
+AddToClassCommand <-- Model: classList
+deactivate Model
+
+AddToClassCommand -> AddToClassCommand ++: checkIndicesAreValid(studentList, classList)
+AddToClassCommand --> AddToClassCommand --
+
+AddToClassCommand -> AddToClassCommand ++: createNameList(studentIndices, studentList)
+AddToClassCommand --> AddToClassCommand --: namesToAdd
+
+AddToClassCommand -> tuitionClassList: get(classIndex)
+activate tuitionClassList
+tuitionClassList -> TuitionClass: Get tuition class
+activate TuitionClass
+tuitionClassList <-- TuitionClass: c1
+deactivate
+AddToClassCommand <-- tuitionClassList: c1
+deactivate tuitionClassList
+
+AddToClassCommand -> TuitionClass: getStudentList()
+activate TuitionClass
+AddToClassCommand <-- TuitionClass: nameList
+deactivate
+
+create newStudentNameList
+AddToClassCommand -> newStudentNameList : StudentNameList()
+activate newStudentNameList
+newStudentNameList --> AddToClassCommand
+deactivate newStudentNameList
+AddToClassCommand -> newStudentNameList : addAll(nameList)
+activate newStudentNameList
+newStudentNameList --> AddToClassCommand : updatedNameList
+deactivate newStudentNameList
+AddToClassCommand -> newStudentNameList : addAll(namesToAdd)
+activate newStudentNameList
+newStudentNameList --> AddToClassCommand : updatedNameList
+deactivate newStudentNameList
+
+create newTuitionClass
+AddToClassCommand -> newTuitionClass ++ :Create new tuition class with updatedNameList
+AddToClassCommand <-- newTuitionClass -- : c2
+
+
+AddToClassCommand -> Model: setClass(c1, c2)
+activate Model
+AddToClassCommand <-- Model
+deactivate Model
+create CommandResult
+AddToClassCommand -> CommandResult
+activate CommandResult
+AddToClassCommand <-- CommandResult
+deactivate CommandResult
+[<-- AddToClassCommand: result
+deactivate AddToClassCommand
+
+@enduml

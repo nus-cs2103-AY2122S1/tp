@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+
+box TimetableUi UI_COLOR_T1
+participant ":TimetablePanel" as TimetablePanel UI_COLOR_T3
+participant ":TimetableTuitionClassSlot" as TimetableTuitionClassSlot UI_COLOR_T3
+participant ":TimetableEmptySlot" as TimetableEmptySlot UI_COLOR_T3
+end box
+
+
+create TimetablePanel
+[-[hidden]-> TimetablePanel
+activate TimetablePanel
+
+group sd buildClasses
+TimetablePanel -> TimetablePanel : buildClasses(List<TuitionClass>)
+activate TimetablePanel
+
+loop Until end of List
+
+opt Free time in between this and previous class
+create TimetableEmptySlot
+TimetablePanel -> TimetableEmptySlot
+activate TimetableEmptySlot
+TimetableEmptySlot --> TimetablePanel
+deactivate TimetableEmptySlot
+end
+
+create TimetableTuitionClassSlot
+TimetablePanel -> TimetableTuitionClassSlot
+activate TimetableTuitionClassSlot
+TimetableTuitionClassSlot --> TimetablePanel
+deactivate TimetableTuitionClassSlot
+end
+
+
+TimetablePanel --> TimetablePanel
+deactivate TimetablePanel
+end
+
+
+@enduml

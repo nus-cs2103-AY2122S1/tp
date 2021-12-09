@@ -1,0 +1,26 @@
+    @startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Interface Ui <<Interface>>
+Interface CommandObserver <<Interface>>
+Class UiManager
+Class MainWindow
+
+}
+
+package Logic <<Rectangle>> {
+Class "{abstract}\nCommand" as Command LOGIC_COLOR
+Class XYZCommand LOGIC_COLOR
+}
+
+UiManager .right..|> Ui
+UiManager -down-> "1" MainWindow
+MainWindow .right..|> CommandObserver
+XYZCommand -up-|> Command LOGIC_COLOR_T4
+
+Command --> CommandObserver LOGIC_COLOR_T4 : < Observes
+@enduml

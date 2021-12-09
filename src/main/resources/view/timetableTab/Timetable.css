@@ -1,0 +1,43 @@
+.timetable-day {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-padding: 25;
+}
+
+.timetable-day-box {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-background-color: derive(#7e4147, 20%);
+    -fx-border-color: #C0888E;
+}
+
+.timetable-scroll {
+    -fx-fit-to-height: true;
+    -fx-max-width: 3750;
+}
+
+.timetable-class-slot-box {
+    -fx-background-color: #C26565;
+    -fx-padding: 15;
+    -fx-border-color: #C6949A;
+}
+
+.timetable-time-panel {
+    -fx-background-color: #BA7C83;
+    -fx-padding: 10;
+    -fx-max-height: 1;
+    -fx-text-alignment: right;
+    -fx-border-color: #C6949A;
+}
+
+.timetable-label {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+}
+
+.timetable-empty-slot-box {
+    -fx-background-color: derive(#7e4147, 20%);
+    -fx-background-insets: 5 0 5 0;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}

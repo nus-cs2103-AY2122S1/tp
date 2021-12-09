@@ -1,0 +1,34 @@
+@startuml
+title: Activity: Build TimetableTuitionClassSlots
+start
+:Sort tuitionClasses based on their class timings\nstarting from the earliest;
+:Find earliest start hour and latest end hour **<U+22D4>**;
+:Store the earliest start hour in a variable called\n'previousTime' which will act as a pointer to the end\nof the latest TuitionClassSlot we built up to;
+:int i = 0;;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+while () is ([i < TuitionClasses.size()])
+:Get tuitionClass at index i;
+    if () then ([tuitionClass at index i's\nstart time != previousTime])
+        :Add empty slot from\npreviousTime to the\nstart time of the tuitionClass;
+
+
+    else ([else])
+    endif
+
+    :Add TimetableTuitionClassSlot from start\ntime to end time of tuitionClass at index i;
+    if () then ([tuitionClass at index i + 1\nis not on the same day as tuitionClass\nat index i])
+        :previousTime = Earliest start hour;
+
+    else ([else])
+        :previousTime = end time of tuitionClass at index i;
+    endif
+:i++;;
+
+endwhile ([else])
+
+
+
+
+stop
+@enduml

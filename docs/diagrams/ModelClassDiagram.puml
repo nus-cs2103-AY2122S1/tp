@@ -5,50 +5,48 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyTimestable <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Timestable
+Class ReadOnlyTimestable
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
+Class UniqueStudentList
+Class UniqueClassList
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+package TuitionClass <<Rectangle>> {
+}
+package Student <<Rectangle>> {
+}
+
+
 
 }
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Timestable .up.|> ReadOnlyTimestable
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyTimestable
+ModelManager -left-> "1" Timestable
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Timestable *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" Student
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Timestable *--> "1" UniqueClassList
+UniqueClassList -right-> "~* all" TuitionClass
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Student
+ModelManager -->"~* filtered" TuitionClass
 @enduml

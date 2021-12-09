@@ -1,0 +1,55 @@
+@startuml
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TimesTableParser" as TimesTableParser LOGIC_COLOR
+participant ":AddToClassCommandParser" as AddToClassCommandParser LOGIC_COLOR
+participant "c:AddToClassCommand" as AddToClassCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+-> LogicManager: execute("addtoclass 1 1")
+activate LogicManager
+LogicManager -> TimesTableParser: parseCommand("addtoclass 1 1")
+activate TimesTableParser
+create AddToClassCommandParser
+TimesTableParser -> AddToClassCommandParser
+activate AddToClassCommandParser
+TimesTableParser <-- AddToClassCommandParser
+deactivate AddToClassCommandParser
+TimesTableParser -> AddToClassCommandParser: parse("1 1")
+activate AddToClassCommandParser
+create AddToClassCommand
+AddToClassCommandParser -> AddToClassCommand: AddToClassCommand(indexArray)
+activate AddToClassCommand
+AddToClassCommandParser <-- AddToClassCommand: c
+deactivate AddToClassCommand
+TimesTableParser <-- AddToClassCommandParser: c
+deactivate AddToClassCommandParser
+LogicManager <-- TimesTableParser: c
+deactivate TimesTableParser
+
+LogicManager -> AddToClassCommand: execute()
+activate AddToClassCommand
+ref over AddToClassCommand, Model : Match Student and Class Indices to their objects. Create updated Name list.
+AddToClassCommand -> Model: setClass(classToAddTo, editedClass)
+activate Model
+AddToClassCommand <-- Model
+deactivate Model
+create CommandResult
+AddToClassCommand -> CommandResult
+activate CommandResult
+AddToClassCommand <-- CommandResult
+deactivate CommandResult
+LogicManager <-- AddToClassCommand: result
+deactivate AddToClassCommand
+<-- LogicManager: result
+deactivate LogicManager
+
+@enduml

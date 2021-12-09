@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+
+group sd generate updated TuitionClass
+
+box Logic LOGIC_COLOR_T1
+participant ":AddToClass" as AddToClass LOGIC_COLOR
+participant ":EditClassDescriptor" as descriptor LOGIC_COLOR
+participant ":EditClassCommand" as EditClassCommand <<class>> LOGIC_COLOR
+end box
+
+create descriptor
+AddToClass -> descriptor : EditClassDescriptor()
+activate descriptor
+
+return
+
+
+AddToClass -> descriptor : setStudentList(updatedStudentNameList)
+activate descriptor
+return
+
+AddToClass -> EditClassCommand : createEditedClass(classToAddTo, editClassDescriptor)
+activate EditClassCommand
+return editedClass
+
+end
+@enduml

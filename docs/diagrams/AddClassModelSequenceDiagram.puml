@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":TimesTable" as TimesTable MODEL_COLOR_T3
+participant ":UniqueClassList" as UniqueClassList MODEL_COLOR_T3
+participant "internalList:ObservableArrayList" as ObservableArrayList MODEL_COLOR_T3
+end box
+
+[-> Model : addTuitionClass(t)
+activate Model
+
+Model -> TimesTable : addTuitionClass(t)
+activate TimesTable
+
+TimesTable -> UniqueClassList : add(t)
+activate UniqueClassList
+
+UniqueClassList -> UniqueClassList : isValidTiming(t)
+activate UniqueClassList
+UniqueClassList --> UniqueClassList
+deactivate UniqueClassList
+
+UniqueClassList -> ObservableArrayList : add(t)
+activate ObservableArrayList
+
+
+@enduml

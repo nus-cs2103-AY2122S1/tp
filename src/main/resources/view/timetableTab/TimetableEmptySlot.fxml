@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<!--Solution below adapted from-->
+<!--https://github.com/AY1920S2-CS2103-W15-4/main/blob/master/src/main/resources/view/calendar/CalendarBuffer.fxml-->
+<HBox fx:id="slot" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="timetable-empty-slot-box">
+    <VBox prefHeight="50" GridPane.columnIndex="0" />
+</HBox>

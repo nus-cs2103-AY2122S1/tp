@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Student <<Rectangle>>{
+
+Class Person
+Class Student
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Tag
+Class NOK
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ...> " * all"Student
+HiddenOutside ...> " * filtered"Student
+
+Person <|-up- Student
+Person <|-right- NOK
+
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Student *-right-> "*" Tag
+Student *--> "1" NOK
+
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+
+
+@enduml

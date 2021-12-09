@@ -11,7 +11,7 @@
 
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" />
+    <Image url="@/images/TimestableLogo.png" />
   </icons>
   <scene>
     <Scene>
@@ -20,9 +20,9 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" style="-fx-background-color: #7e4147;">
         <children>
-          <Label fx:id="helpMessage" text="Label">
+          <Label fx:id="helpMessage" text="Label" textFill="WHITE">
             <HBox.margin>
               <Insets right="5.0" />
             </HBox.margin>

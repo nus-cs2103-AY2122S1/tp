@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+
+box TimetableUi UI_COLOR_T1
+participant ":TimetablePanel" as TimetablePanel UI_COLOR_T3
+participant ":TimetableDay" as TimetableDay UI_COLOR_T3
+end box
+
+
+create TimetablePanel
+[-[hidden]-> TimetablePanel
+activate TimetablePanel
+
+group sd buildDays
+TimetablePanel -> TimetablePanel : buildDays()
+activate TimetablePanel
+
+loop 7 times (Mon to Sun)
+create TimetableDay
+TimetablePanel -> TimetableDay
+activate TimetableDay
+TimetableDay --> TimetablePanel
+deactivate TimetableDay
+end
+
+
+TimetablePanel --> TimetablePanel
+deactivate TimetablePanel
+end
+
+
+@enduml

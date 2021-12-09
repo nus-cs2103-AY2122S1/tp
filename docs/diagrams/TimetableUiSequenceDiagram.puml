@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+
+box MainWindow UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box TimetableUi UI_COLOR_T1
+participant ":TimetablePanel" as TimetablePanel UI_COLOR_T3
+end box
+
+[-> MainWindow : fillInnerParts()
+activate MainWindow
+
+create TimetablePanel
+MainWindow -> TimetablePanel : new TimetablePanel(List<TuitionClass>)
+activate TimetablePanel
+
+TimetablePanel -> TimetablePanel : build()
+activate TimetablePanel
+
+ref over TimetablePanel, TimetablePanel: buildHeader
+
+ref over TimetablePanel, TimetablePanel: buildDays
+
+opt UI_COLOR_T1 has classes
+ref over TimetablePanel, TimetablePanel: buildClasses
+
+end
+
+TimetablePanel --> TimetablePanel
+deactivate TimetablePanel
+
+TimetablePanel --> MainWindow
+[<-- MainWindow
+deactivate MainWindow
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+":Logic" -> ":FindTagCommand" : execute()
+activate ":FindTagCommand"
+":FindTagCommand" -> ":Model" : updateFilteredPersonList(predicate)
+activate ":Model"
+":Model" -> "filteredStudents:FilteredList" : setPredicate(predicate)
+activate "filteredStudents:FilteredList"
+return
+return
+return
+@enduml

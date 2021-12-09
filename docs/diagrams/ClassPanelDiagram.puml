@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package ClassesUi <<Rectangle>>{
+Class ClassPanel
+Class StudentClassPanel
+Class StudentClassTabCard
+Class TuitionClassPanel
+Class TuitionClassCard
+}
+
+package Model <<Rectangle>> {
+Class Student
+Class TuitionClass
+}
+
+Class "{abstract}\nUiPart" as UiPart
+
+Class MainWindow
+MainWindow *--> "1" ClassPanel
+ClassPanel -down-> "1" StudentClassPanel
+ClassPanel -down-> "1" TuitionClassPanel
+StudentClassPanel -down-> "*" StudentClassTabCard
+TuitionClassPanel -down-> "*" TuitionClassCard
+StudentClassTabCard ..> Student
+TuitionClassCard ..> TuitionClass
+
+ClassPanel --|> UiPart
+StudentClassPanel --|> UiPart
+TuitionClassPanel --|> UiPart
+StudentClassTabCard --|> UiPart
+TuitionClassCard --|> UiPart
+
+@enduml

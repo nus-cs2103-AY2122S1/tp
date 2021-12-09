@@ -1,0 +1,19 @@
+@startuml
+title: Activity: Build TimetableDay
+start
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Mon";
+:Increase row index by 1;
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Tue";
+:Increase row index by 1;
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Wed";
+:Increase row index by 1;
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Thu";
+:Increase row index by 1;
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Fri";
+:Increase row index by 1;
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Sat";
+:Increase row index by 1;
+:Build TimetableDay at\nthe left (column index 0)\nlabelled "Sun";
+
+stop
+@enduml

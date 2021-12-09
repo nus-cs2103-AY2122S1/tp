@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+
+
+box Logic LOGIC_COLOR_T1
+participant "c:RemoveFromClassCommand" as RemoveFromClassCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "classList:ObservableList<TuitionClass>" as tuitionClassList MODEL_COLOR
+participant "classToRemoveFrom:TuitionClass" as TuitionClass MODEL_COLOR
+participant "studentList:ObservableList<Student>" as studentList MODEL_COLOR
+participant "editedClass:TuitionClass" as newTuitionClass MODEL_COLOR
+end box
+
+activate RemoveFromClassCommand
+
+group sd Match Student and Class Indices to their objects. Create updated Name list.
+RemoveFromClassCommand -> Model: getFilteredTuitionClassList()
+activate Model
+Model -> tuitionClassList: Get class list
+activate tuitionClassList
+Model <-- tuitionClassList: classList
+deactivate
+RemoveFromClassCommand <-- Model: classList
+deactivate Model
+
+RemoveFromClassCommand -> tuitionClassList: get(classIndex)
+activate tuitionClassList
+tuitionClassList -> TuitionClass: Get tuition class
+activate TuitionClass
+tuitionClassList <-- TuitionClass: classToRemoveFrom
+deactivate
+RemoveFromClassCommand <-- tuitionClassList: classToRemoveFrom
+deactivate tuitionClassList
+
+RemoveFromClassCommand -> TuitionClass: getStudentList()
+activate TuitionClass
+RemoveFromClassCommand <-- TuitionClass: nameList
+deactivate
+
+RemoveFromClassCommand -> Model: getFilteredStudentList()
+activate Model
+Model -> studentList: Get student list
+activate studentList
+Model <-- studentList: studentList
+deactivate
+RemoveFromClassCommand <-- Model: studentList
+deactivate Model
+
+RemoveFromClassCommand -> RemoveFromClassCommand ++: checkIndicesAreValid(studentIndices, studentList)
+RemoveFromClassCommand --> RemoveFromClassCommand --
+
+RemoveFromClassCommand -> RemoveFromClassCommand ++: createNewNameList(studentIndices, studentList)
+RemoveFromClassCommand --> RemoveFromClassCommand --: newNameList
+
+create newTuitionClass
+RemoveFromClassCommand -> newTuitionClass ++ :Create new tuition class with newNameList
+
+
+RemoveFromClassCommand <-- newTuitionClass -- : editedClass
+
+end
+@enduml

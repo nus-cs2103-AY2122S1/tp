@@ -1,0 +1,125 @@
+{
+  "_comment": "TimesTable save file which contains the same Person values as in TypicalPersons#getTypicalTimesTable()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "nok" : {
+      "name" : "Long Chai Boon",
+      "phone" : "67785914",
+      "email" : "longchatbooon@gmail.com",
+      "address" : "325, Clementi State 3, #40-32"
+    },
+    "tagged" : [ "Maths" ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "nok" : {
+      "name" : "Short Chai Boon",
+      "phone" : "87759868",
+      "email" : "hahiihi@gmail.com",
+      "address" : "325, West State 3, #60-12"
+    },
+    "tagged" : [ "Physics" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "Campbell Road Ave 2, #11",
+    "nok" : {
+      "name" : "Jamie Kurz",
+      "phone" : "62212222",
+      "email" : "dontcallmeillcome@gmail.com",
+      "address" : "325, Bat Cave 3, #10-23"
+    },
+    "tagged" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "nok" : {
+      "name" : "Bad Chai Boon",
+      "phone" : "88888888",
+      "email" : "happyorsadyouchoose@gmail.com",
+      "address" : "1, Happy Sad 3, #10-12"
+    },
+    "tagged" : [ "Maths" ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "nok" : {
+      "name" : "Bernard Wan",
+      "phone" : "67785314",
+      "email" : "bernard@gmail.com",
+      "address" : "222, Berkeys State 4, #11-32"
+    },
+    "tagged" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "nok" : {
+      "name" : "Ong Lin Zhen",
+      "phone" : "67382344",
+      "email" : "zhenngggii@gmail.com",
+      "address" : "323, Lin Estate 3, #44-31"
+    },
+    "tagged" : [ ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "nok" : {
+      "name" : "Hehe Chai Red",
+      "phone" : "67111111",
+      "email" : "salmon@gmail.com",
+      "address" : "999, Estate State 4, #10-32"
+    },
+    "tagged" : [ ]
+  } ],
+  "classes" : [{
+    "classTiming" : "MON 10:00-12:00",
+    "className" : "JC Physics",
+    "rate" : "70",
+    "location" : "Jaycee Tuition Center Nex",
+    "students" : [ "Benson Meier", "Alice Pauline" ]
+  }, {
+    "classTiming" : "Tue 11:00-13:00",
+    "className" : "Sec 4 Physics",
+    "rate" : "77",
+    "location" : "Learning Lab Orchard",
+    "students" : [ "Carl Kurz", "Daniel Meier" ]
+  }, {
+    "classTiming" : "Wed 15:00-17:00",
+    "className" : "JC Maths",
+    "rate" : "55",
+    "location" : "Bukit Merah Block 614 #01-330",
+    "students" : [ ]
+  }, {
+    "classTiming" : "Thu 10:00-12:00",
+    "className" : "Sec 4 Maths",
+    "rate" : "60",
+    "location" : "Merlion Tuition Center Kovan",
+    "students" : [ ]
+  }, {
+    "classTiming" : "Fri 15:00-18:00",
+    "className" : "JC Chemistry",
+    "rate" : "50",
+    "location" : "Hougang Blk 313 #11-394",
+    "students" : [ ]
+  }, {
+    "classTiming" : "Sat 13:00-16:00",
+    "className" : "Sec 4 Chemistry",
+    "rate" : "80",
+    "location" : "Kumon at Orchard",
+    "students" : [ ]
+  }]
+}

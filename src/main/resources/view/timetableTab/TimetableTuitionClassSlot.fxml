@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--Solution below adapted from-->
+<!--https://github.com/AY1920S2-CS2103-W15-4/main/blob/master/src/main/resources/view/calendar/CalendarSlot.fxml-->
+<HBox fx:id="slot" styleClass="timetable-class-slot-box" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox prefHeight="50">
+        <Label fx:id="className" wrapText="true" styleClass="timetable-label" text="\$className" />
+        <Label fx:id="time" styleClass="timetable-label" text="\$time" />
+    </VBox>
+</HBox>

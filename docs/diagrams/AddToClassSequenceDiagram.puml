@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddToClass" as AddToClass LOGIC_COLOR
+'participant ":EditClassDescriptor" as descripter LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+'participant "lastShownTuitionClassList:FilteredList" as FilteredClass MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addtoclass 1 1")
+activate LogicManager
+
+LogicManager -> AddToClass : execute()
+activate AddToClass
+
+AddToClass -> ModelManager : getFilteredStudentList()
+AddToClass <-- ModelManager
+AddToClass -> ModelManager : getFilteredClassList()
+AddToClass <-- ModelManager
+AddToClass -> AddToClass : checkIndicesAreInRange()
+activate AddToClass
+AddToClass --> AddToClass
+deactivate
+
+ref over AddToClass, ModelManager : generate updated StudentNameList
+
+ref over AddToClass, ModelManager : generate updated TuitionClass
+
+AddToClass -> ModelManager : setClass(classToAdd, editedClass)
+AddToClass <-- ModelManager
+
+return
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

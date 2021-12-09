@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+group sd generate StudentNameList and TuitionClass
+
+box Logic LOGIC_COLOR_T1
+participant ":AddClassCommandParser" as AddClassCommandParser LOGIC_COLOR
+participant "s:StudentNameList" as StudentNameList LOGIC_COLOR
+participant "t:TuitionClass" as TuitionClass LOGIC_COLOR
+end box
+
+activate AddClassCommandParser
+create StudentNameList
+AddClassCommandParser -> StudentNameList : StudentNameList()
+activate StudentNameList
+
+StudentNameList --> AddClassCommandParser : s
+deactivate StudentNameList
+
+create TuitionClass
+AddClassCommandParser -> TuitionClass : TuitionClass(className, classTiming, location, rate, s)
+activate TuitionClass
+
+TuitionClass --> AddClassCommandParser : t
+deactivate TuitionClass
+
+
+
+
+end
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+title: Activity: Find earliest start hour and latest end hour
+start
+if () then ([Number of TuitionClasses > 0])
+    :Iterate through the list of tuition\nclasses and find the earliest class\nstart timing and round down to\nthe nearest hour;
+    :Set earliest start hour to the earliest class\nstart timing found in the previous step or\nthe default earliest start timing(09:00),\nwhichever is earlier;
+    :Iterate through the list of tuition\nclasses and find the latest class\nend timing and round up to the\nnearest hour;
+    :Set latest end hour to the latest class\nend timing found in the previous step\nor the default latest end timing(18:00),\nwhichever is later;
+
+
+else ([else])
+    :Set earliest start hour\nto default earliest start timing\n(09:00);
+    :Set latest end hour\nto default latest end timing\n(18:00);
+
+endif
+stop
+@enduml

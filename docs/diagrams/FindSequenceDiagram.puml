@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FindTagCommand" as FindTagCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "filteredStudent:FilteredList" as FilteredStudents MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findtag maths")
+activate LogicManager
+
+LogicManager -> FindTagCommand : execute()
+activate FindTagCommand
+
+FindTagCommand -> ModelManager : updateFilteredStudentList(predicate)
+activate ModelManager
+
+ModelManager -> FilteredStudents : setPredicate(predicate)
+activate FilteredStudents
+
+return
+return
+return
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

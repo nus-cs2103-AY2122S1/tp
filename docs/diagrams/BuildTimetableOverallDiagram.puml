@@ -1,0 +1,18 @@
+@startuml
+start
+
+:Clear Displayed Timetable;
+
+:Build TimetableHeader **<U+22D4>**;
+
+:Build TimetableDay **<U+22D4>**;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([Number of TuitionClasses > 0])
+    :Build TimetableTuitionClassSlots **<U+22D4>**;
+else ([else])
+endif
+stop
+@enduml

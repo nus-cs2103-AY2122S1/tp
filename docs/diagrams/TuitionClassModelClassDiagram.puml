@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package TuitionClass <<Rectangle>>{
+
+Class TuitionClass
+Class ClassName
+Class ClassTiming
+Class Rate
+Class Location
+Class StudentNameList
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ...> " * all"TuitionClass
+HiddenOutside ...> " * filtered"TuitionClass
+
+TuitionClass *--> "1" ClassName
+TuitionClass *--> "1" ClassTiming
+TuitionClass *--> "1" Rate
+TuitionClass *--> "1" Location
+TuitionClass *--> "1" StudentNameList
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+title: Activity: Build TimetableHeader
+start
+:Build TimetableHeaderLabel at\ntop left (row index = 0 and\ncolumn index = 0) labelled "Time Slots";
+
+:Find earliest start hour and latest end hour **<U+22D4>**;
+
+while () is ([earliest start hour\n< latest end hour])
+    if () then ([earliest start hour == 23:30])
+        :Add new TimetableHeaderTiming\nfrom earliest start hour to \nearliest start hour + 29 mins;
+        :Break out of while loop,\ngo to else portion of the loop;
+    else ([else])
+        :Add new TimetableHeaderTiming\nfrom earliest start hour to \nearliest start hour + 30 mins;
+        :Increase earliest start hour by 30mins;
+    endif
+endwhile ([else])
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+
+stop
+@enduml

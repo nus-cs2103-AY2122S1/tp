@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+
+box TimetableUi UI_COLOR_T1
+participant ":TimetablePanel" as TimetablePanel UI_COLOR_T3
+participant ":TimetableHeaderLabel" as TimetableHeaderLabel UI_COLOR_T3
+participant ":TimetableHeaderTiming" as TimetableHeaderTiming UI_COLOR_T3
+end box
+
+
+create TimetablePanel
+[-[hidden]-> TimetablePanel
+activate TimetablePanel
+
+group sd buildHeader
+TimetablePanel -> TimetablePanel : buildHeader(List<TuitionClass>)
+activate TimetablePanel
+
+create TimetableHeaderLabel
+TimetablePanel -> TimetableHeaderLabel
+activate TimetableHeaderLabel
+TimetableHeaderLabel --> TimetablePanel
+deactivate TimetableHeaderLabel
+
+loop For every 30 mins from start to end time of List
+create TimetableHeaderTiming
+TimetablePanel -> TimetableHeaderTiming
+activate TimetableHeaderTiming
+TimetableHeaderTiming --> TimetablePanel
+deactivate TimetableHeaderTiming
+end
+
+
+TimetablePanel --> TimetablePanel
+deactivate TimetablePanel
+end
+
+
+@enduml

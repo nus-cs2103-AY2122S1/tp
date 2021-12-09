@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TimesTableParser" as TimesTableParser LOGIC_COLOR
+participant ":RemoveFromClassCommandParser" as RemoveFromClassCommandParser LOGIC_COLOR
+participant "c:RemoveFromClassCommand" as RemoveFromClassCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+-> LogicManager: execute("removefromclass 1 1")
+activate LogicManager
+LogicManager -> TimesTableParser: parseCommand("removefromclass 1 1")
+activate TimesTableParser
+create RemoveFromClassCommandParser
+TimesTableParser -> RemoveFromClassCommandParser
+activate RemoveFromClassCommandParser
+TimesTableParser <-- RemoveFromClassCommandParser
+deactivate RemoveFromClassCommandParser
+TimesTableParser -> RemoveFromClassCommandParser: parse("1 1")
+activate RemoveFromClassCommandParser
+create RemoveFromClassCommand
+RemoveFromClassCommandParser -> RemoveFromClassCommand: RemoveFromClassCommand(indexArray)
+activate RemoveFromClassCommand
+RemoveFromClassCommandParser <-- RemoveFromClassCommand: c
+deactivate RemoveFromClassCommand
+TimesTableParser <-- RemoveFromClassCommandParser: c
+deactivate RemoveFromClassCommandParser
+RemoveFromClassCommandParser -[hidden]-> TimesTableParser
+destroy RemoveFromClassCommandParser
+LogicManager <-- TimesTableParser: c
+deactivate TimesTableParser
+
+LogicManager -> RemoveFromClassCommand: execute()
+activate RemoveFromClassCommand
+ref over RemoveFromClassCommand, Model : Match Student and Class Indices to their objects. Create updated Name list.
+RemoveFromClassCommand -> Model: setClass(classToRemoveFrom, editedClass)
+activate Model
+RemoveFromClassCommand <-- Model
+deactivate Model
+create CommandResult
+RemoveFromClassCommand -> CommandResult
+activate CommandResult
+RemoveFromClassCommand <-- CommandResult
+deactivate CommandResult
+LogicManager <-- RemoveFromClassCommand: result
+deactivate RemoveFromClassCommand
+<-- LogicManager: result
+deactivate LogicManager
+
+
+@enduml

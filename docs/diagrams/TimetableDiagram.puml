@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package TimetableUi <<Rectangle>>{
+Class TimetablePanel
+Class TimetableDay
+Class TimetableEmptySlot
+Class TimetableHeader
+Class TimetableRegion
+Class TimetableTuitionClassSlot
+Class TimetableHeaderTiming
+Class TimetableHeaderLabel
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+Class "{abstract}\nUiPart" as UiPart
+
+Class MainWindow
+MainWindow *--> "1" TimetablePanel
+TimetablePanel *--> "7" TimetableDay
+TimetablePanel *--> "*" TimetableEmptySlot
+TimetablePanel *--> "18...48" TimetableHeaderTiming
+TimetablePanel *--> "1" TimetableHeaderLabel
+TimetablePanel *--> "*" TimetableTuitionClassSlot
+
+TimetableHeaderLabel -down-|> TimetableHeader
+TimetableHeaderTiming -down-|> TimetableHeader
+
+TimetableDay --|> TimetableRegion
+TimetableEmptySlot --|> TimetableRegion
+TimetableHeader --|> TimetableRegion
+TimetableTuitionClassSlot --|> TimetableRegion
+
+TimetableRegion --|> UiPart
+TimetablePanel --|> UiPart
+
+TimetablePanel .right.> Model
+
+@enduml

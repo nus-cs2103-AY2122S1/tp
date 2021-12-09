@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--Solution below adapted from-->
+<!--https://github.com/AY1920S2-CS2103-W15-4/main/blob/master/src/main/resources/view/calendar/CalendarPanel.fxml-->
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <ScrollPane fx:id="scrollPane" styleClass="timetable-scroll" VBox.vgrow="ALWAYS" maxWidth="1000" style="-fx-background-color: derive(#7e4147, 20%)">
+        <GridPane fx:id="timetable" VBox.vgrow="ALWAYS" minWidth="2750" style="-fx-background-color: derive(#7e4147, 20%)"/>
+    </ScrollPane>
+</VBox>
+

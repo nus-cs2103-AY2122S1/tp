@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage{
+
+package "UserPrefs Storage" #F4F6F6{
+Interface UserPrefsStorage <<Interface>>
+Class JsonUserPrefsStorage
+}
+
+Interface Storage <<Interface>>
+Class StorageManager
+
+package "TimesTable Storage" #F4F6F6{
+Interface TimesTableStorage <<Interface>>
+Class JsonTimesTableStorage
+Class JsonSerializableTimesTable
+Class JsonAdaptedStudent
+Class JsonAdaptedTag
+Class JsonAdaptedTuitionClass
+Class JsonAdaptedNok
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Storage
+
+StorageManager .up.|> Storage
+StorageManager -up-> "1" UserPrefsStorage
+StorageManager -up-> "1" TimesTableStorage
+
+Storage -left-|> UserPrefsStorage
+Storage -right-|> TimesTableStorage
+
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonTimesTableStorage .up.|> TimesTableStorage
+JsonTimesTableStorage ..> JsonSerializableTimesTable
+JsonSerializableTimesTable --> "*" JsonAdaptedStudent
+JsonSerializableTimesTable --> "*" JsonAdaptedTuitionClass
+JsonAdaptedStudent --> "*" JsonAdaptedTag
+JsonAdaptedStudent --> "1" JsonAdaptedNok
+@enduml

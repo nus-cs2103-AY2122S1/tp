@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TimesTableParser" as TimesTableParser LOGIC_COLOR
+participant ":AddClassCommandParser" as AddClassCommandParser LOGIC_COLOR
+participant "a:AddClassCommand" as AddClassCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addclass cn/... ct/... r/.. l/...")
+activate LogicManager
+
+LogicManager -> TimesTableParser : parseCommand("addclass cn/... ct/... r/.. l/...")
+activate TimesTableParser
+
+create AddClassCommandParser
+TimesTableParser -> AddClassCommandParser
+activate AddClassCommandParser
+
+AddClassCommandParser --> TimesTableParser
+deactivate AddClassCommandParser
+
+TimesTableParser -> AddClassCommandParser : parse("cn/... ct/... r/.. l/...")
+activate AddClassCommandParser
+
+ref over AddClassCommandParser : generate StudentNameList and TuitionClass
+
+create AddClassCommand
+AddClassCommandParser -> AddClassCommand : AddClassCommand(t)
+activate AddClassCommand
+
+AddClassCommand --> AddClassCommandParser : a
+deactivate AddClassCommand
+
+AddClassCommandParser --> TimesTableParser : a
+deactivate AddClassCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddClassCommandParser -[hidden]-> TimesTableParser
+destroy AddClassCommandParser
+
+TimesTableParser --> LogicManager : a
+deactivate TimesTableParser
+
+LogicManager -> AddClassCommand : execute()
+activate AddClassCommand
+
+AddClassCommand -> Model : addTuitionClass(t)
+activate Model
+deactivate Model
+
+
+
+create CommandResult
+AddClassCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddClassCommand
+deactivate CommandResult
+
+AddClassCommand --> LogicManager : result
+deactivate AddClassCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
