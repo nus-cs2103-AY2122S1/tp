@@ -1,0 +1,12 @@
+{
+  "participants": [ ],
+  "events" : [
+     {
+       "name" : "^^^asda",
+       "isDone" : "Uncompleted",
+       "date" : "2021-09-18",
+       "time" : "1000",
+       "participants" : [ ]
+     }
+   ]
+}

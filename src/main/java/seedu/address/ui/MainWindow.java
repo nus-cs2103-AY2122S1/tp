@@ -31,9 +31,11 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ParticipantListPanel participantListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    //add-on for Managera
+    private EventListPanel eventListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +44,11 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane participantListPanelPlaceholder;
+
+    //Add on for Managera
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -59,7 +65,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
+        this.primaryStage.setResizable(true);
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -110,8 +116,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        participantListPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
+        participantListPanelPlaceholder.getChildren().add(participantListPanel.getRoot());
+
+        //Add-on for Managera
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,8 +173,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ParticipantListPanel getParticipantListPanel() {
+        return participantListPanel;
     }
 
     /**

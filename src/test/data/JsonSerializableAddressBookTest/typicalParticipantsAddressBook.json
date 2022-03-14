@@ -1,0 +1,107 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "participants" : [ {
+    "id" : "aleyeo1",
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ],
+    "birthDate" : "2000-08-02",
+    "notes" : [ {
+      "content" : "Vegetarian",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Janette Yeoh",
+      "phone" : "93822312",
+      "tag" : "Spouse"
+    } ]
+  }, {
+    "id" : "beryu1",
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "tagged" : [ "colleagues", "friends" ],
+    "birthDate" : "1970-04-02",
+    "notes" : [ {
+      "content" : "Allergic to Alcohol",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Bennett Yu",
+      "phone" : "83612412",
+      "tag" : "Parent"
+    } ]
+  }, {
+    "id" : "chaoli1",
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
+    "tagged" : [ "neighbours" ],
+    "birthDate" : "1982-05-13",
+    "notes" : [ {
+      "content" : "Dislike pepper",
+      "importance" : "MEDIUM"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Daniel Pruvos",
+      "phone" : "83460328",
+      "tag" : "Brother"
+    } ]
+  }, {
+    "id" : "davli1",
+    "name" : "David Li",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "address" : "Blk 436 Serangoon Gardens Street 26, #16-43",
+    "tagged" : [ "family" ],
+    "birthDate" : "1999-02-02",
+    "notes" : [ {
+      "content" : "Vegetarian",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Maria Li",
+      "phone" : "84459923",
+      "tag" : "Girlfriend"
+    } ]
+  }, {
+    "id" : "irfibr1",
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "address" : "Blk 47 Tampines Street 20, #17-35",
+    "tagged" : [ "classmates" ],
+    "birthDate" : "2000-05-23",
+    "notes" : [ {
+      "content" : "Dislike ill-mannered Person",
+      "importance" : "MEDIUM"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Juliet Ibrahim",
+      "phone" : "89345342",
+      "tag" : "Grandparent"
+    } ]
+  }, {
+    "id" : "roybal1",
+    "name" : "Roy Balakrishnan",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "address" : "Blk 45 Aljunied Street 85, #11-31",
+    "tagged" : [ "colleagues" ],
+    "birthDate" : "1999-02-08",
+    "notes" : [ {
+      "content" : "Excessive attraction to Alcohol",
+      "importance" : "HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Rouse Balakrishnan",
+      "phone" : "93822312",
+      "tag" : "Brother"
+    } ]
+  }],
+  "events": []
+}

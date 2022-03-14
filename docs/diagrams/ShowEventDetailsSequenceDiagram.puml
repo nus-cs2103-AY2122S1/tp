@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ShowEventDetailsCommandParser" as ShowEventDetailsCommandParser LOGIC_COLOR
+participant "s:ShowEventDetailsCommand" as ShowEventDetailsCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("showDetails 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("showDetails 1")
+activate AddressBookParser
+
+create ShowEventDetailsCommandParser
+AddressBookParser -> ShowEventDetailsCommandParser
+activate ShowEventDetailsCommandParser
+
+ShowEventDetailsCommandParser --> AddressBookParser
+deactivate ShowEventDetailsCommandParser
+
+AddressBookParser -> ShowEventDetailsCommandParser : parse(" 1")
+activate ShowEventDetailsCommandParser
+
+create ShowEventDetailsCommand
+ShowEventDetailsCommandParser -> ShowEventDetailsCommand
+activate ShowEventDetailsCommand
+
+ShowEventDetailsCommand --> ShowEventDetailsCommandParser : s
+deactivate ShowEventDetailsCommand
+
+ShowEventDetailsCommandParser --> AddressBookParser : s
+deactivate ShowEventDetailsCommandParser
+
+ShowEventDetailsCommandParser -[hidden]> AddressBookParser : s
+destroy ShowEventDetailsCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> ShowEventDetailsCommand : execute()
+activate ShowEventDetailsCommand
+
+ShowEventDetailsCommand -> Model : getFilteredEventList()
+activate Model
+
+Model --> ShowEventDetailsCommand
+deactivate Model
+
+create CommandResult
+ShowEventDetailsCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ShowEventDetailsCommand
+deactivate CommandResult
+
+ShowEventDetailsCommand --> LogicManager : result
+deactivate ShowEventDetailsCommand
+
+ShowEventDetailsCommand -[hidden]> LogicManager : result
+destroy ShowEventDetailsCommand
+
+[<- LogicManager
+deactivate LogicManager
+@enduml

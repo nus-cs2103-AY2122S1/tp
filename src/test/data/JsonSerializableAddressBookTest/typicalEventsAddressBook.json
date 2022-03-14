@@ -1,0 +1,19 @@
+{
+  "_comment": "AddressBook save file which contains the same Event values as in TypicalEvents#getTypicalAddressBook()",
+  "participants" : [ ],
+  "events" : [
+    {
+      "name" : "Sleep",
+      "isDone" : "Uncompleted",
+      "date" : "2021-09-18",
+      "time" : "1000",
+      "participants" : [ ]
+    }, {
+      "name" : "Sleep2",
+      "isDone" : "Uncompleted",
+      "date" : "2021-09-18",
+      "time" : "1001",
+      "participants" : [ ]
+    }
+  ]
+}

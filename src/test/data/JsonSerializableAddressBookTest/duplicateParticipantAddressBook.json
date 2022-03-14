@@ -1,0 +1,36 @@
+{
+  "participants": [ {
+    "id" : "aleyeo1",
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ],
+    "birthDate" : "2000-08-02",
+    "notes" : [ {
+      "content" : "Vegetarian",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Janette Yeoh",
+      "phone" : "93822312",
+      "tag" : "Spouse"
+    }] }, {
+    "id" : "aleyeo1",
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ],
+    "birthDate" : "2000-08-02",
+    "notes" : [ {
+      "content" : "Vegetarian",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Janette Yeoh",
+      "phone" : "93822312",
+      "tag" : "Spouse"
+    }] } ],
+  "events" : []
+}

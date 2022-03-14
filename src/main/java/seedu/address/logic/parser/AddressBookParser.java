@@ -7,14 +7,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AddNextOfKinCommand;
+import seedu.address.logic.commands.AddParticipantToEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteEventCommand;
+import seedu.address.logic.commands.DeleteNextOfKinCommand;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventCommand;
+import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
+import seedu.address.logic.commands.ShowEventDetailsCommand;
+import seedu.address.logic.commands.ShowEventParticipantsCommand;
+import seedu.address.logic.commands.SortEventCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,6 +82,53 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        //Add new Commands and cases here:
+
+        case AddEventCommand.COMMAND_WORD:
+            return new AddEventCommandParser().parse(arguments);
+
+        case DeleteEventCommand.COMMAND_WORD:
+            return new DeleteEventCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case SortEventCommand.COMMAND_WORD:
+            return new SortEventCommand();
+
+        case FilterEventCommand.COMMAND_WORD:
+            return new FilterEventCommandParser().parse(arguments);
+
+        case ListEventCommand.COMMAND_WORD:
+            return new ListEventCommand();
+
+        case AddParticipantToEventCommand.COMMAND_WORD:
+            return new AddParticipantToEventParser().parse(arguments);
+
+        case RemoveParticipantFromEventCommand.COMMAND_WORD:
+            return new RemoveParticipantFromEventParser().parse(arguments);
+
+        case AddNextOfKinCommand.COMMAND_WORD:
+            return new AddNextOfKinParser().parse(arguments);
+
+        case DeleteNextOfKinCommand.COMMAND_WORD:
+            return new DeleteNextOfKinParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case ShowEventDetailsCommand.COMMAND_WORD:
+            return new ShowEventDetailsCommandParser().parse(arguments);
+
+        case ShowEventParticipantsCommand.COMMAND_WORD:
+            return new ShowEventParticipantsCommandParser().parse(arguments);
+
+        case FindEventCommand.COMMAND_WORD:
+            return new FindEventCommandParser().parse(arguments);
+
+        case EditEventCommand.COMMAND_WORD:
+            return new EditEventCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

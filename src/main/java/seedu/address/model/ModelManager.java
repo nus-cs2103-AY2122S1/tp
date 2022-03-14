@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,17 +12,20 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
+import seedu.address.model.participant.Participant;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the Managera data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Participant> filteredParticipants;
+    //Add-ons for Managera
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +38,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredParticipants = new FilteredList<>(this.addressBook.getParticipantList());
+        //Add-ons for Managera
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -89,44 +95,123 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return addressBook.hasParticipant(participant);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteParticipant(Participant target) {
+        requireNonNull(target);
+        target.deleteFromEvents();
+        addressBook.removeParticipant(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addParticipant(Participant participant) {
+        addressBook.addParticipant(participant);
+        logger.info("Participant " + participant.getParticipantIdValue()
+                + " was successfully added to AddressBook");
+        updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setParticipant(Participant target, Participant editedParticipant) {
+        requireAllNonNull(target, editedParticipant);
+        target.shiftEvents(editedParticipant);
+        addressBook.setParticipant(target, editedParticipant);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Participant List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Participant> getFilteredParticipantList() {
+        return filteredParticipants;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public Optional<Participant> findParticipant(Predicate<Participant> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        return filteredParticipants.stream().filter(predicate).findFirst();
+    }
+
+    @Override
+    public void updateFilteredParticipantList(Predicate<Participant> predicate) {
+        requireNonNull(predicate);
+        filteredParticipants.setPredicate(predicate);
+    }
+
+    //=========== Event List Accessor =========================================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        logger.info("AddressBook's FilteredList of Participants accessed.");
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    /**
+     * Sorts the events in the addressBook.
+     */
+    @Override
+    public void sortEvents() {
+        addressBook.sortEvents();
+    }
+
+    /**
+     * Returns a boolean if Managera already contain this event.
+     *
+     * @param event An Event instance.
+     * @return A boolean indicating if the event already exists.
+     */
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    /**
+     * Add the event to Managera.
+     */
+    @Override
+    public void addEvent(Event event) {
+        requireNonNull(event);
+        addressBook.addEvent(event);
+    }
+
+    /**
+     * Remove the event from Managera.
+     */
+    @Override
+    public void deleteEvent(Event target) {
+        requireNonNull(target);
+        target.deleteFromParticipants();
+        addressBook.deleteEvent(target);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(target);
+        target.shiftParticipants(editedEvent);
+        addressBook.setEvent(target, editedEvent);
+    }
+
+    @Override
+    public void markEventAsDone(Event target) {
+        target.markAsDone();
     }
 
     @Override
@@ -145,7 +230,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredParticipants.equals(other.filteredParticipants)
+                && filteredEvents.equals(other.filteredEvents);
     }
 
 }
