@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showParticipantAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARTICIPANT;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.participant.Participant;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -22,8 +24,22 @@ import seedu.address.model.UserPrefs;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model anotherModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private UserPrefs standardUserPrefs = new UserPrefs();
+    private Model model = new ModelManager(getTypicalAddressBook(), standardUserPrefs);
+
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        Participant participantToDelete = model.getFilteredParticipantList()
+                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), standardUserPrefs);
+        expectedModel.deleteParticipant(participantToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -31,6 +47,23 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
+
+        Participant participantToDelete = model.getFilteredParticipantList()
+                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), standardUserPrefs);
+        expectedModel.deleteParticipant(participantToDelete);
+        showNoParticipant(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
