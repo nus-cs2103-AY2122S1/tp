@@ -2,18 +2,34 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.ClassLimit;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.StudentList;
+import seedu.address.model.tuition.Timeslot;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +37,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static String[] days = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -121,4 +138,158 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Does not throw ParseException as there are no restrictions for remark input.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String limit} into an {@code ClassLimit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     *
+     */
+    public static ClassLimit parseLimit(String limit) throws ParseException {
+        requireNonNull(limit);
+        String trimmedLimit = limit.trim();
+        try {
+            int myLimit = Integer.parseInt(trimmedLimit);
+            if (!ClassLimit.isValidLimit(myLimit)) {
+                throw new ParseException(ClassLimit.MESSAGE_CONSTRAINTS);
+            }
+            return new ClassLimit(myLimit);
+        } catch (NumberFormatException e) {
+            throw new ParseException(ClassLimit.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String order} into a trimmed string.
+     * @param order the intended sorting order input by user.
+     * @return an Order object.
+     */
+    public static SortCommandParser.Order parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (trimmedOrder.equals(SortCommandParser.Order.TIME.toString())) {
+            return SortCommandParser.Order.TIME;
+        } else if (trimmedOrder.equals(SortCommandParser.Order.ASCENDING.toString())) {
+            return SortCommandParser.Order.ASCENDING;
+        } else if (trimmedOrder.equals(SortCommandParser.Order.DESCENDING.toString())) {
+            return SortCommandParser.Order.DESCENDING;
+        } else {
+            throw new ParseException(SortCommandParser.Order.ORDER_CONSTRAINT);
+        }
+    }
+
+    /**
+     * Parses a {@code String className} into a {@code ClassName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ClassName parseClassName(String className) throws ParseException {
+        requireNonNull(className);
+        String trimmedName = className.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassName(trimmedName);
+    }
+    /**
+     * Parses a {@code List students} into a {@code Student}.
+     * @param students a list of students, each of which is a string
+     * @return a single student object containing an arraylist
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static StudentList parseStudent(List students) throws ParseException {
+        requireNonNull(students);
+        String trimmedStudents = (String) students.get(0);
+        String[] studentNames = trimmedStudents.split(",");
+        ArrayList<String> studentList = new ArrayList<>();
+        for (String s: studentNames) {
+            if (!Name.isValidName(s)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS_ADD_STUDENT_TO_CLASS);
+            }
+            studentList.add(s);
+        }
+        return new StudentList(studentList);
+    }
+
+    /**
+     * Parses a {@code List studentIndexes} into a List of indexes.
+     *
+     * @param indices List of indexes, each representing a student.
+     * @return List of student indexes sorted in descending order.
+     * @throws ParseException If any index is invalid.
+     */
+    public static List<Index> parseIndices(List<String> indices) throws ParseException {
+        List<Index> args = new ArrayList<Index>();
+        String[] students;
+        try {
+            students = ((String) indices.get(0)).split(" ");
+            for (String student : students) {
+                Index i = parseIndex(student);
+                if (!args.contains(i)) {
+                    args.add(i);
+                }
+            }
+        } catch (IndexOutOfBoundsException | java.util.regex.PatternSyntaxException | ParseException pe) {
+            throw new ParseException(Messages.MESSAGE_INVALID_INDICES);
+        }
+        args.sort((index1, index2) -> {
+            if (index1.getOneBased() < index2.getOneBased()) {
+                return 1;
+            } else if (index1.getOneBased() > index2.getOneBased()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        return args;
+    }
+
+    /**
+     * Parses a {@code String timeslot} into a {@code Timeslot}.
+     * Uses EEE HH:mm-HH:mm format.
+     *
+     * @param timeslot The String that represents the day and timings.
+     * @return The timeslot.
+     * @throws ParseException If there are parsing errors or the timings are invalid.
+     */
+    public static Timeslot parseTimeslot(String timeslot) throws ParseException {
+        requireNonNull(timeslot);
+        String[] arr = timeslot.trim().split(" ", 2);
+        String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
+
+        if (arr.length < 2 || arr[0].length() != 3 || times == null || times.length < 2) {
+            throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+        }
+        boolean validDay = Arrays.stream(days).anyMatch(arr[0]::equals);
+        if (!validDay) {
+            throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+        }
+        DateFormat dayFormat = new SimpleDateFormat("EEE");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH);
+        try {
+            Date day = dayFormat.parse(arr[0]);
+            LocalTime start = LocalTime.parse(times[0], timeFormat);
+            LocalTime end = LocalTime.parse(times[1], timeFormat);
+
+            if (!start.isBefore(end)) {
+                throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+            }
+            return new Timeslot(day, start, end);
+        } catch (DateTimeException | java.text.ParseException de) {
+            throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+        }
+    }
 }
+

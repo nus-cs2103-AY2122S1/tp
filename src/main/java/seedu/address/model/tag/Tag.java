@@ -11,6 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_CLASS_STAMP = ".*(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
     public final String tagName;
 
@@ -29,7 +30,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) || test.matches(VALIDATION_CLASS_STAMP);
     }
 
     @Override

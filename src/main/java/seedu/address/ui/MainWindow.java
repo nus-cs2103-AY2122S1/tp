@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
+
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +18,14 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Student;
+import seedu.address.model.tuition.TuitionClass;
+import seedu.address.model.tuition.UniqueTuitionList;
+import seedu.address.ui.infopage.InfoPage;
+import seedu.address.ui.infopage.StudentInfoPage;
+import seedu.address.ui.infopage.TimetableInfoPage;
+import seedu.address.ui.infopage.TodayTuitionClassInfoPage;
+import seedu.address.ui.infopage.TuitionClassInfoPage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +41,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
+    private TuitionListPanel tuitionListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +53,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane tuitionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane infoPagePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,8 +127,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+
+        tuitionListPanel = new TuitionListPanel(logic.getFilteredTuitionList());
+        tuitionListPanelPlaceholder.getChildren().add(tuitionListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +141,18 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        reminderDisplay();
+    }
+
+
+    /**
+     * Display a reminder to tutor about today tuition classes
+     */
+    public void reminderDisplay() {
+        ObservableList<TuitionClass> tuitionClasses = logic.getTodayTuitionList();
+        TodayTuitionClassInfoPage todayTuitionClassInfoPage = new TodayTuitionClassInfoPage(tuitionClasses);
+        updateInfoPage(todayTuitionClassInfoPage);
     }
 
     /**
@@ -163,8 +195,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     /**
@@ -178,13 +210,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
+            executeUiAction(commandResult.getUiAction());
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -193,4 +219,76 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    private void executeUiAction(CommandResult.UiAction action) {
+        switch (action) {
+        case EXIT:
+            handleExit();
+            break;
+        case SHOW_HELP:
+            handleHelp();
+            break;
+        case SHOW_TUITION_PAGE:
+            showTuitionPage();
+            break;
+        case SHOW_TIMETABLE:
+            showTimetable();
+            break;
+        case SHOW_STUDENT_PAGE:
+            showStudentPage();
+            break;
+        case SHOW_TODAY_TUITIONS_PAGE:
+            reminderDisplay();
+            break;
+        case SET_TUITIONS_DEFAULT:
+            updateTuitionListTitle(false);
+            break;
+        case SET_STUDENTS_DEFAULT:
+            updateStudentListTitle(false);
+            break;
+        case SET_TUITIONS_FILTERED:
+            updateTuitionListTitle(true);
+            break;
+        case SET_STUDENTS_FILTERED:
+            updateStudentListTitle(true);
+            break;
+        case NONE:
+            updateInfoPage(null);
+            break;
+        default:
+            break;
+        }
+    }
+
+    private void showTimetable() {
+        updateInfoPage(new TimetableInfoPage(UniqueTuitionList.getMostRecentTuitionClasses(), resultDisplay));
+    }
+
+    private void showStudentPage() {
+        updateInfoPage(new StudentInfoPage(Student.getMostRecent()));
+    }
+
+    private void showTuitionPage() {
+        updateInfoPage(new TuitionClassInfoPage(TuitionClass.getMostRecent()));
+    }
+
+    /**
+     * Updates the Info Page section of the UI with a given info card.
+     * @param infoPage InfoPage to be placed in the Info Page section.
+     */
+    private void updateInfoPage(InfoPage infoPage) {
+        infoPagePlaceholder.getChildren().clear();
+        if (infoPage != null) {
+            infoPagePlaceholder.getChildren().add(infoPage.getRoot());
+        }
+    }
+
+    private void updateStudentListTitle(boolean bool) {
+        studentListPanel.setFiltered(bool);
+    }
+
+    private void updateTuitionListTitle(boolean bool) {
+        tuitionListPanel.setFiltered(bool);
+    }
+
 }

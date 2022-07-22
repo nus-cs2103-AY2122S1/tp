@@ -90,6 +90,8 @@ public class JsonUtil {
         serializeObjectToJsonFile(filePath, jsonFile);
     }
 
+    //addclass n/cs2101 l/10 c/2 ts/2pm s/
+    //add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
 
     /**
      * Converts a given string representation of a JSON data to instance of a class

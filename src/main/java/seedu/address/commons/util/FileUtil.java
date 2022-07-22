@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Writes and reads files
@@ -12,13 +15,20 @@ import java.nio.file.Paths;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+    private static final Logger logger = LogsCenter.getLogger(FileUtil.class);
 
+    /**
+     * Returns boolean true if file exists.
+     *
+     * @param file The path of the file.
+     * @return True if the file exists at the path, false otherwise.
+     */
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
     }
 
     /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * Returns true if {@code path} can be converted into a {@code Path} via ,
      * otherwise returns false.
      * @param path A string representing the file path. Cannot be null.
      */
@@ -69,6 +79,7 @@ public class FileUtil {
      * Assumes file exists
      */
     public static String readFromFile(Path file) throws IOException {
+        logger.info(new String(Files.readAllBytes(file), CHARSET));
         return new String(Files.readAllBytes(file), CHARSET);
     }
 

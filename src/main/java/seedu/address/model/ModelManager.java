@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.SortCommandParser;
+import seedu.address.model.student.Student;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +24,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Student> filteredStudents;
+    private FilteredList<TuitionClass> filteredTuition;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,7 +38,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredTuition = new FilteredList<>(this.addressBook.getTuitionList());
+
     }
 
     public ModelManager() {
@@ -89,44 +95,63 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return addressBook.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteStudent(Student target) {
+        addressBook.removeStudent(target);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        addressBook.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        addressBook.setStudent(target, editedStudent);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public Student getStudent(Index index) {
+        requireNonNull(index);
+        return addressBook.getStudent(index);
+    }
+
+    @Override
+    public Student getSameNameStudent(Student otherStudent) {
+        return this.addressBook.getSameNameStudent(otherStudent);
+    }
+
+
+    @Override
+    public void sort(SortCommandParser.Order order) {
+        requireAllNonNull(order);
+        addressBook.sort(order);
+    }
+
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
+        logger.info("filter" + filteredStudents.toString());
     }
 
     @Override
@@ -145,7 +170,77 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents);
     }
 
+
+    //=========== Filtered Tuition List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<TuitionClass> getFilteredTuitionList() {
+        return filteredTuition;
+    }
+
+    @Override
+    public void updateFilteredTuitionList(Predicate<TuitionClass> predicate) {
+        requireNonNull(predicate);
+        filteredTuition.setPredicate(predicate);
+        logger.info(filteredStudents.toString());
+    }
+
+    @Override
+    public ObservableList<TuitionClass> getTodayTuitionList() {
+        return addressBook.getTodayTuitionList();
+    }
+
+    @Override
+    public boolean hasTuition(TuitionClass tuitionClass) {
+        requireNonNull(tuitionClass);
+        return addressBook.hasTuition(tuitionClass);
+    }
+
+    @Override
+    public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+
+        requireAllNonNull(target, editedTuition);
+        addressBook.setTuition(target, editedTuition);
+    }
+
+    @Override
+    public TuitionClass getTuitionClass(Index index) {
+        requireNonNull(index);
+        return addressBook.getTuition(index);
+    }
+
+    @Override
+    public TuitionClass getClassById(Integer id) {
+        requireAllNonNull(id);
+        return addressBook.getClassById(id);
+    }
+
+    @Override
+    public TuitionClass addToClass(TuitionClass tuitionClass, Student student) {
+        requireNonNull(tuitionClass);
+        requireNonNull(student);
+        TuitionClass c = addressBook.addToClass(tuitionClass, student);
+        updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+        return c;
+    }
+
+    @Override
+    public void addTuition(TuitionClass tuitionClass) {
+        addressBook.addTuition(tuitionClass);
+        updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+    }
+
+    @Override
+    public void deleteTuition(TuitionClass target) {
+        addressBook.removeTuition(target);
+        this.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+        this.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
 }

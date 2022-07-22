@@ -1,0 +1,25 @@
+@startuml
+
+title AddToClassCommand
+
+start
+:User executes addtoclass command;
+:Parse command;
+
+if () then ([valid command])
+    if () then ([use student indices])
+        :Convert each index to student name;
+    else ([use student names])
+    endif
+    :Determine valid students to be enrolled;
+    :Add valid students to respective
+    tuition class;
+    :Update tags of enrolled students
+    and the tuition class capacity;
+    :Update tuition list and student list
+    shown to user;
+else ([else])
+:Alert invalid command message;
+endif
+stop
+@enduml

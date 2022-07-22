@@ -5,27 +5,34 @@ import static java.util.Objects.requireNonNull;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final Logger LOGGER = LogsCenter.getLogger(UserPrefs.class);
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "tutassistor.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+        LOGGER.info("UserPrefs---Not--Reset");
+
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
+        LOGGER.info("UserPrefs---Reset");
         resetData(userPrefs);
     }
 

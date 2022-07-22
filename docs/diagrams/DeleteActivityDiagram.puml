@@ -1,0 +1,20 @@
+@startuml
+
+title DeleteClassCommand
+
+:start;
+:User executes "deleteclass 1";
+
+if () then ([valid tuition class?])
+
+   :Removes the class and tags
+   from all the students in the class;
+   :Deletes the class in database;
+   :Updates the tuition list;
+
+else ([else])
+    :Alert user that the class does not exist;
+    endif
+
+stop
+@enduml
