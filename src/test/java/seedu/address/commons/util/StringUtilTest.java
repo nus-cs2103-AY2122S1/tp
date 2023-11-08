@@ -25,6 +25,8 @@ public class StringUtilTest {
 
         // EP: zero
         assertFalse(StringUtil.isNonZeroUnsignedInteger("0"));
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("+0"));
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("-0"));
 
         // EP: zero as prefix
         assertTrue(StringUtil.isNonZeroUnsignedInteger("01"));
@@ -45,6 +47,41 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    @Test
+    public void isNonNegativeUnsignedInteger() {
+
+        // EP: empty strings
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("")); // Boundary value
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("a"));
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("aaa"));
+
+        // EP: zero
+        assertTrue(StringUtil.isNonNegativeUnsignedInteger("0"));
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("+0"));
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("-0"));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isNonNegativeUnsignedInteger("01"));
+
+        // EP: signed numbers
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("-1"));
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("+1"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger("1 0")); // Spaces in the middle
+
+        // EP: number larger than Integer.MAX_VALUE
+        assertFalse(StringUtil.isNonNegativeUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isNonNegativeUnsignedInteger("1")); // Boundary value
+        assertTrue(StringUtil.isNonNegativeUnsignedInteger("10"));
+    }
+
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 
@@ -56,7 +93,8 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", null));
+        assertThrows(NullPointerException.class, () -> StringUtil
+                .containsWordIgnoreCase("typical sentence", null));
     }
 
     @Test
@@ -140,4 +178,19 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for isValidBooleanValue --------------------------------------
+
+    @Test
+    public void isValidBooleanValue_validInputs_returnsTrue() {
+        assertTrue(StringUtil.isValidBooleanValue("false"));
+        assertTrue(StringUtil.isValidBooleanValue("falSe"));
+        assertTrue(StringUtil.isValidBooleanValue("true"));
+    }
+
+    @Test
+    public void isValidBooleanValue_invalidInputs_returnsFalse() {
+        assertFalse(StringUtil.isValidBooleanValue(" false "));
+        assertFalse(StringUtil.isValidBooleanValue("1"));
+        assertFalse(StringUtil.isValidBooleanValue("t rue"));
+    }
 }

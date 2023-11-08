@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+skinparam ParticipantFontSize 20
+skinparam ArrowFontSize 20
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SportsPaParser" as SportsPaParser LOGIC_COLOR
+participant ":FindMemberCommandParser" as FindMemberCommandParser LOGIC_COLOR
+participant "f:FindMemberCommand" as FindMemberCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:MemberMatchesKeywordsPredicate" as Predicate MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box ObservableList UI_COLOR_T2
+participant ":FilteredMemberList" as FilteredList UI_COLOR_T3
+endbox
+
+[-> LogicManager : execute("findm t/exco)
+activate LogicManager
+
+LogicManager -> SportsPaParser : parseCommand("findm t/exco")
+activate SportsPaParser
+
+create FindMemberCommandParser
+SportsPaParser -> FindMemberCommandParser
+activate FindMemberCommandParser
+
+FindMemberCommandParser --> SportsPaParser
+deactivate FindMemberCommandParser
+
+SportsPaParser -> FindMemberCommandParser : parse("t/exco")
+activate FindMemberCommandParser
+
+create Predicate
+FindMemberCommandParser -> Predicate
+activate Predicate
+
+Predicate --> FindMemberCommandParser : p
+deactivate Predicate
+
+create FindMemberCommand
+FindMemberCommandParser -> FindMemberCommand : FindMemberCommand(p)
+
+activate FindMemberCommand
+FindMemberCommand --> FindMemberCommandParser : f
+deactivate FindMemberCommand
+
+FindMemberCommandParser --> SportsPaParser : f
+deactivate FindMemberCommandParser
+FindMemberCommandParser -[hidden]-> SportsPaParser : f
+destroy FindMemberCommandParser
+
+SportsPaParser --> LogicManager : f
+deactivate SportsPaParser
+
+LogicManager -> FindMemberCommand : execute(model)
+activate FindMemberCommand
+
+FindMemberCommand -> Model : updateFilteredMemberList(p)
+activate Model
+Model -> FilteredList : setPredicate(p)
+
+activate FilteredList
+FilteredList --> Model
+deactivate FilteredList
+
+Model --> FindMemberCommand
+deactivate Model
+
+create CommandResult
+FindMemberCommand -> CommandResult
+
+activate CommandResult
+CommandResult --> FindMemberCommand
+deactivate CommandResult
+
+FindMemberCommand --> LogicManager : result
+deactivate FindMemberCommand
+FindMemberCommand -[hidden]-> LogicManager
+destroy FindMemberCommand
+
+destroy Predicate
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,50 +1,89 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.ReadOnlySportsPa;
+import seedu.address.model.SportsPa;
+import seedu.address.model.facility.AllocationMap;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
+import seedu.address.model.member.Availability;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code SportsPa} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+
+    public static final List<DayOfWeek> SAMPLE_AVAILABILITY =
+            Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
+
+    public static Member[] getSampleMembers() {
+        return new Member[] {
+            new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Availability(SAMPLE_AVAILABILITY),
+                    getTagSet("exco")),
+            new Member(new Name("Bernice Yu"), new Phone("99272758"), new Availability(SAMPLE_AVAILABILITY),
+                    getTagSet("y1")),
+            new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Availability(SAMPLE_AVAILABILITY),
+                    getTagSet("exco", "y2")),
+            new Member(new Name("David Li"), new Phone("91031282"), new Availability(SAMPLE_AVAILABILITY),
+                    getTagSet("y3")),
+            new Member(new Name("Irfan Ibrahim"), new Phone("92492021"), new Availability(SAMPLE_AVAILABILITY),
+                    getTagSet("coach")),
+            new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Availability(SAMPLE_AVAILABILITY),
+                    getTagSet("y3"))
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static Facility[] getSampleFacilities() {
+        // to initialize separate maps for each sample facility
+        Map<DayOfWeek, List<Member>> emptyAllocationMap1 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap2 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap3 = new EnumMap<>(DayOfWeek.class);
+        Map<DayOfWeek, List<Member>> emptyAllocationMap4 = new EnumMap<>(DayOfWeek.class);
+
+        for (DayOfWeek day : DayOfWeek.values()) {
+            emptyAllocationMap1.put(day, new ArrayList<>());
+            emptyAllocationMap2.put(day, new ArrayList<>());
+            emptyAllocationMap3.put(day, new ArrayList<>());
+            emptyAllocationMap4.put(day, new ArrayList<>());
         }
+
+        return new Facility[] {
+            new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
+                    new Time("1130"), new Capacity("5"), new AllocationMap(new EnumMap<>(emptyAllocationMap1))),
+            new Facility(new FacilityName("NUS Field 2"), new Location("Opp University Hall"),
+                    new Time("1330"), new Capacity("8"), new AllocationMap(new EnumMap<>(emptyAllocationMap2))),
+            new Facility(new FacilityName("Court 2"), new Location("University Sports Hall"),
+                    new Time("2030"), new Capacity("10"), new AllocationMap(new EnumMap<>(emptyAllocationMap3))),
+            new Facility(new FacilityName("Court 3"), new Location("University Sports Hall"),
+                    new Time("1230"), new Capacity("6"), new AllocationMap(new EnumMap<>(emptyAllocationMap4)))
+        };
+    }
+
+    public static ReadOnlySportsPa getSampleSportsPa() {
+        SportsPa sampleAb = new SportsPa();
+        for (Member sampleMember : getSampleMembers()) {
+            sampleAb.addMember(sampleMember);
+        }
+
+        for (Facility sampleFacility : getSampleFacilities()) {
+            sampleAb.addFacility(sampleFacility);
+        }
+
         return sampleAb;
     }
 
@@ -56,5 +95,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }

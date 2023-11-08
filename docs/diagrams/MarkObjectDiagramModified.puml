@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Final state
+
+Object "__:ModelManager__" as State1 {
+}
+
+object "__:Member__" as State2 {
+todayAttendance = true
+totalAttendance = 1
+}
+
+object "__:Member__" as State3 {
+todayAttendance = true
+totalAttendance = 1
+}
+
+State1 --> State2
+State1 --> State3
+@enduml

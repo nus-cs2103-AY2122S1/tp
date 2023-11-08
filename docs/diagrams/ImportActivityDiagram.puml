@@ -1,0 +1,23 @@
+@startuml
+
+start
+:User enters import command;
+:Parse import command;
+:ImportCommand.execute();
+:ImportCommand.parseCsv();
+:Iterate through imported member list;
+repeat
+    if () then (isValidImport)
+        if () then (hasMember)
+            :Update existing member details
+            using data from CSV file;
+        else (else)
+            :Add imported member;
+        endif
+    else (else)
+    endif
+repeat while () is (else)
+-> All imported members iterated;
+stop
+
+@enduml

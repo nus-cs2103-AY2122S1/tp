@@ -1,0 +1,116 @@
+{
+  "members" : [ ],
+  "facilities" : [ {
+    "name" : "Court 1",
+    "location" : "Tampines Hub Field",
+    "time" : "1500",
+    "capacity" : "4",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Court 1",
+    "location" : "Kent Ridge Sports Hall 5",
+    "time" : "1500",
+    "capacity" : "4",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Court 2",
+    "location" : "Kent Ridge Sports Hall 5",
+    "time" : "1500",
+    "capacity" : "4",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Court 20",
+    "location" : "University Town Sports Hall 1",
+    "time" : "1600",
+    "capacity" : "4",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Court 21",
+    "location" : "University Town Sports Hall 1",
+    "time" : "1600",
+    "capacity" : "4",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Court 1",
+    "location" : "Kent Ridge Outdoor Tennis Courts",
+    "time" : "1900",
+    "capacity" : "5",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Court 10",
+    "location" : "Kent Ridge Outdoor Tennis Courts",
+    "time" : "1900",
+    "capacity" : "5",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  }, {
+    "name" : "Section A",
+    "location" : "UTown Field",
+    "time" : "1400",
+    "capacity" : "10",
+    "allocationMap" : {
+      "MONDAY" : [ ],
+      "TUESDAY" : [ ],
+      "WEDNESDAY" : [ ],
+      "THURSDAY" : [ ],
+      "FRIDAY" : [ ],
+      "SATURDAY" : [ ],
+      "SUNDAY" : [ ]
+    }
+  } ]
+}

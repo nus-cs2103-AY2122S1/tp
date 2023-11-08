@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -31,7 +32,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private MemberListPanel memberListPanel;
+    private FacilityListPanel facilityListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +44,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane memberListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane facilityListPanelPlaceholder;
+
+    @FXML
+    private TabPane tabsPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,13 +118,16 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        memberListPanel = new MemberListPanel(logic.getFilteredMemberList());
+        memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
+
+        facilityListPanel = new FacilityListPanel(logic.getFilteredFacilityList());
+        facilityListPanelPlaceholder.getChildren().add(facilityListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getSportsPaFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -147,6 +158,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Selects the member tab.
+     */
+    private void handleShowMemberTab() {
+        tabsPlaceholder.getSelectionModel().select(0);
+    }
+
+    /**
+     * Selects the facility tab.
+     */
+    private void handleShowFacilityTab() {
+        tabsPlaceholder.getSelectionModel().select(1);
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -163,8 +188,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public MemberListPanel getMemberListPanel() {
+        return memberListPanel;
     }
 
     /**
@@ -177,6 +202,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowFacilityTab()) {
+                handleShowFacilityTab();
+            }
+
+            if (commandResult.isShowMemberTab()) {
+                handleShowMemberTab();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

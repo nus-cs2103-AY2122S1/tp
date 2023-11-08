@@ -1,0 +1,16 @@
+{
+  "members": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "availability": [],
+    "totalAttendance": 0,
+    "todayAttendance": false
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94343423",
+    "availability": [],
+    "totalAttendance": 0,
+    "todayAttendance": false
+  }],
+  "facilities": []
+}

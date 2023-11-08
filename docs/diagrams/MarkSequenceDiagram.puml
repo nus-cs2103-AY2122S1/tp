@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+skinparam ArrowFontSize 14
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SportsPaParser" as SportsPaParser LOGIC_COLOR
+participant "m: MarkCommand" as MarkCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Member" as Member MODEL_COLOR
+end box
+
+[-> LogicManager : execute(mark 1 2)
+activate LogicManager
+
+LogicManager -> SportsPaParser : parseCommand(mark 1 2)
+activate SportsPaParser
+
+create MarkCommand
+SportsPaParser -> MarkCommand
+activate MarkCommand
+
+MarkCommand --> SportsPaParser
+deactivate MarkCommand
+
+SportsPaParser --> LogicManager : m
+deactivate SportsPaParser
+
+LogicManager -> MarkCommand : execute()
+activate MarkCommand
+
+MarkCommand -> Model : markMembersAttendance(1, 2)
+activate Model
+
+loop until all members marked
+Model -> Model: markOneMemberAttendance()
+activate Model
+Model -> Member : setPresent()
+activate Member
+Member --> Model
+deactivate Member
+return
+end
+
+Model --> MarkCommand
+deactivate Model
+
+MarkCommand --> LogicManager : result
+deactivate MarkCommand
+MarkCommand -[hidden]-> LogicManager : result
+destroy MarkCommand
+
+[<-- LogicManager
+deactivate LogicManager
+
+@enduml
